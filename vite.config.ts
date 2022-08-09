@@ -6,10 +6,6 @@ import tsconfigPaths from "vite-tsconfig-paths";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // Make vite run on port 3000.
-  server: {
-    port: 3000,
-  },
   // TODO EVG-17445: Add resolve field for leafygreen-ui/emotion.
   plugins: [
     tsconfigPaths(),
