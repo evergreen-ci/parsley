@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
+    "build:local": "yarn build",
+    "check-types": "tsc -p tsconfig.json --noEmit",
     "dev": "vite",
     "preview": "vite preview",
     "start": "vite"

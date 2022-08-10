@@ -1,19 +1,64 @@
-functions:
-  fake_function:
-    - command: shell.exec
-      params:
-        script: |
-          echo "I am a fake function"
+stepback: true
+command_type: test
+ignore:
+  - "*.md"
+  - ".github/*"
 
+#######################################
+#              Functions              #
+#######################################
+functions:
+  get-project:
+    command: git.get_project
+    type: setup
+    params:
+      directory: parsley
+
+  yarn-build:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=/opt/nodejs/node-v16.13.0-linux-x64/bin:$PATH
+        yarn build:local
+
+  yarn-install:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=/opt/nodejs/node-v16.13.0-linux-x64/bin:$PATH
+        yarn
+
+  yarn-tsc:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=/opt/nodejs/node-v16.13.0-linux-x64/bin:$PATH
+        yarn check-types
+
+#######################################
+#                Tasks                #
+#######################################
 tasks:
-  - name: fake_task
+  - name: compile
     commands:
-      - func: fake_function
+    - func: get-project
+    - func: yarn-install
+    - func: yarn-build
+
+  - name: type_check
+    commands:
+    - func: get-project
+    - func: yarn-install
+    - func: yarn-tsc
 
 buildvariants:
   - name: ubuntu1604
     display_name: Ubuntu 16.04
     run_on:
-      - ubuntu1604-small
+    - ubuntu1604-large
     tasks:
-      - name: fake_task
+    - name: compile
+    - name: type_check
