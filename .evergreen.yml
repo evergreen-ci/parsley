@@ -1,0 +1,19 @@
+functions:
+  fake_function:
+    - command: shell.exec
+      params:
+        script: |
+          echo "I am a fake function"
+
+tasks:
+  - name: fake_task
+    commands:
+      - func: fake_function
+
+buildvariants:
+  - name: ubuntu1604
+    display_name: Ubuntu 16.04
+    run_on:
+      - ubuntu1604-small
+    tasks:
+      - name: fake_task
