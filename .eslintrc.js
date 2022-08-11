@@ -116,6 +116,6 @@ module.exports = {
     "import/prefer-default-export": OFF,
 
     // Rules for prettier.
-    "prettier/prettier": errorIfStrict, // Makes Prettier issues warnings (yellow) rather than errors (red).
+    "prettier/prettier": errorIfStrict, // Makes Prettier issues warnings rather than errors.
   },
 };
