@@ -32,6 +32,7 @@ module.exports = {
         namedComponents: "arrow-function", // Allows named components with arrow functions
       },
     ],
+    "react/jsx-filename-extension": [1, { extensions: [".tsx"] }], // Allow JSX in TSX file (airbnb rule)
     "react/jsx-props-no-spreading": OFF, // Allows spreading props like {...props}
     "react/prop-types": OFF,
     "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+
