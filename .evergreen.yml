@@ -13,7 +13,7 @@ functions:
     params:
       files:
         - "./parsley/bin/jest/*.xml"
-    
+  
   get-project:
     command: git.get_project
     type: setup
@@ -27,6 +27,22 @@ functions:
       script: |
         export PATH=${node_path}
         yarn
+
+  yarn-build:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn build:local
+
+  yarn-tsc:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn check-types
 
   # TODO EVG-17443: Once storybook is installed we should ignore storybook.test.ts using
   # flag testPathIgnorePatterns.
@@ -42,12 +58,19 @@ functions:
 #                Tasks                #
 #######################################
 tasks:
+  - name: compile
+    commands:
+    - func: yarn-build
+
+  - name: type_check
+    commands:
+    - func: yarn-tsc
+
   - name: test
     commands:
-    - func: get-project
-    - func: yarn-install
     - func: yarn-test
     - func: attach-test-results
+
 
 buildvariants:
   - name: ubuntu1604
@@ -55,4 +78,10 @@ buildvariants:
     run_on:
     - ubuntu1604-small
     tasks:
+    - name: compile
+    - name: type_check
     - name: test
+
+pre:
+  - func: get-project
+  - func: yarn-install
