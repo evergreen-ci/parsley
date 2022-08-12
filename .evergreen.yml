@@ -14,14 +14,6 @@ functions:
     params:
       directory: parsley
 
-  yarn-build:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      script: |
-        export PATH=${node_path}
-        yarn build:local
-
   yarn-install:
     command: shell.exec
     params:
@@ -29,6 +21,14 @@ functions:
       script: |
         export PATH=${node_path}
         yarn
+
+  yarn-build:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn build:local
 
   yarn-tsc:
     command: shell.exec
@@ -44,14 +44,10 @@ functions:
 tasks:
   - name: compile
     commands:
-    - func: get-project
-    - func: yarn-install
     - func: yarn-build
 
   - name: type_check
     commands:
-    - func: get-project
-    - func: yarn-install
     - func: yarn-tsc
 
 buildvariants:
@@ -62,3 +58,7 @@ buildvariants:
     tasks:
     - name: compile
     - name: type_check
+
+pre:
+  - func: get-project
+  - func: yarn-install
