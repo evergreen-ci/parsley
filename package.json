@@ -5,6 +5,8 @@
   "type": "module",
   "scripts": {
     "build": "tsc && vite build",
+    "build:local": "yarn build",
+    "check-types": "tsc -p tsconfig.json --noEmit",
     "dev": "vite",
     "preview": "vite preview",
     "start": "vite"
@@ -21,5 +23,8 @@
     "vite": "^3.0.0",
     "vite-plugin-checker": "^0.4.9",
     "vite-tsconfig-paths": "^3.5.0"
+  },
+  "engines": {
+    "node": ">=16.13.0"
   }
 }
