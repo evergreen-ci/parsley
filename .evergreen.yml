@@ -21,6 +21,22 @@ functions:
       script: |
         export PATH=${node_path}
         yarn
+        
+  yarn-build:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn build:local
+
+  yarn-tsc:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn check-types
 
   yarn-eslint:
     command: shell.exec
@@ -34,10 +50,16 @@ functions:
 #                Tasks                #
 #######################################
 tasks:
+  - name: compile
+    commands:
+    - func: yarn-build
+
+  - name: type_check
+    commands:
+    - func: yarn-tsc
+
   - name: lint
     commands:
-    - func: get-project
-    - func: yarn-install
     - func: yarn-eslint
 
 buildvariants:
@@ -46,4 +68,11 @@ buildvariants:
     run_on:
     - ubuntu1604-small
     tasks:
+    - name: compile
+    - name: type_check
     - name: lint
+
+pre:
+  - func: get-project
+  - func: yarn-install
+
