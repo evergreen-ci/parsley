@@ -1,19 +1,58 @@
-functions:
-  fake_function:
-    - command: shell.exec
-      params:
-        script: |
-          echo "I am a fake function"
+stepback: true
+command_type: test
+ignore:
+  - "*.md"
+  - ".github/*"
 
+#######################################
+#              Functions              #
+#######################################
+functions:
+  attach-test-results:
+    command: attach.xunit_results
+    params:
+      files:
+        - "./parsley/bin/jest/*.xml"
+    
+  get-project:
+    command: git.get_project
+    type: setup
+    params:
+      directory: parsley
+
+  yarn-install:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn
+
+  # TODO EVG-17443: Once storybook is installed we should ignore storybook.test.ts using
+  # flag testPathIgnorePatterns.
+  yarn-test:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn test --ci
+
+#######################################
+#                Tasks                #
+#######################################
 tasks:
-  - name: fake_task
+  - name: test
     commands:
-      - func: fake_function
+    - func: get-project
+    - func: yarn-install
+    - func: yarn-test
+    - func: attach-test-results
 
 buildvariants:
   - name: ubuntu1604
     display_name: Ubuntu 16.04
     run_on:
-      - ubuntu1604-small
+    - ubuntu1604-small
     tasks:
-      - name: fake_task
+    - name: test

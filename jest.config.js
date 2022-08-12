@@ -19,6 +19,14 @@ module.exports = {
   modulePaths: ["<rootDir>/src"],
   preset: "ts-jest",
   resetMocks: true,
+  // Set the output directory for generating test results.
+  reporters: [
+    'default',
+    [ 'jest-junit', {
+      outputDirectory: 'bin/jest',
+      outputName: 'junit.xml',
+    } ]
+  ],
   setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
   // snapshotSerializers: ["@emotion/jest/serializer"], // Possibly enable in EVG-17445.
   testEnvironment: "jsdom",
