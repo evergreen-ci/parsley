@@ -44,6 +44,14 @@ functions:
         export PATH=${node_path}
         yarn check-types
 
+  yarn-eslint:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn eslint:strict
+
   # TODO EVG-17443: Once storybook is installed we should ignore storybook.test.ts using
   # flag testPathIgnorePatterns.
   yarn-test:
@@ -66,11 +74,14 @@ tasks:
     commands:
     - func: yarn-tsc
 
+  - name: lint
+    commands:
+    - func: yarn-eslint
+
   - name: test
     commands:
     - func: yarn-test
     - func: attach-test-results
-
 
 buildvariants:
   - name: ubuntu1604
@@ -80,6 +91,7 @@ buildvariants:
     tasks:
     - name: compile
     - name: type_check
+    - name: lint
     - name: test
 
 pre:
