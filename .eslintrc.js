@@ -23,6 +23,7 @@ module.exports = {
     "eslint:recommended",
     "plugin:import/recommended",
     "plugin:react/recommended",
+    "plugin:storybook/recommended",
     // Airbnb includes some helpful rules for ESLint and React that aren't covered by recommended.
     // See https://github.com/airbnb/javascript/tree/master/packages for specific rules.
     "airbnb",
@@ -50,6 +51,7 @@ module.exports = {
     "no-empty": [ERROR, { allowEmptyCatch: true }],
     "no-plusplus": [ERROR, { allowForLoopAfterthoughts: true }],
     "no-shadow": OFF,
+    "no-undef": OFF,
     "no-unused-vars": OFF,
     "no-use-before-define": OFF,
 

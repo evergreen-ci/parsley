@@ -46,6 +46,14 @@ functions:
         export PATH=${node_path}
         yarn eslint:strict
 
+  yarn-storybook:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn storybook:build
+
 #######################################
 #                Tasks                #
 #######################################
@@ -62,6 +70,10 @@ tasks:
     commands:
     - func: yarn-eslint
 
+  - name: storybook
+    commands:
+    - func: yarn-storybook
+
 buildvariants:
   - name: ubuntu1604
     display_name: Ubuntu 16.04
@@ -71,6 +83,7 @@ buildvariants:
     - name: compile
     - name: type_check
     - name: lint
+    - name: storybook
 
 pre:
   - func: get-project

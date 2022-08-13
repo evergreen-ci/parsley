@@ -39,4 +39,13 @@ module.exports = {
     "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+ (airbnb rule)
     "react/require-default-props": OFF, // Allow not setting defaults for props (airbnb rule)
   },
+  overrides: [
+    {
+      files: ["*.stories.ts", "*.stories.tsx"],
+      extends: ["plugin:storybook/recommended"],
+      rules: {
+        "storybook/no-stories-of": ERROR,
+      },
+    },
+  ],
 };
