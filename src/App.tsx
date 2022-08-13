@@ -1,13 +1,13 @@
-import { useState } from 'react'
+import { useState } from "react";
 
-function App() {
-  const [count, setCount] = useState(0)
+const App = () => {
+  const [count, setCount] = useState(0);
 
   return (
     <div className="App">
       <h1>Vite + React</h1>
       <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
+        <button onClick={() => setCount((c) => c + 1)} type="submit">
           count is {count}
         </button>
         <p>
@@ -15,7 +15,7 @@ function App() {
         </p>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default App
+export default App;

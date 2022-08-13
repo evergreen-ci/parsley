@@ -38,6 +38,14 @@ functions:
         export PATH=${node_path}
         yarn check-types
 
+  yarn-eslint:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn eslint:strict
+
 #######################################
 #                Tasks                #
 #######################################
@@ -50,6 +58,10 @@ tasks:
     commands:
     - func: yarn-tsc
 
+  - name: lint
+    commands:
+    - func: yarn-eslint
+
 buildvariants:
   - name: ubuntu1604
     display_name: Ubuntu 16.04
@@ -58,6 +70,7 @@ buildvariants:
     tasks:
     - name: compile
     - name: type_check
+    - name: lint
 
 pre:
   - func: get-project
