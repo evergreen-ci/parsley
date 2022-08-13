@@ -50,6 +50,7 @@ module.exports = {
     "no-empty": [ERROR, { allowEmptyCatch: true }],
     "no-plusplus": [ERROR, { allowForLoopAfterthoughts: true }],
     "no-shadow": OFF,
+    "no-undef": OFF,
     "no-unused-vars": OFF,
     "no-use-before-define": OFF,
 

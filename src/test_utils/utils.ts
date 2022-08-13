@@ -11,7 +11,7 @@ const mockEnvironmentVariables = () => {
     };
     restoreCalls.push(restore);
   };
-  
+
   const cleanup = () => {
     restoreCalls.forEach((restore) => {
       restore();
