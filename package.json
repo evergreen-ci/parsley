@@ -2,11 +2,14 @@
   "name": "parsley",
   "private": true,
   "version": "0.0.0",
-  "type": "module",
+  "type": "commonjs",
   "scripts": {
     "build": "tsc && vite build",
     "build:local": "yarn build",
     "check-types": "tsc -p tsconfig.json --noEmit",
+    "cy:open": "cypress open",
+    "cy:run": "cypress run",
+    "cy:test": "cypress run --spec",
     "dev": "vite",
     "preview": "vite preview",
     "start": "vite"
@@ -19,6 +22,7 @@
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^2.0.0",
+    "cypress": "10.4.0",
     "typescript": "^4.6.4",
     "vite": "^3.0.0",
     "vite-plugin-checker": "^0.4.9",
