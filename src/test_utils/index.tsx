@@ -1,19 +1,19 @@
 import {
-  render,
   queries,
+  render,
+  screen,
   waitFor,
   within,
-  screen,
 } from "@testing-library/react";
-import type { RenderResult, RenderOptions } from "@testing-library/react";
+import type { RenderOptions, RenderResult } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { createMemoryHistory } from "history";
 import {
-  Route,
-  Routes,
   // Refer to https://reactrouter.com/docs/en/v6/routers/history-router to understand
   // why this import is marked as unstable.
   unstable_HistoryRouter as HistoryRouter,
+  Route,
+  Routes,
 } from "react-router-dom";
 import * as customQueries from "./queries";
 
