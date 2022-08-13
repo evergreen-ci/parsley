@@ -23,7 +23,9 @@ module.exports = {
     "eslint:recommended",
     "plugin:import/recommended",
     "plugin:react/recommended",
-    "airbnb", // Airbnb includes some helpful rules for ESLint and React that aren't covered by recommended.
+    // Airbnb includes some helpful rules for ESLint and React that aren't covered by recommended.
+    // See https://github.com/airbnb/javascript/tree/master/packages for specific rules.
+    "airbnb",
     "plugin:prettier/recommended", // Note: prettier must ALWAYS be the last extension.
   ],
   plugins: ["@typescript-eslint"],
@@ -48,19 +50,12 @@ module.exports = {
     "no-empty": [ERROR, { allowEmptyCatch: true }],
     "no-plusplus": [ERROR, { allowForLoopAfterthoughts: true }],
     "no-shadow": OFF,
-    "no-undef": OFF,
     "no-unused-vars": OFF,
     "no-use-before-define": OFF,
 
-    /*
-     * Rules for typescript-eslint. Note that these rules extend the ESLint rules. This can cause conflicts, so the original
-     * ESLint rules above must be disabled for the following rules to work.
-     */
+    // Rules for typescript-eslint. Note that these rules extend the ESLint rules. This can cause conflicts, so the original
+    // ESLint rules above must be disabled for the following rules to work.
     "@typescript-eslint/no-shadow": ERROR,
-    "@typescript-eslint/no-use-before-define": [
-      ERROR,
-      { functions: false, variables: false },
-    ],
     "@typescript-eslint/no-unused-vars": [
       errorIfStrict,
       {
@@ -68,6 +63,10 @@ module.exports = {
         args: "after-used",
         ignoreRestSiblings: true,
       },
+    ],
+    "@typescript-eslint/no-use-before-define": [
+      ERROR,
+      { functions: false, variables: false },
     ],
 
     // Rules for eslint-plugin-import. These describe rules about file imports.

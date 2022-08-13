@@ -21,21 +21,22 @@ module.exports = {
     ],
 
     // Rules for React Hooks.
-    "react-hooks/rules-of-hooks": ERROR, // Checks rules of Hooks
-    "react-hooks/exhaustive-deps": WARN, // Warns useMemo, useEffect dependencies
+    "react-hooks/rules-of-hooks": ERROR, // Check rules of Hooks
+    "react-hooks/exhaustive-deps": WARN, // Warn useMemo, useEffect dependencies
 
     // Rules for React.
-    "react/destructuring-assignment": OFF, // Allows use of dot notation, for example user.id
+    "react/destructuring-assignment": OFF, // Allow use of dot notation, for example user.id (airbnb rule)
     "react/function-component-definition": [
       errorIfStrict,
       {
-        namedComponents: "arrow-function", // Allows named components with arrow functions
+        namedComponents: "arrow-function", // Allow named components with arrow functions (airbnb rule)
       },
     ],
     "react/jsx-filename-extension": [1, { extensions: [".tsx"] }], // Allow JSX in TSX file (airbnb rule)
-    "react/jsx-props-no-spreading": OFF, // Allows spreading props like {...props}
-    "react/prop-types": OFF,
-    "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+
-    "react/require-default-props": OFF,
+    "react/jsx-props-no-spreading": OFF, // Allow spreading props like {...props} (airbnb rule)
+    "react/jsx-sort-props": WARN, // Sort props alphabetically
+    "react/prop-types": OFF, // (airbnb rule)
+    "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+ (airbnb rule)
+    "react/require-default-props": OFF, // Allow not setting defaults for props (airbnb rule)
   },
 };
