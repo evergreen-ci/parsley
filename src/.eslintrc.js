@@ -39,4 +39,15 @@ module.exports = {
     "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+ (airbnb rule)
     "react/require-default-props": OFF, // Allow not setting defaults for props (airbnb rule)
   },
+  overrides: [
+    {
+      files: ["*.test.ts", "*.test.tsx"],
+      extends: ["plugin:testing-library/react", "plugin:jest/all"],
+      rules: {
+        "jest/no-hooks": OFF,
+        "jest/no-mocks-import": OFF,
+        "jest/prefer-expect-assertions": OFF,
+      },
+    },
+  ],
 };

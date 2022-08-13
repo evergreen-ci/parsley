@@ -9,7 +9,7 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
-    // TODO EVG-17441: add Jest here.
+    jest: true,
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {

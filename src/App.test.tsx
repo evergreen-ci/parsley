@@ -19,6 +19,6 @@ describe("app", () => {
     userEvent.click(button);
     await waitFor(() => {
       expect(screen.getByText("count is 1")).toBeInTheDocument();
-    })
-  })
+    });
+  });
 });
