@@ -3,7 +3,7 @@
 describe("Basic app test", () => {
   beforeEach(() => {
     cy.visit("/");
-  })
+  });
 
   it("allows interacting with the count button", () => {
     cy.contains("count is 0").should("be.visible");
@@ -11,4 +11,4 @@ describe("Basic app test", () => {
     cy.dataCy("app-button").click();
     cy.contains("count is 1").should("be.visible");
   });
-})
+});

@@ -1,10 +1,4 @@
-const LOGIN_COOKIE = "parsley-token";
 const toastDataCy = "toast";
-const loginURL = "http://localhost:5173/login";
-const user = {
-  username: "admin",
-  password: "password",
-};
 
 Cypress.Commands.add("dataCy", (value: string) => {
   cy.get(`[data-cy=${value}]`);
@@ -15,9 +9,8 @@ Cypress.Commands.add("getInputByLabel", (label: string) => {
     .invoke("attr", "for")
     .then((id) => {
       cy.get(`#${id}`);
-    })
-  }
-);
+    });
+});
 
 Cypress.Commands.add(
   "validateToast",

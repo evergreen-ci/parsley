@@ -50,6 +50,7 @@ module.exports = {
     "no-empty": [ERROR, { allowEmptyCatch: true }],
     "no-plusplus": [ERROR, { allowForLoopAfterthoughts: true }],
     "no-shadow": OFF,
+    "no-undef": OFF,
     "no-unused-vars": OFF,
     "no-use-before-define": OFF,
 
@@ -117,4 +118,10 @@ module.exports = {
     // Rules for prettier.
     "prettier/prettier": errorIfStrict, // Makes Prettier issues warnings rather than errors.
   },
+  overrides: [
+    {
+      files: ["cypress/**/*.ts"],
+      extends: ["plugin:cypress/recommended"],
+    },
+  ],
 };
