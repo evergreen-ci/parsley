@@ -8,6 +8,12 @@ ignore:
 #              Functions              #
 #######################################
 functions:
+  attach-test-results:
+    command: attach.xunit_results
+    params:
+      files:
+        - "./parsley/bin/jest/*.xml"
+  
   get-project:
     command: git.get_project
     type: setup
@@ -46,6 +52,16 @@ functions:
         export PATH=${node_path}
         yarn eslint:strict
 
+  # TODO EVG-17443: Once storybook is installed we should ignore storybook.test.ts using
+  # flag testPathIgnorePatterns.
+  yarn-test:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn test --ci
+
 #######################################
 #                Tasks                #
 #######################################
@@ -62,6 +78,11 @@ tasks:
     commands:
     - func: yarn-eslint
 
+  - name: test
+    commands:
+    - func: yarn-test
+    - func: attach-test-results
+
 buildvariants:
   - name: ubuntu1604
     display_name: Ubuntu 16.04
@@ -71,6 +92,7 @@ buildvariants:
     - name: compile
     - name: type_check
     - name: lint
+    - name: test
 
 pre:
   - func: get-project
