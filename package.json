@@ -13,13 +13,12 @@
     "prettier": "prettier --write",
     "preview": "vite preview",
     "start": "vite",
-    "test:exact": "jest --",
     "test:watch": "jest --watch  --verbose",
     "test": "jest --watchAll=false"
   },
   "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
     "react-router-dom": "6.3.0"
   },
   "devDependencies": {
