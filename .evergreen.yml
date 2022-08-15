@@ -79,6 +79,34 @@ functions:
       files:
         - "./parsley/bin/cypress/*.xml"
 
+  attach-cypress-screenshots:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/cypress/screenshots/*"]
+      remote_file: parsley/${task_id}/
+      bucket: mciuploads
+      content_type: image/png
+      permissions: public-read
+      display_name: "screenshot:"
+
+  attach-cypress-videos:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/cypress/videos/*"]
+      remote_file: parsley/${task_id}/
+      bucket: mciuploads
+      content_type: video/mp4
+      permissions: public-read
+      display_name: "video:"
+
 #######################################
 #                Tasks                #
 #######################################
@@ -102,6 +130,8 @@ tasks:
     - func: install-chrome
     - func: yarn-cypress
     - func: attach-cypress-results
+    - func: attach-cypress-screenshots
+    - func: attach-cypress-videos
 
 buildvariants:
   - name: ubuntu1604
