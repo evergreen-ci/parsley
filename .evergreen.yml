@@ -138,7 +138,7 @@ tasks:
   - name: lint
     commands:
     - func: yarn-eslint
-  
+
   - name: test
     commands:
     - func: yarn-test
