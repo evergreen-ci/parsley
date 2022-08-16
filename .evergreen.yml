@@ -8,71 +8,6 @@ ignore:
 #              Functions              #
 #######################################
 functions:
-  get-project:
-    command: git.get_project
-    type: setup
-    params:
-      directory: parsley
-
-  yarn-install:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      script: |
-        export PATH=${node_path}
-        yarn
-
-  yarn-build:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      script: |
-        export PATH=${node_path}
-        yarn build:local
-
-  yarn-tsc:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      script: |
-        export PATH=${node_path}
-        yarn check-types
-
-  yarn-eslint:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      script: |
-        export PATH=${node_path}
-        yarn eslint:strict
-
-  yarn-preview:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      background: true
-      script: |
-        export PATH=${node_path}
-        yarn preview
-
-  install-chrome:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      script: |
-        cd /tmp
-        curl -L -o "chrome.zip" "${chrome_download_url}"
-        unzip chrome.zip
-        cd -
-
-  yarn-cypress:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      script: |
-        export PATH=${node_path}
-        yarn cy:run --browser /tmp/chrome-linux/chrome --reporter junit
-
   attach-cypress-results:
     command: attach.xunit_results
     params:
@@ -107,6 +42,87 @@ functions:
       permissions: public-read
       display_name: "video:"
 
+  attach-test-results:
+    command: attach.xunit_results
+    params:
+      files:
+        - "./parsley/bin/jest/*.xml"
+  
+  get-project:
+    command: git.get_project
+    type: setup
+    params:
+      directory: parsley
+
+  install-chrome:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        cd /tmp
+        curl -L -o "chrome.zip" "${chrome_download_url}"
+        unzip chrome.zip
+        cd -
+
+  yarn-build:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn build:local
+
+  yarn-cypress:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn cy:run --browser /tmp/chrome-linux/chrome --reporter junit
+
+  yarn-eslint:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn eslint:strict
+
+  yarn-install:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn
+
+  yarn-preview:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      background: true
+      script: |
+        export PATH=${node_path}
+        yarn preview
+
+  # TODO EVG-17443: Once storybook is installed we should ignore storybook.test.ts using
+  # flag testPathIgnorePatterns.
+  yarn-test:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn test --ci
+
+  yarn-tsc:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn check-types
+
 #######################################
 #                Tasks                #
 #######################################
@@ -122,6 +138,11 @@ tasks:
   - name: lint
     commands:
     - func: yarn-eslint
+  
+  - name: test
+    commands:
+    - func: yarn-test
+    - func: attach-test-results
 
   - name: e2e_test
     commands:
@@ -142,6 +163,7 @@ buildvariants:
     - name: compile
     - name: type_check
     - name: lint
+    - name: test
     - name: e2e_test
 
 pre:
