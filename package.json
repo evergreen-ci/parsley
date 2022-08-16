@@ -16,8 +16,8 @@
     "prettier": "prettier --write",
     "preview": "vite preview",
     "start": "vite",
-    "test:watch": "jest --watch  --verbose",
-    "test": "jest --watchAll=false"
+    "test": "jest --watchAll=false",
+    "test:watch": "jest --watch  --verbose"
   },
   "dependencies": {
     "react": "18.2.0",
