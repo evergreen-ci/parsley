@@ -52,6 +52,14 @@ functions:
         export PATH=${node_path}
         yarn eslint:strict
 
+  yarn-snapshot:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn test --ci --testPathPattern=storybook.test.ts
+
   yarn-storybook:
     command: shell.exec
     params:
@@ -60,15 +68,13 @@ functions:
         export PATH=${node_path}
         yarn storybook:build
 
-  # TODO EVG-17443: Once storybook is installed we should ignore storybook.test.ts using
-  # flag testPathIgnorePatterns.
   yarn-test:
     command: shell.exec
     params:
       working_dir: parsley
       script: |
         export PATH=${node_path}
-        yarn test --ci
+        yarn test --ci --testPathIgnorePatterns=storybook.test.ts
 
 
 #######################################
@@ -96,6 +102,11 @@ tasks:
     commands:
     - func: yarn-storybook
 
+  - name: snapshots
+    commands:
+    - func: yarn-snapshot
+    - func: attach-test-results
+
 buildvariants:
   - name: ubuntu1604
     display_name: Ubuntu 16.04
@@ -107,6 +118,7 @@ buildvariants:
     - name: lint
     - name: test
     - name: storybook
+    - name: snapshots
 
 pre:
   - func: get-project

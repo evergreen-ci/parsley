@@ -5,6 +5,7 @@ cypress/screenshots/
 
 # production
 /build
+/dist
 
 # storybook
 storybook-static
