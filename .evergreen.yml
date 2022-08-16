@@ -58,7 +58,7 @@ functions:
       working_dir: parsley
       script: |
         export PATH=${node_path}
-        yarn test --ci --testPathPattern=storybook.test.ts
+        yarn test --ci --testPathPattern=storyshots.test.ts
 
   yarn-storybook:
     command: shell.exec
@@ -74,7 +74,7 @@ functions:
       working_dir: parsley
       script: |
         export PATH=${node_path}
-        yarn test --ci --testPathIgnorePatterns=storybook.test.ts
+        yarn test --ci --testPathIgnorePatterns=storyshots.test.ts
 
 
 #######################################
