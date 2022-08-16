@@ -45,6 +45,15 @@ module.exports = {
       extends: ["plugin:storybook/recommended"],
       rules: {
         "storybook/no-stories-of": ERROR,
+      }
+    },
+    {
+      files: ["*.test.ts", "*.test.tsx"],
+      extends: ["plugin:testing-library/react", "plugin:jest/all"],
+      rules: {
+        "jest/no-hooks": OFF,
+        "jest/no-mocks-import": OFF,
+        "jest/prefer-expect-assertions": OFF,
       },
     },
   ],

@@ -9,7 +9,7 @@ module.exports = {
     browser: true,
     es6: true,
     node: true,
-    // TODO EVG-17441: add Jest here.
+    jest: true,
   },
   parser: "@typescript-eslint/parser",
   parserOptions: {
@@ -54,6 +54,12 @@ module.exports = {
     "no-undef": OFF,
     "no-unused-vars": OFF,
     "no-use-before-define": OFF,
+    "sort-imports": [
+      ERROR,
+      {
+        ignoreDeclarationSort: true,
+      },
+    ],
 
     // Rules for typescript-eslint. Note that these rules extend the ESLint rules. This can cause conflicts, so the original
     // ESLint rules above must be disabled for the following rules to work.
