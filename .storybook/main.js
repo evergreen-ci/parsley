@@ -4,6 +4,8 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
     "@storybook/addon-links",
+    // React 18 causes some issues with storyshots. In package.json we have a resolutions field for
+    // react-test-renderer to get around this. (https://github.com/storybookjs/storybook/issues/17985)
     "@storybook/addon-storyshots",
   ],
   framework: "@storybook/react",

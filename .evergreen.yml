@@ -47,6 +47,20 @@ functions:
     params:
       files:
         - "./parsley/bin/jest/*.xml"
+
+  attach-storybook:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/storybook-static/*"]
+      remote_file: parsley/${task_id}/storybook/
+      bucket: mciuploads
+      content_type: text/html
+      permissions: public-read
+      display_name: storybook_
   
   get-project:
     command: git.get_project
@@ -171,6 +185,7 @@ tasks:
   - name: storybook
     commands:
     - func: yarn-storybook
+    - func: attach-storybook
 
   - name: snapshots
     commands:
