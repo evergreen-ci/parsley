@@ -155,8 +155,8 @@ tasks:
     - func: attach-cypress-videos
 
 buildvariants:
-  - name: ubuntu1604
-    display_name: Ubuntu 16.04
+  - name: ubuntu1604-small
+    display_name: Ubuntu 16.04 (small)
     run_on:
     - ubuntu1604-small
     tasks:
@@ -164,6 +164,12 @@ buildvariants:
     - name: type_check
     - name: lint
     - name: test
+
+  - name: ubuntu1604-large
+    display_name: Ubuntu 16.04 (large)
+    run_on:
+    - ubuntu1604-large
+    tasks:
     - name: e2e_test
 
 pre:
