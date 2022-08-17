@@ -24,7 +24,7 @@ module.exports = {
       },
     ],
   ],
-  setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
+  setupFilesAfterEnv: ["<rootDir>/config/jest/setup.ts"],
   // snapshotSerializers: ["@emotion/jest/serializer"], // Possibly enable in EVG-17445.
   testEnvironment: "jsdom",
   testMatch: [
