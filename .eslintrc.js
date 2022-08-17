@@ -124,4 +124,10 @@ module.exports = {
     // Rules for prettier.
     "prettier/prettier": errorIfStrict, // Makes Prettier issues warnings rather than errors.
   },
+  overrides: [
+    {
+      files: ["cypress/**/*.ts"],
+      extends: ["plugin:cypress/recommended"],
+    },
+  ],
 };

@@ -8,6 +8,40 @@ ignore:
 #              Functions              #
 #######################################
 functions:
+  attach-cypress-results:
+    command: attach.xunit_results
+    params:
+      files:
+        - "./parsley/bin/cypress/*.xml"
+
+  attach-cypress-screenshots:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/cypress/screenshots/*"]
+      remote_file: parsley/${task_id}/
+      bucket: mciuploads
+      content_type: image/png
+      permissions: public-read
+      display_name: "screenshot:"
+
+  attach-cypress-videos:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/cypress/videos/*"]
+      remote_file: parsley/${task_id}/
+      bucket: mciuploads
+      content_type: video/mp4
+      permissions: public-read
+      display_name: "video:"
+
   attach-test-results:
     command: attach.xunit_results
     params:
@@ -20,13 +54,15 @@ functions:
     params:
       directory: parsley
 
-  yarn-install:
+  install-chrome:
     command: shell.exec
     params:
       working_dir: parsley
       script: |
-        export PATH=${node_path}
-        yarn
+        cd /tmp
+        curl -L -o "chrome.zip" "${chrome_download_url}"
+        unzip chrome.zip
+        cd -
 
   yarn-build:
     command: shell.exec
@@ -36,13 +72,13 @@ functions:
         export PATH=${node_path}
         yarn build:local
 
-  yarn-tsc:
+  yarn-cypress:
     command: shell.exec
     params:
       working_dir: parsley
       script: |
         export PATH=${node_path}
-        yarn check-types
+        yarn cy:run --browser /tmp/chrome-linux/chrome --reporter junit
 
   yarn-eslint:
     command: shell.exec
@@ -51,6 +87,23 @@ functions:
       script: |
         export PATH=${node_path}
         yarn eslint:strict
+
+  yarn-install:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn
+
+  yarn-preview:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      background: true
+      script: |
+        export PATH=${node_path}
+        yarn preview
 
   # TODO EVG-17443: Once storybook is installed we should ignore storybook.test.ts using
   # flag testPathIgnorePatterns.
@@ -61,6 +114,14 @@ functions:
       script: |
         export PATH=${node_path}
         yarn test --ci
+
+  yarn-tsc:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn check-types
 
 #######################################
 #                Tasks                #
@@ -83,9 +144,19 @@ tasks:
     - func: yarn-test
     - func: attach-test-results
 
+  - name: e2e_test
+    commands:
+    - func: yarn-build
+    - func: yarn-preview
+    - func: install-chrome
+    - func: yarn-cypress
+    - func: attach-cypress-results
+    - func: attach-cypress-screenshots
+    - func: attach-cypress-videos
+
 buildvariants:
-  - name: ubuntu1604
-    display_name: Ubuntu 16.04
+  - name: ubuntu1604-small
+    display_name: Ubuntu 16.04 (small)
     run_on:
     - ubuntu1604-small
     tasks:
@@ -93,6 +164,13 @@ buildvariants:
     - name: type_check
     - name: lint
     - name: test
+
+  - name: ubuntu1604-large
+    display_name: Ubuntu 16.04 (large)
+    run_on:
+    - ubuntu1604-large
+    tasks:
+    - name: e2e_test
 
 pre:
   - func: get-project
