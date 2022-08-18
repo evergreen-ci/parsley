@@ -31,8 +31,9 @@ const storybookConfig = {
 
   async viteFinal(config, { configType }) {
     if (configType === "PRODUCTION") {
-      // Changing the base prevents fetching assets in storybook-static/assets from the wrong path.
-      // (https://github.com/storybookjs/builder-vite/issues/96)
+      // We need to override the 'base' property so that the path to storybook-static/assets
+      // is correct.
+      // (https://github.com/storybookjs/builder-vite/issues/475)
       return { ...config, base: "./" };
     }
     return config;
