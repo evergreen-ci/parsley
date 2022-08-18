@@ -22,7 +22,6 @@ module.exports = {
   extends: [
     "eslint:recommended",
     "plugin:import/recommended",
-    "plugin:react/recommended",
     // Airbnb includes some helpful rules for ESLint and React that aren't covered by recommended.
     // See https://github.com/airbnb/javascript/tree/master/packages for specific rules.
     "airbnb",
@@ -125,6 +124,54 @@ module.exports = {
     "prettier/prettier": errorIfStrict, // Makes Prettier issues warnings rather than errors.
   },
   overrides: [
+    // For React Typescript files in src.
+    {
+      files: ["src/**/*.ts", "src/**/*.tsx"],
+      extends: ["plugin:react/recommended"],
+      plugins: ["jsx-a11y", "react", "react-hooks"],
+      rules: {
+        // TODO EVG-17445: Add rules for emotion.
+
+        // Rules for accessibility.
+        "jsx-a11y/anchor-is-valid": errorIfStrict,
+        "jsx-a11y/aria-props": errorIfStrict,
+        "jsx-a11y/aria-role": [errorIfStrict, { ignoreNonDom: false }],
+        "jsx-a11y/label-has-associated-control": [
+          errorIfStrict,
+          { some: ["nesting", "id"] },
+        ],
+
+        // Rules for React Hooks.
+        "react-hooks/rules-of-hooks": ERROR, // Check rules of Hooks
+        "react-hooks/exhaustive-deps": WARN, // Warn useMemo, useEffect dependencies
+
+        // Rules for React.
+        "react/destructuring-assignment": OFF, // Allow use of dot notation, for example user.id (airbnb rule)
+        "react/function-component-definition": [
+          errorIfStrict,
+          {
+            namedComponents: "arrow-function", // Allow named components with arrow functions (airbnb rule)
+          },
+        ],
+        "react/jsx-filename-extension": [1, { extensions: [".tsx"] }], // Allow JSX in TSX file (airbnb rule)
+        "react/jsx-props-no-spreading": OFF, // Allow spreading props like {...props} (airbnb rule)
+        "react/jsx-sort-props": WARN, // Sort props alphabetically
+        "react/prop-types": OFF, // (airbnb rule)
+        "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+ (airbnb rule)
+        "react/require-default-props": OFF, // Allow not setting defaults for props (airbnb rule)
+      },
+    },
+    // For Jest files.
+    {
+      files: ["src/**/*.test.ts", "src/**/*.test.tsx"],
+      extends: ["plugin:testing-library/react", "plugin:jest/all"],
+      rules: {
+        "jest/no-hooks": OFF,
+        "jest/no-mocks-import": OFF,
+        "jest/prefer-expect-assertions": OFF,
+      },
+    },
+    // For Cypress files.
     {
       files: ["cypress/**/*.ts"],
       extends: ["plugin:cypress/recommended"],
