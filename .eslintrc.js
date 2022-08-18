@@ -171,6 +171,14 @@ module.exports = {
         "jest/prefer-expect-assertions": OFF,
       },
     },
+    // For Storybook files.
+    {
+      files: ["src/**/*.stories.ts", "src/**/*.stories.tsx"],
+      extends: ["plugin:storybook/recommended"],
+      rules: {
+        "storybook/no-stories-of": ERROR,
+      },
+    },
     // For Cypress files.
     {
       files: ["cypress/**/*.ts"],

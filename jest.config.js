@@ -24,7 +24,7 @@ module.exports = {
       },
     ],
   ],
-  setupFilesAfterEnv: ["<rootDir>/jest-setup.ts"],
+  setupFilesAfterEnv: ["<rootDir>/config/jest/setup.ts"],
   // snapshotSerializers: ["@emotion/jest/serializer"], // Possibly enable in EVG-17445.
   testEnvironment: "jsdom",
   testMatch: [
@@ -34,11 +34,13 @@ module.exports = {
   testRunner: "<rootDir>/node_modules/jest-circus/runner.js",
   transform: {
     "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/node_modules/ts-jest",
-    //   "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js", // Possibly enable in EVG-17445.
+    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":
+      "<rootDir>/config/jest/svgTransform.js",
   },
   transformIgnorePatterns: [
     "<rootDir>/node_modules/",
-    //   "^.+\\.module\\.(css|sass|scss)$", // Possibly enable in EVG-17445.
+    // "^.+\\.module\\.(css|sass|scss)$", // Possibly enable in EVG-17445.
   ],
   watchPlugins: [
     "jest-watch-typeahead/filename",
