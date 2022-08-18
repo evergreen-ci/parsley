@@ -1,4 +1,4 @@
-module.exports = {
+const storybookConfig = {
   stories: ["../src/stories/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-essentials",
@@ -28,4 +28,15 @@ module.exports = {
       },
     },
   },
+
+  async viteFinal(config, { configType }) {
+    if (configType === "PRODUCTION") {
+      // Changing the base prevents fetching assets in storybook-static/assets from the wrong path.
+      // (https://github.com/storybookjs/builder-vite/issues/96)
+      return { ...config, base: "./" };
+    }
+    return config;
+  },
 };
+
+module.exports = storybookConfig;

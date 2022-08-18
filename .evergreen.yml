@@ -61,6 +61,51 @@ functions:
       content_type: text/html
       permissions: public-read
       display_name: storybook_
+
+  # Ideally we can get rid of this command with improvements to s3.put.
+  attach-storybook-assets-css:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/storybook-static/assets/*.css"]
+      remote_file: parsley/${task_id}/storybook/assets/
+      bucket: mciuploads
+      content_type: text/css
+      permissions: public-read
+      display_name: storybook_assets_css_
+
+  # Ideally we can get rid of this command with improvements to s3.put.
+  attach-storybook-assets-map:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/storybook-static/assets/*.js.map"]
+      remote_file: parsley/${task_id}/storybook/assets/
+      bucket: mciuploads
+      content_type: application/json
+      permissions: public-read
+      display_name: storybook_assets_map_
+
+  # Ideally we can get rid of this command with improvements to s3.put.
+  attach-storybook-assets-js:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/storybook-static/assets/*.js"]
+      remote_file: parsley/${task_id}/storybook/assets/
+      bucket: mciuploads
+      content_type: application/javascript
+      permissions: public-read
+      display_name: storybook_assets_js_
   
   get-project:
     command: git.get_project
@@ -186,6 +231,9 @@ tasks:
     commands:
     - func: yarn-storybook
     - func: attach-storybook
+    - func: attach-storybook-assets-css
+    - func: attach-storybook-assets-map
+    - func: attach-storybook-assets-js
 
   - name: snapshots
     commands:
