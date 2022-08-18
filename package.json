@@ -10,7 +10,7 @@
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "dev": "vite",
-    "eslint:fix": "STRICT=1 eslint --fix '*.{js,ts,tsx}' 'src/**/*.ts?(x)' 'cypress/**/*.ts'",
+    "eslint:fix": "yarn eslint:strict --fix",
     "eslint:staged": "STRICT=1 eslint",
     "eslint:strict": "STRICT=1 eslint '*.{js,ts,tsx}' 'src/**/*.ts?(x)' 'cypress/**/*.ts'",
     "prepare": "husky install",
