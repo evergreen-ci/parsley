@@ -62,7 +62,7 @@ functions:
       permissions: public-read
       display_name: storybook_
 
-  # Ideally we can get rid of this command with improvements to s3.put.
+  # Ideally we can get rid of this command upon the completion of EVG-17334.
   attach-storybook-assets-css:
     command: s3.put
     type: system
@@ -77,7 +77,7 @@ functions:
       permissions: public-read
       display_name: storybook_assets_css_
 
-  # Ideally we can get rid of this command with improvements to s3.put.
+  # Ideally we can get rid of this command upon the completion of EVG-17334.
   attach-storybook-assets-map:
     command: s3.put
     type: system
@@ -92,7 +92,7 @@ functions:
       permissions: public-read
       display_name: storybook_assets_map_
 
-  # Ideally we can get rid of this command with improvements to s3.put.
+  # Ideally we can get rid of this command upon the completion of EVG-17334.
   attach-storybook-assets-js:
     command: s3.put
     type: system
