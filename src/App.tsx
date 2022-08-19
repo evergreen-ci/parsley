@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SearchBar from "components/SearchBar";
 
 const App = () => {
   const [count, setCount] = useState(0);
@@ -18,6 +19,7 @@ const App = () => {
           Edit <code>src/App.tsx</code> and save to test HMR
         </p>
       </div>
+      <SearchBar />
     </div>
   );
 };

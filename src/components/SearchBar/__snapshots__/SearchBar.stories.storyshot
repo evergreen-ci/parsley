@@ -1,0 +1,174 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Storyshots Components/SearchBar Default 1`] = `
+<div
+  className="css-14zx4vh"
+>
+  <div
+    className="leafygreen-ui-1nkq8lt css-6lshyd"
+  >
+    <button
+      aria-controls="select-1-menu"
+      aria-describedby="select-1-description"
+      aria-disabled={false}
+      aria-expanded={false}
+      aria-invalid={false}
+      aria-labelledby="searchbar-select"
+      className="leafygreen-ui-15utxrd"
+      data-cy="searchbar-select"
+      data-leafygreen-ui="button"
+      data-testid="leafygreen-ui-select-menubutton"
+      disabled={false}
+      id="select-2"
+      onClick={[Function]}
+      type="button"
+      value="search"
+    >
+      <div
+        className="leafygreen-ui-v038xi"
+      />
+      <div
+        className="leafygreen-ui-1qmzz4y"
+      >
+        <div
+          className="leafygreen-ui-obh8q1"
+        >
+          <div
+            className="leafygreen-ui-17aj16e"
+          >
+            Search
+          </div>
+        </div>
+        <svg
+          alt=""
+          aria-hidden={true}
+          className="leafygreen-ui-1wmuq5k"
+          height={16}
+          role="presentation"
+          viewBox="0 0 16 16"
+          width={16}
+        >
+          <path
+            d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+    </button>
+  </div>
+  <div
+    className="css-1735qlt leafygreen-ui-xtefr5"
+  >
+    <div
+      className="leafygreen-ui-k02un9"
+    >
+      <input
+        aria-invalid={false}
+        aria-label="searchbar-input"
+        autoComplete="on"
+        className="leafygreen-ui-ge8o19"
+        data-cy="searchbar-input"
+        disabled={false}
+        id="textinput-1"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyPress={[Function]}
+        placeholder="optional, regexp to search"
+        required={true}
+        spellCheck={false}
+        type="search"
+        value=""
+      />
+      <div
+        className="lg-ui-icon-selector-26098cc5 leafygreen-ui-uy5fvv"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`Storyshots Components/SearchBar Disabled 1`] = `
+<div
+  className="css-14zx4vh"
+>
+  <div
+    className="leafygreen-ui-1nkq8lt css-6lshyd"
+  >
+    <button
+      aria-controls="select-5-menu"
+      aria-describedby="select-5-description"
+      aria-disabled={true}
+      aria-expanded={false}
+      aria-invalid={false}
+      aria-labelledby="searchbar-select"
+      className="leafygreen-ui-vd3d5r"
+      data-cy="searchbar-select"
+      data-leafygreen-ui="button"
+      data-testid="leafygreen-ui-select-menubutton"
+      disabled={true}
+      id="select-6"
+      type="button"
+      value="search"
+    >
+      <div
+        className="leafygreen-ui-v038xi"
+      />
+      <div
+        className="leafygreen-ui-1qmzz4y"
+      >
+        <div
+          className="leafygreen-ui-obh8q1"
+        >
+          <div
+            className="leafygreen-ui-17aj16e"
+          >
+            Search
+          </div>
+        </div>
+        <svg
+          alt=""
+          aria-hidden={true}
+          className="leafygreen-ui-1wfhn6v"
+          height={16}
+          role="presentation"
+          viewBox="0 0 16 16"
+          width={16}
+        >
+          <path
+            d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
+            fill="currentColor"
+          />
+        </svg>
+      </div>
+    </button>
+  </div>
+  <div
+    className="css-1735qlt leafygreen-ui-xtefr5"
+  >
+    <div
+      className="leafygreen-ui-k02un9"
+    >
+      <input
+        aria-invalid={false}
+        aria-label="searchbar-input"
+        autoComplete="off"
+        className="leafygreen-ui-ge8o19"
+        data-cy="searchbar-input"
+        disabled={true}
+        id="textinput-3"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onKeyPress={[Function]}
+        placeholder="optional, regexp to search"
+        required={true}
+        spellCheck={false}
+        type="search"
+        value=""
+      />
+      <div
+        className="lg-ui-icon-selector-26098cc5 leafygreen-ui-uy5fvv"
+      />
+    </div>
+  </div>
+</div>
+`;

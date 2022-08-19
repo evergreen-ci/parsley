@@ -24,12 +24,24 @@
     "test:watch": "jest --watch --verbose"
   },
   "dependencies": {
+    "@emotion/react": "11.9.3",
+    "@emotion/styled": "11.9.3",
+    "@leafygreen-ui/button": "16.0.0",
+    "@leafygreen-ui/emotion": "^4.0.0",
+    "@leafygreen-ui/leafygreen-provider": "2.3.2",
+    "@leafygreen-ui/palette": "3.4.0",
+    "@leafygreen-ui/select": "7.0.0",
+    "@leafygreen-ui/text-input": "10.1.0",
+    "@leafygreen-ui/toggle": "8.0.2",
+    "@leafygreen-ui/typography": "13.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.3.0"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
+    "@emotion/babel-plugin": "11.10.0",
+    "@emotion/eslint-plugin": "11.10.0",
     "@storybook/addon-actions": "6.5.10",
     "@storybook/addon-essentials": "6.5.10",
     "@storybook/addon-interactions": "6.5.10",
@@ -48,7 +60,7 @@
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "5.33.0",
     "@typescript-eslint/parser": "5.33.0",
-    "@vitejs/plugin-react": "^2.0.0",
+    "@vitejs/plugin-react": "2.0.1",
     "babel-loader": "^8.2.5",
     "cypress": "10.4.0",
     "eslint": "8.21.0",

@@ -128,9 +128,13 @@ module.exports = {
     {
       files: ["src/**/*.ts", "src/**/*.tsx"],
       extends: ["plugin:react/recommended"],
-      plugins: ["jsx-a11y", "react", "react-hooks"],
+      plugins: ["jsx-a11y", "react", "react-hooks", "@emotion"],
       rules: {
-        // TODO EVG-17445: Add rules for emotion.
+        // Rules for emotion.
+        "@emotion/import-from-emotion": ERROR,
+        "@emotion/no-vanilla": errorIfStrict,
+        "@emotion/pkg-renaming": ERROR,
+        "@emotion/syntax-preference": [errorIfStrict, "string"],
 
         // Rules for accessibility.
         "jsx-a11y/anchor-is-valid": errorIfStrict,

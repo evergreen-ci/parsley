@@ -24,7 +24,9 @@ module.exports = {
       },
     ],
   ],
-  setupFilesAfterEnv: ["<rootDir>/config/jest/setup.ts"],
+  // jest-dom adds custom jest matchers for asserting on DOM nodes.
+  // learn more: https://github.com/testing-library/jest-dom
+  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
   // snapshotSerializers: ["@emotion/jest/serializer"], // Possibly enable in EVG-17445.
   testEnvironment: "jsdom",
   testMatch: [

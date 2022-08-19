@@ -1,5 +1,5 @@
-const storybookConfig = {
-  stories: ["../src/stories/**/*.stories.@(js|jsx|ts|tsx)"],
+module.exports = {
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
@@ -28,16 +28,18 @@ const storybookConfig = {
       },
     },
   },
-
   async viteFinal(config, { configType }) {
+    const resolve = {
+      alias: {
+        "@leafygreen-ui/emotion": "./config/leafygreen-ui/emotion.ts",
+      },
+    };
+
     if (configType === "PRODUCTION") {
       // We need to override the 'base' property so that the path to storybook-static/assets
-      // is correct.
-      // (https://github.com/storybookjs/builder-vite/issues/475)
-      return { ...config, base: "./" };
+      // is correct. (https://github.com/storybookjs/builder-vite/issues/475)
+      return { ...config, resolve, base: "./" };
     }
-    return config;
+    return { ...config, resolve };
   },
 };
-
-module.exports = storybookConfig;
