@@ -29,35 +29,30 @@ module.exports = {
     },
   },
   async viteFinal(config, { configType }) {
-    const { mergeConfig, loadConfigFromFile } = require("vite"); // eslint-disable-line global-require
-    const path = require("path"); // eslint-disable-line global-require
+    const { loadConfigFromFile, mergeConfig } = require("vite");
+    const path = require("path");
 
+    // Load our Vite config file.
     const { config: viteConfig } = await loadConfigFromFile(
       configType,
       path.resolve(__dirname, "../vite.config.ts")
     );
 
-    // TODO: clean this up
-    // eslint-disable-next-line no-param-reassign
+    // Filter out Storybook's duplicate "vite:react-babel" plugin.
     config.plugins = config.plugins.filter((plugin) => {
-      if (isReactPlugin(plugin)) {
+      if (Array.isArray(plugin) && plugin.some((p) => p.name === "vite:react-babel")) {
         return false;
       }
       return true;
     });
 
+    // Add a special configuration for production.
     if (configType === "PRODUCTION") {
       // We need to override the 'base' property so that the path to storybook-static/assets
       // is correct. (https://github.com/storybookjs/builder-vite/issues/475)
-      config.base = "./"; // eslint-disable-line no-param-reassign
+      config.base = "./";
     }
 
     return mergeConfig(viteConfig, config);
   },
-};
-
-const isReactPlugin = (plugin) => {
-  return (
-    Array.isArray(plugin) && plugin.some((p) => p.name === "vite:react-babel")
-  );
 };
