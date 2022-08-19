@@ -19,7 +19,6 @@ export default defineConfig({
   },
   plugins: [
     tsconfigPaths(),
-    // TODO EVG-17445: Support emotion JSX.
     react({
       jsxImportSource: "@emotion/react", // This enables use of css prop on JSX.
       babel: {
