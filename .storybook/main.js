@@ -29,17 +29,35 @@ module.exports = {
     },
   },
   async viteFinal(config, { configType }) {
-    const resolve = {
-      alias: {
-        "@leafygreen-ui/emotion": "./config/leafygreen-ui/emotion.ts",
-      },
-    };
+    const { mergeConfig, loadConfigFromFile } = require("vite"); // eslint-disable-line global-require
+    const path = require("path"); // eslint-disable-line global-require
+
+    const { config: viteConfig } = await loadConfigFromFile(
+      configType,
+      path.resolve(__dirname, "../vite.config.ts")
+    );
+
+    // TODO: clean this up
+    // eslint-disable-next-line no-param-reassign
+    config.plugins = config.plugins.filter((plugin) => {
+      if (isReactPlugin(plugin)) {
+        return false;
+      }
+      return true;
+    });
 
     if (configType === "PRODUCTION") {
       // We need to override the 'base' property so that the path to storybook-static/assets
       // is correct. (https://github.com/storybookjs/builder-vite/issues/475)
-      return { ...config, resolve, base: "./" };
+      config.base = "./"; // eslint-disable-line no-param-reassign
     }
-    return { ...config, resolve };
+
+    return mergeConfig(viteConfig, config);
   },
+};
+
+const isReactPlugin = (plugin) => {
+  return (
+    Array.isArray(plugin) && plugin.some((p) => p.name === "vite:react-babel")
+  );
 };

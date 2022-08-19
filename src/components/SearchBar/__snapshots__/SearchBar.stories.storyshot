@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Storyshots Components/SearchBar Default 1`] = `
+exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
 <div
   className="css-14zx4vh"
 >
@@ -80,14 +80,14 @@ exports[`Storyshots Components/SearchBar Default 1`] = `
         value=""
       />
       <div
-        className="lg-ui-icon-selector-26098cc5 leafygreen-ui-uy5fvv"
+        className="static-lg-classname leafygreen-ui-uy5fvv"
       />
     </div>
   </div>
 </div>
 `;
 
-exports[`Storyshots Components/SearchBar Disabled 1`] = `
+exports[`storyshots Storyshots Components/SearchBar Disabled 1`] = `
 <div
   className="css-14zx4vh"
 >
@@ -166,7 +166,7 @@ exports[`Storyshots Components/SearchBar Disabled 1`] = `
         value=""
       />
       <div
-        className="lg-ui-icon-selector-26098cc5 leafygreen-ui-uy5fvv"
+        className="static-lg-classname leafygreen-ui-uy5fvv"
       />
     </div>
   </div>

@@ -7,7 +7,6 @@ module.exports = {
   coverageReporters: ["text"],
   moduleFileExtensions: ["json", "js", "jsx", "ts", "tsx"],
   moduleNameMapper: {
-    // "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy", // Possibly enable in EVG-17445.
     "^uuid$": "<rootDir>/node_modules/uuid/dist/index.js",
   },
   modulePaths: ["<rootDir>/src"],
@@ -27,7 +26,7 @@ module.exports = {
   // jest-dom adds custom jest matchers for asserting on DOM nodes.
   // learn more: https://github.com/testing-library/jest-dom
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
-  // snapshotSerializers: ["@emotion/jest/serializer"], // Possibly enable in EVG-17445.
+  snapshotSerializers: ["@emotion/jest/serializer"],
   testEnvironment: "jsdom",
   testMatch: [
     "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
@@ -40,10 +39,7 @@ module.exports = {
     "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":
       "<rootDir>/config/jest/svgTransform.js",
   },
-  transformIgnorePatterns: [
-    "<rootDir>/node_modules/",
-    // "^.+\\.module\\.(css|sass|scss)$", // Possibly enable in EVG-17445.
-  ],
+  transformIgnorePatterns: ["<rootDir>/node_modules/"],
   watchPlugins: [
     "jest-watch-typeahead/filename",
     "jest-watch-typeahead/testname",
