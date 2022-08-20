@@ -5,10 +5,8 @@ describe("Basic app test", () => {
     cy.visit("/");
   });
 
-  it("allows interacting with the count button", () => {
-    cy.contains("count is 0").should("be.visible");
-    cy.dataCy("app-button").should("exist").should("not.be.disabled");
-    cy.dataCy("app-button").click();
-    cy.contains("count is 1").should("be.visible");
+  it("should be able to see the search bar", () => {
+    cy.dataCy("searchbar-select").should("exist");
+    cy.dataCy("searchbar-input").should("exist");
   });
 });

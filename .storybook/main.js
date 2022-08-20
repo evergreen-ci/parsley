@@ -1,5 +1,5 @@
-const storybookConfig = {
-  stories: ["../src/stories/**/*.stories.@(js|jsx|ts|tsx)"],
+module.exports = {
+  stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
   addons: [
     "@storybook/addon-essentials",
     "@storybook/addon-interactions",
@@ -28,16 +28,31 @@ const storybookConfig = {
       },
     },
   },
-
   async viteFinal(config, { configType }) {
+    const { loadConfigFromFile, mergeConfig } = require("vite");
+    const path = require("path");
+
+    // Load our Vite config file.
+    const { config: viteConfig } = await loadConfigFromFile(
+      configType,
+      path.resolve(__dirname, "../vite.config.ts")
+    );
+
+    // Filter out Storybook's duplicate "vite:react-babel" plugin.
+    config.plugins = config.plugins.filter((plugin) => {
+      if (Array.isArray(plugin) && plugin.some((p) => p.name === "vite:react-babel")) {
+        return false;
+      }
+      return true;
+    });
+
+    // Add a special configuration for production.
     if (configType === "PRODUCTION") {
       // We need to override the 'base' property so that the path to storybook-static/assets
-      // is correct.
-      // (https://github.com/storybookjs/builder-vite/issues/475)
-      return { ...config, base: "./" };
+      // is correct. (https://github.com/storybookjs/builder-vite/issues/475)
+      config.base = "./";
     }
-    return config;
+
+    return mergeConfig(viteConfig, config);
   },
 };
-
-module.exports = storybookConfig;

@@ -7,12 +7,29 @@ module.exports = {
   coverageReporters: ["text"],
   moduleFileExtensions: ["json", "js", "jsx", "ts", "tsx"],
   moduleNameMapper: {
-    // "^.+\\.module\\.(css|sass|scss)$": "identity-obj-proxy", // Possibly enable in EVG-17445.
     "^uuid$": "<rootDir>/node_modules/uuid/dist/index.js",
   },
   modulePaths: ["<rootDir>/src"],
   preset: "ts-jest",
   resetMocks: true,
+  // jest-dom adds custom jest matchers for asserting on DOM nodes.
+  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
+  snapshotSerializers: ["@emotion/jest/serializer"],
+  testEnvironment: "jsdom",
+  testMatch: ["<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"],
+  testRunner: "<rootDir>/node_modules/jest-circus/runner.js",
+  transform: {
+    "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/node_modules/ts-jest",
+    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":
+      "<rootDir>/config/jest/svgTransform.js",
+  },
+  transformIgnorePatterns: ["<rootDir>/node_modules/"],
+  watchPlugins: [
+    "jest-watch-typeahead/filename",
+    "jest-watch-typeahead/testname",
+  ],
+
   // Set the output directory for generating test results.
   reporters: [
     "default",
@@ -23,27 +40,5 @@ module.exports = {
         outputName: "junit.xml",
       },
     ],
-  ],
-  setupFilesAfterEnv: ["<rootDir>/config/jest/setup.ts"],
-  // snapshotSerializers: ["@emotion/jest/serializer"], // Possibly enable in EVG-17445.
-  testEnvironment: "jsdom",
-  testMatch: [
-    "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-    "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}",
-  ],
-  testRunner: "<rootDir>/node_modules/jest-circus/runner.js",
-  transform: {
-    "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/node_modules/ts-jest",
-    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
-    "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":
-      "<rootDir>/config/jest/svgTransform.js",
-  },
-  transformIgnorePatterns: [
-    "<rootDir>/node_modules/",
-    // "^.+\\.module\\.(css|sass|scss)$", // Possibly enable in EVG-17445.
-  ],
-  watchPlugins: [
-    "jest-watch-typeahead/filename",
-    "jest-watch-typeahead/testname",
   ],
 };

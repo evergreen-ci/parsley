@@ -12,7 +12,7 @@ storybook-static
 
 # artifacts
 /bin
-# /src/**/*.css TODO EVG-17445: Uncomment this line.
+/src/**/*.css
 
 #env variables
 .cmdrc.json
