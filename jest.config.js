@@ -12,26 +12,11 @@ module.exports = {
   modulePaths: ["<rootDir>/src"],
   preset: "ts-jest",
   resetMocks: true,
-  // Set the output directory for generating test results.
-  reporters: [
-    "default",
-    [
-      "jest-junit",
-      {
-        outputDirectory: "bin/jest",
-        outputName: "junit.xml",
-      },
-    ],
-  ],
   // jest-dom adds custom jest matchers for asserting on DOM nodes.
-  // learn more: https://github.com/testing-library/jest-dom
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
   snapshotSerializers: ["@emotion/jest/serializer"],
   testEnvironment: "jsdom",
-  testMatch: [
-    "<rootDir>/src/**/__tests__/**/*.{js,jsx,ts,tsx}",
-    "<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}",
-  ],
+  testMatch: ["<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"],
   testRunner: "<rootDir>/node_modules/jest-circus/runner.js",
   transform: {
     "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/node_modules/ts-jest",
@@ -43,5 +28,17 @@ module.exports = {
   watchPlugins: [
     "jest-watch-typeahead/filename",
     "jest-watch-typeahead/testname",
+  ],
+
+  // Set the output directory for generating test results.
+  reporters: [
+    "default",
+    [
+      "jest-junit",
+      {
+        outputDirectory: "bin/jest",
+        outputName: "junit.xml",
+      },
+    ],
   ],
 };
