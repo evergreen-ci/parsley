@@ -6,7 +6,7 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  // This resolve field for leafygreen-ui emotion is to prevent LG from pulling in SSR dependencies.
+  // The resolve field for @leafygreen-ui/emotion is to prevent LG from pulling in SSR dependencies.
   // It can be potentially be removed upon the completion of https://jira.mongodb.org/browse/PD-1543.
   resolve: {
     alias: {
@@ -20,11 +20,11 @@ export default defineConfig({
   plugins: [
     tsconfigPaths(),
     react({
-      jsxImportSource: "@emotion/react", // This enables use of css prop on JSX.
+      jsxImportSource: "@emotion/react", // Enables use of css prop on JSX.
       babel: {
-        // @emotion/babel-plugin injects styled component names (e.g. "StyledSelect") into HTML for dev environments
-        // only. It can be toggled for production environments by modifying the parameter autoLabel.
-        // (https://emotion.sh/docs/@emotion/babel-plugin)
+        // @emotion/babel-plugin injects styled component names (e.g. "StyledSelect") into HTML for dev
+        // environments only. It can be toggled for production environments by modifying the parameter
+        // autoLabel. (https://emotion.sh/docs/@emotion/babel-plugin)
         plugins: ["@emotion/babel-plugin"],
       },
       exclude: /\.stories\.tsx?$/, // Exclude storybook stories from fast refresh.

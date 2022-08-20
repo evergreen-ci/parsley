@@ -80,7 +80,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
         value=""
       />
       <div
-        className="static-lg-classname leafygreen-ui-uy5fvv"
+        className="static-lg-ui-classname leafygreen-ui-uy5fvv"
       />
     </div>
   </div>
@@ -166,7 +166,7 @@ exports[`storyshots Storyshots Components/SearchBar Disabled 1`] = `
         value=""
       />
       <div
-        className="static-lg-classname leafygreen-ui-uy5fvv"
+        className="static-lg-ui-classname leafygreen-ui-uy5fvv"
       />
     </div>
   </div>
