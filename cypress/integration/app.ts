@@ -6,6 +6,6 @@ describe("Basic app test", () => {
   });
 
   it("should be able to see the loading page", () => {
-    cy.contains("I am a loading page");
+    cy.contains("I am the loading page");
   });
 });
