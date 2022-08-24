@@ -6,7 +6,7 @@ const { gray, white } = palette;
 
 const NavBar: React.FC = () => <Container>OUR TRUSTY NAVBAR</Container>;
 
-const Container = Styled.div`
+const Container = Styled.nav`
     align-items: center;
     background-color: ${white};
     border-bottom: 1px solid ${gray.light2};
