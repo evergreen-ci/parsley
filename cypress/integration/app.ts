@@ -5,8 +5,7 @@ describe("Basic app test", () => {
     cy.visit("/");
   });
 
-  it("should be able to see the search bar", () => {
-    cy.dataCy("searchbar-select").should("exist");
-    cy.dataCy("searchbar-input").should("exist");
+  it("should be able to see the loading page", () => {
+    cy.contains("I am the loading page");
   });
 });
