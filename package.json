@@ -83,10 +83,12 @@
     "jest-watch-typeahead": "2.0.0",
     "lint-staged": "13.0.3",
     "prettier": "2.7.1",
+    "rollup-plugin-visualizer": "^5.8.0",
     "ts-jest": "28.0.7",
     "typescript": "^4.6.4",
     "vite": "^3.0.0",
     "vite-plugin-checker": "^0.4.9",
+    "vite-plugin-imp": "^2.3.0",
     "vite-tsconfig-paths": "^3.5.0"
   },
   "resolutions": {

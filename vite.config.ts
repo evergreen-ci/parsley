@@ -1,4 +1,5 @@
 import react from "@vitejs/plugin-react";
+import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
 import tsconfigPaths from "vite-tsconfig-paths";
@@ -33,6 +34,11 @@ export default defineConfig({
     }),
     // Typescript checking
     checker({ typescript: true }),
+    // Bundle analyzer
+    visualizer({
+      filename: "build/source_map.html",
+      template: "treemap",
+    }),
   ],
   // Setting jsxImportSource to @emotion/react raises a warning in the console. This line silences
   // the warning. (https://github.com/vitejs/vite/issues/8644)
