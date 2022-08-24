@@ -1,6 +1,7 @@
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
+import envCompatible from "vite-plugin-env-compatible";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
 
@@ -30,6 +31,9 @@ export default defineConfig({
       exclude: /\.stories\.tsx?$/, // Exclude storybook stories from fast refresh.
       include: ["**/*.tsx", "**/*.ts"], // Only Typescript files should use fast refresh.
       fastRefresh: true,
+    }),
+    envCompatible({
+      prefix: "REACT_APP_",
     }),
     // Typescript checking
     checker({ typescript: true }),
