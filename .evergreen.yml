@@ -95,7 +95,7 @@ functions:
   copy-cmdrc:
     command: shell.exec
     params:
-      working_dir: spruce
+      working_dir: parsley
       script: |
         cp .env-cmdrc.sample.json .env-cmdrc.json
 
