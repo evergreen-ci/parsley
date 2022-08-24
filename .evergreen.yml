@@ -97,7 +97,7 @@ functions:
     params:
       working_dir: spruce
       script: |
-        cp env/.cmdrc_sample.json env/.cmdrc.json
+        cp .env-cmdrc.sample.json .env-cmdrc.json
 
   get-project:
     command: git.get_project
@@ -256,4 +256,3 @@ buildvariants:
 pre:
   - func: get-project
   - func: yarn-install
-  - func: setup-credentials
