@@ -1,9 +1,12 @@
 import react from "@vitejs/plugin-react";
+import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
 import envCompatible from "vite-plugin-env-compatible";
+import vitePluginImp from "vite-plugin-imp";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
+import reactVirtualized from "./config/reactVirtualized";
 
 // https://vitejs.dev/config/
 export default defineConfig({
@@ -32,11 +35,26 @@ export default defineConfig({
       include: ["**/*.tsx", "**/*.ts"], // Only Typescript files should use fast refresh.
       fastRefresh: true,
     }),
+    vitePluginImp({
+      optimize: true,
+      libList: [
+        {
+          libName: "react-virtualized",
+          libDirectory: "dist/es",
+        },
+      ],
+    }),
+    reactVirtualized(),
     envCompatible({
       prefix: "REACT_APP_",
     }),
     // Typescript checking
     checker({ typescript: true }),
+    // Bundle analyzer
+    visualizer({
+      filename: "build/source_map.html",
+      template: "treemap",
+    }),
   ],
   // Setting jsxImportSource to @emotion/react raises a warning in the console. This line silences
   // the warning. (https://github.com/vitejs/vite/issues/8644)

@@ -2,7 +2,11 @@
   "compilerOptions": {
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -19,7 +23,18 @@
     "baseUrl": "src",
     "noFallthroughCasesInSwitch": true,
   },
-  "include": ["src", "config/jest/setup.ts"],
-  "exclude": ["node_modules", "vite.config.ts", "cypress.config.ts"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "src",
+    "config/jest/setup.ts",
+  ],
+  "exclude": [
+    "node_modules",
+    "vite.config.ts",
+    "cypress.config.ts"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }
