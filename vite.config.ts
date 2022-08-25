@@ -2,6 +2,7 @@ import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
+import envCompatible from "vite-plugin-env-compatible";
 import vitePluginImp from "vite-plugin-imp";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
@@ -44,6 +45,9 @@ export default defineConfig({
       ],
     }),
     reactVirtualized(),
+    envCompatible({
+      prefix: "REACT_APP_",
+    }),
     // Typescript checking
     checker({ typescript: true }),
     // Bundle analyzer
