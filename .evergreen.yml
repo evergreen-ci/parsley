@@ -92,6 +92,19 @@ functions:
       permissions: public-read
       display_name: storybook_assets_map_
   
+  attach-source-map:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_file: "parsley/build/source_map.html"
+      remote_file: parsley/${task_id}/source_map.html
+      bucket: mciuploads
+      content_type: text/html
+      permissions: public-read
+      display_name: source_map_
+    
   copy-cmdrc:
     command: shell.exec
     params:
@@ -196,6 +209,7 @@ tasks:
     commands:
     - func: copy-cmdrc
     - func: yarn-build
+    - func: attach-source-map
 
   - name: type_check
     commands:
