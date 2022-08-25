@@ -15,7 +15,7 @@ storybook-static
 /src/**/*.css
 
 #env variables
-.cmdrc.json
+.env-cmdrc.json
 
 # misc
 .DS_Store

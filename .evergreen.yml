@@ -92,6 +92,13 @@ functions:
       permissions: public-read
       display_name: storybook_assets_map_
   
+  copy-cmdrc:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        cp .env-cmdrc.sample.json .env-cmdrc.json
+
   get-project:
     command: git.get_project
     type: setup
@@ -187,6 +194,7 @@ functions:
 tasks:
   - name: compile
     commands:
+    - func: copy-cmdrc
     - func: yarn-build
 
   - name: type_check
@@ -204,6 +212,7 @@ tasks:
 
   - name: e2e_test
     commands:
+    - func: copy-cmdrc
     - func: yarn-build
     - func: yarn-preview
     - func: install-chrome
