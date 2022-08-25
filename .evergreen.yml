@@ -135,7 +135,7 @@ functions:
       working_dir: parsley
       script: |
         export PATH=${node_path}
-        yarn cy:run --browser /tmp/chrome-linux/chrome --reporter junit
+        yarn cy:run --browser /tmp/chrome-linux/chrome --record --key ${cypress_record_key} --reporter junit
 
   yarn-eslint:
     command: shell.exec

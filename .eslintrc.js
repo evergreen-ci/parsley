@@ -41,6 +41,13 @@ module.exports = {
   },
   rules: {
     // Rules for ESLint.
+    "arrow-body-style": [
+      errorIfStrict,
+      "as-needed",
+      {
+        requireReturnForObjectLiteral: false,
+      },
+    ],
     "consistent-return": OFF,
     curly: [errorIfStrict, "multi-line"],
     eqeqeq: [errorIfStrict, "always", { null: "ignore" }],
