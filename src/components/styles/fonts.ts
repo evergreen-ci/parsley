@@ -63,7 +63,7 @@ const fontStyles = css`
   /* Italic */
   @font-face {
     font-family: "Euclid Circular A";
-    font-weight: 400, normal;
+    font-weight: 400;
     font-style: italic;
     src: url("/static/fonts/EuclidCircularA/EuclidCircularA-RegularItalic-WebXL.woff2")
         format("woff2"),
