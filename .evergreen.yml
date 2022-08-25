@@ -101,7 +101,7 @@ functions:
       local_file: "parsley/build/source_map.html"
       remote_file: parsley/${task_id}/source_map.html
       bucket: mciuploads
-      content_type: application/json
+      content_type: text/html
       permissions: public-read
       display_name: source_map_
     
