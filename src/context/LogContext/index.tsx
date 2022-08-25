@@ -36,11 +36,11 @@ const LogContextProvider: React.FC<{ children: React.ReactNode }> = ({
   const memoizedContext = useMemo(
     () => ({
       logLines: state.logs,
-      lineCount: state.lineCount,
+      lineCount: state.logs.length,
       clearLines,
       ingestLines,
     }),
-    [state.logs, state.lineCount, ingestLines, clearLines]
+    [state.logs, ingestLines, clearLines]
   );
 
   return (
