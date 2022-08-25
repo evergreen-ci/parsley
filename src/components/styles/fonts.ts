@@ -52,7 +52,7 @@ const fontStyles = css`
   /* Normal */
   @font-face {
     font-family: "Euclid Circular A";
-    font-weight: 400, normal;
+    font-weight: 400;
     font-style: normal;
     src: url("/static/fonts/EuclidCircularA/EuclidCircularA-Regular-WebXL.woff2")
         format("woff2"),
