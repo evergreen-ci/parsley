@@ -6,6 +6,7 @@ import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
 import { StyledLink, StyledRouterLink } from "components/styles";
 import { size } from "constants/tokens";
+import { validateRegexp } from "utils/validators";
 
 const { gray, white } = palette;
 
@@ -21,7 +22,10 @@ const NavBar: React.FC = () => (
           Upload
         </StyledRouterLink>
       </LinkContainer>
-      <SearchBar />
+      <StyledSearchBar
+        validator={validateRegexp}
+        validatorMessage="Invalid Regular Expression"
+      />
     </FlexContainer>
     <ButtonContainer>
       <StyledButton buttonText="Filters">SomeContent</StyledButton>
@@ -39,6 +43,10 @@ const ButtonContainer = styled.div`
   justify-content: space-between;
   margin: 0 ${size.xs};
   justify-self: flex-end;
+`;
+
+const StyledSearchBar = styled(SearchBar)`
+  width: 60vw;
 `;
 
 const StyledButton = styled(PopoverButton)`
