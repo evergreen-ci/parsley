@@ -16,7 +16,7 @@ describe("searchbar", () => {
     expect(input).toHaveValue("test");
     await user.type(input, "{enter}");
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit).toHaveBeenCalledWith("test");
+    expect(onSubmit).toHaveBeenCalledWith("search", "test");
   });
   it("should be able to submit an input by clicking the submit button", async () => {
     const user = userEvent.setup();
@@ -27,7 +27,7 @@ describe("searchbar", () => {
     expect(input).toHaveValue("test");
     await user.click(screen.getByDataCy("searchbar-submit"));
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit).toHaveBeenCalledWith("test");
+    expect(onSubmit).toHaveBeenCalledWith("search", "test");
   });
   it("shows a warning icon if input is invalid", async () => {
     const user = userEvent.setup();

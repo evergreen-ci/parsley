@@ -13,7 +13,7 @@ interface SearchBarProps {
   validator?: (value: string) => boolean;
   validatorMessage?: string;
   className?: string;
-  onSubmit?: (value: string) => void;
+  onSubmit?: (selected: string, value: string) => void;
 }
 
 // Basic component to test LG and Emotion integration.
@@ -32,7 +32,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const handleOnSubmit = () => {
     if (isValid) {
       setInput("");
-      onSubmit?.(input);
+      onSubmit?.(selected, input);
     }
   };
 
