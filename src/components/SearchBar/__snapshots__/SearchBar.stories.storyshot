@@ -5,7 +5,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
   className="css-14zx4vh"
 >
   <div
-    className="leafygreen-ui-1nkq8lt css-6lshyd"
+    className="leafygreen-ui-1nkq8lt css-1svbhsp"
   >
     <button
       aria-controls="select-1-menu"
