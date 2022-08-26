@@ -1,4 +1,5 @@
 import {
+  fireEvent,
   queries,
   render,
   screen,
@@ -91,4 +92,5 @@ export {
   renderWithRouterMatch,
   waitFor,
   userEvent,
+  fireEvent,
 };
