@@ -1,3 +1,4 @@
+import React from "react";
 import { GlobalStyles } from "../src/components/styles";
 
 export const parameters = {
@@ -11,7 +12,7 @@ export const parameters = {
 };
 
 export const decorators = [
-  (Story) => (
+  (Story: () => JSX.Element) => (
     <>
       <GlobalStyles />
       <Story />
