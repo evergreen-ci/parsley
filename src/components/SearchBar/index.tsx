@@ -68,7 +68,7 @@ const StyledSelect = styled(Select)`
 `;
 
 const StyledInput = styled(TextInput)`
-  width: 300px;
+  width: 40vw;
   /* Remove default padding around the text input. */
   > div {
     padding: 0;
