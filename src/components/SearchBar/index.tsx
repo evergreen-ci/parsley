@@ -64,11 +64,12 @@ const StyledSelect = styled(Select)`
     margin-top: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    border-right: 0;
   }
 `;
 
 const StyledInput = styled(TextInput)`
-  width: 300px;
+  width: 40vw;
   /* Remove default padding around the text input. */
   > div {
     padding: 0;

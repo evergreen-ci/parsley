@@ -31,6 +31,7 @@
     "@emotion/react": "11.9.3",
     "@emotion/styled": "11.9.3",
     "@leafygreen-ui/button": "16.0.0",
+    "@leafygreen-ui/card": "7.0.0",
     "@leafygreen-ui/emotion": "4.0.0",
     "@leafygreen-ui/leafygreen-provider": "2.3.2",
     "@leafygreen-ui/palette": "3.4.0",
@@ -95,8 +96,8 @@
     "typescript": "^4.6.4",
     "vite": "^3.0.0",
     "vite-plugin-checker": "^0.4.9",
-    "vite-plugin-imp": "^2.3.0",
     "vite-plugin-env-compatible": "^1.1.1",
+    "vite-plugin-imp": "^2.3.0",
     "vite-tsconfig-paths": "^3.5.0"
   },
   "resolutions": {
