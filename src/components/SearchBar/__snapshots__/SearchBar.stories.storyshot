@@ -57,31 +57,65 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
     </button>
   </div>
   <div
-    className="css-2jqe7f leafygreen-ui-xtefr5"
+    className="css-1xm32e0"
   >
     <div
-      className="leafygreen-ui-k02un9"
+      className="css-zyuymb leafygreen-ui-xtefr5"
     >
-      <input
-        aria-invalid={false}
-        aria-label="searchbar-input"
-        autoComplete="on"
-        className="leafygreen-ui-ge8o19"
-        data-cy="searchbar-input"
-        disabled={false}
-        id="textinput-1"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onKeyPress={[Function]}
-        placeholder="optional, regexp to search"
-        required={true}
-        spellCheck={false}
-        type="search"
-        value=""
-      />
       <div
-        className="static-lg-ui-classname leafygreen-ui-uy5fvv"
-      />
+        className="leafygreen-ui-k02un9"
+      >
+        <input
+          aria-invalid={false}
+          aria-label="searchbar-input"
+          autoComplete="on"
+          className="leafygreen-ui-ge8o19"
+          data-cy="searchbar-input"
+          disabled={false}
+          id="textinput-1"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onKeyPress={[Function]}
+          placeholder="optional, regexp to search"
+          required={true}
+          spellCheck={false}
+          type="search"
+          value=""
+        />
+        <div
+          className="static-lg-ui-classname leafygreen-ui-uy5fvv"
+        />
+      </div>
+    </div>
+    <div
+      className="css-1w7keqv"
+    >
+      <div
+        className="leafygreen-ui-cssveg css-1sg2lsz"
+        data-cy="searchbar-warning"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+      >
+        <svg
+          aria-label="Warning Icon"
+          className="leafygreen-ui-1o1t3sx"
+          fill="none"
+          height={16}
+          role="img"
+          viewBox="0 0 16 16"
+          width={16}
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clipRule="evenodd"
+            d="M8.864 2.514a.983.983 0 00-1.728 0L1.122 13.539A.987.987 0 001.986 15h12.028a.987.987 0 00.864-1.461L8.864 2.514zM7 6a1 1 0 012 0v4a1 1 0 11-2 0V6zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+            fill="currentColor"
+            fillRule="evenodd"
+          />
+        </svg>
+      </div>
     </div>
   </div>
 </div>
