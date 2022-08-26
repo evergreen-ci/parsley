@@ -31,7 +31,7 @@
     "@emotion/react": "11.9.3",
     "@emotion/styled": "11.9.3",
     "@leafygreen-ui/button": "16.0.0",
-    "@leafygreen-ui/card": "^7.0.0",
+    "@leafygreen-ui/card": "7.0.0",
     "@leafygreen-ui/emotion": "4.0.0",
     "@leafygreen-ui/leafygreen-provider": "2.3.2",
     "@leafygreen-ui/palette": "3.4.0",

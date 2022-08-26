@@ -64,6 +64,7 @@ const StyledSelect = styled(Select)`
     margin-top: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
+    border-right: 0;
   }
 `;
 

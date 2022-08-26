@@ -1,23 +1,12 @@
-import { Global, css } from "@emotion/react";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import NavBar from "components/NavBar";
-import fontStyles from "components/styles/fonts";
+import { GlobalStyles } from "components/styles";
 import { GlobalProviders } from "context";
 import Content from "pages/Content";
 
-const globalStyles = css`
-  ${fontStyles}
-  background-color: white;
-  body {
-    font-family: "Euclid Circular A", "Helvetica Neue", Helvetica, Arial,
-      sans-serif;
-    margin: 0;
-  }
-`;
-
 const App = () => (
   <>
-    <Global styles={globalStyles} />
+    <GlobalStyles />
     <GlobalProviders>
       <Router>
         <NavBar />
