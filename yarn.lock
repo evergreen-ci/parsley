@@ -1900,7 +1900,7 @@
   dependencies:
     lodash "^4.17.21"
 
-"@leafygreen-ui/icon-button@^13.1.0":
+"@leafygreen-ui/icon-button@13.1.0":
   version "13.1.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/icon-button/-/icon-button-13.1.0.tgz#df0c7f7b2b3b9fc2431c24b69bbb29e500e6eb8b"
   integrity sha512-Lr6B6O7alE94mspe7UifR/kzZKppX1St4feYNa3Wiv+6FU2n0mvRgEIs9tdFbpDeENBehNV3qs5ZciRZKUZr+g==
@@ -2028,7 +2028,7 @@
     "@leafygreen-ui/lib" "^9.3.0"
     "@leafygreen-ui/palette" "^3.4.0"
 
-"@leafygreen-ui/tooltip@^7.1.0":
+"@leafygreen-ui/tooltip@7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/tooltip/-/tooltip-7.1.0.tgz#04b58787c8b60516b79a84eac013d8c6e18f13b3"
   integrity sha512-EzgsFgeQ4aFXXBqfE76TImvhf00DVHlrYysecYo7XcWiqo4zytUzYwXwIzrwk3AQQjq+eVuid8vkBqt/s6jD7w==
