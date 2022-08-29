@@ -1845,7 +1845,7 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@leafygreen-ui/a11y@^1.2.2":
+"@leafygreen-ui/a11y@^1.2.2", "@leafygreen-ui/a11y@^1.3.0":
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/a11y/-/a11y-1.3.0.tgz#936767e77341e6aae9afbb20836dcd90051e02ae"
   integrity sha512-4aE+I4U6HD13UUkIss0PEQyl4KpgUlbK/N8Gp6CjkE8zAwWgJ3S4OUSB+gNI06H8T+fdqYixhEXeLfw4AWiPEQ==
@@ -1874,7 +1874,7 @@
     "@leafygreen-ui/ripple" "^1.1.1"
     "@leafygreen-ui/tokens" "^1.3.1"
 
-"@leafygreen-ui/card@^7.0.0":
+"@leafygreen-ui/card@7.0.0":
   version "7.0.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/card/-/card-7.0.0.tgz#bc9e3c451a29f8198b799c2b086305cf10bee6a7"
   integrity sha512-k8JFGZEJ7q3QXe2dqn5s4kFtk7ujYYWOfPB31UGslfSimAZPJCsMeHlIuaP8kdHQU5Fx776rVMTMXPi7sbZgFQ==
@@ -1899,6 +1899,18 @@
   integrity sha512-Pc9t70wOgBRMdk9lCZeoFFrJW00LbLVfeKMhDrnKuWnib5oRgBFPjrKqGG2ldYnw+Tt1YJ6EmfV6oS7HxU2MkA==
   dependencies:
     lodash "^4.17.21"
+
+"@leafygreen-ui/icon-button@13.1.0":
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/icon-button/-/icon-button-13.1.0.tgz#df0c7f7b2b3b9fc2431c24b69bbb29e500e6eb8b"
+  integrity sha512-Lr6B6O7alE94mspe7UifR/kzZKppX1St4feYNa3Wiv+6FU2n0mvRgEIs9tdFbpDeENBehNV3qs5ZciRZKUZr+g==
+  dependencies:
+    "@leafygreen-ui/a11y" "^1.3.0"
+    "@leafygreen-ui/box" "^3.0.7"
+    "@leafygreen-ui/emotion" "^4.0.0"
+    "@leafygreen-ui/lib" "^9.4.0"
+    "@leafygreen-ui/palette" "^3.4.0"
+    "@leafygreen-ui/tokens" "^1.3.0"
 
 "@leafygreen-ui/icon@^11.10.0", "@leafygreen-ui/icon@^11.9.0":
   version "11.10.1"
@@ -2015,6 +2027,21 @@
   dependencies:
     "@leafygreen-ui/lib" "^9.3.0"
     "@leafygreen-ui/palette" "^3.4.0"
+
+"@leafygreen-ui/tooltip@7.1.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/tooltip/-/tooltip-7.1.0.tgz#04b58787c8b60516b79a84eac013d8c6e18f13b3"
+  integrity sha512-EzgsFgeQ4aFXXBqfE76TImvhf00DVHlrYysecYo7XcWiqo4zytUzYwXwIzrwk3AQQjq+eVuid8vkBqt/s6jD7w==
+  dependencies:
+    "@leafygreen-ui/emotion" "^4.0.0"
+    "@leafygreen-ui/hooks" "^7.0.0"
+    "@leafygreen-ui/icon" "^11.9.0"
+    "@leafygreen-ui/lib" "^9.4.0"
+    "@leafygreen-ui/palette" "^3.3.2"
+    "@leafygreen-ui/popover" "^9.0.0"
+    "@leafygreen-ui/tokens" "^1.3.1"
+    "@leafygreen-ui/typography" "^13.1.0"
+    lodash "^4.17.21"
 
 "@leafygreen-ui/typography@13.1.1", "@leafygreen-ui/typography@^13.1.0", "@leafygreen-ui/typography@^13.1.1":
   version "13.1.1"
