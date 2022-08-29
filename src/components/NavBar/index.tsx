@@ -5,34 +5,53 @@ import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
 import { StyledLink, StyledRouterLink } from "components/styles";
+import { queryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
+import { useQueryParam } from "hooks/useQueryString";
 import { validateRegexp } from "utils/validators";
 
 const { gray, white } = palette;
 
-const NavBar: React.FC = () => (
-  <Container>
-    <FlexContainer>
-      <LinkContainer>
-        <Icon glyph="LobsterLogo" />
-        <StyledLink css={navLinkStyles} href="https://wiki.corp.mongodb.com">
-          Wiki
-        </StyledLink>
-        <StyledRouterLink css={navLinkStyles} to="/upload">
-          Upload
-        </StyledRouterLink>
-      </LinkContainer>
-      <StyledSearchBar
-        validator={validateRegexp}
-        validatorMessage="Invalid Regular Expression"
-      />
-    </FlexContainer>
-    <ButtonContainer>
-      <StyledButton buttonText="Filters">SomeContent</StyledButton>
-      <StyledButton buttonText="Details">SomeContent</StyledButton>
-    </ButtonContainer>
-  </Container>
-);
+const NavBar: React.FC = () => {
+  const [, setSearch] = useQueryParam(queryParams.search, "");
+  const [filters, setFilters] = useQueryParam<string[]>(
+    queryParams.filters,
+    []
+  );
+
+  const handleSearch = (selected: string, value: string) => {
+    if (selected === "search") {
+      setSearch(value);
+    } else if (selected === "filter") {
+      setFilters([...filters, value]);
+    }
+  };
+
+  return (
+    <Container>
+      <FlexContainer>
+        <LinkContainer>
+          <Icon glyph="LobsterLogo" />
+          <StyledLink css={navLinkStyles} href="https://wiki.corp.mongodb.com">
+            Wiki
+          </StyledLink>
+          <StyledRouterLink css={navLinkStyles} to="/upload">
+            Upload
+          </StyledRouterLink>
+        </LinkContainer>
+        <StyledSearchBar
+          onSubmit={handleSearch}
+          validator={validateRegexp}
+          validatorMessage="Invalid Regular Expression"
+        />
+      </FlexContainer>
+      <ButtonContainer>
+        <StyledButton buttonText="Filters">SomeContent</StyledButton>
+        <StyledButton buttonText="Details">SomeContent</StyledButton>
+      </ButtonContainer>
+    </Container>
+  );
+};
 
 const FlexContainer = styled.div`
   display: flex;
