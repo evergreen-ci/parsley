@@ -2,11 +2,10 @@ import { useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { parseQueryString, stringifyQuery } from "utils/query-string";
 
-/** useQueryString wraps useSearchParams and provides a way to interact and update all query params */
-const useQueryString = () => {
+/** `useQueryParams` returns all of the query params passed into the url */
+const useQueryParams = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  console.log(searchParams.toString());
   const setQueryString = useCallback(
     (params: { [key: string]: any }) => {
       const stringifiedQuery = stringifyQuery(params);
@@ -14,34 +13,42 @@ const useQueryString = () => {
     },
     [navigate]
   );
-  return [searchParams, setQueryString] as const;
+
+  return [parseQueryString(searchParams.toString()), setQueryString] as const;
 };
 
+/** `useQueryParam` allows you to interact with a query param in the same way you would use a useState hook.  */
 const useQueryParam = <T>(
   param: string,
   def: T
 ): readonly [T, (set: T) => void] => {
-  const [searchParams, setSearchParams] = useQueryString();
+  const [searchParams, setSearchParams] = useQueryParams();
   const setQueryParam = useCallback(
     (value: T) => {
       setSearchParams({
-        ...parseQueryString(searchParams.toString()),
+        ...searchParams,
         [param]: value,
       });
     },
     [setSearchParams, searchParams, param]
   );
 
-  if (Array.isArray(def)) {
-    return [
-      searchParams.get(param)?.split(",") as unknown as T,
-      setQueryParam,
-    ] as const;
-  }
   return [
-    (searchParams.get(param) as unknown as T) || def,
+    searchParams[param] !== undefined
+      ? (conditionalToArray(
+          searchParams[param],
+          Array.isArray(def)
+        ) as unknown as T)
+      : def,
     setQueryParam,
   ] as const;
 };
 
-export { useQueryString, useQueryParam };
+/** `conditionalToArray` takes in a value and transforms it into an array if it is not one and should be */
+const conditionalToArray = <T>(value: T, shouldBeArray: boolean) => {
+  if (shouldBeArray) {
+    return Array.isArray(value) ? value : [value];
+  }
+  return value;
+};
+export { useQueryParams, useQueryParam };
