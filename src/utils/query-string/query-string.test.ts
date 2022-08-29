@@ -33,4 +33,19 @@ describe("query-string", () => {
       variants: ["ubuntu1604", "GLADOS"],
     });
   });
+  it("parses a query param with a boolean as a value", () => {
+    expect(parseQueryString("status=true")).toMatchObject({
+      status: true,
+    });
+  });
+  it("parses a query param with a number as a value", () => {
+    expect(parseQueryString("status=1")).toMatchObject({
+      status: 1,
+    });
+  });
+  it("parses a query param with a number array as a value", () => {
+    expect(parseQueryString("status=1,2,3")).toMatchObject({
+      status: [1, 2, 3],
+    });
+  });
 });
