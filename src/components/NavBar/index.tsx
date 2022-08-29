@@ -7,7 +7,7 @@ import SearchBar from "components/SearchBar";
 import { StyledLink, StyledRouterLink } from "components/styles";
 import { queryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
-import { useQueryParam } from "hooks/useQueryString";
+import { useQueryParam } from "hooks/useQueryParam";
 import { validateRegexp } from "utils/validators";
 
 const { gray, white } = palette;
