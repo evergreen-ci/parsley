@@ -5,7 +5,7 @@ import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
 import { StyledLink, StyledRouterLink } from "components/styles";
-import { queryParams } from "constants/queryParams";
+import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import { validateRegexp } from "utils/validators";
@@ -13,9 +13,9 @@ import { validateRegexp } from "utils/validators";
 const { gray, white } = palette;
 
 const NavBar: React.FC = () => {
-  const [, setSearch] = useQueryParam(queryParams.search, "");
+  const [, setSearch] = useQueryParam(QueryParams.Search, "");
   const [filters, setFilters] = useQueryParam<string[]>(
-    queryParams.filters,
+    QueryParams.Filters,
     []
   );
 

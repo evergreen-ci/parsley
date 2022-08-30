@@ -1,8 +1,8 @@
-enum queryParams {
-  search = "search",
-  highlights = "highlights",
-  bookmarks = "bookmarks",
-  filters = "filters",
+enum QueryParams {
+  Search = "search",
+  Highlights = "highlights",
+  Bookmarks = "bookmarks",
+  Filters = "filters",
 }
 
-export { queryParams };
+export { QueryParams };
