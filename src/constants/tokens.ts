@@ -27,4 +27,5 @@ const fontSize = {
   l: "18px",
 } as const;
 
-export { size, zIndex, fontSize };
+const navbarHeight = size.xl;
+export { size, zIndex, fontSize, navbarHeight };

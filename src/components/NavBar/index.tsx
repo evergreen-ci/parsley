@@ -5,7 +5,7 @@ import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
 import { StyledLink, StyledRouterLink } from "components/styles";
-import { size } from "constants/tokens";
+import { navbarHeight, size } from "constants/tokens";
 import { validateRegexp } from "utils/validators";
 
 const { gray, white } = palette;
@@ -63,9 +63,10 @@ const Container = styled.nav`
   background-color: ${white};
   border-bottom: 1px solid ${gray.light2};
   display: flex;
-  height: ${size.xl};
+  height: ${navbarHeight};
   justify-content: space-between;
   padding: 0 ${size.s};
+  position: static;
 `;
 
 const navLinkStyles = css`
