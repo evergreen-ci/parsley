@@ -5,6 +5,7 @@ interface LogContextState {
   logLines: string[];
   lineCount: number;
   ingestLines: (logs: string[]) => void;
+  getLine: (lineNumber: number) => string | undefined;
   clearLines: () => void;
 }
 const LogContext = createContext<LogContextState | null>(null);
@@ -17,10 +18,16 @@ const useLogContext = () => {
   return context as LogContextState;
 };
 
-const LogContextProvider: React.FC<{ children: React.ReactNode }> = ({
+interface LogContextProviderProps {
+  children: React.ReactNode;
+  initialLogLines?: string[];
+}
+
+const LogContextProvider: React.FC<LogContextProviderProps> = ({
   children,
+  initialLogLines,
 }) => {
-  const { state, dispatch } = useLogState();
+  const { state, dispatch } = useLogState(initialLogLines);
 
   const ingestLines = useCallback(
     (lines: string[]) => {
@@ -33,14 +40,19 @@ const LogContextProvider: React.FC<{ children: React.ReactNode }> = ({
     dispatch({ type: "CLEAR_LOGS" });
   }, [dispatch]);
 
+  const getLine = useCallback(
+    (lineNumber: number) => state.logs[lineNumber],
+    [state.logs]
+  );
   const memoizedContext = useMemo(
     () => ({
       logLines: state.logs,
       lineCount: state.logs.length,
       clearLines,
+      getLine,
       ingestLines,
     }),
-    [state.logs, ingestLines, clearLines]
+    [state.logs, ingestLines, getLine, clearLines]
   );
 
   return (
