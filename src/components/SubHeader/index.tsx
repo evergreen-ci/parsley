@@ -6,7 +6,8 @@ import { size } from "constants/tokens";
 
 const { gray } = palette;
 
-const SubNav = () => (
+/** TODO: EVG-17534 */
+const SubHeader = () => (
   <Container>
     <StyledIcon glyph="EvergreenLogo" />
     <StyledLink href="/test">Task Page</StyledLink>
@@ -17,15 +18,15 @@ const StyledIcon = styled(Icon)`
   padding-left: ${size.l};
   padding-right: ${size.l};
 `;
-const subnavHeight = size.xl;
+const SubHeaderHeight = size.xl;
 const Container = styled.div`
   background-color: ${gray.light3};
   width: calc(100vw - 48px);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
-  height: ${subnavHeight};
+  height: ${SubHeaderHeight};
   display: flex;
   align-items: center;
 `;
 
-export { subnavHeight };
-export default SubNav;
+export { SubHeaderHeight };
+export default SubHeader;

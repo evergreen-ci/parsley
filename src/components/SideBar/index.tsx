@@ -5,12 +5,17 @@ import { navbarHeight, size } from "constants/tokens";
 
 const { gray } = palette;
 
+/** TODO: EVG-17532 */
 const SideBar = () => (
   <Container>
-    <Button size={Size.XSmall}>Clear</Button>1
+    <StyledButton size={Size.XSmall}>Clear</StyledButton>
+    <span>1</span>
   </Container>
 );
 
+const StyledButton = styled(Button)`
+  width: 55px;
+`;
 const Container = styled.div`
   background-color: ${gray.light3};
   width: ${size.xl};
