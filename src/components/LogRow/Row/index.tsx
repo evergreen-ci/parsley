@@ -12,14 +12,22 @@ const StyledPre = styled.pre`
     background-color: ${gray.light1};
   }
 `;
+
+/** Make index unselectable so copying a line doesn't copy it */
+const Index = styled.span`
+  user-select: none;
+`;
+
 interface RowProps extends ListRowProps {
   children: React.ReactNode;
   index: number;
 }
 const Row: React.FC<RowProps> = ({ index, children, ...rest }) => (
   <StyledPre {...rest}>
-    {index}
-    {"\t"}
+    <Index>
+      {index} {"\t"}
+    </Index>
+
     {children}
   </StyledPre>
 );
