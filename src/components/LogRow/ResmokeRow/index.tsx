@@ -1,10 +1,16 @@
-import { ListRowRenderer } from "react-virtualized";
-import Pre from "components/LogRow/Row";
+import { ListRowProps, ListRowRenderer } from "react-virtualized";
+import Row from "components/LogRow/Row";
+import { useLogContext } from "context/LogContext";
 
-const ResmokeRow: ListRowRenderer = ({ index, key, style }) => (
-  <Pre key={key} style={style}>
-    ResmokeRow: {index}
-  </Pre>
+const ResmokeRow: React.FC<ListRowProps> = (rowProps) => {
+  const { getLine } = useLogContext();
+  const { index } = rowProps;
+  return <Row {...rowProps}>{getLine(index)}</Row>;
+};
+
+const ResmokeRowRenderer: ListRowRenderer = ({ ...props }) => (
+  <ResmokeRow {...props} />
 );
 
-export default ResmokeRow;
+export { ResmokeRow };
+export default ResmokeRowRenderer;
