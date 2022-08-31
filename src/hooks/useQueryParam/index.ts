@@ -20,7 +20,7 @@ const useQueryParams = () => {
 /** `useQueryParam` allows you to interact with a query param in the same way you would use a useState hook.  */
 const useQueryParam = <T>(
   param: string,
-  def: T
+  defaultParam: T
 ): readonly [T, (set: T) => void] => {
   const [searchParams, setSearchParams] = useQueryParams();
   const setQueryParam = useCallback(
@@ -37,9 +37,9 @@ const useQueryParam = <T>(
     searchParams[param] !== undefined
       ? (conditionalToArray(
           searchParams[param],
-          Array.isArray(def)
+          Array.isArray(defaultParam)
         ) as unknown as T)
-      : def,
+      : defaultParam,
     setQueryParam,
   ] as const;
 };
