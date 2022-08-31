@@ -41,6 +41,7 @@
     "@leafygreen-ui/toggle": "8.0.2",
     "@leafygreen-ui/tooltip": "7.1.0",
     "@leafygreen-ui/typography": "13.1.1",
+    "query-string": "7.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.3.0",
