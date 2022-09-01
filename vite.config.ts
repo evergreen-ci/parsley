@@ -18,7 +18,7 @@ export default defineConfig({
         __dirname,
         "./config/leafygreen-ui/emotion.ts"
       ),
-      // CellMeasurerCache doesn't follow the same directory structurer as the rest of the react-virtualized packages
+      // CellMeasurerCache doesn't follow the same directory structure as the rest of the react-virtualized packages
       // so we need to alias it to the correct path.
       "react-virtualized/dist/es/CellMeasurerCache": path.resolve(
         "node_modules/react-virtualized/dist/es/CellMeasurer/CellMeasurerCache"
