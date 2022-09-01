@@ -1,7 +1,8 @@
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
 import { AnsiiRow, ResmokeRow } from "components/LogRow";
-import { cache } from "components/LogRow/ResmokeRow";
+import { cache as AnsiiRowCache } from "components/LogRow/AnsiiRow";
+import { cache as ResmokeRowCache } from "components/LogRow/ResmokeRow";
 import SideBar from "components/SideBar";
 import SubHeader, { SubHeaderHeight } from "components/SubHeader";
 import { LogTypes } from "constants/enums";
@@ -17,6 +18,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
   const { logLines, lineCount } = useLogContext();
   const [wrap] = useQueryParam("wrap", false);
   const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
+  const logRenderer = rowRendererMap[logType];
   return (
     <Container>
       <SideBar />
@@ -24,10 +26,10 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
         <SubHeader />
         <LogPaneContainer scrollX={!wrap}>
           <LogPane
-            cache={cache}
+            cache={logRenderer.cache}
             logLines={logLines}
             rowCount={lineCount}
-            rowRenderer={rowRendererMap[logType]}
+            rowRenderer={logRenderer.renderer}
             scrollToIndex={scrollToIndex}
             wrap={wrap}
           />
@@ -38,10 +40,14 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
 };
 
 const rowRendererMap = {
-  [LogTypes.EVERGREEN_TASK_LOGS]: ResmokeRow,
-  [LogTypes.EVERGREEN_TEST_LOGS]: AnsiiRow,
-  [LogTypes.RESMOKE_LOGS]: ResmokeRow,
+  [LogTypes.EVERGREEN_TASK_LOGS]: {
+    renderer: AnsiiRow,
+    cache: AnsiiRowCache,
+  },
+  [LogTypes.EVERGREEN_TEST_LOGS]: { renderer: AnsiiRow, cache: AnsiiRowCache },
+  [LogTypes.RESMOKE_LOGS]: { renderer: ResmokeRow, cache: ResmokeRowCache },
 };
+
 const Container = styled.div`
   width: 100vw;
   display: flex;
