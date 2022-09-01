@@ -14,7 +14,7 @@ const AnsiiRow: React.FC<ListRowProps> = (rowProps) => {
   const [wrap] = useQueryParam("wrap", false);
   return (
     <Row wrap={wrap} {...rowProps}>
-      {getLine(index)}
+      <span data-cy="ansii-row">{getLine(index)}</span>
     </Row>
   );
 };
@@ -33,5 +33,5 @@ const cache = new CellMeasurerCache({
   defaultHeight: 16,
 });
 
-export { AnsiiRow };
+export { AnsiiRow, cache };
 export default AnsiiRowRenderer;

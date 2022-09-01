@@ -14,7 +14,7 @@ const ResmokeRow: React.FC<ListRowProps> = (rowProps) => {
   const [wrap] = useQueryParam("wrap", false);
   return (
     <Row wrap={wrap} {...rowProps}>
-      {getLine(index)}
+      <span data-cy="resmoke-row">{getLine(index)}</span>
     </Row>
   );
 };

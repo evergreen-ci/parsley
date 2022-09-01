@@ -34,6 +34,7 @@ const Row: React.FC<RowProps> = (props) => {
   return (
     <StyledPre
       {...rest}
+      data-cy={`log-row-${index}`}
       onDoubleClick={handleDoubleClick}
       selected={selected}
       shouldWrap={wrap}
@@ -58,9 +59,7 @@ const StyledPre = styled.pre<{ shouldWrap: boolean; selected: boolean }>`
     shouldWrap &&
     `
   /* wrap multiple lines */
-  word-break: break-all;
-  word-wrap: break-word;
-  white-space: pre-wrap;
+  white-space: break-spaces;
   `}
 
   ${({ shouldWrap }) =>
