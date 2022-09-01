@@ -10,6 +10,7 @@ const globalStyles = css`
     margin: 0;
     /* Prevent scroll bounce behavior */
     overscroll-behavior-y: none;
+    overscroll-behavior-x: none;
   }
 `;
 const GlobalStyles = () => <Global styles={globalStyles} />;

@@ -18,10 +18,12 @@ const StyledIcon = styled(Icon)`
   padding-left: ${size.l};
   padding-right: ${size.l};
 `;
+
 const SubHeaderHeight = size.xl;
+
 const Container = styled.div`
   background-color: ${gray.light3};
-  width: calc(100vw - 48px);
+  width: calc(100vw - 55px);
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
   height: ${SubHeaderHeight};
   display: flex;
