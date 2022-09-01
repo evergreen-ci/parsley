@@ -1,4 +1,5 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { MemoryRouter } from "react-router-dom";
 import { LogContextProvider } from "context/LogContext";
 import { ResmokeRow } from ".";
 
@@ -27,6 +28,11 @@ SingleLine.decorators = [
       <Story />
     </LogContextProvider>
   ),
+  (Story) => (
+    <MemoryRouter initialEntries={["/"]}>
+      <Story />
+    </MemoryRouter>
+  ),
 ];
 
 const MultiLineTemplate: ComponentStory<typeof ResmokeRow> = (args) => (
@@ -44,6 +50,11 @@ MultiLines.decorators = [
     <LogContextProvider initialLogLines={logLines}>
       <Story />
     </LogContextProvider>
+  ),
+  (Story) => (
+    <MemoryRouter initialEntries={["/"]}>
+      <Story />
+    </MemoryRouter>
   ),
 ];
 
