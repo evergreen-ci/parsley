@@ -4,6 +4,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multi Lines 1`] = `
 Array [
   <pre
     className="css-1t59tt6"
+    data-cy="log-row-0"
     onDoubleClick={[Function]}
     selected={false}
   >
@@ -13,10 +14,15 @@ Array [
       0
       	
     </span>
-    [js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).
+    <span
+      data-cy="resmoke-row"
+    >
+      [js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).
+    </span>
   </pre>,
   <pre
     className="css-1t59tt6"
+    data-cy="log-row-1"
     onDoubleClick={[Function]}
     selected={false}
   >
@@ -26,10 +32,15 @@ Array [
       1
       	
     </span>
-    [j0:prim] Starting mongod on port 20000...
+    <span
+      data-cy="resmoke-row"
+    >
+      [j0:prim] Starting mongod on port 20000...
+    </span>
   </pre>,
   <pre
     className="css-1t59tt6"
+    data-cy="log-row-2"
     onDoubleClick={[Function]}
     selected={false}
   >
@@ -39,10 +50,15 @@ Array [
       2
       	
     </span>
-    PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin mongod-6.0 --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node0/2c65edd254db4835911f796d7b260455.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node0 --port=20000 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1
+    <span
+      data-cy="resmoke-row"
+    >
+      PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin mongod-6.0 --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node0/2c65edd254db4835911f796d7b260455.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node0 --port=20000 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1
+    </span>
   </pre>,
   <pre
     className="css-1t59tt6"
+    data-cy="log-row-3"
     onDoubleClick={[Function]}
     selected={false}
   >
@@ -52,10 +68,15 @@ Array [
       3
       	
     </span>
-    [j0:prim] mongod started on port 20000 with pid 30678.
+    <span
+      data-cy="resmoke-row"
+    >
+      [j0:prim] mongod started on port 20000 with pid 30678.
+    </span>
   </pre>,
   <pre
     className="css-1t59tt6"
+    data-cy="log-row-4"
     onDoubleClick={[Function]}
     selected={false}
   >
@@ -65,10 +86,15 @@ Array [
       4
       	
     </span>
-    [j0:sec0] Starting mongod on port 20001...
+    <span
+      data-cy="resmoke-row"
+    >
+      [j0:sec0] Starting mongod on port 20001...
+    </span>
   </pre>,
   <pre
     className="css-1t59tt6"
+    data-cy="log-row-5"
     onDoubleClick={[Function]}
     selected={false}
   >
@@ -78,10 +104,15 @@ Array [
       5
       	
     </span>
-    PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin /data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin/mongod --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node1/a611b65dce484b7d81b294a7941a2dac.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node1 --port=20001 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1
+    <span
+      data-cy="resmoke-row"
+    >
+      PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin /data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin/mongod --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node1/a611b65dce484b7d81b294a7941a2dac.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node1 --port=20001 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1
+    </span>
   </pre>,
   <pre
     className="css-1t59tt6"
+    data-cy="log-row-6"
     onDoubleClick={[Function]}
     selected={false}
   >
@@ -91,10 +122,15 @@ Array [
       6
       	
     </span>
-    [j0:sec0] mongod started on port 20001 with pid 30681.
+    <span
+      data-cy="resmoke-row"
+    >
+      [j0:sec0] mongod started on port 20001 with pid 30681.
+    </span>
   </pre>,
   <pre
     className="css-1t59tt6"
+    data-cy="log-row-7"
     onDoubleClick={[Function]}
     selected={false}
   >
@@ -104,7 +140,11 @@ Array [
       7
       	
     </span>
-    [j0:sec1] Starting mongod on port 20002...
+    <span
+      data-cy="resmoke-row"
+    >
+      [j0:sec1] Starting mongod on port 20002...
+    </span>
   </pre>,
 ]
 `;
@@ -112,6 +152,7 @@ Array [
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
 <pre
   className="css-1t59tt6"
+  data-cy="log-row-0"
   onDoubleClick={[Function]}
   selected={false}
 >
@@ -121,6 +162,10 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
     0
     	
   </span>
-  [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
+  <span
+    data-cy="resmoke-row"
+  >
+    [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
+  </span>
 </pre>
 `;
