@@ -27,7 +27,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
             cache={cache}
             logLines={logLines}
             rowCount={lineCount}
-            rowHeight={16}
             rowRenderer={rowRendererMap[logType]}
             scrollToIndex={scrollToIndex}
             wrap={wrap}
