@@ -1,7 +1,6 @@
-import { useState } from "react";
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
-import { ResmokeRow } from "components/LogRow";
+import { AnsiiRow, ResmokeRow } from "components/LogRow";
 import { cache } from "components/LogRow/ResmokeRow";
 import SideBar from "components/SideBar";
 import SubHeader, { SubHeaderHeight } from "components/SubHeader";
@@ -11,28 +10,27 @@ import { navbarHeight, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
 
-console.log(cache);
 interface LogWindowProps {
   logType: LogTypes;
 }
-const LogWindow: React.FC<LogWindowProps> = () => {
+const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
   const { logLines, lineCount } = useLogContext();
-  const [wrap] = useState(false);
+  const [wrap] = useQueryParam("wrap", false);
   const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
   return (
     <Container>
       <SideBar />
       <ColumnContainer>
         <SubHeader />
-        <LogPaneContainer wrap={wrap}>
+        <LogPaneContainer scrollX={!wrap}>
           <LogPane
-            allowHorizontalScroll={!wrap}
             cache={cache}
             logLines={logLines}
-            maxWidth={1000}
             rowCount={lineCount}
-            rowRenderer={ResmokeRow}
+            rowHeight={16}
+            rowRenderer={rowRendererMap[logType]}
             scrollToIndex={scrollToIndex}
+            wrap={wrap}
           />
         </LogPaneContainer>
       </ColumnContainer>
@@ -40,6 +38,11 @@ const LogWindow: React.FC<LogWindowProps> = () => {
   );
 };
 
+const rowRendererMap = {
+  [LogTypes.EVERGREEN_TASK_LOGS]: ResmokeRow,
+  [LogTypes.EVERGREEN_TEST_LOGS]: AnsiiRow,
+  [LogTypes.RESMOKE_LOGS]: ResmokeRow,
+};
 const Container = styled.div`
   width: 100vw;
   display: flex;
@@ -47,12 +50,12 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const LogPaneContainer = styled.div<{ wrap: boolean }>`
+const LogPaneContainer = styled.div<{ scrollX: boolean }>`
   display: flex;
   flex-direction: column;
   height: calc(100vh - ${navbarHeight} - ${SubHeaderHeight});
   width: calc(100vw - ${size.xl});
-  ${(props) => props.wrap && "overflow-x: scroll;"}
+  ${(props) => props.scrollX && "overflow-x: scroll;"}
 `;
 
 const ColumnContainer = styled.div`

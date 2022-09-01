@@ -6,11 +6,12 @@ import {
 } from "react-virtualized";
 import Row from "components/LogRow/Row";
 import { useLogContext } from "context/LogContext";
+import { useQueryParam } from "hooks/useQueryParam";
 
 const AnsiiRow: React.FC<ListRowProps> = (rowProps) => {
   const { getLine } = useLogContext();
   const { index } = rowProps;
-  const wrap = false;
+  const [wrap] = useQueryParam("wrap", false);
   return (
     <Row wrap={wrap} {...rowProps}>
       {getLine(index)}

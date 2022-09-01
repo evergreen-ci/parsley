@@ -3,26 +3,28 @@ import { AutoSizer, List, ListProps } from "react-virtualized";
 
 type LogPaneProps = Omit<ListProps, "height" | "width" | "itemData"> & {
   logLines: string[];
-  maxWidth: number;
+  wrap: boolean;
 };
 
 const LogPane: React.FC<LogPaneProps> = ({
-  maxWidth,
   rowRenderer,
   logLines,
   rowCount,
   rowHeight,
   cache,
+  wrap,
   ...rest
 }) => (
   <AutoSizer>
     {({ height, width }) => (
       <List
+        // autoWidth
+        containerStyle={wrap ? undefined : { overflowX: "scroll" }}
         deferredMeasurementCache={cache}
         height={height}
         itemData={logLines}
         rowCount={rowCount}
-        rowHeight={cache.rowHeight}
+        rowHeight={wrap ? cache.rowHeight : rowHeight}
         rowRenderer={rowRenderer}
         scrollToAlignment="start"
         width={width}

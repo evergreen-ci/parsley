@@ -36,7 +36,7 @@ const Row: React.FC<RowProps> = (props) => {
       {...rest}
       onDoubleClick={handleDoubleClick}
       selected={selected}
-      wrap={`${wrap}`}
+      shouldWrap={wrap}
     >
       <Index>
         {index}
@@ -50,18 +50,22 @@ const Row: React.FC<RowProps> = (props) => {
 
 Row.displayName = "Row";
 
-const StyledPre = styled.pre<{ wrap: string; selected: boolean }>`
+const StyledPre = styled.pre<{ shouldWrap: boolean; selected: boolean }>`
   padding-left: ${size.m};
   overflow-y: hidden;
 
-  ${({ wrap }) =>
-    wrap &&
+  ${({ shouldWrap }) =>
+    shouldWrap &&
     `
   /* wrap multiple lines */
   word-break: break-all;
   word-wrap: break-word;
   white-space: pre-wrap;
   `}
+
+  ${({ shouldWrap }) =>
+    !shouldWrap &&
+    ` width: unset !important; /* override react-virtualized's width */`}
 
   ${({ selected }) => selected && `background-color: ${yellow.light3};`}
   :hover {
