@@ -6,11 +6,12 @@ export default defineConfig({
     baseUrl: "http://localhost:4173",
     supportFile: "cypress/support/index.ts",
     specPattern: "cypress/integration/**/*.ts",
+    experimentalStudio: true,
   },
   reporterOptions: {
     mochaFile: "bin/cypress/cypress-[hash].xml",
   },
-  viewportWidth: 1920,
-  viewportHeight: 1080,
+  viewportWidth: 1280,
+  viewportHeight: 800,
   videoCompression: false,
 });
