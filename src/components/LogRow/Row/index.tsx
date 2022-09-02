@@ -7,7 +7,7 @@ import { useQueryParam } from "hooks/useQueryParam";
 
 const { gray, yellow } = palette;
 
-/** Make index unselectable so copying a line doesn't copy it */
+/** Make index unselectable so that it is omitted when copying a log line */
 const Index = styled.span`
   user-select: none;
 `;
