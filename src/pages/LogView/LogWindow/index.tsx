@@ -24,7 +24,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
       <SideBar />
       <ColumnContainer>
         <SubHeader />
-        <LogPaneContainer scrollX={!wrap}>
+        <LogPaneContainer>
           <LogPane
             cache={logRenderer.cache}
             logLines={logLines}
@@ -55,12 +55,11 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const LogPaneContainer = styled.div<{ scrollX: boolean }>`
+const LogPaneContainer = styled.div`
   display: flex;
   flex-direction: column;
   height: calc(100vh - ${navbarHeight} - ${SubHeaderHeight});
   width: calc(100vw - ${size.xl});
-  ${(props) => props.scrollX && "overflow-x: scroll;"}
 `;
 
 const ColumnContainer = styled.div`
