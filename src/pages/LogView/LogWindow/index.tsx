@@ -4,10 +4,10 @@ import { AnsiiRow, ResmokeRow } from "components/LogRow";
 import { cache as AnsiiRowCache } from "components/LogRow/AnsiiRow";
 import { cache as ResmokeRowCache } from "components/LogRow/ResmokeRow";
 import SideBar from "components/SideBar";
-import SubHeader, { SubHeaderHeight } from "components/SubHeader";
+import SubHeader from "components/SubHeader";
 import { LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
-import { navbarHeight, size } from "constants/tokens";
+import { navbarHeight, size, subheaderHeight } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
 
@@ -58,7 +58,7 @@ const Container = styled.div`
 const LogPaneContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - ${navbarHeight} - ${SubHeaderHeight});
+  height: calc(100vh - ${navbarHeight} - ${subheaderHeight});
   width: calc(100vw - ${size.xl});
 `;
 
