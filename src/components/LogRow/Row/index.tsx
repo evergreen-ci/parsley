@@ -7,11 +7,6 @@ import { useQueryParam } from "hooks/useQueryParam";
 
 const { gray, yellow } = palette;
 
-/** Make index unselectable so that it is omitted when copying a log line */
-const Index = styled.span`
-  user-select: none;
-`;
-
 interface RowProps extends ListRowProps {
   children: React.ReactNode;
   index: number;
@@ -35,15 +30,11 @@ const Row: React.FC<RowProps> = (props) => {
     <StyledPre
       {...rest}
       data-cy={`log-row-${index}`}
+      index={index}
       onDoubleClick={handleDoubleClick}
       selected={selected}
       shouldWrap={wrap}
     >
-      <Index>
-        {index}
-        {"\t"}
-      </Index>
-
       {children}
     </StyledPre>
   );
@@ -51,21 +42,26 @@ const Row: React.FC<RowProps> = (props) => {
 
 Row.displayName = "Row";
 
-const StyledPre = styled.pre<{ shouldWrap: boolean; selected: boolean }>`
-  padding-left: ${size.m};
+const StyledPre = styled.pre<{
+  index: number;
+  shouldWrap: boolean;
+  selected: boolean;
+}>`
   overflow-y: hidden;
-
+  :before {
+    content: "${(props) => props.index} \t";
+    padding-left: ${size.s};
+  }
   ${({ shouldWrap }) =>
-    shouldWrap &&
-    `
+    shouldWrap
+      ? `
   /* wrap multiple lines */
   white-space: break-spaces;
+  `
+      : `
+      /* override react-virtualized's width */
+      width: unset !important;
   `}
-
-  ${({ shouldWrap }) =>
-    !shouldWrap &&
-    ` width: unset !important; /* override react-virtualized's width */`}
-
   ${({ selected }) => selected && `background-color: ${yellow.light3};`}
   :hover {
     background-color: ${gray.light1};
