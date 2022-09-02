@@ -1,6 +1,10 @@
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { CellMeasurerCache, ListRowRenderer } from "react-virtualized";
+import {
+  CellMeasurer,
+  CellMeasurerCache,
+  ListRowRenderer,
+} from "react-virtualized";
 import LogPane from ".";
 
 export default {
@@ -13,26 +17,29 @@ const Template: ComponentStory<typeof LogPane> = (args) => (
     <LogPane
       {...args}
       cache={cache}
-      itemData={list}
+      logLines={list}
       rowCount={list.length}
-      rowHeight={15}
       rowRenderer={RowRenderer}
+      wrap={false}
     />
   </Container>
 );
 
 const cache = new CellMeasurerCache({
   fixedWidth: true,
-  minHeight: 15,
+  minHeight: 16,
 });
 
-const list = Array.from({ length: 10000 }, (_, i) => i);
+const list = Array.from({ length: 10000 }, (_, i) => `${i}`);
 
-const RowRenderer: ListRowRenderer = ({ index, key, style }) => (
-  <div key={key} style={style}>
-    {index}
-  </div>
-);
+const RowRenderer: ListRowRenderer = (props) => {
+  const { index, key, parent } = props;
+  return (
+    <CellMeasurer key={key} cache={cache} parent={parent} rowIndex={index}>
+      <pre {...props}>{index}</pre>
+    </CellMeasurer>
+  );
+};
 
 const Container = styled.div`
   height: 500px;
