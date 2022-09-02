@@ -1,167 +1,113 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
-<div>
+Array [
   <pre
-    className="css-1t59tt6"
+    className="css-vvcgax"
     data-cy="log-row-0"
     onDoubleClick={[Function]}
     selected={false}
   >
     <span
-      className="css-15xv5ui"
-    >
-      0
-      	
-    </span>
-    <span
       data-cy="ansii-row"
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
     </span>
-  </pre>
+  </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-1ttpq16"
     data-cy="log-row-1"
     onDoubleClick={[Function]}
     selected={false}
   >
     <span
-      className="css-15xv5ui"
-    >
-      1
-      	
-    </span>
-    <span
       data-cy="ansii-row"
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='lint' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>
+  </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-p2t5h"
     data-cy="log-row-2"
     onDoubleClick={[Function]}
     selected={false}
   >
     <span
-      className="css-15xv5ui"
-    >
-      2
-      	
-    </span>
-    <span
       data-cy="ansii-row"
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='osx' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>
+  </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-15qhiky"
     data-cy="log-row-3"
     onDoubleClick={[Function]}
     selected={false}
   >
     <span
-      className="css-15xv5ui"
-    >
-      3
-      	
-    </span>
-    <span
       data-cy="ansii-row"
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='race-detector' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>
+  </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-ict823"
     data-cy="log-row-4"
     onDoubleClick={[Function]}
     selected={false}
   >
     <span
-      className="css-15xv5ui"
-    >
-      4
-      	
-    </span>
-    <span
       data-cy="ansii-row"
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1604' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>
+  </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-ih53um"
     data-cy="log-row-5"
     onDoubleClick={[Function]}
     selected={false}
   >
     <span
-      className="css-15xv5ui"
-    >
-      5
-      	
-    </span>
-    <span
       data-cy="ansii-row"
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1804-arm64' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>
+  </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-d5vw1i"
     data-cy="log-row-6"
     onDoubleClick={[Function]}
     selected={false}
   >
     <span
-      className="css-15xv5ui"
-    >
-      6
-      	
-    </span>
-    <span
       data-cy="ansii-row"
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='windows' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>
+  </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-u1vx62"
     data-cy="log-row-7"
     onDoubleClick={[Function]}
     selected={false}
   >
     <span
-      className="css-15xv5ui"
-    >
-      7
-      	
-    </span>
-    <span
       data-cy="ansii-row"
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>
-</div>
+  </pre>,
+]
 `;
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
 <pre
-  className="css-1t59tt6"
+  className="css-vvcgax"
   data-cy="log-row-0"
   onDoubleClick={[Function]}
   selected={false}
 >
-  <span
-    className="css-15xv5ui"
-  >
-    0
-    	
-  </span>
   <span
     data-cy="ansii-row"
   >

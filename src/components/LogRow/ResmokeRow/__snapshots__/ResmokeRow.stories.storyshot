@@ -3,17 +3,11 @@
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multi Lines 1`] = `
 Array [
   <pre
-    className="css-1t59tt6"
+    className="css-vvcgax"
     data-cy="log-row-0"
     onDoubleClick={[Function]}
     selected={false}
   >
-    <span
-      className="css-15xv5ui"
-    >
-      0
-      	
-    </span>
     <span
       data-cy="resmoke-row"
     >
@@ -21,17 +15,11 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-1ttpq16"
     data-cy="log-row-1"
     onDoubleClick={[Function]}
     selected={false}
   >
-    <span
-      className="css-15xv5ui"
-    >
-      1
-      	
-    </span>
     <span
       data-cy="resmoke-row"
     >
@@ -39,17 +27,11 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-p2t5h"
     data-cy="log-row-2"
     onDoubleClick={[Function]}
     selected={false}
   >
-    <span
-      className="css-15xv5ui"
-    >
-      2
-      	
-    </span>
     <span
       data-cy="resmoke-row"
     >
@@ -57,17 +39,11 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-15qhiky"
     data-cy="log-row-3"
     onDoubleClick={[Function]}
     selected={false}
   >
-    <span
-      className="css-15xv5ui"
-    >
-      3
-      	
-    </span>
     <span
       data-cy="resmoke-row"
     >
@@ -75,17 +51,11 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-ict823"
     data-cy="log-row-4"
     onDoubleClick={[Function]}
     selected={false}
   >
-    <span
-      className="css-15xv5ui"
-    >
-      4
-      	
-    </span>
     <span
       data-cy="resmoke-row"
     >
@@ -93,17 +63,11 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-ih53um"
     data-cy="log-row-5"
     onDoubleClick={[Function]}
     selected={false}
   >
-    <span
-      className="css-15xv5ui"
-    >
-      5
-      	
-    </span>
     <span
       data-cy="resmoke-row"
     >
@@ -111,17 +75,11 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-d5vw1i"
     data-cy="log-row-6"
     onDoubleClick={[Function]}
     selected={false}
   >
-    <span
-      className="css-15xv5ui"
-    >
-      6
-      	
-    </span>
     <span
       data-cy="resmoke-row"
     >
@@ -129,17 +87,11 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-1t59tt6"
+    className="css-u1vx62"
     data-cy="log-row-7"
     onDoubleClick={[Function]}
     selected={false}
   >
-    <span
-      className="css-15xv5ui"
-    >
-      7
-      	
-    </span>
     <span
       data-cy="resmoke-row"
     >
@@ -151,17 +103,11 @@ Array [
 
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
 <pre
-  className="css-1t59tt6"
+  className="css-vvcgax"
   data-cy="log-row-0"
   onDoubleClick={[Function]}
   selected={false}
 >
-  <span
-    className="css-15xv5ui"
-  >
-    0
-    	
-  </span>
   <span
     data-cy="resmoke-row"
   >
