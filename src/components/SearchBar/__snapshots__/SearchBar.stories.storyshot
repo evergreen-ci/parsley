@@ -14,7 +14,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
       aria-expanded={false}
       aria-invalid={false}
       aria-labelledby="searchbar-select"
-      className="leafygreen-ui-15utxrd"
+      className="leafygreen-ui-23wnbt"
       data-cy="searchbar-select"
       data-leafygreen-ui="button"
       data-testid="leafygreen-ui-select-menubutton"
@@ -42,7 +42,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
         <svg
           alt=""
           aria-hidden={true}
-          className="leafygreen-ui-1wmuq5k"
+          className="leafygreen-ui-866818"
           height={16}
           role="presentation"
           viewBox="0 0 16 16"
