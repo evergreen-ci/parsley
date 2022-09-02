@@ -8,7 +8,6 @@ export default {
   component: ResmokeRow,
 } as ComponentMeta<typeof ResmokeRow>;
 
-// 👇 We create a “template” of how args map to rendering
 const SingleLineTemplate: ComponentStory<typeof ResmokeRow> = (args) => (
   <ResmokeRow {...args} />
 );

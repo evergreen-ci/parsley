@@ -8,7 +8,6 @@ export default {
   component: LogPane,
 } as ComponentMeta<typeof LogPane>;
 
-// 👇 We create a “template” of how args map to rendering
 const Template: ComponentStory<typeof LogPane> = (args) => (
   <Container>
     <LogPane

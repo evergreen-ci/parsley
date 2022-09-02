@@ -7,7 +7,6 @@ export default {
   component: SearchBar,
 } as ComponentMeta<typeof SearchBar>;
 
-// 👇 We create a “template” of how args map to rendering
 const Template: ComponentStory<typeof SearchBar> = (args) => (
   <SearchBar {...args} />
 );

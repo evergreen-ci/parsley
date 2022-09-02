@@ -8,7 +8,6 @@ export default {
   component: AnsiiRow,
 } as ComponentMeta<typeof AnsiiRow>;
 
-// 👇 We create a “template” of how args map to rendering
 const SingleLineTemplate: ComponentStory<typeof AnsiiRow> = (args) => (
   <AnsiiRow {...args} />
 );
