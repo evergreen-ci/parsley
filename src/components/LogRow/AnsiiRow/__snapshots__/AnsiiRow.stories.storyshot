@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
-Array [
+<div>
   <pre
     className="css-1t59tt6"
     data-cy="log-row-0"
@@ -19,7 +19,7 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1t59tt6"
     data-cy="log-row-1"
@@ -37,7 +37,7 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='lint' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1t59tt6"
     data-cy="log-row-2"
@@ -55,7 +55,7 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='osx' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1t59tt6"
     data-cy="log-row-3"
@@ -73,7 +73,7 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='race-detector' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1t59tt6"
     data-cy="log-row-4"
@@ -91,7 +91,7 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1604' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1t59tt6"
     data-cy="log-row-5"
@@ -109,7 +109,7 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1804-arm64' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1t59tt6"
     data-cy="log-row-6"
@@ -127,7 +127,7 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='windows' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1t59tt6"
     data-cy="log-row-7"
@@ -145,8 +145,8 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
-]
+  </pre>
+</div>
 `;
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `

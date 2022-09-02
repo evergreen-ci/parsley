@@ -1,5 +1,3 @@
-import React from "react";
-import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
 import Row from ".";
 
@@ -42,6 +40,7 @@ describe("row", () => {
       expect(history.location.search).toBe("?selectedLine=0");
     });
   });
+
   it("double clicking on a selected log line unselects it", async () => {
     const { history } = renderWithRouterMatch(
       <Row

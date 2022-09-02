@@ -36,7 +36,7 @@ SingleLine.decorators = [
 
 const MultiLineTemplate: ComponentStory<typeof AnsiiRow> = (args) => (
   <>
-    {logLines.map((value, index) => (
+    {logLines.map((_, index) => (
       <AnsiiRow {...args} key={logLines[index]} index={index} />
     ))}
   </>

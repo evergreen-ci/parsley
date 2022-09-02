@@ -36,7 +36,7 @@ SingleLine.decorators = [
 
 const MultiLineTemplate: ComponentStory<typeof ResmokeRow> = (args) => (
   <>
-    {logLines.map((value, index) => (
+    {logLines.map((_, index) => (
       <ResmokeRow {...args} key={logLines[index]} index={index} />
     ))}
   </>

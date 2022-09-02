@@ -22,7 +22,7 @@ const StyledIcon = styled(Icon)`
 const Container = styled.div`
   background-color: ${gray.light3};
   width: calc(100vw - ${size.xl});
-  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 ${size.xxs} ${size.xxs} rgba(0, 0, 0, 0.05);
   height: ${subheaderHeight};
   display: flex;
   align-items: center;

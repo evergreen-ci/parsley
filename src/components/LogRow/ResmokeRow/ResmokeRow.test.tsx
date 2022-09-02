@@ -3,13 +3,12 @@ import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
 import { ResmokeRow } from ".";
 
-const wrapper = (logs: string[]) =>
-  // eslint-disable-next-line func-names, react/display-name
-  function ({ children }: { children: React.ReactNode }) {
-    return (
-      <LogContextProvider initialLogLines={logs}>{children}</LogContextProvider>
-    );
-  };
+const wrapper = (logs: string[]) => {
+  const provider = ({ children }: { children: React.ReactNode }) => (
+    <LogContextProvider initialLogLines={logs}>{children}</LogContextProvider>
+  );
+  return provider;
+};
 
 describe("resmokeRow", () => {
   it("displays a log line and its text for a given index", async () => {
