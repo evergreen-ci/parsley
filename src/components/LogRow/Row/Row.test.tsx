@@ -2,7 +2,7 @@ import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
 import Row from ".";
 
 describe("row", () => {
-  it("renders a log line and its line number", () => {
+  it("renders a log line", () => {
     renderWithRouterMatch(
       <Row
         key={testLog}
@@ -17,7 +17,6 @@ describe("row", () => {
         {testLog}
       </Row>
     );
-    expect(screen.getByText(0)).toBeVisible();
     expect(screen.getByText(testLog)).toBeVisible();
   });
   it("double clicking a log line updates the url and selects it", async () => {
