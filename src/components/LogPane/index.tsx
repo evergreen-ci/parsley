@@ -1,12 +1,12 @@
 import React from "react";
-import { AutoSizer, List, ListProps } from "react-virtualized";
+import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
 
 type LogPaneProps = Omit<
   ListProps,
   "height" | "width" | "itemData" | "rowHeight"
 > & {
-  logLines: string[];
   wrap: boolean;
+  rowRenderer: ListRowRenderer;
 };
 
 const LogPane: React.FC<LogPaneProps> = ({

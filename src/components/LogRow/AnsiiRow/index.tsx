@@ -1,37 +1,16 @@
-import {
-  CellMeasurer,
-  CellMeasurerCache,
-  ListRowProps,
-  ListRowRenderer,
-} from "react-virtualized";
 import Row from "components/LogRow/Row";
-import { useLogContext } from "context/LogContext";
-import { useQueryParam } from "hooks/useQueryParam";
+import { RowProps } from "components/LogRow/RowRenderer";
 
-const AnsiiRow: React.FC<ListRowProps> = (rowProps) => {
-  const { getLine } = useLogContext();
-  const { index } = rowProps;
-  const [wrap] = useQueryParam("wrap", false);
+const AnsiiRow: React.FC<RowProps> = (rowProps) => {
+  const { data, listRowProps } = rowProps;
+  console.log(rowProps);
+  const { getLine, wrap } = data;
+  const { index } = listRowProps;
   return (
-    <Row wrap={wrap} {...rowProps}>
+    <Row wrap={wrap} {...listRowProps}>
       <span data-cy="ansii-row">{getLine(index)}</span>
     </Row>
   );
 };
 
-const AnsiiRowRenderer: ListRowRenderer = (props) => {
-  const { index, key, parent } = props;
-  return (
-    <CellMeasurer key={key} cache={cache} parent={parent} rowIndex={index}>
-      <AnsiiRow {...props} />
-    </CellMeasurer>
-  );
-};
-
-const cache = new CellMeasurerCache({
-  fixedWidth: true,
-  defaultHeight: 16,
-});
-
-export { AnsiiRow, cache };
-export default AnsiiRowRenderer;
+export { AnsiiRow };

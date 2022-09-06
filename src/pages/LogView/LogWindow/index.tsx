@@ -1,8 +1,7 @@
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
 import { AnsiiRow, ResmokeRow } from "components/LogRow";
-import { cache as AnsiiRowCache } from "components/LogRow/AnsiiRow";
-import { cache as ResmokeRowCache } from "components/LogRow/ResmokeRow";
+import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import SideBar from "components/SideBar";
 import SubHeader from "components/SubHeader";
 import { LogTypes } from "constants/enums";
@@ -15,10 +14,14 @@ interface LogWindowProps {
   logType: LogTypes;
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
-  const { logLines, lineCount } = useLogContext();
+  const { logLines, lineCount, getLine } = useLogContext();
   const [wrap] = useQueryParam("wrap", false);
   const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
   const logRenderer = rowRendererMap[logType];
+
+  // TODO: EVG-17525
+  // Do what ever logic to process the lines here
+  const processedLogLines = logLines.map((_, index) => index);
   return (
     <Container>
       <SideBar />
@@ -26,10 +29,10 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
         <SubHeader />
         <LogPaneContainer>
           <LogPane
-            cache={logRenderer.cache}
-            logLines={logLines}
+            cache={cache}
+            logLines={processedLogLines}
             rowCount={lineCount}
-            rowRenderer={logRenderer.renderer}
+            rowRenderer={RowRenderer({ Row: logRenderer, wrap, getLine })}
             scrollToIndex={scrollToIndex}
             wrap={wrap}
           />
@@ -40,12 +43,9 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
 };
 
 const rowRendererMap = {
-  [LogTypes.EVERGREEN_TASK_LOGS]: {
-    renderer: AnsiiRow,
-    cache: AnsiiRowCache,
-  },
-  [LogTypes.EVERGREEN_TEST_LOGS]: { renderer: AnsiiRow, cache: AnsiiRowCache },
-  [LogTypes.RESMOKE_LOGS]: { renderer: ResmokeRow, cache: ResmokeRowCache },
+  [LogTypes.EVERGREEN_TASK_LOGS]: AnsiiRow,
+  [LogTypes.EVERGREEN_TEST_LOGS]: AnsiiRow,
+  [LogTypes.RESMOKE_LOGS]: ResmokeRow,
 };
 
 const Container = styled.div`

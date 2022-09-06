@@ -1,37 +1,15 @@
-import {
-  CellMeasurer,
-  CellMeasurerCache,
-  ListRowProps,
-  ListRowRenderer,
-} from "react-virtualized";
 import Row from "components/LogRow/Row";
-import { useLogContext } from "context/LogContext";
-import { useQueryParam } from "hooks/useQueryParam";
+import { RowProps } from "components/LogRow/RowRenderer";
 
-const ResmokeRow: React.FC<ListRowProps> = (rowProps) => {
-  const { getLine } = useLogContext();
-  const { index } = rowProps;
-  const [wrap] = useQueryParam("wrap", false);
+const ResmokeRow: React.FC<RowProps> = (rowProps) => {
+  const { data, listRowProps } = rowProps;
+  const { getLine, wrap } = data;
+  const { index } = listRowProps;
   return (
-    <Row wrap={wrap} {...rowProps}>
+    <Row wrap={wrap} {...listRowProps}>
       <span data-cy="resmoke-row">{getLine(index)}</span>
     </Row>
   );
 };
 
-const ResmokeRowRenderer: ListRowRenderer = (props) => {
-  const { index, key, parent } = props;
-  return (
-    <CellMeasurer key={key} cache={cache} parent={parent} rowIndex={index}>
-      <ResmokeRow {...props} />
-    </CellMeasurer>
-  );
-};
-
-const cache = new CellMeasurerCache({
-  fixedWidth: true,
-  defaultHeight: 16,
-});
-
-export { ResmokeRow, cache };
-export default ResmokeRowRenderer;
+export { ResmokeRow };

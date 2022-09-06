@@ -1,32 +1,37 @@
+import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
-import { LogContextProvider } from "context/LogContext";
 import { ResmokeRow } from ".";
 
 export default {
   title: "Components/LogRow/ResmokeRow",
   component: ResmokeRow,
-} as ComponentMeta<typeof ResmokeRow>;
+} as ComponentMeta<ResmokeRowProps>;
 
-const SingleLineTemplate: ComponentStory<typeof ResmokeRow> = (args) => (
-  <ResmokeRow {...args} />
+type ResmokeRowProps = React.FC<
+  React.ComponentProps<typeof ResmokeRow>["data"]
+>;
+const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
+  <ResmokeRow
+    key={logLines[0]}
+    data={{ getLine, wrap: args?.wrap }}
+    listRowProps={{
+      index: 2,
+      style: {},
+      columnIndex: 0,
+      isScrolling: false,
+      isVisible: true,
+      key: getLine(2) || "",
+      parent: {} as any,
+    }}
+  />
 );
 
 export const SingleLine = SingleLineTemplate.bind({});
-
 SingleLine.args = {
-  index: 0,
+  wrap: false,
 };
 SingleLine.decorators = [
-  (Story) => (
-    <LogContextProvider
-      initialLogLines={[
-        "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']",
-      ]}
-    >
-      <Story />
-    </LogContextProvider>
-  ),
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
@@ -34,22 +39,31 @@ SingleLine.decorators = [
   ),
 ];
 
-const MultiLineTemplate: ComponentStory<typeof ResmokeRow> = (args) => (
+const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
   <>
     {logLines.map((_, index) => (
-      <ResmokeRow {...args} key={logLines[index]} index={index} />
+      <ResmokeRow
+        key={logLines[index]}
+        data={{ getLine, wrap: args?.wrap }}
+        listRowProps={{
+          index,
+          style: {},
+          columnIndex: 0,
+          isScrolling: false,
+          isVisible: true,
+          key: getLine(index) || "",
+          parent: {} as any,
+        }}
+      />
     ))}
   </>
 );
 
-export const MultiLines = MultiLineTemplate.bind({});
-
-MultiLines.decorators = [
-  (Story) => (
-    <LogContextProvider initialLogLines={logLines}>
-      <Story />
-    </LogContextProvider>
-  ),
+export const MultipleLines = MultipleLineTemplate.bind({});
+MultipleLines.args = {
+  wrap: false,
+};
+MultipleLines.decorators = [
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
@@ -67,3 +81,5 @@ const logLines = [
   "[j0:sec0] mongod started on port 20001 with pid 30681.",
   "[j0:sec1] Starting mongod on port 20002...",
 ];
+
+const getLine = (index: number) => logLines[index];

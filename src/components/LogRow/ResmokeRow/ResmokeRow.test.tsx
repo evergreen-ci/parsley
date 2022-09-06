@@ -13,30 +13,14 @@ const wrapper = (logs: string[]) => {
 describe("resmokeRow", () => {
   it("displays a log line and its text for a given index", async () => {
     renderWithRouterMatch(
-      <ResmokeRow
-        key={logLines[0]}
-        columnIndex={0}
-        index={0}
-        isScrolling={false}
-        isVisible
-        parent={{} as any}
-        style={{}}
-      />,
+      <ResmokeRow data={data} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
     );
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
     renderWithRouterMatch(
-      <ResmokeRow
-        key={logLines[0]}
-        columnIndex={0}
-        index={1}
-        isScrolling={false}
-        isVisible
-        parent={{} as any}
-        style={{}}
-      />,
+      <ResmokeRow data={data} listRowProps={{ ...listRowProps, index: 1 }} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -45,15 +29,7 @@ describe("resmokeRow", () => {
   });
   it("double clicking a log line updates the url and selects it", async () => {
     const { history } = renderWithRouterMatch(
-      <ResmokeRow
-        key={logLines[0]}
-        columnIndex={0}
-        index={0}
-        isScrolling={false}
-        isVisible
-        parent={{} as any}
-        style={{}}
-      />,
+      <ResmokeRow data={data} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -65,15 +41,8 @@ describe("resmokeRow", () => {
   });
   it("double clicking on a selected log line unselects it", async () => {
     const { history } = renderWithRouterMatch(
-      <ResmokeRow
-        key={logLines[0]}
-        columnIndex={0}
-        index={0}
-        isScrolling={false}
-        isVisible
-        parent={{} as any}
-        style={{}}
-      />,
+      <ResmokeRow data={data} listRowProps={listRowProps} />,
+
       {
         wrapper: wrapper(logLines),
         route: "?selectedLine=0",
@@ -96,3 +65,19 @@ const logLines = [
   "[j0:sec0] mongod started on port 20001 with pid 30681.",
   "[j0:sec1] Starting mongod on port 20002...",
 ];
+
+const listRowProps = {
+  key: logLines[0],
+  columnIndex: 0,
+  index: 0,
+  isScrolling: false,
+  isVisible: true,
+  parent: {} as any,
+  style: {},
+};
+const getLine = (index: number) => logLines[index];
+
+const data = {
+  getLine,
+  wrap: false,
+};
