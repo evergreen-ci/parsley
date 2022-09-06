@@ -3,7 +3,6 @@ import { RowProps } from "components/LogRow/RowRenderer";
 
 const AnsiiRow: React.FC<RowProps> = (rowProps) => {
   const { data, listRowProps } = rowProps;
-  console.log(rowProps);
   const { getLine, wrap } = data;
   const { index } = listRowProps;
   return (
