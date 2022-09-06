@@ -30,7 +30,12 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
             cache={cache}
             logLines={processedLogLines}
             rowCount={lineCount}
-            rowRenderer={RowRenderer({ logType, wrap, getLine })}
+            rowRenderer={RowRenderer({
+              logType,
+              wrap,
+              getLine,
+              processedLines: processedLogLines,
+            })}
             scrollToIndex={scrollToIndex}
             wrap={wrap}
           />

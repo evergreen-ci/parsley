@@ -54,6 +54,8 @@ const StyledPre = styled.pre<{
   selected: boolean;
 }>`
   overflow-y: hidden;
+  margin-top: 0;
+  margin-bottom: 0;
   :before {
     content: "${(props) => props.index} \t";
     padding-left: ${size.s};

@@ -12,7 +12,7 @@ type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>["data"]>;
 const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
   <AnsiiRow
     key={logLines[0]}
-    data={{ getLine, wrap: args?.wrap }}
+    data={{ getLine, wrap: args?.wrap, processedLines: processedLogLines }}
     listRowProps={{
       index: 0,
       style: {},
@@ -42,7 +42,7 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
     {logLines.map((_, index) => (
       <AnsiiRow
         key={logLines[index]}
-        data={{ getLine, wrap: args?.wrap }}
+        data={{ getLine, wrap: args?.wrap, processedLines: processedLogLines }}
         listRowProps={{
           index,
           style: {},
@@ -77,5 +77,7 @@ const logLines = [
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='windows' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
 ];
+
+const processedLogLines = logLines.map((_, index) => index);
 
 const getLine = (index: number) => logLines[index];

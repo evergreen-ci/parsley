@@ -14,7 +14,7 @@ type ResmokeRowProps = React.FC<
 const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
   <ResmokeRow
     key={logLines[0]}
-    data={{ getLine, wrap: args?.wrap }}
+    data={{ getLine, wrap: args?.wrap, processedLines: processedLogLines }}
     listRowProps={{
       index: 2,
       style: {},
@@ -44,7 +44,7 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
     {logLines.map((_, index) => (
       <ResmokeRow
         key={logLines[index]}
-        data={{ getLine, wrap: args?.wrap }}
+        data={{ getLine, wrap: args?.wrap, processedLines: processedLogLines }}
         listRowProps={{
           index,
           style: {},
@@ -81,5 +81,6 @@ const logLines = [
   "[j0:sec0] mongod started on port 20001 with pid 30681.",
   "[j0:sec1] Starting mongod on port 20002...",
 ];
+const processedLogLines = logLines.map((_, index) => index);
 
 const getLine = (index: number) => logLines[index];

@@ -13,6 +13,7 @@ interface RowProps {
   data: {
     getLine: (index: number) => string | undefined;
     wrap: boolean;
+    processedLines: (number | number[])[];
   };
 }
 
@@ -20,12 +21,14 @@ interface ListRowRendererFunction {
   getLine: (index: number) => string | undefined;
   wrap: boolean;
   logType: LogTypes;
+  processedLines: (number | number[])[];
 }
 
 const RowRenderer: RowRendererFunction = ({ logType, ...data }) => {
   const Row = rowRendererMap[logType];
   const result = (props: ListRowProps) => {
     const { index, key, parent } = props;
+
     return (
       <CellMeasurer key={key} cache={cache} parent={parent} rowIndex={index}>
         {({ registerChild }) => (

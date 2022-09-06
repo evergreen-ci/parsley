@@ -79,4 +79,5 @@ const getLine = (index: number) => logLines[index];
 const data = {
   getLine,
   wrap: false,
+  processedLines: logLines.map((_, index) => index),
 };
