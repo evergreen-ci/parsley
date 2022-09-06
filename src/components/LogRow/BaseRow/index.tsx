@@ -56,7 +56,8 @@ const StyledPre = styled.pre<{
   overflow-y: hidden;
   margin-top: 0;
   margin-bottom: 0;
-  margin-left: ${size.xs};
+  /* margin-left: ${size.xs}; */
+  margin-right: ${size.xs};
   font-size: ${fontSize.m};
   :before {
     content: "${(props) => props.index}";

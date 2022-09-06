@@ -1,8 +1,8 @@
 import { forwardRef } from "react";
 import BaseRow from "components/LogRow/BaseRow";
-import { RowProps } from "components/LogRow/RowRenderer";
+import { BaseRowProps } from "../types";
 
-const ResmokeRow = forwardRef<any, RowProps>((rowProps, ref) => {
+const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { data, listRowProps } = rowProps;
   const { getLine, wrap, processedLines } = data;
   const { index } = listRowProps;

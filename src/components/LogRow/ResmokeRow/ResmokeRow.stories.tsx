@@ -1,6 +1,7 @@
 import React from "react";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
+import { LogTypes } from "constants/enums";
 import { ResmokeRow } from ".";
 
 export default {
@@ -14,7 +15,12 @@ type ResmokeRowProps = React.FC<
 const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
   <ResmokeRow
     key={logLines[0]}
-    data={{ getLine, wrap: args?.wrap, processedLines: processedLogLines }}
+    data={{
+      getLine,
+      wrap: args?.wrap,
+      processedLines: processedLogLines,
+      logType: LogTypes.RESMOKE_LOGS,
+    }}
     listRowProps={{
       index: 2,
       style: {},
@@ -44,7 +50,12 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
     {logLines.map((_, index) => (
       <ResmokeRow
         key={logLines[index]}
-        data={{ getLine, wrap: args?.wrap, processedLines: processedLogLines }}
+        data={{
+          getLine,
+          wrap: args?.wrap,
+          processedLines: processedLogLines,
+          logType: LogTypes.RESMOKE_LOGS,
+        }}
         listRowProps={{
           index,
           style: {},

@@ -1,3 +1,4 @@
+import { LogTypes } from "constants/enums";
 import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
 import { ResmokeRow } from ".";
@@ -80,4 +81,5 @@ const data = {
   getLine,
   wrap: false,
   processedLines: logLines.map((_, index) => index),
+  logType: LogTypes.RESMOKE_LOGS,
 };

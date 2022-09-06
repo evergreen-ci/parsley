@@ -1,5 +1,6 @@
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
+import { LogTypes } from "constants/enums";
 import { AnsiiRow } from ".";
 
 export default {
@@ -12,7 +13,12 @@ type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>["data"]>;
 const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
   <AnsiiRow
     key={logLines[0]}
-    data={{ getLine, wrap: args?.wrap, processedLines: processedLogLines }}
+    data={{
+      getLine,
+      wrap: args?.wrap,
+      processedLines: processedLogLines,
+      logType: LogTypes.EVERGREEN_TASK_LOGS,
+    }}
     listRowProps={{
       index: 0,
       style: {},
@@ -42,7 +48,12 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
     {logLines.map((_, index) => (
       <AnsiiRow
         key={logLines[index]}
-        data={{ getLine, wrap: args?.wrap, processedLines: processedLogLines }}
+        data={{
+          getLine,
+          wrap: args?.wrap,
+          processedLines: processedLogLines,
+          logType: LogTypes.EVERGREEN_TASK_LOGS,
+        }}
         listRowProps={{
           index,
           style: {},

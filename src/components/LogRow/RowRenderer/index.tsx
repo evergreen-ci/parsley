@@ -7,24 +7,12 @@ import {
 import { LogTypes } from "constants/enums";
 import { AnsiiRow } from "../AnsiiRow";
 import { ResmokeRow } from "../ResmokeRow";
+import { RowData } from "../types";
 
-interface RowProps {
-  listRowProps: ListRowProps;
-  data: {
-    getLine: (index: number) => string | undefined;
-    wrap: boolean;
-    processedLines: (number | number[])[];
-  };
-}
+type RowRendererFunction = (data: RowData) => ListRowRenderer;
 
-interface ListRowRendererFunction {
-  getLine: (index: number) => string | undefined;
-  wrap: boolean;
-  logType: LogTypes;
-  processedLines: (number | number[])[];
-}
-
-const RowRenderer: RowRendererFunction = ({ logType, ...data }) => {
+const RowRenderer: RowRendererFunction = (data) => {
+  const { logType } = data;
   const Row = rowRendererMap[logType];
   const result = (props: ListRowProps) => {
     const { index, key, parent } = props;
@@ -47,12 +35,9 @@ const rowRendererMap = {
   [LogTypes.RESMOKE_LOGS]: ResmokeRow,
 };
 
-type RowRendererFunction = (data: ListRowRendererFunction) => ListRowRenderer;
-
 const cache = new CellMeasurerCache({
   fixedWidth: true,
   defaultHeight: 16,
 });
 
 export { RowRenderer, cache };
-export type { RowProps };

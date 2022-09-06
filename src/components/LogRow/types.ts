@@ -1,10 +1,16 @@
-import { ListRowProps, ListRowRenderer } from "react-virtualized";
+import { ListRowProps } from "react-virtualized";
+import { LogTypes } from "constants/enums";
 
-interface LogRowLineProps extends ListRowProps {
-  wrap: boolean;
-  lines: (number | number[])[];
-  getLine: (line: number) => string;
+interface BaseRowProps {
+  listRowProps: ListRowProps;
+  data: RowData;
 }
-type ListRowRendererFunction = (props: LogRowLineProps) => ListRowRenderer;
 
-export type { ListRowRendererFunction, LogRowLineProps };
+interface RowData {
+  getLine: (index: number) => string | undefined;
+  wrap: boolean;
+  processedLines: (number | number[])[];
+  logType: LogTypes;
+}
+
+export type { BaseRowProps, RowData };
