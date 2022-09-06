@@ -14,7 +14,7 @@ interface LogWindowProps {
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
   const { logLines, lineCount, getLine } = useLogContext();
-  const [wrap] = useQueryParam("wrap", false);
+  const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
 
   // TODO: EVG-17525

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
 
 type LogPaneProps = Omit<
@@ -16,25 +16,35 @@ const LogPane: React.FC<LogPaneProps> = ({
   cache,
   wrap,
   ...rest
-}) => (
-  <AutoSizer>
-    {({ height, width }) => (
-      <List
-        // If wrap is false, We want the list to scroll horizontally.
-        containerStyle={wrap ? undefined : { overflowX: "scroll" }}
-        deferredMeasurementCache={cache}
-        height={height}
-        itemData={logLines}
-        rowCount={rowCount}
-        rowHeight={cache.rowHeight}
-        rowRenderer={rowRenderer}
-        scrollToAlignment="start"
-        width={width}
-        {...rest}
-      />
-    )}
-  </AutoSizer>
-);
+}) => {
+  const listRef = React.useRef<List>(null);
+  useEffect(() => {
+    // Reset the cache and recalculate the row heights
+    cache.clearAll();
+    listRef.current?.recomputeRowHeights();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [wrap]);
+  return (
+    <AutoSizer>
+      {({ height, width }) => (
+        <List
+          // If wrap is false, We want the list to scroll horizontally.
+          ref={listRef}
+          containerStyle={wrap ? undefined : { overflow: "scroll visible" }}
+          deferredMeasurementCache={cache}
+          height={height}
+          itemData={logLines}
+          rowCount={rowCount}
+          rowHeight={cache.rowHeight}
+          rowRenderer={rowRenderer}
+          scrollToAlignment="start"
+          width={width}
+          {...rest}
+        />
+      )}
+    </AutoSizer>
+  );
+};
 
 LogPane.displayName = "LogPane";
 
