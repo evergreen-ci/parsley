@@ -1,30 +1,86 @@
-import { useEffect, useState } from "react";
+import React from "react";
+import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { MemoryRouter } from "react-router-dom";
 import { LogTypes } from "constants/enums";
-import { useLogContext } from "context/LogContext";
-import { LogWindow } from "./LogView/index";
+import { ResmokeRow } from ".";
 
-interface LogViewProps {
-  logType: LogTypes;
-}
+export default {
+  title: "Components/LogRow/ResmokeRow",
+  component: ResmokeRow,
+} as ComponentMeta<ResmokeRowProps>;
 
-const LogView: React.FC<LogViewProps> = ({ logType }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { ingestLines } = useLogContext();
+type ResmokeRowProps = React.FC<
+  React.ComponentProps<typeof ResmokeRow>["data"]
+>;
+const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
+  <ResmokeRow
+    key={logLines[0]}
+    data={{
+      getLine,
+      wrap: args?.wrap,
+      processedLines: processedLogLines,
+      logType: LogTypes.RESMOKE_LOGS,
+    }}
+    listRowProps={{
+      index: 2,
+      style: {},
+      columnIndex: 0,
+      isScrolling: false,
+      isVisible: true,
+      key: getLine(2) || "",
+      parent: {} as any,
+    }}
+  />
+);
 
-  const mockIngestLines = async () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      ingestLines(logLines);
-    }, 200);
-    setIsLoading(false);
-  };
-  useEffect(() => {
-    mockIngestLines();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return <div>{isLoading ? "Loading" : <LogWindow logType={logType} />}</div>;
+export const SingleLine = SingleLineTemplate.bind({});
+SingleLine.args = {
+  wrap: false,
 };
+SingleLine.decorators = [
+  (Story) => (
+    <MemoryRouter initialEntries={["/"]}>
+      <Story />
+    </MemoryRouter>
+  ),
+];
+
+const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
+  <>
+    {logLines.map((_, index) => (
+      <ResmokeRow
+        key={logLines[index]}
+        data={{
+          getLine,
+          wrap: args?.wrap,
+          processedLines: processedLogLines,
+          logType: LogTypes.RESMOKE_LOGS,
+        }}
+        listRowProps={{
+          index,
+          style: {},
+          columnIndex: 0,
+          isScrolling: false,
+          isVisible: true,
+          key: getLine(index) || "",
+          parent: {} as any,
+        }}
+      />
+    ))}
+  </>
+);
+
+export const MultipleLines = MultipleLineTemplate.bind({});
+MultipleLines.args = {
+  wrap: false,
+};
+MultipleLines.decorators = [
+  (Story) => (
+    <MemoryRouter initialEntries={["/"]}>
+      <Story />
+    </MemoryRouter>
+  ),
+];
 
 const logLines = [
   "[js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).",
@@ -36,5 +92,6 @@ const logLines = [
   "[j0:sec0] mongod started on port 20001 with pid 30681.",
   "[j0:sec1] Starting mongod on port 20002...",
 ];
+const processedLogLines = logLines.map((_, index) => index);
 
-export default LogView;
+const getLine = (index: number) => logLines[index];

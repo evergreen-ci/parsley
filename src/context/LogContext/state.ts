@@ -6,9 +6,9 @@ interface LogState {
 
 type Action = { type: "INGEST_LOGS"; logs: string[] } | { type: "CLEAR_LOGS" };
 
-const initialState: LogState = {
-  logs: [],
-};
+const initialState = (initialLogLines?: string[]): LogState => ({
+  logs: initialLogLines || [],
+});
 
 const reducer = (state: LogState, action: Action) => {
   switch (action.type) {
@@ -27,8 +27,8 @@ const reducer = (state: LogState, action: Action) => {
   }
 };
 
-const useLogState = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+const useLogState = (initialLogLines?: string[]) => {
+  const [state, dispatch] = useReducer(reducer, initialState(initialLogLines));
   return {
     state,
     dispatch,
