@@ -3,7 +3,7 @@
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multiple Lines 1`] = `
 Array [
   <pre
-    className="css-vvcgax"
+    className="css-he6zal"
     data-cy="log-row-0"
     onDoubleClick={[Function]}
     selected={false}
@@ -16,7 +16,7 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-1ttpq16"
+    className="css-213xyw"
     data-cy="log-row-1"
     onDoubleClick={[Function]}
     selected={false}
@@ -29,7 +29,7 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-p2t5h"
+    className="css-yssaq3"
     data-cy="log-row-2"
     onDoubleClick={[Function]}
     selected={false}
@@ -42,7 +42,7 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-15qhiky"
+    className="css-1g0x9l2"
     data-cy="log-row-3"
     onDoubleClick={[Function]}
     selected={false}
@@ -55,7 +55,7 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-ict823"
+    className="css-1pu3qdx"
     data-cy="log-row-4"
     onDoubleClick={[Function]}
     selected={false}
@@ -68,7 +68,7 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-ih53um"
+    className="css-1xp8v27"
     data-cy="log-row-5"
     onDoubleClick={[Function]}
     selected={false}
@@ -81,7 +81,7 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-d5vw1i"
+    className="css-7va01b"
     data-cy="log-row-6"
     onDoubleClick={[Function]}
     selected={false}
@@ -94,7 +94,7 @@ Array [
     </span>
   </pre>,
   <pre
-    className="css-u1vx62"
+    className="css-4n1f5c"
     data-cy="log-row-7"
     onDoubleClick={[Function]}
     selected={false}
@@ -111,7 +111,7 @@ Array [
 
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
 <pre
-  className="css-p2t5h"
+  className="css-yssaq3"
   data-cy="log-row-2"
   onDoubleClick={[Function]}
   selected={false}
