@@ -7,6 +7,7 @@ Array [
     data-cy="log-row-0"
     onDoubleClick={[Function]}
     selected={false}
+    style={Object {}}
   >
     <span
       data-cy="ansii-row"
@@ -19,6 +20,7 @@ Array [
     data-cy="log-row-1"
     onDoubleClick={[Function]}
     selected={false}
+    style={Object {}}
   >
     <span
       data-cy="ansii-row"
@@ -31,6 +33,7 @@ Array [
     data-cy="log-row-2"
     onDoubleClick={[Function]}
     selected={false}
+    style={Object {}}
   >
     <span
       data-cy="ansii-row"
@@ -43,6 +46,7 @@ Array [
     data-cy="log-row-3"
     onDoubleClick={[Function]}
     selected={false}
+    style={Object {}}
   >
     <span
       data-cy="ansii-row"
@@ -55,6 +59,7 @@ Array [
     data-cy="log-row-4"
     onDoubleClick={[Function]}
     selected={false}
+    style={Object {}}
   >
     <span
       data-cy="ansii-row"
@@ -67,6 +72,7 @@ Array [
     data-cy="log-row-5"
     onDoubleClick={[Function]}
     selected={false}
+    style={Object {}}
   >
     <span
       data-cy="ansii-row"
@@ -79,6 +85,7 @@ Array [
     data-cy="log-row-6"
     onDoubleClick={[Function]}
     selected={false}
+    style={Object {}}
   >
     <span
       data-cy="ansii-row"
@@ -91,6 +98,7 @@ Array [
     data-cy="log-row-7"
     onDoubleClick={[Function]}
     selected={false}
+    style={Object {}}
   >
     <span
       data-cy="ansii-row"
@@ -107,6 +115,7 @@ exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
   data-cy="log-row-0"
   onDoubleClick={[Function]}
   selected={false}
+  style={Object {}}
 >
   <span
     data-cy="ansii-row"
