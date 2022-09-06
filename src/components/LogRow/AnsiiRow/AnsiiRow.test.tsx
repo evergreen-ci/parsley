@@ -10,7 +10,7 @@ const wrapper = (logs: string[]) => {
 };
 
 describe("ansiiRow", () => {
-  it("displays a log line and its text for a given index", async () => {
+  it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
       <AnsiiRow data={data} listRowProps={listRowProps} />,
       {

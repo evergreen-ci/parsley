@@ -8,6 +8,8 @@ const AnsiiRow = forwardRef<any, RowProps>((rowProps, ref) => {
   const { index } = listRowProps;
 
   const line = processedLines[index];
+  // TODO: EVG-17535
+  // This should be replaced with a collapsible component
   const lineIndex = Array.isArray(line) ? line[0] : line;
   return (
     <BaseRow wrap={wrap} {...listRowProps} ref={ref}>

@@ -1,4 +1,3 @@
-import React from "react";
 import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
 import { ResmokeRow } from ".";
@@ -11,7 +10,7 @@ const wrapper = (logs: string[]) => {
 };
 
 describe("resmokeRow", () => {
-  it("displays a log line and its text for a given index", async () => {
+  it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
       <ResmokeRow data={data} listRowProps={listRowProps} />,
       {

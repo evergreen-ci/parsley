@@ -15,7 +15,7 @@ const LogView: React.FC<LogViewProps> = ({ logType }) => {
     setIsLoading(true);
     setTimeout(() => {
       ingestLines(logLines);
-    }, 1000);
+    }, 200);
     setIsLoading(false);
   };
   useEffect(() => {

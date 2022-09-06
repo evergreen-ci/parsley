@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
@@ -13,13 +14,16 @@ interface LogWindowProps {
   logType: LogTypes;
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
-  const { logLines, lineCount, getLine } = useLogContext();
+  const { logLines, getLine } = useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
 
   // TODO: EVG-17525
   // Do what ever logic to process the lines here
-  const processedLogLines = logLines.map((_, index) => index);
+  const processedLogLines = useMemo(
+    () => logLines.map((_, index) => index),
+    [logLines]
+  );
   return (
     <Container>
       <SideBar />
@@ -29,7 +33,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
           <LogPane
             cache={cache}
             logLines={processedLogLines}
-            rowCount={lineCount}
+            rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
               logType,
               wrap,
