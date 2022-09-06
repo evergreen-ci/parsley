@@ -104,7 +104,21 @@ functions:
       content_type: text/html
       permissions: public-read
       display_name: source_map_
-    
+
+  attach-dist:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/dist/*"]
+      remote_file: parsley/${task_id}/dist/
+      bucket: mciuploads
+      content_type: application/javascript
+      permissions: public-read
+      display_name: dist_
+
   copy-cmdrc:
     command: shell.exec
     params:
@@ -210,6 +224,7 @@ tasks:
     - func: copy-cmdrc
     - func: yarn-build
     - func: attach-source-map
+    - func: attach-dist
 
   - name: type_check
     commands:
