@@ -8,12 +8,16 @@ import { useQueryParam } from "hooks/useQueryParam";
 
 const { gray, yellow } = palette;
 
-interface RowProps extends ListRowProps {
+interface BaseRowProps extends ListRowProps {
   children: React.ReactNode;
   index: number;
   wrap: boolean;
 }
-const Row = forwardRef<any, RowProps>((props, ref) => {
+/**
+ * BaseRow is meant to be used as a wrapper for all rows in the log view.
+ * It is responsible for handling the highlighting of the selected line
+ */
+const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
   const { index, children, wrap, isVisible, ...rest } = props;
   const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
@@ -42,7 +46,7 @@ const Row = forwardRef<any, RowProps>((props, ref) => {
   );
 });
 
-Row.displayName = "Row";
+BaseRow.displayName = "BaseRow";
 
 const StyledPre = styled.pre<{
   index: number;
@@ -70,4 +74,4 @@ const StyledPre = styled.pre<{
   }
 `;
 
-export default Row;
+export default BaseRow;

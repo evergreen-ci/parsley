@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import Row from "components/LogRow/Row";
+import BaseRow from "components/LogRow/BaseRow";
 import { RowProps } from "components/LogRow/RowRenderer";
 
 const ResmokeRow = forwardRef<any, RowProps>((rowProps, ref) => {
@@ -7,9 +7,9 @@ const ResmokeRow = forwardRef<any, RowProps>((rowProps, ref) => {
   const { getLine, wrap } = data;
   const { index } = listRowProps;
   return (
-    <Row ref={ref} wrap={wrap} {...listRowProps}>
+    <BaseRow ref={ref} wrap={wrap} {...listRowProps}>
       <span data-cy="resmoke-row">{getLine(index)}</span>
-    </Row>
+    </BaseRow>
   );
 });
 
