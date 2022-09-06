@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { ListRowProps } from "react-virtualized";
 import { QueryParams } from "constants/queryParams";
-import { size } from "constants/tokens";
+import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 
 const { gray, yellow } = palette;
@@ -56,9 +56,12 @@ const StyledPre = styled.pre<{
   overflow-y: hidden;
   margin-top: 0;
   margin-bottom: 0;
+  margin-left: ${size.xs};
+  font-size: ${fontSize.m};
   :before {
-    content: "${(props) => props.index} \t";
-    padding-left: ${size.s};
+    content: "${(props) => props.index}";
+    margin-left: ${size.s};
+    margin-right: ${size.xl};
   }
   ${({ shouldWrap }) =>
     shouldWrap
