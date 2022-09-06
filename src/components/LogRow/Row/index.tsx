@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { ListRowProps } from "react-virtualized";
@@ -12,8 +13,8 @@ interface RowProps extends ListRowProps {
   index: number;
   wrap: boolean;
 }
-const Row: React.FC<RowProps> = (props) => {
-  const { index, children, wrap, ...rest } = props;
+const Row = forwardRef<any, RowProps>((props, ref) => {
+  const { index, children, wrap, isVisible, ...rest } = props;
   const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
@@ -29,6 +30,7 @@ const Row: React.FC<RowProps> = (props) => {
   return (
     <StyledPre
       {...rest}
+      ref={ref}
       data-cy={`log-row-${index}`}
       index={index}
       onDoubleClick={handleDoubleClick}
@@ -38,7 +40,7 @@ const Row: React.FC<RowProps> = (props) => {
       {children}
     </StyledPre>
   );
-};
+});
 
 Row.displayName = "Row";
 

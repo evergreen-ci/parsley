@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
-import { AnsiiRow, ResmokeRow } from "components/LogRow";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import SideBar from "components/SideBar";
 import SubHeader from "components/SubHeader";
@@ -17,7 +16,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
   const { logLines, lineCount, getLine } = useLogContext();
   const [wrap] = useQueryParam("wrap", false);
   const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
-  const logRenderer = rowRendererMap[logType];
 
   // TODO: EVG-17525
   // Do what ever logic to process the lines here
@@ -32,7 +30,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
             cache={cache}
             logLines={processedLogLines}
             rowCount={lineCount}
-            rowRenderer={RowRenderer({ Row: logRenderer, wrap, getLine })}
+            rowRenderer={RowRenderer({ logType, wrap, getLine })}
             scrollToIndex={scrollToIndex}
             wrap={wrap}
           />
@@ -40,12 +38,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
       </ColumnContainer>
     </Container>
   );
-};
-
-const rowRendererMap = {
-  [LogTypes.EVERGREEN_TASK_LOGS]: AnsiiRow,
-  [LogTypes.EVERGREEN_TEST_LOGS]: AnsiiRow,
-  [LogTypes.RESMOKE_LOGS]: ResmokeRow,
 };
 
 const Container = styled.div`
