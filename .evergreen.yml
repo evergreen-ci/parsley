@@ -115,7 +115,7 @@ functions:
         ["parsley/dist/*"]
       remote_file: parsley/${task_id}/dist/
       bucket: mciuploads
-      content_type: application/javascript
+      content_type: text/html
       permissions: public-read
       display_name: dist_
 
