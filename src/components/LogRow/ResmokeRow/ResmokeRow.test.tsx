@@ -1,30 +1,59 @@
-import { useEffect, useState } from "react";
 import { LogTypes } from "constants/enums";
-import { useLogContext } from "context/LogContext";
-import { LogWindow } from "./LogView/index";
+import { LogContextProvider } from "context/LogContext";
+import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
+import { ResmokeRow } from ".";
 
-interface LogViewProps {
-  logType: LogTypes;
-}
-
-const LogView: React.FC<LogViewProps> = ({ logType }) => {
-  const [isLoading, setIsLoading] = useState(false);
-  const { ingestLines } = useLogContext();
-
-  const mockIngestLines = async () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      ingestLines(logLines);
-    }, 200);
-    setIsLoading(false);
-  };
-  useEffect(() => {
-    mockIngestLines();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  return <div>{isLoading ? "Loading" : <LogWindow logType={logType} />}</div>;
+const wrapper = (logs: string[]) => {
+  const provider = ({ children }: { children: React.ReactNode }) => (
+    <LogContextProvider initialLogLines={logs}>{children}</LogContextProvider>
+  );
+  return provider;
 };
+
+describe("resmokeRow", () => {
+  it("displays a log line and its text for a given index", () => {
+    renderWithRouterMatch(
+      <ResmokeRow data={data} listRowProps={listRowProps} />,
+      {
+        wrapper: wrapper(logLines),
+      }
+    );
+    expect(screen.getByText(logLines[0])).toBeInTheDocument();
+    renderWithRouterMatch(
+      <ResmokeRow data={data} listRowProps={{ ...listRowProps, index: 1 }} />,
+      {
+        wrapper: wrapper(logLines),
+      }
+    );
+    expect(screen.getByText(logLines[1])).toBeInTheDocument();
+  });
+  it("double clicking a log line updates the url and selects it", async () => {
+    const { history } = renderWithRouterMatch(
+      <ResmokeRow data={data} listRowProps={listRowProps} />,
+      {
+        wrapper: wrapper(logLines),
+      }
+    );
+    userEvent.dblClick(screen.getByText(logLines[0]));
+    await waitFor(() => {
+      expect(history.location.search).toBe("?selectedLine=0");
+    });
+  });
+  it("double clicking on a selected log line unselects it", async () => {
+    const { history } = renderWithRouterMatch(
+      <ResmokeRow data={data} listRowProps={listRowProps} />,
+
+      {
+        wrapper: wrapper(logLines),
+        route: "?selectedLine=0",
+      }
+    );
+    userEvent.dblClick(screen.getByText(logLines[0]));
+    await waitFor(() => {
+      expect(history.location.search).toBe("");
+    });
+  });
+});
 
 const logLines = [
   "[js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).",
@@ -37,4 +66,20 @@ const logLines = [
   "[j0:sec1] Starting mongod on port 20002...",
 ];
 
-export default LogView;
+const listRowProps = {
+  key: logLines[0],
+  columnIndex: 0,
+  index: 0,
+  isScrolling: false,
+  isVisible: true,
+  parent: {} as any,
+  style: {},
+};
+const getLine = (index: number) => logLines[index];
+
+const data = {
+  getLine,
+  wrap: false,
+  processedLines: logLines.map((_, index) => index),
+  logType: LogTypes.RESMOKE_LOGS,
+};

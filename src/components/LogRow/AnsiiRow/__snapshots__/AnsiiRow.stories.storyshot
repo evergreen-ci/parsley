@@ -1,0 +1,126 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
+Array [
+  <pre
+    className="css-he6zal"
+    data-cy="log-row-0"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
+    </span>
+  </pre>,
+  <pre
+    className="css-213xyw"
+    data-cy="log-row-1"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='lint' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
+    </span>
+  </pre>,
+  <pre
+    className="css-yssaq3"
+    data-cy="log-row-2"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='osx' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
+    </span>
+  </pre>,
+  <pre
+    className="css-1g0x9l2"
+    data-cy="log-row-3"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='race-detector' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
+    </span>
+  </pre>,
+  <pre
+    className="css-1pu3qdx"
+    data-cy="log-row-4"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1604' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
+    </span>
+  </pre>,
+  <pre
+    className="css-1xp8v27"
+    data-cy="log-row-5"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1804-arm64' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
+    </span>
+  </pre>,
+  <pre
+    className="css-7va01b"
+    data-cy="log-row-6"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='windows' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
+    </span>
+  </pre>,
+  <pre
+    className="css-4n1f5c"
+    data-cy="log-row-7"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
+    </span>
+  </pre>,
+]
+`;
+
+exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
+<pre
+  className="css-he6zal"
+  data-cy="log-row-0"
+  onDoubleClick={[Function]}
+  selected={false}
+  style={Object {}}
+>
+  <span
+    data-cy="ansii-row"
+  >
+    [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
+  </span>
+</pre>
+`;
