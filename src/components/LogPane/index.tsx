@@ -30,7 +30,7 @@ const LogPane: React.FC<LogPaneProps> = ({
         <List
           // If wrap is false, We want the list to scroll horizontally.
           ref={listRef}
-          containerStyle={wrap ? undefined : { overflow: "scroll visible" }}
+          containerStyle={{ overflow: "scroll visible" }}
           deferredMeasurementCache={cache}
           height={height}
           itemData={logLines}

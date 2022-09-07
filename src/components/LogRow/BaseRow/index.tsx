@@ -54,8 +54,8 @@ const StyledPre = styled.pre<{
   selected: boolean;
 }>`
   overflow-y: hidden;
-  margin-top: 0;
-  margin-bottom: 0;
+  /* margin-top: 0;
+  margin-bottom: 0; */
   /* margin-left: ${size.xs}; */
   margin-right: ${size.xs};
   font-size: ${fontSize.m};
@@ -64,16 +64,16 @@ const StyledPre = styled.pre<{
     margin-left: ${size.s};
     margin-right: ${size.xl};
   }
+  /* Override react-virtualized default width to allow horizontal scroll */
+  width: unset !important;
+
   ${({ shouldWrap }) =>
-    shouldWrap
-      ? `
+    shouldWrap &&
+    `
   /* wrap multiple lines */
   white-space: break-spaces;
-  `
-      : `
-      /* override react-virtualized's width */
-      width: unset !important;
   `}
+
   ${({ selected }) => selected && `background-color: ${yellow.light3};`}
   :hover {
     background-color: ${gray.light1};
