@@ -5,17 +5,16 @@ const useAxiosGet = (url: string) => {
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [data, setData] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   axios
     .get(url, {
+      withCredentials: true,
       maxBodyLength: Infinity,
       maxContentLength: Infinity,
       onDownloadProgress: (progressEvent) => {
         const percentCompleted = Math.round(
           (progressEvent.loaded * 100) / progressEvent.total
         );
-        console.log({ progressEvent });
-        console.log(percentCompleted);
         setDownloadProgress(percentCompleted);
       },
       responseType: "text",
@@ -26,10 +25,10 @@ const useAxiosGet = (url: string) => {
     })
     .catch((e) => {
       setIsLoading(false);
-      setError(e.message);
+      setError(e);
     });
 
   return { data, error, isLoading, downloadProgress };
 };
 
-export default useAxiosGet;
+export { useAxiosGet };
