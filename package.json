@@ -30,6 +30,7 @@
   "dependencies": {
     "@emotion/react": "11.9.3",
     "@emotion/styled": "11.9.3",
+    "@leafygreen-ui/badge": "5.0.1",
     "@leafygreen-ui/button": "16.0.0",
     "@leafygreen-ui/card": "7.0.0",
     "@leafygreen-ui/emotion": "4.0.0",
@@ -41,11 +42,13 @@
     "@leafygreen-ui/toggle": "8.0.2",
     "@leafygreen-ui/tooltip": "7.1.0",
     "@leafygreen-ui/typography": "13.1.1",
+    "js-cookie": "3.0.1",
     "query-string": "7.1.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.3.0",
-    "react-virtualized": "9.22.3"
+    "react-virtualized": "9.22.3",
+    "typescript-cookie": "1.0.4"
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
@@ -65,6 +68,7 @@
     "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.4.3",
     "@types/jest": "28.1.6",
+    "@types/js-cookie": "3.0.2",
     "@types/node": "^16.11.47",
     "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
@@ -96,7 +100,7 @@
     "prettier": "2.7.1",
     "rollup-plugin-visualizer": "^5.8.0",
     "ts-jest": "28.0.7",
-    "typescript": "^4.6.4",
+    "typescript": "4.8.2",
     "vite": "^3.0.0",
     "vite-plugin-checker": "^0.4.9",
     "vite-plugin-env-compatible": "^1.1.1",
