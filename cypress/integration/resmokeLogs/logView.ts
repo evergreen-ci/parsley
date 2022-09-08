@@ -1,5 +1,3 @@
-// This file can be deleted later.
-
 describe("Basic resmoke log view", () => {
   before(() => {
     cy.visit("/resmoke/build_0/test_0");

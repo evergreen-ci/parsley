@@ -1,5 +1,3 @@
-// This file can be deleted later.
-
 describe("Basic evergreen test log view", () => {
   before(() => {
     cy.visit("/test/task_0/0/test_0");
