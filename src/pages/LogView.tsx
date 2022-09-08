@@ -26,7 +26,11 @@ const LogView: React.FC<LogViewProps> = ({ logType }) => {
 
   return (
     <PageLayout>
-      {isLoading ? "Loading" : <LogWindow logType={logType} />}
+      {isLoading ? (
+        "Loading"
+      ) : (
+        <LogWindow isUploadedLog={false} logType={logType} />
+      )}
     </PageLayout>
   );
 };

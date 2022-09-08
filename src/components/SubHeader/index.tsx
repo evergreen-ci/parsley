@@ -7,10 +7,17 @@ import { size, subheaderHeight } from "constants/tokens";
 const { gray } = palette;
 
 /** TODO: EVG-17534 */
-const SubHeader = () => (
+interface SubHeaderProps {
+  isUploadedLog: boolean;
+}
+const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => (
   <Container>
     <StyledIcon glyph="EvergreenLogo" />
-    <StyledLink href="/test">Task Page</StyledLink>
+    {isUploadedLog ? (
+      <span>Thanks for uploading</span>
+    ) : (
+      <StyledLink href="/test">Task Page</StyledLink>
+    )}
   </Container>
 );
 
