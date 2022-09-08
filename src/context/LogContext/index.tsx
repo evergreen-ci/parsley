@@ -4,6 +4,7 @@ import useLogState from "./state";
 interface LogContextState {
   logLines: string[];
   lineCount: number;
+  hasLogs: boolean;
   ingestLines: (logs: string[]) => void;
   getLine: (lineNumber: number) => string | undefined;
   clearLines: () => void;
@@ -48,6 +49,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     () => ({
       logLines: state.logs,
       lineCount: state.logs.length,
+      hasLogs: state.logs.length > 0,
       clearLines,
       getLine,
       ingestLines,
