@@ -26,7 +26,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     [logLines]
   );
   return (
-    <Container>
+    <Container data-cy="log-window">
       <SideBar />
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />

@@ -62,12 +62,12 @@ const LogDrop: React.FC<LogDropProps> = ({ onChangeLogType }) => {
           Raw
         </Option>
       </StyledSelect>
-      <Button data-cy="upload-button" onClick={onParse} variant="danger">
+      <Button data-cy="process-log-button" onClick={onParse} variant="danger">
         Process Log
       </Button>
     </Container>
   ) : (
-    <Container {...getRootProps()}>
+    <Container {...getRootProps()} data-cy="upload-zone">
       <input {...getInputProps()} />
       {isDragActive ? (
         <Body>Release to upload</Body>
