@@ -7,7 +7,7 @@ import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 
-const { yellow, green } = palette;
+const { yellow, red } = palette;
 
 interface BaseRowProps extends ListRowProps {
   children: React.ReactNode;
@@ -113,7 +113,7 @@ const StyledPre = styled.pre<{
       width: unset !important;
   `}
 
-  ${({ selected }) => selected && `background-color: ${green.light2};`}
+  ${({ selected }) => selected && `background-color: ${red.light2};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light2};`}
 
   // Hover should be an overlay shadow so that the user can see the color underneath.

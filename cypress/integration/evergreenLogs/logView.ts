@@ -33,7 +33,7 @@ describe("Basic evergreen log view", () => {
   });
 });
 
-describe.only("Log interactions", () => {
+describe("Log interactions", () => {
   before(() => {
     cy.visit("/evergreen/task_0/0/tasks");
   });
@@ -63,5 +63,10 @@ describe.only("Log interactions", () => {
     cy.dataCy("log-link-5").click();
     cy.location("search").should("equal", "?bookmarks=0,4");
     cy.dataCy("log-line-container").should("not.contain", "5");
+  });
+
+  it("should be able to clear bookmarks", () => {
+    cy.dataCy("clear-bookmarks").click();
+    cy.location("search").should("equal", "");
   });
 });
