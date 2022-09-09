@@ -15,7 +15,7 @@ interface LogWindowProps {
   isUploadedLog: boolean;
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
-  const { logLines, getLine } = useLogContext();
+  const { logLines, hasLogs, getLine } = useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
 
@@ -28,7 +28,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
 
   return (
     <Container data-cy="log-window">
-      {logLines.length !== 0 && <SideBar maxLineNumber={logLines.length - 1} />}
+      {hasLogs && <SideBar maxLineNumber={logLines.length - 1} />}
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>
