@@ -46,7 +46,9 @@ SingleLine.decorators = [
 ];
 
 const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
-  <>
+  <div
+    style={{ overflow: "scroll visible", position: "relative", height: 500 }}
+  >
     {logLines.map((_, index) => (
       <ResmokeRow
         key={logLines[index]}
@@ -58,7 +60,13 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
         }}
         listRowProps={{
           index,
-          style: {},
+          style: {
+            height: "16px",
+            left: "0px",
+            position: "absolute",
+            top: 16 * index,
+            width: "100%",
+          },
           columnIndex: 0,
           isScrolling: false,
           isVisible: true,
@@ -67,7 +75,7 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
         }}
       />
     ))}
-  </>
+  </div>
 );
 
 export const MultipleLines = MultipleLineTemplate.bind({});
