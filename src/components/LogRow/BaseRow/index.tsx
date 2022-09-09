@@ -34,7 +34,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
   );
   const bookmarked = bookmarks.includes(index);
 
-  // Clicking a line should select/deselect the line.
+  // Clicking a line should select or deselect the line.
   const handleClick = () => {
     if (selected) {
       setSelectedLine(undefined);
@@ -43,7 +43,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     }
   };
 
-  // Double clicking a line should add a line to the bookmarks.
+  // Double clicking a line should add or remove the line from bookmarks.
   const handleDoubleClick = () => {
     if (bookmarks.includes(index)) {
       const newBookmarks = bookmarks.filter((b) => b !== index);
