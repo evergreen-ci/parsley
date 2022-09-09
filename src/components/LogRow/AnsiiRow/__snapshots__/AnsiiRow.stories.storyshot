@@ -1,13 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
-Array [
+<div
+  style={
+    Object {
+      "height": 500,
+      "overflow": "scroll visible",
+      "position": "relative",
+    }
+  }
+>
   <pre
     className="css-1j2roh1"
     data-cy="log-row-0"
     onDoubleClick={[Function]}
     selected={false}
-    style={Object {}}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 0,
+        "width": "100%",
+      }
+    }
   >
     <svg
       aria-label="Link Icon"
@@ -40,13 +56,21 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1j2roh1"
     data-cy="log-row-1"
     onDoubleClick={[Function]}
     selected={false}
-    style={Object {}}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 16,
+        "width": "100%",
+      }
+    }
   >
     <svg
       aria-label="Link Icon"
@@ -79,13 +103,21 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='lint' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1j2roh1"
     data-cy="log-row-2"
     onDoubleClick={[Function]}
     selected={false}
-    style={Object {}}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 32,
+        "width": "100%",
+      }
+    }
   >
     <svg
       aria-label="Link Icon"
@@ -118,13 +150,21 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='osx' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1j2roh1"
     data-cy="log-row-3"
     onDoubleClick={[Function]}
     selected={false}
-    style={Object {}}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 48,
+        "width": "100%",
+      }
+    }
   >
     <svg
       aria-label="Link Icon"
@@ -157,13 +197,21 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='race-detector' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1j2roh1"
     data-cy="log-row-4"
     onDoubleClick={[Function]}
     selected={false}
-    style={Object {}}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 64,
+        "width": "100%",
+      }
+    }
   >
     <svg
       aria-label="Link Icon"
@@ -196,13 +244,21 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1604' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1j2roh1"
     data-cy="log-row-5"
     onDoubleClick={[Function]}
     selected={false}
-    style={Object {}}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 80,
+        "width": "100%",
+      }
+    }
   >
     <svg
       aria-label="Link Icon"
@@ -235,13 +291,21 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1804-arm64' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1j2roh1"
     data-cy="log-row-6"
     onDoubleClick={[Function]}
     selected={false}
-    style={Object {}}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 96,
+        "width": "100%",
+      }
+    }
   >
     <svg
       aria-label="Link Icon"
@@ -274,13 +338,21 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='windows' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
+  </pre>
   <pre
     className="css-1j2roh1"
     data-cy="log-row-7"
     onDoubleClick={[Function]}
     selected={false}
-    style={Object {}}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 112,
+        "width": "100%",
+      }
+    }
   >
     <svg
       aria-label="Link Icon"
@@ -313,8 +385,3292 @@ Array [
     >
       [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
     </span>
-  </pre>,
-]
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-8"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 128,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-8"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      8
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      Some line with a url 
+      <a
+        href="https://www.google.com"
+      >
+        https://www.google.com
+      </a>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-9"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 144,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-9"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      9
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 20:08:18.604] (Use \`node --trace-deprecation ...\` to show where the warning was created)
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-10"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 160,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-10"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      10
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      ┌
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ┐
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-11"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 176,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-11"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      11
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          │
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Tests:
+      </span>
+              
+      <span
+        style={
+          Object {
+            "color": "rgb(0,187,0)",
+          }
+        }
+      >
+        4
+      </span>
+                                                                                      
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        │
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-12"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 192,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-12"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      12
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          │
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Passing:
+      </span>
+            
+      <span
+        style={
+          Object {
+            "color": "rgb(0,187,0)",
+          }
+        }
+      >
+        4
+      </span>
+                                                                                      
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        │
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-13"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 208,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-13"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      13
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          │
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Failing:
+      </span>
+            
+      <span
+        style={
+          Object {
+            "color": "rgb(0,187,0)",
+          }
+        }
+      >
+        0
+      </span>
+                                                                                      
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        │
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-14"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 224,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-14"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      14
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          │
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Pending:
+      </span>
+            
+      <span
+        style={
+          Object {
+            "color": "rgb(0,187,0)",
+          }
+        }
+      >
+        0
+      </span>
+                                                                                      
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        │
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-15"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 240,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-15"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      15
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          │
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Skipped:
+      </span>
+            
+      <span
+        style={
+          Object {
+            "color": "rgb(0,187,0)",
+          }
+        }
+      >
+        0
+      </span>
+                                                                                      
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        │
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-16"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 256,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-16"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      16
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          │
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Screenshots:
+      </span>
+        
+      <span
+        style={
+          Object {
+            "color": "rgb(0,187,0)",
+          }
+        }
+      >
+        0
+      </span>
+                                                                                      
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        │
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-17"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 272,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-17"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      17
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          │
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Video:
+      </span>
+              
+      <span
+        style={
+          Object {
+            "color": "rgb(0,187,0)",
+          }
+        }
+      >
+        true
+      </span>
+                                                                                   
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        │
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-18"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 288,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-18"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      18
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          │
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Duration:
+      </span>
+           
+      <span
+        style={
+          Object {
+            "color": "rgb(0,187,0)",
+          }
+        }
+      >
+        1 second
+      </span>
+                                                                               
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        │
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-19"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 304,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-19"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      19
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          │
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Estimated:
+      </span>
+          
+      <span
+        style={
+          Object {
+            "color": "rgb(0,187,0)",
+          }
+        }
+      >
+        12 seconds
+      </span>
+                                                                             
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        │
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-20"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 320,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-20"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      20
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          │
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Spec Ran:
+      </span>
+           
+      <span
+        style={
+          Object {
+            "color": "rgb(0,187,0)",
+          }
+        }
+      >
+        logView.ts
+      </span>
+                                                                             
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        │
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-21"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 336,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-21"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      21
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.103] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+          └
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ─
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ┘
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-22"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 352,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-22"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      22
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.679] 
+      <span
+        style={
+          Object {
+            "color": "rgb(0,0,187)",
+          }
+        }
+      >
+          (
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(0,0,187)",
+            "fontWeight": "bold",
+            "textDecoration": "underline",
+          }
+        }
+      >
+        Uploading Results
+      </span>
+      <span
+        style={
+          Object {
+            "color": "rgb(0,0,187)",
+          }
+        }
+      >
+        )
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-23"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 368,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-23"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      23
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.679]   - Done Uploading 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        (1/1)
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(0,0,187)",
+          }
+        }
+      >
+        /data/mci/086da7292b38a2ffb50e7e42f81025f4/parsley/cypress/videos/resmokeLogs/logView.ts.mp4
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-24"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 384,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-24"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      24
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.894] resize:  can't open terminal /dev/tty
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-25"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 400,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-25"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      25
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.894] tput: No value for $TERM and no -T specified
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-26"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 416,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-26"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      26
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.894] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        ====================================================================================================
+      </span>
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-27"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 432,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-27"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      27
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.899]   (
+      <span
+        style={
+          Object {
+            "fontWeight": "bold",
+            "textDecoration": "underline",
+          }
+        }
+      >
+        Run Finished
+      </span>
+      )
+    </span>
+  </pre>
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-28"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={
+      Object {
+        "height": "16px",
+        "left": "0px",
+        "position": "absolute",
+        "top": 448,
+        "width": "100%",
+      }
+    }
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-28"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      28
+    </span>
+    <span
+      data-cy="ansii-row"
+    >
+      [2022/09/09 19:49:46.899] 
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+           
+      </span>
+          
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Spec
+      </span>
+                                                    
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Tests
+      </span>
+        
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Passing
+      </span>
+        
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Failing
+      </span>
+        
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Pending
+      </span>
+        
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+        Skipped
+      </span>
+       
+      <span
+        style={
+          Object {
+            "color": "rgb(85,85,85)",
+          }
+        }
+      >
+         
+      </span>
+    </span>
+  </pre>
+</div>
 `;
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
