@@ -78,6 +78,19 @@ describe("ansiiRow", () => {
       expect(history.location.search).toBe("");
     });
   });
+  it("lines should be linkified if they have a url", async () => {
+    renderWithRouterMatch(
+      <AnsiiRow data={data} listRowProps={{ ...listRowProps, index: 8 }} />,
+      {
+        wrapper: wrapper(["Some line with a url https://www.google.com"]),
+      }
+    );
+    expect(screen.getByText("https://www.google.com")).toBeInTheDocument();
+    expect(screen.getByText("https://www.google.com")).toHaveAttribute(
+      "href",
+      "https://www.google.com"
+    );
+  });
 });
 
 const logLines = [
@@ -89,6 +102,7 @@ const logLines = [
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1804-arm64' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='windows' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
+  "Some line with a url https://www.google.com",
 ];
 
 const listRowProps = {
