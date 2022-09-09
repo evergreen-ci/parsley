@@ -16,30 +16,36 @@ interface LogDropProps {
 }
 
 const LogDrop: React.FC<LogDropProps> = ({ onChangeLogType }) => {
-  const { ingestLines } = useLogContext();
+  const { ingestLines, setFileName } = useLogContext();
   const [hasDroppedLog, setHasDroppedLog] = useState(false);
-  const [logType, setLogType] = useState(LogTypes.RESMOKE_LOGS);
+  const [logType, setLogType] = useState<LogTypes | undefined>(undefined);
   const lineStream = useRef<FileReader["result"]>(null);
 
-  const onDrop = useCallback((acceptedFiles: File[]) => {
-    acceptedFiles.forEach((file: any) => {
-      const reader = new FileReader();
+  const onDrop = useCallback(
+    (acceptedFiles: File[]) => {
+      acceptedFiles.forEach((file) => {
+        const reader = new FileReader();
 
-      //   TODO: EVG-17664 replace these with error toasts
-      reader.onabort = () => console.log("file reading was aborted");
-      reader.onerror = () => console.log("file reading has failed");
-      reader.onload = () => {
-        setHasDroppedLog(true);
-        lineStream.current = reader.result;
-      };
-      reader.readAsText(file);
-    });
-  }, []);
+        //   TODO: EVG-17664 replace these with error toasts
+        reader.onabort = () => console.log("file reading was aborted");
+        reader.onerror = () => console.log("file reading has failed");
+        reader.onload = () => {
+          setHasDroppedLog(true);
+          setFileName(file.name);
+          lineStream.current = reader.result;
+        };
+        reader.readAsText(file);
+      });
+    },
+    [setFileName]
+  );
 
   const onParse = useCallback(() => {
-    onChangeLogType(logType);
-    if (typeof lineStream.current === "string") {
-      ingestLines(lineStream.current.split("\n"));
+    if (logType) {
+      onChangeLogType(logType);
+      if (typeof lineStream.current === "string") {
+        ingestLines(lineStream.current.split("\n"));
+      }
     }
   }, [ingestLines, logType, onChangeLogType]);
 
@@ -55,16 +61,20 @@ const LogDrop: React.FC<LogDropProps> = ({ onChangeLogType }) => {
         onChange={(value) => setLogType(value as LogTypes)}
         value={logType}
       >
-        <Option key="resmoke" value={LogTypes.RESMOKE_LOGS}>
-          Resmoke
-        </Option>
-        <Option key="standard" value={LogTypes.EVERGREEN_TASK_LOGS}>
-          Raw
-        </Option>
+        <Option value={LogTypes.RESMOKE_LOGS}>Resmoke</Option>
+        <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
       </StyledSelect>
-      <Button data-cy="process-log-button" onClick={onParse} variant="danger">
-        Process Log
-      </Button>
+      <ButtonContainer>
+        <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
+        <Button
+          data-cy="process-log-button"
+          disabled={logType === undefined}
+          onClick={onParse}
+          variant="primary"
+        >
+          Process Log
+        </Button>
+      </ButtonContainer>
     </Container>
   ) : (
     <Container {...getRootProps()} data-cy="upload-zone">
@@ -97,6 +107,14 @@ const Container = styled.div`
   border-radius: ${size.s};
 `;
 
+const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  margin-top: ${size.xs};
+  button {
+    margin: 0 ${size.xs};
+  }
+`;
 const Dropzone = styled.div`
   display: flex;
   flex-direction: column;

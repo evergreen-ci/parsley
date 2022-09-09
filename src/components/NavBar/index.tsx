@@ -20,7 +20,7 @@ const NavBar: React.FC = () => {
     QueryParams.Filters,
     []
   );
-  const { hasLogs, clearLines } = useLogContext();
+  const { hasLogs, clearLogs } = useLogContext();
 
   const handleSearch = (selected: string, value: string) => {
     if (selected === "search") {
@@ -38,7 +38,7 @@ const NavBar: React.FC = () => {
           <StyledLink css={navLinkStyles} href="https://wiki.corp.mongodb.com">
             Wiki
           </StyledLink>
-          <UploadLink clearLogs={clearLines} hasLogs={hasLogs} />
+          <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
         <StyledSearchBar
           onSubmit={handleSearch}

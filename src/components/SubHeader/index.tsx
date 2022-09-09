@@ -3,6 +3,7 @@ import { palette } from "@leafygreen-ui/palette";
 import Icon from "components/Icon";
 import { StyledLink } from "components/styles";
 import { size, subheaderHeight } from "constants/tokens";
+import { useLogContext } from "context/LogContext";
 
 const { gray } = palette;
 
@@ -10,16 +11,20 @@ const { gray } = palette;
 interface SubHeaderProps {
   isUploadedLog: boolean;
 }
-const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => (
-  <Container>
-    <StyledIcon glyph="EvergreenLogo" />
-    {isUploadedLog ? (
-      <span>Thanks for uploading</span>
-    ) : (
-      <StyledLink href="/test">Task Page</StyledLink>
-    )}
-  </Container>
-);
+const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
+  const { fileName } = useLogContext();
+
+  return (
+    <Container>
+      <StyledIcon glyph="EvergreenLogo" />
+      {isUploadedLog ? (
+        <span>{fileName}</span>
+      ) : (
+        <StyledLink href="/test">Task Page</StyledLink>
+      )}
+    </Container>
+  );
+};
 
 const StyledIcon = styled(Icon)`
   padding-left: ${size.l};
