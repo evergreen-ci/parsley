@@ -27,7 +27,33 @@ describe("ansiiRow", () => {
     );
     expect(screen.getByText(logLines[1])).toBeInTheDocument();
   });
-  it("double clicking a log line updates the url and selects it", async () => {
+  it("clicking log line link updates the url and selects it", async () => {
+    const { history } = renderWithRouterMatch(
+      <AnsiiRow data={data} listRowProps={listRowProps} />,
+      {
+        wrapper: wrapper(logLines),
+      }
+    );
+    userEvent.click(screen.getByDataCy("log-link-0"));
+    await waitFor(() => {
+      expect(history.location.search).toBe("?selectedLine=0");
+    });
+  });
+  it("clicking on a selected log line link unselects it", async () => {
+    const { history } = renderWithRouterMatch(
+      <AnsiiRow data={data} listRowProps={listRowProps} />,
+
+      {
+        wrapper: wrapper(logLines),
+        route: "?selectedLine=0",
+      }
+    );
+    userEvent.click(screen.getByDataCy("log-link-0"));
+    await waitFor(() => {
+      expect(history.location.search).toBe("");
+    });
+  });
+  it("double clicking a log line adds it to the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
       <AnsiiRow data={data} listRowProps={listRowProps} />,
       {
@@ -36,16 +62,15 @@ describe("ansiiRow", () => {
     );
     userEvent.dblClick(screen.getByText(logLines[0]));
     await waitFor(() => {
-      expect(history.location.search).toBe("?selectedLine=0");
+      expect(history.location.search).toBe("?bookmarks=0");
     });
   });
-  it("double clicking on a selected log line unselects it", async () => {
+  it("double clicking a bookmarked log line removes it from the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
       <AnsiiRow data={data} listRowProps={listRowProps} />,
-
       {
         wrapper: wrapper(logLines),
-        route: "?selectedLine=0",
+        route: "?bookmarks=0",
       }
     );
     userEvent.dblClick(screen.getByText(logLines[0]));

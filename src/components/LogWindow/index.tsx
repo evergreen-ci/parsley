@@ -25,9 +25,10 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     () => logLines.map((_, index) => index),
     [logLines]
   );
+
   return (
     <Container data-cy="log-window">
-      <SideBar />
+      {logLines.length !== 0 && <SideBar maxLineNumber={logLines.length - 1} />}
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>

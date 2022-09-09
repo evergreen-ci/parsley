@@ -35,3 +35,18 @@ Parsley is the UI for Evergreen's log viewer. It will eventually replace [Lobste
 }
 
 ```
+
+## Deployment
+
+### Requirements
+
+You must be on the `main` Branch if deploying to prod.
+
+A `.env-cmdrc.json` file is required to deploy because it sets the environment variables that the application needs for a given deployment environments. See [Environment Variables](#environment-variables) section for more info about this file.
+
+### How to Deploy:
+
+Run the `deploy:beta` or `deploy:staging` yarn command
+
+1. `yarn deploy:beta` = deploy to https://parsley-beta.corp.mongodb.com
+2. `yarn deploy:staging` = deploy to https://parsley-staging.corp.mongodb.com
