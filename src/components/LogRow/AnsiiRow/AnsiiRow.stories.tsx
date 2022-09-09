@@ -10,12 +10,13 @@ export default {
 
 type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>["data"]>;
 
+// Single AnsiiRow.
 const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
   <AnsiiRow
     key={logLines[0]}
     data={{
       getLine,
-      wrap: args?.wrap,
+      wrap: args.wrap,
       processedLines: processedLogLines,
       logType: LogTypes.EVERGREEN_TASK_LOGS,
     }}
@@ -32,6 +33,7 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
 );
 
 export const SingleLine = SingleLineTemplate.bind({});
+
 SingleLine.args = {
   wrap: false,
 };
@@ -43,6 +45,7 @@ SingleLine.decorators = [
   ),
 ];
 
+// Multiple AnsiiRows.
 const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
   <>
     {logLines.map((_, index) => (
@@ -50,7 +53,7 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
         key={logLines[index]}
         data={{
           getLine,
-          wrap: args?.wrap,
+          wrap: args.wrap,
           processedLines: processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
         }}
@@ -70,7 +73,49 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
 
 export const MultiLines = MultiLineTemplate.bind({});
 
+MultiLines.args = {
+  wrap: false,
+};
 MultiLines.decorators = [
+  (Story) => (
+    <MemoryRouter initialEntries={["/"]}>
+      <Story />
+    </MemoryRouter>
+  ),
+];
+
+// Multiple AnsiiRows with CollapsedRows.
+const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => (
+  <>
+    {collapsedProcessedLogLines.map((_, index) => (
+      <AnsiiRow
+        key={logLines[index]}
+        data={{
+          getLine,
+          wrap: args.wrap,
+          processedLines: collapsedProcessedLogLines,
+          logType: LogTypes.EVERGREEN_TASK_LOGS,
+        }}
+        listRowProps={{
+          index,
+          style: {},
+          columnIndex: 0,
+          isScrolling: false,
+          isVisible: true,
+          key: getLine(index),
+          parent: {} as any,
+        }}
+      />
+    ))}
+  </>
+);
+
+export const Collapsed = CollapsedTemplate.bind({});
+
+Collapsed.args = {
+  wrap: false,
+};
+Collapsed.decorators = [
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
@@ -90,5 +135,7 @@ const logLines = [
 ];
 
 const processedLogLines = logLines.map((_, index) => index);
+
+const collapsedProcessedLogLines = [0, [1, 2], 3, 4, [5], 6, 7];
 
 const getLine = (index: number) => logLines[index];

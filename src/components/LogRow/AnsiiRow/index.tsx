@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import CollapsedRow from "components/LogRow//CollapsedRow";
 import BaseRow from "components/LogRow/BaseRow";
 import { BaseRowProps } from "../types";
 
@@ -8,12 +9,12 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { index } = listRowProps;
 
   const line = processedLines[index];
-  // TODO: EVG-17535
-  // This should be replaced with a collapsible component
-  const lineIndex = Array.isArray(line) ? line[0] : line;
-  return (
-    <BaseRow wrap={wrap} {...listRowProps} ref={ref}>
-      <span data-cy="ansii-row">{getLine(lineIndex)}</span>
+
+  return Array.isArray(line) ? (
+    <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
+  ) : (
+    <BaseRow wrap={wrap} {...listRowProps} ref={ref} index={line}>
+      <span data-cy="ansii-row">{getLine(line)}</span>
     </BaseRow>
   );
 });

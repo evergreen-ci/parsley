@@ -25,6 +25,9 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
     [logLines]
   );
 
+  // Uncomment the following to see collapsed rows.
+  // const processedLogLines = [0, [1, 2], 3, 4, [5], 6, 7];
+
   return (
     <Container>
       {logLines.length !== 0 && <SideBar maxLineNumber={logLines.length - 1} />}

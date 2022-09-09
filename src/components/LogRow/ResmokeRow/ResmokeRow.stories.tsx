@@ -12,12 +12,14 @@ export default {
 type ResmokeRowProps = React.FC<
   React.ComponentProps<typeof ResmokeRow>["data"]
 >;
+
+// Single ResmokeRow.
 const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
   <ResmokeRow
     key={logLines[0]}
     data={{
       getLine,
-      wrap: args?.wrap,
+      wrap: args.wrap,
       processedLines: processedLogLines,
       logType: LogTypes.RESMOKE_LOGS,
     }}
@@ -34,6 +36,7 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
 );
 
 export const SingleLine = SingleLineTemplate.bind({});
+
 SingleLine.args = {
   wrap: false,
 };
@@ -45,6 +48,7 @@ SingleLine.decorators = [
   ),
 ];
 
+// Multiple ResmokeRows.
 const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
   <>
     {logLines.map((_, index) => (
@@ -52,7 +56,7 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
         key={logLines[index]}
         data={{
           getLine,
-          wrap: args?.wrap,
+          wrap: args.wrap,
           processedLines: processedLogLines,
           logType: LogTypes.RESMOKE_LOGS,
         }}
@@ -71,10 +75,50 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
 );
 
 export const MultipleLines = MultipleLineTemplate.bind({});
+
 MultipleLines.args = {
   wrap: false,
 };
 MultipleLines.decorators = [
+  (Story) => (
+    <MemoryRouter initialEntries={["/"]}>
+      <Story />
+    </MemoryRouter>
+  ),
+];
+
+// Multiple ResmokeRows with CollapsedRows.
+const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => (
+  <>
+    {collapsedProcessedLogLines.map((_, index) => (
+      <ResmokeRow
+        key={logLines[index]}
+        data={{
+          getLine,
+          wrap: args.wrap,
+          processedLines: collapsedProcessedLogLines,
+          logType: LogTypes.EVERGREEN_TASK_LOGS,
+        }}
+        listRowProps={{
+          index,
+          style: {},
+          columnIndex: 0,
+          isScrolling: false,
+          isVisible: true,
+          key: getLine(index) || "",
+          parent: {} as any,
+        }}
+      />
+    ))}
+  </>
+);
+
+export const Collapsed = CollapsedTemplate.bind({});
+
+Collapsed.args = {
+  wrap: false,
+};
+Collapsed.decorators = [
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
@@ -93,5 +137,7 @@ const logLines = [
   "[j0:sec1] Starting mongod on port 20002...",
 ];
 const processedLogLines = logLines.map((_, index) => index);
+
+const collapsedProcessedLogLines = [0, 1, 2, [3, 4, 5], 6, 7];
 
 const getLine = (index: number) => logLines[index];
