@@ -17,7 +17,7 @@ export default (options: InjectVariablesInHTMLConfig) => {
           to,
         });
       } catch (error) {
-        console.error("Error occurred:", error);
+        console.error("Error occurred: ", error);
       }
     },
   };
