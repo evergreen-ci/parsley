@@ -1,21 +1,83 @@
+import { useEffect } from "react";
 import styled from "@emotion/styled";
-import Button, { Size } from "@leafygreen-ui/button";
+import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
-import { navbarHeight, size } from "constants/tokens";
+import Icon from "components/Icon";
+import { QueryParams } from "constants/queryParams";
+import { fontSize, navbarHeight, size } from "constants/tokens";
+import { useQueryParam } from "hooks/useQueryParam";
 
 const { gray } = palette;
 
+interface SideBarProps {
+  maxLineNumber: number;
+}
+
 /** TODO: EVG-17532 */
-const SideBar = () => (
-  <Container>
-    <StyledButton size={Size.XSmall}>Clear</StyledButton>
-    <span>1</span>
-  </Container>
-);
+const SideBar: React.FC<SideBarProps> = ({ maxLineNumber }) => {
+  const [selectedLine] = useQueryParam<number | undefined>(
+    QueryParams.SelectedLine,
+    undefined
+  );
+  const [bookmarks, setBookmarks] = useQueryParam<number[]>(
+    QueryParams.Bookmarks,
+    []
+  );
+
+  // Set 0 and last log line to be initial bookmarks on load.
+  useEffect(() => {
+    if (bookmarks.length === 0) {
+      setBookmarks([0, maxLineNumber]);
+    }
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const lineNumbers = selectedLine
+    ? Array.from(new Set([...bookmarks, selectedLine])).sort()
+    : bookmarks;
+
+  return (
+    <Container>
+      <StyledButton
+        data-cy="clear-bookmarks"
+        onClick={() => setBookmarks([])}
+        size="xsmall"
+      >
+        Clear
+      </StyledButton>
+      <LogLineContainer data-cy="log-line-container">
+        {lineNumbers.map((l) => (
+          <LogLineNumber key={`log-line-${l}`}>
+            <span> {l} </span>
+            {l === selectedLine && <StyledIcon glyph="Link" size="small" />}
+          </LogLineNumber>
+        ))}
+      </LogLineContainer>
+    </Container>
+  );
+};
 
 const StyledButton = styled(Button)`
   width: 56px;
 `;
+
+const LogLineContainer = styled.div`
+  margin-left: ${size.xs};
+  margin-top: ${size.xxs};
+  align-self: start;
+  cursor: pointer;
+`;
+
+const LogLineNumber = styled.div`
+  display: flex;
+  align-items: center;
+  font-size: ${fontSize.m};
+`;
+
+const StyledIcon = styled(Icon)`
+  vertical-align: text-bottom;
+  margin-left: ${size.xxs};
+`;
+
 const Container = styled.div`
   background-color: ${gray.light3};
   width: ${size.xl};
