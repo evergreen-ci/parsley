@@ -16,18 +16,21 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
 
   return (
     <Container>
-      <StyledIcon glyph="EvergreenLogo" />
       {isUploadedLog ? (
-        <span>{fileName}</span>
+        <span>File name: ./{fileName}</span>
       ) : (
-        <StyledLink href="/test">Task Page</StyledLink>
+        <>
+          <IconWrapper>
+            <Icon glyph="EvergreenLogo" />
+          </IconWrapper>
+          <StyledLink href="/test">Task Page</StyledLink>
+        </>
       )}
     </Container>
   );
 };
 
-const StyledIcon = styled(Icon)`
-  padding-left: ${size.l};
+const IconWrapper = styled.div`
   padding-right: ${size.l};
 `;
 
@@ -38,6 +41,7 @@ const Container = styled.div`
   height: ${subheaderHeight};
   display: flex;
   align-items: center;
+  padding-left: ${size.l};
 `;
 
 export default SubHeader;

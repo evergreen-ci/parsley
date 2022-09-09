@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
+import LogWindow from "components/LogWindow";
 import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
-import { LogWindow } from "./LogView/index";
 
 interface LogViewProps {
   logType: LogTypes;

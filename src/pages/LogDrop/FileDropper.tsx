@@ -11,11 +11,11 @@ import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 
 const { red } = palette;
-interface LogDropProps {
+interface FileDropperProps {
   onChangeLogType: (logType: LogTypes) => void;
 }
 
-const LogDrop: React.FC<LogDropProps> = ({ onChangeLogType }) => {
+const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
   const { ingestLines, setFileName } = useLogContext();
   const [hasDroppedLog, setHasDroppedLog] = useState(false);
   const [logType, setLogType] = useState<LogTypes | undefined>(undefined);
@@ -68,7 +68,7 @@ const LogDrop: React.FC<LogDropProps> = ({ onChangeLogType }) => {
         <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
         <Button
           data-cy="process-log-button"
-          disabled={logType === undefined}
+          disabled={!logType}
           onClick={onParse}
           variant="primary"
         >
@@ -121,10 +121,13 @@ const Dropzone = styled.div`
   width: 60%;
   justify-content: center;
   align-items: center;
+  > * {
+    margin-bottom: ${size.xs};
+  }
 `;
 
 // @ts-expect-error
 const StyledSelect = styled(Select)`
   margin-bottom: ${size.xs};
 `;
-export default LogDrop;
+export default FileDropper;

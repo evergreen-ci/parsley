@@ -1,10 +1,10 @@
 import { useState } from "react";
 import style from "@emotion/styled";
+import LogWindow from "components/LogWindow";
 import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
-import FileDropper from "./LogDrop/index";
-import LogWindow from "./LogView/LogWindow";
+import FileDropper from "./LogDrop/FileDropper";
 
 const LogDrop = () => {
   const { hasLogs } = useLogContext();
