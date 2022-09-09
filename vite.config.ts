@@ -6,10 +6,21 @@ import envCompatible from "vite-plugin-env-compatible";
 import vitePluginImp from "vite-plugin-imp";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
+import injectVariablesInHTML from "./config/injectVariablesInHTML";
 import reactVirtualized from "./config/reactVirtualized";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  build: {
+    rollupOptions: {
+      plugins: [
+        injectVariablesInHTML({
+          files: "dist/index.html",
+          variables: ["%GIT_SHA%"],
+        }),
+      ],
+    },
+  },
   // The resolve field for @leafygreen-ui/emotion is to prevent LG from pulling in SSR dependencies.
   // It can be potentially be removed upon the completion of https://jira.mongodb.org/browse/PD-1543.
   resolve: {
