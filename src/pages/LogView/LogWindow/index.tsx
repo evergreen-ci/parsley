@@ -24,9 +24,10 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
     () => logLines.map((_, index) => index),
     [logLines]
   );
+
   return (
     <Container>
-      <SideBar />
+      {logLines.length !== 0 && <SideBar maxLineNumber={logLines.length - 1} />}
       <ColumnContainer>
         <SubHeader />
         <LogPaneContainer>
