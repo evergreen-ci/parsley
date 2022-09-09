@@ -100,7 +100,8 @@ const Container = styled.div`
   display: flex;
   flex-direction: column;
   width: 60%;
-  height: 250px;
+  max-height: 250px;
+  height: 60%;
   justify-content: center;
   align-items: center;
   border: ${size.xxs} dashed ${red.base};
