@@ -88,7 +88,7 @@ const LogDrop: React.FC<LogDropProps> = ({ onChangeLogType }) => {
           </Body>
           <Body weight="medium">or</Body>
           <Button leftGlyph={<Icon glyph="Upload" />} onClick={open}>
-            Select From Files
+            Select from Files
           </Button>
         </Dropzone>
       )}

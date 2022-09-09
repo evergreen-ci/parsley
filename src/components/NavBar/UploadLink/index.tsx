@@ -1,7 +1,6 @@
 import { useCallback, useState } from "react";
 import { css } from "@emotion/react";
 import ConfirmationModal from "@leafygreen-ui/confirmation-modal";
-import { H3 } from "@leafygreen-ui/typography";
 import { useNavigate } from "react-router-dom";
 import { StyledRouterLink } from "components/styles";
 import routes from "constants/routes";
@@ -47,7 +46,7 @@ const UploadLink: React.FC<UploadLinkProps> = ({ hasLogs, clearLogs }) => {
         title="Navigating away will clear your current logs."
         variant="danger"
       >
-        <H3>Are you sure you want to navigate away?</H3>
+        Are you sure you want to navigate away?
       </ConfirmationModal>
     </>
   );
