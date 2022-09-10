@@ -5,11 +5,7 @@ import { palette } from "@leafygreen-ui/palette";
 import TextInput from "@leafygreen-ui/text-input";
 import Toggle from "@leafygreen-ui/toggle";
 import { Disclaimer, Subtitle } from "@leafygreen-ui/typography";
-
 import Cookie from "js-cookie";
-// import { getCookie, setCookie } from "typescript-cookie";
-// import { get as getCookie, set as setCookie } from "js-cookie";
-// import Cookie from "js-cookie";
 
 import Icon from "components/Icon";
 import { FORMAT_LOG_V2, PRETTY_PRINT_BOOKMARKS } from "constants/cookies";
@@ -168,6 +164,15 @@ export const PrettyPrintToggle: React.FC = () => {
 };
 
 export const SearchRange: React.FC = () => {
+  // const [lowerBound, setLowerBound] = useState("0")
+  // const [,setLowerBound] = useQueryParam("lower", 0)
+  // const updateLower = (newVal: number) => {
+  //   if (!Number.isNaN(newVal)) {
+  //     setLowerBound(newVal);
+  //     setLowerBound(newVal);
+  //   }
+  // }
+
   const [lowerBound, setLowerBound] = useQueryParam("lower", 0);
   const [upperBound, setUpperBound] = useQueryParam("upper", -1);
 

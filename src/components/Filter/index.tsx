@@ -73,11 +73,11 @@ const Filter: React.FC<FilterProps> = ({
           size={Size.XLarge}
         />
         <StyledIcon
-          glyph={isVisible ? "Visibility" : "VisibilityOff"}
+          glyph={isVisible ? "Visibility" : "ClosedEye"}
           onClick={() => toggleVisible()}
           size={Size.XLarge}
         />
-        <Badge> FILTER </Badge>
+        <StyledBadge> FILTER </StyledBadge>
       </LeftContainer>
       <RightContainer>
         <StyledBody>{filterText}</StyledBody>
@@ -104,6 +104,10 @@ const RightButton = styled(Button)`
 
 const StyledIcon = styled(Icon)`
   cursor: pointer;
+`;
+
+const StyledBadge = styled(Badge)`
+  user-select: none;
 `;
 
 const FilterRow = styled.div`

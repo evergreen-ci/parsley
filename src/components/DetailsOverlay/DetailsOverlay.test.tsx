@@ -1,5 +1,3 @@
-// import { getCookie, setCookie } from "typescript-cookie";
-// import * as Cookie from "js-cookie";
 import Cookie from "js-cookie";
 import {
   renderWithRouterMatch as render,
@@ -9,31 +7,17 @@ import {
 } from "test_utils";
 import DetailsOverlay from ".";
 
-// typescript-cookie problem: https://github.com/carhartl/typescript-cookie/issues/110
-// js-cookie problem: stackoverflow.com/questions/65556421/typescript-using-the-incorrect-type-with-jest-when-there-are-multiple-available
 jest.mock("js-cookie");
-// const { get } = Cookie;
 const mockedGet = Cookie.get as unknown as jest.Mock<string>;
-
-// this doesn't work :(
-// jest.mock("js-cookie", () => ({
-//   get: jest.fn().mockReturnValue("true"),
-// }));
 
 describe("detailsOverlay", () => {
   beforeEach(() => {
-    console.log("Should be mocked: ", Cookie);
     mockedGet.mockImplementation(() => "true");
-    console.log("my cookieeee: ", Cookie.get());
-    console.log("my cookieeee: ", Cookie.get("my-cookie"));
-    // This doesn't work:
-    // jest.mock("js-cookie", () => ({ get: () => "true" }));
   });
 
   describe("wrap toggle", () => {
     it("should update the URL correctly", async () => {
       const { history } = render(<DetailsOverlay />);
-      const { location } = history;
 
       const wrapToggle = screen.getByDataCy("wrap-toggle");
       expect(wrapToggle).toHaveAttribute("aria-checked", "false");
@@ -42,23 +26,22 @@ describe("detailsOverlay", () => {
       await waitFor(() => {
         expect(wrapToggle).toHaveAttribute("aria-checked", "true");
       });
-      await waitFor(() => {
-        expect(location.search).toBe("?wrap=true");
-      });
+      expect(history.location.search).toBe("?wrap=true");
     });
   });
 
   describe("case sensitivity toggle", () => {
-    it("should update the URL correctly", () => {
+    it("should update the URL correctly", async () => {
       const { history } = render(<DetailsOverlay />);
-      const { location } = history;
 
       const caseSensitiveToggle = screen.getByDataCy("case-sensitive-toggle");
       expect(caseSensitiveToggle).toHaveAttribute("aria-checked", "false");
 
       userEvent.click(caseSensitiveToggle);
-      expect(caseSensitiveToggle).toHaveAttribute("aria-checked", "true");
-      expect(location.search).toBe("?caseSensitive=true");
+      await waitFor(() => {
+        expect(caseSensitiveToggle).toHaveAttribute("aria-checked", "true");
+      });
+      expect(history.location.search).toBe("?caseSensitive=true");
     });
   });
 
@@ -68,45 +51,51 @@ describe("detailsOverlay", () => {
       const formatV2Toggle = screen.getByDataCy("format-v2-toggle");
       expect(formatV2Toggle).toHaveAttribute("aria-checked", "true");
     });
-    it("should not update the URL", () => {
+    it("should not update the URL", async () => {
       const { history } = render(<DetailsOverlay />);
-      const { location } = history;
+
       const formatV2Toggle = screen.getByDataCy("format-v2-toggle");
       userEvent.click(formatV2Toggle);
-      expect(formatV2Toggle).toHaveAttribute("aria-checked", "false");
-      expect(location.search).toBe("");
+      await waitFor(() => {
+        expect(formatV2Toggle).toHaveAttribute("aria-checked", "false");
+      });
+      expect(history.location.search).toBe("");
     });
   });
 
   describe("filter logic toggle", () => {
-    it("should update the URL correctly", () => {
+    it("should update the URL correctly", async () => {
       const { history } = render(<DetailsOverlay />);
-      const { location } = history;
 
       const filterLogicToggle = screen.getByDataCy("filter-logic-toggle");
       expect(filterLogicToggle).toHaveAttribute("aria-checked", "false");
 
       userEvent.click(filterLogicToggle);
-      expect(filterLogicToggle).toHaveAttribute("aria-checked", "true");
-      expect(location.search).toBe("?filterLogic=or");
+      await waitFor(() => {
+        expect(filterLogicToggle).toHaveAttribute("aria-checked", "true");
+      });
+      expect(history.location.search).toBe("?filterLogic=or");
 
       userEvent.click(filterLogicToggle);
-      expect(filterLogicToggle).toHaveAttribute("aria-checked", "false");
-      expect(location.search).toBe("?filterLogic=and");
+      await waitFor(() => {
+        expect(filterLogicToggle).toHaveAttribute("aria-checked", "false");
+      });
+      expect(history.location.search).toBe("?filterLogic=and");
     });
   });
 
   describe("expandable rows toggle", () => {
-    it("should update the URL correctly", () => {
+    it("should update the URL correctly", async () => {
       const { history } = render(<DetailsOverlay />);
-      const { location } = history;
 
       const expandableRowsToggle = screen.getByDataCy("expandable-rows-toggle");
       expect(expandableRowsToggle).toHaveAttribute("aria-checked", "false");
 
       userEvent.click(expandableRowsToggle);
-      expect(expandableRowsToggle).toHaveAttribute("aria-checked", "true");
-      expect(location.search).toBe("?expandable=true");
+      await waitFor(() => {
+        expect(expandableRowsToggle).toHaveAttribute("aria-checked", "true");
+      });
+      expect(history.location.search).toBe("?expandable=true");
     });
   });
 
@@ -116,13 +105,38 @@ describe("detailsOverlay", () => {
       const prettyPrintToggle = screen.getByDataCy("pretty-print-toggle");
       expect(prettyPrintToggle).toHaveAttribute("aria-checked", "true");
     });
-    it("should not update the URL", () => {
+    it("should not update the URL", async () => {
       const { history } = render(<DetailsOverlay />);
-      const { location } = history;
+
       const prettyPrintToggle = screen.getByDataCy("pretty-print-toggle");
       userEvent.click(prettyPrintToggle);
-      expect(prettyPrintToggle).toHaveAttribute("aria-checked", "false");
-      expect(location.search).toBe("");
+      await waitFor(() => {
+        expect(prettyPrintToggle).toHaveAttribute("aria-checked", "false");
+      });
+      expect(history.location.search).toBe("");
+    });
+  });
+
+  describe("filters", () => {
+    it("filters properly display", () => {
+      render(<DetailsOverlay />, {
+        route: "?filters=filter1,filter2",
+      });
+      expect(screen.getByText("filter1")).toBeInTheDocument();
+      expect(screen.getByText("filter2")).toBeInTheDocument();
+    });
+    it("should be able to delete filters", async () => {
+      const { history } = render(<DetailsOverlay />, {
+        route: "?filters=filter1,filter2",
+      });
+      userEvent.click(screen.getAllByLabelText("X Icon")[0]);
+
+      await waitFor(() => {
+        expect(history.location.search).toBe("?filters=filter2");
+      });
+      expect(history.location.search).toBe("?filters=filter2");
+      expect(screen.queryByText("filter1")).not.toBeInTheDocument();
+      expect(screen.getByText("filter2")).toBeInTheDocument();
     });
   });
 });
