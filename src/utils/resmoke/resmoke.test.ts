@@ -1,8 +1,33 @@
+import { readFileSync } from "fs";
+import { join } from "path";
 import { processResmokeLine } from ".";
 
+const resmokeLog = JSON.parse(
+  readFileSync(join(__dirname, "./testData/resmoke.json"), "utf8")
+);
+const parsedResmokeLog = JSON.parse(
+  readFileSync(join(__dirname, "./testData/parsedResmoke.json"), "utf8")
+);
+
 describe("resmoke", () => {
-  it("should transform a line to a resmoke line", () => {
+  it("should transform a simple line to a resmoke line", () => {
     expect(processResmokeLine(input)).toStrictEqual(output);
+  });
+  it("should ignore non resmoke lines", () => {
+    expect(processResmokeLine("hello")).toBe("hello");
+  });
+  it("should ignore resmoke lines that don't have mongo logs", () => {
+    expect(
+      processResmokeLine(
+        "[js_test:startup_recovery_commit_transaction_before_stable_timestamp] MongoDB shell version v6.2.0-alpha-250-g46817bf"
+      )
+    ).toBe(
+      "[js_test:startup_recovery_commit_transaction_before_stable_timestamp] MongoDB shell version v6.2.0-alpha-250-g46817bf"
+    );
+  });
+  it("should transform a resmoke log", () => {
+    const transformedLines = resmokeLog.map(processResmokeLine);
+    expect(transformedLines).toStrictEqual(parsedResmokeLog);
   });
 });
 
