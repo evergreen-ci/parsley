@@ -78,7 +78,7 @@ describe("ansiiRow", () => {
       expect(history.location.search).toBe("");
     });
   });
-  it("lines should be linkified if they have a url", async () => {
+  it("lines should be linkified if they have a url", () => {
     renderWithRouterMatch(
       <AnsiiRow data={data} listRowProps={{ ...listRowProps, index: 8 }} />,
       {
