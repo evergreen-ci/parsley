@@ -1,8 +1,18 @@
 import { Global, css } from "@emotion/react";
 import fontStyles from "components/styles/fonts";
 
+const resetStyles = css`
+  /* Reset styles */
+  *,
+  *:before,
+  *:after {
+    box-sizing: border-box;
+  }
+`;
+
 const globalStyles = css`
   ${fontStyles}
+  ${resetStyles}
   background-color: white;
   body {
     font-family: "Euclid Circular A", "Helvetica Neue", Helvetica, Arial,
@@ -17,6 +27,7 @@ const globalStyles = css`
     }
   }
 `;
+
 const GlobalStyles = () => <Global styles={globalStyles} />;
 
 export default GlobalStyles;
