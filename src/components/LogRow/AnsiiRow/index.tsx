@@ -17,6 +17,20 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   // This should be replaced with a collapsible component
   const lineIndex = Array.isArray(line) ? line[0] : line;
   const lineContent = getLine(lineIndex);
+  if (!lineContent) return null;
+  return (
+    <BaseRow wrap={wrap} {...listRowProps} ref={ref}>
+      <ProcessedAnsiiRow lineContent={lineContent} />
+    </BaseRow>
+  );
+});
+
+interface ProcessedAnsiiRowProps {
+  lineContent: string;
+}
+const ProcessedAnsiiRow: React.FC<ProcessedAnsiiRowProps> = ({
+  lineContent,
+}) => {
   const memoizedLogLine = useMemo(() => {
     if (!lineContent) return null;
     const render = linkifyHtml(ansiUp.ansi_to_html(lineContent), {
@@ -26,13 +40,8 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
     });
     return parse(render);
   }, [lineContent]);
-  if (!lineContent) return null;
-  return (
-    <BaseRow wrap={wrap} {...listRowProps} ref={ref}>
-      <span data-cy="ansii-row">{memoizedLogLine}</span>
-    </BaseRow>
-  );
-});
+  return <span data-cy="ansii-row">{memoizedLogLine}</span>;
+};
 
 AnsiiRow.displayName = "AnsiiRow";
 
