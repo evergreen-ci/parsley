@@ -4,11 +4,13 @@ import { palette } from "@leafygreen-ui/palette";
 import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
-import { StyledLink, StyledRouterLink } from "components/styles";
+import { StyledLink } from "components/styles";
 import { QueryParams } from "constants/queryParams";
 import { navbarHeight, size } from "constants/tokens";
+import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
 import { validateRegexp } from "utils/validators";
+import UploadLink from "./UploadLink";
 
 const { gray, white } = palette;
 
@@ -18,6 +20,7 @@ const NavBar: React.FC = () => {
     QueryParams.Filters,
     []
   );
+  const { hasLogs, clearLogs } = useLogContext();
 
   const handleSearch = (selected: string, value: string) => {
     if (selected === "search") {
@@ -35,9 +38,7 @@ const NavBar: React.FC = () => {
           <StyledLink css={navLinkStyles} href="https://wiki.corp.mongodb.com">
             Wiki
           </StyledLink>
-          <StyledRouterLink css={navLinkStyles} to="/upload">
-            Upload
-          </StyledRouterLink>
+          <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
         <StyledSearchBar
           onSubmit={handleSearch}

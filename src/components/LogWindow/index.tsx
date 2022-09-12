@@ -12,9 +12,10 @@ import { useQueryParam } from "hooks/useQueryParam";
 
 interface LogWindowProps {
   logType: LogTypes;
+  isUploadedLog: boolean;
 }
-const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
-  const { logLines, getLine } = useLogContext();
+const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
+  const { logLines, hasLogs, getLine } = useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
 
@@ -29,10 +30,10 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
   // const processedLogLines = [0, [1, 2], 3, 4, [5], 6, 7];
 
   return (
-    <Container>
-      {logLines.length !== 0 && <SideBar maxLineNumber={logLines.length - 1} />}
+    <Container data-cy="log-window">
+      {hasLogs && <SideBar maxLineNumber={logLines.length - 1} />}
       <ColumnContainer>
-        <SubHeader />
+        <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>
           <LogPane
             cache={cache}

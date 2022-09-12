@@ -1,5 +1,6 @@
 const paths = {
   home: "/",
+  upload: "/upload",
   evergreenLogs: "/evergreen",
   testLogs: "/test",
   resmokeLogs: "/resmoke",
@@ -15,6 +16,7 @@ const slugs = {
 
 const routes = {
   root: paths.home,
+  upload: paths.upload,
   evergreenLogs: `${paths.evergreenLogs}/${slugs.taskID}/${slugs.execution}/${slugs.origin}`,
   testLogs: `${paths.testLogs}/${slugs.taskID}/${slugs.execution}/${slugs.testID}`,
   resmokeLogs: `${paths.resmokeLogs}/${slugs.buildID}/${slugs.testID}`,
