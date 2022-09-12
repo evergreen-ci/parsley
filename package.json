@@ -36,7 +36,7 @@
     "@emotion/styled": "11.9.3",
     "@leafygreen-ui/button": "16.0.0",
     "@leafygreen-ui/card": "7.0.0",
-    "@leafygreen-ui/confirmation-modal": "^3.0.6",
+    "@leafygreen-ui/confirmation-modal": "3.0.6",
     "@leafygreen-ui/emotion": "4.0.0",
     "@leafygreen-ui/icon-button": "13.1.0",
     "@leafygreen-ui/leafygreen-provider": "2.3.2",

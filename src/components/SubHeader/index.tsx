@@ -17,7 +17,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
   return (
     <Container>
       {isUploadedLog ? (
-        <span>File name: ./{fileName}</span>
+        <span>File name: {fileName}</span>
       ) : (
         <>
           <IconWrapper>

@@ -1896,7 +1896,7 @@
     "@leafygreen-ui/palette" "^3.4.0"
     "@leafygreen-ui/tokens" "^1.3.1"
 
-"@leafygreen-ui/confirmation-modal@^3.0.6":
+"@leafygreen-ui/confirmation-modal@3.0.6":
   version "3.0.6"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/confirmation-modal/-/confirmation-modal-3.0.6.tgz#47d3615f0b0fa23fc151cbd6224e466dc4e27b9c"
   integrity sha512-KWXg46M8mb1wAz08L/Ndu5ccPD/dw2iYw7ahAXMePq2j8+IGWhsN151OIOzt1xxc9fKsd3sYdirf6X+tKtX4cA==
