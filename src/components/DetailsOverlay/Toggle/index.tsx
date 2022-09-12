@@ -5,6 +5,7 @@ import Toggle from "@leafygreen-ui/toggle";
 import { Disclaimer } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
 import { FORMAT_LOG_V2, PRETTY_PRINT_BOOKMARKS } from "constants/cookies";
+import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import { FilterRow, StyledSubtitle } from "../styles";
@@ -45,7 +46,7 @@ const BaseToggle: React.FC<BaseToggleProps> = ({
 );
 
 export const WrapToggle: React.FC = () => {
-  const [wrap, setWrap] = useQueryParam("wrap", false);
+  const [wrap, setWrap] = useQueryParam(QueryParams.Wrap, false);
   return (
     <BaseToggle
       data-cy="wrap-toggle"
@@ -58,7 +59,7 @@ export const WrapToggle: React.FC = () => {
 
 export const CaseSensitiveToggle: React.FC = () => {
   const [caseSensitive, setCaseSensitive] = useQueryParam(
-    "caseSensitive",
+    QueryParams.CaseSensitive,
     false
   );
   return (
@@ -89,7 +90,10 @@ export const LogV2Toggle: React.FC = () => {
 };
 
 export const FilterLogicToggle: React.FC = () => {
-  const [filterLogic, setFilterLogic] = useQueryParam("filterLogic", "and");
+  const [filterLogic, setFilterLogic] = useQueryParam(
+    QueryParams.FilterLogic,
+    "and"
+  );
   const isActive = filterLogic !== "and";
 
   const onChange = (checked: boolean) => {
@@ -114,7 +118,7 @@ export const FilterLogicToggle: React.FC = () => {
 
 export const ExpandableRowsToggle: React.FC = () => {
   const [expandableRows, setExpandableRows] = useQueryParam(
-    "expandable",
+    QueryParams.Expandable,
     false
   );
   return (

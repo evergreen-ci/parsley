@@ -1,16 +1,17 @@
 import styled from "@emotion/styled";
 import TextInput from "@leafygreen-ui/text-input";
+import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import { FilterRow, StyledSubtitle } from "../styles";
 
 const SearchRangeInput: React.FC = () => {
   const [lowerBound, setLowerQueryParam] = useQueryParam<number | undefined>(
-    "lower",
+    QueryParams.LowerRange,
     undefined
   );
   const [upperBound, setUpperBound] = useQueryParam<number | undefined>(
-    "upper",
+    QueryParams.UpperRange,
     undefined
   );
 
