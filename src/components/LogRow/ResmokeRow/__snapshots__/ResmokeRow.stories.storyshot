@@ -1,5 +1,300 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`storyshots Storyshots Components/LogRow/ResmokeRow Collapsed 1`] = `
+Array [
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-0"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-0"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      0
+    </span>
+    <span
+      data-cy="resmoke-row"
+    >
+      [js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).
+    </span>
+  </pre>,
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-1"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-1"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      1
+    </span>
+    <span
+      data-cy="resmoke-row"
+    >
+      [j0:prim] Starting mongod on port 20000...
+    </span>
+  </pre>,
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-2"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-2"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      2
+    </span>
+    <span
+      data-cy="resmoke-row"
+    >
+      PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin mongod-6.0 --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node0/2c65edd254db4835911f796d7b260455.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node0 --port=20000 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1
+    </span>
+  </pre>,
+  <div
+    className="css-10b3ng4"
+    data-cy="collapsed-row-3"
+    style={Object {}}
+  >
+    <div
+      className="leafygreen-ui-114muox"
+    >
+       
+      3 lines skipped
+       
+    </div>
+    <button
+      aria-disabled={false}
+      className="leafygreen-ui-loq8o6 css-1plrovb"
+      data-leafygreen-ui="button"
+      disabled={false}
+      type="button"
+    >
+      <div
+        className="leafygreen-ui-v038xi"
+      />
+      <div
+        className="leafygreen-ui-1hhc9ms"
+      >
+        <svg
+          aria-label="Expand Icon"
+          className="leafygreen-ui-6392lc"
+          fill="none"
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M14 3V5.5C14 5.77614 13.7762 6 13.5 6C13.2239 6 13 5.77614 13 5.5V4L10.5 6.5C10.2239 6.77614 9.77614 6.77614 9.5 6.5C9.22385 6.22385 9.22385 5.77614 9.49998 5.49999L11.9999 3H10.4999C10.2237 3 9.99987 2.77614 9.99987 2.5C9.99987 2.22386 10.2237 2 10.4999 2H13C13.5523 2 14 2.44772 14 3Z"
+            fill="#001E2B"
+          />
+          <path
+            d="M11.9999 3H10.4999C10.2237 3 9.99987 2.77614 9.99987 2.5V2.5C9.99987 2.22386 10.2237 2 10.4999 2H13C13.5523 2 14 2.44772 14 3V5.5C14 5.77614 13.7762 6 13.5 6V6C13.2239 6 13 5.77614 13 5.5V4M11.9999 3V3C12.5522 3 13 3.44772 13 4V4M11.9999 3L9.49998 5.49999C9.22385 5.77614 9.22385 6.22385 9.5 6.5V6.5C9.77614 6.77614 10.2239 6.77614 10.5 6.5L13 4"
+            stroke="#001E2B"
+          />
+          <path
+            d="M2 12L1.99999 9.00002C1.99999 8.72388 2.22384 8.50002 2.49999 8.50002C2.77613 8.50002 2.99999 8.72388 2.99999 9.00002V11.0001L5.50013 8.50004C5.77627 8.22391 6.22397 8.22393 6.50009 8.50009C6.77619 8.77622 6.77617 9.22389 6.50006 9.5L4 12.0001H5.50014C5.77628 12.0001 6.00013 12.2239 6.00013 12.5001C6.00013 12.7762 5.77627 13.0001 5.50013 13.0001L2.99998 13C2.4477 13 2 12.5523 2 12Z"
+            fill="#001E2B"
+          />
+          <path
+            d="M4 12.0001H5.50014C5.77628 12.0001 6.00013 12.2239 6.00013 12.5001V12.5001C6.00013 12.7762 5.77627 13.0001 5.50013 13.0001L2.99998 13C2.4477 13 2 12.5523 2 12L1.99999 9.00002C1.99999 8.72388 2.22384 8.50002 2.49999 8.50002V8.50002C2.77613 8.50002 2.99999 8.72388 2.99999 9.00002V11.0001M4 12.0001V12.0001C3.44772 12.0001 2.99999 11.5523 2.99999 11.0001V11.0001M4 12.0001L6.50006 9.5C6.77617 9.22389 6.77619 8.77622 6.50009 8.50009V8.50009C6.22397 8.22393 5.77627 8.22391 5.50013 8.50004L2.99999 11.0001"
+            stroke="#001E2B"
+          />
+        </svg>
+        All
+      </div>
+    </button>
+    <button
+      aria-disabled={false}
+      className="leafygreen-ui-loq8o6 css-1plrovb"
+      data-leafygreen-ui="button"
+      disabled={false}
+      type="button"
+    >
+      <div
+        className="leafygreen-ui-v038xi"
+      />
+      <div
+        className="leafygreen-ui-1hhc9ms"
+      >
+        <svg
+          aria-label="Expand Icon"
+          className="leafygreen-ui-6392lc"
+          fill="none"
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M14 3V5.5C14 5.77614 13.7762 6 13.5 6C13.2239 6 13 5.77614 13 5.5V4L10.5 6.5C10.2239 6.77614 9.77614 6.77614 9.5 6.5C9.22385 6.22385 9.22385 5.77614 9.49998 5.49999L11.9999 3H10.4999C10.2237 3 9.99987 2.77614 9.99987 2.5C9.99987 2.22386 10.2237 2 10.4999 2H13C13.5523 2 14 2.44772 14 3Z"
+            fill="#001E2B"
+          />
+          <path
+            d="M11.9999 3H10.4999C10.2237 3 9.99987 2.77614 9.99987 2.5V2.5C9.99987 2.22386 10.2237 2 10.4999 2H13C13.5523 2 14 2.44772 14 3V5.5C14 5.77614 13.7762 6 13.5 6V6C13.2239 6 13 5.77614 13 5.5V4M11.9999 3V3C12.5522 3 13 3.44772 13 4V4M11.9999 3L9.49998 5.49999C9.22385 5.77614 9.22385 6.22385 9.5 6.5V6.5C9.77614 6.77614 10.2239 6.77614 10.5 6.5L13 4"
+            stroke="#001E2B"
+          />
+          <path
+            d="M2 12L1.99999 9.00002C1.99999 8.72388 2.22384 8.50002 2.49999 8.50002C2.77613 8.50002 2.99999 8.72388 2.99999 9.00002V11.0001L5.50013 8.50004C5.77627 8.22391 6.22397 8.22393 6.50009 8.50009C6.77619 8.77622 6.77617 9.22389 6.50006 9.5L4 12.0001H5.50014C5.77628 12.0001 6.00013 12.2239 6.00013 12.5001C6.00013 12.7762 5.77627 13.0001 5.50013 13.0001L2.99998 13C2.4477 13 2 12.5523 2 12Z"
+            fill="#001E2B"
+          />
+          <path
+            d="M4 12.0001H5.50014C5.77628 12.0001 6.00013 12.2239 6.00013 12.5001V12.5001C6.00013 12.7762 5.77627 13.0001 5.50013 13.0001L2.99998 13C2.4477 13 2 12.5523 2 12L1.99999 9.00002C1.99999 8.72388 2.22384 8.50002 2.49999 8.50002V8.50002C2.77613 8.50002 2.99999 8.72388 2.99999 9.00002V11.0001M4 12.0001V12.0001C3.44772 12.0001 2.99999 11.5523 2.99999 11.0001V11.0001M4 12.0001L6.50006 9.5C6.77617 9.22389 6.77619 8.77622 6.50009 8.50009V8.50009C6.22397 8.22393 5.77627 8.22391 5.50013 8.50004L2.99999 11.0001"
+            stroke="#001E2B"
+          />
+        </svg>
+        5 Above and Below
+      </div>
+    </button>
+  </div>,
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-6"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-6"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      6
+    </span>
+    <span
+      data-cy="resmoke-row"
+    >
+      [j0:sec0] mongod started on port 20001 with pid 30681.
+    </span>
+  </pre>,
+  <pre
+    className="css-1j2roh1"
+    data-cy="log-row-7"
+    onDoubleClick={[Function]}
+    selected={false}
+    style={Object {}}
+  >
+    <svg
+      aria-label="Link Icon"
+      className="css-ak14il"
+      data-cy="log-link-7"
+      fill="none"
+      height={14}
+      onClick={[Function]}
+      role="img"
+      viewBox="0 0 16 16"
+      width={14}
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <span
+      className="css-1bxf48m"
+    >
+      7
+    </span>
+    <span
+      data-cy="resmoke-row"
+    >
+      [j0:sec1] Starting mongod on port 20002...
+    </span>
+  </pre>,
+]
+`;
+
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multiple Lines 1`] = `
 Array [
   <pre
