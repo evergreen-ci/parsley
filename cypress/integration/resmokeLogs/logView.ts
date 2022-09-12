@@ -25,7 +25,11 @@ describe("Basic resmoke log view", () => {
     );
   });
   it("long lines with wrapping turned on should fit on screen", () => {
-    cy.visit("/evergreen/task_0/0/tasks?wrap=true");
+    // Turn wrapping on through the Details Overlay.
+    cy.dataCy("details-button").click();
+    cy.dataCy("wrap-toggle").click();
+    cy.dataCy("details-button").click();
+
     cy.dataCy("log-row-2").should("be.visible");
     cy.dataCy("log-row-2").should(
       "contain.text",

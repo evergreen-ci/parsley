@@ -3424,6 +3424,68 @@ exports[`storyshots Storyshots Components/IconWithTooltip Default 1`] = `
       onMouseLeave={[Function]}
     >
       <svg
+        aria-label="Closed Eye Icon"
+        fill="none"
+        height="24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M22.5 10.5H20.4231C20.4231 12.6538 14.7692 16.9621 12 16.9621V18.5775C15.2308 18.5775 22.5 15.2115 22.5 10.5Z"
+          fill="#001E2B"
+        />
+        <path
+          d="M1.49999 10.5005H3.57691C3.57691 12.6544 9.23076 16.9621 12 16.9621V18.5775C8.76922 18.5775 1.49999 15.2121 1.49999 10.5005Z"
+          fill="#001E2B"
+        />
+        <path
+          d="M12 18.5775C8.76922 18.5775 1.49999 15.2121 1.49999 10.5005H3.57691C3.57691 12.6544 9.23076 16.9621 12 16.9621M12 18.5775V16.9621M12 18.5775C15.2308 18.5775 22.5 15.2115 22.5 10.5H20.4231C20.4231 12.6538 14.7692 16.9621 12 16.9621"
+          stroke="#001E2B"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M1.5 16.5577L2.79231 15.3461L3.43846 15.9519L2.14615 17.1634L1.5 16.5577Z"
+          stroke="#001E2B"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M7.96154 17.7692H6.66923L5.37692 19.5865L6 20.2504L7.96154 17.7692Z"
+          stroke="#001E2B"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M22.5 16.5577L21.2077 15.3461L20.5615 15.9519L21.8538 17.1634L22.5 16.5577Z"
+          stroke="#001E2B"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M15.6316 17.6353H16.9239L18.6231 19.5865L17.9769 20.1923L15.6316 17.6353Z"
+          stroke="#001E2B"
+          strokeLinejoin="round"
+        />
+        <path
+          d="M11.1924 18.5769H12.8077V21H11.1924V18.5769Z"
+          fill="#001E2B"
+          stroke="#001E2B"
+          strokeLinejoin="round"
+        />
+      </svg>
+    </div>
+    <span>
+      ClosedEye
+    </span>
+  </div>
+  <div
+    className="css-141et6l"
+  >
+    <div
+      className="leafygreen-ui-cssveg css-1sg2lsz"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <svg
         aria-label="Evergreen Icon"
         height="28"
         width="14"

@@ -1,15 +1,13 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
-import TextInput from "@leafygreen-ui/text-input";
 import Toggle from "@leafygreen-ui/toggle";
-import { Disclaimer, Subtitle } from "@leafygreen-ui/typography";
+import { Disclaimer } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
-import Icon from "components/Icon";
 import { FORMAT_LOG_V2, PRETTY_PRINT_BOOKMARKS } from "constants/cookies";
 import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { FilterRow, StyledSubtitle } from "../styles";
 
 const { gray } = palette;
 
@@ -92,6 +90,7 @@ export const LogV2Toggle: React.FC = () => {
 
 export const FilterLogicToggle: React.FC = () => {
   const [filterLogic, setFilterLogic] = useQueryParam("filterLogic", "and");
+  const isActive = filterLogic !== "and";
 
   const onChange = (checked: boolean) => {
     if (checked) {
@@ -100,6 +99,7 @@ export const FilterLogicToggle: React.FC = () => {
       setFilterLogic("and");
     }
   };
+
   return (
     <BaseToggle
       data-cy="filter-logic-toggle"
@@ -107,7 +107,7 @@ export const FilterLogicToggle: React.FC = () => {
       leftLabel="AND"
       onChange={onChange}
       rightLabel="OR"
-      value={filterLogic !== "and"}
+      value={isActive}
     />
   );
 };
@@ -146,81 +146,6 @@ export const PrettyPrintToggle: React.FC = () => {
   );
 };
 
-export const SearchRange: React.FC = () => {
-  const [lowerBound, setLowerQueryParam] = useQueryParam<number | undefined>(
-    "lower",
-    undefined
-  );
-  const [upperBound, setUpperBound] = useQueryParam<number | undefined>(
-    "upper",
-    undefined
-  );
-
-  const updateLowerBound = (newVal: string) => {
-    if (newVal === "") {
-      setLowerQueryParam(undefined);
-    } else {
-      setLowerQueryParam(parseInt(newVal, 10));
-    }
-  };
-
-  const updateUpperBound = (newVal: string) => {
-    if (newVal === "") {
-      setUpperBound(undefined);
-    } else {
-      setUpperBound(parseInt(newVal, 10));
-    }
-  };
-
-  return (
-    <FilterRow>
-      <StyledSubtitle> Range </StyledSubtitle>
-      <RangeContainer>
-        <RangeInput
-          aria-labelledby="Range Lower Bound"
-          data-cy="range-lower-bound"
-          min={0}
-          onChange={(e) => updateLowerBound(e.target.value)}
-          placeholder="0"
-          sizeVariant="small"
-          type="number"
-          value={(lowerBound ?? "").toString()}
-        />
-        <RangeInput
-          aria-labelledby="Range Upper Bound"
-          data-cy="range-upper-bound"
-          min={-1}
-          onChange={(e) => updateUpperBound(e.target.value)}
-          placeholder="-1"
-          sizeVariant="small"
-          type="number"
-          value={(upperBound ?? "").toString()}
-        />
-      </RangeContainer>
-    </FilterRow>
-  );
-};
-
-export const ButtonRow: React.FC = () => (
-  <FilterRow>
-    <Button leftGlyph={<Icon glyph="Copy" />}> JIRA </Button>
-    <Button leftGlyph={<Icon glyph="Export" />}> RAW </Button>
-    <Button leftGlyph={<Icon glyph="Export" />}> HTML </Button>
-  </FilterRow>
-);
-
-const FilterRow = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: ${size.m};
-`;
-
-// @ts-ignore-error
-const StyledSubtitle = styled(Subtitle as div)`
-  font-size: 16px;
-`;
-
 // @ts-ignore-error
 const StyledDisclaimer = styled(Disclaimer)`
   color: ${gray.base};
@@ -230,13 +155,4 @@ const StyledDisclaimer = styled(Disclaimer)`
 const ToggleWithLabel = styled.div`
   display: flex;
   align-items: center;
-`;
-
-const RangeContainer = styled.div`
-  display: flex;
-`;
-
-const RangeInput = styled(TextInput)`
-  width: ${size.xxl};
-  margin-left: ${size.xs};
 `;

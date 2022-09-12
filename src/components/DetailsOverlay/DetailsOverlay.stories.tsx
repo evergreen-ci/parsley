@@ -1,3 +1,4 @@
+import Card from "@leafygreen-ui/card";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
 import DetailsOverlay from ".";
@@ -7,15 +8,35 @@ export default {
   component: DetailsOverlay,
 } as ComponentMeta<typeof DetailsOverlay>;
 
-const Template: ComponentStory<typeof DetailsOverlay> = (args) => (
-  <DetailsOverlay {...args} />
+// Default DetailsOverlay (no filters)
+const DefaultTemplate: ComponentStory<typeof DetailsOverlay> = (args) => (
+  <Card style={{ maxWidth: 720 }}>
+    <DetailsOverlay {...args} />
+  </Card>
 );
 
-export const Default = Template.bind({});
+export const Default = DefaultTemplate.bind({});
 
 Default.decorators = [
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
+      <Story />
+    </MemoryRouter>
+  ),
+];
+
+// DetailsOverlay with filters
+const WithFiltersTemplate: ComponentStory<typeof DetailsOverlay> = (args) => (
+  <Card style={{ maxWidth: 720 }}>
+    <DetailsOverlay {...args} />
+  </Card>
+);
+
+export const WithFilters = WithFiltersTemplate.bind({});
+
+WithFilters.decorators = [
+  (Story) => (
+    <MemoryRouter initialEntries={["/?filters=filter1,filter2"]}>
       <Story />
     </MemoryRouter>
   ),

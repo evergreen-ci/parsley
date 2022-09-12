@@ -48,7 +48,7 @@ const NavBar: React.FC = () => {
       </FlexContainer>
       <ButtonContainer>
         <StyledButton buttonText="Filters">SomeContent</StyledButton>
-        <StyledButton buttonText="Details">
+        <StyledButton buttonText="Details" data-cy="details-button">
           <DetailsOverlay />
         </StyledButton>
       </ButtonContainer>

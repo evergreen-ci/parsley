@@ -3,16 +3,16 @@ import Filter from "components/Filter";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import ButtonRow from "./ButtonRow";
+import SearchRangeInput from "./SearchRangeInput";
 import {
-  ButtonRow,
   CaseSensitiveToggle,
   ExpandableRowsToggle,
   FilterLogicToggle,
   LogV2Toggle,
   PrettyPrintToggle,
-  SearchRange,
   WrapToggle,
-} from "./Components";
+} from "./Toggle";
 
 interface DetailsOverlayProps {
   ["data-cy"]?: string;
@@ -35,12 +35,11 @@ const DetailsOverlay: React.FC<DetailsOverlayProps> = ({
     <Card data-cy={dataCy}>
       <FilterOptions>
         <FilterContainer>
-          <SearchRange />
+          <SearchRangeInput />
           <WrapToggle />
           <CaseSensitiveToggle />
           <LogV2Toggle />
         </FilterContainer>
-
         <FilterContainer>
           <FilterLogicToggle />
           <ExpandableRowsToggle />
