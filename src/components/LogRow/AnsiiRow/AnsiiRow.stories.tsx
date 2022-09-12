@@ -1,7 +1,10 @@
+import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
+import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import { AnsiiRow } from ".";
+import { RowRenderer, cache } from "../RowRenderer";
 
 export default {
   title: "Components/LogRow/AnsiiRow",
@@ -44,40 +47,27 @@ SingleLine.decorators = [
 ];
 
 const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
-  <div
-    style={{ overflow: "scroll visible", position: "relative", height: 500 }}
-  >
-    {logLines.map((_, index) => (
-      <AnsiiRow
-        key={logLines[index]}
-        data={{
-          getLine,
-          wrap: args?.wrap,
-          processedLines: processedLogLines,
-          logType: LogTypes.EVERGREEN_TASK_LOGS,
-        }}
-        listRowProps={{
-          index,
-          style: {
-            height: "16px",
-            left: "0px",
-            position: "absolute",
-            top: 16 * index,
-            width: "100%",
-          },
-          columnIndex: 0,
-          isScrolling: false,
-          isVisible: true,
-          key: getLine(index) || "",
-          parent: {} as any,
-        }}
-      />
-    ))}
-  </div>
+  <Container>
+    <LogPane
+      cache={cache}
+      logLines={processedLogLines}
+      rowCount={processedLogLines.length}
+      rowRenderer={RowRenderer({
+        logType: LogTypes.EVERGREEN_TASK_LOGS,
+        wrap: args.wrap,
+        getLine,
+        processedLines: processedLogLines,
+      })}
+      scrollToIndex={0}
+      wrap={args.wrap}
+    />
+  </Container>
 );
 
 export const MultiLines = MultiLineTemplate.bind({});
-
+MultiLines.args = {
+  wrap: false,
+};
 MultiLines.decorators = [
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
@@ -121,4 +111,8 @@ const logLines = [
 
 const processedLogLines = logLines.map((_, index) => index);
 
+const Container = styled.div`
+  height: 400px;
+  width: 800px;
+`;
 const getLine = (index: number) => logLines[index];
