@@ -8,15 +8,9 @@ module.exports = {
   moduleFileExtensions: ["json", "js", "jsx", "ts", "tsx"],
   moduleNameMapper: {
     "^uuid$": "<rootDir>/node_modules/uuid/dist/index.js",
-    // "typescript-cookie": "typescript-cookie/src/index.js",
-    // "^typescript-cookie$":
-    //   "<rootDir>/node_modules/typescript-cookie/dist/typescript-cookie.mjs",
-    // "^typescript-cookie/(.*)": "typescript-cookie/$1",
-    // "^typescript-cookie(.*)$": "<rootDir>/node_modules/typescript-cookie$1",
   },
   modulePaths: ["<rootDir>/src"],
   preset: "ts-jest",
-  // resolver: "ts-jest-resolver",
   resetMocks: true,
   // jest-dom adds custom jest matchers for asserting on DOM nodes.
   setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
@@ -30,21 +24,11 @@ module.exports = {
     "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":
       "<rootDir>/config/jest/svgTransform.js",
   },
-  transformIgnorePatterns: [
-    "<rootDir>/node_modules/",
-    // `<rootDir>/node_modules/(?!typescript-cookie)`,
-  ],
+  transformIgnorePatterns: ["<rootDir>/node_modules/"],
   watchPlugins: [
     "jest-watch-typeahead/filename",
     "jest-watch-typeahead/testname",
   ],
-  // globals: {
-  //   "ts-jest": {
-  //     tsconfig: {
-  //       allowJs: true,
-  //     },
-  //   },
-  // },
 
   // Set the output directory for generating test results.
   reporters: [

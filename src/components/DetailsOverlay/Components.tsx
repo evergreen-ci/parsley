@@ -6,7 +6,6 @@ import TextInput from "@leafygreen-ui/text-input";
 import Toggle from "@leafygreen-ui/toggle";
 import { Disclaimer, Subtitle } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
-
 import Icon from "components/Icon";
 import { FORMAT_LOG_V2, PRETTY_PRINT_BOOKMARKS } from "constants/cookies";
 import { size } from "constants/tokens";
@@ -81,13 +80,6 @@ export const LogV2Toggle: React.FC = () => {
     Cookie.set(FORMAT_LOG_V2, checked.toString(), { expires: 365 });
   };
 
-  // for typescript-cookie
-  // const [logV2, setLogV2] = useState(getCookie(FORMAT_LOG_V2) === "true");
-  // const onChange = (checked: boolean) => {
-  //   setLogV2(checked);
-  //   setCookie(FORMAT_LOG_V2, checked.toString(), { expires: 365 });
-  // };
-
   return (
     <BaseToggle
       data-cy="format-v2-toggle"
@@ -144,15 +136,6 @@ export const PrettyPrintToggle: React.FC = () => {
     Cookie.set(PRETTY_PRINT_BOOKMARKS, checked.toString(), { expires: 365 });
   };
 
-  // for typescript-cookie
-  // const [prettyPrint, setPrettyPrint] = useState(
-  //   getCookie(PRETTY_PRINT_BOOKMARKS) === "true"
-  // );
-  // const onChange = (checked: boolean) => {
-  //   setPrettyPrint(checked);
-  //   setCookie(PRETTY_PRINT_BOOKMARKS, checked.toString(), { expires: 365 });
-  // };
-
   return (
     <BaseToggle
       data-cy="pretty-print-toggle"
@@ -164,37 +147,54 @@ export const PrettyPrintToggle: React.FC = () => {
 };
 
 export const SearchRange: React.FC = () => {
-  // const [lowerBound, setLowerBound] = useState("0")
-  // const [,setLowerBound] = useQueryParam("lower", 0)
-  // const updateLower = (newVal: number) => {
-  //   if (!Number.isNaN(newVal)) {
-  //     setLowerBound(newVal);
-  //     setLowerBound(newVal);
-  //   }
-  // }
+  const [lowerBound, setLowerQueryParam] = useQueryParam<number | undefined>(
+    "lower",
+    undefined
+  );
+  const [upperBound, setUpperBound] = useQueryParam<number | undefined>(
+    "upper",
+    undefined
+  );
 
-  const [lowerBound, setLowerBound] = useQueryParam("lower", 0);
-  const [upperBound, setUpperBound] = useQueryParam("upper", -1);
+  const updateLowerBound = (newVal: string) => {
+    if (newVal === "") {
+      setLowerQueryParam(undefined);
+    } else {
+      setLowerQueryParam(parseInt(newVal, 10));
+    }
+  };
+
+  const updateUpperBound = (newVal: string) => {
+    if (newVal === "") {
+      setUpperBound(undefined);
+    } else {
+      setUpperBound(parseInt(newVal, 10));
+    }
+  };
 
   return (
     <FilterRow>
       <StyledSubtitle> Range </StyledSubtitle>
       <RangeContainer>
         <RangeInput
-          aria-labelledby="range-lower-bound"
+          aria-labelledby="Range Lower Bound"
+          data-cy="range-lower-bound"
           min={0}
-          onChange={(e) => setLowerBound(parseInt(e.target.value, 10))}
+          onChange={(e) => updateLowerBound(e.target.value)}
+          placeholder="0"
           sizeVariant="small"
           type="number"
-          value={lowerBound.toString()}
+          value={(lowerBound ?? "").toString()}
         />
         <RangeInput
-          aria-labelledby="range-upper-bound"
+          aria-labelledby="Range Upper Bound"
+          data-cy="range-upper-bound"
           min={-1}
-          onChange={(e) => setUpperBound(parseInt(e.target.value, 10))}
+          onChange={(e) => updateUpperBound(e.target.value)}
+          placeholder="-1"
           sizeVariant="small"
           type="number"
-          value={upperBound.toString()}
+          value={(upperBound ?? "").toString()}
         />
       </RangeContainer>
     </FilterRow>

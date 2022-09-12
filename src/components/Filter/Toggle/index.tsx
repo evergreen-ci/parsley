@@ -1,24 +1,24 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import Button from "@leafygreen-ui/button";
+import Button, { Variant } from "@leafygreen-ui/button";
 import { size } from "constants/tokens";
 
-interface FilterToggleProps {
-  activeButton?: string;
+interface ToggleProps {
+  activeButton?: "left" | "right";
   ["data-cy"]?: string;
   leftText: string;
   rightText: string;
 }
 
-const FilterToggle: React.FC<FilterToggleProps> = ({
+const Toggle: React.FC<ToggleProps> = ({
   activeButton = "left",
   "data-cy": dataCy,
   leftText,
   rightText,
 }) => {
   const [active, setActive] = useState<string>(activeButton);
-  const leftVariant = active === "left" ? "primary" : "default";
-  const rightVariant = active === "right" ? "primary" : "default";
+  const leftVariant = active === "left" ? Variant.Primary : Variant.Default;
+  const rightVariant = active === "right" ? Variant.Primary : Variant.Default;
 
   const changeActiveButton = (newActive: string) => {
     if (active !== newActive) {
@@ -56,4 +56,4 @@ const RightButton = styled(Button)`
   width: ${size.xxl};
 `;
 
-export default FilterToggle;
+export default Toggle;

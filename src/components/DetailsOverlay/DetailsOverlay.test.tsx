@@ -15,6 +15,39 @@ describe("detailsOverlay", () => {
     mockedGet.mockImplementation(() => "true");
   });
 
+  describe("range input", () => {
+    it("should update the URL correctly", async () => {
+      const { history } = render(<DetailsOverlay />);
+
+      const lowerBound = screen.getByDataCy("range-lower-bound");
+      userEvent.type(lowerBound, "99");
+      await waitFor(() => {
+        expect(history.location.search).toBe("?lower=99");
+      });
+
+      const upperBound = screen.getByDataCy("range-upper-bound");
+      userEvent.type(upperBound, "100");
+      await waitFor(() => {
+        expect(history.location.search).toBe("?lower=99&upper=100");
+      });
+    });
+
+    it("empty input should not add anything to the URL", async () => {
+      const { history } = render(<DetailsOverlay />);
+
+      const lowerBound = screen.getByDataCy("range-lower-bound");
+      userEvent.type(lowerBound, "99");
+      await waitFor(() => {
+        expect(history.location.search).toBe("?lower=99");
+      });
+
+      userEvent.clear(lowerBound);
+      await waitFor(() => {
+        expect(history.location.search).toBe("");
+      });
+    });
+  });
+
   describe("wrap toggle", () => {
     it("should update the URL correctly", async () => {
       const { history } = render(<DetailsOverlay />);

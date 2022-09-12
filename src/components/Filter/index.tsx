@@ -1,51 +1,10 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import Badge from "@leafygreen-ui/badge";
-import Button, { Variant } from "@leafygreen-ui/button";
 import { Body } from "@leafygreen-ui/typography";
 import Icon, { Size } from "components/Icon";
 import { fontSize, size } from "constants/tokens";
-
-interface FilterToggleProps {
-  activeButton?: "left" | "right";
-  ["data-cy"]?: string;
-  leftText: string;
-  rightText: string;
-}
-
-const FilterToggle: React.FC<FilterToggleProps> = ({
-  activeButton = "left",
-  "data-cy": dataCy,
-  leftText,
-  rightText,
-}) => {
-  const [active, setActive] = useState<string>(activeButton);
-  const leftVariant = active === "left" ? Variant.Primary : Variant.Default;
-  const rightVariant = active === "right" ? Variant.Primary : Variant.Default;
-
-  const changeActiveButton = (newActive: string) => {
-    if (active !== newActive) {
-      setActive(newActive);
-    }
-  };
-
-  return (
-    <div data-cy={dataCy}>
-      <LeftButton
-        onClick={() => changeActiveButton("left")}
-        variant={leftVariant}
-      >
-        {rightText}
-      </LeftButton>
-      <RightButton
-        onClick={() => changeActiveButton("right")}
-        variant={rightVariant}
-      >
-        {leftText}
-      </RightButton>
-    </div>
-  );
-};
+import Toggle from "./Toggle";
 
 interface FilterProps {
   ["data-cy"]?: string;
@@ -82,25 +41,13 @@ const Filter: React.FC<FilterProps> = ({
       <RightContainer>
         <StyledBody>{filterText}</StyledBody>
         <FilterOptions>
-          <FilterToggle leftText="Sensitive" rightText="Insensitive" />
-          <FilterToggle leftText="Match" rightText="Inverse" />
+          <Toggle leftText="Sensitive" rightText="Insensitive" />
+          <Toggle leftText="Match" rightText="Inverse" />
         </FilterOptions>
       </RightContainer>
     </FilterRow>
   );
 };
-
-const LeftButton = styled(Button)`
-  border-top-right-radius: 0;
-  border-bottom-right-radius: 0;
-  width: ${size.xxl};
-`;
-
-const RightButton = styled(Button)`
-  border-top-left-radius: 0;
-  border-bottom-left-radius: 0;
-  width: ${size.xxl};
-`;
 
 const StyledIcon = styled(Icon)`
   cursor: pointer;
