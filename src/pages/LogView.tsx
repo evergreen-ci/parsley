@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import LogWindow from "components/LogWindow";
+import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
-import { LogWindow } from "./LogView/index";
 
 interface LogViewProps {
   logType: LogTypes;
@@ -23,7 +24,15 @@ const LogView: React.FC<LogViewProps> = ({ logType }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <div>{isLoading ? "Loading" : <LogWindow logType={logType} />}</div>;
+  return (
+    <PageLayout>
+      {isLoading ? (
+        "Loading"
+      ) : (
+        <LogWindow isUploadedLog={false} logType={logType} />
+      )}
+    </PageLayout>
+  );
 };
 
 const logLines = [

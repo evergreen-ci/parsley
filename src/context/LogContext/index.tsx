@@ -4,9 +4,12 @@ import useLogState from "./state";
 interface LogContextState {
   logLines: string[];
   lineCount: number;
+  hasLogs: boolean;
+  fileName?: string;
   ingestLines: (logs: string[]) => void;
   getLine: (lineNumber: number) => string | undefined;
-  clearLines: () => void;
+  setFileName: (fileName: string) => void;
+  clearLogs: () => void;
 }
 const LogContext = createContext<LogContextState | null>(null);
 
@@ -36,7 +39,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [dispatch]
   );
 
-  const clearLines = useCallback(() => {
+  const clearLogs = useCallback(() => {
     dispatch({ type: "CLEAR_LOGS" });
   }, [dispatch]);
 
@@ -44,15 +47,25 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     (lineNumber: number) => state.logs[lineNumber],
     [state.logs]
   );
+
+  const setFileName = useCallback(
+    (fileName: string) => {
+      dispatch({ type: "SET_FILE_NAME", fileName });
+    },
+    [dispatch]
+  );
   const memoizedContext = useMemo(
     () => ({
       logLines: state.logs,
       lineCount: state.logs.length,
-      clearLines,
+      fileName: state.fileName,
+      hasLogs: state.logs.length > 0,
+      clearLogs,
+      setFileName,
       getLine,
       ingestLines,
     }),
-    [state.logs, ingestLines, getLine, clearLines]
+    [state.logs, state.fileName, setFileName, ingestLines, getLine, clearLogs]
   );
 
   return (
