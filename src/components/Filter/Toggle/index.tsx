@@ -3,8 +3,13 @@ import styled from "@emotion/styled";
 import Button, { Variant } from "@leafygreen-ui/button";
 import { size } from "constants/tokens";
 
+export enum ToggleButton {
+  Left = "left",
+  Right = "right",
+}
+
 interface ToggleProps {
-  activeButton?: "left" | "right";
+  activeButton?: ToggleButton.Left | ToggleButton.Right;
   ["data-cy"]?: string;
   leftText: string;
   rightText: string;
@@ -17,8 +22,10 @@ const Toggle: React.FC<ToggleProps> = ({
   rightText,
 }) => {
   const [active, setActive] = useState<string>(activeButton);
-  const leftVariant = active === "left" ? Variant.Primary : Variant.Default;
-  const rightVariant = active === "right" ? Variant.Primary : Variant.Default;
+  const leftVariant =
+    active === ToggleButton.Left ? Variant.Primary : Variant.Default;
+  const rightVariant =
+    active === ToggleButton.Right ? Variant.Primary : Variant.Default;
 
   const changeActiveButton = (newActive: string) => {
     if (active !== newActive) {
@@ -29,13 +36,13 @@ const Toggle: React.FC<ToggleProps> = ({
   return (
     <div data-cy={dataCy}>
       <LeftButton
-        onClick={() => changeActiveButton("left")}
+        onClick={() => changeActiveButton(ToggleButton.Left)}
         variant={leftVariant}
       >
         {rightText}
       </LeftButton>
       <RightButton
-        onClick={() => changeActiveButton("right")}
+        onClick={() => changeActiveButton(ToggleButton.Right)}
         variant={rightVariant}
       >
         {leftText}
