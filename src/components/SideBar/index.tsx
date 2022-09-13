@@ -32,7 +32,7 @@ const SideBar: React.FC<SideBarProps> = ({ maxLineNumber }) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const lineNumbers = selectedLine
-    ? Array.from(new Set([...bookmarks, selectedLine])).sort()
+    ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
     : bookmarks;
 
   return (

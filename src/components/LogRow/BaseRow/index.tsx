@@ -49,7 +49,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       const newBookmarks = bookmarks.filter((b) => b !== index);
       setBookmarks(newBookmarks);
     } else {
-      const newBookmarks = [...bookmarks, index].sort();
+      const newBookmarks = [...bookmarks, index].sort((a, b) => a - b);
       setBookmarks(newBookmarks);
     }
   };

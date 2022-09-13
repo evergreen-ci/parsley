@@ -37,9 +37,7 @@ CollapsedRow.displayName = "CollapsedRow";
 const RowContainer = styled.div`
   display: flex;
   align-items: center;
-  overflow-y: hidden;
 
-  height: ${size.m} !important;
   padding-left: ${size.s};
   background-color: ${gray.light2};
 `;
