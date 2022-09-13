@@ -1,16 +1,21 @@
 const processResmokeLine = (line: string) => {
-  const port = line.match(portRegex)?.[1];
+  const port = line.match(portRegex)?.[0];
   const resmokeFunction = line.match(resmokeFunctionRegex)?.[0];
-  const json = line.match(jsonRegex)?.[1] || "";
-  if (!resmokeFunction && !json) {
+  const json = line.match(jsonRegex)?.[0];
+
+  if (!resmokeFunction || !json) {
     // Its not a resmoke line with json so we can just return it
+    return line;
+  }
+  const timeStamp =
+    json.match(timeStampRegex)?.[1] ||
+    json.match(timestampWithOffsetRegex)?.[1];
+
+  if (!timeStamp) {
     return line;
   }
 
   // Timezones can either include a timezone offset or a timezone name
-  const timeStamp =
-    json.match(timeStampRegex)?.[1] ||
-    json.match(timestampWithOffsetRegex)?.[1];
 
   const shellPrefix = json.match(shellPrefixRegex)?.[1];
   const config = json.match(configSrvRegex)?.[1];
@@ -65,18 +70,18 @@ const conditionallyBuildResmokeLine = (
  * @example s12345
  * @example d54321
  */
-const portRegex = / [sdbc](\d{1,5})/;
+const portRegex = / [sdbc](\d{1,5})/g;
 
 /** The resmoke function
  * @example [js:test]
  * @example [js:setup]
  */
-const resmokeFunctionRegex = /\[.*\]/;
+const resmokeFunctionRegex = /\[.*\]/g;
 
 /** The json object
  * @example {"t":{"$date":"2021-03-03T20:54:54.000Z"},"s":"I",  "c":"NETWORK",  "id":22900,  "ctx":"conn1","msg":"client metadata","attr":{"remote":"
  */
-const jsonRegex = /\{(.*)\}/;
+const jsonRegex = /\{(.*)\}/g;
 
 /** The timestamp
  * @example "t":{"$date":"2021-03-03T20:54:54.000Z"}

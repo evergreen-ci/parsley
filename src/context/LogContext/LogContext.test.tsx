@@ -1,4 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
+import { LogTypes } from "constants/enums";
 import { LogContextProvider, useLogContext } from ".";
 
 describe("useLogContext", () => {
@@ -16,7 +17,7 @@ describe("useLogContext", () => {
     );
     const { result } = renderHook(() => useLogContext(), { wrapper });
     act(() => {
-      result.current.ingestLines(["foo", "bar"]);
+      result.current.ingestLines(["foo", "bar"], LogTypes.EVERGREEN_TASK_LOGS);
     });
     expect(result.current.logLines).toStrictEqual(["foo", "bar"]);
     expect(result.current.lineCount).toBe(2);

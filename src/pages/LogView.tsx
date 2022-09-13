@@ -15,7 +15,7 @@ const LogView: React.FC<LogViewProps> = ({ logType }) => {
   const mockIngestLines = async () => {
     setIsLoading(true);
     setTimeout(() => {
-      ingestLines(logLines);
+      ingestLines(logLines, logType);
     }, 200);
     setIsLoading(false);
   };
