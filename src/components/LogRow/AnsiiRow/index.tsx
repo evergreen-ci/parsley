@@ -32,7 +32,6 @@ const ProcessedAnsiiRow: React.FC<ProcessedAnsiiRowProps> = ({
   lineContent,
 }) => {
   const memoizedLogLine = useMemo(() => {
-    if (!lineContent) return null;
     const render = linkifyHtml(ansiUp.ansi_to_html(lineContent), {
       validate: {
         url: (value: string) => /^(http)s?:\/\//.test(value),
