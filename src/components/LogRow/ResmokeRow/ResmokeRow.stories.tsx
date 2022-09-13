@@ -1,6 +1,10 @@
 import React from "react";
+import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
+
+import LogPane from "components/LogPane";
+import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
 import { ResmokeRow } from ".";
 
@@ -46,28 +50,21 @@ SingleLine.decorators = [
 ];
 
 const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
-  <>
-    {logLines.map((_, index) => (
-      <ResmokeRow
-        key={logLines[index]}
-        data={{
-          getLine,
-          wrap: args?.wrap,
-          processedLines: processedLogLines,
-          logType: LogTypes.RESMOKE_LOGS,
-        }}
-        listRowProps={{
-          index,
-          style: {},
-          columnIndex: 0,
-          isScrolling: false,
-          isVisible: true,
-          key: getLine(index) || "",
-          parent: {} as any,
-        }}
-      />
-    ))}
-  </>
+  <Container>
+    <LogPane
+      cache={cache}
+      logLines={processedLogLines}
+      rowCount={processedLogLines.length}
+      rowRenderer={RowRenderer({
+        logType: LogTypes.RESMOKE_LOGS,
+        wrap: args.wrap,
+        getLine,
+        processedLines: processedLogLines,
+      })}
+      scrollToIndex={0}
+      wrap={args.wrap}
+    />
+  </Container>
 );
 
 export const MultipleLines = MultipleLineTemplate.bind({});
@@ -94,4 +91,8 @@ const logLines = [
 ];
 const processedLogLines = logLines.map((_, index) => index);
 
+const Container = styled.div`
+  height: 400px;
+  width: 800px;
+`;
 const getLine = (index: number) => logLines[index];
