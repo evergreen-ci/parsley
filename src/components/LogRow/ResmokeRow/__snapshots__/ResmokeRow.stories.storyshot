@@ -296,320 +296,41 @@ Array [
 `;
 
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multiple Lines 1`] = `
-Array [
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-0"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
+<div
+  className="css-1mysoqc"
+>
+  <div
+    style={
+      Object {
+        "height": 0,
+        "overflow": "visible",
+        "width": 0,
+      }
+    }
   >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-0"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      0
-    </span>
-    <span
-      data-cy="resmoke-row"
-    >
-      [js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-1"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-1"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      1
-    </span>
-    <span
-      data-cy="resmoke-row"
-    >
-      [j0:prim] Starting mongod on port 20000...
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-2"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-2"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      2
-    </span>
-    <span
-      data-cy="resmoke-row"
-    >
-      PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin mongod-6.0 --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node0/2c65edd254db4835911f796d7b260455.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node0 --port=20000 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-3"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-3"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      3
-    </span>
-    <span
-      data-cy="resmoke-row"
-    >
-      [j0:prim] mongod started on port 20000 with pid 30678.
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-4"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-4"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      4
-    </span>
-    <span
-      data-cy="resmoke-row"
-    >
-      [j0:sec0] Starting mongod on port 20001...
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-5"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-5"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      5
-    </span>
-    <span
-      data-cy="resmoke-row"
-    >
-      PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin /data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin/mongod --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node1/a611b65dce484b7d81b294a7941a2dac.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node1 --port=20001 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-6"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-6"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      6
-    </span>
-    <span
-      data-cy="resmoke-row"
-    >
-      [j0:sec0] mongod started on port 20001 with pid 30681.
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-7"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-7"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      7
-    </span>
-    <span
-      data-cy="resmoke-row"
-    >
-      [j0:sec1] Starting mongod on port 20002...
-    </span>
-  </pre>,
-]
+    <div
+      aria-label="grid"
+      aria-readonly={true}
+      className="ReactVirtualized__Grid ReactVirtualized__List"
+      onScroll={[Function]}
+      role="grid"
+      style={
+        Object {
+          "WebkitOverflowScrolling": "touch",
+          "boxSizing": "border-box",
+          "direction": "ltr",
+          "height": 0,
+          "overflowX": "hidden",
+          "overflowY": "auto",
+          "position": "relative",
+          "width": 0,
+          "willChange": "transform",
+        }
+      }
+      tabIndex={0}
+    />
+  </div>
+</div>
 `;
 
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `

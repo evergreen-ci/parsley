@@ -391,320 +391,41 @@ Array [
 `;
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
-Array [
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-0"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
+<div
+  className="css-1mysoqc"
+>
+  <div
+    style={
+      Object {
+        "height": 0,
+        "overflow": "visible",
+        "width": 0,
+      }
+    }
   >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-0"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      0
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-1"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-1"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      1
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='lint' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-2"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-2"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      2
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='osx' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-3"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-3"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      3
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='race-detector' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-4"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-4"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      4
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1604' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-5"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-5"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      5
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1804-arm64' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-6"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-6"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      6
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='windows' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-7"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-7"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      7
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-]
+    <div
+      aria-label="grid"
+      aria-readonly={true}
+      className="ReactVirtualized__Grid ReactVirtualized__List"
+      onScroll={[Function]}
+      role="grid"
+      style={
+        Object {
+          "WebkitOverflowScrolling": "touch",
+          "boxSizing": "border-box",
+          "direction": "ltr",
+          "height": 0,
+          "overflowX": "hidden",
+          "overflowY": "auto",
+          "position": "relative",
+          "width": 0,
+          "willChange": "transform",
+        }
+      }
+      tabIndex={0}
+    />
+  </div>
+</div>
 `;
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
