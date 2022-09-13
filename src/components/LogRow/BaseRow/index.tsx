@@ -103,6 +103,7 @@ const StyledPre = styled.pre<{
   margin-bottom: 0;
   margin-right: ${size.xs};
   font-size: ${fontSize.m};
+  word-break: break-all;
   ${({ shouldWrap }) =>
     shouldWrap
       ? `
