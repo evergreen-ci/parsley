@@ -38,7 +38,7 @@ const RowContainer = styled.div`
   display: flex;
   align-items: center;
 
-  padding-left: ${size.s};
+  padding-left: ${size.l};
   background-color: ${gray.light2};
 `;
 

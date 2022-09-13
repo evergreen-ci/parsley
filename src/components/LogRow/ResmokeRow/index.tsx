@@ -13,7 +13,7 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   return Array.isArray(line) ? (
     <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
   ) : (
-    <BaseRow ref={ref} wrap={wrap} {...listRowProps} index={line}>
+    <BaseRow ref={ref} wrap={wrap} {...listRowProps} lineNumber={line}>
       <span data-cy="resmoke-row">{getLine(line)}</span>
     </BaseRow>
   );

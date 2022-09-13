@@ -10,6 +10,7 @@ describe("row", () => {
         index={0}
         isScrolling={false}
         isVisible
+        lineNumber={0}
         parent={{} as any}
         style={{}}
         wrap={false}
@@ -27,6 +28,7 @@ describe("row", () => {
         index={0}
         isScrolling={false}
         isVisible
+        lineNumber={0}
         parent={{} as any}
         style={{}}
         wrap={false}
@@ -47,6 +49,7 @@ describe("row", () => {
         index={0}
         isScrolling={false}
         isVisible
+        lineNumber={0}
         parent={{} as any}
         style={{}}
         wrap={false}
@@ -70,6 +73,7 @@ describe("row", () => {
         index={0}
         isScrolling={false}
         isVisible
+        lineNumber={0}
         parent={{} as any}
         style={{}}
         wrap={false}
@@ -90,6 +94,7 @@ describe("row", () => {
         index={0}
         isScrolling={false}
         isVisible
+        lineNumber={0}
         parent={{} as any}
         style={{}}
         wrap={false}
@@ -113,6 +118,7 @@ describe("row", () => {
         index={0}
         isScrolling={false}
         isVisible
+        lineNumber={0}
         parent={{} as any}
         style={{}}
         wrap={false}

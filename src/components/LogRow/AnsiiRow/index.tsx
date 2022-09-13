@@ -13,7 +13,7 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   return Array.isArray(line) ? (
     <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
   ) : (
-    <BaseRow wrap={wrap} {...listRowProps} ref={ref} index={line}>
+    <BaseRow wrap={wrap} {...listRowProps} ref={ref} lineNumber={line}>
       <span data-cy="ansii-row">{getLine(line)}</span>
     </BaseRow>
   );
