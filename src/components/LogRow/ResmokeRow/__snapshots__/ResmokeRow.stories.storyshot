@@ -40,7 +40,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multiple Lines 1`] =
 
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
 <pre
-  className="css-1j2roh1"
+  className="css-rpdi2m"
   data-cy="log-row-2"
   onDoubleClick={[Function]}
   selected={false}
@@ -68,7 +68,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
     />
   </svg>
   <span
-    className="css-1bxf48m"
+    className="css-1ix6uu2"
   >
     2
   </span>

@@ -86,8 +86,10 @@ const StyledIcon = styled(Icon)`
 `;
 
 const Index = styled.span`
+  display: inline-block;
+  width: ${size.xl};
   margin-left: ${size.s};
-  margin-right: ${size.xl};
+  margin-right: ${size.s};
   user-select: none;
 `;
 
@@ -102,6 +104,7 @@ const StyledPre = styled.pre<{
   margin-bottom: 0;
   margin-right: ${size.xs};
   font-size: ${fontSize.m};
+  word-break: break-all;
   ${({ shouldWrap }) =>
     shouldWrap
       ? `
