@@ -1,393 +1,41 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Collapsed 1`] = `
-Array [
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-0"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-0"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      0
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
-    </span>
-  </pre>,
+<div
+  className="css-1mysoqc"
+>
   <div
-    className="css-1ldibl0"
-    data-cy="collapsed-row-1"
-    style={Object {}}
+    style={
+      Object {
+        "height": 0,
+        "overflow": "visible",
+        "width": 0,
+      }
+    }
   >
     <div
-      className="leafygreen-ui-114muox"
-    >
-       
-      2 lines skipped
-       
-    </div>
-    <button
-      aria-disabled={false}
-      className="leafygreen-ui-loq8o6 css-1plrovb"
-      data-leafygreen-ui="button"
-      disabled={false}
-      type="button"
-    >
-      <div
-        className="leafygreen-ui-v038xi"
-      />
-      <div
-        className="leafygreen-ui-1hhc9ms"
-      >
-        <svg
-          aria-label="Expand Icon"
-          className="leafygreen-ui-6392lc"
-          fill="none"
-          height="16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
-            fill="#001E2B"
-          />
-          <path
-            d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
-            stroke="#001E2B"
-          />
-          <path
-            d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
-            fill="#001E2B"
-          />
-          <path
-            d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
-            stroke="#001E2B"
-          />
-        </svg>
-        All
-      </div>
-    </button>
-    <button
-      aria-disabled={false}
-      className="leafygreen-ui-loq8o6 css-1plrovb"
-      data-leafygreen-ui="button"
-      disabled={false}
-      type="button"
-    >
-      <div
-        className="leafygreen-ui-v038xi"
-      />
-      <div
-        className="leafygreen-ui-1hhc9ms"
-      >
-        <svg
-          aria-label="Expand Icon"
-          className="leafygreen-ui-6392lc"
-          fill="none"
-          height="16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
-            fill="#001E2B"
-          />
-          <path
-            d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
-            stroke="#001E2B"
-          />
-          <path
-            d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
-            fill="#001E2B"
-          />
-          <path
-            d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
-            stroke="#001E2B"
-          />
-        </svg>
-        5 Above and Below
-      </div>
-    </button>
-  </div>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-3"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-3"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      3
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='race-detector' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-4"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-4"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      4
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='ubuntu1604' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-  <div
-    className="css-1ldibl0"
-    data-cy="collapsed-row-4"
-    style={Object {}}
-  >
-    <div
-      className="leafygreen-ui-114muox"
-    >
-       
-      1 line skipped
-       
-    </div>
-    <button
-      aria-disabled={false}
-      className="leafygreen-ui-loq8o6 css-1plrovb"
-      data-leafygreen-ui="button"
-      disabled={false}
-      type="button"
-    >
-      <div
-        className="leafygreen-ui-v038xi"
-      />
-      <div
-        className="leafygreen-ui-1hhc9ms"
-      >
-        <svg
-          aria-label="Expand Icon"
-          className="leafygreen-ui-6392lc"
-          fill="none"
-          height="16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
-            fill="#001E2B"
-          />
-          <path
-            d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
-            stroke="#001E2B"
-          />
-          <path
-            d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
-            fill="#001E2B"
-          />
-          <path
-            d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
-            stroke="#001E2B"
-          />
-        </svg>
-        All
-      </div>
-    </button>
-    <button
-      aria-disabled={false}
-      className="leafygreen-ui-loq8o6 css-1plrovb"
-      data-leafygreen-ui="button"
-      disabled={false}
-      type="button"
-    >
-      <div
-        className="leafygreen-ui-v038xi"
-      />
-      <div
-        className="leafygreen-ui-1hhc9ms"
-      >
-        <svg
-          aria-label="Expand Icon"
-          className="leafygreen-ui-6392lc"
-          fill="none"
-          height="16"
-          width="16"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
-            fill="#001E2B"
-          />
-          <path
-            d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
-            stroke="#001E2B"
-          />
-          <path
-            d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
-            fill="#001E2B"
-          />
-          <path
-            d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
-            stroke="#001E2B"
-          />
-        </svg>
-        5 Above and Below
-      </div>
-    </button>
-  </div>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-6"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-6"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      6
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='windows' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-  <pre
-    className="css-1j2roh1"
-    data-cy="log-row-7"
-    onDoubleClick={[Function]}
-    selected={false}
-    style={Object {}}
-  >
-    <svg
-      aria-label="Link Icon"
-      className="css-ak14il"
-      data-cy="log-link-7"
-      fill="none"
-      height={14}
-      onClick={[Function]}
-      role="img"
-      viewBox="0 0 16 16"
-      width={14}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span
-      className="css-1bxf48m"
-    >
-      7
-    </span>
-    <span
-      data-cy="ansii-row"
-    >
-      [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']
-    </span>
-  </pre>,
-]
+      aria-label="grid"
+      aria-readonly={true}
+      className="ReactVirtualized__Grid ReactVirtualized__List"
+      onScroll={[Function]}
+      role="grid"
+      style={
+        Object {
+          "WebkitOverflowScrolling": "touch",
+          "boxSizing": "border-box",
+          "direction": "ltr",
+          "height": 0,
+          "overflowX": "hidden",
+          "overflowY": "auto",
+          "position": "relative",
+          "width": 0,
+          "willChange": "transform",
+        }
+      }
+      tabIndex={0}
+    />
+  </div>
+</div>
 `;
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
@@ -430,7 +78,7 @@ exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
 <pre
-  className="css-1j2roh1"
+  className="css-rpdi2m"
   data-cy="log-row-0"
   onDoubleClick={[Function]}
   selected={false}
