@@ -6,6 +6,7 @@ type LogPaneProps = Omit<
   "height" | "width" | "itemData" | "rowHeight"
 > & {
   wrap: boolean;
+  search: string;
   rowRenderer: ListRowRenderer;
 };
 
@@ -15,6 +16,7 @@ const LogPane: React.FC<LogPaneProps> = ({
   rowCount,
   cache,
   wrap,
+  search,
   ...rest
 }) => {
   const listRef = useRef<List>(null);
@@ -23,7 +25,7 @@ const LogPane: React.FC<LogPaneProps> = ({
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wrap]);
+  }, [wrap, search]);
   return (
     <AutoSizer>
       {({ height, width }) => (

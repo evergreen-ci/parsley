@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
@@ -66,6 +65,7 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
         processedLines: processedLogLines,
       })}
       scrollToIndex={0}
+      search=""
       wrap={args.wrap}
     />
   </Container>
@@ -98,6 +98,7 @@ const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => (
         processedLines: collapsedProcessedLogLines,
       })}
       scrollToIndex={0}
+      search=""
       wrap={args.wrap}
     />
   </Container>

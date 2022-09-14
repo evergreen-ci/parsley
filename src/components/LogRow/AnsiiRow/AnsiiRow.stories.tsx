@@ -62,6 +62,7 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
         processedLines: processedLogLines,
       })}
       scrollToIndex={0}
+      search=""
       wrap={args.wrap}
     />
   </Container>
@@ -93,6 +94,7 @@ const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => (
         processedLines: collapsedProcessedLogLines,
       })}
       scrollToIndex={0}
+      search=""
       wrap={args.wrap}
     />
   </Container>

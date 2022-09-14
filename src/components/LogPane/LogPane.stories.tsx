@@ -20,6 +20,7 @@ const Template: ComponentStory<typeof LogPane> = (args) => (
       logLines={list}
       rowCount={list.length}
       rowRenderer={RowRenderer}
+      search=""
       wrap={false}
     />
   </Container>

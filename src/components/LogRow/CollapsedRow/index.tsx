@@ -37,9 +37,11 @@ CollapsedRow.displayName = "CollapsedRow";
 const RowContainer = styled.div`
   display: flex;
   align-items: center;
+  background-color: ${gray.light2}8C;
 
+  padding-top: ${size.xxs};
+  padding-bottom: ${size.xxs};
   padding-left: ${size.l};
-  background-color: ${gray.light2};
 `;
 
 const StyledButton = styled(Button)`
