@@ -22,6 +22,7 @@ const conditionallyBuildResmokeLine = (
  */
 const portRegex = / [sdbc](\d{1,5})/g;
 
+/** `getPort` returns the port associated with a resmoke line */
 const getPort = (line: string) => {
   const port = line.match(portRegex)?.[0];
   return port;
@@ -33,6 +34,7 @@ const getPort = (line: string) => {
  */
 const resmokeFunctionRegex = /\[.*\]/g;
 
+/** `getResmokeFunction` returns the resmoke function that ran a resmoke line */
 const getResmokeFunction = (line: string) => {
   const resmokeFunction = line.match(resmokeFunctionRegex)?.[0];
   return resmokeFunction;
@@ -43,6 +45,7 @@ const getResmokeFunction = (line: string) => {
  */
 const jsonRegex = /\{(.*)\}/g;
 
+/** `getJSONString` returns the json object in a resmoke line */
 const getJSONString = (line: string) => {
   const json = line.match(jsonRegex)?.[0];
   return json;
@@ -62,6 +65,7 @@ const timeStampRegex =
 const timestampWithOffsetRegex =
   /{"t":{"\$date":"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+\d{2}:\d{2})"}/;
 
+/** `getTimeStamp` returns the timestamp ran by a resmoke function this is found in the resmoke json  */
 const getTimeStamp = (line: string) => {
   const timeStamp =
     line.match(timeStampRegex)?.[1] ||
@@ -75,6 +79,7 @@ const getTimeStamp = (line: string) => {
  */
 const shellPrefixRegex = /"s":"([A-z])"/;
 
+/** `getShellPrefix` returns the shell prefix ran by a resmoke function this is found in the resmoke json */
 const getShellPrefix = (line: string) => {
   const shellPrefix = line.match(shellPrefixRegex)?.[1];
   return shellPrefix;
@@ -88,7 +93,8 @@ const getShellPrefix = (line: string) => {
  */
 const configSrvRegex = /"c":"([A-z]*)"/;
 
-const getConfigSrv = (line: string) => {
+/** `getConfigServer` returns the config server associated with a resmoke function this is found in the resmoke json  */
+const getConfigServer = (line: string) => {
   const configSrv = line.match(configSrvRegex)?.[1];
   return configSrv;
 };
@@ -100,6 +106,7 @@ const getConfigSrv = (line: string) => {
  */
 const idRegex = /"id":([0-9]*)/;
 
+/** `getId` returns the process id associated with a mongod instance this is found in the resmoke json  */
 const getId = (line: string) => {
   const id = line.match(idRegex)?.[1];
   return id;
@@ -112,7 +119,8 @@ const getId = (line: string) => {
  */
 const ctxRegex = /"ctx":"([A-z0-9]*)"/;
 
-const getCtx = (line: string) => {
+/** `getContext` returns the ctx associated with a resmoke line this is found in the resmoke json */
+const getContext = (line: string) => {
   const ctx = line.match(ctxRegex)?.[1];
   return ctx;
 };
@@ -122,7 +130,8 @@ const getCtx = (line: string) => {
  */
 const msgRegex = /msg":"(.*?)"/;
 
-const getMsg = (line: string) => {
+/** `getMessage` returns the message outputted by resmoke for a given line this is found in the resmoke json */
+const getMessage = (line: string) => {
   const msg = line.match(msgRegex)?.[1];
   return msg;
 };
@@ -132,18 +141,19 @@ const getMsg = (line: string) => {
  */
 const attrRegex = /("attr":.*)}/;
 
-const getAttr = (line: string) => {
+/** `getAttributes` returns the additional json attributes found in a resmoke line json */
+const getAttributes = (line: string) => {
   const attr = line.match(attrRegex)?.[1];
   return attr;
 };
 
 export {
-  getAttr,
-  getCtx,
-  getConfigSrv,
+  getAttributes,
+  getContext,
+  getConfigServer,
   getId,
   getJSONString,
-  getMsg,
+  getMessage,
   getPort,
   getResmokeFunction,
   getShellPrefix,

@@ -1,11 +1,11 @@
 import {
   conditionallyBuildResmokeLine,
-  getAttr,
-  getConfigSrv,
-  getCtx,
+  getAttributes,
+  getConfigServer,
+  getContext,
   getId,
   getJSONString,
-  getMsg,
+  getMessage,
   getPort,
   getResmokeFunction,
   getShellPrefix,
@@ -30,11 +30,11 @@ const processResmokeLine = (line: string) => {
   // Timezones can either include a timezone offset or a timezone name
 
   const shellPrefix = getShellPrefix(json);
-  const config = getConfigSrv(json);
+  const config = getConfigServer(json);
   const id = getId(json);
-  const ctx = getCtx(json);
-  const msg = getMsg(json);
-  const attr = getAttr(json);
+  const ctx = getContext(json);
+  const msg = getMessage(json);
+  const attr = getAttributes(json);
 
   let result = conditionallyBuildResmokeLine("", resmokeFunction);
   result = conditionallyBuildResmokeLine(result, port);
