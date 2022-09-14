@@ -88,8 +88,10 @@ const StyledIcon = styled(Icon)`
 `;
 
 const Index = styled.span`
+  display: inline-block;
+  width: ${size.xl};
   margin-left: ${size.s};
-  margin-right: ${size.xl};
+  margin-right: ${size.s};
   user-select: none;
 `;
 
