@@ -53,6 +53,7 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
   <Container>
     <LogPane
       cache={cache}
+      filters={[]}
       logLines={processedLogLines}
       rowCount={processedLogLines.length}
       rowRenderer={RowRenderer({
@@ -62,7 +63,6 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
         processedLines: processedLogLines,
       })}
       scrollToIndex={0}
-      search=""
       wrap={args.wrap}
     />
   </Container>
@@ -85,6 +85,7 @@ const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => (
   <Container>
     <LogPane
       cache={cache}
+      filters={[]}
       logLines={collapsedProcessedLogLines}
       rowCount={collapsedProcessedLogLines.length}
       rowRenderer={RowRenderer({
@@ -94,7 +95,6 @@ const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => (
         processedLines: collapsedProcessedLogLines,
       })}
       scrollToIndex={0}
-      search=""
       wrap={args.wrap}
     />
   </Container>

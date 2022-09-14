@@ -17,7 +17,7 @@ interface LogWindowProps {
 const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const { logLines, hasLogs, getLine } = useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
-  const [search] = useQueryParam(QueryParams.Search, "");
+  const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
   const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
 
   // TODO: EVG-17525
@@ -35,6 +35,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         <LogPaneContainer>
           <LogPane
             cache={cache}
+            filters={filters}
             logLines={processedLogLines}
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
@@ -44,7 +45,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               processedLines: processedLogLines,
             })}
             scrollToIndex={scrollToIndex}
-            search={search}
             wrap={wrap}
           />
         </LogPaneContainer>
