@@ -40,14 +40,36 @@ const getResmokeFunction = (line: string) => {
   return resmokeFunction;
 };
 
-/** The json object
- * @example {"t":{"$date":"2021-03-03T20:54:54.000Z"},"s":"I",  "c":"NETWORK",  "id":22900,  "ctx":"conn1","msg":"client metadata","attr":{"remote":"
- */
-const jsonRegex = /\{(.*)\}/g;
-
 /** `getJSONString` returns the json object in a resmoke line */
 const getJSONString = (line: string) => {
-  const json = line.match(jsonRegex)?.[0];
+  // const json = line.match(jsonRegex)?.[0];
+  // Lets try to find the json string by finding the first { and the last }
+  const openBracketIndex = line.indexOf("{");
+  const closeBracketIndex = line.lastIndexOf("}");
+  // if we can't find the brackets, return undefined
+  if (openBracketIndex === -1 || closeBracketIndex === -1) {
+    return undefined;
+  }
+  // if the open bracket is after the close bracket, return undefined
+  if (openBracketIndex > closeBracketIndex) {
+    return undefined;
+  }
+  const json = line.slice(openBracketIndex);
+
+  // If we have a mismatching number of brackets, return undefined
+  if (json.match(/{/g)?.length !== json.match(/}/g)?.length) {
+    return undefined;
+  }
+  // If the first character is not a {, return undefined
+  if (json[0] !== "{") {
+    return undefined;
+  }
+  // If the last character is not a }, return undefined
+  if (json[json.length - 1] !== "}") {
+    return undefined;
+  }
+
+  // This resulting string should hopefully be a json expression as a string.
   return json;
 };
 
