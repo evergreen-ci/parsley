@@ -1,4 +1,3 @@
-import React from "react";
 import LeafyGreenProvider from "@leafygreen-ui/leafygreen-provider";
 import { LogContextProvider } from "./LogContext";
 
