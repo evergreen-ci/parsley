@@ -20,16 +20,12 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
     );
   }
-
   const lineContent = getLine(line);
-  if (!lineContent) {
-    return null;
-  }
-  return (
+  return lineContent ? (
     <BaseRow wrap={wrap} {...listRowProps} ref={ref} lineNumber={line}>
       <ProcessedAnsiiRow lineContent={lineContent} />
     </BaseRow>
-  );
+  ) : null;
 });
 
 interface ProcessedAnsiiRowProps {
