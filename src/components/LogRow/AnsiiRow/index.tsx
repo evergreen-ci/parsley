@@ -2,6 +2,7 @@ import { forwardRef, useMemo } from "react";
 import AnsiUp from "ansi_up";
 import parse from "html-react-parser";
 import linkifyHtml from "linkify-html";
+import CollapsedRow from "components/LogRow//CollapsedRow";
 import BaseRow from "components/LogRow/BaseRow";
 import { BaseRowProps } from "../types";
 
@@ -13,16 +14,18 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { index } = listRowProps;
 
   const line = processedLines[index];
-  // TODO: EVG-17535
-  // This should be replaced with a collapsible component
-  const lineIndex = Array.isArray(line) ? line[0] : line;
-  const lineContent = getLine(lineIndex);
-  if (!lineContent) return null;
-  return (
-    <BaseRow wrap={wrap} {...listRowProps} ref={ref}>
+
+  if (Array.isArray(line)) {
+    return (
+      <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
+    );
+  }
+  const lineContent = getLine(line);
+  return lineContent ? (
+    <BaseRow wrap={wrap} {...listRowProps} ref={ref} lineNumber={line}>
       <ProcessedAnsiiRow lineContent={lineContent} />
     </BaseRow>
-  );
+  ) : null;
 });
 
 interface ProcessedAnsiiRowProps {
