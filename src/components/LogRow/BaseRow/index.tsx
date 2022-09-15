@@ -9,12 +9,12 @@ import { useQueryParam } from "hooks/useQueryParam";
 
 const { yellow, red } = palette;
 
-// Note: The line number associated with a log line and its index within the context of the virtualized list
-// can differ due to collapsed rows.
 interface BaseRowProps extends ListRowProps {
   children: React.ReactNode;
   index: number;
   wrap: boolean;
+  // The line number associated with a log line and its index within the context of the virtualized list
+  // may differ due to collapsed rows.
   lineNumber: number;
 }
 
