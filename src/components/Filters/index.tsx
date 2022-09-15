@@ -41,7 +41,7 @@ const Filters: React.FC<FiltersProps> = ({ "data-cy": dataCy }) => {
 
 const Wrapper = styled.div`
   background-color: ${gray.light2}66;
-  padding: ${size.s} 0 ${size.s} ${size.s};
+  padding: ${size.xs} ${size.s};
   border-radius: ${size.s};
   margin-bottom: ${size.s};
 `;

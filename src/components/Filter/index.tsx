@@ -1,6 +1,7 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import Badge from "@leafygreen-ui/badge";
+import IconButton from "@leafygreen-ui/icon-button";
 import { Body } from "@leafygreen-ui/typography";
 import Icon, { Size } from "components/Icon";
 import { fontSize, size } from "constants/tokens";
@@ -26,18 +27,23 @@ const Filter: React.FC<FilterProps> = ({
   return (
     <FilterRow data-cy={dataCy} visible={isVisible}>
       <LeftContainer>
-        <StyledIcon
-          glyph="X"
+        <IconButton
+          aria-label="Delete filter button"
           onClick={() => deleteFilter(filterText)}
-          size={Size.XLarge}
-        />
-        <StyledIcon
-          glyph={isVisible ? "Visibility" : "ClosedEye"}
+          size={Size.Large}
+        >
+          <Icon glyph="X" />
+        </IconButton>
+        <IconButton
+          aria-label="Visibility filter button"
           onClick={() => toggleVisible()}
-          size={Size.XLarge}
-        />
+          size={Size.Large}
+        >
+          <Icon glyph={isVisible ? "Visibility" : "ClosedEye"} />
+        </IconButton>
         <StyledBadge>FILTER</StyledBadge>
       </LeftContainer>
+
       <RightContainer>
         <StyledBody>{filterText}</StyledBody>
         <FilterOptions>
@@ -49,26 +55,17 @@ const Filter: React.FC<FilterProps> = ({
   );
 };
 
-const StyledIcon = styled(Icon)`
-  cursor: pointer;
-`;
-
-const StyledBadge = styled(Badge)`
-  user-select: none;
-`;
-
 const FilterRow = styled.div<{
   visible: boolean;
 }>`
   display: flex;
   align-items: flex-start;
-  svg,
-  p,
-  div {
-    margin-right: ${size.xs};
-  }
-
   ${({ visible }) => !visible && `opacity: 50%;`}
+`;
+
+const StyledBadge = styled(Badge)`
+  user-select: none;
+  margin: 0 ${size.xs};
 `;
 
 const LeftContainer = styled.div`
@@ -80,6 +77,7 @@ const RightContainer = styled.div`
   display: flex;
   flex-direction: column;
   margin-left: ${size.xs};
+  margin-top: ${size.xs};
 `;
 
 const StyledBody = styled(Body)`
@@ -90,6 +88,9 @@ const StyledBody = styled(Body)`
 const FilterOptions = styled.div`
   display: flex;
   margin-top: ${size.xs};
+  > * {
+    margin-right: ${size.xs};
+  }
 `;
 
 export default Filter;
