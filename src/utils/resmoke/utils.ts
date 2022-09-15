@@ -20,7 +20,7 @@ const conditionallyBuildResmokeLine = (
  * @example s12345
  * @example d54321
  */
-const portRegex = / [sdbc](\d{1,5})/g;
+const portRegex = /[sdbc](\d{1,5})/g;
 
 /** `getPort` returns the port associated with a resmoke line */
 const getPort = (line: string) => {
@@ -99,7 +99,7 @@ const getTimeStamp = (line: string) => {
  * @example "s":"I"
  * @example "s":"W"
  */
-const shellPrefixRegex = /"s":"([A-z])"/;
+const shellPrefixRegex = /"s":"([A-Z0-9]+)"/;
 
 /** `getShellPrefix` returns the shell prefix ran by a resmoke function this is found in the resmoke json */
 const getShellPrefix = (line: string) => {
@@ -113,13 +113,14 @@ const getShellPrefix = (line: string) => {
  * @example "c":"COMMAND"
  * @example "c":"REPL"
  */
-const configSrvRegex = /"c":"([A-z]*)"/;
-
+const configSrvRegex = /"c":"([a-zA-Z-]+)"/;
 /** `getConfigServer` returns the config server associated with a resmoke function this is found in the resmoke json  */
 const getConfigServer = (line: string) => {
   const configSrv = line.match(configSrvRegex)?.[1];
   return configSrv;
 };
+
+// regex that matches  "c":"NETWORK" or "c":"STORAGE" or "c":"COMMAND" or "c":"REPL" and nothing else
 
 /** The id
  * @example "id":22900
@@ -139,7 +140,7 @@ const getId = (line: string) => {
  * @example "ctx":"conn2"
  * @example "ctx":"conn3"
  */
-const ctxRegex = /"ctx":"([A-z0-9]*)"/;
+const ctxRegex = /"ctx":"([a-zA-Z0-9-]+)"/;
 
 /** `getContext` returns the ctx associated with a resmoke line this is found in the resmoke json */
 const getContext = (line: string) => {
