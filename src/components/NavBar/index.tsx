@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Badge from "@leafygreen-ui/badge";
 import { palette } from "@leafygreen-ui/palette";
 import DetailsOverlay from "components/DetailsOverlay";
-import Filters from "components/Filters";
+import FiltersOverlay from "components/FiltersOverlay";
 import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
@@ -58,7 +58,7 @@ const NavBar: React.FC = () => {
             </span>
           }
         >
-          <Filters />
+          <FiltersOverlay />
         </StyledButton>
         <StyledButton buttonText="Details" data-cy="details-button">
           <DetailsOverlay />

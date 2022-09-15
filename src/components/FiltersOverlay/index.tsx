@@ -1,17 +1,19 @@
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import Filter from "components/Filter";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import Filter from "./Filter";
 
 const { gray } = palette;
 
-interface FiltersProps {
+interface FiltersOverlayProps {
   ["data-cy"]?: string;
 }
 
-const Filters: React.FC<FiltersProps> = ({ "data-cy": dataCy }) => {
+const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
+  "data-cy": dataCy,
+}) => {
   const [filters, setFilters] = useQueryParam<string[]>(
     QueryParams.Filters,
     []
@@ -39,13 +41,6 @@ const Filters: React.FC<FiltersProps> = ({ "data-cy": dataCy }) => {
   );
 };
 
-const Wrapper = styled.div`
-  background-color: ${gray.light2}66;
-  padding: ${size.xs} ${size.s};
-  border-radius: ${size.s};
-  margin-bottom: ${size.s};
-`;
-
 const Card = styled.div`
   width: 600px;
   max-height: 400px;
@@ -53,4 +48,11 @@ const Card = styled.div`
   padding: ${size.xxs};
 `;
 
-export default Filters;
+const Wrapper = styled.div`
+  background-color: ${gray.light2}66;
+  padding: ${size.xs} ${size.s};
+  border-radius: ${size.s};
+  margin-bottom: ${size.s};
+`;
+
+export default FiltersOverlay;

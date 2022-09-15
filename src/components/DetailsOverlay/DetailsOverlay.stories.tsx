@@ -8,9 +8,8 @@ export default {
   component: DetailsOverlay,
 } as ComponentMeta<typeof DetailsOverlay>;
 
-// Default DetailsOverlay (no filters)
 const DefaultTemplate: ComponentStory<typeof DetailsOverlay> = (args) => (
-  <Card style={{ maxWidth: 720 }}>
+  <Card style={{ maxWidth: 750 }}>
     <DetailsOverlay {...args} />
   </Card>
 );
@@ -20,23 +19,6 @@ export const Default = DefaultTemplate.bind({});
 Default.decorators = [
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
-
-// DetailsOverlay with filters
-const WithFiltersTemplate: ComponentStory<typeof DetailsOverlay> = (args) => (
-  <Card style={{ maxWidth: 720 }}>
-    <DetailsOverlay {...args} />
-  </Card>
-);
-
-export const WithFilters = WithFiltersTemplate.bind({});
-
-WithFilters.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/?filters=filter1,filter2"]}>
       <Story />
     </MemoryRouter>
   ),
