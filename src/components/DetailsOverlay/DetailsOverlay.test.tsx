@@ -78,24 +78,6 @@ describe("detailsOverlay", () => {
     });
   });
 
-  describe("logV2 toggle", () => {
-    it("should read from the cookie properly", () => {
-      render(<DetailsOverlay />);
-      const formatV2Toggle = screen.getByDataCy("format-v2-toggle");
-      expect(formatV2Toggle).toHaveAttribute("aria-checked", "true");
-    });
-    it("should not update the URL", async () => {
-      const { history } = render(<DetailsOverlay />);
-
-      const formatV2Toggle = screen.getByDataCy("format-v2-toggle");
-      userEvent.click(formatV2Toggle);
-      await waitFor(() => {
-        expect(formatV2Toggle).toHaveAttribute("aria-checked", "false");
-      });
-      expect(history.location.search).toBe("");
-    });
-  });
-
   describe("filter logic toggle", () => {
     it("should update the URL correctly", async () => {
       const { history } = render(<DetailsOverlay />);
