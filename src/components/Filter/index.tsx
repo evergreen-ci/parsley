@@ -24,7 +24,7 @@ const Filter: React.FC<FilterProps> = ({
   };
 
   return (
-    <FilterRow data-cy={dataCy}>
+    <FilterRow data-cy={dataCy} visible={isVisible}>
       <LeftContainer>
         <StyledIcon
           glyph="X"
@@ -36,7 +36,7 @@ const Filter: React.FC<FilterProps> = ({
           onClick={() => toggleVisible()}
           size={Size.XLarge}
         />
-        <StyledBadge> FILTER </StyledBadge>
+        <StyledBadge>FILTER</StyledBadge>
       </LeftContainer>
       <RightContainer>
         <StyledBody>{filterText}</StyledBody>
@@ -57,15 +57,18 @@ const StyledBadge = styled(Badge)`
   user-select: none;
 `;
 
-const FilterRow = styled.div`
+const FilterRow = styled.div<{
+  visible: boolean;
+}>`
   display: flex;
   align-items: flex-start;
-  margin: ${size.s} 0;
   svg,
   p,
   div {
     margin-right: ${size.xs};
   }
+
+  ${({ visible }) => !visible && `opacity: 50%;`}
 `;
 
 const LeftContainer = styled.div`

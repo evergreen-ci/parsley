@@ -33,7 +33,7 @@ const SearchRangeInput: React.FC = () => {
 
   return (
     <FilterRow>
-      <StyledSubtitle> Range </StyledSubtitle>
+      <StyledSubtitle>Range</StyledSubtitle>
       <RangeContainer>
         <RangeInput
           aria-labelledby="Range Lower Bound"

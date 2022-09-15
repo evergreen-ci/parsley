@@ -4,7 +4,7 @@ import { palette } from "@leafygreen-ui/palette";
 import Toggle from "@leafygreen-ui/toggle";
 import { Disclaimer } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
-import { FORMAT_LOG_V2, PRETTY_PRINT_BOOKMARKS } from "constants/cookies";
+import { PRETTY_PRINT_BOOKMARKS } from "constants/cookies";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
@@ -30,7 +30,7 @@ const BaseToggle: React.FC<BaseToggleProps> = ({
   onChange,
 }) => (
   <FilterRow>
-    <StyledSubtitle> {label} </StyledSubtitle>
+    <StyledSubtitle>{label}</StyledSubtitle>
     <ToggleWithLabel>
       <StyledDisclaimer>{leftLabel}</StyledDisclaimer>
       <Toggle
@@ -68,23 +68,6 @@ export const CaseSensitiveToggle: React.FC = () => {
       label="Case Sensitive"
       onChange={setCaseSensitive}
       value={caseSensitive}
-    />
-  );
-};
-
-export const LogV2Toggle: React.FC = () => {
-  const [logV2, setLogV2] = useState(Cookie.get(FORMAT_LOG_V2) === "true");
-  const onChange = (checked: boolean) => {
-    setLogV2(checked);
-    Cookie.set(FORMAT_LOG_V2, checked.toString(), { expires: 365 });
-  };
-
-  return (
-    <BaseToggle
-      data-cy="format-v2-toggle"
-      label="Format LogV2"
-      onChange={onChange}
-      value={logV2}
     />
   );
 };

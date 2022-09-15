@@ -1,7 +1,9 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import Badge from "@leafygreen-ui/badge";
 import { palette } from "@leafygreen-ui/palette";
 import DetailsOverlay from "components/DetailsOverlay";
+import Filters from "components/Filters";
 import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
@@ -22,11 +24,12 @@ const NavBar: React.FC = () => {
     []
   );
   const { hasLogs, clearLogs } = useLogContext();
+  const numFilters = filters.length;
 
   const handleSearch = (selected: string, value: string) => {
     if (selected === "search") {
       setSearch(value);
-    } else if (selected === "filter") {
+    } else if (selected === "filter" && !filters.includes(value)) {
       setFilters([...filters, value]);
     }
   };
@@ -48,7 +51,15 @@ const NavBar: React.FC = () => {
         />
       </FlexContainer>
       <ButtonContainer>
-        <StyledButton buttonText="Filters">SomeContent</StyledButton>
+        <StyledButton
+          buttonText={
+            <span>
+              Filters <Badge variant="green">{numFilters}</Badge>
+            </span>
+          }
+        >
+          <Filters />
+        </StyledButton>
         <StyledButton buttonText="Details" data-cy="details-button">
           <DetailsOverlay />
         </StyledButton>
