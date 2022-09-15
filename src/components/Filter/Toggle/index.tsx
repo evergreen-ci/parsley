@@ -1,51 +1,44 @@
-import { useState } from "react";
 import styled from "@emotion/styled";
 import Button, { Variant } from "@leafygreen-ui/button";
 import { size } from "constants/tokens";
 
-export enum ToggleButton {
-  Left = "left",
-  Right = "right",
-}
-
 interface ToggleProps {
-  activeButton?: ToggleButton.Left | ToggleButton.Right;
+  value: boolean;
+  onChange: (newValue: boolean) => void;
   ["data-cy"]?: string;
   leftText: string;
   rightText: string;
 }
 
 const Toggle: React.FC<ToggleProps> = ({
-  activeButton = "left",
+  value,
+  onChange,
   "data-cy": dataCy,
   leftText,
   rightText,
 }) => {
-  const [active, setActive] = useState<string>(activeButton);
-  const leftVariant =
-    active === ToggleButton.Left ? Variant.Primary : Variant.Default;
-  const rightVariant =
-    active === ToggleButton.Right ? Variant.Primary : Variant.Default;
+  const leftVariant = value ? Variant.Primary : Variant.Default;
+  const rightVariant = value ? Variant.Default : Variant.Primary;
 
-  const changeActiveButton = (newActive: string) => {
-    if (active !== newActive) {
-      setActive(newActive);
+  const changeActiveButton = (newActive: boolean) => {
+    if (value !== newActive) {
+      onChange(newActive);
     }
   };
 
   return (
     <div data-cy={dataCy}>
       <LeftButton
-        onClick={() => changeActiveButton(ToggleButton.Left)}
+        onClick={() => changeActiveButton(true)}
         variant={leftVariant}
       >
-        {rightText}
+        {leftText}
       </LeftButton>
       <RightButton
-        onClick={() => changeActiveButton(ToggleButton.Right)}
+        onClick={() => changeActiveButton(false)}
         variant={rightVariant}
       >
-        {leftText}
+        {rightText}
       </RightButton>
     </div>
   );

@@ -19,13 +19,15 @@ const Filter: React.FC<FilterProps> = ({
   deleteFilter,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
+  const [caseInsensitive, setCaseInsensitive] = useState(true);
+  const [match, setMatch] = useState(true);
 
   const toggleVisible = () => {
     setIsVisible(!isVisible);
   };
 
   return (
-    <FilterRow data-cy={dataCy} visible={isVisible}>
+    <FilterRow data-cy={dataCy}>
       <LeftContainer>
         <IconButton
           aria-label="Delete filter button"
@@ -47,20 +49,27 @@ const Filter: React.FC<FilterProps> = ({
       <RightContainer>
         <StyledBody>{filterText}</StyledBody>
         <FilterOptions>
-          <Toggle leftText="Sensitive" rightText="Insensitive" />
-          <Toggle leftText="Match" rightText="Inverse" />
+          <Toggle
+            leftText="Insensitive"
+            onChange={setCaseInsensitive}
+            rightText="Sensitive"
+            value={caseInsensitive}
+          />
+          <Toggle
+            leftText="Match"
+            onChange={setMatch}
+            rightText="Inverse"
+            value={match}
+          />
         </FilterOptions>
       </RightContainer>
     </FilterRow>
   );
 };
 
-const FilterRow = styled.div<{
-  visible: boolean;
-}>`
+const FilterRow = styled.div`
   display: flex;
   align-items: flex-start;
-  ${({ visible }) => !visible && `opacity: 50%;`}
 `;
 
 const StyledBadge = styled(Badge)`

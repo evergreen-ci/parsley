@@ -50,7 +50,7 @@ const SearchRangeInput: React.FC = () => {
           data-cy="range-upper-bound"
           min={-1}
           onChange={(e) => updateUpperBound(e.target.value)}
-          placeholder="-1"
+          placeholder="100"
           sizeVariant="small"
           type="number"
           value={(upperBound ?? "").toString()}
