@@ -32,7 +32,6 @@ const reducer = (state: LogState, action: Action): LogState => {
         ...state,
         logs: processedLogs,
         logType: action.logType,
-        fileName: "",
       };
     }
     case "CLEAR_LOGS":
