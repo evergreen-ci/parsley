@@ -1,5 +1,4 @@
 import {
-  conditionallyBuildResmokeLine,
   getAttributes,
   getConfigServer,
   getContext,
@@ -13,22 +12,20 @@ import {
 } from "./utils";
 
 const processResmokeLine = (line: string) => {
-  const port = getPort(line);
+  // First check if it is a resmoke line at all
   const resmokeFunction = getResmokeFunction(line);
+  if (!resmokeFunction) {
+    return line;
+  }
+  // Try to get the JSON string in the resmoke line
+  // If there is no JSON string, return the line as is
   const json = getJSONString(line);
-
-  if (!resmokeFunction || !json) {
-    // Its not a resmoke line with json so we can just return it
+  const port = getPort(line);
+  if (!json) {
     return line;
   }
+
   const timeStamp = getTimeStamp(json);
-
-  if (!timeStamp) {
-    return line;
-  }
-
-  // Timezones can either include a timezone offset or a timezone name
-
   const shellPrefix = getShellPrefix(json);
   const config = getConfigServer(json);
   const id = getId(json);
@@ -36,28 +33,14 @@ const processResmokeLine = (line: string) => {
   const msg = getMessage(json);
   const attr = getAttributes(json);
 
-  let result = conditionallyBuildResmokeLine("", resmokeFunction);
-  result = conditionallyBuildResmokeLine(result, port);
-  result = conditionallyBuildResmokeLine(
-    result,
-    timeStamp,
-    (value) => `| ${value}`
-  );
-  result = conditionallyBuildResmokeLine(
-    result,
-    shellPrefix,
-    (value) => ` ${value} `
-  );
-  result = conditionallyBuildResmokeLine(
-    result,
-    config,
-    (value) => ` ${value} `
-  );
-  result = conditionallyBuildResmokeLine(result, id, (value) => ` ${value}`);
-  result = conditionallyBuildResmokeLine(result, ctx, (value) => ` [${value}]`);
-  result = conditionallyBuildResmokeLine(result, msg, (value) => ` "${value}"`);
-  result = conditionallyBuildResmokeLine(result, attr, (value) => `,${value}`);
-  return result;
+  const output = `${resmokeFunction} ${port ?? ""}| ${timeStamp ?? ""} ${
+    shellPrefix ?? ""
+  }  ${config ?? ""}  ${id ?? ""} [${ctx ?? ""}] "${msg ?? ""}"${
+    attr ? `,${attr}` : ""
+  }`;
+  return output;
 };
 
 export { processResmokeLine };
+
+// regex for

@@ -1,30 +1,12 @@
-/**
- * `conditionallyBuildResmokeLine` will only add the value to the result if the value is not undefined
- * @param line The line to process
- * @param value The value to null check
- * @param formatting The formatting to apply to the value
- * @returns string The processed line
- */
-const conditionallyBuildResmokeLine = (
-  line: string,
-  value: string | undefined,
-  formatting?: (value: string) => string
-) => {
-  if (value) {
-    return `${line}${formatting ? formatting(value) : value}`;
-  }
-  return line;
-};
-
 /** sdbc following by a 5 digit number
  * @example s12345
  * @example d54321
  */
-const portRegex = /[sdbc](\d{1,5})/g;
+const portRegex = / ([sdbc]\d{1,5})\|/;
 
 /** `getPort` returns the port associated with a resmoke line */
 const getPort = (line: string) => {
-  const port = line.match(portRegex)?.[0];
+  const port = line.match(portRegex)?.[1];
   return port;
 };
 
@@ -113,10 +95,13 @@ const getShellPrefix = (line: string) => {
  * @example "c":"COMMAND"
  * @example "c":"REPL"
  */
-const configSrvRegex = /"c":"([a-zA-Z-]+)"/;
+const configSrvRegex = /"c":"([a-zA-Z-_]+)"/;
 /** `getConfigServer` returns the config server associated with a resmoke function this is found in the resmoke json  */
 const getConfigServer = (line: string) => {
-  const configSrv = line.match(configSrvRegex)?.[1];
+  let configSrv = line.match(configSrvRegex)?.[1];
+  if (configSrv === "-") {
+    configSrv = configSrv.padEnd(6, " ");
+  }
   return configSrv;
 };
 
@@ -181,5 +166,4 @@ export {
   getResmokeFunction,
   getShellPrefix,
   getTimeStamp,
-  conditionallyBuildResmokeLine,
 };
