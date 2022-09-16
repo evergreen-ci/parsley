@@ -5,6 +5,7 @@ import { ListRowProps } from "react-virtualized";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
+import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
 
 const { yellow, red } = palette;
@@ -24,6 +25,7 @@ interface BaseRowProps extends ListRowProps {
  */
 const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
   const { index, lineNumber, children, wrap, isVisible, ...rest } = props;
+  const { setScrollIndex } = useLogContext();
 
   const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
@@ -43,6 +45,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       setSelectedLine(undefined);
     } else {
       setSelectedLine(lineNumber);
+      setScrollIndex(index);
     }
   };
 

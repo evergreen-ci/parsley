@@ -44,7 +44,6 @@ const SideBar: React.FC<SideBarProps> = ({
   // Finds the corresponding index of a lineNumber and scrolls to it.
   const scrollToIndex = (lineNumber: number): void => {
     const lineIndex = findLineIndex(processedLogLines, lineNumber);
-    console.log("The line index is: ", lineIndex);
     setScrollIndex(lineIndex);
   };
 

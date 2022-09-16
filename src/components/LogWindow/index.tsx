@@ -28,33 +28,10 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
 
   // TODO: EVG-17525
   // Do what ever logic to process the lines here
-  // const processedLogLines = useMemo(
-  //   () => logLines.map((_, index) => index),
-  //   [logLines]
-  // );
-
-  const [search] = useQueryParam(QueryParams.Search, "");
-  const lineCount = logLines.length;
-
-  const processedLogLines = useMemo(() => {
-    if (!search) {
-      return [...Array(lineCount).keys()];
-    }
-    const regex = new RegExp(search, "i");
-    const matchingSearches = [];
-    for (let i = 0; i < lineCount; i++) {
-      const line = getLine(i) || "";
-      if (regex.test(line)) {
-        matchingSearches.push(i);
-      } else if (Array.isArray(matchingSearches[matchingSearches.length - 1])) {
-        // @ts-expect-error
-        matchingSearches[matchingSearches.length - 1].push(i);
-      } else {
-        matchingSearches.push([i]);
-      }
-    }
-    return matchingSearches;
-  }, [search, lineCount, getLine]);
+  const processedLogLines = useMemo(
+    () => logLines.map((_, index) => index),
+    [logLines]
+  );
 
   return (
     <Container data-cy="log-window">
