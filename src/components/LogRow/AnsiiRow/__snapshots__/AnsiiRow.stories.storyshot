@@ -1,5 +1,43 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`storyshots Storyshots Components/LogRow/AnsiiRow Collapsed 1`] = `
+<div
+  className="css-1mysoqc"
+>
+  <div
+    style={
+      Object {
+        "height": 0,
+        "overflow": "visible",
+        "width": 0,
+      }
+    }
+  >
+    <div
+      aria-label="grid"
+      aria-readonly={true}
+      className="ReactVirtualized__Grid ReactVirtualized__List"
+      onScroll={[Function]}
+      role="grid"
+      style={
+        Object {
+          "WebkitOverflowScrolling": "touch",
+          "boxSizing": "border-box",
+          "direction": "ltr",
+          "height": 0,
+          "overflowX": "hidden",
+          "overflowY": "auto",
+          "position": "relative",
+          "width": 0,
+          "willChange": "transform",
+        }
+      }
+      tabIndex={0}
+    />
+  </div>
+</div>
+`;
+
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
 <div
   className="css-1mysoqc"

@@ -1,4 +1,3 @@
-import React from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
@@ -16,12 +15,14 @@ export default {
 type ResmokeRowProps = React.FC<
   React.ComponentProps<typeof ResmokeRow>["data"]
 >;
+
+// Single ResmokeRow.
 const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
   <ResmokeRow
     key={logLines[0]}
     data={{
       getLine,
-      wrap: args?.wrap,
+      wrap: args.wrap,
       processedLines: processedLogLines,
       logType: LogTypes.RESMOKE_LOGS,
     }}
@@ -38,6 +39,7 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
 );
 
 export const SingleLine = SingleLineTemplate.bind({});
+
 SingleLine.args = {
   wrap: false,
 };
@@ -49,10 +51,12 @@ SingleLine.decorators = [
   ),
 ];
 
+// Multiple ResmokeRows.
 const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
   <Container>
     <LogPane
       cache={cache}
+      filters={[]}
       logLines={processedLogLines}
       rowCount={processedLogLines.length}
       rowRenderer={RowRenderer({
@@ -68,10 +72,44 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
 );
 
 export const MultipleLines = MultipleLineTemplate.bind({});
+
 MultipleLines.args = {
   wrap: false,
 };
 MultipleLines.decorators = [
+  (Story) => (
+    <MemoryRouter initialEntries={["/"]}>
+      <Story />
+    </MemoryRouter>
+  ),
+];
+
+// Multiple ResmokeRows with CollapsedRows.
+const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => (
+  <Container>
+    <LogPane
+      cache={cache}
+      filters={[]}
+      logLines={collapsedProcessedLogLines}
+      rowCount={collapsedProcessedLogLines.length}
+      rowRenderer={RowRenderer({
+        logType: LogTypes.RESMOKE_LOGS,
+        wrap: args.wrap,
+        getLine,
+        processedLines: collapsedProcessedLogLines,
+      })}
+      scrollToIndex={0}
+      wrap={args.wrap}
+    />
+  </Container>
+);
+
+export const Collapsed = CollapsedTemplate.bind({});
+
+Collapsed.args = {
+  wrap: false,
+};
+Collapsed.decorators = [
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
@@ -90,6 +128,8 @@ const logLines = [
   "[j0:sec1] Starting mongod on port 20002...",
 ];
 const processedLogLines = logLines.map((_, index) => index);
+
+const collapsedProcessedLogLines = [0, 1, 2, [3, 4, 5], 6, 7];
 
 const Container = styled.div`
   height: 400px;
