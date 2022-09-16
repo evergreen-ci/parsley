@@ -1,5 +1,12 @@
 import { fail } from "assert";
 
+const LOGIN_COOKIE = "mci-token";
+const loginURL = "http://localhost:9090/login";
+const user = {
+  username: "admin",
+  password: "password",
+};
+
 const toastDataCy = "toast";
 
 Cypress.Commands.add("dataCy", (value: string) => {
@@ -79,3 +86,15 @@ Cypress.Commands.add(
     }
   }
 );
+
+Cypress.Commands.add("login", () => {
+  cy.getCookie(LOGIN_COOKIE).then((c) => {
+    if (!c) {
+      cy.request("POST", loginURL, { ...user });
+    }
+  });
+});
+
+Cypress.Commands.add("preserveCookies", () => {
+  Cypress.Cookies.preserveOnce(LOGIN_COOKIE, "mci-session");
+});

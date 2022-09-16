@@ -37,6 +37,26 @@ declare global {
         message?: string,
         shouldClose?: boolean
       ): void;
+
+      /**
+       * Custom command to preserve cookie between tests.
+       * @example cy.preserveCookies()
+       */
+      preserveCookies(): void;
+      /**
+       * Custom command to login to the application
+       * @example cy.login()
+       */
+      login(): void;
     }
   }
 }
+
+// Login before each test and remove banner cookies
+// We can disable the necessary cookies for tests that need the banners
+before(() => {
+  cy.login();
+});
+beforeEach(() => {
+  cy.preserveCookies();
+});
