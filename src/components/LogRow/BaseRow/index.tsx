@@ -13,6 +13,9 @@ interface BaseRowProps extends ListRowProps {
   children: React.ReactNode;
   index: number;
   wrap: boolean;
+  // The line number associated with a log line and its index within the context of the virtualized list
+  // may differ due to collapsed rows.
+  lineNumber: number;
 }
 
 /**
@@ -20,36 +23,36 @@ interface BaseRowProps extends ListRowProps {
  * It is responsible for handling the highlighting of the selected line
  */
 const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
-  const { index, children, wrap, isVisible, ...rest } = props;
+  const { index, lineNumber, children, wrap, isVisible, ...rest } = props;
 
   const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
   );
-  const selected = selectedLine === index;
+  const selected = selectedLine === lineNumber;
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
     []
   );
-  const bookmarked = bookmarks.includes(index);
+  const bookmarked = bookmarks.includes(lineNumber);
 
   // Clicking a line should select or deselect the line.
   const handleClick = () => {
     if (selected) {
       setSelectedLine(undefined);
     } else {
-      setSelectedLine(index);
+      setSelectedLine(lineNumber);
     }
   };
 
   // Double clicking a line should add or remove the line from bookmarks.
   const handleDoubleClick = () => {
-    if (bookmarks.includes(index)) {
-      const newBookmarks = bookmarks.filter((b) => b !== index);
+    if (bookmarks.includes(lineNumber)) {
+      const newBookmarks = bookmarks.filter((b) => b !== lineNumber);
       setBookmarks(newBookmarks);
     } else {
-      const newBookmarks = [...bookmarks, index].sort();
+      const newBookmarks = [...bookmarks, lineNumber].sort((a, b) => a - b);
       setBookmarks(newBookmarks);
     }
   };
@@ -59,19 +62,18 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       {...rest}
       ref={ref}
       bookmarked={bookmarked}
-      data-cy={`log-row-${index}`}
-      index={index}
+      data-cy={`log-row-${lineNumber}`}
       onDoubleClick={handleDoubleClick}
       selected={selected}
       shouldWrap={wrap}
     >
       <StyledIcon
-        data-cy={`log-link-${index}`}
+        data-cy={`log-link-${lineNumber}`}
         glyph={selected ? "ArrowWithCircle" : "Link"}
         onClick={handleClick}
         size="small"
       />
-      <Index>{index}</Index>
+      <Index>{lineNumber}</Index>
       {children}
     </StyledPre>
   );
@@ -86,13 +88,14 @@ const StyledIcon = styled(Icon)`
 `;
 
 const Index = styled.span`
+  display: inline-block;
+  width: ${size.xl};
   margin-left: ${size.s};
-  margin-right: ${size.xl};
+  margin-right: ${size.s};
   user-select: none;
 `;
 
 const StyledPre = styled.pre<{
-  index: number;
   shouldWrap: boolean;
   selected: boolean;
   bookmarked: boolean;
