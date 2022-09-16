@@ -6,15 +6,21 @@ import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, navbarHeight, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { findLineIndex } from "utils/search";
 
 const { gray } = palette;
 
 interface SideBarProps {
   maxLineNumber: number;
+  processedLogLines: (number | number[])[];
+  setScrollIndex: (scrollIndex: number | undefined) => void;
 }
 
-/** TODO: EVG-17532 */
-const SideBar: React.FC<SideBarProps> = ({ maxLineNumber }) => {
+const SideBar: React.FC<SideBarProps> = ({
+  maxLineNumber,
+  processedLogLines,
+  setScrollIndex,
+}) => {
   const [selectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
@@ -35,6 +41,13 @@ const SideBar: React.FC<SideBarProps> = ({ maxLineNumber }) => {
     ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
     : bookmarks;
 
+  // Finds the corresponding index of a lineNumber and scrolls to it.
+  const scrollToIndex = (lineNumber: number): void => {
+    const lineIndex = findLineIndex(processedLogLines, lineNumber);
+    console.log("The line index is: ", lineIndex);
+    setScrollIndex(lineIndex);
+  };
+
   return (
     <Container>
       <StyledButton
@@ -46,7 +59,7 @@ const SideBar: React.FC<SideBarProps> = ({ maxLineNumber }) => {
       </StyledButton>
       <LogLineContainer data-cy="log-line-container">
         {lineNumbers.map((l) => (
-          <LogLineNumber key={`log-line-${l}`}>
+          <LogLineNumber key={`log-line-${l}`} onClick={() => scrollToIndex(l)}>
             <span> {l} </span>
             {l === selectedLine && <StyledIcon glyph="Link" size="small" />}
           </LogLineNumber>
@@ -71,6 +84,8 @@ const LogLineNumber = styled.div`
   display: flex;
   align-items: center;
   font-size: ${fontSize.m};
+  line-height: 1.3em;
+  font-family: "Source Code Pro";
 `;
 
 const StyledIcon = styled(Icon)`

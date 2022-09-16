@@ -3,12 +3,14 @@ import { useReducer } from "react";
 interface LogState {
   logs: string[];
   fileName?: string;
+  scrollIndex?: number;
 }
 
 type Action =
   | { type: "INGEST_LOGS"; logs: string[] }
   | { type: "CLEAR_LOGS" }
-  | { type: "SET_FILE_NAME"; fileName: string };
+  | { type: "SET_FILE_NAME"; fileName: string }
+  | { type: "SET_SCROLL_INDEX"; scrollIndex: number | undefined };
 
 const initialState = (initialLogLines?: string[]): LogState => ({
   logs: initialLogLines || [],
@@ -31,6 +33,11 @@ const reducer = (state: LogState, action: Action) => {
       return {
         ...state,
         fileName: action.fileName,
+      };
+    case "SET_SCROLL_INDEX":
+      return {
+        ...state,
+        scrollIndex: action.scrollIndex,
       };
     default:
       throw new Error(`Unkown reducer action ${action}`);

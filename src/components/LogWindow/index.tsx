@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useEffect, useMemo } from "react";
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
@@ -15,21 +15,56 @@ interface LogWindowProps {
   isUploadedLog: boolean;
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
-  const { logLines, hasLogs, getLine } = useLogContext();
+  const { logLines, scrollIndex, setScrollIndex, hasLogs, getLine } =
+    useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
-  const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
+  const [selectedLine] = useQueryParam(QueryParams.SelectedLine, 0);
+
+  // On page load, scroll to the share line or the first line (default).
+  useEffect(() => {
+    setScrollIndex(selectedLine);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // TODO: EVG-17525
   // Do what ever logic to process the lines here
-  const processedLogLines = useMemo(
-    () => logLines.map((_, index) => index),
-    [logLines]
-  );
+  // const processedLogLines = useMemo(
+  //   () => logLines.map((_, index) => index),
+  //   [logLines]
+  // );
+
+  const [search] = useQueryParam(QueryParams.Search, "");
+  const lineCount = logLines.length;
+
+  const processedLogLines = useMemo(() => {
+    if (!search) {
+      return [...Array(lineCount).keys()];
+    }
+    const regex = new RegExp(search, "i");
+    const matchingSearches = [];
+    for (let i = 0; i < lineCount; i++) {
+      const line = getLine(i) || "";
+      if (regex.test(line)) {
+        matchingSearches.push(i);
+      } else if (Array.isArray(matchingSearches[matchingSearches.length - 1])) {
+        // @ts-expect-error
+        matchingSearches[matchingSearches.length - 1].push(i);
+      } else {
+        matchingSearches.push([i]);
+      }
+    }
+    return matchingSearches;
+  }, [search, lineCount, getLine]);
 
   return (
     <Container data-cy="log-window">
-      {hasLogs && <SideBar maxLineNumber={logLines.length - 1} />}
+      {hasLogs && (
+        <SideBar
+          maxLineNumber={logLines.length - 1}
+          processedLogLines={processedLogLines}
+          setScrollIndex={setScrollIndex}
+        />
+      )}
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>
@@ -44,7 +79,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               getLine,
               processedLines: processedLogLines,
             })}
-            scrollToIndex={scrollToIndex}
+            scrollToIndex={scrollIndex}
             wrap={wrap}
           />
         </LogPaneContainer>

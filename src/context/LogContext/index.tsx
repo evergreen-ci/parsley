@@ -6,10 +6,12 @@ interface LogContextState {
   lineCount: number;
   hasLogs: boolean;
   fileName?: string;
+  scrollIndex?: number;
   ingestLines: (logs: string[]) => void;
   getLine: (lineNumber: number) => string | undefined;
   setFileName: (fileName: string) => void;
   clearLogs: () => void;
+  setScrollIndex: (newScrollIndex: number | undefined) => void;
 }
 const LogContext = createContext<LogContextState | null>(null);
 
@@ -48,6 +50,13 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [state.logs]
   );
 
+  const setScrollIndex = useCallback(
+    (newScrollIndex: number | undefined) => {
+      dispatch({ type: "SET_SCROLL_INDEX", scrollIndex: newScrollIndex });
+    },
+    [dispatch]
+  );
+
   const setFileName = useCallback(
     (fileName: string) => {
       dispatch({ type: "SET_FILE_NAME", fileName });
@@ -60,12 +69,23 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       lineCount: state.logs.length,
       fileName: state.fileName,
       hasLogs: state.logs.length > 0,
+      scrollIndex: state.scrollIndex,
+      setScrollIndex,
       clearLogs,
       setFileName,
       getLine,
       ingestLines,
     }),
-    [state.logs, state.fileName, setFileName, ingestLines, getLine, clearLogs]
+    [
+      state.logs,
+      state.fileName,
+      state.scrollIndex,
+      setFileName,
+      setScrollIndex,
+      ingestLines,
+      getLine,
+      clearLogs,
+    ]
   );
 
   return (

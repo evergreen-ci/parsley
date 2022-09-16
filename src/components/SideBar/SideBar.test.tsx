@@ -3,16 +3,29 @@ import SideBar from ".";
 
 describe("sideBar", () => {
   it("sets 0 and last log line as the initial bookmarks", async () => {
-    const { history } = renderWithRouterMatch(<SideBar maxLineNumber={10} />);
+    const { history } = renderWithRouterMatch(
+      <SideBar
+        maxLineNumber={10}
+        processedLogLines={[]}
+        setScrollIndex={jest.fn()}
+      />
+    );
     await waitFor(() => {
       expect(history.location.search).toBe("?bookmarks=0,10");
     });
   });
 
   it("properly displays sorted bookmarks and selectedLine", () => {
-    renderWithRouterMatch(<SideBar maxLineNumber={10} />, {
-      route: "?bookmarks=1,7&selectedLine=5",
-    });
+    renderWithRouterMatch(
+      <SideBar
+        maxLineNumber={10}
+        processedLogLines={[]}
+        setScrollIndex={jest.fn()}
+      />,
+      {
+        route: "?bookmarks=1,7&selectedLine=5",
+      }
+    );
     const { children } = screen.getByDataCy("log-line-container");
     expect(children).toHaveLength(3);
     expect(children.item(0)?.textContent).toContain("1");
@@ -24,9 +37,16 @@ describe("sideBar", () => {
   });
 
   it("should be able to clear all bookmarks without removing selected line", async () => {
-    const { history } = renderWithRouterMatch(<SideBar maxLineNumber={10} />, {
-      route: "?bookmarks=1,3&selectedLine=5",
-    });
+    const { history } = renderWithRouterMatch(
+      <SideBar
+        maxLineNumber={10}
+        processedLogLines={[]}
+        setScrollIndex={jest.fn()}
+      />,
+      {
+        route: "?bookmarks=1,3&selectedLine=5",
+      }
+    );
     userEvent.click(screen.getByDataCy("clear-bookmarks"));
     await waitFor(() => {
       expect(history.location.search).toBe("?selectedLine=5");
