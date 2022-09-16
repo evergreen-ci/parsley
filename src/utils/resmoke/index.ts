@@ -35,7 +35,7 @@ const processResmokeLine = (line: string) => {
 
   const output = `${resmokeFunction} ${port ?? ""}| ${timeStamp ?? ""} ${
     shellPrefix ?? ""
-  }  ${config ?? ""}  ${id ?? ""} [${ctx ?? ""}] "${msg ?? ""}"${
+  } ${config ?? ""} ${id ?? ""} [${ctx ?? ""}] "${msg ?? ""}"${
     attr ? `,${attr}` : ""
   }`;
   return output;
