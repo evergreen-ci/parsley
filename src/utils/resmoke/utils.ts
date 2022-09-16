@@ -85,10 +85,7 @@ const shellPrefixRegex = /"s":"([A-Z0-9]+)"/;
 
 /** `getShellPrefix` returns the shell prefix ran by a resmoke function this is found in the resmoke json */
 const getShellPrefix = (line: string) => {
-  let shellPrefix = line.match(shellPrefixRegex)?.[1];
-  if (shellPrefix) {
-    shellPrefix = shellPrefix.padEnd(2, " ");
-  }
+  const shellPrefix = line.match(shellPrefixRegex)?.[1];
   return shellPrefix;
 };
 
@@ -101,10 +98,7 @@ const getShellPrefix = (line: string) => {
 const configSrvRegex = /"c":"([a-zA-Z-_]+)"/;
 /** `getConfigServer` returns the config server associated with a resmoke function this is found in the resmoke json  */
 const getConfigServer = (line: string) => {
-  let configSrv = line.match(configSrvRegex)?.[1];
-  if (configSrv) {
-    configSrv = configSrv.padEnd(8, " ");
-  }
+  const configSrv = line.match(configSrvRegex)?.[1];
   return configSrv;
 };
 
@@ -119,11 +113,7 @@ const idRegex = /"id":([0-9]*)/;
 
 /** `getId` returns the process id associated with a mongod instance this is found in the resmoke json  */
 const getId = (line: string) => {
-  let id = line.match(idRegex)?.[1];
-  // make id at least 7 characters long
-  if (id) {
-    id = id.padEnd(7, " ");
-  }
+  const id = line.match(idRegex)?.[1];
   return id;
 };
 

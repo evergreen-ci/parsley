@@ -26,16 +26,16 @@ const processResmokeLine = (line: string) => {
   }
 
   const timeStamp = getTimeStamp(json);
-  const shellPrefix = getShellPrefix(json);
-  const config = getConfigServer(json);
-  const id = getId(json);
+  const shellPrefix = getShellPrefix(json)?.padEnd(2, " ");
+  const configSrv = getConfigServer(json)?.padEnd(8, " ");
+  const id = getId(json)?.padEnd(7, " ");
   const ctx = getContext(json);
   const msg = getMessage(json);
   const attr = getAttributes(json);
 
   const output = `${resmokeFunction} ${port ?? ""}| ${timeStamp ?? ""} ${
     shellPrefix ?? ""
-  } ${config ?? ""} ${id ?? ""} [${ctx ?? ""}] "${msg ?? ""}"${
+  } ${configSrv ?? ""} ${id ?? ""} [${ctx ?? ""}] "${msg ?? ""}"${
     attr ? `,${attr}` : ""
   }`;
   return output;
