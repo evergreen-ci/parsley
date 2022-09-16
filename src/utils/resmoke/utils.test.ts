@@ -34,10 +34,12 @@ describe("resmoke/utils", () => {
       expect(getConfigServer(line)).toBe("NETWORK");
       line = `{"t":{"$date":"2022-09-08T14:51:21.568+00:00"},"s":"I",  "c":"COMMAND" }`;
       expect(getConfigServer(line)).toBe("COMMAND");
-      line = `{"t":{"$date":"2022-09-08T14:51:21.568+00:00"},"s":"I",  "c":"-" }`;
-      expect(getConfigServer(line)).toBe("-");
       line = `[j0:s0:n1] {"t":{"$date":"2022-09-13T16:57:46.852+00:00"},"s":"D2", "c":"REPL_HB",  "id":4615670, "ctx":"ReplCoord-1","msg":"Sending heartbeat","attr":{"requestId":3705,"target":"localhost:20003","heartbeatObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":3,"hbv":1,"from":"localhost:20004","fromId":1,"term":3,"primaryId":1}}}`;
       expect(getConfigServer(line)).toBe("REPL_HB");
+    });
+    it("should pad the config server if its value is `-`", () => {
+      const line = `{"t":{"$date":"2022-09-08T14:51:21.568+00:00"},"s":"I",  "c":"-" }`;
+      expect(getConfigServer(line)).toBe("-     ");
     });
   });
   describe("getContext", () => {
