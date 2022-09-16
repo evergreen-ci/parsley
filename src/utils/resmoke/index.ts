@@ -42,5 +42,3 @@ const processResmokeLine = (line: string) => {
 };
 
 export { processResmokeLine };
-
-// regex for
