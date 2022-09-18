@@ -32,8 +32,8 @@
     "test:watch": "jest --watch --verbose"
   },
   "dependencies": {
-    "@emotion/react": "11.9.3",
-    "@emotion/styled": "11.9.3",
+    "@emotion/react": "11.10.0",
+    "@emotion/styled": "11.10.0",
     "@leafygreen-ui/badge": "5.0.1",
     "@leafygreen-ui/banner": "5.0.0",
     "@leafygreen-ui/button": "16.0.0",
@@ -43,8 +43,9 @@
     "@leafygreen-ui/icon-button": "13.1.0",
     "@leafygreen-ui/leafygreen-provider": "2.3.2",
     "@leafygreen-ui/palette": "3.4.0",
+    "@leafygreen-ui/segmented-control": "3.0.1",
     "@leafygreen-ui/select": "7.0.1",
-    "@leafygreen-ui/text-input": "10.1.0",
+    "@leafygreen-ui/text-input": "10.1.3",
     "@leafygreen-ui/toggle": "8.0.2",
     "@leafygreen-ui/tooltip": "7.1.0",
     "@leafygreen-ui/typography": "13.1.1",

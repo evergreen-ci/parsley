@@ -2,10 +2,26 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import Badge from "@leafygreen-ui/badge";
 import IconButton from "@leafygreen-ui/icon-button";
+import { palette } from "@leafygreen-ui/palette";
+import {
+  SegmentedControlOption as Option,
+  SegmentedControl,
+} from "@leafygreen-ui/segmented-control";
 import { Body } from "@leafygreen-ui/typography";
 import Icon, { Size } from "components/Icon";
 import { fontSize, size } from "constants/tokens";
-import Toggle from "./Toggle";
+
+const { gray } = palette;
+
+enum CaseSensitivity {
+  Sensitive = "sensitive",
+  Insensitive = "insensitive",
+}
+
+enum MatchType {
+  Exact = "exact",
+  Inverse = "inverse",
+}
 
 interface FilterProps {
   ["data-cy"]?: string;
@@ -19,8 +35,10 @@ const Filter: React.FC<FilterProps> = ({
   deleteFilter,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
-  const [caseInsensitive, setCaseInsensitive] = useState(true);
-  const [match, setMatch] = useState(true);
+  const [caseSensitivity, setCaseSensitivity] = useState<string>(
+    CaseSensitivity.Insensitive
+  );
+  const [matchType, setMatchType] = useState<string>(MatchType.Exact);
 
   const toggleVisible = () => {
     setIsVisible(!isVisible);
@@ -34,14 +52,17 @@ const Filter: React.FC<FilterProps> = ({
           onClick={() => deleteFilter(filterText)}
           size={Size.Large}
         >
-          <Icon glyph="X" />
+          <Icon fill={gray.dark1} glyph="X" />
         </IconButton>
         <IconButton
           aria-label="Visibility filter button"
           onClick={() => toggleVisible()}
           size={Size.Large}
         >
-          <Icon glyph={isVisible ? "Visibility" : "ClosedEye"} />
+          <Icon
+            fill={gray.dark1}
+            glyph={isVisible ? "Visibility" : "ClosedEye"}
+          />
         </IconButton>
         <StyledBadge>FILTER</StyledBadge>
       </LeftContainer>
@@ -49,18 +70,17 @@ const Filter: React.FC<FilterProps> = ({
       <RightContainer>
         <StyledBody>{filterText}</StyledBody>
         <FilterOptions>
-          <Toggle
-            leftText="Insensitive"
-            onChange={setCaseInsensitive}
-            rightText="Sensitive"
-            value={caseInsensitive}
-          />
-          <Toggle
-            leftText="Match"
-            onChange={setMatch}
-            rightText="Inverse"
-            value={match}
-          />
+          <SegmentedControl
+            defaultValue={caseSensitivity}
+            onChange={setCaseSensitivity}
+          >
+            <Option value={CaseSensitivity.Insensitive}>Insensitive</Option>
+            <Option value={CaseSensitivity.Sensitive}>Sensitive</Option>
+          </SegmentedControl>
+          <SegmentedControl defaultValue={matchType} onChange={setMatchType}>
+            <Option value={MatchType.Exact}>Match</Option>
+            <Option value={MatchType.Inverse}>Inverse</Option>
+          </SegmentedControl>
         </FilterOptions>
       </RightContainer>
     </FilterRow>

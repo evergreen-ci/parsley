@@ -8,6 +8,7 @@ interface LeafygreenIconProps extends React.SVGProps<SVGSVGElement> {
 
 export const ClosedEye: React.ComponentType<LeafygreenIconProps> = ({
   className,
+  fill = "#001E2B",
   onClick,
 }) => (
   <svg
@@ -21,22 +22,22 @@ export const ClosedEye: React.ComponentType<LeafygreenIconProps> = ({
   >
     <path
       d="M22.5 10.5h-2.077c0 2.154-5.654 6.462-8.423 6.462v1.616c3.23 0 10.5-3.367 10.5-8.078ZM1.5 10.5h2.077c0 2.154 5.654 6.462 8.423 6.462v1.616c-3.23 0-10.5-3.366-10.5-8.077Z"
-      fill="#001E2B"
+      fill={fill}
     />
     <path
       d="M12 18.578c-3.23 0-10.5-3.366-10.5-8.077h2.077c0 2.153 5.654 6.461 8.423 6.461m0 1.616v-1.616m0 1.616c3.23 0 10.5-3.367 10.5-8.078h-2.077c0 2.154-5.654 6.462-8.423 6.462M1.5 16.558l1.292-1.212.646.606-1.292 1.211-.646-.605Z"
-      stroke="#001E2B"
+      stroke={fill}
       strokeLinejoin="round"
     />
     <path
       d="M7.962 17.77H6.669l-1.292 1.817.623.663 1.962-2.48ZM22.5 16.558l-1.292-1.212-.646.606 1.292 1.211.646-.605ZM15.632 17.635h1.292l1.7 1.951-.647.606-2.345-2.557Z"
-      stroke="#001E2B"
+      stroke={fill}
       strokeLinejoin="round"
     />
     <path
       d="M11.192 18.577h1.616V21h-1.616v-2.423Z"
-      fill="#001E2B"
-      stroke="#001E2B"
+      fill={fill}
+      stroke={fill}
       strokeLinejoin="round"
     />
   </svg>
