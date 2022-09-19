@@ -69,7 +69,9 @@ const SearchRangeInput: React.FC = () => {
           />
         </InputContainer>
         {hasError && (
-          <WarningMessage>Specified range is not valid.</WarningMessage>
+          <ErrorMessage data-cy="range-error-message">
+            Specified range is not valid.
+          </ErrorMessage>
         )}
       </RangeContainer>
     </StyledFilterRow>
@@ -95,7 +97,7 @@ const RangeInput = styled(TextInput)`
   margin-left: ${size.xs};
 `;
 
-const WarningMessage = styled.div`
+const ErrorMessage = styled.div`
   color: ${red.base};
   margin-top: ${size.xxs};
   margin-left: ${size.xs};

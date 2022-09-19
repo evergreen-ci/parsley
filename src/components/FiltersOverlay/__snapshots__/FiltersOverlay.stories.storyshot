@@ -50,7 +50,7 @@ exports[`storyshots Storyshots Components/FiltersOverlay With Filters 1`] = `
             >
               <svg
                 aria-label="X Icon"
-                className=""
+                className="leafygreen-ui-jc2z8v"
                 fill="none"
                 height={20}
                 role="img"
@@ -79,7 +79,7 @@ exports[`storyshots Storyshots Components/FiltersOverlay With Filters 1`] = `
             >
               <svg
                 aria-label="Visibility Icon"
-                className=""
+                className="leafygreen-ui-jc2z8v"
                 fill="none"
                 height={20}
                 role="img"
@@ -113,77 +113,153 @@ exports[`storyshots Storyshots Components/FiltersOverlay With Filters 1`] = `
           <div
             className="css-1wywawq"
           >
-            <div>
-              <button
-                aria-disabled={false}
-                className="leafygreen-ui-fa96ss css-137zs9a"
-                data-leafygreen-ui="button"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
+            <div
+              className="leafygreen-ui-1gmp0zo"
+            >
+              <div
+                aria-label="segmented-control-1"
+                aria-owns="segmented-control-1-0 segmented-control-1-1"
+                className="leafygreen-ui-12bq93"
+                onKeyDownCapture={[Function]}
+                role="tablist"
               >
                 <div
-                  className="leafygreen-ui-v038xi"
+                  className="leafygreen-ui-o8nc5p"
+                  data-lg-checked={true}
+                >
+                  <div
+                    className="leafygreen-ui-177u11x"
+                    tabIndex={-1}
+                  >
+                    <button
+                      aria-selected={true}
+                      className="leafygreen-ui-erolhb"
+                      disabled={false}
+                      id="segmented-control-1-0"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="tab"
+                      tabIndex={0}
+                    >
+                      <span
+                        className="leafygreen-ui-7usxqc"
+                      >
+                        Insensitive
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="leafygreen-ui-o8nc5p"
+                  data-lg-checked={false}
+                >
+                  <div
+                    className="leafygreen-ui-177u11x"
+                    tabIndex={-1}
+                  >
+                    <button
+                      aria-selected={false}
+                      className="leafygreen-ui-erolhb"
+                      disabled={false}
+                      id="segmented-control-1-1"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="tab"
+                      tabIndex={-1}
+                    >
+                      <span
+                        className="leafygreen-ui-7usxqc"
+                      >
+                        Sensitive
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="leafygreen-ui-1lbipy6"
+                  data-leafygreen-ui="selection-indicator"
                 />
                 <div
-                  className="leafygreen-ui-1qmzz4y"
-                >
-                  Insensitive
-                </div>
-              </button>
-              <button
-                aria-disabled={false}
-                className="leafygreen-ui-1olgycx css-cqs1z6"
-                data-leafygreen-ui="button"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
-              >
-                <div
-                  className="leafygreen-ui-v038xi"
+                  className="leafygreen-ui-5ppege"
+                  data-leafygreen-ui="hover-indicator"
                 />
-                <div
-                  className="leafygreen-ui-1qmzz4y"
-                >
-                  Sensitive
-                </div>
-              </button>
+              </div>
             </div>
-            <div>
-              <button
-                aria-disabled={false}
-                className="leafygreen-ui-fa96ss css-137zs9a"
-                data-leafygreen-ui="button"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
+            <div
+              className="leafygreen-ui-1gmp0zo"
+            >
+              <div
+                aria-label="segmented-control-2"
+                aria-owns="segmented-control-2-0 segmented-control-2-1"
+                className="leafygreen-ui-12bq93"
+                onKeyDownCapture={[Function]}
+                role="tablist"
               >
                 <div
-                  className="leafygreen-ui-v038xi"
+                  className="leafygreen-ui-o8nc5p"
+                  data-lg-checked={true}
+                >
+                  <div
+                    className="leafygreen-ui-177u11x"
+                    tabIndex={-1}
+                  >
+                    <button
+                      aria-selected={true}
+                      className="leafygreen-ui-erolhb"
+                      disabled={false}
+                      id="segmented-control-2-0"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="tab"
+                      tabIndex={0}
+                    >
+                      <span
+                        className="leafygreen-ui-7usxqc"
+                      >
+                        Match
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="leafygreen-ui-o8nc5p"
+                  data-lg-checked={false}
+                >
+                  <div
+                    className="leafygreen-ui-177u11x"
+                    tabIndex={-1}
+                  >
+                    <button
+                      aria-selected={false}
+                      className="leafygreen-ui-erolhb"
+                      disabled={false}
+                      id="segmented-control-2-1"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="tab"
+                      tabIndex={-1}
+                    >
+                      <span
+                        className="leafygreen-ui-7usxqc"
+                      >
+                        Inverse
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="leafygreen-ui-1lbipy6"
+                  data-leafygreen-ui="selection-indicator"
                 />
                 <div
-                  className="leafygreen-ui-1qmzz4y"
-                >
-                  Match
-                </div>
-              </button>
-              <button
-                aria-disabled={false}
-                className="leafygreen-ui-1olgycx css-cqs1z6"
-                data-leafygreen-ui="button"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
-              >
-                <div
-                  className="leafygreen-ui-v038xi"
+                  className="leafygreen-ui-5ppege"
+                  data-leafygreen-ui="hover-indicator"
                 />
-                <div
-                  className="leafygreen-ui-1qmzz4y"
-                >
-                  Inverse
-                </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -210,7 +286,7 @@ exports[`storyshots Storyshots Components/FiltersOverlay With Filters 1`] = `
             >
               <svg
                 aria-label="X Icon"
-                className=""
+                className="leafygreen-ui-jc2z8v"
                 fill="none"
                 height={20}
                 role="img"
@@ -239,7 +315,7 @@ exports[`storyshots Storyshots Components/FiltersOverlay With Filters 1`] = `
             >
               <svg
                 aria-label="Visibility Icon"
-                className=""
+                className="leafygreen-ui-jc2z8v"
                 fill="none"
                 height={20}
                 role="img"
@@ -273,77 +349,153 @@ exports[`storyshots Storyshots Components/FiltersOverlay With Filters 1`] = `
           <div
             className="css-1wywawq"
           >
-            <div>
-              <button
-                aria-disabled={false}
-                className="leafygreen-ui-fa96ss css-137zs9a"
-                data-leafygreen-ui="button"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
+            <div
+              className="leafygreen-ui-1gmp0zo"
+            >
+              <div
+                aria-label="segmented-control-3"
+                aria-owns="segmented-control-3-0 segmented-control-3-1"
+                className="leafygreen-ui-12bq93"
+                onKeyDownCapture={[Function]}
+                role="tablist"
               >
                 <div
-                  className="leafygreen-ui-v038xi"
+                  className="leafygreen-ui-o8nc5p"
+                  data-lg-checked={true}
+                >
+                  <div
+                    className="leafygreen-ui-177u11x"
+                    tabIndex={-1}
+                  >
+                    <button
+                      aria-selected={true}
+                      className="leafygreen-ui-erolhb"
+                      disabled={false}
+                      id="segmented-control-3-0"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="tab"
+                      tabIndex={0}
+                    >
+                      <span
+                        className="leafygreen-ui-7usxqc"
+                      >
+                        Insensitive
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="leafygreen-ui-o8nc5p"
+                  data-lg-checked={false}
+                >
+                  <div
+                    className="leafygreen-ui-177u11x"
+                    tabIndex={-1}
+                  >
+                    <button
+                      aria-selected={false}
+                      className="leafygreen-ui-erolhb"
+                      disabled={false}
+                      id="segmented-control-3-1"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="tab"
+                      tabIndex={-1}
+                    >
+                      <span
+                        className="leafygreen-ui-7usxqc"
+                      >
+                        Sensitive
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="leafygreen-ui-1lbipy6"
+                  data-leafygreen-ui="selection-indicator"
                 />
                 <div
-                  className="leafygreen-ui-1qmzz4y"
-                >
-                  Insensitive
-                </div>
-              </button>
-              <button
-                aria-disabled={false}
-                className="leafygreen-ui-1olgycx css-cqs1z6"
-                data-leafygreen-ui="button"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
-              >
-                <div
-                  className="leafygreen-ui-v038xi"
+                  className="leafygreen-ui-5ppege"
+                  data-leafygreen-ui="hover-indicator"
                 />
-                <div
-                  className="leafygreen-ui-1qmzz4y"
-                >
-                  Sensitive
-                </div>
-              </button>
+              </div>
             </div>
-            <div>
-              <button
-                aria-disabled={false}
-                className="leafygreen-ui-fa96ss css-137zs9a"
-                data-leafygreen-ui="button"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
+            <div
+              className="leafygreen-ui-1gmp0zo"
+            >
+              <div
+                aria-label="segmented-control-4"
+                aria-owns="segmented-control-4-0 segmented-control-4-1"
+                className="leafygreen-ui-12bq93"
+                onKeyDownCapture={[Function]}
+                role="tablist"
               >
                 <div
-                  className="leafygreen-ui-v038xi"
+                  className="leafygreen-ui-o8nc5p"
+                  data-lg-checked={true}
+                >
+                  <div
+                    className="leafygreen-ui-177u11x"
+                    tabIndex={-1}
+                  >
+                    <button
+                      aria-selected={true}
+                      className="leafygreen-ui-erolhb"
+                      disabled={false}
+                      id="segmented-control-4-0"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="tab"
+                      tabIndex={0}
+                    >
+                      <span
+                        className="leafygreen-ui-7usxqc"
+                      >
+                        Match
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="leafygreen-ui-o8nc5p"
+                  data-lg-checked={false}
+                >
+                  <div
+                    className="leafygreen-ui-177u11x"
+                    tabIndex={-1}
+                  >
+                    <button
+                      aria-selected={false}
+                      className="leafygreen-ui-erolhb"
+                      disabled={false}
+                      id="segmented-control-4-1"
+                      onClick={[Function]}
+                      onMouseEnter={[Function]}
+                      onMouseLeave={[Function]}
+                      role="tab"
+                      tabIndex={-1}
+                    >
+                      <span
+                        className="leafygreen-ui-7usxqc"
+                      >
+                        Inverse
+                      </span>
+                    </button>
+                  </div>
+                </div>
+                <div
+                  className="leafygreen-ui-1lbipy6"
+                  data-leafygreen-ui="selection-indicator"
                 />
                 <div
-                  className="leafygreen-ui-1qmzz4y"
-                >
-                  Match
-                </div>
-              </button>
-              <button
-                aria-disabled={false}
-                className="leafygreen-ui-1olgycx css-cqs1z6"
-                data-leafygreen-ui="button"
-                disabled={false}
-                onClick={[Function]}
-                type="button"
-              >
-                <div
-                  className="leafygreen-ui-v038xi"
+                  className="leafygreen-ui-5ppege"
+                  data-leafygreen-ui="hover-indicator"
                 />
-                <div
-                  className="leafygreen-ui-1qmzz4y"
-                >
-                  Inverse
-                </div>
-              </button>
+              </div>
             </div>
           </div>
         </div>

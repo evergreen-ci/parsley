@@ -42,7 +42,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
         <svg
           alt=""
           aria-hidden={true}
-          className="leafygreen-ui-866818"
+          className="leafygreen-ui-13p6dfv leafygreen-ui-1t9qnhm"
           height={16}
           role="presentation"
           viewBox="0 0 16 16"
@@ -60,16 +60,16 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
     className="css-1xm32e0"
   >
     <div
-      className="css-zyuymb leafygreen-ui-xtefr5"
+      className="css-1u3fi1 leafygreen-ui-xtefr5"
     >
       <div
-        className="leafygreen-ui-k02un9"
+        className="leafygreen-ui-lzja97"
       >
         <input
           aria-invalid={false}
           aria-label="searchbar-input"
           autoComplete="on"
-          className="leafygreen-ui-ge8o19"
+          className="leafygreen-ui-1imva9i"
           data-cy="searchbar-input"
           disabled={false}
           id="textinput-5"
@@ -83,7 +83,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
           value=""
         />
         <div
-          className="static-lg-ui-classname leafygreen-ui-uy5fvv"
+          className="lg-ui-icon-selector-0000 leafygreen-ui-uy5fvv"
         />
       </div>
     </div>

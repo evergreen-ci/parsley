@@ -19,7 +19,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
         className="css-pzjbf8"
       >
         <div
-          className="css-91jh6a"
+          className="css-qzhvvy"
         >
           <h6
             className="css-teqmh5 leafygreen-ui-41zalo"
@@ -27,60 +27,64 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             Range
           </h6>
           <div
-            className="css-ov1ktg"
+            className="css-1iyoj2o"
           >
             <div
-              className="css-1b84j75 leafygreen-ui-xtefr5"
+              className="css-1sg2lsz"
             >
               <div
-                className="leafygreen-ui-k02un9"
+                className="css-1b84j75 leafygreen-ui-xtefr5"
               >
-                <input
-                  aria-invalid={false}
-                  aria-labelledby="Range Lower Bound"
-                  autoComplete="on"
-                  className="leafygreen-ui-1k0gd4n"
-                  data-cy="range-lower-bound"
-                  disabled={false}
-                  id="textinput-1"
-                  min={0}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  placeholder="0"
-                  required={true}
-                  type="number"
-                  value=""
-                />
                 <div
-                  className="static-lg-ui-classname leafygreen-ui-4uj7hc"
-                />
+                  className="leafygreen-ui-lzja97"
+                >
+                  <input
+                    aria-invalid={false}
+                    aria-labelledby="Range Lower Bound"
+                    autoComplete="on"
+                    className="leafygreen-ui-2ti9rx"
+                    data-cy="range-lower-bound"
+                    disabled={false}
+                    id="textinput-1"
+                    min={0}
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    placeholder="0"
+                    required={true}
+                    type="number"
+                    value=""
+                  />
+                  <div
+                    className="lg-ui-icon-selector-0000 leafygreen-ui-4uj7hc"
+                  />
+                </div>
               </div>
-            </div>
-            <div
-              className="css-1b84j75 leafygreen-ui-xtefr5"
-            >
               <div
-                className="leafygreen-ui-k02un9"
+                className="css-1b84j75 leafygreen-ui-xtefr5"
               >
-                <input
-                  aria-invalid={false}
-                  aria-labelledby="Range Upper Bound"
-                  autoComplete="on"
-                  className="leafygreen-ui-1k0gd4n"
-                  data-cy="range-upper-bound"
-                  disabled={false}
-                  id="textinput-2"
-                  min={-1}
-                  onBlur={[Function]}
-                  onChange={[Function]}
-                  placeholder="100"
-                  required={true}
-                  type="number"
-                  value=""
-                />
                 <div
-                  className="static-lg-ui-classname leafygreen-ui-4uj7hc"
-                />
+                  className="leafygreen-ui-lzja97"
+                >
+                  <input
+                    aria-invalid={false}
+                    aria-labelledby="Range Upper Bound"
+                    autoComplete="on"
+                    className="leafygreen-ui-2ti9rx"
+                    data-cy="range-upper-bound"
+                    disabled={false}
+                    id="textinput-2"
+                    min={0}
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    placeholder="100"
+                    required={true}
+                    type="number"
+                    value=""
+                  />
+                  <div
+                    className="lg-ui-icon-selector-0000 leafygreen-ui-4uj7hc"
+                  />
+                </div>
               </div>
             </div>
           </div>

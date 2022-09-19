@@ -20,13 +20,13 @@ describe("detailsOverlay", () => {
       const { history } = render(<DetailsOverlay />);
 
       const lowerBound = screen.getByDataCy("range-lower-bound");
-      userEvent.type(lowerBound, "99");
+      await userEvent.type(lowerBound, "99");
       await waitFor(() => {
         expect(history.location.search).toBe("?lower=99");
       });
 
       const upperBound = screen.getByDataCy("range-upper-bound");
-      userEvent.type(upperBound, "100");
+      await userEvent.type(upperBound, "100");
       await waitFor(() => {
         expect(history.location.search).toBe("?lower=99&upper=100");
       });
@@ -36,14 +36,28 @@ describe("detailsOverlay", () => {
       const { history } = render(<DetailsOverlay />);
 
       const lowerBound = screen.getByDataCy("range-lower-bound");
-      userEvent.type(lowerBound, "99");
+      await userEvent.type(lowerBound, "99");
       await waitFor(() => {
         expect(history.location.search).toBe("?lower=99");
       });
 
-      userEvent.clear(lowerBound);
+      await userEvent.clear(lowerBound);
       await waitFor(() => {
         expect(history.location.search).toBe("");
+      });
+    });
+
+    it("should show an error on invalid input", async () => {
+      render(<DetailsOverlay />);
+
+      const upperBound = screen.getByDataCy("range-upper-bound");
+      await userEvent.type(upperBound, "8");
+
+      const lowerBound = screen.getByDataCy("range-lower-bound");
+      await userEvent.type(lowerBound, "9");
+
+      await waitFor(() => {
+        expect(screen.getByDataCy("range-error-message")).toBeInTheDocument();
       });
     });
   });
