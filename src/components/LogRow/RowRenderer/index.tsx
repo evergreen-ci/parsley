@@ -1,3 +1,4 @@
+import { Suspense, lazy } from "react";
 import {
   CellMeasurer,
   CellMeasurerCache,
@@ -5,9 +6,10 @@ import {
   ListRowRenderer,
 } from "react-virtualized";
 import { LogTypes } from "constants/enums";
-import { AnsiiRow } from "../AnsiiRow";
-import { ResmokeRow } from "../ResmokeRow";
+import ResmokeRow from "../ResmokeRow";
 import { RowData } from "../types";
+
+const AnsiiRow = lazy(() => import("../AnsiiRow"));
 
 type RowRendererFunction = (data: RowData) => ListRowRenderer;
 
@@ -29,9 +31,14 @@ const RowRenderer: RowRendererFunction = (data) => {
   return result;
 };
 
+const SuspendedAnsiiRow = (props: React.ComponentProps<typeof AnsiiRow>) => (
+  <Suspense fallback={<div>Loading...</div>}>
+    <AnsiiRow {...props} />
+  </Suspense>
+);
 const rowRendererMap = {
-  [LogTypes.EVERGREEN_TASK_LOGS]: AnsiiRow,
-  [LogTypes.EVERGREEN_TEST_LOGS]: AnsiiRow,
+  [LogTypes.EVERGREEN_TASK_LOGS]: SuspendedAnsiiRow,
+  [LogTypes.EVERGREEN_TEST_LOGS]: SuspendedAnsiiRow,
   [LogTypes.RESMOKE_LOGS]: ResmokeRow,
 };
 

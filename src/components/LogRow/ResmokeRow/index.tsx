@@ -21,4 +21,4 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
 
 ResmokeRow.displayName = "ResmokeRow";
 
-export { ResmokeRow };
+export default ResmokeRow;

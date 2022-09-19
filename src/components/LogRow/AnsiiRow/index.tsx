@@ -47,4 +47,4 @@ const ProcessedAnsiiRow: React.FC<ProcessedAnsiiRowProps> = ({
 
 AnsiiRow.displayName = "AnsiiRow";
 
-export { AnsiiRow };
+export default AnsiiRow;
