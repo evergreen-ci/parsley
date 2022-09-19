@@ -10,7 +10,6 @@ export default {
   component: Icon,
 } as ComponentMeta<typeof Icon>;
 
-// 👇 We create a “template” of how args map to rendering
 const Template: ComponentStory<typeof Icon> = (args) => (
   <Container>
     {Object.keys(glyphs).map((name) => (

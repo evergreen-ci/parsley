@@ -1,4 +1,3 @@
-import React from "react";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { LogContextProvider, useLogContext } from ".";
 
@@ -22,18 +21,27 @@ describe("useLogContext", () => {
     expect(result.current.logLines).toStrictEqual(["foo", "bar"]);
     expect(result.current.lineCount).toBe(2);
   });
-  it("should be able to clear the list of logs", () => {
+  it("saving a filename should save it to the context", () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
       <LogContextProvider>{children}</LogContextProvider>
     );
     const { result } = renderHook(() => useLogContext(), { wrapper });
     act(() => {
-      result.current.ingestLines(["foo", "bar"]);
+      result.current.setFileName("foo.txt");
     });
+    expect(result.current.fileName).toBe("foo.txt");
+  });
+  it("should be able to clear the list of logs", () => {
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+      <LogContextProvider initialLogLines={["foo", "bar"]}>
+        {children}
+      </LogContextProvider>
+    );
+    const { result } = renderHook(() => useLogContext(), { wrapper });
     expect(result.current.logLines).toStrictEqual(["foo", "bar"]);
     expect(result.current.lineCount).toBe(2);
     act(() => {
-      result.current.clearLines();
+      result.current.clearLogs();
     });
     expect(result.current.logLines).toStrictEqual([]);
     expect(result.current.lineCount).toBe(0);

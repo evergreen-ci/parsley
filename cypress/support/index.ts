@@ -8,6 +8,17 @@ declare global {
        * @example cy.dataCy('greeting')
        */
       dataCy(value: string): Chainable<Element>;
+      /** Custom command to determine if an element is not contained in the viewport.
+       * @example cy.isNotContainedInViewport()
+       * @example cy.isNotContainedInViewport().should('be.visible')
+       */
+      isNotContainedInViewport(): Chainable<Element>;
+      /**
+       * Custom command to determine if an element is contained in the viewport.
+       * @example cy.isContainedInViewport()
+       * @example cy.isContainedInViewport().should('be.visible')
+       */
+      isContainedInViewport(): Chainable<Element>;
       /**
        * Custom command to enter get an input by its label
        * @example cy.getInputBylabel("Some Label")
