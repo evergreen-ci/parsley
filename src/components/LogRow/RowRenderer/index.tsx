@@ -1,4 +1,4 @@
-import React, { Suspense, lazy } from "react";
+import { Suspense, lazy } from "react";
 import {
   CellMeasurer,
   CellMeasurerCache,
@@ -6,7 +6,7 @@ import {
   ListRowRenderer,
 } from "react-virtualized";
 import { LogTypes } from "constants/enums";
-import { ResmokeRow } from "../ResmokeRow";
+import ResmokeRow from "../ResmokeRow";
 import { RowData } from "../types";
 
 const AnsiiRow = lazy(() => import("../AnsiiRow"));
