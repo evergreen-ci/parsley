@@ -209,7 +209,6 @@ functions:
 #######################################
 #      Local Evergreen Functions      #
 #######################################
-
   get-evergreen-project:
     command: git.get_project
     type: setup
