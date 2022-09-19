@@ -5,6 +5,12 @@ enum QueryParams {
   Filters = "filters",
   SelectedLine = "selectedLine",
   Wrap = "wrap",
+  FilterLogic = "filterLogic",
 }
 
-export { QueryParams };
+enum FilterLogic {
+  And = "and",
+  Or = "or",
+}
+
+export { QueryParams, FilterLogic };
