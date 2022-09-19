@@ -1,7 +1,7 @@
 import { LogTypes } from "constants/enums";
 import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
-import { AnsiiRow } from ".";
+import AnsiiRow from ".";
 
 const wrapper = (logs: string[]) => {
   const provider = ({ children }: { children: React.ReactNode }) => (

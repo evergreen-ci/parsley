@@ -3,7 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
-import { AnsiiRow } from ".";
+import AnsiiRow from ".";
 import { RowRenderer, cache } from "../RowRenderer";
 
 export default {
