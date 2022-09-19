@@ -20,7 +20,10 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
-  const [selectedLine] = useQueryParam(QueryParams.SelectedLine, 0);
+  const [selectedLine] = useQueryParam<number | undefined>(
+    QueryParams.SelectedLine,
+    undefined
+  );
   const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
 
   // TODO EVG-17537: more advanced filtering
