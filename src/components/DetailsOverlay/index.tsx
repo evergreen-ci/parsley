@@ -8,7 +8,7 @@ import {
   FilterLogicToggle,
   PrettyPrintToggle,
   WrapToggle,
-} from "./Toggle";
+} from "./Toggles";
 
 interface DetailsOverlayProps {
   ["data-cy"]?: string;

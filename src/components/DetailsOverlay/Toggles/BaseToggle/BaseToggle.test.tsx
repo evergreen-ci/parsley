@@ -6,7 +6,7 @@ import {
 } from "test_utils";
 import BaseToggle from ".";
 
-describe("baseToggle", () => {
+describe("base toggle", () => {
   it("properly renders labels", () => {
     const toggleFunc = jest.fn();
     render(
