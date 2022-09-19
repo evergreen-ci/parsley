@@ -1,11 +1,10 @@
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
-
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
-import { ResmokeRow } from ".";
+import ResmokeRow from ".";
 
 export default {
   title: "Components/LogRow/ResmokeRow",

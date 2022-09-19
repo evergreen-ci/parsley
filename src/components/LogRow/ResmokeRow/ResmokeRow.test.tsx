@@ -1,7 +1,7 @@
 import { LogTypes } from "constants/enums";
 import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
-import { ResmokeRow } from ".";
+import ResmokeRow from ".";
 
 const wrapper = (logs: string[]) => {
   const provider = ({ children }: { children: React.ReactNode }) => (
