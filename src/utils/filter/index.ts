@@ -12,10 +12,12 @@ export const matchesFilter = (
   filters: string[],
   filterLogic: FilterLogic
 ) => {
-  if (filterLogic === FilterLogic.And) {
-    return filters.every((f) => logLine.match(new RegExp(f, "i")));
-  }
-  return filters.some((f) => logLine.match(new RegExp(f, "i")));
+  const regexFilter =
+    filterLogic === FilterLogic.And
+      ? filters.map((f) => `(?=^.*${f})`).join("")
+      : filters.join("|");
+
+  return !!logLine.match(new RegExp(regexFilter, "i"));
 };
 
 /**
