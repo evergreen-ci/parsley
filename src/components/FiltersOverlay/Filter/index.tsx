@@ -71,13 +71,18 @@ const Filter: React.FC<FilterProps> = ({
         <StyledBody>{filterText}</StyledBody>
         <FilterOptions>
           <SegmentedControl
+            aria-controls="case-sensitivity"
             defaultValue={caseSensitivity}
             onChange={setCaseSensitivity}
           >
             <Option value={CaseSensitivity.Insensitive}>Insensitive</Option>
             <Option value={CaseSensitivity.Sensitive}>Sensitive</Option>
           </SegmentedControl>
-          <SegmentedControl defaultValue={matchType} onChange={setMatchType}>
+          <SegmentedControl
+            aria-controls="match-type"
+            defaultValue={matchType}
+            onChange={setMatchType}
+          >
             <Option value={MatchType.Exact}>Match</Option>
             <Option value={MatchType.Inverse}>Inverse</Option>
           </SegmentedControl>

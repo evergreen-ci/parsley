@@ -7,7 +7,7 @@ import {
 import FiltersOverlay from ".";
 
 describe("filtersOverlay", () => {
-  it("filters properly display", () => {
+  it("filters properly display based on URL", () => {
     render(<FiltersOverlay />, {
       route: "?filters=filter1,filter2",
     });
@@ -15,7 +15,7 @@ describe("filtersOverlay", () => {
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 
-  it("should be able to delete filters", async () => {
+  it("deleting filters should modify the URL correctly", async () => {
     const { history } = render(<FiltersOverlay />, {
       route: "?filters=filter1,filter2",
     });
