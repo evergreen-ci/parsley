@@ -9,7 +9,8 @@ import { FilterRow, StyledSubtitle } from "../styles";
 const { red } = palette;
 
 const SearchRangeInput: React.FC = () => {
-  const [lowerBound, setLowerQueryParam] = useQueryParam<number | undefined>(
+  // TODO: Manage search range in LogContext rather than as query params.
+  const [lowerBound, setLowerBound] = useQueryParam<number | undefined>(
     QueryParams.LowerRange,
     undefined
   );
@@ -19,15 +20,15 @@ const SearchRangeInput: React.FC = () => {
   );
 
   const hasError =
-    lowerBound !== undefined && upperBound !== undefined
-      ? lowerBound > upperBound
-      : false;
+    lowerBound !== undefined &&
+    upperBound !== undefined &&
+    lowerBound > upperBound;
 
   const updateLowerBound = (newVal: string) => {
     if (newVal === "") {
-      setLowerQueryParam(undefined);
+      setLowerBound(undefined);
     } else {
-      setLowerQueryParam(parseInt(newVal, 10));
+      setLowerBound(parseInt(newVal, 10));
     }
   };
 

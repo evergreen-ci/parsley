@@ -1,10 +1,5 @@
 import Cookie from "js-cookie";
-import {
-  renderWithRouterMatch as render,
-  screen,
-  userEvent,
-  waitFor,
-} from "test_utils";
+import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import PrettyPrintToggle from ".";
 
 jest.mock("js-cookie");
@@ -24,10 +19,9 @@ describe("pretty print toggle", () => {
     const { history } = render(<PrettyPrintToggle />);
 
     const prettyPrintToggle = screen.getByDataCy("pretty-print-toggle");
-    userEvent.click(prettyPrintToggle);
-    await waitFor(() => {
-      expect(prettyPrintToggle).toHaveAttribute("aria-checked", "false");
-    });
+    await userEvent.click(prettyPrintToggle);
+
+    expect(prettyPrintToggle).toHaveAttribute("aria-checked", "false");
     expect(history.location.search).toBe("");
   });
 });

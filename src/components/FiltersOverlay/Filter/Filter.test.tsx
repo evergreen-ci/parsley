@@ -1,4 +1,4 @@
-import { render, screen, userEvent, waitFor } from "test_utils";
+import { render, screen, userEvent } from "test_utils";
 import Filter from ".";
 
 describe("filters", () => {
@@ -11,11 +11,10 @@ describe("filters", () => {
   it("calls deleteFilter with correct parameters", async () => {
     const deleteFilter = jest.fn();
     render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
-    userEvent.click(screen.getByLabelText("Delete filter button"));
 
-    await waitFor(() => {
-      expect(deleteFilter).toHaveBeenCalledTimes(1);
-    });
+    await userEvent.click(screen.getByLabelText("Delete filter button"));
+
+    expect(deleteFilter).toHaveBeenCalledTimes(1);
     expect(deleteFilter).toHaveBeenCalledWith("myFilter");
   });
 
@@ -24,13 +23,11 @@ describe("filters", () => {
     render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
 
     expect(screen.getByLabelText("Visibility Icon")).toBeInTheDocument();
-    userEvent.click(screen.getByLabelText("Visibility filter button"));
-    await waitFor(() => {
-      expect(screen.getByLabelText("Closed Eye Icon")).toBeInTheDocument();
-    });
+    await userEvent.click(screen.getByLabelText("Visibility filter button"));
+    expect(screen.getByLabelText("Closed Eye Icon")).toBeInTheDocument();
   });
 
-  it("should be able to interavy with Case Sensitivity segmented control", async () => {
+  it("should be able to interact with Case Sensitivity segmented control", async () => {
     const deleteFilter = jest.fn();
     render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
 
@@ -50,7 +47,7 @@ describe("filters", () => {
     expect(sensitiveOption).toHaveAttribute("aria-selected", "true");
   });
 
-  it("should be able to interavy with Match Type segmented control", async () => {
+  it("should be able to interact with Match Type segmented control", async () => {
     const deleteFilter = jest.fn();
     render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
 

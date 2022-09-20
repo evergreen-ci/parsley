@@ -1,9 +1,4 @@
-import {
-  renderWithRouterMatch as render,
-  screen,
-  userEvent,
-  waitFor,
-} from "test_utils";
+import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import WrapToggle from ".";
 
 describe("wrap toggle", () => {
@@ -13,10 +8,9 @@ describe("wrap toggle", () => {
     const wrapToggle = screen.getByDataCy("wrap-toggle");
     expect(wrapToggle).toHaveAttribute("aria-checked", "false");
 
-    userEvent.click(wrapToggle);
-    await waitFor(() => {
-      expect(wrapToggle).toHaveAttribute("aria-checked", "true");
-    });
+    await userEvent.click(wrapToggle);
+
+    expect(wrapToggle).toHaveAttribute("aria-checked", "true");
     expect(history.location.search).toBe("?wrap=true");
   });
 });

@@ -1,9 +1,4 @@
-import {
-  renderWithRouterMatch as render,
-  screen,
-  userEvent,
-  waitFor,
-} from "test_utils";
+import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import BaseToggle from ".";
 
 describe("base toggle", () => {
@@ -35,11 +30,9 @@ describe("base toggle", () => {
       />
     );
     const toggle = screen.getByDataCy("toggle");
+    await userEvent.click(toggle);
 
-    userEvent.click(toggle);
-    await waitFor(() => {
-      expect(toggleFunc).toHaveBeenCalledTimes(1);
-    });
+    expect(toggleFunc).toHaveBeenCalledTimes(1);
     // The second parameter is a mouseEvent that can be ignored.
     expect(toggleFunc).toHaveBeenCalledWith(true, expect.anything());
   });
