@@ -27,9 +27,13 @@ describe("Basic evergreen log view", () => {
     );
   });
   it("long lines with wrapping turned on should fit on screen", () => {
-    cy.visit(`${logLink}?wrap=true`);
-    cy.dataCy("log-row-22").should("be.visible");
-    cy.dataCy("log-row-22").should(
+    // Turn wrapping on through the Details Overlay.
+    cy.dataCy("details-button").click();
+    cy.dataCy("wrap-toggle").click();
+    cy.dataCy("details-button").click();
+
+    cy.dataCy("log-row-2").should("be.visible");
+    cy.dataCy("log-row-2").should(
       "contain.text",
       `[2022/03/02 17:02:18.500] warning Pattern ["@apollo/client@latest"] is trying to unpack in the same destination "/home/ubuntu/.cache/yarn/v6/npm-@apollo-client-3.3.7-f15bf961dc0c2bee37a47bf86b8881fdc6183810-integrity/node_modules/@apollo/client" as pattern ["@apollo/client@3.3.7"]. This could result in non-deterministic behavior, skipping.`
     );
