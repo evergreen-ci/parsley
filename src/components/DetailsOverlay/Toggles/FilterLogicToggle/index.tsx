@@ -1,19 +1,20 @@
-import { QueryParams } from "constants/queryParams";
+import { FilterLogic, QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
 import BaseToggle from "../BaseToggle";
 
 const FilterLogicToggle: React.FC = () => {
   const [filterLogic, setFilterLogic] = useQueryParam(
     QueryParams.FilterLogic,
-    "and"
+    FilterLogic.And
   );
-  const isActive = filterLogic !== "and";
+
+  const isChecked = filterLogic === FilterLogic.Or;
 
   const onChange = (checked: boolean) => {
     if (checked) {
-      setFilterLogic("or");
+      setFilterLogic(FilterLogic.Or);
     } else {
-      setFilterLogic("and");
+      setFilterLogic(FilterLogic.And);
     }
   };
   return (
@@ -23,7 +24,7 @@ const FilterLogicToggle: React.FC = () => {
       leftLabel="AND"
       onChange={onChange}
       rightLabel="OR"
-      value={isActive}
+      value={isChecked}
     />
   );
 };

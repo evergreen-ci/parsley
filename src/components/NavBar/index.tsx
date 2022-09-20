@@ -24,7 +24,6 @@ const NavBar: React.FC = () => {
     []
   );
   const { hasLogs, clearLogs } = useLogContext();
-  const numFilters = filters.length;
 
   const handleSearch = (selected: string, value: string) => {
     if (selected === "search") {
@@ -54,7 +53,7 @@ const NavBar: React.FC = () => {
         <StyledButton
           buttonText={
             <span>
-              Filters <Badge variant="green">{numFilters}</Badge>
+              Filters <Badge variant="green">{filters.length}</Badge>
             </span>
           }
         >

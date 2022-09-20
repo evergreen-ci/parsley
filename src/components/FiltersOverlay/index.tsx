@@ -24,15 +24,13 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
     setFilters(newFilters);
   };
 
-  const hasFilters = filters.length > 0;
-
   return (
     <Card data-cy={dataCy}>
-      {hasFilters ? (
+      {filters.length ? (
         filters.map((filter) => (
-          <Wrapper key={filter}>
+          <FilterWrapper key={filter}>
             <Filter deleteFilter={deleteFilter} filterText={filter} />
-          </Wrapper>
+          </FilterWrapper>
         ))
       ) : (
         <> No filters have been applied.</>
@@ -48,7 +46,7 @@ const Card = styled.div`
   padding: ${size.xxs};
 `;
 
-const Wrapper = styled.div`
+const FilterWrapper = styled.div`
   background-color: ${gray.light2}66;
   padding: ${size.xs} ${size.s};
   border-radius: ${size.s};

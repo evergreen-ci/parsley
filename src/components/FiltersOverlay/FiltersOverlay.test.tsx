@@ -2,7 +2,7 @@ import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import FiltersOverlay from ".";
 
 describe("filtersOverlay", () => {
-  it("filters properly display based on URL", () => {
+  it("filters should properly display based on URL", () => {
     render(<FiltersOverlay />, {
       route: "?filters=filter1,filter2",
     });

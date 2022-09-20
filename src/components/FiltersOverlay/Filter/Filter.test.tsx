@@ -8,7 +8,7 @@ describe("filters", () => {
     expect(screen.getByText("myFilter")).toBeInTheDocument();
   });
 
-  it("calls deleteFilter with correct parameters", async () => {
+  it("should call deleteFilter with the correct parameters", async () => {
     const deleteFilter = jest.fn();
     render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
 
@@ -18,7 +18,7 @@ describe("filters", () => {
     expect(deleteFilter).toHaveBeenCalledWith("myFilter");
   });
 
-  it("should toggle visibility icons when clicked", async () => {
+  it("should toggle between visibility icons when they are clicked", async () => {
     const deleteFilter = jest.fn();
     render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
 

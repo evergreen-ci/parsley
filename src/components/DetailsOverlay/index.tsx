@@ -18,28 +18,23 @@ const DetailsOverlay: React.FC<DetailsOverlayProps> = ({
   "data-cy": dataCy,
 }) => (
   <Card data-cy={dataCy}>
-    <FilterOptions>
-      <FilterContainer>
-        <SearchRangeInput />
-        <WrapToggle />
-        <CaseSensitiveToggle />
-      </FilterContainer>
-      <FilterContainer>
-        <FilterLogicToggle />
-        <ExpandableRowsToggle />
-        <PrettyPrintToggle />
-        <ButtonRow />
-      </FilterContainer>
-    </FilterOptions>
+    <FilterContainer>
+      <SearchRangeInput />
+      <WrapToggle />
+      <CaseSensitiveToggle />
+    </FilterContainer>
+    <FilterContainer>
+      <FilterLogicToggle />
+      <ExpandableRowsToggle />
+      <PrettyPrintToggle />
+      <ButtonRow />
+    </FilterContainer>
   </Card>
 );
 
 const Card = styled.div`
   width: 700px;
   padding: ${size.xs};
-`;
-
-const FilterOptions = styled.div`
   display: flex;
   justify-content: space-between;
 `;

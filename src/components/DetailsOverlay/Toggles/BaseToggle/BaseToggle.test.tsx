@@ -19,7 +19,7 @@ describe("base toggle", () => {
     expect(screen.getByText("Right")).toBeInTheDocument();
   });
 
-  it("calls the on change function with the correct parameters", async () => {
+  it("calls the onChange function with the correct parameters", async () => {
     const toggleFunc = jest.fn();
     render(
       <BaseToggle

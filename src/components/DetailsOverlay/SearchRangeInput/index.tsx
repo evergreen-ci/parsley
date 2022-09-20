@@ -44,8 +44,8 @@ const SearchRangeInput: React.FC = () => {
     <StyledFilterRow>
       <StyledSubtitle>Range</StyledSubtitle>
 
-      <RangeContainer>
-        <InputContainer>
+      <RangeInputContainer>
+        <RangeInputWrapper>
           <RangeInput
             aria-labelledby="Range Lower Bound"
             data-cy="range-lower-bound"
@@ -68,13 +68,13 @@ const SearchRangeInput: React.FC = () => {
             type="number"
             value={(upperBound ?? "").toString()}
           />
-        </InputContainer>
+        </RangeInputWrapper>
         {hasError && (
           <ErrorMessage data-cy="range-error-message">
             Specified range is not valid.
           </ErrorMessage>
         )}
-      </RangeContainer>
+      </RangeInputContainer>
     </StyledFilterRow>
   );
 };
@@ -83,14 +83,14 @@ const StyledFilterRow = styled(FilterRow)`
   align-items: flex-start;
 `;
 
-const InputContainer = styled.div`
-  display: flex;
-  align-items: center;
-`;
-
-const RangeContainer = styled.div`
+const RangeInputContainer = styled.div`
   display: flex;
   flex-direction: column;
+`;
+
+const RangeInputWrapper = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const RangeInput = styled(TextInput)`
