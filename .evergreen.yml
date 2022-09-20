@@ -262,17 +262,15 @@ functions:
     type: setup
     params:
       directory: parsley
-      prefix: parsley/logkeeper
       revisions:
         logkeeper: ${logkeeper_rev}
 
   setup-logkeeper:
-    command: subprocess.exec
+    command: shell.exec
     type: setup
     params:
       working_dir: parsley/logkeeper
       script: |
-        ls -al
         mkdir -p _bucketdata
         cp -r testdata/simple/* _bucketdata
 
