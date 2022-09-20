@@ -8,7 +8,7 @@ import { useOnClickOutside } from "hooks";
 interface PopoverButtonProps extends Omit<ButtonProps, "children"> {
   children: React.ReactNode;
   onClick?: () => void;
-  buttonText: string;
+  buttonText: React.ReactNode | string;
 }
 const PopoverButton: React.FC<PopoverButtonProps> = ({
   children,
