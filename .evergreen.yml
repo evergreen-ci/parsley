@@ -5,9 +5,13 @@ ignore:
   - ".github/*"
 
 modules:
-- name: evergreen
-  repo: git@github.com:evergreen-ci/evergreen.git
-  branch: main
+  - name: evergreen
+    repo: git@github.com:evergreen-ci/evergreen.git
+    branch: main
+  - name: logkeeper
+    repo: git@github.com:evergreen-ci/logkeeper.git
+    branch: main
+
 
 #######################################
 #            Parsley Functions        #
@@ -251,6 +255,50 @@ functions:
         GOROOT: /opt/golang/go1.16
 
 #######################################
+#      Local Logkeeper Functions      #
+#######################################
+  get-logkeeper-project:
+    command: git.get_project
+    type: setup
+    params:
+      directory: parsley
+      prefix: parsley/logkeeper
+      revisions:
+        logkeeper: ${logkeeper_rev}
+
+  setup-logkeeper:
+    command: subprocess.exec
+    type: setup
+    params:
+      working_dir: parsley/logkeeper
+      script: |
+        ls -al
+        mkdir -p _bucketdata
+        cp -r testdata/simple/* _bucketdata
+
+  run-logkeeper:
+    command: subprocess.exec
+    params:
+      working_dir: parsley/logkeeper
+      binary: make
+      args: ["run", "main/logkeeper.go", "--localpath", "_bucketdata"]
+      background: true
+
+  attach-logkeeper-logs:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/logkeeper/logkeeperapp.log"]
+      remote_file: parsley/${task_id}/logkeeper
+      bucket: mciuploads
+      content_type: text/html
+      permissions: public-read
+      display_name: "logkeeper:"
+
+#######################################
 #                Tasks                #
 #######################################
 tasks:
@@ -276,10 +324,13 @@ tasks:
   - name: e2e_test
     commands:
     - func: get-evergreen-project
+    - func: get-logkeeper-project
     - func: setup-mongodb
     - func: run-make-background
       vars:
         target: local-evergreen
+    - func: setup-logkeeper
+    - func: run-logkeeper
     - func: copy-cmdrc
     - func: yarn-install
     - func: yarn-build
@@ -289,6 +340,7 @@ tasks:
     - func: attach-cypress-results
     - func: attach-cypress-screenshots
     - func: attach-cypress-videos
+    - func: attach-logkeeper-logs
 
   - name: storybook
     commands:
@@ -321,6 +373,7 @@ buildvariants:
     - ubuntu1604-large
     modules:
       - evergreen
+      - logkeeper
     tasks:
     - name: e2e_test
 
