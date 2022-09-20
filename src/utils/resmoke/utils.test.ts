@@ -2,9 +2,9 @@ import {
   getAttributes,
   getConfigServer,
   getContext,
-  getId,
   getJSONString,
   getMessage,
+  getPid,
   getPort,
   getResmokeFunction,
   getShellPrefix,
@@ -55,15 +55,15 @@ describe("resmoke/utils", () => {
       expect(getContext(line)).toBe("-");
     });
   });
-  describe("getId", () => {
+  describe("getPid", () => {
     it("handles empty strings", () => {
-      expect(getId("")).toBeUndefined();
+      expect(getPid("")).toBeUndefined();
     });
     it("returns the id", () => {
       let line = `{"t":{"$date":"2021-04-19T21:59:01.816+00:00"},"s":"I",  "c":"NETWORK",  "id":22900,  "ctx":"conn1","msg":"client metadata","attr":{"remote":"something"}}`;
-      expect(getId(line)).toBe("22900");
+      expect(getPid(line)).toBe("22900");
       line = `{"t":{"$date":"2022-09-08T14:51:21.568+00:00"},"s":"I",  "c":"COMMAND",  "id":22943,   "ctx":"listener","msg":"Connection accepted","attr":{"remote":"something"}}`;
-      expect(getId(line)).toBe("22943");
+      expect(getPid(line)).toBe("22943");
     });
   });
   describe("getJSONString", () => {

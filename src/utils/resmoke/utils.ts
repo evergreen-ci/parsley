@@ -24,7 +24,6 @@ const getResmokeFunction = (line: string) => {
 
 /** `getJSONString` returns the json object in a resmoke line */
 const getJSONString = (line: string) => {
-  // const json = line.match(jsonRegex)?.[0];
   // Lets try to find the json string by finding the first { and the last }
   const openBracketIndex = line.indexOf("{");
   const closeBracketIndex = line.lastIndexOf("}");
@@ -111,8 +110,8 @@ const getConfigServer = (line: string) => {
  */
 const idRegex = /"id":([0-9]*)/;
 
-/** `getId` returns the process id associated with a mongod instance this is found in the resmoke json  */
-const getId = (line: string) => {
+/** `getPid` returns the process id associated with a mongod instance this is found in the resmoke json  */
+const getPid = (line: string) => {
   const id = line.match(idRegex)?.[1];
   return id;
 };
@@ -156,7 +155,7 @@ export {
   getAttributes,
   getContext,
   getConfigServer,
-  getId,
+  getPid,
   getJSONString,
   getMessage,
   getPort,
