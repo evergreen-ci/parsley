@@ -9,7 +9,7 @@ import {
   getResmokeFunction,
   getShellPrefix,
   getTimeStamp,
-} from "./utils";
+} from "./helpers";
 
 const processResmokeLine = (line: string) => {
   // First check if it is a resmoke line at all

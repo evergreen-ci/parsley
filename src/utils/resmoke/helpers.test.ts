@@ -9,9 +9,9 @@ import {
   getResmokeFunction,
   getShellPrefix,
   getTimeStamp,
-} from "./utils";
+} from "./helpers";
 
-describe("resmoke/utils", () => {
+describe("resmoke/helpers", () => {
   describe("getAttributes", () => {
     it("handles empty strings", () => {
       expect(getAttributes("")).toBeUndefined();
