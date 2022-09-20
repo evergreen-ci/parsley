@@ -4,7 +4,7 @@ import TextInput from "@leafygreen-ui/text-input";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
-import { FilterRow, StyledSubtitle } from "../styles";
+import { DetailName, DetailRow } from "../styles";
 
 const { red } = palette;
 
@@ -41,8 +41,8 @@ const SearchRangeInput: React.FC = () => {
   };
 
   return (
-    <StyledFilterRow>
-      <StyledSubtitle>Range</StyledSubtitle>
+    <StyledDetailRow>
+      <DetailName>Range</DetailName>
 
       <RangeInputContainer>
         <RangeInputWrapper>
@@ -75,11 +75,11 @@ const SearchRangeInput: React.FC = () => {
           </ErrorMessage>
         )}
       </RangeInputContainer>
-    </StyledFilterRow>
+    </StyledDetailRow>
   );
 };
 
-const StyledFilterRow = styled(FilterRow)`
+const StyledDetailRow = styled(DetailRow)`
   align-items: flex-start;
 `;
 

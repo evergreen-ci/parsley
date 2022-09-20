@@ -4,13 +4,13 @@ import Filter from ".";
 describe("filters", () => {
   it("should display the name of the filter", () => {
     const deleteFilter = jest.fn();
-    render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
+    render(<Filter deleteFilter={deleteFilter} filterName="myFilter" />);
     expect(screen.getByText("myFilter")).toBeInTheDocument();
   });
 
   it("should call deleteFilter with the correct parameters", async () => {
     const deleteFilter = jest.fn();
-    render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
+    render(<Filter deleteFilter={deleteFilter} filterName="myFilter" />);
 
     await userEvent.click(screen.getByLabelText("Delete filter button"));
 
@@ -20,7 +20,7 @@ describe("filters", () => {
 
   it("should toggle between visibility icons when they are clicked", async () => {
     const deleteFilter = jest.fn();
-    render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
+    render(<Filter deleteFilter={deleteFilter} filterName="myFilter" />);
 
     expect(screen.getByLabelText("Visibility Icon")).toBeInTheDocument();
     await userEvent.click(screen.getByLabelText("Visibility filter button"));
@@ -29,7 +29,7 @@ describe("filters", () => {
 
   it("should be able to interact with Case Sensitivity segmented control", async () => {
     const deleteFilter = jest.fn();
-    render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
+    render(<Filter deleteFilter={deleteFilter} filterName="myFilter" />);
 
     const insensitiveOption = screen.getByRole("tab", {
       name: "Insensitive",
@@ -49,7 +49,7 @@ describe("filters", () => {
 
   it("should be able to interact with Match Type segmented control", async () => {
     const deleteFilter = jest.fn();
-    render(<Filter deleteFilter={deleteFilter} filterText="myFilter" />);
+    render(<Filter deleteFilter={deleteFilter} filterName="myFilter" />);
 
     const matchOption = screen.getByRole("tab", {
       name: "Match",

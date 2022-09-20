@@ -3,7 +3,7 @@ import { palette } from "@leafygreen-ui/palette";
 import Toggle from "@leafygreen-ui/toggle";
 import { Disclaimer } from "@leafygreen-ui/typography";
 import { size } from "constants/tokens";
-import { FilterRow, StyledSubtitle } from "../../styles";
+import { DetailName, DetailRow } from "../../styles";
 
 const { gray } = palette;
 
@@ -24,10 +24,10 @@ const BaseToggle: React.FC<BaseToggleProps> = ({
   value,
   onChange,
 }) => (
-  <FilterRow>
-    <StyledSubtitle>{label}</StyledSubtitle>
-    <ToggleWithLabel>
-      <StyledDisclaimer>{leftLabel}</StyledDisclaimer>
+  <DetailRow>
+    <DetailName>{label}</DetailName>
+    <ToggleWrapper>
+      <ToggleLabel>{leftLabel}</ToggleLabel>
       <Toggle
         aria-labelledby="base-toggle"
         checked={value}
@@ -35,17 +35,17 @@ const BaseToggle: React.FC<BaseToggleProps> = ({
         onChange={onChange}
         size="small"
       />
-      <StyledDisclaimer>{rightLabel}</StyledDisclaimer>
-    </ToggleWithLabel>
-  </FilterRow>
+      <ToggleLabel>{rightLabel}</ToggleLabel>
+    </ToggleWrapper>
+  </DetailRow>
 );
 
-const StyledDisclaimer = styled(Disclaimer)`
+const ToggleLabel = styled(Disclaimer)`
   color: ${gray.base};
   margin: 0 ${size.xxs};
 `;
 
-const ToggleWithLabel = styled.div`
+const ToggleWrapper = styled.div`
   display: flex;
   align-items: center;
 `;

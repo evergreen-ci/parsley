@@ -1,13 +1,13 @@
 import Button from "@leafygreen-ui/button";
 import Icon from "components/Icon";
-import { FilterRow } from "../styles";
+import { DetailRow } from "../styles";
 
 const ButtonRow: React.FC = () => (
-  <FilterRow>
+  <DetailRow>
     <Button leftGlyph={<Icon glyph="Copy" />}>JIRA</Button>
     <Button leftGlyph={<Icon glyph="Export" />}>RAW</Button>
     <Button leftGlyph={<Icon glyph="Export" />}>HTML</Button>
-  </FilterRow>
+  </DetailRow>
 );
 
 export default ButtonRow;

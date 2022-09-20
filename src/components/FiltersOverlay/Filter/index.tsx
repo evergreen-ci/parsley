@@ -25,13 +25,13 @@ enum MatchType {
 
 interface FilterProps {
   ["data-cy"]?: string;
-  filterText: string;
+  filterName: string;
   deleteFilter: (filter: string) => void;
 }
 
 const Filter: React.FC<FilterProps> = ({
   "data-cy": dataCy,
-  filterText,
+  filterName,
   deleteFilter,
 }) => {
   const [isVisible, setIsVisible] = useState(true);
@@ -49,7 +49,7 @@ const Filter: React.FC<FilterProps> = ({
       <LeftContainer>
         <IconButton
           aria-label="Delete filter button"
-          onClick={() => deleteFilter(filterText)}
+          onClick={() => deleteFilter(filterName)}
           size={Size.Large}
         >
           <Icon fill={gray.dark1} glyph="X" />
@@ -68,8 +68,8 @@ const Filter: React.FC<FilterProps> = ({
       </LeftContainer>
 
       <RightContainer>
-        <StyledBody>{filterText}</StyledBody>
-        <FilterOptions>
+        <FilterName>{filterName}</FilterName>
+        <SegmentedControlContainer>
           <SegmentedControl
             aria-controls="case-sensitivity"
             defaultValue={caseSensitivity}
@@ -86,7 +86,7 @@ const Filter: React.FC<FilterProps> = ({
             <Option value={MatchType.Exact}>Match</Option>
             <Option value={MatchType.Inverse}>Inverse</Option>
           </SegmentedControl>
-        </FilterOptions>
+        </SegmentedControlContainer>
       </RightContainer>
     </FilterRow>
   );
@@ -114,12 +114,12 @@ const RightContainer = styled.div`
   margin-top: ${size.xs};
 `;
 
-const StyledBody = styled(Body)`
+const FilterName = styled(Body)`
   font-size: ${fontSize.m};
   word-break: break-all;
 `;
 
-const FilterOptions = styled.div`
+const SegmentedControlContainer = styled.div`
   display: flex;
   margin-top: ${size.xs};
   > * {

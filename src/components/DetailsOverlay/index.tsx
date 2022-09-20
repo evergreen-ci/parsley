@@ -17,29 +17,29 @@ interface DetailsOverlayProps {
 const DetailsOverlay: React.FC<DetailsOverlayProps> = ({
   "data-cy": dataCy,
 }) => (
-  <Card data-cy={dataCy}>
-    <FilterContainer>
+  <DetailsOverlayCard data-cy={dataCy}>
+    <Container>
       <SearchRangeInput />
       <WrapToggle />
       <CaseSensitiveToggle />
-    </FilterContainer>
-    <FilterContainer>
+    </Container>
+    <Container>
       <FilterLogicToggle />
       <ExpandableRowsToggle />
       <PrettyPrintToggle />
       <ButtonRow />
-    </FilterContainer>
-  </Card>
+    </Container>
+  </DetailsOverlayCard>
 );
 
-const Card = styled.div`
+const DetailsOverlayCard = styled.div`
   width: 700px;
   padding: ${size.xs};
   display: flex;
   justify-content: space-between;
 `;
 
-const FilterContainer = styled.div`
+const Container = styled.div`
   width: 300px;
 `;
 

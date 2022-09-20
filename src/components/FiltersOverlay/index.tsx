@@ -25,21 +25,21 @@ const FiltersOverlay: React.FC<FiltersOverlayProps> = ({
   };
 
   return (
-    <Card data-cy={dataCy}>
+    <FiltersOverlayCard data-cy={dataCy}>
       {filters.length ? (
         filters.map((filter) => (
           <FilterWrapper key={filter}>
-            <Filter deleteFilter={deleteFilter} filterText={filter} />
+            <Filter deleteFilter={deleteFilter} filterName={filter} />
           </FilterWrapper>
         ))
       ) : (
         <> No filters have been applied.</>
       )}
-    </Card>
+    </FiltersOverlayCard>
   );
 };
 
-const Card = styled.div`
+const FiltersOverlayCard = styled.div`
   width: 600px;
   max-height: 400px;
   overflow-y: scroll;
