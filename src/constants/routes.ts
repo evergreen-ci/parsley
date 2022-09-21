@@ -19,7 +19,7 @@ const routes = {
   upload: paths.upload,
   evergreenLogs: `${paths.evergreenLogs}/:${slugs.taskID}/:${slugs.execution}/:${slugs.origin}`,
   testLogs: `${paths.testLogs}/:${slugs.taskID}/:${slugs.execution}/:${slugs.testID}`,
-  resmokeLogs: `${paths.resmokeLogs}/:${slugs.buildID}/:${slugs.testID}`,
+  resmokeLogs: `${paths.resmokeLogs}/:${slugs.buildID}/test/:${slugs.testID}`,
 };
 
 export { slugs };
