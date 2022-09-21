@@ -285,7 +285,6 @@ functions:
         PATH: ${goroot}/bin:$PATH
         LK_CORS_ORIGINS: http://localhost:\d+
 
-
   attach-logkeeper-logs:
     command: s3.put
     type: system
