@@ -17,7 +17,7 @@ export const matchesFilter = (
       ? filters.map((f) => `(?=^.*${f})`).join("")
       : filters.join("|");
 
-  return !!logLine.match(new RegExp(regexFilter, "i"));
+  return new RegExp(regexFilter, "i").test(logLine);
 };
 
 /**
@@ -38,7 +38,7 @@ export const filterLogs = (
   filterLogic: FilterLogic
 ): (number | number[])[] => {
   if (filters.length === 0) {
-    return [...Array(logLines.length).keys()];
+    return logLines.map((_, idx) => idx);
   }
 
   const filteredLines: (number | number[])[] = [];
@@ -50,18 +50,18 @@ export const filterLogs = (
       return arr;
     }
 
-    // Determine if a line should be displayed or collapsed depending on if it matches the filter.
-    const hasMatch = matchesFilter(logLine, filters, filterLogic);
-
-    if (hasMatch) {
+    // If the line matches the filters, it should remain uncollapsed.
+    if (matchesFilter(logLine, filters, filterLogic)) {
       arr.push(idx);
+      return arr;
+    }
+
+    // If the line doesn't match the filters, collapse it.
+    const previousItem = arr[arr.length - 1];
+    if (Array.isArray(previousItem)) {
+      previousItem.push(idx);
     } else {
-      const previousItem = arr[arr.length - 1];
-      if (Array.isArray(previousItem)) {
-        previousItem.push(idx);
-      } else {
-        arr.push([idx]);
-      }
+      arr.push([idx]);
     }
     return arr;
   }, filteredLines);
