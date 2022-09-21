@@ -99,7 +99,7 @@ describe("resmoke/helpers", () => {
     it("handles empty strings", () => {
       expect(getMessage("")).toBeUndefined();
     });
-    it("handes strings in complex json", () => {
+    it("handles strings in complex json", () => {
       expect(
         getMessage(
           '{"t":{"$date":"2022-09-08T14:51:20.907+00:00"},"s":"I",  "c":"-",        "id":20883,   "ctx":"conn1","msg":"Interrupted operation as its client disconnected","attr":{"opId":9}}'
