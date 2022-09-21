@@ -22,7 +22,7 @@ Parsley is capable of fetching logs from both [evergreen](https://github.com/eve
 
 **Evergreen**
 1. Clone the [Evergreen Repository](https://github.com/evergreen-ci/evergreen)
-2. Follow the setup instructions in the readme to set up your environment.
+2. Follow the setup instructions in the README to set up your environment.
 3. Run `make local-evergreen` to start the local evergreen server
 
 **Logkeeper**
