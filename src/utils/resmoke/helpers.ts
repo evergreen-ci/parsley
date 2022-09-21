@@ -24,7 +24,7 @@ const getResmokeFunction = (line: string) => {
 
 /** `getJSONString` returns the json object in a resmoke line */
 const getJSONString = (line: string) => {
-  // Lets try to find the json string by finding the first { and the last }
+  // Find the first occurrence of `{` and the last occurrence of `}`
   const openBracketIndex = line.indexOf("{");
   const closeBracketIndex = line.lastIndexOf("}");
   // if we can't find the brackets, return undefined
