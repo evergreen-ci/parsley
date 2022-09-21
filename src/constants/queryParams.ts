@@ -5,7 +5,11 @@ enum QueryParams {
   Filters = "filters",
   SelectedLine = "selectedLine",
   Wrap = "wrap",
+  Expandable = "expandable",
+  CaseSensitive = "caseSensitive",
   FilterLogic = "filterLogic",
+  LowerRange = "lower",
+  UpperRange = "upper",
 }
 
 enum FilterLogic {
@@ -13,4 +17,4 @@ enum FilterLogic {
   Or = "or",
 }
 
-export { QueryParams, FilterLogic };
+export { FilterLogic, QueryParams };
