@@ -5,10 +5,11 @@ import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import SideBar from "components/SideBar";
 import SubHeader from "components/SubHeader";
 import { LogTypes } from "constants/enums";
-import { QueryParams } from "constants/queryParams";
+import { FilterLogic, QueryParams } from "constants/queryParams";
 import { navbarHeight, size, subheaderHeight } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
+import { filterLogs } from "utils/filter";
 
 interface LogWindowProps {
   logType: LogTypes;
@@ -18,13 +19,17 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const { logLines, hasLogs, getLine } = useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
-  const [scrollToIndex] = useQueryParam(QueryParams.SelectedLine, 0);
+  const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
+  const [selectedLine] = useQueryParam<number | undefined>(
+    QueryParams.SelectedLine,
+    undefined
+  );
+  const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
 
-  // TODO: EVG-17525
-  // Do what ever logic to process the lines here
+  // TODO EVG-17537: more advanced filtering
   const processedLogLines = useMemo(
-    () => logLines.map((_, index) => index),
-    [logLines]
+    () => filterLogs(logLines, filters, bookmarks, selectedLine, filterLogic),
+    [logLines, filters, bookmarks, selectedLine, filterLogic]
   );
 
   return (
@@ -44,7 +49,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               getLine,
               processedLines: processedLogLines,
             })}
-            scrollToIndex={scrollToIndex}
+            scrollToIndex={selectedLine}
             wrap={wrap}
           />
         </LogPaneContainer>

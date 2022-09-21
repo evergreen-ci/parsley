@@ -1,7 +1,7 @@
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import SearchRangeInput from ".";
 
-describe("range input", () => {
+describe("search range input", () => {
   it("should update the URL correctly", async () => {
     const { history } = render(<SearchRangeInput />);
 

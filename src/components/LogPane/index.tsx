@@ -25,7 +25,7 @@ const LogPane: React.FC<LogPaneProps> = ({
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wrap, filters]);
+  }, [wrap, `${filters}`]);
   return (
     <AutoSizer>
       {({ height, width }) => (
