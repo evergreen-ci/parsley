@@ -18,7 +18,7 @@ Parsley is the UI for Evergreen's log viewer. It will eventually replace [Lobste
 
 #### Starting supporting services
 
-Parsley is capable of fetching logs from both [evergreen](https://github.com/evergreen-ci/evergreen) and [logkeeper](https://github.com/evergreen-ci/logkeeper) if you would like to develop against them locally you need to start both of the servers locally.
+Parsley is capable of fetching logs from both [evergreen](https://github.com/evergreen-ci/evergreen) and [logkeeper](https://github.com/evergreen-ci/logkeeper). If you would like to develop against them you will need to run both of the servers locally.
 
 **Evergreen**
 1. Clone the [Evergreen Repository](https://github.com/evergreen-ci/evergreen)
