@@ -33,7 +33,7 @@ Parsley is capable of fetching logs from both [evergreen](https://github.com/eve
     # Use this (or similar command) to seed some sample data into a local bucket and use that as storage
     mkdir -p _bucketdata && cp -r testdata/simple/* _bucketdata
     ```
-3. Run the following command to inject the necessary env variables and start the local logkeeper server `LK_CORS_ORIGINS=http:\/\/localhost:5173,http:\/\/localhost:4173 go run main/logkeeper.go --localPath _bucketdata`
+3. Run the following command to inject the necessary env variables and start the local logkeeper server `LK_CORS_ORIGINS=http:\/\/localhost:\\d+ go run main/logkeeper.go --localPath _bucketdata`
 
 
 ### Environment Variables
