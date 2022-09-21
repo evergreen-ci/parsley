@@ -101,8 +101,6 @@ const getConfigServer = (line: string) => {
   return configSrv;
 };
 
-// regex that matches  "c":"NETWORK" or "c":"STORAGE" or "c":"COMMAND" or "c":"REPL" and nothing else
-
 /** The id
  * @example "id":22900
  * @example "id":22901
@@ -153,11 +151,11 @@ const getAttributes = (line: string) => {
 
 export {
   getAttributes,
-  getContext,
   getConfigServer,
-  getPid,
+  getContext,
   getJSONString,
   getMessage,
+  getPid,
   getPort,
   getResmokeFunction,
   getShellPrefix,
