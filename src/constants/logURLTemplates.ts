@@ -10,7 +10,7 @@ const getEvergreenTestLogURL = (
     test_name: testID,
     text: true,
   };
-  return `${evergreenURL}/test_log/${taskID}/${execution}/?${stringifyQuery(
+  return `${evergreenURL}/test_log/${taskID}/${execution}?${stringifyQuery(
     params
   )}`;
 };
