@@ -15,6 +15,12 @@ const getEvergreenTestLogURL = (
   )}`;
 };
 
+/**
+ *
+ * @param buildID - the build ID of the resmoke job
+ * @param testID - the test ID of the resmoke job
+ * @returns `/build/${buildID}/test/${testID}`
+ */
 const getResmokeLogURL = (buildID: string, testID: string) => {
   const params = {
     raw: 1,
@@ -25,14 +31,20 @@ const getResmokeLogURL = (buildID: string, testID: string) => {
   )}`;
 };
 
+enum originToType {
+  agent = "A",
+  system = "S",
+  task = "T",
+}
+
 const getEvergreenTaskLogURL = (
   taskID: string,
   execution: string,
-  origin: string
+  origin: keyof typeof originToType
 ) => {
   const params = {
     text: true,
-    type: origin,
+    type: originToType[origin] || undefined,
   };
   return `${evergreenURL}/task_log_raw/${taskID}/${execution}?${stringifyQuery(
     params

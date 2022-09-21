@@ -39,7 +39,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
       if (!taskID || !execution || !origin) {
         break;
       }
-      url = getEvergreenTaskLogURL(taskID, execution, origin);
+      url = getEvergreenTaskLogURL(taskID, execution, origin as any);
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
