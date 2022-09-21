@@ -44,7 +44,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
     if (logType) {
       onChangeLogType(logType);
       if (typeof lineStream.current === "string") {
-        ingestLines(lineStream.current.split("\n"));
+        ingestLines(lineStream.current.split("\n"), logType);
       }
     }
   }, [ingestLines, logType, onChangeLogType]);
