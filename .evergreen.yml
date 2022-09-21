@@ -275,12 +275,14 @@ functions:
         cp -r testdata/simple/* _bucketdata
 
   run-logkeeper:
-    command: subprocess.exec
+    command: shell.exec
     params:
       working_dir: parsley/logkeeper
-      binary: make
-      args: ["run", "main/logkeeper.go", "--localpath", "_bucketdata"]
+      script: PATH=/opt/golang/go1.16/bin:$PATH go run main/logkeeper.go --localPath _bucketdata
       background: true
+      env:
+        SETTINGS_OVERRIDE: file
+        GOROOT: /opt/golang/go1.16
 
   attach-logkeeper-logs:
     command: s3.put
@@ -288,13 +290,11 @@ functions:
     params:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/logkeeper/logkeeperapp.log"]
-      remote_file: parsley/${task_id}/logkeeper
+      local_file: parsley/logkeeper/logkeeperapp.log
+      remote_file: parsley/${task_id}/${execution}/logkeeperapp.log
       bucket: mciuploads
       content_type: text/html
       permissions: public-read
-      display_name: "logkeeper:"
 
 #######################################
 #                Tasks                #
