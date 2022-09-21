@@ -226,7 +226,7 @@ functions:
       type: setup
       params:
         env:
-          gobin: /opt/golang/go1.16/bin/go
+          gobin: ${goroot}/bin/go
           MONGODB_URL: ${mongodb_url}
           DECOMPRESS: ${decompress}
         working_dir: parsley/evergreen
@@ -252,7 +252,7 @@ functions:
       background: true
       env:
         SETTINGS_OVERRIDE: file
-        GOROOT: /opt/golang/go1.16
+        GOROOT: ${goroot}
 
 #######################################
 #      Local Logkeeper Functions      #
@@ -278,11 +278,11 @@ functions:
     command: shell.exec
     params:
       working_dir: parsley/logkeeper
-      script: PATH=/opt/golang/go1.16/bin:$PATH go run main/logkeeper.go --localPath _bucketdata
       background: true
+      script: PATH=${goroot}/bin:$PATH go run main/logkeeper.go --localPath _bucketdata
       env:
-        SETTINGS_OVERRIDE: file
-        GOROOT: /opt/golang/go1.16
+        GOROOT: ${goroot}
+
 
   attach-logkeeper-logs:
     command: s3.put
