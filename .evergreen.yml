@@ -279,7 +279,7 @@ functions:
     params:
       working_dir: parsley/logkeeper
       background: true
-      script: PATH=${goroot}/bin:$PATH go run main/logkeeper.go --localPath _bucketdata
+      script: PATH=${goroot}/bin:$PATH LK_CORS_ORIGINS=http:\/\/localhost:5173,http:\/\/localhost:4173 go run main/logkeeper.go --localPath _bucketdata
       env:
         GOROOT: ${goroot}
 
