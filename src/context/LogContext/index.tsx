@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useMemo } from "react";
+import { LogTypes } from "constants/enums";
 import useLogState from "./state";
 
 interface LogContextState {
@@ -7,7 +8,7 @@ interface LogContextState {
   hasLogs: boolean;
   fileName?: string;
   scrollIndex?: number;
-  ingestLines: (logs: string[]) => void;
+  ingestLines: (logs: string[], logType: LogTypes) => void;
   getLine: (lineNumber: number) => string | undefined;
   setFileName: (fileName: string) => void;
   clearLogs: () => void;
@@ -35,8 +36,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const { state, dispatch } = useLogState(initialLogLines);
 
   const ingestLines = useCallback(
-    (lines: string[]) => {
-      dispatch({ type: "INGEST_LOGS", logs: lines });
+    (lines: string[], logType: LogTypes) => {
+      dispatch({ type: "INGEST_LOGS", logs: lines, logType });
     },
     [dispatch]
   );
