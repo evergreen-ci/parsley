@@ -45,10 +45,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
         onChange={(v) => setSelected(v)}
         value={selected}
       >
-        <Option key="search" value="search">
+        <Option key="search" data-cy="search-option" value="search">
           Search
         </Option>
-        <Option key="filter" value="filter">
+        <Option key="filter" data-cy="filter-option" value="filter">
           Filter
         </Option>
       </StyledSelect>
