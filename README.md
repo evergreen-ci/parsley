@@ -16,7 +16,7 @@ Parsley is the UI for Evergreen's log viewer. It will eventually replace [Lobste
 4. Run `yarn`.
 5. Run `yarn run dev`. This will launch the app.
 
-#### Starting supporting services
+### Starting supporting services
 
 Parsley is capable of fetching logs from both [evergreen](https://github.com/evergreen-ci/evergreen) and [logkeeper](https://github.com/evergreen-ci/logkeeper). If you would like to develop against them you will need to run both of the servers locally.
 
