@@ -23,7 +23,11 @@ describe("Basic resmoke log view", () => {
     );
   });
   it("long lines with wrapping turned on should fit on screen", () => {
-    cy.visit("/evergreen/task_0/0/tasks?wrap=true");
+    // Turn wrapping on through the Details Overlay.
+    cy.dataCy("details-button").click();
+    cy.dataCy("wrap-toggle").click();
+    cy.dataCy("details-button").click();
+
     cy.dataCy("log-row-2").should("be.visible");
     cy.dataCy("log-row-2").should(
       "contain.text",
@@ -33,7 +37,7 @@ describe("Basic resmoke log view", () => {
   });
 });
 
-describe("Log interactions", () => {
+describe("Bookmarking and selecting lines", () => {
   before(() => {
     cy.visit("/resmoke/build_0/test_0");
   });
@@ -68,5 +72,45 @@ describe("Log interactions", () => {
   it("should be able to clear bookmarks", () => {
     cy.dataCy("clear-bookmarks").click();
     cy.location("search").should("equal", "");
+  });
+});
+
+describe("Filtering", () => {
+  it("should be able to apply filters", () => {
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("starting{enter}");
+
+    cy.dataCy("log-row-0").should("be.visible");
+    cy.dataCy("log-row-1").should("be.visible");
+    cy.dataCy("log-row-2").should("not.exist");
+    cy.dataCy("log-row-3").should("not.exist");
+    cy.dataCy("log-row-4").should("be.visible");
+    cy.dataCy("log-row-5").should("not.exist");
+    cy.dataCy("log-row-6").should("not.exist");
+    cy.dataCy("log-row-7").should("be.visible");
+  });
+
+  it("should respect applied filters and selected lines", () => {
+    // TODO EVG-17908: Instead of revisiting the page, delete the filters from the drawer.
+    cy.visit("/evergreen/task_0/0/tasks");
+
+    // Select a line, with the expectation that it won't be collapsed by the filter.
+    cy.dataCy("log-link-5").click();
+    // Bookmark a line, with the expecation that it won't be collapsed by the filter.
+    cy.dataCy("log-row-6").dblclick();
+
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("notarealfilter{enter}");
+
+    cy.dataCy("log-row-0").should("be.visible");
+    cy.dataCy("log-row-1").should("not.exist");
+    cy.dataCy("log-row-2").should("not.exist");
+    cy.dataCy("log-row-3").should("not.exist");
+    cy.dataCy("log-row-4").should("not.exist");
+    cy.dataCy("log-row-5").should("be.visible");
+    cy.dataCy("log-row-6").should("be.visible");
+    cy.dataCy("log-row-7").should("be.visible");
   });
 });

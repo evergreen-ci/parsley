@@ -16,6 +16,30 @@ Parsley is the UI for Evergreen's log viewer. It will eventually replace [Lobste
 4. Run `yarn`.
 5. Run `yarn run dev`. This will launch the app.
 
+### Starting supporting services
+
+Parsley is capable of fetching logs from both [evergreen](https://github.com/evergreen-ci/evergreen) and [logkeeper](https://github.com/evergreen-ci/logkeeper). If you would like to develop against them you will need to run both of the servers locally.
+
+**Evergreen**
+1. Clone the [Evergreen Repository](https://github.com/evergreen-ci/evergreen)
+2. Follow the setup instructions in the README to set up your environment.
+3. Run `make local-evergreen` to start the local evergreen server
+
+**Logkeeper**
+1. Clone the [Logkeeper Repository](https://github.com/evergreen-ci/logkeeper)
+2. ```sh
+    cd logkeeper
+    
+    # Use this (or similar command) to seed some sample data into a local bucket and use that as storage
+    mkdir -p _bucketdata && cp -r testdata/simple/* _bucketdata
+    ```
+3. Run the following command to inject the necessary env variables and start the local logkeeper server 
+
+    `LK_CORS_ORIGINS=http:\/\/localhost:\\d+ go run main/logkeeper.go --localPath _bucketdata` 
+
+    Note that all log output is piped to a file named `logkeeperapp.log`.
+    You can use `tail -f logkeeperapp.log` to view the log output
+
 
 ### Environment Variables
 
