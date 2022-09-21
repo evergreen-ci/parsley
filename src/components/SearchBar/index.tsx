@@ -16,7 +16,6 @@ interface SearchBarProps {
   onSubmit?: (selected: string, value: string) => void;
 }
 
-// Basic component to test LG and Emotion integration.
 const SearchBar: React.FC<SearchBarProps> = ({
   disabled = false,
   validator = () => true,
@@ -46,10 +45,10 @@ const SearchBar: React.FC<SearchBarProps> = ({
         onChange={(v) => setSelected(v)}
         value={selected}
       >
-        <Option key="search" value="search">
+        <Option key="search" data-cy="search-option" value="search">
           Search
         </Option>
-        <Option key="filter" value="filter">
+        <Option key="filter" data-cy="filter-option" value="filter">
           Filter
         </Option>
       </StyledSelect>
@@ -108,10 +107,6 @@ const StyledSelect = styled(Select)`
 `;
 
 const StyledInput = styled(TextInputWithGlyph)`
-  /* Remove default padding around the text input. */
-  > div {
-    padding: 0;
-  }
   /* overwrite lg borders https://jira.mongodb.org/browse/PD-1995 */
   div input {
     border-top-left-radius: 0;

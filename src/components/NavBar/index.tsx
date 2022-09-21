@@ -1,6 +1,9 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
+import Badge from "@leafygreen-ui/badge";
 import { palette } from "@leafygreen-ui/palette";
+import DetailsOverlay from "components/DetailsOverlay";
+import FiltersOverlay from "components/FiltersOverlay";
 import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
@@ -25,7 +28,7 @@ const NavBar: React.FC = () => {
   const handleSearch = (selected: string, value: string) => {
     if (selected === "search") {
       setSearch(value);
-    } else if (selected === "filter") {
+    } else if (selected === "filter" && !filters.includes(value)) {
       setFilters([...filters, value]);
     }
   };
@@ -47,8 +50,18 @@ const NavBar: React.FC = () => {
         />
       </FlexContainer>
       <ButtonContainer>
-        <StyledButton buttonText="Filters">SomeContent</StyledButton>
-        <StyledButton buttonText="Details">SomeContent</StyledButton>
+        <StyledButton
+          buttonText={
+            <span>
+              Filters <Badge variant="green">{filters.length}</Badge>
+            </span>
+          }
+        >
+          <FiltersOverlay />
+        </StyledButton>
+        <StyledButton buttonText="Details" data-cy="details-button">
+          <DetailsOverlay />
+        </StyledButton>
       </ButtonContainer>
     </Container>
   );
@@ -57,6 +70,7 @@ const NavBar: React.FC = () => {
 const FlexContainer = styled.div`
   display: flex;
 `;
+
 const ButtonContainer = styled.div`
   display: flex;
   align-items: center;
