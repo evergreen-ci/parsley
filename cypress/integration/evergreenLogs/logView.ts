@@ -98,7 +98,7 @@ describe("Filtering", () => {
 
   it("should respect applied filters and selected lines", () => {
     // TODO EVG-17908: Instead of revisiting the page, delete the filters from the drawer.
-    cy.visit("/evergreen/task_0/0/tasks");
+    cy.visit(logLink);
 
     // Select a line, with the expectation that it won't be collapsed by the filter.
     cy.dataCy("log-link-5").click();

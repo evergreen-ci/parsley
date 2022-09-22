@@ -1,6 +1,8 @@
+const logLink =
+  "/test/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0/JustAFakeTestInALonelyWorld";
 describe("Basic evergreen test log view", () => {
   before(() => {
-    cy.visit("/test/task_0/0/test_0");
+    cy.visit(logLink);
   });
 
   it("should be able to see log lines", () => {
@@ -39,7 +41,7 @@ describe("Basic evergreen test log view", () => {
 
 describe("Bookmarking and selecting lines", () => {
   before(() => {
-    cy.visit("/test/task_0/0/test_0");
+    cy.visit(logLink);
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
@@ -93,7 +95,7 @@ describe("Filtering", () => {
 
   it("should respect applied filters and selected lines", () => {
     // TODO EVG-17908: Instead of revisiting the page, delete the filters from the drawer.
-    cy.visit("/evergreen/task_0/0/tasks");
+    cy.visit(logLink);
 
     // Select a line, with the expectation that it won't be collapsed by the filter.
     cy.dataCy("log-link-5").click();
