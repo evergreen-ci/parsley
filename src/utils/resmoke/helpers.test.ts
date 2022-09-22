@@ -130,21 +130,17 @@ describe("resmoke/helpers", () => {
       expect(getResmokeFunction("hello")).toBeUndefined();
     });
     it("returns undefined if a line has a resmoke function but no json", () => {
-      expect(getResmokeFunction("[j1] hello")).toBeUndefined();
-      expect(getResmokeFunction("[j2] hello")).toBeUndefined();
-      expect(getResmokeFunction("[j0:s0:n2] hello")).toBeUndefined();
+      expect(getResmokeFunction("[j1] hello")).toBe("[j1]");
+      expect(getResmokeFunction("[j2] hello")).toBe("[j2]");
+      expect(getResmokeFunction("[j0:s0:n2] hello")).toBe("[j0:s0:n2]");
     });
     it("returns a resmoke function correctly", () => {
-      expect(
-        getResmokeFunction(
-          `[js_test:fle_agg] {"t":{"$date":"2022-09-21T22:11:21.630Z"},"s":"I",  "c":"-",        "id":22810,   "ctx":"js","msg":"shell: Started program","attr":{"pid":"21666","port":-1,"argv":["/data/mci/dc8eb627f29b4cfe1d70952dac9eb6d7/src/dist-test/bin/mongocryptd","--port=20540","--unixSocketPrefix=/data/db/job2/mongorunner","--setParameter","featureFlagFLE2Range=true","--setParameter","enableTestCommands=1","-vvv","--pidfilepath=/data/db/job2/mongorunner/cryptd.pid"]}}`
-        )
-      ).toBe(`[js_test:fle_agg]`);
-      expect(
-        getResmokeFunction(
-          `[js_test:fle_agg] sh21666| {"t":{"$date":"2022-09-21T22:11:23.637+00:00"},"s":"I",  "c":"NETWORK",  "id":4648602, "ctx":"main","msg":"Implicit TCP FastOpen in use."}`
-        )
-      ).toBe("[js_test:fle_agg]");
+      expect(getResmokeFunction(`[js_test:fle_agg] `)).toBe(
+        `[js_test:fle_agg]`
+      );
+      expect(getResmokeFunction(`[js_test:fle_agg] sh21666| `)).toBe(
+        "[js_test:fle_agg]"
+      );
     });
   });
   describe("getShellPrefix", () => {

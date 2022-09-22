@@ -18,16 +18,7 @@ const resmokeFunctionRegex = /\[.*\]/g;
 
 /** `getResmokeFunction` returns the resmoke function that ran a resmoke line */
 const getResmokeFunction = (line: string) => {
-  let logParts = line.split("|"); // in many cases mongod will insert a pipe between the metadata and json logs
-  if (logParts.length !== 2) {
-    const startOfJson = line.indexOf("{"); // if not, attempt to find the first occurence of a json document and attempt to parse as a log
-    if (startOfJson > -1) {
-      logParts = [line.substring(0, startOfJson)];
-    } else {
-      return undefined;
-    }
-  }
-  const resmokeFunction = logParts[0].match(resmokeFunctionRegex)?.[0];
+  const resmokeFunction = line.match(resmokeFunctionRegex)?.[0];
   return resmokeFunction;
 };
 
