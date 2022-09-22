@@ -100,10 +100,14 @@ const listRowProps = {
   parent: {} as any,
   style: {},
 };
+
 const getLine = (index: number) => logLines[index];
+
+const setScrollIndex = jest.fn();
 
 const data = {
   getLine,
+  setScrollIndex,
   wrap: false,
   processedLines: logLines.map((_, index) => index),
   logType: LogTypes.RESMOKE_LOGS,

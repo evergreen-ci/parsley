@@ -5,7 +5,7 @@ import { BaseRowProps } from "../types";
 
 const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { data, listRowProps } = rowProps;
-  const { getLine, wrap, processedLines } = data;
+  const { getLine, setScrollIndex, wrap, processedLines } = data;
   const { index } = listRowProps;
 
   const line = processedLines[index];
@@ -13,7 +13,13 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   return Array.isArray(line) ? (
     <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
   ) : (
-    <BaseRow ref={ref} wrap={wrap} {...listRowProps} lineNumber={line}>
+    <BaseRow
+      ref={ref}
+      {...listRowProps}
+      lineNumber={line}
+      setScrollIndex={setScrollIndex}
+      wrap={wrap}
+    >
       <span data-cy="resmoke-row">{getLine(line)}</span>
     </BaseRow>
   );

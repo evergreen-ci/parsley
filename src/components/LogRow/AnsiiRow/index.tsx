@@ -10,7 +10,7 @@ const ansiUp = new AnsiUp();
 
 const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { data, listRowProps } = rowProps;
-  const { getLine, wrap, processedLines } = data;
+  const { getLine, setScrollIndex, wrap, processedLines } = data;
   const { index } = listRowProps;
 
   const line = processedLines[index];
@@ -22,7 +22,13 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   }
   const lineContent = getLine(line);
   return lineContent ? (
-    <BaseRow wrap={wrap} {...listRowProps} ref={ref} lineNumber={line}>
+    <BaseRow
+      {...listRowProps}
+      ref={ref}
+      lineNumber={line}
+      setScrollIndex={setScrollIndex}
+      wrap={wrap}
+    >
       <ProcessedAnsiiRow lineContent={lineContent} />
     </BaseRow>
   ) : null;

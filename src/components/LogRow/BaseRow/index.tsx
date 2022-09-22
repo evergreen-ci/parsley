@@ -5,7 +5,6 @@ import { ListRowProps } from "react-virtualized";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
-import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
 
 const { yellow, red } = palette;
@@ -17,6 +16,7 @@ interface BaseRowProps extends ListRowProps {
   // The line number associated with a log line and its index within the context of the virtualized list
   // may differ due to collapsed rows.
   lineNumber: number;
+  setScrollIndex: (scrollIndex: number | undefined) => void;
 }
 
 /**
@@ -24,8 +24,7 @@ interface BaseRowProps extends ListRowProps {
  * It is responsible for handling the highlighting of the selected line
  */
 const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
-  const { index, lineNumber, children, wrap, isVisible, ...rest } = props;
-  const { setScrollIndex } = useLogContext();
+  const { children, index, lineNumber, setScrollIndex, wrap, ...rest } = props;
 
   const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,

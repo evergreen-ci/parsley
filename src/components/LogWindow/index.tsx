@@ -54,6 +54,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         <LogPaneContainer>
           <LogPane
             cache={cache}
+            filterLogic={filterLogic}
             filters={filters}
             logLines={processedLogLines}
             rowCount={processedLogLines.length}
@@ -61,6 +62,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               logType,
               wrap,
               getLine,
+              setScrollIndex,
               processedLines: processedLogLines,
             })}
             scrollToIndex={scrollIndex}
