@@ -210,6 +210,14 @@ functions:
         export PATH=${node_path}
         yarn check-types
 
+  yarn-verify-backend:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn verify-backend
+
 #######################################
 #      Local Evergreen Functions      #
 #######################################
@@ -335,6 +343,7 @@ tasks:
     - func: yarn-build
     - func: yarn-preview
     - func: install-chrome
+    - func: yarn-verify-backend
     - func: yarn-cypress
     - func: attach-cypress-results
     - func: attach-cypress-screenshots
