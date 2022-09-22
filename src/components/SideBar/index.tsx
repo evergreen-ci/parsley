@@ -58,7 +58,11 @@ const SideBar: React.FC<SideBarProps> = ({
       </StyledButton>
       <LogLineContainer data-cy="log-line-container">
         {lineNumbers.map((l) => (
-          <LogLineNumber key={`log-line-${l}`} onClick={() => scrollToIndex(l)}>
+          <LogLineNumber
+            key={`log-line-${l}`}
+            data-cy={`log-line-${l}`}
+            onClick={() => scrollToIndex(l)}
+          >
             <span> {l} </span>
             {l === selectedLine && <StyledIcon glyph="Link" size="small" />}
           </LogLineNumber>

@@ -6,7 +6,7 @@ describe("sideBar", () => {
     const { history } = renderWithRouterMatch(
       <SideBar
         maxLineNumber={10}
-        processedLogLines={[]}
+        processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         setScrollIndex={jest.fn()}
       />
     );
@@ -19,7 +19,7 @@ describe("sideBar", () => {
     renderWithRouterMatch(
       <SideBar
         maxLineNumber={10}
-        processedLogLines={[]}
+        processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         setScrollIndex={jest.fn()}
       />,
       {
@@ -40,16 +40,48 @@ describe("sideBar", () => {
     const { history } = renderWithRouterMatch(
       <SideBar
         maxLineNumber={10}
-        processedLogLines={[]}
+        processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         setScrollIndex={jest.fn()}
       />,
       {
         route: "?bookmarks=1,3&selectedLine=5",
       }
     );
-    userEvent.click(screen.getByDataCy("clear-bookmarks"));
-    await waitFor(() => {
-      expect(history.location.search).toBe("?selectedLine=5");
-    });
+    await userEvent.click(screen.getByDataCy("clear-bookmarks"));
+    expect(history.location.search).toBe("?selectedLine=5");
+  });
+
+  it("setScrollIndex should be called when clicking on a log line (no collapsed lines)", async () => {
+    const setScrollIndex = jest.fn();
+    renderWithRouterMatch(
+      <SideBar
+        maxLineNumber={4}
+        processedLogLines={[0, 1, 2, 3, 4]}
+        setScrollIndex={setScrollIndex}
+      />,
+      {
+        route: "?bookmarks=1,3",
+      }
+    );
+    await userEvent.click(screen.getByDataCy("log-line-3"));
+    expect(setScrollIndex).toHaveBeenCalledTimes(1);
+    expect(setScrollIndex).toHaveBeenCalledWith(3);
+  });
+
+  it("setScrollIndex should be called when clicking on a log line (collapsed lines)", async () => {
+    const setScrollIndex = jest.fn();
+    renderWithRouterMatch(
+      <SideBar
+        maxLineNumber={4}
+        processedLogLines={[[0, 1, 2], 3, 4]}
+        setScrollIndex={setScrollIndex}
+      />,
+      {
+        route: "?bookmarks=1,3",
+      }
+    );
+    await userEvent.click(screen.getByDataCy("log-line-3"));
+    expect(setScrollIndex).toHaveBeenCalledTimes(1);
+    expect(setScrollIndex).toHaveBeenCalledWith(1);
   });
 });

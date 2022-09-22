@@ -66,4 +66,15 @@ describe("useLogContext", () => {
     expect(result.current.logLines).toStrictEqual([]);
     expect(result.current.lineCount).toBe(0);
   });
+  it("should be able to set a scroll index", () => {
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+      <LogContextProvider>{children}</LogContextProvider>
+    );
+    const { result } = renderHook(() => useLogContext(), { wrapper });
+    expect(result.current.scrollIndex).toBeUndefined();
+    act(() => {
+      result.current.setScrollIndex(13);
+    });
+    expect(result.current.scrollIndex).toBe(13);
+  });
 });
