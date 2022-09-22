@@ -129,10 +129,18 @@ describe("resmoke/helpers", () => {
     it("handles strings without resmoke", () => {
       expect(getResmokeFunction("hello")).toBeUndefined();
     });
-    it("handles strings with resmoke", () => {
+    it("returns resmoke function on a normal line", () => {
       expect(getResmokeFunction("[j1] hello")).toBe("[j1]");
       expect(getResmokeFunction("[j2] hello")).toBe("[j2]");
       expect(getResmokeFunction("[j0:s0:n2] hello")).toBe("[j0:s0:n2]");
+    });
+    it("returns a resmoke function correctly", () => {
+      expect(getResmokeFunction(`[js_test:fle_agg] `)).toBe(
+        `[js_test:fle_agg]`
+      );
+      expect(getResmokeFunction(`[js_test:fle_agg] sh21666| `)).toBe(
+        "[js_test:fle_agg]"
+      );
     });
   });
   describe("getShellPrefix", () => {
