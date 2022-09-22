@@ -1,12 +1,9 @@
 import { fail } from "assert";
 
-const LOGIN_COOKIE = "mci-token";
-const loginURL = "http://localhost:9090/login";
 const user = {
   username: "admin",
   password: "password",
 };
-
 const toastDataCy = "toast";
 
 Cypress.Commands.add("dataCy", (value: string) => {
@@ -88,13 +85,19 @@ Cypress.Commands.add(
 );
 
 Cypress.Commands.add("login", () => {
-  cy.getCookie(LOGIN_COOKIE).then((c) => {
-    if (!c) {
-      cy.request("POST", loginURL, { ...user });
+  const args = { ...user };
+  cy.session(
+    // Username & password can be used as the cache key too
+    args,
+    () => {
+      cy.origin("http://localhost:9090", { args }, ({ username, password }) => {
+        cy.request("POST", "/login", { username, password });
+      });
+    },
+    {
+      validate() {
+        cy.request("/graphql").its("status").should("eq", 200);
+      },
     }
-  });
-});
-
-Cypress.Commands.add("preserveCookies", () => {
-  Cypress.Cookies.preserveOnce(LOGIN_COOKIE, "mci-session");
+  );
 });

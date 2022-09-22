@@ -51,12 +51,3 @@ declare global {
     }
   }
 }
-
-// Login before each test and remove banner cookies
-// We can disable the necessary cookies for tests that need the banners
-before(() => {
-  cy.login();
-});
-beforeEach(() => {
-  cy.preserveCookies();
-});
