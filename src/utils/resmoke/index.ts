@@ -23,6 +23,9 @@ const processResmokeLine = (line: string) => {
   if (!json) {
     return line;
   }
+  if (!(getPid(json) && getShellPrefix(json) && getContext(json))) {
+    return line;
+  }
 
   const port = getPort(line) ?? "";
   const timeStamp = getTimeStamp(json) ?? "";
