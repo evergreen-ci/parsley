@@ -20,6 +20,7 @@ const routes = {
   evergreenLogs: `${paths.evergreenLogs}/:${slugs.taskID}/:${slugs.execution}/:${slugs.origin}`,
   testLogs: `${paths.testLogs}/:${slugs.taskID}/:${slugs.execution}/:${slugs.testID}`,
   resmokeLogs: `${paths.resmokeLogs}/:${slugs.buildID}/test/:${slugs.testID}`,
+  resmokeLogsAll: `${paths.resmokeLogs}/:${slugs.buildID}/all`,
 };
 
 export { slugs };

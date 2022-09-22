@@ -29,10 +29,11 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
   let url = "";
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
-      if (!buildID || !testID) {
-        break;
+      if (buildID && testID) {
+        url = getResmokeLogURL(buildID, testID);
+      } else if (buildID) {
+        url = getResmokeLogURL(buildID);
       }
-      url = getResmokeLogURL(buildID, testID);
       break;
     }
     case LogTypes.EVERGREEN_TASK_LOGS: {

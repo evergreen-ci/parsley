@@ -28,6 +28,10 @@ const Content: React.FC = () => (
       element={<LogView logType={LogTypes.RESMOKE_LOGS} />}
       path={routes.resmokeLogs}
     />
+    <Route
+      element={<LogView logType={LogTypes.RESMOKE_LOGS} />}
+      path={routes.resmokeLogsAll}
+    />
   </Routes>
 );
 

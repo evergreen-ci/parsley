@@ -21,14 +21,17 @@ const getEvergreenTestLogURL = (
  * @param testID - the test ID of the resmoke job
  * @returns `/build/${buildID}/test/${testID}`
  */
-const getResmokeLogURL = (buildID: string, testID: string) => {
+const getResmokeLogURL = (buildID: string, testID?: string) => {
   const params = {
     raw: 1,
     s3: true, // TODO: Remove this once this becomes the default
   };
-  return `${logkeeperURL}/build/${buildID}/test/${testID}?${stringifyQuery(
-    params
-  )}`;
+  if (testID) {
+    return `${logkeeperURL}/build/${buildID}/test/${testID}?${stringifyQuery(
+      params
+    )}`;
+  }
+  return `${logkeeperURL}/build/${buildID}/all?${stringifyQuery(params)}`;
 };
 
 enum originToType {
