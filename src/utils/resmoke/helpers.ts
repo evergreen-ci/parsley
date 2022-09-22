@@ -22,7 +22,7 @@ const getResmokeFunction = (line: string) => {
   if (logParts.length !== 2) {
     const startOfJson = line.indexOf("{"); // if not, attempt to find the first occurence of a json document and attempt to parse as a log
     if (startOfJson > -1) {
-      logParts = [line.substring(0, startOfJson), line.substring(startOfJson)];
+      logParts = [line.substring(0, startOfJson)];
     } else {
       return undefined;
     }
