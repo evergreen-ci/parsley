@@ -262,6 +262,14 @@ functions:
         SETTINGS_OVERRIDE: file
         GOROOT: ${goroot}
 
+  wait-for-evergreen:
+    command: shell.exec
+    type: setup
+    params:
+      working_dir: parsley
+      script: ./scripts/wait-for-evergreen.sh
+
+
 #######################################
 #      Local Logkeeper Functions      #
 #######################################
@@ -343,6 +351,7 @@ tasks:
     - func: yarn-build
     - func: yarn-preview
     - func: install-chrome
+    - func: wait-for-evergreen
     - func: yarn-verify-backend
     - func: yarn-cypress
     - func: attach-cypress-results
