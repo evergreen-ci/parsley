@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "test_utils";
+import { render, screen, userEvent, waitFor } from "test_utils";
 import IconWithTooltip from ".";
 
 describe("iconWithTooltip", () => {
@@ -9,7 +9,7 @@ describe("iconWithTooltip", () => {
       </IconWithTooltip>
     );
     expect(screen.queryByText("Some Text")).toBeNull();
-    fireEvent.mouseEnter(screen.getByDataCy("Icon"));
+    userEvent.hover(screen.getByDataCy("Icon"));
     await waitFor(() => {
       expect(screen.getByText("Some Text")).toBeVisible();
     });
