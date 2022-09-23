@@ -26,7 +26,7 @@
     "preview": "vite preview",
     "snapshot": "jest storyshots.test.ts --watchAll=false",
     "start": "vite",
-    "verify-backend": "./verify-backend.sh",
+    "verify-backend": "./scripts/verify-backend.sh",
     "storybook": "start-storybook -p 6006",
     "storybook:build": "build-storybook",
     "test": "jest --watchAll=false",
