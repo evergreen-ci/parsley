@@ -1,7 +1,7 @@
 import {
-  fireEvent,
   renderWithRouterMatch as render,
   screen,
+  userEvent,
   waitFor,
 } from "test_utils";
 import UploadLink from ".";
@@ -21,7 +21,7 @@ describe("uploadLink", () => {
     render(<UploadLink clearLogs={clearLogs} hasLogs />);
     expect(screen.getByText("Upload")).toBeInTheDocument();
     expect(screen.queryByDataCy("upload-link")).toHaveAttribute("href", "/");
-    fireEvent.click(screen.getByText("Upload"));
+    await userEvent.click(screen.getByText("Upload"));
     await waitFor(() => {
       expect(screen.queryByDataCy("confirmation-modal")).toBeVisible();
     });
@@ -29,11 +29,15 @@ describe("uploadLink", () => {
   it("closing the modal does not clear logs", async () => {
     const clearLogs = jest.fn();
     render(<UploadLink clearLogs={clearLogs} hasLogs />);
-    fireEvent.click(screen.getByText("Upload"));
+    await userEvent.click(screen.getByText("Upload"));
     await waitFor(() => {
       expect(screen.queryByDataCy("confirmation-modal")).toBeVisible();
     });
-    fireEvent.click(screen.getByText("Cancel"));
+
+    const cancelButton = screen.getByRole("button", {
+      name: "Cancel",
+    });
+    await userEvent.click(cancelButton);
     await waitFor(() => {
       expect(screen.queryByDataCy("confirmation-modal")).not.toBeVisible();
     });
@@ -42,17 +46,21 @@ describe("uploadLink", () => {
   it("confirming the modal clears logs and navigates to /upload", async () => {
     const clearLogs = jest.fn();
     const { history } = render(<UploadLink clearLogs={clearLogs} hasLogs />);
-    fireEvent.click(screen.getByText("Upload"));
+    await userEvent.click(screen.getByText("Upload"));
     await waitFor(() => {
       expect(screen.queryByDataCy("confirmation-modal")).toBeVisible();
     });
-    fireEvent.click(screen.getByText("Confirm"));
+
+    const confirmButton = screen.getByRole("button", {
+      name: "Confirm",
+    });
+    await userEvent.click(confirmButton);
     await waitFor(() => {
       expect(
         screen.queryByDataCy("confirmation-modal")
       ).not.toBeInTheDocument();
     });
-    expect(clearLogs).toHaveBeenCalledWith();
     expect(history.location.pathname).toBe("/upload");
+    expect(clearLogs).toHaveBeenCalledTimes(1);
   });
 });
