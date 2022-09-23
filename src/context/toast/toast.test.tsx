@@ -6,7 +6,7 @@ import { RenderFakeToastContext } from "./__mocks__";
 
 // This function allows us to directly interact with the useToastContext hook and monitor any changes to the DOM.
 // (Courtesy of: https://github.com/testing-library/react-hooks-testing-library/issues/86)
-const renderToastProviderWithHook = () => {
+const renderComponentWithHook = () => {
   const hook: { current: DispatchToastContextState } = {
     current: {} as DispatchToastContextState,
   };
@@ -38,7 +38,7 @@ describe("toast", () => {
     // from showing in the test runner.
     const errorObject = console.error;
     jest.spyOn(console, "error").mockImplementation();
-    const { Component } = renderToastProviderWithHook();
+    const { Component } = renderComponentWithHook();
     expect(() => render(<Component />)).toThrow(
       "useToastContext must be used within a ToastProvider"
     );
@@ -46,13 +46,13 @@ describe("toast", () => {
   });
 
   it("should not display a toast by default", () => {
-    const { Component } = renderToastProviderWithHook();
+    const { Component } = renderComponentWithHook();
     render(<Component />, { wrapper });
     expect(screen.queryByDataCy("toast")).toBeNull();
   });
 
   it("should be able to set a custom title for a toast", async () => {
-    const { Component, hook } = renderToastProviderWithHook();
+    const { Component, hook } = renderComponentWithHook();
     render(<Component />, {
       wrapper,
     });
@@ -66,7 +66,7 @@ describe("toast", () => {
 
   describe("displays a toast which corresponds to the variant dispatched", () => {
     it("success", async () => {
-      const { Component, hook } = renderToastProviderWithHook();
+      const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
       });
@@ -79,7 +79,7 @@ describe("toast", () => {
     });
 
     it("error", async () => {
-      const { Component, hook } = renderToastProviderWithHook();
+      const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
       });
@@ -92,7 +92,7 @@ describe("toast", () => {
     });
 
     it("warning", async () => {
-      const { Component, hook } = renderToastProviderWithHook();
+      const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
       });
@@ -105,7 +105,7 @@ describe("toast", () => {
     });
 
     it("info", async () => {
-      const { Component, hook } = renderToastProviderWithHook();
+      const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
       });
@@ -118,7 +118,7 @@ describe("toast", () => {
     });
 
     it("progress", async () => {
-      const { Component, hook } = renderToastProviderWithHook();
+      const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
       });
@@ -133,7 +133,7 @@ describe("toast", () => {
 
   describe("closing the toast", () => {
     it("should be able to close a toast by clicking the X button by default", async () => {
-      const { Component, hook } = renderToastProviderWithHook();
+      const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
       });
@@ -149,7 +149,7 @@ describe("toast", () => {
     });
 
     it("should not be able to close the toast when closable is false", async () => {
-      const { Component, hook } = renderToastProviderWithHook();
+      const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
       });
@@ -162,7 +162,7 @@ describe("toast", () => {
 
     it("should trigger a callback function onClose", async () => {
       const onClose = jest.fn();
-      const { Component, hook } = renderToastProviderWithHook();
+      const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
       });
@@ -181,7 +181,7 @@ describe("toast", () => {
     it("should close on its own after a timeout has completed", async () => {
       jest.useFakeTimers();
       user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
-      const { Component, hook } = renderToastProviderWithHook();
+      const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
       });
@@ -203,7 +203,7 @@ describe("toast", () => {
     });
 
     it("should close the toast when hide() is called", async () => {
-      const { Component, hook } = renderToastProviderWithHook();
+      const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
       });
@@ -223,24 +223,23 @@ describe("toast", () => {
 });
 
 describe("mocked toast", () => {
-  const ToastComponent: React.FC = () => {
-    const dispatchToast = useToastContext();
-    return (
-      <button onClick={() => dispatchToast.success("test")} type="button">
-        Click Me
-      </button>
-    );
-  };
-
   it("should be able to mock the toast in a component test", async () => {
     const user = userEvent.setup();
+    const ToastComponent: React.FC = () => {
+      const dispatchToast = useToastContext();
+      return (
+        <button onClick={() => dispatchToast.success("test")} type="button">
+          Click Me
+        </button>
+      );
+    };
+
     const {
       Component,
       useToastContext: useToastContextSpied,
       dispatchToast,
     } = RenderFakeToastContext(<ToastComponent />);
     render(<Component />);
-
     await user.click(screen.getByText("Click Me"));
     expect(useToastContextSpied).toHaveBeenCalledTimes(1);
     expect(dispatchToast.success).toHaveBeenCalledWith("test");
@@ -252,12 +251,9 @@ describe("mocked toast", () => {
       dispatchToast.success("test");
     };
 
-    const {
-      HookWrapper,
-      useToastContext: useToastContextSpied,
-      dispatchToast,
-    } = RenderFakeToastContext();
-    renderHook(() => useUpdateToastTest(), { wrapper: HookWrapper });
+    const { useToastContext: useToastContextSpied, dispatchToast } =
+      RenderFakeToastContext();
+    renderHook(() => useUpdateToastTest());
     expect(useToastContextSpied).toHaveBeenCalledTimes(1);
     expect(dispatchToast.success).toHaveBeenCalledWith("test");
   });
