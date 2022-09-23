@@ -10,12 +10,11 @@ import styled from "@emotion/styled";
 import Toast, { Variant } from "@leafygreen-ui/toast";
 import {
   TOAST_TIMEOUT,
-  mapLeafyGreenVariantToToastVariant,
   mapToastToLeafyGreenVariant,
-  variantToTitleMap,
+  mapVariantToTitle,
 } from "constants/toast";
 import { zIndex } from "constants/tokens";
-import { DispatchToast, ToastType } from "types/toast";
+import { DispatchToast, VisibleToast } from "types/toast";
 
 export interface DispatchToastContextState {
   success: DispatchToast;
@@ -41,7 +40,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
   const [toastOpen, setToastOpen] = useState(false);
-  const [visibleToast, setVisibleToast] = useState<ToastType>({
+  const [visibleToast, setVisibleToast] = useState<VisibleToast>({
     variant: Variant.Note,
     title: "",
     message: "",
@@ -61,7 +60,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   });
 
   const dispatchToast = useCallback(
-    (toast: ToastType) => {
+    (toast: VisibleToast) => {
       setVisibleToast(toast);
       setToastOpen(true);
     },
@@ -138,9 +137,9 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
             : undefined
         }
         data-cy="toast"
-        data-variant={mapLeafyGreenVariantToToastVariant[visibleToast.variant]}
+        data-variant={visibleToast.variant}
         open={toastOpen}
-        title={visibleToast.title || variantToTitleMap[visibleToast.variant]}
+        title={visibleToast.title || mapVariantToTitle[visibleToast.variant]}
         variant={visibleToast.variant}
       />
     </ToastDispatchContext.Provider>

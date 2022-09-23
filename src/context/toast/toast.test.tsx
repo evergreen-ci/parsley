@@ -38,6 +38,12 @@ const ToastComponent: React.FC<ToastComponentProps> = ({
 };
 
 describe("toast", () => {
+  let user: ReturnType<typeof userEvent.setup>;
+
+  beforeEach(() => {
+    user = userEvent.setup();
+  });
+
   it("should error when rendered outside of ToastProvider context", () => {
     // This test intentionally throws an error so we need to mock the error object to prevent it
     // from showing in the test runner.
@@ -64,7 +70,7 @@ describe("toast", () => {
         wrapper,
       }
     );
-    await userEvent.click(screen.getByText("Click Me"));
+    await user.click(screen.getByText("Click Me"));
     expect(screen.queryByText("Something Happened!")).not.toBeInTheDocument();
     expect(screen.getByText("Custom Title")).toBeInTheDocument();
     expect(screen.getByText("test string")).toBeInTheDocument();
@@ -75,7 +81,7 @@ describe("toast", () => {
       render(<ToastComponent params={["test string"]} toastType="success" />, {
         wrapper,
       });
-      await userEvent.click(screen.getByText("Click Me"));
+      await user.click(screen.getByText("Click Me"));
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Success!")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
@@ -84,7 +90,7 @@ describe("toast", () => {
       render(<ToastComponent params={["test string"]} toastType="error" />, {
         wrapper,
       });
-      await userEvent.click(screen.getByText("Click Me"));
+      await user.click(screen.getByText("Click Me"));
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Error!")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
@@ -93,7 +99,7 @@ describe("toast", () => {
       render(<ToastComponent params={["test string"]} toastType="warning" />, {
         wrapper,
       });
-      await userEvent.click(screen.getByText("Click Me"));
+      await user.click(screen.getByText("Click Me"));
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Warning!")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
@@ -102,7 +108,7 @@ describe("toast", () => {
       render(<ToastComponent params={["test string"]} toastType="info" />, {
         wrapper,
       });
-      await userEvent.click(screen.getByText("Click Me"));
+      await user.click(screen.getByText("Click Me"));
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Something Happened!")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
@@ -111,7 +117,7 @@ describe("toast", () => {
       render(<ToastComponent params={["test string"]} toastType="progress" />, {
         wrapper,
       });
-      await userEvent.click(screen.getByText("Click Me"));
+      await user.click(screen.getByText("Click Me"));
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Loading...")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
@@ -123,12 +129,12 @@ describe("toast", () => {
       render(<ToastComponent params={["test string"]} toastType="info" />, {
         wrapper,
       });
-      await userEvent.click(screen.getByText("Click Me"));
+      await user.click(screen.getByText("Click Me"));
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
 
       const closeButton = screen.getByLabelText("X Icon");
       expect(closeButton).toBeInTheDocument();
-      await userEvent.click(closeButton);
+      await user.click(closeButton);
       await waitFor(() => {
         expect(screen.queryByDataCy("toast")).not.toBeInTheDocument();
       });
@@ -140,7 +146,7 @@ describe("toast", () => {
           wrapper,
         }
       );
-      await userEvent.click(screen.getByText("Click Me"));
+      await user.click(screen.getByText("Click Me"));
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.queryByLabelText("X Icon")).toBeNull();
     });
@@ -155,12 +161,12 @@ describe("toast", () => {
           wrapper,
         }
       );
-      await userEvent.click(screen.getByText("Click Me"));
+      await user.click(screen.getByText("Click Me"));
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
 
       const closeButton = screen.getByLabelText("X Icon");
       expect(closeButton).toBeInTheDocument();
-      await userEvent.click(closeButton);
+      await user.click(closeButton);
       await waitFor(() => {
         expect(screen.queryByDataCy("toast")).not.toBeInTheDocument();
       });
@@ -168,7 +174,7 @@ describe("toast", () => {
     });
     it("should close on its own after a timeout has completed", async () => {
       jest.useFakeTimers();
-      const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+      user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
 
       render(<ToastComponent params={["test string"]} toastType="info" />, {
         wrapper,
@@ -192,11 +198,11 @@ describe("toast", () => {
           wrapper,
         }
       );
-      await userEvent.click(screen.getByText("Click Me"));
+      await user.click(screen.getByText("Click Me"));
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
 
       rerender(<ToastComponent params={[]} toastType="hide" />);
-      await userEvent.click(screen.getByText("Click Me"));
+      await user.click(screen.getByText("Click Me"));
       await waitFor(() => {
         expect(screen.queryByDataCy("toast")).not.toBeInTheDocument();
       });
@@ -206,6 +212,7 @@ describe("toast", () => {
 
 describe("mocked toast", () => {
   it("should be able to mock the toast in a component test", async () => {
+    const user = userEvent.setup();
     const {
       Component,
       useToastContext: useToastContextSpied,
@@ -214,7 +221,7 @@ describe("mocked toast", () => {
       <ToastComponent params={["test"]} toastType="success" />
     );
     render(<Component />);
-    await userEvent.click(screen.getByText("Click Me"));
+    await user.click(screen.getByText("Click Me"));
     expect(useToastContextSpied).toHaveBeenCalledTimes(1);
     expect(dispatchToast.success).toHaveBeenCalledWith("test");
   });

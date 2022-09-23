@@ -1,6 +1,6 @@
 import { Variant } from "@leafygreen-ui/toast";
 
-export type ToastType = {
+export type VisibleToast = {
   variant: Variant;
   closable: boolean;
   message: string;
@@ -19,7 +19,7 @@ export type DispatchToast = (
   }
 ) => void;
 
-export type ToastTypeKeys = {
+export type ToastVariants = {
   success: string;
   warning: string;
   error: string;

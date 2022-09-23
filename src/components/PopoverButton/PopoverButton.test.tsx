@@ -1,9 +1,10 @@
 import { render, screen, userEvent, waitFor } from "test_utils";
 import PopoverButton from ".";
 
+const user = userEvent.setup();
+
 describe("popoverButton", () => {
   it("opens a popover when clicked", async () => {
-    const user = userEvent.setup();
     render(
       <PopoverButton buttonText="Open Popover">Some content</PopoverButton>
     );
@@ -16,7 +17,6 @@ describe("popoverButton", () => {
     });
   });
   it("calls the passed in event handler when the button is clicked", async () => {
-    const user = userEvent.setup();
     const onClick = jest.fn();
     render(
       <PopoverButton buttonText="Open Popover" onClick={onClick}>

@@ -6,6 +6,8 @@ import {
 } from "test_utils";
 import UploadLink from ".";
 
+const user = userEvent.setup();
+
 describe("uploadLink", () => {
   it("links to /upload page when there are no logs", () => {
     const clearLogs = jest.fn();
@@ -21,7 +23,7 @@ describe("uploadLink", () => {
     render(<UploadLink clearLogs={clearLogs} hasLogs />);
     expect(screen.getByText("Upload")).toBeInTheDocument();
     expect(screen.queryByDataCy("upload-link")).toHaveAttribute("href", "/");
-    await userEvent.click(screen.getByText("Upload"));
+    await user.click(screen.getByText("Upload"));
     await waitFor(() => {
       expect(screen.queryByDataCy("confirmation-modal")).toBeVisible();
     });
@@ -29,7 +31,7 @@ describe("uploadLink", () => {
   it("closing the modal does not clear logs", async () => {
     const clearLogs = jest.fn();
     render(<UploadLink clearLogs={clearLogs} hasLogs />);
-    await userEvent.click(screen.getByText("Upload"));
+    await user.click(screen.getByText("Upload"));
     await waitFor(() => {
       expect(screen.queryByDataCy("confirmation-modal")).toBeVisible();
     });
@@ -37,7 +39,7 @@ describe("uploadLink", () => {
     const cancelButton = screen.getByRole("button", {
       name: "Cancel",
     });
-    await userEvent.click(cancelButton);
+    await user.click(cancelButton);
     await waitFor(() => {
       expect(screen.queryByDataCy("confirmation-modal")).not.toBeVisible();
     });
@@ -46,7 +48,7 @@ describe("uploadLink", () => {
   it("confirming the modal clears logs and navigates to /upload", async () => {
     const clearLogs = jest.fn();
     const { history } = render(<UploadLink clearLogs={clearLogs} hasLogs />);
-    await userEvent.click(screen.getByText("Upload"));
+    await user.click(screen.getByText("Upload"));
     await waitFor(() => {
       expect(screen.queryByDataCy("confirmation-modal")).toBeVisible();
     });
@@ -54,7 +56,7 @@ describe("uploadLink", () => {
     const confirmButton = screen.getByRole("button", {
       name: "Confirm",
     });
-    await userEvent.click(confirmButton);
+    await user.click(confirmButton);
     await waitFor(() => {
       expect(
         screen.queryByDataCy("confirmation-modal")
