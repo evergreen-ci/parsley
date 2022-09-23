@@ -1,41 +1,30 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { act, renderHook } from "@testing-library/react-hooks";
 import { TOAST_TIMEOUT } from "constants/toast";
-import { act, render, screen, userEvent, waitFor } from "test_utils";
+import { render, screen, userEvent, waitFor } from "test_utils";
 import { DispatchToastContextState, ToastProvider, useToastContext } from ".";
 import { RenderFakeToastContext } from "./__mocks__";
+
+// This function allows us to directly interact with the useToastContext hook and monitor any changes to the DOM.
+// (Courtesy of: https://github.com/testing-library/react-hooks-testing-library/issues/86)
+const renderToastProviderWithHook = () => {
+  const hook: { current: DispatchToastContextState } = {
+    current: {} as DispatchToastContextState,
+  };
+  const Component: React.FC = () => {
+    hook.current = useToastContext();
+    return null;
+  };
+  return {
+    Component,
+    hook,
+  };
+};
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <ToastProvider>
     <div>{children}</div>
   </ToastProvider>
 );
-
-// According to the creators of @testing-library/react-hooks, the correct way to test a hook with DOM side effects
-// is to write a small test component that uses the hook internally.
-// (https://github.com/testing-library/react-hooks-testing-library/issues/86)
-type ToastComponentProps = {
-  [K in keyof DispatchToastContextState]: {
-    toastType: K;
-    params: Parameters<DispatchToastContextState[K]>;
-  };
-}[keyof DispatchToastContextState];
-
-const ToastComponent: React.FC<ToastComponentProps> = ({
-  toastType,
-  params,
-}) => {
-  const dispatchToast = useToastContext();
-  return (
-    <button
-      // @ts-ignore-error: Typescript is unable to infer the correct type, but based on the props
-      // definition we should not be able to pass incorrect arguments.
-      onClick={() => dispatchToast[toastType](...(params as []))}
-      type="button"
-    >
-      Click Me
-    </button>
-  );
-};
 
 describe("toast", () => {
   let user: ReturnType<typeof userEvent.setup>;
@@ -49,28 +38,27 @@ describe("toast", () => {
     // from showing in the test runner.
     const errorObject = console.error;
     jest.spyOn(console, "error").mockImplementation();
-    expect(() =>
-      render(<ToastComponent params={["msg"]} toastType="success" />)
-    ).toThrow("useToastContext must be used within a ToastProvider");
+    const { Component } = renderToastProviderWithHook();
+    expect(() => render(<Component />)).toThrow(
+      "useToastContext must be used within a ToastProvider"
+    );
     console.error = errorObject;
   });
 
   it("should not display a toast by default", () => {
-    render(<div />, { wrapper });
+    const { Component } = renderToastProviderWithHook();
+    render(<Component />, { wrapper });
     expect(screen.queryByDataCy("toast")).toBeNull();
   });
 
   it("should be able to set a custom title for a toast", async () => {
-    render(
-      <ToastComponent
-        params={["test string", true, { title: "Custom Title" }]}
-        toastType="info"
-      />,
-      {
-        wrapper,
-      }
-    );
-    await user.click(screen.getByText("Click Me"));
+    const { Component, hook } = renderToastProviderWithHook();
+    render(<Component />, {
+      wrapper,
+    });
+    act(() => {
+      hook.current.info("test string", true, { title: "Custom Title" });
+    });
     expect(screen.queryByText("Something Happened!")).not.toBeInTheDocument();
     expect(screen.getByText("Custom Title")).toBeInTheDocument();
     expect(screen.getByText("test string")).toBeInTheDocument();
@@ -78,46 +66,65 @@ describe("toast", () => {
 
   describe("displays a toast which corresponds to the variant dispatched", () => {
     it("success", async () => {
-      render(<ToastComponent params={["test string"]} toastType="success" />, {
+      const { Component, hook } = renderToastProviderWithHook();
+      render(<Component />, {
         wrapper,
       });
-      await user.click(screen.getByText("Click Me"));
+      act(() => {
+        hook.current.success("test string");
+      });
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Success!")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
     });
+
     it("error", async () => {
-      render(<ToastComponent params={["test string"]} toastType="error" />, {
+      const { Component, hook } = renderToastProviderWithHook();
+      render(<Component />, {
         wrapper,
       });
-      await user.click(screen.getByText("Click Me"));
+      act(() => {
+        hook.current.error("test string");
+      });
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Error!")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
     });
+
     it("warning", async () => {
-      render(<ToastComponent params={["test string"]} toastType="warning" />, {
+      const { Component, hook } = renderToastProviderWithHook();
+      render(<Component />, {
         wrapper,
       });
-      await user.click(screen.getByText("Click Me"));
+      act(() => {
+        hook.current.warning("test string");
+      });
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Warning!")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
     });
+
     it("info", async () => {
-      render(<ToastComponent params={["test string"]} toastType="info" />, {
+      const { Component, hook } = renderToastProviderWithHook();
+      render(<Component />, {
         wrapper,
       });
-      await user.click(screen.getByText("Click Me"));
+      act(() => {
+        hook.current.info("test string");
+      });
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Something Happened!")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
     });
+
     it("progress", async () => {
-      render(<ToastComponent params={["test string"]} toastType="progress" />, {
+      const { Component, hook } = renderToastProviderWithHook();
+      render(<Component />, {
         wrapper,
       });
-      await user.click(screen.getByText("Click Me"));
+      act(() => {
+        hook.current.progress("test string");
+      });
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Loading...")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
@@ -125,61 +132,62 @@ describe("toast", () => {
   });
 
   describe("closing the toast", () => {
-    it("should be able to close a toast by clicking the x by default", async () => {
-      render(<ToastComponent params={["test string"]} toastType="info" />, {
+    it("should be able to close a toast by clicking the X button by default", async () => {
+      const { Component, hook } = renderToastProviderWithHook();
+      render(<Component />, {
         wrapper,
       });
-      await user.click(screen.getByText("Click Me"));
-      expect(screen.getByDataCy("toast")).toBeInTheDocument();
+      act(() => {
+        hook.current.info("test string");
+      });
 
-      const closeButton = screen.getByLabelText("X Icon");
-      expect(closeButton).toBeInTheDocument();
-      await user.click(closeButton);
+      expect(screen.getByDataCy("toast")).toBeInTheDocument();
+      await user.click(screen.getByLabelText("X Icon"));
       await waitFor(() => {
         expect(screen.queryByDataCy("toast")).not.toBeInTheDocument();
       });
     });
+
     it("should not be able to close the toast when closable is false", async () => {
-      render(
-        <ToastComponent params={["test string", false]} toastType="info" />,
-        {
-          wrapper,
-        }
-      );
-      await user.click(screen.getByText("Click Me"));
+      const { Component, hook } = renderToastProviderWithHook();
+      render(<Component />, {
+        wrapper,
+      });
+      act(() => {
+        hook.current.info("test string", false);
+      });
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.queryByLabelText("X Icon")).toBeNull();
     });
+
     it("should trigger a callback function onClose", async () => {
       const onClose = jest.fn();
-      render(
-        <ToastComponent
-          params={["test string", true, { onClose }]}
-          toastType="info"
-        />,
-        {
-          wrapper,
-        }
-      );
-      await user.click(screen.getByText("Click Me"));
-      expect(screen.getByDataCy("toast")).toBeInTheDocument();
+      const { Component, hook } = renderToastProviderWithHook();
+      render(<Component />, {
+        wrapper,
+      });
+      act(() => {
+        hook.current.info("test string", true, { onClose });
+      });
 
-      const closeButton = screen.getByLabelText("X Icon");
-      expect(closeButton).toBeInTheDocument();
-      await user.click(closeButton);
+      expect(screen.getByDataCy("toast")).toBeInTheDocument();
+      await user.click(screen.getByLabelText("X Icon"));
       await waitFor(() => {
         expect(screen.queryByDataCy("toast")).not.toBeInTheDocument();
       });
       expect(onClose).toHaveBeenCalledTimes(1);
     });
+
     it("should close on its own after a timeout has completed", async () => {
       jest.useFakeTimers();
       user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
-
-      render(<ToastComponent params={["test string"]} toastType="info" />, {
+      const { Component, hook } = renderToastProviderWithHook();
+      render(<Component />, {
         wrapper,
       });
-      await user.click(screen.getByText("Click Me"));
+      act(() => {
+        hook.current.info("test string");
+      });
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
 
       // Advance timer so that the timeout is triggered.
@@ -189,20 +197,24 @@ describe("toast", () => {
       await waitFor(() => {
         expect(screen.queryByDataCy("toast")).not.toBeInTheDocument();
       });
+
+      // Reset to use real timers.
       jest.useRealTimers();
     });
+
     it("should close the toast when hide() is called", async () => {
-      const { rerender } = render(
-        <ToastComponent params={["test string", true]} toastType="info" />,
-        {
-          wrapper,
-        }
-      );
-      await user.click(screen.getByText("Click Me"));
+      const { Component, hook } = renderToastProviderWithHook();
+      render(<Component />, {
+        wrapper,
+      });
+      act(() => {
+        hook.current.info("test string", true);
+      });
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
 
-      rerender(<ToastComponent params={[]} toastType="hide" />);
-      await user.click(screen.getByText("Click Me"));
+      act(() => {
+        hook.current.hide();
+      });
       await waitFor(() => {
         expect(screen.queryByDataCy("toast")).not.toBeInTheDocument();
       });
@@ -211,16 +223,24 @@ describe("toast", () => {
 });
 
 describe("mocked toast", () => {
+  const ToastComponent: React.FC = () => {
+    const dispatchToast = useToastContext();
+    return (
+      <button onClick={() => dispatchToast.success("test")} type="button">
+        Click Me
+      </button>
+    );
+  };
+
   it("should be able to mock the toast in a component test", async () => {
     const user = userEvent.setup();
     const {
       Component,
       useToastContext: useToastContextSpied,
       dispatchToast,
-    } = RenderFakeToastContext(
-      <ToastComponent params={["test"]} toastType="success" />
-    );
+    } = RenderFakeToastContext(<ToastComponent />);
     render(<Component />);
+
     await user.click(screen.getByText("Click Me"));
     expect(useToastContextSpied).toHaveBeenCalledTimes(1);
     expect(dispatchToast.success).toHaveBeenCalledWith("test");
