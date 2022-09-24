@@ -299,7 +299,7 @@ functions:
       env:
         GOROOT: ${goroot}
         PATH: ${goroot}/bin:$PATH
-        LK_CORS_ORIGINS: http://localhost:\d+
+        LK_CORS_ORIGINS: http://localhost:\\d+
 
   attach-logkeeper-logs:
     command: s3.put
@@ -312,6 +312,18 @@ functions:
       bucket: mciuploads
       content_type: text/html
       permissions: public-read
+
+  seed-logkeeper:
+    command: s3.get
+    type: setup
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      extract_to: parsley/logkeeper/_bucketdata
+      remote_file: _bucketdata.tar.gz
+      bucket: parsley-test
+      working_dir: parsley/logkeeper
+      
 
 #######################################
 #                Tasks                #
@@ -345,6 +357,7 @@ tasks:
       vars:
         target: local-evergreen
     - func: setup-logkeeper
+    - func: seed-logkeeper
     - func: run-logkeeper
     - func: copy-cmdrc
     - func: yarn-install
