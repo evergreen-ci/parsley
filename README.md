@@ -27,15 +27,10 @@ Parsley is capable of fetching logs from both [evergreen](https://github.com/eve
 
 **Logkeeper**
 1. Clone the [Logkeeper Repository](https://github.com/evergreen-ci/logkeeper)
-2. ```sh
-    cd logkeeper
-    
-    # Use this (or similar command) to seed some sample data into a local bucket and use that as storage
-    mkdir -p _bucketdata && cp -r testdata/simple/* _bucketdata
-    ```
-3. Run the following command to inject the necessary env variables and start the local logkeeper server 
+2. Run `yarn bootstrap-logkeeper` to download some sample resmoke logs from s3. 
+3. Run the command outputted by the preview step to seed the env variables and start the local logkeeper server 
 
-    `LK_CORS_ORIGINS=http:\/\/localhost:\\d+ go run main/logkeeper.go --localPath _bucketdata` 
+    `LK_CORS_ORIGINS=http:\/\/localhost:\\d+ go run main/logkeeper.go --localPath {abs_path_to_parsley}/bin/_bucketdata` 
 
     Note that all log output is piped to a file named `logkeeperapp.log`.
     You can use `tail -f logkeeperapp.log` to view the log output

@@ -9,14 +9,14 @@ GREEN='\033[0;32m'
 SPRUCE_DIR=pwd
 
 # Check to see if we have a _bucketdata directory
-if [ ! -d "_bucketdata" ]; then
+if [ ! -d "bin/_bucketdata" ]; then
     echo "${RED}No _bucketdata directory found!${NC}"
     echo "Creating one now..."
-    mkdir _bucketdata
+    mkdir bin/_bucketdata
     # Use aws cli to download the bucket data
     echo "Downloading bucket data..."
     # Try to download the bucket data
-    aws s3 sync --content-encoding gzip  s3://parsley-test/ _bucketdata/ 
+    aws s3 sync --content-encoding gzip  s3://parsley-test/ ./bin
     # Check to see if the download was successful
     if [ $? -ne 0 ]; then
         echo "${RED}Failed to download bucket data!${NC}"
@@ -28,26 +28,18 @@ if [ ! -d "_bucketdata" ]; then
     fi
     # Uncompress the files in the _bucketdata directory
     echo "Uncompressing bucket data..."
-    uncompressedCount=0
-    # Recursively List all the files in the _bucketdata directory
-    for file in $(find _bucketdata -type f); do
-        # Check to see if the file is compressed
-        if file --mime-type -b "$file" | grep -q gzip; then
-            # If it is, uncompress it
-            echo "Uncompressing $file"
-            mv "$file" "$file.gz"
-            gunzip "$file.gz"
-            uncompressedCount=$((uncompressedCount+1))
-        fi
-    done
-    echo "Uncompressed $uncompressedCount files."
-    # Check to see if the uncompression was successful
+    tar -xzf ./bin/_bucketdata.tar.gz -C ./bin/
+    # Check to see if the uncompress was successful
     if [ $? -ne 0 ]; then
         echo "${RED}Failed to uncompress bucket data!${NC}"
         echo "Cleaning up _bucketdata directory..."
         rm -rf _bucketdata
         exit 1
     fi
+    echo "Uncompressed files."
+    echo "Cleaning up _bucketdata directory..."
+    rm bin/_bucketdata.tar.gz
+    echo "Done!"
     echo "${GREEN}Bucket data downloaded successfully!${NC}"
     
 else
@@ -57,4 +49,4 @@ fi
 
 
 echo "Use the following command to start logkeeper:"
-echo "${YELLOW}LK_CORS_ORIGINS=http:\/\/localhost:\\\d+ go run main/logkeeper.go --localPath $PWD/_bucketdata${NC}"
+echo "${YELLOW}LK_CORS_ORIGINS=http:\/\/localhost:\\\d+ go run main/logkeeper.go --localPath $PWD/bin/_bucketdata${NC}"
