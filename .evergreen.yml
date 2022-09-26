@@ -318,7 +318,6 @@ tasks:
   - name: test
     commands:
     - func: yarn-test
-    - func: attach-test-results
 
   - name: e2e_test
     commands:
@@ -336,10 +335,6 @@ tasks:
     - func: yarn-preview
     - func: install-chrome
     - func: yarn-cypress
-    - func: attach-cypress-results
-    - func: attach-cypress-screenshots
-    - func: attach-cypress-videos
-    - func: attach-logkeeper-logs
 
   - name: storybook
     commands:
@@ -379,3 +374,11 @@ buildvariants:
 pre:
   - func: get-project
   - func: yarn-install
+
+post:
+  - func: attach-results
+  - func: attach-cypress-results
+  - func: attach-cypress-screenshots
+  - func: attach-cypress-videos
+  - func: attach-logkeeper-logs
+  - func: attach-test-results
