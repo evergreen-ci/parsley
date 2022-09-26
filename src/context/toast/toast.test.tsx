@@ -34,8 +34,8 @@ describe("toast", () => {
   });
 
   it("should error when rendered outside of ToastProvider context", () => {
-    // This test intentionally throws an error so we need to mock the error object to prevent it
-    // from showing in the test runner.
+    // This test intentionally throws an error, so we need to mock the error object to prevent it
+    // from flooding the test runner.
     const errorObject = console.error;
     jest.spyOn(console, "error").mockImplementation();
     const { Component } = renderComponentWithHook();
@@ -184,6 +184,7 @@ describe("toast", () => {
     it("should close on its own after a timeout has completed", async () => {
       jest.useFakeTimers();
       user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+
       const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
@@ -242,6 +243,7 @@ describe("mocked toast", () => {
       useToastContext: useToastContextSpied,
       dispatchToast,
     } = RenderFakeToastContext(<ToastComponent />);
+
     render(<Component />);
     await user.click(screen.getByText("Click Me"));
     expect(useToastContextSpied).toHaveBeenCalledTimes(1);

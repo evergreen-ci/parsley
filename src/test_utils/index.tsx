@@ -1,5 +1,4 @@
 import {
-  act,
   fireEvent,
   queries,
   render,
@@ -87,7 +86,6 @@ const renderWithRouterMatch = (
 };
 
 export {
-  act,
   customScreen as screen,
   customRender as render,
   customWithin as within,

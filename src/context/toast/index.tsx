@@ -29,11 +29,11 @@ export interface DispatchToastContextState {
   hide: () => void;
 }
 
-export const ToastDispatchContext =
+export const DispatchToastContext =
   createContext<DispatchToastContextState | null>(null);
 
 const useToastContext = (): DispatchToastContextState => {
-  const context = useContext(ToastDispatchContext);
+  const context = useContext(DispatchToastContext);
   if (context === null || context === undefined) {
     throw new Error("useToastContext must be used within a ToastProvider");
   }
@@ -130,7 +130,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [dispatchToast, hideToast]);
 
   return (
-    <ToastDispatchContext.Provider value={toastContext}>
+    <DispatchToastContext.Provider value={toastContext}>
       {children}
       <StyledToast
         body={<Message>{visibleToast.message}</Message>}
@@ -149,7 +149,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
         title={visibleToast.title || mapVariantToTitle[visibleToast.variant]}
         variant={visibleToast.variant}
       />
-    </ToastDispatchContext.Provider>
+    </DispatchToastContext.Provider>
   );
 };
 

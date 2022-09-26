@@ -1,9 +1,9 @@
 import { render, screen, userEvent, waitFor } from "test_utils";
 import PopoverButton from ".";
 
-const user = userEvent.setup();
-
 describe("popoverButton", () => {
+  const user = userEvent.setup();
+
   it("opens a popover when clicked", async () => {
     render(
       <PopoverButton buttonText="Open Popover">Some content</PopoverButton>
