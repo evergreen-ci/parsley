@@ -281,15 +281,6 @@ functions:
       revisions:
         logkeeper: ${logkeeper_rev}
 
-  setup-logkeeper:
-    command: shell.exec
-    type: setup
-    params:
-      working_dir: parsley/logkeeper
-      script: |
-        mkdir -p _bucketdata
-        cp -r testdata/simple/* _bucketdata
-
   run-logkeeper:
     command: shell.exec
     params:
@@ -299,7 +290,7 @@ functions:
       env:
         GOROOT: ${goroot}
         PATH: ${goroot}/bin:$PATH
-        LK_CORS_ORIGINS: http://localhost:\\d+
+        LK_CORS_ORIGINS: http:\/\/localhost:\d+
 
   attach-logkeeper-logs:
     command: s3.put
@@ -319,10 +310,11 @@ functions:
     params:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
-      extract_to: parsley/logkeeper/_bucketdata
+      extract_to: parsley/logkeeper
       remote_file: _bucketdata.tar.gz
       bucket: parsley-test
       working_dir: parsley/logkeeper
+
       
 
 #######################################
@@ -356,7 +348,6 @@ tasks:
     - func: run-make-background
       vars:
         target: local-evergreen
-    - func: setup-logkeeper
     - func: seed-logkeeper
     - func: run-logkeeper
     - func: copy-cmdrc
