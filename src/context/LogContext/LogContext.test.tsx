@@ -325,5 +325,25 @@ describe("useLogContext", () => {
       });
       expect(result.current.matchingSearchCount).toBe(0);
     });
+    it("should only search within our bounds", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router route="?upper=1">
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+      expect(result.current.processedLogLines).toHaveLength(3);
+      act(() => {
+        result.current.setSearch("line");
+      });
+      expect(result.current.matchingSearchCount).toBe(2);
+    });
   });
 });

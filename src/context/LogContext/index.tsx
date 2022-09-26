@@ -53,6 +53,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     undefined
   );
   const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
+  const [caseSensitive] = useQueryParam(QueryParams.CaseSensitive, false);
 
   const { state, dispatch } = useLogState(initialLogLines);
 
@@ -113,17 +114,19 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     // if no match, return undefined
     const matchingIndices = [];
     if (state.search === undefined) return [];
+    const searchRegex = new RegExp(state.search, caseSensitive ? "" : "i");
     for (let i = 0; i < processedLogLines.length; i++) {
       const lineIndex = processedLogLines[i];
       if (!Array.isArray(lineIndex)) {
         const line = getLine(lineIndex);
-        if (line?.match(state?.search || "")) {
+        console.log(searchRegex.test(line));
+        if (searchRegex.test(line)) {
           matchingIndices.push(lineIndex);
         }
       }
     }
     return matchingIndices;
-  }, [state.search, processedLogLines, getLine]);
+  }, [state.search, processedLogLines, caseSensitive, getLine]);
 
   const memoizedContext = useMemo(
     () => ({
