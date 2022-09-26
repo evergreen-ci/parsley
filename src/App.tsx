@@ -7,14 +7,16 @@ import Content from "pages";
 const App = () => (
   <>
     <GlobalStyles />
-    <GlobalProviders>
-      <Router>
-        <NavBar />
-        <Routes>
-          <Route element={<Content />} path="/*" />
-        </Routes>
-      </Router>
-    </GlobalProviders>
+    <Router>
+      <GlobalProviders>
+        <>
+          <NavBar />
+          <Routes>
+            <Route element={<Content />} path="/*" />
+          </Routes>
+        </>
+      </GlobalProviders>
+    </Router>
   </>
 );
 
