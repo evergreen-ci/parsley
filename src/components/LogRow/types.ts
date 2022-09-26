@@ -1,5 +1,6 @@
 import { ListRowProps } from "react-virtualized";
 import { LogTypes } from "constants/enums";
+import { ProcessedLogLines } from "types/logs";
 
 interface BaseRowProps {
   listRowProps: ListRowProps;
@@ -9,7 +10,7 @@ interface BaseRowProps {
 interface RowData {
   getLine: (index: number) => string | undefined;
   wrap: boolean;
-  processedLines: (number | number[])[];
+  processedLines: ProcessedLogLines;
   logType: LogTypes;
 }
 

@@ -1,4 +1,5 @@
 import { FilterLogic } from "constants/queryParams";
+import { ProcessedLogLines } from "types/logs";
 
 /**
  * Function that determines if a particular log line satisfies the filter conditions.
@@ -36,12 +37,12 @@ export const filterLogs = (
   bookmarks: number[],
   selectedLine: number | undefined,
   filterLogic: FilterLogic
-): (number | number[])[] => {
+): ProcessedLogLines => {
   if (filters.length === 0) {
     return logLines.map((_, idx) => idx);
   }
 
-  const filteredLines: (number | number[])[] = [];
+  const filteredLines: ProcessedLogLines = [];
 
   logLines.reduce((arr, logLine, idx) => {
     // Bookmarks and selected lines should always remain uncollapsed.

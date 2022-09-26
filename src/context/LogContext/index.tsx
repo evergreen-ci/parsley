@@ -8,6 +8,7 @@ import {
 import { LogTypes } from "constants/enums";
 import { FilterLogic, QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
+import { ProcessedLogLines } from "types/logs";
 import { filterLogs } from "utils/filter";
 import useLogState from "./state";
 
@@ -16,7 +17,7 @@ interface LogContextState {
   hasLogs: boolean;
   lineCount: number;
   matchingSearchCount: number;
-  processedLogLines: (number | number[])[];
+  processedLogLines: ProcessedLogLines;
   hasSearch: boolean;
   search?: string;
   selectedLine?: number;
