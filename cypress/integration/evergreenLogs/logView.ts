@@ -1,5 +1,5 @@
 const logLink =
-  "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/E";
+  "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
 
 describe("Basic evergreen log view", () => {
   before(() => {
@@ -48,17 +48,17 @@ describe("Bookmarking and selecting lines", () => {
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
-    cy.location("search").should("equal", "?bookmarks=0,1788");
+    cy.location("search").should("equal", "?bookmarks=0,298");
     cy.dataCy("log-line-container").should("contain", "0");
-    cy.dataCy("log-line-container").should("contain", "1788");
+    cy.dataCy("log-line-container").should("contain", "298");
   });
 
   it("should be able to bookmark and unbookmark log lines", () => {
     cy.dataCy("log-row-4").dblclick();
-    cy.location("search").should("equal", "?bookmarks=0,4,1788");
+    cy.location("search").should("equal", "?bookmarks=0,4,298");
     cy.dataCy("log-line-container").should("contain", "0");
     cy.dataCy("log-line-container").should("contain", "4");
-    cy.dataCy("log-line-container").should("contain", "1788");
+    cy.dataCy("log-line-container").should("contain", "298");
 
     cy.dataCy("log-row-4").dblclick();
     cy.dataCy("log-line-container").should("not.contain", "4");
@@ -66,11 +66,11 @@ describe("Bookmarking and selecting lines", () => {
 
   it("should be able to select and unselect lines", () => {
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,1788&selectedLine=5");
+    cy.location("search").should("equal", "?bookmarks=0,298&selectedLine=5");
     cy.dataCy("log-line-container").should("contain", "5");
 
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,1788");
+    cy.location("search").should("equal", "?bookmarks=0,298");
     cy.dataCy("log-line-container").should("not.contain", "5");
   });
 
