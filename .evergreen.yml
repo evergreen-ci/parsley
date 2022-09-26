@@ -112,7 +112,7 @@ functions:
       bucket: mciuploads
       content_type: text/html
       permissions: public-read
-      display_name: source_map_
+      display_name: source_map
     
   copy-cmdrc:
     command: shell.exec
