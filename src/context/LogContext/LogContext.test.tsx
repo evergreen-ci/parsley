@@ -197,4 +197,133 @@ describe("useLogContext", () => {
       });
     });
   });
+
+  describe("search", () => {
+    it("shouldn't return any matching searches if a search hasn't been placed", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+      expect(result.current.processedLogLines).toHaveLength(3);
+      expect(result.current.matchingSearchCount).toBe(0);
+      expect(result.current.hasSearch).toBe(false);
+    });
+    it("should return the correct number of matching searches", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+      expect(result.current.processedLogLines).toHaveLength(3);
+      act(() => {
+        result.current.setSearch("A line");
+      });
+      expect(result.current.matchingSearchCount).toBe(1);
+      expect(result.current.hasSearch).toBe(true);
+    });
+    it("should allow regex searches", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+      expect(result.current.processedLogLines).toHaveLength(3);
+      act(() => {
+        result.current.setSearch("[a-b] line");
+      });
+      expect(result.current.matchingSearchCount).toBe(2);
+      expect(result.current.hasSearch).toBe(true);
+    });
+    it("should allow case insensitive searches", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router route="?caseSensitive=false">
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+      expect(result.current.processedLogLines).toHaveLength(3);
+      act(() => {
+        result.current.setSearch("a line");
+      });
+      expect(result.current.matchingSearchCount).toBe(1);
+      expect(result.current.hasSearch).toBe(true);
+    });
+    it("should allow case sensitive searches", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router route="?caseSensitive=true">
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+      expect(result.current.processedLogLines).toHaveLength(3);
+      act(() => {
+        result.current.setSearch("a line");
+      });
+      expect(result.current.matchingSearchCount).toBe(0);
+      expect(result.current.hasSearch).toBe(true);
+    });
+    it("should only search non filtered out lines", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router route="?filters=A,3&filterLogic=or">
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+      expect(result.current.processedLogLines).toHaveLength(3);
+      act(() => {
+        result.current.setSearch("A line");
+      });
+      expect(result.current.matchingSearchCount).toBe(1);
+      act(() => {
+        result.current.setSearch("B line");
+      });
+      expect(result.current.matchingSearchCount).toBe(0);
+    });
+  });
 });
