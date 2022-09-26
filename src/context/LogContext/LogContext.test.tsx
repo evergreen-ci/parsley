@@ -10,8 +10,14 @@ import {
 import { LogTypes } from "constants/enums";
 import { LogContextProvider, useLogContext } from ".";
 
-const Router = ({ children }: { children: React.ReactNode }) => (
-  <HistoryRouter history={createMemoryHistory()}>
+const Router = ({
+  children,
+  route = "/",
+}: {
+  children: React.ReactNode;
+  route?: string;
+}) => (
+  <HistoryRouter history={createMemoryHistory({ initialEntries: [route] })}>
     <Routes>
       <Route element={children} path="/" />
     </Routes>
@@ -103,5 +109,92 @@ describe("useLogContext", () => {
       result.current.clearLogs();
     });
     expect(result.current.lineCount).toBe(0);
+  });
+  describe("filters", () => {
+    it("applying a filter should filter the list of logs and collapse unmatching ones", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router route="?filters=bar">
+          <LogContextProvider initialLogLines={["foo", "bar", "baz"]}>
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+
+      expect(result.current.processedLogLines).toHaveLength(3);
+      expect(result.current.processedLogLines).toStrictEqual([[0], 1, [2]]);
+    });
+    it("non matching filters should collapse all of the logs", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router route="?filters=wrong">
+          <LogContextProvider initialLogLines={["foo", "bar", "baz"]}>
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+
+      expect(result.current.processedLogLines).toHaveLength(1);
+      expect(result.current.processedLogLines).toStrictEqual([[0, 1, 2]]);
+    });
+    describe("applying multiple filters should filter the list of logs and collapse unmatching ones", () => {
+      it("should `AND` filters by default", () => {
+        const wrapper: React.FC<{ children: React.ReactNode }> = ({
+          children,
+        }) => (
+          <Router route="?filters=A,3">
+            <LogContextProvider
+              initialLogLines={["A line 1", "B line 2", "C line 3"]}
+            >
+              {children}
+            </LogContextProvider>
+          </Router>
+        );
+        const { result } = renderHook(() => useLogContext(), { wrapper });
+        expect(result.current.lineCount).toBe(3);
+        expect(result.current.processedLogLines).toHaveLength(1);
+        expect(result.current.processedLogLines).toStrictEqual([[0, 1, 2]]);
+      });
+      it("should `AND` filters if the query param specifies it", () => {
+        const wrapper: React.FC<{ children: React.ReactNode }> = ({
+          children,
+        }) => (
+          <Router route="?filters=A,3&filterLogic=and">
+            <LogContextProvider
+              initialLogLines={["A line 1", "B line 2", "C line 3"]}
+            >
+              {children}
+            </LogContextProvider>
+          </Router>
+        );
+        const { result } = renderHook(() => useLogContext(), { wrapper });
+        expect(result.current.lineCount).toBe(3);
+        expect(result.current.processedLogLines).toHaveLength(1);
+        expect(result.current.processedLogLines).toStrictEqual([[0, 1, 2]]);
+      });
+      it("should `OR` filters if the query param specifies it", () => {
+        const wrapper: React.FC<{ children: React.ReactNode }> = ({
+          children,
+        }) => (
+          <Router route="?filters=A,3&filterLogic=or">
+            <LogContextProvider
+              initialLogLines={["A line 1", "B line 2", "C line 3"]}
+            >
+              {children}
+            </LogContextProvider>
+          </Router>
+        );
+        const { result } = renderHook(() => useLogContext(), { wrapper });
+        expect(result.current.lineCount).toBe(3);
+        expect(result.current.processedLogLines).toHaveLength(3);
+        expect(result.current.processedLogLines).toStrictEqual([0, [1], 2]);
+      });
+    });
   });
 });
