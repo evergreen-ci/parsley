@@ -1,7 +1,6 @@
-const logLink =
-  "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
-
 describe("Basic evergreen log view", () => {
+  const logLink =
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   before(() => {
     cy.login();
     cy.visit(logLink);
@@ -42,6 +41,8 @@ describe("Basic evergreen log view", () => {
 });
 
 describe("Bookmarking and selecting lines", () => {
+  const logLink =
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   before(() => {
     cy.login();
     cy.visit(logLink);
@@ -81,6 +82,8 @@ describe("Bookmarking and selecting lines", () => {
 });
 
 describe("Filtering", () => {
+  const logLink =
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   it("should be able to apply filters", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("filter-option").click();
