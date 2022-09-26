@@ -13,17 +13,18 @@ import { navbarHeight, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
 import { validateRegexp } from "utils/validators";
+import SearchCount from "./SearchCount";
 import UploadLink from "./UploadLink";
 
 const { gray, white } = palette;
 
 const NavBar: React.FC = () => {
-  const [, setSearch] = useQueryParam(QueryParams.Search, "");
   const [filters, setFilters] = useQueryParam<string[]>(
     QueryParams.Filters,
     []
   );
-  const { hasLogs, clearLogs } = useLogContext();
+  const { hasLogs, clearLogs, setSearch, hasSearch, matchingSearchCount } =
+    useLogContext();
 
   const handleSearch = (selected: string, value: string) => {
     if (selected === "search") {
@@ -44,10 +45,17 @@ const NavBar: React.FC = () => {
           <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
         <StyledSearchBar
+          disabled={!hasLogs}
           onSubmit={handleSearch}
           validator={validateRegexp}
           validatorMessage="Invalid Regular Expression"
         />
+        {hasSearch && (
+          <SearchCount
+            currentSearchIndex={0}
+            matchingSearchCount={matchingSearchCount}
+          />
+        )}
       </FlexContainer>
       <ButtonContainer>
         <StyledButton
