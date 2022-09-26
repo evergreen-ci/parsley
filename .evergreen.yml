@@ -375,7 +375,6 @@ pre:
   - func: yarn-install
 
 post:
-  - func: attach-results
   - func: attach-cypress-results
   - func: attach-cypress-screenshots
   - func: attach-cypress-videos
