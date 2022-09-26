@@ -54,6 +54,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
   const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
   const [caseSensitive] = useQueryParam(QueryParams.CaseSensitive, false);
+  const [upperRange] = useQueryParam<undefined | number>(
+    QueryParams.UpperRange,
+    undefined
+  );
+  const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
 
   const { state, dispatch } = useLogState(initialLogLines);
 
@@ -115,18 +120,32 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     const matchingIndices = [];
     if (state.search === undefined) return [];
     const searchRegex = new RegExp(state.search, caseSensitive ? "" : "i");
+
     for (let i = 0; i < processedLogLines.length; i++) {
       const lineIndex = processedLogLines[i];
       if (!Array.isArray(lineIndex)) {
-        const line = getLine(lineIndex);
-        console.log(searchRegex.test(line));
-        if (searchRegex.test(line)) {
-          matchingIndices.push(lineIndex);
+        // Since processLogLines is ordered by line number, we can stop searching if we are out of range for our upper bound
+        if (upperRange && lineIndex > upperRange) {
+          break;
+        }
+        // If we are in range for our lower bound, we can start searching
+        if (lowerRange !== undefined && lineIndex >= lowerRange) {
+          const line = getLine(lineIndex);
+          if (searchRegex.test(line)) {
+            matchingIndices.push(lineIndex);
+          }
         }
       }
     }
     return matchingIndices;
-  }, [state.search, processedLogLines, caseSensitive, getLine]);
+  }, [
+    state.search,
+    caseSensitive,
+    upperRange,
+    lowerRange,
+    processedLogLines,
+    getLine,
+  ]);
 
   const memoizedContext = useMemo(
     () => ({
