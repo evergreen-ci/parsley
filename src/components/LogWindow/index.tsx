@@ -14,7 +14,7 @@ interface LogWindowProps {
   isUploadedLog: boolean;
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
-  const { hasLogs, getLine, lineCount, processedLogLines, scrollToLine } =
+  const { hasLogs, getLine, lineCount, processedLogLines, selectedLine } =
     useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
@@ -36,7 +36,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               getLine,
               processedLines: processedLogLines,
             })}
-            scrollToIndex={scrollToLine}
+            scrollToIndex={selectedLine}
             wrap={wrap}
           />
         </LogPaneContainer>
