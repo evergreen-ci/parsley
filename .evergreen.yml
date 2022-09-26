@@ -346,7 +346,6 @@ tasks:
   - name: snapshots
     commands:
     - func: yarn-snapshot
-    - func: attach-test-results
 
 buildvariants:
   - name: ubuntu1604-small
