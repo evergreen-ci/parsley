@@ -1,5 +1,5 @@
 import { Variant } from "@leafygreen-ui/toast";
-import { ToastVariants } from "types/toast";
+import { ToastVariants } from "./types";
 
 export const mapVariantToTitle = {
   [Variant.Success]: "Success!",

@@ -1,8 +1,8 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { TOAST_TIMEOUT } from "constants/toast";
 import { render, screen, userEvent, waitFor } from "test_utils";
 import { DispatchToastContextState, ToastProvider, useToastContext } from ".";
 import { RenderFakeToastContext } from "./__mocks__";
+import { TOAST_TIMEOUT } from "./constants";
 
 // This function allows us to directly interact with the useToastContext hook and monitor any changes to the DOM.
 // (Courtesy of: https://github.com/testing-library/react-hooks-testing-library/issues/86)
@@ -123,11 +123,14 @@ describe("toast", () => {
         wrapper,
       });
       act(() => {
-        hook.current.progress("test string");
+        hook.current.progress("test string", 0.8);
       });
       expect(screen.getByDataCy("toast")).toBeInTheDocument();
       expect(screen.getByText("Loading...")).toBeInTheDocument();
       expect(screen.getByText("test string")).toBeInTheDocument();
+
+      const progressBar = screen.getByRole("progressbar");
+      expect(progressBar).toHaveAttribute("aria-valuenow", "80");
     });
   });
 

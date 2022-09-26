@@ -8,20 +8,24 @@ import {
 } from "react";
 import styled from "@emotion/styled";
 import Toast, { Variant } from "@leafygreen-ui/toast";
+import { zIndex } from "constants/tokens";
 import {
   TOAST_TIMEOUT,
   mapToastToLeafyGreenVariant,
   mapVariantToTitle,
-} from "constants/toast";
-import { zIndex } from "constants/tokens";
-import { DispatchToast, VisibleToast } from "types/toast";
+} from "./constants";
+import {
+  DispatchToast,
+  DispatchToastWithProgress,
+  VisibleToast,
+} from "./types";
 
 export interface DispatchToastContextState {
   success: DispatchToast;
   warning: DispatchToast;
   error: DispatchToast;
   info: DispatchToast;
-  progress: DispatchToast;
+  progress: DispatchToastWithProgress;
   hide: () => void;
 }
 
@@ -47,6 +51,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
     closable: true,
     onClose: () => {},
     shouldTimeout: true,
+    progress: undefined,
   });
 
   useEffect(() => {
@@ -111,10 +116,11 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
           ...defaultOptions,
           ...options,
         }),
-      progress: (message = "", closable = true, options = {}) =>
+      progress: (message = "", progress = 0.5, closable = true, options = {}) =>
         dispatchToast({
           variant: mapToastToLeafyGreenVariant.progress,
           message,
+          progress,
           closable,
           ...defaultOptions,
           ...options,
@@ -139,6 +145,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
         data-cy="toast"
         data-variant={visibleToast.variant}
         open={toastOpen}
+        progress={visibleToast.progress}
         title={visibleToast.title || mapVariantToTitle[visibleToast.variant]}
         variant={visibleToast.variant}
       />
