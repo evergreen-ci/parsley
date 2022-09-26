@@ -93,10 +93,14 @@ Cypress.Commands.add("login", () => {
       cy.origin("http://localhost:9090", { args }, ({ username, password }) => {
         cy.request("POST", "/login", { username, password });
       });
+      cy.visit("/");
     },
     {
       validate() {
-        cy.request("/graphql").its("status").should("eq", 200);
+        cy.origin("http://localhost:9090", () => {
+          cy.request("/graphql").its("status").should("eq", 200);
+        });
+        cy.visit("/");
       },
     }
   );
