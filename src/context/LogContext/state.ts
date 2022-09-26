@@ -53,7 +53,7 @@ const reducer = (state: LogState, action: Action): LogState => {
     case "SET_SEARCH":
       return {
         ...state,
-        search: action.search,
+        search: action.search.length ? action.search : undefined,
       };
     case "SCROLL_TO_LINE":
       return {

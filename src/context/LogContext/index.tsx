@@ -10,6 +10,7 @@ import { FilterLogic, QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
 import { ProcessedLogLines } from "types/logs";
 import { filterLogs } from "utils/filter";
+import { searchLogs } from "utils/search";
 import useLogState from "./state";
 
 interface LogContextState {
@@ -114,39 +115,32 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
 
   const hasSearch = useMemo(() => !!state.search, [state.search]);
-  const searchResults = useMemo(() => {
-    // search through processedLoglines
-    // return the line number of the first match
-    // if no match, return undefined
-    const matchingIndices = [];
-    if (state.search === undefined) return [];
-    const searchRegex = new RegExp(state.search, caseSensitive ? "" : "i");
-
-    for (let i = 0; i < processedLogLines.length; i++) {
-      const lineIndex = processedLogLines[i];
-      if (!Array.isArray(lineIndex)) {
-        // Since processLogLines is ordered by line number, we can stop searching if we are out of range for our upper bound
-        if (upperRange && lineIndex > upperRange) {
-          break;
-        }
-        // If we are in range for our lower bound, we can start searching
-        if (lowerRange !== undefined && lineIndex >= lowerRange) {
-          const line = getLine(lineIndex);
-          if (searchRegex.test(line)) {
-            matchingIndices.push(lineIndex);
-          }
-        }
-      }
-    }
-    return matchingIndices;
-  }, [
-    state.search,
-    caseSensitive,
-    upperRange,
-    lowerRange,
-    processedLogLines,
-    getLine,
-  ]);
+  const searchResults = useMemo(
+    () =>
+      // search through processedLoglines
+      // return the line number of the first match
+      // if no match, return undefined
+      hasSearch
+        ? searchLogs({
+            // @ts-expect-error state.search is always defined if hasSearch is true
+            search: state.search,
+            processedLogLines,
+            caseSensitive,
+            upperBound: upperRange,
+            lowerBound: lowerRange,
+            getLine,
+          })
+        : [],
+    [
+      state.search,
+      hasSearch,
+      caseSensitive,
+      upperRange,
+      lowerRange,
+      processedLogLines,
+      getLine,
+    ]
+  );
 
   const memoizedContext = useMemo(
     () => ({
@@ -155,6 +149,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       hasLogs: state.logs.length > 0,
       processedLogLines,
       hasSearch,
+      search: state.search,
       matchingSearchCount: searchResults.length,
       clearLogs,
       getLine,
@@ -169,6 +164,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       processedLogLines,
       searchResults.length,
       hasSearch,
+      state.search,
       clearLogs,
       getLine,
       ingestLines,
