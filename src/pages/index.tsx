@@ -32,6 +32,7 @@ const Content: React.FC = () => (
       element={<LogView logType={LogTypes.RESMOKE_LOGS} />}
       path={routes.resmokeLogsAll}
     />
+    <Route element={<div>404</div>} path="*" />
   </Routes>
 );
 
