@@ -25,6 +25,10 @@ declare global {
        */
       getInputByLabel(label: string): Chainable<Element>;
       /**
+       * Custom command to open and close the Leafygreen NavBar.
+       */
+      toggleNavBar(): void;
+      /**
        * Custom command to validate a toast was rendered
        * @example cy.validateToast("success", "This succeeded")
        * @example cy.validateToast("error", "This failed")

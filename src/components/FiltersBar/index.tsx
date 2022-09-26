@@ -1,0 +1,111 @@
+import { useState } from "react";
+import styled from "@emotion/styled";
+import Badge, { Variant } from "@leafygreen-ui/badge";
+import { SideNav, SideNavGroup } from "@leafygreen-ui/side-nav";
+import { Body } from "@leafygreen-ui/typography";
+import Icon from "components/Icon";
+import { QueryParams } from "constants/queryParams";
+import { size, zIndex } from "constants/tokens";
+import { useQueryParam } from "hooks/useQueryParam";
+import Filter from "./Filter";
+
+interface FiltersBarProps {
+  ["data-cy"]?: string;
+}
+
+const FiltersBar: React.FC<FiltersBarProps> = ({ "data-cy": dataCy }) => {
+  const [collapsed, setCollapsed] = useState(true);
+
+  const [filters, setFilters] = useQueryParam<string[]>(
+    QueryParams.Filters,
+    []
+  );
+
+  const deleteFilter = (filterName: string) => {
+    const newFilters = filters.filter((f) => f !== filterName);
+    setFilters(newFilters);
+  };
+
+  const editFilter = (oldFilter: string, newFilter: string) => {
+    // Duplicate filters are not allowed.
+    if (filters.includes(newFilter)) {
+      return;
+    }
+    const newFilters = [...filters];
+    const idxToReplace = newFilters.indexOf(oldFilter);
+    newFilters[idxToReplace] = newFilter;
+    setFilters(newFilters);
+  };
+
+  return (
+    <StyledSideNav
+      aria-label="Filters Side Nav"
+      collapsed={collapsed}
+      data-cy={dataCy}
+      setCollapsed={setCollapsed}
+      widthOverride={250}
+    >
+      <PaddedContainer>
+        <StyledSideNavGroup
+          glyph={<Icon glyph="Filter" />}
+          header={
+            <NavGroupHeader data-cy="nav-group-header">
+              <NavGroupTitle> Filters</NavGroupTitle>
+              <Badge variant={Variant.Green}>{filters.length}</Badge>
+            </NavGroupHeader>
+          }
+        >
+          {filters.length ? (
+            filters.map((filter) => (
+              <FilterWrapper key={filter}>
+                <Filter
+                  deleteFilter={deleteFilter}
+                  editFilter={editFilter}
+                  filterName={filter}
+                />
+              </FilterWrapper>
+            ))
+          ) : (
+            <FilterWrapper data-cy="no-filters-message">
+              <Body>No filters have been applied.</Body>
+            </FilterWrapper>
+          )}
+        </StyledSideNavGroup>
+      </PaddedContainer>
+    </StyledSideNav>
+  );
+};
+
+const StyledSideNav = styled(SideNav)`
+  z-index: ${zIndex.navbar};
+  box-shadow: 0 ${size.xxs} ${size.xxs} rgba(0, 0, 0, 0.25);
+`;
+
+const PaddedContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  padding: 0 ${size.xs};
+`;
+
+// @ts-expect-error
+const StyledSideNavGroup = styled(SideNavGroup)`
+  > div {
+    padding: 0;
+  }
+`;
+
+const NavGroupHeader = styled.div`
+  display: flex;
+  align-items: center;
+`;
+
+const NavGroupTitle = styled.div`
+  margin-right: ${size.xxs};
+`;
+
+const FilterWrapper = styled.div`
+  margin-top: ${size.xs};
+  margin-bottom: ${size.s};
+`;
+
+export default FiltersBar;

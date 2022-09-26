@@ -1,9 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import Badge from "@leafygreen-ui/badge";
 import { palette } from "@leafygreen-ui/palette";
 import DetailsOverlay from "components/DetailsOverlay";
-import FiltersOverlay from "components/FiltersOverlay";
 import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
@@ -50,15 +48,6 @@ const NavBar: React.FC = () => {
         />
       </FlexContainer>
       <ButtonContainer>
-        <StyledButton
-          buttonText={
-            <span>
-              Filters <Badge variant="green">{filters.length}</Badge>
-            </span>
-          }
-        >
-          <FiltersOverlay />
-        </StyledButton>
         <StyledButton buttonText="Details" data-cy="details-button">
           <DetailsOverlay />
         </StyledButton>
@@ -66,6 +55,18 @@ const NavBar: React.FC = () => {
     </Container>
   );
 };
+
+const Container = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: ${navbarHeight};
+
+  background-color: ${white};
+  border-bottom: 1px solid ${gray.light2};
+  padding: 0 ${size.s};
+  position: static;
+`;
 
 const FlexContainer = styled.div`
   display: flex;
@@ -90,17 +91,6 @@ const StyledButton = styled(PopoverButton)`
 const LinkContainer = styled.div`
   display: flex;
   margin-right: ${size.l};
-`;
-
-const Container = styled.nav`
-  align-items: center;
-  background-color: ${white};
-  border-bottom: 1px solid ${gray.light2};
-  display: flex;
-  height: ${navbarHeight};
-  justify-content: space-between;
-  padding: 0 ${size.s};
-  position: static;
 `;
 
 const navLinkStyles = css`

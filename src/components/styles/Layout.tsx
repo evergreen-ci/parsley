@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import { navbarHeight } from "constants/tokens";
 
 const PageLayout = styled.div`
-  height: calc(100vh - ${navbarHeight});
+  // PageLayout should take up the remaining page height after the NavBar.
+  flex: 1 1 auto;
 `;
 
 export { PageLayout };

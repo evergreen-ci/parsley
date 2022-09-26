@@ -54,44 +54,50 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
     maxFiles: 1,
   });
 
-  return hasDroppedLog ? (
+  return (
     <Container>
-      <StyledSelect
-        label="How would you like to parse this log?"
-        onChange={(value) => setLogType(value as LogTypes)}
-        value={logType}
-      >
-        <Option value={LogTypes.RESMOKE_LOGS}>Resmoke</Option>
-        <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
-      </StyledSelect>
-      <ButtonContainer>
-        <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
-        <Button
-          data-cy="process-log-button"
-          disabled={!logType}
-          onClick={onParse}
-          variant="primary"
-        >
-          Process Log
-        </Button>
-      </ButtonContainer>
-    </Container>
-  ) : (
-    <Container {...getRootProps()} data-cy="upload-zone">
-      <input {...getInputProps()} />
-      {isDragActive ? (
-        <Body>Release to upload</Body>
-      ) : (
-        <Dropzone>
-          <Body weight="medium">
-            Drag and Drop a log file to view in Lobster
-          </Body>
-          <Body weight="medium">or</Body>
-          <Button leftGlyph={<Icon glyph="Upload" />} onClick={open}>
-            Select from Files
-          </Button>
-        </Dropzone>
-      )}
+      <RedBorderBox>
+        {hasDroppedLog ? (
+          <ParseLogs>
+            <StyledSelect
+              label="How would you like to parse this log?"
+              onChange={(value) => setLogType(value as LogTypes)}
+              value={logType}
+            >
+              <Option value={LogTypes.RESMOKE_LOGS}>Resmoke</Option>
+              <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
+            </StyledSelect>
+            <ButtonContainer>
+              <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
+              <Button
+                data-cy="process-log-button"
+                disabled={!logType}
+                onClick={onParse}
+                variant="primary"
+              >
+                Process Log
+              </Button>
+            </ButtonContainer>
+          </ParseLogs>
+        ) : (
+          <div {...getRootProps()} data-cy="upload-zone">
+            <input {...getInputProps()} />
+            {isDragActive ? (
+              <Body>Release to upload</Body>
+            ) : (
+              <Dropzone>
+                <Body weight="medium">
+                  Drag and Drop a log file to view in Lobster
+                </Body>
+                <Body weight="medium">or</Body>
+                <Button leftGlyph={<Icon glyph="Upload" />} onClick={open}>
+                  Select from Files
+                </Button>
+              </Dropzone>
+            )}
+          </div>
+        )}
+      </RedBorderBox>
     </Container>
   );
 };
@@ -99,27 +105,47 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60%;
-  max-height: 250px;
-  height: 60%;
   justify-content: center;
   align-items: center;
+  height: 100%;
+`;
+
+const RedBorderBox = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 800px;
+  height: 250px;
+
+  padding: ${size.xl};
   border: ${size.xxs} dashed ${red.base};
   border-radius: ${size.s};
 `;
 
+const ParseLogs = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 300px;
+`;
+
+// @ts-expect-error
+const StyledSelect = styled(Select)`
+  margin-bottom: ${size.s};
+`;
+
 const ButtonContainer = styled.div`
   display: flex;
-  justify-content: space-between;
-  margin-top: ${size.xs};
+  align-self: flex-end;
   button {
-    margin: 0 ${size.xs};
+    margin-left: ${size.xs};
   }
 `;
+
 const Dropzone = styled.div`
   display: flex;
   flex-direction: column;
-  width: 60%;
   justify-content: center;
   align-items: center;
   > * {
@@ -127,8 +153,4 @@ const Dropzone = styled.div`
   }
 `;
 
-// @ts-expect-error
-const StyledSelect = styled(Select)`
-  margin-bottom: ${size.xs};
-`;
 export default FileDropper;

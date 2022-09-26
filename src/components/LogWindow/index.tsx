@@ -1,12 +1,12 @@
 import { useMemo } from "react";
 import styled from "@emotion/styled";
+import FiltersBar from "components/FiltersBar";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import SideBar from "components/SideBar";
 import SubHeader from "components/SubHeader";
 import { LogTypes } from "constants/enums";
 import { FilterLogic, QueryParams } from "constants/queryParams";
-import { navbarHeight, size, subheaderHeight } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
 import { filterLogs } from "utils/filter";
@@ -34,6 +34,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
 
   return (
     <Container data-cy="log-window">
+      <FiltersBar />
       {hasLogs && <SideBar maxLineNumber={logLines.length - 1} />}
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
@@ -59,21 +60,23 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
 };
 
 const Container = styled.div`
-  width: 100vw;
   display: flex;
   flex-direction: row;
   height: 100%;
-`;
-
-const LogPaneContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  height: calc(100vh - ${navbarHeight} - ${subheaderHeight});
-  width: calc(100vw - ${size.xl});
+  overflow-y: hidden;
 `;
 
 const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
+  // ColumnContainer should take up the remaining page width after FiltersBar & SideBar.
+  flex: 1 1 auto;
 `;
+
+const LogPaneContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+`;
+
 export default LogWindow;

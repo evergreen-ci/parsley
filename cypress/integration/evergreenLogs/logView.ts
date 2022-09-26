@@ -91,9 +91,10 @@ describe("Filtering", () => {
     cy.dataCy("log-row-7").should("be.visible");
   });
 
-  it("should respect applied filters and selected lines", () => {
-    // TODO EVG-17908: Instead of revisiting the page, delete the filters from the drawer.
-    cy.visit("/evergreen/task_0/0/tasks");
+  it("should preserve applied bookmarks and selected lines even if they don't match the filters", () => {
+    // Delete the filters from the drawer.
+    cy.toggleNavBar();
+    cy.get(`[aria-label="Delete filter button"]`).click();
 
     // Select a line, with the expectation that it won't be collapsed by the filter.
     cy.dataCy("log-link-5").click();
@@ -104,13 +105,20 @@ describe("Filtering", () => {
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("notarealfilter{enter}");
 
-    cy.dataCy("log-row-0").should("be.visible");
+    cy.dataCy("log-row-0").should("not.exist");
     cy.dataCy("log-row-1").should("not.exist");
     cy.dataCy("log-row-2").should("not.exist");
     cy.dataCy("log-row-3").should("not.exist");
     cy.dataCy("log-row-4").should("not.exist");
     cy.dataCy("log-row-5").should("be.visible");
     cy.dataCy("log-row-6").should("be.visible");
-    cy.dataCy("log-row-7").should("be.visible");
+    cy.dataCy("log-row-7").should("not.exist");
+  });
+
+  it("should be able to edit filters", () => {
+    cy.get(`[aria-label="Edit filter button"]`).click();
+    cy.dataCy("edit-filter-name").type("js_test");
+    cy.contains("button", "OK").click();
+    cy.dataCy("log-row-0").should("be.visible");
   });
 });
