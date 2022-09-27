@@ -4,20 +4,20 @@ import {
   userEvent,
   within,
 } from "test_utils";
-import FiltersBar from ".";
+import FiltersDrawer from ".";
 
 describe("filtersOverlay", () => {
   const user = userEvent.setup();
 
   it("shows a message when no filters have been applied", async () => {
-    render(<FiltersBar />);
-    // The FiltersBar is rendered in a collapsed state, so we need to open it for the tests.
+    render(<FiltersDrawer />);
+    // The FiltersDrawer is rendered in a collapsed state, so we need to open it for the tests.
     await user.click(screen.getByLabelText("Collapse navigation"));
     expect(screen.getByDataCy("no-filters-message")).toBeInTheDocument();
   });
 
   it("filters should properly display based on URL", async () => {
-    render(<FiltersBar />, {
+    render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
     await user.click(screen.getByLabelText("Collapse navigation"));
@@ -27,7 +27,7 @@ describe("filtersOverlay", () => {
   });
 
   it("shows the number of filters in the header", async () => {
-    render(<FiltersBar />, {
+    render(<FiltersDrawer />, {
       route: "?filters=one,two,three,four",
     });
     await user.click(screen.getByLabelText("Collapse navigation"));
@@ -37,7 +37,7 @@ describe("filtersOverlay", () => {
   });
 
   it("deleting filters should modify the URL correctly", async () => {
-    const { history } = render(<FiltersBar />, {
+    const { history } = render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
     await user.click(screen.getByLabelText("Collapse navigation"));
@@ -50,7 +50,7 @@ describe("filtersOverlay", () => {
   });
 
   it("editing filters should modify the URL correctly", async () => {
-    const { history } = render(<FiltersBar />, {
+    const { history } = render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
     await user.click(screen.getByLabelText("Collapse navigation"));
@@ -70,7 +70,7 @@ describe("filtersOverlay", () => {
   });
 
   it("trying to edit a filter to a filter that already exists should do nothing", async () => {
-    const { history } = render(<FiltersBar />, {
+    const { history } = render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
     await user.click(screen.getByLabelText("Collapse navigation"));
@@ -89,7 +89,7 @@ describe("filtersOverlay", () => {
   });
 
   it("pressing the cancel button after editing a filter should do nothing", async () => {
-    const { history } = render(<FiltersBar />, {
+    const { history } = render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
     await user.click(screen.getByLabelText("Collapse navigation"));

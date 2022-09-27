@@ -9,11 +9,11 @@ import { size, zIndex } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import Filter from "./Filter";
 
-interface FiltersBarProps {
+interface FiltersDrawerProps {
   ["data-cy"]?: string;
 }
 
-const FiltersBar: React.FC<FiltersBarProps> = ({ "data-cy": dataCy }) => {
+const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
   const [collapsed, setCollapsed] = useState(true);
 
   const [filters, setFilters] = useQueryParam<string[]>(
@@ -108,4 +108,4 @@ const FilterWrapper = styled.div`
   margin-bottom: ${size.s};
 `;
 
-export default FiltersBar;
+export default FiltersDrawer;

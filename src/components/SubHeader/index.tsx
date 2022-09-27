@@ -52,12 +52,11 @@ const StyledBody = styled(Body)`
 const Container = styled.div`
   display: flex;
   align-items: center;
+  height: ${subheaderHeight};
 
   background-color: ${gray.light3};
   box-shadow: 0 ${size.xxs} ${size.xxs} rgba(0, 0, 0, 0.05);
-  height: ${subheaderHeight};
   padding-left: ${size.l};
-
   z-index: ${zIndex.backdrop};
 `;
 

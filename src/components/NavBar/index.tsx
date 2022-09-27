@@ -65,7 +65,6 @@ const Container = styled.nav`
   background-color: ${white};
   border-bottom: 1px solid ${gray.light2};
   padding: 0 ${size.s};
-  position: static;
 `;
 
 const FlexContainer = styled.div`

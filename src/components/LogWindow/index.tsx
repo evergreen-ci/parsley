@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import styled from "@emotion/styled";
-import FiltersBar from "components/FiltersBar";
+import FiltersDrawer from "components/FiltersDrawer";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import SideBar from "components/SideBar";
@@ -34,7 +34,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
 
   return (
     <Container data-cy="log-window">
-      <FiltersBar />
+      {hasLogs && <FiltersDrawer />}
       {hasLogs && <SideBar maxLineNumber={logLines.length - 1} />}
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
