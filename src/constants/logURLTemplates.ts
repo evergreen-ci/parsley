@@ -24,7 +24,6 @@ const getEvergreenTestLogURL = (
 const getResmokeLogURL = (buildID: string, testID?: string) => {
   const params = {
     raw: 1,
-    s3: true, // TODO: Remove this once this becomes the default
   };
   if (testID) {
     return `${logkeeperURL}/build/${buildID}/test/${testID}?${stringifyQuery(
