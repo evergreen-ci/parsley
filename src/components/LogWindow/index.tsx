@@ -76,7 +76,8 @@ const ColumnContainer = styled.div`
 const LogPaneContainer = styled.div`
   display: flex;
   flex-direction: column;
-  height: 100%;
+  // LogPaneContainer should take up the remaining page height after SubHeader.
+  flex: 1 1 auto;
 `;
 
 export default LogWindow;
