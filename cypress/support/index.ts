@@ -37,12 +37,6 @@ declare global {
         message?: string,
         shouldClose?: boolean
       ): void;
-
-      /**
-       * Custom command to preserve cookie between tests.
-       * @example cy.preserveCookies()
-       */
-      preserveCookies(): void;
       /**
        * Custom command to login to the application
        * @example cy.login()
