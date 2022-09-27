@@ -8,7 +8,7 @@ import {
 } from "constants/logURLTemplates";
 import { slugs } from "constants/routes";
 import { useLogContext } from "context/LogContext";
-import { useAxiosGet } from "hooks/useAxios";
+import { useAxiosGet } from "hooks";
 
 interface LoadingPageProps {
   onLoad: () => void;
