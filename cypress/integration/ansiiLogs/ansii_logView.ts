@@ -36,7 +36,7 @@ describe("Basic evergreen log view", () => {
       "contain.text",
       `[2022/03/02 17:01:58.701] Running pre-task commands.`
     );
-    cy.dataCy("log-row-22").isContainedInViewport();
+    cy.dataCy("log-row-2").isContainedInViewport();
   });
 });
 
