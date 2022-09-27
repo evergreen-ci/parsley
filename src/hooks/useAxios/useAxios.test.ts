@@ -16,8 +16,8 @@ jest.mock("axios");
 
 describe("useAxiosGet", () => {
   it("gets a good response from the api and updates its state", async () => {
-    // @ts-expect-error
-    axios.get.mockResolvedValue(mockApi);
+    const mockedAxiosGet = axios.get as jest.MockedFunction<typeof axios.get>;
+    mockedAxiosGet.mockResolvedValue(mockApi);
     const { result, waitForNextUpdate } = renderHook(() =>
       useAxiosGet(API_URL)
     );
@@ -27,8 +27,8 @@ describe("useAxiosGet", () => {
     expect(result.current.data).toBe(jsonMessage);
   });
   it("gets a bad response from the api and returns an error", async () => {
-    // @ts-expect-error
-    axios.get.mockRejectedValue({ status: 404, message: "error" });
+    const mockedAxiosGet = axios.get as jest.MockedFunction<typeof axios.get>;
+    mockedAxiosGet.mockRejectedValue({ status: 404, message: "error" });
     const { result, waitForNextUpdate } = renderHook(() =>
       useAxiosGet(API_URL)
     );
