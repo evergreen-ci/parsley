@@ -9,6 +9,7 @@ import Icon from "components/Icon";
 import { LogTypes } from "constants/enums";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
+import { useToastContext } from "context/toast";
 
 const { red } = palette;
 interface FileDropperProps {
@@ -17,6 +18,8 @@ interface FileDropperProps {
 
 const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
   const { ingestLines, setFileName } = useLogContext();
+  const dispatchToast = useToastContext();
+
   const [hasDroppedLog, setHasDroppedLog] = useState(false);
   const [logType, setLogType] = useState<LogTypes | undefined>(undefined);
   const lineStream = useRef<FileReader["result"]>(null);
@@ -26,9 +29,8 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
       acceptedFiles.forEach((file) => {
         const reader = new FileReader();
 
-        //   TODO: EVG-17664 replace these with error toasts
-        reader.onabort = () => console.log("file reading was aborted");
-        reader.onerror = () => console.log("file reading has failed");
+        reader.onabort = () => dispatchToast.error("File reading was aborted.");
+        reader.onerror = () => dispatchToast.error("File reading failed.");
         reader.onload = () => {
           setHasDroppedLog(true);
           setFileName(file.name);
@@ -37,7 +39,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
         reader.readAsText(file);
       });
     },
-    [setFileName]
+    [setFileName, dispatchToast]
   );
 
   const onParse = useCallback(() => {

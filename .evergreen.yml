@@ -112,7 +112,7 @@ functions:
       bucket: mciuploads
       content_type: text/html
       permissions: public-read
-      display_name: source_map_
+      display_name: source_map
     
   copy-cmdrc:
     command: shell.exec
@@ -338,7 +338,6 @@ tasks:
   - name: test
     commands:
     - func: yarn-test
-    - func: attach-test-results
 
   - name: e2e_test
     commands:
@@ -358,10 +357,6 @@ tasks:
     - func: wait-for-evergreen
     - func: yarn-verify-backend
     - func: yarn-cypress
-    - func: attach-cypress-results
-    - func: attach-cypress-screenshots
-    - func: attach-cypress-videos
-    - func: attach-logkeeper-logs
 
   - name: storybook
     commands:
@@ -373,7 +368,6 @@ tasks:
   - name: snapshots
     commands:
     - func: yarn-snapshot
-    - func: attach-test-results
 
 buildvariants:
   - name: ubuntu1604-small
@@ -401,3 +395,10 @@ buildvariants:
 pre:
   - func: get-project
   - func: yarn-install
+
+post:
+  - func: attach-cypress-results
+  - func: attach-cypress-screenshots
+  - func: attach-cypress-videos
+  - func: attach-logkeeper-logs
+  - func: attach-test-results

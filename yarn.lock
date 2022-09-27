@@ -1937,7 +1937,7 @@
     "@emotion/react" "^11.4.0"
     "@emotion/server" "^11.4.0"
 
-"@leafygreen-ui/emotion@^4.0.0", "@leafygreen-ui/emotion@^4.0.1":
+"@leafygreen-ui/emotion@4.0.1", "@leafygreen-ui/emotion@^4.0.0", "@leafygreen-ui/emotion@^4.0.1":
   version "4.0.1"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/emotion/-/emotion-4.0.1.tgz#b34a0690a4ef44a76525c61180f6f606284fbf81"
   integrity sha512-WmPOSPLxfohMn/ZxnPBehY6/9rYY9ybVx3XtqfVgS04quuI5UxW2HMmtaGIA7AMbSERtxH1T0Xc6NKllWd5/qQ==
@@ -2096,6 +2096,14 @@
     "@leafygreen-ui/hooks" "^7.3.0"
     "@leafygreen-ui/lib" "^9.3.0"
 
+"@leafygreen-ui/portal@^4.0.4":
+  version "4.0.4"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/portal/-/portal-4.0.4.tgz#934e170fe11d8c32d1b13c64cf9f798e5cb01c13"
+  integrity sha512-n9LUW9ngmJsJxAZhz5GWDfHu2T0I0on7WUVGiyir/HbUYL5ctoKOJnbXBKzWEL39S3yr6ZqOm9NUMQfFobO29w==
+  dependencies:
+    "@leafygreen-ui/hooks" "^7.3.1"
+    "@leafygreen-ui/lib" "^9.4.2"
+
 "@leafygreen-ui/ripple@^1.1.1":
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/ripple/-/ripple-1.1.2.tgz#c153bf8b8a4fafd7316965cd2232f8dd70fdbeda"
@@ -2157,6 +2165,23 @@
     "@leafygreen-ui/palette" "^3.4.1"
     "@leafygreen-ui/tokens" "^1.3.0"
     "@leafygreen-ui/typography" "^13.1.0"
+
+"@leafygreen-ui/toast@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/toast/-/toast-2.0.0.tgz#bbc8bc9b23b1710c990a0bf5ef24730d65213293"
+  integrity sha512-10GCIl/OUIqbFceJRfSHRa5yKplLEstxgEfEyPB1lQEqij6UFwiUNdGjLslV+YyCk6YglQz87Ox4CWsYRKWAUQ==
+  dependencies:
+    "@leafygreen-ui/emotion" "4.0.1"
+    "@leafygreen-ui/icon" "^11.10.2"
+    "@leafygreen-ui/icon-button" "^13.1.1"
+    "@leafygreen-ui/lib" "^9.4.2"
+    "@leafygreen-ui/palette" "^3.4.2"
+    "@leafygreen-ui/portal" "^4.0.4"
+    "@leafygreen-ui/tokens" "^1.3.2"
+    "@leafygreen-ui/typography" "^13.1.2"
+    lodash "^4.17.21"
+    polished "^4.2.2"
+    react-transition-group "^4.4.1"
 
 "@leafygreen-ui/toggle@8.0.2":
   version "8.0.2"
