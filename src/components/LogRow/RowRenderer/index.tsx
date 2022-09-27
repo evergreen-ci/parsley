@@ -1,4 +1,4 @@
-import { Suspense, lazy } from "react";
+import { Suspense, forwardRef, lazy } from "react";
 import {
   CellMeasurer,
   CellMeasurerCache,
@@ -31,11 +31,17 @@ const RowRenderer: RowRendererFunction = (data) => {
   return result;
 };
 
-const SuspendedAnsiiRow = (props: React.ComponentProps<typeof AnsiiRow>) => (
-  <Suspense fallback={<div>Loading...</div>}>
-    <AnsiiRow {...props} />
-  </Suspense>
+// We need to forward the ref to both the Row and the FallBackRow so that CellMeasurer can register the child
+const SuspendedAnsiiRow = forwardRef(
+  (props: React.ComponentProps<typeof AnsiiRow>, ref) => (
+    // @ts-expect-error - ref is a valid prop for div
+    <Suspense fallback={<div ref={ref}>Loading...</div>}>
+      <AnsiiRow {...props} ref={ref} />
+    </Suspense>
+  )
 );
+SuspendedAnsiiRow.displayName = "SuspendedAnsiiRow";
+
 const rowRendererMap = {
   [LogTypes.EVERGREEN_TASK_LOGS]: SuspendedAnsiiRow,
   [LogTypes.EVERGREEN_TEST_LOGS]: SuspendedAnsiiRow,
