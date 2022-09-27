@@ -3,7 +3,7 @@ import { palette } from "@leafygreen-ui/palette";
 import { Body } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { StyledLink } from "components/styles";
-import { fontSize, size, subheaderHeight, zIndex } from "constants/tokens";
+import { fontSize, size, subheaderHeight } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 
 const { gray } = palette;
@@ -57,7 +57,6 @@ const Container = styled.div`
   background-color: ${gray.light3};
   box-shadow: 0 ${size.xxs} ${size.xxs} rgba(0, 0, 0, 0.05);
   padding-left: ${size.l};
-  z-index: ${zIndex.backdrop};
 `;
 
 export default SubHeader;

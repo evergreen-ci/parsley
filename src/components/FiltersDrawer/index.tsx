@@ -77,7 +77,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
 };
 
 const StyledSideNav = styled(SideNav)`
-  z-index: ${zIndex.navbar};
+  z-index: ${zIndex.drawer};
   box-shadow: 0 ${size.xxs} ${size.xxs} rgba(0, 0, 0, 0.25);
 `;
 
