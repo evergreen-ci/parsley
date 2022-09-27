@@ -61,10 +61,10 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
       ingestLines(data.split("\n"), logType);
       onLoad();
     }
-  }, [data, ingestLines, onLoad, logType]);
-  if (error) {
-    dispatchToast.error(error);
-  }
+    if (error) {
+      dispatchToast.error(error);
+    }
+  }, [data, ingestLines, error, onLoad, logType, dispatchToast]);
   return <div>I am the loading page</div>;
 };
 
