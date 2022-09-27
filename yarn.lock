@@ -2212,6 +2212,23 @@
     "@leafygreen-ui/tokens" "^1.3.0"
     "@leafygreen-ui/typography" "^13.1.0"
 
+"@leafygreen-ui/toast@2.0.0":
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/toast/-/toast-2.0.0.tgz#bbc8bc9b23b1710c990a0bf5ef24730d65213293"
+  integrity sha512-10GCIl/OUIqbFceJRfSHRa5yKplLEstxgEfEyPB1lQEqij6UFwiUNdGjLslV+YyCk6YglQz87Ox4CWsYRKWAUQ==
+  dependencies:
+    "@leafygreen-ui/emotion" "4.0.1"
+    "@leafygreen-ui/icon" "^11.10.2"
+    "@leafygreen-ui/icon-button" "^13.1.1"
+    "@leafygreen-ui/lib" "^9.4.2"
+    "@leafygreen-ui/palette" "^3.4.2"
+    "@leafygreen-ui/portal" "^4.0.4"
+    "@leafygreen-ui/tokens" "^1.3.2"
+    "@leafygreen-ui/typography" "^13.1.2"
+    lodash "^4.17.21"
+    polished "^4.2.2"
+    react-transition-group "^4.4.1"
+
 "@leafygreen-ui/toggle@8.0.2":
   version "8.0.2"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/toggle/-/toggle-8.0.2.tgz#593664dbaa24fa89b711de18b63f8002cf3466cd"
