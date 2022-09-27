@@ -1,14 +1,14 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { render, screen, userEvent, waitFor } from "test_utils";
-import { DispatchToastContextState, ToastProvider, useToastContext } from ".";
+import { ToastContextState, ToastProvider, useToastContext } from ".";
 import { RenderFakeToastContext } from "./__mocks__";
 import { TOAST_TIMEOUT } from "./constants";
 
 // This function allows us to directly interact with the useToastContext hook and monitor any changes to the DOM.
 // (Courtesy of: https://github.com/testing-library/react-hooks-testing-library/issues/86)
 const renderComponentWithHook = () => {
-  const hook: { current: DispatchToastContextState } = {
-    current: {} as DispatchToastContextState,
+  const hook: { current: ToastContextState } = {
+    current: {} as ToastContextState,
   };
   const Component: React.FC = () => {
     hook.current = useToastContext();

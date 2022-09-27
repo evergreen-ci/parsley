@@ -20,7 +20,7 @@ import {
   VisibleToast,
 } from "./types";
 
-export interface DispatchToastContextState {
+export interface ToastContextState {
   success: DispatchToast;
   warning: DispatchToast;
   error: DispatchToast;
@@ -29,11 +29,10 @@ export interface DispatchToastContextState {
   hide: () => void;
 }
 
-export const DispatchToastContext =
-  createContext<DispatchToastContextState | null>(null);
+export const ToastContext = createContext<ToastContextState | null>(null);
 
-const useToastContext = (): DispatchToastContextState => {
-  const context = useContext(DispatchToastContext);
+const useToastContext = (): ToastContextState => {
+  const context = useContext(ToastContext);
   if (context === null || context === undefined) {
     throw new Error("useToastContext must be used within a ToastProvider");
   }
@@ -76,7 +75,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
     setToastOpen(false);
   }, [setToastOpen]);
 
-  const toastContext = useMemo(() => {
+  const memoizedContext = useMemo(() => {
     const defaultOptions = {
       onClose: () => {},
       shouldTimeout: true,
@@ -130,7 +129,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
   }, [dispatchToast, hideToast]);
 
   return (
-    <DispatchToastContext.Provider value={toastContext}>
+    <ToastContext.Provider value={memoizedContext}>
       {children}
       <StyledToast
         body={<Message>{visibleToast.message}</Message>}
@@ -149,7 +148,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
         title={visibleToast.title || mapVariantToTitle[visibleToast.variant]}
         variant={visibleToast.variant}
       />
-    </DispatchToastContext.Provider>
+    </ToastContext.Provider>
   );
 };
 
