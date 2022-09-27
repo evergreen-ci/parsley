@@ -1,9 +1,9 @@
 import { forwardRef, useMemo } from "react";
 import AnsiUp from "ansi_up";
-import parse from "html-react-parser";
 import linkifyHtml from "linkify-html";
 import CollapsedRow from "components/LogRow//CollapsedRow";
 import BaseRow from "components/LogRow/BaseRow";
+import renderHtml from "utils/renderHtml";
 import { BaseRowProps } from "../types";
 
 const ansiUp = new AnsiUp();
@@ -40,7 +40,7 @@ const ProcessedAnsiiRow: React.FC<ProcessedAnsiiRowProps> = ({
         url: (value: string) => /^(http)s?:\/\//.test(value),
       },
     });
-    return parse(render);
+    return renderHtml(render);
   }, [lineContent]);
   return <span data-cy="ansii-row">{memoizedLogLine}</span>;
 };
