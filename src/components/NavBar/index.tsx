@@ -1,6 +1,7 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Badge from "@leafygreen-ui/badge";
+import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
 import DetailsOverlay from "components/DetailsOverlay";
 import FiltersOverlay from "components/FiltersOverlay";
@@ -23,8 +24,14 @@ const NavBar: React.FC = () => {
     QueryParams.Filters,
     []
   );
-  const { hasLogs, clearLogs, setSearch, hasSearch, matchingSearchCount } =
-    useLogContext();
+  const {
+    hasLogs,
+    clearLogs,
+    setSearch,
+    hasSearch,
+    matchingSearchCount,
+    selectedLine,
+  } = useLogContext();
 
   const handleSearch = (selected: string, value: string) => {
     if (selected === "search") {
@@ -51,10 +58,19 @@ const NavBar: React.FC = () => {
           validatorMessage="Invalid Regular Expression"
         />
         {hasSearch && (
-          <SearchCount
-            currentSearchIndex={0}
-            matchingSearchCount={matchingSearchCount}
-          />
+          <>
+            <SearchCount
+              currentSearchIndex={selectedLine}
+              matchingSearchCount={matchingSearchCount}
+            />
+
+            {matchingSearchCount > 0 && (
+              <>
+                <Button size="small">Prev</Button>
+                <Button size="small">Next</Button>
+              </>
+            )}
+          </>
         )}
       </FlexContainer>
       <ButtonContainer>
