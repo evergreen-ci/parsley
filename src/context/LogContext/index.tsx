@@ -16,10 +16,10 @@ import useLogState from "./state";
 interface LogContextState {
   fileName?: string;
   hasLogs: boolean;
+  hasSearch: boolean;
   lineCount: number;
   matchingSearchCount: number;
   processedLogLines: ProcessedLogLines;
-  hasSearch: boolean;
   search?: string;
   selectedLine?: number;
   clearLogs: () => void;
@@ -64,34 +64,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const { state, dispatch } = useLogState(initialLogLines);
 
-  const ingestLines = useCallback(
-    (lines: string[], logType: LogTypes) => {
-      dispatch({ type: "INGEST_LOGS", logs: lines, logType });
-    },
-    [dispatch]
-  );
-
-  const clearLogs = useCallback(() => {
-    dispatch({ type: "CLEAR_LOGS" });
-  }, [dispatch]);
-
   const getLine = useCallback(
     (lineNumber: number) => state.logs[lineNumber],
     [state.logs]
-  );
-
-  const setFileName = useCallback(
-    (fileName: string) => {
-      dispatch({ type: "SET_FILE_NAME", fileName });
-    },
-    [dispatch]
-  );
-
-  const setSearch = useCallback(
-    (search: string) => {
-      dispatch({ type: "SET_SEARCH", search });
-    },
-    [dispatch]
   );
 
   const scrollToLine = useCallback(
@@ -106,7 +81,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       scrollToLine(selectedLine);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.logs.length > 0, selectedLine, scrollToLine]);
+  }, [state.logs.length > 0, selectedLine]);
 
   // TODO EVG-17537: more advanced filtering
   const processedLogLines = useMemo(
@@ -114,15 +89,13 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [state.logs, filters, bookmarks, selectedLine, filterLogic]
   );
 
-  const hasSearch = useMemo(() => !!state.search, [state.search]);
   const searchResults = useMemo(
     () =>
       // search through processedLoglines
       // return the line number of the first match
       // if no match, return undefined
-      hasSearch
+      state.search
         ? searchLogs({
-            // @ts-expect-error state.search is always defined if hasSearch is true
             search: state.search,
             processedLogLines,
             caseSensitive,
@@ -133,7 +106,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         : [],
     [
       state.search,
-      hasSearch,
       caseSensitive,
       upperRange,
       lowerRange,
@@ -144,33 +116,35 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const memoizedContext = useMemo(
     () => ({
-      lineCount: state.logs.length,
       fileName: state.fileName,
       hasLogs: state.logs.length > 0,
-      processedLogLines,
-      hasSearch,
-      search: state.search,
+      hasSearch: !!state.search,
+      lineCount: state.logs.length,
       matchingSearchCount: searchResults.length,
-      clearLogs,
+      processedLogLines,
+      search: state.search,
+      clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       getLine,
-      ingestLines,
-      setFileName,
-      setSearch,
+      ingestLines: (lines: string[], logType: LogTypes) => {
+        dispatch({ type: "INGEST_LOGS", logs: lines, logType });
+      },
+      setFileName: (fileName: string) => {
+        dispatch({ type: "SET_FILE_NAME", fileName });
+      },
+      setSearch: (search: string) => {
+        dispatch({ type: "SET_SEARCH", search });
+      },
       scrollToLine,
     }),
     [
       state.logs.length,
       state.fileName,
+      state.search,
       processedLogLines,
       searchResults.length,
-      hasSearch,
-      state.search,
-      clearLogs,
       getLine,
-      ingestLines,
-      setFileName,
-      setSearch,
       scrollToLine,
+      dispatch,
     ]
   );
 
