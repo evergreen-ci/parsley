@@ -8,6 +8,7 @@ import {
 } from "constants/logURLTemplates";
 import { slugs } from "constants/routes";
 import { useLogContext } from "context/LogContext";
+import { useToastContext } from "context/toast";
 import { useAxiosGet } from "hooks";
 
 interface LoadingPageProps {
@@ -23,7 +24,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
     [slugs.taskID]: taskID,
     [slugs.execution]: execution,
   } = useParams();
-
+  const dispatchToast = useToastContext();
   const { ingestLines } = useLogContext();
 
   let url = "";
@@ -62,7 +63,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
     }
   }, [data, ingestLines, onLoad, logType]);
   if (error) {
-    console.error(error);
+    dispatchToast.error(error);
   }
   return <div>I am the loading page</div>;
 };
