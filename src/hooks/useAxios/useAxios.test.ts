@@ -35,9 +35,6 @@ describe("useAxiosGet", () => {
     expect(result.current.isLoading).toBe(true);
     await waitForNextUpdate();
     expect(result.current.isLoading).toBe(false);
-    expect(result.current.error).toStrictEqual({
-      status: 404,
-      message: "error",
-    });
+    expect(result.current.error).toBe("error");
   });
 });

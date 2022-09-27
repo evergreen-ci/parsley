@@ -4,7 +4,7 @@ import axios from "axios";
 const useAxiosGet = (url: string) => {
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [data, setData] = useState<string | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState<null>(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axios
@@ -26,7 +26,7 @@ const useAxiosGet = (url: string) => {
       })
       .catch((e) => {
         setIsLoading(false);
-        setError(e);
+        setError(e.message);
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
