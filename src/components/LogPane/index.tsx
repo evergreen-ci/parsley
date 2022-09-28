@@ -30,7 +30,6 @@ const LogPane: React.FC<LogPaneProps> = ({
     <AutoSizer>
       {({ height, width }) => (
         <List
-          // If wrap is false, We want the list to scroll horizontally.
           ref={listRef}
           containerStyle={{ overflow: "scroll visible" }}
           deferredMeasurementCache={cache}
