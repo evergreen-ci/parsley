@@ -14,24 +14,35 @@ interface SearchBarProps {
   validatorMessage?: string;
   className?: string;
   onSubmit?: (selected: string, value: string) => void;
+  onChange?: (selected: string, value: string) => void;
+  shouldClearOnSubmit?: (selected: string) => boolean;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
+  className,
   disabled = false,
+  onChange,
+  onSubmit,
+  shouldClearOnSubmit = () => true,
   validator = () => true,
   validatorMessage = "Invalid Input",
-  className,
-  onSubmit,
 }) => {
   const [input, setInput] = useState("");
   const [selected, setSelected] = useState("search");
 
   const isValid = validator(input);
-
   const handleOnSubmit = () => {
     if (isValid) {
-      setInput("");
+      if (shouldClearOnSubmit(selected)) {
+        setInput("");
+      }
       onSubmit?.(selected, input);
+    }
+  };
+  const handleOnChange = (value: string) => {
+    setInput(value);
+    if (validator(value)) {
+      onChange?.(selected, value);
     }
   };
 
@@ -75,7 +86,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             </IconWithTooltip>
           )
         }
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => handleOnChange(e.target.value)}
         onKeyPress={(e: KeyboardEvent<HTMLInputElement>) =>
           e.key === "Enter" && handleOnSubmit()
         }
