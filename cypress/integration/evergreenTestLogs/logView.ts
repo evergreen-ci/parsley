@@ -1,6 +1,7 @@
 describe("Basic evergreen test log view", () => {
   before(() => {
     cy.visit("/test/task_0/0/test_0");
+    cy.setCookie("has-opened-drawer", "true");
   });
 
   it("should be able to see log lines", () => {
@@ -40,6 +41,7 @@ describe("Basic evergreen test log view", () => {
 describe("Bookmarking and selecting lines", () => {
   before(() => {
     cy.visit("/test/task_0/0/test_0");
+    cy.setCookie("has-opened-drawer", "true");
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
