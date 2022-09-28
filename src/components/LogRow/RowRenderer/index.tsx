@@ -1,4 +1,3 @@
-import { Suspense, forwardRef, lazy } from "react";
 import {
   CellMeasurer,
   CellMeasurerCache,
@@ -6,10 +5,9 @@ import {
   ListRowRenderer,
 } from "react-virtualized";
 import { LogTypes } from "constants/enums";
+import AnsiiRow from "../AnsiiRow";
 import ResmokeRow from "../ResmokeRow";
 import { RowData } from "../types";
-
-const AnsiiRow = lazy(() => import("../AnsiiRow"));
 
 type RowRendererFunction = (data: RowData) => ListRowRenderer;
 
@@ -31,20 +29,9 @@ const RowRenderer: RowRendererFunction = (data) => {
   return result;
 };
 
-// We need to forward the ref to both the Row and the FallBackRow so that CellMeasurer can register the child
-const SuspendedAnsiiRow = forwardRef(
-  (props: React.ComponentProps<typeof AnsiiRow>, ref) => (
-    // @ts-expect-error - ref is a valid prop for div
-    <Suspense fallback={<div ref={ref}>Loading...</div>}>
-      <AnsiiRow {...props} ref={ref} />
-    </Suspense>
-  )
-);
-SuspendedAnsiiRow.displayName = "SuspendedAnsiiRow";
-
 const rowRendererMap = {
-  [LogTypes.EVERGREEN_TASK_LOGS]: SuspendedAnsiiRow,
-  [LogTypes.EVERGREEN_TEST_LOGS]: SuspendedAnsiiRow,
+  [LogTypes.EVERGREEN_TASK_LOGS]: AnsiiRow,
+  [LogTypes.EVERGREEN_TEST_LOGS]: AnsiiRow,
   [LogTypes.RESMOKE_LOGS]: ResmokeRow,
 };
 
