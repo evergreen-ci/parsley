@@ -44,7 +44,7 @@ if [ ! -d "bin/_bucketdata" ]; then
     
 else
     echo "Found bin/_bucketdata directory, skipping download..."
-    echo "If you want to download the bucket data again, delete the _bucketdata directory and run this script again."
+    echo "If you want to download the bucket data again, delete the _bucketdata directory and rerun this script."
 fi
 
 
