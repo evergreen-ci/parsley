@@ -36,7 +36,7 @@ if [ ! -d "bin/_bucketdata" ]; then
         rm -rf _bucketdata
         exit 1
     fi
-    echo "Uncompressed files."
+    echo "Finished uncompressing files."
     echo "Cleaning up _bucketdata directory..."
     rm bin/_bucketdata.tar.gz
     echo "Done!"
