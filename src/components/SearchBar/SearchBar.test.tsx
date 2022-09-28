@@ -2,6 +2,9 @@ import { render, screen, userEvent } from "test_utils";
 import SearchBar from ".";
 
 describe("searchbar", () => {
+  afterEach(() => {
+    jest.useRealTimers();
+  });
   it("disables properly", async () => {
     render(<SearchBar disabled />);
     expect(screen.getByDataCy("searchbar-select")).toBeDisabled();
@@ -85,28 +88,32 @@ describe("searchbar", () => {
     expect(input).toHaveValue("test");
     expect(onSubmit).toHaveBeenCalledWith("search", "test");
   });
-  it("should call onChange as input changes", async () => {
-    const user = userEvent.setup();
+
+  it("should call a debounced onChange as input changes", async () => {
+    jest.useFakeTimers();
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     const onChange = jest.fn();
     render(<SearchBar onChange={onChange} />);
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
-    expect(onChange).toHaveBeenCalledTimes(4);
-    expect(onChange).toHaveBeenCalledWith("search", "t");
-    expect(onChange).toHaveBeenCalledWith("search", "te");
+    jest.advanceTimersByTime(1000);
+    expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith("search", "test");
   });
   it("should not call onChange if input is invalid", async () => {
-    const user = userEvent.setup();
+    jest.useFakeTimers();
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     const onChange = jest.fn();
     render(<SearchBar onChange={onChange} validator={(i) => i.length > 4} />);
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
+    jest.advanceTimersByTime(1000);
     expect(onChange).not.toHaveBeenCalled();
     await user.type(input, "1");
     expect(input).toHaveValue("test1");
+    jest.advanceTimersByTime(1000);
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith("search", "test1");
   });

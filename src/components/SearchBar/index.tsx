@@ -1,4 +1,4 @@
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
@@ -6,6 +6,7 @@ import { Option, Select } from "@leafygreen-ui/select";
 import Icon from "components/Icon";
 import IconWithTooltip from "components/IconWithTooltip";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
+import debounce from "utils/debounce";
 
 const { yellow } = palette;
 interface SearchBarProps {
@@ -39,10 +40,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
       onSubmit?.(selected, input);
     }
   };
+
+  // debounce the onChange handler to prevent excessive rerenders
+  const debouncedHandleOnChangeCallback = useMemo(
+    () => debounce((value: string) => onChange?.(selected, value), 1000),
+    [selected, onChange]
+  );
+
   const handleOnChange = (value: string) => {
     setInput(value);
     if (validator(value)) {
-      onChange?.(selected, value);
+      debouncedHandleOnChangeCallback(value);
     }
   };
 
