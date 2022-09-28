@@ -1,20 +1,27 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import Badge, { Variant } from "@leafygreen-ui/badge";
+import { palette } from "@leafygreen-ui/palette";
 import { SideNav, SideNavGroup } from "@leafygreen-ui/side-nav";
 import { Body } from "@leafygreen-ui/typography";
+import Cookie from "js-cookie";
 import Icon from "components/Icon";
+import { HAS_OPENED_DRAWER } from "constants/cookies";
 import { QueryParams } from "constants/queryParams";
 import { size, zIndex } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import Filter from "./Filter";
+
+const { green, gray } = palette;
 
 interface FiltersDrawerProps {
   ["data-cy"]?: string;
 }
 
 const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(
+    Cookie.get(HAS_OPENED_DRAWER) === "true"
+  );
 
   const [filters, setFilters] = useQueryParam<string[]>(
     QueryParams.Filters,
@@ -42,15 +49,23 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
       aria-label="Filters Side Nav"
       collapsed={collapsed}
       data-cy={dataCy}
-      setCollapsed={setCollapsed}
-      widthOverride={250}
+      setCollapsed={(collapse) => {
+        setCollapsed(collapse);
+        Cookie.set(HAS_OPENED_DRAWER, "true", { expires: 365 });
+      }}
+      widthOverride={270}
     >
       <PaddedContainer>
         <StyledSideNavGroup
-          glyph={<Icon glyph="Filter" />}
+          glyph={
+            <Icon
+              fill={filters.length ? green.dark2 : gray.base}
+              glyph="Filter"
+            />
+          }
           header={
             <NavGroupHeader data-cy="nav-group-header">
-              <NavGroupTitle> Filters</NavGroupTitle>
+              <NavGroupTitle>Filters</NavGroupTitle>
               <Badge variant={Variant.Green}>{filters.length}</Badge>
             </NavGroupHeader>
           }
@@ -105,7 +120,7 @@ const NavGroupTitle = styled.div`
 
 const FilterWrapper = styled.div`
   margin-top: ${size.xs};
-  margin-bottom: ${size.s};
+  margin-bottom: ${size.m};
 `;
 
 export default FiltersDrawer;

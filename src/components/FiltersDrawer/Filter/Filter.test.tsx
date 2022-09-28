@@ -62,6 +62,20 @@ describe("filters", () => {
     expect(editFilter).toHaveBeenCalledWith("myFilter", "newFilter");
   });
 
+  it("should toggle between visibility icons when they are clicked", async () => {
+    render(
+      <Filter
+        deleteFilter={jest.fn()}
+        editFilter={jest.fn()}
+        filterName="myFilter"
+      />
+    );
+
+    expect(screen.getByLabelText("Visibility Icon")).toBeInTheDocument();
+    await user.click(screen.getByLabelText("Visibility filter button"));
+    expect(screen.getByLabelText("Closed Eye Icon")).toBeInTheDocument();
+  });
+
   it("should call deleteFilter with the correct parameters", async () => {
     const deleteFilter = jest.fn();
     render(
@@ -75,20 +89,6 @@ describe("filters", () => {
 
     expect(deleteFilter).toHaveBeenCalledTimes(1);
     expect(deleteFilter).toHaveBeenCalledWith("myFilter");
-  });
-
-  it("should toggle between visibility icons when they are clicked", async () => {
-    render(
-      <Filter
-        deleteFilter={jest.fn()}
-        editFilter={jest.fn()}
-        filterName="myFilter"
-      />
-    );
-
-    expect(screen.getByLabelText("Visibility Icon")).toBeInTheDocument();
-    await user.click(screen.getByLabelText("Visibility filter button"));
-    expect(screen.getByLabelText("Closed Eye Icon")).toBeInTheDocument();
   });
 
   it("should be able to interact with Case Sensitivity segmented control", async () => {
@@ -125,19 +125,19 @@ describe("filters", () => {
       />
     );
 
-    const matchOption = screen.getByRole("tab", {
-      name: "Match",
+    const exactOption = screen.getByRole("tab", {
+      name: "Exact",
     });
     const inverseOption = screen.getByRole("tab", {
       name: "Inverse",
     });
 
-    expect(matchOption).toHaveAttribute("aria-selected", "true");
+    expect(exactOption).toHaveAttribute("aria-selected", "true");
     expect(inverseOption).toHaveAttribute("aria-selected", "false");
 
     await user.click(inverseOption);
 
-    expect(matchOption).toHaveAttribute("aria-selected", "false");
+    expect(exactOption).toHaveAttribute("aria-selected", "false");
     expect(inverseOption).toHaveAttribute("aria-selected", "true");
   });
 });

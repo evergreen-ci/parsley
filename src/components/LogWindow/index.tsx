@@ -69,7 +69,7 @@ const Container = styled.div`
 const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  // ColumnContainer should take up the remaining page width after FiltersBar & SideBar.
+  // ColumnContainer should take up the remaining page width after FiltersDrawer & SideBar.
   flex: 1 1 auto;
 `;
 

@@ -1,3 +1,4 @@
+import Cookie from "js-cookie";
 import {
   renderWithRouterMatch as render,
   screen,
@@ -6,55 +7,66 @@ import {
 } from "test_utils";
 import FiltersDrawer from ".";
 
-describe("filtersOverlay", () => {
+jest.mock("js-cookie");
+const mockedGet = Cookie.get as unknown as jest.Mock<string>;
+
+describe("filtersDrawer", () => {
   const user = userEvent.setup();
 
-  it("shows a message when no filters have been applied", async () => {
+  beforeEach(() => {
+    // Setting the cookie to false means the drawer will be open by default, which means we
+    // won't have to toggle it to test its contents.
+    mockedGet.mockImplementation(() => "false");
+  });
+
+  it("should be uncollapsed if the user has never seen the filters drawer before", () => {
     render(<FiltersDrawer />);
-    // The FiltersDrawer is rendered in a collapsed state, so we need to open it for the tests.
-    await user.click(screen.getByLabelText("Collapse navigation"));
+    const collapseButton = screen.getByLabelText("Collapse navigation");
+    expect(collapseButton).toHaveAttribute("aria-expanded", "true");
+  });
+
+  it("should be collapsed if the user has already seen the filters drawer before", () => {
+    mockedGet.mockImplementation(() => "true");
+
+    render(<FiltersDrawer />);
+    const collapseButton = screen.getByLabelText("Collapse navigation");
+    expect(collapseButton).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("should be possible to toggle the drawer open and closed", async () => {
+    render(<FiltersDrawer />);
+
+    const collapseButton = screen.getByLabelText("Collapse navigation");
+    expect(collapseButton).toHaveAttribute("aria-expanded", "true");
+    await user.click(collapseButton);
+    expect(collapseButton).toHaveAttribute("aria-expanded", "false");
+  });
+
+  it("shows a message when no filters have been applied", () => {
+    render(<FiltersDrawer />);
     expect(screen.getByDataCy("no-filters-message")).toBeInTheDocument();
   });
 
-  it("filters should properly display based on URL", async () => {
+  it("filters should properly display based on URL", () => {
     render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
-    await user.click(screen.getByLabelText("Collapse navigation"));
-
     expect(screen.getByText("filter1")).toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 
-  it("shows the number of filters in the header", async () => {
+  it("shows the number of filters in the header", () => {
     render(<FiltersDrawer />, {
       route: "?filters=one,two,three,four",
     });
-    await user.click(screen.getByLabelText("Collapse navigation"));
-
     const navGroupHeader = screen.getByDataCy("nav-group-header");
     expect(within(navGroupHeader).getByText("4")).toBeInTheDocument();
-  });
-
-  it("deleting filters should modify the URL correctly", async () => {
-    const { history } = render(<FiltersDrawer />, {
-      route: "?filters=filter1,filter2",
-    });
-    await user.click(screen.getByLabelText("Collapse navigation"));
-
-    // Delete the first filter.
-    await user.click(screen.getAllByLabelText("Delete filter button")[0]);
-    expect(history.location.search).toBe("?filters=filter2");
-    expect(screen.queryByText("filter1")).not.toBeInTheDocument();
-    expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 
   it("editing filters should modify the URL correctly", async () => {
     const { history } = render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
-    await user.click(screen.getByLabelText("Collapse navigation"));
-
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter button")[0]);
     await user.type(screen.getAllByDataCy("edit-filter-name")[0], "newFilter");
@@ -73,7 +85,6 @@ describe("filtersOverlay", () => {
     const { history } = render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
-    await user.click(screen.getByLabelText("Collapse navigation"));
 
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter button")[0]);
@@ -92,7 +103,6 @@ describe("filtersOverlay", () => {
     const { history } = render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
-    await user.click(screen.getByLabelText("Collapse navigation"));
 
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter button")[0]);
@@ -104,6 +114,17 @@ describe("filtersOverlay", () => {
 
     expect(history.location.search).toBe("?filters=filter1,filter2");
     expect(screen.getByText("filter1")).toBeInTheDocument();
+    expect(screen.getByText("filter2")).toBeInTheDocument();
+  });
+
+  it("deleting filters should modify the URL correctly", async () => {
+    const { history } = render(<FiltersDrawer />, {
+      route: "?filters=filter1,filter2",
+    });
+    // Delete the first filter.
+    await user.click(screen.getAllByLabelText("Delete filter button")[0]);
+    expect(history.location.search).toBe("?filters=filter2");
+    expect(screen.queryByText("filter1")).not.toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 });

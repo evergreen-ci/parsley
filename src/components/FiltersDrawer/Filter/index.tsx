@@ -63,12 +63,6 @@ const Filter: React.FC<FilterProps> = ({
             <Icon fill={gray.base} glyph="Edit" />
           </IconButton>
           <IconButton
-            aria-label="Delete filter button"
-            onClick={() => deleteFilter(filterName)}
-          >
-            <Icon fill={gray.base} glyph="X" />
-          </IconButton>
-          <IconButton
             aria-label="Visibility filter button"
             onClick={() => setIsVisible(!isVisible)}
           >
@@ -76,6 +70,12 @@ const Filter: React.FC<FilterProps> = ({
               fill={gray.base}
               glyph={isVisible ? "Visibility" : "ClosedEye"}
             />
+          </IconButton>
+          <IconButton
+            aria-label="Delete filter button"
+            onClick={() => deleteFilter(filterName)}
+          >
+            <Icon fill={gray.base} glyph="X" />
           </IconButton>
         </FilterIcons>
       </FilterLabel>
@@ -115,6 +115,7 @@ const Filter: React.FC<FilterProps> = ({
       <StyledSegmentedControl
         aria-controls="case-sensitivity"
         defaultValue={caseSensitivity}
+        label="Case"
         onChange={setCaseSensitivity}
         size="small"
       >
@@ -125,10 +126,11 @@ const Filter: React.FC<FilterProps> = ({
       <StyledSegmentedControl
         aria-controls="match-type"
         defaultValue={matchType}
+        label="Match"
         onChange={setMatchType}
         size="small"
       >
-        <Option value={MatchType.Exact}>Match</Option>
+        <Option value={MatchType.Exact}>Exact</Option>
         <Option value={MatchType.Inverse}>Inverse</Option>
       </StyledSegmentedControl>
     </FilterRow>
@@ -148,6 +150,7 @@ const FilterLabel = styled.div`
 
 const FilterIcons = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const StyledTextInput = styled(TextInput)`
@@ -161,7 +164,7 @@ const ButtonWrapper = styled.div`
 
   margin-top: ${size.xxs};
   margin-bottom: ${size.xs};
-  > button {
+  button {
     margin-left: ${size.xxs};
   }
 `;
@@ -177,6 +180,12 @@ const FilterName = styled(Body)`
 
 const StyledSegmentedControl = styled(SegmentedControl)`
   margin-bottom: ${size.xs};
+  padding-left: ${size.xxs};
+
+  // Set the labels to have the same width so that the controls are aligned.
+  > div:first-of-type {
+    width: 52px;
+  }
 `;
 
 export default Filter;
