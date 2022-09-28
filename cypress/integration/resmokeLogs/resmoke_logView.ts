@@ -1,21 +1,17 @@
 describe("Basic resmoke log view", () => {
   before(() => {
-    cy.visit("/resmoke/build_0/test_0");
+    cy.login();
+    cy.visit(
+      "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab"
+    );
   });
 
-  it("should be able to see log lines", () => {
-    cy.dataCy("log-row-0").should("be.visible");
-  });
   it("should render resmoke lines", () => {
     cy.dataCy("resmoke-row").should("be.visible");
   });
   it("by default should have wrapping turned off and should be able to scroll horizontally", () => {
-    cy.dataCy("log-row-2").should("be.visible");
-    cy.dataCy("log-row-2").should(
-      "contain.text",
-      "disableLogicalSessionCacheRefresh"
-    );
-    cy.dataCy("log-row-2").isNotContainedInViewport();
+    cy.dataCy("log-row-16").should("be.visible");
+    cy.dataCy("log-row-16").isNotContainedInViewport();
     cy.get(".ReactVirtualized__Grid__innerScrollContainer").should(
       "have.css",
       "overflow",
@@ -28,44 +24,42 @@ describe("Basic resmoke log view", () => {
     cy.dataCy("wrap-toggle").click();
     cy.dataCy("details-button").click();
 
-    cy.dataCy("log-row-2").should("be.visible");
-    cy.dataCy("log-row-2").should(
-      "contain.text",
-      "disableLogicalSessionCacheRefresh"
-    );
-    cy.dataCy("log-row-2").isContainedInViewport();
+    cy.dataCy("log-row-16").should("be.visible");
+    cy.dataCy("log-row-16").isContainedInViewport();
   });
 });
 
 describe("Bookmarking and selecting lines", () => {
   before(() => {
-    cy.visit("/resmoke/build_0/test_0");
+    cy.visit(
+      "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab"
+    );
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
-    cy.location("search").should("equal", "?bookmarks=0,7");
+    cy.location("search").should("equal", "?bookmarks=0,11080");
     cy.dataCy("log-line-container").should("contain", "0");
-    cy.dataCy("log-line-container").should("contain", "7");
+    cy.dataCy("log-line-container").should("contain", "11080");
   });
 
   it("should be able to bookmark and unbookmark log lines", () => {
     cy.dataCy("log-row-4").dblclick();
-    cy.location("search").should("equal", "?bookmarks=0,4,7");
+    cy.location("search").should("equal", "?bookmarks=0,4,11080");
     cy.dataCy("log-line-container").should("contain", "0");
     cy.dataCy("log-line-container").should("contain", "4");
-    cy.dataCy("log-line-container").should("contain", "7");
+    cy.dataCy("log-line-container").should("contain", "11080");
 
-    cy.dataCy("log-row-7").dblclick();
-    cy.dataCy("log-line-container").should("not.contain", "7");
+    cy.dataCy("log-row-4").dblclick();
+    cy.dataCy("log-line-container").should("not.contain", "4");
   });
 
   it("should be able to select and unselect lines", () => {
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,4&selectedLine=5");
+    cy.location("search").should("equal", "?bookmarks=0,11080&selectedLine=5");
     cy.dataCy("log-line-container").should("contain", "5");
 
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,4");
+    cy.location("search").should("equal", "?bookmarks=0,11080");
     cy.dataCy("log-line-container").should("not.contain", "5");
   });
 
@@ -81,19 +75,17 @@ describe("Filtering", () => {
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("starting{enter}");
 
-    cy.dataCy("log-row-0").should("be.visible");
-    cy.dataCy("log-row-1").should("be.visible");
-    cy.dataCy("log-row-2").should("not.exist");
-    cy.dataCy("log-row-3").should("not.exist");
-    cy.dataCy("log-row-4").should("be.visible");
-    cy.dataCy("log-row-5").should("not.exist");
-    cy.dataCy("log-row-6").should("not.exist");
-    cy.dataCy("log-row-7").should("be.visible");
+    cy.get("[data-cy^='log-row-']").each(($el) => {
+      cy.wrap($el).contains("starting", { matchCase: false });
+    });
   });
 
   it("should respect applied filters and selected lines", () => {
     // TODO EVG-17908: Instead of revisiting the page, delete the filters from the drawer.
-    cy.visit("/evergreen/task_0/0/tasks");
+    cy.login();
+    cy.visit(
+      "http://localhost:4173/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab"
+    );
 
     // Select a line, with the expectation that it won't be collapsed by the filter.
     cy.dataCy("log-link-5").click();
@@ -104,13 +96,11 @@ describe("Filtering", () => {
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("notarealfilter{enter}");
 
-    cy.dataCy("log-row-0").should("be.visible");
-    cy.dataCy("log-row-1").should("not.exist");
-    cy.dataCy("log-row-2").should("not.exist");
-    cy.dataCy("log-row-3").should("not.exist");
-    cy.dataCy("log-row-4").should("not.exist");
-    cy.dataCy("log-row-5").should("be.visible");
-    cy.dataCy("log-row-6").should("be.visible");
-    cy.dataCy("log-row-7").should("be.visible");
+    cy.get("[data-cy^='log-row-']").each(($el) => {
+      // Matched elements should be one of the bookmarked or selected values
+      cy.wrap($el)
+        .should("have.attr", "data-cy")
+        .and("match", /log-row-(0|5|6|11080)/);
+    });
   });
 });

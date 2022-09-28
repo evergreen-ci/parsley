@@ -105,16 +105,12 @@ const StyledPre = styled.pre<{
   margin-bottom: 0;
   margin-right: ${size.xs};
   font-size: ${fontSize.m};
-  word-break: break-all;
+  width: unset !important;
   ${({ shouldWrap }) =>
-    shouldWrap
-      ? `
+    shouldWrap &&
+    `
   /* wrap multiple lines */
   white-space: break-spaces;
-  `
-      : `
-      /* override react-virtualized's width */
-      width: unset !important;
   `}
 
   ${({ selected }) => selected && `background-color: ${red.light2};`}
