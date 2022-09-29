@@ -1,18 +1,14 @@
 import { useReducer } from "react";
 import { LogTypes } from "constants/enums";
 import { processResmokeLine } from "utils/resmoke";
+import { DIRECTION, SearchState } from "./types";
 
-interface searchState {
-  searchTerm?: RegExp;
-  searchIndex?: number;
-  searchRange?: number;
-}
 interface LogState {
   logs: string[];
   fileName?: string;
   logType?: LogTypes;
   lineNumber?: number;
-  searchState: searchState;
+  searchState: SearchState;
 }
 
 type Action =
@@ -20,11 +16,17 @@ type Action =
   | { type: "CLEAR_LOGS" }
   | { type: "SET_FILE_NAME"; fileName: string }
   | { type: "SET_SEARCH_TERM"; searchTerm: string; caseSensitive: boolean }
-  | { type: "SCROLL_TO_LINE"; lineNumber: number };
+  | { type: "SCROLL_TO_LINE"; lineNumber: number }
+  | { type: "SET_MATCH_COUNT"; matchCount: number }
+  | { type: "PAGINATE"; direction: DIRECTION };
 
 const initialState = (initialLogLines?: string[]): LogState => ({
   logs: initialLogLines || [],
-  searchState: {},
+  searchState: {
+    searchIndex: 0,
+    searchRange: 0,
+    hasSearch: false,
+  },
 });
 
 const reducer = (state: LogState, action: Action): LogState => {
@@ -57,6 +59,7 @@ const reducer = (state: LogState, action: Action): LogState => {
         fileName: action.fileName,
       };
     case "SET_SEARCH_TERM": {
+      const hasSearch = !!action.searchTerm;
       const searchTerm = new RegExp(
         action.searchTerm,
         action.caseSensitive ? "g" : "gi"
@@ -64,9 +67,41 @@ const reducer = (state: LogState, action: Action): LogState => {
       return {
         ...state,
         searchState: {
-          searchTerm: action.searchTerm.length ? searchTerm : undefined,
+          searchTerm: hasSearch ? searchTerm : undefined,
           searchIndex: 0,
           searchRange: 0,
+          hasSearch,
+        },
+      };
+    }
+    case "SET_MATCH_COUNT":
+      return {
+        ...state,
+        searchState: {
+          ...state.searchState,
+          searchRange: action.matchCount,
+          searchIndex: 0,
+        },
+      };
+    case "PAGINATE": {
+      const { searchIndex, searchRange } = state.searchState;
+      let nextPage = searchIndex;
+      if (action.direction === DIRECTION.NEXT) {
+        if (searchIndex + 1 < searchRange) {
+          nextPage += 1;
+        } else {
+          nextPage = 0;
+        }
+      } else if (searchIndex - 1 < 0) {
+        nextPage = searchRange;
+      } else {
+        nextPage -= 1;
+      }
+      return {
+        ...state,
+        searchState: {
+          ...state.searchState,
+          searchIndex: nextPage,
         },
       };
     }

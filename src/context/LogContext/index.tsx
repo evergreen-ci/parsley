@@ -12,22 +12,22 @@ import { ProcessedLogLines } from "types/logs";
 import { filterLogs } from "utils/filter";
 import { searchLogs } from "utils/searchLogs";
 import useLogState from "./state";
+import { DIRECTION, SearchState } from "./types";
 
 interface LogContextState {
   fileName?: string;
   hasLogs: boolean;
-  hasSearch: boolean;
   lineCount: number;
-  matchingSearchCount: number;
   processedLogLines: ProcessedLogLines;
-  search?: RegExp;
   selectedLine?: number;
+  searchState: SearchState;
   clearLogs: () => void;
   getLine: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
   scrollToLine: (lineNumber: number) => void;
   setFileName: (fileName: string) => void;
   setSearch: (search: string) => void;
+  paginate: (dir: DIRECTION) => void;
 }
 const LogContext = createContext<LogContextState | null>(null);
 
@@ -66,7 +66,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const getLine = useCallback(
     (lineNumber: number) => state.logs[lineNumber],
-    [state.logs]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [state.logs.length]
   );
 
   const scrollToLine = useCallback(
@@ -86,7 +87,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   // TODO EVG-17537: more advanced filtering
   const processedLogLines = useMemo(
     () => filterLogs(state.logs, filters, bookmarks, selectedLine, filterLogic),
-    [state.logs, filters, bookmarks, selectedLine, filterLogic]
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [state.logs.length, `${filters}`, `${bookmarks}`, selectedLine, filterLogic]
   );
 
   const searchResults = useMemo(
@@ -112,15 +114,21 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     ]
   );
 
+  useEffect(() => {
+    dispatch({
+      type: "SET_MATCH_COUNT",
+      matchCount: searchResults.length,
+    });
+  }, [dispatch, searchResults.length, state.searchState.searchTerm]);
+
   const memoizedContext = useMemo(
     () => ({
       fileName: state.fileName,
-      hasLogs: state.logs.length > 0,
       hasSearch: !!state.searchState.searchTerm,
       lineCount: state.logs.length,
-      matchingSearchCount: searchResults.length,
       processedLogLines,
-      search: state.searchState.searchTerm,
+      searchState: state.searchState,
+      hasLogs: !!state.logs.length,
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       getLine,
       ingestLines: (lines: string[], logType: LogTypes) => {
@@ -133,13 +141,15 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         dispatch({ type: "SET_SEARCH_TERM", searchTerm, caseSensitive });
       },
       scrollToLine,
+      paginate: (direction: DIRECTION) => {
+        dispatch({ type: "PAGINATE", direction });
+      },
     }),
     [
-      state.logs.length,
       state.fileName,
-      state.searchState?.searchTerm,
+      state.searchState,
+      state.logs.length,
       processedLogLines,
-      searchResults.length,
       getLine,
       scrollToLine,
       dispatch,

@@ -12,6 +12,7 @@ import { StyledLink } from "components/styles";
 import { QueryParams } from "constants/queryParams";
 import { navbarHeight, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
+import { DIRECTION } from "context/LogContext/types";
 import { useQueryParam } from "hooks/useQueryParam";
 import { validateRegexp } from "utils/validators";
 import SearchCount from "./SearchCount";
@@ -24,15 +25,10 @@ const NavBar: React.FC = () => {
     QueryParams.Filters,
     []
   );
-  const {
-    hasLogs,
-    clearLogs,
-    setSearch,
-    hasSearch,
-    matchingSearchCount,
-    selectedLine,
-  } = useLogContext();
+  const { hasLogs, clearLogs, setSearch, searchState, paginate } =
+    useLogContext();
 
+  const { hasSearch, searchRange, searchIndex } = searchState;
   const handleSearch = (selected: string, value: string) => {
     if (selected === "search") {
       setSearch(value);
@@ -64,14 +60,21 @@ const NavBar: React.FC = () => {
         {hasSearch && (
           <>
             <SearchCount
-              currentSearchIndex={selectedLine}
-              matchingSearchCount={matchingSearchCount}
+              currentSearchIndex={searchIndex + 1}
+              matchingSearchCount={searchRange}
             />
 
-            {matchingSearchCount > 0 && (
+            {searchRange > 0 && (
               <>
-                <Button size="small">Prev</Button>
-                <Button size="small">Next</Button>
+                <Button
+                  onClick={() => paginate(DIRECTION.PREVIOUS)}
+                  size="small"
+                >
+                  Prev
+                </Button>
+                <Button onClick={() => paginate(DIRECTION.NEXT)} size="small">
+                  Next
+                </Button>
               </>
             )}
           </>

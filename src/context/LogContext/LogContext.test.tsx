@@ -214,8 +214,8 @@ describe("useLogContext", () => {
       const { result } = renderHook(() => useLogContext(), { wrapper });
       expect(result.current.lineCount).toBe(3);
       expect(result.current.processedLogLines).toHaveLength(3);
-      expect(result.current.matchingSearchCount).toBe(0);
-      expect(result.current.hasSearch).toBe(false);
+      expect(result.current.searchState.searchRange).toBe(0);
+      expect(result.current.searchState.hasSearch).toBe(false);
     });
     it("should return the correct number of matching searches", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -235,8 +235,8 @@ describe("useLogContext", () => {
       act(() => {
         result.current.setSearch("A line");
       });
-      expect(result.current.matchingSearchCount).toBe(1);
-      expect(result.current.hasSearch).toBe(true);
+      expect(result.current.searchState.searchRange).toBe(1);
+      expect(result.current.searchState.hasSearch).toBe(true);
     });
     it("should allow regex searches", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -256,8 +256,8 @@ describe("useLogContext", () => {
       act(() => {
         result.current.setSearch("[a-b] line");
       });
-      expect(result.current.matchingSearchCount).toBe(2);
-      expect(result.current.hasSearch).toBe(true);
+      expect(result.current.searchState.searchRange).toBe(2);
+      expect(result.current.searchState.hasSearch).toBe(true);
     });
     it("should allow case insensitive searches", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -277,8 +277,8 @@ describe("useLogContext", () => {
       act(() => {
         result.current.setSearch("a line");
       });
-      expect(result.current.matchingSearchCount).toBe(1);
-      expect(result.current.hasSearch).toBe(true);
+      expect(result.current.searchState.searchRange).toBe(1);
+      expect(result.current.searchState.hasSearch).toBe(true);
     });
     it("should allow case sensitive searches", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -298,8 +298,8 @@ describe("useLogContext", () => {
       act(() => {
         result.current.setSearch("a line");
       });
-      expect(result.current.matchingSearchCount).toBe(0);
-      expect(result.current.hasSearch).toBe(true);
+      expect(result.current.searchState.searchRange).toBe(0);
+      expect(result.current.searchState.hasSearch).toBe(true);
     });
     it("should only search non filtered out lines", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -319,11 +319,11 @@ describe("useLogContext", () => {
       act(() => {
         result.current.setSearch("A line");
       });
-      expect(result.current.matchingSearchCount).toBe(1);
+      expect(result.current.searchState.searchRange).toBe(1);
       act(() => {
         result.current.setSearch("B line");
       });
-      expect(result.current.matchingSearchCount).toBe(0);
+      expect(result.current.searchState.searchRange).toBe(0);
     });
     it("should only search within our bounds", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -343,7 +343,7 @@ describe("useLogContext", () => {
       act(() => {
         result.current.setSearch("line");
       });
-      expect(result.current.matchingSearchCount).toBe(2);
+      expect(result.current.searchState.searchRange).toBe(2);
     });
   });
 });
