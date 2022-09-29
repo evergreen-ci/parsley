@@ -1,5 +1,9 @@
 import { fail } from "assert";
 
+const user = {
+  username: "admin",
+  password: "password",
+};
 const toastDataCy = "toast";
 
 Cypress.Commands.add("dataCy", (value: string) => {
@@ -62,6 +66,19 @@ Cypress.Commands.add("getInputByLabel", (label: string) => {
     .then((id) => {
       cy.get(`#${id}`);
     });
+});
+
+Cypress.Commands.add("login", () => {
+  const args = { ...user };
+  cy.session(
+    // Username & password can be used as the cache key too
+    args,
+    () => {
+      cy.origin("http://localhost:9090", { args }, ({ username, password }) => {
+        cy.request("POST", "/login", { username, password });
+      });
+    }
+  );
 });
 
 Cypress.Commands.add("toggleNavBar", () => {
