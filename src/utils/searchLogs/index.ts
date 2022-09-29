@@ -1,8 +1,7 @@
 import { ProcessedLogLines } from "types/logs";
 
 interface searchOptions {
-  search: string;
-  caseSensitive: boolean;
+  searchRegex: RegExp;
   upperBound?: number;
   lowerBound: number;
   getLine: (lineNumber: number) => string;
@@ -10,17 +9,10 @@ interface searchOptions {
 }
 
 export const searchLogs = (options: searchOptions): number[] => {
-  const {
-    search,
-    caseSensitive,
-    upperBound,
-    lowerBound,
-    getLine,
-    processedLogLines,
-  } = options;
+  const { searchRegex, upperBound, lowerBound, getLine, processedLogLines } =
+    options;
   const matchingIndices = [];
-  const searchRegex = new RegExp(search, caseSensitive ? "" : "i");
-
+  console.time("searchLogs");
   for (let i = 0; i < processedLogLines.length; i++) {
     const lineIndex = processedLogLines[i];
     if (!Array.isArray(lineIndex)) {
@@ -37,5 +29,6 @@ export const searchLogs = (options: searchOptions): number[] => {
       }
     }
   }
+  console.timeEnd("searchLogs");
   return matchingIndices;
 };
