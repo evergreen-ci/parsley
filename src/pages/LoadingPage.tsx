@@ -1,5 +1,8 @@
 import { useEffect } from "react";
+import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
+import Icon from "components/Icon";
+import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
 import {
   getEvergreenTaskLogURL,
@@ -7,9 +10,11 @@ import {
   getResmokeLogURL,
 } from "constants/logURLTemplates";
 import { slugs } from "constants/routes";
+import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import { useAxiosGet } from "hooks";
+import LoadingBar from "./LoadingPage/LoadingBar";
 
 interface LoadingPageProps {
   onLoad: () => void;
@@ -55,7 +60,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
       break;
   }
 
-  const { data, error } = useAxiosGet(url);
+  const { data, error, isLoading } = useAxiosGet(url);
   useEffect(() => {
     if (data) {
       ingestLines(data.split("\n"), logType);
@@ -65,7 +70,39 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
       dispatchToast.error(error);
     }
   }, [data, ingestLines, error, onLoad, logType, dispatchToast]);
-  return <div>I am the loading page</div>;
+  return (
+    <StyledPageLayout>
+      {isLoading || !error ? (
+        <LoadingBarContainer>
+          <LogoContainer>
+            <Icon glyph="LobsterLogo" />
+            Loading Lobster...
+          </LogoContainer>
+          <LoadingBar indeterminate progress={100} />
+        </LoadingBarContainer>
+      ) : (
+        <div>404 here</div>
+      )}
+    </StyledPageLayout>
+  );
 };
 
+const LoadingBarContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 40%;
+`;
+
+const LogoContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin-bottom: ${size.xs};
+`;
+const StyledPageLayout = styled(PageLayout)`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
 export default LoadingPage;
