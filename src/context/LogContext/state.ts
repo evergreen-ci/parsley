@@ -2,12 +2,17 @@ import { useReducer } from "react";
 import { LogTypes } from "constants/enums";
 import { processResmokeLine } from "utils/resmoke";
 
+interface searchState {
+  searchTerm?: RegExp;
+  searchIndex?: number;
+  searchRange?: number;
+}
 interface LogState {
   logs: string[];
   fileName?: string;
   logType?: LogTypes;
-  searchTerm?: RegExp;
   lineNumber?: number;
+  searchState: searchState;
 }
 
 type Action =
@@ -19,6 +24,7 @@ type Action =
 
 const initialState = (initialLogLines?: string[]): LogState => ({
   logs: initialLogLines || [],
+  searchState: {},
 });
 
 const reducer = (state: LogState, action: Action): LogState => {
@@ -57,7 +63,11 @@ const reducer = (state: LogState, action: Action): LogState => {
       );
       return {
         ...state,
-        searchTerm: action.searchTerm.length ? searchTerm : undefined,
+        searchState: {
+          searchTerm: action.searchTerm.length ? searchTerm : undefined,
+          searchIndex: 0,
+          searchRange: 0,
+        },
       };
     }
     case "SCROLL_TO_LINE":

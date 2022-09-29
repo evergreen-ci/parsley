@@ -94,27 +94,33 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       // search through processedLoglines
       // return the line number of the first match
       // if no match, return undefined
-      state.searchTerm
+      state.searchState.searchTerm
         ? searchLogs({
-            searchRegex: state.searchTerm,
+            searchRegex: state.searchState.searchTerm,
             processedLogLines,
             upperBound: upperRange,
             lowerBound: lowerRange,
             getLine,
           })
         : [],
-    [state.searchTerm, upperRange, lowerRange, processedLogLines, getLine]
+    [
+      state.searchState.searchTerm,
+      upperRange,
+      lowerRange,
+      processedLogLines,
+      getLine,
+    ]
   );
 
   const memoizedContext = useMemo(
     () => ({
       fileName: state.fileName,
       hasLogs: state.logs.length > 0,
-      hasSearch: !!state.searchTerm,
+      hasSearch: !!state.searchState.searchTerm,
       lineCount: state.logs.length,
       matchingSearchCount: searchResults.length,
       processedLogLines,
-      search: state.searchTerm,
+      search: state.searchState.searchTerm,
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       getLine,
       ingestLines: (lines: string[], logType: LogTypes) => {
@@ -131,7 +137,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [
       state.logs.length,
       state.fileName,
-      state.searchTerm,
+      state.searchState?.searchTerm,
       processedLogLines,
       searchResults.length,
       getLine,
