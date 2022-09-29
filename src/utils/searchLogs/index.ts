@@ -12,7 +12,6 @@ export const searchLogs = (options: searchOptions): number[] => {
   const { searchRegex, upperBound, lowerBound, getLine, processedLogLines } =
     options;
   const matchingIndices = [];
-  console.time("searchLogs");
   for (let i = 0; i < processedLogLines.length; i++) {
     const lineIndex = processedLogLines[i];
     if (!Array.isArray(lineIndex)) {
@@ -29,6 +28,5 @@ export const searchLogs = (options: searchOptions): number[] => {
       }
     }
   }
-  console.timeEnd("searchLogs");
   return matchingIndices;
 };
