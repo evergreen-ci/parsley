@@ -9,6 +9,7 @@ import {
 } from "react-router-dom";
 import { LogTypes } from "constants/enums";
 import { LogContextProvider, useLogContext } from ".";
+import { DIRECTION } from "./types";
 
 const Router = ({
   children,
@@ -344,6 +345,86 @@ describe("useLogContext", () => {
         result.current.setSearch("line");
       });
       expect(result.current.searchState.searchRange).toBe(2);
+    });
+  });
+  describe("pagination", () => {
+    it("should reset search index to 0 when a new search is applied", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+      expect(result.current.processedLogLines).toHaveLength(3);
+      act(() => {
+        result.current.setSearch("line");
+      });
+      expect(result.current.searchState.hasSearch).toBe(true);
+      expect(result.current.searchState.searchRange).toBe(2);
+      expect(result.current.searchState.searchIndex).toBe(0);
+    });
+    it("paginating should increment and decrement the search index", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+      expect(result.current.processedLogLines).toHaveLength(3);
+      act(() => {
+        result.current.setSearch("line");
+      });
+      expect(result.current.searchState.searchIndex).toBe(0);
+      act(() => {
+        result.current.paginate(DIRECTION.NEXT);
+      });
+      expect(result.current.searchState.searchIndex).toBe(1);
+      act(() => {
+        result.current.paginate(DIRECTION.PREVIOUS);
+      });
+      expect(result.current.searchState.searchIndex).toBe(0);
+    });
+    it("paginating past the searchRange should jump to the opposite end", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.lineCount).toBe(3);
+      expect(result.current.processedLogLines).toHaveLength(3);
+      act(() => {
+        result.current.setSearch("line");
+      });
+      expect(result.current.searchState.searchIndex).toBe(0);
+      act(() => {
+        result.current.paginate(DIRECTION.PREVIOUS);
+      });
+      expect(result.current.searchState.searchIndex).toBe(2);
+      act(() => {
+        result.current.paginate(DIRECTION.NEXT);
+      });
+      expect(result.current.searchState.searchIndex).toBe(0);
     });
   });
 });
