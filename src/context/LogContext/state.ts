@@ -6,7 +6,7 @@ interface LogState {
   logs: string[];
   fileName?: string;
   logType?: LogTypes;
-  search?: string;
+  searchTerm?: RegExp;
   lineNumber?: number;
 }
 
@@ -14,7 +14,7 @@ type Action =
   | { type: "INGEST_LOGS"; logs: string[]; logType: LogTypes }
   | { type: "CLEAR_LOGS" }
   | { type: "SET_FILE_NAME"; fileName: string }
-  | { type: "SET_SEARCH"; search: string }
+  | { type: "SET_SEARCH_TERM"; searchTerm: string; caseSensitive: boolean }
   | { type: "SCROLL_TO_LINE"; lineNumber: number };
 
 const initialState = (initialLogLines?: string[]): LogState => ({
@@ -50,18 +50,23 @@ const reducer = (state: LogState, action: Action): LogState => {
         ...state,
         fileName: action.fileName,
       };
-    case "SET_SEARCH":
+    case "SET_SEARCH_TERM": {
+      const searchTerm = new RegExp(
+        action.searchTerm,
+        action.caseSensitive ? "g" : "gi"
+      );
       return {
         ...state,
-        search: action.search.length ? action.search : undefined,
+        searchTerm: action.searchTerm.length ? searchTerm : undefined,
       };
+    }
     case "SCROLL_TO_LINE":
       return {
         ...state,
         lineNumber: action.lineNumber,
       };
     default:
-      throw new Error(`Unkown reducer action ${action}`);
+      throw new Error(`Unknown reducer action ${action}`);
   }
 };
 

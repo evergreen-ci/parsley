@@ -10,7 +10,7 @@ import { FilterLogic, QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
 import { ProcessedLogLines } from "types/logs";
 import { filterLogs } from "utils/filter";
-import { searchLogs } from "utils/search";
+import { searchLogs } from "utils/searchLogs";
 import useLogState from "./state";
 
 interface LogContextState {
@@ -20,7 +20,7 @@ interface LogContextState {
   lineCount: number;
   matchingSearchCount: number;
   processedLogLines: ProcessedLogLines;
-  search?: string;
+  search?: RegExp;
   selectedLine?: number;
   clearLogs: () => void;
   getLine: (lineNumber: number) => string | undefined;
@@ -94,35 +94,27 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       // search through processedLoglines
       // return the line number of the first match
       // if no match, return undefined
-      state.search
+      state.searchTerm
         ? searchLogs({
-            search: state.search,
+            searchRegex: state.searchTerm,
             processedLogLines,
-            caseSensitive,
             upperBound: upperRange,
             lowerBound: lowerRange,
             getLine,
           })
         : [],
-    [
-      state.search,
-      caseSensitive,
-      upperRange,
-      lowerRange,
-      processedLogLines,
-      getLine,
-    ]
+    [state.searchTerm, upperRange, lowerRange, processedLogLines, getLine]
   );
 
   const memoizedContext = useMemo(
     () => ({
       fileName: state.fileName,
       hasLogs: state.logs.length > 0,
-      hasSearch: !!state.search,
+      hasSearch: !!state.searchTerm,
       lineCount: state.logs.length,
       matchingSearchCount: searchResults.length,
       processedLogLines,
-      search: state.search,
+      search: state.searchTerm,
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       getLine,
       ingestLines: (lines: string[], logType: LogTypes) => {
@@ -131,20 +123,21 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       setFileName: (fileName: string) => {
         dispatch({ type: "SET_FILE_NAME", fileName });
       },
-      setSearch: (search: string) => {
-        dispatch({ type: "SET_SEARCH", search });
+      setSearch: (searchTerm: string) => {
+        dispatch({ type: "SET_SEARCH_TERM", searchTerm, caseSensitive });
       },
       scrollToLine,
     }),
     [
       state.logs.length,
       state.fileName,
-      state.search,
+      state.searchTerm,
       processedLogLines,
       searchResults.length,
       getLine,
       scrollToLine,
       dispatch,
+      caseSensitive,
     ]
   );
 
