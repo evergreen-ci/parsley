@@ -2,7 +2,7 @@
  * @example s12345
  * @example d54321
  */
-const portRegex = / ([sdbc]\d{1,5})\|/;
+const portRegex = / ([shdbc]+\d{1,5})\|/;
 
 /** `getPort` returns the port associated with a resmoke line */
 const getPort = (line: string) => {

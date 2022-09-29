@@ -37,6 +37,11 @@ declare global {
         message?: string,
         shouldClose?: boolean
       ): void;
+      /**
+       * Custom command to login to the application
+       * @example cy.login()
+       */
+      login(): void;
     }
   }
 }
