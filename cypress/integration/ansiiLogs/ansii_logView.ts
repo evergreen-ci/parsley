@@ -113,9 +113,16 @@ describe("Filtering", () => {
   });
 
   it("should be able to edit filters", () => {
+    // Clear selected line and bookmarks.
+    cy.dataCy("log-link-5").click();
+    cy.dataCy("clear-bookmarks").click();
+
     cy.get(`[aria-label="Edit filter button"]`).click();
-    cy.dataCy("edit-filter-name").type("js_test");
+    cy.dataCy("edit-filter-name").type("running");
     cy.contains("button", "OK").click();
-    cy.dataCy("log-row-0").should("be.visible");
+
+    cy.get("[data-cy^='log-row-']").each(($el) => {
+      cy.wrap($el).contains("running", { matchCase: false });
+    });
   });
 });
