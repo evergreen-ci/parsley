@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
-import Icon from "components/Icon";
 import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
 import {
@@ -74,10 +73,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
     <StyledPageLayout>
       {isLoading || !error ? (
         <LoadingBarContainer>
-          <LogoContainer>
-            <Icon glyph="LobsterLogo" />
-            Loading Lobster...
-          </LogoContainer>
+          <LogoContainer>🌿 Loading Lobster...</LogoContainer>
           <LoadingBar indeterminate progress={100} />
         </LoadingBarContainer>
       ) : (

@@ -2,7 +2,7 @@ import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { size } from "constants/tokens";
 
-const { red, gray } = palette;
+const { gray, green } = palette;
 interface LoadingBarProps {
   progress: number;
   indeterminate: boolean;
@@ -28,7 +28,7 @@ const Container = styled.div`
 const Bar = styled.div<{ progress: number }>`
   width: ${({ progress }) => progress}%;
   height: 100%;
-  background-color: ${red.base};
+  background-color: ${green.base};
   /* border radius left */
   border-top-left-radius: ${size.xs};
   border-bottom-left-radius: ${size.xs};
@@ -44,16 +44,16 @@ const Bar = styled.div<{ progress: number }>`
   animation: glowing 1.5s linear infinite;
   @keyframes glowing {
     0% {
-      background-color: ${red.base};
-      box-shadow: 0 0 5px ${red.base};
+      background-color: ${green.dark2};
+      box-shadow: 0 0 5px ${green.dark2};
     }
     50% {
-      background-color: ${red.light1};
-      box-shadow: 0 0 5px ${red.light1};
+      background-color: ${green.base};
+      box-shadow: 0 0 10px ${green.base};
     }
     100% {
-      background-color: ${red.base};
-      box-shadow: 0 0 5px ${red.base};
+      background-color: ${green.dark2};
+      box-shadow: 0 0 5px ${green.dark2};
     }
   }
 `;
