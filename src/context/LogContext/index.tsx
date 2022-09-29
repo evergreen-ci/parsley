@@ -1,4 +1,4 @@
-import {
+import React, {
   createContext,
   useCallback,
   useContext,
@@ -61,7 +61,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     undefined
   );
   const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
-
   const { state, dispatch } = useLogState(initialLogLines);
 
   const getLine = useCallback(
@@ -76,13 +75,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     },
     [dispatch]
   );
-
-  useEffect(() => {
-    if (selectedLine) {
-      scrollToLine(selectedLine);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.logs.length > 0, selectedLine]);
 
   // TODO EVG-17537: more advanced filtering
   const processedLogLines = useMemo(
@@ -121,6 +113,19 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     });
   }, [dispatch, searchResults.length, state.searchState.searchTerm]);
 
+  useEffect(() => {
+    if (selectedLine) {
+      scrollToLine(selectedLine);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state.logs.length > 0, selectedLine]);
+
+  useEffect(() => {
+    if (state.searchState.searchIndex) {
+      scrollToLine(searchResults[state.searchState.searchIndex]);
+    }
+  }, [scrollToLine, searchResults, state.searchState.searchIndex]);
+
   const memoizedContext = useMemo(
     () => ({
       fileName: state.fileName,
@@ -129,6 +134,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       processedLogLines,
       searchState: state.searchState,
       hasLogs: !!state.logs.length,
+      selectedLine: state.lineNumber,
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       getLine,
       ingestLines: (lines: string[], logType: LogTypes) => {
@@ -149,6 +155,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       state.fileName,
       state.searchState,
       state.logs.length,
+      state.lineNumber,
       processedLogLines,
       getLine,
       scrollToLine,
