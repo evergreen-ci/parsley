@@ -21,7 +21,6 @@ const Container = styled.div`
   height: ${size.s};
   border-radius: ${size.xs};
   background-color: ${gray.light2};
-  border: 1px solid ${gray.base};
   width: 100%;
 `;
 
