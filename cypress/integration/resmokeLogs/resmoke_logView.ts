@@ -86,7 +86,7 @@ describe("Filtering", () => {
   it("should preserve applied bookmarks and selected lines even if they don't match the filters", () => {
     // Delete the filters from the drawer.
     cy.toggleNavBar();
-    cy.get(`[aria-label="Delete filter button"]`).click();
+    cy.get(`[aria-label="Delete filter"]`).click();
 
     // Select a line, with the expectation that it won't be collapsed by the filter.
     cy.dataCy("log-link-5").click();
@@ -110,7 +110,7 @@ describe("Filtering", () => {
     cy.dataCy("log-link-5").click();
     cy.dataCy("clear-bookmarks").click();
 
-    cy.get(`[aria-label="Edit filter button"]`).click();
+    cy.get(`[aria-label="Edit filter"]`).click();
     cy.dataCy("edit-filter-name").type("running");
     cy.contains("button", "OK").click();
 
