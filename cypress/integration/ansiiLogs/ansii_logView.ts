@@ -118,7 +118,7 @@ describe("Filtering", () => {
     cy.dataCy("clear-bookmarks").click();
 
     cy.get(`[aria-label="Edit filter"]`).click();
-    cy.dataCy("edit-filter-name").type("running");
+    cy.dataCy("edit-filter-name").clear().type("running");
     cy.contains("button", "OK").click();
 
     cy.get("[data-cy^='log-row-']").each(($el) => {
