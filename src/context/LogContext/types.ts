@@ -1,7 +1,7 @@
 interface SearchState {
   searchTerm?: RegExp;
-  searchIndex: number;
-  searchRange: number;
+  searchIndex?: number;
+  searchRange?: number;
   hasSearch: boolean;
 }
 

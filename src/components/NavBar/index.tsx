@@ -60,11 +60,11 @@ const NavBar: React.FC = () => {
         {hasSearch && (
           <>
             <SearchCount
-              currentSearchIndex={searchIndex + 1}
-              matchingSearchCount={searchRange}
+              currentSearchIndex={(searchIndex ?? 0) + 1}
+              matchingSearchCount={searchRange ?? 0}
             />
 
-            {searchRange > 0 && (
+            {searchRange !== undefined && (
               <>
                 <Button
                   onClick={() => paginate(DIRECTION.PREVIOUS)}

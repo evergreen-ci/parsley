@@ -113,6 +113,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     });
   }, [dispatch, searchResults.length, state.searchState.searchTerm]);
 
+  // If the selected line changes, scroll to it
   useEffect(() => {
     if (selectedLine) {
       scrollToLine(selectedLine);
@@ -120,8 +121,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [state.logs.length > 0, selectedLine]);
 
+  // If the search term changes, scroll to the first match
   useEffect(() => {
-    if (state.searchState.searchIndex) {
+    if (state.searchState.searchIndex !== undefined) {
       scrollToLine(searchResults[state.searchState.searchIndex]);
     }
   }, [scrollToLine, searchResults, state.searchState.searchIndex]);

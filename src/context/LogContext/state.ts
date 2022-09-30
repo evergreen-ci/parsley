@@ -79,31 +79,34 @@ const reducer = (state: LogState, action: Action): LogState => {
         ...state,
         searchState: {
           ...state.searchState,
-          searchRange: action.matchCount,
-          searchIndex: 0,
+          searchRange: action.matchCount ? action.matchCount : undefined,
+          searchIndex: action.matchCount ? 0 : undefined,
         },
       };
     case "PAGINATE": {
       const { searchIndex, searchRange } = state.searchState;
-      let nextPage = searchIndex;
-      if (action.direction === DIRECTION.NEXT) {
-        if (searchIndex + 1 < searchRange) {
-          nextPage += 1;
+      if (searchRange !== undefined && searchIndex !== undefined) {
+        let nextPage = searchIndex;
+        if (action.direction === DIRECTION.NEXT) {
+          if (searchIndex + 1 < searchRange) {
+            nextPage += 1;
+          } else {
+            nextPage = 0;
+          }
+        } else if (searchIndex - 1 < 0) {
+          nextPage = searchRange - 1;
         } else {
-          nextPage = 0;
+          nextPage -= 1;
         }
-      } else if (searchIndex - 1 < 0) {
-        nextPage = searchRange;
-      } else {
-        nextPage -= 1;
+        return {
+          ...state,
+          searchState: {
+            ...state.searchState,
+            searchIndex: nextPage,
+          },
+        };
       }
-      return {
-        ...state,
-        searchState: {
-          ...state.searchState,
-          searchIndex: nextPage,
-        },
-      };
+      return state;
     }
     case "SCROLL_TO_LINE":
       return {
