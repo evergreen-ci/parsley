@@ -16,6 +16,7 @@ type Action =
   | { type: "CLEAR_LOGS" }
   | { type: "SET_FILE_NAME"; fileName: string }
   | { type: "SET_SEARCH_TERM"; searchTerm: string; caseSensitive: boolean }
+  | { type: "TOGGLE_CASE_SENSITIVE"; caseSensitive: boolean }
   | { type: "SCROLL_TO_LINE"; lineNumber: number }
   | { type: "SET_MATCH_COUNT"; matchCount: number }
   | { type: "PAGINATE"; direction: DIRECTION };
@@ -68,9 +69,28 @@ const reducer = (state: LogState, action: Action): LogState => {
         ...state,
         searchState: {
           searchTerm: hasSearch ? searchTerm : undefined,
-          searchIndex: 0,
-          searchRange: 0,
+          searchIndex: undefined,
+          searchRange: undefined,
           hasSearch,
+        },
+      };
+    }
+    case "TOGGLE_CASE_SENSITIVE": {
+      const { searchTerm } = state.searchState;
+      if (!searchTerm) {
+        return state;
+      }
+      const newSearchTerm = new RegExp(
+        searchTerm.source,
+        action.caseSensitive ? "g" : "gi"
+      );
+      return {
+        ...state,
+        searchState: {
+          searchTerm: newSearchTerm,
+          searchIndex: undefined,
+          searchRange: undefined,
+          hasSearch: true,
         },
       };
     }

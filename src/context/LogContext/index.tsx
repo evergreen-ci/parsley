@@ -106,6 +106,12 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     ]
   );
 
+  // Handle case sensitivity changes
+  useEffect(() => {
+    dispatch({ type: "TOGGLE_CASE_SENSITIVE", caseSensitive });
+  }, [caseSensitive, dispatch]);
+
+  // Handle search result changes
   useEffect(() => {
     dispatch({
       type: "SET_MATCH_COUNT",
