@@ -91,6 +91,16 @@ describe("ansiiRow", () => {
       "https://www.google.com"
     );
   });
+  it("should highlight matching text on the line", () => {
+    renderWithRouterMatch(
+      <AnsiiRow
+        data={{ ...data, searchTerm: /highlight me/gi }}
+        listRowProps={{ ...listRowProps, index: 9 }}
+      />
+    );
+    expect(screen.getByText("highlight me")).toBeInTheDocument();
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
+  });
 });
 
 const logLines = [
@@ -103,6 +113,7 @@ const logLines = [
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='windows' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
   "Some line with a url https://www.google.com",
+  "some random text that should not be highlighted but highlight me should",
 ];
 
 const listRowProps = {

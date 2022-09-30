@@ -78,6 +78,16 @@ describe("resmokeRow", () => {
       expect(history.location.search).toBe("");
     });
   });
+  it("should highlight matching text on the line", () => {
+    renderWithRouterMatch(
+      <ResmokeRow
+        data={{ ...data, searchTerm: /mongod/gi }}
+        listRowProps={{ ...listRowProps, index: 7 }}
+      />
+    );
+    expect(screen.getByText("mongod")).toBeInTheDocument();
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("mongod");
+  });
 });
 
 const logLines = [
