@@ -59,25 +59,28 @@ const renderWithRouterMatch = (
     route = "/",
     history = createMemoryHistory({ initialEntries: [route] }),
     path = "/",
+    wrapper: TestWrapper,
     ...rest
   } = options;
-  const { rerender, ...renderRest } = customRender(
+  const wrapper = ({ children }: { children: any }) => (
     <HistoryRouter history={history}>
       <Routes>
-        <Route element={ui} path={path} />
+        <Route
+          element={
+            TestWrapper ? <TestWrapper>{children}</TestWrapper> : children
+          }
+          path={path}
+        />
       </Routes>
-    </HistoryRouter>,
-    rest
+    </HistoryRouter>
   );
+
+  const { rerender, ...renderRest } = customRender(ui, { ...rest, wrapper });
+
   const customRerender = (element: React.ReactElement) => {
-    rerender(
-      <HistoryRouter history={history}>
-        <Routes>
-          <Route element={element} path={path} />
-        </Routes>
-      </HistoryRouter>
-    );
+    rerender(element);
   };
+
   return {
     history,
     rerender: customRerender,
