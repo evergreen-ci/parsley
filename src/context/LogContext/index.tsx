@@ -4,7 +4,9 @@ import React, {
   useContext,
   useEffect,
   useMemo,
+  useRef,
 } from "react";
+import { List } from "react-virtualized";
 import { LogTypes } from "constants/enums";
 import { FilterLogic, QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
@@ -21,6 +23,7 @@ interface LogContextState {
   processedLogLines: ProcessedLogLines;
   selectedLine?: number;
   searchState: SearchState;
+  listRef: React.RefObject<List>;
   clearLogs: () => void;
   getLine: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
@@ -62,6 +65,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
   const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
   const { state, dispatch } = useLogState(initialLogLines);
+  const listRef = useRef<List>(null);
 
   const getLine = useCallback(
     (lineNumber: number) => state.logs[lineNumber],
@@ -69,12 +73,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [state.logs.length]
   );
 
-  const scrollToLine = useCallback(
-    (lineNumber: number) => {
-      dispatch({ type: "SCROLL_TO_LINE", lineNumber });
-    },
-    [dispatch]
-  );
+  const scrollToLine = useCallback((lineNumber: number) => {
+    listRef.current?.scrollToRow(lineNumber);
+  }, []);
 
   // TODO EVG-17537: more advanced filtering
   const processedLogLines = useMemo(
@@ -143,6 +144,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       searchState: state.searchState,
       hasLogs: !!state.logs.length,
       selectedLine: state.lineNumber,
+      listRef,
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       getLine,
       ingestLines: (lines: string[], logType: LogTypes) => {

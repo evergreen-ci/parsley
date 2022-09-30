@@ -1,5 +1,6 @@
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
+import { useLogContext } from "context/LogContext";
 
 type LogPaneProps = Omit<
   ListProps,
@@ -19,7 +20,7 @@ const LogPane: React.FC<LogPaneProps> = ({
   filters,
   ...rest
 }) => {
-  const listRef = useRef<List>(null);
+  const { listRef } = useLogContext();
   useEffect(() => {
     // Reset the cache and recalculate the row heights
     cache.clearAll();
