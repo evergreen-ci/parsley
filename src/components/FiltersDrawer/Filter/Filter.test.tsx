@@ -24,11 +24,13 @@ describe("filters", () => {
       />
     );
 
-    await user.click(screen.getByLabelText("Edit filter button"));
+    await user.click(screen.getByLabelText("Edit filter"));
 
-    // Should show text input rather than the filter name.
+    // Should show text input containing the current value.
     expect(screen.queryByText("myFilter")).toBeNull();
     expect(screen.getByDataCy("edit-filter-name")).toBeInTheDocument();
+    expect(screen.getByDataCy("edit-filter-name")).toHaveValue("myFilter");
+
     const confirmButton = screen.getByRole("button", {
       name: "OK",
     });
@@ -49,10 +51,11 @@ describe("filters", () => {
       />
     );
 
-    await user.click(screen.getByLabelText("Edit filter button"));
-
-    expect(screen.getByDataCy("edit-filter-name")).toBeInTheDocument();
+    // Clear the text input and submit a new filter.
+    await user.click(screen.getByLabelText("Edit filter"));
+    await user.clear(screen.getByDataCy("edit-filter-name"));
     await user.type(screen.getByDataCy("edit-filter-name"), "newFilter");
+
     const confirmButton = screen.getByRole("button", {
       name: "OK",
     });
@@ -72,7 +75,7 @@ describe("filters", () => {
     );
 
     expect(screen.getByLabelText("Visibility Icon")).toBeInTheDocument();
-    await user.click(screen.getByLabelText("Visibility filter button"));
+    await user.click(screen.getByLabelText("Hide filter"));
     expect(screen.getByLabelText("Closed Eye Icon")).toBeInTheDocument();
   });
 
@@ -85,7 +88,7 @@ describe("filters", () => {
         filterName="myFilter"
       />
     );
-    await user.click(screen.getByLabelText("Delete filter button"));
+    await user.click(screen.getByLabelText("Delete filter"));
 
     expect(deleteFilter).toHaveBeenCalledTimes(1);
     expect(deleteFilter).toHaveBeenCalledWith("myFilter");

@@ -49,7 +49,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
       aria-label="Filters Side Nav"
       collapsed={collapsed}
       data-cy={dataCy}
-      setCollapsed={(collapse: React.SetStateAction<boolean>) => {
+      setCollapsed={(collapse) => {
         setCollapsed(collapse);
         Cookie.set(HAS_OPENED_DRAWER, "true", { expires: 365 });
       }}

@@ -38,7 +38,7 @@ const Filter: React.FC<FilterProps> = ({
   deleteFilter,
   editFilter,
 }) => {
-  const [newFilter, setNewFilter] = useState("");
+  const [newFilter, setNewFilter] = useState(filterName);
   const [isEditing, setIsEditing] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [caseSensitivity, setCaseSensitivity] = useState<string>(
@@ -48,7 +48,7 @@ const Filter: React.FC<FilterProps> = ({
 
   const resetEditState = () => {
     setIsEditing(false);
-    setNewFilter("");
+    setNewFilter(filterName);
   };
 
   return (
@@ -57,13 +57,13 @@ const Filter: React.FC<FilterProps> = ({
         <Badge>FILTER</Badge>
         <FilterIcons>
           <IconButton
-            aria-label="Edit filter button"
+            aria-label="Edit filter"
             onClick={() => setIsEditing(true)}
           >
             <Icon fill={gray.base} glyph="Edit" />
           </IconButton>
           <IconButton
-            aria-label="Visibility filter button"
+            aria-label={isVisible ? "Hide filter" : "Show filter"}
             onClick={() => setIsVisible(!isVisible)}
           >
             <Icon
@@ -72,7 +72,7 @@ const Filter: React.FC<FilterProps> = ({
             />
           </IconButton>
           <IconButton
-            aria-label="Delete filter button"
+            aria-label="Delete filter"
             onClick={() => deleteFilter(filterName)}
           >
             <Icon fill={gray.base} glyph="X" />
@@ -93,6 +93,9 @@ const Filter: React.FC<FilterProps> = ({
             value={newFilter}
           />
           <ButtonWrapper>
+            <Button onClick={() => resetEditState()} size="xsmall">
+              Cancel
+            </Button>
             <Button
               onClick={() => {
                 editFilter(filterName, newFilter);
@@ -102,9 +105,6 @@ const Filter: React.FC<FilterProps> = ({
               variant={Variant.PrimaryOutline}
             >
               OK
-            </Button>
-            <Button onClick={() => resetEditState()} size="xsmall">
-              Cancel
             </Button>
           </ButtonWrapper>
         </>
@@ -164,9 +164,7 @@ const ButtonWrapper = styled.div`
 
   margin-top: ${size.xxs};
   margin-bottom: ${size.xs};
-  button {
-    margin-left: ${size.xxs};
-  }
+  gap: ${size.xxs};
 `;
 
 const FilterName = styled(Body)`
