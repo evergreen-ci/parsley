@@ -84,7 +84,7 @@ describe("Filtering", () => {
     // TODO EVG-17908: Instead of revisiting the page, delete the filters from the drawer.
     cy.login();
     cy.visit(
-      "http://localhost:4173/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab"
+      "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab"
     );
 
     // Select a line, with the expectation that it won't be collapsed by the filter.
@@ -102,5 +102,38 @@ describe("Filtering", () => {
         .should("have.attr", "data-cy")
         .and("match", /log-row-(0|5|6|11080)/);
     });
+  });
+});
+
+describe("scrolling", () => {
+  const logLink =
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+  });
+
+  it("should be able to jump to selected line when there are no collapsed rows", () => {
+    cy.dataCy("log-row-4").dblclick();
+
+    cy.get(".ReactVirtualized__Grid").scrollTo("bottom", { duration: 2000 });
+    cy.dataCy("log-row-4").should("not.exist");
+
+    cy.dataCy("log-line-4").click();
+    cy.dataCy("log-row-4").should("be.visible");
+  });
+
+  it("should be able to jump to selected line when there are collapsed rows", () => {
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("repl_hb{enter}");
+
+    cy.dataCy("log-row-30").dblclick();
+
+    cy.get(".ReactVirtualized__Grid").scrollTo("bottom", { duration: 2000 });
+    cy.dataCy("log-row-30").should("not.exist");
+
+    cy.dataCy("log-line-30").click();
+    cy.dataCy("log-row-30").should("be.visible");
   });
 });

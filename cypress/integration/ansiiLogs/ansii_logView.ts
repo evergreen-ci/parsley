@@ -110,3 +110,36 @@ describe("Filtering", () => {
     });
   });
 });
+
+describe("scrolling", () => {
+  const logLink =
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+  });
+
+  it("should be able to jump to selected line when there are no collapsed rows", () => {
+    cy.dataCy("log-row-4").dblclick();
+
+    cy.get(".ReactVirtualized__Grid").scrollTo("bottom", { duration: 2000 });
+    cy.dataCy("log-row-4").should("not.exist");
+
+    cy.dataCy("log-line-4").click();
+    cy.dataCy("log-row-4").should("be.visible");
+  });
+
+  it("should be able to jump to selected line when there are collapsed rows", () => {
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("pass{enter}");
+
+    cy.dataCy("log-row-56").dblclick();
+
+    cy.get(".ReactVirtualized__Grid").scrollTo("bottom", { duration: 2000 });
+    cy.dataCy("log-row-56").should("not.exist");
+
+    cy.dataCy("log-line-56").click();
+    cy.dataCy("log-row-56").should("be.visible");
+  });
+});
