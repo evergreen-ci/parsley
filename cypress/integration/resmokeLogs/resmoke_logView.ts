@@ -37,17 +37,17 @@ describe("Bookmarking and selecting lines", () => {
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
-    cy.location("search").should("equal", "?bookmarks=0,11080");
+    cy.location("search").should("equal", "?bookmarks=0,11079");
     cy.dataCy("log-line-container").should("contain", "0");
-    cy.dataCy("log-line-container").should("contain", "11080");
+    cy.dataCy("log-line-container").should("contain", "11079");
   });
 
   it("should be able to bookmark and unbookmark log lines", () => {
     cy.dataCy("log-row-4").dblclick();
-    cy.location("search").should("equal", "?bookmarks=0,4,11080");
+    cy.location("search").should("equal", "?bookmarks=0,4,11079");
     cy.dataCy("log-line-container").should("contain", "0");
     cy.dataCy("log-line-container").should("contain", "4");
-    cy.dataCy("log-line-container").should("contain", "11080");
+    cy.dataCy("log-line-container").should("contain", "11079");
 
     cy.dataCy("log-row-4").dblclick();
     cy.dataCy("log-line-container").should("not.contain", "4");
@@ -55,11 +55,11 @@ describe("Bookmarking and selecting lines", () => {
 
   it("should be able to select and unselect lines", () => {
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,11080&selectedLine=5");
+    cy.location("search").should("equal", "?bookmarks=0,11079&selectedLine=5");
     cy.dataCy("log-line-container").should("contain", "5");
 
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,11080");
+    cy.location("search").should("equal", "?bookmarks=0,11079");
     cy.dataCy("log-line-container").should("not.contain", "5");
   });
 
@@ -100,7 +100,7 @@ describe("Filtering", () => {
       // Matched elements should be one of the bookmarked or selected values
       cy.wrap($el)
         .should("have.attr", "data-cy")
-        .and("match", /log-row-(0|5|6|11080)/);
+        .and("match", /log-row-(0|5|6|11079)/);
     });
   });
 });
@@ -113,11 +113,18 @@ describe("Jump to line", () => {
     cy.visit(logLink);
   });
 
-  it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
-    cy.dataCy("log-row-4").dblclick({ force: true });
+  it("should default to bookmarking 0 and the last log line on load", () => {
+    cy.location("search").should("equal", "?bookmarks=0,11079");
+    cy.dataCy("log-line-container").should("contain", "0");
+    cy.dataCy("log-line-container").should("contain", "11079");
+  });
 
-    cy.get(".ReactVirtualized__Grid").scrollTo("bottom", { duration: 2000 });
-    cy.dataCy("log-row-4").should("not.exist");
+  it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
+    cy.dataCy("log-row-4").dblclick();
+
+    cy.dataCy("log-line-11079").click();
+    cy.dataCy("log-row-11079").should("be.visible");
+    cy.dataCy("log-row-56").should("not.exist");
 
     cy.dataCy("log-line-4").click();
     cy.dataCy("log-row-4").should("be.visible");
@@ -128,9 +135,10 @@ describe("Jump to line", () => {
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("repl_hb{enter}");
 
-    cy.dataCy("log-row-30").dblclick({ force: true });
+    cy.dataCy("log-row-30").dblclick();
 
-    cy.get(".ReactVirtualized__Grid").scrollTo("bottom", { duration: 2000 });
+    cy.dataCy("log-line-11079").click();
+    cy.dataCy("log-row-11079").should("be.visible");
     cy.dataCy("log-row-30").should("not.exist");
 
     cy.dataCy("log-line-30").click();

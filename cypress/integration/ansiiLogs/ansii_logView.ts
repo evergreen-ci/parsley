@@ -43,17 +43,17 @@ describe("Bookmarking and selecting lines", () => {
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
-    cy.location("search").should("equal", "?bookmarks=0,298");
+    cy.location("search").should("equal", "?bookmarks=0,297");
     cy.dataCy("log-line-container").should("contain", "0");
-    cy.dataCy("log-line-container").should("contain", "298");
+    cy.dataCy("log-line-container").should("contain", "297");
   });
 
   it("should be able to bookmark and unbookmark log lines", () => {
     cy.dataCy("log-row-4").dblclick();
-    cy.location("search").should("equal", "?bookmarks=0,4,298");
+    cy.location("search").should("equal", "?bookmarks=0,4,297");
     cy.dataCy("log-line-container").should("contain", "0");
     cy.dataCy("log-line-container").should("contain", "4");
-    cy.dataCy("log-line-container").should("contain", "298");
+    cy.dataCy("log-line-container").should("contain", "297");
 
     cy.dataCy("log-row-4").dblclick();
     cy.dataCy("log-line-container").should("not.contain", "4");
@@ -61,11 +61,11 @@ describe("Bookmarking and selecting lines", () => {
 
   it("should be able to select and unselect lines", () => {
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,298&selectedLine=5");
+    cy.location("search").should("equal", "?bookmarks=0,297&selectedLine=5");
     cy.dataCy("log-line-container").should("contain", "5");
 
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,298");
+    cy.location("search").should("equal", "?bookmarks=0,297");
     cy.dataCy("log-line-container").should("not.contain", "5");
   });
 
@@ -111,7 +111,7 @@ describe("Filtering", () => {
   });
 });
 
-describe("Jump to line", () => {
+describe.only("Jump to line", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   before(() => {
@@ -119,11 +119,18 @@ describe("Jump to line", () => {
     cy.visit(logLink);
   });
 
-  it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
-    cy.dataCy("log-row-4").dblclick({ force: true });
+  it("should default to bookmarking 0 and the last log line on load", () => {
+    cy.location("search").should("equal", "?bookmarks=0,297");
+    cy.dataCy("log-line-container").should("contain", "0");
+    cy.dataCy("log-line-container").should("contain", "297");
+  });
 
-    cy.get(".ReactVirtualized__Grid").scrollTo("bottom", { duration: 2000 });
-    cy.dataCy("log-row-4").should("not.exist");
+  it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
+    cy.dataCy("log-row-4").dblclick();
+
+    cy.dataCy("log-line-297").click();
+    cy.dataCy("log-row-297").should("be.visible");
+    cy.dataCy("log-row-56").should("not.exist");
 
     cy.dataCy("log-line-4").click();
     cy.dataCy("log-row-4").should("be.visible");
@@ -134,9 +141,10 @@ describe("Jump to line", () => {
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("pass{enter}");
 
-    cy.dataCy("log-row-56").dblclick({ force: true });
+    cy.dataCy("log-row-56").dblclick();
 
-    cy.get(".ReactVirtualized__Grid").scrollTo("bottom", { duration: 2000 });
+    cy.dataCy("log-line-297").click();
+    cy.dataCy("log-row-297").should("be.visible");
     cy.dataCy("log-row-56").should("not.exist");
 
     cy.dataCy("log-line-56").click();

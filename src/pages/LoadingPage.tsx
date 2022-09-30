@@ -58,7 +58,11 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
   const { data, error } = useAxiosGet(url);
   useEffect(() => {
     if (data) {
-      ingestLines(data.split("\n"), logType);
+      // Temporary fix
+      ingestLines(
+        data.split("\n").filter((l) => l !== ""),
+        logType
+      );
       onLoad();
     }
     if (error) {
