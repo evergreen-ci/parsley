@@ -4,11 +4,11 @@ import { size } from "constants/tokens";
 
 const { gray, green } = palette;
 interface LoadingBarProps {
-  progress: number;
+  progress?: number;
   indeterminate: boolean;
 }
 const LoadingBar: React.FC<LoadingBarProps> = ({
-  progress,
+  progress = 100,
   indeterminate = false,
 }) => (
   <Container>
@@ -28,18 +28,16 @@ const Container = styled.div`
 const Bar = styled.div<{ progress: number }>`
   width: ${({ progress }) => progress}%;
   height: 100%;
-  background-color: ${green.base};
   /* border radius left */
   border-top-left-radius: ${size.xs};
   border-bottom-left-radius: ${size.xs};
   ${({ progress }) =>
-    progress === 100
-      ? `
+    progress === 100 &&
+    `
     /* border radius right */
     border-top-right-radius: ${size.xs};
     border-bottom-right-radius: ${size.xs};
-    `
-      : ""}
+    `}
 
   animation: glowing 1.5s linear infinite;
   @keyframes glowing {

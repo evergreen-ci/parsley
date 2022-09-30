@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { useParams } from "react-router-dom";
-import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
 import {
   getEvergreenTaskLogURL,
@@ -13,7 +12,7 @@ import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import { useAxiosGet } from "hooks";
-import LoadingBar from "./LoadingPage/LoadingBar";
+import LoadingBar from "./LoadingBar";
 
 interface LoadingPageProps {
   onLoad: () => void;
@@ -70,35 +69,38 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
     }
   }, [data, ingestLines, error, onLoad, logType, dispatchToast]);
   return (
-    <StyledPageLayout>
+    <Container>
       {isLoading || !error ? (
         <LoadingBarContainer>
           <LogoContainer>🌿 Loading Parsley...</LogoContainer>
-          <LoadingBar indeterminate progress={100} />
+          <LoadingBar indeterminate />
         </LoadingBarContainer>
       ) : (
         <div>404 here</div>
       )}
-    </StyledPageLayout>
+    </Container>
   );
 };
 
 const LoadingBarContainer = styled.div`
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
   width: 40%;
 `;
 
 const LogoContainer = styled.div`
-  display: flex;
   align-items: center;
+  display: flex;
   margin-bottom: ${size.xs};
 `;
-const StyledPageLayout = styled(PageLayout)`
+
+const Container = styled.div`
+  align-items: center;
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  height: 100%;
 `;
+
 export default LoadingPage;

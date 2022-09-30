@@ -2,7 +2,7 @@ import { useState } from "react";
 import LogWindow from "components/LogWindow";
 import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
-import LoadingPage from "./LoadingPage";
+import LoadingPage from "./LogView/LoadingPage";
 
 interface LogViewProps {
   logType: LogTypes;
