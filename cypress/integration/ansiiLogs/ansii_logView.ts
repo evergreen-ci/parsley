@@ -126,7 +126,7 @@ describe.only("Jump to line", () => {
   });
 
   it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
-    cy.dataCy("log-row-4").dblclick();
+    cy.dataCy("log-row-4").dblclick({ force: true });
 
     cy.dataCy("log-line-297").click();
     cy.dataCy("log-row-297").should("be.visible");
@@ -141,7 +141,7 @@ describe.only("Jump to line", () => {
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("pass{enter}");
 
-    cy.dataCy("log-row-56").dblclick();
+    cy.dataCy("log-row-56").dblclick({ force: true });
 
     cy.dataCy("log-line-297").click();
     cy.dataCy("log-row-297").should("be.visible");
