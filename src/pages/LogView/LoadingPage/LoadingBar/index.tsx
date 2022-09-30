@@ -18,7 +18,7 @@ const LoadingBar: React.FC<LoadingBarProps> = ({
 
 const Container = styled.div`
   position: relative;
-  height: ${size.s};
+  height: 12px;
   border-radius: ${size.xs};
   background-color: ${gray.light2};
   width: 100%;
