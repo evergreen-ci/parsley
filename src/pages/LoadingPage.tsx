@@ -73,7 +73,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
     <StyledPageLayout>
       {isLoading || !error ? (
         <LoadingBarContainer>
-          <LogoContainer>🌿 Loading Lobster...</LogoContainer>
+          <LogoContainer>🌿 Loading Parsley...</LogoContainer>
           <LoadingBar indeterminate progress={100} />
         </LoadingBarContainer>
       ) : (
