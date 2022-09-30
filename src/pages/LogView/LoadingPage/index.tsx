@@ -15,11 +15,10 @@ import { useAxiosGet } from "hooks";
 import LoadingBar from "./LoadingBar";
 
 interface LoadingPageProps {
-  onLoad: () => void;
   logType: LogTypes;
 }
 
-const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
+const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const {
     [slugs.buildID]: buildID,
     [slugs.origin]: origin,
@@ -62,12 +61,11 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
   useEffect(() => {
     if (data) {
       ingestLines(data.split("\n"), logType);
-      onLoad();
     }
     if (error) {
       dispatchToast.error(error);
     }
-  }, [data, ingestLines, error, onLoad, logType, dispatchToast]);
+  }, [data, ingestLines, error, logType, dispatchToast]);
   return (
     <Container>
       {isLoading || !error ? (
