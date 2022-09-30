@@ -1,7 +1,6 @@
 import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Badge from "@leafygreen-ui/badge";
-import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
 import DetailsOverlay from "components/DetailsOverlay";
 import FiltersOverlay from "components/FiltersOverlay";
@@ -12,10 +11,9 @@ import { StyledLink } from "components/styles";
 import { QueryParams } from "constants/queryParams";
 import { navbarHeight, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
-import { DIRECTION } from "context/LogContext/types";
 import { useQueryParam } from "hooks/useQueryParam";
 import { validateRegexp } from "utils/validators";
-import SearchCount from "./SearchCount";
+import SearchResults from "./SearchResults";
 import UploadLink from "./UploadLink";
 
 const { gray, white } = palette;
@@ -28,7 +26,7 @@ const NavBar: React.FC = () => {
   const { hasLogs, clearLogs, setSearch, searchState, paginate } =
     useLogContext();
 
-  const { hasSearch, searchRange, searchIndex } = searchState;
+  const { hasSearch } = searchState;
   const handleSearch = (selected: string, value: string) => {
     if (selected === "search") {
       setSearch(value);
@@ -58,26 +56,7 @@ const NavBar: React.FC = () => {
           validatorMessage="Invalid Regular Expression"
         />
         {hasSearch && (
-          <>
-            <SearchCount
-              currentSearchIndex={(searchIndex ?? 0) + 1}
-              matchingSearchCount={searchRange ?? 0}
-            />
-
-            {searchRange !== undefined && (
-              <>
-                <Button
-                  onClick={() => paginate(DIRECTION.PREVIOUS)}
-                  size="small"
-                >
-                  Prev
-                </Button>
-                <Button onClick={() => paginate(DIRECTION.NEXT)} size="small">
-                  Next
-                </Button>
-              </>
-            )}
-          </>
+          <SearchResults paginate={paginate} searchState={searchState} />
         )}
       </FlexContainer>
       <ButtonContainer>

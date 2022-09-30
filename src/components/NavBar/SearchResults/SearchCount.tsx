@@ -19,11 +19,11 @@ const SearchCount: React.FC<SearchCountProps> = ({
 );
 
 const Container = styled.div<{ hasMatches: boolean }>`
-  display: flex;
   align-items: center;
+  color: ${({ hasMatches }) => (hasMatches ? black : red.dark2)};
+  display: flex;
   justify-content: center;
   margin-left: ${size.xs};
-  color: ${({ hasMatches }) => (hasMatches ? black : red.dark2)};
 `;
 
 export default SearchCount;
