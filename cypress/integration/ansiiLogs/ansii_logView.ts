@@ -111,7 +111,7 @@ describe("Filtering", () => {
   });
 });
 
-describe("scrolling", () => {
+describe("Jump to line", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   before(() => {
@@ -119,8 +119,8 @@ describe("scrolling", () => {
     cy.visit(logLink);
   });
 
-  it("should be able to jump to selected line when there are no collapsed rows", () => {
-    cy.dataCy("log-row-4").dblclick();
+  it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
+    cy.dataCy("log-row-4").dblclick({ force: true });
 
     cy.get(".ReactVirtualized__Grid").scrollTo("bottom", { duration: 2000 });
     cy.dataCy("log-row-4").should("not.exist");
@@ -129,12 +129,12 @@ describe("scrolling", () => {
     cy.dataCy("log-row-4").should("be.visible");
   });
 
-  it("should be able to jump to selected line when there are collapsed rows", () => {
+  it("should be able to use the sidebar to jump to a line when there are collapsed rows", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("pass{enter}");
 
-    cy.dataCy("log-row-56").dblclick();
+    cy.dataCy("log-row-56").dblclick({ force: true });
 
     cy.get(".ReactVirtualized__Grid").scrollTo("bottom", { duration: 2000 });
     cy.dataCy("log-row-56").should("not.exist");

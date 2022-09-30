@@ -4,7 +4,7 @@ import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
-import { fontSize, navbarHeight, size } from "constants/tokens";
+import { navbarHeight, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import { findLineIndex } from "utils/search";
 
@@ -41,7 +41,7 @@ const SideBar: React.FC<SideBarProps> = ({
     ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
     : bookmarks;
 
-  // Finds the corresponding index of a lineNumber and scrolls to it.
+  // Finds the corresponding index of a line number and scrolls to it.
   const scrollToIndex = (lineNumber: number): void => {
     const lineIndex = findLineIndex(processedLogLines, lineNumber);
     setScrollIndex(lineIndex);
@@ -73,11 +73,11 @@ const SideBar: React.FC<SideBarProps> = ({
 };
 
 const StyledButton = styled(Button)`
-  width: 56px;
+  width: 52px;
 `;
 
 const LogLineContainer = styled.div`
-  margin-left: ${size.xs};
+  margin-left: ${size.xxs};
   margin-top: ${size.xxs};
   align-self: start;
   cursor: pointer;
@@ -86,14 +86,13 @@ const LogLineContainer = styled.div`
 const LogLineNumber = styled.div`
   display: flex;
   align-items: center;
-  font-size: ${fontSize.m};
-  line-height: 1.3em;
+  font-size: 13px;
+  line-height: 1.5em;
   font-family: "Source Code Pro";
 `;
 
 const StyledIcon = styled(Icon)`
   vertical-align: text-bottom;
-  margin-left: ${size.xxs};
 `;
 
 const Container = styled.div`
