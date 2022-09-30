@@ -12,6 +12,7 @@ interface RowData {
   wrap: boolean;
   processedLines: ProcessedLogLines;
   logType: LogTypes;
+  searchTerm?: RegExp;
 }
 
 export type { BaseRowProps, RowData };

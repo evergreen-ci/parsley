@@ -14,11 +14,18 @@ interface LogWindowProps {
   isUploadedLog: boolean;
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
-  const { hasLogs, getLine, lineCount, processedLogLines, selectedLine } =
-    useLogContext();
+  const {
+    hasLogs,
+    getLine,
+    lineCount,
+    processedLogLines,
+    selectedLine,
+    searchState,
+  } = useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
 
+  const { searchTerm } = searchState;
   return (
     <Container data-cy="log-window">
       {hasLogs && <SideBar maxLineNumber={lineCount - 1} />}
@@ -35,6 +42,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               wrap,
               getLine,
               processedLines: processedLogLines,
+              searchTerm,
             })}
             scrollToIndex={selectedLine}
             wrap={wrap}
