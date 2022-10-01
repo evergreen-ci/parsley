@@ -59,10 +59,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
   useEffect(() => {
     if (data) {
       // Temporary fix
-      ingestLines(
-        data.split("\n").filter((l) => l !== ""),
-        logType
-      );
+      ingestLines(data.trim().split("\n"), logType);
       onLoad();
     }
     if (error) {
