@@ -2,6 +2,7 @@ import { forwardRef, useMemo } from "react";
 import Highlight from "components/Highlight";
 import CollapsedRow from "components/LogRow//CollapsedRow";
 import BaseRow from "components/LogRow/BaseRow";
+import { isCollapsedRow } from "utils/collapsedRow";
 import renderHtml from "utils/renderHtml";
 import { BaseRowProps } from "../types";
 
@@ -12,7 +13,7 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
 
   const line = processedLines[index];
 
-  if (Array.isArray(line)) {
+  if (isCollapsedRow(line)) {
     return (
       <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
     );

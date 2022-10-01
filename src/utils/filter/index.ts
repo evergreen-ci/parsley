@@ -1,5 +1,6 @@
 import { FilterLogic } from "constants/queryParams";
 import { ProcessedLogLines } from "types/logs";
+import { isCollapsedRow } from "utils/collapsedRow";
 
 /**
  * Function that determines if a particular log line satisfies the filter conditions.
@@ -59,7 +60,7 @@ export const filterLogs = (
 
     // If the line doesn't match the filters, collapse it.
     const previousItem = arr[arr.length - 1];
-    if (Array.isArray(previousItem)) {
+    if (isCollapsedRow(previousItem)) {
       previousItem.push(idx);
     } else {
       arr.push([idx]);

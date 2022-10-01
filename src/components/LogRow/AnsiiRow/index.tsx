@@ -4,6 +4,7 @@ import linkifyHtml from "linkify-html";
 import Highlight from "components/Highlight";
 import CollapsedRow from "components/LogRow//CollapsedRow";
 import BaseRow from "components/LogRow/BaseRow";
+import { isCollapsedRow } from "utils/collapsedRow";
 import renderHtml from "utils/renderHtml";
 import { BaseRowProps } from "../types";
 
@@ -15,9 +16,8 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { index } = listRowProps;
 
   const line = processedLines[index];
-  console.log({ highlightedLine, line, index });
 
-  if (Array.isArray(line)) {
+  if (isCollapsedRow(line)) {
     return (
       <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
     );

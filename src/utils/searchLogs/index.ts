@@ -1,4 +1,5 @@
 import { ProcessedLogLines } from "types/logs";
+import { isCollapsedRow } from "utils/collapsedRow";
 
 interface searchOptions {
   searchRegex: RegExp;
@@ -14,7 +15,7 @@ const searchLogs = (options: searchOptions): number[] => {
   const matchingIndices = [];
   for (let i = 0; i < processedLogLines.length; i++) {
     const lineIndex = processedLogLines[i];
-    if (!Array.isArray(lineIndex)) {
+    if (!isCollapsedRow(lineIndex)) {
       // Since processLogLines is ordered by line number, we can stop searching if we are out of range for our upper bound
       if (upperBound && lineIndex > upperBound) {
         break;
