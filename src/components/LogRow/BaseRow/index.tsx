@@ -38,7 +38,8 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     QueryParams.SelectedLine,
     undefined
   );
-  const selected = selectedLine === lineNumber || highlightedLine === index;
+  const selected =
+    selectedLine === lineNumber || highlightedLine === lineNumber;
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
