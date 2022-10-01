@@ -8,7 +8,7 @@ interface searchOptions {
   processedLogLines: ProcessedLogLines;
 }
 
-export const searchLogs = (options: searchOptions): number[] => {
+const searchLogs = (options: searchOptions): number[] => {
   const { searchRegex, upperBound, lowerBound, getLine, processedLogLines } =
     options;
   const matchingIndices = [];
@@ -30,3 +30,5 @@ export const searchLogs = (options: searchOptions): number[] => {
   }
   return matchingIndices;
 };
+
+export default searchLogs;

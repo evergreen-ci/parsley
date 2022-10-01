@@ -1,4 +1,4 @@
-import { searchLogs } from ".";
+import searchLogs from ".";
 
 describe("searchLogs", () => {
   it("should return an empty array if there are no matching lines", () => {
@@ -69,7 +69,7 @@ describe("searchLogs", () => {
     expect(getLine).toHaveBeenCalledWith(0);
     expect(getLine).toHaveBeenCalledWith(3);
   });
-  it("should not search lines that are folded if they are out of the range", () => {
+  it("should not search lines that are folded or if they are out of the range", () => {
     const lines = ["line 1", "line 2", "line 3", "line 4"];
     const getLine = jest.fn((index: number) => lines[index]);
     const options = {

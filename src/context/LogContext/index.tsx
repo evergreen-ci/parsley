@@ -12,7 +12,7 @@ import { FilterLogic, QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
 import { ProcessedLogLines } from "types/logs";
 import { filterLogs } from "utils/filter";
-import { searchLogs } from "utils/searchLogs";
+import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
 import { DIRECTION, SearchState } from "./types";
 
