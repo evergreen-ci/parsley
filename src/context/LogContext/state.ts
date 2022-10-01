@@ -63,7 +63,7 @@ const reducer = (state: LogState, action: Action): LogState => {
       const hasSearch = !!action.searchTerm;
       const searchTerm = new RegExp(
         action.searchTerm,
-        action.caseSensitive ? "g" : "gi"
+        action.caseSensitive ? "" : "i"
       );
       return {
         ...state,
@@ -82,7 +82,7 @@ const reducer = (state: LogState, action: Action): LogState => {
       }
       const newSearchTerm = new RegExp(
         searchTerm.source,
-        action.caseSensitive ? "g" : "gi"
+        action.caseSensitive ? "" : "i"
       );
       return {
         ...state,

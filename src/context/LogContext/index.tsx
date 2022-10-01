@@ -1,4 +1,4 @@
-import React, {
+import {
   createContext,
   useCallback,
   useContext,
@@ -139,6 +139,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const highlightedLine =
     state.searchState.searchIndex &&
     searchResults[state.searchState.searchIndex];
+
   const memoizedContext = useMemo(
     () => ({
       fileName: state.fileName,
@@ -172,6 +173,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       state.logs.length,
       state.lineNumber,
       processedLogLines,
+      highlightedLine,
       getLine,
       scrollToLine,
       dispatch,

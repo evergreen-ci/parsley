@@ -215,7 +215,7 @@ describe("useLogContext", () => {
       const { result } = renderHook(() => useLogContext(), { wrapper });
       expect(result.current.lineCount).toBe(3);
       expect(result.current.processedLogLines).toHaveLength(3);
-      expect(result.current.searchState.searchRange).toBe(0);
+      expect(result.current.searchState.searchRange).toBeUndefined();
       expect(result.current.searchState.hasSearch).toBe(false);
     });
     it("should return the correct number of matching searches", () => {
@@ -299,7 +299,7 @@ describe("useLogContext", () => {
       act(() => {
         result.current.setSearch("a line");
       });
-      expect(result.current.searchState.searchRange).toBe(0);
+      expect(result.current.searchState.searchRange).toBeUndefined();
       expect(result.current.searchState.hasSearch).toBe(true);
     });
     it("should only search non filtered out lines", () => {
@@ -324,7 +324,7 @@ describe("useLogContext", () => {
       act(() => {
         result.current.setSearch("B line");
       });
-      expect(result.current.searchState.searchRange).toBe(0);
+      expect(result.current.searchState.searchRange).toBeUndefined();
     });
     it("should only search within our bounds", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
@@ -367,7 +367,7 @@ describe("useLogContext", () => {
         result.current.setSearch("line");
       });
       expect(result.current.searchState.hasSearch).toBe(true);
-      expect(result.current.searchState.searchRange).toBe(2);
+      expect(result.current.searchState.searchRange).toBe(3);
       expect(result.current.searchState.searchIndex).toBe(0);
     });
     it("paginating should increment and decrement the search index", () => {
