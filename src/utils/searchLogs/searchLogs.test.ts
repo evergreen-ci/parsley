@@ -54,7 +54,7 @@ describe("searchLogs", () => {
     expect(getLine).toHaveBeenCalledWith(0);
     expect(getLine).toHaveBeenCalledWith(1);
   });
-  it("should not search lines that are folded", () => {
+  it("should not match on folded lines and should return the processedLogLine index", () => {
     const lines = ["line 1", "line 2", "line 3", "line 4"];
     const getLine = jest.fn((index: number) => lines[index]);
     const options = {
@@ -64,7 +64,7 @@ describe("searchLogs", () => {
       processedLogLines: [0, [1, 2], 3],
     };
     const matchingIndices = searchLogs(options);
-    expect(matchingIndices).toStrictEqual([0, 3]);
+    expect(matchingIndices).toStrictEqual([0, 2]);
     expect(getLine).toHaveBeenCalledTimes(2);
     expect(getLine).toHaveBeenCalledWith(0);
     expect(getLine).toHaveBeenCalledWith(3);

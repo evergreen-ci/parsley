@@ -12,7 +12,7 @@ interface searchOptions {
 const searchLogs = (options: searchOptions): number[] => {
   const { searchRegex, upperBound, lowerBound, getLine, processedLogLines } =
     options;
-  const matchingIndices = [];
+  const matchingIndices: number[] = [];
   for (let i = 0; i < processedLogLines.length; i++) {
     const lineIndex = processedLogLines[i];
     if (!isCollapsedRow(lineIndex)) {
@@ -24,7 +24,8 @@ const searchLogs = (options: searchOptions): number[] => {
       if (lineIndex >= lowerBound) {
         const line = getLine(lineIndex);
         if (searchRegex.test(line)) {
-          matchingIndices.push(lineIndex);
+          // We want to match the index of the processedLogLines array, not the line number
+          matchingIndices.push(i);
         }
       }
     }
