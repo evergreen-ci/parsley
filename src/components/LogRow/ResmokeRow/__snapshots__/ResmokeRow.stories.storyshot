@@ -78,7 +78,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multiple Lines 1`] =
 
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
 <pre
-  className="css-g5434z"
+  className="css-1f21fgs"
   data-cy="log-row-2"
   onDoubleClick={[Function]}
   selected={false}

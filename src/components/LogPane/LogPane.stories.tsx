@@ -1,10 +1,12 @@
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { MemoryRouter } from "react-router-dom";
 import {
   CellMeasurer,
   CellMeasurerCache,
   ListRowRenderer,
 } from "react-virtualized";
+import { LogContextProvider } from "context/LogContext";
 import LogPane from ".";
 
 export default {
@@ -49,4 +51,16 @@ const Container = styled.div`
 `;
 export const Default = Template.bind({});
 
+Default.decorators = [
+  (Story) => (
+    <LogContextProvider>
+      <Story />
+    </LogContextProvider>
+  ),
+  (Story) => (
+    <MemoryRouter initialEntries={["/"]}>
+      <Story />
+    </MemoryRouter>
+  ),
+];
 Default.args = {};

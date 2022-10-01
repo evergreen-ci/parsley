@@ -3,6 +3,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
+import { LogContextProvider } from "context/LogContext";
 import AnsiiRow from ".";
 import { RowRenderer, cache } from "../RowRenderer";
 
@@ -42,6 +43,11 @@ SingleLine.args = {
 };
 SingleLine.decorators = [
   (Story) => (
+    <LogContextProvider>
+      <Story />
+    </LogContextProvider>
+  ),
+  (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
     </MemoryRouter>
@@ -73,6 +79,11 @@ MultiLines.args = {
   wrap: false,
 };
 MultiLines.decorators = [
+  (Story) => (
+    <LogContextProvider>
+      <Story />
+    </LogContextProvider>
+  ),
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
@@ -106,6 +117,11 @@ Collapsed.args = {
   wrap: false,
 };
 Collapsed.decorators = [
+  (Story) => (
+    <LogContextProvider>
+      <Story />
+    </LogContextProvider>
+  ),
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />

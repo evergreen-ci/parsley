@@ -4,6 +4,7 @@ import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
+import { LogContextProvider } from "context/LogContext";
 import ResmokeRow from ".";
 
 export default {
@@ -44,6 +45,11 @@ SingleLine.args = {
 };
 SingleLine.decorators = [
   (Story) => (
+    <LogContextProvider>
+      <Story />
+    </LogContextProvider>
+  ),
+  (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
     </MemoryRouter>
@@ -77,6 +83,11 @@ MultipleLines.args = {
 };
 MultipleLines.decorators = [
   (Story) => (
+    <LogContextProvider>
+      <Story />
+    </LogContextProvider>
+  ),
+  (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
     </MemoryRouter>
@@ -109,6 +120,11 @@ Collapsed.args = {
   wrap: false,
 };
 Collapsed.decorators = [
+  (Story) => (
+    <LogContextProvider>
+      <Story />
+    </LogContextProvider>
+  ),
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
