@@ -8,7 +8,7 @@ import { BaseRowProps } from "../types";
 
 const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { data, listRowProps } = rowProps;
-  const { getLine, wrap, processedLines, searchTerm } = data;
+  const { getLine, wrap, processedLines, searchTerm, highlightedLine } = data;
   const { index } = listRowProps;
 
   const line = processedLines[index];
@@ -20,7 +20,13 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   }
   const lineContent = getLine(line);
   return lineContent ? (
-    <BaseRow wrap={wrap} {...listRowProps} ref={ref} lineNumber={line}>
+    <BaseRow
+      wrap={wrap}
+      {...listRowProps}
+      ref={ref}
+      highlightedLine={highlightedLine}
+      lineNumber={line}
+    >
       <ProcessedResmokeRow lineContent={lineContent} searchTerm={searchTerm} />
     </BaseRow>
   ) : null;
