@@ -16,6 +16,7 @@ interface BaseRowProps extends ListRowProps {
   // The line number associated with a log line and its index within the context of the virtualized list
   // may differ due to collapsed rows.
   lineNumber: number;
+  highlightedLine?: number;
 }
 
 /**
@@ -23,13 +24,21 @@ interface BaseRowProps extends ListRowProps {
  * It is responsible for handling the highlighting of the selected line
  */
 const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
-  const { index, lineNumber, children, wrap, isVisible, ...rest } = props;
+  const {
+    index,
+    lineNumber,
+    children,
+    wrap,
+    isVisible,
+    highlightedLine,
+    ...rest
+  } = props;
 
   const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
   );
-  const selected = selectedLine === lineNumber;
+  const selected = selectedLine === lineNumber || highlightedLine === index;
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
@@ -115,7 +124,13 @@ const StyledPre = styled.pre<{
 
   ${({ selected }) => selected && `background-color: ${red.light2};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light2};`}
-
+  ${({ selected }) =>
+    selected &&
+    `
+    mark {
+      background-color: ${yellow.light3};
+    }
+`}
   // Hover should be an overlay shadow so that the user can see the color underneath.
   :hover {
     box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.1);

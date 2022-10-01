@@ -13,6 +13,7 @@ interface RowData {
   processedLines: ProcessedLogLines;
   logType: LogTypes;
   searchTerm?: RegExp;
+  highlightedLine?: number;
 }
 
 export type { BaseRowProps, RowData };

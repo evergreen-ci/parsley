@@ -11,10 +11,11 @@ const ansiUp = new AnsiUp();
 
 const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { data, listRowProps } = rowProps;
-  const { getLine, wrap, processedLines, searchTerm } = data;
+  const { getLine, wrap, processedLines, searchTerm, highlightedLine } = data;
   const { index } = listRowProps;
 
   const line = processedLines[index];
+  console.log({ highlightedLine, line, index });
 
   if (Array.isArray(line)) {
     return (
@@ -23,7 +24,13 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   }
   const lineContent = getLine(line);
   return lineContent ? (
-    <BaseRow wrap={wrap} {...listRowProps} ref={ref} lineNumber={line}>
+    <BaseRow
+      wrap={wrap}
+      {...listRowProps}
+      ref={ref}
+      highlightedLine={highlightedLine}
+      lineNumber={line}
+    >
       <ProcessedAnsiiRow lineContent={lineContent} searchTerm={searchTerm} />
     </BaseRow>
   ) : null;

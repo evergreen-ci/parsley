@@ -24,6 +24,7 @@ interface LogContextState {
   selectedLine?: number;
   searchState: SearchState;
   listRef: React.RefObject<List>;
+  highlightedLine?: number;
   clearLogs: () => void;
   getLine: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
@@ -135,6 +136,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     }
   }, [scrollToLine, searchResults, state.searchState.searchIndex]);
 
+  const highlightedLine =
+    state.searchState.searchIndex &&
+    searchResults[state.searchState.searchIndex];
   const memoizedContext = useMemo(
     () => ({
       fileName: state.fileName,
@@ -145,6 +149,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       hasLogs: !!state.logs.length,
       selectedLine: state.lineNumber,
       listRef,
+      highlightedLine,
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       getLine,
       ingestLines: (lines: string[], logType: LogTypes) => {
