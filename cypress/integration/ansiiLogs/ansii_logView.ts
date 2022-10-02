@@ -1,12 +1,12 @@
 describe("Basic evergreen log view", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
-
   before(() => {
     cy.login();
     cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
   });
+
   const longLogLine = `[2022/03/02 17:02:18.500] warning Pattern ["@apollo/client@latest"] is trying to unpack in the same destination "/home/ubuntu/.cache/yarn/v6/npm-@apollo-client-3.3.7-f15bf961dc0c2bee37a47bf86b8881fdc6183810-integrity/node_modules/@apollo/client" as pattern ["@apollo/client@3.3.7"]. This could result in non-deterministic behavior, skipping.`;
   it("should be able to see log lines", () => {
     cy.dataCy("log-row-0").should("be.visible");
@@ -39,7 +39,6 @@ describe("Basic evergreen log view", () => {
 describe("Bookmarking and selecting lines", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
-
   before(() => {
     cy.login();
     cy.visit(logLink);
@@ -92,7 +91,7 @@ describe("Filtering", () => {
 
   it("should preserve applied bookmarks and selected lines even if they don't match the filters", () => {
     // Delete the filters from the drawer.
-    cy.toggleNavBar();
+    cy.toggleDrawer();
     cy.get(`[aria-label="Delete filter"]`).click();
 
     // Select a line, with the expectation that it won't be collapsed by the filter.

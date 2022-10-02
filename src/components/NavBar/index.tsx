@@ -1,4 +1,3 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import DetailsOverlay from "components/DetailsOverlay";
@@ -36,9 +35,7 @@ const NavBar: React.FC = () => {
       <FlexContainer>
         <LinkContainer>
           <Icon glyph="LobsterLogo" />
-          <StyledLink css={navLinkStyles} href="https://wiki.corp.mongodb.com">
-            Wiki
-          </StyledLink>
+          <StyledLink href="https://wiki.corp.mongodb.com">Wiki</StyledLink>
           <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
         <StyledSearchBar
@@ -47,11 +44,10 @@ const NavBar: React.FC = () => {
           validatorMessage="Invalid Regular Expression"
         />
       </FlexContainer>
-      <ButtonContainer>
-        <StyledButton buttonText="Details" data-cy="details-button">
-          <DetailsOverlay />
-        </StyledButton>
-      </ButtonContainer>
+
+      <StyledButton buttonText="Details" data-cy="details-button">
+        <DetailsOverlay />
+      </StyledButton>
     </Container>
   );
 };
@@ -71,29 +67,19 @@ const FlexContainer = styled.div`
   display: flex;
 `;
 
-const ButtonContainer = styled.div`
+const LinkContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 ${size.xs};
-  justify-self: flex-end;
+  margin-right: ${size.l};
+  gap: ${size.l};
 `;
 
 const StyledSearchBar = styled(SearchBar)`
   width: 60vw;
+  margin-left: ${size.m};
 `;
 
 const StyledButton = styled(PopoverButton)`
   margin: 0 ${size.xs};
-`;
-
-const LinkContainer = styled.div`
-  display: flex;
-  margin-right: ${size.l};
-`;
-
-const navLinkStyles = css`
-  margin: 0 ${size.s};
 `;
 
 export default NavBar;

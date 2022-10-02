@@ -81,7 +81,7 @@ Cypress.Commands.add("login", () => {
   );
 });
 
-Cypress.Commands.add("toggleNavBar", () => {
+Cypress.Commands.add("toggleDrawer", () => {
   cy.get(`[aria-label="Collapse navigation"]`).click();
 });
 

@@ -24,9 +24,8 @@ describe("filters", () => {
       />
     );
 
-    await user.click(screen.getByLabelText("Edit filter"));
-
     // Should show text input containing the current value.
+    await user.click(screen.getByLabelText("Edit filter"));
     expect(screen.queryByText("myFilter")).toBeNull();
     expect(screen.getByDataCy("edit-filter-name")).toBeInTheDocument();
     expect(screen.getByDataCy("edit-filter-name")).toHaveValue("myFilter");
@@ -73,7 +72,6 @@ describe("filters", () => {
         filterName="myFilter"
       />
     );
-
     expect(screen.getByLabelText("Visibility Icon")).toBeInTheDocument();
     await user.click(screen.getByLabelText("Hide filter"));
     expect(screen.getByLabelText("Closed Eye Icon")).toBeInTheDocument();
@@ -89,7 +87,6 @@ describe("filters", () => {
       />
     );
     await user.click(screen.getByLabelText("Delete filter"));
-
     expect(deleteFilter).toHaveBeenCalledTimes(1);
     expect(deleteFilter).toHaveBeenCalledWith("myFilter");
   });

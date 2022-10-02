@@ -27,7 +27,7 @@ declare global {
       /**
        * Custom command to open and close the Leafygreen NavBar.
        */
-      toggleNavBar(): void;
+      toggleDrawer(): void;
       /**
        * Custom command to validate a toast was rendered
        * @example cy.validateToast("success", "This succeeded")

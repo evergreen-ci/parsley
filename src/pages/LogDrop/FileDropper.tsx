@@ -60,15 +60,15 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
     <Container>
       <RedBorderBox>
         {hasDroppedLog ? (
-          <ParseLogs>
-            <StyledSelect
+          <ProcessLogsContainer>
+            <Select
               label="How would you like to parse this log?"
               onChange={(value) => setLogType(value as LogTypes)}
               value={logType}
             >
               <Option value={LogTypes.RESMOKE_LOGS}>Resmoke</Option>
               <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
-            </StyledSelect>
+            </Select>
             <ButtonContainer>
               <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
               <Button
@@ -80,9 +80,9 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
                 Process Log
               </Button>
             </ButtonContainer>
-          </ParseLogs>
+          </ProcessLogsContainer>
         ) : (
-          <div {...getRootProps()} data-cy="upload-zone">
+          <UploadLogsContainer {...getRootProps()} data-cy="upload-zone">
             <input {...getInputProps()} />
             {isDragActive ? (
               <Body>Release to upload</Body>
@@ -97,7 +97,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
                 </Button>
               </Dropzone>
             )}
-          </div>
+          </UploadLogsContainer>
         )}
       </RedBorderBox>
     </Container>
@@ -116,33 +116,31 @@ const RedBorderBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-
-  width: 800px;
-  height: 250px;
+  width: 50vw;
+  height: 30vh;
 
   padding: ${size.xl};
   border: ${size.xxs} dashed ${red.base};
   border-radius: ${size.s};
 `;
 
-const ParseLogs = styled.div`
+const ProcessLogsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  gap: ${size.xs};
   width: 300px;
-`;
-
-// @ts-expect-error
-const StyledSelect = styled(Select)`
-  margin-bottom: ${size.s};
 `;
 
 const ButtonContainer = styled.div`
   display: flex;
   align-self: flex-end;
-  button {
-    margin-left: ${size.xs};
-  }
+  gap: ${size.xs};
+`;
+
+const UploadLogsContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Dropzone = styled.div`
@@ -150,9 +148,7 @@ const Dropzone = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  > * {
-    margin-bottom: ${size.xs};
-  }
+  gap: ${size.xs};
 `;
 
 export default FileDropper;

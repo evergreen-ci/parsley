@@ -1,9 +1,9 @@
 describe("Basic resmoke log view", () => {
+  const logLink =
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
   before(() => {
     cy.login();
-    cy.visit(
-      "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab"
-    );
+    cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
   });
 
@@ -31,11 +31,11 @@ describe("Basic resmoke log view", () => {
 });
 
 describe("Bookmarking and selecting lines", () => {
+  const logLink =
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
   before(() => {
     cy.login();
-    cy.visit(
-      "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab"
-    );
+    cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
   });
 
@@ -85,7 +85,7 @@ describe("Filtering", () => {
 
   it("should preserve applied bookmarks and selected lines even if they don't match the filters", () => {
     // Delete the filters from the drawer.
-    cy.toggleNavBar();
+    cy.toggleDrawer();
     cy.get(`[aria-label="Delete filter"]`).click();
 
     // Select a line, with the expectation that it won't be collapsed by the filter.

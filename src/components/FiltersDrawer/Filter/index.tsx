@@ -11,19 +11,10 @@ import {
 import TextInput from "@leafygreen-ui/text-input";
 import { Body } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
+import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
 
 const { gray } = palette;
-
-enum CaseSensitivity {
-  Sensitive = "sensitive",
-  Insensitive = "insensitive",
-}
-
-enum MatchType {
-  Exact = "exact",
-  Inverse = "inverse",
-}
 
 interface FilterProps {
   ["data-cy"]?: string;

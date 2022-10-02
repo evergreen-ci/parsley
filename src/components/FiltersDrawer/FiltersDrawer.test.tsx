@@ -67,12 +67,10 @@ describe("filtersDrawer", () => {
     const { history } = render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
-
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter")[0]);
     await user.clear(screen.getAllByDataCy("edit-filter-name")[0]);
     await user.type(screen.getAllByDataCy("edit-filter-name")[0], "newFilter");
-
     const confirmButton = screen.getByRole("button", {
       name: "OK",
     });
@@ -88,12 +86,10 @@ describe("filtersDrawer", () => {
     const { history } = render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
-
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter")[0]);
     await user.clear(screen.getAllByDataCy("edit-filter-name")[0]);
     await user.type(screen.getAllByDataCy("edit-filter-name")[0], "filter2");
-
     const confirmButton = screen.getByRole("button", {
       name: "OK",
     });
@@ -108,12 +104,10 @@ describe("filtersDrawer", () => {
     const { history } = render(<FiltersDrawer />, {
       route: "?filters=filter1,filter2",
     });
-
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter")[0]);
     await user.clear(screen.getAllByDataCy("edit-filter-name")[0]);
     await user.type(screen.getAllByDataCy("edit-filter-name")[0], "newFilter");
-
     const cancelButton = screen.getByRole("button", {
       name: "Cancel",
     });
