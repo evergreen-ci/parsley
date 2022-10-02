@@ -108,7 +108,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             <button
               aria-checked={false}
               aria-disabled={false}
-              aria-labelledby="Toggle"
+              aria-labelledby="Wrap Toggle"
               className="leafygreen-ui-wo7arb"
               data-cy="wrap-toggle"
               data-leafygreen-ui="toggle-button"
@@ -174,7 +174,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             <button
               aria-checked={false}
               aria-disabled={false}
-              aria-labelledby="Toggle"
+              aria-labelledby="Case Sensitive Toggle"
               className="leafygreen-ui-wo7arb"
               data-cy="case-sensitive-toggle"
               data-leafygreen-ui="toggle-button"
@@ -244,7 +244,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             <button
               aria-checked={false}
               aria-disabled={false}
-              aria-labelledby="Toggle"
+              aria-labelledby="Filter Logic Toggle"
               className="leafygreen-ui-wo7arb"
               data-cy="filter-logic-toggle"
               data-leafygreen-ui="toggle-button"
@@ -310,7 +310,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             <button
               aria-checked={false}
               aria-disabled={false}
-              aria-labelledby="Toggle"
+              aria-labelledby="Expandable Rows Toggle"
               className="leafygreen-ui-wo7arb"
               data-cy="expandable-rows-toggle"
               data-leafygreen-ui="toggle-button"
@@ -376,7 +376,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             <button
               aria-checked={false}
               aria-disabled={false}
-              aria-labelledby="Toggle"
+              aria-labelledby="Pretty Print Bookmarks Toggle"
               className="leafygreen-ui-wo7arb"
               data-cy="pretty-print-toggle"
               data-leafygreen-ui="toggle-button"
