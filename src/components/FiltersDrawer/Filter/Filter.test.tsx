@@ -23,7 +23,6 @@ describe("filters", () => {
         filterName="myFilter"
       />
     );
-
     // Should show text input containing the current value.
     await user.click(screen.getByLabelText("Edit filter"));
     expect(screen.queryByText("myFilter")).toBeNull();
@@ -49,7 +48,6 @@ describe("filters", () => {
         filterName="myFilter"
       />
     );
-
     // Clear the text input and submit a new filter.
     await user.click(screen.getByLabelText("Edit filter"));
     await user.clear(screen.getByDataCy("edit-filter-name"));

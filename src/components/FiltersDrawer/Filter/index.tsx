@@ -43,10 +43,10 @@ const Filter: React.FC<FilterProps> = ({
   };
 
   return (
-    <FilterRow data-cy={dataCy}>
-      <FilterLabel>
+    <FilterContainer data-cy={dataCy}>
+      <FilterHeader>
         <Badge>FILTER</Badge>
-        <FilterIcons>
+        <IconButtonContainer>
           <IconButton
             aria-label="Edit filter"
             onClick={() => setIsEditing(true)}
@@ -68,13 +68,13 @@ const Filter: React.FC<FilterProps> = ({
           >
             <Icon fill={gray.base} glyph="X" />
           </IconButton>
-        </FilterIcons>
-      </FilterLabel>
+        </IconButtonContainer>
+      </FilterHeader>
 
       {isEditing ? (
         <>
           <StyledTextInput
-            aria-label="Edit Filter Name"
+            aria-label="Edit filter name"
             data-cy="edit-filter-name"
             onChange={(e) => setNewFilter(e.target.value)}
             placeholder="New filter definition"
@@ -104,7 +104,7 @@ const Filter: React.FC<FilterProps> = ({
       )}
 
       <StyledSegmentedControl
-        aria-controls="case-sensitivity"
+        aria-controls="Toggle case sensitivity"
         defaultValue={caseSensitivity}
         label="Case"
         onChange={setCaseSensitivity}
@@ -115,7 +115,7 @@ const Filter: React.FC<FilterProps> = ({
       </StyledSegmentedControl>
 
       <StyledSegmentedControl
-        aria-controls="match-type"
+        aria-controls="Toggle match type"
         defaultValue={matchType}
         label="Match"
         onChange={setMatchType}
@@ -124,22 +124,22 @@ const Filter: React.FC<FilterProps> = ({
         <Option value={MatchType.Exact}>Exact</Option>
         <Option value={MatchType.Inverse}>Inverse</Option>
       </StyledSegmentedControl>
-    </FilterRow>
+    </FilterContainer>
   );
 };
 
-const FilterRow = styled.div`
+const FilterContainer = styled.div`
   display: flex;
   flex-direction: column;
 `;
 
-const FilterLabel = styled.div`
+const FilterHeader = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
 `;
 
-const FilterIcons = styled.div`
+const IconButtonContainer = styled.div`
   display: flex;
   align-items: center;
 `;
@@ -152,7 +152,6 @@ const StyledTextInput = styled(TextInput)`
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-
   margin-top: ${size.xxs};
   margin-bottom: ${size.xs};
   gap: ${size.xxs};

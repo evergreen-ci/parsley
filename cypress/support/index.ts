@@ -25,7 +25,7 @@ declare global {
        */
       getInputByLabel(label: string): Chainable<Element>;
       /**
-       * Custom command to open and close the Leafygreen NavBar.
+       * Custom command to open and close the Leafygreen SideNav.
        */
       toggleDrawer(): void;
       /**

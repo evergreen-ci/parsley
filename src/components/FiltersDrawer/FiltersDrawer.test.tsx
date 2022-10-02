@@ -25,7 +25,7 @@ describe("filtersDrawer", () => {
     expect(collapseButton).toHaveAttribute("aria-expanded", "true");
   });
 
-  it("should be collapsed if the user has already seen the filters drawer before", () => {
+  it("should be collapsed if the user has seen the filters drawer before", () => {
     mockedGet.mockImplementation(() => "true");
 
     render(<FiltersDrawer />);

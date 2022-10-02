@@ -46,7 +46,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
 
   return (
     <StyledSideNav
-      aria-label="Filters Side Nav"
+      aria-label="Filters side nav"
       collapsed={collapsed}
       data-cy={dataCy}
       setCollapsed={(collapse) => {
