@@ -48,12 +48,7 @@ const reducer = (state: LogState, action: Action): LogState => {
       };
     }
     case "CLEAR_LOGS":
-      return {
-        ...state,
-        logs: [],
-        fileName: "",
-        logType: undefined,
-      };
+      return initialState([]);
     case "SET_FILE_NAME":
       return {
         ...state,
