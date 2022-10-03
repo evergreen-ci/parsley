@@ -29,7 +29,7 @@ const BaseToggle: React.FC<BaseToggleProps> = ({
     <ToggleWrapper>
       <ToggleLabel>{leftLabel}</ToggleLabel>
       <Toggle
-        aria-labelledby="base-toggle"
+        aria-labelledby={`${label} Toggle`}
         checked={value}
         data-cy={dataCy}
         onChange={onChange}

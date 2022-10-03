@@ -4,7 +4,7 @@ import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
-import { fontSize, navbarHeight, size } from "constants/tokens";
+import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 
 const { gray } = palette;
@@ -57,7 +57,7 @@ const SideBar: React.FC<SideBarProps> = ({ maxLineNumber }) => {
 };
 
 const StyledButton = styled(Button)`
-  width: 56px;
+  width: 52px;
 `;
 
 const LogLineContainer = styled.div`
@@ -79,15 +79,15 @@ const StyledIcon = styled(Icon)`
 `;
 
 const Container = styled.div`
-  background-color: ${gray.light3};
-  width: ${size.xl};
-  max-height: calc(100vh - ${navbarHeight});
-  box-shadow: 0 ${size.xxs} ${size.xxs} rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: ${size.xl};
+  background-color: ${gray.light3};
+  box-shadow: 0 ${size.xxs} ${size.xxs} rgba(0, 0, 0, 0.25);
   padding-top: ${size.s};
-  z-index: 1;
+  z-index: 0;
 `;
 
 export default SideBar;

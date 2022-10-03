@@ -5,6 +5,7 @@ import routes from "constants/routes";
 import LogView from "./LogView";
 
 const LogDrop = lazy(() => import("./LogDrop"));
+
 const Content: React.FC = () => (
   <Routes>
     <Route element={<Navigate to={routes.upload} />} path={routes.root} />

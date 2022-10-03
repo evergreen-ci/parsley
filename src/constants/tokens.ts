@@ -13,11 +13,12 @@ const size = {
 
 const zIndex = {
   backdrop: -1,
-  modal: 10,
-  tooltip: 20,
-  popover: 30,
-  toast: 40,
-  dropdown: 50,
+  drawer: 10,
+  modal: 20,
+  tooltip: 30,
+  popover: 40,
+  toast: 50,
+  dropdown: 60,
   max_do_not_use: 1000, // should only be used for things like the welcome modal that need to overlay EVERYTHING
 } as const;
 
