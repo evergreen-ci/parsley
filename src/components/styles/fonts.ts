@@ -119,7 +119,7 @@ const fontStyles = css`
     font-style: normal;
     src: url("/static/fonts/SourceCodePro/SourceCodePro-Regular.otf.woff2")
         format("woff2"),
-      url("/static/fonts/MongoDBValueSerif/SourceCodePro-Regular.otf.woff")
+      url("/static/fonts/SourceCodePro/SourceCodePro-Regular.otf.woff")
         format("woff");
   }
 `;
