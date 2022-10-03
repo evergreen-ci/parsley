@@ -7,7 +7,7 @@ import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 
-const { yellow, red } = palette;
+const { yellow, red, green } = palette;
 
 interface BaseRowProps extends ListRowProps {
   children: React.ReactNode;
@@ -16,6 +16,7 @@ interface BaseRowProps extends ListRowProps {
   // The line number associated with a log line and its index within the context of the virtualized list
   // may differ due to collapsed rows.
   lineNumber: number;
+  expanded: boolean;
 }
 
 /**
@@ -23,7 +24,8 @@ interface BaseRowProps extends ListRowProps {
  * It is responsible for handling the highlighting of the selected line
  */
 const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
-  const { index, lineNumber, children, wrap, isVisible, ...rest } = props;
+  const { index, lineNumber, expanded, children, wrap, isVisible, ...rest } =
+    props;
 
   const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
@@ -63,6 +65,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       ref={ref}
       bookmarked={bookmarked}
       data-cy={`log-row-${lineNumber}`}
+      expanded={expanded}
       onDoubleClick={handleDoubleClick}
       selected={selected}
       shouldWrap={wrap}
@@ -99,6 +102,7 @@ const StyledPre = styled.pre<{
   shouldWrap: boolean;
   selected: boolean;
   bookmarked: boolean;
+  expanded: boolean;
 }>`
   overflow-y: hidden;
   margin-top: 0;
@@ -113,6 +117,7 @@ const StyledPre = styled.pre<{
   white-space: break-spaces;
   `}
 
+  ${({ expanded }) => expanded && `background-color: ${green.light3};`}
   ${({ selected }) => selected && `background-color: ${red.light2};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light2};`}
 

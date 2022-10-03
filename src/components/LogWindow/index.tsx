@@ -16,7 +16,14 @@ interface LogWindowProps {
   isUploadedLog: boolean;
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
-  const { logLines, hasLogs, getLine } = useLogContext();
+  const {
+    logLines,
+    hasLogs,
+    getLine,
+    setExpandedLines,
+    collapseLines,
+    expandedLines,
+  } = useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
@@ -25,22 +32,46 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     undefined
   );
   const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
+  const [expandableRows] = useQueryParam(QueryParams.Expandable, false);
 
   // TODO EVG-17537: more advanced filtering
   const processedLogLines = useMemo(
-    () => filterLogs(logLines, filters, bookmarks, selectedLine, filterLogic),
-    [logLines, filters, bookmarks, selectedLine, filterLogic]
+    () =>
+      filterLogs({
+        logLines,
+        filters,
+        bookmarks,
+        selectedLine,
+        expandedLines,
+        filterLogic,
+        expandableRows,
+      }),
+    [
+      logLines,
+      filters,
+      bookmarks,
+      selectedLine,
+      expandedLines,
+      filterLogic,
+      expandableRows,
+    ]
   );
 
   return (
     <Container data-cy="log-window">
-      {hasLogs && <FiltersDrawer />}
+      {hasLogs && (
+        <FiltersDrawer
+          collapseLines={collapseLines}
+          expandedLines={expandedLines}
+        />
+      )}
       {hasLogs && <SideBar maxLineNumber={logLines.length - 1} />}
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>
           <LogPane
             cache={cache}
+            expandedLines={expandedLines}
             filters={filters}
             logLines={processedLogLines}
             rowCount={processedLogLines.length}
@@ -48,6 +79,8 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               logType,
               wrap,
               getLine,
+              expandedLines,
+              setExpandedLines,
               processedLines: processedLogLines,
             })}
             scrollToIndex={selectedLine}

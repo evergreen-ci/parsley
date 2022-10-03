@@ -4,6 +4,10 @@ declare global {
   namespace Cypress {
     interface Chainable {
       /**
+       * Custom command to click one of the toggles in the Details Overlay panel.
+       */
+      clickToggle(toggleDataCy: string): void;
+      /**
        * Custom command to select DOM element by data-cy attribute.
        * @example cy.dataCy('greeting')
        */
@@ -25,6 +29,11 @@ declare global {
        */
       getInputByLabel(label: string): Chainable<Element>;
       /**
+       * Custom command to login to the application
+       * @example cy.login()
+       */
+      login(): void;
+      /**
        * Custom command to open and close the Leafygreen SideNav.
        */
       toggleDrawer(): void;
@@ -41,11 +50,6 @@ declare global {
         message?: string,
         shouldClose?: boolean
       ): void;
-      /**
-       * Custom command to login to the application
-       * @example cy.login()
-       */
-      login(): void;
     }
   }
 }

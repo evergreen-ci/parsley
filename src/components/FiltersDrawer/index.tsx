@@ -1,24 +1,32 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import Badge, { Variant } from "@leafygreen-ui/badge";
+import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import { SideNav, SideNavGroup } from "@leafygreen-ui/side-nav";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, Overline } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
 import Icon from "components/Icon";
 import { HAS_OPENED_DRAWER } from "constants/cookies";
 import { QueryParams } from "constants/queryParams";
 import { size, zIndex } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { ExpandedLines } from "types/logs";
 import Filter from "./Filter";
 
 const { green, gray } = palette;
 
 interface FiltersDrawerProps {
   ["data-cy"]?: string;
+  expandedLines: ExpandedLines;
+  collapseLines: (idx: number) => void;
 }
 
-const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
+const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
+  "data-cy": dataCy,
+  expandedLines,
+  collapseLines,
+}) => {
   const [collapsed, setCollapsed] = useState(
     Cookie.get(HAS_OPENED_DRAWER) === "true"
   );
@@ -86,6 +94,34 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
             </FilterWrapper>
           )}
         </StyledSideNavGroup>
+
+        {/* TODO: Remove below code, as it is only a proof of concept. */}
+        <StyledSideNavGroup
+          glyph={
+            <Icon
+              fill={expandedLines.length ? green.dark2 : gray.base}
+              glyph="Expand"
+            />
+          }
+          header="Expanded Rows"
+        >
+          <ExpandedLineContainer>
+            {expandedLines.map((e, idx) => (
+              <ExpandedLineWrapper key={`range-${e[0]}-to-${e[1]}`}>
+                <IconButton
+                  aria-label="Delete range button"
+                  onClick={() => collapseLines(idx)}
+                >
+                  <Icon fill={green.dark2} glyph="X" />
+                </IconButton>
+                <Overline>
+                  Row {e[0]} to {e[1]}
+                </Overline>
+              </ExpandedLineWrapper>
+            ))}
+          </ExpandedLineContainer>
+        </StyledSideNavGroup>
+        {/* TODO: Remove above code, as it is only a proof of concept. */}
       </PaddedContainer>
     </StyledSideNav>
   );
@@ -121,6 +157,21 @@ const NavGroupTitle = styled.div`
 const FilterWrapper = styled.div`
   margin-top: ${size.xs};
   margin-bottom: ${size.m};
+`;
+
+const ExpandedLineWrapper = styled.div`
+  display: flex;
+  align-items: center;
+
+  width: 150px;
+  background: ${green.light2};
+  border-radius: ${size.xxs};
+`;
+
+const ExpandedLineContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: ${size.xs};
 `;
 
 export default FiltersDrawer;

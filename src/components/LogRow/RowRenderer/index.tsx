@@ -6,16 +6,21 @@ import {
 } from "react-virtualized";
 import { LogTypes } from "constants/enums";
 import AnsiiRow from "../AnsiiRow";
+import CollapsedRow from "../CollapsedRow";
 import ResmokeRow from "../ResmokeRow";
 import { RowData } from "../types";
 
 type RowRendererFunction = (data: RowData) => ListRowRenderer;
 
 const RowRenderer: RowRendererFunction = (data) => {
-  const { logType } = data;
-  const Row = rowRendererMap[logType];
+  const { logType, processedLines } = data;
+
   const result = (props: ListRowProps) => {
     const { index, key, parent } = props;
+
+    const Row = Array.isArray(processedLines[index])
+      ? CollapsedRow
+      : rowRendererMap[logType];
 
     return (
       <CellMeasurer key={key} cache={cache} parent={parent} rowIndex={index}>

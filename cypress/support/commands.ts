@@ -6,6 +6,12 @@ const user = {
 };
 const toastDataCy = "toast";
 
+Cypress.Commands.add("clickToggle", (toggleDataCy: string) => {
+  cy.dataCy("details-button").click();
+  cy.dataCy(toggleDataCy).click();
+  cy.dataCy("details-button").click();
+});
+
 Cypress.Commands.add("dataCy", (value: string) => {
   cy.get(`[data-cy=${value}]`);
 });

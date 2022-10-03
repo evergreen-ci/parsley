@@ -8,6 +8,7 @@ type LogPaneProps = Omit<
   wrap: boolean;
   filters: string[];
   rowRenderer: ListRowRenderer;
+  expandedLines: Array<[number, number]>;
 };
 
 const LogPane: React.FC<LogPaneProps> = ({
@@ -17,15 +18,18 @@ const LogPane: React.FC<LogPaneProps> = ({
   cache,
   wrap,
   filters,
+  expandedLines,
   ...rest
 }) => {
   const listRef = useRef<List>(null);
+
   useEffect(() => {
     // Reset the cache and recalculate the row heights
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wrap, `${filters}`]);
+  }, [wrap, `${filters}`, `${expandedLines}`]);
+
   return (
     <AutoSizer>
       {({ height, width }) => (

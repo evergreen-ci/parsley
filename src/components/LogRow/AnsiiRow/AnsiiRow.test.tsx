@@ -118,6 +118,8 @@ const getLine = (index: number) => logLines[index];
 
 const data = {
   getLine,
+  setExpandedLines: jest.fn(),
+  expandedLines: [],
   wrap: false,
   processedLines: logLines.map((_, index) => index),
   logType: LogTypes.RESMOKE_LOGS,

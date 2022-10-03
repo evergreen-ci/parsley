@@ -2,27 +2,29 @@ import { forwardRef, useMemo } from "react";
 import AnsiUp from "ansi_up";
 import parse from "html-react-parser";
 import linkifyHtml from "linkify-html";
-import CollapsedRow from "components/LogRow//CollapsedRow";
 import BaseRow from "components/LogRow/BaseRow";
+import { isExpanded } from "utils/expandedRanges";
 import { BaseRowProps } from "../types";
 
 const ansiUp = new AnsiUp();
 
 const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { data, listRowProps } = rowProps;
-  const { getLine, wrap, processedLines } = data;
+  const { getLine, wrap, processedLines, expandedLines } = data;
   const { index } = listRowProps;
 
-  const line = processedLines[index];
-
-  if (Array.isArray(line)) {
-    return (
-      <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
-    );
-  }
+  const line = processedLines[index] as number;
+  const expanded = isExpanded(line, expandedLines);
   const lineContent = getLine(line);
+
   return lineContent ? (
-    <BaseRow wrap={wrap} {...listRowProps} ref={ref} lineNumber={line}>
+    <BaseRow
+      {...listRowProps}
+      ref={ref}
+      expanded={expanded}
+      lineNumber={line}
+      wrap={wrap}
+    >
       <ProcessedAnsiiRow lineContent={lineContent} />
     </BaseRow>
   ) : null;

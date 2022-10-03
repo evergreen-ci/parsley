@@ -1,8 +1,10 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
+import { ExpandedLines } from "types/logs";
 import AnsiiRow from ".";
 import { RowRenderer, cache } from "../RowRenderer";
 
@@ -14,26 +16,32 @@ export default {
 type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>["data"]>;
 
 // Single AnsiiRow.
-const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
-  <AnsiiRow
-    key={logLines[0]}
-    data={{
-      getLine,
-      wrap: args.wrap,
-      processedLines: processedLogLines,
-      logType: LogTypes.EVERGREEN_TASK_LOGS,
-    }}
-    listRowProps={{
-      index: 0,
-      style: {},
-      columnIndex: 0,
-      isScrolling: false,
-      isVisible: true,
-      key: getLine(0) || "",
-      parent: {} as any,
-    }}
-  />
-);
+const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
+  const [, setExpandedLines] = useState<ExpandedLines>([]);
+
+  return (
+    <AnsiiRow
+      key={logLines[0]}
+      data={{
+        getLine,
+        wrap: args.wrap,
+        processedLines: processedLogLines,
+        logType: LogTypes.EVERGREEN_TASK_LOGS,
+        expandedLines: [],
+        setExpandedLines,
+      }}
+      listRowProps={{
+        index: 0,
+        style: {},
+        columnIndex: 0,
+        isScrolling: false,
+        isVisible: true,
+        key: getLine(0) || "",
+        parent: {} as any,
+      }}
+    />
+  );
+};
 
 export const SingleLine = SingleLineTemplate.bind({});
 
@@ -49,63 +57,36 @@ SingleLine.decorators = [
 ];
 
 // Multiple AnsiiRows.
-const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
-  <Container>
-    <LogPane
-      cache={cache}
-      filters={[]}
-      logLines={processedLogLines}
-      rowCount={processedLogLines.length}
-      rowRenderer={RowRenderer({
-        logType: LogTypes.EVERGREEN_TASK_LOGS,
-        wrap: args.wrap,
-        getLine,
-        processedLines: processedLogLines,
-      })}
-      scrollToIndex={0}
-      wrap={args.wrap}
-    />
-  </Container>
-);
+const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
+  const [, setExpandedLines] = useState<ExpandedLines>([]);
 
+  return (
+    <Container>
+      <LogPane
+        cache={cache}
+        expandedLines={[]}
+        filters={[]}
+        logLines={processedLogLines}
+        rowCount={processedLogLines.length}
+        rowRenderer={RowRenderer({
+          logType: LogTypes.EVERGREEN_TASK_LOGS,
+          wrap: args.wrap,
+          getLine,
+          processedLines: processedLogLines,
+          expandedLines: [],
+          setExpandedLines,
+        })}
+        scrollToIndex={0}
+        wrap={args.wrap}
+      />
+    </Container>
+  );
+};
 export const MultiLines = MultiLineTemplate.bind({});
 MultiLines.args = {
   wrap: false,
 };
 MultiLines.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
-
-// Multiple AnsiiRows with CollapsedRows.
-const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => (
-  <Container>
-    <LogPane
-      cache={cache}
-      filters={[]}
-      logLines={collapsedProcessedLogLines}
-      rowCount={collapsedProcessedLogLines.length}
-      rowRenderer={RowRenderer({
-        logType: LogTypes.EVERGREEN_TASK_LOGS,
-        wrap: args.wrap,
-        getLine,
-        processedLines: collapsedProcessedLogLines,
-      })}
-      scrollToIndex={0}
-      wrap={args.wrap}
-    />
-  </Container>
-);
-
-export const Collapsed = CollapsedTemplate.bind({});
-
-Collapsed.args = {
-  wrap: false,
-};
-Collapsed.decorators = [
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
@@ -147,8 +128,6 @@ const logLines = [
 ];
 
 const processedLogLines = logLines.map((_, index) => index);
-
-const collapsedProcessedLogLines = [0, [1, 2], 3, 4, [5], 6, 7];
 
 const Container = styled.div`
   height: 400px;

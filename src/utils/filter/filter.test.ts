@@ -33,72 +33,146 @@ describe("matchesFilter", () => {
 });
 
 describe("filterLogs", () => {
+  it("should not apply any processing if there are no filters applied", () => {
+    expect(
+      filterLogs({
+        logLines,
+        filters: [],
+        bookmarks: [],
+        selectedLine: undefined,
+        expandedLines: [],
+        filterLogic: FilterLogic.And,
+        expandableRows: true,
+      })
+    ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+  });
+
+  it("should not apply any processing if expandable rows are not enabled", () => {
+    expect(
+      filterLogs({
+        logLines,
+        filters: ["starting"],
+        bookmarks: [],
+        selectedLine: undefined,
+        expandedLines: [],
+        filterLogic: FilterLogic.And,
+        expandableRows: false,
+      })
+    ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+  });
+
   describe("filtering (AND)", () => {
-    it("works without any filters, bookmarks, or selected line applied", () => {
+    it("works with only filters", () => {
       expect(
-        filterLogs(logLines, [], [], undefined, FilterLogic.And)
-      ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+        filterLogs({
+          logLines,
+          filters: ["starting", "port"],
+          bookmarks: [],
+          selectedLine: undefined,
+          expandedLines: [],
+          filterLogic: FilterLogic.And,
+          expandableRows: true,
+        })
+      ).toStrictEqual([[0], 1, [2, 3], 4, [5, 6], 7]);
     });
 
-    it("works with filters", () => {
+    it("works with filters and expandedLines", () => {
       expect(
-        filterLogs(
+        filterLogs({
           logLines,
-          ["starting", "port"],
-          [],
-          undefined,
-          FilterLogic.And
-        )
-      ).toStrictEqual([[0], 1, [2, 3], 4, [5, 6], 7]);
+          filters: ["starting", "port"],
+          bookmarks: [],
+          selectedLine: undefined,
+          expandedLines: [[0, 4]],
+          filterLogic: FilterLogic.And,
+          expandableRows: true,
+        })
+      ).toStrictEqual([0, 1, 2, 3, 4, [5, 6], 7]);
     });
 
     it("works with filters and bookmarks", () => {
       expect(
-        filterLogs(
+        filterLogs({
           logLines,
-          ["starting", "port"],
-          [2],
-          undefined,
-          FilterLogic.And
-        )
+          filters: ["starting", "port"],
+          bookmarks: [2],
+          selectedLine: undefined,
+          expandedLines: [],
+          filterLogic: FilterLogic.And,
+          expandableRows: true,
+        })
       ).toStrictEqual([[0], 1, 2, [3], 4, [5, 6], 7]);
     });
 
     it("works with filters, bookmarks, and selected line", () => {
       expect(
-        filterLogs(logLines, ["starting", "port"], [2], 0, FilterLogic.And)
+        filterLogs({
+          logLines,
+          filters: ["starting", "port"],
+          bookmarks: [2],
+          selectedLine: 0,
+          expandedLines: [],
+          filterLogic: FilterLogic.And,
+          expandableRows: true,
+        })
       ).toStrictEqual([0, 1, 2, [3], 4, [5, 6], 7]);
     });
   });
 
   describe("filtering (OR)", () => {
-    it("works without any filters, bookmarks, or selected line applied", () => {
+    it("works with only filters", () => {
       expect(
-        filterLogs(logLines, [], [], undefined, FilterLogic.Or)
-      ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+        filterLogs({
+          logLines,
+          filters: ["starting", "pid"],
+          bookmarks: [],
+          selectedLine: undefined,
+          expandedLines: [],
+          filterLogic: FilterLogic.Or,
+          expandableRows: true,
+        })
+      ).toStrictEqual([0, 1, [2], 3, 4, [5], 6, 7]);
     });
 
-    it("works with filters", () => {
+    it("works with filters and expanded lines", () => {
       expect(
-        filterLogs(logLines, ["starting", "pid"], [], undefined, FilterLogic.Or)
-      ).toStrictEqual([0, 1, [2], 3, 4, [5], 6, 7]);
+        filterLogs({
+          logLines,
+          filters: ["starting", "pid"],
+          bookmarks: [],
+          selectedLine: undefined,
+          expandedLines: [[0, 4]],
+          filterLogic: FilterLogic.Or,
+          expandableRows: true,
+        })
+      ).toStrictEqual([0, 1, 2, 3, 4, [5], 6, 7]);
     });
 
     it("works with filters and bookmarks", () => {
       expect(
-        filterLogs(
+        filterLogs({
           logLines,
-          ["starting", "pid"],
-          [5],
-          undefined,
-          FilterLogic.Or
-        )
+          filters: ["starting", "pid"],
+          bookmarks: [5],
+          selectedLine: undefined,
+          expandedLines: [],
+          filterLogic: FilterLogic.Or,
+          expandableRows: true,
+        })
       ).toStrictEqual([0, 1, [2], 3, 4, 5, 6, 7]);
     });
 
     it("works with filters, bookmarks, and selectedLine", () => {
       expect(
-        filterLogs(logLines, ["starting", "pid"], [5], 2, FilterLogic.Or)
+        filterLogs({
+          logLines,
+          filters: ["starting", "pid"],
+          bookmarks: [5],
+          selectedLine: 2,
+          expandedLines: [],
+          filterLogic: FilterLogic.Or,
+          expandableRows: true,
+        })
       ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
     });
   });

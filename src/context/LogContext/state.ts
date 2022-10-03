@@ -1,20 +1,26 @@
 import { useReducer } from "react";
 import { LogTypes } from "constants/enums";
+import { ExpandedLines } from "types/logs";
+import { mergeIntervals } from "utils/expandedRanges";
 import { processResmokeLine } from "utils/resmoke";
 
 interface LogState {
   logs: string[];
   fileName?: string;
   logType?: LogTypes;
+  expandedLines: ExpandedLines;
 }
 
 type Action =
   | { type: "INGEST_LOGS"; logs: string[]; logType: LogTypes }
   | { type: "CLEAR_LOGS" }
+  | { type: "EXPAND_LINES"; expandedLines: ExpandedLines }
+  | { type: "COLLAPSE_LINES"; idx: number }
   | { type: "SET_FILE_NAME"; fileName: string };
 
 const initialState = (initialLogLines?: string[]): LogState => ({
   logs: initialLogLines || [],
+  expandedLines: [],
 });
 
 const reducer = (state: LogState, action: Action): LogState => {
@@ -38,16 +44,33 @@ const reducer = (state: LogState, action: Action): LogState => {
       return {
         ...state,
         logs: [],
+        expandedLines: [],
         fileName: "",
         logType: undefined,
       };
+    case "EXPAND_LINES": {
+      const intervals = state.expandedLines.concat(action.expandedLines);
+      return {
+        ...state,
+        expandedLines: mergeIntervals(intervals),
+      };
+    }
+    case "COLLAPSE_LINES": {
+      const newExpandedLines = state.expandedLines.filter(
+        (_f, idx) => idx !== action.idx
+      );
+      return {
+        ...state,
+        expandedLines: newExpandedLines,
+      };
+    }
     case "SET_FILE_NAME":
       return {
         ...state,
         fileName: action.fileName,
       };
     default:
-      throw new Error(`Unkown reducer action ${action}`);
+      throw new Error(`Unknown reducer action ${action}`);
   }
 };
 

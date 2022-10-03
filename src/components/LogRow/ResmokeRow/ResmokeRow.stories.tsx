@@ -1,9 +1,11 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
+import { ExpandedLines } from "types/logs";
 import ResmokeRow from ".";
 
 export default {
@@ -16,26 +18,32 @@ type ResmokeRowProps = React.FC<
 >;
 
 // Single ResmokeRow.
-const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
-  <ResmokeRow
-    key={logLines[0]}
-    data={{
-      getLine,
-      wrap: args.wrap,
-      processedLines: processedLogLines,
-      logType: LogTypes.RESMOKE_LOGS,
-    }}
-    listRowProps={{
-      index: 2,
-      style: {},
-      columnIndex: 0,
-      isScrolling: false,
-      isVisible: true,
-      key: getLine(2) || "",
-      parent: {} as any,
-    }}
-  />
-);
+const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
+  const [, setExpandedLines] = useState<ExpandedLines>([]);
+
+  return (
+    <ResmokeRow
+      key={logLines[0]}
+      data={{
+        getLine,
+        wrap: args.wrap,
+        processedLines: processedLogLines,
+        logType: LogTypes.RESMOKE_LOGS,
+        expandedLines: [],
+        setExpandedLines,
+      }}
+      listRowProps={{
+        index: 2,
+        style: {},
+        columnIndex: 0,
+        isScrolling: false,
+        isVisible: true,
+        key: getLine(2) || "",
+        parent: {} as any,
+      }}
+    />
+  );
+};
 
 export const SingleLine = SingleLineTemplate.bind({});
 
@@ -51,64 +59,37 @@ SingleLine.decorators = [
 ];
 
 // Multiple ResmokeRows.
-const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
-  <Container>
-    <LogPane
-      cache={cache}
-      filters={[]}
-      logLines={processedLogLines}
-      rowCount={processedLogLines.length}
-      rowRenderer={RowRenderer({
-        logType: LogTypes.RESMOKE_LOGS,
-        wrap: args.wrap,
-        getLine,
-        processedLines: processedLogLines,
-      })}
-      scrollToIndex={0}
-      wrap={args.wrap}
-    />
-  </Container>
-);
+const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
+  const [, setExpandedLines] = useState<ExpandedLines>([]);
 
+  return (
+    <Container>
+      <LogPane
+        cache={cache}
+        expandedLines={[]}
+        filters={[]}
+        logLines={processedLogLines}
+        rowCount={processedLogLines.length}
+        rowRenderer={RowRenderer({
+          logType: LogTypes.RESMOKE_LOGS,
+          wrap: args.wrap,
+          getLine,
+          processedLines: processedLogLines,
+          expandedLines: [],
+          setExpandedLines,
+        })}
+        scrollToIndex={0}
+        wrap={args.wrap}
+      />
+    </Container>
+  );
+};
 export const MultipleLines = MultipleLineTemplate.bind({});
 
 MultipleLines.args = {
   wrap: false,
 };
 MultipleLines.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
-
-// Multiple ResmokeRows with CollapsedRows.
-const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => (
-  <Container>
-    <LogPane
-      cache={cache}
-      filters={[]}
-      logLines={collapsedProcessedLogLines}
-      rowCount={collapsedProcessedLogLines.length}
-      rowRenderer={RowRenderer({
-        logType: LogTypes.RESMOKE_LOGS,
-        wrap: args.wrap,
-        getLine,
-        processedLines: collapsedProcessedLogLines,
-      })}
-      scrollToIndex={0}
-      wrap={args.wrap}
-    />
-  </Container>
-);
-
-export const Collapsed = CollapsedTemplate.bind({});
-
-Collapsed.args = {
-  wrap: false,
-};
-Collapsed.decorators = [
   (Story) => (
     <MemoryRouter initialEntries={["/"]}>
       <Story />
@@ -127,8 +108,6 @@ const logLines = [
   "[j0:sec1] Starting mongod on port 20002...",
 ];
 const processedLogLines = logLines.map((_, index) => index);
-
-const collapsedProcessedLogLines = [0, 1, 2, [3, 4, 5], 6, 7];
 
 const Container = styled.div`
   height: 400px;

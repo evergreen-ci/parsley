@@ -20,7 +20,7 @@ describe("filtersDrawer", () => {
   });
 
   it("should be uncollapsed if the user has never seen the filters drawer before", () => {
-    render(<FiltersDrawer />);
+    render(<FiltersDrawer {...props} />);
     const collapseButton = screen.getByLabelText("Collapse navigation");
     expect(collapseButton).toHaveAttribute("aria-expanded", "true");
   });
@@ -28,13 +28,13 @@ describe("filtersDrawer", () => {
   it("should be collapsed if the user has seen the filters drawer before", () => {
     mockedGet.mockImplementation(() => "true");
 
-    render(<FiltersDrawer />);
+    render(<FiltersDrawer {...props} />);
     const collapseButton = screen.getByLabelText("Collapse navigation");
     expect(collapseButton).toHaveAttribute("aria-expanded", "false");
   });
 
   it("should be possible to toggle the drawer open and closed", async () => {
-    render(<FiltersDrawer />);
+    render(<FiltersDrawer {...props} />);
 
     const collapseButton = screen.getByLabelText("Collapse navigation");
     expect(collapseButton).toHaveAttribute("aria-expanded", "true");
@@ -43,12 +43,12 @@ describe("filtersDrawer", () => {
   });
 
   it("shows a message when no filters have been applied", () => {
-    render(<FiltersDrawer />);
+    render(<FiltersDrawer {...props} />);
     expect(screen.getByDataCy("no-filters-message")).toBeInTheDocument();
   });
 
   it("filters should properly display based on URL", () => {
-    render(<FiltersDrawer />, {
+    render(<FiltersDrawer {...props} />, {
       route: "?filters=filter1,filter2",
     });
     expect(screen.getByText("filter1")).toBeInTheDocument();
@@ -56,7 +56,7 @@ describe("filtersDrawer", () => {
   });
 
   it("shows the number of filters in the header", () => {
-    render(<FiltersDrawer />, {
+    render(<FiltersDrawer {...props} />, {
       route: "?filters=one,two,three,four",
     });
     const navGroupHeader = screen.getByDataCy("nav-group-header");
@@ -64,7 +64,7 @@ describe("filtersDrawer", () => {
   });
 
   it("editing filters should modify the URL correctly", async () => {
-    const { history } = render(<FiltersDrawer />, {
+    const { history } = render(<FiltersDrawer {...props} />, {
       route: "?filters=filter1,filter2",
     });
     // Edit the first filter.
@@ -83,7 +83,7 @@ describe("filtersDrawer", () => {
   });
 
   it("trying to edit a filter to a filter that already exists should do nothing", async () => {
-    const { history } = render(<FiltersDrawer />, {
+    const { history } = render(<FiltersDrawer {...props} />, {
       route: "?filters=filter1,filter2",
     });
     // Edit the first filter.
@@ -101,7 +101,7 @@ describe("filtersDrawer", () => {
   });
 
   it("pressing the cancel button after editing a filter should do nothing", async () => {
-    const { history } = render(<FiltersDrawer />, {
+    const { history } = render(<FiltersDrawer {...props} />, {
       route: "?filters=filter1,filter2",
     });
     // Edit the first filter.
@@ -119,7 +119,7 @@ describe("filtersDrawer", () => {
   });
 
   it("deleting filters should modify the URL correctly", async () => {
-    const { history } = render(<FiltersDrawer />, {
+    const { history } = render(<FiltersDrawer {...props} />, {
       route: "?filters=filter1,filter2",
     });
     // Delete the first filter.
@@ -129,3 +129,9 @@ describe("filtersDrawer", () => {
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 });
+
+// TODO: Remove this.
+const props = {
+  expandedLines: [],
+  collapseLines: jest.fn(),
+};
