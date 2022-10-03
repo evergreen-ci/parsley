@@ -137,8 +137,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   }, [scrollToLine, searchResults, state.searchState.searchIndex]);
 
   const highlightedLine =
-    state.searchState.searchIndex &&
-    searchResults[state.searchState.searchIndex];
+    state.searchState.searchIndex !== undefined
+      ? searchResults[state.searchState.searchIndex]
+      : undefined;
 
   const memoizedContext = useMemo(
     () => ({
