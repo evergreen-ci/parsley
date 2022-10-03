@@ -80,6 +80,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
 <pre
   className="css-1f21fgs"
   data-cy="log-row-2"
+  data-selected={false}
   onDoubleClick={[Function]}
   selected={false}
   style={Object {}}
