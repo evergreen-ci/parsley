@@ -6,6 +6,7 @@ import { Option, Select } from "@leafygreen-ui/select";
 import Icon from "components/Icon";
 import IconWithTooltip from "components/IconWithTooltip";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
+import { zIndex } from "constants/tokens";
 import debounce from "utils/debounce";
 
 const { yellow } = palette;
@@ -62,6 +63,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         data-cy="searchbar-select"
         disabled={disabled}
         onChange={(v) => setSelected(v)}
+        popoverZIndex={zIndex.popover}
         value={selected}
       >
         <Option key="search" data-cy="search-option" value="search">

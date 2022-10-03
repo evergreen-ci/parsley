@@ -1,9 +1,6 @@
-import { css } from "@emotion/react";
 import styled from "@emotion/styled";
-import Badge from "@leafygreen-ui/badge";
 import { palette } from "@leafygreen-ui/palette";
 import DetailsOverlay from "components/DetailsOverlay";
-import FiltersOverlay from "components/FiltersOverlay";
 import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
@@ -42,9 +39,7 @@ const NavBar: React.FC = () => {
       <FlexContainer>
         <LinkContainer>
           <Icon glyph="LobsterLogo" />
-          <StyledLink css={navLinkStyles} href="https://wiki.corp.mongodb.com">
-            Wiki
-          </StyledLink>
+          <StyledLink href="https://wiki.corp.mongodb.com">Wiki</StyledLink>
           <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
         <StyledSearchBar
@@ -59,62 +54,42 @@ const NavBar: React.FC = () => {
           <SearchResults paginate={paginate} searchState={searchState} />
         )}
       </FlexContainer>
-      <ButtonContainer>
-        <StyledButton
-          buttonText={
-            <span>
-              Filters <Badge variant="green">{filters.length}</Badge>
-            </span>
-          }
-        >
-          <FiltersOverlay />
-        </StyledButton>
-        <StyledButton buttonText="Details" data-cy="details-button">
-          <DetailsOverlay />
-        </StyledButton>
-      </ButtonContainer>
+
+      <StyledButton buttonText="Details" data-cy="details-button">
+        <DetailsOverlay />
+      </StyledButton>
     </Container>
   );
 };
+
+const Container = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: ${navbarHeight};
+
+  background-color: ${white};
+  border-bottom: 1px solid ${gray.light2};
+  padding: 0 ${size.s};
+`;
 
 const FlexContainer = styled.div`
   display: flex;
 `;
 
-const ButtonContainer = styled.div`
+const LinkContainer = styled.div`
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 0 ${size.xs};
-  justify-self: flex-end;
+  margin-right: ${size.l};
+  gap: ${size.l};
 `;
 
 const StyledSearchBar = styled(SearchBar)`
   width: 60vw;
+  margin-left: ${size.m};
 `;
 
 const StyledButton = styled(PopoverButton)`
   margin: 0 ${size.xs};
-`;
-
-const LinkContainer = styled.div`
-  display: flex;
-  margin-right: ${size.l};
-`;
-
-const Container = styled.nav`
-  align-items: center;
-  background-color: ${white};
-  border-bottom: 1px solid ${gray.light2};
-  display: flex;
-  height: ${navbarHeight};
-  justify-content: space-between;
-  padding: 0 ${size.s};
-  position: static;
-`;
-
-const navLinkStyles = css`
-  margin: 0 ${size.s};
 `;
 
 export default NavBar;

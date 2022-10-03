@@ -4,4 +4,14 @@ enum LogTypes {
   RESMOKE_LOGS = "RESMOKE_LOGS",
 }
 
-export { LogTypes };
+enum CaseSensitivity {
+  Sensitive = "sensitive",
+  Insensitive = "insensitive",
+}
+
+enum MatchType {
+  Exact = "exact",
+  Inverse = "inverse",
+}
+
+export { LogTypes, CaseSensitivity, MatchType };
