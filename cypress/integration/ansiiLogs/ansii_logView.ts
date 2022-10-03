@@ -110,3 +110,37 @@ describe("Filtering", () => {
     });
   });
 });
+
+describe.only("Searching", () => {
+  const logLink =
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("search-option").click();
+  });
+  it("searching for a term should highlight matching words ", () => {
+    cy.dataCy("searchbar-input").type("Starting");
+    cy.dataCy("search-count").should("be.visible");
+    cy.dataCy("search-count").should("contain.text", "1/1");
+    cy.dataCy("highlight").should("exist");
+    cy.dataCy("highlight").should("have.length", 1);
+    cy.dataCy("highlight").should("contain.text", "Starting");
+  });
+  it("searching for a term should snap the matching line to the top of the window", () => {
+    cy.dataCy("searchbar-input").clear();
+    cy.dataCy("searchbar-input").type("v2.28.5");
+    cy.dataCy("search-count").should("be.visible");
+    cy.dataCy("search-count").should("contain.text", "1/1");
+    cy.get('[data-cy="ansii-row"]:visible')
+      .first()
+      .should("contain.text", "v2.28.5");
+    // cy.dataCy("ansii-row")
+    //   .get(":visible")
+    //   .first()
+    //   .should("contain.text", "v2.28.5");
+    // // Determine if first visible line is the one we searched for
+    // cy.dataCy("ansii-row").first().should("contain.text", "v2.28.5");
+  });
+});
