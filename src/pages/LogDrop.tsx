@@ -1,5 +1,4 @@
 import { useState } from "react";
-import style from "@emotion/styled";
 import LogWindow from "components/LogWindow";
 import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
@@ -11,22 +10,13 @@ const LogDrop = () => {
   const [logType, setLogType] = useState(LogTypes.RESMOKE_LOGS);
   return (
     <PageLayout>
-      <Container>
-        {hasLogs ? (
-          <LogWindow isUploadedLog logType={logType} />
-        ) : (
-          <FileDropper onChangeLogType={setLogType} />
-        )}
-      </Container>
+      {hasLogs ? (
+        <LogWindow isUploadedLog logType={logType} />
+      ) : (
+        <FileDropper onChangeLogType={setLogType} />
+      )}
     </PageLayout>
   );
 };
-
-const Container = style.div`
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-`;
 
 export default LogDrop;

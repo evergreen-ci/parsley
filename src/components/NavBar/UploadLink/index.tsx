@@ -4,7 +4,7 @@ import ConfirmationModal from "@leafygreen-ui/confirmation-modal";
 import { useNavigate } from "react-router-dom";
 import { StyledRouterLink } from "components/styles";
 import routes from "constants/routes";
-import { size, zIndex } from "constants/tokens";
+import { zIndex } from "constants/tokens";
 
 interface UploadLinkProps {
   hasLogs: boolean;
@@ -23,7 +23,6 @@ const UploadLink: React.FC<UploadLinkProps> = ({ hasLogs, clearLogs }) => {
   return (
     <>
       <StyledRouterLink
-        css={navLinkStyles}
         data-cy="upload-link"
         onClick={handleClick}
         to={hasLogs ? "#" : routes.upload}
@@ -51,9 +50,5 @@ const UploadLink: React.FC<UploadLinkProps> = ({ hasLogs, clearLogs }) => {
     </>
   );
 };
-
-const navLinkStyles = css`
-  margin: 0 ${size.s};
-`;
 
 export default UploadLink;

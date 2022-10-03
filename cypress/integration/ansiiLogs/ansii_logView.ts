@@ -4,7 +4,9 @@ describe("Basic evergreen log view", () => {
   before(() => {
     cy.login();
     cy.visit(logLink);
+    cy.setCookie("has-opened-drawer", "true");
   });
+
   const longLogLine = `[2022/03/02 17:02:18.500] warning Pattern ["@apollo/client@latest"] is trying to unpack in the same destination "/home/ubuntu/.cache/yarn/v6/npm-@apollo-client-3.3.7-f15bf961dc0c2bee37a47bf86b8881fdc6183810-integrity/node_modules/@apollo/client" as pattern ["@apollo/client@3.3.7"]. This could result in non-deterministic behavior, skipping.`;
   it("should be able to see log lines", () => {
     cy.dataCy("log-row-0").should("be.visible");
@@ -40,6 +42,7 @@ describe("Bookmarking and selecting lines", () => {
   before(() => {
     cy.login();
     cy.visit(logLink);
+    cy.setCookie("has-opened-drawer", "true");
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
@@ -76,8 +79,6 @@ describe("Bookmarking and selecting lines", () => {
 });
 
 describe("Filtering", () => {
-  const logLink =
-    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   it("should be able to apply filters", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("filter-option").click();
@@ -88,10 +89,10 @@ describe("Filtering", () => {
     });
   });
 
-  it("should respect applied filters and selected lines", () => {
-    // TODO EVG-17908: Instead of revisiting the page, delete the filters from the drawer.
-    cy.login(); // TODO EVG-17908: Remove this line.
-    cy.visit(logLink);
+  it("should preserve applied bookmarks and selected lines even if they don't match the filters", () => {
+    // Delete the filters from the drawer.
+    cy.toggleDrawer();
+    cy.get(`[aria-label="Delete filter"]`).click();
 
     // Select a line, with the expectation that it won't be collapsed by the filter.
     cy.dataCy("log-link-5").click();
@@ -107,6 +108,20 @@ describe("Filtering", () => {
       cy.wrap($el)
         .should("have.attr", "data-cy")
         .and("match", /log-row-(0|5|6)/);
+    });
+  });
+
+  it("should be able to edit filters", () => {
+    // Clear selected line and bookmarks.
+    cy.dataCy("log-link-5").click();
+    cy.dataCy("clear-bookmarks").click();
+
+    cy.get(`[aria-label="Edit filter"]`).click();
+    cy.dataCy("edit-filter-name").clear().type("running");
+    cy.contains("button", "OK").click();
+
+    cy.get("[data-cy^='log-row-']").each(($el) => {
+      cy.wrap($el).contains("running", { matchCase: false });
     });
   });
 });
