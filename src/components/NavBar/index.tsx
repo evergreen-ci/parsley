@@ -39,13 +39,18 @@ const NavBar: React.FC = () => {
           <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
         <StyledSearchBar
+          disabled={!hasLogs}
           onSubmit={handleSearch}
           validator={validateRegexp}
           validatorMessage="Invalid Regular Expression"
         />
       </FlexContainer>
 
-      <StyledButton buttonText="Details" data-cy="details-button">
+      <StyledButton
+        buttonText="Details"
+        data-cy="details-button"
+        disabled={!hasLogs}
+      >
         <DetailsOverlay />
       </StyledButton>
     </Container>
