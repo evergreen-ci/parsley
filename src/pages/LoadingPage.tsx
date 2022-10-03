@@ -65,7 +65,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ onLoad, logType }) => {
       dispatchToast.error(error);
     }
   }, [data, ingestLines, error, onLoad, logType, dispatchToast]);
-  return <div>I am the loading page</div>;
+  return error ? null : <div>I am the loading page</div>;
 };
 
 export default LoadingPage;

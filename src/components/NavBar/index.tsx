@@ -56,8 +56,9 @@ const Container = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: ${navbarHeight};
+  flex-shrink: 0;
 
+  height: ${navbarHeight};
   background-color: ${white};
   border-bottom: 1px solid ${gray.light2};
   padding: 0 ${size.s};
