@@ -20,10 +20,18 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 
     {searchState.searchRange !== undefined && (
       <>
-        <Button onClick={() => paginate(DIRECTION.PREVIOUS)} size="small">
+        <Button
+          data-cy="previous-button"
+          onClick={() => paginate(DIRECTION.PREVIOUS)}
+          size="small"
+        >
           Prev
         </Button>
-        <Button onClick={() => paginate(DIRECTION.NEXT)} size="small">
+        <Button
+          data-cy="next-button"
+          onClick={() => paginate(DIRECTION.NEXT)}
+          size="small"
+        >
           Next
         </Button>
       </>

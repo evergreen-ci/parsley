@@ -119,7 +119,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       type: "SET_MATCH_COUNT",
       matchCount: searchResults.length,
     });
-  }, [dispatch, searchResults.length, state.searchState.searchTerm]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [dispatch, `${searchResults}`, state.searchState.searchTerm]);
 
   // If the selected line changes, scroll to it
   useEffect(() => {

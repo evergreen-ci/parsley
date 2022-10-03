@@ -29,6 +29,11 @@ declare global {
        */
       toggleDrawer(): void;
       /**
+       * Custom command to open and close the Details Panel.
+       * @example cy.toggleDetailsPanel(open: boolean)
+       */
+      toggleDetailsPanel(open: boolean): void;
+      /**
        * Custom command to validate a toast was rendered
        * @example cy.validateToast("success", "This succeeded")
        * @example cy.validateToast("error", "This failed")

@@ -38,8 +38,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     QueryParams.SelectedLine,
     undefined
   );
-  const selected =
-    selectedLine === lineNumber || highlightedLine === lineNumber;
+  const selected = selectedLine === lineNumber || highlightedLine === index;
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
@@ -73,6 +72,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       ref={ref}
       bookmarked={bookmarked}
       data-cy={`log-row-${lineNumber}`}
+      data-selected={selected}
       onDoubleClick={handleDoubleClick}
       selected={selected}
       shouldWrap={wrap}

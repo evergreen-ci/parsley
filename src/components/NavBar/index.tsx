@@ -56,7 +56,7 @@ const NavBar: React.FC = () => {
       </FlexContainer>
 
       <StyledButton buttonText="Details" data-cy="details-button">
-        <DetailsOverlay />
+        <DetailsOverlay data-cy="details-overlay" />
       </StyledButton>
     </Container>
   );
