@@ -11,7 +11,7 @@ const SearchCount: React.FC<SearchCountProps> = ({
   currentSearchIndex,
   matchingSearchCount,
 }) => (
-  <Container hasMatches={matchingSearchCount !== 0}>
+  <Container data-cy="search-count" hasMatches={matchingSearchCount !== 0}>
     {matchingSearchCount !== 0
       ? `${currentSearchIndex}/${matchingSearchCount}`
       : "Not Found"}
