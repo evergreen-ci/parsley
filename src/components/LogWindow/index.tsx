@@ -37,7 +37,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
       {hasLogs && <FiltersDrawer />}
       {hasLogs && <SideBar maxLineNumber={logLines.length - 1} />}
       <ColumnContainer>
-        <SubHeader isUploadedLog={isUploadedLog} />
+        <SubHeader isUploadedLog={isUploadedLog} logType={logType} />
         <LogPaneContainer>
           <LogPane
             cache={cache}

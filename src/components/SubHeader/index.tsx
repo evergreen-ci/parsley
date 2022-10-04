@@ -1,8 +1,12 @@
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { Body } from "@leafygreen-ui/typography";
+import { useParams } from "react-router-dom";
 import Icon from "components/Icon";
 import { StyledLink } from "components/styles";
+import { LogTypes } from "constants/enums";
+import { getEvergreenTaskURL } from "constants/externalURLTemplates";
+import { slugs } from "constants/routes";
 import { fontSize, size, subheaderHeight } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 
@@ -11,10 +15,35 @@ const { gray } = palette;
 /** TODO: EVG-17534 */
 interface SubHeaderProps {
   isUploadedLog: boolean;
+  logType: LogTypes;
 }
-const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
+const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog, logType }) => {
   const { fileName } = useLogContext();
-
+  const {
+    // [slugs.buildID]: buildID,
+    // [slugs.origin]: origin,
+    // [slugs.testID]: testID,
+    [slugs.taskID]: taskID,
+    [slugs.execution]: execution,
+  } = useParams();
+  let url = "";
+  if (!isUploadedLog) {
+    switch (logType) {
+      case LogTypes.RESMOKE_LOGS: {
+        break;
+      }
+      case LogTypes.EVERGREEN_TASK_LOGS:
+      case LogTypes.EVERGREEN_TEST_LOGS: {
+        if (!taskID || !execution) {
+          break;
+        }
+        url = getEvergreenTaskURL(taskID, execution);
+        break;
+      }
+      default:
+        break;
+    }
+  }
   return (
     <Container>
       {isUploadedLog ? (
@@ -29,7 +58,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
           <IconWrapper>
             <Icon glyph="EvergreenLogo" />
           </IconWrapper>
-          <StyledLink href="/test">Task Page</StyledLink>
+          <StyledLink href={url}>Task Page</StyledLink>
         </Header>
       )}
     </Container>
