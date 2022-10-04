@@ -42,7 +42,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
         <svg
           alt=""
           aria-hidden={true}
-          className="leafygreen-ui-13p6dfv leafygreen-ui-1t9qnhm"
+          className="leafygreen-ui-866818"
           height={16}
           role="presentation"
           viewBox="0 0 16 16"
