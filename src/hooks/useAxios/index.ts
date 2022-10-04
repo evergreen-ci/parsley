@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const useAxiosGet = (url: string) => {
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [data, setData] = useState<string | null>(null);
-  const [error, setError] = useState<null>(null);
+  const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     axios
@@ -24,7 +24,7 @@ const useAxiosGet = (url: string) => {
         setIsLoading(false);
         setData(d);
       })
-      .catch((e) => {
+      .catch((e: Error | AxiosError) => {
         setIsLoading(false);
         setError(e.message);
       });

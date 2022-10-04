@@ -2,6 +2,7 @@ import { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
 import { LogTypes } from "constants/enums";
 import routes from "constants/routes";
+import NotFound from "./404";
 import LogView from "./LogView";
 
 const LogDrop = lazy(() => import("./LogDrop"));
@@ -33,7 +34,7 @@ const Content: React.FC = () => (
       element={<LogView logType={LogTypes.RESMOKE_LOGS} />}
       path={routes.resmokeLogsAll}
     />
-    <Route element={<div>404</div>} path="*" />
+    <Route element={<NotFound />} path="*" />
   </Routes>
 );
 

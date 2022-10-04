@@ -63,7 +63,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   height: 100%;
-  overflow-y: hidden;
 `;
 
 const ColumnContainer = styled.div`
