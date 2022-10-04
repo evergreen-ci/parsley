@@ -19,7 +19,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     getLine,
     lineCount,
     processedLogLines,
-    selectedLine,
     searchState,
     highlightedLine,
   } = useLogContext();
@@ -48,7 +47,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               searchTerm,
               highlightedLine,
             })}
-            scrollToIndex={selectedLine}
             wrap={wrap}
           />
         </LogPaneContainer>
