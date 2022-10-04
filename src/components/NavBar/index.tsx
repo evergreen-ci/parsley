@@ -5,6 +5,7 @@ import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
 import { StyledLink } from "components/styles";
+import { SearchBarActions } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { navbarHeight, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
@@ -25,14 +26,24 @@ const NavBar: React.FC = () => {
 
   const { hasSearch } = searchState;
   const handleSearch = (selected: string, value: string) => {
-    if (selected === "search") {
+    if (selected === SearchBarActions.Search) {
       setSearch(value);
-    } else if (selected === "filter" && !filters.includes(value)) {
+    } else if (
+      selected === SearchBarActions.Filter &&
+      !filters.includes(value)
+    ) {
       setFilters([...filters, value]);
     }
   };
 
-  const shouldClearOnSubmit = (selected: string) => selected === "filter";
+  const handleOnChange = (selected: string, value: string) => {
+    if (selected === SearchBarActions.Search) {
+      setSearch(value);
+    }
+  };
+
+  const shouldClearOnSubmit = (selected: string) =>
+    selected === SearchBarActions.Filter;
 
   return (
     <Container>
@@ -44,7 +55,7 @@ const NavBar: React.FC = () => {
         </LinkContainer>
         <StyledSearchBar
           disabled={!hasLogs}
-          onChange={handleSearch}
+          onChange={handleOnChange}
           onSubmit={handleSearch}
           shouldClearOnSubmit={shouldClearOnSubmit}
           validator={validateRegexp}

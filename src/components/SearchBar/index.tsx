@@ -6,6 +6,7 @@ import { Option, Select } from "@leafygreen-ui/select";
 import Icon from "components/Icon";
 import IconWithTooltip from "components/IconWithTooltip";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
+import { SearchBarActions } from "constants/enums";
 import { zIndex } from "constants/tokens";
 import debounce from "utils/debounce";
 
@@ -30,7 +31,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   validatorMessage = "Invalid Input",
 }) => {
   const [input, setInput] = useState("");
-  const [selected, setSelected] = useState("search");
+  const [selected, setSelected] = useState(SearchBarActions.Search);
 
   const isValid = validator(input);
   const handleOnSubmit = () => {
@@ -62,14 +63,22 @@ const SearchBar: React.FC<SearchBarProps> = ({
         aria-labelledby="searchbar-select"
         data-cy="searchbar-select"
         disabled={disabled}
-        onChange={(v) => setSelected(v)}
+        onChange={(v) => setSelected(v as SearchBarActions)}
         popoverZIndex={zIndex.popover}
         value={selected}
       >
-        <Option key="search" data-cy="search-option" value="search">
+        <Option
+          key={SearchBarActions.Search}
+          data-cy="search-option"
+          value={SearchBarActions.Search}
+        >
           Search
         </Option>
-        <Option key="filter" data-cy="filter-option" value="filter">
+        <Option
+          key={SearchBarActions.Filter}
+          data-cy="filter-option"
+          value={SearchBarActions.Filter}
+        >
           Filter
         </Option>
       </StyledSelect>
@@ -102,7 +111,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         }
         placeholder="optional, regexp to search"
         spellCheck={false}
-        type="search"
+        type={SearchBarActions.Search}
         value={input}
       />
     </Container>
