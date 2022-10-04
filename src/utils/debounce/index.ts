@@ -1,6 +1,13 @@
-const debounce = (fn: Function, delay: number) => {
+/**
+ * The `debounce()` function forces a function to wait a certain amount of time before running again.
+ * @param fn
+ * @param delay
+ * @returns
+ */
+const debounce = <T extends (...args: any[]) => any>(fn: T, delay: number) => {
   let timeout: NodeJS.Timeout;
-  return (...args: any[]) => {
+
+  return (...args: Parameters<T>) => {
     clearTimeout(timeout);
     timeout = setTimeout(() => fn(...args), delay);
   };
