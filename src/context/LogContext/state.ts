@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import { LogTypes } from "constants/enums";
 import { processResmokeLine } from "utils/resmoke";
-import { DIRECTION, SearchState } from "./types";
+import { SearchState } from "./types";
 
 interface LogState {
   logs: string[];
@@ -19,7 +19,7 @@ type Action =
   | { type: "SET_CASE_SENSITIVE"; caseSensitive: boolean }
   | { type: "SCROLL_TO_LINE"; lineNumber: number }
   | { type: "SET_MATCH_COUNT"; matchCount: number }
-  | { type: "PAGINATE"; direction: DIRECTION };
+  | { type: "PAGINATE"; nextPage: number };
 
 const initialState = (initialLogLines?: string[]): LogState => ({
   logs: initialLogLines || [],
@@ -107,31 +107,14 @@ const reducer = (state: LogState, action: Action): LogState => {
           searchIndex: action.matchCount ? 0 : undefined,
         },
       };
-    case "PAGINATE": {
-      const { searchIndex, searchRange } = state.searchState;
-      if (searchRange !== undefined && searchIndex !== undefined) {
-        let nextPage = searchIndex;
-        if (action.direction === DIRECTION.NEXT) {
-          if (searchIndex + 1 < searchRange) {
-            nextPage += 1;
-          } else {
-            nextPage = 0;
-          }
-        } else if (searchIndex - 1 < 0) {
-          nextPage = searchRange - 1;
-        } else {
-          nextPage -= 1;
-        }
-        return {
-          ...state,
-          searchState: {
-            ...state.searchState,
-            searchIndex: nextPage,
-          },
-        };
-      }
-      return state;
-    }
+    case "PAGINATE":
+      return {
+        ...state,
+        searchState: {
+          ...state.searchState,
+          searchIndex: action.nextPage,
+        },
+      };
     case "SCROLL_TO_LINE":
       return {
         ...state,

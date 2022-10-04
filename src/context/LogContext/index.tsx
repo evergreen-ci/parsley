@@ -15,6 +15,7 @@ import { filterLogs } from "utils/filter";
 import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
 import { DIRECTION, SearchState } from "./types";
+import { getNextPage } from "./utils";
 
 interface LogContextState {
   fileName?: string;
@@ -123,14 +124,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       scrollToLine(selectedLine);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [state.logs.length > 0, selectedLine]);
-
-  // If the search term changes, scroll to the first match
-  useEffect(() => {
-    if (state.searchState.searchIndex !== undefined) {
-      scrollToLine(searchResults[state.searchState.searchIndex]);
-    }
-  }, [scrollToLine, searchResults, state.searchState.searchIndex]);
+  }, [!!state.logs.length, selectedLine]);
 
   const highlightedLine =
     state.searchState.searchIndex !== undefined
@@ -161,7 +155,12 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
       scrollToLine,
       paginate: (direction: DIRECTION) => {
-        dispatch({ type: "PAGINATE", direction });
+        const { searchIndex, searchRange } = state.searchState;
+        if (searchIndex !== undefined && searchRange !== undefined) {
+          const nextPage = getNextPage(searchIndex, searchRange, direction);
+          dispatch({ type: "PAGINATE", nextPage });
+          scrollToLine(searchResults[nextPage]);
+        }
       },
       setCaseSensitive: (caseSensitive: boolean) => {
         dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive });
@@ -174,6 +173,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       state.lineNumber,
       processedLogLines,
       highlightedLine,
+      searchResults,
       getLine,
       scrollToLine,
       dispatch,
