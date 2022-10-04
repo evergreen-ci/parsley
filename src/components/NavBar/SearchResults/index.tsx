@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
+import { size } from "constants/tokens";
 import { DIRECTION, SearchState } from "context/LogContext/types";
 import SearchCount from "./SearchCount";
 
@@ -42,6 +43,7 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 const SearchContainer = styled.div`
   align-items: center;
   display: flex;
+  gap: ${size.xs};
 `;
 
 export default SearchResults;
