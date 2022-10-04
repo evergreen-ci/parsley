@@ -15,8 +15,8 @@ type Action =
   | { type: "INGEST_LOGS"; logs: string[]; logType: LogTypes }
   | { type: "CLEAR_LOGS" }
   | { type: "SET_FILE_NAME"; fileName: string }
-  | { type: "SET_SEARCH_TERM"; searchTerm: string; caseSensitive: boolean }
-  | { type: "TOGGLE_CASE_SENSITIVE"; caseSensitive: boolean }
+  | { type: "SET_SEARCH_TERM"; searchTerm: string }
+  | { type: "SET_CASE_SENSITIVE"; caseSensitive: boolean }
   | { type: "SCROLL_TO_LINE"; lineNumber: number }
   | { type: "SET_MATCH_COUNT"; matchCount: number }
   | { type: "PAGINATE"; direction: DIRECTION };
@@ -27,6 +27,7 @@ const initialState = (initialLogLines?: string[]): LogState => ({
     searchIndex: 0,
     searchRange: 0,
     hasSearch: false,
+    caseSensitive: false,
   },
 });
 
@@ -58,11 +59,12 @@ const reducer = (state: LogState, action: Action): LogState => {
       const hasSearch = !!action.searchTerm;
       const searchTerm = new RegExp(
         action.searchTerm,
-        action.caseSensitive ? "" : "i"
+        state.searchState.caseSensitive ? "" : "i"
       );
       return {
         ...state,
         searchState: {
+          ...state.searchState,
           searchTerm: hasSearch ? searchTerm : undefined,
           searchIndex: undefined,
           searchRange: undefined,
@@ -70,10 +72,16 @@ const reducer = (state: LogState, action: Action): LogState => {
         },
       };
     }
-    case "TOGGLE_CASE_SENSITIVE": {
+    case "SET_CASE_SENSITIVE": {
       const { searchTerm } = state.searchState;
       if (!searchTerm) {
-        return state;
+        return {
+          ...state,
+          searchState: {
+            ...state.searchState,
+            caseSensitive: action.caseSensitive,
+          },
+        };
       }
       const newSearchTerm = new RegExp(
         searchTerm.source,
@@ -86,6 +94,7 @@ const reducer = (state: LogState, action: Action): LogState => {
           searchIndex: undefined,
           searchRange: undefined,
           hasSearch: true,
+          caseSensitive: action.caseSensitive,
         },
       };
     }

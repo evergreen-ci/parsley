@@ -264,7 +264,7 @@ describe("useLogContext", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => (
-        <Router route="?caseSensitive=false">
+        <Router>
           <LogContextProvider
             initialLogLines={["A line 1", "B line 2", "C line 3"]}
           >
@@ -273,6 +273,7 @@ describe("useLogContext", () => {
         </Router>
       );
       const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.searchState.caseSensitive).toBeFalsy();
       expect(result.current.lineCount).toBe(3);
       expect(result.current.processedLogLines).toHaveLength(3);
       act(() => {
@@ -285,7 +286,7 @@ describe("useLogContext", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => (
-        <Router route="?caseSensitive=true">
+        <Router>
           <LogContextProvider
             initialLogLines={["A line 1", "B line 2", "C line 3"]}
           >
@@ -294,10 +295,13 @@ describe("useLogContext", () => {
         </Router>
       );
       const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.searchState.caseSensitive).toBeFalsy();
       expect(result.current.lineCount).toBe(3);
-      expect(result.current.processedLogLines).toHaveLength(3);
       act(() => {
         result.current.setSearch("a line");
+      });
+      act(() => {
+        result.current.setCaseSensitive(true);
       });
       expect(result.current.searchState.searchRange).toBeUndefined();
       expect(result.current.searchState.hasSearch).toBe(true);

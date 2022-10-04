@@ -19,19 +19,20 @@ import { DIRECTION, SearchState } from "./types";
 interface LogContextState {
   fileName?: string;
   hasLogs: boolean;
-  lineCount: number;
-  processedLogLines: ProcessedLogLines;
-  selectedLine?: number;
-  searchState: SearchState;
-  listRef: React.RefObject<List>;
   highlightedLine?: number;
+  lineCount: number;
+  listRef: React.RefObject<List>;
+  processedLogLines: ProcessedLogLines;
+  searchState: SearchState;
+  selectedLine?: number;
   clearLogs: () => void;
   getLine: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
+  paginate: (dir: DIRECTION) => void;
   scrollToLine: (lineNumber: number) => void;
   setFileName: (fileName: string) => void;
   setSearch: (search: string) => void;
-  paginate: (dir: DIRECTION) => void;
+  setCaseSensitive: (caseSensitive: boolean) => void;
 }
 const LogContext = createContext<LogContextState | null>(null);
 
@@ -59,7 +60,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     undefined
   );
   const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
-  const [caseSensitive] = useQueryParam(QueryParams.CaseSensitive, false);
   const [upperRange] = useQueryParam<undefined | number>(
     QueryParams.UpperRange,
     undefined
@@ -107,11 +107,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       getLine,
     ]
   );
-
-  // Handle case sensitivity changes
-  useEffect(() => {
-    dispatch({ type: "TOGGLE_CASE_SENSITIVE", caseSensitive });
-  }, [caseSensitive, dispatch]);
 
   // Handle search result changes
   useEffect(() => {
@@ -162,11 +157,14 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         dispatch({ type: "SET_FILE_NAME", fileName });
       },
       setSearch: (searchTerm: string) => {
-        dispatch({ type: "SET_SEARCH_TERM", searchTerm, caseSensitive });
+        dispatch({ type: "SET_SEARCH_TERM", searchTerm });
       },
       scrollToLine,
       paginate: (direction: DIRECTION) => {
         dispatch({ type: "PAGINATE", direction });
+      },
+      setCaseSensitive: (caseSensitive: boolean) => {
+        dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive });
       },
     }),
     [
@@ -179,7 +177,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       getLine,
       scrollToLine,
       dispatch,
-      caseSensitive,
     ]
   );
 
