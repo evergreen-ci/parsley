@@ -1,10 +1,11 @@
-import { PageLayout } from "components/styles";
-import notFound from "./404/notFound.svg";
+import { Suspense, lazy } from "react";
+
+const NotFoundSvg = lazy(() => import("./404/NotFoundSvg"));
 
 const NotFound: React.FC = () => (
-  <PageLayout>
-    <img alt="Page not found" data-cy="404" src={notFound} />
-  </PageLayout>
+  <Suspense fallback={<div>Loading</div>}>
+    <NotFoundSvg />
+  </Suspense>
 );
 
 export default NotFound;

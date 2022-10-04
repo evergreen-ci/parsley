@@ -12,6 +12,7 @@ import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import { useAxiosGet } from "hooks";
+import NotFound from "pages/404";
 import LoadingBar from "./LoadingBar";
 
 interface LoadingPageProps {
@@ -75,7 +76,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
           <LoadingBar indeterminate />
         </LoadingBarContainer>
       ) : (
-        <div>404 here</div>
+        <NotFound />
       )}
     </Container>
   );
