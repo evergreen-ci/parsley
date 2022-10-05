@@ -66,7 +66,11 @@ const NavBar: React.FC = () => {
         )}
       </FlexContainer>
 
-      <StyledButton buttonText="Details" data-cy="details-button">
+      <StyledButton
+        buttonText="Details"
+        data-cy="details-button"
+        disabled={!hasLogs}
+      >
         <DetailsOverlay data-cy="details-overlay" />
       </StyledButton>
     </Container>
@@ -77,8 +81,9 @@ const Container = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: ${navbarHeight};
+  flex-shrink: 0;
 
+  height: ${navbarHeight};
   background-color: ${white};
   border-bottom: 1px solid ${gray.light2};
   padding: 0 ${size.s};
