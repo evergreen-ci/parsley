@@ -17,7 +17,6 @@ type Action =
   | { type: "SET_FILE_NAME"; fileName: string }
   | { type: "SET_SEARCH_TERM"; searchTerm: string }
   | { type: "SET_CASE_SENSITIVE"; caseSensitive: boolean }
-  | { type: "SCROLL_TO_LINE"; lineNumber: number }
   | { type: "SET_MATCH_COUNT"; matchCount: number }
   | { type: "PAGINATE"; nextPage: number };
 
@@ -114,11 +113,6 @@ const reducer = (state: LogState, action: Action): LogState => {
           ...state.searchState,
           searchIndex: action.nextPage,
         },
-      };
-    case "SCROLL_TO_LINE":
-      return {
-        ...state,
-        lineNumber: action.lineNumber,
       };
     default:
       throw new Error(`Unknown reducer action ${action}`);

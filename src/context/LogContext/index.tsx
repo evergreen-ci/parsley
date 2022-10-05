@@ -25,7 +25,6 @@ interface LogContextState {
   listRef: React.RefObject<List>;
   processedLogLines: ProcessedLogLines;
   searchState: SearchState;
-  selectedLine?: number;
   clearLogs: () => void;
   getLine: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
@@ -139,7 +138,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       processedLogLines,
       searchState: state.searchState,
       hasLogs: !!state.logs.length,
-      selectedLine: state.lineNumber,
       listRef,
       highlightedLine,
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
@@ -170,7 +168,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       state.fileName,
       state.searchState,
       state.logs.length,
-      state.lineNumber,
       processedLogLines,
       highlightedLine,
       searchResults,
