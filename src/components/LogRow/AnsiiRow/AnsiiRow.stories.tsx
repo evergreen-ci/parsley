@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import AnsiiRow from ".";
@@ -40,13 +39,6 @@ export const SingleLine = SingleLineTemplate.bind({});
 SingleLine.args = {
   wrap: false,
 };
-SingleLine.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 // Multiple AnsiiRows.
 const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
@@ -72,13 +64,6 @@ export const MultiLines = MultiLineTemplate.bind({});
 MultiLines.args = {
   wrap: false,
 };
-MultiLines.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 // Multiple AnsiiRows with CollapsedRows.
 const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => (
@@ -105,13 +90,6 @@ export const Collapsed = CollapsedTemplate.bind({});
 Collapsed.args = {
   wrap: false,
 };
-Collapsed.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 const logLines = [
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']",

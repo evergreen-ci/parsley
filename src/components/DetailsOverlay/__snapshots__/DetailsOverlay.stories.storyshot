@@ -425,9 +425,14 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
       >
         <button
           aria-disabled={false}
-          className="leafygreen-ui-1olgycx"
+          className="leafygreen-ui-1olgycx leafygreen-ui-cssveg"
           data-leafygreen-ui="button"
           disabled={false}
+          onBlur={[Function]}
+          onClick={[Function]}
+          onFocus={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
           type="button"
         >
           <div
