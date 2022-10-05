@@ -22,15 +22,17 @@ const ButtonRow: React.FC = () => {
         align="top"
         justify="middle"
         trigger={
-          <Button
-            leftGlyph={<Icon glyph="Copy" />}
-            onClick={() => {
-              copyToClipboard(jiraString);
-              setHasCopied(!hasCopied);
-            }}
-          >
-            JIRA
-          </Button>
+          <div>
+            <Button
+              leftGlyph={<Icon glyph="Copy" />}
+              onClick={() => {
+                copyToClipboard(jiraString);
+                setHasCopied(!hasCopied);
+              }}
+            >
+              JIRA
+            </Button>
+          </div>
         }
         triggerEvent="hover"
       >

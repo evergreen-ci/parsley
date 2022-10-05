@@ -423,45 +423,49 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
       <div
         className="css-91jh6a"
       >
-        <button
-          aria-disabled={false}
-          className="leafygreen-ui-1olgycx leafygreen-ui-cssveg"
-          data-leafygreen-ui="button"
-          disabled={false}
+        <div
+          className="leafygreen-ui-cssveg"
           onBlur={[Function]}
-          onClick={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
-          type="button"
         >
-          <div
-            className="leafygreen-ui-v038xi"
-          />
-          <div
-            className="leafygreen-ui-1qmzz4y"
+          <button
+            aria-disabled={false}
+            className="leafygreen-ui-1olgycx"
+            data-leafygreen-ui="button"
+            disabled={false}
+            onClick={[Function]}
+            type="button"
           >
-            <svg
-              alt=""
-              aria-hidden={true}
-              className="leafygreen-ui-1svomvq"
-              fill="none"
-              height={16}
-              role="presentation"
-              viewBox="0 0 16 16"
-              width={16}
-              xmlns="http://www.w3.org/2000/svg"
+            <div
+              className="leafygreen-ui-v038xi"
+            />
+            <div
+              className="leafygreen-ui-1qmzz4y"
             >
-              <path
-                clipRule="evenodd"
-                d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1zm8-.928L7.257 6.498A.857.857 0 007 7.11v.688h3.01a.857.857 0 00.857-.858V4h-.717a.857.857 0 00-.6.246l-.55.54zM4.867 1H4.15a.857.857 0 00-.601.246L1.257 3.498A.857.857 0 001 4.11v.688h3.01a.857.857 0 00.857-.858V1zM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 017 13.286V12z"
-                fill="currentColor"
-                fillRule="evenodd"
-              />
-            </svg>
-            JIRA
-          </div>
-        </button>
+              <svg
+                alt=""
+                aria-hidden={true}
+                className="leafygreen-ui-1svomvq"
+                fill="none"
+                height={16}
+                role="presentation"
+                viewBox="0 0 16 16"
+                width={16}
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clipRule="evenodd"
+                  d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1zm8-.928L7.257 6.498A.857.857 0 007 7.11v.688h3.01a.857.857 0 00.857-.858V4h-.717a.857.857 0 00-.6.246l-.55.54zM4.867 1H4.15a.857.857 0 00-.601.246L1.257 3.498A.857.857 0 001 4.11v.688h3.01a.857.857 0 00.857-.858V1zM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 017 13.286V12z"
+                  fill="currentColor"
+                  fillRule="evenodd"
+                />
+              </svg>
+              JIRA
+            </div>
+          </button>
+        </div>
         <button
           aria-disabled={false}
           className="leafygreen-ui-1olgycx"
