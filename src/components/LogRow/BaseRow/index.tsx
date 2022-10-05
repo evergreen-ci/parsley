@@ -38,7 +38,8 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     QueryParams.SelectedLine,
     undefined
   );
-  const selected = selectedLine === lineNumber || highlightedLine === index;
+  const selected = selectedLine === lineNumber;
+  const isHighlighted = highlightedLine === index;
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
@@ -72,7 +73,9 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       ref={ref}
       bookmarked={bookmarked}
       data-cy={`log-row-${lineNumber}`}
+      data-highlighted={isHighlighted}
       data-selected={selected}
+      highlighted={isHighlighted}
       onDoubleClick={handleDoubleClick}
       selected={selected}
       shouldWrap={wrap}
@@ -109,6 +112,7 @@ const StyledPre = styled.pre<{
   shouldWrap: boolean;
   selected: boolean;
   bookmarked: boolean;
+  highlighted: boolean;
 }>`
   overflow-y: hidden;
   margin-top: 0;
@@ -123,13 +127,14 @@ const StyledPre = styled.pre<{
   white-space: break-spaces;
   `}
 
-  ${({ selected }) => selected && `background-color: ${red.light2};`}
+  ${({ selected }) => selected && `background-color: #FA8128;`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light2};`}
-  ${({ selected }) =>
-    selected &&
+  ${({ highlighted }) => highlighted && `background-color: ${red.light2};`}
+  ${({ highlighted }) =>
+    highlighted &&
     `
     mark {
-      background-color: ${yellow.light3};
+      filter: brightness(0.7);
     }
 `}
   // Hover should be an overlay shadow so that the user can see the color underneath.
