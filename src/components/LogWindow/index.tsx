@@ -21,6 +21,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     processedLogLines,
     searchState,
     highlightedLine,
+    range,
   } = useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
@@ -42,6 +43,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
             rowRenderer={RowRenderer({
               logType,
               wrap,
+              range,
               getLine,
               processedLines: processedLogLines,
               searchTerm,

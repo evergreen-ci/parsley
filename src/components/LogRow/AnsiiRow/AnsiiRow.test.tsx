@@ -94,12 +94,40 @@ describe("ansiiRow", () => {
   it("should highlight matching text on the line", () => {
     renderWithRouterMatch(
       <AnsiiRow
-        data={{ ...data, searchTerm: /highlight me/gi }}
+        data={{ ...data, searchTerm: /highlight me/i }}
         listRowProps={{ ...listRowProps, index: 9 }}
       />
     );
-    expect(screen.getByText("highlight me")).toBeInTheDocument();
+    expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
     expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
+  });
+  it("should highlight matching text if it is within range", () => {
+    renderWithRouterMatch(
+      <AnsiiRow
+        data={{
+          ...data,
+          searchTerm: /highlight me/i,
+          range: { lowerRange: 0, upperRange: 10 },
+        }}
+        listRowProps={{ ...listRowProps, index: 9 }}
+      />
+    );
+    expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
+  });
+  it("should not highlight matching text if it is outside of range", () => {
+    renderWithRouterMatch(
+      <AnsiiRow
+        data={{
+          ...data,
+          searchTerm: /highlight me/i,
+          range: { lowerRange: 0, upperRange: 8 },
+        }}
+        listRowProps={{ ...listRowProps, index: 9 }}
+      />
+    );
+    expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
+    expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
   });
 });
 
@@ -132,4 +160,7 @@ const data = {
   wrap: false,
   processedLines: logLines.map((_, index) => index),
   logType: LogTypes.RESMOKE_LOGS,
+  range: {
+    lowerRange: 0,
+  },
 };

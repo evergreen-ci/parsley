@@ -5,10 +5,12 @@ import BaseRow from "components/LogRow/BaseRow";
 import { isCollapsedRow } from "utils/collapsedRow";
 import renderHtml from "utils/renderHtml";
 import { BaseRowProps } from "../types";
+import { isLineInRange } from "../utils";
 
 const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { data, listRowProps } = rowProps;
-  const { getLine, wrap, processedLines, searchTerm, highlightedLine } = data;
+  const { getLine, wrap, processedLines, range, searchTerm, highlightedLine } =
+    data;
   const { index } = listRowProps;
 
   const line = processedLines[index];
@@ -19,6 +21,8 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
     );
   }
   const lineContent = getLine(line);
+  const inRange = isLineInRange(range, line);
+
   return lineContent ? (
     <BaseRow
       wrap={wrap}
@@ -27,7 +31,10 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       highlightedLine={highlightedLine}
       lineNumber={line}
     >
-      <ProcessedResmokeRow lineContent={lineContent} searchTerm={searchTerm} />
+      <ProcessedResmokeRow
+        lineContent={lineContent}
+        searchTerm={inRange ? searchTerm : undefined}
+      />
     </BaseRow>
   ) : null;
 });

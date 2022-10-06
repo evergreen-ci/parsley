@@ -81,12 +81,40 @@ describe("resmokeRow", () => {
   it("should highlight matching text on the line", () => {
     renderWithRouterMatch(
       <ResmokeRow
-        data={{ ...data, searchTerm: /mongod/gi }}
+        data={{ ...data, searchTerm: /mongod/i }}
         listRowProps={{ ...listRowProps, index: 7 }}
       />
     );
-    expect(screen.getByText("mongod")).toBeInTheDocument();
+    expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
     expect(screen.getByDataCy("highlight")).toHaveTextContent("mongod");
+  });
+  it("should highlight matching text if it is within range", () => {
+    renderWithRouterMatch(
+      <ResmokeRow
+        data={{
+          ...data,
+          searchTerm: /mongod/i,
+          range: { lowerRange: 0, upperRange: 8 },
+        }}
+        listRowProps={{ ...listRowProps, index: 7 }}
+      />
+    );
+    expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("mongod");
+  });
+  it("should not highlight matching text if it is outside of range", () => {
+    renderWithRouterMatch(
+      <ResmokeRow
+        data={{
+          ...data,
+          searchTerm: /mongod/i,
+          range: { lowerRange: 0, upperRange: 6 },
+        }}
+        listRowProps={{ ...listRowProps, index: 7 }}
+      />
+    );
+    expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
+    expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
   });
 });
 
@@ -117,4 +145,7 @@ const data = {
   wrap: false,
   processedLines: logLines.map((_, index) => index),
   logType: LogTypes.RESMOKE_LOGS,
+  range: {
+    lowerRange: 0,
+  },
 };

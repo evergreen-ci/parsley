@@ -13,6 +13,10 @@ interface RowData {
   processedLines: ProcessedLogLines;
   logType: LogTypes;
   searchTerm?: RegExp;
+  range: {
+    lowerRange: number;
+    upperRange?: number;
+  };
   highlightedLine?: number;
 }
 
