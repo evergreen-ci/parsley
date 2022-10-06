@@ -40,17 +40,17 @@ describe("Bookmarking and selecting lines", () => {
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
-    cy.location("search").should("equal", "?bookmarks=0,11080");
+    cy.location("search").should("equal", "?bookmarks=0,11079");
     cy.dataCy("log-line-container").should("contain", "0");
-    cy.dataCy("log-line-container").should("contain", "11080");
+    cy.dataCy("log-line-container").should("contain", "11079");
   });
 
   it("should be able to bookmark and unbookmark log lines", () => {
     cy.dataCy("log-row-4").dblclick();
-    cy.location("search").should("equal", "?bookmarks=0,4,11080");
+    cy.location("search").should("equal", "?bookmarks=0,4,11079");
     cy.dataCy("log-line-container").should("contain", "0");
     cy.dataCy("log-line-container").should("contain", "4");
-    cy.dataCy("log-line-container").should("contain", "11080");
+    cy.dataCy("log-line-container").should("contain", "11079");
 
     cy.dataCy("log-row-4").dblclick();
     cy.dataCy("log-line-container").should("not.contain", "4");
@@ -58,12 +58,36 @@ describe("Bookmarking and selecting lines", () => {
 
   it("should be able to select and unselect lines", () => {
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,11080&selectedLine=5");
+    cy.location("search").should("equal", "?bookmarks=0,11079&selectedLine=5");
     cy.dataCy("log-line-container").should("contain", "5");
 
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,11080");
+    cy.location("search").should("equal", "?bookmarks=0,11079");
     cy.dataCy("log-line-container").should("not.contain", "5");
+  });
+
+  it("should be able to copy bookmarks as JIRA format", () => {
+    cy.dataCy("log-row-10").dblclick({ scrollBehavior: false });
+    cy.dataCy("log-row-11").dblclick({ scrollBehavior: false });
+
+    const logLine0 =
+      "[fsm_workload_test:internal_transactions_kill_sessions] Fixture status:";
+    const logLine10 =
+      "|ShardedClusterFixture:job0:mongos0        |j0:s0   |20009|73157|";
+    const logLine11 =
+      "|ShardedClusterFixture:job0:mongos1        |j0:s1   |20010|73217|";
+    const logLine11079 = `[j0:s1] | 2022-09-21T12:50:28.489+00:00 I  NETWORK  22944   [conn60] "Connection ended","attr":{"remote":"127.0.0.1:47362","uuid":{"uuid":{"$uuid":"b28d7d9f-03b6-4f93-a7cd-5e1948135f69"}},"connectionId":60,"connectionCount":2}`;
+
+    cy.dataCy("details-button").click();
+    cy.enableClipboard();
+    cy.dataCy("jira-button-wrapper").click();
+    cy.window()
+      .its("navigator.clipboard")
+      .invoke("readText")
+      .should(
+        "equal",
+        `{noformat}\n${logLine0}\n...\n${logLine10}\n${logLine11}\n...\n${logLine11079}\n{noformat}`
+      );
   });
 
   it("should be able to clear bookmarks", () => {
@@ -101,7 +125,7 @@ describe("Filtering", () => {
       // Matched elements should be one of the bookmarked or selected values
       cy.wrap($el)
         .should("have.attr", "data-cy")
-        .and("match", /log-row-(0|5|6|11080)/);
+        .and("match", /log-row-(0|5|6|11079)/);
     });
   });
 

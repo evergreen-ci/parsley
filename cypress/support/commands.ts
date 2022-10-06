@@ -10,6 +10,18 @@ Cypress.Commands.add("dataCy", (value: string) => {
   cy.get(`[data-cy=${value}]`);
 });
 
+Cypress.Commands.add("enableClipboard", () => {
+  cy.wrap(
+    Cypress.automation("remote:debugger:protocol", {
+      command: "Browser.grantPermissions",
+      params: {
+        permissions: ["clipboardReadWrite", "clipboardSanitizedWrite"],
+        origin: window.location.origin,
+      },
+    })
+  );
+});
+
 Cypress.Commands.add(
   "isContainedInViewport",
   { prevSubject: true },

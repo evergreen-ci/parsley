@@ -8,6 +8,10 @@ declare global {
        * @example cy.dataCy('greeting')
        */
       dataCy(value: string): Chainable<Element>;
+      /**
+       * Custom command to enable clipboard interactions.
+       */
+      enableClipboard(): void;
       /** Custom command to determine if an element is not contained in the viewport.
        * @example cy.isNotContainedInViewport()
        * @example cy.isNotContainedInViewport().should('be.visible')
@@ -25,6 +29,11 @@ declare global {
        */
       getInputByLabel(label: string): Chainable<Element>;
       /**
+       * Custom command to login to the application
+       * @example cy.login()
+       */
+      login(): void;
+      /**
        * Custom command to open and close the Leafygreen SideNav.
        */
       toggleDrawer(): void;
@@ -41,11 +50,6 @@ declare global {
         message?: string,
         shouldClose?: boolean
       ): void;
-      /**
-       * Custom command to login to the application
-       * @example cy.login()
-       */
-      login(): void;
     }
   }
 }
