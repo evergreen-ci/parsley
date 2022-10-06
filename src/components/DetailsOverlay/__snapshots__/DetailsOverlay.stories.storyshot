@@ -424,18 +424,18 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
         className="css-91jh6a"
       >
         <div
-          className="leafygreen-ui-cssveg"
+          className="leafygreen-ui-cssveg css-0"
+          data-cy="jira-button-wrapper"
           onBlur={[Function]}
           onFocus={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
         >
           <button
-            aria-disabled={false}
-            className="leafygreen-ui-1olgycx"
+            aria-disabled={true}
+            className="leafygreen-ui-19176yt"
             data-leafygreen-ui="button"
-            disabled={false}
-            onClick={[Function]}
+            disabled={true}
             type="button"
           >
             <div
@@ -447,7 +447,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               <svg
                 alt=""
                 aria-hidden={true}
-                className="leafygreen-ui-1svomvq"
+                className="leafygreen-ui-dv5amo"
                 fill="none"
                 height={16}
                 role="presentation"
