@@ -12,10 +12,7 @@ export const copyToClipboard = (textToCopy: string) => {
  * @param logLines - flat list of log lines
  * @returns formatted string that can be pasted into JIRA
  */
-export const constructJiraString = (
-  bookmarks: number[],
-  logLines: string[]
-) => {
+export const getJiraFormat = (bookmarks: number[], logLines: string[]) => {
   if (bookmarks.length === 0) {
     return "";
   }
@@ -24,10 +21,14 @@ export const constructJiraString = (
 
   for (let i = 0; i < bookmarks.length; i++) {
     const bookmarkLine = bookmarks[i];
-    const logText = logLines[bookmarkLine];
+
+    if (bookmarkLine >= logLines.length) {
+      jiraString += "{noformat}";
+      return jiraString;
+    }
 
     // Add the log text to the string.
-    jiraString += `${logText}\n`;
+    jiraString += `${logLines[bookmarkLine]}\n`;
 
     // If the current and next bookmark are not adjacent to each other, insert an
     // ellipsis in between them.

@@ -6,7 +6,7 @@ import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
-import { constructJiraString, copyToClipboard } from "utils/string";
+import { copyToClipboard, getJiraFormat } from "utils/string";
 import { DetailRow } from "../styles";
 
 const ButtonRow: React.FC = () => {
@@ -14,39 +14,42 @@ const ButtonRow: React.FC = () => {
 
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
   const { logLines } = useLogContext();
-  const jiraString = constructJiraString(bookmarks, logLines);
+
+  const tooltipText = bookmarks.length
+    ? "Copy Jira Log Information"
+    : "No bookmarks to copy.";
 
   return (
     <DetailRow>
-      <StyledTooltip
+      <Tooltip
         align="top"
         justify="middle"
         trigger={
-          <div>
+          <ButtonWrapper data-cy="jira-button-wrapper">
             <Button
+              disabled={!bookmarks.length}
               leftGlyph={<Icon glyph="Copy" />}
               onClick={() => {
-                copyToClipboard(jiraString);
+                copyToClipboard(getJiraFormat(bookmarks, logLines));
                 setHasCopied(!hasCopied);
               }}
             >
               JIRA
             </Button>
-          </div>
+          </ButtonWrapper>
         }
         triggerEvent="hover"
       >
-        {hasCopied ? "Copied!" : "Copy Jira Log Information"}
-      </StyledTooltip>
+        {hasCopied ? "Copied!" : tooltipText}
+      </Tooltip>
       <Button leftGlyph={<Icon glyph="Export" />}>RAW</Button>
       <Button leftGlyph={<Icon glyph="Export" />}>HTML</Button>
     </DetailRow>
   );
 };
 
-// @ts-expect-error
-const StyledTooltip = styled(Tooltip)`
-  max-width: 120px;
-`;
+// We need to wrap the button in a dummy div because mouse events are not triggered on
+// disabled elements.
+const ButtonWrapper = styled.div``;
 
 export default ButtonRow;

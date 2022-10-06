@@ -12,13 +12,30 @@ const wrapper = (logs: string[]) => {
 describe("buttonRow", () => {
   const user = userEvent.setup();
   describe("jira button", () => {
-    it("tooltip text should change appropriately", async () => {
+    it("should be disabled when there are no bookmarks", async () => {
       renderWithRouterMatch(<ButtonRow />, {
         wrapper: wrapper(logLines),
       });
       const jiraButton = screen.getByRole("button", {
         name: "JIRA",
       });
+      expect(jiraButton).toBeDisabled();
+      // Tooltip text should appear when button is disabled.
+      await user.hover(screen.getByDataCy("jira-button-wrapper"));
+      await waitFor(() => {
+        expect(screen.getByText("No bookmarks to copy.")).toBeInTheDocument();
+      });
+    });
+
+    it("tooltip text should indicate when the user has successfully copied to clipboard", async () => {
+      renderWithRouterMatch(<ButtonRow />, {
+        wrapper: wrapper(logLines),
+        route: "?bookmarks=0,2",
+      });
+      const jiraButton = screen.getByRole("button", {
+        name: "JIRA",
+      });
+      expect(jiraButton).toBeEnabled();
       // Tooltip text should appear on hover.
       await user.hover(jiraButton);
       await waitFor(() => {
@@ -47,6 +64,8 @@ describe("buttonRow", () => {
       const jiraButton = screen.getByRole("button", {
         name: "JIRA",
       });
+      expect(jiraButton).toBeEnabled();
+
       await user.click(jiraButton);
       expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1);
       expect(navigator.clipboard.writeText).toHaveBeenCalledWith(

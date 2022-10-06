@@ -1,4 +1,4 @@
-import { constructJiraString, copyToClipboard } from ".";
+import { copyToClipboard, getJiraFormat } from ".";
 
 describe("copyToClipboard", () => {
   it("should copy the correct text", () => {
@@ -13,12 +13,36 @@ describe("copyToClipboard", () => {
   });
 });
 
-describe("constructJiraString", () => {
-  it("should properly format text", () => {
-    const bookmarks = [0, 2, 4, 5];
-    const logLines = ["zero", "one", "two", "three", "four", "five"];
+describe("getJiraFormat", () => {
+  const logLines = ["zero", "one", "two", "three", "four", "five"];
 
-    expect(constructJiraString(bookmarks, logLines)).toBe(
+  it("should add an ellipsis between lines if they are not adjacent to each other", () => {
+    const bookmarks = [0, 5];
+    expect(getJiraFormat(bookmarks, logLines)).toBe(
+      `{noformat}\n${logLines[0]}\n...\n${logLines[5]}\n{noformat}`
+    );
+  });
+
+  it("should not add an ellipsis if the lines are adjacent", () => {
+    const bookmarks = [0, 1];
+    expect(getJiraFormat(bookmarks, logLines)).toBe(
+      `{noformat}\n${logLines[0]}\n${logLines[1]}\n{noformat}`
+    );
+  });
+
+  it("should return an empty string when there are no bookmarks", () => {
+    const bookmarks: number[] = [];
+    expect(getJiraFormat(bookmarks, logLines)).toBe("");
+  });
+
+  it("should handle out of bounds bookmarks", () => {
+    const bookmarks = [6];
+    expect(getJiraFormat(bookmarks, logLines)).toBe(`{noformat}\n{noformat}`);
+  });
+
+  it("should properly format JIRA text", () => {
+    const bookmarks = [0, 2, 4, 5];
+    expect(getJiraFormat(bookmarks, logLines)).toBe(
       `{noformat}\n${logLines[0]}\n...\n${logLines[2]}\n...\n${logLines[4]}\n${logLines[5]}\n{noformat}`
     );
   });
