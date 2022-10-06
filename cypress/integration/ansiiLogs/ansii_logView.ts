@@ -150,7 +150,7 @@ describe("Searching", () => {
     cy.dataCy("searchbar-input").type("info");
     cy.dataCy("search-count").should("be.visible");
     cy.dataCy("search-count").should("contain.text", "1/4");
-    cy.get("[data-selected='true']").should("contain.text", "info");
+    cy.get("[data-highlighted='true']").should("contain.text", "info");
   });
 
   it("should be able to specify a range of lines to search", () => {
