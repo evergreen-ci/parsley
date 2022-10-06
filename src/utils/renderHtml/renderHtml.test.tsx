@@ -1,4 +1,3 @@
-import React from "react";
 import { render, screen } from "test_utils";
 import renderHtml from ".";
 
