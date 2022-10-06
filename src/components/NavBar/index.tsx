@@ -42,9 +42,6 @@ const NavBar: React.FC = () => {
     }
   };
 
-  const shouldClearOnSubmit = (selected: string) =>
-    selected === SearchBarActions.Filter;
-
   return (
     <Container>
       <FlexContainer>
@@ -57,7 +54,6 @@ const NavBar: React.FC = () => {
           disabled={!hasLogs}
           onChange={handleOnChange}
           onSubmit={handleSearch}
-          shouldClearOnSubmit={shouldClearOnSubmit}
           validator={validateRegexp}
           validatorMessage="Invalid Regular Expression"
         />

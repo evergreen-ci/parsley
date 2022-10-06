@@ -72,23 +72,36 @@ describe("searchbar", () => {
     await user.type(input, "{enter}");
     expect(onSubmit).toHaveBeenCalledWith("search", "test");
   });
-  it("should not clear input if shouldClearOnSubmit is false", async () => {
+  it("should not clear input if a user is searching", async () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn();
-    render(
-      <SearchBar
-        onSubmit={onSubmit}
-        shouldClearOnSubmit={() => false}
-        validator={() => true}
-      />
-    );
+    render(<SearchBar onSubmit={onSubmit} validator={() => true} />);
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     await user.type(input, "{enter}");
     expect(input).toHaveValue("test");
     expect(onSubmit).toHaveBeenCalledWith("search", "test");
   });
-
+  it("should clear input if a user is applying a filter and should reset search", async () => {
+    const user = userEvent.setup();
+    const onSubmit = jest.fn();
+    const onChange = jest.fn();
+    render(
+      <SearchBar
+        onChange={onChange}
+        onSubmit={onSubmit}
+        validator={() => true}
+      />
+    );
+    const input = screen.getByDataCy("searchbar-input");
+    await user.click(screen.getByDataCy("searchbar-select"));
+    await user.click(screen.getByDataCy("filter-option"));
+    await user.type(input, "test");
+    await user.type(input, "{enter}");
+    expect(input).toHaveValue("");
+    expect(onSubmit).toHaveBeenCalledWith("filter", "test");
+    expect(onChange).toHaveBeenCalledWith("search", "");
+  });
   it("should call a debounced onChange as input changes", async () => {
     jest.useFakeTimers();
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });

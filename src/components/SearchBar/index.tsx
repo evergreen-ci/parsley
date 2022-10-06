@@ -18,7 +18,6 @@ interface SearchBarProps {
   className?: string;
   onSubmit?: (selected: string, value: string) => void;
   onChange?: (selected: string, value: string) => void;
-  shouldClearOnSubmit?: (selected: string) => boolean;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -26,18 +25,19 @@ const SearchBar: React.FC<SearchBarProps> = ({
   disabled = false,
   onChange,
   onSubmit,
-  shouldClearOnSubmit = () => true,
   validator = () => true,
   validatorMessage = "Invalid Input",
 }) => {
   const [input, setInput] = useState("");
   const [selected, setSelected] = useState(SearchBarActions.Search);
-
+  const isFilter = selected === SearchBarActions.Filter;
   const isValid = validator(input);
   const handleOnSubmit = () => {
     if (isValid) {
-      if (shouldClearOnSubmit(selected)) {
+      if (isFilter) {
         setInput("");
+        // Clear the input and also clear the search value
+        onChange?.(SearchBarActions.Search, "");
       }
       onSubmit?.(selected, input);
     }
@@ -111,7 +111,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         }
         placeholder="optional, regexp to search"
         spellCheck={false}
-        type={SearchBarActions.Search}
+        type="search"
         value={input}
       />
     </Container>
