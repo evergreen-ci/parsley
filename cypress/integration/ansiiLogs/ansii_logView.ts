@@ -189,7 +189,7 @@ describe("Searching", () => {
     );
 
     cy.toggleDetailsPanel(false);
-    cy.dataCy("search-count").should("contain.text", "Not Found");
+    cy.dataCy("search-count").should("contain.text", "No Matches");
     cy.toggleDetailsPanel(true);
     cy.dataCy("case-sensitive-toggle").click({ force: true });
     cy.dataCy("case-sensitive-toggle").should(

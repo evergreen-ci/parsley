@@ -15,7 +15,7 @@ const SearchCount: React.FC<SearchCountProps> = ({
   <StyledBody data-cy="search-count" hasMatches={matchingSearchCount !== 0}>
     {matchingSearchCount !== 0
       ? `${currentSearchIndex}/${matchingSearchCount}`
-      : "Not Found"}
+      : "No Matches"}
   </StyledBody>
 );
 
