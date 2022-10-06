@@ -39,14 +39,12 @@ const renderHtml = (html: string = "", options: renderHtmlOptions = {}) =>
             options.preserveAttributes.includes(domNode.name)
               ? domNode.attribs
               : {};
-          if (SwapComponent) {
-            return (
-              // @ts-expect-error
-              <SwapComponent className={extraProps.class} {...extraProps}>
-                {domToReact(domNode.children)}
-              </SwapComponent>
-            );
-          }
+          return (
+            // @ts-expect-error
+            <SwapComponent className={extraProps.class} {...extraProps}>
+              {domToReact(domNode.children)}
+            </SwapComponent>
+          );
         }
         return domNode;
       }
