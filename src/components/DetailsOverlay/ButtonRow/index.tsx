@@ -13,7 +13,7 @@ const ButtonRow: React.FC = () => {
   const [hasCopied, setHasCopied] = useState(false);
 
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
-  const { logLines } = useLogContext();
+  const { getLine } = useLogContext();
 
   const tooltipText = bookmarks.length
     ? "Copy Jira Log Information"
@@ -30,7 +30,7 @@ const ButtonRow: React.FC = () => {
               disabled={!bookmarks.length}
               leftGlyph={<Icon glyph="Copy" />}
               onClick={() => {
-                copyToClipboard(getJiraFormat(bookmarks, logLines));
+                copyToClipboard(getJiraFormat(bookmarks, getLine));
                 setHasCopied(!hasCopied);
               }}
             >
