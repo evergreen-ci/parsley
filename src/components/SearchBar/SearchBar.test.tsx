@@ -85,14 +85,7 @@ describe("searchbar", () => {
   it("should clear input if a user is applying a filter and should reset search", async () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn();
-    const onChange = jest.fn();
-    render(
-      <SearchBar
-        onChange={onChange}
-        onSubmit={onSubmit}
-        validator={() => true}
-      />
-    );
+    render(<SearchBar onSubmit={onSubmit} validator={() => true} />);
     const input = screen.getByDataCy("searchbar-input");
     await user.click(screen.getByDataCy("searchbar-select"));
     await user.click(screen.getByDataCy("filter-option"));
@@ -100,7 +93,6 @@ describe("searchbar", () => {
     await user.type(input, "{enter}");
     expect(input).toHaveValue("");
     expect(onSubmit).toHaveBeenCalledWith("filter", "test");
-    expect(onChange).toHaveBeenCalledWith("search", "");
   });
   it("should call a debounced onChange as input changes", async () => {
     jest.useFakeTimers();
