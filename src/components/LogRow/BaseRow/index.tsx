@@ -1,16 +1,18 @@
-import { forwardRef } from "react";
+import { forwardRef, useMemo } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { ListRowProps } from "react-virtualized";
+import Highlight from "components/Highlight";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import renderHtml from "utils/renderHtml";
 
 const { yellow, red } = palette;
 
 interface BaseRowProps extends ListRowProps {
-  children: React.ReactNode;
+  children: string;
   index: number;
   wrap: boolean;
   // The line number associated with a log line and its index within the context of the virtualized list
@@ -18,6 +20,8 @@ interface BaseRowProps extends ListRowProps {
   lineNumber: number;
   highlightedLine?: number;
   scrollToLine: (lineNumber: number) => void;
+  searchTerm?: RegExp;
+  "data-cy-text"?: string;
 }
 
 /**
@@ -33,6 +37,8 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     isVisible,
     highlightedLine,
     scrollToLine,
+    searchTerm,
+    "data-cy-text": dataCyText,
     ...rest
   } = props;
 
@@ -90,10 +96,38 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
         size="small"
       />
       <Index>{lineNumber}</Index>
-      {children}
+      <ProcessedBaseRow data-cy={dataCyText} searchTerm={searchTerm}>
+        {children}
+      </ProcessedBaseRow>
     </StyledPre>
   );
 });
+
+interface ProcessedBaseRowProps {
+  children: string;
+  searchTerm?: RegExp;
+  ["data-cy"]?: string;
+}
+const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = ({
+  children,
+  searchTerm,
+  "data-cy": dataCy,
+}) => {
+  const memoizedLogLine = useMemo(() => {
+    let render = children;
+    if (searchTerm) {
+      render = render.replace(searchTerm, `<mark>$&</mark>`);
+    }
+    return renderHtml(render, {
+      transform: {
+        // @ts-expect-error - This is expecting a react component but its an Emotion component which are virtually the same thing
+        mark: Highlight,
+      },
+    });
+  }, [children, searchTerm]);
+
+  return <span data-cy={dataCy}>{memoizedLogLine}</span>;
+};
 
 BaseRow.displayName = "BaseRow";
 
