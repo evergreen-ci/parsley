@@ -27,8 +27,9 @@ const useKeyboardShortcut = (
       ) {
         return false;
       }
-      if (shortcutKeys.includes("Shift") && !event.shiftKey) return false;
       if (shortcutKeys.includes("Alt") && !event.altKey) return false;
+      if (shortcutKeys.includes("Shift") && !event.shiftKey) return false;
+
       return shortcutKeys[shortcutKeys.length - 1] === event.key;
     },
     [shortcutKeys]
@@ -39,16 +40,16 @@ const useKeyboardShortcut = (
       const { preventDefault = true, overrideIgnore = false } = options;
 
       const shortcutPressed = isShortcutPressed(event);
-      const shouldIgnore =
-        !overrideIgnore &&
-        INPUT_ELEMENTS.includes((event.target as HTMLElement).tagName);
+      const shouldExecute =
+        overrideIgnore ||
+        !INPUT_ELEMENTS.includes((event.target as HTMLElement).tagName);
 
       if (shortcutPressed) {
         // Prevent browser default behavior.
         if (preventDefault) {
           event.preventDefault();
         }
-        if (!shouldIgnore) {
+        if (shouldExecute) {
           cbRef.current();
         }
       }
