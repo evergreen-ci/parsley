@@ -15,7 +15,6 @@ type LogPaneProps = Omit<
 
 const LogPane: React.FC<LogPaneProps> = ({
   rowRenderer,
-  logLines,
   rowCount,
   cache,
   wrap,
@@ -34,11 +33,20 @@ const LogPane: React.FC<LogPaneProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wrap, `${filters}`]);
 
+  // There is some sort of race condition where the listRef.current is not set yet
+  // when the component first renders. This useEffect ensures that the selected line is
+  // scrolled to when the listRef.current is set.
   useEffect(() => {
+    let timeout: ReturnType<typeof setTimeout>;
     if (selectedLine) {
-      scrollToLine(selectedLine);
+      timeout = setTimeout(() => {
+        scrollToLine(selectedLine);
+      }, 0);
     }
-  }, [scrollToLine, selectedLine]);
+    return () => clearTimeout(timeout);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
   return (
     <AutoSizer>
       {({ height, width }) => (
@@ -47,7 +55,6 @@ const LogPane: React.FC<LogPaneProps> = ({
           containerStyle={{ overflow: "scroll visible" }}
           deferredMeasurementCache={cache}
           height={height}
-          itemData={logLines}
           overscanRowCount={200}
           rowCount={rowCount}
           rowHeight={cache.rowHeight}
