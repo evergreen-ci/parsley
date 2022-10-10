@@ -12,15 +12,18 @@ const SearchCount: React.FC<SearchCountProps> = ({
   currentSearchIndex,
   matchingSearchCount,
 }) => (
-  <StyledBody data-cy="search-count" hasMatches={matchingSearchCount !== 0}>
+  <StyledBody
+    data-cy="search-count"
+    has-matches={`${matchingSearchCount !== 0}`}
+  >
     {matchingSearchCount !== 0
       ? `${currentSearchIndex}/${matchingSearchCount}`
       : "No Matches"}
   </StyledBody>
 );
 
-const StyledBody = styled(Body)<{ hasMatches: boolean }>`
-  color: ${({ hasMatches }) => (hasMatches ? black : red.dark2)};
+const StyledBody = styled(Body)<{ "has-matches": string }>`
+  color: ${({ "has-matches": hasMatches }) => (hasMatches ? black : red.dark2)};
   margin-left: ${size.xs};
 `;
 
