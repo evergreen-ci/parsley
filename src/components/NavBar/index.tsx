@@ -33,6 +33,7 @@ const NavBar: React.FC = () => {
       !filters.includes(value)
     ) {
       setFilters([...filters, value]);
+      setSearch("");
     }
   };
 

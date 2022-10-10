@@ -23,8 +23,8 @@ interface SearchBarProps {
 const SearchBar: React.FC<SearchBarProps> = ({
   className,
   disabled = false,
-  onChange,
-  onSubmit,
+  onChange = () => {},
+  onSubmit = () => {},
   validator = () => true,
   validatorMessage = "Invalid Input",
 }) => {
@@ -36,16 +36,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
     if (isValid) {
       if (isFilter) {
         setInput("");
-        // Clear the input and also clear the search value
-        onChange?.(SearchBarActions.Search, "");
       }
-      onSubmit?.(selected, input);
+      onSubmit(selected, input);
     }
   };
 
   // debounce the onChange handler to prevent excessive rerenders
   const debouncedHandleOnChangeCallback = useMemo(
-    () => debounce((value: string) => onChange?.(selected, value), 1000),
+    () => debounce((value: string) => onChange(selected, value), 1000),
     [selected, onChange]
   );
 
