@@ -17,6 +17,7 @@ interface BaseRowProps extends ListRowProps {
   // may differ due to collapsed rows.
   lineNumber: number;
   highlightedLine?: number;
+  scrollToLine: (lineNumber: number) => void;
 }
 
 /**
@@ -31,6 +32,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     wrap,
     isVisible,
     highlightedLine,
+    scrollToLine,
     ...rest
   } = props;
 
@@ -53,6 +55,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       setSelectedLine(undefined);
     } else {
       setSelectedLine(lineNumber);
+      scrollToLine(lineNumber);
     }
   };
 

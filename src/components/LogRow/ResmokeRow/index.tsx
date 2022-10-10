@@ -9,8 +9,15 @@ import { isLineInRange } from "../utils";
 
 const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { data, listRowProps } = rowProps;
-  const { getLine, wrap, processedLines, range, searchTerm, highlightedLine } =
-    data;
+  const {
+    getLine,
+    wrap,
+    processedLines,
+    range,
+    searchTerm,
+    highlightedLine,
+    scrollToLine,
+  } = data;
   const { index } = listRowProps;
 
   const line = processedLines[index];
@@ -30,6 +37,7 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       ref={ref}
       highlightedLine={highlightedLine}
       lineNumber={line}
+      scrollToLine={scrollToLine}
     >
       <ProcessedResmokeRow
         lineContent={lineContent}

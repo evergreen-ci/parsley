@@ -15,13 +15,14 @@ interface LogWindowProps {
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const {
-    hasLogs,
     getLine,
+    hasLogs,
+    highlightedLine,
     lineCount,
     processedLogLines,
-    searchState,
-    highlightedLine,
     range,
+    scrollToLine,
+    searchState,
   } = useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
@@ -40,13 +41,14 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
             filters={filters}
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
-              logType,
-              wrap,
-              range,
               getLine,
-              processedLines: processedLogLines,
-              searchTerm,
               highlightedLine,
+              logType,
+              processedLines: processedLogLines,
+              range,
+              scrollToLine,
+              searchTerm,
+              wrap,
             })}
             wrap={wrap}
           />

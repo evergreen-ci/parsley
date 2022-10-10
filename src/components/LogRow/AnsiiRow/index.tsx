@@ -13,8 +13,15 @@ const ansiUp = new AnsiUp();
 
 const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { data, listRowProps } = rowProps;
-  const { getLine, wrap, processedLines, searchTerm, range, highlightedLine } =
-    data;
+  const {
+    getLine,
+    wrap,
+    processedLines,
+    searchTerm,
+    range,
+    highlightedLine,
+    scrollToLine,
+  } = data;
   const { index } = listRowProps;
 
   const line = processedLines[index];
@@ -34,6 +41,7 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       ref={ref}
       highlightedLine={highlightedLine}
       lineNumber={line}
+      scrollToLine={scrollToLine}
     >
       <ProcessedAnsiiRow
         lineContent={lineContent}

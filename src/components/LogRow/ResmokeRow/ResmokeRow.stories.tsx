@@ -24,6 +24,7 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
       processedLines: processedLogLines,
       logType: LogTypes.RESMOKE_LOGS,
       range: { lowerRange: 0 },
+      scrollToLine: () => {},
     }}
     listRowProps={{
       index: 2,
@@ -57,6 +58,7 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
         getLine,
         processedLines: processedLogLines,
         range: { lowerRange: 0 },
+        scrollToLine: () => {},
       })}
       scrollToIndex={0}
       wrap={args.wrap}
@@ -86,6 +88,7 @@ const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => (
         range: {
           lowerRange: 0,
         },
+        scrollToLine: () => {},
       })}
       scrollToIndex={0}
       wrap={args.wrap}

@@ -28,8 +28,12 @@ describe("resmokeRow", () => {
     expect(screen.getByText(logLines[1])).toBeInTheDocument();
   });
   it("clicking log line link updates the url and selects it", async () => {
+    const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
-      <ResmokeRow data={data} listRowProps={listRowProps} />,
+      <ResmokeRow
+        data={{ ...data, scrollToLine }}
+        listRowProps={listRowProps}
+      />,
       {
         wrapper: wrapper(logLines),
       }
@@ -38,6 +42,7 @@ describe("resmokeRow", () => {
     await waitFor(() => {
       expect(history.location.search).toBe("?selectedLine=0");
     });
+    expect(scrollToLine).toHaveBeenCalledWith(0);
   });
   it("clicking on a selected log line link unselects it", async () => {
     const { history } = renderWithRouterMatch(
@@ -148,4 +153,5 @@ const data = {
   range: {
     lowerRange: 0,
   },
+  scrollToLine: () => {},
 };
