@@ -38,7 +38,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
           <LogPane
             cache={cache}
             filters={filters}
-            logLines={processedLogLines}
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
               logType,

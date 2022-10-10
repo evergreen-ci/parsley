@@ -1,11 +1,4 @@
-import {
-  createContext,
-  useCallback,
-  useContext,
-  useEffect,
-  useMemo,
-  useRef,
-} from "react";
+import { createContext, useCallback, useContext, useMemo, useRef } from "react";
 import { List } from "react-virtualized";
 import { LogTypes } from "constants/enums";
 import { FilterLogic, QueryParams } from "constants/queryParams";
@@ -89,45 +82,32 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [state.logs.length, `${filters}`, `${bookmarks}`, selectedLine, filterLogic]
   );
 
-  const searchResults = useMemo(
-    () =>
-      // search through processedLoglines
-      // return the line number of the first match
-      // if no match, return undefined
-      state.searchState.searchTerm
-        ? searchLogs({
-            searchRegex: state.searchState.searchTerm,
-            processedLogLines,
-            upperBound: upperRange,
-            lowerBound: lowerRange,
-            getLine,
-          })
-        : [],
-    [
-      state.searchState.searchTerm,
-      upperRange,
-      lowerRange,
-      processedLogLines,
-      getLine,
-    ]
-  );
-
-  // Handle search result changes
-  useEffect(() => {
+  const searchResults = useMemo(() => {
+    // search through processedLoglines
+    // return the line number of the first match
+    // if no match, return undefined
+    const results = state.searchState.searchTerm
+      ? searchLogs({
+          searchRegex: state.searchState.searchTerm,
+          processedLogLines,
+          upperBound: upperRange,
+          lowerBound: lowerRange,
+          getLine,
+        })
+      : [];
     dispatch({
       type: "SET_MATCH_COUNT",
-      matchCount: searchResults.length,
+      matchCount: results.length,
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [dispatch, `${searchResults}`, state.searchState.searchTerm]);
-
-  // If the selected line changes, scroll to it
-  useEffect(() => {
-    if (selectedLine) {
-      scrollToLine(selectedLine);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [!!state.logs.length, selectedLine]);
+    return results;
+  }, [
+    dispatch,
+    state.searchState.searchTerm,
+    upperRange,
+    lowerRange,
+    processedLogLines,
+    getLine,
+  ]);
 
   const highlightedLine =
     state.searchState.searchIndex !== undefined
