@@ -9,6 +9,7 @@ import Icon from "components/Icon";
 import { HAS_OPENED_DRAWER } from "constants/cookies";
 import { QueryParams } from "constants/queryParams";
 import { size, zIndex } from "constants/tokens";
+import { useKeyboardShortcut } from "hooks";
 import { useQueryParam } from "hooks/useQueryParam";
 import Filter from "./Filter";
 
@@ -22,6 +23,8 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
   const [collapsed, setCollapsed] = useState(
     Cookie.get(HAS_OPENED_DRAWER) === "true"
   );
+
+  useKeyboardShortcut(["Control", "d"], () => setCollapsed(!collapsed));
 
   const [filters, setFilters] = useQueryParam<string[]>(
     QueryParams.Filters,

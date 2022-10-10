@@ -4,14 +4,15 @@ import { size } from "constants/tokens";
 
 type TextInputWithGlyphProps = {
   icon: React.ReactElement;
+  inputRef?: React.RefObject<HTMLInputElement>;
 } & React.ComponentProps<typeof TextInput>;
 
 const TextInputWithGlyph: React.FC<TextInputWithGlyphProps> = (props) => {
-  const { icon, ...rest } = props;
+  const { icon, inputRef, ...rest } = props;
 
   return (
     <TextInputWrapper>
-      <TextInput {...rest} />
+      <TextInput ref={inputRef} {...rest} />
       <IconWrapper>{icon}</IconWrapper>
     </TextInputWrapper>
   );

@@ -50,4 +50,14 @@ describe("searchbar", () => {
     expect(input).toHaveValue("test");
     expect(onSubmit).not.toHaveBeenCalled();
   });
+  it("pressing Control+F puts focus on the input", async () => {
+    const user = userEvent.setup();
+    render(<SearchBar onSubmit={jest.fn()} />);
+
+    const input = screen.getByDataCy("searchbar-input");
+    expect(input).not.toHaveFocus();
+
+    await user.keyboard("{Control>}{f}");
+    expect(input).toHaveFocus();
+  });
 });
