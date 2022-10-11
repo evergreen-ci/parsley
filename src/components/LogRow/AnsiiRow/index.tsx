@@ -30,7 +30,7 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
     );
   }
   const lineContent = getLine(line) || "";
-  const memoizedLogLine = linkifyHtml(ansiUp.ansi_to_html(lineContent), {
+  const linkifiedLine = linkifyHtml(ansiUp.ansi_to_html(lineContent), {
     validate: {
       url: (value: string) => /^(http)s?:\/\//.test(value),
     },
@@ -48,7 +48,7 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}
     >
-      {memoizedLogLine}
+      {linkifiedLine}
     </BaseRow>
   ) : null;
 });

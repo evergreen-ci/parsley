@@ -8,6 +8,7 @@ import {
   Routes,
 } from "react-router-dom";
 import { LogTypes } from "constants/enums";
+import { isCollapsedRow } from "utils/collapsedRow";
 import { LogContextProvider, useLogContext } from ".";
 import { DIRECTION } from "./types";
 
@@ -52,9 +53,9 @@ describe("useLogContext", () => {
     for (let i = 0; i < lines.length; i++) {
       const line = result.current.processedLogLines[i];
       // Expect the line not to be an array
-      expect(Array.isArray(line)).toBe(false);
-      // @ts-expect-error line is not an array we confirmed it above
-      expect(result.current.getLine(line)).toStrictEqual(lines[i]);
+      expect(isCollapsedRow(line)).toBe(false);
+      // line is not an array we confirmed it above
+      expect(result.current.getLine(line as number)).toStrictEqual(lines[i]);
     }
   });
   it("ingesting a resmoke log should transform it before adding it to the list of logs", () => {

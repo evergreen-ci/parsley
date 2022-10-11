@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
@@ -25,27 +25,15 @@ const LogPane: React.FC<LogPaneProps> = ({
     QueryParams.SelectedLine,
     undefined
   );
-  const { listRef, scrollToLine } = useLogContext();
+  const [initialScrollIndex] = useState(selectedLine);
+
+  const { listRef } = useLogContext();
   useEffect(() => {
     // Reset the cache and recalculate the row heights
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [wrap, `${filters}`]);
-
-  // There is some sort of race condition where the listRef.current is not set yet
-  // when the component first renders. This useEffect ensures that the selected line is
-  // scrolled to when the listRef.current is set.
-  useEffect(() => {
-    let timeout: ReturnType<typeof setTimeout>;
-    if (selectedLine) {
-      timeout = setTimeout(() => {
-        scrollToLine(selectedLine);
-      }, 0);
-    }
-    return () => clearTimeout(timeout);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <AutoSizer>
@@ -60,6 +48,7 @@ const LogPane: React.FC<LogPaneProps> = ({
           rowHeight={cache.rowHeight}
           rowRenderer={rowRenderer}
           scrollToAlignment="start"
+          scrollToIndex={initialScrollIndex}
           width={width}
           {...rest}
         />
