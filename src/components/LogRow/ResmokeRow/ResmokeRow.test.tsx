@@ -154,4 +154,5 @@ const data = {
     lowerRange: 0,
   },
   scrollToLine: () => {},
+  getResmokeLineColor: () => undefined,
 };

@@ -110,6 +110,7 @@ describe("ansiiRow", () => {
           ...data,
           searchTerm: /highlight me/i,
           range: { lowerRange: 0, upperRange: 10 },
+          getResmokeLineColor: () => undefined,
         }}
         listRowProps={{ ...listRowProps, index: 9 }}
       />
@@ -124,6 +125,7 @@ describe("ansiiRow", () => {
           ...data,
           searchTerm: /highlight me/i,
           range: { lowerRange: 0, upperRange: 8 },
+          getResmokeLineColor: () => undefined,
         }}
         listRowProps={{ ...listRowProps, index: 9 }}
       />
@@ -162,6 +164,7 @@ const data = {
   wrap: false,
   processedLines: logLines.map((_, index) => index),
   scrollToLine: () => {},
+  getResmokeLineColor: () => undefined,
   logType: LogTypes.RESMOKE_LOGS,
   range: {
     lowerRange: 0,

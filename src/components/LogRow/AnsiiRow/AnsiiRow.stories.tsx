@@ -23,6 +23,7 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
       logType: LogTypes.EVERGREEN_TASK_LOGS,
       range: { lowerRange: 0 },
       scrollToLine: () => {},
+      getResmokeLineColor: () => undefined,
     }}
     listRowProps={{
       index: 0,
@@ -57,6 +58,7 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
         processedLines: processedLogLines,
         range: { lowerRange: 0 },
         scrollToLine: () => {},
+        getResmokeLineColor: () => undefined,
       })}
       scrollToIndex={0}
       wrap={args.wrap}
@@ -84,6 +86,7 @@ const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => (
         processedLines: collapsedProcessedLogLines,
         range: { lowerRange: 0 },
         scrollToLine: () => {},
+        getResmokeLineColor: () => undefined,
       })}
       scrollToIndex={0}
       wrap={args.wrap}

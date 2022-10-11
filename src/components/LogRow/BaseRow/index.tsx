@@ -22,6 +22,7 @@ interface BaseRowProps extends ListRowProps {
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
   "data-cy-text"?: string;
+  resmokeRowColor?: string;
 }
 
 /**
@@ -38,6 +39,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     highlightedLine,
     scrollToLine,
     searchTerm,
+    resmokeRowColor,
     "data-cy-text": dataCyText,
     ...rest
   } = props;
@@ -96,7 +98,11 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
         size="small"
       />
       <Index>{lineNumber}</Index>
-      <ProcessedBaseRow data-cy={dataCyText} searchTerm={searchTerm}>
+      <ProcessedBaseRow
+        color={resmokeRowColor}
+        data-cy={dataCyText}
+        searchTerm={searchTerm}
+      >
         {children}
       </ProcessedBaseRow>
     </StyledPre>
@@ -106,11 +112,13 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
 interface ProcessedBaseRowProps {
   children: string;
   searchTerm?: RegExp;
+  color?: string;
   ["data-cy"]?: string;
 }
 const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = ({
   children,
   searchTerm,
+  color,
   "data-cy": dataCy,
 }) => {
   const memoizedLogLine = useMemo(() => {
@@ -126,7 +134,11 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = ({
     });
   }, [children, searchTerm]);
 
-  return <span data-cy={dataCy}>{memoizedLogLine}</span>;
+  return (
+    <span data-cy={dataCy} style={{ color }}>
+      {memoizedLogLine}
+    </span>
+  );
 };
 
 BaseRow.displayName = "BaseRow";
@@ -163,7 +175,7 @@ const StyledPre = styled.pre<{
   /* wrap multiple lines */
   white-space: break-spaces;
   `}
-
+  ${({ color }) => color && `color: ${color};`}
   ${({ selected }) => selected && `background-color: #FA8128;`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light2};`}
   ${({ highlighted }) => highlighted && `background-color: ${red.light2};`}

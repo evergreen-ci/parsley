@@ -16,6 +16,7 @@ interface LogWindowProps {
 const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const {
     getLine,
+    getResmokeLineColor,
     hasLogs,
     highlightedLine,
     lineCount,
@@ -42,6 +43,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
               getLine,
+              getResmokeLineColor,
               highlightedLine,
               logType,
               processedLines: processedLogLines,
