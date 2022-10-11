@@ -1,3 +1,5 @@
+import { isCollapsedRow } from "utils/collapsedRow";
+
 /**
  * This function employs binary search to search for the index of a line number within the
  * processed log lines array.
@@ -21,8 +23,9 @@ export const findLineIndex = (
   const midIdx = Math.floor((start + end) / 2);
   const midItem = processedLines[midIdx];
 
-  // If the item is a collapsed row
-  if (Array.isArray(midItem)) {
+  // If the item is a collapsed row, we'll shift our search depending on the first and last line numbers
+  // in the collapsed row.
+  if (isCollapsedRow(midItem)) {
     const firstItem = midItem[0];
     const lastItem = midItem[midItem.length - 1];
     if (firstItem <= lineNumber && lineNumber <= lastItem) {
@@ -35,7 +38,7 @@ export const findLineIndex = (
       return findLineIndex(processedLines, lineNumber, midIdx + 1, end);
     }
   }
-  // If item is not collapsed
+  // If item is not collapsed, we'll shift our search based on the line number.
   else {
     if (midItem === lineNumber) {
       return midIdx;

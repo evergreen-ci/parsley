@@ -72,11 +72,12 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
 
   const scrollToLine = useCallback((lineNumber: number) => {
-    console.log("Jumping to line...:", lineNumber);
+    // We need to call scrollToRow twice because of https://github.com/bvaughn/react-virtualized/issues/995.
+    // When we switch to a different virtual list library we should not do this.
     listRef.current?.scrollToRow(lineNumber);
     setTimeout(() => {
       listRef.current?.scrollToRow(lineNumber);
-    }, 100);
+    }, 0);
   }, []);
 
   // TODO EVG-17537: more advanced filtering

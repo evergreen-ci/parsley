@@ -14,7 +14,7 @@ describe("findLineIndex", () => {
     expect(findLineIndex(processedLines, 4)).toBe(3);
   });
 
-  it("should return `undefined` when line number does not exist in array", () => {
+  it("should return -1 when line number does not exist in array", () => {
     expect(findLineIndex(processedLines, -1)).toBe(-1);
     expect(findLineIndex(processedLines, 8)).toBe(-1);
   });
