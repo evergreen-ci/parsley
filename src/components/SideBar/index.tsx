@@ -13,7 +13,7 @@ const { gray } = palette;
 interface SideBarProps {
   maxLineNumber: number;
   processedLogLines: (number | number[])[];
-  setScrollIndex: (scrollIndex: number | undefined) => void;
+  setScrollIndex: (scrollIndex: number) => void;
 }
 
 const SideBar: React.FC<SideBarProps> = ({
@@ -44,7 +44,9 @@ const SideBar: React.FC<SideBarProps> = ({
   // Finds the corresponding index of a line number and scrolls to it.
   const scrollToIndex = (lineNumber: number): void => {
     const lineIndex = findLineIndex(processedLogLines, lineNumber);
-    setScrollIndex(lineIndex);
+    if (lineIndex) {
+      setScrollIndex(lineIndex);
+    }
   };
 
   return (

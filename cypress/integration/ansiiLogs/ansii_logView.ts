@@ -202,6 +202,7 @@ describe("Searching", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
   });
+
   it("searching for a term should highlight matching words ", () => {
     cy.dataCy("searchbar-input").type("Starting");
     cy.dataCy("search-count").should("be.visible");
@@ -236,6 +237,7 @@ describe("Searching", () => {
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "1/4");
   });
+
   it("should be able to toggle case sensitivity", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("starting");
@@ -253,7 +255,6 @@ describe("Searching", () => {
       "aria-checked",
       "true"
     );
-
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "No Matches");
     cy.toggleDetailsPanel(true);
@@ -266,6 +267,7 @@ describe("Searching", () => {
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "1/1");
   });
+
   it("should be able to paginate through search results", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("info");

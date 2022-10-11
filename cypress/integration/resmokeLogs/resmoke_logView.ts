@@ -196,6 +196,7 @@ describe("Searching", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
   });
+
   it("searching for a term should highlight matching words ", () => {
     cy.dataCy("searchbar-input").type("ShardedClusterFixture:job0:mongos0 ");
     cy.dataCy("search-count").should("be.visible");
@@ -250,7 +251,6 @@ describe("Searching", () => {
       "aria-checked",
       "true"
     );
-
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "No Matches");
     cy.toggleDetailsPanel(true);
@@ -263,6 +263,7 @@ describe("Searching", () => {
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "1/1");
   });
+
   it("should be able to paginate through search results", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("conn49");
