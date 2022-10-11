@@ -11,28 +11,29 @@ import { DIRECTION, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
-  fileName?: string;
   expandedLines: ExpandedLines;
-  setExpandedLines: (expandedLines: ExpandedLines) => void;
-  collapseLines: (idx: number) => void;
+  fileName?: string;
   hasLogs: boolean;
   highlightedLine?: number;
   lineCount: number;
   listRef: React.RefObject<List>;
   processedLogLines: ProcessedLogLines;
-  searchState: SearchState;
   range: {
     lowerRange: number;
     upperRange?: number;
   };
+  searchState: SearchState;
+
   clearLogs: () => void;
+  collapseLines: (idx: number) => void;
+  expandLines: (expandedLines: ExpandedLines) => void;
   getLine: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
   paginate: (dir: DIRECTION) => void;
   scrollToLine: (lineNumber: number) => void;
+  setCaseSensitive: (caseSensitive: boolean) => void;
   setFileName: (fileName: string) => void;
   setSearch: (search: string) => void;
-  setCaseSensitive: (caseSensitive: boolean) => void;
 }
 
 const LogContext = createContext<LogContextState | null>(null);
@@ -76,20 +77,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [state.logs.length]
   );
 
-  const setExpandedLines = useCallback(
-    (expandedLines: ExpandedLines) => {
-      dispatch({ type: "EXPAND_LINES", expandedLines });
-    },
-    [dispatch]
-  );
-
-  const collapseLines = useCallback(
-    (idx: number) => {
-      dispatch({ type: "COLLAPSE_LINES", idx });
-    },
-    [dispatch]
-  );
-
   const scrollToLine = useCallback((lineNumber: number) => {
     listRef.current?.scrollToRow(lineNumber);
   }, []);
@@ -107,7 +94,15 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         expandableRows,
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [state.logs.length, `${filters}`, `${bookmarks}`, selectedLine, filterLogic]
+    [
+      state.logs.length,
+      `${filters}`, // eslint-disable-line react-hooks/exhaustive-deps
+      `${bookmarks}`, // eslint-disable-line react-hooks/exhaustive-deps
+      `${state.expandedLines}`, // eslint-disable-line react-hooks/exhaustive-deps
+      selectedLine,
+      filterLogic,
+      expandableRows,
+    ]
   );
 
   const searchResults = useMemo(() => {
@@ -145,8 +140,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const memoizedContext = useMemo(
     () => ({
       expandedLines: state.expandedLines,
-      setExpandedLines,
-      collapseLines,
+      expandLines: (expandedLines: ExpandedLines) =>
+        dispatch({ type: "EXPAND_LINES", expandedLines }),
+      collapseLines: (idx: number) => dispatch({ type: "COLLAPSE_LINES", idx }),
       fileName: state.fileName,
       hasSearch: !!state.searchState.searchTerm,
       lineCount: state.logs.length,
@@ -185,8 +181,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     }),
     [
       state.expandedLines,
-      setExpandedLines,
-      collapseLines,
       state.fileName,
       state.searchState,
       state.logs.length,

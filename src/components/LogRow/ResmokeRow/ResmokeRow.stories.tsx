@@ -19,14 +19,14 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
   <ResmokeRow
     key={logLines[0]}
     data={{
+      expandLines: () => {},
       getLine,
-      wrap: args.wrap,
-      processedLines: processedLogLines,
-      logType: LogTypes.RESMOKE_LOGS,
-      expandedLines: [],
-      setExpandedLines: () => {},
-      range: { lowerRange: 0 },
       scrollToLine: () => {},
+      expandedLines: [],
+      logType: LogTypes.RESMOKE_LOGS,
+      processedLines: processedLogLines,
+      range: { lowerRange: 0 },
+      wrap: args.wrap,
     }}
     listRowProps={{
       index: 2,
@@ -56,14 +56,14 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
       logLines={processedLogLines}
       rowCount={processedLogLines.length}
       rowRenderer={RowRenderer({
-        logType: LogTypes.RESMOKE_LOGS,
-        wrap: args.wrap,
+        expandLines: () => {},
         getLine,
-        processedLines: processedLogLines,
-        expandedLines: [],
-        setExpandedLines: () => {},
-        range: { lowerRange: 0 },
         scrollToLine: () => {},
+        expandedLines: [],
+        logType: LogTypes.RESMOKE_LOGS,
+        processedLines: processedLogLines,
+        range: { lowerRange: 0 },
+        wrap: args.wrap,
       })}
       scrollToIndex={0}
       wrap={args.wrap}

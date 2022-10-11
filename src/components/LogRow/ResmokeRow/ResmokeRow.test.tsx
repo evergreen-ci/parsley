@@ -146,14 +146,15 @@ const listRowProps = {
 const getLine = (index: number) => logLines[index];
 
 const data = {
+  expandLines: jest.fn(),
   getLine,
-  setExpandedLines: jest.fn(),
+  scrollToLine: () => {},
+
   expandedLines: [],
-  wrap: false,
-  processedLines: logLines.map((_, index) => index),
   logType: LogTypes.RESMOKE_LOGS,
+  processedLines: logLines.map((_, index) => index),
   range: {
     lowerRange: 0,
   },
-  scrollToLine: () => {},
+  wrap: false,
 };

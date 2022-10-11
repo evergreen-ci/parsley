@@ -9,18 +9,19 @@ interface BaseRowProps {
 
 interface RowData {
   getLine: (index: number) => string | undefined;
+  expandLines: (expandedLines: ExpandedLines) => void;
   scrollToLine: (lineNumber: number) => void;
-  wrap: boolean;
-  processedLines: ProcessedLogLines;
-  logType: LogTypes;
-  setExpandedLines: (expandedLines: ExpandedLines) => void;
+
   expandedLines: ExpandedLines;
-  searchTerm?: RegExp;
+  highlightedLine?: number;
+  logType: LogTypes;
+  processedLines: ProcessedLogLines;
   range: {
     lowerRange: number;
     upperRange?: number;
   };
-  highlightedLine?: number;
+  searchTerm?: RegExp;
+  wrap: boolean;
 }
 
 export type { BaseRowProps, RowData };

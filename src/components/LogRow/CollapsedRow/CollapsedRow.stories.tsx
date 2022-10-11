@@ -38,14 +38,14 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          logType: LogTypes.EVERGREEN_TASK_LOGS,
-          wrap: args.wrap,
+          expandLines,
           getLine: (index: number) => ansiiLogLines[index],
-          processedLines: processedLogLines,
-          expandedLines,
-          setExpandedLines: expandLines,
           scrollToLine: () => {},
+          expandedLines,
+          logType: LogTypes.EVERGREEN_TASK_LOGS,
+          processedLines: processedLogLines,
           range: { lowerRange: 0 },
+          wrap: args.wrap,
         })}
         scrollToIndex={0}
         wrap={args.wrap}
@@ -88,14 +88,14 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          logType: LogTypes.RESMOKE_LOGS,
-          wrap: args.wrap,
+          expandLines,
           getLine: (index: number) => resmokeLogLines[index],
-          processedLines: processedLogLines,
-          expandedLines,
-          setExpandedLines: expandLines,
           scrollToLine: () => {},
+          expandedLines,
+          logType: LogTypes.RESMOKE_LOGS,
+          processedLines: processedLogLines,
           range: { lowerRange: 0 },
+          wrap: args.wrap,
         })}
         scrollToIndex={0}
         wrap={args.wrap}

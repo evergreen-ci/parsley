@@ -13,7 +13,7 @@ const SKIP_NUMBER = 5;
 
 const CollapsedRow = forwardRef<any, BaseRowProps>((props, ref) => {
   const { data, listRowProps } = props;
-  const { processedLines, setExpandedLines } = data;
+  const { processedLines, expandLines } = data;
   const { index } = listRowProps;
 
   const line = processedLines[index] as number[];
@@ -29,7 +29,7 @@ const CollapsedRow = forwardRef<any, BaseRowProps>((props, ref) => {
     if (2 * SKIP_NUMBER > numCollapsed) {
       expandAll();
     } else {
-      setExpandedLines([
+      expandLines([
         [start, start + (SKIP_NUMBER - 1)],
         [end - (SKIP_NUMBER - 1), end],
       ]);
@@ -37,7 +37,7 @@ const CollapsedRow = forwardRef<any, BaseRowProps>((props, ref) => {
   };
 
   const expandAll = () => {
-    setExpandedLines([[start, end]]);
+    expandLines([[start, end]]);
   };
 
   return (

@@ -17,14 +17,14 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
   <AnsiiRow
     key={logLines[0]}
     data={{
+      expandLines: () => {},
       getLine,
-      wrap: args.wrap,
-      processedLines: processedLogLines,
-      logType: LogTypes.EVERGREEN_TASK_LOGS,
-      expandedLines: [],
-      setExpandedLines: () => {},
-      range: { lowerRange: 0 },
       scrollToLine: () => {},
+      expandedLines: [],
+      logType: LogTypes.EVERGREEN_TASK_LOGS,
+      processedLines: processedLogLines,
+      range: { lowerRange: 0 },
+      wrap: args.wrap,
     }}
     listRowProps={{
       index: 0,
@@ -54,14 +54,14 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
       logLines={processedLogLines}
       rowCount={processedLogLines.length}
       rowRenderer={RowRenderer({
-        logType: LogTypes.EVERGREEN_TASK_LOGS,
-        wrap: args.wrap,
+        expandLines: () => {},
         getLine,
-        processedLines: processedLogLines,
-        expandedLines: [],
-        setExpandedLines: () => {},
-        range: { lowerRange: 0 },
         scrollToLine: () => {},
+        expandedLines: [],
+        logType: LogTypes.EVERGREEN_TASK_LOGS,
+        processedLines: processedLogLines,
+        range: { lowerRange: 0 },
+        wrap: args.wrap,
       })}
       scrollToIndex={0}
       wrap={args.wrap}

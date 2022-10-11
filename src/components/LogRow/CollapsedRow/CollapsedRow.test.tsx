@@ -23,11 +23,11 @@ describe("collapsedRow", () => {
     expect(screen.getByText("11 lines skipped")).toBeInTheDocument();
   });
 
-  it("should call setExpandedLines function with the correct arguments when expanding 5 lines", async () => {
-    const setExpandedLines = jest.fn();
+  it("should call expandLines function with the correct arguments when expanding 5 lines", async () => {
+    const expandLines = jest.fn();
     renderWithRouterMatch(
       <CollapsedRow
-        data={{ ...data, setExpandedLines }}
+        data={{ ...data, expandLines }}
         listRowProps={listRowProps}
       />,
       {
@@ -38,18 +38,18 @@ describe("collapsedRow", () => {
       name: "Expand Icon 5 Above and Below",
     });
     await user.click(expandFiveButton);
-    expect(setExpandedLines).toHaveBeenCalledTimes(1);
-    expect(setExpandedLines).toHaveBeenCalledWith([
+    expect(expandLines).toHaveBeenCalledTimes(1);
+    expect(expandLines).toHaveBeenCalledWith([
       [0, 4],
       [6, 10],
     ]);
   });
 
-  it("should call setExpandedLines function with the correct arguments when expanding all lines", async () => {
-    const setExpandedLines = jest.fn();
+  it("should call expandLines function with the correct arguments when expanding all lines", async () => {
+    const expandLines = jest.fn();
     renderWithRouterMatch(
       <CollapsedRow
-        data={{ ...data, setExpandedLines }}
+        data={{ ...data, expandLines }}
         listRowProps={listRowProps}
       />,
       {
@@ -60,8 +60,8 @@ describe("collapsedRow", () => {
       name: "Expand Icon All",
     });
     await user.click(expandFiveButton);
-    expect(setExpandedLines).toHaveBeenCalledTimes(1);
-    expect(setExpandedLines).toHaveBeenCalledWith([[0, 10]]);
+    expect(expandLines).toHaveBeenCalledTimes(1);
+    expect(expandLines).toHaveBeenCalledWith([[0, 10]]);
   });
 });
 
@@ -92,12 +92,13 @@ const listRowProps = {
 };
 
 const data = {
+  expandLines: jest.fn(),
   getLine,
-  setExpandedLines: jest.fn(),
   scrollToLine: jest.fn(),
-  range: { lowerRange: 0 },
+
   expandedLines: [],
-  wrap: false,
-  processedLines: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
   logType: LogTypes.RESMOKE_LOGS,
+  processedLines: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
+  range: { lowerRange: 0 },
+  wrap: false,
 };
