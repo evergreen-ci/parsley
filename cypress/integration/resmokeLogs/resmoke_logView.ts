@@ -257,6 +257,6 @@ describe("Searching", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("NETWORK");
     cy.dataCy("search-count").should("be.visible");
-    cy.dataCy("search-count").should("contain.text", "1/6");
+    cy.dataCy("search-count").should("contain.text", "1/7");
   });
 });
