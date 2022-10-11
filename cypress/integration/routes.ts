@@ -36,6 +36,6 @@ describe("Parsley Routes", () => {
   });
   it("visiting a non existent page should 404", () => {
     cy.visit("/this/is/not/a/real/page");
-    cy.contains("404");
+    cy.dataCy("404").should("be.visible");
   });
 });

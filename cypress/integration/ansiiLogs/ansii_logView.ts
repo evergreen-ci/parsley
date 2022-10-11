@@ -72,6 +72,31 @@ describe("Bookmarking and selecting lines", () => {
     cy.dataCy("log-line-container").should("not.contain", "5");
   });
 
+  it("should be able to copy bookmarks as JIRA format", () => {
+    cy.dataCy("log-row-10").dblclick({ scrollBehavior: false });
+    cy.dataCy("log-row-11").dblclick({ scrollBehavior: false });
+
+    const logLine0 =
+      "[2022/03/02 17:01:58.587] Task logger initialized (agent version 2022-02-14 from 00a4c8f3e8e4559cc23e04a019b6d1725c40c3e5).";
+    const logLine10 =
+      "[2022/03/02 17:02:01.610] e391612 EVG-16049 Update spruce project page for admin only variables (#1114)";
+    const logLine11 =
+      "[2022/03/02 17:02:01.610] 04a52b2 EVG-15959 Fix rerender method in test utils (#1118)";
+    const logLine297 =
+      "[2022/03/02 17:05:21.050] running setup group because we have a new independent task";
+
+    cy.enableClipboard();
+    cy.dataCy("details-button").click();
+    cy.dataCy("jira-button-wrapper").click();
+    cy.window()
+      .its("navigator.clipboard")
+      .invoke("readText")
+      .should(
+        "equal",
+        `{noformat}\n${logLine0}\n...\n${logLine10}\n${logLine11}\n...\n${logLine297}\n{noformat}`
+      );
+  });
+
   it("should be able to clear bookmarks", () => {
     cy.dataCy("clear-bookmarks").click();
     cy.location("search").should("equal", "");
@@ -126,7 +151,7 @@ describe("Filtering", () => {
   });
 });
 
-describe.only("Jump to line", () => {
+describe("Jump to line", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   before(() => {
@@ -164,5 +189,123 @@ describe.only("Jump to line", () => {
 
     cy.dataCy("log-line-56").click();
     cy.dataCy("log-row-56").should("be.visible");
+  });
+});
+
+describe("Searching", () => {
+  const logLink =
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+    cy.toggleDrawer();
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("search-option").click();
+  });
+  it("searching for a term should highlight matching words ", () => {
+    cy.dataCy("searchbar-input").type("Starting");
+    cy.dataCy("search-count").should("be.visible");
+    cy.dataCy("search-count").should("contain.text", "1/1");
+    cy.dataCy("highlight").should("exist");
+    cy.dataCy("highlight").should("have.length", 1);
+    cy.dataCy("highlight").should("contain.text", "Starting");
+  });
+
+  it("searching for a term should snap the matching line to the top of the window", () => {
+    cy.dataCy("searchbar-input").clear();
+    cy.dataCy("searchbar-input").type("info");
+    cy.dataCy("search-count").should("be.visible");
+    cy.dataCy("search-count").should("contain.text", "1/4");
+    cy.get("[data-highlighted='true']").should("contain.text", "info");
+  });
+
+  it("should be able to specify a range of lines to search", () => {
+    cy.toggleDetailsPanel(true);
+    cy.dataCy("range-upper-bound").should("be.visible");
+    cy.dataCy("range-upper-bound").type("25");
+    cy.toggleDetailsPanel(false);
+    cy.dataCy("search-count").should("contain.text", "1/2");
+    cy.toggleDetailsPanel(true);
+    cy.dataCy("range-lower-bound").should("be.visible");
+    cy.dataCy("range-lower-bound").type("25");
+    cy.toggleDetailsPanel(false);
+    cy.dataCy("search-count").should("contain.text", "1/1");
+    cy.toggleDetailsPanel(true);
+    cy.dataCy("range-lower-bound").clear();
+    cy.dataCy("range-upper-bound").clear();
+    cy.toggleDetailsPanel(false);
+    cy.dataCy("search-count").should("contain.text", "1/4");
+  });
+  it("should be able to toggle case sensitivity", () => {
+    cy.dataCy("searchbar-input").clear();
+    cy.dataCy("searchbar-input").type("starting");
+    cy.dataCy("search-count").should("contain.text", "1/1");
+    cy.toggleDetailsPanel(true);
+    cy.dataCy("case-sensitive-toggle").should("be.visible");
+    cy.dataCy("case-sensitive-toggle").should(
+      "have.attr",
+      "aria-checked",
+      "false"
+    );
+    cy.dataCy("case-sensitive-toggle").click({ force: true });
+    cy.dataCy("case-sensitive-toggle").should(
+      "have.attr",
+      "aria-checked",
+      "true"
+    );
+
+    cy.toggleDetailsPanel(false);
+    cy.dataCy("search-count").should("contain.text", "No Matches");
+    cy.toggleDetailsPanel(true);
+    cy.dataCy("case-sensitive-toggle").click({ force: true });
+    cy.dataCy("case-sensitive-toggle").should(
+      "have.attr",
+      "aria-checked",
+      "false"
+    );
+    cy.toggleDetailsPanel(false);
+    cy.dataCy("search-count").should("contain.text", "1/1");
+  });
+  it("should be able to paginate through search results", () => {
+    cy.dataCy("searchbar-input").clear();
+    cy.dataCy("searchbar-input").type("info");
+    cy.dataCy("search-count").should("be.visible");
+    cy.dataCy("search-count").should("contain.text", "1/4");
+    cy.dataCy("next-button").click();
+    cy.dataCy("search-count").should("contain.text", "2/4");
+    cy.dataCy("next-button").click();
+    cy.dataCy("search-count").should("contain.text", "3/4");
+    cy.dataCy("next-button").click();
+    cy.dataCy("search-count").should("contain.text", "4/4");
+    cy.dataCy("next-button").click();
+    cy.dataCy("search-count").should("contain.text", "1/4");
+    cy.dataCy("previous-button").click();
+    cy.dataCy("search-count").should("contain.text", "4/4");
+    cy.dataCy("previous-button").click();
+    cy.dataCy("search-count").should("contain.text", "3/4");
+    cy.dataCy("previous-button").click();
+    cy.dataCy("search-count").should("contain.text", "2/4");
+    cy.dataCy("previous-button").click();
+    cy.dataCy("search-count").should("contain.text", "1/4");
+  });
+
+  it("should be able to search on filtered content", () => {
+    cy.dataCy("searchbar-input").clear();
+    cy.dataCy("searchbar-input").type("spruce");
+    cy.dataCy("search-count").should("be.visible");
+    cy.dataCy("search-count").should("contain.text", "1/27");
+    cy.dataCy("searchbar-input").clear();
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("Starting");
+    cy.dataCy("searchbar-input").type("{enter}");
+    cy.get("[data-cy^='collapsed-row-']").should("exist");
+    cy.get("[data-cy^='collapsed-row-']").should("have.length", 1);
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("search-option").click();
+    cy.dataCy("searchbar-input").clear();
+    cy.dataCy("searchbar-input").type("Spruce");
+    cy.dataCy("search-count").should("be.visible");
+    cy.dataCy("search-count").should("contain.text", "1/1");
   });
 });

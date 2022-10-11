@@ -5,28 +5,41 @@ import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
 import { StyledLink } from "components/styles";
+import { SearchBarActions } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { navbarHeight, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
 import { validateRegexp } from "utils/validators";
+import SearchResults from "./SearchResults";
 import UploadLink from "./UploadLink";
 
 const { gray, white } = palette;
 
 const NavBar: React.FC = () => {
-  const [, setSearch] = useQueryParam(QueryParams.Search, "");
   const [filters, setFilters] = useQueryParam<string[]>(
     QueryParams.Filters,
     []
   );
-  const { hasLogs, clearLogs } = useLogContext();
+  const { hasLogs, clearLogs, setSearch, searchState, paginate } =
+    useLogContext();
 
+  const { hasSearch } = searchState;
   const handleSearch = (selected: string, value: string) => {
-    if (selected === "search") {
+    if (selected === SearchBarActions.Search) {
       setSearch(value);
-    } else if (selected === "filter" && !filters.includes(value)) {
+    } else if (
+      selected === SearchBarActions.Filter &&
+      !filters.includes(value)
+    ) {
       setFilters([...filters, value]);
+      setSearch("");
+    }
+  };
+
+  const handleOnChange = (selected: string, value: string) => {
+    if (selected === SearchBarActions.Search) {
+      setSearch(value);
     }
   };
 
@@ -39,14 +52,23 @@ const NavBar: React.FC = () => {
           <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
         <StyledSearchBar
+          disabled={!hasLogs}
+          onChange={handleOnChange}
           onSubmit={handleSearch}
           validator={validateRegexp}
           validatorMessage="Invalid Regular Expression"
         />
+        {hasSearch && (
+          <SearchResults paginate={paginate} searchState={searchState} />
+        )}
       </FlexContainer>
 
-      <StyledButton buttonText="Details" data-cy="details-button">
-        <DetailsOverlay />
+      <StyledButton
+        buttonText="Details"
+        data-cy="details-button"
+        disabled={!hasLogs}
+      >
+        <DetailsOverlay data-cy="details-overlay" />
       </StyledButton>
     </Container>
   );
@@ -56,8 +78,9 @@ const Container = styled.nav`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: ${navbarHeight};
+  flex-shrink: 0;
 
+  height: ${navbarHeight};
   background-color: ${white};
   border-bottom: 1px solid ${gray.light2};
   padding: 0 ${size.s};

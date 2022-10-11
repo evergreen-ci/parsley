@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
@@ -17,49 +16,38 @@ type ResmokeRowProps = React.FC<
 >;
 
 // Single ResmokeRow.
-const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
-  const [, setScrollIndex] = useState<number | undefined>(undefined);
-
-  return (
-    <ResmokeRow
-      key={logLines[0]}
-      data={{
-        getLine,
-        setScrollIndex,
-        logType: LogTypes.RESMOKE_LOGS,
-        processedLines: processedLogLines,
-        wrap: args.wrap,
-      }}
-      listRowProps={{
-        index: 2,
-        style: {},
-        columnIndex: 0,
-        isScrolling: false,
-        isVisible: true,
-        key: getLine(2) || "",
-        parent: {} as any,
-      }}
-    />
-  );
-};
+const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
+  <ResmokeRow
+    key={logLines[0]}
+    data={{
+      getLine,
+      wrap: args.wrap,
+      processedLines: processedLogLines,
+      logType: LogTypes.RESMOKE_LOGS,
+      range: { lowerRange: 0 },
+      scrollToLine: () => {},
+    }}
+    listRowProps={{
+      index: 2,
+      style: {},
+      columnIndex: 0,
+      isScrolling: false,
+      isVisible: true,
+      key: getLine(2) || "",
+      parent: {} as any,
+    }}
+  />
+);
 
 export const SingleLine = SingleLineTemplate.bind({});
 
 SingleLine.args = {
   wrap: false,
 };
-SingleLine.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 // Multiple ResmokeRows.
 const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   const [scrollIndex, setScrollIndex] = useState<number | undefined>(undefined);
-
   return (
     <Container>
       <LogPane
@@ -70,10 +58,11 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
           getLine,
-          setScrollIndex,
+          scrollToLine: setScrollIndex,
           logType: LogTypes.RESMOKE_LOGS,
           processedLines: processedLogLines,
           wrap: args.wrap,
+          range: { lowerRange: 0 },
         })}
         scrollToIndex={scrollIndex}
         wrap={args.wrap}
@@ -86,13 +75,6 @@ export const MultipleLines = MultipleLineTemplate.bind({});
 MultipleLines.args = {
   wrap: false,
 };
-MultipleLines.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 // Multiple ResmokeRows with CollapsedRows.
 const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => {
@@ -108,10 +90,11 @@ const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => {
         rowCount={collapsedProcessedLogLines.length}
         rowRenderer={RowRenderer({
           getLine,
-          setScrollIndex,
+          scrollToLine: setScrollIndex,
           logType: LogTypes.RESMOKE_LOGS,
           processedLines: collapsedProcessedLogLines,
           wrap: args.wrap,
+          range: { lowerRange: 0 },
         })}
         scrollToIndex={scrollIndex}
         wrap={args.wrap}
@@ -125,13 +108,6 @@ export const Collapsed = CollapsedTemplate.bind({});
 Collapsed.args = {
   wrap: false,
 };
-Collapsed.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 const logLines = [
   "[js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).",

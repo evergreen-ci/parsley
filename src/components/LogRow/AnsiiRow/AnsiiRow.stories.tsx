@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import AnsiiRow from ".";
@@ -15,43 +14,34 @@ export default {
 type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>["data"]>;
 
 // Single AnsiiRow.
-const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
-  const [, setScrollIndex] = useState<number | undefined>(undefined);
+const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
+  <AnsiiRow
+    key={logLines[0]}
+    data={{
+      getLine,
+      wrap: args.wrap,
+      processedLines: processedLogLines,
+      logType: LogTypes.EVERGREEN_TASK_LOGS,
+      range: { lowerRange: 0 },
+      scrollToLine: () => {},
+    }}
+    listRowProps={{
+      index: 0,
+      style: {},
+      columnIndex: 0,
+      isScrolling: false,
+      isVisible: true,
+      key: getLine(0) || "",
+      parent: {} as any,
+    }}
+  />
+);
 
-  return (
-    <AnsiiRow
-      key={logLines[0]}
-      data={{
-        getLine,
-        setScrollIndex,
-        logType: LogTypes.EVERGREEN_TASK_LOGS,
-        processedLines: processedLogLines,
-        wrap: args.wrap,
-      }}
-      listRowProps={{
-        index: 0,
-        style: {},
-        columnIndex: 0,
-        isScrolling: false,
-        isVisible: true,
-        key: getLine(0) || "",
-        parent: {} as any,
-      }}
-    />
-  );
-};
 export const SingleLine = SingleLineTemplate.bind({});
 
 SingleLine.args = {
   wrap: false,
 };
-SingleLine.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 // Multiple AnsiiRows.
 const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
@@ -67,7 +57,8 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
           getLine,
-          setScrollIndex,
+          scrollToLine: setScrollIndex,
+          range: { lowerRange: 0 },
           logType: LogTypes.EVERGREEN_TASK_LOGS,
           processedLines: processedLogLines,
           wrap: args.wrap,
@@ -83,13 +74,6 @@ export const MultiLines = MultiLineTemplate.bind({});
 MultiLines.args = {
   wrap: false,
 };
-MultiLines.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 // Multiple AnsiiRows with CollapsedRows.
 const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => {
@@ -105,10 +89,11 @@ const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => {
         rowCount={collapsedProcessedLogLines.length}
         rowRenderer={RowRenderer({
           getLine,
-          setScrollIndex,
+          scrollToLine: setScrollIndex,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
           processedLines: collapsedProcessedLogLines,
           wrap: args.wrap,
+          range: { lowerRange: 0 },
         })}
         scrollToIndex={scrollIndex}
         wrap={args.wrap}
@@ -122,13 +107,6 @@ export const Collapsed = CollapsedTemplate.bind({});
 Collapsed.args = {
   wrap: false,
 };
-Collapsed.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 const logLines = [
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']",

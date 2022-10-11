@@ -14,4 +14,9 @@ enum MatchType {
   Inverse = "inverse",
 }
 
-export { LogTypes, CaseSensitivity, MatchType };
+enum SearchBarActions {
+  Filter = "filter",
+  Search = "search",
+}
+
+export { LogTypes, CaseSensitivity, MatchType, SearchBarActions };

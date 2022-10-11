@@ -6,7 +6,6 @@ enum QueryParams {
   SelectedLine = "selectedLine",
   Wrap = "wrap",
   Expandable = "expandable",
-  CaseSensitive = "caseSensitive",
   FilterLogic = "filterLogic",
   LowerRange = "lower",
   UpperRange = "upper",

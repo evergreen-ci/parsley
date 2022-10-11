@@ -8,23 +8,13 @@ describe("row", () => {
   });
 
   it("clicking log line link updates the url and selects it", async () => {
+    const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>
     );
     await userEvent.click(screen.getByDataCy("log-link-0"));
     expect(history.location.search).toBe("?selectedLine=0");
-  });
-
-  it("clicking log line link to select it should call setScrollIndex", async () => {
-    const setScrollIndex = jest.fn();
-    renderWithRouterMatch(
-      <Row {...rowProps} setScrollIndex={setScrollIndex}>
-        {testLog}
-      </Row>
-    );
-    await userEvent.click(screen.getByDataCy("log-link-0"));
-    expect(setScrollIndex).toHaveBeenCalledTimes(1);
-    expect(setScrollIndex).toHaveBeenCalledWith(0);
+    expect(scrollToLine).toHaveBeenCalledWith(0);
   });
 
   it("clicking on a selected log line link unselects it", async () => {
@@ -58,12 +48,14 @@ describe("row", () => {
   });
 
   it("a log line can be selected and bookmarked at the same time", async () => {
+    const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
-      <Row {...rowProps}>{testLog}</Row>
+      <Row {...rowProps} scrollToLine={scrollToLine}>
+        {testLog}
+      </Row>
     );
     await userEvent.click(screen.getByDataCy("log-link-0"));
-    expect(history.location.search).toBe("?selectedLine=0");
-
+    expect(scrollToLine).toHaveBeenCalledWith(0);
     await userEvent.dblClick(screen.getByText(testLog));
     expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");
   });
@@ -79,7 +71,7 @@ const rowProps = {
   isVisible: true,
   lineNumber: 0,
   parent: {} as any,
-  setScrollIndex: jest.fn(),
+  scrollToLine: jest.fn(),
   style: {},
   wrap: false,
 };
