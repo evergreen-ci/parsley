@@ -149,6 +149,15 @@ const getAttributes = (line: string) => {
   return attr;
 };
 
+const stateRegex =
+  /(:s(hard)?\d*|:c(onfigsvr)?)?:(initsync|prim(ary)?|(mongo)?s|sec(ondary)?\d*|n(ode)?\d*)]/;
+
+/** `getState` returns the state of a mongod instance */
+const getState = (line: string) => {
+  const state = line.match(stateRegex)?.[0];
+  return state;
+};
+
 export {
   getAttributes,
   getConfigServer,
@@ -159,5 +168,6 @@ export {
   getPort,
   getResmokeFunction,
   getShellPrefix,
+  getState,
   getTimeStamp,
 };
