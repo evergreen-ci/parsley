@@ -1,4 +1,4 @@
-import { KeyboardEvent, useState } from "react";
+import { KeyboardEvent, useMemo, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
@@ -6,7 +6,9 @@ import { Option, Select } from "@leafygreen-ui/select";
 import Icon from "components/Icon";
 import IconWithTooltip from "components/IconWithTooltip";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
+import { SearchBarActions } from "constants/enums";
 import { zIndex } from "constants/tokens";
+import debounce from "utils/debounce";
 
 const { yellow } = palette;
 interface SearchBarProps {
@@ -15,24 +17,40 @@ interface SearchBarProps {
   validatorMessage?: string;
   className?: string;
   onSubmit?: (selected: string, value: string) => void;
+  onChange?: (selected: string, value: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
+  className,
   disabled = false,
+  onChange = () => {},
+  onSubmit = () => {},
   validator = () => true,
   validatorMessage = "Invalid Input",
-  className,
-  onSubmit,
 }) => {
   const [input, setInput] = useState("");
-  const [selected, setSelected] = useState("search");
-
+  const [selected, setSelected] = useState(SearchBarActions.Search);
+  const isFilter = selected === SearchBarActions.Filter;
   const isValid = validator(input);
-
   const handleOnSubmit = () => {
     if (isValid) {
-      setInput("");
-      onSubmit?.(selected, input);
+      if (isFilter) {
+        setInput("");
+      }
+      onSubmit(selected, input);
+    }
+  };
+
+  // debounce the onChange handler to prevent excessive rerenders
+  const debouncedHandleOnChangeCallback = useMemo(
+    () => debounce((value: string) => onChange(selected, value), 1000),
+    [selected, onChange]
+  );
+
+  const handleOnChange = (value: string) => {
+    setInput(value);
+    if (validator(value)) {
+      debouncedHandleOnChangeCallback(value);
     }
   };
 
@@ -43,14 +61,22 @@ const SearchBar: React.FC<SearchBarProps> = ({
         aria-labelledby="searchbar-select"
         data-cy="searchbar-select"
         disabled={disabled}
-        onChange={(v) => setSelected(v)}
+        onChange={(v) => setSelected(v as SearchBarActions)}
         popoverZIndex={zIndex.popover}
         value={selected}
       >
-        <Option key="search" data-cy="search-option" value="search">
+        <Option
+          key={SearchBarActions.Search}
+          data-cy="search-option"
+          value={SearchBarActions.Search}
+        >
           Search
         </Option>
-        <Option key="filter" data-cy="filter-option" value="filter">
+        <Option
+          key={SearchBarActions.Filter}
+          data-cy="filter-option"
+          value={SearchBarActions.Filter}
+        >
           Filter
         </Option>
       </StyledSelect>
@@ -77,7 +103,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             </IconWithTooltip>
           )
         }
-        onChange={(e) => setInput(e.target.value)}
+        onChange={(e) => handleOnChange(e.target.value)}
         onKeyPress={(e: KeyboardEvent<HTMLInputElement>) =>
           e.key === "Enter" && handleOnSubmit()
         }

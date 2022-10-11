@@ -10,6 +10,19 @@ Cypress.Commands.add("dataCy", (value: string) => {
   cy.get(`[data-cy=${value}]`);
 });
 
+// Source: https://stackoverflow.com/questions/60174546/how-grant-cypress-test-application-some-permissions
+Cypress.Commands.add("enableClipboard", () => {
+  cy.wrap(
+    Cypress.automation("remote:debugger:protocol", {
+      command: "Browser.grantPermissions",
+      params: {
+        permissions: ["clipboardReadWrite", "clipboardSanitizedWrite"],
+        origin: window.location.origin,
+      },
+    })
+  );
+});
+
 Cypress.Commands.add(
   "isContainedInViewport",
   { prevSubject: true },
@@ -83,6 +96,18 @@ Cypress.Commands.add("login", () => {
 
 Cypress.Commands.add("toggleDrawer", () => {
   cy.get(`[aria-label="Collapse navigation"]`).click();
+});
+
+Cypress.Commands.add("toggleDetailsPanel", (open: boolean) => {
+  if (open) {
+    cy.get(`[data-cy="details-overlay"]`).should("not.exist");
+    cy.get(`[data-cy="details-button"]`).click();
+    cy.get(`[data-cy="details-overlay"]`).should("be.visible");
+  } else {
+    cy.get(`[data-cy="details-overlay"]`).should("be.visible");
+    cy.get(`[data-cy="details-button"]`).click();
+    cy.get(`[data-cy="details-overlay"]`).should("not.exist");
+  }
 });
 
 Cypress.Commands.add(
