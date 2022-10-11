@@ -424,7 +424,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
         className="css-91jh6a"
       >
         <div
-          className="leafygreen-ui-cssveg css-0"
+          className="leafygreen-ui-cssveg"
           data-cy="jira-button-wrapper"
           onBlur={[Function]}
           onFocus={[Function]}
