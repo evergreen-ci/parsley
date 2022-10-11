@@ -20,14 +20,14 @@ describe("buttonRow", () => {
         name: "JIRA",
       });
       expect(jiraButton).toBeDisabled();
-      // Tooltip text should appear when button is disabled.
+      // Tooltip should appear even if button is disabled.
       await user.hover(screen.getByDataCy("jira-button-wrapper"));
       await waitFor(() => {
         expect(screen.getByText("No bookmarks to copy.")).toBeInTheDocument();
       });
     });
 
-    it("tooltip text should indicate when the user has successfully copied to clipboard", async () => {
+    it("should indicate when the user has successfully copied to clipboard", async () => {
       renderWithRouterMatch(<ButtonRow />, {
         wrapper: wrapper(logLines),
         route: "?bookmarks=0,2",
@@ -50,7 +50,7 @@ describe("buttonRow", () => {
       });
     });
 
-    it("should copy the correct text", async () => {
+    it("should copy the correct text when clicked", async () => {
       Object.defineProperty(navigator, "clipboard", {
         value: {
           writeText: jest.fn(),

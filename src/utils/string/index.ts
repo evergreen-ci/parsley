@@ -1,5 +1,5 @@
 /**
- * Function to copy text to a user's clipboard.
+ * `copyToClipboard` copies text to a user's clipboard.
  * @param textToCopy - text to be copied
  */
 export const copyToClipboard = (textToCopy: string) => {
@@ -7,9 +7,9 @@ export const copyToClipboard = (textToCopy: string) => {
 };
 
 /**
- * Function that constructs the JIRA format string from the bookmarks.
- * @param bookmarks - list of numbers representing the applied bookmarks
- * @param getLine - function that gets the log text associated with a log line number
+ * `getJiraFormat` uses the applied bookmarks to construct a JIRA formatted string.
+ * @param bookmarks  - array of numbers representing the applied bookmarks
+ * @param getLine - function that retrieves the log text associated with a log line number
  * @returns formatted string that can be pasted into JIRA
  */
 export const getJiraFormat = (
@@ -28,11 +28,9 @@ export const getJiraFormat = (
 
     // If bookmarks is out of bounds, stop processing.
     if (logText === undefined) {
-      jiraString += "{noformat}";
-      return jiraString;
+      break;
     }
 
-    // Add the log text to the string.
     jiraString += `${logText}\n`;
 
     // If the current and next bookmark are not adjacent to each other, insert an

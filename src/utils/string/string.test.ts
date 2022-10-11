@@ -41,7 +41,7 @@ describe("getJiraFormat", () => {
     expect(getJiraFormat(bookmarks, getLine)).toBe(`{noformat}\n{noformat}`);
   });
 
-  it("should properly format JIRA text", () => {
+  it("should properly format the JIRA string", () => {
     const bookmarks = [0, 2, 4, 5];
     expect(getJiraFormat(bookmarks, getLine)).toBe(
       `{noformat}\n${logLines[0]}\n...\n${logLines[2]}\n...\n${logLines[4]}\n${logLines[5]}\n{noformat}`

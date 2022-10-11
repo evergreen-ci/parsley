@@ -10,6 +10,7 @@ Cypress.Commands.add("dataCy", (value: string) => {
   cy.get(`[data-cy=${value}]`);
 });
 
+// Source: https://stackoverflow.com/questions/60174546/how-grant-cypress-test-application-some-permissions
 Cypress.Commands.add("enableClipboard", () => {
   cy.wrap(
     Cypress.automation("remote:debugger:protocol", {

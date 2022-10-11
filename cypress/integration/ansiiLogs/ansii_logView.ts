@@ -85,8 +85,8 @@ describe("Bookmarking and selecting lines", () => {
     const logLine297 =
       "[2022/03/02 17:05:21.050] running setup group because we have a new independent task";
 
-    cy.dataCy("details-button").click();
     cy.enableClipboard();
+    cy.dataCy("details-button").click();
     cy.dataCy("jira-button-wrapper").click();
     cy.window()
       .its("navigator.clipboard")
