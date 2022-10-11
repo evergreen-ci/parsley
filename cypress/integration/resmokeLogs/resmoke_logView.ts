@@ -110,9 +110,19 @@ describe("Filtering", () => {
     });
   });
 
+  it("should be able to edit filters", () => {
+    cy.toggleDrawer();
+    cy.get(`[aria-label="Edit filter"]`).click();
+    cy.dataCy("edit-filter-name").clear().type("running");
+    cy.contains("button", "OK").click();
+
+    cy.get("[data-cy^='log-row-']").each(($el) => {
+      cy.wrap($el).contains("running", { matchCase: false });
+    });
+  });
+
   it("should preserve applied bookmarks and selected lines even if they don't match the filters", () => {
     // Delete the filters from the drawer.
-    cy.toggleDrawer();
     cy.get(`[aria-label="Delete filter"]`).click();
 
     // Select a line, with the expectation that it won't be collapsed by the filter.
@@ -129,17 +139,6 @@ describe("Filtering", () => {
       cy.wrap($el)
         .should("have.attr", "data-cy")
         .and("match", /log-row-(0|5|6|11079)/);
-    });
-  });
-
-  it("should be able to edit filters", () => {
-    cy.toggleDrawer();
-    cy.get(`[aria-label="Edit filter"]`).click();
-    cy.dataCy("edit-filter-name").clear().type("running");
-    cy.contains("button", "OK").click();
-
-    cy.get("[data-cy^='log-row-']").each(($el) => {
-      cy.wrap($el).contains("running", { matchCase: false });
     });
   });
 });

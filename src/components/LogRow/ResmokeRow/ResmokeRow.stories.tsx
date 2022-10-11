@@ -1,10 +1,8 @@
-import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
-import { ExpandedLines } from "types/logs";
 import ResmokeRow from ".";
 
 export default {
@@ -17,34 +15,30 @@ type ResmokeRowProps = React.FC<
 >;
 
 // Single ResmokeRow.
-const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
-  const [, setExpandedLines] = useState<ExpandedLines>([]);
-
-  return (
-    <ResmokeRow
-      key={logLines[0]}
-      data={{
-        getLine,
-        wrap: args.wrap,
-        processedLines: processedLogLines,
-        logType: LogTypes.RESMOKE_LOGS,
-        expandedLines: [],
-        setExpandedLines,
-        range: { lowerRange: 0 },
-        scrollToLine: () => {},
-      }}
-      listRowProps={{
-        index: 2,
-        style: {},
-        columnIndex: 0,
-        isScrolling: false,
-        isVisible: true,
-        key: getLine(2) || "",
-        parent: {} as any,
-      }}
-    />
-  );
-};
+const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
+  <ResmokeRow
+    key={logLines[0]}
+    data={{
+      getLine,
+      wrap: args.wrap,
+      processedLines: processedLogLines,
+      logType: LogTypes.RESMOKE_LOGS,
+      expandedLines: [],
+      setExpandedLines: () => {},
+      range: { lowerRange: 0 },
+      scrollToLine: () => {},
+    }}
+    listRowProps={{
+      index: 2,
+      style: {},
+      columnIndex: 0,
+      isScrolling: false,
+      isVisible: true,
+      key: getLine(2) || "",
+      parent: {} as any,
+    }}
+  />
+);
 
 export const SingleLine = SingleLineTemplate.bind({});
 
@@ -53,32 +47,29 @@ SingleLine.args = {
 };
 
 // Multiple ResmokeRows.
-const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
-  const [, setExpandedLines] = useState<ExpandedLines>([]);
-  return (
-    <Container>
-      <LogPane
-        cache={cache}
-        expandedLines={[]}
-        filters={[]}
-        logLines={processedLogLines}
-        rowCount={processedLogLines.length}
-        rowRenderer={RowRenderer({
-          logType: LogTypes.RESMOKE_LOGS,
-          wrap: args.wrap,
-          getLine,
-          processedLines: processedLogLines,
-          expandedLines: [],
-          setExpandedLines,
-          range: { lowerRange: 0 },
-          scrollToLine: () => {},
-        })}
-        scrollToIndex={0}
-        wrap={args.wrap}
-      />
-    </Container>
-  );
-};
+const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
+  <Container>
+    <LogPane
+      cache={cache}
+      expandedLines={[]}
+      filters={[]}
+      logLines={processedLogLines}
+      rowCount={processedLogLines.length}
+      rowRenderer={RowRenderer({
+        logType: LogTypes.RESMOKE_LOGS,
+        wrap: args.wrap,
+        getLine,
+        processedLines: processedLogLines,
+        expandedLines: [],
+        setExpandedLines: () => {},
+        range: { lowerRange: 0 },
+        scrollToLine: () => {},
+      })}
+      scrollToIndex={0}
+      wrap={args.wrap}
+    />
+  </Container>
+);
 export const MultipleLines = MultipleLineTemplate.bind({});
 
 MultipleLines.args = {
