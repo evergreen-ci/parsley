@@ -20,9 +20,7 @@ describe("Basic resmoke log view", () => {
     );
   });
   it("long lines with wrapping turned on should fit on screen", () => {
-    // Turn wrapping on through the Details Overlay.
-    cy.clickToggle("wrap-toggle");
-
+    cy.clickToggle("wrap-toggle", true); // Turn wrap on.
     cy.dataCy("log-row-16").should("be.visible");
     cy.dataCy("log-row-16").isContainedInViewport();
   });
@@ -96,8 +94,7 @@ describe("Bookmarking and selecting lines", () => {
 
 describe("Filtering", () => {
   before(() => {
-    // Turn expandable rows on through the Details Overlay.
-    cy.clickToggle("expandable-rows-toggle");
+    cy.clickToggle("expandable-rows-toggle", true); // Turn expandable rows on.
   });
 
   it("should be able to apply filters", () => {
@@ -150,9 +147,7 @@ describe("expanding collapsed rows", () => {
     cy.login();
     cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
-
-    // Turn expandable rows on through the Details Overlay.
-    cy.clickToggle("expandable-rows-toggle");
+    cy.clickToggle("expandable-rows-toggle", true); // Turn expandable rows on.
   });
 
   it("should be able to expand collapsed rows", () => {
@@ -186,9 +181,7 @@ describe("Searching", () => {
     cy.toggleDrawer();
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
-
-    // Turn expandable rows on through the Details Overlay.
-    cy.clickToggle("expandable-rows-toggle");
+    cy.clickToggle("expandable-rows-toggle", true); // Turn expandable rows on.
   });
   it("searching for a term should highlight matching words ", () => {
     cy.dataCy("searchbar-input").type("ShardedClusterFixture:job0:mongos0 ");
@@ -211,50 +204,24 @@ describe("Searching", () => {
   });
 
   it("should be able to specify a range of lines to search", () => {
-    cy.toggleDetailsPanel(true);
-    cy.dataCy("range-upper-bound").should("be.visible");
-    cy.dataCy("range-upper-bound").type("25");
-    cy.toggleDetailsPanel(false);
+    cy.editBounds({ upper: "25" });
     cy.dataCy("search-count").should("contain.text", "1/7");
-    cy.toggleDetailsPanel(true);
-    cy.dataCy("range-lower-bound").should("be.visible");
-    cy.dataCy("range-lower-bound").type("25");
-    cy.toggleDetailsPanel(false);
+
+    cy.editBounds({ lower: "25" });
     cy.dataCy("search-count").should("contain.text", "1/1");
-    cy.toggleDetailsPanel(true);
-    cy.dataCy("range-lower-bound").clear();
-    cy.dataCy("range-upper-bound").clear();
-    cy.toggleDetailsPanel(false);
+
+    cy.clearBounds();
     cy.dataCy("search-count").should("contain.text", "1/1484");
   });
   it("should be able to toggle case sensitivity", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("Mongos0");
     cy.dataCy("search-count").should("contain.text", "1/1");
-    cy.toggleDetailsPanel(true);
-    cy.dataCy("case-sensitive-toggle").should("be.visible");
-    cy.dataCy("case-sensitive-toggle").should(
-      "have.attr",
-      "aria-checked",
-      "false"
-    );
-    cy.dataCy("case-sensitive-toggle").click({ force: true });
-    cy.dataCy("case-sensitive-toggle").should(
-      "have.attr",
-      "aria-checked",
-      "true"
-    );
 
-    cy.toggleDetailsPanel(false);
+    cy.clickToggle("case-sensitive-toggle", true); // Turn case sensitivity on.
     cy.dataCy("search-count").should("contain.text", "No Matches");
-    cy.toggleDetailsPanel(true);
-    cy.dataCy("case-sensitive-toggle").click({ force: true });
-    cy.dataCy("case-sensitive-toggle").should(
-      "have.attr",
-      "aria-checked",
-      "false"
-    );
-    cy.toggleDetailsPanel(false);
+
+    cy.clickToggle("case-sensitive-toggle", false); // Turn case sensitivity off.
     cy.dataCy("search-count").should("contain.text", "1/1");
   });
   it("should be able to paginate through search results", () => {

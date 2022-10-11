@@ -106,9 +106,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
 
   const searchResults = useMemo(() => {
-    // search through processedLoglines
-    // return the line number of the first match
-    // if no match, return undefined
     const results = state.searchState.searchTerm
       ? searchLogs({
           searchRegex: state.searchState.searchTerm,
@@ -125,11 +122,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     return results;
   }, [
     dispatch,
-    state.searchState.searchTerm,
-    upperRange,
-    lowerRange,
-    processedLogLines,
     getLine,
+    state.searchState.searchTerm,
+    lowerRange,
+    upperRange,
+    processedLogLines,
   ]);
 
   const highlightedLine =
@@ -140,33 +137,27 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const memoizedContext = useMemo(
     () => ({
       expandedLines: state.expandedLines,
-      expandLines: (expandedLines: ExpandedLines) =>
-        dispatch({ type: "EXPAND_LINES", expandedLines }),
-      collapseLines: (idx: number) => dispatch({ type: "COLLAPSE_LINES", idx }),
       fileName: state.fileName,
-      hasSearch: !!state.searchState.searchTerm,
-      lineCount: state.logs.length,
-      processedLogLines,
-      searchState: state.searchState,
       hasLogs: !!state.logs.length,
+      hasSearch: !!state.searchState.searchTerm,
+      highlightedLine,
+      lineCount: state.logs.length,
+      listRef,
+      processedLogLines,
       range: {
         lowerRange,
         upperRange,
       },
-      listRef,
-      highlightedLine,
+      searchState: state.searchState,
+
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
+      collapseLines: (idx: number) => dispatch({ type: "COLLAPSE_LINES", idx }),
+      expandLines: (expandedLines: ExpandedLines) =>
+        dispatch({ type: "EXPAND_LINES", expandedLines }),
       getLine,
       ingestLines: (lines: string[], logType: LogTypes) => {
         dispatch({ type: "INGEST_LOGS", logs: lines, logType });
       },
-      setFileName: (fileName: string) => {
-        dispatch({ type: "SET_FILE_NAME", fileName });
-      },
-      setSearch: (searchTerm: string) => {
-        dispatch({ type: "SET_SEARCH_TERM", searchTerm });
-      },
-      scrollToLine,
       paginate: (direction: DIRECTION) => {
         const { searchIndex, searchRange } = state.searchState;
         if (searchIndex !== undefined && searchRange !== undefined) {
@@ -175,23 +166,30 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           scrollToLine(searchResults[nextPage]);
         }
       },
+      scrollToLine,
       setCaseSensitive: (caseSensitive: boolean) => {
         dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive });
+      },
+      setFileName: (fileName: string) => {
+        dispatch({ type: "SET_FILE_NAME", fileName });
+      },
+      setSearch: (searchTerm: string) => {
+        dispatch({ type: "SET_SEARCH_TERM", searchTerm });
       },
     }),
     [
       state.expandedLines,
       state.fileName,
-      state.searchState,
       state.logs.length,
-      processedLogLines,
-      lowerRange,
-      upperRange,
+      state.searchState,
       highlightedLine,
+      lowerRange,
+      processedLogLines,
+      searchResults,
+      upperRange,
+      dispatch,
       getLine,
       scrollToLine,
-      dispatch,
-      searchResults,
     ]
   );
 

@@ -6,12 +6,20 @@ declare global {
       /**
        * Custom command to click one of the toggles in the Details Overlay panel.
        */
-      clickToggle(toggleDataCy: string): void;
+      clickToggle(toggleDataCy: string, enable: boolean): void;
+      /**
+       * Custom command to clear the search range bounds in the Details Overlay panel.
+       */
+      clearBounds(): void;
       /**
        * Custom command to select DOM element by data-cy attribute.
        * @example cy.dataCy('greeting')
        */
       dataCy(value: string): Chainable<Element>;
+      /**
+       * Custom command to edit the search range bounds in the Details Overlay panel.
+       */
+      editBounds(bounds: { upper?: string; lower?: string }): void;
       /**
        * Custom command to enable clipboard interactions.
        */
