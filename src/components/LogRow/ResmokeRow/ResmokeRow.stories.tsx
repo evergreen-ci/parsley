@@ -54,6 +54,7 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
         cache={cache}
         filterLogic="and"
         filters={[]}
+        initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
@@ -86,6 +87,7 @@ const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => {
         cache={cache}
         filterLogic="and"
         filters={[]}
+        initialScrollIndex={-1}
         logLines={collapsedProcessedLogLines}
         rowCount={collapsedProcessedLogLines.length}
         rowRenderer={RowRenderer({

@@ -53,6 +53,7 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
         cache={cache}
         filterLogic="and"
         filters={[]}
+        initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
@@ -85,6 +86,7 @@ const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => {
         cache={cache}
         filterLogic="and"
         filters={[]}
+        initialScrollIndex={-1}
         logLines={collapsedProcessedLogLines}
         rowCount={collapsedProcessedLogLines.length}
         rowRenderer={RowRenderer({

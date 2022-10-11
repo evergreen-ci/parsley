@@ -72,7 +72,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
 
   const scrollToLine = useCallback((lineNumber: number) => {
+    console.log("Jumping to line...:", lineNumber);
     listRef.current?.scrollToRow(lineNumber);
+    setTimeout(() => {
+      listRef.current?.scrollToRow(lineNumber);
+    }, 100);
   }, []);
 
   // TODO EVG-17537: more advanced filtering

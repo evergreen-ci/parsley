@@ -2,12 +2,12 @@ import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
 import SideBar from ".";
 
 describe("sideBar", () => {
-  it("sets 0 and last log line as the initial bookmarks", async () => {
+  it("should set 0 and last log line as the initial bookmarks", async () => {
     const { history } = renderWithRouterMatch(
       <SideBar
         maxLineNumber={10}
         processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        setScrollIndex={jest.fn()}
+        scrollToLine={jest.fn()}
       />
     );
     await waitFor(() => {
@@ -15,12 +15,12 @@ describe("sideBar", () => {
     });
   });
 
-  it("properly displays sorted bookmarks and selectedLine", () => {
+  it("should properly display sorted bookmarks and selectedLine", () => {
     renderWithRouterMatch(
       <SideBar
         maxLineNumber={10}
         processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        setScrollIndex={jest.fn()}
+        scrollToLine={jest.fn()}
       />,
       {
         route: "?bookmarks=1,7&selectedLine=5",
@@ -41,7 +41,7 @@ describe("sideBar", () => {
       <SideBar
         maxLineNumber={10}
         processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        setScrollIndex={jest.fn()}
+        scrollToLine={jest.fn()}
       />,
       {
         route: "?bookmarks=1,3&selectedLine=5",
@@ -51,37 +51,37 @@ describe("sideBar", () => {
     expect(history.location.search).toBe("?selectedLine=5");
   });
 
-  it("setScrollIndex should be called when clicking on a log line (no collapsed lines)", async () => {
-    const setScrollIndex = jest.fn();
+  it("should call scrollToLine when clicking on a log line (with no collapsed lines)", async () => {
+    const scrollToLine = jest.fn();
     renderWithRouterMatch(
       <SideBar
         maxLineNumber={4}
         processedLogLines={[0, 1, 2, 3, 4]}
-        setScrollIndex={setScrollIndex}
+        scrollToLine={scrollToLine}
       />,
       {
         route: "?bookmarks=1,3",
       }
     );
     await userEvent.click(screen.getByDataCy("log-line-3"));
-    expect(setScrollIndex).toHaveBeenCalledTimes(1);
-    expect(setScrollIndex).toHaveBeenCalledWith(3);
+    expect(scrollToLine).toHaveBeenCalledTimes(1);
+    expect(scrollToLine).toHaveBeenCalledWith(3);
   });
 
-  it("setScrollIndex should be called when clicking on a log line (collapsed lines)", async () => {
-    const setScrollIndex = jest.fn();
+  it("should call scrollToLine when clicking on a log line (with collapsed lines)", async () => {
+    const scrollToLine = jest.fn();
     renderWithRouterMatch(
       <SideBar
         maxLineNumber={4}
         processedLogLines={[[0, 1, 2], 3, 4]}
-        setScrollIndex={setScrollIndex}
+        scrollToLine={scrollToLine}
       />,
       {
         route: "?bookmarks=1,3",
       }
     );
     await userEvent.click(screen.getByDataCy("log-line-3"));
-    expect(setScrollIndex).toHaveBeenCalledTimes(1);
-    expect(setScrollIndex).toHaveBeenCalledWith(1);
+    expect(scrollToLine).toHaveBeenCalledTimes(1);
+    expect(scrollToLine).toHaveBeenCalledWith(1);
   });
 });

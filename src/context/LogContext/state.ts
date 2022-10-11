@@ -6,7 +6,6 @@ import { SearchState } from "./types";
 interface LogState {
   logs: string[];
   fileName?: string;
-  scrollIndex?: number;
   logType?: LogTypes;
   lineNumber?: number;
   searchState: SearchState;

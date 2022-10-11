@@ -9,13 +9,13 @@
  */
 export const findLineIndex = (
   processedLines: (number | number[])[],
-  lineNumber: number,
+  lineNumber: number | undefined,
   start: number = 0,
   end: number = processedLines.length - 1
-): number | undefined => {
+): number => {
   // Line number was not found in the array.
-  if (start > end) {
-    return undefined;
+  if (lineNumber === undefined || start > end) {
+    return -1;
   }
 
   const midIdx = Math.floor((start + end) / 2);
@@ -48,5 +48,5 @@ export const findLineIndex = (
     }
   }
 
-  return undefined;
+  return -1;
 };

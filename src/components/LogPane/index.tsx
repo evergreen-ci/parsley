@@ -1,8 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
-import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
-import { useQueryParam } from "hooks/useQueryParam";
 
 type LogPaneProps = Omit<
   ListProps,
@@ -11,6 +9,7 @@ type LogPaneProps = Omit<
   wrap: boolean;
   filterLogic: string;
   filters: string[];
+  initialScrollIndex: number;
   rowRenderer: ListRowRenderer;
 };
 
@@ -21,14 +20,9 @@ const LogPane: React.FC<LogPaneProps> = ({
   wrap,
   filterLogic,
   filters,
+  initialScrollIndex,
   ...rest
 }) => {
-  const [selectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
-    undefined
-  );
-  const [initialScrollIndex] = useState(selectedLine);
-
   const { listRef } = useLogContext();
   useEffect(() => {
     // Reset the cache and recalculate the row heights

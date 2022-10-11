@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import FiltersDrawer from "components/FiltersDrawer";
 import LogPane from "components/LogPane";
@@ -8,6 +9,7 @@ import { LogTypes } from "constants/enums";
 import { FilterLogic, QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
+import { findLineIndex } from "utils/search";
 
 interface LogWindowProps {
   logType: LogTypes;
@@ -30,6 +32,14 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
 
   const { searchTerm } = searchState;
 
+  const [selectedLine] = useQueryParam<number | undefined>(
+    QueryParams.SelectedLine,
+    undefined
+  );
+  const [initialScrollIndex] = useState(
+    findLineIndex(processedLogLines, selectedLine)
+  );
+
   return (
     <Container data-cy="log-window">
       {hasLogs && <FiltersDrawer />}
@@ -37,7 +47,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         <SideBar
           maxLineNumber={lineCount - 1}
           processedLogLines={processedLogLines}
-          setScrollIndex={scrollToLine}
+          scrollToLine={scrollToLine}
         />
       )}
       <ColumnContainer>
@@ -47,6 +57,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
             cache={cache}
             filterLogic={filterLogic}
             filters={filters}
+            initialScrollIndex={initialScrollIndex}
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
               getLine,

@@ -1,6 +1,6 @@
 import { LogTypes } from "constants/enums";
 import { LogContextProvider } from "context/LogContext";
-import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
+import { renderWithRouterMatch, screen, userEvent } from "test_utils";
 import AnsiiRow from ".";
 
 const wrapper = (logs: string[]) => {
@@ -11,6 +11,7 @@ const wrapper = (logs: string[]) => {
 };
 
 describe("ansiiRow", () => {
+  const user = userEvent.setup();
   it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
       <AnsiiRow data={data} listRowProps={listRowProps} />,
@@ -35,10 +36,8 @@ describe("ansiiRow", () => {
         wrapper: wrapper(logLines),
       }
     );
-    userEvent.click(screen.getByDataCy("log-link-0"));
-    await waitFor(() => {
-      expect(history.location.search).toBe("?selectedLine=0");
-    });
+    await user.click(screen.getByDataCy("log-link-0"));
+    expect(history.location.search).toBe("?selectedLine=0");
     expect(scrollToLine).toHaveBeenCalledWith(0);
   });
   it("clicking on a selected log line link unselects it", async () => {
@@ -50,10 +49,8 @@ describe("ansiiRow", () => {
         route: "?selectedLine=0",
       }
     );
-    userEvent.click(screen.getByDataCy("log-link-0"));
-    await waitFor(() => {
-      expect(history.location.search).toBe("");
-    });
+    await user.click(screen.getByDataCy("log-link-0"));
+    expect(history.location.search).toBe("");
   });
   it("double clicking a log line adds it to the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
@@ -62,10 +59,8 @@ describe("ansiiRow", () => {
         wrapper: wrapper(logLines),
       }
     );
-    userEvent.dblClick(screen.getByText(logLines[0]));
-    await waitFor(() => {
-      expect(history.location.search).toBe("?bookmarks=0");
-    });
+    await user.dblClick(screen.getByText(logLines[0]));
+    expect(history.location.search).toBe("?bookmarks=0");
   });
   it("double clicking a bookmarked log line removes it from the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
@@ -75,10 +70,8 @@ describe("ansiiRow", () => {
         route: "?bookmarks=0",
       }
     );
-    userEvent.dblClick(screen.getByText(logLines[0]));
-    await waitFor(() => {
-      expect(history.location.search).toBe("");
-    });
+    await user.dblClick(screen.getByText(logLines[0]));
+    expect(history.location.search).toBe("");
   });
   it("lines should be linkified if they have a url", () => {
     renderWithRouterMatch(
@@ -158,14 +151,13 @@ const listRowProps = {
 
 const getLine = (index: number) => logLines[index];
 
-const setScrollIndex = jest.fn();
+const scrollToLine = jest.fn();
 
 const data = {
   getLine,
-  setScrollIndex,
   wrap: false,
   processedLines: logLines.map((_, index) => index),
-  scrollToLine: () => {},
+  scrollToLine,
   logType: LogTypes.RESMOKE_LOGS,
   range: {
     lowerRange: 0,
