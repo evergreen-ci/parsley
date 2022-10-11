@@ -98,6 +98,18 @@ Cypress.Commands.add("toggleDrawer", () => {
   cy.get(`[aria-label="Collapse navigation"]`).click();
 });
 
+Cypress.Commands.add("toggleDetailsPanel", (open: boolean) => {
+  if (open) {
+    cy.get(`[data-cy="details-overlay"]`).should("not.exist");
+    cy.get(`[data-cy="details-button"]`).click();
+    cy.get(`[data-cy="details-overlay"]`).should("be.visible");
+  } else {
+    cy.get(`[data-cy="details-overlay"]`).should("be.visible");
+    cy.get(`[data-cy="details-button"]`).click();
+    cy.get(`[data-cy="details-overlay"]`).should("not.exist");
+  }
+});
+
 Cypress.Commands.add(
   "validateToast",
   (status: string, message?: string, shouldClose?: boolean) => {

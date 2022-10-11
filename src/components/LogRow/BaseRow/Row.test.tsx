@@ -12,6 +12,7 @@ describe("row", () => {
         isVisible
         lineNumber={0}
         parent={{} as any}
+        scrollToLine={() => {}}
         style={{}}
         wrap={false}
       >
@@ -21,6 +22,7 @@ describe("row", () => {
     expect(screen.getByText(testLog)).toBeVisible();
   });
   it("clicking log line link updates the url and selects it", async () => {
+    const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
       <Row
         key={testLog}
@@ -30,6 +32,7 @@ describe("row", () => {
         isVisible
         lineNumber={0}
         parent={{} as any}
+        scrollToLine={scrollToLine}
         style={{}}
         wrap={false}
       >
@@ -40,6 +43,7 @@ describe("row", () => {
     await waitFor(() => {
       expect(history.location.search).toBe("?selectedLine=0");
     });
+    expect(scrollToLine).toHaveBeenCalledWith(0);
   });
   it("clicking on a selected log line link unselects it", async () => {
     const { history } = renderWithRouterMatch(
@@ -51,6 +55,7 @@ describe("row", () => {
         isVisible
         lineNumber={0}
         parent={{} as any}
+        scrollToLine={() => {}}
         style={{}}
         wrap={false}
       >
@@ -75,6 +80,7 @@ describe("row", () => {
         isVisible
         lineNumber={0}
         parent={{} as any}
+        scrollToLine={() => {}}
         style={{}}
         wrap={false}
       >
@@ -96,6 +102,7 @@ describe("row", () => {
         isVisible
         lineNumber={0}
         parent={{} as any}
+        scrollToLine={() => {}}
         style={{}}
         wrap={false}
       >
@@ -111,6 +118,7 @@ describe("row", () => {
     });
   });
   it("a log line can be selected and bookmarked at the same time", async () => {
+    const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
       <Row
         key={testLog}
@@ -120,6 +128,7 @@ describe("row", () => {
         isVisible
         lineNumber={0}
         parent={{} as any}
+        scrollToLine={scrollToLine}
         style={{}}
         wrap={false}
       >
@@ -130,6 +139,7 @@ describe("row", () => {
     await waitFor(() => {
       expect(history.location.search).toBe("?selectedLine=0");
     });
+    expect(scrollToLine).toHaveBeenCalledWith(0);
     userEvent.dblClick(screen.getByText(testLog));
     await waitFor(() => {
       expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");

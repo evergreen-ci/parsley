@@ -8,16 +8,16 @@ import Content from "pages";
 const App = () => (
   <>
     <GlobalStyles />
-    <GlobalProviders>
-      <Router>
+    <Router>
+      <GlobalProviders>
         <AppWrapper>
           <NavBar />
           <Routes>
             <Route element={<Content />} path="/*" />
           </Routes>
         </AppWrapper>
-      </Router>
-    </GlobalProviders>
+      </GlobalProviders>
+    </Router>
   </>
 );
 
