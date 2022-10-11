@@ -44,6 +44,8 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
           processedLines: processedLogLines,
           expandedLines,
           setExpandedLines: expandLines,
+          scrollToLine: () => {},
+          range: { lowerRange: 0 },
         })}
         scrollToIndex={0}
         wrap={args.wrap}
@@ -92,6 +94,8 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
           processedLines: processedLogLines,
           expandedLines,
           setExpandedLines: expandLines,
+          scrollToLine: () => {},
+          range: { lowerRange: 0 },
         })}
         scrollToIndex={0}
         wrap={args.wrap}

@@ -94,6 +94,8 @@ const listRowProps = {
 const data = {
   getLine,
   setExpandedLines: jest.fn(),
+  scrollToLine: jest.fn(),
+  range: { lowerRange: 0 },
   expandedLines: [],
   wrap: false,
   processedLines: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
