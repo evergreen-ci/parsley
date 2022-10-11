@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
@@ -59,13 +58,6 @@ export const CollapsedAnsiiRow = CollapsedAnsiiTemplate.bind({});
 CollapsedAnsiiRow.args = {
   wrap: false,
 };
-CollapsedAnsiiRow.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 // CollapsedRow withs ResmokeRows.
 const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
@@ -109,13 +101,6 @@ export const CollapsedResmokeRow = CollapsedResmokeTemplate.bind({});
 CollapsedResmokeRow.args = {
   wrap: false,
 };
-CollapsedResmokeRow.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 const ansiiLogLines = [
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
