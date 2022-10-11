@@ -9,7 +9,9 @@ describe("row", () => {
   it("clicking log line link updates the url and selects it", async () => {
     const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
-      <Row {...rowProps}>{testLog}</Row>
+      <Row {...rowProps} scrollToLine={scrollToLine}>
+        {testLog}
+      </Row>
     );
     userEvent.click(screen.getByDataCy("log-link-0"));
     await waitFor(() => {
@@ -51,7 +53,6 @@ describe("row", () => {
     });
   });
   it("a log line can be selected and bookmarked at the same time", async () => {
-    const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>
     );
@@ -59,7 +60,6 @@ describe("row", () => {
     await waitFor(() => {
       expect(history.location.search).toBe("?selectedLine=0");
     });
-    expect(scrollToLine).toHaveBeenCalledWith(0);
     userEvent.dblClick(screen.getByText(testLog));
     await waitFor(() => {
       expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");

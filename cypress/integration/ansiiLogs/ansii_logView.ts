@@ -192,6 +192,9 @@ describe("Searching", () => {
     cy.toggleDrawer();
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
+
+    // Turn expandable rows on through the Details Overlay.
+    cy.clickToggle("expandable-rows-toggle");
   });
   it("searching for a term should highlight matching words ", () => {
     cy.dataCy("searchbar-input").type("Starting");
