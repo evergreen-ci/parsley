@@ -1,5 +1,6 @@
 import { FilterLogic } from "constants/queryParams";
-import { ExpandedLines } from "types/logs";
+import { ExpandedLines, ProcessedLogLines } from "types/logs";
+import { isCollapsedRow } from "utils/collapsedRow";
 import { isExpanded } from "utils/expandedRanges";
 
 type FilterLogsParams = {
@@ -39,7 +40,7 @@ export const filterLogs = ({
     return logLines.map((_, idx) => idx);
   }
 
-  const filteredLines: (number | number[])[] = [];
+  const filteredLines: ProcessedLogLines = [];
 
   logLines.reduce((arr, logLine, idx) => {
     // Bookmarks and selected lines should always remain uncollapsed.
@@ -60,7 +61,7 @@ export const filterLogs = ({
 
     // If the line doesn't match the filters, collapse it.
     const previousItem = arr[arr.length - 1];
-    if (Array.isArray(previousItem)) {
+    if (isCollapsedRow(previousItem)) {
       previousItem.push(idx);
     } else {
       arr.push([idx]);

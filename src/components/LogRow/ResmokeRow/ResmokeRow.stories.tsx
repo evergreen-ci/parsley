@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
@@ -31,6 +30,8 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
         logType: LogTypes.RESMOKE_LOGS,
         expandedLines: [],
         setExpandedLines,
+        range: { lowerRange: 0 },
+        scrollToLine: () => {},
       }}
       listRowProps={{
         index: 2,
@@ -50,18 +51,10 @@ export const SingleLine = SingleLineTemplate.bind({});
 SingleLine.args = {
   wrap: false,
 };
-SingleLine.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 // Multiple ResmokeRows.
 const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   const [, setExpandedLines] = useState<ExpandedLines>([]);
-
   return (
     <Container>
       <LogPane
@@ -77,6 +70,8 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
           processedLines: processedLogLines,
           expandedLines: [],
           setExpandedLines,
+          range: { lowerRange: 0 },
+          scrollToLine: () => {},
         })}
         scrollToIndex={0}
         wrap={args.wrap}
@@ -89,13 +84,6 @@ export const MultipleLines = MultipleLineTemplate.bind({});
 MultipleLines.args = {
   wrap: false,
 };
-MultipleLines.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 const logLines = [
   "[js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).",

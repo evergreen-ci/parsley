@@ -1,6 +1,6 @@
 import { ListRowProps } from "react-virtualized";
 import { LogTypes } from "constants/enums";
-import { ExpandedLines } from "types/logs";
+import { ExpandedLines, ProcessedLogLines } from "types/logs";
 
 interface BaseRowProps {
   listRowProps: ListRowProps;
@@ -9,11 +9,18 @@ interface BaseRowProps {
 
 interface RowData {
   getLine: (index: number) => string | undefined;
+  scrollToLine: (lineNumber: number) => void;
   wrap: boolean;
-  processedLines: (number | number[])[];
+  processedLines: ProcessedLogLines;
   logType: LogTypes;
   setExpandedLines: (expandedLines: ExpandedLines) => void;
   expandedLines: ExpandedLines;
+  searchTerm?: RegExp;
+  range: {
+    lowerRange: number;
+    upperRange?: number;
+  };
+  highlightedLine?: number;
 }
 
 export type { BaseRowProps, RowData };

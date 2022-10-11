@@ -78,8 +78,10 @@ exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
 <pre
-  className="css-g5434z"
+  className="css-1k3ki9o"
   data-cy="log-row-0"
+  data-highlighted={false}
+  data-selected={false}
   onDoubleClick={[Function]}
   selected={false}
   style={Object {}}

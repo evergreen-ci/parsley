@@ -12,6 +12,10 @@ declare global {
        * @example cy.dataCy('greeting')
        */
       dataCy(value: string): Chainable<Element>;
+      /**
+       * Custom command to enable clipboard interactions.
+       */
+      enableClipboard(): void;
       /** Custom command to determine if an element is not contained in the viewport.
        * @example cy.isNotContainedInViewport()
        * @example cy.isNotContainedInViewport().should('be.visible')
@@ -37,6 +41,11 @@ declare global {
        * Custom command to open and close the Leafygreen SideNav.
        */
       toggleDrawer(): void;
+      /**
+       * Custom command to open and close the Details Panel.
+       * @example cy.toggleDetailsPanel(open: boolean)
+       */
+      toggleDetailsPanel(open: boolean): void;
       /**
        * Custom command to validate a toast was rendered
        * @example cy.validateToast("success", "This succeeded")
