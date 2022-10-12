@@ -151,6 +151,47 @@ describe("Filtering", () => {
   });
 });
 
+describe("Jump to line", () => {
+  const logLink =
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+  });
+
+  it("should default to bookmarking 0 and the last log line on load", () => {
+    cy.location("search").should("equal", "?bookmarks=0,297");
+    cy.dataCy("log-line-container").should("contain", "0");
+    cy.dataCy("log-line-container").should("contain", "297");
+  });
+
+  it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
+    cy.dataCy("log-row-4").dblclick({ force: true });
+
+    cy.dataCy("log-line-297").click();
+    cy.dataCy("log-row-297").should("be.visible");
+    cy.dataCy("log-row-56").should("not.exist");
+
+    cy.dataCy("log-line-4").click();
+    cy.dataCy("log-row-4").should("be.visible");
+  });
+
+  it("should be able to use the sidebar to jump to a line when there are collapsed rows", () => {
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("pass{enter}");
+
+    cy.dataCy("log-row-56").dblclick({ force: true });
+
+    cy.dataCy("log-line-297").click();
+    cy.dataCy("log-row-297").should("be.visible");
+    cy.dataCy("log-row-56").should("not.exist");
+
+    cy.dataCy("log-line-56").click();
+    cy.dataCy("log-row-56").should("be.visible");
+  });
+});
+
 describe("Searching", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
@@ -161,6 +202,7 @@ describe("Searching", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
   });
+
   it("searching for a term should highlight matching words ", () => {
     cy.dataCy("searchbar-input").type("Starting");
     cy.dataCy("search-count").should("be.visible");
@@ -195,6 +237,7 @@ describe("Searching", () => {
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "1/4");
   });
+
   it("should be able to toggle case sensitivity", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("starting");
@@ -212,7 +255,6 @@ describe("Searching", () => {
       "aria-checked",
       "true"
     );
-
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "No Matches");
     cy.toggleDetailsPanel(true);
@@ -225,6 +267,7 @@ describe("Searching", () => {
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "1/1");
   });
+
   it("should be able to paginate through search results", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("info");

@@ -1,7 +1,7 @@
 import { createContext, useCallback, useContext, useMemo, useRef } from "react";
 import { List } from "react-virtualized";
-import { LogTypes } from "constants/enums";
-import { FilterLogic, QueryParams } from "constants/queryParams";
+import { FilterLogic, LogTypes } from "constants/enums";
+import { QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
 import { ProcessedLogLines } from "types/logs";
 import { filterLogs } from "utils/filter";
@@ -72,7 +72,12 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
 
   const scrollToLine = useCallback((lineNumber: number) => {
+    // We need to call scrollToRow twice because of https://github.com/bvaughn/react-virtualized/issues/995.
+    // When we switch to a different virtual list library we should not do this.
     listRef.current?.scrollToRow(lineNumber);
+    setTimeout(() => {
+      listRef.current?.scrollToRow(lineNumber);
+    }, 0);
   }, []);
 
   // TODO EVG-17537: more advanced filtering

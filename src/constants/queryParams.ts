@@ -11,9 +11,4 @@ enum QueryParams {
   UpperRange = "upper",
 }
 
-enum FilterLogic {
-  And = "and",
-  Or = "or",
-}
-
-export { FilterLogic, QueryParams };
+export { QueryParams };

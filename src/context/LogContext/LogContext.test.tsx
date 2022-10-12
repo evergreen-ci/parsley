@@ -81,8 +81,9 @@ describe("useLogContext", () => {
       const line = result.current.processedLogLines[i];
       // Expect the line not to be an array
       expect(Array.isArray(line)).toBe(false);
-      // @ts-expect-error line is not an array we confirmed it above
-      expect(result.current.getLine(line)).toStrictEqual(resmokeLines[i]);
+      expect(result.current.getLine(line as number)).toStrictEqual(
+        resmokeLines[i]
+      );
     }
   });
   it("saving a filename should save it to the context", () => {

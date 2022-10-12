@@ -144,6 +144,47 @@ describe("Filtering", () => {
   });
 });
 
+describe("Jump to line", () => {
+  const logLink =
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+  });
+
+  it("should default to bookmarking 0 and the last log line on load", () => {
+    cy.location("search").should("equal", "?bookmarks=0,11079");
+    cy.dataCy("log-line-container").should("contain", "0");
+    cy.dataCy("log-line-container").should("contain", "11079");
+  });
+
+  it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
+    cy.dataCy("log-row-4").dblclick({ force: true });
+
+    cy.dataCy("log-line-11079").click();
+    cy.dataCy("log-row-11079").should("be.visible");
+    cy.dataCy("log-row-56").should("not.exist");
+
+    cy.dataCy("log-line-4").click();
+    cy.dataCy("log-row-4").should("be.visible");
+  });
+
+  it("should be able to use the sidebar to jump to a line when there are collapsed rows", () => {
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("repl_hb{enter}");
+
+    cy.dataCy("log-row-30").dblclick({ force: true });
+
+    cy.dataCy("log-line-11079").click();
+    cy.dataCy("log-row-11079").should("be.visible");
+    cy.dataCy("log-row-30").should("not.exist");
+
+    cy.dataCy("log-line-30").click();
+    cy.dataCy("log-row-30").should("be.visible");
+  });
+});
+
 describe("Searching", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
@@ -155,6 +196,7 @@ describe("Searching", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
   });
+
   it("searching for a term should highlight matching words ", () => {
     cy.dataCy("searchbar-input").type("ShardedClusterFixture:job0:mongos0 ");
     cy.dataCy("search-count").should("be.visible");
@@ -209,7 +251,6 @@ describe("Searching", () => {
       "aria-checked",
       "true"
     );
-
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "No Matches");
     cy.toggleDetailsPanel(true);
@@ -222,6 +263,7 @@ describe("Searching", () => {
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "1/1");
   });
+
   it("should be able to paginate through search results", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("conn49");

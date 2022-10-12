@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
@@ -45,27 +46,31 @@ SingleLine.args = {
 };
 
 // Multiple ResmokeRows.
-const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
-  <Container>
-    <LogPane
-      cache={cache}
-      filters={[]}
-      logLines={processedLogLines}
-      rowCount={processedLogLines.length}
-      rowRenderer={RowRenderer({
-        logType: LogTypes.RESMOKE_LOGS,
-        wrap: args.wrap,
-        getLine,
-        processedLines: processedLogLines,
-        range: { lowerRange: 0 },
-        scrollToLine: () => {},
-      })}
-      scrollToIndex={0}
-      wrap={args.wrap}
-    />
-  </Container>
-);
-
+const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
+  const [scrollIndex, setScrollIndex] = useState<number>(-1);
+  return (
+    <Container>
+      <LogPane
+        cache={cache}
+        filterLogic="and"
+        filters={[]}
+        initialScrollIndex={-1}
+        logLines={processedLogLines}
+        rowCount={processedLogLines.length}
+        rowRenderer={RowRenderer({
+          getLine,
+          scrollToLine: setScrollIndex,
+          logType: LogTypes.RESMOKE_LOGS,
+          processedLines: processedLogLines,
+          wrap: args.wrap,
+          range: { lowerRange: 0 },
+        })}
+        scrollToIndex={scrollIndex}
+        wrap={args.wrap}
+      />
+    </Container>
+  );
+};
 export const MultipleLines = MultipleLineTemplate.bind({});
 
 MultipleLines.args = {
@@ -73,28 +78,32 @@ MultipleLines.args = {
 };
 
 // Multiple ResmokeRows with CollapsedRows.
-const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => (
-  <Container>
-    <LogPane
-      cache={cache}
-      filters={[]}
-      logLines={collapsedProcessedLogLines}
-      rowCount={collapsedProcessedLogLines.length}
-      rowRenderer={RowRenderer({
-        logType: LogTypes.RESMOKE_LOGS,
-        wrap: args.wrap,
-        getLine,
-        processedLines: collapsedProcessedLogLines,
-        range: {
-          lowerRange: 0,
-        },
-        scrollToLine: () => {},
-      })}
-      scrollToIndex={0}
-      wrap={args.wrap}
-    />
-  </Container>
-);
+const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => {
+  const [scrollIndex, setScrollIndex] = useState<number>(-1);
+
+  return (
+    <Container>
+      <LogPane
+        cache={cache}
+        filterLogic="and"
+        filters={[]}
+        initialScrollIndex={-1}
+        logLines={collapsedProcessedLogLines}
+        rowCount={collapsedProcessedLogLines.length}
+        rowRenderer={RowRenderer({
+          getLine,
+          scrollToLine: setScrollIndex,
+          logType: LogTypes.RESMOKE_LOGS,
+          processedLines: collapsedProcessedLogLines,
+          wrap: args.wrap,
+          range: { lowerRange: 0 },
+        })}
+        scrollToIndex={scrollIndex}
+        wrap={args.wrap}
+      />
+    </Container>
+  );
+};
 
 export const Collapsed = CollapsedTemplate.bind({});
 
