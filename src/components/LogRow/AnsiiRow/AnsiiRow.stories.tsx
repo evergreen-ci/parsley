@@ -45,7 +45,7 @@ SingleLine.args = {
 
 // Multiple AnsiiRows.
 const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
-  const [scrollIndex, setScrollIndex] = useState<number | undefined>(undefined);
+  const [scrollIndex, setScrollIndex] = useState<number>(-1);
 
   return (
     <Container>
@@ -78,7 +78,7 @@ MultiLines.args = {
 
 // Multiple AnsiiRows with CollapsedRows.
 const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => {
-  const [scrollIndex, setScrollIndex] = useState<number | undefined>(undefined);
+  const [scrollIndex, setScrollIndex] = useState<number>(-1);
 
   return (
     <Container>

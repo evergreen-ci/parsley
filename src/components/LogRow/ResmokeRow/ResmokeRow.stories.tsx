@@ -47,7 +47,7 @@ SingleLine.args = {
 
 // Multiple ResmokeRows.
 const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
-  const [scrollIndex, setScrollIndex] = useState<number | undefined>(undefined);
+  const [scrollIndex, setScrollIndex] = useState<number>(-1);
   return (
     <Container>
       <LogPane
@@ -79,7 +79,7 @@ MultipleLines.args = {
 
 // Multiple ResmokeRows with CollapsedRows.
 const CollapsedTemplate: ComponentStory<ResmokeRowProps> = (args) => {
-  const [scrollIndex, setScrollIndex] = useState<number | undefined>(undefined);
+  const [scrollIndex, setScrollIndex] = useState<number>(-1);
 
   return (
     <Container>
