@@ -1,4 +1,5 @@
-import { FilterLogic, QueryParams } from "constants/queryParams";
+import { FilterLogic } from "constants/enums";
+import { QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
 import BaseToggle from "../BaseToggle";
 
