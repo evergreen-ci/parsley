@@ -151,13 +151,11 @@ const listRowProps = {
 
 const getLine = (index: number) => logLines[index];
 
-const scrollToLine = jest.fn();
-
 const data = {
   getLine,
   wrap: false,
   processedLines: logLines.map((_, index) => index),
-  scrollToLine,
+  scrollToLine: jest.fn(),
   logType: LogTypes.RESMOKE_LOGS,
   range: {
     lowerRange: 0,

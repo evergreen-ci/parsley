@@ -1,16 +1,17 @@
+import { ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
 
 /**
- * This function employs binary search to search for the index of a line number within the
+ * `findLineIndex` employs binary search to search for the index of a line number within the
  * processed log lines array.
  * @param processedLines - processed log lines
  * @param lineNumber - line number to search for
  * @param start - the point in the array from which to start searching
  * @param end - the point in the array from which to stop searching
- * @returns the index of the line number within the array if it was found, otherwise undefined
+ * @returns the index of the line number within the array if it was found, otherwise -1
  */
 export const findLineIndex = (
-  processedLines: (number | number[])[],
+  processedLines: ProcessedLogLines,
   lineNumber: number | undefined,
   start: number = 0,
   end: number = processedLines.length - 1

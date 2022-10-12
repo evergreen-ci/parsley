@@ -9,7 +9,7 @@ describe("findLineIndex", () => {
     expect(findLineIndex(processedLines, 7)).toBe(5);
   });
 
-  it("should correctly determine index when line number is inside a collapsed array", () => {
+  it("should correctly determine index when line number exists in nested array", () => {
     expect(findLineIndex(processedLines, 1)).toBe(1);
     expect(findLineIndex(processedLines, 4)).toBe(3);
   });

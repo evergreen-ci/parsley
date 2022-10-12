@@ -8,7 +8,7 @@ import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import { findLineIndex } from "utils/search";
 
-const { gray } = palette;
+const { gray, green } = palette;
 
 interface SideBarProps {
   maxLineNumber: number;
@@ -29,6 +29,9 @@ const SideBar: React.FC<SideBarProps> = ({
     QueryParams.Bookmarks,
     []
   );
+  const lineNumbers = selectedLine
+    ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
+    : bookmarks;
 
   // Set 0 and last log line to be initial bookmarks on load.
   useEffect(() => {
@@ -37,14 +40,10 @@ const SideBar: React.FC<SideBarProps> = ({
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const lineNumbers = selectedLine
-    ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
-    : bookmarks;
-
   // Finds the corresponding index of a line number and scrolls to it.
   const scrollToIndex = (lineNumber: number): void => {
     const lineIndex = findLineIndex(processedLogLines, lineNumber);
-    if (lineIndex !== undefined) {
+    if (lineIndex !== -1) {
       scrollToLine(lineIndex);
     }
   };
@@ -65,7 +64,7 @@ const SideBar: React.FC<SideBarProps> = ({
             data-cy={`log-line-${l}`}
             onClick={() => scrollToIndex(l)}
           >
-            <span> {l} </span>
+            <span>{l}</span>
             {l === selectedLine && <StyledIcon glyph="Link" size="small" />}
           </LogLineNumber>
         ))}
@@ -79,7 +78,7 @@ const StyledButton = styled(Button)`
 `;
 
 const LogLineContainer = styled.div`
-  margin-left: ${size.xxs};
+  margin-left: ${size.xs};
   margin-top: ${size.xxs};
   align-self: start;
   cursor: pointer;
@@ -91,6 +90,9 @@ const LogLineNumber = styled.div`
   font-size: 13px;
   line-height: 1.5em;
   font-family: "Source Code Pro";
+  :hover {
+    color: ${green.dark1};
+  }
 `;
 
 const StyledIcon = styled(Icon)`

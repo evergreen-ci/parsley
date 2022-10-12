@@ -139,8 +139,6 @@ const listRowProps = {
 
 const getLine = (index: number) => logLines[index];
 
-const scrollToLine = jest.fn();
-
 const data = {
   getLine,
   wrap: false,
@@ -149,5 +147,5 @@ const data = {
   range: {
     lowerRange: 0,
   },
-  scrollToLine,
+  scrollToLine: jest.fn(),
 };
