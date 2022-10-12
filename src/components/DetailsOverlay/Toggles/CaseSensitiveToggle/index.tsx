@@ -1,18 +1,14 @@
-import { QueryParams } from "constants/queryParams";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useLogContext } from "context/LogContext";
 import BaseToggle from "../BaseToggle";
 
 const CaseSensitiveToggle: React.FC = () => {
-  const [caseSensitive, setCaseSensitive] = useQueryParam(
-    QueryParams.CaseSensitive,
-    false
-  );
+  const { searchState, setCaseSensitive } = useLogContext();
   return (
     <BaseToggle
       data-cy="case-sensitive-toggle"
       label="Case Sensitive"
       onChange={setCaseSensitive}
-      value={caseSensitive}
+      value={searchState.caseSensitive}
     />
   );
 };

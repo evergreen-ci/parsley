@@ -28,8 +28,9 @@ describe("ansiiRow", () => {
     expect(screen.getByText(logLines[1])).toBeInTheDocument();
   });
   it("clicking log line link updates the url and selects it", async () => {
+    const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
-      <AnsiiRow data={data} listRowProps={listRowProps} />,
+      <AnsiiRow data={{ ...data, scrollToLine }} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -38,6 +39,7 @@ describe("ansiiRow", () => {
     await waitFor(() => {
       expect(history.location.search).toBe("?selectedLine=0");
     });
+    expect(scrollToLine).toHaveBeenCalledWith(0);
   });
   it("clicking on a selected log line link unselects it", async () => {
     const { history } = renderWithRouterMatch(
@@ -91,6 +93,44 @@ describe("ansiiRow", () => {
       "https://www.google.com"
     );
   });
+  it("should highlight matching text on the line", () => {
+    renderWithRouterMatch(
+      <AnsiiRow
+        data={{ ...data, searchTerm: /highlight me/i }}
+        listRowProps={{ ...listRowProps, index: 9 }}
+      />
+    );
+    expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
+  });
+  it("should highlight matching text if it is within range", () => {
+    renderWithRouterMatch(
+      <AnsiiRow
+        data={{
+          ...data,
+          searchTerm: /highlight me/i,
+          range: { lowerRange: 0, upperRange: 10 },
+        }}
+        listRowProps={{ ...listRowProps, index: 9 }}
+      />
+    );
+    expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
+  });
+  it("should not highlight matching text if it is outside of range", () => {
+    renderWithRouterMatch(
+      <AnsiiRow
+        data={{
+          ...data,
+          searchTerm: /highlight me/i,
+          range: { lowerRange: 0, upperRange: 8 },
+        }}
+        listRowProps={{ ...listRowProps, index: 9 }}
+      />
+    );
+    expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
+    expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
+  });
 });
 
 const logLines = [
@@ -103,6 +143,7 @@ const logLines = [
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [message='created build' name='windows' project='mci' project_identifier='' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
   "Some line with a url https://www.google.com",
+  "some random text that should not be highlighted but highlight me should",
 ];
 
 const listRowProps = {
@@ -120,5 +161,9 @@ const data = {
   getLine,
   wrap: false,
   processedLines: logLines.map((_, index) => index),
+  scrollToLine: () => {},
   logType: LogTypes.RESMOKE_LOGS,
+  range: {
+    lowerRange: 0,
+  },
 };

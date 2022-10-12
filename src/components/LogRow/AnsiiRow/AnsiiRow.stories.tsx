@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
-import { MemoryRouter } from "react-router-dom";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import AnsiiRow from ".";
@@ -22,6 +21,8 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
       wrap: args.wrap,
       processedLines: processedLogLines,
       logType: LogTypes.EVERGREEN_TASK_LOGS,
+      range: { lowerRange: 0 },
+      scrollToLine: () => {},
     }}
     listRowProps={{
       index: 0,
@@ -40,13 +41,6 @@ export const SingleLine = SingleLineTemplate.bind({});
 SingleLine.args = {
   wrap: false,
 };
-SingleLine.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 // Multiple AnsiiRows.
 const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
@@ -61,6 +55,8 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
         wrap: args.wrap,
         getLine,
         processedLines: processedLogLines,
+        range: { lowerRange: 0 },
+        scrollToLine: () => {},
       })}
       scrollToIndex={0}
       wrap={args.wrap}
@@ -72,13 +68,6 @@ export const MultiLines = MultiLineTemplate.bind({});
 MultiLines.args = {
   wrap: false,
 };
-MultiLines.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 // Multiple AnsiiRows with CollapsedRows.
 const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => (
@@ -93,6 +82,8 @@ const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => (
         wrap: args.wrap,
         getLine,
         processedLines: collapsedProcessedLogLines,
+        range: { lowerRange: 0 },
+        scrollToLine: () => {},
       })}
       scrollToIndex={0}
       wrap={args.wrap}
@@ -105,13 +96,6 @@ export const Collapsed = CollapsedTemplate.bind({});
 Collapsed.args = {
   wrap: false,
 };
-Collapsed.decorators = [
-  (Story) => (
-    <MemoryRouter initialEntries={["/"]}>
-      <Story />
-    </MemoryRouter>
-  ),
-];
 
 const logLines = [
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']",
