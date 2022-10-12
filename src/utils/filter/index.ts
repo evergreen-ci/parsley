@@ -23,7 +23,7 @@ export const matchesFilter = (
 };
 
 /**
- * Function that processes log lines according to what filters, bookmarks, and selected line are applied.
+ * `filterLogs` processes log lines according to what filters, bookmarks, and selected line are applied.
  * @param logLines - list of strings representing the log lines
  * @param filters  - list of strings representing the filters being applied
  * @param bookmarks - list of line numbers representing bookmarks

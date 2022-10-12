@@ -9,7 +9,7 @@ import { LogTypes } from "constants/enums";
 import { FilterLogic, QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
-import { findLineIndex } from "utils/search";
+import { findLineIndex } from "utils/findLineIndex";
 
 interface LogWindowProps {
   logType: LogTypes;

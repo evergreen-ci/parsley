@@ -6,7 +6,7 @@ import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
-import { findLineIndex } from "utils/search";
+import { findLineIndex } from "utils/findLineIndex";
 
 const { gray, green } = palette;
 
