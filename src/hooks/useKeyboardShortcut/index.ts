@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useRef } from "react";
+import { CharKey, ModifierKey } from "constants/keys";
 
 type UseKeyboardShortcutOptions = {
+  disabled?: boolean;
   preventDefault?: boolean;
   overrideIgnore?: boolean;
 };
@@ -9,26 +11,43 @@ type UseKeyboardShortcutOptions = {
 const INPUT_ELEMENTS = ["INPUT", "TEXTAREA", "SELECT"];
 
 const useKeyboardShortcut = (
-  shortcutKeys: string[],
+  shortcutKeys: (ModifierKey | CharKey)[] | CharKey,
   cb: () => void,
-  disabled: boolean = false,
   options: UseKeyboardShortcutOptions = {}
 ) => {
   // We wrap the callback to prevent triggering unnecessary useEffect.
   const cbRef = useRef(cb);
   cbRef.current = cb;
 
+  const {
+    disabled = false,
+    preventDefault = true,
+    overrideIgnore = false,
+  } = options;
+
   const isShortcutPressed = useCallback(
     (event: KeyboardEvent) => {
-      if (
-        shortcutKeys.includes("Control") &&
-        !event.ctrlKey &&
-        !event.metaKey
-      ) {
-        return false;
+      if (typeof shortcutKeys === "string") {
+        return (
+          shortcutKeys === event.key &&
+          !event.metaKey &&
+          !event.ctrlKey &&
+          !event.shiftKey &&
+          !event.altKey
+        );
       }
-      if (shortcutKeys.includes("Alt") && !event.altKey) return false;
-      if (shortcutKeys.includes("Shift") && !event.shiftKey) return false;
+
+      const shouldControl = shortcutKeys.includes(ModifierKey.Control);
+      if (shouldControl && !event.ctrlKey && !event.metaKey) return false;
+      if (!shouldControl && (event.ctrlKey || event.metaKey)) return false;
+
+      const shouldAlt = shortcutKeys.includes(ModifierKey.Alt);
+      if (shouldAlt && !event.altKey) return false;
+      if (!shouldAlt && event.altKey) return false;
+
+      const shouldShift = shortcutKeys.includes(ModifierKey.Shift);
+      if (shouldShift && !event.shiftKey) return false;
+      if (!shouldShift && event.shiftKey) return false;
 
       return shortcutKeys[shortcutKeys.length - 1] === event.key;
     },
@@ -37,24 +56,22 @@ const useKeyboardShortcut = (
 
   const handleKeydown = useCallback(
     (event: KeyboardEvent) => {
-      const { preventDefault = true, overrideIgnore = false } = options;
-
       const shortcutPressed = isShortcutPressed(event);
       const shouldExecute =
         overrideIgnore ||
         !INPUT_ELEMENTS.includes((event.target as HTMLElement).tagName);
 
       if (shortcutPressed) {
-        // Prevent browser default behavior.
-        if (preventDefault) {
-          event.preventDefault();
-        }
         if (shouldExecute) {
+          // Prevent browser default behavior.
+          if (preventDefault) {
+            event.preventDefault();
+          }
           cbRef.current();
         }
       }
     },
-    [isShortcutPressed, options]
+    [isShortcutPressed, preventDefault, overrideIgnore]
   );
 
   useEffect(() => {
