@@ -9,7 +9,7 @@ import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import renderHtml from "utils/renderHtml";
 
-const { yellow, red, green } = palette;
+const { yellow, red } = palette;
 
 interface BaseRowProps extends ListRowProps {
   children: string;
@@ -18,7 +18,6 @@ interface BaseRowProps extends ListRowProps {
   // The line number associated with a log line and its index within the context of the virtualized list
   // may differ due to collapsed rows.
   lineNumber: number;
-  expanded: boolean;
   highlightedLine?: number;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
@@ -40,7 +39,6 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     scrollToLine,
     searchTerm,
     "data-cy-text": dataCyText,
-    expanded,
     ...rest
   } = props;
 
@@ -86,7 +84,6 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       data-cy={`log-row-${lineNumber}`}
       data-highlighted={isHighlighted}
       data-selected={selected}
-      expanded={expanded}
       highlighted={isHighlighted}
       onDoubleClick={handleDoubleClick}
       selected={selected}
@@ -152,7 +149,6 @@ const StyledPre = styled.pre<{
   shouldWrap: boolean;
   selected: boolean;
   bookmarked: boolean;
-  expanded: boolean;
   highlighted: boolean;
 }>`
   overflow-y: hidden;
@@ -168,7 +164,6 @@ const StyledPre = styled.pre<{
   white-space: break-spaces;
   `}
 
-  ${({ expanded }) => expanded && `background-color: ${green.light3};`}
   ${({ selected }) => selected && `background-color: ${red.light2};`}
   ${({ selected }) => selected && `background-color: #FA8128;`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light2};`}

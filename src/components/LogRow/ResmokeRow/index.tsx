@@ -1,6 +1,5 @@
 import { forwardRef } from "react";
 import BaseRow from "components/LogRow/BaseRow";
-import { isExpanded } from "utils/expandedRanges";
 import { BaseRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
@@ -13,14 +12,11 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
     range,
     searchTerm,
     highlightedLine,
-    expandedLines,
     scrollToLine,
   } = data;
   const { index } = listRowProps;
 
   const line = processedLines[index] as number;
-  const expanded = isExpanded(line, expandedLines);
-
   const lineContent = getLine(line);
   const inRange = isLineInRange(range, line);
 
@@ -30,7 +26,6 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       {...listRowProps}
       ref={ref}
       data-cy-text="resmoke-row"
-      expanded={expanded}
       highlightedLine={highlightedLine}
       lineNumber={line}
       scrollToLine={scrollToLine}

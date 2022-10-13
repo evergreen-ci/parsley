@@ -2,7 +2,6 @@ import { forwardRef } from "react";
 import AnsiUp from "ansi_up";
 import linkifyHtml from "linkify-html";
 import BaseRow from "components/LogRow/BaseRow";
-import { isExpanded } from "utils/expandedRanges";
 import { BaseRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
@@ -19,12 +18,9 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
     range,
     highlightedLine,
     scrollToLine,
-    expandedLines,
   } = data;
 
   const line = processedLines[index] as number;
-  const expanded = isExpanded(line, expandedLines);
-
   const lineContent = getLine(line) || "";
   const linkifiedLine = linkifyHtml(ansiUp.ansi_to_html(lineContent), {
     validate: {
@@ -39,7 +35,6 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       {...listRowProps}
       ref={ref}
       data-cy-text="ansii-row"
-      expanded={expanded}
       highlightedLine={highlightedLine}
       lineNumber={line}
       scrollToLine={scrollToLine}

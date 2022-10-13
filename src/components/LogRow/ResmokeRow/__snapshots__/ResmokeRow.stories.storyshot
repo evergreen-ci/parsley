@@ -40,7 +40,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multiple Lines 1`] =
 
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
 <pre
-  className="css-5sz07f"
+  className="css-h4v6ss"
   data-cy="log-row-2"
   data-highlighted={false}
   data-selected={false}

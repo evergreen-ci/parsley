@@ -5,9 +5,10 @@ import { palette } from "@leafygreen-ui/palette";
 import { Overline } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { size } from "constants/tokens";
+import { OverlineType } from "types/leafygreen";
 import { BaseRowProps } from "../types";
 
-const { gray } = palette;
+const { gray, black } = palette;
 
 const SKIP_NUMBER = 5;
 
@@ -23,17 +24,13 @@ const CollapsedRow = forwardRef<any, BaseRowProps>((props, ref) => {
 
   const lineText =
     numCollapsed !== 1 ? `${numCollapsed} lines skipped` : "1 line skipped";
+  const disableExpandFive = 2 * SKIP_NUMBER > numCollapsed;
 
   const expandFive = () => {
-    // If expanding above & below is greater than the number of collapsed lines, then expand all.
-    if (2 * SKIP_NUMBER > numCollapsed) {
-      expandAll();
-    } else {
-      expandLines([
-        [start, start + (SKIP_NUMBER - 1)],
-        [end - (SKIP_NUMBER - 1), end],
-      ]);
-    }
+    expandLines([
+      [start, start + (SKIP_NUMBER - 1)],
+      [end - (SKIP_NUMBER - 1), end],
+    ]);
   };
 
   const expandAll = () => {
@@ -46,17 +43,20 @@ const CollapsedRow = forwardRef<any, BaseRowProps>((props, ref) => {
       ref={ref}
       data-cy={`collapsed-row-${start}-${end}`}
     >
-      <Overline> {lineText} </Overline>
+      <StyledOverline>{lineText}</StyledOverline>
       <StyledButton
         leftGlyph={<Icon glyph="Expand" />}
-        onClick={() => expandAll()}
+        onClick={expandAll}
         size="xsmall"
       >
         All
       </StyledButton>
       <StyledButton
-        leftGlyph={<Icon glyph="Expand" />}
-        onClick={() => expandFive()}
+        disabled={disableExpandFive}
+        leftGlyph={
+          <Icon fill={disableExpandFive ? gray.base : black} glyph="Expand" />
+        }
+        onClick={expandFive}
         size="xsmall"
       >
         {SKIP_NUMBER} Above and Below
@@ -74,6 +74,10 @@ const CollapsedLineWrapper = styled.div`
   padding-top: ${size.xxs};
   padding-bottom: ${size.xxs};
   padding-left: ${size.l};
+`;
+
+const StyledOverline = styled<OverlineType>(Overline)`
+  width: 150px;
 `;
 
 const StyledButton = styled(Button)`

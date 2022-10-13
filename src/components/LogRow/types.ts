@@ -12,7 +12,6 @@ interface RowData {
   expandLines: (expandedLines: ExpandedLines) => void;
   scrollToLine: (lineNumber: number) => void;
 
-  expandedLines: ExpandedLines;
   highlightedLine?: number;
   logType: LogTypes;
   processedLines: ProcessedLogLines;

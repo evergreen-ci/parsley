@@ -69,7 +69,6 @@ const rowProps = {
   scrollToLine: jest.fn(),
   isVisible: true,
   lineNumber: 0,
-  expanded: false,
   parent: {} as any,
   style: {},
   wrap: false,

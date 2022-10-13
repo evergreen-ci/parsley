@@ -72,7 +72,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               expandLines,
               getLine,
               scrollToLine,
-              expandedLines,
               highlightedLine,
               logType,
               processedLines: processedLogLines,
