@@ -14,6 +14,7 @@ type Action =
   | { type: "INGEST_LOGS"; logs: string[]; logType: LogTypes }
   | { type: "CLEAR_LOGS" }
   | { type: "SET_FILE_NAME"; fileName: string }
+  | { type: "SET_LOG_METADATA"; logMetadata: LogMetadata }
   | { type: "SET_SEARCH_TERM"; searchTerm: string }
   | { type: "SET_CASE_SENSITIVE"; caseSensitive: boolean }
   | { type: "SET_MATCH_COUNT"; matchCount: number }
@@ -51,6 +52,14 @@ const reducer = (state: LogState, action: Action): LogState => {
     }
     case "CLEAR_LOGS":
       return initialState([]);
+    case "SET_LOG_METADATA":
+      return {
+        ...state,
+        logMetadata: {
+          ...state.logMetadata,
+          ...action.logMetadata,
+        },
+      };
     case "SET_FILE_NAME":
       return {
         ...state,

@@ -28,6 +28,7 @@ interface LogContextState {
   paginate: (dir: DIRECTION) => void;
   scrollToLine: (lineNumber: number) => void;
   setFileName: (fileName: string) => void;
+  setLogMetadata: (logMetadata: LogMetadata) => void;
   setSearch: (search: string) => void;
   setCaseSensitive: (caseSensitive: boolean) => void;
 }
@@ -135,6 +136,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
       setFileName: (fileName: string) => {
         dispatch({ type: "SET_FILE_NAME", fileName });
+      },
+      setLogMetadata: (logMetadata: LogMetadata) => {
+        dispatch({ type: "SET_LOG_METADATA", logMetadata });
       },
       setSearch: (searchTerm: string) => {
         dispatch({ type: "SET_SEARCH_TERM", searchTerm });

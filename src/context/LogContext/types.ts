@@ -11,10 +11,10 @@ interface SearchState {
 interface LogMetadata {
   logType?: LogTypes;
   fileName?: string;
-  taskId?: string;
-  execution?: number;
-  testId?: string;
-  buildId?: string;
+  taskID?: string;
+  execution?: string;
+  testID?: string;
+  buildID?: string;
   origin?: string;
 }
 
