@@ -52,7 +52,7 @@ describe("Resmoke syntax highlighting", () => {
       cy.dataCy("resmoke-row").should(
         "have.css",
         "color",
-        "rgb(153, 112, 171)" // Although it isn't ideal to test for a specific color, this helps us ensure that the color is consistent and deterministic.
+        "rgb(8, 60, 144)" // Although it isn't ideal to test for a specific color, this helps us ensure that the color is consistent and deterministic.
       );
     });
 
@@ -60,7 +60,7 @@ describe("Resmoke syntax highlighting", () => {
       cy.dataCy("resmoke-row").should(
         "have.css",
         "color",
-        "rgb(153, 112, 171)" // Although it isn't ideal to test for a specific color, this helps us ensure that the color is consistent and deterministic.
+        "rgb(8, 60, 144)" // Although it isn't ideal to test for a specific color, this helps us ensure that the color is consistent and deterministic.
       );
     });
   });
@@ -73,14 +73,14 @@ describe("Resmoke syntax highlighting", () => {
       cy.dataCy("resmoke-row").should(
         "have.css",
         "color",
-        "rgb(90, 174, 97)" // Although it isn't ideal to test for a specific color, this helps us ensure that the color is consistent and deterministic.
+        "rgb(0, 163, 92)" // Although it isn't ideal to test for a specific color, this helps us ensure that the color is consistent and deterministic.
       );
     });
     cy.dataCy("log-row-20").within(() => {
       cy.dataCy("resmoke-row").should(
         "have.css",
         "color",
-        "rgb(153, 112, 171)" // Although it isn't ideal to test for a specific color, this helps us ensure that the color is consistent and deterministic.
+        "rgb(8, 60, 144)" // Although it isn't ideal to test for a specific color, this helps us ensure that the color is consistent and deterministic.
       );
     });
   });

@@ -45,7 +45,7 @@ describe("getColorMapping", () => {
       `[j0:s0:n0] | 2022-09-21T12:59:01.277+00:00 I  -        20883   [conn1690] "Interrupted operation as its client disconnected","attr":{"opId":172754}`,
       portColors
     );
-    expect(color).toStrictEqual({ color: "#5aae61", portOrState: ":s0:n0]" });
+    expect(color).toStrictEqual({ color: "#00A35C", portOrState: ":s0:n0]" });
   });
   it("should return the same color for the same port", () => {
     const portColors: Record<string, string> = {};
@@ -73,7 +73,7 @@ describe("getColorMapping", () => {
     );
     portColors = { ...portColors, ...color2 };
     expect(color1).not.toStrictEqual(color2);
-    expect(color2).toStrictEqual({ color: "#bf812d", portOrState: ":s0:n1]" });
+    expect(color2).toStrictEqual({ color: "#5B0000", portOrState: ":s0:n1]" });
   });
 });
 
