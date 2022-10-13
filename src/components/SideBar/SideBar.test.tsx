@@ -63,7 +63,7 @@ describe("sideBar", () => {
         route: "?bookmarks=1,3",
       }
     );
-    await userEvent.click(screen.getByDataCy("log-line-3"));
+    await userEvent.click(screen.getByDataCy("sidebar-log-line-3"));
     expect(scrollToLine).toHaveBeenCalledTimes(1);
     expect(scrollToLine).toHaveBeenCalledWith(3);
   });
@@ -80,7 +80,7 @@ describe("sideBar", () => {
         route: "?bookmarks=1,3",
       }
     );
-    await userEvent.click(screen.getByDataCy("log-line-3"));
+    await userEvent.click(screen.getByDataCy("sidebar-log-line-3"));
     expect(scrollToLine).toHaveBeenCalledTimes(1);
     expect(scrollToLine).toHaveBeenCalledWith(1);
   });

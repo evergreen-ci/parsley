@@ -33,7 +33,9 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
       <LogPane
         cache={cache}
         expandedLines={expandedLines}
+        filterLogic="and"
         filters={[]}
+        initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
@@ -76,7 +78,9 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
       <LogPane
         cache={cache}
         expandedLines={expandedLines}
+        filterLogic="and"
         filters={[]}
+        initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
