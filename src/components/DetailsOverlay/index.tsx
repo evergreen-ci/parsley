@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { size } from "constants/tokens";
+import { LogMetadata } from "context/LogContext/types";
 import ButtonRow from "./ButtonRow";
 import SearchRangeInput from "./SearchRangeInput";
 import {
@@ -12,23 +13,27 @@ import {
 
 interface DetailsOverlayProps {
   ["data-cy"]?: string;
+  logMetadata?: LogMetadata;
 }
 
 const DetailsOverlay: React.FC<DetailsOverlayProps> = ({
   "data-cy": dataCy,
+  logMetadata,
 }) => (
   <DetailsOverlayCard data-cy={dataCy}>
-    <Container>
-      <SearchRangeInput />
-      <WrapToggle />
-      <CaseSensitiveToggle />
-    </Container>
-    <Container>
-      <FilterLogicToggle />
-      <ExpandableRowsToggle />
-      <PrettyPrintToggle />
-      <ButtonRow />
-    </Container>
+    <Row>
+      <Column>
+        <SearchRangeInput />
+        <WrapToggle />
+        <CaseSensitiveToggle />
+      </Column>
+      <Column>
+        <FilterLogicToggle />
+        <ExpandableRowsToggle />
+        <PrettyPrintToggle />
+      </Column>
+    </Row>
+    <ButtonRow logMetadata={logMetadata} />
   </DetailsOverlayCard>
 );
 
@@ -36,10 +41,15 @@ const DetailsOverlayCard = styled.div`
   width: 700px;
   padding: ${size.xs};
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
 `;
 
-const Container = styled.div`
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+const Column = styled.div`
   width: 300px;
 `;
 
