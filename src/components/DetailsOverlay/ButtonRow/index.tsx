@@ -106,6 +106,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
           trigger={
             <Button
               as="a"
+              data-cy="job-logs-button"
               href={jobLogsURL}
               leftGlyph={<Icon glyph="Export" />}
               target="_blank"
@@ -123,6 +124,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
         trigger={
           <Button
             as="a"
+            data-cy="raw-log-button"
             disabled={!rawLogURL}
             href={rawLogURL}
             leftGlyph={<Icon glyph="Export" />}
@@ -140,6 +142,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
         trigger={
           <Button
             as="a"
+            data-cy="html-log-button"
             href={htmlLogURL}
             leftGlyph={<Icon glyph="Export" />}
             target="_blank"
