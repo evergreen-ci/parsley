@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
 import { useLogContext } from "context/LogContext";
+import { ExpandedLines } from "types/logs";
 
 type LogPaneProps = Omit<
   ListProps,
@@ -11,7 +12,7 @@ type LogPaneProps = Omit<
   filters: string[];
   initialScrollIndex: number;
   rowRenderer: ListRowRenderer;
-  expandedLines: Array<[number, number]>;
+  expandedLines: ExpandedLines;
 };
 
 const LogPane: React.FC<LogPaneProps> = ({

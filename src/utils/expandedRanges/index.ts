@@ -38,7 +38,7 @@ export const mergeIntervals = (intervals: ExpandedLines) => {
  */
 export const isExpanded = (
   lineNumber: number,
-  expandedLines: Array<[number, number]>
+  expandedLines: ExpandedLines
 ) => {
   let expanded = false;
 

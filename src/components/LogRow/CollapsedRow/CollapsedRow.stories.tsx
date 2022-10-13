@@ -48,7 +48,6 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
           range: { lowerRange: 0 },
           wrap: args.wrap,
         })}
-        scrollToIndex={0}
         wrap={args.wrap}
       />
     </Container>
@@ -93,7 +92,6 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
           range: { lowerRange: 0 },
           wrap: args.wrap,
         })}
-        scrollToIndex={0}
         wrap={args.wrap}
       />
     </Container>
