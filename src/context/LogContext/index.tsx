@@ -88,7 +88,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [getLine, state.colorMapping]
   );
 
-  console.log("COLORMAPPING", state.colorMapping);
   const scrollToLine = useCallback((lineNumber: number) => {
     // We need to call scrollToRow twice because of https://github.com/bvaughn/react-virtualized/issues/995.
     // When we switch to a different virtual list library we should not do this.

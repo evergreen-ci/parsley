@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from "react";
+import { forwardRef, memo, useMemo } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { ListRowProps } from "react-virtualized";
@@ -115,12 +115,9 @@ interface ProcessedBaseRowProps {
   color?: string;
   ["data-cy"]?: string;
 }
-const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = ({
-  children,
-  searchTerm,
-  color,
-  "data-cy": dataCy,
-}) => {
+
+const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
+  const { children, searchTerm, color, "data-cy": dataCy } = props;
   const memoizedLogLine = useMemo(() => {
     let render = children;
     if (searchTerm) {
@@ -139,8 +136,9 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = ({
       {memoizedLogLine}
     </span>
   );
-};
+});
 
+ProcessedBaseRow.displayName = "ProcessedBaseRow";
 BaseRow.displayName = "BaseRow";
 
 const StyledIcon = styled(Icon)`
