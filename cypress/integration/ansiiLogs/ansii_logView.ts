@@ -184,7 +184,6 @@ describe("Jump to line", () => {
   before(() => {
     cy.login();
     cy.visit(logLink);
-    cy.clickToggle("expandable-rows-toggle", true); // Turn expandable rows on.
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
@@ -205,6 +204,7 @@ describe("Jump to line", () => {
   });
 
   it("should be able to use the sidebar to jump to a line when there are collapsed rows", () => {
+    cy.clickToggle("expandable-rows-toggle", true); // Turn expandable rows on.
     cy.dataCy("searchbar-select").click();
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("pass{enter}");
