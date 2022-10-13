@@ -161,6 +161,8 @@ const StyledPre = styled.pre<{
   bookmarked: boolean;
   highlighted: boolean;
 }>`
+  font-family: "Source Code Pro", monospace;
+  line-height: 1.25;
   overflow-y: hidden;
   margin-top: 0;
   margin-bottom: 0;
@@ -174,16 +176,11 @@ const StyledPre = styled.pre<{
   white-space: break-spaces;
   `}
   ${({ color }) => color && `color: ${color};`}
-  ${({ selected }) => selected && `background-color: #FA8128;`}
-  ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light2};`}
-  ${({ highlighted }) => highlighted && `background-color: ${red.light2};`}
-  ${({ highlighted }) =>
-    highlighted &&
-    `
-    mark {
-      filter: brightness(0.7);
-    }
-`}
+  ${({ selected }) => selected && `background-color: ${yellow.light3};`}
+
+  ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
+  ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
+
   // Hover should be an overlay shadow so that the user can see the color underneath.
   :hover {
     box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.1);
