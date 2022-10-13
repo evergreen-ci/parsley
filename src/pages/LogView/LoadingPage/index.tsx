@@ -28,15 +28,17 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     [slugs.execution]: execution,
   } = useParams();
   const dispatchToast = useToastContext();
-  const { ingestLines } = useLogContext();
+  const { ingestLines, setLogMetadata } = useLogContext();
 
   let url = "";
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
-        url = getResmokeLogURL(buildID, testID);
+        url = getResmokeLogURL(buildID, { testID, raw: true });
+        setLogMetadata({ buildID, testID });
       } else if (buildID) {
-        url = getResmokeLogURL(buildID);
+        url = getResmokeLogURL(buildID, { raw: true });
+        setLogMetadata({ buildID });
       }
       break;
     }
@@ -44,14 +46,18 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       if (!taskID || !execution || !origin) {
         break;
       }
-      url = getEvergreenTaskLogURL(taskID, execution, origin as any);
+      url = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+        text: true,
+      });
+      setLogMetadata({ taskID, execution, origin });
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
       if (!taskID || !execution || !testID) {
         break;
       }
-      url = getEvergreenTestLogURL(taskID, execution, testID);
+      url = getEvergreenTestLogURL(taskID, execution, testID, { text: true });
+      setLogMetadata({ taskID, execution, testID });
       break;
     }
     default:
