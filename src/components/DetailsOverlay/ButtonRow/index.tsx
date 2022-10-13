@@ -100,27 +100,56 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
         {hasCopied ? "Copied!" : tooltipText}
       </Tooltip>
       {jobLogsURL && (
-        <Button as="a" href={jobLogsURL} leftGlyph={<Icon glyph="Export" />}>
-          JOB LOGS
-        </Button>
+        <Tooltip
+          align="top"
+          justify="middle"
+          trigger={
+            <Button
+              as="a"
+              href={jobLogsURL}
+              leftGlyph={<Icon glyph="Export" />}
+              target="_blank"
+            >
+              JOB LOGS
+            </Button>
+          }
+        >
+          View all logs for this job
+        </Tooltip>
       )}
-      <Button
-        as="a"
-        disabled={!rawLogURL}
-        href={rawLogURL}
-        leftGlyph={<Icon glyph="Export" />}
-        target="_blank"
+      <Tooltip
+        align="top"
+        justify="middle"
+        trigger={
+          <Button
+            as="a"
+            disabled={!rawLogURL}
+            href={rawLogURL}
+            leftGlyph={<Icon glyph="Export" />}
+            target="_blank"
+          >
+            RAW
+          </Button>
+        }
       >
-        RAW
-      </Button>
-      <Button
-        as="a"
-        href={htmlLogURL}
-        leftGlyph={<Icon glyph="Export" />}
-        target="_blank"
+        Open Raw log in a new tab
+      </Tooltip>
+      <Tooltip
+        align="top"
+        justify="middle"
+        trigger={
+          <Button
+            as="a"
+            href={htmlLogURL}
+            leftGlyph={<Icon glyph="Export" />}
+            target="_blank"
+          >
+            HTML
+          </Button>
+        }
       >
-        HTML
-      </Button>
+        Open log in standard HTML format in a new tab
+      </Tooltip>
     </DetailRow>
   );
 };
