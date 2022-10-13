@@ -21,9 +21,9 @@ const NavBar: React.FC = () => {
     QueryParams.Filters,
     []
   );
-  const { hasLogs, clearLogs, setSearch, searchState, paginate } =
+  const { hasLogs, logMetadata, clearLogs, setSearch, searchState, paginate } =
     useLogContext();
-
+  const { logType } = logMetadata || {};
   const { hasSearch } = searchState;
   const handleSearch = (selected: string, value: string) => {
     if (selected === SearchBarActions.Search) {
@@ -68,7 +68,7 @@ const NavBar: React.FC = () => {
         data-cy="details-button"
         disabled={!hasLogs}
       >
-        <DetailsOverlay data-cy="details-overlay" />
+        <DetailsOverlay data-cy="details-overlay" logType={logType} />
       </StyledButton>
     </Container>
   );

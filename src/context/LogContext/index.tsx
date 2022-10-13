@@ -7,12 +7,12 @@ import { ProcessedLogLines } from "types/logs";
 import { filterLogs } from "utils/filter";
 import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
-import { DIRECTION, SearchState } from "./types";
+import { DIRECTION, LogMetadata, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
-  fileName?: string;
   hasLogs: boolean;
+  logMetadata?: LogMetadata;
   highlightedLine?: number;
   lineCount: number;
   listRef: React.RefObject<List>;
@@ -116,9 +116,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const memoizedContext = useMemo(
     () => ({
-      fileName: state.fileName,
       hasSearch: !!state.searchState.searchTerm,
       lineCount: state.logs.length,
+      logMetadata: state.logMetadata,
       processedLogLines,
       searchState: state.searchState,
       hasLogs: !!state.logs.length,
@@ -153,7 +153,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
     }),
     [
-      state.fileName,
+      state.logMetadata,
       state.searchState,
       state.logs.length,
       processedLogLines,

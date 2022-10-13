@@ -1,12 +1,11 @@
 import { useReducer } from "react";
 import { LogTypes } from "constants/enums";
 import { processResmokeLine } from "utils/resmoke";
-import { SearchState } from "./types";
+import { LogMetadata, SearchState } from "./types";
 
 interface LogState {
   logs: string[];
-  fileName?: string;
-  logType?: LogTypes;
+  logMetadata?: LogMetadata;
   lineNumber?: number;
   searchState: SearchState;
 }
@@ -44,7 +43,10 @@ const reducer = (state: LogState, action: Action): LogState => {
       return {
         ...state,
         logs: processedLogs,
-        logType: action.logType,
+        logMetadata: {
+          ...state.logMetadata,
+          logType: action.logType,
+        },
       };
     }
     case "CLEAR_LOGS":
@@ -52,7 +54,10 @@ const reducer = (state: LogState, action: Action): LogState => {
     case "SET_FILE_NAME":
       return {
         ...state,
-        fileName: action.fileName,
+        logMetadata: {
+          ...state.logMetadata,
+          fileName: action.fileName,
+        },
       };
     case "SET_SEARCH_TERM": {
       const hasSearch = !!action.searchTerm;

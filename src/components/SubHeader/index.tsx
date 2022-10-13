@@ -13,8 +13,8 @@ interface SubHeaderProps {
   isUploadedLog: boolean;
 }
 const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
-  const { fileName } = useLogContext();
-
+  const { logMetadata } = useLogContext();
+  const { fileName } = logMetadata || {};
   return (
     <Container>
       {isUploadedLog ? (
