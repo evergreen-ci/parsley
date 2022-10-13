@@ -6,31 +6,60 @@ import useKeyboardShortcut from ".";
 describe("useKeyboardShortcut", () => {
   const user = userEvent.setup();
 
-  it("should call the callback when the exact specified shortcut keys are pressed", async () => {
-    const callback = jest.fn();
-    renderHook(() =>
-      useKeyboardShortcut([ModifierKey.Control, CharKey.A], callback)
-    );
-    await user.keyboard("{Control}");
-    expect(callback).toHaveBeenCalledTimes(0);
-    await user.keyboard("{a}");
-    expect(callback).toHaveBeenCalledTimes(0);
-    await user.keyboard("{Control>}{Shift>}{a}{/Control}{/Shift}");
-    expect(callback).toHaveBeenCalledTimes(0);
-    await user.keyboard("{Control>}{a}{/Control}");
-    expect(callback).toHaveBeenCalledTimes(1);
+  describe("multiple keys", () => {
+    it("should call the callback only when the exact shortcut keys are pressed", async () => {
+      const callback = jest.fn();
+      renderHook(() =>
+        useKeyboardShortcut([ModifierKey.Control, CharKey.A], callback)
+      );
+      await user.keyboard("{Control}");
+      expect(callback).toHaveBeenCalledTimes(0);
+      await user.keyboard("{a}");
+      expect(callback).toHaveBeenCalledTimes(0);
+      await user.keyboard("{Control>}{Shift>}{a}{/Control}{/Shift}");
+      expect(callback).toHaveBeenCalledTimes(0);
+      await user.keyboard("{Control>}{a}{/Control}");
+      expect(callback).toHaveBeenCalledTimes(1);
+    });
+
+    it("should not call the callback if an input element has focus", async () => {
+      const callback = jest.fn();
+      renderHook(() =>
+        useKeyboardShortcut([ModifierKey.Control, CharKey.A], callback)
+      );
+      render(<input data-cy="test-input" />);
+
+      await user.click(screen.getByDataCy("test-input"));
+      expect(screen.getByDataCy("test-input")).toHaveFocus();
+      await user.keyboard("{Control>}{a}{/Control}");
+      expect(callback).toHaveBeenCalledTimes(0);
+      expect(screen.getByDataCy("test-input")).toHaveValue("");
+    });
   });
 
-  it("should not call the callback if an input element has focus", async () => {
-    const callback = jest.fn();
-    renderHook(() =>
-      useKeyboardShortcut([ModifierKey.Control, CharKey.A], callback)
-    );
-    render(<input data-cy="test-input" />);
-    await user.click(screen.getByDataCy("test-input"));
-    expect(screen.getByDataCy("test-input")).toHaveFocus();
-    await user.keyboard("{Control>}{a}{/Control}");
-    expect(callback).toHaveBeenCalledTimes(0);
+  describe("single key", () => {
+    it("should call the callback only when the exact shortcut key is pressed", async () => {
+      const callback = jest.fn();
+      renderHook(() => useKeyboardShortcut(CharKey.A, callback));
+      await user.keyboard("{Control>}{A}{/Control}");
+      expect(callback).toHaveBeenCalledTimes(0);
+      await user.keyboard("{Control>}{Shift>}{a}{/Control}{/Shift}");
+      expect(callback).toHaveBeenCalledTimes(0);
+      await user.keyboard("{a}");
+      expect(callback).toHaveBeenCalledTimes(1);
+    });
+
+    it("should not call the callback if an input element has focus", async () => {
+      const callback = jest.fn();
+      renderHook(() => useKeyboardShortcut(CharKey.A, callback));
+      render(<input data-cy="test-input" />);
+
+      await user.click(screen.getByDataCy("test-input"));
+      expect(screen.getByDataCy("test-input")).toHaveFocus();
+      await user.keyboard("{a}");
+      expect(callback).toHaveBeenCalledTimes(0);
+      expect(screen.getByDataCy("test-input")).toHaveValue("a");
+    });
   });
 
   it("should call the callback if an input element has focus and overrideIgnore is enabled", async () => {
