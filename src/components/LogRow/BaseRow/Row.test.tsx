@@ -1,4 +1,4 @@
-import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
+import { renderWithRouterMatch, screen, userEvent } from "test_utils";
 import Row from ".";
 
 describe("row", () => {
@@ -6,19 +6,19 @@ describe("row", () => {
     renderWithRouterMatch(<Row {...rowProps}>{testLog}</Row>);
     expect(screen.getByText(testLog)).toBeVisible();
   });
-  it("clicking log line link updates the url and selects it", async () => {
+
+  it("clicking log line link updates the url and and scrolls to the line", async () => {
     const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
-      <Row {...rowProps} scrollToLine={scrollToLine}>
+      <Row {...rowProps} index={7} lineNumber={54} scrollToLine={scrollToLine}>
         {testLog}
       </Row>
     );
-    userEvent.click(screen.getByDataCy("log-link-0"));
-    await waitFor(() => {
-      expect(history.location.search).toBe("?selectedLine=0");
-    });
-    expect(scrollToLine).toHaveBeenCalledWith(0);
+    await userEvent.click(screen.getByDataCy("log-link-54"));
+    expect(history.location.search).toBe("?selectedLine=54");
+    expect(scrollToLine).toHaveBeenCalledWith(7);
   });
+
   it("clicking on a selected log line link unselects it", async () => {
     const { history } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>,
@@ -26,20 +26,18 @@ describe("row", () => {
         route: "?selectedLine=0",
       }
     );
-    userEvent.click(screen.getByDataCy("log-link-0"));
-    await waitFor(() => {
-      expect(history.location.search).toBe("");
-    });
+    await userEvent.click(screen.getByDataCy("log-link-0"));
+    expect(history.location.search).toBe("");
   });
+
   it("double clicking a log line adds it to the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>
     );
-    userEvent.dblClick(screen.getByText(testLog));
-    await waitFor(() => {
-      expect(history.location.search).toBe("?bookmarks=0");
-    });
+    await userEvent.dblClick(screen.getByText(testLog));
+    expect(history.location.search).toBe("?bookmarks=0");
   });
+
   it("double clicking a bookmarked log line removes it from the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>,
@@ -47,23 +45,17 @@ describe("row", () => {
         route: "?bookmarks=0",
       }
     );
-    userEvent.dblClick(screen.getByText(testLog));
-    await waitFor(() => {
-      expect(history.location.search).toBe("");
-    });
+    await userEvent.dblClick(screen.getByText(testLog));
+    expect(history.location.search).toBe("");
   });
+
   it("a log line can be selected and bookmarked at the same time", async () => {
     const { history } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>
     );
-    userEvent.click(screen.getByDataCy("log-link-0"));
-    await waitFor(() => {
-      expect(history.location.search).toBe("?selectedLine=0");
-    });
-    userEvent.dblClick(screen.getByText(testLog));
-    await waitFor(() => {
-      expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");
-    });
+    await userEvent.click(screen.getByDataCy("log-link-0"));
+    await userEvent.dblClick(screen.getByText(testLog));
+    expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");
   });
 });
 

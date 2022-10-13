@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
@@ -45,29 +46,36 @@ SingleLine.args = {
 };
 
 // Multiple AnsiiRows.
-const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
-  <Container>
-    <LogPane
-      cache={cache}
-      expandedLines={[]}
-      filters={[]}
-      logLines={processedLogLines}
-      rowCount={processedLogLines.length}
-      rowRenderer={RowRenderer({
-        expandLines: () => {},
-        getLine,
-        scrollToLine: () => {},
-        expandedLines: [],
-        logType: LogTypes.EVERGREEN_TASK_LOGS,
-        processedLines: processedLogLines,
-        range: { lowerRange: 0 },
-        wrap: args.wrap,
-      })}
-      scrollToIndex={0}
-      wrap={args.wrap}
-    />
-  </Container>
-);
+const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
+  const [scrollIndex, setScrollIndex] = useState<number>(-1);
+
+  return (
+    <Container>
+      <LogPane
+        cache={cache}
+        expandedLines={[]}
+        filterLogic="and"
+        filters={[]}
+        initialScrollIndex={-1}
+        logLines={processedLogLines}
+        rowCount={processedLogLines.length}
+        rowRenderer={RowRenderer({
+          expandLines: () => {},
+          getLine,
+          scrollToLine: setScrollIndex,
+          expandedLines: [],
+          range: { lowerRange: 0 },
+          logType: LogTypes.EVERGREEN_TASK_LOGS,
+          processedLines: processedLogLines,
+          wrap: args.wrap,
+        })}
+        scrollToIndex={scrollIndex}
+        wrap={args.wrap}
+      />
+    </Container>
+  );
+};
+
 export const MultiLines = MultiLineTemplate.bind({});
 MultiLines.args = {
   wrap: false,
@@ -108,8 +116,9 @@ const logLines = [
 
 const processedLogLines = logLines.map((_, index) => index);
 
+const getLine = (index: number) => logLines[index];
+
 const Container = styled.div`
   height: 400px;
   width: 800px;
 `;
-const getLine = (index: number) => logLines[index];

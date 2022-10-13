@@ -1,15 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
-import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
-import { useQueryParam } from "hooks/useQueryParam";
 
 type LogPaneProps = Omit<
   ListProps,
   "height" | "width" | "itemData" | "rowHeight"
 > & {
   wrap: boolean;
+  filterLogic: string;
   filters: string[];
+  initialScrollIndex: number;
   rowRenderer: ListRowRenderer;
   expandedLines: Array<[number, number]>;
 };
@@ -19,23 +19,20 @@ const LogPane: React.FC<LogPaneProps> = ({
   rowCount,
   cache,
   wrap,
+  filterLogic,
   filters,
   expandedLines,
+  initialScrollIndex,
   ...rest
 }) => {
-  const [selectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
-    undefined
-  );
-  const [initialScrollIndex] = useState(selectedLine);
-
   const { listRef } = useLogContext();
+
   useEffect(() => {
     // Reset the cache and recalculate the row heights
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wrap, `${filters}`, `${expandedLines}`]);
+  }, [wrap, filterLogic, `${filters}`, `${expandedLines}`]);
 
   return (
     <AutoSizer>

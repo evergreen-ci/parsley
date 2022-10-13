@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
@@ -47,29 +48,34 @@ SingleLine.args = {
 };
 
 // Multiple ResmokeRows.
-const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
-  <Container>
-    <LogPane
-      cache={cache}
-      expandedLines={[]}
-      filters={[]}
-      logLines={processedLogLines}
-      rowCount={processedLogLines.length}
-      rowRenderer={RowRenderer({
-        expandLines: () => {},
-        getLine,
-        scrollToLine: () => {},
-        expandedLines: [],
-        logType: LogTypes.RESMOKE_LOGS,
-        processedLines: processedLogLines,
-        range: { lowerRange: 0 },
-        wrap: args.wrap,
-      })}
-      scrollToIndex={0}
-      wrap={args.wrap}
-    />
-  </Container>
-);
+const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
+  const [scrollIndex, setScrollIndex] = useState<number>(-1);
+  return (
+    <Container>
+      <LogPane
+        cache={cache}
+        expandedLines={[]}
+        filterLogic="and"
+        filters={[]}
+        initialScrollIndex={-1}
+        logLines={processedLogLines}
+        rowCount={processedLogLines.length}
+        rowRenderer={RowRenderer({
+          expandLines: () => {},
+          getLine,
+          scrollToLine: setScrollIndex,
+          expandedLines: [],
+          logType: LogTypes.RESMOKE_LOGS,
+          processedLines: processedLogLines,
+          range: { lowerRange: 0 },
+          wrap: args.wrap,
+        })}
+        scrollToIndex={scrollIndex}
+        wrap={args.wrap}
+      />
+    </Container>
+  );
+};
 export const MultipleLines = MultipleLineTemplate.bind({});
 
 MultipleLines.args = {
@@ -86,6 +92,7 @@ const logLines = [
   "[j0:sec0] mongod started on port 20001 with pid 30681.",
   "[j0:sec1] Starting mongod on port 20002...",
 ];
+
 const processedLogLines = logLines.map((_, index) => index);
 
 const Container = styled.div`

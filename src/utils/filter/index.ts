@@ -1,4 +1,4 @@
-import { FilterLogic } from "constants/queryParams";
+import { FilterLogic } from "constants/enums";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
 import { isExpanded } from "utils/expandedRanges";
@@ -14,7 +14,7 @@ type FilterLogsParams = {
 };
 
 /**
- * Function that processes log lines according to what filters, bookmarks, and selected line are applied.
+ * `filterLogs` processes log lines according to what filters, bookmarks, and selected line are applied.
  * @param {string[]} obj.logLines - list of strings representing the log lines
  * @param {string[]} obj.filters  - list of strings representing the filters being applied
  * @param {number[]} obj.bookmarks - list of line numbers representing bookmarks

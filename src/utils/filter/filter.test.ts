@@ -1,4 +1,4 @@
-import { FilterLogic } from "constants/queryParams";
+import { FilterLogic } from "constants/enums";
 import { filterLogs, matchesFilter } from ".";
 
 const logLines = [

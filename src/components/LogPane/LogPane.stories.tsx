@@ -18,6 +18,7 @@ const Template: ComponentStory<typeof LogPane> = (args) => (
       {...args}
       cache={cache}
       expandedLines={[]}
+      filterLogic="and"
       filters={[]}
       logLines={list}
       rowCount={list.length}
