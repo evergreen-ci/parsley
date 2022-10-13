@@ -184,6 +184,7 @@ describe("Jump to line", () => {
   before(() => {
     cy.login();
     cy.visit(logLink);
+    cy.clickToggle("expandable-rows-toggle", true); // Turn expandable rows on.
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {

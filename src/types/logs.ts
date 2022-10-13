@@ -1,6 +1,6 @@
-export type ExpandedLines = Array<[number, number]>;
-type ProcessedLogLine = number | number[];
+type ExpandedLines = Array<[number, number]>;
 
+type ProcessedLogLine = number | number[];
 type ProcessedLogLines = ProcessedLogLine[];
 
-export type { ProcessedLogLine, ProcessedLogLines };
+export type { ExpandedLines, ProcessedLogLine, ProcessedLogLines };
