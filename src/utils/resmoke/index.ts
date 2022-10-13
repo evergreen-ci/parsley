@@ -1,3 +1,4 @@
+import { palette } from "@leafygreen-ui/palette";
 import {
   getAttributes,
   getConfigServer,
@@ -12,6 +13,7 @@ import {
   getTimeStamp,
 } from "./helpers";
 
+const { green, yellow, red, blue, purple } = palette;
 /**
  * `processResmokeLine` takes a raw log line and transforms it to a readable resmoke line if it is a resmoke line otherwise it returns the original line
  * @param line log line from resmoke
@@ -102,17 +104,17 @@ const getColorMapping = (
  * colorList is an array of colors that are used to color resmoke lines
  */
 const colorList = [
-  "#5aae61",
-  "#9970ab",
-  "#bf812d",
-  "#2166ac",
-  "#8c510a",
-  "#1b7837",
-  "#74add1",
-  "#d6604d",
-  "#762a83",
-  "#35978f",
-  "#de77ae",
+  green.dark1,
+  blue.dark2,
+  red.dark3,
+  yellow.dark2,
+  green.dark2,
+  purple.dark2,
+  blue.base,
+  green.dark3,
+  red.dark2,
+  purple.base,
+  yellow.dark3,
 ];
 
-export { processResmokeLine, getColorMapping };
+export { processResmokeLine, getColorMapping, colorList };
