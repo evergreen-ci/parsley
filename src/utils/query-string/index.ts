@@ -18,13 +18,15 @@ export const stringifyQuery = (object: { [key: string]: any }) =>
 
 export const parseFilters = (filters: string[]): ParsedFilter[] => {
   const parsedFilters: ParsedFilter[] = filters.map((f) => {
-    const visible = f.charAt(0) === "1";
+    const filter = f.toString();
+    const visible = filter.charAt(0) === "1";
     const caseSensitive =
-      f.charAt(1) === "1"
+      filter.charAt(1) === "1"
         ? CaseSensitivity.Sensitive
         : CaseSensitivity.Insensitive;
-    const matchType = f.charAt(2) === "1" ? MatchType.Inverse : MatchType.Exact;
-    const name = f.substring(3);
+    const matchType =
+      filter.charAt(2) === "1" ? MatchType.Inverse : MatchType.Exact;
+    const name = filter.substring(3);
 
     return {
       visible,
@@ -38,7 +40,6 @@ export const parseFilters = (filters: string[]): ParsedFilter[] => {
 
 export const stringifyFilters = (filters: ParsedFilter[]) =>
   filters
-    .sort((a, b) => a.name.localeCompare(b.name))
     .map((f) => {
       const visible = f.visible ? 1 : 0;
       const caseSensitive =

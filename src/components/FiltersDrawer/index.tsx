@@ -77,7 +77,10 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
         >
           {filters.length ? (
             filters.map((filter) => (
-              <FilterWrapper key={filter.name}>
+              <FilterWrapper
+                key={filter.name}
+                data-cy={`filter-${filter.name}`}
+              >
                 <Filter
                   deleteFilter={deleteFilter}
                   editFilter={editFilter}

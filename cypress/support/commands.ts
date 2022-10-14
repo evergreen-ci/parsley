@@ -6,6 +6,12 @@ const user = {
 };
 const toastDataCy = "toast";
 
+Cypress.Commands.add("addFilter", (filter: string) => {
+  cy.dataCy("searchbar-select").click();
+  cy.dataCy("filter-option").click();
+  cy.dataCy("searchbar-input").type(`${filter}{enter}`);
+});
+
 Cypress.Commands.add("dataCy", (value: string) => {
   cy.get(`[data-cy=${value}]`);
 });
