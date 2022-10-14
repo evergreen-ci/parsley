@@ -1,16 +1,17 @@
 import { useEffect } from "react";
 import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
 import { useLogContext } from "context/LogContext";
+import type { ParsedFilter } from "types/filters";
 
 type LogPaneProps = Omit<
   ListProps,
   "height" | "width" | "itemData" | "rowHeight"
 > & {
-  wrap: boolean;
+  filters: ParsedFilter[];
   filterLogic: string;
-  filters: string[];
   initialScrollIndex: number;
   rowRenderer: ListRowRenderer;
+  wrap: boolean;
 };
 
 const LogPane: React.FC<LogPaneProps> = ({
@@ -24,12 +25,13 @@ const LogPane: React.FC<LogPaneProps> = ({
   ...rest
 }) => {
   const { listRef } = useLogContext();
+
   useEffect(() => {
     // Reset the cache and recalculate the row heights
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wrap, filterLogic, `${filters}`]);
+  }, [wrap, filterLogic, JSON.stringify(filters)]);
 
   return (
     <AutoSizer>

@@ -206,6 +206,31 @@ describe("toast", () => {
       jest.useRealTimers();
     });
 
+    it("should not close on its own if shouldTimeout is false", async () => {
+      jest.useFakeTimers();
+      user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+
+      const { Component, hook } = renderComponentWithHook();
+      render(<Component />, {
+        wrapper,
+      });
+      act(() => {
+        hook.current.info("test string", true, { shouldTimeout: false });
+      });
+      expect(screen.getByDataCy("toast")).toBeInTheDocument();
+
+      // Advance timer, which would normally trigger timeout.
+      act(() => {
+        jest.advanceTimersByTime(TOAST_TIMEOUT);
+      });
+      await waitFor(() => {
+        expect(screen.getByDataCy("toast")).toBeInTheDocument();
+      });
+
+      // Reset to use real timers.
+      jest.useRealTimers();
+    });
+
     it("should close the toast when hide() is called", async () => {
       const { Component, hook } = renderComponentWithHook();
       render(<Component />, {

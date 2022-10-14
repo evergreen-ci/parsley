@@ -2,7 +2,7 @@ import { createContext, useCallback, useContext, useMemo, useRef } from "react";
 import { List } from "react-virtualized";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useFilterParam, useQueryParam } from "hooks/useQueryParam";
 import { ProcessedLogLines } from "types/logs";
 import { filterLogs } from "utils/filter";
 import searchLogs from "utils/searchLogs";
@@ -50,7 +50,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   children,
   initialLogLines,
 }) => {
-  const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
+  const [filters] = useFilterParam();
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
   const [selectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
@@ -82,9 +82,22 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   // TODO EVG-17537: more advanced filtering
   const processedLogLines = useMemo(
-    () => filterLogs(state.logs, filters, bookmarks, selectedLine, filterLogic),
+    () =>
+      filterLogs({
+        logLines: state.logs,
+        filters,
+        bookmarks,
+        selectedLine,
+        filterLogic,
+      }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [state.logs.length, `${filters}`, `${bookmarks}`, selectedLine, filterLogic]
+    [
+      state.logs.length,
+      JSON.stringify(filters), // eslint-disable-line
+      `${bookmarks}`, // eslint-disable-line
+      selectedLine,
+      filterLogic,
+    ]
   );
 
   const searchResults = useMemo(() => {

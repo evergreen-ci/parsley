@@ -1,5 +1,13 @@
+import { CaseSensitivity, MatchType } from "constants/enums";
 import { render, screen, userEvent } from "test_utils";
 import Filter from ".";
+
+const defaultFilter = {
+  caseSensitive: CaseSensitivity.Insensitive,
+  matchType: MatchType.Exact,
+  name: "myFilter",
+  visible: true,
+};
 
 describe("filters", () => {
   const user = userEvent.setup();
@@ -9,7 +17,7 @@ describe("filters", () => {
       <Filter
         deleteFilter={jest.fn()}
         editFilter={jest.fn()}
-        filterName="myFilter"
+        filter={defaultFilter}
       />
     );
     expect(screen.getByText("myFilter")).toBeInTheDocument();
@@ -20,7 +28,7 @@ describe("filters", () => {
       <Filter
         deleteFilter={jest.fn()}
         editFilter={jest.fn()}
-        filterName="myFilter"
+        filter={defaultFilter}
       />
     );
     // Should show text input containing the current value.
@@ -45,7 +53,7 @@ describe("filters", () => {
       <Filter
         deleteFilter={jest.fn()}
         editFilter={editFilter}
-        filterName="myFilter"
+        filter={defaultFilter}
       />
     );
     // Clear the text input and submit a new filter.
@@ -59,20 +67,22 @@ describe("filters", () => {
     await user.click(confirmButton);
 
     expect(editFilter).toHaveBeenCalledTimes(1);
-    expect(editFilter).toHaveBeenCalledWith("myFilter", "newFilter");
+    expect(editFilter).toHaveBeenCalledWith("name", "newFilter", defaultFilter);
   });
 
   it("should toggle between visibility icons when they are clicked", async () => {
+    const editFilter = jest.fn();
     render(
       <Filter
         deleteFilter={jest.fn()}
-        editFilter={jest.fn()}
-        filterName="myFilter"
+        editFilter={editFilter}
+        filter={defaultFilter}
       />
     );
     expect(screen.getByLabelText("Visibility Icon")).toBeInTheDocument();
     await user.click(screen.getByLabelText("Hide filter"));
-    expect(screen.getByLabelText("Closed Eye Icon")).toBeInTheDocument();
+    expect(editFilter).toHaveBeenCalledTimes(1);
+    expect(editFilter).toHaveBeenCalledWith("visible", false, defaultFilter);
   });
 
   it("should call deleteFilter with the correct parameters", async () => {
@@ -81,7 +91,7 @@ describe("filters", () => {
       <Filter
         deleteFilter={deleteFilter}
         editFilter={jest.fn()}
-        filterName="myFilter"
+        filter={defaultFilter}
       />
     );
     await user.click(screen.getByLabelText("Delete filter"));
@@ -90,11 +100,12 @@ describe("filters", () => {
   });
 
   it("should be able to interact with Case Sensitivity segmented control", async () => {
+    const editFilter = jest.fn();
     render(
       <Filter
         deleteFilter={jest.fn()}
-        editFilter={jest.fn()}
-        filterName="myFilter"
+        editFilter={editFilter}
+        filter={defaultFilter}
       />
     );
 
@@ -112,14 +123,21 @@ describe("filters", () => {
 
     expect(insensitiveOption).toHaveAttribute("aria-selected", "false");
     expect(sensitiveOption).toHaveAttribute("aria-selected", "true");
+
+    expect(editFilter).toHaveBeenCalledWith(
+      "caseSensitive",
+      CaseSensitivity.Sensitive,
+      defaultFilter
+    );
   });
 
   it("should be able to interact with Match Type segmented control", async () => {
+    const editFilter = jest.fn();
     render(
       <Filter
         deleteFilter={jest.fn()}
-        editFilter={jest.fn()}
-        filterName="myFilter"
+        editFilter={editFilter}
+        filter={defaultFilter}
       />
     );
 
@@ -137,5 +155,11 @@ describe("filters", () => {
 
     expect(exactOption).toHaveAttribute("aria-selected", "false");
     expect(inverseOption).toHaveAttribute("aria-selected", "true");
+
+    expect(editFilter).toHaveBeenCalledWith(
+      "matchType",
+      MatchType.Inverse,
+      defaultFilter
+    );
   });
 });

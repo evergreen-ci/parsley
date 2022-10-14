@@ -7,9 +7,10 @@ import { Body } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
 import Icon from "components/Icon";
 import { HAS_OPENED_DRAWER } from "constants/cookies";
-import { QueryParams } from "constants/queryParams";
+import { CaseSensitivity, MatchType } from "constants/enums";
 import { size, zIndex } from "constants/tokens";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useFilterParam } from "hooks/useQueryParam";
+import type { ParsedFilter } from "types/filters";
 import Filter from "./Filter";
 
 const { green, gray } = palette;
@@ -23,24 +24,28 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
     Cookie.get(HAS_OPENED_DRAWER) === "true"
   );
 
-  const [filters, setFilters] = useQueryParam<string[]>(
-    QueryParams.Filters,
-    []
-  );
+  const [filters, setFilters] = useFilterParam();
 
   const deleteFilter = (filterName: string) => {
-    const newFilters = filters.filter((f) => f !== filterName);
+    const newFilters = filters.filter((f) => f.name !== filterName);
     setFilters(newFilters);
   };
 
-  const editFilter = (oldFilter: string, newFilter: string) => {
+  const editFilter = (
+    fieldName: "matchType" | "caseSensitive" | "visible" | "name",
+    fieldValue: MatchType | CaseSensitivity | boolean | string,
+    filter: ParsedFilter
+  ) => {
     // Duplicate filters are not allowed.
-    if (filters.includes(newFilter)) {
+    if (fieldName === "name" && filters.some((f) => f.name === fieldValue)) {
       return;
     }
     const newFilters = [...filters];
-    const idxToReplace = newFilters.indexOf(oldFilter);
-    newFilters[idxToReplace] = newFilter;
+    const idxToReplace = newFilters.findIndex((f) => f.name === filter.name);
+    newFilters[idxToReplace] = {
+      ...filter,
+      [fieldName]: fieldValue,
+    };
     setFilters(newFilters);
   };
 
@@ -72,11 +77,11 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
         >
           {filters.length ? (
             filters.map((filter) => (
-              <FilterWrapper key={filter}>
+              <FilterWrapper key={filter.name}>
                 <Filter
                   deleteFilter={deleteFilter}
                   editFilter={editFilter}
-                  filterName={filter}
+                  filter={filter}
                 />
               </FilterWrapper>
             ))

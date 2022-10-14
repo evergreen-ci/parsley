@@ -8,7 +8,7 @@ import SubHeader from "components/SubHeader";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useFilterParam, useQueryParam } from "hooks/useQueryParam";
 import { findLineIndex } from "utils/findLineIndex";
 
 interface LogWindowProps {
@@ -26,16 +26,17 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     scrollToLine,
     searchState,
   } = useLogContext();
+
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
-  const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
   const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
-
-  const { searchTerm } = searchState;
-
+  const [filters] = useFilterParam();
   const [selectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
   );
+
+  const { searchTerm } = searchState;
+
   const [initialScrollIndex] = useState(
     findLineIndex(processedLogLines, selectedLine)
   );

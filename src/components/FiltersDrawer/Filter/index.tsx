@@ -13,33 +13,31 @@ import { Body } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
+import type { ParsedFilter } from "types/filters";
 
 const { gray } = palette;
 
 interface FilterProps {
   ["data-cy"]?: string;
-  filterName: string;
+  filter: ParsedFilter;
   deleteFilter: (filter: string) => void;
-  editFilter: (oldFilter: string, newFilter: string) => void;
+  editFilter: (fieldName: any, fieldValue: any, filter: ParsedFilter) => void;
 }
 
 const Filter: React.FC<FilterProps> = ({
   "data-cy": dataCy,
-  filterName,
+  filter,
   deleteFilter,
   editFilter,
 }) => {
-  const [newFilter, setNewFilter] = useState(filterName);
+  const { name, visible, caseSensitive, matchType } = filter;
+
+  const [newFilter, setNewFilter] = useState(name);
   const [isEditing, setIsEditing] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [caseSensitivity, setCaseSensitivity] = useState<string>(
-    CaseSensitivity.Insensitive
-  );
-  const [matchType, setMatchType] = useState<string>(MatchType.Exact);
 
   const resetEditState = () => {
     setIsEditing(false);
-    setNewFilter(filterName);
+    setNewFilter(name);
   };
 
   return (
@@ -54,17 +52,17 @@ const Filter: React.FC<FilterProps> = ({
             <Icon fill={gray.base} glyph="Edit" />
           </IconButton>
           <IconButton
-            aria-label={isVisible ? "Hide filter" : "Show filter"}
-            onClick={() => setIsVisible(!isVisible)}
+            aria-label={visible ? "Hide filter" : "Show filter"}
+            onClick={() => editFilter("visible", !visible, filter)}
           >
             <Icon
               fill={gray.base}
-              glyph={isVisible ? "Visibility" : "ClosedEye"}
+              glyph={visible ? "Visibility" : "ClosedEye"}
             />
           </IconButton>
           <IconButton
             aria-label="Delete filter"
-            onClick={() => deleteFilter(filterName)}
+            onClick={() => deleteFilter(name)}
           >
             <Icon fill={gray.base} glyph="X" />
           </IconButton>
@@ -89,7 +87,7 @@ const Filter: React.FC<FilterProps> = ({
             </Button>
             <Button
               onClick={() => {
-                editFilter(filterName, newFilter);
+                editFilter("name", newFilter, filter);
                 resetEditState();
               }}
               size="xsmall"
@@ -100,14 +98,16 @@ const Filter: React.FC<FilterProps> = ({
           </ButtonWrapper>
         </>
       ) : (
-        <FilterName>{filterName}</FilterName>
+        <FilterName>{name}</FilterName>
       )}
 
       <StyledSegmentedControl
         aria-controls="Toggle case sensitivity"
-        defaultValue={caseSensitivity}
+        defaultValue={caseSensitive}
         label="Case"
-        onChange={setCaseSensitivity}
+        onChange={(value) =>
+          editFilter("caseSensitive", value as CaseSensitivity, filter)
+        }
         size="small"
       >
         <Option value={CaseSensitivity.Insensitive}>Insensitive</Option>
@@ -118,7 +118,9 @@ const Filter: React.FC<FilterProps> = ({
         aria-controls="Toggle match type"
         defaultValue={matchType}
         label="Match"
-        onChange={setMatchType}
+        onChange={(value) =>
+          editFilter("matchType", value as MatchType, filter)
+        }
         size="small"
       >
         <Option value={MatchType.Exact}>Exact</Option>

@@ -1,6 +1,12 @@
 import { useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { parseQueryString, stringifyQuery } from "utils/query-string";
+import type { ParsedFilter } from "types/filters";
+import {
+  parseFilters,
+  parseQueryString,
+  stringifyFilters,
+  stringifyQuery,
+} from "utils/query-string";
 
 /** `useQueryParams` returns all of the query params passed into the url */
 const useQueryParams = () => {
@@ -17,7 +23,8 @@ const useQueryParams = () => {
   return [parseQueryString(searchParams.toString()), setQueryString] as const;
 };
 
-/** `useQueryParam` allows you to interact with a query param in the same way you would use a useState hook.
+/**
+ * `useQueryParam` allows you to interact with a query param in the same way you would use a useState hook.
  *  The first argument is the name of the query param. The second argument is the initial value of the query param.
  *  `useQueryParam` will default to the second argument if the query param is not present in the url.
  */
@@ -26,6 +33,7 @@ const useQueryParam = <T>(
   defaultParam: T
 ): readonly [T, (set: T) => void] => {
   const [searchParams, setSearchParams] = useQueryParams();
+
   const setQueryParam = useCallback(
     (value: T) => {
       setSearchParams({
@@ -36,15 +44,39 @@ const useQueryParam = <T>(
     [setSearchParams, searchParams, param]
   );
 
-  return [
+  const queryParam =
     searchParams[param] !== undefined
       ? (conditionalToArray(
           searchParams[param],
           Array.isArray(defaultParam)
         ) as unknown as T)
-      : defaultParam,
-    setQueryParam,
-  ] as const;
+      : defaultParam;
+
+  return [queryParam, setQueryParam] as const;
+};
+
+/**
+ * `useFilterParam` is a specialized form of useQueryParam. It needs to do special processing when converting
+ * filters to and from URLs.
+ */
+const useFilterParam = () => {
+  const [searchParams, setSearchParams] = useQueryParams();
+
+  const parsedFilters = parseFilters(
+    conditionalToArray(searchParams.filters ?? [], true) as string[]
+  );
+
+  const setFiltersParam = useCallback(
+    (filters: ParsedFilter[]) => {
+      setSearchParams({
+        ...searchParams,
+        filters: stringifyFilters(filters),
+      });
+    },
+    [setSearchParams, searchParams]
+  );
+
+  return [parsedFilters, setFiltersParam] as const;
 };
 
 /** `conditionalToArray` takes in a value and transforms it into an array if it is not one and should be */
@@ -54,4 +86,4 @@ const conditionalToArray = <T>(value: T, shouldBeArray: boolean) => {
   }
   return value;
 };
-export { useQueryParams, useQueryParam };
+export { useQueryParams, useQueryParam, useFilterParam };

@@ -1,105 +1,212 @@
-import { FilterLogic } from "constants/enums";
+import { CaseSensitivity, FilterLogic, MatchType } from "constants/enums";
 import { filterLogs, matchesFilter } from ".";
 
-const logLines = [
-  "[js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).",
-  "[j0:prim] Starting mongod on port 20000...",
-  `PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin mongod-6.0 --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node0/2c65edd254db4835911f796d7b260455.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node0 --port=20000 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1`,
-  "[j0:prim] mongod started on port 20000 with pid 30678.",
-  "[j0:sec0] Starting mongod on port 20001...",
-  `PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin /data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin/mongod --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node1/a611b65dce484b7d81b294a7941a2dac.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node1 --port=20001 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1`,
-  "[j0:sec0] mongod started on port 20001 with pid 30681.",
-  "[j0:sec1] Starting mongod on port 20002...",
-];
+/**
+ * Helper test function for constructing a ParsedFilter object.
+ */
+const makeFilter = (filter: {
+  name: string;
+  caseSensitive?: CaseSensitivity;
+  matchType?: MatchType;
+  visible?: boolean;
+}) => {
+  const {
+    name,
+    caseSensitive = CaseSensitivity.Insensitive,
+    matchType = MatchType.Exact,
+    visible = true,
+  } = filter;
+
+  return {
+    caseSensitive,
+    matchType,
+    name,
+    visible,
+  };
+};
 
 describe("matchesFilter", () => {
-  it("works with AND condition (case insensitive)", () => {
-    expect(
-      matchesFilter(logLines[7], ["starting", "port"], FilterLogic.And)
-    ).toBe(true);
-    expect(
-      matchesFilter(logLines[7], ["running", "port"], FilterLogic.And)
-    ).toBe(false);
+  const logLine =
+    "[2022/03/02 17:02:01.610] 04a52b2 EVG-15959 Fix rerender method in test utils (#1118)";
+
+  describe("single filter", () => {
+    describe("case sensitivity", () => {
+      it("works with case sensitivity off", () => {
+        const filter = makeFilter({ name: "fix" });
+        expect(matchesFilter(logLine, [filter], FilterLogic.And)).toBe(true);
+      });
+      it("works with case sensitivity on", () => {
+        const filter = makeFilter({
+          name: "fix",
+          caseSensitive: CaseSensitivity.Sensitive,
+        });
+        expect(matchesFilter(logLine, [filter], FilterLogic.And)).toBe(false);
+      });
+    });
+
+    describe("match type", () => {
+      it("works with match type exact", () => {
+        const filter = makeFilter({
+          name: "fix",
+        });
+        expect(matchesFilter(logLine, [filter], FilterLogic.And)).toBe(true);
+      });
+      it("works with match type inverse", () => {
+        const filter = makeFilter({
+          name: "fix",
+          matchType: MatchType.Inverse,
+        });
+        expect(matchesFilter(logLine, [filter], FilterLogic.And)).toBe(false);
+      });
+    });
+
+    describe("visibility", () => {
+      it("works with visibility on", () => {
+        const filter = makeFilter({
+          name: "not-in-logline",
+        });
+        expect(matchesFilter(logLine, [filter], FilterLogic.And)).toBe(false);
+      });
+      it("works with visibility off", () => {
+        const filter = makeFilter({
+          name: "not-in-logline",
+          visible: false,
+        });
+        expect(matchesFilter(logLine, [filter], FilterLogic.And)).toBe(true);
+      });
+    });
   });
 
-  it("works with OR condition (case insensitive)", () => {
-    expect(
-      matchesFilter(logLines[7], ["starting", "port"], FilterLogic.Or)
-    ).toBe(true);
-    expect(
-      matchesFilter(logLines[7], ["running", "port"], FilterLogic.Or)
-    ).toBe(true);
+  describe("multiple filters", () => {
+    describe("filter logic (and)", () => {
+      it("should work for condition A and B", () => {
+        const filter1 = makeFilter({
+          name: "rerender",
+        });
+        const filter2 = makeFilter({
+          name: "test",
+        });
+        expect(
+          matchesFilter(logLine, [filter1, filter2], FilterLogic.And)
+        ).toBe(true);
+      });
+      it("should work for condition !A and B / A and !B", () => {
+        const filter1 = makeFilter({
+          name: "rerender",
+        });
+        const filter2 = makeFilter({
+          name: "test",
+          matchType: MatchType.Inverse,
+        });
+        expect(
+          matchesFilter(logLine, [filter1, filter2], FilterLogic.And)
+        ).toBe(false);
+      });
+      it("should work for condition !A and !B", () => {
+        const filter1 = makeFilter({
+          name: "rerender",
+          matchType: MatchType.Inverse,
+        });
+        const filter2 = makeFilter({
+          name: "test",
+          matchType: MatchType.Inverse,
+        });
+        expect(
+          matchesFilter(logLine, [filter1, filter2], FilterLogic.And)
+        ).toBe(false);
+      });
+    });
+
+    describe("filter logic (or)", () => {
+      it("should work for condition A or B", () => {
+        const filter1 = makeFilter({
+          name: "rerender",
+        });
+        const filter2 = makeFilter({
+          name: "test",
+        });
+        expect(matchesFilter(logLine, [filter1, filter2], FilterLogic.Or)).toBe(
+          true
+        );
+      });
+      it("should work for condition !A or B / A or !B", () => {
+        const filter1 = makeFilter({
+          name: "rerender",
+        });
+        const filter2 = makeFilter({
+          name: "test",
+          matchType: MatchType.Inverse,
+        });
+        expect(matchesFilter(logLine, [filter1, filter2], FilterLogic.Or)).toBe(
+          true
+        );
+      });
+      it("should work for condition !A or !B", () => {
+        const filter1 = makeFilter({
+          name: "rerender",
+          matchType: MatchType.Inverse,
+        });
+        const filter2 = makeFilter({
+          name: "test",
+          matchType: MatchType.Inverse,
+        });
+        expect(matchesFilter(logLine, [filter1, filter2], FilterLogic.Or)).toBe(
+          false
+        );
+      });
+    });
   });
 });
 
 describe("filterLogs", () => {
-  describe("filtering (AND)", () => {
-    it("works without any filters, bookmarks, or selected line applied", () => {
-      expect(
-        filterLogs(logLines, [], [], undefined, FilterLogic.And)
-      ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
-    });
+  const logLines = [
+    "[js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).",
+    "[j0:prim] Starting mongod on port 20000...",
+    `PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin mongod-6.0 --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node0/2c65edd254db4835911f796d7b260455.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node0 --port=20000 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1`,
+    "[j0:prim] mongod started on port 20000 with pid 30678.",
+    "[j0:sec0] Starting mongod on port 20001...",
+    `PATH=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src:/data/multiversion:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin:/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/venv/bin:/home/ec2-user/.local/bin:/home/ec2-user/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/opt/node/bin:/opt/node/bin:/data/multiversion INSTALL_DIR=/data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin /data/mci/f99ab8d06437c8a83d4c7356bcd6d965/src/dist-test/bin/mongod --setParameter enableTestCommands=1 --setParameter backtraceLogFile=/data/db/job0/resmoke/node1/a611b65dce484b7d81b294a7941a2dac.stacktrace --setParameter internalQueryFrameworkControl=forceClassicEngine --setParameter 'logComponentVerbosity={'"'"'replication'"'"': {'"'"'election'"'"': 4, '"'"'heartbeats'"'"': 2, '"'"'initialSync'"'"': 2, '"'"'rollback'"'"': 2}, '"'"'sharding'"'"': {'"'"'migration'"'"': 2}, '"'"'storage'"'"': {'"'"'recovery'"'"': 2}, '"'"'transaction'"'"': 4, '"'"'tenantMigration'"'"': 4}' --setParameter disableLogicalSessionCacheRefresh=true --setParameter coordinateCommitReturnImmediatelyAfterPersistingDecision=false --setParameter transactionLifetimeLimitSeconds=86400 --setParameter maxIndexBuildDrainBatchSize=10 --setParameter writePeriodicNoops=false --setParameter shutdownTimeoutMillisForSignaledShutdown=100 --setParameter testingDiagnosticsEnabled=true --oplogSize=511 --replSet=rs --dbpath=/data/db/job0/resmoke/node1 --port=20001 --enableMajorityReadConcern=True --storageEngine=wiredTiger --wiredTigerCacheSizeGB=1`,
+    "[j0:sec0] mongod started on port 20001 with pid 30681.",
+    "[j0:sec1] Starting mongod on port 20002...",
+  ];
 
-    it("works with filters", () => {
-      expect(
-        filterLogs(
-          logLines,
-          ["starting", "port"],
-          [],
-          undefined,
-          FilterLogic.And
-        )
-      ).toStrictEqual([[0], 1, [2, 3], 4, [5, 6], 7]);
-    });
-
-    it("works with filters and bookmarks", () => {
-      expect(
-        filterLogs(
-          logLines,
-          ["starting", "port"],
-          [2],
-          undefined,
-          FilterLogic.And
-        )
-      ).toStrictEqual([[0], 1, 2, [3], 4, [5, 6], 7]);
-    });
-
-    it("works with filters, bookmarks, and selected line", () => {
-      expect(
-        filterLogs(logLines, ["starting", "port"], [2], 0, FilterLogic.And)
-      ).toStrictEqual([0, 1, 2, [3], 4, [5, 6], 7]);
-    });
+  it("should return the log lines as is if there are no filters", () => {
+    expect(
+      filterLogs({
+        logLines,
+        filters: [],
+        bookmarks: [],
+        selectedLine: undefined,
+        filterLogic: FilterLogic.And,
+      })
+    ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
   });
 
-  describe("filtering (OR)", () => {
-    it("works without any filters, bookmarks, or selected line applied", () => {
-      expect(
-        filterLogs(logLines, [], [], undefined, FilterLogic.Or)
-      ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
-    });
+  describe("with a filter applied", () => {
+    const filter = makeFilter({ name: "prim" });
 
-    it("works with filters", () => {
+    it("should not collapse bookmarks", () => {
       expect(
-        filterLogs(logLines, ["starting", "pid"], [], undefined, FilterLogic.Or)
-      ).toStrictEqual([0, 1, [2], 3, 4, [5], 6, 7]);
-    });
-
-    it("works with filters and bookmarks", () => {
-      expect(
-        filterLogs(
+        filterLogs({
           logLines,
-          ["starting", "pid"],
-          [5],
-          undefined,
-          FilterLogic.Or
-        )
-      ).toStrictEqual([0, 1, [2], 3, 4, 5, 6, 7]);
+          filters: [filter],
+          bookmarks: [7],
+          selectedLine: undefined,
+          filterLogic: FilterLogic.And,
+        })
+      ).toStrictEqual([[0], 1, [2], 3, [4, 5, 6], 7]);
     });
 
-    it("works with filters, bookmarks, and selectedLine", () => {
+    it("should not collapse selected lines", () => {
       expect(
-        filterLogs(logLines, ["starting", "pid"], [5], 2, FilterLogic.Or)
-      ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+        filterLogs({
+          logLines,
+          filters: [filter],
+          bookmarks: [],
+          selectedLine: 7,
+          filterLogic: FilterLogic.And,
+        })
+      ).toStrictEqual([[0], 1, [2], 3, [4, 5, 6], 7]);
     });
   });
 });
