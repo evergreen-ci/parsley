@@ -1,7 +1,6 @@
 describe("Filtering", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
-  const comma = "%2C";
 
   describe("Applying filters", () => {
     describe("Basic filtering", () => {
@@ -10,6 +9,9 @@ describe("Filtering", () => {
         cy.visit(logLink);
         cy.setCookie("has-opened-drawer", "true");
         cy.get(".ReactVirtualized__Grid").should("be.visible");
+      });
+
+      it("should not collapse bookmarks and selected line", () => {
         // Bookmark and select a line, with the expectation that they won't be collapsed by the filter.
         cy.dataCy("log-link-5").click();
         cy.dataCy("log-row-6").dblclick();
@@ -17,16 +19,9 @@ describe("Filtering", () => {
           "equal",
           "?bookmarks=0,6,297&selectedLine=5"
         );
-      });
-
-      it("should not collapse bookmarks and selected line", () => {
         // Apply a filter that doesn't satisfy any log line.
         cy.addFilter("notarealfilter");
-        cy.location("search").should(
-          "equal",
-          "?bookmarks=0,6,297&filters=100notarealfilter&selectedLine=5"
-        );
-        // Matched elements should be one of the bookmarked or selected values
+        // Matched elements should be one of the bookmarked or selected values.
         cy.get("[data-cy^='log-row-']").each(($el) => {
           cy.wrap($el)
             .should("have.attr", "data-cy")
@@ -36,74 +31,76 @@ describe("Filtering", () => {
     });
 
     describe("Advanced filtering", () => {
+      const filter1 = "Warning";
+      const filter2 = "storybook";
+
       describe("filtering mode is AND", () => {
         before(() => {
           cy.login();
-          cy.visit(logLink);
+          cy.visit(`${logLink}/?filterLogic=and`);
           cy.setCookie("has-opened-drawer", "true");
           cy.dataCy("clear-bookmarks").click();
-          cy.location("search").should("equal", "");
         });
 
         it("should be able to apply two default filters (case insensitive, exact match)", () => {
-          cy.addFilter("Warning");
-          cy.addFilter("storybook");
+          cy.addFilter(filter1);
+          cy.addFilter(filter2);
           cy.location("search").should(
             "equal",
-            `?filters=100Warning${comma}100storybook`
+            `?filterLogic=and&filters=100${filter1},100${filter2}`
           );
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
-            cy.wrap($el).contains("Warning", { matchCase: false });
-            cy.wrap($el).contains("storybook", { matchCase: false });
+            cy.wrap($el).contains(filter1, { matchCase: false });
+            cy.wrap($el).contains(filter2, { matchCase: false });
           });
         });
 
         it("should be able to toggle case sensitivity", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-Warning").within(() => {
+          cy.dataCy(`filter-${filter1}`).within(() => {
             cy.contains("Sensitive").click();
           });
           cy.location("search").should(
             "equal",
-            `?filters=110Warning${comma}100storybook`
+            `?filterLogic=and&filters=110${filter1},100${filter2}`
           );
           cy.toggleDrawer();
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
-            cy.wrap($el).contains("Warning", { matchCase: true });
-            cy.wrap($el).contains("storybook", { matchCase: false });
+            cy.wrap($el).contains(filter1, { matchCase: true });
+            cy.wrap($el).contains(filter2, { matchCase: false });
           });
         });
 
         it("should be able to toggle inverse matching", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-storybook").within(() => {
+          cy.dataCy(`filter-${filter2}`).within(() => {
             cy.contains("Inverse").click();
           });
           cy.location("search").should(
             "equal",
-            `?filters=110Warning${comma}101storybook`
+            `?filterLogic=and&filters=110${filter1},101${filter2}`
           );
           cy.toggleDrawer();
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
-            cy.wrap($el).contains("Warning", { matchCase: true });
-            cy.wrap($el).should("not.contain.text", "storybook");
+            cy.wrap($el).contains(filter1, { matchCase: true });
+            cy.wrap($el).should("not.contain.text", filter2);
           });
         });
 
         it("should be able to toggle visibility", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-Warning").within(() => {
+          cy.dataCy(`filter-${filter1}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
           });
-          cy.dataCy("filter-storybook").within(() => {
+          cy.dataCy(`filter-${filter2}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
           });
           cy.location("search").should(
             "equal",
-            `?filters=010Warning${comma}001storybook`
+            `?filterLogic=and&filters=010${filter1},001${filter2}`
           );
           cy.toggleDrawer();
 
@@ -114,22 +111,17 @@ describe("Filtering", () => {
       describe("filtering mode is OR", () => {
         before(() => {
           cy.login();
-          cy.visit(logLink);
+          cy.visit(`${logLink}/?filterLogic=or`);
           cy.setCookie("has-opened-drawer", "true");
           cy.dataCy("clear-bookmarks").click();
-          cy.location("search").should("equal", "");
-
-          cy.dataCy("details-button").click();
-          cy.dataCy("filter-logic-toggle").click();
-          cy.dataCy("details-button").click();
         });
 
         it("should be able to apply two default filters (case insensitive, exact match)", () => {
-          cy.addFilter("Warning");
-          cy.addFilter("storybook");
+          cy.addFilter(filter1);
+          cy.addFilter(filter2);
           cy.location("search").should(
             "equal",
-            `?filterLogic=or&filters=100Warning${comma}100storybook`
+            `?filterLogic=or&filters=100${filter1},100${filter2}`
           );
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
@@ -141,12 +133,12 @@ describe("Filtering", () => {
 
         it("should be able to toggle case sensitivity", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-Warning").within(() => {
+          cy.dataCy(`filter-${filter1}`).within(() => {
             cy.contains("Sensitive").click();
           });
           cy.location("search").should(
             "equal",
-            `?filterLogic=or&filters=110Warning${comma}100storybook`
+            `?filterLogic=or&filters=110${filter1},100${filter2}`
           );
           cy.toggleDrawer();
 
@@ -163,12 +155,12 @@ describe("Filtering", () => {
 
         it("should be able to toggle inverse matching", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-storybook").within(() => {
+          cy.dataCy(`filter-${filter2}`).within(() => {
             cy.contains("Inverse").click();
           });
           cy.location("search").should(
             "equal",
-            `?filterLogic=or&filters=110Warning${comma}101storybook`
+            `?filterLogic=or&filters=110${filter1},101${filter2}`
           );
           cy.toggleDrawer();
 
@@ -185,15 +177,15 @@ describe("Filtering", () => {
 
         it("should be able to toggle visibility", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-Warning").within(() => {
+          cy.dataCy(`filter-${filter1}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
           });
-          cy.dataCy("filter-storybook").within(() => {
+          cy.dataCy(`filter-${filter2}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
           });
           cy.location("search").should(
             "equal",
-            `?filterLogic=or&filters=010Warning${comma}001storybook`
+            `?filterLogic=or&filters=010${filter1},001${filter2}`
           );
           cy.toggleDrawer();
 

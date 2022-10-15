@@ -38,14 +38,11 @@ export const parseFilters = (filters: string[]): ParsedFilter[] => {
   return parsedFilters;
 };
 
-export const stringifyFilters = (filters: ParsedFilter[]) =>
-  filters
-    .map((f) => {
-      const visible = f.visible ? 1 : 0;
-      const caseSensitive =
-        f.caseSensitive === CaseSensitivity.Sensitive ? 1 : 0;
-      const matchType = f.matchType === MatchType.Inverse ? 1 : 0;
+export const stringifyFilters = (filters: ParsedFilter[]): string[] =>
+  filters.map((f) => {
+    const visible = f.visible ? 1 : 0;
+    const caseSensitive = f.caseSensitive === CaseSensitivity.Sensitive ? 1 : 0;
+    const matchType = f.matchType === MatchType.Inverse ? 1 : 0;
 
-      return `${visible}${caseSensitive}${matchType}${f.name}`;
-    })
-    .join(",");
+    return `${visible}${caseSensitive}${matchType}${f.name}`;
+  });

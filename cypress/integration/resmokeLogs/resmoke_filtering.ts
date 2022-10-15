@@ -1,7 +1,6 @@
 describe("Filtering", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
-  const comma = "%2C";
 
   describe("Applying filters", () => {
     describe("Basic filtering", () => {
@@ -10,6 +9,9 @@ describe("Filtering", () => {
         cy.visit(logLink);
         cy.setCookie("has-opened-drawer", "true");
         cy.get(".ReactVirtualized__Grid").should("be.visible");
+      });
+
+      it("should not collapse bookmarks and selected line", () => {
         // Bookmark and select a line, with the expectation that they won't be collapsed by the filter.
         cy.dataCy("log-link-5").click();
         cy.dataCy("log-row-6").dblclick();
@@ -17,15 +19,8 @@ describe("Filtering", () => {
           "equal",
           "?bookmarks=0,6,11079&selectedLine=5"
         );
-      });
-
-      it("should not collapse bookmarks and selected line", () => {
         // Apply a filter that doesn't satisfy any log line.
         cy.addFilter("notarealfilter");
-        cy.location("search").should(
-          "equal",
-          "?bookmarks=0,6,11079&filters=100notarealfilter&selectedLine=5"
-        );
         // Matched elements should be one of the bookmarked or selected values
         cy.get("[data-cy^='log-row-']").each(($el) => {
           cy.wrap($el)
@@ -36,74 +31,76 @@ describe("Filtering", () => {
     });
 
     describe("Advanced filtering", () => {
+      const filter1 = "NETWORK";
+      const filter2 = "metadata";
+
       describe("filtering mode is AND", () => {
         before(() => {
           cy.login();
-          cy.visit(logLink);
+          cy.visit(`${logLink}/?filterLogic=and`);
           cy.setCookie("has-opened-drawer", "true");
           cy.dataCy("clear-bookmarks").click();
-          cy.location("search").should("equal", "");
         });
 
         it("should be able to apply two default filters (case insensitive, exact match)", () => {
-          cy.addFilter("NETWORK");
-          cy.addFilter("metadata");
+          cy.addFilter(filter1);
+          cy.addFilter(filter2);
           cy.location("search").should(
             "equal",
-            `?filters=100NETWORK${comma}100metadata`
+            `?filterLogic=and&filters=100${filter1},100${filter2}`
           );
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
-            cy.wrap($el).contains("NETWORK", { matchCase: false });
-            cy.wrap($el).contains("metadata", { matchCase: false });
+            cy.wrap($el).contains(filter1, { matchCase: false });
+            cy.wrap($el).contains(filter2, { matchCase: false });
           });
         });
 
         it("should be able to toggle case sensitivity", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-NETWORK").within(() => {
+          cy.dataCy(`filter-${filter1}`).within(() => {
             cy.contains("Sensitive").click();
           });
           cy.location("search").should(
             "equal",
-            `?filters=110NETWORK${comma}100metadata`
+            `?filterLogic=and&filters=110${filter1},100${filter2}`
           );
           cy.toggleDrawer();
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
-            cy.wrap($el).contains("NETWORK", { matchCase: true });
-            cy.wrap($el).contains("metadata", { matchCase: false });
+            cy.wrap($el).contains(filter1, { matchCase: true });
+            cy.wrap($el).contains(filter2, { matchCase: false });
           });
         });
 
         it("should be able to toggle inverse matching", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-metadata").within(() => {
+          cy.dataCy(`filter-${filter2}`).within(() => {
             cy.contains("Inverse").click();
           });
           cy.location("search").should(
             "equal",
-            `?filters=110NETWORK${comma}101metadata`
+            `?filterLogic=and&filters=110${filter1},101${filter2}`
           );
           cy.toggleDrawer();
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
-            cy.wrap($el).contains("NETWORK", { matchCase: true });
-            cy.wrap($el).should("not.contain.text", "metadata");
+            cy.wrap($el).contains(filter1, { matchCase: true });
+            cy.wrap($el).should("not.contain.text", filter2);
           });
         });
 
         it("should be able to toggle visibility", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-NETWORK").within(() => {
+          cy.dataCy(`filter-${filter1}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
           });
-          cy.dataCy("filter-metadata").within(() => {
+          cy.dataCy(`filter-${filter2}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
           });
           cy.location("search").should(
             "equal",
-            `?filters=010NETWORK${comma}001metadata`
+            `?filterLogic=and&filters=010${filter1},001${filter2}`
           );
           cy.toggleDrawer();
 
@@ -114,22 +111,17 @@ describe("Filtering", () => {
       describe("filtering mode is OR", () => {
         before(() => {
           cy.login();
-          cy.visit(logLink);
+          cy.visit(`${logLink}/?filterLogic=or`);
           cy.setCookie("has-opened-drawer", "true");
           cy.dataCy("clear-bookmarks").click();
-          cy.location("search").should("equal", "");
-
-          cy.dataCy("details-button").click();
-          cy.dataCy("filter-logic-toggle").click();
-          cy.dataCy("details-button").click();
         });
 
         it("should be able to apply two default filters (case insensitive, exact match)", () => {
-          cy.addFilter("NETWORK");
-          cy.addFilter("metadata");
+          cy.addFilter(filter1);
+          cy.addFilter(filter2);
           cy.location("search").should(
             "equal",
-            `?filterLogic=or&filters=100NETWORK${comma}100metadata`
+            `?filterLogic=or&filters=100${filter1},100${filter2}`
           );
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
@@ -141,12 +133,12 @@ describe("Filtering", () => {
 
         it("should be able to toggle case sensitivity", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-NETWORK").within(() => {
+          cy.dataCy(`filter-${filter1}`).within(() => {
             cy.contains("Sensitive").click();
           });
           cy.location("search").should(
             "equal",
-            `?filterLogic=or&filters=110NETWORK${comma}100metadata`
+            `?filterLogic=or&filters=110${filter1},100${filter2}`
           );
           cy.toggleDrawer();
 
@@ -163,12 +155,12 @@ describe("Filtering", () => {
 
         it("should be able to toggle inverse matching", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-metadata").within(() => {
+          cy.dataCy(`filter-${filter2}`).within(() => {
             cy.contains("Inverse").click();
           });
           cy.location("search").should(
             "equal",
-            `?filterLogic=or&filters=110NETWORK${comma}101metadata`
+            `?filterLogic=or&filters=110${filter1},101${filter2}`
           );
           cy.toggleDrawer();
 
@@ -185,15 +177,15 @@ describe("Filtering", () => {
 
         it("should be able to toggle visibility", () => {
           cy.toggleDrawer();
-          cy.dataCy("filter-NETWORK").within(() => {
+          cy.dataCy(`filter-${filter1}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
           });
-          cy.dataCy("filter-metadata").within(() => {
+          cy.dataCy(`filter-${filter2}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
           });
           cy.location("search").should(
             "equal",
-            `?filterLogic=or&filters=010NETWORK${comma}001metadata`
+            `?filterLogic=or&filters=010${filter1},001${filter2}`
           );
           cy.toggleDrawer();
 
@@ -222,19 +214,19 @@ describe("Filtering", () => {
       cy.dataCy("filter-notarealfilter").within(() => {
         cy.get(`[aria-label="Edit filter"]`).click();
       });
-      cy.dataCy("edit-filter-name").clear().type("NETWORK");
+      cy.dataCy("edit-filter-name").clear().type("REPL_HB");
       cy.contains("button", "OK").click();
-      cy.location("search").should("equal", "?filters=100NETWORK");
+      cy.location("search").should("equal", "?filters=100REPL_HB");
       cy.toggleDrawer();
 
       cy.get("[data-cy^='log-row-']").each(($el) => {
-        cy.wrap($el).contains("NETWORK", { matchCase: false });
+        cy.wrap($el).contains("REPL_HB", { matchCase: false });
       });
     });
 
     it("should be able to delete a filter", () => {
       cy.toggleDrawer();
-      cy.dataCy("filter-NETWORK").within(() => {
+      cy.dataCy("filter-REPL_HB").within(() => {
         cy.get(`[aria-label="Delete filter"]`).click();
       });
       cy.location("search").should("equal", "");

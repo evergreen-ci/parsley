@@ -9,7 +9,7 @@ import {
 describe("filters", () => {
   describe("stringifyFilters", () => {
     it("can handle empty input", () => {
-      expect(stringifyFilters([])).toBe("");
+      expect(stringifyFilters([])).toStrictEqual([]);
     });
     it("stringifies a single filter correctly", () => {
       expect(
@@ -21,7 +21,7 @@ describe("filters", () => {
             visible: true,
           },
         ])
-      ).toBe("100hello-i-am-a-filter");
+      ).toStrictEqual(["100hello-i-am-a-filter"]);
     });
     it("stringifies multiple filters correctly", () => {
       expect(
@@ -45,7 +45,7 @@ describe("filters", () => {
             visible: false,
           },
         ])
-      ).toBe("101failed,011passed,010running");
+      ).toStrictEqual(["011passed", "101failed", "010running"]);
     });
   });
 
