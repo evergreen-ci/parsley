@@ -32,6 +32,7 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
     <Container>
       <LogPane
         cache={cache}
+        expandableRows
         expandedLines={expandedLines}
         filterLogic="and"
         filters={[]}
@@ -75,6 +76,7 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
     <Container>
       <LogPane
         cache={cache}
+        expandableRows
         expandedLines={expandedLines}
         filterLogic="and"
         filters={[]}

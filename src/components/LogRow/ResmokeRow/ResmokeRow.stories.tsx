@@ -53,6 +53,7 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
     <Container>
       <LogPane
         cache={cache}
+        expandableRows
         expandedLines={[]}
         filterLogic="and"
         filters={[]}

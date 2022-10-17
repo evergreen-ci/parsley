@@ -8,6 +8,7 @@ type LogPaneProps = Omit<
   "height" | "width" | "itemData" | "rowHeight"
 > & {
   wrap: boolean;
+  expandableRows: boolean;
   filterLogic: string;
   filters: string[];
   initialScrollIndex: number;
@@ -20,6 +21,7 @@ const LogPane: React.FC<LogPaneProps> = ({
   rowCount,
   cache,
   wrap,
+  expandableRows,
   filterLogic,
   filters,
   expandedLines,
@@ -33,7 +35,7 @@ const LogPane: React.FC<LogPaneProps> = ({
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wrap, filterLogic, `${filters}`, `${expandedLines}`]);
+  }, [wrap, filterLogic, `${filters}`, `${expandedLines}`, expandableRows]);
 
   return (
     <AutoSizer>

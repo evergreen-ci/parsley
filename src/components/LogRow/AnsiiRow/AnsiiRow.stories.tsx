@@ -52,6 +52,7 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
     <Container>
       <LogPane
         cache={cache}
+        expandableRows
         expandedLines={[]}
         filterLogic="and"
         filters={[]}

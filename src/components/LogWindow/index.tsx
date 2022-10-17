@@ -33,6 +33,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
   const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
+  const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
 
   const { searchTerm } = searchState;
 
@@ -65,6 +66,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         <LogPaneContainer>
           <LogPane
             cache={cache}
+            expandableRows={expandableRows}
             expandedLines={expandedLines}
             filterLogic={filterLogic}
             filters={filters}
