@@ -49,7 +49,7 @@ describe("filtersDrawer", () => {
 
   it("filters should properly display based on URL", () => {
     render(<FiltersDrawer />, {
-      route: "?filters=filter1,filter2",
+      route: "?filters=100filter1,100filter2",
     });
     expect(screen.getByText("filter1")).toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
@@ -57,7 +57,7 @@ describe("filtersDrawer", () => {
 
   it("shows the number of filters in the header", () => {
     render(<FiltersDrawer />, {
-      route: "?filters=one,two,three,four",
+      route: "?filters=100one,100two,100three,100four",
     });
     const navGroupHeader = screen.getByDataCy("nav-group-header");
     expect(within(navGroupHeader).getByText("4")).toBeInTheDocument();
@@ -65,7 +65,7 @@ describe("filtersDrawer", () => {
 
   it("editing filters should modify the URL correctly", async () => {
     const { history } = render(<FiltersDrawer />, {
-      route: "?filters=filter1,filter2",
+      route: "?filters=100filter1,100filter2",
     });
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter")[0]);
@@ -76,7 +76,7 @@ describe("filtersDrawer", () => {
     });
     await user.click(confirmButton);
 
-    expect(history.location.search).toBe("?filters=newFilter,filter2");
+    expect(history.location.search).toBe("?filters=100newFilter,100filter2");
     expect(screen.queryByText("filter1")).not.toBeInTheDocument();
     expect(screen.getByText("newFilter")).toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
@@ -84,7 +84,7 @@ describe("filtersDrawer", () => {
 
   it("trying to edit a filter to a filter that already exists should do nothing", async () => {
     const { history } = render(<FiltersDrawer />, {
-      route: "?filters=filter1,filter2",
+      route: "?filters=100filter1,100filter2",
     });
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter")[0]);
@@ -95,14 +95,14 @@ describe("filtersDrawer", () => {
     });
     await user.click(confirmButton);
 
-    expect(history.location.search).toBe("?filters=filter1,filter2");
+    expect(history.location.search).toBe("?filters=100filter1,100filter2");
     expect(screen.getByText("filter1")).toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 
   it("pressing the cancel button after editing a filter should do nothing", async () => {
     const { history } = render(<FiltersDrawer />, {
-      route: "?filters=filter1,filter2",
+      route: "?filters=100filter1,100filter2",
     });
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter")[0]);
@@ -113,18 +113,18 @@ describe("filtersDrawer", () => {
     });
     await user.click(cancelButton);
 
-    expect(history.location.search).toBe("?filters=filter1,filter2");
+    expect(history.location.search).toBe("?filters=100filter1,100filter2");
     expect(screen.getByText("filter1")).toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 
   it("deleting filters should modify the URL correctly", async () => {
     const { history } = render(<FiltersDrawer />, {
-      route: "?filters=filter1,filter2",
+      route: "?filters=100filter1,100filter2",
     });
     // Delete the first filter.
     await user.click(screen.getAllByLabelText("Delete filter")[0]);
-    expect(history.location.search).toBe("?filters=filter2");
+    expect(history.location.search).toBe("?filters=100filter2");
     expect(screen.queryByText("filter1")).not.toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
