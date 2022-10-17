@@ -20,12 +20,14 @@ interface FiltersDrawerProps {
   ["data-cy"]?: string;
   expandedLines: ExpandedLines;
   collapseLines: (idx: number) => void;
+  clearExpandedLines: () => void;
 }
 
 const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
   "data-cy": dataCy,
   expandedLines,
   collapseLines,
+  clearExpandedLines,
 }) => {
   const [collapsed, setCollapsed] = useState(
     Cookie.get(HAS_OPENED_DRAWER) === "true"
@@ -39,6 +41,10 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
   const deleteFilter = (filterName: string) => {
     const newFilters = filters.filter((f) => f !== filterName);
     setFilters(newFilters);
+
+    if (newFilters.length === 0) {
+      clearExpandedLines();
+    }
   };
 
   const editFilter = (oldFilter: string, newFilter: string) => {

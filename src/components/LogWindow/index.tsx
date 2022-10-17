@@ -17,6 +17,7 @@ interface LogWindowProps {
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const {
+    clearExpandedLines,
     collapseLines,
     expandLines,
     getLine,
@@ -47,6 +48,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     <Container data-cy="log-window">
       {hasLogs && (
         <FiltersDrawer
+          clearExpandedLines={clearExpandedLines}
           collapseLines={collapseLines}
           expandedLines={expandedLines}
         />

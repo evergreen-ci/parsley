@@ -100,10 +100,6 @@ describe("Bookmarking and selecting lines", () => {
 });
 
 describe("Filtering", () => {
-  before(() => {
-    cy.clickToggle("expandable-rows-toggle", true); // Turn expandable rows on.
-  });
-
   it("should be able to apply filters", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("filter-option").click();
@@ -171,7 +167,6 @@ describe("Jump to line", () => {
   });
 
   it("should be able to use the sidebar to jump to a line when there are collapsed rows", () => {
-    cy.clickToggle("expandable-rows-toggle", true); // Turn expandable rows on.
     cy.dataCy("searchbar-select").click();
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("pass{enter}");
@@ -196,7 +191,6 @@ describe("Searching", () => {
     cy.toggleDrawer();
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
-    cy.clickToggle("expandable-rows-toggle", true); // Turn expandable rows on.
   });
 
   it("searching for a term should highlight matching words ", () => {
@@ -290,7 +284,6 @@ describe("expanding collapsed rows", () => {
     cy.login();
     cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
-    cy.clickToggle("expandable-rows-toggle", true); // Turn expandable rows on.
   });
 
   it("should be able to expand collapsed rows", () => {

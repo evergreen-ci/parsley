@@ -23,6 +23,7 @@ type Action =
   | { type: "SET_MATCH_COUNT"; matchCount: number }
   | { type: "EXPAND_LINES"; expandedLines: ExpandedLines }
   | { type: "COLLAPSE_LINES"; idx: number }
+  | { type: "CLEAR_EXPANDED_LINES" }
   | { type: "PAGINATE"; nextPage: number };
 
 const initialState = (initialLogLines?: string[]): LogState => ({
@@ -71,6 +72,11 @@ const reducer = (state: LogState, action: Action): LogState => {
         expandedLines: newExpandedLines,
       };
     }
+    case "CLEAR_EXPANDED_LINES":
+      return {
+        ...state,
+        expandedLines: [],
+      };
     case "SET_FILE_NAME":
       return {
         ...state,

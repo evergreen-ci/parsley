@@ -24,6 +24,7 @@ interface LogContextState {
   };
   searchState: SearchState;
 
+  clearExpandedLines: () => void;
   clearLogs: () => void;
   collapseLines: (idx: number) => void;
   expandLines: (expandedLines: ExpandedLines) => void;
@@ -67,7 +68,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     undefined
   );
   const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
-  const [expandableRows] = useQueryParam(QueryParams.Expandable, false);
+  const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
   const { state, dispatch } = useLogState(initialLogLines);
   const listRef = useRef<List>(null);
 
@@ -155,6 +156,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
       searchState: state.searchState,
 
+      clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       collapseLines: (idx: number) => dispatch({ type: "COLLAPSE_LINES", idx }),
       expandLines: (expandedLines: ExpandedLines) =>
