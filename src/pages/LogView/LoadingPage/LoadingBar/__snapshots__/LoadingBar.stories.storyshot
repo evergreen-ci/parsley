@@ -2,10 +2,10 @@
 
 exports[`storyshots Storyshots pages/LoadingPage/LoadingBar Default 1`] = `
 <div
-  className="css-p0x6d"
+  className="css-gv4jhe"
 >
   <div
-    className="css-1gahscu"
+    className="css-gsef79"
   />
 </div>
 `;
