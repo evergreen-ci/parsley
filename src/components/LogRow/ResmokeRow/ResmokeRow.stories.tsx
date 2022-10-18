@@ -26,7 +26,7 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
       processedLines: processedLogLines,
       logType: LogTypes.RESMOKE_LOGS,
       range: { lowerRange: 0 },
-      scrollToLine: () => {},
+      scrollToLine: () => undefined,
       getResmokeLineColor: () => undefined,
     }}
     listRowProps={{

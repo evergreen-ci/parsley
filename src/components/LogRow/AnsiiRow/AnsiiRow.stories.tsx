@@ -23,7 +23,7 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
       processedLines: processedLogLines,
       logType: LogTypes.EVERGREEN_TASK_LOGS,
       range: { lowerRange: 0 },
-      scrollToLine: () => {},
+      scrollToLine: () => undefined,
       getResmokeLineColor: () => undefined,
     }}
     listRowProps={{
