@@ -21,7 +21,7 @@ interface BaseRowProps extends ListRowProps {
   highlightedLine?: number;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
-  "data-cy-text"?: string;
+  "data-cy"?: string;
   resmokeRowColor?: string;
 }
 
@@ -40,7 +40,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     scrollToLine,
     searchTerm,
     resmokeRowColor,
-    "data-cy-text": dataCyText,
+    "data-cy": dataCyText,
     ...rest
   } = props;
 
