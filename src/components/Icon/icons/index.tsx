@@ -1,7 +1,7 @@
 import type { Size } from "@leafygreen-ui/icon";
 import { palette } from "@leafygreen-ui/palette";
 
-const { green } = palette;
+const { black, green } = palette;
 
 interface LeafygreenIconProps extends React.SVGProps<SVGSVGElement> {
   size?: number | typeof Size[keyof typeof Size];
@@ -11,7 +11,7 @@ interface LeafygreenIconProps extends React.SVGProps<SVGSVGElement> {
 
 export const ClosedEye: React.ComponentType<LeafygreenIconProps> = ({
   className,
-  fill = "#001E2B",
+  fill = black,
   onClick,
 }) => (
   <svg
