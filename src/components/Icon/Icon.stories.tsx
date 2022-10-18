@@ -5,6 +5,14 @@ import { size } from "constants/tokens";
 import Icon, { Size, glyphs } from ".";
 
 const { green } = palette;
+
+const Sizes = {
+  [Size.Small]: 14,
+  [Size.Default]: 16,
+  [Size.Large]: 20,
+  [Size.XLarge]: 24,
+};
+
 export default {
   title: "Components/Icon",
   component: Icon,
@@ -25,11 +33,11 @@ export const Default = Template.bind({});
 
 Default.argTypes = {
   color: { control: "color" },
-  size: { control: { type: "select", options: Size } },
+  size: { control: { type: "select", options: Sizes } },
 };
 Default.args = {
   color: green.dark3,
-  size: Size.XLarge,
+  size: Sizes[Size.XLarge],
 };
 
 const Container = styled.div`

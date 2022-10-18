@@ -7,6 +7,7 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
   const { data, listRowProps } = rowProps;
   const {
     getLine,
+    getResmokeLineColor,
     wrap,
     processedLines,
     range,
@@ -18,6 +19,7 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
 
   const line = processedLines[index] as number;
   const lineContent = getLine(line);
+  const color = getResmokeLineColor(line);
   const inRange = isLineInRange(range, line);
 
   return lineContent ? (
@@ -25,9 +27,10 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       wrap={wrap}
       {...listRowProps}
       ref={ref}
-      data-cy-text="resmoke-row"
+      data-cy="resmoke-row"
       highlightedLine={highlightedLine}
       lineNumber={line}
+      resmokeRowColor={color}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}
     >

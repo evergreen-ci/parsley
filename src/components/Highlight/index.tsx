@@ -5,6 +5,7 @@ const { red } = palette;
 
 const Highlight = styled.mark<{ "data-cy"?: string }>`
   background-color: ${red.light2};
+  font-weight: bold;
 `;
 
 Highlight.defaultProps = {

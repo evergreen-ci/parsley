@@ -40,7 +40,7 @@ exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
 <pre
-  className="css-h4v6ss"
+  className="css-11nrrs1"
   data-cy="log-row-0"
   data-highlighted={false}
   data-selected={false}
@@ -76,6 +76,11 @@ exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
   </span>
   <span
     data-cy="ansii-row"
+    style={
+      Object {
+        "color": undefined,
+      }
+    }
   >
     [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
   </span>

@@ -89,7 +89,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
             ) : (
               <Dropzone>
                 <Body weight="medium">
-                  Drag and Drop a log file to view in Lobster
+                  Drag and Drop a log file to view in Parsley
                 </Body>
                 <Body weight="medium">or</Body>
                 <Button leftGlyph={<Icon glyph="Upload" />} onClick={open}>

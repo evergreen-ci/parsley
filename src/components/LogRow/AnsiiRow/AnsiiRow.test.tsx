@@ -103,6 +103,7 @@ describe("ansiiRow", () => {
           ...data,
           searchTerm: /highlight me/i,
           range: { lowerRange: 0, upperRange: 10 },
+          getResmokeLineColor: () => undefined,
         }}
         listRowProps={{ ...listRowProps, index: 9 }}
       />
@@ -117,6 +118,7 @@ describe("ansiiRow", () => {
           ...data,
           searchTerm: /highlight me/i,
           range: { lowerRange: 0, upperRange: 8 },
+          getResmokeLineColor: () => undefined,
         }}
         listRowProps={{ ...listRowProps, index: 9 }}
       />
@@ -154,6 +156,7 @@ const getLine = (index: number) => logLines[index];
 const data = {
   expandLines: jest.fn(),
   getLine,
+  getResmokeLineColor: () => undefined,
   scrollToLine: jest.fn(),
 
   expandedLines: [],

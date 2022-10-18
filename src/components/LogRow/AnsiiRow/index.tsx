@@ -34,7 +34,7 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       wrap={wrap}
       {...listRowProps}
       ref={ref}
-      data-cy-text="ansii-row"
+      data-cy="ansii-row"
       highlightedLine={highlightedLine}
       lineNumber={line}
       scrollToLine={scrollToLine}

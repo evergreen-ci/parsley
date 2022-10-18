@@ -17,9 +17,9 @@ const LoadingBar: React.FC<LoadingBarProps> = ({
 );
 
 const Container = styled.div`
-  height: 12px;
-  border-radius: ${size.xs};
+  height: 6px;
   background-color: ${gray.light2};
+  border-radius: ${size.xxs};
   width: 100%;
 `;
 
@@ -27,30 +27,16 @@ const Bar = styled.div<{ progress: number }>`
   width: ${({ progress }) => progress}%;
   height: 100%;
   /* border radius left */
-  border-top-left-radius: ${size.xs};
-  border-bottom-left-radius: ${size.xs};
+  border-top-left-radius: ${size.xxs};
+  border-bottom-left-radius: ${size.xxs};
   ${({ progress }) =>
     progress === 100 &&
     `
     /* border radius right */
-    border-top-right-radius: ${size.xs};
-    border-bottom-right-radius: ${size.xs};
+    border-top-right-radius: ${size.xxs};
+    border-bottom-right-radius: ${size.xxs};
     `}
-
-  animation: glowing 1.5s linear infinite;
-  @keyframes glowing {
-    0% {
-      background-color: ${green.dark2};
-      box-shadow: 0 0 5px ${green.dark2};
-    }
-    50% {
-      background-color: ${green.base};
-      box-shadow: 0 0 10px ${green.base};
-    }
-    100% {
-      background-color: ${green.dark2};
-      box-shadow: 0 0 5px ${green.dark2};
-    }
-  }
+  background: ${green.base};
+  box-shadow: 0 0 ${size.xs} ${green.light2};
 `;
 export default LoadingBar;

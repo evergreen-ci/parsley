@@ -18,9 +18,10 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
   <AnsiiRow
     key={logLines[0]}
     data={{
-      expandLines: () => {},
+      expandLines: () => undefined,
       getLine,
-      scrollToLine: () => {},
+      getResmokeLineColor: () => undefined,
+      scrollToLine: () => undefined,
       logType: LogTypes.EVERGREEN_TASK_LOGS,
       processedLines: processedLogLines,
       range: { lowerRange: 0 },
@@ -62,11 +63,14 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
         rowRenderer={RowRenderer({
           expandLines: () => {},
           getLine,
+          getResmokeLineColor: () => undefined,
           scrollToLine: setScrollIndex,
           range: { lowerRange: 0 },
           logType: LogTypes.EVERGREEN_TASK_LOGS,
           processedLines: processedLogLines,
           wrap: args.wrap,
+          searchTerm: /p=debug/,
+          highlightedLine: args.highlightedLine,
         })}
         scrollToIndex={scrollIndex}
         wrap={args.wrap}
@@ -78,6 +82,7 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
 export const MultiLines = MultiLineTemplate.bind({});
 MultiLines.args = {
   wrap: false,
+  highlightedLine: 0,
 };
 
 const logLines = [

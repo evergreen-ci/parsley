@@ -26,6 +26,51 @@ describe("Basic resmoke log view", () => {
   });
 });
 
+describe("Resmoke syntax highlighting", () => {
+  // Although it isn't ideal to test for a specific color, this helps us ensure that the color is consistent and deterministic.
+  const colors = {
+    black: "rgb(0, 0, 0)",
+    blue: "rgb(8, 60, 144)",
+    green: "rgb(0, 163, 92)",
+  };
+  const logLink =
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+    cy.setCookie("has-opened-drawer", "true");
+  });
+  it("should not color non resmoke log lines", () => {
+    cy.dataCy("log-row-0").within(() => {
+      cy.dataCy("resmoke-row").should("have.css", "color", colors.black);
+    });
+  });
+  it("should color similar resmoke lines with the same color", () => {
+    cy.dataCy("log-row-20").should("be.visible");
+    cy.dataCy("log-row-21").should("be.visible");
+    cy.dataCy("log-row-20").should("contain", "[j0:s0:n1]");
+    cy.dataCy("log-row-21").should("contain", "[j0:s0:n1]");
+    cy.dataCy("log-row-20").within(() => {
+      cy.dataCy("resmoke-row").should("have.css", "color", colors.blue);
+    });
+
+    cy.dataCy("log-row-21").within(() => {
+      cy.dataCy("resmoke-row").should("have.css", "color", colors.blue);
+    });
+  });
+  it("should color different resmoke lines with different colors if their resmoke state is different", () => {
+    cy.dataCy("log-row-19").should("be.visible");
+    cy.dataCy("log-row-20").should("be.visible");
+    cy.dataCy("log-row-19").should("contain", "[j0:s0:n0]");
+    cy.dataCy("log-row-20").should("contain", "[j0:s0:n1]");
+    cy.dataCy("log-row-19").within(() => {
+      cy.dataCy("resmoke-row").should("have.css", "color", colors.green);
+    });
+    cy.dataCy("log-row-20").within(() => {
+      cy.dataCy("resmoke-row").should("have.css", "color", colors.blue);
+    });
+  });
+});
 describe("Bookmarking and selecting lines", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
