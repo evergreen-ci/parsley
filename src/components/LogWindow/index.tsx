@@ -2,10 +2,10 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import FiltersDrawer from "components/FiltersDrawer";
 import LogPane from "components/LogPane";
-import { RowRenderer, cache } from "components/LogRow/RowRenderer";
+import { RowRenderer } from "components/LogRow/RowRenderer";
 import SideBar from "components/SideBar";
 import SubHeader from "components/SubHeader";
-import { FilterLogic, LogTypes } from "constants/enums";
+import { LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
@@ -33,9 +33,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     searchState,
   } = useLogContext();
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
-  const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
-  const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
-  const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
 
   const { searchTerm } = searchState;
 
@@ -67,11 +64,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>
           <LogPane
-            cache={cache}
-            expandableRows={expandableRows}
-            expandedLines={expandedLines}
-            filterLogic={filterLogic}
-            filters={filters}
             initialScrollIndex={initialScrollIndex}
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
@@ -88,7 +80,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               processedLogLines,
               logType,
             })}
-            wrap={wrap}
           />
         </LogPaneContainer>
       </ColumnContainer>

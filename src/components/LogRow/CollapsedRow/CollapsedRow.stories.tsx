@@ -18,7 +18,7 @@ type CollapsedRowProps = React.FC<
 
 // CollapsedRow with AnsiiRows.
 const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
-  const [expandedLines, setExpandedLines] = useState<ExpandedLines>([]);
+  const [, setExpandedLines] = useState<ExpandedLines>([]);
   const [processedLogLines, setProcessedLogLines] = useState(
     collapsedProcessedLogLines
   );
@@ -26,16 +26,12 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
   const expandLines = (linesToExpand: ExpandedLines) => {
     setExpandedLines([...linesToExpand]);
     setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]);
+    cache.clear(3, 0);
   };
 
   return (
     <Container>
       <LogPane
-        cache={cache}
-        expandableRows
-        expandedLines={expandedLines}
-        filterLogic="and"
-        filters={[]}
         initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
@@ -53,7 +49,6 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
           processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
         })}
-        wrap={args.wrap}
       />
     </Container>
   );
@@ -68,7 +63,7 @@ CollapsedAnsiiRow.args = {
 
 // CollapsedRow withs ResmokeRows.
 const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
-  const [expandedLines, setExpandedLines] = useState<ExpandedLines>([]);
+  const [, setExpandedLines] = useState<ExpandedLines>([]);
   const [processedLogLines, setProcessedLogLines] = useState(
     collapsedProcessedLogLines
   );
@@ -76,16 +71,12 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
   const expandLines = (linesToExpand: ExpandedLines) => {
     setExpandedLines([...linesToExpand]);
     setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]);
+    cache.clear(3, 0);
   };
 
   return (
     <Container>
       <LogPane
-        cache={cache}
-        expandableRows
-        expandedLines={expandedLines}
-        filterLogic="and"
-        filters={[]}
         initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
@@ -103,7 +94,6 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
           processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
         })}
-        wrap={args.wrap}
       />
     </Container>
   );

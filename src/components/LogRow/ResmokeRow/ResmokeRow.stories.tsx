@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
-import { RowRenderer, cache } from "components/LogRow/RowRenderer";
+import { RowRenderer } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
 import { colorList } from "utils/resmoke";
 import ResmokeRow from ".";
@@ -53,11 +53,6 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   return (
     <Container>
       <LogPane
-        cache={cache}
-        expandableRows
-        expandedLines={[]}
-        filterLogic="and"
-        filters={[]}
         initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
@@ -76,7 +71,6 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
           logType: LogTypes.RESMOKE_LOGS,
         })}
         scrollToIndex={scrollIndex}
-        wrap={args.wrap}
       />
     </Container>
   );
@@ -92,11 +86,6 @@ const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   return (
     <Container>
       <LogPane
-        cache={cache}
-        expandableRows
-        expandedLines={[]}
-        filterLogic="and"
-        filters={[]}
         initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
@@ -115,7 +104,6 @@ const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
           logType: LogTypes.RESMOKE_LOGS,
         })}
         scrollToIndex={scrollIndex}
-        wrap={args.wrap}
       />
     </Container>
   );

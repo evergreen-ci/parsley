@@ -3,10 +3,12 @@ import {
   useCallback,
   useContext,
   useDeferredValue,
+  useEffect,
   useMemo,
   useRef,
 } from "react";
-import { List } from "react-virtualized";
+import { CellMeasurerCache, List } from "react-virtualized";
+import { cache } from "components/LogRow/RowRenderer";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
@@ -19,6 +21,7 @@ import { DIRECTION, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
+  cache: CellMeasurerCache;
   expandedLines: ExpandedLines;
   fileName?: string;
   hasLogs: boolean;
@@ -35,7 +38,7 @@ interface LogContextState {
   clearExpandedLines: () => void;
   clearLogs: () => void;
   collapseLines: (idx: number) => void;
-  expandLines: (expandedLines: ExpandedLines) => void;
+  expandLines: (expandedLines: ExpandedLines, index: number) => void;
   getLine: (lineNumber: number) => string | undefined;
   getResmokeLineColor: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
@@ -65,6 +68,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   children,
   initialLogLines,
 }) => {
+  const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
   const [selectedLine] = useQueryParam<number | undefined>(
@@ -133,6 +137,17 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     ]
   );
 
+  useEffect(() => {
+    cache.clearAll();
+    listRef.current?.recomputeRowHeights();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [
+    wrap,
+    filterLogic,
+    `${deferredFilters}`, // eslint-disable-line react-hooks/exhaustive-deps
+    expandableRows,
+  ]);
+
   const searchResults = useMemo(() => {
     const results = state.searchState.searchTerm
       ? searchLogs({
@@ -164,6 +179,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const memoizedContext = useMemo(
     () => ({
+      cache,
       expandedLines: state.expandedLines,
       fileName: state.fileName,
       hasLogs: !!state.logs.length,
@@ -181,8 +197,14 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       collapseLines: (idx: number) => dispatch({ type: "COLLAPSE_LINES", idx }),
-      expandLines: (expandedLines: ExpandedLines) =>
-        dispatch({ type: "EXPAND_LINES", expandedLines }),
+      expandLines: (expandedLines: ExpandedLines, index: number) => {
+        dispatch({ type: "EXPAND_LINES", expandedLines });
+        // https://github.com/bvaughn/react-virtualized/issues/842
+        for (let i = index; i < state.logs.length; i++) {
+          cache.clear(i, 0);
+        }
+        listRef.current?.recomputeRowHeights(index);
+      },
       getLine,
       getResmokeLineColor,
       ingestLines: (lines: string[], logType: LogTypes) => {

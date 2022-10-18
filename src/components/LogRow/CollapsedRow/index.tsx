@@ -19,6 +19,7 @@ interface CollapsedRowProps extends BaseRowProps {
 const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
   const { collapsedLines, data, listRowProps } = props;
   const { expandLines } = data;
+  const { index } = listRowProps;
 
   const numCollapsed = collapsedLines.length;
   const start = collapsedLines[0];
@@ -32,15 +33,18 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
 
   const expandFive = () => {
     startTransition(() => {
-      expandLines([
-        [start, start + (SKIP_NUMBER - 1)],
-        [end - (SKIP_NUMBER - 1), end],
-      ]);
+      expandLines(
+        [
+          [start, start + (SKIP_NUMBER - 1)],
+          [end - (SKIP_NUMBER - 1), end],
+        ],
+        index
+      );
     });
   };
   const expandAll = () => {
     startTransition(() => {
-      expandLines([[start, end]]);
+      expandLines([[start, end]], index);
     });
   };
 
