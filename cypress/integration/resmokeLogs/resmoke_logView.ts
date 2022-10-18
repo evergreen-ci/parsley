@@ -69,7 +69,7 @@ describe("Resmoke syntax highlighting", () => {
       );
     });
   });
-  it("should color different resmoke lines with different colors", () => {
+  it("should color different resmoke lines with different colors if their resmoke state is different", () => {
     cy.dataCy("log-row-19").should("be.visible");
     cy.dataCy("log-row-20").should("be.visible");
     cy.dataCy("log-row-19").should("contain", "[j0:s0:n0]");
