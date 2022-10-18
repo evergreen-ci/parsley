@@ -35,7 +35,7 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       wrap={wrap}
       {...listRowProps}
       ref={ref}
-      data-cy-text="resmoke-row"
+      data-cy="resmoke-row"
       highlightedLine={highlightedLine}
       lineNumber={line}
       resmokeRowColor={color}
