@@ -34,6 +34,8 @@
     "test:watch": "jest --watch --verbose"
   },
   "dependencies": {
+    "@bugsnag/js": "7.18.0",
+    "@bugsnag/plugin-react": "7.18.0",
     "@emotion/react": "11.10.0",
     "@emotion/styled": "11.10.0",
     "@leafygreen-ui/badge": "5.0.1",
