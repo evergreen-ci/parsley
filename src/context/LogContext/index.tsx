@@ -1,4 +1,11 @@
-import { createContext, useCallback, useContext, useMemo, useRef } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useDeferredValue,
+  useMemo,
+  useRef,
+} from "react";
 import { List } from "react-virtualized";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
@@ -101,6 +108,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     }, 0);
   }, []);
 
+  const deferredFilters = useDeferredValue(filters);
   // TODO EVG-17537: more advanced filtering
   const processedLogLines = useMemo(
     () =>
@@ -116,7 +124,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       state.logs.length,
-      `${filters}`, // eslint-disable-line react-hooks/exhaustive-deps
+      `${deferredFilters}`, // eslint-disable-line react-hooks/exhaustive-deps
       `${bookmarks}`, // eslint-disable-line react-hooks/exhaustive-deps
       `${state.expandedLines}`, // eslint-disable-line react-hooks/exhaustive-deps
       selectedLine,

@@ -3,24 +3,25 @@ import BaseRow from "components/LogRow/BaseRow";
 import { BaseRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
-const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
-  const { data, listRowProps } = rowProps;
+interface ResmokeRowProps extends BaseRowProps {
+  lineNumber: number;
+}
+
+const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
+  const { data, listRowProps, lineNumber } = rowProps;
   const {
     getLine,
     getResmokeLineColor,
     wrap,
-    processedLines,
     range,
     searchTerm,
     highlightedLine,
     scrollToLine,
   } = data;
-  const { index } = listRowProps;
 
-  const line = processedLines[index] as number;
-  const lineContent = getLine(line);
-  const color = getResmokeLineColor(line);
-  const inRange = isLineInRange(range, line);
+  const lineContent = getLine(lineNumber);
+  const color = getResmokeLineColor(lineNumber);
+  const inRange = isLineInRange(range, lineNumber);
 
   return lineContent ? (
     <BaseRow
@@ -29,7 +30,7 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       ref={ref}
       data-cy="resmoke-row"
       highlightedLine={highlightedLine}
-      lineNumber={line}
+      lineNumber={lineNumber}
       resmokeRowColor={color}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}

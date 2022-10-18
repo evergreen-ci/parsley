@@ -22,11 +22,10 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
       getLine,
       getResmokeLineColor: () => undefined,
       scrollToLine: () => undefined,
-      logType: LogTypes.EVERGREEN_TASK_LOGS,
-      processedLines: processedLogLines,
       range: { lowerRange: 0 },
       wrap: args.wrap,
     }}
+    lineNumber={0}
     listRowProps={{
       index: 0,
       style: {},
@@ -61,16 +60,18 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          expandLines: () => {},
-          getLine,
-          getResmokeLineColor: () => undefined,
-          scrollToLine: setScrollIndex,
-          range: { lowerRange: 0 },
+          data: {
+            expandLines: () => {},
+            getLine,
+            getResmokeLineColor: () => undefined,
+            scrollToLine: setScrollIndex,
+            range: { lowerRange: 0 },
+            wrap: args.wrap,
+            searchTerm: /p=debug/,
+            highlightedLine: args.highlightedLine,
+          },
+          processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
-          processedLines: processedLogLines,
-          wrap: args.wrap,
-          searchTerm: /p=debug/,
-          highlightedLine: args.highlightedLine,
         })}
         scrollToIndex={scrollIndex}
         wrap={args.wrap}

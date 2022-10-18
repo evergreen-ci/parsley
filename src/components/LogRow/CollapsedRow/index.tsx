@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useTransition } from "react";
 import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
@@ -12,29 +12,36 @@ const { gray, black } = palette;
 
 const SKIP_NUMBER = 5;
 
-const CollapsedRow = forwardRef<any, BaseRowProps>((props, ref) => {
-  const { data, listRowProps } = props;
-  const { processedLines, expandLines } = data;
-  const { index } = listRowProps;
+interface CollapsedRowProps extends BaseRowProps {
+  collapsedLines: number[];
+}
 
-  const line = processedLines[index] as number[];
-  const numCollapsed = line.length;
-  const start = line[0];
-  const end = line[line.length - 1];
+const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
+  const { collapsedLines, data, listRowProps } = props;
+  const { expandLines } = data;
+
+  const numCollapsed = collapsedLines.length;
+  const start = collapsedLines[0];
+  const end = collapsedLines[collapsedLines.length - 1];
 
   const lineText =
     numCollapsed !== 1 ? `${numCollapsed} lines skipped` : "1 line skipped";
   const disableExpandFive = 2 * SKIP_NUMBER > numCollapsed;
 
-  const expandFive = () => {
-    expandLines([
-      [start, start + (SKIP_NUMBER - 1)],
-      [end - (SKIP_NUMBER - 1), end],
-    ]);
-  };
+  const [, startTransition] = useTransition();
 
+  const expandFive = () => {
+    startTransition(() => {
+      expandLines([
+        [start, start + (SKIP_NUMBER - 1)],
+        [end - (SKIP_NUMBER - 1), end],
+      ]);
+    });
+  };
   const expandAll = () => {
-    expandLines([[start, end]]);
+    startTransition(() => {
+      expandLines([[start, end]]);
+    });
   };
 
   return (

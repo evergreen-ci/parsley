@@ -5,28 +5,48 @@ import {
   ListRowRenderer,
 } from "react-virtualized";
 import { LogTypes } from "constants/enums";
+import { ProcessedLogLines } from "types/logs";
+import { isCollapsedRow } from "utils/collapsedRow";
 import AnsiiRow from "../AnsiiRow";
 import CollapsedRow from "../CollapsedRow";
 import ResmokeRow from "../ResmokeRow";
 import { RowData } from "../types";
 
-type RowRendererFunction = (data: RowData) => ListRowRenderer;
+type RowRendererFunction = (props: {
+  data: RowData;
+  processedLogLines: ProcessedLogLines;
+  logType: LogTypes;
+}) => ListRowRenderer;
 
-const RowRenderer: RowRendererFunction = (data) => {
-  const { logType, processedLines } = data;
+const RowRenderer: RowRendererFunction = (props) => {
+  const { logType, processedLogLines, data } = props;
 
-  const result = (props: ListRowProps) => {
-    const { index, key, parent } = props;
-
-    const Row = Array.isArray(processedLines[index])
-      ? CollapsedRow
-      : rowRendererMap[logType];
+  const result = (listRowProps: ListRowProps) => {
+    const { index, key, parent } = listRowProps;
 
     return (
       <CellMeasurer key={key} cache={cache} parent={parent} rowIndex={index}>
-        {({ registerChild }) => (
-          <Row ref={registerChild} data={data} listRowProps={props} />
-        )}
+        {({ registerChild }) => {
+          if (isCollapsedRow(processedLogLines[index])) {
+            return (
+              <CollapsedRow
+                ref={registerChild}
+                collapsedLines={processedLogLines[index] as number[]}
+                data={data}
+                listRowProps={listRowProps}
+              />
+            );
+          }
+          const Row = rowRendererMap[logType];
+          return (
+            <Row
+              ref={registerChild}
+              data={data}
+              lineNumber={processedLogLines[index] as number}
+              listRowProps={listRowProps}
+            />
+          );
+        }}
       </CellMeasurer>
     );
   };

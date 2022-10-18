@@ -1,4 +1,3 @@
-import { LogTypes } from "constants/enums";
 import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen, userEvent } from "test_utils";
 import CollapsedRow from ".";
@@ -15,7 +14,11 @@ describe("collapsedRow", () => {
 
   it("renders a collapsed log line", () => {
     renderWithRouterMatch(
-      <CollapsedRow data={data} listRowProps={listRowProps} />,
+      <CollapsedRow
+        collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
+        data={data}
+        listRowProps={listRowProps}
+      />,
       {
         wrapper: wrapper(logLines),
       }
@@ -27,6 +30,7 @@ describe("collapsedRow", () => {
     const expandLines = jest.fn();
     renderWithRouterMatch(
       <CollapsedRow
+        collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         data={{ ...data, expandLines }}
         listRowProps={listRowProps}
       />,
@@ -50,6 +54,7 @@ describe("collapsedRow", () => {
     const expandLines = jest.fn();
     renderWithRouterMatch(
       <CollapsedRow
+        collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         data={{ ...data, expandLines }}
         listRowProps={listRowProps}
       />,
@@ -68,9 +73,9 @@ describe("collapsedRow", () => {
   it("should disable the `Expand 5 Above and Below` button if there are less than 10 log lines in the collapsed row", async () => {
     renderWithRouterMatch(
       <CollapsedRow
+        collapsedLines={[0, 1, 2]}
         data={{
           ...data,
-          processedLines: [[0, 1, 2], 3, 4, 5, 6, 7, 8, 9, 10],
         }}
         listRowProps={listRowProps}
       />,
@@ -118,8 +123,6 @@ const data = {
   getResmokeLineColor: jest.fn(),
 
   expandedLines: [],
-  logType: LogTypes.RESMOKE_LOGS,
-  processedLines: [[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]],
   range: { lowerRange: 0 },
   wrap: false,
 };

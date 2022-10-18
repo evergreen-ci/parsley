@@ -75,16 +75,18 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
             initialScrollIndex={initialScrollIndex}
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
-              expandLines,
-              getLine,
-              scrollToLine,
-              getResmokeLineColor,
-              highlightedLine,
+              data: {
+                expandLines,
+                getLine,
+                scrollToLine,
+                getResmokeLineColor,
+                highlightedLine,
+                range,
+                searchTerm,
+                wrap,
+              },
+              processedLogLines,
               logType,
-              processedLines: processedLogLines,
-              range,
-              searchTerm,
-              wrap,
             })}
             wrap={wrap}
           />

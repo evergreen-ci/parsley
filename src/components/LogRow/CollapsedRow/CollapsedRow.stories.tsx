@@ -40,16 +40,18 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          expandLines,
-          getLine: (index: number) => ansiiLogLines[index],
-          getResmokeLineColor: () => undefined,
-          scrollToLine: () => {},
-          highlightedLine: args.highlightedLine,
+          data: {
+            expandLines,
+            getLine: (index: number) => ansiiLogLines[index],
+            getResmokeLineColor: () => undefined,
+            scrollToLine: () => {},
+            highlightedLine: args.highlightedLine,
+            range: { lowerRange: 0 },
+            searchTerm: /p=debug/,
+            wrap: args.wrap,
+          },
+          processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
-          processedLines: processedLogLines,
-          range: { lowerRange: 0 },
-          searchTerm: /p=debug/,
-          wrap: args.wrap,
         })}
         wrap={args.wrap}
       />
@@ -88,16 +90,18 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          expandLines,
-          getLine: (index: number) => resmokeLogLines[index],
-          getResmokeLineColor: () => undefined,
-          scrollToLine: () => {},
-          highlightedLine: args.highlightedLine,
+          data: {
+            expandLines,
+            getLine: (index: number) => resmokeLogLines[index],
+            getResmokeLineColor: () => undefined,
+            scrollToLine: () => {},
+            highlightedLine: args.highlightedLine,
+            range: { lowerRange: 0 },
+            searchTerm: /mongod/,
+            wrap: args.wrap,
+          },
+          processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
-          processedLines: processedLogLines,
-          range: { lowerRange: 0 },
-          searchTerm: /mongod/,
-          wrap: args.wrap,
         })}
         wrap={args.wrap}
       />

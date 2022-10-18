@@ -25,11 +25,10 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
       getLine,
       getResmokeLineColor: () => undefined,
       scrollToLine: () => undefined,
-      logType: LogTypes.RESMOKE_LOGS,
-      processedLines: processedLogLines,
       range: { lowerRange: 0 },
       wrap: args.wrap,
     }}
+    lineNumber={0}
     listRowProps={{
       index: 2,
       style: {},
@@ -63,16 +62,18 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          expandLines: () => undefined,
-          getLine,
-          getResmokeLineColor: () => undefined,
-          scrollToLine: setScrollIndex,
+          data: {
+            expandLines: () => undefined,
+            getLine,
+            getResmokeLineColor: () => undefined,
+            scrollToLine: setScrollIndex,
+            range: { lowerRange: 0 },
+            wrap: args.wrap,
+            searchTerm: /mongod/,
+            highlightedLine: args.highlightedLine,
+          },
+          processedLogLines,
           logType: LogTypes.RESMOKE_LOGS,
-          processedLines: processedLogLines,
-          range: { lowerRange: 0 },
-          wrap: args.wrap,
-          searchTerm: /mongod/,
-          highlightedLine: args.highlightedLine,
         })}
         scrollToIndex={scrollIndex}
         wrap={args.wrap}
@@ -100,16 +101,18 @@ const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          expandLines: () => undefined,
-          getLine,
-          getResmokeLineColor: (lineNumber: number) => colorList[lineNumber],
-          scrollToLine: setScrollIndex,
-          highlightedLine: args.highlightedLine,
+          data: {
+            expandLines: () => undefined,
+            getLine,
+            getResmokeLineColor: (lineNumber: number) => colorList[lineNumber],
+            scrollToLine: setScrollIndex,
+            highlightedLine: args.highlightedLine,
+            range: { lowerRange: 0 },
+            searchTerm: /mongod/,
+            wrap: args.wrap,
+          },
+          processedLogLines,
           logType: LogTypes.RESMOKE_LOGS,
-          processedLines: processedLogLines,
-          range: { lowerRange: 0 },
-          searchTerm: /mongod/,
-          wrap: args.wrap,
         })}
         scrollToIndex={scrollIndex}
         wrap={args.wrap}

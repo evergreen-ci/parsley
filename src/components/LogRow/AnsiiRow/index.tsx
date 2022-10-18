@@ -7,28 +7,23 @@ import { isLineInRange } from "../utils";
 
 const ansiUp = new AnsiUp();
 
-const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
-  const { data, listRowProps } = rowProps;
-  const { index } = listRowProps;
-  const {
-    getLine,
-    wrap,
-    processedLines,
-    searchTerm,
-    range,
-    highlightedLine,
-    scrollToLine,
-  } = data;
+interface AnsiiRowProps extends BaseRowProps {
+  lineNumber: number;
+}
 
-  const line = processedLines[index] as number;
-  const lineContent = getLine(line) || "";
+const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
+  const { data, listRowProps, lineNumber } = rowProps;
+  const { getLine, wrap, searchTerm, range, highlightedLine, scrollToLine } =
+    data;
+
+  const lineContent = getLine(lineNumber) || "";
   const linkifiedLine = linkifyHtml(ansiUp.ansi_to_html(lineContent), {
     validate: {
       url: (value: string) => /^(http)s?:\/\//.test(value),
     },
   });
 
-  const inRange = isLineInRange(range, line);
+  const inRange = isLineInRange(range, lineNumber);
   return lineContent ? (
     <BaseRow
       wrap={wrap}
@@ -36,7 +31,7 @@ const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       ref={ref}
       data-cy="ansii-row"
       highlightedLine={highlightedLine}
-      lineNumber={line}
+      lineNumber={lineNumber}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}
     >
