@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
-    "build": "tsc && GIT_SHA=`git rev-parse HEAD` vite build",
+    "build": "tsc && . ./scripts/appVersion.sh && GIT_SHA=`git rev-parse HEAD` vite build",
     "build:local": "env-cmd -e local yarn build",
     "build:beta": "env-cmd -e beta yarn build",
     "build:staging": "env-cmd -e staging yarn build",
