@@ -38,6 +38,10 @@ enum CharKey {
   ArrowLeft = "ArrowLeft",
   ArrowRight = "ArrowRight",
   ArrowUp = "ArrowUp",
+  ForwardSlash = "/",
+  Period = ".",
+  Comma = ",",
+  Semicolon = ";",
 }
 
 export { ModifierKey, CharKey };

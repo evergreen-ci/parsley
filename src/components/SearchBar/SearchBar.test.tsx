@@ -2,12 +2,6 @@ import { render, screen, userEvent } from "test_utils";
 import SearchBar from ".";
 
 describe("searchbar", () => {
-  let user: ReturnType<typeof userEvent.setup>;
-
-  beforeEach(() => {
-    user = userEvent.setup();
-  });
-
   afterEach(() => {
     jest.useRealTimers();
   });
@@ -18,8 +12,10 @@ describe("searchbar", () => {
     expect(screen.getByDataCy("searchbar-input")).toBeDisabled();
   });
   it("should be able to submit an input by pressing enter", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     render(<SearchBar onSubmit={onSubmit} />);
+
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
@@ -28,8 +24,10 @@ describe("searchbar", () => {
     expect(onSubmit).toHaveBeenCalledWith("search", "test");
   });
   it("should be able to submit an input by clicking the submit button", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     render(<SearchBar onSubmit={onSubmit} />);
+
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
@@ -38,8 +36,10 @@ describe("searchbar", () => {
     expect(onSubmit).toHaveBeenCalledWith("search", "test");
   });
   it("shows a warning icon if input is invalid", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     render(<SearchBar onSubmit={onSubmit} validator={(i) => i.length > 5} />);
+
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
@@ -48,8 +48,10 @@ describe("searchbar", () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
   it("invalid inputs should not submit", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     render(<SearchBar onSubmit={onSubmit} validator={(i) => i.length > 5} />);
+
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     await user.type(input, "{enter}");
@@ -57,8 +59,10 @@ describe("searchbar", () => {
     expect(onSubmit).not.toHaveBeenCalled();
   });
   it("should be able to change the selected option", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     render(<SearchBar onSubmit={onSubmit} />);
+
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
@@ -75,8 +79,10 @@ describe("searchbar", () => {
     expect(onSubmit).toHaveBeenCalledWith("search", "test");
   });
   it("should not clear input if a user is searching", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     render(<SearchBar onSubmit={onSubmit} validator={() => true} />);
+
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     await user.type(input, "{enter}");
@@ -84,8 +90,10 @@ describe("searchbar", () => {
     expect(onSubmit).toHaveBeenCalledWith("search", "test");
   });
   it("should clear input if a user is applying a filter and should reset search", async () => {
+    const user = userEvent.setup();
     const onSubmit = jest.fn();
     render(<SearchBar onSubmit={onSubmit} validator={() => true} />);
+
     const input = screen.getByDataCy("searchbar-input");
     await user.click(screen.getByDataCy("searchbar-select"));
     await user.click(screen.getByDataCy("filter-option"));
@@ -96,9 +104,10 @@ describe("searchbar", () => {
   });
   it("should call a debounced onChange as input changes", async () => {
     jest.useFakeTimers();
-    user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     const onChange = jest.fn();
     render(<SearchBar onChange={onChange} />);
+
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
@@ -108,9 +117,10 @@ describe("searchbar", () => {
   });
   it("should not call onChange if input is invalid", async () => {
     jest.useFakeTimers();
-    user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     const onChange = jest.fn();
     render(<SearchBar onChange={onChange} validator={(i) => i.length > 4} />);
+
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
@@ -123,6 +133,7 @@ describe("searchbar", () => {
     expect(onChange).toHaveBeenCalledWith("search", "test1");
   });
   it("pressing Control+F puts focus on the input", async () => {
+    const user = userEvent.setup();
     render(<SearchBar onSubmit={jest.fn()} />);
 
     const input = screen.getByDataCy("searchbar-input");
@@ -132,6 +143,7 @@ describe("searchbar", () => {
     expect(input).toHaveFocus();
   });
   it("pressing Command+F puts focus on the input", async () => {
+    const user = userEvent.setup();
     render(<SearchBar onSubmit={jest.fn()} />);
 
     const input = screen.getByDataCy("searchbar-input");

@@ -39,7 +39,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const inputRef = useRef<HTMLInputElement>(null);
 
   useKeyboardShortcut(
-    [ModifierKey.Control, CharKey.F],
+    { charKey: CharKey.F, modifierKeys: [ModifierKey.Control] },
     () => {
       if (inputRef.current) inputRef.current.focus();
     },
@@ -47,7 +47,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   );
 
   useKeyboardShortcut(
-    [ModifierKey.Control, CharKey.S],
+    { charKey: CharKey.S, modifierKeys: [ModifierKey.Control] },
     () =>
       selected === SearchBarActions.Search
         ? setSelected(SearchBarActions.Filter)

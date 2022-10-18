@@ -10,7 +10,10 @@ describe("useKeyboardShortcut", () => {
     it("should call the callback only when the exact shortcut keys are pressed", async () => {
       const callback = jest.fn();
       renderHook(() =>
-        useKeyboardShortcut([ModifierKey.Control, CharKey.A], callback)
+        useKeyboardShortcut(
+          { charKey: CharKey.A, modifierKeys: [ModifierKey.Control] },
+          callback
+        )
       );
       await user.keyboard("{Control}");
       expect(callback).toHaveBeenCalledTimes(0);
@@ -25,7 +28,10 @@ describe("useKeyboardShortcut", () => {
     it("should not call the callback if an input element has focus", async () => {
       const callback = jest.fn();
       renderHook(() =>
-        useKeyboardShortcut([ModifierKey.Control, CharKey.A], callback)
+        useKeyboardShortcut(
+          { charKey: CharKey.A, modifierKeys: [ModifierKey.Control] },
+          callback
+        )
       );
       render(<input data-cy="test-input" />);
 
@@ -40,7 +46,7 @@ describe("useKeyboardShortcut", () => {
   describe("single key", () => {
     it("should call the callback only when the exact shortcut key is pressed", async () => {
       const callback = jest.fn();
-      renderHook(() => useKeyboardShortcut(CharKey.A, callback));
+      renderHook(() => useKeyboardShortcut({ charKey: CharKey.A }, callback));
       await user.keyboard("{Control>}{A}{/Control}");
       expect(callback).toHaveBeenCalledTimes(0);
       await user.keyboard("{Control>}{Shift>}{a}{/Control}{/Shift}");
@@ -51,7 +57,7 @@ describe("useKeyboardShortcut", () => {
 
     it("should not call the callback if an input element has focus", async () => {
       const callback = jest.fn();
-      renderHook(() => useKeyboardShortcut(CharKey.A, callback));
+      renderHook(() => useKeyboardShortcut({ charKey: CharKey.A }, callback));
       render(<input data-cy="test-input" />);
 
       await user.click(screen.getByDataCy("test-input"));
@@ -65,9 +71,13 @@ describe("useKeyboardShortcut", () => {
   it("should call the callback if an input element has focus and overrideIgnore is enabled", async () => {
     const callback = jest.fn();
     renderHook(() =>
-      useKeyboardShortcut([ModifierKey.Control, CharKey.A], callback, {
-        overrideIgnore: true,
-      })
+      useKeyboardShortcut(
+        { charKey: CharKey.A, modifierKeys: [ModifierKey.Control] },
+        callback,
+        {
+          overrideIgnore: true,
+        }
+      )
     );
     render(<input data-cy="test-input" />);
     await user.click(screen.getByDataCy("test-input"));
@@ -79,9 +89,13 @@ describe("useKeyboardShortcut", () => {
   it("should not call the callback if the component is disabled", async () => {
     const callback = jest.fn();
     renderHook(() =>
-      useKeyboardShortcut([ModifierKey.Control, CharKey.A], callback, {
-        disabled: true,
-      })
+      useKeyboardShortcut(
+        { charKey: CharKey.A, modifierKeys: [ModifierKey.Control] },
+        callback,
+        {
+          disabled: true,
+        }
+      )
     );
     await user.keyboard("{a}");
     expect(callback).toHaveBeenCalledTimes(0);
@@ -99,7 +113,9 @@ describe("useKeyboardShortcut", () => {
 
     const { rerender: rerenderHook } = renderHook(
       (args: { disabled: boolean } = { disabled: false }) =>
-        useKeyboardShortcut([CharKey.A], jest.fn(), { disabled: args.disabled })
+        useKeyboardShortcut({ charKey: CharKey.A }, jest.fn(), {
+          disabled: args.disabled,
+        })
     );
     expect(mockedAddEventListener).toHaveBeenCalledTimes(1);
 

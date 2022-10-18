@@ -1,5 +1,11 @@
 import { useCallback, useEffect, useRef } from "react";
 import { CharKey, ModifierKey } from "constants/keys";
+import { arraySymmetricDifference } from "utils/array";
+
+type ShortcutKeys = {
+  modifierKeys?: ModifierKey[];
+  charKey: CharKey;
+};
 
 type UseKeyboardShortcutOptions = {
   disabled?: boolean;
@@ -11,10 +17,14 @@ type UseKeyboardShortcutOptions = {
 const INPUT_ELEMENTS = ["INPUT", "TEXTAREA", "SELECT"];
 
 const useKeyboardShortcut = (
-  shortcutKeys: (ModifierKey | CharKey)[] | CharKey,
+  keys: ShortcutKeys,
   cb: () => void,
   options: UseKeyboardShortcutOptions = {}
 ) => {
+  if (!keys.modifierKeys?.length && !keys.charKey) {
+    throw new Error("Must provide at least one key.");
+  }
+
   // We wrap the callback to prevent triggering unnecessary useEffect.
   const cbRef = useRef(cb);
   cbRef.current = cb;
@@ -25,43 +35,33 @@ const useKeyboardShortcut = (
     overrideIgnore = false,
   } = options;
 
-  const isShortcutPressed = useCallback(
-    (event: KeyboardEvent) => {
-      if (typeof shortcutKeys === "string") {
-        return (
-          shortcutKeys === event.key &&
-          !event.metaKey &&
-          !event.ctrlKey &&
-          !event.shiftKey &&
-          !event.altKey
-        );
-      }
-
-      const shouldControl = shortcutKeys.includes(ModifierKey.Control);
-      if (shouldControl && !event.ctrlKey && !event.metaKey) return false;
-      if (!shouldControl && (event.ctrlKey || event.metaKey)) return false;
-
-      const shouldAlt = shortcutKeys.includes(ModifierKey.Alt);
-      if (shouldAlt && !event.altKey) return false;
-      if (!shouldAlt && event.altKey) return false;
-
-      const shouldShift = shortcutKeys.includes(ModifierKey.Shift);
-      if (shouldShift && !event.shiftKey) return false;
-      if (!shouldShift && event.shiftKey) return false;
-
-      return shortcutKeys[shortcutKeys.length - 1] === event.key;
-    },
-    [shortcutKeys]
-  );
+  const areExactModifierKeysPressed = (
+    event: KeyboardEvent,
+    modifierKeys: ModifierKey[]
+  ): boolean => {
+    const pressedModifierKeys: ModifierKey[] = [
+      ...(event.ctrlKey || event.metaKey ? [ModifierKey.Control] : []),
+      ...(event.altKey ? [ModifierKey.Alt] : []),
+      ...(event.shiftKey ? [ModifierKey.Shift] : []),
+    ];
+    return (
+      arraySymmetricDifference(pressedModifierKeys, modifierKeys).length === 0
+    );
+  };
 
   const handleKeydown = useCallback(
     (event: KeyboardEvent) => {
-      const shortcutPressed = isShortcutPressed(event);
+      const exactModifierKeysPressed = areExactModifierKeysPressed(
+        event,
+        keys.modifierKeys ?? []
+      );
+      const charKeyPressed = event.key === keys.charKey;
+
       const shouldExecute =
         overrideIgnore ||
         !INPUT_ELEMENTS.includes((event.target as HTMLElement).tagName);
 
-      if (shortcutPressed) {
+      if (exactModifierKeysPressed && charKeyPressed) {
         if (shouldExecute) {
           // Prevent browser default behavior.
           if (preventDefault) {
@@ -71,7 +71,7 @@ const useKeyboardShortcut = (
         }
       }
     },
-    [isShortcutPressed, preventDefault, overrideIgnore]
+    [keys, preventDefault, overrideIgnore]
   );
 
   useEffect(() => {
