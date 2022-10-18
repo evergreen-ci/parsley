@@ -46,7 +46,7 @@ const NavBar: React.FC = () => {
   return (
     <Container>
       <FlexContainer>
-        <Logo glyph="ParsleyLogo" size={32} useStroke />
+        <Logo glyph="ParsleyLogo" size={24} useStroke />
         <LinkContainer>
           <StyledLink href="https://wiki.corp.mongodb.com">Wiki</StyledLink>
           <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
