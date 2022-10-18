@@ -22,6 +22,7 @@ describe("searchbar", () => {
     await user.type(input, "{enter}");
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith("search", "test");
+    expect(input).not.toHaveFocus();
   });
   it("should be able to submit an input by clicking the submit button", async () => {
     const user = userEvent.setup();

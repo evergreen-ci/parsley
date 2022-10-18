@@ -43,7 +43,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     () => {
       if (inputRef.current) inputRef.current.focus();
     },
-    { disabled }
+    { disabled, overrideIgnore: true }
   );
 
   useKeyboardShortcut(
@@ -56,6 +56,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
   );
 
   const handleOnSubmit = () => {
+    if (inputRef.current) {
+      inputRef.current.blur();
+    }
     if (isFilter) {
       setInput("");
     }

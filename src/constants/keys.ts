@@ -42,6 +42,8 @@ enum CharKey {
   Period = ".",
   Comma = ",",
   Semicolon = ";",
+  QuestionMark = "?",
+  ExclamationMark = "!",
 }
 
 export { ModifierKey, CharKey };
