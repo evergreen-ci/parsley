@@ -9,6 +9,7 @@ interface BaseRowProps {
 
 interface RowData {
   getLine: (index: number) => string | undefined;
+  getResmokeLineColor: (index: number) => string | undefined;
   scrollToLine: (lineNumber: number) => void;
   wrap: boolean;
   processedLines: ProcessedLogLines;

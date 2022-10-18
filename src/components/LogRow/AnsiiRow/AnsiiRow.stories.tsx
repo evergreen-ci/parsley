@@ -23,7 +23,8 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
       processedLines: processedLogLines,
       logType: LogTypes.EVERGREEN_TASK_LOGS,
       range: { lowerRange: 0 },
-      scrollToLine: () => {},
+      scrollToLine: () => undefined,
+      getResmokeLineColor: () => undefined,
     }}
     listRowProps={{
       index: 0,
@@ -63,6 +64,9 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
           logType: LogTypes.EVERGREEN_TASK_LOGS,
           processedLines: processedLogLines,
           wrap: args.wrap,
+          searchTerm: /p=debug/,
+          highlightedLine: args.highlightedLine,
+          getResmokeLineColor: () => undefined,
         })}
         scrollToIndex={scrollIndex}
         wrap={args.wrap}
@@ -74,6 +78,7 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
 export const MultiLines = MultiLineTemplate.bind({});
 MultiLines.args = {
   wrap: false,
+  highlightedLine: 0,
 };
 
 // Multiple AnsiiRows with CollapsedRows.
@@ -96,6 +101,9 @@ const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => {
           processedLines: collapsedProcessedLogLines,
           wrap: args.wrap,
           range: { lowerRange: 0 },
+          searchTerm: /p=debug/,
+          highlightedLine: args.highlightedLine,
+          getResmokeLineColor: () => undefined,
         })}
         scrollToIndex={scrollIndex}
         wrap={args.wrap}
@@ -108,6 +116,7 @@ export const Collapsed = CollapsedTemplate.bind({});
 
 Collapsed.args = {
   wrap: false,
+  highlightedLine: 0,
 };
 
 const logLines = [

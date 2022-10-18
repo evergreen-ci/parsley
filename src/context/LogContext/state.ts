@@ -1,10 +1,11 @@
 import { useReducer } from "react";
 import { LogTypes } from "constants/enums";
-import { processResmokeLine } from "utils/resmoke";
+import { getColorMapping, processResmokeLine } from "utils/resmoke";
 import { LogMetadata, SearchState } from "./types";
 
 interface LogState {
   logs: string[];
+  colorMapping?: Record<string, string>;
   logMetadata?: LogMetadata;
   lineNumber?: number;
   searchState: SearchState;
@@ -33,12 +34,34 @@ const initialState = (initialLogLines?: string[]): LogState => ({
 const reducer = (state: LogState, action: Action): LogState => {
   switch (action.type) {
     case "INGEST_LOGS": {
-      let processedLogs = action.logs;
+      let processedLogs;
+      let colorMap;
       switch (action.logType) {
-        case LogTypes.RESMOKE_LOGS:
-          processedLogs = action.logs.map(processResmokeLine);
+        case LogTypes.RESMOKE_LOGS: {
+          const transformedLogs = action.logs.reduce(
+            (acc, logLine) => {
+              const processedLogLine = processResmokeLine(logLine);
+              const colorMapping = getColorMapping(
+                processedLogLine,
+                acc.colorMap
+              );
+              if (colorMapping) {
+                acc.colorMap[colorMapping.portOrState] = colorMapping.color;
+              }
+              acc.processedLogs.push(processedLogLine);
+              return acc;
+            },
+            {
+              colorMap: {} as Record<string, string>,
+              processedLogs: [] as string[],
+            }
+          );
+          processedLogs = transformedLogs.processedLogs;
+          colorMap = transformedLogs.colorMap;
           break;
+        }
         default:
+          processedLogs = action.logs;
           break;
       }
       return {
@@ -47,6 +70,7 @@ const reducer = (state: LogState, action: Action): LogState => {
         logMetadata: {
           ...state.logMetadata,
           logType: action.logType,
+          colorMapping: colorMap,
         },
       };
     }
