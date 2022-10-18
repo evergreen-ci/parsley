@@ -10,6 +10,7 @@ import { HAS_OPENED_DRAWER } from "constants/cookies";
 import { QueryParams } from "constants/queryParams";
 import { size, zIndex } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { leaveBreadcrumb } from "utils/errorReporting";
 import Filter from "./Filter";
 
 const { green, gray } = palette;
@@ -31,6 +32,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
   const deleteFilter = (filterName: string) => {
     const newFilters = filters.filter((f) => f !== filterName);
     setFilters(newFilters);
+    leaveBreadcrumb("delete-filter", { filterName }, "user");
   };
 
   const editFilter = (oldFilter: string, newFilter: string) => {
@@ -42,6 +44,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
     const idxToReplace = newFilters.indexOf(oldFilter);
     newFilters[idxToReplace] = newFilter;
     setFilters(newFilters);
+    leaveBreadcrumb("edit-filter", { oldFilter, newFilter }, "user");
   };
 
   return (

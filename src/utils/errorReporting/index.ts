@@ -59,4 +59,4 @@ const leaveBreadcrumb = (
   }
 };
 
-export default { leaveBreadcrumb, reportError };
+export { leaveBreadcrumb, reportError };
