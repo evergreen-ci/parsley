@@ -75,23 +75,14 @@ const getColorMapping = (
   if (!logLine) {
     return;
   }
-  let portOrState: string | undefined;
-  const port = getPort(logLine);
-  if (port) {
-    portOrState = port;
-  } else {
-    const state = getState(logLine);
-    if (state) {
-      portOrState = state;
+  const portOrState: string | undefined = getPort(logLine) ?? getState(logLine);
+  if (portOrState) {
+    if (!portColors[portOrState]) {
+      return {
+        color: colorList[Object.keys(portColors).length % colorList.length],
+        portOrState,
+      };
     }
-  }
-  if (portOrState && !portColors[portOrState]) {
-    return {
-      color: colorList[Object.keys(portColors).length % colorList.length],
-      portOrState,
-    };
-  }
-  if (portOrState && portColors[portOrState]) {
     return {
       color: portColors[portOrState],
       portOrState,

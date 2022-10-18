@@ -80,10 +80,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         return undefined;
       }
       const colorMapping = getColorMapping(lineContent, state.colorMapping);
-      if (colorMapping) {
-        return colorMapping.color;
-      }
-      return undefined;
+      return colorMapping !== undefined ? colorMapping.color : undefined;
     },
     [getLine, state.colorMapping]
   );
