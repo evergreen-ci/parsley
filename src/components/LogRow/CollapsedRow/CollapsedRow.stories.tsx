@@ -42,10 +42,13 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
         rowRenderer={RowRenderer({
           expandLines,
           getLine: (index: number) => ansiiLogLines[index],
+          getResmokeLineColor: () => undefined,
           scrollToLine: () => {},
+          highlightedLine: args.highlightedLine,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
           processedLines: processedLogLines,
           range: { lowerRange: 0 },
+          searchTerm: /p=debug/,
           wrap: args.wrap,
         })}
         wrap={args.wrap}
@@ -58,6 +61,7 @@ export const CollapsedAnsiiRow = CollapsedAnsiiTemplate.bind({});
 
 CollapsedAnsiiRow.args = {
   wrap: false,
+  highlightedLine: 0,
 };
 
 // CollapsedRow withs ResmokeRows.
@@ -86,10 +90,13 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
         rowRenderer={RowRenderer({
           expandLines,
           getLine: (index: number) => resmokeLogLines[index],
+          getResmokeLineColor: () => undefined,
           scrollToLine: () => {},
-          logType: LogTypes.RESMOKE_LOGS,
+          highlightedLine: args.highlightedLine,
+          logType: LogTypes.EVERGREEN_TASK_LOGS,
           processedLines: processedLogLines,
           range: { lowerRange: 0 },
+          searchTerm: /mongod/,
           wrap: args.wrap,
         })}
         wrap={args.wrap}
@@ -102,6 +109,7 @@ export const CollapsedResmokeRow = CollapsedResmokeTemplate.bind({});
 
 CollapsedResmokeRow.args = {
   wrap: false,
+  highlightedLine: 1,
 };
 
 const ansiiLogLines = [

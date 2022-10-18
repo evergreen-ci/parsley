@@ -115,6 +115,7 @@ const data = {
   expandLines: jest.fn(),
   getLine,
   scrollToLine: jest.fn(),
+  getResmokeLineColor: jest.fn(),
 
   expandedLines: [],
   logType: LogTypes.RESMOKE_LOGS,

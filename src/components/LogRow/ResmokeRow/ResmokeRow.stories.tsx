@@ -4,6 +4,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
+import { colorList } from "utils/resmoke";
 import ResmokeRow from ".";
 
 export default {
@@ -83,6 +84,45 @@ export const MultipleLines = MultipleLineTemplate.bind({});
 
 MultipleLines.args = {
   wrap: false,
+};
+
+const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
+  const [scrollIndex, setScrollIndex] = useState<number>(-1);
+  return (
+    <Container>
+      <LogPane
+        cache={cache}
+        expandableRows
+        expandedLines={[]}
+        filterLogic="and"
+        filters={[]}
+        initialScrollIndex={-1}
+        logLines={processedLogLines}
+        rowCount={processedLogLines.length}
+        rowRenderer={RowRenderer({
+          expandLines: () => undefined,
+          getLine,
+          getResmokeLineColor: (lineNumber: number) => colorList[lineNumber],
+          scrollToLine: setScrollIndex,
+          highlightedLine: args.highlightedLine,
+          logType: LogTypes.RESMOKE_LOGS,
+          processedLines: processedLogLines,
+          range: { lowerRange: 0 },
+          searchTerm: /mongod/,
+          wrap: args.wrap,
+        })}
+        scrollToIndex={scrollIndex}
+        wrap={args.wrap}
+      />
+    </Container>
+  );
+};
+
+export const ResmokeHighlighting = ResmokeHighlightingTemplate.bind({});
+
+ResmokeHighlighting.args = {
+  wrap: false,
+  highlightedLine: 1,
 };
 
 const logLines = [
