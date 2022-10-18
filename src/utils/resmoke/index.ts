@@ -75,7 +75,7 @@ const getColorMapping = (
   if (!logLine) {
     return;
   }
-  const portOrState: string | undefined = getPort(logLine) ?? getState(logLine);
+  const portOrState = getPort(logLine) ?? getState(logLine);
   if (portOrState) {
     if (!portColors[portOrState]) {
       return {
