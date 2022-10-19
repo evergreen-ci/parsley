@@ -143,6 +143,7 @@ describe("Filtering", () => {
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("starting{enter}");
 
+    cy.get("[data-cy^='collapsed-row-']").should("exist");
     cy.get("[data-cy^='log-row-']").each(($el) => {
       cy.wrap($el).contains("starting", { matchCase: false });
     });
@@ -154,15 +155,21 @@ describe("Filtering", () => {
     cy.dataCy("edit-filter-name").clear().type("running");
     cy.contains("button", "OK").click();
 
+    // Previous filter should no longer apply.
+    cy.contains("starting").should("not.exist");
+
     cy.get("[data-cy^='log-row-']").each(($el) => {
       cy.wrap($el).contains("running", { matchCase: false });
     });
   });
 
-  it("should preserve applied bookmarks and selected lines even if they don't match the filters", () => {
+  it("should be able to delete filters", () => {
     // Delete the filters from the drawer.
     cy.get(`[aria-label="Delete filter"]`).click();
+    cy.get("[data-cy^='collapsed-row-']").should("not.exist");
+  });
 
+  it("should preserve applied bookmarks and selected lines even if they don't match the filters", () => {
     // Select a line, with the expectation that it won't be collapsed by the filter.
     cy.dataCy("log-link-5").click();
     // Bookmark a line, with the expecation that it won't be collapsed by the filter.
@@ -171,7 +178,7 @@ describe("Filtering", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("notarealfilter{enter}");
-
+    cy.get("[data-cy^='collapsed-row-']").should("exist");
     cy.get("[data-cy^='log-row-']").each(($el) => {
       // Matched elements should be one of the bookmarked or selected values
       cy.wrap($el)
