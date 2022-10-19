@@ -5,44 +5,41 @@ import { isExpanded } from "utils/expandedRanges";
 
 type FilterLogsParams = {
   logLines: string[];
-  filters: string[];
+  matchingLines: Set<number>;
   bookmarks: number[];
   selectedLine: number | undefined;
   expandedLines: ExpandedLines;
-  filterLogic: FilterLogic;
   expandableRows: boolean;
 };
 
 /**
  * `filterLogs` processes log lines according to what filters, bookmarks, and selected line are applied.
  * @param {string[]} obj.logLines - list of strings representing the log lines
- * @param {string[]} obj.filters  - list of strings representing the filters being applied
+ * @param {string[]} obj.matchingLines - set of numbers representing which lines match the applied filters
  * @param {number[]} obj.bookmarks - list of line numbers representing bookmarks
  * @param {number | undefined} obj.selectedLine - a line number representing a selected line
  * @param {ExpandedLines} obj.expandedLines - an array of intervals representing expanded ranges
- * @param {FilterLogic} obj.filterLogic - specifies whether to use AND or OR when applying filters
  * @param {boolean} obj.expandableRows - specifies if expandable rows is enabled
  * @returns an array of numbers that indicates which log lines should be displayed, and which log lines
  * should be collapsed
  */
 export const filterLogs = ({
   logLines,
-  filters,
+  matchingLines,
   bookmarks,
   selectedLine,
   expandedLines,
-  filterLogic,
   expandableRows,
 }: FilterLogsParams): (number | number[])[] => {
   // If there are no filters or expandable rows is not enabled, then we don't have to do any
   // processing.
-  if (filters.length === 0 || !expandableRows) {
+  if (matchingLines.size === 0 || !expandableRows) {
     return logLines.map((_, idx) => idx);
   }
 
   const filteredLines: ProcessedLogLines = [];
 
-  logLines.reduce((arr, logLine, idx) => {
+  logLines.reduce((arr, _logLine, idx) => {
     // Bookmarks and selected lines should always remain uncollapsed.
     if (
       bookmarks.includes(idx) ||
@@ -54,7 +51,7 @@ export const filterLogs = ({
     }
 
     // If the line matches the filters, it should remain uncollapsed.
-    if (matchesFilter(logLine, filters, filterLogic)) {
+    if (matchingLines.has(idx)) {
       arr.push(idx);
       return arr;
     }
@@ -74,20 +71,32 @@ export const filterLogs = ({
 
 /**
  * Function that determines if a particular log line satisfies the filter conditions.
- * @param logLine - string representing a log line
+ * @param logLines - list of strings representing the log lines
  * @param filters - list of filters being applied
  * @param filterLogic - specifies whether to use AND or OR filtering
  * @returns true if filter conditions are satisfied, false otherwise
  */
-export const matchesFilter = (
-  logLine: string,
+export const getMatchingLines = (
+  logLines: string[],
   filters: string[],
   filterLogic: FilterLogic
 ) => {
-  const regexFilter =
-    filterLogic === FilterLogic.And
-      ? filters.map((f) => `(?=^.*${f})`).join("")
-      : filters.join("|");
+  const set = new Set<number>();
 
-  return new RegExp(regexFilter, "i").test(logLine);
+  if (filters.length === 0) {
+    return set;
+  }
+
+  const regexToMatch: RegExp[] = filters.map((f) => new RegExp(f, "i"));
+  logLines.forEach((line, idx) => {
+    if (filterLogic === FilterLogic.And) {
+      if (regexToMatch.every((regex) => line.match(regex))) {
+        set.add(idx);
+      }
+    } else if (regexToMatch.some((regex) => line.match(regex))) {
+      set.add(idx);
+    }
+  });
+
+  return set;
 };

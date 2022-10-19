@@ -7,7 +7,7 @@ interface BaseRowProps {
 }
 
 interface RowData {
-  expandLines: (expandedLines: ExpandedLines, index: number) => void;
+  expandLines: (expandedLines: ExpandedLines) => void;
   getLine: (index: number) => string | undefined;
   getResmokeLineColor: (index: number) => string | undefined;
   scrollToLine: (lineNumber: number) => void;

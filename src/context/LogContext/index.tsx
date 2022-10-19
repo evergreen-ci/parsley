@@ -2,10 +2,10 @@ import {
   createContext,
   useCallback,
   useContext,
-  useDeferredValue,
   useEffect,
   useMemo,
   useRef,
+  useState,
 } from "react";
 import { CellMeasurerCache, List } from "react-virtualized";
 import { cache } from "components/LogRow/RowRenderer";
@@ -13,7 +13,7 @@ import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
-import { filterLogs } from "utils/filter";
+import { filterLogs, getMatchingLines } from "utils/filter";
 import { getColorMapping } from "utils/resmoke";
 import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
@@ -38,7 +38,7 @@ interface LogContextState {
   clearExpandedLines: () => void;
   clearLogs: () => void;
   collapseLines: (idx: number) => void;
-  expandLines: (expandedLines: ExpandedLines, index: number) => void;
+  expandLines: (expandedLines: ExpandedLines) => void;
   getLine: (lineNumber: number) => string | undefined;
   getResmokeLineColor: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
@@ -82,8 +82,48 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
   const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
   const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
+
   const { state, dispatch } = useLogState(initialLogLines);
+  const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
+    []
+  );
+
   const listRef = useRef<List>(null);
+
+  const matchingLines = useMemo(
+    () => getMatchingLines(state.logs, filters, filterLogic),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [`${filters}`, state.logs.length, filterLogic]
+  );
+
+  useEffect(
+    () => {
+      setProcessedLogLines(
+        filterLogs({
+          logLines: state.logs,
+          matchingLines,
+          bookmarks,
+          selectedLine,
+          expandedLines: state.expandedLines,
+          expandableRows,
+        })
+      );
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      state.logs.length,
+      matchingLines.size,
+      `${bookmarks}`, // eslint-disable-line react-hooks/exhaustive-deps
+      `${selectedLine}`, // eslint-disable-line react-hooks/exhaustive-deps
+      `${state.expandedLines}`, // eslint-disable-line react-hooks/exhaustive-deps
+      expandableRows,
+    ]
+  );
+
+  useEffect(() => {
+    cache.clearAll();
+    listRef.current?.recomputeRowHeights();
+  }, [wrap, matchingLines.size, expandableRows]);
 
   const getLine = useCallback(
     (lineNumber: number) => state.logs[lineNumber],
@@ -111,42 +151,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       listRef.current?.scrollToRow(lineNumber);
     }, 0);
   }, []);
-
-  const deferredFilters = useDeferredValue(filters);
-  // TODO EVG-17537: more advanced filtering
-  const processedLogLines = useMemo(
-    () =>
-      filterLogs({
-        logLines: state.logs,
-        filters,
-        bookmarks,
-        selectedLine,
-        filterLogic,
-        expandedLines: state.expandedLines,
-        expandableRows,
-      }),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [
-      state.logs.length,
-      `${deferredFilters}`, // eslint-disable-line react-hooks/exhaustive-deps
-      `${bookmarks}`, // eslint-disable-line react-hooks/exhaustive-deps
-      `${state.expandedLines}`, // eslint-disable-line react-hooks/exhaustive-deps
-      selectedLine,
-      filterLogic,
-      expandableRows,
-    ]
-  );
-
-  useEffect(() => {
-    cache.clearAll();
-    listRef.current?.recomputeRowHeights();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [
-    wrap,
-    filterLogic,
-    `${deferredFilters}`, // eslint-disable-line react-hooks/exhaustive-deps
-    expandableRows,
-  ]);
 
   const searchResults = useMemo(() => {
     const results = state.searchState.searchTerm
@@ -197,14 +201,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       collapseLines: (idx: number) => dispatch({ type: "COLLAPSE_LINES", idx }),
-      expandLines: (expandedLines: ExpandedLines, index: number) => {
-        dispatch({ type: "EXPAND_LINES", expandedLines });
-        // https://github.com/bvaughn/react-virtualized/issues/842
-        for (let i = index; i < state.logs.length; i++) {
-          cache.clear(i, 0);
-        }
-        listRef.current?.recomputeRowHeights(index);
-      },
+      expandLines: (expandedLines: ExpandedLines) =>
+        dispatch({ type: "EXPAND_LINES", expandedLines }),
       getLine,
       getResmokeLineColor,
       ingestLines: (lines: string[], logType: LogTypes) => {

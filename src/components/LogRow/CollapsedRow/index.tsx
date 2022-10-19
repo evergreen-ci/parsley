@@ -19,7 +19,6 @@ interface CollapsedRowProps extends BaseRowProps {
 const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
   const { collapsedLines, data, listRowProps } = props;
   const { expandLines } = data;
-  const { index } = listRowProps;
 
   const numCollapsed = collapsedLines.length;
   const start = collapsedLines[0];
@@ -33,18 +32,15 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
 
   const expandFive = () => {
     startTransition(() => {
-      expandLines(
-        [
-          [start, start + (SKIP_NUMBER - 1)],
-          [end - (SKIP_NUMBER - 1), end],
-        ],
-        index
-      );
+      expandLines([
+        [start, start + (SKIP_NUMBER - 1)],
+        [end - (SKIP_NUMBER - 1), end],
+      ]);
     });
   };
   const expandAll = () => {
     startTransition(() => {
-      expandLines([[start, end]], index);
+      expandLines([[start, end]]);
     });
   };
 
@@ -82,8 +78,6 @@ const CollapsedLineWrapper = styled.div`
   display: flex;
   align-items: center;
   background-color: ${gray.light2}8C;
-  padding-top: ${size.xxs};
-  padding-bottom: ${size.xxs};
   padding-left: ${size.l};
 `;
 
@@ -93,6 +87,9 @@ const StyledOverline = styled<OverlineType>(Overline)`
 
 const StyledButton = styled(Button)`
   margin-left: ${size.xs};
+  max-height: ${size.s};
+  border-radius: ${size.xxs};
+  font-size: 12px;
 `;
 
 export default CollapsedRow;
