@@ -67,10 +67,10 @@ const reducer = (state: LogState, action: Action): LogState => {
       return {
         ...state,
         logs: processedLogs,
+        colorMapping: colorMap,
         logMetadata: {
           ...state.logMetadata,
           logType: action.logType,
-          colorMapping: colorMap,
         },
       };
     }
