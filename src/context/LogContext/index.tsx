@@ -112,7 +112,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       state.logs.length,
-      matchingLines.size,
+      matchingLines,
       `${bookmarks}`, // eslint-disable-line react-hooks/exhaustive-deps
       `${selectedLine}`, // eslint-disable-line react-hooks/exhaustive-deps
       `${state.expandedLines}`, // eslint-disable-line react-hooks/exhaustive-deps
@@ -123,7 +123,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   useEffect(() => {
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
-  }, [wrap, matchingLines.size, expandableRows]);
+  }, [wrap, matchingLines, expandableRows]);
 
   const getLine = useCallback(
     (lineNumber: number) => state.logs[lineNumber],

@@ -44,13 +44,10 @@ describe("collapsedRow", () => {
     expect(expandFiveButton).toBeEnabled();
     await user.click(expandFiveButton);
     expect(expandLines).toHaveBeenCalledTimes(1);
-    expect(expandLines).toHaveBeenCalledWith(
-      [
-        [0, 4],
-        [6, 10],
-      ],
-      0
-    );
+    expect(expandLines).toHaveBeenCalledWith([
+      [0, 4],
+      [6, 10],
+    ]);
   });
 
   it("should call expandLines function with the correct arguments when expanding all lines", async () => {
@@ -70,7 +67,7 @@ describe("collapsedRow", () => {
     });
     await user.click(expandFiveButton);
     expect(expandLines).toHaveBeenCalledTimes(1);
-    expect(expandLines).toHaveBeenCalledWith([[0, 10]], 0);
+    expect(expandLines).toHaveBeenCalledWith([[0, 10]]);
   });
 
   it("should disable the `Expand 5 Above and Below` button if there are less than 10 log lines in the collapsed row", async () => {

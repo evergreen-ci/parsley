@@ -5,7 +5,7 @@ import { isExpanded } from "utils/expandedRanges";
 
 type FilterLogsParams = {
   logLines: string[];
-  matchingLines: Set<number>;
+  matchingLines: Set<number> | undefined;
   bookmarks: number[];
   selectedLine: number | undefined;
   expandedLines: ExpandedLines;
@@ -33,7 +33,7 @@ export const filterLogs = ({
 }: FilterLogsParams): (number | number[])[] => {
   // If there are no filters or expandable rows is not enabled, then we don't have to do any
   // processing.
-  if (matchingLines.size === 0 || !expandableRows) {
+  if (matchingLines === undefined || !expandableRows) {
     return logLines.map((_, idx) => idx);
   }
 
@@ -84,7 +84,7 @@ export const getMatchingLines = (
   const set = new Set<number>();
 
   if (filters.length === 0) {
-    return set;
+    return undefined;
   }
 
   const regexToMatch: RegExp[] = filters.map((f) => new RegExp(f, "i"));
