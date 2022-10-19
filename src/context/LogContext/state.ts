@@ -55,10 +55,7 @@ const reducer = (state: LogState, action: Action): LogState => {
     case "SET_LOG_METADATA":
       return {
         ...state,
-        logMetadata: {
-          ...state.logMetadata,
-          ...action.logMetadata,
-        },
+        logMetadata: action.logMetadata,
       };
     case "SET_FILE_NAME":
       return {
