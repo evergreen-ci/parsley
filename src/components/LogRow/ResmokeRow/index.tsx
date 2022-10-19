@@ -2,7 +2,6 @@ import { forwardRef } from "react";
 import CollapsedRow from "components/LogRow//CollapsedRow";
 import BaseRow from "components/LogRow/BaseRow";
 import { isCollapsedRow } from "utils/collapsedRow";
-import { escapeHtml } from "utils/renderHtml/escapeHtml";
 import { BaseRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
@@ -27,7 +26,7 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
     );
   }
-  const lineContent = escapeHtml(getLine(line) || "");
+  const lineContent = getLine(line) || "";
   const color = getResmokeLineColor(line);
   const inRange = isLineInRange(range, line);
 
