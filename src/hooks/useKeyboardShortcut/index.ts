@@ -10,10 +10,10 @@ type ShortcutKeys = {
 type UseKeyboardShortcutOptions = {
   disabled?: boolean;
   preventDefault?: boolean;
-  overrideIgnore?: boolean;
+  ignoreFocus?: boolean;
 };
 
-// Used to prevent shortcuts from being activated on input elements.
+// Used to prevent shortcuts from being activated when input elements have focus.
 const INPUT_ELEMENTS = ["INPUT", "TEXTAREA", "SELECT"];
 
 const useKeyboardShortcut = (
@@ -31,8 +31,8 @@ const useKeyboardShortcut = (
 
   const {
     disabled = false,
+    ignoreFocus = false,
     preventDefault = true,
-    overrideIgnore = false,
   } = options;
 
   const areExactModifierKeysPressed = (
@@ -58,7 +58,7 @@ const useKeyboardShortcut = (
       const charKeyPressed = event.key === keys.charKey;
 
       const shouldExecute =
-        overrideIgnore ||
+        ignoreFocus ||
         !INPUT_ELEMENTS.includes((event.target as HTMLElement).tagName);
 
       if (exactModifierKeysPressed && charKeyPressed) {
@@ -71,7 +71,7 @@ const useKeyboardShortcut = (
         }
       }
     },
-    [keys, preventDefault, overrideIgnore]
+    [keys, preventDefault, ignoreFocus]
   );
 
   useEffect(() => {

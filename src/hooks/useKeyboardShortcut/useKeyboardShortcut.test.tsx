@@ -75,7 +75,7 @@ describe("useKeyboardShortcut", () => {
         { charKey: CharKey.A, modifierKeys: [ModifierKey.Control] },
         callback,
         {
-          overrideIgnore: true,
+          ignoreFocus: true,
         }
       )
     );
