@@ -7,6 +7,7 @@ import { EmotionJSX } from "@emotion/react/types/jsx-namespace";
 import {
   appVersion,
   bugsnagAPIKey,
+  isLocal,
   isProductionBuild,
   releaseStage,
 } from "utils/environmentVariables";
@@ -64,7 +65,7 @@ const getBoundary = () => {
 
 const initializeBugsnag = () => {
   // Only need to Bugsnag.start once, will throw console warnings otherwise
-  if (bugsnagStarted || !isProductionBuild) {
+  if (bugsnagStarted || !isProductionBuild || isLocal) {
     console.log("Bugsnag started");
     return;
   }

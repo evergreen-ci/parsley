@@ -1,5 +1,5 @@
 import Bugsnag, { BreadcrumbType, Event, NotifiableError } from "@bugsnag/js";
-import { isProductionBuild } from "utils/environmentVariables";
+import { isLocal, isProductionBuild } from "utils/environmentVariables";
 
 interface reportErrorResult {
   severe: () => void;
@@ -52,7 +52,7 @@ const leaveBreadcrumb = (
   metadata: { [key: string]: any },
   type: BreadcrumbType
 ) => {
-  if (!isProductionBuild) {
+  if (!isProductionBuild || isLocal) {
     console.debug({ message, metadata, type });
   } else {
     Bugsnag.leaveBreadcrumb(message, metadata, type);
