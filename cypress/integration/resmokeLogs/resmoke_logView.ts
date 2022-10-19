@@ -30,6 +30,51 @@ describe("Basic resmoke log view", () => {
   });
 });
 
+describe("Resmoke syntax highlighting", () => {
+  // Although it isn't ideal to test for a specific color, this helps us ensure that the color is consistent and deterministic.
+  const colors = {
+    black: "rgb(0, 0, 0)",
+    blue: "rgb(8, 60, 144)",
+    green: "rgb(0, 163, 92)",
+  };
+  const logLink =
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+    cy.setCookie("has-opened-drawer", "true");
+  });
+  it("should not color non resmoke log lines", () => {
+    cy.dataCy("log-row-0").within(() => {
+      cy.dataCy("resmoke-row").should("have.css", "color", colors.black);
+    });
+  });
+  it("should color similar resmoke lines with the same color", () => {
+    cy.dataCy("log-row-20").should("be.visible");
+    cy.dataCy("log-row-21").should("be.visible");
+    cy.dataCy("log-row-20").should("contain", "[j0:s0:n1]");
+    cy.dataCy("log-row-21").should("contain", "[j0:s0:n1]");
+    cy.dataCy("log-row-20").within(() => {
+      cy.dataCy("resmoke-row").should("have.css", "color", colors.blue);
+    });
+
+    cy.dataCy("log-row-21").within(() => {
+      cy.dataCy("resmoke-row").should("have.css", "color", colors.blue);
+    });
+  });
+  it("should color different resmoke lines with different colors if their resmoke state is different", () => {
+    cy.dataCy("log-row-19").should("be.visible");
+    cy.dataCy("log-row-20").should("be.visible");
+    cy.dataCy("log-row-19").should("contain", "[j0:s0:n0]");
+    cy.dataCy("log-row-20").should("contain", "[j0:s0:n1]");
+    cy.dataCy("log-row-19").within(() => {
+      cy.dataCy("resmoke-row").should("have.css", "color", colors.green);
+    });
+    cy.dataCy("log-row-20").within(() => {
+      cy.dataCy("resmoke-row").should("have.css", "color", colors.blue);
+    });
+  });
+});
 describe("Bookmarking and selecting lines", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
@@ -144,6 +189,47 @@ describe("Filtering", () => {
   });
 });
 
+describe("Jump to line", () => {
+  const logLink =
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+  });
+
+  it("should default to bookmarking 0 and the last log line on load", () => {
+    cy.location("search").should("equal", "?bookmarks=0,11079");
+    cy.dataCy("log-line-container").should("contain", "0");
+    cy.dataCy("log-line-container").should("contain", "11079");
+  });
+
+  it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
+    cy.dataCy("log-row-4").dblclick({ force: true });
+
+    cy.dataCy("log-line-11079").click();
+    cy.dataCy("log-row-11079").should("be.visible");
+    cy.dataCy("log-row-56").should("not.exist");
+
+    cy.dataCy("log-line-4").click();
+    cy.dataCy("log-row-4").should("be.visible");
+  });
+
+  it("should be able to use the sidebar to jump to a line when there are collapsed rows", () => {
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("repl_hb{enter}");
+
+    cy.dataCy("log-row-30").dblclick({ force: true });
+
+    cy.dataCy("log-line-11079").click();
+    cy.dataCy("log-row-11079").should("be.visible");
+    cy.dataCy("log-row-30").should("not.exist");
+
+    cy.dataCy("log-line-30").click();
+    cy.dataCy("log-row-30").should("be.visible");
+  });
+});
+
 describe("Searching", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
@@ -155,6 +241,7 @@ describe("Searching", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
   });
+
   it("searching for a term should highlight matching words ", () => {
     cy.dataCy("searchbar-input").type("ShardedClusterFixture:job0:mongos0 ");
     cy.dataCy("search-count").should("be.visible");
@@ -209,7 +296,6 @@ describe("Searching", () => {
       "aria-checked",
       "true"
     );
-
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "No Matches");
     cy.toggleDetailsPanel(true);
@@ -222,6 +308,7 @@ describe("Searching", () => {
     cy.toggleDetailsPanel(false);
     cy.dataCy("search-count").should("contain.text", "1/1");
   });
+
   it("should be able to paginate through search results", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("conn49");

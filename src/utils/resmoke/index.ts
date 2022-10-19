@@ -1,3 +1,4 @@
+import { palette } from "@leafygreen-ui/palette";
 import {
   getAttributes,
   getConfigServer,
@@ -8,9 +9,16 @@ import {
   getPort,
   getResmokeFunction,
   getShellPrefix,
+  getState,
   getTimeStamp,
 } from "./helpers";
 
+const { green, yellow, red, blue, purple } = palette;
+/**
+ * `processResmokeLine` takes a raw log line and transforms it to a readable resmoke line if it is a resmoke line otherwise it returns the original line
+ * @param line log line from resmoke
+ * @returns processed resmoke line or original line
+ */
 const processResmokeLine = (line: string) => {
   let logParts = line.split("|"); // in many cases mongod will insert a pipe between the metadata and json logs
   if (logParts.length !== 2) {
@@ -54,4 +62,50 @@ const processResmokeLine = (line: string) => {
   return output;
 };
 
-export { processResmokeLine };
+/**
+ * `getColorMapping` returns a mapping of colors to resmoke functions
+ * @param logLine a log line from resmoke
+ * @param portColors a map of ports to colors for already seen ports
+ * @returns a color code for the port or undefined if the line is not a resmoke line
+ */
+const getColorMapping = (
+  logLine: string,
+  portColors: Record<string, string>
+) => {
+  if (!logLine) {
+    return;
+  }
+  const portOrState = getPort(logLine) ?? getState(logLine);
+  if (portOrState) {
+    if (!portColors[portOrState]) {
+      return {
+        color: colorList[Object.keys(portColors).length % colorList.length],
+        portOrState,
+      };
+    }
+    return {
+      color: portColors[portOrState],
+      portOrState,
+    };
+  }
+  return undefined;
+};
+
+/**
+ * colorList is an array of colors that are used to color resmoke lines
+ */
+const colorList = [
+  green.dark1,
+  blue.dark2,
+  red.dark3,
+  yellow.dark2,
+  green.dark2,
+  purple.dark2,
+  blue.base,
+  green.dark3,
+  red.dark2,
+  purple.base,
+  yellow.dark3,
+];
+
+export { processResmokeLine, getColorMapping, colorList };

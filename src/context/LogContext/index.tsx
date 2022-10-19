@@ -1,10 +1,11 @@
 import { createContext, useCallback, useContext, useMemo, useRef } from "react";
 import { List } from "react-virtualized";
-import { LogTypes } from "constants/enums";
-import { FilterLogic, QueryParams } from "constants/queryParams";
+import { FilterLogic, LogTypes } from "constants/enums";
+import { QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
 import { ProcessedLogLines } from "types/logs";
 import { filterLogs } from "utils/filter";
+import { getColorMapping } from "utils/resmoke";
 import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
 import { DIRECTION, SearchState } from "./types";
@@ -24,6 +25,7 @@ interface LogContextState {
   };
   clearLogs: () => void;
   getLine: (lineNumber: number) => string | undefined;
+  getResmokeLineColor: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
   paginate: (dir: DIRECTION) => void;
   scrollToLine: (lineNumber: number) => void;
@@ -71,8 +73,25 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [state.logs.length]
   );
 
+  const getResmokeLineColor = useCallback(
+    (lineNumber: number) => {
+      const lineContent = getLine(lineNumber);
+      if (!state.colorMapping || !lineContent) {
+        return undefined;
+      }
+      const colorMapping = getColorMapping(lineContent, state.colorMapping);
+      return colorMapping !== undefined ? colorMapping.color : undefined;
+    },
+    [getLine, state.colorMapping]
+  );
+
   const scrollToLine = useCallback((lineNumber: number) => {
+    // We need to call scrollToRow twice because of https://github.com/bvaughn/react-virtualized/issues/995.
+    // When we switch to a different virtual list library we should not do this.
     listRef.current?.scrollToRow(lineNumber);
+    setTimeout(() => {
+      listRef.current?.scrollToRow(lineNumber);
+    }, 0);
   }, []);
 
   // TODO EVG-17537: more advanced filtering
@@ -130,6 +149,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       highlightedLine,
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
       getLine,
+      getResmokeLineColor,
       ingestLines: (lines: string[], logType: LogTypes) => {
         dispatch({ type: "INGEST_LOGS", logs: lines, logType });
       },
@@ -161,6 +181,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       upperRange,
       highlightedLine,
       getLine,
+      getResmokeLineColor,
       scrollToLine,
       dispatch,
       searchResults,

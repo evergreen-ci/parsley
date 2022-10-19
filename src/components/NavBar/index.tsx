@@ -46,8 +46,8 @@ const NavBar: React.FC = () => {
   return (
     <Container>
       <FlexContainer>
+        <Logo glyph="ParsleyLogo" size={24} useStroke />
         <LinkContainer>
-          <Icon glyph="LobsterLogo" />
           <StyledLink href="https://wiki.corp.mongodb.com">Wiki</StyledLink>
           <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
@@ -86,8 +86,13 @@ const Container = styled.nav`
   padding: 0 ${size.s};
 `;
 
+const Logo = styled(Icon)`
+  margin-right: ${size.m};
+`;
+
 const FlexContainer = styled.div`
   display: flex;
+  align-items: center;
 `;
 
 const LinkContainer = styled.div`

@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
+import { Body } from "@leafygreen-ui/typography";
 import { useParams } from "react-router-dom";
+import Icon from "components/Icon";
 import { LogTypes } from "constants/enums";
 import {
   getEvergreenTaskLogURL,
@@ -8,7 +10,7 @@ import {
   getResmokeLogURL,
 } from "constants/logURLTemplates";
 import { slugs } from "constants/routes";
-import { size } from "constants/tokens";
+import { fontSize, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import { useAxiosGet } from "hooks";
@@ -67,11 +69,15 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       dispatchToast.error(error);
     }
   }, [data, ingestLines, error, logType, dispatchToast]);
+
   return (
     <Container>
       {isLoading || !error ? (
         <LoadingBarContainer>
-          <LogoContainer>🌿 Loading Parsley...</LogoContainer>
+          <LogoContainer>
+            <StyledIcon glyph="ParsleyLogo" size={40} useStroke />
+            <StyledBody>Loading Parsley...</StyledBody>
+          </LogoContainer>
           <LoadingBar indeterminate />
         </LoadingBarContainer>
       ) : (
@@ -89,9 +95,36 @@ const LoadingBarContainer = styled.div`
 `;
 
 const LogoContainer = styled.div`
-  align-items: center;
   display: flex;
-  margin-bottom: ${size.xs};
+  align-items: flex-end;
+  margin-bottom: ${size.s};
+`;
+
+const StyledBody = styled(Body)`
+  font-size: ${fontSize.l};
+`;
+
+const StyledIcon = styled(Icon)`
+  margin-right: ${size.s};
+  animation: sway infinite 3s ease-in-out;
+  transform-origin: bottom;
+  @keyframes sway {
+    0% {
+      transform: rotate(0deg);
+    }
+    25% {
+      transform: rotate(-5deg);
+    }
+    50% {
+      transform: rotate(5deg);
+    }
+    75% {
+      transform: rotate(-5deg);
+    }
+    100% {
+      transform: rotate(0deg);
+    }
+  }
 `;
 
 const Container = styled.div`
