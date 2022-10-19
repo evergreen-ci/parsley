@@ -73,6 +73,22 @@ describe("buttonRow", () => {
       );
     });
   });
+  describe("job logs button", () => {
+    it("should be disabled when there is no job logs url", async () => {
+      renderWithRouterMatch(<ButtonRow />, {
+        wrapper: wrapper(logLines),
+      });
+      const jobLogsButton = screen.getByDataCy("job-logs-button");
+      expect(jobLogsButton).toHaveAttribute("aria-disabled", "true");
+      // Tooltip should appear even if button is disabled.
+      await user.hover(jobLogsButton);
+      await waitFor(() => {
+        expect(
+          screen.getByText("View all logs for this job")
+        ).toBeInTheDocument();
+      });
+    });
+  });
 });
 
 const logLines = [

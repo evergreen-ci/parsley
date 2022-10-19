@@ -105,7 +105,6 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
         justify="middle"
         trigger={
           <Button
-            as="a"
             data-cy="job-logs-button"
             disabled={!jobLogsURL}
             href={jobLogsURL}
@@ -123,7 +122,6 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
         justify="middle"
         trigger={
           <Button
-            as="a"
             data-cy="raw-log-button"
             disabled={!rawLogURL}
             href={rawLogURL}
@@ -141,7 +139,6 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
         justify="middle"
         trigger={
           <Button
-            as="a"
             data-cy="html-log-button"
             href={htmlLogURL}
             leftGlyph={<Icon glyph="Export" />}
