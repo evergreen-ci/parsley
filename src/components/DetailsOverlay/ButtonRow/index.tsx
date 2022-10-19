@@ -99,25 +99,25 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
       >
         {hasCopied ? "Copied!" : tooltipText}
       </Tooltip>
-      {jobLogsURL && (
-        <Tooltip
-          align="top"
-          justify="middle"
-          trigger={
-            <Button
-              as="a"
-              data-cy="job-logs-button"
-              href={jobLogsURL}
-              leftGlyph={<Icon glyph="Export" />}
-              target="_blank"
-            >
-              JOB LOGS
-            </Button>
-          }
-        >
-          View all logs for this job
-        </Tooltip>
-      )}
+
+      <Tooltip
+        align="top"
+        justify="middle"
+        trigger={
+          <Button
+            as="a"
+            data-cy="job-logs-button"
+            disabled={!jobLogsURL}
+            href={jobLogsURL}
+            leftGlyph={<Icon glyph="Export" />}
+            target="_blank"
+          >
+            Job Logs
+          </Button>
+        }
+      >
+        View all logs for this job
+      </Tooltip>
       <Tooltip
         align="top"
         justify="middle"
@@ -130,7 +130,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
             leftGlyph={<Icon glyph="Export" />}
             target="_blank"
           >
-            RAW
+            Raw
           </Button>
         }
       >

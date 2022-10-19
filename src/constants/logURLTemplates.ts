@@ -5,7 +5,7 @@ const getEvergreenTestLogURL = (
   taskID: string,
   execution: string,
   testID: string,
-  options: { text?: boolean; html?: boolean }
+  options: { text?: boolean }
 ) => {
   const { text } = options;
   const params = {
