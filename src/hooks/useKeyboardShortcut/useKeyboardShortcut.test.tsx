@@ -68,7 +68,7 @@ describe("useKeyboardShortcut", () => {
     });
   });
 
-  it("should call the callback if an input element has focus and overrideIgnore is enabled", async () => {
+  it("should call the callback if an input element has focus and ignoreFocus is enabled", async () => {
     const callback = jest.fn();
     renderHook(() =>
       useKeyboardShortcut(
