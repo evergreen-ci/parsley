@@ -27,11 +27,12 @@ const RowRenderer: RowRendererFunction = (props) => {
     return (
       <CellMeasurer key={key} cache={cache} parent={parent} rowIndex={index}>
         {({ registerChild }) => {
-          if (isCollapsedRow(processedLogLines[index])) {
+          const processedLogLine = processedLogLines[index];
+          if (isCollapsedRow(processedLogLine)) {
             return (
               <CollapsedRow
                 ref={registerChild}
-                collapsedLines={processedLogLines[index] as number[]}
+                collapsedLines={processedLogLine}
                 data={data}
                 listRowProps={listRowProps}
               />
@@ -42,7 +43,7 @@ const RowRenderer: RowRendererFunction = (props) => {
             <Row
               ref={registerChild}
               data={data}
-              lineNumber={processedLogLines[index] as number}
+              lineNumber={processedLogLine}
               listRowProps={listRowProps}
             />
           );

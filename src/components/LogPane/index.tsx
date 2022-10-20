@@ -1,5 +1,9 @@
+import { useEffect } from "react";
 import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
+import { cache } from "components/LogRow/RowRenderer";
+import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
+import { useQueryParam } from "hooks/useQueryParam";
 
 type LogPaneProps = Omit<
   ListProps,
@@ -15,7 +19,15 @@ const LogPane: React.FC<LogPaneProps> = ({
   initialScrollIndex,
   ...rest
 }) => {
-  const { listRef, cache } = useLogContext();
+  const { listRef, matchingLines } = useLogContext();
+
+  const [wrap] = useQueryParam(QueryParams.Wrap, false);
+  const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
+
+  useEffect(() => {
+    cache.clearAll();
+    listRef.current?.recomputeRowHeights();
+  }, [listRef, wrap, matchingLines, expandableRows]);
 
   return (
     <AutoSizer>

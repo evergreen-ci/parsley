@@ -78,7 +78,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
             />
           }
           header={
-            <NavGroupHeader data-cy="nav-group-header">
+            <NavGroupHeader data-cy="filters-nav-group-header">
               <NavGroupTitle>Filters</NavGroupTitle>
               <Badge variant={Variant.Green}>{filters.length}</Badge>
             </NavGroupHeader>
@@ -101,7 +101,6 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
           )}
         </StyledSideNavGroup>
 
-        {/* TODO: Remove below code, as it is only a proof of concept. */}
         <StyledSideNavGroup
           glyph={
             <Icon
@@ -109,25 +108,35 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
               glyph="Expand"
             />
           }
-          header="Expanded Rows"
+          header={
+            <NavGroupHeader data-cy="expanded-lines-nav-group-header">
+              <NavGroupTitle>Expanded Lines</NavGroupTitle>
+              <Badge variant={Variant.Green}>{expandedLines.length}</Badge>
+            </NavGroupHeader>
+          }
         >
           <ExpandedLineContainer>
-            {expandedLines.map((e, idx) => (
-              <ExpandedLineWrapper key={`range-${e[0]}-to-${e[1]}`}>
-                <IconButton
-                  aria-label="Delete range button"
-                  onClick={() => collapseLines(idx)}
-                >
-                  <Icon fill={green.dark2} glyph="X" />
-                </IconButton>
-                <Overline>
-                  Row {e[0]} to {e[1]}
-                </Overline>
+            {expandedLines.length ? (
+              expandedLines.map((e, idx) => (
+                <ExpandedLineWrapper key={`range-${e[0]}-to-${e[1]}`}>
+                  <IconButton
+                    aria-label="Delete range button"
+                    onClick={() => collapseLines(idx)}
+                  >
+                    <Icon fill={green.dark2} glyph="X" />
+                  </IconButton>
+                  <Overline>
+                    Row {e[0]} to {e[1]}
+                  </Overline>
+                </ExpandedLineWrapper>
+              ))
+            ) : (
+              <ExpandedLineWrapper data-cy="no-expanded-lines-message">
+                <Body>No lines have been expanded.</Body>
               </ExpandedLineWrapper>
-            ))}
+            )}
           </ExpandedLineContainer>
         </StyledSideNavGroup>
-        {/* TODO: Remove above code, as it is only a proof of concept. */}
       </PaddedContainer>
     </StyledSideNav>
   );
@@ -165,19 +174,15 @@ const FilterWrapper = styled.div`
   margin-bottom: ${size.m};
 `;
 
-const ExpandedLineWrapper = styled.div`
-  display: flex;
-  align-items: center;
-
-  width: 150px;
-  background: ${green.light2};
-  border-radius: ${size.xxs};
-`;
-
 const ExpandedLineContainer = styled.div`
   display: flex;
   flex-direction: column;
-  gap: ${size.xs};
+`;
+
+const ExpandedLineWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding-top: ${size.xxs};
 `;
 
 export default FiltersDrawer;

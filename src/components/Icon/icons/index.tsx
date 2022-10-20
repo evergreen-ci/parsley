@@ -73,13 +73,14 @@ export const ArrowWithCircle: React.ComponentType<LeafygreenIconProps> = ({
 export const Expand: React.ComponentType<LeafygreenIconProps> = ({
   className,
   fill = black,
+  size = 16,
 }) => (
   <svg
     aria-label="Expand Icon"
     className={className}
     fill="none"
-    height="16"
-    width="16"
+    height={size}
+    width={size}
     xmlns="http://www.w3.org/2000/svg"
   >
     <path

@@ -7,8 +7,7 @@ import {
   useRef,
   useState,
 } from "react";
-import { CellMeasurerCache, List } from "react-virtualized";
-import { cache } from "components/LogRow/RowRenderer";
+import { List } from "react-virtualized";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
@@ -21,13 +20,13 @@ import { DIRECTION, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
-  cache: CellMeasurerCache;
   expandedLines: ExpandedLines;
   fileName?: string;
   hasLogs: boolean;
   highlightedLine?: number;
   lineCount: number;
   listRef: React.RefObject<List>;
+  matchingLines: Set<number> | undefined;
   processedLogLines: ProcessedLogLines;
   range: {
     lowerRange: number;
@@ -68,7 +67,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   children,
   initialLogLines,
 }) => {
-  const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
   const [selectedLine] = useQueryParam<number | undefined>(
@@ -96,6 +94,10 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [`${filters}`, state.logs.length, filterLogic]
   );
 
+  const stringifiedMatchingLines = (matchingLines ?? "").toString();
+  const stringifiedBookmarks = bookmarks.toString();
+  const stringifiedExpandedLines = state.expandedLines.toString();
+
   useEffect(
     () => {
       setProcessedLogLines(
@@ -112,18 +114,13 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       state.logs.length,
-      matchingLines,
-      `${bookmarks}`, // eslint-disable-line react-hooks/exhaustive-deps
-      `${selectedLine}`, // eslint-disable-line react-hooks/exhaustive-deps
-      `${state.expandedLines}`, // eslint-disable-line react-hooks/exhaustive-deps
+      stringifiedMatchingLines,
+      stringifiedBookmarks,
+      selectedLine,
+      stringifiedExpandedLines,
       expandableRows,
     ]
   );
-
-  useEffect(() => {
-    cache.clearAll();
-    listRef.current?.recomputeRowHeights();
-  }, [wrap, matchingLines, expandableRows]);
 
   const getLine = useCallback(
     (lineNumber: number) => state.logs[lineNumber],
@@ -183,7 +180,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const memoizedContext = useMemo(
     () => ({
-      cache,
       expandedLines: state.expandedLines,
       fileName: state.fileName,
       hasLogs: !!state.logs.length,
@@ -191,6 +187,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       highlightedLine,
       lineCount: state.logs.length,
       listRef,
+      matchingLines,
       processedLogLines,
       range: {
         lowerRange,
@@ -234,6 +231,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       state.searchState,
       highlightedLine,
       lowerRange,
+      matchingLines,
       processedLogLines,
       searchResults,
       upperRange,
