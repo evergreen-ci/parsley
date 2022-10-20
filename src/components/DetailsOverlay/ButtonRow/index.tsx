@@ -2,13 +2,6 @@ import { useState } from "react";
 import Button from "@leafygreen-ui/button";
 import Tooltip from "@leafygreen-ui/tooltip";
 import Icon from "components/Icon";
-import { LogTypes } from "constants/enums";
-import { getSpruceJobLogsURL } from "constants/externalURLTemplates";
-import {
-  getEvergreenTaskLogURL,
-  getEvergreenTestLogURL,
-  getResmokeLogURL,
-} from "constants/logURLTemplates";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { LogMetadata } from "context/LogContext/types";
@@ -25,51 +18,7 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
   const { getLine } = useLogContext();
 
-  const { logType, taskID, execution, buildID, testID, origin } =
-    logMetadata || {};
-  let jobLogsURL = "";
-  let rawLogURL = "";
-  let htmlLogURL = "";
-  switch (logType) {
-    case LogTypes.RESMOKE_LOGS: {
-      if (buildID && testID) {
-        rawLogURL = getResmokeLogURL(buildID, { testID, raw: true });
-        htmlLogURL = getResmokeLogURL(buildID, { testID, html: true });
-      } else if (buildID) {
-        rawLogURL = getResmokeLogURL(buildID, { raw: true });
-        htmlLogURL = getResmokeLogURL(buildID, { html: true });
-      }
-      break;
-    }
-    case LogTypes.EVERGREEN_TASK_LOGS:
-      if (!taskID || !execution || !origin) {
-        break;
-      }
-      jobLogsURL = getSpruceJobLogsURL(taskID, execution);
-
-      rawLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
-        text: true,
-      });
-      htmlLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
-        text: false,
-      });
-      break;
-    case LogTypes.EVERGREEN_TEST_LOGS: {
-      if (!taskID || !execution || !testID) {
-        break;
-      }
-      jobLogsURL = getSpruceJobLogsURL(taskID, execution);
-      rawLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
-        text: true,
-      });
-      htmlLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
-        text: false,
-      });
-      break;
-    }
-    default:
-      break;
-  }
+  const { htmlLogURL, rawLogURL, jobLogsURL } = logMetadata || {};
   const tooltipText = bookmarks.length
     ? "Copy Jira Log Information"
     : "No bookmarks to copy.";

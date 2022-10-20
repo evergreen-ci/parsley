@@ -4,6 +4,7 @@ import { Body } from "@leafygreen-ui/typography";
 import { useParams } from "react-router-dom";
 import Icon from "components/Icon";
 import { LogTypes } from "constants/enums";
+import { getSpruceJobLogsURL } from "constants/externalURLTemplates";
 import {
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
@@ -37,10 +38,19 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
         url = getResmokeLogURL(buildID, { testID, raw: true });
-        setLogMetadata({ buildID, testID });
+        setLogMetadata({
+          buildID,
+          testID,
+          rawLogURL: url,
+          htmlLogURL: getResmokeLogURL(buildID, { testID, html: true }),
+        });
       } else if (buildID) {
         url = getResmokeLogURL(buildID, { raw: true });
-        setLogMetadata({ buildID });
+        setLogMetadata({
+          buildID,
+          rawLogURL: url,
+          htmlLogURL: getResmokeLogURL(buildID, { html: true }),
+        });
       }
       break;
     }
@@ -51,7 +61,16 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       url = getEvergreenTaskLogURL(taskID, execution, origin as any, {
         text: true,
       });
-      setLogMetadata({ taskID, execution, origin });
+      setLogMetadata({
+        taskID,
+        execution,
+        origin,
+        rawLogURL: url,
+        htmlLogURL: getEvergreenTaskLogURL(taskID, execution, origin as any, {
+          text: false,
+        }),
+        jobLogsURL: getSpruceJobLogsURL(taskID, execution),
+      });
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
@@ -59,7 +78,16 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         break;
       }
       url = getEvergreenTestLogURL(taskID, execution, testID, { text: true });
-      setLogMetadata({ taskID, execution, testID });
+      setLogMetadata({
+        taskID,
+        execution,
+        testID,
+        rawLogURL: url,
+        htmlLogURL: getEvergreenTestLogURL(taskID, execution, testID, {
+          text: false,
+        }),
+        jobLogsURL: getSpruceJobLogsURL(taskID, execution),
+      });
       break;
     }
     default:

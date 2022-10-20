@@ -16,6 +16,9 @@ interface LogMetadata {
   testID?: string;
   buildID?: string;
   origin?: string;
+  htmlLogURL?: string;
+  rawLogURL?: string;
+  jobLogsURL?: string;
 }
 
 enum DIRECTION {
