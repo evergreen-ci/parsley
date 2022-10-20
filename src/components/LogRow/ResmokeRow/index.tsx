@@ -26,7 +26,7 @@ const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
       <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
     );
   }
-  const lineContent = getLine(line);
+  const lineContent = getLine(line) || "";
   const color = getResmokeLineColor(line);
   const inRange = isLineInRange(range, line);
 
