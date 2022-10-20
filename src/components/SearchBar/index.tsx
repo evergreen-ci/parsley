@@ -1,4 +1,4 @@
-import { KeyboardEvent, useMemo, useState } from "react";
+import { KeyboardEvent, useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
@@ -7,7 +7,9 @@ import Icon from "components/Icon";
 import IconWithTooltip from "components/IconWithTooltip";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
+import { CharKey, ModifierKey } from "constants/keys";
 import { zIndex } from "constants/tokens";
+import { useKeyboardShortcut } from "hooks";
 import debounce from "utils/debounce";
 
 const { yellow } = palette;
@@ -30,15 +32,37 @@ const SearchBar: React.FC<SearchBarProps> = ({
 }) => {
   const [input, setInput] = useState("");
   const [selected, setSelected] = useState(SearchBarActions.Search);
+
   const isFilter = selected === SearchBarActions.Filter;
   const isValid = validator(input);
+
+  const inputRef = useRef<HTMLInputElement>(null);
+
+  useKeyboardShortcut(
+    { charKey: CharKey.F, modifierKeys: [ModifierKey.Control] },
+    () => {
+      if (inputRef.current) inputRef.current.focus();
+    },
+    { disabled, ignoreFocus: true }
+  );
+
+  useKeyboardShortcut(
+    { charKey: CharKey.S, modifierKeys: [ModifierKey.Control] },
+    () =>
+      selected === SearchBarActions.Search
+        ? setSelected(SearchBarActions.Filter)
+        : setSelected(SearchBarActions.Search),
+    { disabled, ignoreFocus: true }
+  );
+
   const handleOnSubmit = () => {
-    if (isValid) {
-      if (isFilter) {
-        setInput("");
-      }
-      onSubmit(selected, input);
+    if (inputRef.current) {
+      inputRef.current.blur();
     }
+    if (isFilter) {
+      setInput("");
+    }
+    onSubmit(selected, input);
   };
 
   // debounce the onChange handler to prevent excessive rerenders
@@ -81,6 +105,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </Option>
       </StyledSelect>
       <StyledInput
+        ref={inputRef}
         aria-label="searchbar-input"
         data-cy="searchbar-input"
         disabled={disabled}
@@ -89,6 +114,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
             <IconButton
               aria-label="Select plus button"
               data-cy="searchbar-submit"
+              disabled={disabled || input.length === 0}
               onClick={handleOnSubmit}
             >
               <Icon glyph="Plus" />
@@ -105,7 +131,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         }
         onChange={(e) => handleOnChange(e.target.value)}
         onKeyPress={(e: KeyboardEvent<HTMLInputElement>) =>
-          e.key === "Enter" && handleOnSubmit()
+          e.key === "Enter" && isValid && handleOnSubmit()
         }
         placeholder="optional, regexp to search"
         spellCheck={false}
