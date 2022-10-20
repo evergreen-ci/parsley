@@ -4,7 +4,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import AnsiiRow from ".";
-import { RowRenderer } from "../RowRenderer";
+import { RowRenderer, cache } from "../RowRenderer";
 
 export default {
   title: "Components/LogRow/AnsiiRow",
@@ -51,6 +51,7 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
   return (
     <Container>
       <LogPane
+        cache={cache}
         initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}

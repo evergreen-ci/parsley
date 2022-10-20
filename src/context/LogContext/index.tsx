@@ -94,7 +94,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [`${filters}`, state.logs.length, filterLogic]
   );
 
-  const stringifiedMatchingLines = (matchingLines ?? "").toString();
   const stringifiedBookmarks = bookmarks.toString();
   const stringifiedExpandedLines = state.expandedLines.toString();
 
@@ -114,7 +113,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [
       state.logs.length,
-      stringifiedMatchingLines,
+      matchingLines,
       stringifiedBookmarks,
       selectedLine,
       stringifiedExpandedLines,

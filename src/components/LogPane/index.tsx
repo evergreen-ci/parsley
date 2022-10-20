@@ -1,6 +1,11 @@
 import { useEffect } from "react";
-import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
-import { cache } from "components/LogRow/RowRenderer";
+import {
+  AutoSizer,
+  CellMeasurerCache,
+  List,
+  ListProps,
+  ListRowRenderer,
+} from "react-virtualized";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
@@ -9,11 +14,13 @@ type LogPaneProps = Omit<
   ListProps,
   "height" | "width" | "itemData" | "rowHeight"
 > & {
+  cache: CellMeasurerCache;
   initialScrollIndex: number;
   rowRenderer: ListRowRenderer;
 };
 
 const LogPane: React.FC<LogPaneProps> = ({
+  cache,
   rowRenderer,
   rowCount,
   initialScrollIndex,
@@ -27,13 +34,14 @@ const LogPane: React.FC<LogPaneProps> = ({
   useEffect(() => {
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
-  }, [listRef, wrap, matchingLines, expandableRows]);
+  }, [listRef, cache, wrap, matchingLines, expandableRows]);
 
   return (
     <AutoSizer>
       {({ height, width }) => (
         <List
           ref={listRef}
+          cache={cache}
           containerStyle={{ overflow: "scroll visible" }}
           deferredMeasurementCache={cache}
           height={height}

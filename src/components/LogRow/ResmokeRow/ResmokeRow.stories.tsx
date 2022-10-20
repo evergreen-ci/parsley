@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
-import { RowRenderer } from "components/LogRow/RowRenderer";
+import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
 import { colorList } from "utils/resmoke";
 import ResmokeRow from ".";
@@ -53,6 +53,7 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   return (
     <Container>
       <LogPane
+        cache={cache}
         initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
@@ -86,6 +87,7 @@ const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   return (
     <Container>
       <LogPane
+        cache={cache}
         initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}

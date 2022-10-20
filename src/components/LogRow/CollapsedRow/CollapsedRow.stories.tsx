@@ -26,12 +26,12 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
   const expandLines = (linesToExpand: ExpandedLines) => {
     setExpandedLines([...linesToExpand]);
     setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]);
-    cache.clear(3, 0);
   };
 
   return (
     <Container>
       <LogPane
+        cache={cache}
         initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
@@ -71,12 +71,12 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
   const expandLines = (linesToExpand: ExpandedLines) => {
     setExpandedLines([...linesToExpand]);
     setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]);
-    cache.clear(3, 0);
   };
 
   return (
     <Container>
       <LogPane
+        cache={cache}
         initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
