@@ -1,5 +1,6 @@
 import { render, screen } from "test_utils";
 import renderHtml from ".";
+import { escapeHtml } from "./escapeHtml";
 
 describe("renderHtml", () => {
   it("renders a plain string with no html", () => {
@@ -25,5 +26,15 @@ describe("renderHtml", () => {
     expect(screen.queryByDataCy("element")).not.toBeInTheDocument();
     expect(screen.getByDataCy("component")).toBeInTheDocument();
     expect(screen.queryByDataCy("component")).toHaveTextContent("✨string✨");
+  });
+});
+
+describe("escapeHtml", () => {
+  it("escapes html", () => {
+    expect(escapeHtml("<div>")).toBe("&lt;div&gt;");
+    expect(escapeHtml("<span>some text</span>")).toBe(
+      "&lt;span&gt;some text&lt;/span&gt;"
+    );
+    expect(escapeHtml("<preview>")).toBe("&lt;preview&gt;");
   });
 });

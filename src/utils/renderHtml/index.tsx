@@ -26,10 +26,15 @@ interface renderHtmlOptions extends HTMLReactParserOptions {
     [key: string]: React.ReactNode;
   };
 }
+
+const allowedTags = ["a", "span", "mark"];
 const renderHtml = (html: string = "", options: renderHtmlOptions = {}) =>
   parse(html, {
     replace: (domNode) => {
       if (domNode instanceof Element) {
+        if (!allowedTags.includes(domNode.name)) {
+          return <>&lt;{domNode.tagName}&gt;</>;
+        }
         if (options.transform && options.transform[domNode.name]) {
           const SwapComponent = options.transform[domNode.name];
           // SwapComponent is just what ever component we want to return from the transform object
