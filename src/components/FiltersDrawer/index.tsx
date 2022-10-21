@@ -1,24 +1,34 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import Badge, { Variant } from "@leafygreen-ui/badge";
+import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import { SideNav, SideNavGroup } from "@leafygreen-ui/side-nav";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, Overline } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
 import Icon from "components/Icon";
 import { HAS_OPENED_DRAWER } from "constants/cookies";
 import { QueryParams } from "constants/queryParams";
 import { size, zIndex } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { ExpandedLines } from "types/logs";
 import Filter from "./Filter";
 
 const { green, gray } = palette;
 
 interface FiltersDrawerProps {
   ["data-cy"]?: string;
+  expandedLines: ExpandedLines;
+  collapseLines: (idx: number) => void;
+  clearExpandedLines: () => void;
 }
 
-const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
+const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
+  "data-cy": dataCy,
+  expandedLines,
+  collapseLines,
+  clearExpandedLines,
+}) => {
   const [collapsed, setCollapsed] = useState(
     Cookie.get(HAS_OPENED_DRAWER) === "true"
   );
@@ -31,6 +41,10 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
   const deleteFilter = (filterName: string) => {
     const newFilters = filters.filter((f) => f !== filterName);
     setFilters(newFilters);
+
+    if (newFilters.length === 0) {
+      clearExpandedLines();
+    }
   };
 
   const editFilter = (oldFilter: string, newFilter: string) => {
@@ -64,7 +78,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
             />
           }
           header={
-            <NavGroupHeader data-cy="nav-group-header">
+            <NavGroupHeader data-cy="filters-nav-group-header">
               <NavGroupTitle>Filters</NavGroupTitle>
               <Badge variant={Variant.Green}>{filters.length}</Badge>
             </NavGroupHeader>
@@ -84,6 +98,41 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({ "data-cy": dataCy }) => {
             <FilterWrapper data-cy="no-filters-message">
               <Body>No filters have been applied.</Body>
             </FilterWrapper>
+          )}
+        </StyledSideNavGroup>
+
+        <StyledSideNavGroup
+          glyph={
+            <Icon
+              fill={expandedLines.length ? green.dark2 : gray.base}
+              glyph="Expand"
+            />
+          }
+          header={
+            <NavGroupHeader data-cy="expanded-lines-nav-group-header">
+              <NavGroupTitle>Expanded Lines</NavGroupTitle>
+              <Badge variant={Variant.Green}>{expandedLines.length}</Badge>
+            </NavGroupHeader>
+          }
+        >
+          {expandedLines.length ? (
+            expandedLines.map((e, idx) => (
+              <ExpandedLineWrapper key={`range-${e[0]}-to-${e[1]}`}>
+                <IconButton
+                  aria-label="Delete range button"
+                  onClick={() => collapseLines(idx)}
+                >
+                  <Icon fill={green.dark2} glyph="X" />
+                </IconButton>
+                <Overline>
+                  Row {e[0]} to {e[1]}
+                </Overline>
+              </ExpandedLineWrapper>
+            ))
+          ) : (
+            <ExpandedLineWrapper data-cy="no-expanded-lines-message">
+              <Body>No lines have been expanded.</Body>
+            </ExpandedLineWrapper>
           )}
         </StyledSideNavGroup>
       </PaddedContainer>
@@ -121,6 +170,12 @@ const NavGroupTitle = styled.div`
 const FilterWrapper = styled.div`
   margin-top: ${size.xs};
   margin-bottom: ${size.m};
+`;
+
+const ExpandedLineWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  padding-top: ${size.xxs};
 `;
 
 export default FiltersDrawer;

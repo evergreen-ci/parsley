@@ -1,52 +1,39 @@
 import { forwardRef } from "react";
 import AnsiUp from "ansi_up";
 import linkifyHtml from "linkify-html";
-import CollapsedRow from "components/LogRow//CollapsedRow";
 import BaseRow from "components/LogRow/BaseRow";
-import { isCollapsedRow } from "utils/collapsedRow";
 import { BaseRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
 const ansiUp = new AnsiUp();
 
-const AnsiiRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
-  const { data, listRowProps } = rowProps;
-  const {
-    getLine,
-    wrap,
-    processedLines,
-    searchTerm,
-    range,
-    highlightedLine,
-    scrollToLine,
-  } = data;
-  const { index } = listRowProps;
+interface AnsiiRowProps extends BaseRowProps {
+  lineNumber: number;
+}
 
-  const line = processedLines[index];
+const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
+  const { data, listRowProps, lineNumber } = rowProps;
+  const { getLine, scrollToLine, highlightedLine, range, searchTerm, wrap } =
+    data;
 
-  if (isCollapsedRow(line)) {
-    return (
-      <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
-    );
-  }
-  const lineContent = getLine(line) || "";
+  const lineContent = getLine(lineNumber) || "";
   const linkifiedLine = linkifyHtml(ansiUp.ansi_to_html(lineContent), {
     validate: {
       url: (value: string) => /^(http)s?:\/\//.test(value),
     },
   });
+  const inRange = isLineInRange(range, lineNumber);
 
-  const inRange = isLineInRange(range, line);
   return lineContent ? (
     <BaseRow
-      wrap={wrap}
       {...listRowProps}
       ref={ref}
       data-cy="ansii-row"
       highlightedLine={highlightedLine}
-      lineNumber={line}
+      lineNumber={lineNumber}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}
+      wrap={wrap}
     >
       {linkifiedLine}
     </BaseRow>
