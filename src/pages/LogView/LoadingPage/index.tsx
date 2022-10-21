@@ -34,23 +34,16 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const { ingestLines, setLogMetadata } = useLogContext();
 
   let url = "";
+  let htmlLogURL = "";
+  let jobLogsURL = "";
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
         url = getResmokeLogURL(buildID, { testID, raw: true });
-        setLogMetadata({
-          buildID,
-          testID,
-          rawLogURL: url,
-          htmlLogURL: getResmokeLogURL(buildID, { testID, html: true }),
-        });
+        htmlLogURL = getResmokeLogURL(buildID, { testID, html: true });
       } else if (buildID) {
         url = getResmokeLogURL(buildID, { raw: true });
-        setLogMetadata({
-          buildID,
-          rawLogURL: url,
-          htmlLogURL: getResmokeLogURL(buildID, { html: true }),
-        });
+        htmlLogURL = getResmokeLogURL(buildID, { html: true });
       }
       break;
     }
@@ -61,16 +54,10 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       url = getEvergreenTaskLogURL(taskID, execution, origin as any, {
         text: true,
       });
-      setLogMetadata({
-        taskID,
-        execution,
-        origin,
-        rawLogURL: url,
-        htmlLogURL: getEvergreenTaskLogURL(taskID, execution, origin as any, {
-          text: false,
-        }),
-        jobLogsURL: getSpruceJobLogsURL(taskID, execution),
+      htmlLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+        text: false,
       });
+      jobLogsURL = getSpruceJobLogsURL(taskID, execution);
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
@@ -78,16 +65,10 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         break;
       }
       url = getEvergreenTestLogURL(taskID, execution, testID, { text: true });
-      setLogMetadata({
-        taskID,
-        execution,
-        testID,
-        rawLogURL: url,
-        htmlLogURL: getEvergreenTestLogURL(taskID, execution, testID, {
-          text: false,
-        }),
-        jobLogsURL: getSpruceJobLogsURL(taskID, execution),
+      htmlLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
+        text: false,
       });
+      jobLogsURL = getSpruceJobLogsURL(taskID, execution);
       break;
     }
     default:
@@ -98,11 +79,36 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   useEffect(() => {
     if (data) {
       ingestLines(data.trimEnd().split("\n"), logType);
+      setLogMetadata({
+        taskID,
+        execution,
+        testID,
+        origin,
+        buildID,
+        rawLogURL: url,
+        htmlLogURL,
+        jobLogsURL,
+      });
     }
     if (error) {
       dispatchToast.error(error);
     }
-  }, [data, ingestLines, error, logType, dispatchToast]);
+  }, [
+    data,
+    ingestLines,
+    error,
+    logType,
+    dispatchToast,
+    setLogMetadata,
+    taskID,
+    execution,
+    testID,
+    origin,
+    buildID,
+    url,
+    htmlLogURL,
+    jobLogsURL,
+  ]);
 
   return (
     <Container>
