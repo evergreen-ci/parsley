@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
-    "build": "tsc && GIT_SHA=`git rev-parse HEAD` vite build",
+    "build": "tsc && . ./scripts/appVersion.sh && GIT_SHA=`git rev-parse HEAD` vite build",
     "build:local": "env-cmd -e local yarn build",
     "build:beta": "env-cmd -e beta yarn build",
     "build:staging": "env-cmd -e staging yarn build",
@@ -15,7 +15,7 @@
     "cy:run": "cypress run",
     "deploy:beta": "yarn build:beta && env-cmd -e beta yarn deploy:do-not-use",
     "deploy:staging": "yarn build:staging && env-cmd -e staging yarn deploy:do-not-use",
-    "deploy:do-not-use": "aws s3 sync dist/ s3://${BUCKET}/ --acl public-read --follow-symlinks --delete --exclude .env-cmdrc.json",
+    "deploy:do-not-use": ". ./scripts/deploy.sh",
     "dev": "env-cmd -e devLocal vite",
     "staging": "env-cmd -e devStaging vite",
     "production": "env-cmd -e devProduction vite",
@@ -29,11 +29,14 @@
     "start": "vite",
     "verify-backend": "./scripts/verify-backend.sh",
     "storybook": "start-storybook -p 6006",
-    "storybook:build": "build-storybook",
+    "storybook:build": " . ./scripts/appVersion.sh && env-cmd -e local build-storybook",
     "test": "jest --watchAll=false",
-    "test:watch": "jest --watch --verbose"
+    "test:watch": "jest --watch --verbose",
+    "upload-source-maps": "node ./scripts/upload-source-maps.js"
   },
   "dependencies": {
+    "@bugsnag/js": "7.18.0",
+    "@bugsnag/plugin-react": "7.18.0",
     "@emotion/react": "11.10.0",
     "@emotion/styled": "11.10.0",
     "@leafygreen-ui/badge": "5.0.1",
@@ -51,7 +54,7 @@
     "@leafygreen-ui/text-input": "10.1.3",
     "@leafygreen-ui/toast": "2.0.0",
     "@leafygreen-ui/toggle": "8.0.2",
-    "@leafygreen-ui/tooltip": "7.1.0",
+    "@leafygreen-ui/tooltip": "7.1.3",
     "@leafygreen-ui/typography": "13.1.1",
     "ansi_up": "5.1.0",
     "axios": "0.27.2",
@@ -68,6 +71,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
+    "@bugsnag/source-maps": "^2.3.1",
     "@emotion/babel-plugin": "11.10.0",
     "@emotion/eslint-plugin": "11.10.0",
     "@emotion/jest": "11.10.0",

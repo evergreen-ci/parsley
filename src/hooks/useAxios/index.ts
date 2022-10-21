@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
+import { leaveBreadcrumb } from "utils/errorReporting";
 
 const useAxiosGet = (url: string) => {
   const [downloadProgress, setDownloadProgress] = useState(0);
@@ -7,6 +8,7 @@ const useAxiosGet = (url: string) => {
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
+    leaveBreadcrumb("useAxiosGet", { url }, "request");
     axios
       .get(url, {
         withCredentials: true,

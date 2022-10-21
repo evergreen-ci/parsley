@@ -1,3 +1,5 @@
+import { LogTypes } from "constants/enums";
+
 interface SearchState {
   searchTerm?: RegExp;
   searchIndex?: number;
@@ -6,10 +8,23 @@ interface SearchState {
   caseSensitive: boolean;
 }
 
+interface LogMetadata {
+  logType?: LogTypes;
+  fileName?: string;
+  taskID?: string;
+  execution?: string;
+  testID?: string;
+  buildID?: string;
+  origin?: string;
+  htmlLogURL?: string;
+  rawLogURL?: string;
+  jobLogsURL?: string;
+}
+
 enum DIRECTION {
   PREVIOUS,
   NEXT,
 }
 
 export { DIRECTION };
-export type { SearchState };
+export type { SearchState, LogMetadata };

@@ -4,6 +4,7 @@ import { Body } from "@leafygreen-ui/typography";
 import { useParams } from "react-router-dom";
 import Icon from "components/Icon";
 import { LogTypes } from "constants/enums";
+import { getSpruceJobLogsURL } from "constants/externalURLTemplates";
 import {
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
@@ -15,6 +16,7 @@ import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import { useAxiosGet } from "hooks";
 import NotFound from "pages/404";
+import { leaveBreadcrumb } from "utils/errorReporting";
 import LoadingBar from "./LoadingBar";
 
 interface LoadingPageProps {
@@ -30,15 +32,19 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     [slugs.execution]: execution,
   } = useParams();
   const dispatchToast = useToastContext();
-  const { ingestLines } = useLogContext();
+  const { ingestLines, setLogMetadata } = useLogContext();
 
   let url = "";
+  let htmlLogURL = "";
+  let jobLogsURL = "";
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
-        url = getResmokeLogURL(buildID, testID);
+        url = getResmokeLogURL(buildID, { testID, raw: true });
+        htmlLogURL = getResmokeLogURL(buildID, { testID, html: true });
       } else if (buildID) {
-        url = getResmokeLogURL(buildID);
+        url = getResmokeLogURL(buildID, { raw: true });
+        htmlLogURL = getResmokeLogURL(buildID, { html: true });
       }
       break;
     }
@@ -46,14 +52,24 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       if (!taskID || !execution || !origin) {
         break;
       }
-      url = getEvergreenTaskLogURL(taskID, execution, origin as any);
+      url = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+        text: true,
+      });
+      htmlLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+        text: false,
+      });
+      jobLogsURL = getSpruceJobLogsURL(taskID, execution);
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
       if (!taskID || !execution || !testID) {
         break;
       }
-      url = getEvergreenTestLogURL(taskID, execution, testID);
+      url = getEvergreenTestLogURL(taskID, execution, testID, { text: true });
+      htmlLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
+        text: false,
+      });
+      jobLogsURL = getSpruceJobLogsURL(taskID, execution);
       break;
     }
     default:
@@ -63,12 +79,38 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const { data, error, isLoading } = useAxiosGet(url);
   useEffect(() => {
     if (data) {
+      leaveBreadcrumb("ingest-log-lines", { logType }, "process");
       ingestLines(data.trimEnd().split("\n"), logType);
+      setLogMetadata({
+        taskID,
+        execution,
+        testID,
+        origin,
+        buildID,
+        rawLogURL: url,
+        htmlLogURL,
+        jobLogsURL,
+      });
     }
     if (error) {
       dispatchToast.error(error);
     }
-  }, [data, ingestLines, error, logType, dispatchToast]);
+  }, [
+    data,
+    ingestLines,
+    error,
+    logType,
+    dispatchToast,
+    setLogMetadata,
+    taskID,
+    execution,
+    testID,
+    origin,
+    buildID,
+    url,
+    htmlLogURL,
+    jobLogsURL,
+  ]);
 
   return (
     <Container>

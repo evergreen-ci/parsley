@@ -11,6 +11,7 @@ import { CharKey, ModifierKey } from "constants/keys";
 import { zIndex } from "constants/tokens";
 import { useKeyboardShortcut } from "hooks";
 import debounce from "utils/debounce";
+import { leaveBreadcrumb } from "utils/errorReporting";
 
 const { yellow } = palette;
 interface SearchBarProps {
@@ -63,6 +64,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     if (isFilter || isHighlight) {
       setInput("");
     }
+    leaveBreadcrumb("search-bar-submit", { selected, input }, "user");
     onSubmit(selected, input);
   };
 
@@ -79,6 +81,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
+  const handleChangeSelect = (value: string) => {
+    setSelected(value as SearchBarActions);
+    leaveBreadcrumb("search-bar-select", { value }, "user");
+  };
+
   return (
     <Container className={className}>
       <StyledSelect
@@ -86,7 +93,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         aria-labelledby="searchbar-select"
         data-cy="searchbar-select"
         disabled={disabled}
-        onChange={(v) => setSelected(v as SearchBarActions)}
+        onChange={handleChangeSelect}
         popoverZIndex={zIndex.popover}
         value={selected}
       >

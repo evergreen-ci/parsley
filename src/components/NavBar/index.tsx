@@ -27,7 +27,6 @@ const NavBar: React.FC = () => {
   );
   const { hasLogs, clearLogs, setSearch, searchState, paginate } =
     useLogContext();
-
   const { hasSearch } = searchState;
   const handleSearch = (selected: string, value: string) => {
     switch (selected) {

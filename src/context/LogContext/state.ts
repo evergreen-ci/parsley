@@ -3,13 +3,12 @@ import { LogTypes } from "constants/enums";
 import { ExpandedLines } from "types/logs";
 import { mergeIntervals } from "utils/expandedLines";
 import { getColorMapping, processResmokeLine } from "utils/resmoke";
-import { SearchState } from "./types";
+import { LogMetadata, SearchState } from "./types";
 
 interface LogState {
   logs: string[];
   colorMapping?: Record<string, string>;
-  fileName?: string;
-  logType?: LogTypes;
+  logMetadata?: LogMetadata;
   expandedLines: ExpandedLines;
   lineNumber?: number;
   searchState: SearchState;
@@ -19,6 +18,7 @@ type Action =
   | { type: "INGEST_LOGS"; logs: string[]; logType: LogTypes }
   | { type: "CLEAR_LOGS" }
   | { type: "SET_FILE_NAME"; fileName: string }
+  | { type: "SET_LOG_METADATA"; logMetadata: LogMetadata }
   | { type: "SET_SEARCH_TERM"; searchTerm: string }
   | { type: "SET_CASE_SENSITIVE"; caseSensitive: boolean }
   | { type: "SET_MATCH_COUNT"; matchCount: number }
@@ -74,12 +74,20 @@ const reducer = (state: LogState, action: Action): LogState => {
       return {
         ...state,
         logs: processedLogs,
-        logType: action.logType,
         colorMapping: colorMap,
+        logMetadata: {
+          ...state.logMetadata,
+          logType: action.logType,
+        },
       };
     }
     case "CLEAR_LOGS":
       return initialState([]);
+    case "SET_LOG_METADATA":
+      return {
+        ...state,
+        logMetadata: action.logMetadata,
+      };
     case "EXPAND_LINES": {
       const intervals = state.expandedLines.concat(action.expandedLines);
       return {
@@ -104,7 +112,10 @@ const reducer = (state: LogState, action: Action): LogState => {
     case "SET_FILE_NAME":
       return {
         ...state,
-        fileName: action.fileName,
+        logMetadata: {
+          ...state.logMetadata,
+          fileName: action.fileName,
+        },
       };
     case "SET_SEARCH_TERM": {
       const hasSearch = !!action.searchTerm;

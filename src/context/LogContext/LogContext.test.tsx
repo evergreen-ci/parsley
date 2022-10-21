@@ -69,7 +69,7 @@ describe("useLogContext", () => {
     act(() => {
       result.current.setFileName("foo.txt");
     });
-    expect(result.current.fileName).toBe("foo.txt");
+    expect(result.current.logMetadata?.fileName).toBe("foo.txt");
   });
   it("should be able to clear the list of logs", () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
