@@ -112,7 +112,7 @@ functions:
         ["parsley/storybook-static/assets/*.svg"]
       remote_file: parsley/${task_id}/storybook/assets/
       bucket: mciuploads
-      content_type: image/svg+xml"
+      content_type: image/svg+xml
       permissions: public-read
       display_name: storybook_assets_svg_
 
