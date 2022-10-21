@@ -15,7 +15,7 @@
     "cy:run": "cypress run",
     "deploy:beta": "yarn build:beta && env-cmd -e beta yarn deploy:do-not-use",
     "deploy:staging": "yarn build:staging && env-cmd -e staging yarn deploy:do-not-use",
-    "deploy:do-not-use": "aws s3 sync dist/ s3://${BUCKET}/ --acl public-read --follow-symlinks --delete --exclude .env-cmdrc.json",
+    "deploy:do-not-use": ". ./scripts/deploy.sh",
     "dev": "env-cmd -e devLocal vite",
     "staging": "env-cmd -e devStaging vite",
     "production": "env-cmd -e devProduction vite",
@@ -31,7 +31,8 @@
     "storybook": "start-storybook -p 6006",
     "storybook:build": " . ./scripts/appVersion.sh && env-cmd -e local build-storybook",
     "test": "jest --watchAll=false",
-    "test:watch": "jest --watch --verbose"
+    "test:watch": "jest --watch --verbose",
+    "upload-source-maps": "node ./scripts/upload-source-maps.js"
   },
   "dependencies": {
     "@bugsnag/js": "7.18.0",
