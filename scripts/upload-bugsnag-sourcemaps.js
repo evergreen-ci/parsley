@@ -5,5 +5,5 @@ browser.uploadMultiple({
   appVersion: process.env.REACT_APP_VERSION,
   overwrite: true,
   directory: "./dist/assets",
-  baseUrl: `${process.env.REACT_APP_SPRUCE_URL}/assets`,
+  baseUrl: `${process.env.REACT_APP_PARSLEY_URL}/assets`,
 });
