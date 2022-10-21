@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import { StyledRouterLink } from "components/styles";
 import routes from "constants/routes";
 import { zIndex } from "constants/tokens";
+import { leaveBreadcrumb } from "utils/errorReporting";
 
 interface UploadLinkProps {
   hasLogs: boolean;
@@ -17,6 +18,7 @@ const UploadLink: React.FC<UploadLinkProps> = ({ hasLogs, clearLogs }) => {
     if (hasLogs) {
       setOpen(true);
     } else {
+      leaveBreadcrumb("upload-link", { hasLogs }, "navigation");
       navigate(routes.upload);
     }
   }, [hasLogs, navigate]);

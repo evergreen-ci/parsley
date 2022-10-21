@@ -12,6 +12,7 @@ import { QueryParams } from "constants/queryParams";
 import { size, zIndex } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import { ExpandedLines } from "types/logs";
+import { leaveBreadcrumb } from "utils/errorReporting";
 import Filter from "./Filter";
 
 const { green, gray } = palette;
@@ -45,6 +46,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     if (newFilters.length === 0) {
       clearExpandedLines();
     }
+    leaveBreadcrumb("delete-filter", { filterName }, "user");
   };
 
   const editFilter = (oldFilter: string, newFilter: string) => {
@@ -56,6 +58,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     const idxToReplace = newFilters.indexOf(oldFilter);
     newFilters[idxToReplace] = newFilter;
     setFilters(newFilters);
+    leaveBreadcrumb("edit-filter", { oldFilter, newFilter }, "user");
   };
 
   return (
