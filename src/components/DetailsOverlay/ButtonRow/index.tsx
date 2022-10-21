@@ -13,8 +13,9 @@ const ButtonRow: React.FC = () => {
   const [hasCopied, setHasCopied] = useState(false);
 
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
-  const { getLine } = useLogContext();
+  const { getLine, logMetadata } = useLogContext();
 
+  const { htmlLogURL, rawLogURL, jobLogsURL } = logMetadata || {};
   const tooltipText = bookmarks.length
     ? "Copy Jira Log Information"
     : "No bookmarks to copy.";
@@ -45,8 +46,63 @@ const ButtonRow: React.FC = () => {
       >
         {hasCopied ? "Copied!" : tooltipText}
       </Tooltip>
-      <Button leftGlyph={<Icon glyph="Export" />}>RAW</Button>
-      <Button leftGlyph={<Icon glyph="Export" />}>HTML</Button>
+      <Tooltip
+        align="top"
+        justify="middle"
+        trigger={
+          <div data-cy="job-logs-button-wrapper">
+            <Button
+              data-cy="job-logs-button"
+              disabled={!jobLogsURL}
+              href={jobLogsURL}
+              leftGlyph={<Icon glyph="Export" />}
+              target="_blank"
+            >
+              Job Logs
+            </Button>
+          </div>
+        }
+      >
+        View all logs for this job
+      </Tooltip>
+      <Tooltip
+        align="top"
+        justify="middle"
+        trigger={
+          <div data-cy="raw-logs-button-wrapper">
+            <Button
+              data-cy="raw-log-button"
+              disabled={!rawLogURL}
+              href={rawLogURL}
+              leftGlyph={<Icon glyph="Export" />}
+              target="_blank"
+            >
+              Raw
+            </Button>
+          </div>
+        }
+      >
+        Open Raw log in a new tab
+      </Tooltip>
+      <Tooltip
+        align="top"
+        justify="middle"
+        trigger={
+          <div data-cy="html-logs-button-wrapper">
+            <Button
+              data-cy="html-log-button"
+              disabled={!htmlLogURL}
+              href={htmlLogURL}
+              leftGlyph={<Icon glyph="Export" />}
+              target="_blank"
+            >
+              HTML
+            </Button>
+          </div>
+        }
+      >
+        Open log in HTML format in a new tab
+      </Tooltip>
     </DetailRow>
   );
 };
