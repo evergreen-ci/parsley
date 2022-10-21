@@ -1,12 +1,15 @@
 import { useReducer } from "react";
 import { LogTypes } from "constants/enums";
-import { processResmokeLine } from "utils/resmoke";
-import { SearchState } from "./types";
+import { ExpandedLines } from "types/logs";
+import { mergeIntervals } from "utils/expandedLines";
+import { getColorMapping, processResmokeLine } from "utils/resmoke";
+import { LogMetadata, SearchState } from "./types";
 
 interface LogState {
   logs: string[];
-  fileName?: string;
-  logType?: LogTypes;
+  colorMapping?: Record<string, string>;
+  logMetadata?: LogMetadata;
+  expandedLines: ExpandedLines;
   lineNumber?: number;
   searchState: SearchState;
 }
@@ -15,9 +18,13 @@ type Action =
   | { type: "INGEST_LOGS"; logs: string[]; logType: LogTypes }
   | { type: "CLEAR_LOGS" }
   | { type: "SET_FILE_NAME"; fileName: string }
+  | { type: "SET_LOG_METADATA"; logMetadata: LogMetadata }
   | { type: "SET_SEARCH_TERM"; searchTerm: string }
   | { type: "SET_CASE_SENSITIVE"; caseSensitive: boolean }
   | { type: "SET_MATCH_COUNT"; matchCount: number }
+  | { type: "EXPAND_LINES"; expandedLines: ExpandedLines }
+  | { type: "COLLAPSE_LINES"; idx: number }
+  | { type: "CLEAR_EXPANDED_LINES" }
   | { type: "PAGINATE"; nextPage: number };
 
 const initialState = (initialLogLines?: string[]): LogState => ({
@@ -28,31 +35,87 @@ const initialState = (initialLogLines?: string[]): LogState => ({
     hasSearch: false,
     caseSensitive: false,
   },
+  expandedLines: [],
 });
 
 const reducer = (state: LogState, action: Action): LogState => {
   switch (action.type) {
     case "INGEST_LOGS": {
-      let processedLogs = action.logs;
+      let processedLogs;
+      let colorMap;
       switch (action.logType) {
-        case LogTypes.RESMOKE_LOGS:
-          processedLogs = action.logs.map(processResmokeLine);
+        case LogTypes.RESMOKE_LOGS: {
+          const transformedLogs = action.logs.reduce(
+            (acc, logLine) => {
+              const processedLogLine = processResmokeLine(logLine);
+              const colorMapping = getColorMapping(
+                processedLogLine,
+                acc.colorMap
+              );
+              if (colorMapping) {
+                acc.colorMap[colorMapping.portOrState] = colorMapping.color;
+              }
+              acc.processedLogs.push(processedLogLine);
+              return acc;
+            },
+            {
+              colorMap: {} as Record<string, string>,
+              processedLogs: [] as string[],
+            }
+          );
+          processedLogs = transformedLogs.processedLogs;
+          colorMap = transformedLogs.colorMap;
           break;
+        }
         default:
+          processedLogs = action.logs;
           break;
       }
       return {
         ...state,
         logs: processedLogs,
-        logType: action.logType,
+        colorMapping: colorMap,
+        logMetadata: {
+          ...state.logMetadata,
+          logType: action.logType,
+        },
       };
     }
     case "CLEAR_LOGS":
       return initialState([]);
+    case "SET_LOG_METADATA":
+      return {
+        ...state,
+        logMetadata: action.logMetadata,
+      };
+    case "EXPAND_LINES": {
+      const intervals = state.expandedLines.concat(action.expandedLines);
+      return {
+        ...state,
+        expandedLines: mergeIntervals(intervals),
+      };
+    }
+    case "COLLAPSE_LINES": {
+      const newExpandedLines = state.expandedLines.filter(
+        (_f, idx) => idx !== action.idx
+      );
+      return {
+        ...state,
+        expandedLines: newExpandedLines,
+      };
+    }
+    case "CLEAR_EXPANDED_LINES":
+      return {
+        ...state,
+        expandedLines: [],
+      };
     case "SET_FILE_NAME":
       return {
         ...state,
-        fileName: action.fileName,
+        logMetadata: {
+          ...state.logMetadata,
+          fileName: action.fileName,
+        },
       };
     case "SET_SEARCH_TERM": {
       const hasSearch = !!action.searchTerm;

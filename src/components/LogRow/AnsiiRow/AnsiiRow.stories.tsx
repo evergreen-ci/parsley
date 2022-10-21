@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
@@ -17,13 +18,14 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
   <AnsiiRow
     key={logLines[0]}
     data={{
+      expandLines: () => undefined,
       getLine,
-      wrap: args.wrap,
-      processedLines: processedLogLines,
-      logType: LogTypes.EVERGREEN_TASK_LOGS,
+      getResmokeLineColor: () => undefined,
+      scrollToLine: () => undefined,
       range: { lowerRange: 0 },
-      scrollToLine: () => {},
+      wrap: args.wrap,
     }}
+    lineNumber={0}
     listRowProps={{
       index: 0,
       style: {},
@@ -43,58 +45,40 @@ SingleLine.args = {
 };
 
 // Multiple AnsiiRows.
-const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
-  <Container>
-    <LogPane
-      cache={cache}
-      filters={[]}
-      logLines={processedLogLines}
-      rowCount={processedLogLines.length}
-      rowRenderer={RowRenderer({
-        logType: LogTypes.EVERGREEN_TASK_LOGS,
-        wrap: args.wrap,
-        getLine,
-        processedLines: processedLogLines,
-        range: { lowerRange: 0 },
-        scrollToLine: () => {},
-      })}
-      scrollToIndex={0}
-      wrap={args.wrap}
-    />
-  </Container>
-);
+const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
+  const [scrollIndex, setScrollIndex] = useState<number>(-1);
+
+  return (
+    <Container>
+      <LogPane
+        cache={cache}
+        initialScrollIndex={-1}
+        logLines={processedLogLines}
+        rowCount={processedLogLines.length}
+        rowRenderer={RowRenderer({
+          data: {
+            expandLines: () => {},
+            getLine,
+            getResmokeLineColor: () => undefined,
+            scrollToLine: setScrollIndex,
+            range: { lowerRange: 0 },
+            wrap: args.wrap,
+            searchTerm: /p=debug/,
+            highlightedLine: args.highlightedLine,
+          },
+          processedLogLines,
+          logType: LogTypes.EVERGREEN_TASK_LOGS,
+        })}
+        scrollToIndex={scrollIndex}
+      />
+    </Container>
+  );
+};
 
 export const MultiLines = MultiLineTemplate.bind({});
 MultiLines.args = {
   wrap: false,
-};
-
-// Multiple AnsiiRows with CollapsedRows.
-const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => (
-  <Container>
-    <LogPane
-      cache={cache}
-      filters={[]}
-      logLines={collapsedProcessedLogLines}
-      rowCount={collapsedProcessedLogLines.length}
-      rowRenderer={RowRenderer({
-        logType: LogTypes.EVERGREEN_TASK_LOGS,
-        wrap: args.wrap,
-        getLine,
-        processedLines: collapsedProcessedLogLines,
-        range: { lowerRange: 0 },
-        scrollToLine: () => {},
-      })}
-      scrollToIndex={0}
-      wrap={args.wrap}
-    />
-  </Container>
-);
-
-export const Collapsed = CollapsedTemplate.bind({});
-
-Collapsed.args = {
-  wrap: false,
+  highlightedLine: 0,
 };
 
 const logLines = [
@@ -132,10 +116,9 @@ const logLines = [
 
 const processedLogLines = logLines.map((_, index) => index);
 
-const collapsedProcessedLogLines = [0, [1, 2], 3, 4, [5], 6, 7];
+const getLine = (index: number) => logLines[index];
 
 const Container = styled.div`
   height: 400px;
   width: 800px;
 `;
-const getLine = (index: number) => logLines[index];

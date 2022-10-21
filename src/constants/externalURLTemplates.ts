@@ -1,4 +1,4 @@
-import { evergreenURL } from "utils/environmentVariables";
+import { evergreenURL, spruceURL } from "utils/environmentVariables";
 import { stringifyQuery } from "utils/query-string";
 
 const getEvergreenTaskURL = (taskID: string, execution: string) => {
@@ -10,4 +10,7 @@ const getEvergreenTaskURL = (taskID: string, execution: string) => {
   )}`;
 };
 
-export { getEvergreenTaskURL };
+const getSpruceJobLogsURL = (taskID: string, execution: string) =>
+  `${spruceURL}/job-logs/${taskID}/${execution}`;
+
+export { getSpruceJobLogsURL, getEvergreenTaskURL };

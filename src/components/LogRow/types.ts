@@ -1,6 +1,5 @@
 import { ListRowProps } from "react-virtualized";
-import { LogTypes } from "constants/enums";
-import { ProcessedLogLines } from "types/logs";
+import { ExpandedLines } from "types/logs";
 
 interface BaseRowProps {
   listRowProps: ListRowProps;
@@ -8,17 +7,18 @@ interface BaseRowProps {
 }
 
 interface RowData {
+  expandLines: (expandedLines: ExpandedLines) => void;
   getLine: (index: number) => string | undefined;
+  getResmokeLineColor: (index: number) => string | undefined;
   scrollToLine: (lineNumber: number) => void;
-  wrap: boolean;
-  processedLines: ProcessedLogLines;
-  logType: LogTypes;
-  searchTerm?: RegExp;
+
+  highlightedLine?: number;
   range: {
     lowerRange: number;
     upperRange?: number;
   };
-  highlightedLine?: number;
+  searchTerm?: RegExp;
+  wrap: boolean;
 }
 
 export type { BaseRowProps, RowData };

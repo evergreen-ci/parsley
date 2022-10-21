@@ -1,6 +1,5 @@
-import { LogTypes } from "constants/enums";
 import { LogContextProvider } from "context/LogContext";
-import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
+import { renderWithRouterMatch, screen, userEvent } from "test_utils";
 import AnsiiRow from ".";
 
 const wrapper = (logs: string[]) => {
@@ -11,16 +10,21 @@ const wrapper = (logs: string[]) => {
 };
 
 describe("ansiiRow", () => {
+  const user = userEvent.setup();
   it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
-      <AnsiiRow data={data} listRowProps={listRowProps} />,
+      <AnsiiRow data={data} lineNumber={0} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
     );
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
     renderWithRouterMatch(
-      <AnsiiRow data={data} listRowProps={{ ...listRowProps, index: 1 }} />,
+      <AnsiiRow
+        data={data}
+        lineNumber={1}
+        listRowProps={{ ...listRowProps, index: 1 }}
+      />,
       {
         wrapper: wrapper(logLines),
       }
@@ -30,59 +34,59 @@ describe("ansiiRow", () => {
   it("clicking log line link updates the url and selects it", async () => {
     const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
-      <AnsiiRow data={{ ...data, scrollToLine }} listRowProps={listRowProps} />,
+      <AnsiiRow
+        data={{ ...data, scrollToLine }}
+        lineNumber={0}
+        listRowProps={listRowProps}
+      />,
       {
         wrapper: wrapper(logLines),
       }
     );
-    userEvent.click(screen.getByDataCy("log-link-0"));
-    await waitFor(() => {
-      expect(history.location.search).toBe("?selectedLine=0");
-    });
+    await user.click(screen.getByDataCy("log-link-0"));
+    expect(history.location.search).toBe("?selectedLine=0");
     expect(scrollToLine).toHaveBeenCalledWith(0);
   });
   it("clicking on a selected log line link unselects it", async () => {
     const { history } = renderWithRouterMatch(
-      <AnsiiRow data={data} listRowProps={listRowProps} />,
+      <AnsiiRow data={data} lineNumber={0} listRowProps={listRowProps} />,
 
       {
         wrapper: wrapper(logLines),
         route: "?selectedLine=0",
       }
     );
-    userEvent.click(screen.getByDataCy("log-link-0"));
-    await waitFor(() => {
-      expect(history.location.search).toBe("");
-    });
+    await user.click(screen.getByDataCy("log-link-0"));
+    expect(history.location.search).toBe("");
   });
   it("double clicking a log line adds it to the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
-      <AnsiiRow data={data} listRowProps={listRowProps} />,
+      <AnsiiRow data={data} lineNumber={0} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
     );
-    userEvent.dblClick(screen.getByText(logLines[0]));
-    await waitFor(() => {
-      expect(history.location.search).toBe("?bookmarks=0");
-    });
+    await user.dblClick(screen.getByText(logLines[0]));
+    expect(history.location.search).toBe("?bookmarks=0");
   });
   it("double clicking a bookmarked log line removes it from the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
-      <AnsiiRow data={data} listRowProps={listRowProps} />,
+      <AnsiiRow data={data} lineNumber={0} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
         route: "?bookmarks=0",
       }
     );
-    userEvent.dblClick(screen.getByText(logLines[0]));
-    await waitFor(() => {
-      expect(history.location.search).toBe("");
-    });
+    await user.dblClick(screen.getByText(logLines[0]));
+    expect(history.location.search).toBe("");
   });
   it("lines should be linkified if they have a url", () => {
     renderWithRouterMatch(
-      <AnsiiRow data={data} listRowProps={{ ...listRowProps, index: 8 }} />,
+      <AnsiiRow
+        data={data}
+        lineNumber={8}
+        listRowProps={{ ...listRowProps, index: 8 }}
+      />,
       {
         wrapper: wrapper(["Some line with a url https://www.google.com"]),
       }
@@ -97,6 +101,7 @@ describe("ansiiRow", () => {
     renderWithRouterMatch(
       <AnsiiRow
         data={{ ...data, searchTerm: /highlight me/i }}
+        lineNumber={9}
         listRowProps={{ ...listRowProps, index: 9 }}
       />
     );
@@ -111,6 +116,7 @@ describe("ansiiRow", () => {
           searchTerm: /highlight me/i,
           range: { lowerRange: 0, upperRange: 10 },
         }}
+        lineNumber={9}
         listRowProps={{ ...listRowProps, index: 9 }}
       />
     );
@@ -125,6 +131,7 @@ describe("ansiiRow", () => {
           searchTerm: /highlight me/i,
           range: { lowerRange: 0, upperRange: 8 },
         }}
+        lineNumber={9}
         listRowProps={{ ...listRowProps, index: 9 }}
       />
     );
@@ -155,15 +162,16 @@ const listRowProps = {
   parent: {} as any,
   style: {},
 };
+
 const getLine = (index: number) => logLines[index];
 
 const data = {
+  expandLines: jest.fn(),
   getLine,
+  getResmokeLineColor: jest.fn(),
+  scrollToLine: jest.fn(),
+
+  expandedLines: [],
+  range: { lowerRange: 0 },
   wrap: false,
-  processedLines: logLines.map((_, index) => index),
-  scrollToLine: () => {},
-  logType: LogTypes.RESMOKE_LOGS,
-  range: {
-    lowerRange: 0,
-  },
 };

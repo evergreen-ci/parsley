@@ -17,11 +17,8 @@ const Template: ComponentStory<typeof LogPane> = (args) => (
     <LogPane
       {...args}
       cache={cache}
-      filters={[]}
-      logLines={list}
       rowCount={list.length}
       rowRenderer={RowRenderer}
-      wrap={false}
     />
   </Container>
 );

@@ -1,5 +1,12 @@
-type ProcessedLogLine = number | number[];
+type ExpandedLine = [number, number];
+type ExpandedLines = ExpandedLine[];
 
+type ProcessedLogLine = number | number[];
 type ProcessedLogLines = ProcessedLogLine[];
 
-export type { ProcessedLogLine, ProcessedLogLines };
+export type {
+  ExpandedLine,
+  ExpandedLines,
+  ProcessedLogLine,
+  ProcessedLogLines,
+};

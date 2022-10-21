@@ -1,4 +1,4 @@
-import { forwardRef, useMemo } from "react";
+import { forwardRef, memo, useMemo } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { ListRowProps } from "react-virtualized";
@@ -8,6 +8,7 @@ import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import renderHtml from "utils/renderHtml";
+import { escapeHtml } from "utils/renderHtml/escapeHtml";
 
 const { yellow, red } = palette;
 
@@ -21,7 +22,8 @@ interface BaseRowProps extends ListRowProps {
   highlightedLine?: number;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
-  "data-cy-text"?: string;
+  "data-cy"?: string;
+  resmokeRowColor?: string;
 }
 
 /**
@@ -38,7 +40,8 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     highlightedLine,
     scrollToLine,
     searchTerm,
-    "data-cy-text": dataCyText,
+    resmokeRowColor,
+    "data-cy": dataCyText,
     ...rest
   } = props;
 
@@ -96,7 +99,11 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
         size="small"
       />
       <Index>{lineNumber}</Index>
-      <ProcessedBaseRow data-cy={dataCyText} searchTerm={searchTerm}>
+      <ProcessedBaseRow
+        color={resmokeRowColor}
+        data-cy={dataCyText}
+        searchTerm={searchTerm}
+      >
         {children}
       </ProcessedBaseRow>
     </StyledPre>
@@ -106,17 +113,20 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
 interface ProcessedBaseRowProps {
   children: string;
   searchTerm?: RegExp;
+  color?: string;
   ["data-cy"]?: string;
 }
-const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = ({
-  children,
-  searchTerm,
-  "data-cy": dataCy,
-}) => {
+
+const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
+  const { children, searchTerm, color, "data-cy": dataCy } = props;
   const memoizedLogLine = useMemo(() => {
     let render = children;
     if (searchTerm) {
-      render = render.replace(searchTerm, `<mark>$&</mark>`);
+      // escape the matching string to prevent XSS
+      render = render.replace(
+        searchTerm,
+        (match) => `<mark>${escapeHtml(match)}</mark>`
+      );
     }
     return renderHtml(render, {
       transform: {
@@ -126,9 +136,14 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = ({
     });
   }, [children, searchTerm]);
 
-  return <span data-cy={dataCy}>{memoizedLogLine}</span>;
-};
+  return (
+    <span data-cy={dataCy} style={{ color }}>
+      {memoizedLogLine}
+    </span>
+  );
+});
 
+ProcessedBaseRow.displayName = "ProcessedBaseRow";
 BaseRow.displayName = "BaseRow";
 
 const StyledIcon = styled(Icon)`
@@ -151,6 +166,8 @@ const StyledPre = styled.pre<{
   bookmarked: boolean;
   highlighted: boolean;
 }>`
+  font-family: "Source Code Pro", monospace;
+  line-height: 1.25;
   overflow-y: hidden;
   margin-top: 0;
   margin-bottom: 0;
@@ -163,17 +180,12 @@ const StyledPre = styled.pre<{
   /* wrap multiple lines */
   white-space: break-spaces;
   `}
+  ${({ color }) => color && `color: ${color};`}
+  ${({ selected }) => selected && `background-color: ${yellow.light3};`}
 
-  ${({ selected }) => selected && `background-color: #FA8128;`}
-  ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light2};`}
-  ${({ highlighted }) => highlighted && `background-color: ${red.light2};`}
-  ${({ highlighted }) =>
-    highlighted &&
-    `
-    mark {
-      filter: brightness(0.7);
-    }
-`}
+  ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
+  ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
+
   // Hover should be an overlay shadow so that the user can see the color underneath.
   :hover {
     box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.1);

@@ -4,17 +4,23 @@ import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
-import { fontSize, size } from "constants/tokens";
+import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { findLineIndex } from "utils/findLineIndex";
 
-const { gray } = palette;
+const { gray, green } = palette;
 
 interface SideBarProps {
   maxLineNumber: number;
+  processedLogLines: (number | number[])[];
+  scrollToLine: (scrollIndex: number) => void;
 }
 
-/** TODO: EVG-17532 */
-const SideBar: React.FC<SideBarProps> = ({ maxLineNumber }) => {
+const SideBar: React.FC<SideBarProps> = ({
+  maxLineNumber,
+  processedLogLines,
+  scrollToLine,
+}) => {
   const [selectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
@@ -23,6 +29,9 @@ const SideBar: React.FC<SideBarProps> = ({ maxLineNumber }) => {
     QueryParams.Bookmarks,
     []
   );
+  const lineNumbers = selectedLine
+    ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
+    : bookmarks;
 
   // Set 0 and last log line to be initial bookmarks on load.
   useEffect(() => {
@@ -31,9 +40,13 @@ const SideBar: React.FC<SideBarProps> = ({ maxLineNumber }) => {
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const lineNumbers = selectedLine
-    ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
-    : bookmarks;
+  // Finds the corresponding index of a line number and scrolls to it.
+  const scrollToIndex = (lineNumber: number): void => {
+    const lineIndex = findLineIndex(processedLogLines, lineNumber);
+    if (lineIndex !== -1) {
+      scrollToLine(lineIndex);
+    }
+  };
 
   return (
     <Container>
@@ -44,10 +57,14 @@ const SideBar: React.FC<SideBarProps> = ({ maxLineNumber }) => {
       >
         Clear
       </StyledButton>
-      <LogLineContainer data-cy="log-line-container">
+      <LogLineContainer data-cy="sidebar-log-line-container">
         {lineNumbers.map((l) => (
-          <LogLineNumber key={`log-line-${l}`}>
-            <span> {l} </span>
+          <LogLineNumber
+            key={`sidebar-log-line-${l}`}
+            data-cy={`sidebar-log-line-${l}`}
+            onClick={() => scrollToIndex(l)}
+          >
+            <span>{l}</span>
             {l === selectedLine && <StyledIcon glyph="Link" size="small" />}
           </LogLineNumber>
         ))}
@@ -70,12 +87,16 @@ const LogLineContainer = styled.div`
 const LogLineNumber = styled.div`
   display: flex;
   align-items: center;
-  font-size: ${fontSize.m};
+  font-size: 13px;
+  line-height: 1.5em;
+  font-family: "Source Code Pro";
+  :hover {
+    color: ${green.dark1};
+  }
 `;
 
 const StyledIcon = styled(Icon)`
   vertical-align: text-bottom;
-  margin-left: ${size.xxs};
 `;
 
 const Container = styled.div`

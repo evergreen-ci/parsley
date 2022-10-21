@@ -1,43 +1,39 @@
 import { forwardRef } from "react";
-import CollapsedRow from "components/LogRow//CollapsedRow";
 import BaseRow from "components/LogRow/BaseRow";
-import { isCollapsedRow } from "utils/collapsedRow";
 import { BaseRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
-const ResmokeRow = forwardRef<any, BaseRowProps>((rowProps, ref) => {
-  const { data, listRowProps } = rowProps;
+interface ResmokeRowProps extends BaseRowProps {
+  lineNumber: number;
+}
+
+const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
+  const { data, listRowProps, lineNumber } = rowProps;
   const {
     getLine,
-    wrap,
-    processedLines,
+    getResmokeLineColor,
+    scrollToLine,
+    highlightedLine,
     range,
     searchTerm,
-    highlightedLine,
-    scrollToLine,
+    wrap,
   } = data;
-  const { index } = listRowProps;
 
-  const line = processedLines[index];
-
-  if (isCollapsedRow(line)) {
-    return (
-      <CollapsedRow ref={ref} {...listRowProps} numCollapsed={line.length} />
-    );
-  }
-  const lineContent = getLine(line);
-  const inRange = isLineInRange(range, line);
+  const lineContent = getLine(lineNumber);
+  const lineColor = getResmokeLineColor(lineNumber);
+  const inRange = isLineInRange(range, lineNumber);
 
   return lineContent ? (
     <BaseRow
-      wrap={wrap}
       {...listRowProps}
       ref={ref}
-      data-cy-text="resmoke-row"
+      data-cy="resmoke-row"
       highlightedLine={highlightedLine}
-      lineNumber={line}
+      lineNumber={lineNumber}
+      resmokeRowColor={lineColor}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}
+      wrap={wrap}
     >
       {lineContent}
     </BaseRow>

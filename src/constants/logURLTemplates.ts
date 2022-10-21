@@ -1,14 +1,24 @@
 import { evergreenURL, logkeeperURL } from "utils/environmentVariables";
 import { stringifyQuery } from "utils/query-string";
 
+/**
+ *
+ * @param taskID - the task ID
+ * @param execution - the execution number of the task
+ * @param testID - the test ID of the test
+ * @param options
+ * @returns /test_log/${taskID}/${execution}?test_name=${testID}&text=true
+ */
 const getEvergreenTestLogURL = (
   taskID: string,
   execution: string,
-  testID: string
+  testID: string,
+  options: { text?: boolean }
 ) => {
+  const { text } = options;
   const params = {
     test_name: testID,
-    text: true,
+    text,
   };
   return `${evergreenURL}/test_log/${taskID}/${execution}?${stringifyQuery(
     params
@@ -21,9 +31,14 @@ const getEvergreenTestLogURL = (
  * @param testID - the test ID of the resmoke job
  * @returns `/build/${buildID}/test/${testID}`
  */
-const getResmokeLogURL = (buildID: string, testID?: string) => {
+const getResmokeLogURL = (
+  buildID: string,
+  options: { testID?: string; raw?: boolean; html?: boolean }
+) => {
+  const { raw, html, testID } = options;
   const params = {
-    raw: 1,
+    raw,
+    html,
   };
   if (testID) {
     return `${logkeeperURL}/build/${buildID}/test/${testID}?${stringifyQuery(
@@ -39,13 +54,23 @@ enum originToType {
   task = "T",
 }
 
+/**
+ *
+ * @param taskID - the task ID
+ * @param execution - the execution number of the task
+ * @param origin - the origin of the log
+ * @param options -
+ * @returns /task/${taskID}/${execution}?type=${originToType[origin]}&text=true
+ */
 const getEvergreenTaskLogURL = (
   taskID: string,
   execution: string,
-  origin: keyof typeof originToType
+  origin: keyof typeof originToType,
+  options: { text?: boolean }
 ) => {
+  const { text } = options;
   const params = {
-    text: true,
+    text,
     type: originToType[origin] || undefined,
   };
   return `${evergreenURL}/task_log_raw/${taskID}/${execution}?${stringifyQuery(

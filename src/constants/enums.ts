@@ -19,4 +19,9 @@ enum SearchBarActions {
   Search = "search",
 }
 
-export { LogTypes, CaseSensitivity, MatchType, SearchBarActions };
+enum FilterLogic {
+  And = "and",
+  Or = "or",
+}
+
+export { CaseSensitivity, FilterLogic, LogTypes, MatchType, SearchBarActions };

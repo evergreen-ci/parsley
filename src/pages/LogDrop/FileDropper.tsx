@@ -10,6 +10,7 @@ import { LogTypes } from "constants/enums";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
+import { leaveBreadcrumb } from "utils/errorReporting";
 
 const { red } = palette;
 interface FileDropperProps {
@@ -26,6 +27,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
+      leaveBreadcrumb("Dropped file", {}, "user");
       acceptedFiles.forEach((file) => {
         const reader = new FileReader();
 
@@ -45,6 +47,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
   const onParse = useCallback(() => {
     if (logType) {
       onChangeLogType(logType);
+      leaveBreadcrumb("Parsing file", { logType }, "process");
       if (typeof lineStream.current === "string") {
         ingestLines(lineStream.current.split("\n"), logType);
       }
@@ -89,7 +92,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
             ) : (
               <Dropzone>
                 <Body weight="medium">
-                  Drag and Drop a log file to view in Lobster
+                  Drag and Drop a log file to view in Parsley
                 </Body>
                 <Body weight="medium">or</Body>
                 <Button leftGlyph={<Icon glyph="Upload" />} onClick={open}>
