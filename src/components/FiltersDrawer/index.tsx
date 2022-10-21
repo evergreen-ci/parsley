@@ -11,9 +11,8 @@ import { HAS_OPENED_DRAWER } from "constants/cookies";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size, zIndex } from "constants/tokens";
 import { useFilterParam } from "hooks/useQueryParam";
-import type { ParsedFilter } from "types/filters";
-import { ExpandedLines } from "types/logs";
-import Filter from "./Filter";
+import { ExpandedLines, Filter } from "types/logs";
+import FilterGroup from "./FilterGroup";
 
 const { green, gray } = palette;
 
@@ -46,9 +45,9 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
   };
 
   const editFilter = (
-    fieldName: "matchType" | "caseSensitive" | "visible" | "name",
+    fieldName: keyof Filter,
     fieldValue: MatchType | CaseSensitivity | boolean | string,
-    filter: ParsedFilter
+    filter: Filter
   ) => {
     // Duplicate filters are not allowed.
     if (fieldName === "name" && filters.some((f) => f.name === fieldValue)) {
@@ -95,7 +94,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
                 key={filter.name}
                 data-cy={`filter-${filter.name}`}
               >
-                <Filter
+                <FilterGroup
                   deleteFilter={deleteFilter}
                   editFilter={editFilter}
                   filter={filter}

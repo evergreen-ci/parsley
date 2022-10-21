@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import type { ParsedFilter } from "types/filters";
+import { Filters } from "types/logs";
 import {
   parseFilters,
   parseQueryString,
@@ -67,7 +67,7 @@ const useFilterParam = () => {
   );
 
   const setFiltersParam = useCallback(
-    (filters: ParsedFilter[]) => {
+    (filters: Filters) => {
       setSearchParams({
         ...searchParams,
         filters: stringifyFilters(filters),

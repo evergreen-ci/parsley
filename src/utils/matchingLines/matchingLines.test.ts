@@ -1,13 +1,8 @@
 import { CaseSensitivity, FilterLogic, MatchType } from "constants/enums";
-import {
-  constructRegexToMatch,
-  filterLogs,
-  getMatchingLines,
-  matchesFilters,
-} from ".";
+import { constructRegexToMatch, getMatchingLines, matchesFilters } from ".";
 
 /**
- * Helper test function for constructing a ParsedFilter object.
+ * Helper test function for constructing a Filter object.
  */
 const makeFilter = (filter: {
   name: string;
@@ -227,75 +222,6 @@ describe("matchesFilters", () => {
           )
         ).toBe(false);
       });
-    });
-  });
-});
-
-describe("filterLogs", () => {
-  it("should return the log lines as is if there are no matching lines", () => {
-    expect(
-      filterLogs({
-        logLines,
-        matchingLines: undefined,
-        bookmarks: [],
-        selectedLine: undefined,
-        expandedLines: [],
-        expandableRows: true,
-      })
-    ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
-  });
-
-  it("should return the log lines as if expandable rows is turned off", () => {
-    expect(
-      filterLogs({
-        logLines,
-        matchingLines: new Set([1, 2, 3]),
-        bookmarks: [],
-        selectedLine: undefined,
-        expandedLines: [],
-        expandableRows: false,
-      })
-    ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
-  });
-
-  describe("with matching lines", () => {
-    it("should not collapse bookmarks", () => {
-      expect(
-        filterLogs({
-          logLines,
-          matchingLines: new Set([1]),
-          bookmarks: [7],
-          selectedLine: undefined,
-          expandedLines: [],
-          expandableRows: true,
-        })
-      ).toStrictEqual([[0], 1, [2, 3, 4, 5, 6], 7]);
-    });
-
-    it("should not collapse selected lines", () => {
-      expect(
-        filterLogs({
-          logLines,
-          matchingLines: new Set([1]),
-          bookmarks: [],
-          selectedLine: 7,
-          expandedLines: [],
-          expandableRows: true,
-        })
-      ).toStrictEqual([[0], 1, [2, 3, 4, 5, 6], 7]);
-    });
-
-    it("should not collapse expanded lines", () => {
-      expect(
-        filterLogs({
-          logLines,
-          matchingLines: new Set([1]),
-          bookmarks: [],
-          selectedLine: undefined,
-          expandedLines: [[4, 6]],
-          expandableRows: true,
-        })
-      ).toStrictEqual([[0], 1, [2, 3], 4, 5, 6, [7]]);
     });
   });
 });

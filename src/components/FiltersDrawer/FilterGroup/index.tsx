@@ -13,18 +13,22 @@ import { Body } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
-import type { ParsedFilter } from "types/filters";
+import { Filter } from "types/logs";
 
 const { gray } = palette;
 
-interface FilterProps {
+interface FilterGroupProps {
   ["data-cy"]?: string;
-  filter: ParsedFilter;
+  filter: Filter;
   deleteFilter: (filter: string) => void;
-  editFilter: (fieldName: any, fieldValue: any, filter: ParsedFilter) => void;
+  editFilter: (
+    fieldName: keyof Filter,
+    fieldValue: MatchType | CaseSensitivity | boolean | string,
+    filter: Filter
+  ) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({
+const FilterGroup: React.FC<FilterGroupProps> = ({
   "data-cy": dataCy,
   filter,
   deleteFilter,
@@ -178,4 +182,4 @@ const StyledSegmentedControl = styled(SegmentedControl)`
   }
 `;
 
-export default Filter;
+export default FilterGroup;

@@ -1,6 +1,6 @@
 import { parse, stringify } from "query-string";
 import { CaseSensitivity, MatchType } from "constants/enums";
-import type { ParsedFilter } from "types/filters";
+import { Filters } from "types/logs";
 
 export const parseQueryString = (search: string) =>
   parse(search, {
@@ -16,8 +16,8 @@ export const stringifyQuery = (object: { [key: string]: any }) =>
     skipEmptyString: true,
   });
 
-export const parseFilters = (filters: string[]): ParsedFilter[] => {
-  const parsedFilters: ParsedFilter[] = filters.map((f) => {
+export const parseFilters = (filters: string[]): Filters => {
+  const parsedFilters: Filters = filters.map((f) => {
     const filter = f.toString();
     const visible = filter.charAt(0) === "1";
     const caseSensitive =
@@ -38,7 +38,7 @@ export const parseFilters = (filters: string[]): ParsedFilter[] => {
   return parsedFilters;
 };
 
-export const stringifyFilters = (filters: ParsedFilter[]): string[] =>
+export const stringifyFilters = (filters: Filters): string[] =>
   filters.map((f) => {
     const visible = f.visible ? 1 : 0;
     const caseSensitive = f.caseSensitive === CaseSensitivity.Sensitive ? 1 : 0;
