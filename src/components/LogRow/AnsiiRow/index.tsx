@@ -13,7 +13,7 @@ interface AnsiiRowProps extends BaseRowProps {
 
 const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
   const { data, listRowProps, lineNumber } = rowProps;
-  const { getLine, wrap, searchTerm, range, highlightedLine, scrollToLine } =
+  const { getLine, scrollToLine, highlightedLine, range, searchTerm, wrap } =
     data;
 
   const lineContent = getLine(lineNumber) || "";
@@ -22,11 +22,10 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
       url: (value: string) => /^(http)s?:\/\//.test(value),
     },
   });
-
   const inRange = isLineInRange(range, lineNumber);
+
   return lineContent ? (
     <BaseRow
-      wrap={wrap}
       {...listRowProps}
       ref={ref}
       data-cy="ansii-row"
@@ -34,6 +33,7 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
       lineNumber={lineNumber}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}
+      wrap={wrap}
     >
       {linkifiedLine}
     </BaseRow>

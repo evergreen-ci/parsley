@@ -115,27 +115,25 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
             </NavGroupHeader>
           }
         >
-          <ExpandedLineContainer>
-            {expandedLines.length ? (
-              expandedLines.map((e, idx) => (
-                <ExpandedLineWrapper key={`range-${e[0]}-to-${e[1]}`}>
-                  <IconButton
-                    aria-label="Delete range button"
-                    onClick={() => collapseLines(idx)}
-                  >
-                    <Icon fill={green.dark2} glyph="X" />
-                  </IconButton>
-                  <Overline>
-                    Row {e[0]} to {e[1]}
-                  </Overline>
-                </ExpandedLineWrapper>
-              ))
-            ) : (
-              <ExpandedLineWrapper data-cy="no-expanded-lines-message">
-                <Body>No lines have been expanded.</Body>
+          {expandedLines.length ? (
+            expandedLines.map((e, idx) => (
+              <ExpandedLineWrapper key={`range-${e[0]}-to-${e[1]}`}>
+                <IconButton
+                  aria-label="Delete range button"
+                  onClick={() => collapseLines(idx)}
+                >
+                  <Icon fill={green.dark2} glyph="X" />
+                </IconButton>
+                <Overline>
+                  Row {e[0]} to {e[1]}
+                </Overline>
               </ExpandedLineWrapper>
-            )}
-          </ExpandedLineContainer>
+            ))
+          ) : (
+            <ExpandedLineWrapper data-cy="no-expanded-lines-message">
+              <Body>No lines have been expanded.</Body>
+            </ExpandedLineWrapper>
+          )}
         </StyledSideNavGroup>
       </PaddedContainer>
     </StyledSideNav>
@@ -172,11 +170,6 @@ const NavGroupTitle = styled.div`
 const FilterWrapper = styled.div`
   margin-top: ${size.xs};
   margin-bottom: ${size.m};
-`;
-
-const ExpandedLineContainer = styled.div`
-  display: flex;
-  flex-direction: column;
 `;
 
 const ExpandedLineWrapper = styled.div`

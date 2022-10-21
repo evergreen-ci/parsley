@@ -190,6 +190,19 @@ describe("filtersDrawer", () => {
       expect(collapseLines).toHaveBeenCalledTimes(1);
       expect(collapseLines).toHaveBeenCalledWith(0);
     });
+
+    it("deleting a filter should cause clearExpandedLines if there are no longer any filters applied", async () => {
+      const clearExpandedLines = jest.fn();
+      const { history } = render(
+        <FiltersDrawer {...props} clearExpandedLines={clearExpandedLines} />,
+        {
+          route: "?filters=filter1",
+        }
+      );
+      await user.click(screen.getAllByLabelText("Delete filter")[0]);
+      expect(history.location.search).toBe("");
+      expect(clearExpandedLines).toHaveBeenCalledTimes(1);
+    });
   });
 });
 

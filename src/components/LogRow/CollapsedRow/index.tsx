@@ -38,6 +38,7 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
       ]);
     });
   };
+
   const expandAll = () => {
     startTransition(() => {
       expandLines([[start, end]]);
@@ -61,6 +62,7 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
       <StyledButton
         disabled={disableExpandFive}
         leftGlyph={
+          // TODO: Remove conditional color when LG-2528 is completed.
           <Icon fill={disableExpandFive ? gray.base : black} glyph="Expand" />
         }
         onClick={expandFive}

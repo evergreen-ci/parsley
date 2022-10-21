@@ -12,28 +12,28 @@ const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
   const {
     getLine,
     getResmokeLineColor,
-    wrap,
+    scrollToLine,
+    highlightedLine,
     range,
     searchTerm,
-    highlightedLine,
-    scrollToLine,
+    wrap,
   } = data;
 
   const lineContent = getLine(lineNumber);
-  const color = getResmokeLineColor(lineNumber);
+  const lineColor = getResmokeLineColor(lineNumber);
   const inRange = isLineInRange(range, lineNumber);
 
   return lineContent ? (
     <BaseRow
-      wrap={wrap}
       {...listRowProps}
       ref={ref}
       data-cy="resmoke-row"
       highlightedLine={highlightedLine}
       lineNumber={lineNumber}
-      resmokeRowColor={color}
+      resmokeRowColor={lineColor}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}
+      wrap={wrap}
     >
       {lineContent}
     </BaseRow>

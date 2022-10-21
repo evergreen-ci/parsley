@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import { LogTypes } from "constants/enums";
 import { ExpandedLines } from "types/logs";
-import { mergeIntervals } from "utils/expandedRanges";
+import { mergeIntervals } from "utils/expandedLines";
 import { getColorMapping, processResmokeLine } from "utils/resmoke";
 import { SearchState } from "./types";
 

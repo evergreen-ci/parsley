@@ -18,6 +18,7 @@ export const mergeIntervals = (intervals: ExpandedLines) => {
   let current = intervals[0];
 
   for (let i = 1; i < intervals.length; i++) {
+    // If current interval's END + 1 equals next interval's START, the intervals can be merged.
     if (current[1] + 1 === intervals[i][0]) {
       current = [current[0], intervals[i][1]];
     } else {

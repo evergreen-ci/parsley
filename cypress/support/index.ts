@@ -5,6 +5,7 @@ declare global {
     interface Chainable {
       /**
        * Custom command to click one of the toggles in the Details Overlay panel.
+       * @example cy.clickToggle('wrap-toggle', true)
        */
       clickToggle(toggleDataCy: string, enable: boolean): void;
       /**
@@ -18,6 +19,7 @@ declare global {
       dataCy(value: string): Chainable<Element>;
       /**
        * Custom command to edit the search range bounds in the Details Overlay panel.
+       * @example cy.editBounds({ lower: 5, upper: 10 })
        */
       editBounds(bounds: { upper?: string; lower?: string }): void;
       /**

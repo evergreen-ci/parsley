@@ -32,14 +32,15 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     range,
     searchState,
   } = useLogContext();
-  const [wrap] = useQueryParam(QueryParams.Wrap, false);
 
   const { searchTerm } = searchState;
 
+  const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [selectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
   );
+
   const [initialScrollIndex] = useState(
     findLineIndex(processedLogLines, selectedLine)
   );
@@ -71,8 +72,8 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               data: {
                 expandLines,
                 getLine,
-                scrollToLine,
                 getResmokeLineColor,
+                scrollToLine,
                 highlightedLine,
                 range,
                 searchTerm,

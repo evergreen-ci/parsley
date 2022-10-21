@@ -1,7 +1,7 @@
 import { FilterLogic } from "constants/enums";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
-import { isExpanded } from "utils/expandedRanges";
+import { isExpanded } from "utils/expandedLines";
 
 type FilterLogsParams = {
   logLines: string[];
@@ -13,9 +13,9 @@ type FilterLogsParams = {
 };
 
 /**
- * `filterLogs` processes log lines according to what filters, bookmarks, and selected line are applied.
+ * `filterLogs` processes log lines according to what filters, bookmarks, selected line, and expanded lines are applied.
  * @param {string[]} obj.logLines - list of strings representing the log lines
- * @param {string[]} obj.matchingLines - set of numbers representing which lines match the applied filters
+ * @param {Set<number>} obj.matchingLines - set of numbers representing which lines match the applied filters
  * @param {number[]} obj.bookmarks - list of line numbers representing bookmarks
  * @param {number | undefined} obj.selectedLine - a line number representing a selected line
  * @param {ExpandedLines} obj.expandedLines - an array of intervals representing expanded ranges
@@ -40,7 +40,7 @@ export const filterLogs = ({
   const filteredLines: ProcessedLogLines = [];
 
   logLines.reduce((arr, _logLine, idx) => {
-    // Bookmarks and selected lines should always remain uncollapsed.
+    // Bookmarks, selected lines, and expanded lines should always remain uncollapsed.
     if (
       bookmarks.includes(idx) ||
       selectedLine === idx ||
@@ -70,11 +70,12 @@ export const filterLogs = ({
 };
 
 /**
- * Function that determines if a particular log line satisfies the filter conditions.
+ * 'getMatchingLines' determines which log lines match the applied filters. This function returns undefined if no
+ * filters have been applied.
  * @param logLines - list of strings representing the log lines
  * @param filters - list of filters being applied
  * @param filterLogic - specifies whether to use AND or OR filtering
- * @returns true if filter conditions are satisfied, false otherwise
+ * @returns a set of numbers representing the matched lines, or undefined
  */
 export const getMatchingLines = (
   logLines: string[],

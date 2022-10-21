@@ -4,7 +4,6 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
-import { ExpandedLines } from "types/logs";
 import CollapsedRow from ".";
 
 export default {
@@ -18,15 +17,10 @@ type CollapsedRowProps = React.FC<
 
 // CollapsedRow with AnsiiRows.
 const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
-  const [, setExpandedLines] = useState<ExpandedLines>([]);
+  // Used to simulate expanding lines.
   const [processedLogLines, setProcessedLogLines] = useState(
     collapsedProcessedLogLines
   );
-
-  const expandLines = (linesToExpand: ExpandedLines) => {
-    setExpandedLines([...linesToExpand]);
-    setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]);
-  };
 
   return (
     <Container>
@@ -37,7 +31,7 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
           data: {
-            expandLines,
+            expandLines: () => setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]),
             getLine: (index: number) => ansiiLogLines[index],
             getResmokeLineColor: () => undefined,
             scrollToLine: () => {},
@@ -63,15 +57,10 @@ CollapsedAnsiiRow.args = {
 
 // CollapsedRow withs ResmokeRows.
 const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
-  const [, setExpandedLines] = useState<ExpandedLines>([]);
+  // Used to simulate expanding lines.
   const [processedLogLines, setProcessedLogLines] = useState(
     collapsedProcessedLogLines
   );
-
-  const expandLines = (linesToExpand: ExpandedLines) => {
-    setExpandedLines([...linesToExpand]);
-    setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]);
-  };
 
   return (
     <Container>
@@ -82,7 +71,7 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
           data: {
-            expandLines,
+            expandLines: () => setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]),
             getLine: (index: number) => resmokeLogLines[index],
             getResmokeLineColor: () => undefined,
             scrollToLine: () => {},

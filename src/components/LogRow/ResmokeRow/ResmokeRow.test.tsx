@@ -169,8 +169,6 @@ const data = {
   scrollToLine: jest.fn(),
 
   expandedLines: [],
-  range: {
-    lowerRange: 0,
-  },
+  range: { lowerRange: 0 },
   wrap: false,
 };

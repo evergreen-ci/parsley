@@ -88,14 +88,15 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const listRef = useRef<List>(null);
 
+  const stringifiedFilters = filters.toString();
+  const stringifiedBookmarks = bookmarks.toString();
+  const stringifiedExpandedLines = state.expandedLines.toString();
+
   const matchingLines = useMemo(
     () => getMatchingLines(state.logs, filters, filterLogic),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [`${filters}`, state.logs.length, filterLogic]
+    [stringifiedFilters, state.logs.length, filterLogic]
   );
-
-  const stringifiedBookmarks = bookmarks.toString();
-  const stringifiedExpandedLines = state.expandedLines.toString();
 
   useEffect(
     () => {
