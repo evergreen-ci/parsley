@@ -13,6 +13,7 @@ interface RowData {
   scrollToLine: (lineNumber: number) => void;
 
   highlightedLine?: number;
+  highlights?: RegExp;
   range: {
     lowerRange: number;
     upperRange?: number;

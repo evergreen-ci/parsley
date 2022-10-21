@@ -22,6 +22,7 @@ interface BaseRowProps extends ListRowProps {
   highlightedLine?: number;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
+  highlights?: RegExp;
   "data-cy"?: string;
   resmokeRowColor?: string;
 }
@@ -38,6 +39,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     wrap,
     isVisible,
     highlightedLine,
+    highlights,
     scrollToLine,
     searchTerm,
     resmokeRowColor,
@@ -102,6 +104,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       <ProcessedBaseRow
         color={resmokeRowColor}
         data-cy={dataCyText}
+        highlights={highlights}
         searchTerm={searchTerm}
       >
         {children}
@@ -114,11 +117,12 @@ interface ProcessedBaseRowProps {
   children: string;
   searchTerm?: RegExp;
   color?: string;
+  highlights?: RegExp;
   ["data-cy"]?: string;
 }
 
 const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
-  const { children, searchTerm, color, "data-cy": dataCy } = props;
+  const { children, searchTerm, color, "data-cy": dataCy, highlights } = props;
   const memoizedLogLine = useMemo(() => {
     let render = children;
     if (searchTerm) {
@@ -128,13 +132,21 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
         (match) => `<mark>${escapeHtml(match)}</mark>`
       );
     }
+    if (highlights) {
+      if (String(highlights) !== String(searchTerm)) {
+        render = render.replace(
+          highlights,
+          (match) => `<mark>${escapeHtml(match)}</mark>`
+        );
+      }
+    }
     return renderHtml(render, {
       transform: {
         // @ts-expect-error - This is expecting a react component but its an Emotion component which are virtually the same thing
         mark: Highlight,
       },
     });
-  }, [children, searchTerm]);
+  }, [children, searchTerm, highlights]);
 
   return (
     <span data-cy={dataCy} style={{ color }}>
