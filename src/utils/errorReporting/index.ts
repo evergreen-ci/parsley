@@ -33,10 +33,7 @@ const reportError = (err: CustomBugsnagError): reportErrorResult => {
 };
 
 const sendError = (err: CustomBugsnagError, severity: Event["severity"]) => {
-  let metadata: { [key: string]: any } = {};
-  if (err.metadata) {
-    metadata = err.metadata;
-  }
+  const metadata = err.metadata || {};
   Bugsnag.notify(err, (event) => {
     // reassigning param is recommended usage in bugsnag docs
     // eslint-disable-next-line no-param-reassign
