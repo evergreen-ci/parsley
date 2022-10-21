@@ -38,6 +38,11 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     []
   );
 
+  const [highlights, setHighlights] = useQueryParam<string[]>(
+    QueryParams.Highlights,
+    []
+  );
+
   const deleteFilter = (filterName: string) => {
     const newFilters = filters.filter((f) => f !== filterName);
     setFilters(newFilters);
@@ -58,6 +63,10 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     setFilters(newFilters);
   };
 
+  const deleteHighlight = (highlightName: string) => {
+    const newHighlights = highlights.filter((f) => f !== highlightName);
+    setHighlights(newHighlights);
+  };
   return (
     <StyledSideNav
       aria-label="Filters side nav"
@@ -86,18 +95,18 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
         >
           {filters.length ? (
             filters.map((filter) => (
-              <FilterWrapper key={filter}>
+              <SectionWrapper key={filter}>
                 <Filter
                   deleteFilter={deleteFilter}
                   editFilter={editFilter}
                   filterName={filter}
                 />
-              </FilterWrapper>
+              </SectionWrapper>
             ))
           ) : (
-            <FilterWrapper data-cy="no-filters-message">
+            <SectionWrapper data-cy="no-filters-message">
               <Body>No filters have been applied.</Body>
-            </FilterWrapper>
+            </SectionWrapper>
           )}
         </StyledSideNavGroup>
 
@@ -117,7 +126,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
         >
           {expandedLines.length ? (
             expandedLines.map((e, idx) => (
-              <ExpandedLineWrapper key={`range-${e[0]}-to-${e[1]}`}>
+              <NonFilterElement key={`range-${e[0]}-to-${e[1]}`}>
                 <IconButton
                   aria-label="Delete range button"
                   onClick={() => collapseLines(idx)}
@@ -127,12 +136,47 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
                 <Overline>
                   Row {e[0]} to {e[1]}
                 </Overline>
-              </ExpandedLineWrapper>
+              </NonFilterElement>
             ))
           ) : (
-            <ExpandedLineWrapper data-cy="no-expanded-lines-message">
+            <SectionWrapper data-cy="no-expanded-lines-message">
               <Body>No lines have been expanded.</Body>
-            </ExpandedLineWrapper>
+            </SectionWrapper>
+          )}
+        </StyledSideNavGroup>
+
+        <StyledSideNavGroup
+          glyph={
+            <Icon
+              fill={highlights.length ? green.dark2 : gray.base}
+              glyph="Minus"
+            />
+          }
+          header={
+            <NavGroupHeader data-cy="highlight-nav-group-header">
+              <NavGroupTitle>Highlighted Terms</NavGroupTitle>
+              <Badge variant={Variant.Green}>{highlights.length}</Badge>
+            </NavGroupHeader>
+          }
+        >
+          {highlights.length ? (
+            <>
+              {highlights.map((highlight) => (
+                <NonFilterElement key={`highlight-${highlight}`}>
+                  <IconButton
+                    aria-label="Delete highlight button"
+                    onClick={() => deleteHighlight(highlight)}
+                  >
+                    <Icon fill={green.dark2} glyph="X" />
+                  </IconButton>
+                  <Overline>{highlight}</Overline>
+                </NonFilterElement>
+              ))}
+            </>
+          ) : (
+            <SectionWrapper data-cy="no-highlight-message">
+              <Body>No terms have been highlighted.</Body>
+            </SectionWrapper>
           )}
         </StyledSideNavGroup>
       </PaddedContainer>
@@ -167,15 +211,15 @@ const NavGroupTitle = styled.div`
   margin-right: ${size.xxs};
 `;
 
-const FilterWrapper = styled.div`
+const SectionWrapper = styled.div`
   margin-top: ${size.xs};
   margin-bottom: ${size.m};
 `;
 
-const ExpandedLineWrapper = styled.div`
+const NonFilterElement = styled.div`
   display: flex;
   align-items: center;
-  padding-top: ${size.xxs};
+  margin: ${size.xs} 0;
 `;
 
 export default FiltersDrawer;
