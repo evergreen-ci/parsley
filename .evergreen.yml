@@ -101,6 +101,21 @@ functions:
       permissions: public-read
       display_name: storybook_assets_map_
   
+  # Ideally we can get rid of this command upon the completion of EVG-17334.
+  attach-storybook-assets-svg:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/storybook-static/assets/*.svg"]
+      remote_file: parsley/${task_id}/storybook/assets/
+      bucket: mciuploads
+      content_type: image/svg+xml
+      permissions: public-read
+      display_name: storybook_assets_svg_
+
   attach-source-map:
     command: s3.put
     type: system
@@ -360,9 +375,11 @@ tasks:
 
   - name: storybook
     commands:
+    - func: copy-cmdrc
     - func: yarn-storybook
     - func: attach-storybook
     - func: attach-storybook-assets-js
+    - func: attach-storybook-assets-svg
     - func: attach-storybook-assets-map
 
   - name: snapshots

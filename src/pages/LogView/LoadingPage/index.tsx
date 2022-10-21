@@ -16,6 +16,7 @@ import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import { useAxiosGet } from "hooks";
 import NotFound from "pages/404";
+import { leaveBreadcrumb } from "utils/errorReporting";
 import LoadingBar from "./LoadingBar";
 
 interface LoadingPageProps {
@@ -78,6 +79,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const { data, error, isLoading } = useAxiosGet(url);
   useEffect(() => {
     if (data) {
+      leaveBreadcrumb("ingest-log-lines", { logType }, "process");
       ingestLines(data.trimEnd().split("\n"), logType);
       setLogMetadata({
         taskID,
