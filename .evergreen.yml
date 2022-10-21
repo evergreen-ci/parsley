@@ -360,6 +360,7 @@ tasks:
 
   - name: storybook
     commands:
+    - func: copy-cmdrc
     - func: yarn-storybook
     - func: attach-storybook
     - func: attach-storybook-assets-js
