@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { size } from "constants/tokens";
-import { LogMetadata } from "context/LogContext/types";
 import ButtonRow from "./ButtonRow";
 import SearchRangeInput from "./SearchRangeInput";
 import {
@@ -13,12 +12,10 @@ import {
 
 interface DetailsOverlayProps {
   ["data-cy"]?: string;
-  logMetadata?: LogMetadata;
 }
 
 const DetailsOverlay: React.FC<DetailsOverlayProps> = ({
   "data-cy": dataCy,
-  logMetadata,
 }) => (
   <DetailsOverlayCard data-cy={dataCy}>
     <Row>
@@ -33,7 +30,7 @@ const DetailsOverlay: React.FC<DetailsOverlayProps> = ({
         <PrettyPrintToggle />
       </Column>
     </Row>
-    <ButtonRow logMetadata={logMetadata} />
+    <ButtonRow />
   </DetailsOverlayCard>
 );
 

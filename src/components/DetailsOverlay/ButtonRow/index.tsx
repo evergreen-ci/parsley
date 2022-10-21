@@ -4,19 +4,15 @@ import Tooltip from "@leafygreen-ui/tooltip";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
-import { LogMetadata } from "context/LogContext/types";
 import { useQueryParam } from "hooks/useQueryParam";
 import { copyToClipboard, getJiraFormat } from "utils/string";
 import { DetailRow } from "../styles";
 
-interface ButtonRowProps {
-  logMetadata?: LogMetadata;
-}
-const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
+const ButtonRow: React.FC = () => {
   const [hasCopied, setHasCopied] = useState(false);
 
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
-  const { getLine } = useLogContext();
+  const { getLine, logMetadata } = useLogContext();
 
   const { htmlLogURL, rawLogURL, jobLogsURL } = logMetadata || {};
   const tooltipText = bookmarks.length
@@ -48,20 +44,21 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
       >
         {hasCopied ? "Copied!" : tooltipText}
       </Tooltip>
-
       <Tooltip
         align="top"
         justify="middle"
         trigger={
-          <Button
-            data-cy="job-logs-button"
-            disabled={!jobLogsURL}
-            href={jobLogsURL}
-            leftGlyph={<Icon glyph="Export" />}
-            target="_blank"
-          >
-            Job Logs
-          </Button>
+          <div data-cy="job-logs-button-wrapper">
+            <Button
+              data-cy="job-logs-button"
+              disabled={!jobLogsURL}
+              href={jobLogsURL}
+              leftGlyph={<Icon glyph="Export" />}
+              target="_blank"
+            >
+              Job Logs
+            </Button>
+          </div>
         }
       >
         View all logs for this job
@@ -70,15 +67,17 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
         align="top"
         justify="middle"
         trigger={
-          <Button
-            data-cy="raw-log-button"
-            disabled={!rawLogURL}
-            href={rawLogURL}
-            leftGlyph={<Icon glyph="Export" />}
-            target="_blank"
-          >
-            Raw
-          </Button>
+          <div data-cy="raw-logs-button-wrapper">
+            <Button
+              data-cy="raw-log-button"
+              disabled={!rawLogURL}
+              href={rawLogURL}
+              leftGlyph={<Icon glyph="Export" />}
+              target="_blank"
+            >
+              Raw
+            </Button>
+          </div>
         }
       >
         Open Raw log in a new tab
@@ -87,17 +86,20 @@ const ButtonRow: React.FC<ButtonRowProps> = ({ logMetadata }) => {
         align="top"
         justify="middle"
         trigger={
-          <Button
-            data-cy="html-log-button"
-            href={htmlLogURL}
-            leftGlyph={<Icon glyph="Export" />}
-            target="_blank"
-          >
-            HTML
-          </Button>
+          <div data-cy="html-logs-button-wrapper">
+            <Button
+              data-cy="html-log-button"
+              disabled={!htmlLogURL}
+              href={htmlLogURL}
+              leftGlyph={<Icon glyph="Export" />}
+              target="_blank"
+            >
+              HTML
+            </Button>
+          </div>
         }
       >
-        Open log in standard HTML format in a new tab
+        Open log in HTML format in a new tab
       </Tooltip>
     </DetailRow>
   );

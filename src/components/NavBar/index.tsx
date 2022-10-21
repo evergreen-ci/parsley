@@ -21,7 +21,7 @@ const NavBar: React.FC = () => {
     QueryParams.Filters,
     []
   );
-  const { hasLogs, logMetadata, clearLogs, setSearch, searchState, paginate } =
+  const { hasLogs, clearLogs, setSearch, searchState, paginate } =
     useLogContext();
   const { hasSearch } = searchState;
   const handleSearch = (selected: string, value: string) => {
@@ -67,7 +67,7 @@ const NavBar: React.FC = () => {
         data-cy="details-button"
         disabled={!hasLogs}
       >
-        <DetailsOverlay data-cy="details-overlay" logMetadata={logMetadata} />
+        <DetailsOverlay data-cy="details-overlay" />
       </StyledButton>
     </Container>
   );
