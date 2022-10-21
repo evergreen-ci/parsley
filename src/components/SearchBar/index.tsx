@@ -34,6 +34,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [selected, setSelected] = useState(SearchBarActions.Search);
 
   const isFilter = selected === SearchBarActions.Filter;
+  const isHighlight = selected === SearchBarActions.Highlight;
   const isValid = validator(input);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -59,7 +60,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     if (inputRef.current) {
       inputRef.current.blur();
     }
-    if (isFilter) {
+    if (isFilter || isHighlight) {
       setInput("");
     }
     onSubmit(selected, input);
@@ -102,6 +103,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
           value={SearchBarActions.Filter}
         >
           Filter
+        </Option>
+        <Option
+          key={SearchBarActions.Highlight}
+          data-cy="highlight-option"
+          value={SearchBarActions.Highlight}
+        >
+          Highlight
         </Option>
       </StyledSelect>
       <StyledInput

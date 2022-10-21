@@ -21,19 +21,33 @@ const NavBar: React.FC = () => {
     QueryParams.Filters,
     []
   );
+  const [highlights, setHighlights] = useQueryParam<string[]>(
+    QueryParams.Highlights,
+    []
+  );
   const { hasLogs, clearLogs, setSearch, searchState, paginate } =
     useLogContext();
 
   const { hasSearch } = searchState;
   const handleSearch = (selected: string, value: string) => {
-    if (selected === SearchBarActions.Search) {
-      setSearch(value);
-    } else if (
-      selected === SearchBarActions.Filter &&
-      !filters.includes(value)
-    ) {
-      setFilters([...filters, value]);
-      setSearch("");
+    switch (selected) {
+      case SearchBarActions.Search:
+        setSearch(value);
+        break;
+      case SearchBarActions.Filter:
+        if (!filters.includes(value)) {
+          setSearch("");
+          setFilters([...filters, value]);
+        }
+        break;
+      case SearchBarActions.Highlight:
+        if (!highlights.includes(value)) {
+          setSearch("");
+          setHighlights([...highlights, value]);
+        }
+        break;
+      default:
+        throw new Error("Invalid search action");
     }
   };
 
