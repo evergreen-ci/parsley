@@ -12,9 +12,53 @@ Cypress.Commands.add("addFilter", (filter: string) => {
   cy.dataCy("searchbar-input").type(`${filter}{enter}`);
 });
 
+Cypress.Commands.add("clearBounds", () => {
+  cy.dataCy("details-button").click();
+  cy.get(`[data-cy="details-overlay"]`).should("be.visible");
+
+  cy.dataCy("range-lower-bound").clear();
+  cy.dataCy("range-upper-bound").clear();
+
+  cy.dataCy("details-button").click();
+  cy.get(`[data-cy="details-overlay"]`).should("not.exist");
+});
+
+Cypress.Commands.add(
+  "clickToggle",
+  (toggleDataCy: string, enabled: boolean) => {
+    cy.dataCy("details-button").click();
+    cy.get(`[data-cy="details-overlay"]`).should("be.visible");
+    cy.dataCy(toggleDataCy).click();
+    cy.dataCy(toggleDataCy).should("have.attr", "aria-checked", `${enabled}`);
+    cy.dataCy("details-button").click();
+    cy.get(`[data-cy="details-overlay"]`).should("not.exist");
+  }
+);
+
 Cypress.Commands.add("dataCy", (value: string) => {
   cy.get(`[data-cy=${value}]`);
 });
+
+Cypress.Commands.add(
+  "editBounds",
+  (bounds: { upper: string; lower: string }) => {
+    cy.dataCy("details-button").click();
+    cy.get(`[data-cy="details-overlay"]`).should("be.visible");
+
+    if (bounds.upper !== undefined) {
+      cy.dataCy("range-upper-bound").should("be.visible");
+      cy.dataCy("range-upper-bound").type(bounds.upper);
+    }
+
+    if (bounds.lower !== undefined) {
+      cy.dataCy("range-lower-bound").should("be.visible");
+      cy.dataCy("range-lower-bound").type(bounds.lower);
+    }
+
+    cy.dataCy("details-button").click();
+    cy.get(`[data-cy="details-overlay"]`).should("not.exist");
+  }
+);
 
 // Source: https://stackoverflow.com/questions/60174546/how-grant-cypress-test-application-some-permissions
 Cypress.Commands.add("enableClipboard", () => {

@@ -66,10 +66,10 @@ const rowProps = {
   columnIndex: 0,
   index: 0,
   isScrolling: false,
+  scrollToLine: jest.fn(),
   isVisible: true,
   lineNumber: 0,
   parent: {} as any,
-  scrollToLine: jest.fn(),
   style: {},
   wrap: false,
 };

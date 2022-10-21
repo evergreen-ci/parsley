@@ -308,7 +308,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             className="leafygreen-ui-1j2gfit"
           >
             <button
-              aria-checked={false}
+              aria-checked={true}
               aria-disabled={false}
               aria-labelledby="Expandable Rows Toggle"
               className="leafygreen-ui-wo7arb"
