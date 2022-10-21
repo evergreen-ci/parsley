@@ -8,6 +8,7 @@ import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import renderHtml from "utils/renderHtml";
+import { escapeHtml } from "utils/renderHtml/escapeHtml";
 
 const { yellow, red } = palette;
 
@@ -121,7 +122,11 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
   const memoizedLogLine = useMemo(() => {
     let render = children;
     if (searchTerm) {
-      render = render.replace(searchTerm, `<mark>$&</mark>`);
+      // escape the matching string to prevent XSS
+      render = render.replace(
+        searchTerm,
+        (match) => `<mark>${escapeHtml(match)}</mark>`
+      );
     }
     return renderHtml(render, {
       transform: {

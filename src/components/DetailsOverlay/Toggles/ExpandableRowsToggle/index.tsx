@@ -5,7 +5,7 @@ import BaseToggle from "../BaseToggle";
 const ExpandableRowsToggle: React.FC = () => {
   const [expandableRows, setExpandableRows] = useQueryParam(
     QueryParams.Expandable,
-    false
+    true
   );
   return (
     <BaseToggle

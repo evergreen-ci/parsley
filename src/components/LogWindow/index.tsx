@@ -5,7 +5,7 @@ import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import SideBar from "components/SideBar";
 import SubHeader from "components/SubHeader";
-import { FilterLogic, LogTypes } from "constants/enums";
+import { LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
@@ -17,33 +17,43 @@ interface LogWindowProps {
 }
 const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const {
+    clearExpandedLines,
+    collapseLines,
+    expandLines,
     getLine,
     getResmokeLineColor,
+    scrollToLine,
+
+    expandedLines,
     hasLogs,
     highlightedLine,
     lineCount,
     processedLogLines,
     range,
-    scrollToLine,
     searchState,
   } = useLogContext();
-  const [wrap] = useQueryParam(QueryParams.Wrap, false);
-  const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
-  const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
 
   const { searchTerm } = searchState;
 
+  const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [selectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
   );
+
   const [initialScrollIndex] = useState(
     findLineIndex(processedLogLines, selectedLine)
   );
 
   return (
     <Container data-cy="log-window">
-      {hasLogs && <FiltersDrawer />}
+      {hasLogs && (
+        <FiltersDrawer
+          clearExpandedLines={clearExpandedLines}
+          collapseLines={collapseLines}
+          expandedLines={expandedLines}
+        />
+      )}
       {hasLogs && (
         <SideBar
           maxLineNumber={lineCount - 1}
@@ -56,22 +66,22 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         <LogPaneContainer>
           <LogPane
             cache={cache}
-            filterLogic={filterLogic}
-            filters={filters}
             initialScrollIndex={initialScrollIndex}
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
-              getLine,
-              getResmokeLineColor,
-              highlightedLine,
+              data: {
+                expandLines,
+                getLine,
+                getResmokeLineColor,
+                scrollToLine,
+                highlightedLine,
+                range,
+                searchTerm,
+                wrap,
+              },
+              processedLogLines,
               logType,
-              processedLines: processedLogLines,
-              range,
-              scrollToLine,
-              searchTerm,
-              wrap,
             })}
-            wrap={wrap}
           />
         </LogPaneContainer>
       </ColumnContainer>

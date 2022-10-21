@@ -1,10 +1,18 @@
-import { createContext, useCallback, useContext, useMemo, useRef } from "react";
+import {
+  createContext,
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from "react";
 import { List } from "react-virtualized";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
-import { ProcessedLogLines } from "types/logs";
-import { filterLogs } from "utils/filter";
+import { ExpandedLines, ProcessedLogLines } from "types/logs";
+import { filterLogs, getMatchingLines } from "utils/filter";
 import { getColorMapping } from "utils/resmoke";
 import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
@@ -12,27 +20,34 @@ import { DIRECTION, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
+  expandedLines: ExpandedLines;
   fileName?: string;
   hasLogs: boolean;
   highlightedLine?: number;
   lineCount: number;
   listRef: React.RefObject<List>;
+  matchingLines: Set<number> | undefined;
   processedLogLines: ProcessedLogLines;
-  searchState: SearchState;
   range: {
     lowerRange: number;
     upperRange?: number;
   };
+  searchState: SearchState;
+
+  clearExpandedLines: () => void;
   clearLogs: () => void;
+  collapseLines: (idx: number) => void;
+  expandLines: (expandedLines: ExpandedLines) => void;
   getLine: (lineNumber: number) => string | undefined;
   getResmokeLineColor: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
   paginate: (dir: DIRECTION) => void;
   scrollToLine: (lineNumber: number) => void;
+  setCaseSensitive: (caseSensitive: boolean) => void;
   setFileName: (fileName: string) => void;
   setSearch: (search: string) => void;
-  setCaseSensitive: (caseSensitive: boolean) => void;
 }
+
 const LogContext = createContext<LogContextState | null>(null);
 
 const useLogContext = () => {
@@ -64,8 +79,48 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     undefined
   );
   const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
+  const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
+
   const { state, dispatch } = useLogState(initialLogLines);
+  const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
+    []
+  );
+
   const listRef = useRef<List>(null);
+
+  const stringifiedFilters = filters.toString();
+  const stringifiedBookmarks = bookmarks.toString();
+  const stringifiedExpandedLines = state.expandedLines.toString();
+
+  const matchingLines = useMemo(
+    () => getMatchingLines(state.logs, filters, filterLogic),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [stringifiedFilters, state.logs.length, filterLogic]
+  );
+
+  useEffect(
+    () => {
+      setProcessedLogLines(
+        filterLogs({
+          logLines: state.logs,
+          matchingLines,
+          bookmarks,
+          selectedLine,
+          expandedLines: state.expandedLines,
+          expandableRows,
+        })
+      );
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [
+      state.logs.length,
+      matchingLines,
+      stringifiedBookmarks,
+      selectedLine,
+      stringifiedExpandedLines,
+      expandableRows,
+    ]
+  );
 
   const getLine = useCallback(
     (lineNumber: number) => state.logs[lineNumber],
@@ -94,17 +149,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     }, 0);
   }, []);
 
-  // TODO EVG-17537: more advanced filtering
-  const processedLogLines = useMemo(
-    () => filterLogs(state.logs, filters, bookmarks, selectedLine, filterLogic),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [state.logs.length, `${filters}`, `${bookmarks}`, selectedLine, filterLogic]
-  );
-
   const searchResults = useMemo(() => {
-    // search through processedLoglines
-    // return the line number of the first match
-    // if no match, return undefined
     const results = state.searchState.searchTerm
       ? searchLogs({
           searchRegex: state.searchState.searchTerm,
@@ -121,11 +166,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     return results;
   }, [
     dispatch,
-    state.searchState.searchTerm,
-    upperRange,
-    lowerRange,
-    processedLogLines,
     getLine,
+    state.searchState.searchTerm,
+    lowerRange,
+    upperRange,
+    processedLogLines,
   ]);
 
   const highlightedLine =
@@ -135,31 +180,31 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const memoizedContext = useMemo(
     () => ({
+      expandedLines: state.expandedLines,
       fileName: state.fileName,
-      hasSearch: !!state.searchState.searchTerm,
-      lineCount: state.logs.length,
-      processedLogLines,
-      searchState: state.searchState,
       hasLogs: !!state.logs.length,
+      hasSearch: !!state.searchState.searchTerm,
+      highlightedLine,
+      lineCount: state.logs.length,
+      listRef,
+      matchingLines,
+      processedLogLines,
       range: {
         lowerRange,
         upperRange,
       },
-      listRef,
-      highlightedLine,
+      searchState: state.searchState,
+
+      clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
+      collapseLines: (idx: number) => dispatch({ type: "COLLAPSE_LINES", idx }),
+      expandLines: (expandedLines: ExpandedLines) =>
+        dispatch({ type: "EXPAND_LINES", expandedLines }),
       getLine,
       getResmokeLineColor,
       ingestLines: (lines: string[], logType: LogTypes) => {
         dispatch({ type: "INGEST_LOGS", logs: lines, logType });
       },
-      setFileName: (fileName: string) => {
-        dispatch({ type: "SET_FILE_NAME", fileName });
-      },
-      setSearch: (searchTerm: string) => {
-        dispatch({ type: "SET_SEARCH_TERM", searchTerm });
-      },
-      scrollToLine,
       paginate: (direction: DIRECTION) => {
         const { searchIndex, searchRange } = state.searchState;
         if (searchIndex !== undefined && searchRange !== undefined) {
@@ -168,23 +213,32 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           scrollToLine(searchResults[nextPage]);
         }
       },
+      scrollToLine,
       setCaseSensitive: (caseSensitive: boolean) => {
         dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive });
       },
+      setFileName: (fileName: string) => {
+        dispatch({ type: "SET_FILE_NAME", fileName });
+      },
+      setSearch: (searchTerm: string) => {
+        dispatch({ type: "SET_SEARCH_TERM", searchTerm });
+      },
     }),
     [
+      state.expandedLines,
       state.fileName,
-      state.searchState,
       state.logs.length,
-      processedLogLines,
-      lowerRange,
-      upperRange,
+      state.searchState,
       highlightedLine,
+      lowerRange,
+      matchingLines,
+      processedLogLines,
+      searchResults,
+      upperRange,
+      dispatch,
       getLine,
       getResmokeLineColor,
       scrollToLine,
-      dispatch,
-      searchResults,
     ]
   );
 

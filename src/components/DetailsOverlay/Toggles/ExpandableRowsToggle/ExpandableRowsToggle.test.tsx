@@ -6,11 +6,11 @@ describe("expandable rows toggle", () => {
     const { history } = render(<ExpandableRowsToggle />);
 
     const expandableRowsToggle = screen.getByDataCy("expandable-rows-toggle");
-    expect(expandableRowsToggle).toHaveAttribute("aria-checked", "false");
+    expect(expandableRowsToggle).toHaveAttribute("aria-checked", "true");
 
     await userEvent.click(expandableRowsToggle);
 
-    expect(expandableRowsToggle).toHaveAttribute("aria-checked", "true");
-    expect(history.location.search).toBe("?expandable=true");
+    expect(expandableRowsToggle).toHaveAttribute("aria-checked", "false");
+    expect(history.location.search).toBe("?expandable=false");
   });
 });
