@@ -49,13 +49,14 @@ const sendError = (err: CustomBugsnagError, severity: Event["severity"]) => {
 
 const leaveBreadcrumb = (
   message: string,
-  metadata: { [key: string]: any },
-  type: BreadcrumbType
+  metadata?: { [key: string]: any },
+  type?: BreadcrumbType
 ) => {
+  const breadcrumbType = type || "manual";
   if (!isProductionBuild || isLocal) {
-    console.debug({ message, metadata, type });
+    console.debug({ message, metadata, breadcrumbType });
   } else {
-    Bugsnag.leaveBreadcrumb(message, metadata, type);
+    Bugsnag.leaveBreadcrumb(message, metadata, breadcrumbType);
   }
 };
 
