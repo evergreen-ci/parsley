@@ -50,7 +50,7 @@ const getEvergreenTaskLogURL = (
   taskID: string,
   execution: string,
   origin: keyof typeof originToType,
-  options: { text?: boolean; html?: boolean }
+  options: { text?: boolean }
 ) => {
   const { text } = options;
   const params = {
