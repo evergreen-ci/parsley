@@ -57,6 +57,34 @@ describe("row", () => {
     await userEvent.dblClick(screen.getByText(testLog));
     expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");
   });
+  it("a search term highlights the matching text", () => {
+    const regexp = /Test/i;
+    renderWithRouterMatch(
+      <Row {...rowProps} searchTerm={regexp}>
+        {testLog}
+      </Row>
+    );
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
+  });
+  it("highlighted terms should highlight the matching text", () => {
+    const regexp = /Test/i;
+    renderWithRouterMatch(
+      <Row {...rowProps} highlights={regexp}>
+        {testLog}
+      </Row>
+    );
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
+  });
+  it("should deduplicate highlights and searches on the same text", () => {
+    const regexp = /Test/i;
+    renderWithRouterMatch(
+      <Row {...rowProps} highlights={regexp} searchTerm={regexp}>
+        {testLog}
+      </Row>
+    );
+    expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
+  });
 });
 
 const testLog = "Test Log";

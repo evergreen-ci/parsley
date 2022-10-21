@@ -7,6 +7,7 @@ import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
 import { escapeHtml } from "utils/renderHtml/escapeHtml";
 
@@ -133,7 +134,11 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
       );
     }
     if (highlights) {
-      if (String(highlights) !== String(searchTerm)) {
+      const shouldCheckForOverlappingRegex = searchTerm !== undefined;
+      const hasOverlappingRegexes =
+        shouldCheckForOverlappingRegex &&
+        hasOverlappingRegex(searchTerm, highlights, children);
+      if (!hasOverlappingRegexes) {
         render = render.replace(
           highlights,
           (match) => `<mark>${escapeHtml(match)}</mark>`
