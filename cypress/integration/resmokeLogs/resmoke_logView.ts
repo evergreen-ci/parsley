@@ -175,3 +175,33 @@ describe("Jump to line", () => {
     cy.dataCy("log-row-30").should("be.visible");
   });
 });
+
+describe("expanding collapsed rows", () => {
+  const logLink =
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+    cy.setCookie("has-opened-drawer", "true");
+  });
+
+  it("should be able to expand collapsed rows", () => {
+    // Apply a filter.
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("ShardedClusterFixture:job0{enter}");
+
+    cy.dataCy("log-row-1").should("not.exist");
+    cy.dataCy("log-row-2").should("not.exist");
+    cy.dataCy("log-row-3").should("not.exist");
+
+    cy.dataCy("collapsed-row-1-3").within(() => {
+      cy.contains("All").click();
+    });
+
+    cy.dataCy("collapsed-row-1-3").should("not.exist");
+    cy.dataCy("log-row-1").should("be.visible");
+    cy.dataCy("log-row-2").should("be.visible");
+    cy.dataCy("log-row-3").should("be.visible");
+  });
+});

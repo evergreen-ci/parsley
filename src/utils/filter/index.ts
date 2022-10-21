@@ -70,23 +70,8 @@ export const filterLogs = ({
   return filteredLines;
 };
 
-/**
- * `matchesFilter` determines if a particular log line satisfies the filter conditions.
- * @param logLine - string representing a log line
- * @param filters - list of filters being applied
- * @param filterLogic - specifies whether to use AND or OR filtering
- * @returns true if filter conditions are satisfied, false otherwise
- */
-export const matchesFilter = (
-  logLine: string,
-  filters: ParsedFilter[],
-  filterLogic: FilterLogic
-): boolean => {
+export const constructRegexToMatch = (filters: ParsedFilter[]) => {
   const visibleFilters = filters.filter((f) => f.visible !== false);
-
-  if (visibleFilters.length === 0) {
-    return true;
-  }
 
   const regexToMatch: { regex: RegExp; isMatch: boolean }[] = [];
 
@@ -105,13 +90,21 @@ export const matchesFilter = (
     }
   });
 
+  return regexToMatch;
+};
+
+export const matchesFilters = (
+  line: string,
+  regexToMatch: { regex: RegExp; isMatch: boolean }[],
+  filterLogic: FilterLogic
+) => {
   if (filterLogic === FilterLogic.And) {
     return regexToMatch.every(({ regex, isMatch }) =>
-      isMatch ? regex.test(logLine) : !regex.test(logLine)
+      isMatch ? regex.test(line) : !regex.test(line)
     );
   }
   return regexToMatch.some(({ regex, isMatch }) =>
-    isMatch ? regex.test(logLine) : !regex.test(logLine)
+    isMatch ? regex.test(line) : !regex.test(line)
   );
 };
 
@@ -125,7 +118,7 @@ export const matchesFilter = (
  */
 export const getMatchingLines = (
   logLines: string[],
-  filters: string[],
+  filters: ParsedFilter[],
   filterLogic: FilterLogic
 ) => {
   const set = new Set<number>();
@@ -134,13 +127,10 @@ export const getMatchingLines = (
     return undefined;
   }
 
-  const regexToMatch: RegExp[] = filters.map((f) => new RegExp(f, "i"));
+  const regexToMatch = constructRegexToMatch(filters);
+
   logLines.forEach((line, idx) => {
-    if (filterLogic === FilterLogic.And) {
-      if (regexToMatch.every((regex) => line.match(regex))) {
-        set.add(idx);
-      }
-    } else if (regexToMatch.some((regex) => line.match(regex))) {
+    if (matchesFilters(line, regexToMatch, filterLogic)) {
       set.add(idx);
     }
   });

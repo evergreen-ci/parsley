@@ -93,7 +93,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const stringifiedExpandedLines = state.expandedLines.toString();
 
   const matchingLines = useMemo(
-    () => getMatchingLines(state.logs, [], filterLogic),
+    () => getMatchingLines(state.logs, filters, filterLogic),
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [stringifiedFilters, state.logs.length, filterLogic]
   );

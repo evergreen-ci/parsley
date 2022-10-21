@@ -137,3 +137,35 @@ describe("Jump to line", () => {
     cy.dataCy("log-row-56").should("be.visible");
   });
 });
+
+describe("expanding collapsed rows", () => {
+  const logLink =
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+    cy.setCookie("has-opened-drawer", "true");
+  });
+
+  it("should be able to expand collapsed rows", () => {
+    // Apply a filter.
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("evg{enter}");
+
+    cy.dataCy("log-row-1").should("not.exist");
+    cy.dataCy("log-row-2").should("not.exist");
+    cy.dataCy("log-row-3").should("not.exist");
+    cy.dataCy("log-row-4").should("not.exist");
+
+    cy.dataCy("collapsed-row-1-4").within(() => {
+      cy.contains("All").click();
+    });
+
+    cy.dataCy("collapsed-row-1-4").should("not.exist");
+    cy.dataCy("log-row-1").should("be.visible");
+    cy.dataCy("log-row-2").should("be.visible");
+    cy.dataCy("log-row-3").should("be.visible");
+    cy.dataCy("log-row-4").should("be.visible");
+  });
+});
