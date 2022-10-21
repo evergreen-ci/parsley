@@ -1,6 +1,14 @@
 import { evergreenURL, logkeeperURL } from "utils/environmentVariables";
 import { stringifyQuery } from "utils/query-string";
 
+/**
+ *
+ * @param taskID - the task ID
+ * @param execution - the execution number of the task
+ * @param testID - the test ID of the test
+ * @param options
+ * @returns /test_log/${taskID}/${execution}?test_name=${testID}&text=true
+ */
 const getEvergreenTestLogURL = (
   taskID: string,
   execution: string,
@@ -46,6 +54,14 @@ enum originToType {
   task = "T",
 }
 
+/**
+ *
+ * @param taskID - the task ID
+ * @param execution - the execution number of the task
+ * @param origin - the origin of the log
+ * @param options -
+ * @returns /task/${taskID}/${execution}?type=${originToType[origin]}&text=true
+ */
 const getEvergreenTaskLogURL = (
   taskID: string,
   execution: string,
