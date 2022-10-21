@@ -142,7 +142,7 @@ describe("useLogContext", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => (
-        <Router route="?filters=bar">
+        <Router route="?filters=100bar">
           <LogContextProvider initialLogLines={["foo", "bar", "baz"]}>
             {children}
           </LogContextProvider>
@@ -158,7 +158,7 @@ describe("useLogContext", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => (
-        <Router route="?filters=wrong">
+        <Router route="?filters=100wrong">
           <LogContextProvider initialLogLines={["foo", "bar", "baz"]}>
             {children}
           </LogContextProvider>
@@ -175,7 +175,7 @@ describe("useLogContext", () => {
         const wrapper: React.FC<{ children: React.ReactNode }> = ({
           children,
         }) => (
-          <Router route="?filters=A,3">
+          <Router route="?filters=100A,1003">
             <LogContextProvider
               initialLogLines={["A line 1", "B line 2", "C line 3"]}
             >
@@ -192,7 +192,7 @@ describe("useLogContext", () => {
         const wrapper: React.FC<{ children: React.ReactNode }> = ({
           children,
         }) => (
-          <Router route="?filters=A,3&filterLogic=and">
+          <Router route="?filters=100A,1003&filterLogic=and">
             <LogContextProvider
               initialLogLines={["A line 1", "B line 2", "C line 3"]}
             >
@@ -209,7 +209,7 @@ describe("useLogContext", () => {
         const wrapper: React.FC<{ children: React.ReactNode }> = ({
           children,
         }) => (
-          <Router route="?filters=A,3&filterLogic=or">
+          <Router route="?filters=100A,1003&filterLogic=or">
             <LogContextProvider
               initialLogLines={["A line 1", "B line 2", "C line 3"]}
             >
@@ -336,7 +336,7 @@ describe("useLogContext", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => (
-        <Router route="?filters=A,3&filterLogic=or">
+        <Router route="?filters=100A,1003&filterLogic=or">
           <LogContextProvider
             initialLogLines={["A line 1", "B line 2", "C line 3"]}
           >

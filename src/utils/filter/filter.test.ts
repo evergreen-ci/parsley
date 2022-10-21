@@ -46,6 +46,14 @@ describe("getMatchingLines", () => {
     expect(getMatchingLines(logLines, [], FilterLogic.And)).toBeUndefined();
   });
 
+  it("returns undefined if there are no visible filters", () => {
+    const filter1 = makeFilter({ name: "starting", visible: false });
+    const filter2 = makeFilter({ name: "mongod", visible: false });
+    expect(
+      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
+    ).toBeUndefined();
+  });
+
   it("returns an empty set if there are no lines that satisfy the filter", () => {
     const filter1 = makeFilter({
       name: "starting",
@@ -69,12 +77,6 @@ describe("getMatchingLines", () => {
 });
 
 describe("constructRegexToMatch", () => {
-  it("returns an empty array if all filters have visibility off", () => {
-    const filter1 = makeFilter({ name: "filter1", visible: false });
-    const filter2 = makeFilter({ name: "filter2", visible: false });
-    expect(constructRegexToMatch([filter1, filter2])).toStrictEqual([]);
-  });
-
   it("properly constructs case sensitive filters", () => {
     const filter1 = makeFilter({
       name: "filter1",

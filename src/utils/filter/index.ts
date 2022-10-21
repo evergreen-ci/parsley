@@ -70,9 +70,7 @@ export const filterLogs = ({
   return filteredLines;
 };
 
-export const constructRegexToMatch = (filters: ParsedFilter[]) => {
-  const visibleFilters = filters.filter((f) => f.visible !== false);
-
+export const constructRegexToMatch = (visibleFilters: ParsedFilter[]) => {
   const regexToMatch: { regex: RegExp; isMatch: boolean }[] = [];
 
   visibleFilters.forEach((f) => {
@@ -123,7 +121,8 @@ export const getMatchingLines = (
 ) => {
   const set = new Set<number>();
 
-  if (filters.length === 0) {
+  const visibleFilters = filters.filter((f) => f.visible !== false);
+  if (visibleFilters.length === 0) {
     return undefined;
   }
 
