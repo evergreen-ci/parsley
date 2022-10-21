@@ -29,7 +29,7 @@
     "start": "vite",
     "verify-backend": "./scripts/verify-backend.sh",
     "storybook": "start-storybook -p 6006",
-    "storybook:build": "build-storybook",
+    "storybook:build": " . ./scripts/appVersion.sh && env-cmd -e local build-storybook",
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch --verbose"
   },
@@ -70,6 +70,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.18.10",
+    "@bugsnag/source-maps": "^2.3.1",
     "@emotion/babel-plugin": "11.10.0",
     "@emotion/eslint-plugin": "11.10.0",
     "@emotion/jest": "11.10.0",
