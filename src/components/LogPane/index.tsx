@@ -1,41 +1,47 @@
 import { useEffect } from "react";
-import { AutoSizer, List, ListProps, ListRowRenderer } from "react-virtualized";
+import {
+  AutoSizer,
+  CellMeasurerCache,
+  List,
+  ListProps,
+  ListRowRenderer,
+} from "react-virtualized";
+import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
+import { useQueryParam } from "hooks/useQueryParam";
 
 type LogPaneProps = Omit<
   ListProps,
   "height" | "width" | "itemData" | "rowHeight"
 > & {
-  wrap: boolean;
-  filterLogic: string;
-  filters: string[];
+  cache: CellMeasurerCache;
   initialScrollIndex: number;
   rowRenderer: ListRowRenderer;
 };
 
 const LogPane: React.FC<LogPaneProps> = ({
+  cache,
   rowRenderer,
   rowCount,
-  cache,
-  wrap,
-  filterLogic,
-  filters,
   initialScrollIndex,
   ...rest
 }) => {
-  const { listRef } = useLogContext();
+  const { listRef, matchingLines } = useLogContext();
+
+  const [wrap] = useQueryParam(QueryParams.Wrap, false);
+  const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
+
   useEffect(() => {
-    // Reset the cache and recalculate the row heights
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [wrap, filterLogic, `${filters}`]);
+  }, [listRef, cache, wrap, matchingLines, expandableRows]);
 
   return (
     <AutoSizer>
       {({ height, width }) => (
         <List
           ref={listRef}
+          cache={cache}
           containerStyle={{ overflow: "scroll visible" }}
           deferredMeasurementCache={cache}
           height={height}

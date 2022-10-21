@@ -9,7 +9,6 @@ import { DetailName, DetailRow } from "../styles";
 const { red } = palette;
 
 const SearchRangeInput: React.FC = () => {
-  // TODO: Manage search range in LogContext rather than as query params.
   const [lowerBound, setLowerBound] = useQueryParam<number | undefined>(
     QueryParams.LowerRange,
     undefined

@@ -18,14 +18,14 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
   <AnsiiRow
     key={logLines[0]}
     data={{
+      expandLines: () => undefined,
       getLine,
-      wrap: args.wrap,
-      processedLines: processedLogLines,
-      logType: LogTypes.EVERGREEN_TASK_LOGS,
-      range: { lowerRange: 0 },
-      scrollToLine: () => undefined,
       getResmokeLineColor: () => undefined,
+      scrollToLine: () => undefined,
+      range: { lowerRange: 0 },
+      wrap: args.wrap,
     }}
+    lineNumber={0}
     listRowProps={{
       index: 0,
       style: {},
@@ -52,24 +52,24 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
     <Container>
       <LogPane
         cache={cache}
-        filterLogic="and"
-        filters={[]}
         initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          getLine,
-          scrollToLine: setScrollIndex,
-          range: { lowerRange: 0 },
+          data: {
+            expandLines: () => {},
+            getLine,
+            getResmokeLineColor: () => undefined,
+            scrollToLine: setScrollIndex,
+            range: { lowerRange: 0 },
+            wrap: args.wrap,
+            searchTerm: /p=debug/,
+            highlightedLine: args.highlightedLine,
+          },
+          processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
-          processedLines: processedLogLines,
-          wrap: args.wrap,
-          searchTerm: /p=debug/,
-          highlightedLine: args.highlightedLine,
-          getResmokeLineColor: () => undefined,
         })}
         scrollToIndex={scrollIndex}
-        wrap={args.wrap}
       />
     </Container>
   );
@@ -77,44 +77,6 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
 
 export const MultiLines = MultiLineTemplate.bind({});
 MultiLines.args = {
-  wrap: false,
-  highlightedLine: 0,
-};
-
-// Multiple AnsiiRows with CollapsedRows.
-const CollapsedTemplate: ComponentStory<AnsiiRowProps> = (args) => {
-  const [scrollIndex, setScrollIndex] = useState<number>(-1);
-
-  return (
-    <Container>
-      <LogPane
-        cache={cache}
-        filterLogic="and"
-        filters={[]}
-        initialScrollIndex={-1}
-        logLines={collapsedProcessedLogLines}
-        rowCount={collapsedProcessedLogLines.length}
-        rowRenderer={RowRenderer({
-          getLine,
-          scrollToLine: setScrollIndex,
-          logType: LogTypes.EVERGREEN_TASK_LOGS,
-          processedLines: collapsedProcessedLogLines,
-          wrap: args.wrap,
-          range: { lowerRange: 0 },
-          searchTerm: /p=debug/,
-          highlightedLine: args.highlightedLine,
-          getResmokeLineColor: () => undefined,
-        })}
-        scrollToIndex={scrollIndex}
-        wrap={args.wrap}
-      />
-    </Container>
-  );
-};
-
-export const Collapsed = CollapsedTemplate.bind({});
-
-Collapsed.args = {
   wrap: false,
   highlightedLine: 0,
 };
@@ -153,8 +115,6 @@ const logLines = [
 ];
 
 const processedLogLines = logLines.map((_, index) => index);
-
-const collapsedProcessedLogLines = [0, [1, 2], 3, 4, [5], 6, 7];
 
 const getLine = (index: number) => logLines[index];
 

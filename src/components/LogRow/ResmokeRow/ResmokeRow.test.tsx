@@ -1,4 +1,3 @@
-import { LogTypes } from "constants/enums";
 import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen, userEvent } from "test_utils";
 import ResmokeRow from ".";
@@ -14,14 +13,18 @@ describe("resmokeRow", () => {
   const user = userEvent.setup();
   it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
-      <ResmokeRow data={data} listRowProps={listRowProps} />,
+      <ResmokeRow data={data} lineNumber={0} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
     );
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
     renderWithRouterMatch(
-      <ResmokeRow data={data} listRowProps={{ ...listRowProps, index: 1 }} />,
+      <ResmokeRow
+        data={data}
+        lineNumber={1}
+        listRowProps={{ ...listRowProps, index: 1 }}
+      />,
       {
         wrapper: wrapper(logLines),
       }
@@ -33,6 +36,7 @@ describe("resmokeRow", () => {
     const { history } = renderWithRouterMatch(
       <ResmokeRow
         data={{ ...data, scrollToLine }}
+        lineNumber={0}
         listRowProps={listRowProps}
       />,
       {
@@ -45,7 +49,7 @@ describe("resmokeRow", () => {
   });
   it("clicking on a selected log line link unselects it", async () => {
     const { history } = renderWithRouterMatch(
-      <ResmokeRow data={data} listRowProps={listRowProps} />,
+      <ResmokeRow data={data} lineNumber={0} listRowProps={listRowProps} />,
 
       {
         wrapper: wrapper(logLines),
@@ -57,7 +61,7 @@ describe("resmokeRow", () => {
   });
   it("double clicking a log line adds it to the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
-      <ResmokeRow data={data} listRowProps={listRowProps} />,
+      <ResmokeRow data={data} lineNumber={0} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -67,7 +71,7 @@ describe("resmokeRow", () => {
   });
   it("double clicking a bookmarked log line removes it from the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
-      <ResmokeRow data={data} listRowProps={listRowProps} />,
+      <ResmokeRow data={data} lineNumber={0} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
         route: "?bookmarks=0",
@@ -80,6 +84,7 @@ describe("resmokeRow", () => {
     renderWithRouterMatch(
       <ResmokeRow
         data={{ ...data, searchTerm: /mongod/i }}
+        lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
       />
     );
@@ -94,6 +99,7 @@ describe("resmokeRow", () => {
           searchTerm: /mongod/i,
           range: { lowerRange: 0, upperRange: 8 },
         }}
+        lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
       />
     );
@@ -108,6 +114,7 @@ describe("resmokeRow", () => {
           searchTerm: /mongod/i,
           range: { lowerRange: 0, upperRange: 6 },
         }}
+        lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
       />
     );
@@ -122,6 +129,7 @@ describe("resmokeRow", () => {
           ...data,
           getResmokeLineColor,
         }}
+        lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
       />
     );
@@ -155,13 +163,12 @@ const listRowProps = {
 const getLine = (index: number) => logLines[index];
 
 const data = {
+  expandLines: jest.fn(),
   getLine,
-  wrap: false,
-  processedLines: logLines.map((_, index) => index),
-  logType: LogTypes.RESMOKE_LOGS,
-  range: {
-    lowerRange: 0,
-  },
-  scrollToLine: jest.fn(),
   getResmokeLineColor: jest.fn(),
+  scrollToLine: jest.fn(),
+
+  expandedLines: [],
+  range: { lowerRange: 0 },
+  wrap: false,
 };

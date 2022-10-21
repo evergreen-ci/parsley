@@ -25,11 +25,7 @@ describe("Basic evergreen log view", () => {
     );
   });
   it("long lines with wrapping turned on should fit on screen", () => {
-    // Turn wrapping on through the Details Overlay.
-    cy.dataCy("details-button").click();
-    cy.dataCy("wrap-toggle").click();
-    cy.dataCy("details-button").click();
-
+    cy.clickToggle("wrap-toggle", true); // Turn wrap on.
     cy.dataCy("log-row-22").should("be.visible");
     cy.dataCy("log-row-22").should("contain.text", longLogLine);
     cy.dataCy("log-row-22").isContainedInViewport();
@@ -47,29 +43,29 @@ describe("Bookmarking and selecting lines", () => {
 
   it("should default to bookmarking 0 and the last log line on load", () => {
     cy.location("search").should("equal", "?bookmarks=0,297");
-    cy.dataCy("log-line-container").should("contain", "0");
-    cy.dataCy("log-line-container").should("contain", "297");
+    cy.dataCy("sidebar-log-line-container").should("contain", "0");
+    cy.dataCy("sidebar-log-line-container").should("contain", "297");
   });
 
   it("should be able to bookmark and unbookmark log lines", () => {
     cy.dataCy("log-row-4").dblclick();
     cy.location("search").should("equal", "?bookmarks=0,4,297");
-    cy.dataCy("log-line-container").should("contain", "0");
-    cy.dataCy("log-line-container").should("contain", "4");
-    cy.dataCy("log-line-container").should("contain", "297");
+    cy.dataCy("sidebar-log-line-container").should("contain", "0");
+    cy.dataCy("sidebar-log-line-container").should("contain", "4");
+    cy.dataCy("sidebar-log-line-container").should("contain", "297");
 
     cy.dataCy("log-row-4").dblclick();
-    cy.dataCy("log-line-container").should("not.contain", "4");
+    cy.dataCy("sidebar-log-line-container").should("not.contain", "4");
   });
 
   it("should be able to select and unselect lines", () => {
     cy.dataCy("log-link-5").click();
     cy.location("search").should("equal", "?bookmarks=0,297&selectedLine=5");
-    cy.dataCy("log-line-container").should("contain", "5");
+    cy.dataCy("sidebar-log-line-container").should("contain", "5");
 
     cy.dataCy("log-link-5").click();
     cy.location("search").should("equal", "?bookmarks=0,297");
-    cy.dataCy("log-line-container").should("not.contain", "5");
+    cy.dataCy("sidebar-log-line-container").should("not.contain", "5");
   });
 
   it("should be able to copy bookmarks as JIRA format", () => {
@@ -109,44 +105,45 @@ describe("Filtering", () => {
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("starting{enter}");
 
+    cy.get("[data-cy^='collapsed-row-']").should("exist");
     cy.get("[data-cy^='log-row-']").each(($el) => {
       cy.wrap($el).contains("starting", { matchCase: false });
     });
   });
 
-  it("should preserve applied bookmarks and selected lines even if they don't match the filters", () => {
-    // Delete the filters from the drawer.
+  it("should be able to edit filters", () => {
     cy.toggleDrawer();
-    cy.get(`[aria-label="Delete filter"]`).click();
+    cy.get(`[aria-label="Edit filter"]`).click();
+    cy.dataCy("edit-filter-name").clear().type("running");
+    cy.contains("button", "OK").click();
 
+    // Previous filter should no longer apply.
+    cy.contains("starting").should("not.exist");
+
+    cy.get("[data-cy^='log-row-']").each(($el) => {
+      cy.wrap($el).contains("running", { matchCase: false });
+    });
+  });
+
+  it("should be able to delete filters", () => {
+    // Delete the filters from the drawer.
+    cy.get(`[aria-label="Delete filter"]`).click();
+    cy.get("[data-cy^='collapsed-row-']").should("not.exist");
+  });
+
+  it("should preserve applied bookmarks and selected lines even if they don't match the filters", () => {
     // Select a line, with the expectation that it won't be collapsed by the filter.
     cy.dataCy("log-link-5").click();
     // Bookmark a line, with the expecation that it won't be collapsed by the filter.
     cy.dataCy("log-row-6").dblclick();
 
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("notarealfilter{enter}");
-
+    cy.get("[data-cy^='collapsed-row-']").should("exist");
     cy.get("[data-cy^='log-row-']").each(($el) => {
       // Matched elements should be one of the bookmarked or selected values
       cy.wrap($el)
         .should("have.attr", "data-cy")
         .and("match", /log-row-(0|5|6)/);
-    });
-  });
-
-  it("should be able to edit filters", () => {
-    // Clear selected line and bookmarks.
-    cy.dataCy("log-link-5").click();
-    cy.dataCy("clear-bookmarks").click();
-
-    cy.get(`[aria-label="Edit filter"]`).click();
-    cy.dataCy("edit-filter-name").clear().type("running");
-    cy.contains("button", "OK").click();
-
-    cy.get("[data-cy^='log-row-']").each(($el) => {
-      cy.wrap($el).contains("running", { matchCase: false });
     });
   });
 });
@@ -161,18 +158,18 @@ describe("Jump to line", () => {
 
   it("should default to bookmarking 0 and the last log line on load", () => {
     cy.location("search").should("equal", "?bookmarks=0,297");
-    cy.dataCy("log-line-container").should("contain", "0");
-    cy.dataCy("log-line-container").should("contain", "297");
+    cy.dataCy("sidebar-log-line-container").should("contain", "0");
+    cy.dataCy("sidebar-log-line-container").should("contain", "297");
   });
 
   it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
     cy.dataCy("log-row-4").dblclick({ force: true });
 
-    cy.dataCy("log-line-297").click();
+    cy.dataCy("sidebar-log-line-297").click();
     cy.dataCy("log-row-297").should("be.visible");
     cy.dataCy("log-row-56").should("not.exist");
 
-    cy.dataCy("log-line-4").click();
+    cy.dataCy("sidebar-log-line-4").click();
     cy.dataCy("log-row-4").should("be.visible");
   });
 
@@ -183,11 +180,11 @@ describe("Jump to line", () => {
 
     cy.dataCy("log-row-56").dblclick({ force: true });
 
-    cy.dataCy("log-line-297").click();
+    cy.dataCy("sidebar-log-line-297").click();
     cy.dataCy("log-row-297").should("be.visible");
     cy.dataCy("log-row-56").should("not.exist");
 
-    cy.dataCy("log-line-56").click();
+    cy.dataCy("sidebar-log-line-56").click();
     cy.dataCy("log-row-56").should("be.visible");
   });
 });
@@ -221,20 +218,13 @@ describe("Searching", () => {
   });
 
   it("should be able to specify a range of lines to search", () => {
-    cy.toggleDetailsPanel(true);
-    cy.dataCy("range-upper-bound").should("be.visible");
-    cy.dataCy("range-upper-bound").type("25");
-    cy.toggleDetailsPanel(false);
+    cy.editBounds({ upper: "25" });
     cy.dataCy("search-count").should("contain.text", "1/2");
-    cy.toggleDetailsPanel(true);
-    cy.dataCy("range-lower-bound").should("be.visible");
-    cy.dataCy("range-lower-bound").type("25");
-    cy.toggleDetailsPanel(false);
+
+    cy.editBounds({ lower: "25" });
     cy.dataCy("search-count").should("contain.text", "1/1");
-    cy.toggleDetailsPanel(true);
-    cy.dataCy("range-lower-bound").clear();
-    cy.dataCy("range-upper-bound").clear();
-    cy.toggleDetailsPanel(false);
+
+    cy.clearBounds();
     cy.dataCy("search-count").should("contain.text", "1/4");
   });
 
@@ -242,29 +232,11 @@ describe("Searching", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("starting");
     cy.dataCy("search-count").should("contain.text", "1/1");
-    cy.toggleDetailsPanel(true);
-    cy.dataCy("case-sensitive-toggle").should("be.visible");
-    cy.dataCy("case-sensitive-toggle").should(
-      "have.attr",
-      "aria-checked",
-      "false"
-    );
-    cy.dataCy("case-sensitive-toggle").click({ force: true });
-    cy.dataCy("case-sensitive-toggle").should(
-      "have.attr",
-      "aria-checked",
-      "true"
-    );
-    cy.toggleDetailsPanel(false);
+
+    cy.clickToggle("case-sensitive-toggle", true); // Turn case sensitivity on.
     cy.dataCy("search-count").should("contain.text", "No Matches");
-    cy.toggleDetailsPanel(true);
-    cy.dataCy("case-sensitive-toggle").click({ force: true });
-    cy.dataCy("case-sensitive-toggle").should(
-      "have.attr",
-      "aria-checked",
-      "false"
-    );
-    cy.toggleDetailsPanel(false);
+
+    cy.clickToggle("case-sensitive-toggle", false); // Turn case sensitivity off.
     cy.dataCy("search-count").should("contain.text", "1/1");
   });
 
@@ -309,5 +281,37 @@ describe("Searching", () => {
     cy.dataCy("searchbar-input").type("Spruce");
     cy.dataCy("search-count").should("be.visible");
     cy.dataCy("search-count").should("contain.text", "1/1");
+  });
+});
+
+describe("expanding collapsed rows", () => {
+  const logLink =
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
+  before(() => {
+    cy.login();
+    cy.visit(logLink);
+    cy.setCookie("has-opened-drawer", "true");
+  });
+
+  it("should be able to expand collapsed rows", () => {
+    // Apply a filter.
+    cy.dataCy("searchbar-select").click();
+    cy.dataCy("filter-option").click();
+    cy.dataCy("searchbar-input").type("evg{enter}");
+
+    cy.dataCy("log-row-1").should("not.exist");
+    cy.dataCy("log-row-2").should("not.exist");
+    cy.dataCy("log-row-3").should("not.exist");
+    cy.dataCy("log-row-4").should("not.exist");
+
+    cy.dataCy("collapsed-row-1-4").within(() => {
+      cy.contains("All").click();
+    });
+
+    cy.dataCy("collapsed-row-1-4").should("not.exist");
+    cy.dataCy("log-row-1").should("be.visible");
+    cy.dataCy("log-row-2").should("be.visible");
+    cy.dataCy("log-row-3").should("be.visible");
+    cy.dataCy("log-row-4").should("be.visible");
   });
 });
