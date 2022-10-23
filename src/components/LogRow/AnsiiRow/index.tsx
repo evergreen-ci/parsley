@@ -13,8 +13,16 @@ interface AnsiiRowProps extends BaseRowProps {
 
 const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
   const { data, listRowProps, lineNumber } = rowProps;
-  const { getLine, scrollToLine, highlightedLine, range, searchTerm, wrap } =
-    data;
+  const {
+    getLine,
+    resetRowHeightAtIndex,
+    scrollToLine,
+    highlightedLine,
+    prettyPrint,
+    range,
+    searchTerm,
+    wrap,
+  } = data;
 
   const lineContent = getLine(lineNumber) || "";
   const linkifiedLine = linkifyHtml(ansiUp.ansi_to_html(lineContent), {
@@ -31,6 +39,8 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
       data-cy="ansii-row"
       highlightedLine={highlightedLine}
       lineNumber={lineNumber}
+      prettyPrint={prettyPrint}
+      resetRowHeightAtIndex={resetRowHeightAtIndex}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}
       wrap={wrap}

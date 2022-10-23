@@ -120,9 +120,12 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
         >
           {expandedLines.length ? (
             expandedLines.map((e, idx) => (
-              <ExpandedLineWrapper key={`range-${e[0]}-to-${e[1]}`}>
+              <ExpandedLineWrapper
+                key={`expanded-row-${e[0]}-to-${e[1]}`}
+                data-cy={`expanded-row-${e[0]}-to-${e[1]}`}
+              >
                 <IconButton
-                  aria-label="Delete range button"
+                  aria-label="Delete range"
                   onClick={() => collapseLines(idx)}
                 >
                   <Icon fill={green.dark2} glyph="X" />

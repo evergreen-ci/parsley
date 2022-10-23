@@ -169,9 +169,11 @@ const data = {
   expandLines: jest.fn(),
   getLine,
   getResmokeLineColor: jest.fn(),
+  resetRowHeightAtIndex: jest.fn(),
   scrollToLine: jest.fn(),
 
   expandedLines: [],
+  prettyPrint: false,
   range: { lowerRange: 0 },
   wrap: false,
 };

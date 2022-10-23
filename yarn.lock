@@ -10442,6 +10442,11 @@ loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
+lossless-json@2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/lossless-json/-/lossless-json-2.0.1.tgz#03f2deb5c1a828feac19d88c16e93d6388971d52"
+  integrity sha512-KW/FSL426qblKVvf4ImeMVGr0Je6J9aXvAMUOIU8AzelDj06q47mn6QJ+56lBBd+A8kjrncrxdKQs6ZssAXTmw==
+
 loud-rejection@^1.0.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/loud-rejection/-/loud-rejection-1.6.0.tgz#5b46f80147edee578870f086d04821cf998e551f"
