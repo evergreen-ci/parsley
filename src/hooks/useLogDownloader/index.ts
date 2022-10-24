@@ -1,13 +1,23 @@
 import { useEffect, useState } from "react";
 import { leaveBreadcrumb } from "utils/errorReporting";
 
-const useAxiosGet = (url: string) => {
+/*
+ * useLogDownloader is a custom hook that downloads a log file from a given URL.
+ * It downloads the log file and splits the log file into an array of strings.
+ * Each string is split based on the newline character.
+ * It returns an object with the following properties:
+ * - isLoading: a boolean that is true while the log is being downloaded
+ * - data: the log file as an array of strings
+ * - error: an error message if the download fails
+ *
+ */
+const useLogDownloader = (url: string) => {
   const [downloadProgress, setDownloadProgress] = useState(0);
   const [data, setData] = useState<string | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
-    leaveBreadcrumb("useAxiosGet", { url }, "request");
+    leaveBreadcrumb("useLogDownloader", { url }, "request");
     const req = new Request(url, { method: "GET" });
     const abortController = new AbortController();
 
@@ -47,11 +57,10 @@ const useAxiosGet = (url: string) => {
       })
       .then((response) => response?.text() || "")
       .then((text) => {
-        console.timeEnd("useAxiosGet");
         setData(text);
       })
       .catch((err: Error) => {
-        leaveBreadcrumb("useAxiosGet", { url, err }, "error");
+        leaveBreadcrumb("useLogDownloader", { url, err }, "error");
         setError(err.message);
       })
       .finally(() => {
@@ -65,4 +74,4 @@ const useAxiosGet = (url: string) => {
   return { data, error, isLoading, downloadProgress };
 };
 
-export { useAxiosGet };
+export { useLogDownloader };

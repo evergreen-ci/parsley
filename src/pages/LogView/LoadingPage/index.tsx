@@ -15,7 +15,7 @@ import { slugs } from "constants/routes";
 import { fontSize, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
-import { useAxiosGet } from "hooks";
+import { useLogDownloader } from "hooks";
 import NotFound from "pages/404";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import { convertBytesToUnitString } from "./utils";
@@ -78,7 +78,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       break;
   }
 
-  const { data, error, isLoading, downloadProgress } = useAxiosGet(url);
+  const { data, error, isLoading, downloadProgress } = useLogDownloader(url);
 
   useEffect(() => {
     if (data) {
