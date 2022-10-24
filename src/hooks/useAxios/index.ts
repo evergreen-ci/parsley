@@ -33,8 +33,7 @@ const useAxiosGet = (url: string) => {
                   return;
                 }
                 downloaded += value.length;
-                const downloadedKB = Math.round(downloaded / 1024);
-                setDownloadProgress(downloadedKB);
+                setDownloadProgress(downloaded / 1024);
 
                 controller.enqueue(value);
                 return pump();

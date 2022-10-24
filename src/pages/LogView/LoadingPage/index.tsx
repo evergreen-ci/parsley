@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
+import { palette } from "@leafygreen-ui/palette";
 import { Body } from "@leafygreen-ui/typography";
 import { useParams } from "react-router-dom";
 import Icon from "components/Icon";
@@ -17,8 +18,9 @@ import { useToastContext } from "context/toast";
 import { useAxiosGet } from "hooks";
 import NotFound from "pages/404";
 import { leaveBreadcrumb } from "utils/errorReporting";
-import LoadingBar from "./LoadingBar";
+import { convertBytesToUnitString } from "./utils";
 
+const { green } = palette;
 interface LoadingPageProps {
   logType: LogTypes;
 }
@@ -78,7 +80,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
 
   const { data, error, isLoading, downloadProgress } = useAxiosGet(url);
 
-  const downloadProgressInMb = Math.round(downloadProgress / 1024);
   useEffect(() => {
     if (data) {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
@@ -118,14 +119,17 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     <Container>
       {isLoading || !error ? (
         <LoadingBarContainer>
-          <SpaceBetween>
-            <LogoContainer>
-              <StyledIcon glyph="ParsleyLogo" size={40} useStroke />
+          <LogoContainer>
+            <StyledIcon glyph="ParsleyLogo" size={144} useStroke />
+            <SpaceBetween>
               <StyledBody>Loading Parsley...</StyledBody>
-            </LogoContainer>
-            {downloadProgress && <b>{downloadProgressInMb} mb</b>}
-          </SpaceBetween>
-          <LoadingBar indeterminate />
+              {downloadProgress && (
+                <StyledLoadingProgressText>
+                  {convertBytesToUnitString(downloadProgress)}
+                </StyledLoadingProgressText>
+              )}
+            </SpaceBetween>
+          </LogoContainer>
         </LoadingBarContainer>
       ) : (
         <NotFound />
@@ -135,15 +139,23 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
 };
 
 const LoadingBarContainer = styled.div`
-  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  width: 40%;
+  width: 20%;
+  align-items: center;
+  justify-content: center;
+`;
+
+const StyledLoadingProgressText = styled.pre`
+  color: ${green};
 `;
 
 const LogoContainer = styled.div`
   display: flex;
-  align-items: flex-end;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
 `;
 
 const SpaceBetween = styled.div`
