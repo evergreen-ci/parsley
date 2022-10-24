@@ -76,7 +76,9 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       break;
   }
 
-  const { data, error, isLoading } = useAxiosGet(url);
+  const { data, error, isLoading, downloadProgress } = useAxiosGet(url);
+
+  const downloadProgressInMb = Math.round(downloadProgress / 1024);
   useEffect(() => {
     if (data) {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
@@ -116,10 +118,13 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     <Container>
       {isLoading || !error ? (
         <LoadingBarContainer>
-          <LogoContainer>
-            <StyledIcon glyph="ParsleyLogo" size={40} useStroke />
-            <StyledBody>Loading Parsley...</StyledBody>
-          </LogoContainer>
+          <SpaceBetween>
+            <LogoContainer>
+              <StyledIcon glyph="ParsleyLogo" size={40} useStroke />
+              <StyledBody>Loading Parsley...</StyledBody>
+            </LogoContainer>
+            {downloadProgress && <b>{downloadProgressInMb} mb</b>}
+          </SpaceBetween>
           <LoadingBar indeterminate />
         </LoadingBarContainer>
       ) : (
@@ -139,9 +144,15 @@ const LoadingBarContainer = styled.div`
 const LogoContainer = styled.div`
   display: flex;
   align-items: flex-end;
-  margin-bottom: ${size.s};
 `;
 
+const SpaceBetween = styled.div`
+  margin-bottom: ${size.s};
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: flex-end;
+`;
 const StyledBody = styled(Body)`
   font-size: ${fontSize.l};
 `;
