@@ -42,7 +42,9 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   );
   const [highlights] = useQueryParam<string[]>(QueryParams.Highlights, []);
 
-  const highlightRegex = new RegExp(highlights.join("|"), "i");
+  const highlightRegex = highlights.length
+    ? new RegExp(highlights.join("|"), "i")
+    : undefined;
 
   const [initialScrollIndex] = useState(
     findLineIndex(processedLogLines, selectedLine)

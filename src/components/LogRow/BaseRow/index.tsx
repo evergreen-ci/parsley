@@ -138,6 +138,7 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
       const hasOverlappingRegexes =
         shouldCheckForOverlappingRegex &&
         hasOverlappingRegex(searchTerm, highlights, children);
+
       if (!hasOverlappingRegexes) {
         render = render.replace(
           highlights,
