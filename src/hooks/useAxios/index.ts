@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import axios, { AxiosError } from "axios";
 import { leaveBreadcrumb } from "utils/errorReporting";
 
 const useAxiosGet = (url: string) => {
@@ -9,29 +8,61 @@ const useAxiosGet = (url: string) => {
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
     leaveBreadcrumb("useAxiosGet", { url }, "request");
-    axios
-      .get(url, {
-        withCredentials: true,
-        maxBodyLength: Infinity,
-        maxContentLength: Infinity,
-        onDownloadProgress: (progressEvent) => {
-          const percentCompleted = Math.round(
-            (progressEvent.loaded * 100) / progressEvent.total
-          );
-          setDownloadProgress(percentCompleted);
-        },
-        responseType: "text",
+    const req = new Request(url, { method: "GET" });
+    const abortController = new AbortController();
+
+    fetch(req, { credentials: "include" })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(response.statusText);
+        }
+        let downloaded = 0;
+
+        const reader = response.body?.getReader();
+        if (reader !== undefined) {
+          const stream = new ReadableStream({
+            start(controller) {
+              return pump();
+              async function pump(): Promise<any> {
+                const { done, value } = (await reader?.read()) || {
+                  done: true,
+                  value: null,
+                };
+                if (done) {
+                  controller.close();
+                  return;
+                }
+                downloaded += value.length;
+                const downloadedKB = Math.round(downloaded / 1024);
+                setDownloadProgress(downloadedKB);
+
+                controller.enqueue(value);
+                return pump();
+              }
+            },
+          });
+          return new Response(stream, {
+            headers: { "Content-Type": "text/plain" },
+          });
+        }
       })
-      .then(({ data: d }) => {
-        setIsLoading(false);
-        setData(d);
+      .then((response) => response?.text() || "")
+      .then((text) => {
+        console.timeEnd("useAxiosGet");
+        setData(text);
       })
-      .catch((e: Error | AxiosError) => {
+      .catch((err: Error) => {
+        leaveBreadcrumb("useAxiosGet", { url, err }, "error");
+        setError(err.message);
+      })
+      .finally(() => {
         setIsLoading(false);
-        setError(e.message);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    return () => {
+      abortController.abort();
+    };
+  }, [url]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   return { data, error, isLoading, downloadProgress };
 };
 
