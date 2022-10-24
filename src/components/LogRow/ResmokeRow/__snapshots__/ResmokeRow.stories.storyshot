@@ -78,7 +78,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Resmoke Highlighting
 
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
 <div
-  className="css-ji3z2b"
+  className="css-1exn4ml"
   data-cy="log-row-0"
   data-highlighted={false}
   data-selected={false}
@@ -108,12 +108,12 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
     />
   </svg>
   <pre
-    className="css-ibmtd1"
+    className="css-1ye3usn"
   >
     0
   </pre>
   <pre
-    className="css-1kxoji1"
+    className="css-1759fk7"
   >
     <span
       data-cy="resmoke-row"
