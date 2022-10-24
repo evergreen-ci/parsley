@@ -162,7 +162,6 @@ const RowContainer = styled.div<{
 
   ${({ color }) => color && `color: ${color};`}
   ${({ selected }) => selected && `background-color: ${yellow.light3};`}
-
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
   ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
 
@@ -171,6 +170,10 @@ const RowContainer = styled.div<{
   :hover {
     box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.1);
   }
+
+  font-family: "Source Code Pro", monospace;
+  line-height: 1.25;
+  font-size: ${fontSize.m};
 `;
 
 const StyledIcon = styled(Icon)`
@@ -181,27 +184,23 @@ const StyledIcon = styled(Icon)`
 `;
 
 const Index = styled.pre`
-  /* display: inline-block; */
   width: ${size.xl};
-  flex-shrink: 0;
   margin-top: 0;
   margin-bottom: 0;
   margin-left: ${size.s};
   margin-right: ${size.s};
   user-select: none;
+  flex-shrink: 0;
 `;
 
 const StyledPre = styled.pre<{
   shouldWrap: boolean;
 }>`
-  font-family: "Source Code Pro", monospace;
-  line-height: 1.25;
   overflow-y: hidden;
   margin-top: 0;
   margin-bottom: 0;
   margin-right: ${size.xs};
-  font-size: ${fontSize.m};
-  /* width: unset !important; */
+
   ${({ shouldWrap }) =>
     shouldWrap &&
     `
