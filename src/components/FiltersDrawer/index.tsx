@@ -12,6 +12,7 @@ import { CaseSensitivity, MatchType } from "constants/enums";
 import { size, zIndex } from "constants/tokens";
 import { useFilterParam } from "hooks/useQueryParam";
 import { ExpandedLines, Filter } from "types/logs";
+import { leaveBreadcrumb } from "utils/errorReporting";
 import FilterGroup from "./FilterGroup";
 
 const { green, gray } = palette;
@@ -42,6 +43,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     if (newFilters.length === 0) {
       clearExpandedLines();
     }
+    leaveBreadcrumb("delete-filter", { filterName }, "user");
   };
 
   const editFilter = (
@@ -60,6 +62,11 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
       [fieldName]: fieldValue,
     };
     setFilters(newFilters);
+    leaveBreadcrumb(
+      "edit-filter",
+      { filterName: filter.name, fieldName, fieldValue },
+      "user"
+    );
   };
 
   return (

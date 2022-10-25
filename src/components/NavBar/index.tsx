@@ -19,7 +19,6 @@ const NavBar: React.FC = () => {
   const [filters, setFilters] = useFilterParam();
   const { hasLogs, clearLogs, setSearch, searchState, paginate } =
     useLogContext();
-
   const { hasSearch } = searchState;
   const handleSearch = (selected: string, value: string) => {
     if (selected === SearchBarActions.Search) {

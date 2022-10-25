@@ -17,13 +17,13 @@ import { getMatchingLines } from "utils/matchingLines";
 import { getColorMapping } from "utils/resmoke";
 import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
-import { DIRECTION, SearchState } from "./types";
+import { DIRECTION, LogMetadata, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
   expandedLines: ExpandedLines;
-  fileName?: string;
   hasLogs: boolean;
+  logMetadata?: LogMetadata;
   highlightedLine?: number;
   lineCount: number;
   listRef: React.RefObject<List>;
@@ -46,6 +46,7 @@ interface LogContextState {
   scrollToLine: (lineNumber: number) => void;
   setCaseSensitive: (caseSensitive: boolean) => void;
   setFileName: (fileName: string) => void;
+  setLogMetadata: (logMetadata: LogMetadata) => void;
   setSearch: (search: string) => void;
 }
 
@@ -182,11 +183,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const memoizedContext = useMemo(
     () => ({
       expandedLines: state.expandedLines,
-      fileName: state.fileName,
       hasLogs: !!state.logs.length,
       hasSearch: !!state.searchState.searchTerm,
       highlightedLine,
       lineCount: state.logs.length,
+      logMetadata: state.logMetadata,
       listRef,
       matchingLines,
       processedLogLines,
@@ -206,6 +207,16 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       ingestLines: (lines: string[], logType: LogTypes) => {
         dispatch({ type: "INGEST_LOGS", logs: lines, logType });
       },
+      setFileName: (fileName: string) => {
+        dispatch({ type: "SET_FILE_NAME", fileName });
+      },
+      setLogMetadata: (logMetadata: LogMetadata) => {
+        dispatch({ type: "SET_LOG_METADATA", logMetadata });
+      },
+      setSearch: (searchTerm: string) => {
+        dispatch({ type: "SET_SEARCH_TERM", searchTerm });
+      },
+      scrollToLine,
       paginate: (direction: DIRECTION) => {
         const { searchIndex, searchRange } = state.searchState;
         if (searchIndex !== undefined && searchRange !== undefined) {
@@ -214,20 +225,13 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           scrollToLine(searchResults[nextPage]);
         }
       },
-      scrollToLine,
       setCaseSensitive: (caseSensitive: boolean) => {
         dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive });
-      },
-      setFileName: (fileName: string) => {
-        dispatch({ type: "SET_FILE_NAME", fileName });
-      },
-      setSearch: (searchTerm: string) => {
-        dispatch({ type: "SET_SEARCH_TERM", searchTerm });
       },
     }),
     [
       state.expandedLines,
-      state.fileName,
+      state.logMetadata,
       state.logs.length,
       state.searchState,
       highlightedLine,
