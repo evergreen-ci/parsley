@@ -8,7 +8,7 @@ import { StyledLink } from "components/styles";
 import { CaseSensitivity, MatchType, SearchBarActions } from "constants/enums";
 import { navbarHeight, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
-import { useFilterParam } from "hooks/useQueryParam";
+import { useFilterParam } from "hooks/useFilterParam";
 import { validateRegexp } from "utils/validators";
 import SearchResults from "./SearchResults";
 import UploadLink from "./UploadLink";

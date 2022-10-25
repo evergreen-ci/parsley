@@ -1,12 +1,7 @@
 import { useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { Filters } from "types/logs";
-import {
-  parseFilters,
-  parseQueryString,
-  stringifyFilters,
-  stringifyQuery,
-} from "utils/query-string";
+import { conditionalToArray } from "utils/array";
+import { parseQueryString, stringifyQuery } from "utils/query-string";
 
 /** `useQueryParams` returns all of the query params passed into the url */
 const useQueryParams = () => {
@@ -55,35 +50,4 @@ const useQueryParam = <T>(
   return [queryParam, setQueryParam] as const;
 };
 
-/**
- * `useFilterParam` is a specialized form of useQueryParam. It needs to do special processing when converting
- * filters to and from URLs.
- */
-const useFilterParam = () => {
-  const [searchParams, setSearchParams] = useQueryParams();
-
-  const parsedFilters = parseFilters(
-    conditionalToArray(searchParams.filters ?? [], true) as string[]
-  );
-
-  const setFiltersParam = useCallback(
-    (filters: Filters) => {
-      setSearchParams({
-        ...searchParams,
-        filters: stringifyFilters(filters),
-      });
-    },
-    [setSearchParams, searchParams]
-  );
-
-  return [parsedFilters, setFiltersParam] as const;
-};
-
-/** `conditionalToArray` takes in a value and transforms it into an array if it is not one and should be */
-const conditionalToArray = <T>(value: T, shouldBeArray: boolean) => {
-  if (shouldBeArray) {
-    return Array.isArray(value) ? value : [value];
-  }
-  return value;
-};
-export { useQueryParams, useQueryParam, useFilterParam };
+export { useQueryParams, useQueryParam };

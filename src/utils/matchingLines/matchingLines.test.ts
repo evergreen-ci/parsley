@@ -69,6 +69,16 @@ describe("getMatchingLines", () => {
       getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
     ).toStrictEqual(new Set([1, 4, 7]));
   });
+
+  it("only uses visible filters when looking for matches", () => {
+    const filter1 = makeFilter({
+      name: "starting",
+    });
+    const filter2 = makeFilter({ name: "mongod", visible: false });
+    expect(
+      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
+    ).toStrictEqual(new Set([0, 1, 4, 7]));
+  });
 });
 
 describe("constructRegexToMatch", () => {

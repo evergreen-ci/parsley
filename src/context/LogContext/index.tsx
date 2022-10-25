@@ -10,7 +10,8 @@ import {
 import { List } from "react-virtualized";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
-import { useFilterParam, useQueryParam } from "hooks/useQueryParam";
+import { useFilterParam } from "hooks/useFilterParam";
+import { useQueryParam } from "hooks/useQueryParam";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
 import filterLogs from "utils/filterLogs";
 import { getMatchingLines } from "utils/matchingLines";

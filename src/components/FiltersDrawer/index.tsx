@@ -10,7 +10,7 @@ import Icon from "components/Icon";
 import { HAS_OPENED_DRAWER } from "constants/cookies";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size, zIndex } from "constants/tokens";
-import { useFilterParam } from "hooks/useQueryParam";
+import { useFilterParam } from "hooks/useFilterParam";
 import { ExpandedLines, Filter } from "types/logs";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import FilterGroup from "./FilterGroup";

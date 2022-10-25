@@ -70,7 +70,7 @@ export const getMatchingLines = (
     return undefined;
   }
 
-  const regexToMatch = constructRegexToMatch(filters);
+  const regexToMatch = constructRegexToMatch(visibleFilters);
 
   logLines.forEach((line, idx) => {
     if (matchesFilters(line, regexToMatch, filterLogic)) {
