@@ -20,7 +20,7 @@ interface BaseRowProps extends ListRowProps {
   // The line number associated with a log line and its index within the context of the virtualized list
   // may differ due to collapsed rows.
   lineNumber: number;
-  prettyPrint: boolean;
+  prettyPrint?: boolean;
   highlightedLine?: number;
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
@@ -40,7 +40,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     index,
     highlightedLine,
     lineNumber,
-    prettyPrint,
+    prettyPrint = false,
     searchTerm,
     resmokeRowColor,
     wrap,
@@ -54,13 +54,14 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     undefined
   );
   const selected = selectedLine === lineNumber;
-  const isHighlighted = highlightedLine === index;
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
     []
   );
   const bookmarked = bookmarks.includes(lineNumber);
+
+  const highlighted = highlightedLine === index;
 
   // Clicking a line should select or deselect the line.
   const handleClick = () => {
@@ -74,13 +75,16 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
 
   // Double clicking a line should add or remove the line from bookmarks.
   const handleDoubleClick = () => {
-    resetRowHeightAtIndex(index);
     if (bookmarks.includes(lineNumber)) {
       const newBookmarks = bookmarks.filter((b) => b !== lineNumber);
       setBookmarks(newBookmarks);
     } else {
       const newBookmarks = [...bookmarks, lineNumber].sort((a, b) => a - b);
       setBookmarks(newBookmarks);
+    }
+
+    if (prettyPrint) {
+      resetRowHeightAtIndex(index);
     }
   };
 
@@ -90,9 +94,9 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       {...rest}
       bookmarked={bookmarked}
       data-cy={`log-row-${lineNumber}`}
-      data-highlighted={isHighlighted}
+      data-highlighted={highlighted}
       data-selected={selected}
-      highlighted={isHighlighted}
+      highlighted={highlighted}
       onDoubleClick={handleDoubleClick}
       selected={selected}
     >
@@ -160,6 +164,10 @@ const RowContainer = styled.div<{
   display: flex;
   align-items: flex-start;
 
+  font-family: "Source Code Pro", monospace;
+  line-height: 1.25;
+  font-size: ${fontSize.m};
+
   ${({ color }) => color && `color: ${color};`}
   ${({ selected }) => selected && `background-color: ${yellow.light3};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
@@ -170,10 +178,6 @@ const RowContainer = styled.div<{
   :hover {
     box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.1);
   }
-
-  font-family: "Source Code Pro", monospace;
-  line-height: 1.25;
-  font-size: ${fontSize.m};
 `;
 
 const StyledIcon = styled(Icon)`
@@ -202,11 +206,7 @@ const StyledPre = styled.pre<{
   margin-right: ${size.xs};
 
   ${({ shouldWrap }) =>
-    shouldWrap &&
-    `
-  /* wrap multiple lines */
-  white-space: break-spaces;
-  `}
+    shouldWrap && ` /* wrap multiple lines */ white-space: break-spaces;`}
 `;
 
 export default BaseRow;

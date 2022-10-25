@@ -18,7 +18,6 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
     resetRowHeightAtIndex,
     scrollToLine,
     highlightedLine,
-    prettyPrint,
     range,
     searchTerm,
     wrap,
@@ -39,7 +38,6 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
       data-cy="ansii-row"
       highlightedLine={highlightedLine}
       lineNumber={lineNumber}
-      prettyPrint={prettyPrint}
       resetRowHeightAtIndex={resetRowHeightAtIndex}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}

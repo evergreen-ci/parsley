@@ -40,7 +40,7 @@ exports[`storyshots Storyshots Components/LogRow/AnsiiRow Multi Lines 1`] = `
 
 exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
 <div
-  className="css-1exn4ml"
+  className="css-8iuxnu"
   data-cy="log-row-0"
   data-highlighted={false}
   data-selected={false}

@@ -30,23 +30,42 @@ describe("row", () => {
     expect(history.location.search).toBe("");
   });
 
-  it("double clicking a log line adds it to the bookmarks and resets row heights", async () => {
-    const resetRowHeightAtIndex = jest.fn();
+  it("double clicking a log line adds it to the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
-      <Row {...rowProps} resetRowHeightAtIndex={resetRowHeightAtIndex}>
-        {testLog}
-      </Row>
+      <Row {...rowProps}>{testLog}</Row>
     );
     await userEvent.dblClick(screen.getByText(testLog));
     expect(history.location.search).toBe("?bookmarks=0");
-    expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(1);
-    expect(resetRowHeightAtIndex).toHaveBeenCalledWith(0);
   });
 
-  it("double clicking a bookmarked log line removes it from the bookmarks and resets row heights", async () => {
+  it("double clicking a bookmarked log line removes it from the bookmarks", async () => {
+    const { history } = renderWithRouterMatch(
+      <Row {...rowProps}>{testLog}</Row>,
+      {
+        route: "?bookmarks=0",
+      }
+    );
+    await userEvent.dblClick(screen.getByText(testLog));
+    expect(history.location.search).toBe("");
+  });
+
+  it("a log line can be selected and bookmarked at the same time", async () => {
+    const { history } = renderWithRouterMatch(
+      <Row {...rowProps}>{testLog}</Row>
+    );
+    await userEvent.click(screen.getByDataCy("log-link-0"));
+    await userEvent.dblClick(screen.getByText(testLog));
+    expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");
+  });
+
+  it("bookmarking a line when pretty print is enabled should call resetRowHeightAtIndex", async () => {
     const resetRowHeightAtIndex = jest.fn();
     const { history } = renderWithRouterMatch(
-      <Row {...rowProps} resetRowHeightAtIndex={resetRowHeightAtIndex}>
+      <Row
+        {...rowProps}
+        prettyPrint
+        resetRowHeightAtIndex={resetRowHeightAtIndex}
+      >
         {testLog}
       </Row>,
       {
@@ -59,13 +78,23 @@ describe("row", () => {
     expect(resetRowHeightAtIndex).toHaveBeenCalledWith(0);
   });
 
-  it("a log line can be selected and bookmarked at the same time", async () => {
+  it("bookmarking a line when pretty print is not enabled should not call resetRowHeightAtIndex", async () => {
+    const resetRowHeightAtIndex = jest.fn();
     const { history } = renderWithRouterMatch(
-      <Row {...rowProps}>{testLog}</Row>
+      <Row
+        {...rowProps}
+        prettyPrint={false}
+        resetRowHeightAtIndex={resetRowHeightAtIndex}
+      >
+        {testLog}
+      </Row>,
+      {
+        route: "?bookmarks=0",
+      }
     );
-    await userEvent.click(screen.getByDataCy("log-link-0"));
     await userEvent.dblClick(screen.getByText(testLog));
-    expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");
+    expect(history.location.search).toBe("");
+    expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(0);
   });
 });
 
