@@ -167,7 +167,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
               {highlights.map((highlight) => (
                 <NonFilterElement key={`highlight-${highlight}`}>
                   <IconButton
-                    aria-label="Delete highlight button"
+                    aria-label="Delete highlight"
                     data-cy="delete-highlight-button"
                     onClick={() => deleteHighlight(highlight)}
                   >
