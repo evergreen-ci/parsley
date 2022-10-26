@@ -50,10 +50,18 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   useKeyboardShortcut(
     { charKey: CharKey.S, modifierKeys: [ModifierKey.Control] },
-    () =>
-      selected === SearchBarActions.Search
-        ? setSelected(SearchBarActions.Filter)
-        : setSelected(SearchBarActions.Search),
+    () => {
+      // Iterate through SearchBarActions and select the next one.
+      const SearchBarActionValues = Object.values(SearchBarActions);
+      let keyIndex = SearchBarActionValues.indexOf(selected) + 1;
+      if (keyIndex > SearchBarActionValues.length - 1) {
+        keyIndex = 0;
+      }
+      const nextKey = Object.keys(SearchBarActions)[
+        keyIndex
+      ] as keyof typeof SearchBarActions;
+      setSelected(SearchBarActions[nextKey]);
+    },
     { disabled, ignoreFocus: true }
   );
 
