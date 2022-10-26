@@ -12,8 +12,7 @@ import { leaveBreadcrumb } from "utils/errorReporting";
  *
  */
 const useLogDownloader = (url: string) => {
-  const [downloadProgress, setDownloadProgress] = useState(0);
-  const [data, setData] = useState<string | null>(null);
+  const [data, setData] = useState<string[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
   useEffect(() => {
@@ -21,43 +20,16 @@ const useLogDownloader = (url: string) => {
     const req = new Request(url, { method: "GET" });
     const abortController = new AbortController();
 
-    fetch(req, { credentials: "include" })
+    fetch(req, { credentials: "include", signal: abortController.signal })
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
         }
-        let downloaded = 0;
-
-        const reader = response.body?.getReader();
-        if (reader !== undefined) {
-          const stream = new ReadableStream({
-            start(controller) {
-              return pump();
-              async function pump(): Promise<any> {
-                const { done, value } = (await reader?.read()) || {
-                  done: true,
-                  value: null,
-                };
-                if (done) {
-                  controller.close();
-                  return;
-                }
-                downloaded += value.length;
-                setDownloadProgress(downloaded / 1024);
-
-                controller.enqueue(value);
-                return pump();
-              }
-            },
-          });
-          return new Response(stream, {
-            headers: { "Content-Type": "text/plain" },
-          });
-        }
+        return response;
       })
-      .then((response) => response?.text() || "")
+      .then((response) => response.text() || "")
       .then((text) => {
-        setData(text);
+        setData(text.split("\n"));
       })
       .catch((err: Error) => {
         leaveBreadcrumb("useLogDownloader", { url, err }, "error");
@@ -71,7 +43,7 @@ const useLogDownloader = (url: string) => {
     };
   }, [url]);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  return { data, error, isLoading, downloadProgress };
+  return { data, error, isLoading };
 };
 
 export { useLogDownloader };
