@@ -10,6 +10,7 @@ module.exports = {
     "^uuid$": "<rootDir>/node_modules/uuid/dist/index.js",
   },
   modulePaths: ["<rootDir>/src"],
+  setupFiles: ["<rootDir>/setupJest.js"],
   preset: "ts-jest",
   resetMocks: true,
   // jest-dom adds custom jest matchers for asserting on DOM nodes.
