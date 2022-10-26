@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { palette } from "@leafygreen-ui/palette";
 import { Body } from "@leafygreen-ui/typography";
 import { useParams } from "react-router-dom";
 import Icon from "components/Icon";
@@ -18,9 +17,8 @@ import { useToastContext } from "context/toast";
 import { useLogDownloader } from "hooks";
 import NotFound from "pages/404";
 import { leaveBreadcrumb } from "utils/errorReporting";
-import { convertBytesToUnitString } from "./utils";
+import LoadingBar from "./LoadingBar";
 
-const { green } = palette;
 interface LoadingPageProps {
   logType: LogTypes;
 }
@@ -78,12 +76,12 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       break;
   }
 
-  const { data, error, isLoading, downloadProgress } = useLogDownloader(url);
+  const { data, error, isLoading } = useLogDownloader(url);
 
   useEffect(() => {
     if (data) {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
-      ingestLines(data.trimEnd().split("\n"), logType);
+      ingestLines(data, logType);
       setLogMetadata({
         taskID,
         execution,
@@ -119,17 +117,13 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     <Container>
       {isLoading || !error ? (
         <LoadingBarContainer>
-          <LogoContainer>
-            <StyledIcon glyph="ParsleyLogo" size={144} useStroke />
-            <SpaceBetween>
+          <SpaceBetween>
+            <LogoContainer>
+              <StyledIcon glyph="ParsleyLogo" size={40} useStroke />
               <StyledBody>Loading Parsley...</StyledBody>
-              {downloadProgress && (
-                <StyledLoadingProgressText>
-                  {convertBytesToUnitString(downloadProgress)}
-                </StyledLoadingProgressText>
-              )}
-            </SpaceBetween>
-          </LogoContainer>
+            </LogoContainer>
+          </SpaceBetween>
+          <LoadingBar indeterminate />
         </LoadingBarContainer>
       ) : (
         <NotFound />
@@ -139,23 +133,15 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
 };
 
 const LoadingBarContainer = styled.div`
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
-  width: 20%;
-  align-items: center;
-  justify-content: center;
-`;
-
-const StyledLoadingProgressText = styled.pre`
-  color: ${green};
+  width: 40%;
 `;
 
 const LogoContainer = styled.div`
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
+  align-items: flex-end;
 `;
 
 const SpaceBetween = styled.div`
