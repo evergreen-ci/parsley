@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
+import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb } from "utils/errorReporting";
-
 /*
  * useLogDownloader is a custom hook that downloads a log file from a given URL.
  * It downloads the log file and splits the log file into an array of strings.
@@ -15,12 +15,19 @@ const useLogDownloader = (url: string) => {
   const [data, setData] = useState<string[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     leaveBreadcrumb("useLogDownloader", { url }, "request");
     const req = new Request(url, { method: "GET" });
+    // We can utilize AbortController to cancel the request if the component unmounts
+    // When running in strict mode this will trigger an error because of how strict mode behaves
+    // We need to case on it to avoid the error
     const abortController = new AbortController();
 
-    fetch(req, { credentials: "include", signal: abortController.signal })
+    fetch(req, {
+      credentials: "include",
+      signal: isProduction ? abortController.signal : undefined,
+    })
       .then((response) => {
         if (!response.ok) {
           throw new Error(response.statusText);
