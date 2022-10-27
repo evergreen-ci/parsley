@@ -1,5 +1,5 @@
-import { useAxiosGet } from "./useAxios";
 import useKeyboardShortcut from "./useKeyboardShortcut";
+import { useLogDownloader } from "./useLogDownloader";
 import useOnClickOutside from "./useOnClickOutside";
 
-export { useOnClickOutside, useAxiosGet, useKeyboardShortcut };
+export { useOnClickOutside, useLogDownloader, useKeyboardShortcut };

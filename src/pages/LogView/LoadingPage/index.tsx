@@ -14,7 +14,7 @@ import { slugs } from "constants/routes";
 import { fontSize, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
-import { useAxiosGet } from "hooks";
+import { useLogDownloader } from "hooks";
 import NotFound from "pages/404";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import LoadingBar from "./LoadingBar";
@@ -76,11 +76,12 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       break;
   }
 
-  const { data, error, isLoading } = useAxiosGet(url);
+  const { data, error, isLoading } = useLogDownloader(url);
+
   useEffect(() => {
     if (data) {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
-      ingestLines(data.trimEnd().split("\n"), logType);
+      ingestLines(data, logType);
       setLogMetadata({
         taskID,
         execution,
@@ -134,12 +135,12 @@ const LoadingBarContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 40%;
+  gap: ${size.s};
 `;
 
 const LogoContainer = styled.div`
   display: flex;
   align-items: flex-end;
-  margin-bottom: ${size.s};
 `;
 
 const StyledBody = styled(Body)`
