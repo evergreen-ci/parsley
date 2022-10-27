@@ -3,7 +3,7 @@ import { stringifyQuery } from "utils/query-string";
 
 const getEvergreenTaskURL = (taskID: string, execution: string) => {
   const params = {
-    redirectSpruceUsers: true,
+    redirect_spruce_users: true,
   };
   return `${evergreenURL}/task/${taskID}/${execution}?${stringifyQuery(
     params
