@@ -67,7 +67,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
   };
 
   const deleteHighlight = (highlightName: string) => {
-    const newHighlights = highlights.filter((f) => f !== highlightName);
+    const newHighlights = highlights.filter((h) => h !== highlightName);
     setHighlights(newHighlights);
   };
   return (
