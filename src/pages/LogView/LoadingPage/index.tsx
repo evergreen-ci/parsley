@@ -15,7 +15,9 @@ import { fontSize, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import { useLogDownloader } from "hooks";
+import { useFetch } from "hooks/useFetch";
 import NotFound from "pages/404";
+import { LogKeeperMetadata } from "types/api";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import LoadingBar from "./LoadingBar";
 
@@ -78,13 +80,20 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
 
   const { data, error, isLoading } = useLogDownloader(url);
 
+  const { data: logkeeperMetadata } = useFetch<LogKeeperMetadata>(
+    getResmokeLogURL(buildID || "", { testID, metadata: true }),
+    {
+      skip: !buildID,
+    }
+  );
+
   useEffect(() => {
     if (data) {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
       ingestLines(data, logType);
       setLogMetadata({
-        taskID,
-        execution,
+        taskID: taskID || logkeeperMetadata?.task_id,
+        execution: execution || String(logkeeperMetadata?.execution || 0),
         testID,
         origin,
         buildID,
@@ -111,6 +120,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     url,
     htmlLogURL,
     jobLogsURL,
+    logkeeperMetadata?.task_id,
+    logkeeperMetadata?.execution,
   ]);
 
   return (

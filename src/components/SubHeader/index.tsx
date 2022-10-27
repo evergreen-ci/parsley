@@ -9,7 +9,6 @@ import { useLogContext } from "context/LogContext";
 
 const { gray } = palette;
 
-/** TODO: EVG-17534 */
 interface SubHeaderProps {
   isUploadedLog: boolean;
 }
@@ -17,9 +16,11 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
   const { logMetadata } = useLogContext();
   const { fileName, taskID, execution } = logMetadata || {};
   let taskLink = "";
+
   if (taskID !== undefined && execution !== undefined) {
     taskLink = getEvergreenTaskURL(taskID, execution);
   }
+
   return (
     <Container>
       {isUploadedLog ? (

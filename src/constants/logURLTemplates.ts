@@ -33,12 +33,13 @@ const getEvergreenTestLogURL = (
  */
 const getResmokeLogURL = (
   buildID: string,
-  options: { testID?: string; raw?: boolean; html?: boolean }
+  options: { testID?: string; raw?: boolean; html?: boolean; metadata?: true }
 ) => {
-  const { raw, html, testID } = options;
+  const { raw, html, testID, metadata } = options;
   const params = {
     raw,
     html,
+    metadata,
   };
   if (testID) {
     return `${logkeeperURL}/build/${buildID}/test/${testID}?${stringifyQuery(
