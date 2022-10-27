@@ -83,12 +83,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     >
       <PaddedContainer>
         <StyledSideNavGroup
-          glyph={
-            <Icon
-              fill={filters.length ? green.dark2 : gray.base}
-              glyph="Filter"
-            />
-          }
+          glyph={<SideNavIcon active={filters.length > 0} glyph="Filter" />}
           header={
             <NavGroupHeader data-cy="filters-nav-group-header">
               <NavGroupTitle>Filters</NavGroupTitle>
@@ -115,10 +110,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
 
         <StyledSideNavGroup
           glyph={
-            <Icon
-              fill={expandedLines.length ? green.dark2 : gray.base}
-              glyph="Expand"
-            />
+            <SideNavIcon active={expandedLines.length > 0} glyph="Expand" />
           }
           header={
             <NavGroupHeader data-cy="expanded-lines-nav-group-header">
@@ -149,12 +141,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
         </StyledSideNavGroup>
 
         <StyledSideNavGroup
-          glyph={
-            <Icon
-              fill={highlights.length ? green.dark2 : gray.base}
-              glyph="Minus"
-            />
-          }
+          glyph={<SideNavIcon active={highlights.length > 0} glyph="Minus" />}
           header={
             <NavGroupHeader data-cy="highlight-nav-group-header">
               <NavGroupTitle>Highlighted Terms</NavGroupTitle>
@@ -187,6 +174,15 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     </StyledSideNav>
   );
 };
+interface SideNavIconProps extends React.ComponentProps<typeof Icon> {
+  active: boolean;
+}
+
+const SideNavIcon: React.FC<SideNavIconProps> = ({ active, ...rest }) => (
+  <Icon {...rest} fill={active ? green.dark2 : gray.base} />
+);
+// Leafygreen's SideNav requires this element to have an Icon displayName
+SideNavIcon.displayName = "Icon";
 
 const StyledSideNav = styled(SideNav)`
   z-index: ${zIndex.drawer};
