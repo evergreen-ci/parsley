@@ -36,7 +36,7 @@ const useLogDownloader = (url: string) => {
       })
       .then((response) => response.text() || "")
       .then((text) => {
-        setData(text.split("\n"));
+        setData(text.trimEnd().split("\n"));
       })
       .catch((err: Error) => {
         leaveBreadcrumb("useLogDownloader", { url, err }, "error");

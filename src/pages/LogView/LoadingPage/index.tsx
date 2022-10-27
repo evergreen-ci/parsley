@@ -117,12 +117,10 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     <Container>
       {isLoading || !error ? (
         <LoadingBarContainer>
-          <SpaceBetween>
-            <LogoContainer>
-              <StyledIcon glyph="ParsleyLogo" size={40} useStroke />
-              <StyledBody>Loading Parsley...</StyledBody>
-            </LogoContainer>
-          </SpaceBetween>
+          <LogoContainer>
+            <StyledIcon glyph="ParsleyLogo" size={40} useStroke />
+            <StyledBody>Loading Parsley...</StyledBody>
+          </LogoContainer>
           <LoadingBar indeterminate />
         </LoadingBarContainer>
       ) : (
@@ -137,6 +135,7 @@ const LoadingBarContainer = styled.div`
   display: flex;
   flex-direction: column;
   width: 40%;
+  gap: ${size.s};
 `;
 
 const LogoContainer = styled.div`
@@ -144,13 +143,6 @@ const LogoContainer = styled.div`
   align-items: flex-end;
 `;
 
-const SpaceBetween = styled.div`
-  margin-bottom: ${size.s};
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: flex-end;
-`;
 const StyledBody = styled(Body)`
   font-size: ${fontSize.l};
 `;
