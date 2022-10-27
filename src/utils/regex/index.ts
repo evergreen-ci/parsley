@@ -8,10 +8,10 @@
 const hasOverlappingRegex = (regex1: RegExp, regex2: RegExp, text: string) => {
   const regex1Matches = text.match(regex1);
   const regex2Matches = text.match(regex2);
-  if (!regex1Matches || !regex2Matches) {
-    return false;
+  if (regex1Matches && regex2Matches) {
+    return true;
   }
-  return regex1Matches.some((match) => regex2.test(match));
+  return false;
 };
 
 export { hasOverlappingRegex };

@@ -53,10 +53,9 @@ const SearchBar: React.FC<SearchBarProps> = ({
     () => {
       // Iterate through SearchBarActions and select the next one.
       const SearchBarActionValues = Object.values(SearchBarActions);
-      let keyIndex = SearchBarActionValues.indexOf(selected) + 1;
-      if (keyIndex > SearchBarActionValues.length - 1) {
-        keyIndex = 0;
-      }
+      const keyIndex =
+        (SearchBarActionValues.indexOf(selected) + 1) %
+        SearchBarActionValues.length;
       const nextKey = Object.keys(SearchBarActions)[
         keyIndex
       ] as keyof typeof SearchBarActions;
