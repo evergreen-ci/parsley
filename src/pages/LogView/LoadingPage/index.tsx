@@ -39,6 +39,12 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   let url = "";
   let htmlLogURL = "";
   let jobLogsURL = "";
+  const { data: logkeeperMetadata } = useFetch<LogKeeperMetadata>(
+    getResmokeLogURL(buildID || "", { testID, metadata: true }),
+    {
+      skip: !buildID,
+    }
+  );
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
@@ -47,6 +53,12 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       } else if (buildID) {
         url = getResmokeLogURL(buildID, { raw: true });
         htmlLogURL = getResmokeLogURL(buildID, { html: true });
+      }
+      if (logkeeperMetadata) {
+        jobLogsURL = getSpruceJobLogsURL(
+          logkeeperMetadata.task_id,
+          String(logkeeperMetadata.execution || 0)
+        );
       }
       break;
     }
@@ -79,13 +91,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   }
 
   const { data, error, isLoading } = useLogDownloader(url);
-
-  const { data: logkeeperMetadata } = useFetch<LogKeeperMetadata>(
-    getResmokeLogURL(buildID || "", { testID, metadata: true }),
-    {
-      skip: !buildID,
-    }
-  );
 
   useEffect(() => {
     if (data) {
