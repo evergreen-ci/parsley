@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb } from "utils/errorReporting";
-/*
- * useLogDownloader is a custom hook that downloads a log file from a given URL.
+/**
+ * `useLogDownloader` is a custom hook that downloads a log file from a given URL.
  * It downloads the log file and splits the log file into an array of strings.
  * Each string is split based on the newline character.
  * It returns an object with the following properties:
@@ -19,13 +19,11 @@ const useLogDownloader = (url: string) => {
   useEffect(() => {
     leaveBreadcrumb("useLogDownloader", { url }, "request");
     const req = new Request(url, { method: "GET" });
-    // We can utilize AbortController to cancel the request if the component unmounts
-    // When running in strict mode this will trigger an error because of how strict mode behaves
-    // We need to case on it to avoid the error
     const abortController = new AbortController();
 
     fetch(req, {
       credentials: "include",
+      // Conditionally define signal because AbortController throws error in development's strict mode
       signal: isProduction ? abortController.signal : undefined,
     })
       .then((response) => {
@@ -46,10 +44,10 @@ const useLogDownloader = (url: string) => {
         setIsLoading(false);
       });
     return () => {
+      // Cancel the request if the component unmounts
       abortController.abort();
     };
   }, [url]);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
   return { data, error, isLoading };
 };
 
