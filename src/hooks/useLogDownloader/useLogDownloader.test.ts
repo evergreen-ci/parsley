@@ -9,12 +9,11 @@ const textMessage =
 // Fetch is not supported in jest so we need to mock it out
 describe("useLogDownloader", () => {
   it("gets a good response from the api and updates its state", async () => {
-    const mockFetchPromise = Promise.resolve({
+    const mockFetchPromise = jest.fn().mockResolvedValue({
       ok: true,
       text: () => Promise.resolve(textMessage),
     });
-    // eslint-disable-next-line jest/prefer-spy-on -- we want to mock the global fetch and we can't spy on it
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+    jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
     const { result, waitForNextUpdate } = renderHook(() =>
       useLogDownloader(API_URL)
@@ -29,9 +28,10 @@ describe("useLogDownloader", () => {
     ]);
   });
   it("gets a bad response from the api and returns an error", async () => {
-    const mockFetchPromise = Promise.reject(new Error("Something went wrong"));
-    // eslint-disable-next-line jest/prefer-spy-on -- we want to mock the global fetch and we can't spy on it
-    global.fetch = jest.fn().mockImplementation(() => mockFetchPromise);
+    const mockFetchPromise = jest
+      .fn()
+      .mockRejectedValue(new Error("Something went wrong"));
+    jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
     const { result, waitForNextUpdate } = renderHook(() =>
       useLogDownloader(API_URL)
