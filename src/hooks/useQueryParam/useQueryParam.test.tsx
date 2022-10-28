@@ -27,25 +27,26 @@ describe("useQueryParams", () => {
   });
 });
 
-const useJointHook = (param: string, def: any) => {
-  const queryParam = useQueryParam(param, def);
-  const queryParams = useQueryParams();
-  return { queryParam, queryParams };
+const useQueryJointHook = (param: string, def: any) => {
+  const [queryParam, setQueryParam] = useQueryParam(param, def);
+  const [allQueryParams] = useQueryParams();
+  return { queryParam, setQueryParam, allQueryParams };
 };
+
 describe("useQueryParam", () => {
   it("setting a query param value should not update other values", () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
       <MemoryRouter initialEntries={["/?search=test"]}>{children}</MemoryRouter>
     );
-    const { result } = renderHook(() => useJointHook("other", ""), {
+    const { result } = renderHook(() => useQueryJointHook("other", ""), {
       wrapper,
     });
-    expect(result.current.queryParams[0]).toMatchObject({ search: "test" });
+    expect(result.current.allQueryParams).toMatchObject({ search: "test" });
     act(() => {
-      result.current.queryParam[1]("test2");
+      result.current.setQueryParam("test2");
     });
-    expect(result.current.queryParam[0]).toBe("test2");
-    expect(result.current.queryParams[0]).toMatchObject({
+    expect(result.current.queryParam).toBe("test2");
+    expect(result.current.allQueryParams).toMatchObject({
       other: "test2",
       search: "test",
     });
@@ -54,10 +55,10 @@ describe("useQueryParam", () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
       <MemoryRouter initialEntries={["/"]}>{children}</MemoryRouter>
     );
-    const { result } = renderHook(() => useJointHook("other", "default"), {
+    const { result } = renderHook(() => useQueryJointHook("other", "default"), {
       wrapper,
     });
-    expect(result.current.queryParam[0]).toBe("default");
+    expect(result.current.queryParam).toBe("default");
   });
   it("query param should not be default if it exists", () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
@@ -65,10 +66,10 @@ describe("useQueryParam", () => {
         {children}
       </MemoryRouter>
     );
-    const { result } = renderHook(() => useJointHook("other", "default"), {
+    const { result } = renderHook(() => useQueryJointHook("other", "default"), {
       wrapper,
     });
-    expect(result.current.queryParam[0]).toBe("something");
+    expect(result.current.queryParam).toBe("something");
   });
 
   describe("should handle strings", () => {
@@ -80,27 +81,27 @@ describe("useQueryParam", () => {
           {children}
         </MemoryRouter>
       );
-      const { result } = renderHook(() => useJointHook("search", "test"), {
+      const { result } = renderHook(() => useQueryJointHook("search", "test"), {
         wrapper,
       });
-      expect(result.current.queryParam[0]).toBe("test");
+      expect(result.current.queryParam).toBe("test");
       act(() => {
-        result.current.queryParam[1]("test2");
+        result.current.setQueryParam("test2");
       });
-      expect(result.current.queryParam[0]).toBe("test2");
+      expect(result.current.queryParam).toBe("test2");
     });
     it("when a default is not provided", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => <MemoryRouter initialEntries={["/"]}>{children}</MemoryRouter>;
-      const { result } = renderHook(() => useJointHook("search", "test"), {
+      const { result } = renderHook(() => useQueryJointHook("search", "test"), {
         wrapper,
       });
-      expect(result.current.queryParam[0]).toBe("test");
+      expect(result.current.queryParam).toBe("test");
       act(() => {
-        result.current.queryParam[1]("test2");
+        result.current.setQueryParam("test2");
       });
-      expect(result.current.queryParam[0]).toBe("test2");
+      expect(result.current.queryParam).toBe("test2");
     });
   });
   describe("should handle numbers", () => {
@@ -110,27 +111,27 @@ describe("useQueryParam", () => {
       }) => (
         <MemoryRouter initialEntries={["/?search=1"]}>{children}</MemoryRouter>
       );
-      const { result } = renderHook(() => useJointHook("search", 1), {
+      const { result } = renderHook(() => useQueryJointHook("search", 1), {
         wrapper,
       });
-      expect(result.current.queryParam[0]).toBe(1);
+      expect(result.current.queryParam).toBe(1);
       act(() => {
-        result.current.queryParam[1](2);
+        result.current.setQueryParam(2);
       });
-      expect(result.current.queryParam[0]).toBe(2);
+      expect(result.current.queryParam).toBe(2);
     });
     it("when a default is not provided", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => <MemoryRouter initialEntries={["/"]}>{children}</MemoryRouter>;
-      const { result } = renderHook(() => useJointHook("search", 1), {
+      const { result } = renderHook(() => useQueryJointHook("search", 1), {
         wrapper,
       });
-      expect(result.current.queryParam[0]).toBe(1);
+      expect(result.current.queryParam).toBe(1);
       act(() => {
-        result.current.queryParam[1](2);
+        result.current.setQueryParam(2);
       });
-      expect(result.current.queryParam[0]).toBe(2);
+      expect(result.current.queryParam).toBe(2);
     });
   });
   describe("should handle booleans", () => {
@@ -142,27 +143,27 @@ describe("useQueryParam", () => {
           {children}
         </MemoryRouter>
       );
-      const { result } = renderHook(() => useJointHook("search", true), {
+      const { result } = renderHook(() => useQueryJointHook("search", true), {
         wrapper,
       });
-      expect(result.current.queryParam[0]).toBe(true);
+      expect(result.current.queryParam).toBe(true);
       act(() => {
-        result.current.queryParam[1](false);
+        result.current.setQueryParam(false);
       });
-      expect(result.current.queryParam[0]).toBe(false);
+      expect(result.current.queryParam).toBe(false);
     });
     it("when a default is not provided", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => <MemoryRouter initialEntries={["/"]}>{children}</MemoryRouter>;
-      const { result } = renderHook(() => useJointHook("search", true), {
+      const { result } = renderHook(() => useQueryJointHook("search", true), {
         wrapper,
       });
-      expect(result.current.queryParam[0]).toBe(true);
+      expect(result.current.queryParam).toBe(true);
       act(() => {
-        result.current.queryParam[1](false);
+        result.current.setQueryParam(false);
       });
-      expect(result.current.queryParam[0]).toBe(false);
+      expect(result.current.queryParam).toBe(false);
     });
   });
   describe("should handle arrays", () => {
@@ -172,35 +173,35 @@ describe("useQueryParam", () => {
       }) => (
         <MemoryRouter initialEntries={["/?search=1"]}>{children}</MemoryRouter>
       );
-      const { result } = renderHook(() => useJointHook("search", [1]), {
+      const { result } = renderHook(() => useQueryJointHook("search", [1]), {
         wrapper,
       });
-      expect(result.current.queryParam[0]).toStrictEqual([1]);
+      expect(result.current.queryParam).toStrictEqual([1]);
       act(() => {
-        result.current.queryParam[1]([2]);
+        result.current.setQueryParam([2]);
       });
-      expect(result.current.queryParam[0]).toStrictEqual([2]);
+      expect(result.current.queryParam).toStrictEqual([2]);
       act(() => {
-        result.current.queryParam[1]([3, 4]);
+        result.current.setQueryParam([3, 4]);
       });
-      expect(result.current.queryParam[0]).toStrictEqual([3, 4]);
+      expect(result.current.queryParam).toStrictEqual([3, 4]);
     });
     it("when a default is not provided", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => <MemoryRouter initialEntries={["/"]}>{children}</MemoryRouter>;
-      const { result } = renderHook(() => useJointHook("search", [1]), {
+      const { result } = renderHook(() => useQueryJointHook("search", [1]), {
         wrapper,
       });
-      expect(result.current.queryParam[0]).toStrictEqual([1]);
+      expect(result.current.queryParam).toStrictEqual([1]);
       act(() => {
-        result.current.queryParam[1]([2]);
+        result.current.setQueryParam([2]);
       });
-      expect(result.current.queryParam[0]).toStrictEqual([2]);
+      expect(result.current.queryParam).toStrictEqual([2]);
       act(() => {
-        result.current.queryParam[1]([3, 4]);
+        result.current.setQueryParam([3, 4]);
       });
-      expect(result.current.queryParam[0]).toStrictEqual([3, 4]);
+      expect(result.current.queryParam).toStrictEqual([3, 4]);
     });
   });
 });

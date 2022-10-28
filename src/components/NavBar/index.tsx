@@ -5,10 +5,11 @@ import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
 import { StyledLink } from "components/styles";
-import { SearchBarActions } from "constants/enums";
+import { CaseSensitivity, MatchType, SearchBarActions } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { navbarHeight, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
+import { useFilterParam } from "hooks/useFilterParam";
 import { useQueryParam } from "hooks/useQueryParam";
 import { validateRegexp } from "utils/validators";
 import SearchResults from "./SearchResults";
@@ -17,10 +18,7 @@ import UploadLink from "./UploadLink";
 const { gray, white } = palette;
 
 const NavBar: React.FC = () => {
-  const [filters, setFilters] = useQueryParam<string[]>(
-    QueryParams.Filters,
-    []
-  );
+  const [filters, setFilters] = useFilterParam();
   const [highlights, setHighlights] = useQueryParam<string[]>(
     QueryParams.Highlights,
     []
@@ -34,9 +32,17 @@ const NavBar: React.FC = () => {
         setSearch(value);
         break;
       case SearchBarActions.Filter:
-        if (!filters.includes(value)) {
+        if (!filters.some((f) => f.name === value)) {
           setSearch("");
-          setFilters([...filters, value]);
+          setFilters([
+            ...filters,
+            {
+              name: value,
+              caseSensitive: CaseSensitivity.Insensitive,
+              matchType: MatchType.Exact,
+              visible: true,
+            },
+          ]);
         }
         break;
       case SearchBarActions.Highlight:

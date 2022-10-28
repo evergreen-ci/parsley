@@ -1,4 +1,3 @@
-import { FilterLogic } from "constants/enums";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
 import { isExpanded } from "utils/expandedLines";
@@ -23,7 +22,7 @@ type FilterLogsParams = {
  * @returns an array of numbers that indicates which log lines should be displayed, and which log lines
  * should be collapsed
  */
-export const filterLogs = ({
+const filterLogs = ({
   logLines,
   matchingLines,
   bookmarks,
@@ -69,35 +68,4 @@ export const filterLogs = ({
   return filteredLines;
 };
 
-/**
- * 'getMatchingLines' determines which log lines match the applied filters. This function returns undefined if no
- * filters have been applied.
- * @param logLines - list of strings representing the log lines
- * @param filters - list of filters being applied
- * @param filterLogic - specifies whether to use AND or OR filtering
- * @returns a set of numbers representing the matched lines, or undefined
- */
-export const getMatchingLines = (
-  logLines: string[],
-  filters: string[],
-  filterLogic: FilterLogic
-) => {
-  const set = new Set<number>();
-
-  if (filters.length === 0) {
-    return undefined;
-  }
-
-  const regexToMatch: RegExp[] = filters.map((f) => new RegExp(f, "i"));
-  logLines.forEach((line, idx) => {
-    if (filterLogic === FilterLogic.And) {
-      if (regexToMatch.every((regex) => line.match(regex))) {
-        set.add(idx);
-      }
-    } else if (regexToMatch.some((regex) => line.match(regex))) {
-      set.add(idx);
-    }
-  });
-
-  return set;
-};
+export default filterLogs;
