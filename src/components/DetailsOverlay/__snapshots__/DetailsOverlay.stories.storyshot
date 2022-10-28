@@ -55,7 +55,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
                     value=""
                   />
                   <div
-                    className="lg-ui-icon-selector-0000 leafygreen-ui-4uj7hc"
+                    className="static-lg-ui-classname leafygreen-ui-4uj7hc"
                   />
                 </div>
               </div>
@@ -82,7 +82,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
                     value=""
                   />
                   <div
-                    className="lg-ui-icon-selector-0000 leafygreen-ui-4uj7hc"
+                    className="static-lg-ui-classname leafygreen-ui-4uj7hc"
                   />
                 </div>
               </div>
@@ -438,7 +438,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
       >
         <button
           aria-disabled={true}
-          className="leafygreen-ui-19176yt"
+          className="leafygreen-ui-e1tz2b"
           data-leafygreen-ui="button"
           disabled={true}
           type="button"
@@ -452,7 +452,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             <svg
               alt=""
               aria-hidden={true}
-              className="leafygreen-ui-dv5amo"
+              className="leafygreen-ui-169mpis"
               fill="none"
               height={16}
               role="presentation"
@@ -481,7 +481,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
       >
         <button
           aria-disabled={true}
-          className="leafygreen-ui-19176yt"
+          className="leafygreen-ui-e1tz2b"
           data-cy="job-logs-button"
           data-leafygreen-ui="button"
           disabled={true}
@@ -497,7 +497,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             <svg
               alt=""
               aria-hidden={true}
-              className="leafygreen-ui-dv5amo"
+              className="leafygreen-ui-169mpis"
               fill="none"
               height={16}
               role="presentation"
@@ -528,7 +528,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
       >
         <button
           aria-disabled={true}
-          className="leafygreen-ui-19176yt"
+          className="leafygreen-ui-e1tz2b"
           data-cy="raw-log-button"
           data-leafygreen-ui="button"
           disabled={true}
@@ -544,7 +544,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             <svg
               alt=""
               aria-hidden={true}
-              className="leafygreen-ui-dv5amo"
+              className="leafygreen-ui-169mpis"
               fill="none"
               height={16}
               role="presentation"
@@ -575,7 +575,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
       >
         <button
           aria-disabled={true}
-          className="leafygreen-ui-19176yt"
+          className="leafygreen-ui-e1tz2b"
           data-cy="html-log-button"
           data-leafygreen-ui="button"
           disabled={true}
@@ -591,7 +591,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             <svg
               alt=""
               aria-hidden={true}
-              className="leafygreen-ui-dv5amo"
+              className="leafygreen-ui-169mpis"
               fill="none"
               height={16}
               role="presentation"
