@@ -8,12 +8,12 @@ import { Body, Overline } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
 import Icon from "components/Icon";
 import { HAS_OPENED_DRAWER } from "constants/cookies";
-import { QueryParams } from "constants/queryParams";
+import { CaseSensitivity, MatchType } from "constants/enums";
 import { size, zIndex } from "constants/tokens";
-import { useQueryParam } from "hooks/useQueryParam";
-import { ExpandedLines } from "types/logs";
+import { useFilterParam } from "hooks/useFilterParam";
+import { ExpandedLines, Filter } from "types/logs";
 import { leaveBreadcrumb } from "utils/errorReporting";
-import Filter from "./Filter";
+import FilterGroup from "./FilterGroup";
 
 const { green, gray } = palette;
 
@@ -34,13 +34,10 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     Cookie.get(HAS_OPENED_DRAWER) === "true"
   );
 
-  const [filters, setFilters] = useQueryParam<string[]>(
-    QueryParams.Filters,
-    []
-  );
+  const [filters, setFilters] = useFilterParam();
 
   const deleteFilter = (filterName: string) => {
-    const newFilters = filters.filter((f) => f !== filterName);
+    const newFilters = filters.filter((f) => f.name !== filterName);
     setFilters(newFilters);
 
     if (newFilters.length === 0) {
@@ -49,16 +46,27 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     leaveBreadcrumb("delete-filter", { filterName }, "user");
   };
 
-  const editFilter = (oldFilter: string, newFilter: string) => {
+  const editFilter = (
+    fieldName: keyof Filter,
+    fieldValue: MatchType | CaseSensitivity | boolean | string,
+    filter: Filter
+  ) => {
     // Duplicate filters are not allowed.
-    if (filters.includes(newFilter)) {
+    if (fieldName === "name" && filters.some((f) => f.name === fieldValue)) {
       return;
     }
     const newFilters = [...filters];
-    const idxToReplace = newFilters.indexOf(oldFilter);
-    newFilters[idxToReplace] = newFilter;
+    const idxToReplace = newFilters.findIndex((f) => f.name === filter.name);
+    newFilters[idxToReplace] = {
+      ...filter,
+      [fieldName]: fieldValue,
+    };
     setFilters(newFilters);
-    leaveBreadcrumb("edit-filter", { oldFilter, newFilter }, "user");
+    leaveBreadcrumb(
+      "edit-filter",
+      { filterName: filter.name, fieldName, fieldValue },
+      "user"
+    );
   };
 
   return (
@@ -89,11 +97,14 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
         >
           {filters.length ? (
             filters.map((filter) => (
-              <FilterWrapper key={filter}>
-                <Filter
+              <FilterWrapper
+                key={filter.name}
+                data-cy={`filter-${filter.name}`}
+              >
+                <FilterGroup
                   deleteFilter={deleteFilter}
                   editFilter={editFilter}
-                  filterName={filter}
+                  filter={filter}
                 />
               </FilterWrapper>
             ))
