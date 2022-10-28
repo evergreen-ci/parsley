@@ -20,7 +20,7 @@ describe("filters", () => {
         filter={defaultFilter}
       />
     );
-    expect(screen.getByText("myFilter")).toBeInTheDocument();
+    expect(screen.getByText(defaultFilter.name)).toBeInTheDocument();
   });
 
   it("should be able to toggle editing", async () => {
@@ -31,11 +31,12 @@ describe("filters", () => {
         filter={defaultFilter}
       />
     );
-    // Should show text input containing the current value.
     await user.click(screen.getByLabelText("Edit filter"));
-    expect(screen.queryByText("myFilter")).toBeNull();
+    expect(screen.queryByText(defaultFilter.name)).toBeNull();
     expect(screen.getByDataCy("edit-filter-name")).toBeInTheDocument();
-    expect(screen.getByDataCy("edit-filter-name")).toHaveValue("myFilter");
+    expect(screen.getByDataCy("edit-filter-name")).toHaveValue(
+      defaultFilter.name
+    );
 
     const confirmButton = screen.getByRole("button", {
       name: "OK",

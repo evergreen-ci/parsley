@@ -31,7 +31,7 @@ export const constructRegexToMatch = (visibleFilters: Filters) => {
 /**
  * `matchesFilters` tests if a given log line matches the applied filters.
  * @param line - a log line
- * @param regexToMatch - an array of objects representing the regex expressions that must be matched
+ * @param regexToMatch - an array of objects containing a regex expression and a boolean indicating if the match is exact or not
  * @param filterLogic - the filter mode, one of "AND" or "OR"
  * @returns true if the line matches the filters, false otherwise
  */
@@ -51,26 +51,25 @@ export const matchesFilters = (
 };
 
 /**
- * 'getMatchingLines' determines which log lines match the applied filters. This function returns undefined if no
+ * `getMatchingLines` determines which log lines match the applied filters. This function returns undefined if no
  * filters have been applied.
  * @param logLines - list of strings representing the log lines
  * @param filters - list of filters being applied
- * @param filterLogic - specifies whether to use AND or OR filtering
- * @returns a set of numbers representing the matched lines, or undefined
+ * @param filterLogic - the filter mode, one of "AND" or "OR"
+ * @returns a set of numbers representing the matched lines, or undefined if no filters have been applied
  */
 export const getMatchingLines = (
   logLines: string[],
   filters: Filters,
   filterLogic: FilterLogic
 ) => {
-  const set = new Set<number>();
-
   const visibleFilters = filters.filter((f) => f.visible !== false);
   if (visibleFilters.length === 0) {
     return undefined;
   }
 
   const regexToMatch = constructRegexToMatch(visibleFilters);
+  const set = new Set<number>();
 
   logLines.forEach((line, idx) => {
     if (matchesFilters(line, regexToMatch, filterLogic)) {

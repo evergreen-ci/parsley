@@ -15,7 +15,10 @@ const arraySymmetricDifference = <T>(a: T[], b: T[]) => {
   return difference;
 };
 
-/** `conditionalToArray` takes in a value and transforms it into an array if it is not one and should be */
+/**
+ * `conditionalToArray` takes in a generic value and transforms it into an array if shouldBeArray is true.
+ * The value remains unchanged if it is already an array, or if shouldBeArray is false.
+ * */
 const conditionalToArray = <T>(value: T, shouldBeArray: boolean) => {
   if (shouldBeArray) {
     return Array.isArray(value) ? value : [value];

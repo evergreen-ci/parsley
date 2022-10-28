@@ -18,7 +18,9 @@ export const stringifyQuery = (object: { [key: string]: any }) =>
 
 export const parseFilters = (filters: string[]): Filters => {
   const parsedFilters: Filters = filters.map((f) => {
+    // Ensure that a filter is a string before parsing it.
     const filter = f.toString();
+
     const visible = filter.charAt(0) === "1";
     const caseSensitive =
       filter.charAt(1) === "1"

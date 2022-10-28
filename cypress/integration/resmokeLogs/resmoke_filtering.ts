@@ -6,8 +6,8 @@ describe("Filtering", () => {
     describe("Basic filtering", () => {
       before(() => {
         cy.login();
-        cy.visit(logLink);
         cy.setCookie("has-opened-drawer", "true");
+        cy.visit(logLink);
         cy.get(".ReactVirtualized__Grid").should("be.visible");
       });
 
@@ -38,7 +38,6 @@ describe("Filtering", () => {
         before(() => {
           cy.login();
           cy.visit(`${logLink}/?filterLogic=and`);
-          cy.setCookie("has-opened-drawer", "true");
           cy.dataCy("clear-bookmarks").click();
         });
 
@@ -57,7 +56,6 @@ describe("Filtering", () => {
         });
 
         it("should be able to toggle case sensitivity", () => {
-          cy.toggleDrawer();
           cy.dataCy(`filter-${filter1}`).within(() => {
             cy.contains("Sensitive").click();
           });
@@ -65,7 +63,6 @@ describe("Filtering", () => {
             "equal",
             `?filterLogic=and&filters=110${filter1},100${filter2}`
           );
-          cy.toggleDrawer();
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
             cy.wrap($el).contains(filter1, { matchCase: true });
@@ -74,7 +71,6 @@ describe("Filtering", () => {
         });
 
         it("should be able to toggle inverse matching", () => {
-          cy.toggleDrawer();
           cy.dataCy(`filter-${filter2}`).within(() => {
             cy.contains("Inverse").click();
           });
@@ -82,7 +78,6 @@ describe("Filtering", () => {
             "equal",
             `?filterLogic=and&filters=110${filter1},101${filter2}`
           );
-          cy.toggleDrawer();
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
             cy.wrap($el).contains(filter1, { matchCase: true });
@@ -91,7 +86,6 @@ describe("Filtering", () => {
         });
 
         it("should be able to toggle visibility", () => {
-          cy.toggleDrawer();
           cy.dataCy(`filter-${filter1}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
           });
@@ -102,7 +96,6 @@ describe("Filtering", () => {
             "equal",
             `?filterLogic=and&filters=010${filter1},001${filter2}`
           );
-          cy.toggleDrawer();
 
           cy.get("[data-cy^='collapsed-row-']").should("not.exist");
         });
@@ -112,7 +105,6 @@ describe("Filtering", () => {
         before(() => {
           cy.login();
           cy.visit(`${logLink}/?filterLogic=or`);
-          cy.setCookie("has-opened-drawer", "true");
           cy.dataCy("clear-bookmarks").click();
         });
 
@@ -132,7 +124,6 @@ describe("Filtering", () => {
         });
 
         it("should be able to toggle case sensitivity", () => {
-          cy.toggleDrawer();
           cy.dataCy(`filter-${filter1}`).within(() => {
             cy.contains("Sensitive").click();
           });
@@ -140,7 +131,6 @@ describe("Filtering", () => {
             "equal",
             `?filterLogic=or&filters=110${filter1},100${filter2}`
           );
-          cy.toggleDrawer();
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
             cy.wrap($el)
@@ -154,7 +144,6 @@ describe("Filtering", () => {
         });
 
         it("should be able to toggle inverse matching", () => {
-          cy.toggleDrawer();
           cy.dataCy(`filter-${filter2}`).within(() => {
             cy.contains("Inverse").click();
           });
@@ -162,7 +151,6 @@ describe("Filtering", () => {
             "equal",
             `?filterLogic=or&filters=110${filter1},101${filter2}`
           );
-          cy.toggleDrawer();
 
           cy.get("[data-cy^='log-row-']").each(($el) => {
             cy.wrap($el)
@@ -176,7 +164,6 @@ describe("Filtering", () => {
         });
 
         it("should be able to toggle visibility", () => {
-          cy.toggleDrawer();
           cy.dataCy(`filter-${filter1}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
           });
@@ -187,7 +174,6 @@ describe("Filtering", () => {
             "equal",
             `?filterLogic=or&filters=010${filter1},001${filter2}`
           );
-          cy.toggleDrawer();
 
           cy.get("[data-cy^='collapsed-row-']").should("not.exist");
         });
@@ -199,7 +185,6 @@ describe("Filtering", () => {
     before(() => {
       cy.login();
       cy.visit(logLink);
-      cy.setCookie("has-opened-drawer", "true");
       cy.dataCy("clear-bookmarks").click();
       cy.location("search").should("equal", "");
     });
@@ -210,14 +195,12 @@ describe("Filtering", () => {
 
       cy.get("[data-cy^='log-row-']").should("not.exist");
 
-      cy.toggleDrawer();
       cy.dataCy("filter-notarealfilter").within(() => {
         cy.get(`[aria-label="Edit filter"]`).click();
       });
       cy.dataCy("edit-filter-name").clear().type("REPL_HB");
       cy.contains("button", "OK").click();
       cy.location("search").should("equal", "?filters=100REPL_HB");
-      cy.toggleDrawer();
 
       cy.get("[data-cy^='log-row-']").each(($el) => {
         cy.wrap($el).contains("REPL_HB", { matchCase: false });
@@ -225,12 +208,10 @@ describe("Filtering", () => {
     });
 
     it("should be able to delete a filter", () => {
-      cy.toggleDrawer();
       cy.dataCy("filter-REPL_HB").within(() => {
         cy.get(`[aria-label="Delete filter"]`).click();
       });
       cy.location("search").should("equal", "");
-      cy.toggleDrawer();
 
       cy.get("[data-cy^='collapsed-row-']").should("not.exist");
     });

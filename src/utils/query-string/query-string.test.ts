@@ -63,6 +63,16 @@ describe("filters", () => {
         },
       ]);
     });
+    it("parses a single filter that resembles a number correctly", () => {
+      expect(parseFilters(["10012345"])).toStrictEqual([
+        {
+          caseSensitive: CaseSensitivity.Insensitive,
+          matchType: MatchType.Exact,
+          name: "12345",
+          visible: true,
+        },
+      ]);
+    });
     it("parses multiple filters correctly", () => {
       expect(
         parseFilters(["011passed", "101failed", "010running"])

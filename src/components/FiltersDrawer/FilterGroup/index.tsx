@@ -36,12 +36,12 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
 }) => {
   const { name, visible, caseSensitive, matchType } = filter;
 
-  const [newFilter, setNewFilter] = useState(name);
+  const [newFilterName, setNewFilterName] = useState(name);
   const [isEditing, setIsEditing] = useState(false);
 
   const resetEditState = () => {
     setIsEditing(false);
-    setNewFilter(name);
+    setNewFilterName(name);
   };
 
   return (
@@ -78,12 +78,12 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
           <StyledTextInput
             aria-label="Edit filter name"
             data-cy="edit-filter-name"
-            onChange={(e) => setNewFilter(e.target.value)}
+            onChange={(e) => setNewFilterName(e.target.value)}
             placeholder="New filter definition"
             sizeVariant="small"
             spellCheck={false}
             type="search"
-            value={newFilter}
+            value={newFilterName}
           />
           <ButtonWrapper>
             <Button onClick={() => resetEditState()} size="xsmall">
@@ -91,7 +91,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
             </Button>
             <Button
               onClick={() => {
-                editFilter("name", newFilter, filter);
+                editFilter("name", newFilterName, filter);
                 resetEditState();
               }}
               size="xsmall"

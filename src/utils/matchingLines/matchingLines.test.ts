@@ -2,7 +2,7 @@ import { CaseSensitivity, FilterLogic, MatchType } from "constants/enums";
 import { constructRegexToMatch, getMatchingLines, matchesFilters } from ".";
 
 /**
- * Helper test function for constructing a Filter object.
+ * Helper function for constructing a Filter object.
  */
 const makeFilter = (filter: {
   name: string;
@@ -35,51 +35,6 @@ const logLines = [
   "[j0:sec0] mongod started on port 20001 with pid 30681.",
   "[j0:sec1] Starting mongod on port 20002...",
 ];
-
-describe("getMatchingLines", () => {
-  it("returns undefined if there are no filters", () => {
-    expect(getMatchingLines(logLines, [], FilterLogic.And)).toBeUndefined();
-  });
-
-  it("returns undefined if there are no visible filters", () => {
-    const filter1 = makeFilter({ name: "starting", visible: false });
-    const filter2 = makeFilter({ name: "mongod", visible: false });
-    expect(
-      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
-    ).toBeUndefined();
-  });
-
-  it("returns an empty set if there are no lines that satisfy the filter", () => {
-    const filter1 = makeFilter({
-      name: "starting",
-      caseSensitive: CaseSensitivity.Sensitive,
-    });
-    const filter2 = makeFilter({ name: "mongod" });
-    expect(
-      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
-    ).toStrictEqual(new Set([]));
-  });
-
-  it("returns correct set of numbers given applied filters", () => {
-    const filter1 = makeFilter({
-      name: "starting",
-    });
-    const filter2 = makeFilter({ name: "mongod" });
-    expect(
-      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
-    ).toStrictEqual(new Set([1, 4, 7]));
-  });
-
-  it("only uses visible filters when looking for matches", () => {
-    const filter1 = makeFilter({
-      name: "starting",
-    });
-    const filter2 = makeFilter({ name: "mongod", visible: false });
-    expect(
-      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
-    ).toStrictEqual(new Set([0, 1, 4, 7]));
-  });
-});
 
 describe("constructRegexToMatch", () => {
   it("properly constructs case sensitive filters", () => {
@@ -233,5 +188,50 @@ describe("matchesFilters", () => {
         ).toBe(false);
       });
     });
+  });
+});
+
+describe("getMatchingLines", () => {
+  it("returns undefined if there are no filters", () => {
+    expect(getMatchingLines(logLines, [], FilterLogic.And)).toBeUndefined();
+  });
+
+  it("returns undefined if there are no visible filters", () => {
+    const filter1 = makeFilter({ name: "starting", visible: false });
+    const filter2 = makeFilter({ name: "mongod", visible: false });
+    expect(
+      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
+    ).toBeUndefined();
+  });
+
+  it("returns an empty set if there are no lines that satisfy the filter", () => {
+    const filter1 = makeFilter({
+      name: "starting",
+      caseSensitive: CaseSensitivity.Sensitive,
+    });
+    const filter2 = makeFilter({ name: "mongod" });
+    expect(
+      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
+    ).toStrictEqual(new Set([]));
+  });
+
+  it("returns correct set of numbers given applied filters", () => {
+    const filter1 = makeFilter({
+      name: "starting",
+    });
+    const filter2 = makeFilter({ name: "mongod" });
+    expect(
+      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
+    ).toStrictEqual(new Set([1, 4, 7]));
+  });
+
+  it("only uses visible filters when looking for matches", () => {
+    const filter1 = makeFilter({
+      name: "starting",
+    });
+    const filter2 = makeFilter({ name: "mongod", visible: false });
+    expect(
+      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
+    ).toStrictEqual(new Set([0, 1, 4, 7]));
   });
 });
