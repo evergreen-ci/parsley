@@ -12,7 +12,7 @@ import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import { leaveBreadcrumb } from "utils/errorReporting";
 
-const { red } = palette;
+const { green } = palette;
 interface FileDropperProps {
   onChangeLogType: (logType: LogTypes) => void;
 }
@@ -61,7 +61,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
 
   return (
     <Container>
-      <RedBorderBox>
+      <BorderBox>
         {hasDroppedLog ? (
           <ProcessLogsContainer>
             <Select
@@ -102,7 +102,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
             )}
           </UploadLogsContainer>
         )}
-      </RedBorderBox>
+      </BorderBox>
     </Container>
   );
 };
@@ -115,7 +115,7 @@ const Container = styled.div`
   height: 100%;
 `;
 
-const RedBorderBox = styled.div`
+const BorderBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -123,7 +123,7 @@ const RedBorderBox = styled.div`
   height: 30vh;
 
   padding: ${size.xl};
-  border: ${size.xxs} dashed ${red.base};
+  border: ${size.xxs} dashed ${green.base};
   border-radius: ${size.s};
 `;
 
