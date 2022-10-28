@@ -13,33 +13,35 @@ import { Body } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
+import { Filter } from "types/logs";
 
 const { gray } = palette;
 
-interface FilterProps {
+interface FilterGroupProps {
   ["data-cy"]?: string;
-  filterName: string;
+  filter: Filter;
   deleteFilter: (filter: string) => void;
-  editFilter: (oldFilter: string, newFilter: string) => void;
+  editFilter: (
+    fieldName: keyof Filter,
+    fieldValue: MatchType | CaseSensitivity | boolean | string,
+    filter: Filter
+  ) => void;
 }
 
-const Filter: React.FC<FilterProps> = ({
+const FilterGroup: React.FC<FilterGroupProps> = ({
   "data-cy": dataCy,
-  filterName,
+  filter,
   deleteFilter,
   editFilter,
 }) => {
-  const [newFilter, setNewFilter] = useState(filterName);
+  const { name, visible, caseSensitive, matchType } = filter;
+
+  const [newFilterName, setNewFilterName] = useState(name);
   const [isEditing, setIsEditing] = useState(false);
-  const [isVisible, setIsVisible] = useState(true);
-  const [caseSensitivity, setCaseSensitivity] = useState<string>(
-    CaseSensitivity.Insensitive
-  );
-  const [matchType, setMatchType] = useState<string>(MatchType.Exact);
 
   const resetEditState = () => {
     setIsEditing(false);
-    setNewFilter(filterName);
+    setNewFilterName(name);
   };
 
   return (
@@ -54,17 +56,17 @@ const Filter: React.FC<FilterProps> = ({
             <Icon fill={gray.base} glyph="Edit" />
           </IconButton>
           <IconButton
-            aria-label={isVisible ? "Hide filter" : "Show filter"}
-            onClick={() => setIsVisible(!isVisible)}
+            aria-label={visible ? "Hide filter" : "Show filter"}
+            onClick={() => editFilter("visible", !visible, filter)}
           >
             <Icon
               fill={gray.base}
-              glyph={isVisible ? "Visibility" : "ClosedEye"}
+              glyph={visible ? "Visibility" : "ClosedEye"}
             />
           </IconButton>
           <IconButton
             aria-label="Delete filter"
-            onClick={() => deleteFilter(filterName)}
+            onClick={() => deleteFilter(name)}
           >
             <Icon fill={gray.base} glyph="X" />
           </IconButton>
@@ -76,12 +78,12 @@ const Filter: React.FC<FilterProps> = ({
           <StyledTextInput
             aria-label="Edit filter name"
             data-cy="edit-filter-name"
-            onChange={(e) => setNewFilter(e.target.value)}
+            onChange={(e) => setNewFilterName(e.target.value)}
             placeholder="New filter definition"
             sizeVariant="small"
             spellCheck={false}
             type="search"
-            value={newFilter}
+            value={newFilterName}
           />
           <ButtonWrapper>
             <Button onClick={() => resetEditState()} size="xsmall">
@@ -89,7 +91,7 @@ const Filter: React.FC<FilterProps> = ({
             </Button>
             <Button
               onClick={() => {
-                editFilter(filterName, newFilter);
+                editFilter("name", newFilterName, filter);
                 resetEditState();
               }}
               size="xsmall"
@@ -100,14 +102,16 @@ const Filter: React.FC<FilterProps> = ({
           </ButtonWrapper>
         </>
       ) : (
-        <FilterName>{filterName}</FilterName>
+        <FilterName>{name}</FilterName>
       )}
 
       <StyledSegmentedControl
         aria-controls="Toggle case sensitivity"
-        defaultValue={caseSensitivity}
+        defaultValue={caseSensitive}
         label="Case"
-        onChange={setCaseSensitivity}
+        onChange={(value) =>
+          editFilter("caseSensitive", value as CaseSensitivity, filter)
+        }
         size="small"
       >
         <Option value={CaseSensitivity.Insensitive}>Insensitive</Option>
@@ -118,7 +122,9 @@ const Filter: React.FC<FilterProps> = ({
         aria-controls="Toggle match type"
         defaultValue={matchType}
         label="Match"
-        onChange={setMatchType}
+        onChange={(value) =>
+          editFilter("matchType", value as MatchType, filter)
+        }
         size="small"
       >
         <Option value={MatchType.Exact}>Exact</Option>
@@ -176,4 +182,4 @@ const StyledSegmentedControl = styled(SegmentedControl)`
   }
 `;
 
-export default Filter;
+export default FilterGroup;

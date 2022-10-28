@@ -10,9 +10,11 @@ import {
 import { List } from "react-virtualized";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
+import { useFilterParam } from "hooks/useFilterParam";
 import { useQueryParam } from "hooks/useQueryParam";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
-import { filterLogs, getMatchingLines } from "utils/filter";
+import filterLogs from "utils/filterLogs";
+import { getMatchingLines } from "utils/matchingLines";
 import { getColorMapping } from "utils/resmoke";
 import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
@@ -68,7 +70,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   children,
   initialLogLines,
 }) => {
-  const [filters] = useQueryParam<string[]>(QueryParams.Filters, []);
+  const [filters] = useFilterParam();
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
   const [selectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
@@ -89,7 +91,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const listRef = useRef<List>(null);
 
-  const stringifiedFilters = filters.toString();
+  const stringifiedFilters = JSON.stringify(filters);
   const stringifiedBookmarks = bookmarks.toString();
   const stringifiedExpandedLines = state.expandedLines.toString();
 

@@ -27,12 +27,6 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe("toast", () => {
-  let user: ReturnType<typeof userEvent.setup>;
-
-  beforeEach(() => {
-    user = userEvent.setup();
-  });
-
   it("should error when rendered outside of ToastProvider context", () => {
     // This test intentionally throws an error, so we need to mock the error object to prevent it
     // from flooding the test runner.
@@ -136,6 +130,7 @@ describe("toast", () => {
 
   describe("closing the toast", () => {
     it("should be able to close a toast by clicking the X button by default", async () => {
+      const user = userEvent.setup();
       const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
         wrapper,
@@ -164,6 +159,7 @@ describe("toast", () => {
     });
 
     it("should trigger a callback function onClose", async () => {
+      const user = userEvent.setup();
       const onClose = jest.fn();
       const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
@@ -183,7 +179,7 @@ describe("toast", () => {
 
     it("should close on its own after a timeout has completed", async () => {
       jest.useFakeTimers();
-      user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+      userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
 
       const { Component, hook } = renderComponentWithHook();
       render(<Component />, {
