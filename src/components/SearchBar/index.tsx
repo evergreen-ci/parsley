@@ -114,12 +114,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
       <StyledInput
         ref={inputRef}
         aria-label="searchbar-input"
+        aria-labelledby="searchbar-input"
         data-cy="searchbar-input"
         disabled={disabled}
         icon={
           isValid ? (
             <IconButton
-              aria-label="Select plus button"
+              aria-label="Select plus"
               data-cy="searchbar-submit"
               disabled={disabled || input.length === 0}
               onClick={handleOnSubmit}

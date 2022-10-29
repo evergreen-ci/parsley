@@ -3,7 +3,7 @@
 exports[`storyshots Storyshots Components/PopoverButton Default 1`] = `
 <button
   aria-disabled={false}
-  className="leafygreen-ui-hcibra"
+  className="leafygreen-ui-1t94nwe"
   data-leafygreen-ui="button"
   disabled={false}
   onClick={[Function]}
@@ -19,7 +19,7 @@ exports[`storyshots Storyshots Components/PopoverButton Default 1`] = `
     <svg
       alt=""
       aria-hidden={true}
-      className="leafygreen-ui-hjec15"
+      className="leafygreen-ui-1t9qnhm"
       fill="none"
       height={16}
       role="presentation"
