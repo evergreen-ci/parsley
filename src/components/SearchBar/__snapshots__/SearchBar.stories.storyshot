@@ -68,6 +68,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
         <input
           aria-invalid={false}
           aria-label="searchbar-input"
+          aria-labelledby="searchbar-input"
           autoComplete="on"
           className="leafygreen-ui-1imva9i"
           data-cy="searchbar-input"
@@ -83,7 +84,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
           value=""
         />
         <div
-          className="lg-ui-icon-selector-0000 leafygreen-ui-uy5fvv"
+          className="static-lg-ui-classname leafygreen-ui-uy5fvv"
         />
       </div>
     </div>
