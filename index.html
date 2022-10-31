@@ -8,7 +8,7 @@
   <link rel="shortcut icon" href="/favicon.ico" />
   <title>Parsley</title>
   <script type="text/javascript">
-    if ("%NODE_ENV%" === "true") {
+    if ("%NODE_ENV%" === "production") {
       ; window.NREUM || (NREUM = {}); NREUM.init = { distributed_tracing: { enabled: true }, privacy: { cookies_enabled: true }, ajax: { deny_list: ["bam.nr-data.net"] } };
 
       ; NREUM.loader_config = { accountID: "%NEW_RELIC_ACCOUNT_ID%", trustKey: "%NEW_RELIC_TRUST_KEY%", agentID: "%NEW_RELIC_AGENT_ID%", licenseKey: "%NEW_RELIC_LICENSE_KEY%", applicationID: "%NEW_RELIC_APPLICATION_ID%" }
