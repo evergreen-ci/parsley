@@ -17,7 +17,14 @@ export default defineConfig({
       plugins: [
         injectVariablesInHTML({
           files: "dist/index.html",
-          variables: ["%GIT_SHA%"],
+          variables: [
+            "%GIT_SHA%",
+            "%NEW_RELIC_ACCOUNT_ID%",
+            "%NEW_RELIC_TRUST_KEY%",
+            "%NEW_RELIC_AGENT_ID%",
+            "%NEW_RELIC_LICENSE_KEY%",
+            "%NEW_RELIC_APPLICATION_ID%",
+          ],
         }),
       ],
     },
