@@ -75,7 +75,20 @@ describe("row", () => {
     );
     expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
   });
-  it("should deduplicate highlights and searches on the same text", () => {
+
+  it("should highlight every matching term on a line", () => {
+    const regexp = /Test|Log/i;
+    renderWithRouterMatch(
+      <Row {...rowProps} highlights={regexp}>
+        {testLog}
+      </Row>
+    );
+    expect(screen.queryAllByDataCy("highlight")).toHaveLength(2);
+    screen.getAllByDataCy("highlight").forEach((highlight) => {
+      expect(highlight).toHaveTextContent(/Test|Log/i);
+    });
+  });
+  it("should deduplicate highlights and searches on the same string", () => {
     const regexp = /Test/i;
     renderWithRouterMatch(
       <Row {...rowProps} highlights={regexp} searchTerm={regexp}>
@@ -84,6 +97,19 @@ describe("row", () => {
     );
     expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
     expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
+  });
+  it("should show both highlights and searches if they are on the same line", () => {
+    const searchRegex = /Test/i;
+    const highlightRegex = /Log/i;
+    renderWithRouterMatch(
+      <Row {...rowProps} highlights={highlightRegex} searchTerm={searchRegex}>
+        {testLog}
+      </Row>
+    );
+    expect(screen.queryAllByDataCy("highlight")).toHaveLength(2);
+    screen.getAllByDataCy("highlight").forEach((highlight) => {
+      expect(highlight).toHaveTextContent(/Test|Log/i);
+    });
   });
 });
 
