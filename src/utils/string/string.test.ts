@@ -1,4 +1,4 @@
-import { copyToClipboard, getJiraFormat } from ".";
+import { copyToClipboard, getJiraFormat, stringIntersection } from ".";
 
 describe("copyToClipboard", () => {
   it("should copy the correct text", () => {
@@ -46,5 +46,19 @@ describe("getJiraFormat", () => {
     expect(getJiraFormat(bookmarks, getLine)).toBe(
       `{noformat}\n${logLines[0]}\n...\n${logLines[2]}\n...\n${logLines[4]}\n${logLines[5]}\n{noformat}`
     );
+  });
+});
+
+describe("stringIntersection", () => {
+  it("should return true if strings have any intersection", () => {
+    expect(stringIntersection("abc", "bc")).toBeTruthy();
+    expect(stringIntersection("bc", "abc")).toBeTruthy();
+  });
+  it("should return false if there isn't any overlap between the strings", () => {
+    expect(stringIntersection("abc", "def")).toBeFalsy();
+    expect(stringIntersection("def", "abc")).toBeFalsy();
+  });
+  it("should return false if there is only a partial overlap", () => {
+    expect(stringIntersection("abc", "bcd")).toBeFalsy();
   });
 });
