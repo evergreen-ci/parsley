@@ -30,7 +30,7 @@ export default defineConfig({
     },
   },
   // The resolve field for @leafygreen-ui/emotion is to prevent LG from pulling in SSR dependencies.
-  // It can be potentially be removed upon the completion of https://jira.mongodb.org/browse/PD-1543.
+  // It can be potentially removed upon the completion of https://jira.mongodb.org/browse/PD-1543.
   resolve: {
     alias: {
       "@leafygreen-ui/emotion": path.resolve(
