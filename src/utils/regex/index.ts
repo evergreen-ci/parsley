@@ -1,5 +1,5 @@
 /**
- * hasOverlappingRegex - Checks if 2 regexes overlap each other
+ * `hasOverlappingRegex` - Checks if 2 regexes overlap each other
  * @param regex1
  * @param regex2
  * @param text

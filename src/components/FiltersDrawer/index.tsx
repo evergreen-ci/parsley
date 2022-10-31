@@ -163,20 +163,18 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
           }
         >
           {highlights.length ? (
-            <>
-              {highlights.map((highlight) => (
-                <NonFilterElement key={`highlight-${highlight}`}>
-                  <IconButton
-                    aria-label="Delete highlight"
-                    data-cy="delete-highlight-button"
-                    onClick={() => deleteHighlight(highlight)}
-                  >
-                    <Icon fill={green.dark2} glyph="X" />
-                  </IconButton>
-                  <Overline>{highlight}</Overline>
-                </NonFilterElement>
-              ))}
-            </>
+            highlights.map((highlight) => (
+              <NonFilterElement key={`highlight-${highlight}`}>
+                <IconButton
+                  aria-label="Delete highlight"
+                  data-cy="delete-highlight-button"
+                  onClick={() => deleteHighlight(highlight)}
+                >
+                  <Icon fill={green.dark2} glyph="X" />
+                </IconButton>
+                <Overline>{highlight}</Overline>
+              </NonFilterElement>
+            ))
           ) : (
             <SectionWrapper data-cy="no-highlight-message">
               <Body>No terms have been highlighted.</Body>
