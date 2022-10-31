@@ -77,6 +77,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
         <>
           <StyledTextInput
             aria-label="Edit filter name"
+            aria-labelledby="Edit filter name"
             data-cy="edit-filter-name"
             onChange={(e) => setNewFilterName(e.target.value)}
             placeholder="New filter definition"

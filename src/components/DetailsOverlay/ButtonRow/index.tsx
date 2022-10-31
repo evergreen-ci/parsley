@@ -101,7 +101,7 @@ const ButtonRow: React.FC = () => {
           </div>
         }
       >
-        Open log in HTML format in a new tab
+        Open log in standard HTML format in a new tab
       </Tooltip>
     </DetailRow>
   );
