@@ -1,4 +1,4 @@
-type LogKeeperMetadata = {
+type LogkeeperMetadata = {
   id: string;
   builder: string;
   buildnum: number;
@@ -6,4 +6,4 @@ type LogKeeperMetadata = {
   execution?: number;
 };
 
-export type { LogKeeperMetadata };
+export type { LogkeeperMetadata };

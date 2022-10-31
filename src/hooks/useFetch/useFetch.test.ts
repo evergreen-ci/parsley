@@ -42,4 +42,26 @@ describe("useFetch", () => {
     expect(result.current.data).toBeNull();
     expect(result.current.error).toBeNull();
   });
+  it("makes a request if skip is changed from true to false", async () => {
+    const mockFetchPromise = jest.fn().mockResolvedValue({
+      ok: true,
+      json: () => Promise.resolve(jsonMessage),
+    });
+
+    let skip = true;
+    jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
+    const { result, rerender, waitForNextUpdate } = renderHook(() =>
+      useFetch(API_URL, { skip })
+    );
+    expect(mockFetchPromise).not.toHaveBeenCalled();
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.data).toBeNull();
+    skip = false;
+    rerender();
+    expect(result.current.isLoading).toBe(true);
+    await waitForNextUpdate();
+    expect(result.current.isLoading).toBe(false);
+    // eslint-disable-next-line jest/max-expects
+    expect(result.current.data).toBe(jsonMessage);
+  });
 });

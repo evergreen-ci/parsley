@@ -12,7 +12,7 @@ import { stringifyQuery } from "utils/query-string";
 const getEvergreenTestLogURL = (
   taskID: string,
   execution: string,
-  testID: string,
+  testID: string | number,
   options: { text?: boolean }
 ) => {
   const { text } = options;
@@ -65,7 +65,7 @@ enum originToType {
  */
 const getEvergreenTaskLogURL = (
   taskID: string,
-  execution: string,
+  execution: string | number,
   origin: keyof typeof originToType,
   options: { text?: boolean }
 ) => {

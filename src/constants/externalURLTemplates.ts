@@ -1,7 +1,7 @@
 import { evergreenURL, spruceURL } from "utils/environmentVariables";
 import { stringifyQuery } from "utils/query-string";
 
-const getEvergreenTaskURL = (taskID: string, execution: string) => {
+const getEvergreenTaskURL = (taskID: string, execution: string | number) => {
   const params = {
     redirect_spruce_users: true,
   };
@@ -10,7 +10,7 @@ const getEvergreenTaskURL = (taskID: string, execution: string) => {
   )}`;
 };
 
-const getSpruceJobLogsURL = (taskID: string, execution: string) =>
+const getSpruceJobLogsURL = (taskID: string, execution: string | number) =>
   `${spruceURL}/job-logs/${taskID}/${execution}`;
 
 export { getSpruceJobLogsURL, getEvergreenTaskURL };

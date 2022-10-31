@@ -15,6 +15,8 @@ const useFetch = <T extends object>(
     skip?: boolean;
   }
 ) => {
+  const { skip = false } = options || {};
+
   const [data, setData] = useState<T | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [isLoading, setIsLoading] = useState(false);
@@ -24,7 +26,7 @@ const useFetch = <T extends object>(
     const req = new Request(url, { method: "GET" });
     const abortController = new AbortController();
 
-    if (!options?.skip) {
+    if (!skip) {
       setIsLoading(true);
       fetch(req, {
         credentials: "include",
@@ -53,7 +55,7 @@ const useFetch = <T extends object>(
       // Cancel the request if the component unmounts
       abortController.abort();
     };
-  }, [url, options?.skip]);
+  }, [url, skip]);
   return { data, error, isLoading };
 };
 

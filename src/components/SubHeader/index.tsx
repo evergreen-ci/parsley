@@ -15,11 +15,10 @@ interface SubHeaderProps {
 const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
   const { logMetadata } = useLogContext();
   const { fileName, taskID, execution } = logMetadata || {};
-  let taskLink = "";
-
-  if (taskID !== undefined && execution !== undefined) {
-    taskLink = getEvergreenTaskURL(taskID, execution);
-  }
+  const taskLink =
+    taskID !== undefined && execution !== undefined
+      ? getEvergreenTaskURL(taskID, execution)
+      : "";
 
   return (
     <Container>

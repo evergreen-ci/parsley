@@ -17,7 +17,7 @@ import { useToastContext } from "context/toast";
 import { useLogDownloader } from "hooks";
 import { useFetch } from "hooks/useFetch";
 import NotFound from "pages/404";
-import { LogKeeperMetadata } from "types/api";
+import { LogkeeperMetadata } from "types/api";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import LoadingBar from "./LoadingBar";
 
@@ -39,7 +39,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   let url = "";
   let htmlLogURL = "";
   let jobLogsURL = "";
-  const { data: logkeeperMetadata } = useFetch<LogKeeperMetadata>(
+  const { data: logkeeperMetadata } = useFetch<LogkeeperMetadata>(
     getResmokeLogURL(buildID || "", { testID, metadata: true }),
     {
       skip: !buildID,
@@ -57,7 +57,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       if (logkeeperMetadata) {
         jobLogsURL = getSpruceJobLogsURL(
           logkeeperMetadata.task_id,
-          String(logkeeperMetadata.execution || 0)
+          logkeeperMetadata.execution || 0
         );
       }
       break;
