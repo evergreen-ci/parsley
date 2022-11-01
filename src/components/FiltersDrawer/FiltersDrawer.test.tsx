@@ -186,7 +186,7 @@ describe("filtersDrawer", () => {
           expandedLines={[[0, 2]]}
         />
       );
-      await user.click(screen.getByLabelText("Delete range button"));
+      await user.click(screen.getByLabelText("Delete range"));
       expect(collapseLines).toHaveBeenCalledTimes(1);
       expect(collapseLines).toHaveBeenCalledWith(0);
     });

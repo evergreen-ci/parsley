@@ -3,13 +3,12 @@ import BaseToggle from ".";
 
 describe("base toggle", () => {
   it("properly renders labels", () => {
-    const toggleFunc = jest.fn();
     render(
       <BaseToggle
         data-cy="toggle"
         label="Test Label"
         leftLabel="Left"
-        onChange={toggleFunc}
+        onChange={jest.fn()}
         rightLabel="Right"
         value
       />
@@ -35,5 +34,20 @@ describe("base toggle", () => {
     expect(toggleFunc).toHaveBeenCalledTimes(1);
     // The second parameter is a mouseEvent that can be ignored.
     expect(toggleFunc).toHaveBeenCalledWith(true, expect.anything());
+  });
+
+  it("should be possible to disable the toggle", () => {
+    render(
+      <BaseToggle
+        data-cy="toggle"
+        disabled
+        label="Test Label"
+        leftLabel="Left"
+        onChange={jest.fn()}
+        rightLabel="Right"
+        value
+      />
+    );
+    expect(screen.getByDataCy("toggle")).toBeDisabled();
   });
 });

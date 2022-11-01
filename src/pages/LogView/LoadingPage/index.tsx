@@ -81,8 +81,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   useEffect(() => {
     if (data) {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
-      ingestLines(data, logType);
       setLogMetadata({
+        logType,
         taskID,
         execution,
         testID,
@@ -92,6 +92,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         htmlLogURL,
         jobLogsURL,
       });
+      ingestLines(data, logType);
     }
     if (error) {
       dispatchToast.error(error);

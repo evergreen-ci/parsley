@@ -168,4 +168,21 @@ describe("expanding collapsed rows", () => {
     cy.dataCy("log-row-3").should("be.visible");
     cy.dataCy("log-row-4").should("be.visible");
   });
+
+  it("should be able to see what rows have been expanded in the drawer", () => {
+    cy.toggleDrawer();
+    cy.dataCy("expanded-row-1-to-4").should("be.visible");
+  });
+
+  it("should be possible to re-collapse rows through the drawer", () => {
+    cy.dataCy("log-row-1").should("be.visible");
+    cy.dataCy("log-row-2").should("be.visible");
+    cy.dataCy("log-row-3").should("be.visible");
+    cy.dataCy("log-row-4").should("be.visible");
+
+    cy.dataCy("expanded-row-1-to-4").within(() => {
+      cy.get(`[aria-label="Delete range"]`).click();
+    });
+    cy.dataCy("collapsed-row-1-4").should("exist");
+  });
 });
