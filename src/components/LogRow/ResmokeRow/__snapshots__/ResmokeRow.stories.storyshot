@@ -77,8 +77,8 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Resmoke Highlighting
 `;
 
 exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
-<pre
-  className="css-11nrrs1"
+<div
+  className="css-8iuxnu"
   data-cy="log-row-0"
   data-highlighted={false}
   data-selected={false}
@@ -88,7 +88,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
 >
   <svg
     aria-label="Link Icon"
-    className="css-ak14il"
+    className="css-e6tumk"
     data-cy="log-link-0"
     fill="none"
     height={14}
@@ -107,20 +107,24 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
       fill="currentColor"
     />
   </svg>
-  <span
-    className="css-1ix6uu2"
+  <pre
+    className="css-1dzaw1s"
   >
     0
-  </span>
-  <span
-    data-cy="resmoke-row"
-    style={
-      Object {
-        "color": undefined,
-      }
-    }
+  </pre>
+  <pre
+    className="css-lponur"
   >
-    [js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).
-  </span>
-</pre>
+    <span
+      data-cy="resmoke-row"
+      style={
+        Object {
+          "color": undefined,
+        }
+      }
+    >
+      [js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).
+    </span>
+  </pre>
+</div>
 `;

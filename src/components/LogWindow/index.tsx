@@ -22,12 +22,14 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     expandLines,
     getLine,
     getResmokeLineColor,
+    resetRowHeightAtIndex,
     scrollToLine,
 
     expandedLines,
     hasLogs,
     highlightedLine,
     lineCount,
+    prettyPrint,
     processedLogLines,
     range,
     searchState,
@@ -73,8 +75,10 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
                 expandLines,
                 getLine,
                 getResmokeLineColor,
+                resetRowHeightAtIndex,
                 scrollToLine,
                 highlightedLine,
+                prettyPrint,
                 range,
                 searchTerm,
                 wrap,
@@ -82,6 +86,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
               processedLogLines,
               logType,
             })}
+            wrap={wrap}
           />
         </LogPaneContainer>
       </ColumnContainer>
