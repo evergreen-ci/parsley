@@ -15,6 +15,7 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
   const { data, listRowProps, lineNumber } = rowProps;
   const {
     getLine,
+    resetRowHeightAtIndex,
     scrollToLine,
     highlightedLine,
     range,
@@ -39,6 +40,7 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
       highlightedLine={highlightedLine}
       highlights={highlights}
       lineNumber={lineNumber}
+      resetRowHeightAtIndex={resetRowHeightAtIndex}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}
       wrap={wrap}

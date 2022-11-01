@@ -111,6 +111,45 @@ describe("row", () => {
       expect(highlight).toHaveTextContent(/Test|Log/i);
     });
   });
+
+  it("bookmarking a line when pretty print is enabled should call resetRowHeightAtIndex", async () => {
+    const resetRowHeightAtIndex = jest.fn();
+    const { history } = renderWithRouterMatch(
+      <Row
+        {...rowProps}
+        prettyPrint
+        resetRowHeightAtIndex={resetRowHeightAtIndex}
+      >
+        {testLog}
+      </Row>,
+      {
+        route: "?bookmarks=0",
+      }
+    );
+    await userEvent.dblClick(screen.getByText(testLog));
+    expect(history.location.search).toBe("");
+    expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(1);
+    expect(resetRowHeightAtIndex).toHaveBeenCalledWith(0);
+  });
+
+  it("bookmarking a line when pretty print is not enabled should not call resetRowHeightAtIndex", async () => {
+    const resetRowHeightAtIndex = jest.fn();
+    const { history } = renderWithRouterMatch(
+      <Row
+        {...rowProps}
+        prettyPrint={false}
+        resetRowHeightAtIndex={resetRowHeightAtIndex}
+      >
+        {testLog}
+      </Row>,
+      {
+        route: "?bookmarks=0",
+      }
+    );
+    await userEvent.dblClick(screen.getByText(testLog));
+    expect(history.location.search).toBe("");
+    expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(0);
+  });
 });
 
 const testLog = "Test Log";
@@ -119,11 +158,14 @@ const rowProps = {
   key: testLog,
   columnIndex: 0,
   index: 0,
-  isScrolling: false,
-  scrollToLine: jest.fn(),
   isVisible: true,
-  lineNumber: 0,
+  isScrolling: false,
   parent: {} as any,
   style: {},
+
+  resetRowHeightAtIndex: jest.fn(),
+  scrollToLine: jest.fn(),
+  lineNumber: 0,
+  prettyPrint: false,
   wrap: false,
 };

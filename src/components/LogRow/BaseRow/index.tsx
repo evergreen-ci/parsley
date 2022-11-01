@@ -7,6 +7,7 @@ import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { formatPrettyPrint } from "utils/prettyPrint";
 import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
 import { escapeHtml } from "utils/renderHtml/escapeHtml";
@@ -15,17 +16,19 @@ const { yellow, red } = palette;
 
 interface BaseRowProps extends ListRowProps {
   children: string;
+  "data-cy"?: string;
   index: number;
-  wrap: boolean;
   // The line number associated with a log line and its index within the context of the virtualized list
   // may differ due to collapsed rows.
   lineNumber: number;
+  prettyPrint?: boolean;
   highlightedLine?: number;
+  resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
   highlights?: RegExp;
-  "data-cy"?: string;
   resmokeRowColor?: string;
+  wrap: boolean;
 }
 
 /**
@@ -34,17 +37,18 @@ interface BaseRowProps extends ListRowProps {
  */
 const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
   const {
-    index,
-    lineNumber,
     children,
-    wrap,
-    isVisible,
+    "data-cy": dataCyText,
+    index,
     highlightedLine,
-    highlights,
-    scrollToLine,
+    lineNumber,
+    prettyPrint = false,
     searchTerm,
     resmokeRowColor,
-    "data-cy": dataCyText,
+    wrap,
+    resetRowHeightAtIndex,
+    highlights,
+    scrollToLine,
     ...rest
   } = props;
 
@@ -53,13 +57,14 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     undefined
   );
   const selected = selectedLine === lineNumber;
-  const isHighlighted = highlightedLine === index;
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
     []
   );
   const bookmarked = bookmarks.includes(lineNumber);
+
+  const highlighted = highlightedLine === index;
 
   // Clicking a line should select or deselect the line.
   const handleClick = () => {
@@ -80,20 +85,23 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       const newBookmarks = [...bookmarks, lineNumber].sort((a, b) => a - b);
       setBookmarks(newBookmarks);
     }
+
+    if (prettyPrint) {
+      resetRowHeightAtIndex(index);
+    }
   };
 
   return (
-    <StyledPre
-      {...rest}
+    <RowContainer
       ref={ref}
+      {...rest}
       bookmarked={bookmarked}
       data-cy={`log-row-${lineNumber}`}
-      data-highlighted={isHighlighted}
+      data-highlighted={highlighted}
       data-selected={selected}
-      highlighted={isHighlighted}
+      highlighted={highlighted}
       onDoubleClick={handleDoubleClick}
       selected={selected}
-      shouldWrap={wrap}
     >
       <StyledIcon
         data-cy={`log-link-${lineNumber}`}
@@ -102,15 +110,17 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
         size="small"
       />
       <Index>{lineNumber}</Index>
-      <ProcessedBaseRow
-        color={resmokeRowColor}
-        data-cy={dataCyText}
-        highlights={highlights}
-        searchTerm={searchTerm}
-      >
-        {children}
-      </ProcessedBaseRow>
-    </StyledPre>
+      <StyledPre shouldWrap={wrap}>
+        <ProcessedBaseRow
+          color={resmokeRowColor}
+          data-cy={dataCyText}
+          highlights={highlights}
+          searchTerm={searchTerm}
+        >
+          {bookmarked && prettyPrint ? formatPrettyPrint(children) : children}
+        </ProcessedBaseRow>
+      </StyledPre>
+    </RowContainer>
   );
 });
 
@@ -163,50 +173,63 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
 ProcessedBaseRow.displayName = "ProcessedBaseRow";
 BaseRow.displayName = "BaseRow";
 
-const StyledIcon = styled(Icon)`
-  cursor: pointer;
-  vertical-align: text-bottom;
-  user-select: none;
+const RowContainer = styled.div<{
+  selected: boolean;
+  bookmarked: boolean;
+  highlighted: boolean;
+}>`
+  display: flex;
+  align-items: flex-start;
+
+  font-family: "Source Code Pro", monospace;
+  line-height: 1.25;
+  font-size: ${fontSize.m};
+
+  ${({ color }) => color && `color: ${color};`}
+  ${({ selected }) => selected && `background-color: ${yellow.light3};`}
+  ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
+  ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
+
+  width: unset !important;
+  // Hover should be an overlay shadow so that the user can see the color underneath.
+  :hover {
+    box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.1);
+  }
 `;
 
-const Index = styled.span`
-  display: inline-block;
+const StyledIcon = styled(Icon)`
+  cursor: pointer;
+  user-select: none;
+  flex-shrink: 0;
+`;
+
+const Index = styled.pre`
   width: ${size.xl};
+  margin-top: 0;
+  margin-bottom: 0;
   margin-left: ${size.s};
   margin-right: ${size.s};
+  flex-shrink: 0;
+
+  font-family: inherit;
+  line-height: inherit;
+  font-size: inherit;
   user-select: none;
 `;
 
 const StyledPre = styled.pre<{
   shouldWrap: boolean;
-  selected: boolean;
-  bookmarked: boolean;
-  highlighted: boolean;
 }>`
-  font-family: "Source Code Pro", monospace;
-  line-height: 1.25;
   overflow-y: hidden;
   margin-top: 0;
   margin-bottom: 0;
   margin-right: ${size.xs};
-  font-size: ${fontSize.m};
-  width: unset !important;
+
+  font-family: inherit;
+  line-height: inherit;
+  font-size: inherit;
   ${({ shouldWrap }) =>
-    shouldWrap &&
-    `
-  /* wrap multiple lines */
-  white-space: break-spaces;
-  `}
-  ${({ color }) => color && `color: ${color};`}
-  ${({ selected }) => selected && `background-color: ${yellow.light3};`}
-
-  ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
-  ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
-
-  // Hover should be an overlay shadow so that the user can see the color underneath.
-  :hover {
-    box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.1);
-  }
+    shouldWrap && ` /* wrap multiple lines */ white-space: break-spaces;`}
 `;
 
 export default BaseRow;

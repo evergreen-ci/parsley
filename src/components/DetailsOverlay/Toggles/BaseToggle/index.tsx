@@ -9,6 +9,7 @@ const { gray } = palette;
 
 interface BaseToggleProps {
   ["data-cy"]?: string;
+  disabled?: boolean;
   leftLabel?: string;
   rightLabel?: string;
   label: string;
@@ -18,6 +19,7 @@ interface BaseToggleProps {
 
 const BaseToggle: React.FC<BaseToggleProps> = ({
   "data-cy": dataCy,
+  disabled = false,
   rightLabel = "ON",
   leftLabel = "OFF",
   label,
@@ -32,6 +34,7 @@ const BaseToggle: React.FC<BaseToggleProps> = ({
         aria-labelledby={`${label} Toggle`}
         checked={value}
         data-cy={dataCy}
+        disabled={disabled}
         onChange={onChange}
         size="small"
       />

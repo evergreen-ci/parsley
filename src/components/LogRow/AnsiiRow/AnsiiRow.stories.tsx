@@ -21,7 +21,9 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
       expandLines: () => undefined,
       getLine,
       getResmokeLineColor: () => undefined,
+      resetRowHeightAtIndex: () => undefined,
       scrollToLine: () => undefined,
+      prettyPrint: args.prettyPrint,
       range: { lowerRange: 0 },
       wrap: args.wrap,
     }}
@@ -41,6 +43,7 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
 export const SingleLine = SingleLineTemplate.bind({});
 
 SingleLine.args = {
+  prettyPrint: false,
   wrap: false,
 };
 
@@ -60,16 +63,19 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
             expandLines: () => {},
             getLine,
             getResmokeLineColor: () => undefined,
+            resetRowHeightAtIndex: () => undefined,
             scrollToLine: setScrollIndex,
-            range: { lowerRange: 0 },
-            wrap: args.wrap,
-            searchTerm: /p=debug/,
             highlightedLine: args.highlightedLine,
+            prettyPrint: args.prettyPrint,
+            range: { lowerRange: 0 },
+            searchTerm: /p=debug/,
+            wrap: args.wrap,
           },
           processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
         })}
         scrollToIndex={scrollIndex}
+        wrap={args.wrap}
       />
     </Container>
   );
@@ -77,8 +83,9 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
 
 export const MultiLines = MultiLineTemplate.bind({});
 MultiLines.args = {
-  wrap: false,
   highlightedLine: 0,
+  prettyPrint: false,
+  wrap: false,
 };
 
 const logLines = [
