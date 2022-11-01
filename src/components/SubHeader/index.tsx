@@ -3,18 +3,23 @@ import { palette } from "@leafygreen-ui/palette";
 import { Body } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { StyledLink } from "components/styles";
+import { getEvergreenTaskURL } from "constants/externalURLTemplates";
 import { fontSize, size, subheaderHeight } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 
 const { gray } = palette;
 
-/** TODO: EVG-17534 */
 interface SubHeaderProps {
   isUploadedLog: boolean;
 }
 const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
   const { logMetadata } = useLogContext();
-  const { fileName } = logMetadata || {};
+  const { fileName, taskID, execution } = logMetadata || {};
+  const taskLink =
+    taskID !== undefined && execution !== undefined
+      ? getEvergreenTaskURL(taskID, execution)
+      : "";
+
   return (
     <Container>
       {isUploadedLog ? (
@@ -29,7 +34,9 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
           <IconWrapper>
             <Icon glyph="EvergreenLogo" />
           </IconWrapper>
-          <StyledLink href="/test">Task Page</StyledLink>
+          <StyledLink href={taskLink} target="_blank">
+            Task Page
+          </StyledLink>
         </Header>
       )}
     </Container>

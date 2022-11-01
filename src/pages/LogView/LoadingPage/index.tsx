@@ -15,7 +15,9 @@ import { fontSize, size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import { useLogDownloader } from "hooks";
+import { useFetch } from "hooks/useFetch";
 import NotFound from "pages/404";
+import { LogkeeperMetadata } from "types/api";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import LoadingBar from "./LoadingBar";
 
@@ -37,6 +39,12 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   let url = "";
   let htmlLogURL = "";
   let jobLogsURL = "";
+  const { data: logkeeperMetadata } = useFetch<LogkeeperMetadata>(
+    getResmokeLogURL(buildID || "", { testID, metadata: true }),
+    {
+      skip: !buildID,
+    }
+  );
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
@@ -45,6 +53,12 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       } else if (buildID) {
         url = getResmokeLogURL(buildID, { raw: true });
         htmlLogURL = getResmokeLogURL(buildID, { html: true });
+      }
+      if (logkeeperMetadata) {
+        jobLogsURL = getSpruceJobLogsURL(
+          logkeeperMetadata.task_id,
+          logkeeperMetadata.execution || 0
+        );
       }
       break;
     }
@@ -83,8 +97,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
       setLogMetadata({
         logType,
-        taskID,
-        execution,
+        taskID: taskID || logkeeperMetadata?.task_id,
+        execution: execution || String(logkeeperMetadata?.execution || 0),
         testID,
         origin,
         buildID,
@@ -112,6 +126,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     url,
     htmlLogURL,
     jobLogsURL,
+    logkeeperMetadata?.task_id,
+    logkeeperMetadata?.execution,
   ]);
 
   return (
