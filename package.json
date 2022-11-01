@@ -123,7 +123,7 @@
     "serve": "^14.0.1",
     "ts-jest": "28.0.7",
     "typescript": "4.8.2",
-    "vite": "^3.0.0",
+    "vite": "^3.2.2",
     "vite-plugin-checker": "^0.4.9",
     "vite-plugin-env-compatible": "^1.1.1",
     "vite-plugin-imp": "^2.3.0",
