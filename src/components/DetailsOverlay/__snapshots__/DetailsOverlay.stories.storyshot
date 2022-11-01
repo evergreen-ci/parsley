@@ -378,12 +378,12 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
             >
               <button
                 aria-checked={false}
-                aria-disabled={false}
+                aria-disabled={true}
                 aria-labelledby="Pretty Print Bookmarks Toggle"
                 className="leafygreen-ui-wo7arb"
                 data-cy="pretty-print-toggle"
                 data-leafygreen-ui="toggle-button"
-                disabled={false}
+                disabled={true}
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -411,10 +411,6 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
                   </svg>
                 </div>
               </button>
-              <div
-                className="leafygreen-ui-139eoox"
-                data-leafygreen-ui="interaction-ring"
-              />
             </div>
             <small
               className="css-155nmlp leafygreen-ui-ppjyot"

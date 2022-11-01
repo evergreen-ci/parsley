@@ -42,3 +42,12 @@ export const getJiraFormat = (
   jiraString += "{noformat}";
   return jiraString;
 };
+
+/**
+ * `stringIntersection` returns a boolean indicating if two strings have a full overlap
+ * @param string1
+ * @param string2
+ * @returns - Boolean indicating if string1 or string2 fit into the other.
+ */
+export const stringIntersection = (string1: string, string2: string) =>
+  string1.includes(string2) || string2.includes(string1);

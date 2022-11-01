@@ -17,6 +17,7 @@ type LogPaneProps = Omit<
   cache: CellMeasurerCache;
   initialScrollIndex: number;
   rowRenderer: ListRowRenderer;
+  wrap: boolean;
 };
 
 const LogPane: React.FC<LogPaneProps> = ({
@@ -24,17 +25,17 @@ const LogPane: React.FC<LogPaneProps> = ({
   rowRenderer,
   rowCount,
   initialScrollIndex,
+  wrap,
   ...rest
 }) => {
-  const { listRef, matchingLines } = useLogContext();
+  const { listRef, matchingLines, prettyPrint } = useLogContext();
 
-  const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
 
   useEffect(() => {
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
-  }, [listRef, cache, wrap, matchingLines, expandableRows]);
+  }, [listRef, cache, wrap, matchingLines, expandableRows, prettyPrint]);
 
   return (
     <AutoSizer>

@@ -34,8 +34,10 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
             expandLines: () => setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]),
             getLine: (index: number) => ansiiLogLines[index],
             getResmokeLineColor: () => undefined,
+            resetRowHeightAtIndex: () => undefined,
             scrollToLine: () => {},
             highlightedLine: args.highlightedLine,
+            prettyPrint: args.prettyPrint,
             range: { lowerRange: 0 },
             searchTerm: /p=debug/,
             wrap: args.wrap,
@@ -43,6 +45,7 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
           processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
         })}
+        wrap={args.wrap}
       />
     </Container>
   );
@@ -51,8 +54,9 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
 export const CollapsedAnsiiRow = CollapsedAnsiiTemplate.bind({});
 
 CollapsedAnsiiRow.args = {
-  wrap: false,
   highlightedLine: 0,
+  prettyPrint: false,
+  wrap: false,
 };
 
 // CollapsedRow withs ResmokeRows.
@@ -74,8 +78,10 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
             expandLines: () => setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]),
             getLine: (index: number) => resmokeLogLines[index],
             getResmokeLineColor: () => undefined,
+            resetRowHeightAtIndex: () => undefined,
             scrollToLine: () => {},
             highlightedLine: args.highlightedLine,
+            prettyPrint: args.prettyPrint,
             range: { lowerRange: 0 },
             searchTerm: /mongod/,
             wrap: args.wrap,
@@ -83,6 +89,7 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
           processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
         })}
+        wrap={args.wrap}
       />
     </Container>
   );
@@ -91,8 +98,9 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
 export const CollapsedResmokeRow = CollapsedResmokeTemplate.bind({});
 
 CollapsedResmokeRow.args = {
-  wrap: false,
   highlightedLine: 1,
+  prettyPrint: false,
+  wrap: false,
 };
 
 const ansiiLogLines = [
