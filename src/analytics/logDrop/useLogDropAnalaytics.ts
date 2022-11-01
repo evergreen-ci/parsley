@@ -17,7 +17,7 @@ interface Analytics extends A<Action> {}
 export const useLogDropAnalytics = (): Analytics => {
   const sendEvent: Analytics["sendEvent"] = (action) => {
     addPageAction<Action, P>(action, {
-      object: "UploadedLog",
+      object: "LogDrop",
     });
   };
 
