@@ -35,6 +35,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [selected, setSelected] = useState(SearchBarActions.Search);
 
   const isFilter = selected === SearchBarActions.Filter;
+  const isHighlight = selected === SearchBarActions.Highlight;
   const isValid = validator(input);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -49,10 +50,17 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   useKeyboardShortcut(
     { charKey: CharKey.S, modifierKeys: [ModifierKey.Control] },
-    () =>
-      selected === SearchBarActions.Search
-        ? setSelected(SearchBarActions.Filter)
-        : setSelected(SearchBarActions.Search),
+    () => {
+      // Iterate through SearchBarActions and select the next one.
+      const SearchBarActionValues = Object.values(SearchBarActions);
+      const keyIndex =
+        (SearchBarActionValues.indexOf(selected) + 1) %
+        SearchBarActionValues.length;
+      const nextKey = Object.keys(SearchBarActions)[
+        keyIndex
+      ] as keyof typeof SearchBarActions;
+      setSelected(SearchBarActions[nextKey]);
+    },
     { disabled, ignoreFocus: true }
   );
 
@@ -60,7 +68,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     if (inputRef.current) {
       inputRef.current.blur();
     }
-    if (isFilter) {
+    if (isFilter || isHighlight) {
       setInput("");
     }
     leaveBreadcrumb("search-bar-submit", { selected, input }, "user");
@@ -109,6 +117,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
           value={SearchBarActions.Filter}
         >
           Filter
+        </Option>
+        <Option
+          key={SearchBarActions.Highlight}
+          data-cy="highlight-option"
+          value={SearchBarActions.Highlight}
+        >
+          Highlight
         </Option>
       </StyledSelect>
       <StyledInput

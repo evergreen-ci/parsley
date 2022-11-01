@@ -57,6 +57,81 @@ describe("row", () => {
     await userEvent.dblClick(screen.getByText(testLog));
     expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");
   });
+  describe("search", () => {
+    it("a search term highlights the matching text", () => {
+      const regexp = /Test/i;
+      renderWithRouterMatch(
+        <Row {...rowProps} searchTerm={regexp}>
+          {testLog}
+        </Row>
+      );
+      expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
+    });
+
+    it("should preserve case sensitivity when applying a search", () => {
+      let regexp = /test/i;
+      const { rerender } = renderWithRouterMatch(
+        <Row {...rowProps} searchTerm={regexp}>
+          {testLog}
+        </Row>
+      );
+      expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
+      regexp = /test/;
+      rerender(
+        <Row {...rowProps} searchTerm={regexp}>
+          {testLog}
+        </Row>
+      );
+      expect(screen.queryByDataCy("highlight")).toBeNull();
+    });
+  });
+  describe("highlights", () => {
+    it("highlighted terms should highlight the matching text", () => {
+      const regexp = /Test/i;
+      renderWithRouterMatch(
+        <Row {...rowProps} highlights={regexp}>
+          {testLog}
+        </Row>
+      );
+      expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
+    });
+
+    it("should highlight every matching term on a line", () => {
+      const regexp = /Test|Log/i;
+      renderWithRouterMatch(
+        <Row {...rowProps} highlights={regexp}>
+          {testLog}
+        </Row>
+      );
+      expect(screen.queryAllByDataCy("highlight")).toHaveLength(2);
+      screen.getAllByDataCy("highlight").forEach((highlight) => {
+        expect(highlight).toHaveTextContent(/Test|Log/i);
+      });
+    });
+    it("should deduplicate highlights and searches on the same string", () => {
+      const regexp = /Test/i;
+      renderWithRouterMatch(
+        <Row {...rowProps} highlights={regexp} searchTerm={regexp}>
+          {testLog}
+        </Row>
+      );
+      expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
+      expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
+    });
+    it("should show both highlights and searches if they are on the same line", () => {
+      const searchRegex = /Test/i;
+      const highlightRegex = /Log/i;
+      renderWithRouterMatch(
+        <Row {...rowProps} highlights={highlightRegex} searchTerm={searchRegex}>
+          {testLog}
+        </Row>
+      );
+      expect(screen.queryAllByDataCy("highlight")).toHaveLength(2);
+      screen.getAllByDataCy("highlight").forEach((highlight) => {
+        expect(highlight).toHaveTextContent(/Test|Log/i);
+      });
+    });
+  });
 
   it("bookmarking a line when pretty print is enabled should call resetRowHeightAtIndex", async () => {
     const resetRowHeightAtIndex = jest.fn();

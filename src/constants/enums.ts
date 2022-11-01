@@ -17,6 +17,7 @@ enum MatchType {
 enum SearchBarActions {
   Filter = "filter",
   Search = "search",
+  Highlight = "highlight",
 }
 
 enum FilterLogic {

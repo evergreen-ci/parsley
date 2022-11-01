@@ -9,8 +9,10 @@ import Cookie from "js-cookie";
 import Icon from "components/Icon";
 import { HAS_OPENED_DRAWER } from "constants/cookies";
 import { CaseSensitivity, MatchType } from "constants/enums";
+import { QueryParams } from "constants/queryParams";
 import { size, zIndex } from "constants/tokens";
 import { useFilterParam } from "hooks/useFilterParam";
+import { useQueryParam } from "hooks/useQueryParam";
 import { ExpandedLines, Filter } from "types/logs";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import FilterGroup from "./FilterGroup";
@@ -35,6 +37,11 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
   );
 
   const [filters, setFilters] = useFilterParam();
+
+  const [highlights, setHighlights] = useQueryParam<string[]>(
+    QueryParams.Highlights,
+    []
+  );
 
   const deleteFilter = (filterName: string) => {
     const newFilters = filters.filter((f) => f.name !== filterName);
@@ -69,6 +76,10 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     );
   };
 
+  const deleteHighlight = (highlightName: string) => {
+    const newHighlights = highlights.filter((h) => h !== highlightName);
+    setHighlights(newHighlights);
+  };
   return (
     <StyledSideNav
       aria-label="Filters side nav"
@@ -82,12 +93,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     >
       <PaddedContainer>
         <StyledSideNavGroup
-          glyph={
-            <Icon
-              fill={filters.length ? green.dark2 : gray.base}
-              glyph="Filter"
-            />
-          }
+          glyph={<SideNavIcon active={filters.length > 0} glyph="Filter" />}
           header={
             <NavGroupHeader data-cy="filters-nav-group-header">
               <NavGroupTitle>Filters</NavGroupTitle>
@@ -97,7 +103,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
         >
           {filters.length ? (
             filters.map((filter) => (
-              <FilterWrapper
+              <SectionWrapper
                 key={filter.name}
                 data-cy={`filter-${filter.name}`}
               >
@@ -106,21 +112,18 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
                   editFilter={editFilter}
                   filter={filter}
                 />
-              </FilterWrapper>
+              </SectionWrapper>
             ))
           ) : (
-            <FilterWrapper data-cy="no-filters-message">
+            <SectionWrapper data-cy="no-filters-message">
               <Body>No filters have been applied.</Body>
-            </FilterWrapper>
+            </SectionWrapper>
           )}
         </StyledSideNavGroup>
 
         <StyledSideNavGroup
           glyph={
-            <Icon
-              fill={expandedLines.length ? green.dark2 : gray.base}
-              glyph="Expand"
-            />
+            <SideNavIcon active={expandedLines.length > 0} glyph="Expand" />
           }
           header={
             <NavGroupHeader data-cy="expanded-lines-nav-group-header">
@@ -131,7 +134,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
         >
           {expandedLines.length ? (
             expandedLines.map((e, idx) => (
-              <ExpandedLineWrapper
+              <NonFilterElement
                 key={`expanded-row-${e[0]}-to-${e[1]}`}
                 data-cy={`expanded-row-${e[0]}-to-${e[1]}`}
               >
@@ -144,18 +147,56 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
                 <Overline>
                   Row {e[0]} to {e[1]}
                 </Overline>
-              </ExpandedLineWrapper>
+              </NonFilterElement>
             ))
           ) : (
-            <ExpandedLineWrapper data-cy="no-expanded-lines-message">
+            <SectionWrapper data-cy="no-expanded-lines-message">
               <Body>No lines have been expanded.</Body>
-            </ExpandedLineWrapper>
+            </SectionWrapper>
+          )}
+        </StyledSideNavGroup>
+
+        <StyledSideNavGroup
+          glyph={<SideNavIcon active={highlights.length > 0} glyph="Minus" />}
+          header={
+            <NavGroupHeader data-cy="highlight-nav-group-header">
+              <NavGroupTitle>Highlighted Terms</NavGroupTitle>
+              <Badge variant={Variant.Green}>{highlights.length}</Badge>
+            </NavGroupHeader>
+          }
+        >
+          {highlights.length ? (
+            highlights.map((highlight) => (
+              <NonFilterElement key={`highlight-${highlight}`}>
+                <IconButton
+                  aria-label="Delete highlight"
+                  data-cy="delete-highlight-button"
+                  onClick={() => deleteHighlight(highlight)}
+                >
+                  <Icon fill={green.dark2} glyph="X" />
+                </IconButton>
+                <Overline>{highlight}</Overline>
+              </NonFilterElement>
+            ))
+          ) : (
+            <SectionWrapper data-cy="no-highlight-message">
+              <Body>No terms have been highlighted.</Body>
+            </SectionWrapper>
           )}
         </StyledSideNavGroup>
       </PaddedContainer>
     </StyledSideNav>
   );
 };
+interface SideNavIconProps extends React.ComponentProps<typeof Icon> {
+  active: boolean;
+}
+
+const SideNavIcon: React.FC<SideNavIconProps> = ({ active, ...rest }) => (
+  <Icon {...rest} fill={active ? green.dark2 : gray.base} />
+);
+// Leafygreen's SideNav requires this element to have an Icon displayName
+SideNavIcon.displayName = "Icon";
 
 const StyledSideNav = styled(SideNav)`
   z-index: ${zIndex.drawer};
@@ -184,15 +225,15 @@ const NavGroupTitle = styled.div`
   margin-right: ${size.xxs};
 `;
 
-const FilterWrapper = styled.div`
+const SectionWrapper = styled.div`
   margin-top: ${size.xs};
   margin-bottom: ${size.m};
 `;
 
-const ExpandedLineWrapper = styled.div`
+const NonFilterElement = styled.div`
   display: flex;
   align-items: center;
-  padding-top: ${size.xxs};
+  margin: ${size.xs} 0;
 `;
 
 export default FiltersDrawer;

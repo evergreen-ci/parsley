@@ -14,6 +14,7 @@ interface RowData {
   scrollToLine: (lineNumber: number) => void;
 
   highlightedLine?: number;
+  highlights?: RegExp;
   prettyPrint: boolean;
   range: {
     lowerRange: number;

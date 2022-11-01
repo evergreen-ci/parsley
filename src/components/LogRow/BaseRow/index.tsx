@@ -8,6 +8,7 @@ import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import { formatPrettyPrint } from "utils/prettyPrint";
+import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
 import { escapeHtml } from "utils/renderHtml/escapeHtml";
 
@@ -25,6 +26,7 @@ interface BaseRowProps extends ListRowProps {
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
+  highlights?: RegExp;
   resmokeRowColor?: string;
   wrap: boolean;
 }
@@ -45,6 +47,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     resmokeRowColor,
     wrap,
     resetRowHeightAtIndex,
+    highlights,
     scrollToLine,
     ...rest
   } = props;
@@ -111,6 +114,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
         <ProcessedBaseRow
           color={resmokeRowColor}
           data-cy={dataCyText}
+          highlights={highlights}
           searchTerm={searchTerm}
         >
           {bookmarked && prettyPrint ? formatPrettyPrint(children) : children}
@@ -124,19 +128,32 @@ interface ProcessedBaseRowProps {
   children: string;
   searchTerm?: RegExp;
   color?: string;
+  highlights?: RegExp;
   ["data-cy"]?: string;
 }
 
 const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
-  const { children, searchTerm, color, "data-cy": dataCy } = props;
+  const { children, searchTerm, color, "data-cy": dataCy, highlights } = props;
   const memoizedLogLine = useMemo(() => {
     let render = children;
     if (searchTerm) {
       // escape the matching string to prevent XSS
       render = render.replace(
-        searchTerm,
+        new RegExp(searchTerm, searchTerm.ignoreCase ? "gi" : "g"),
         (match) => `<mark>${escapeHtml(match)}</mark>`
       );
+    }
+    if (highlights) {
+      const shouldCheckForOverlappingRegex = searchTerm !== undefined;
+      const hasOverlappingRegexes =
+        shouldCheckForOverlappingRegex &&
+        hasOverlappingRegex(searchTerm, highlights, children);
+      if (!hasOverlappingRegexes) {
+        render = render.replace(
+          new RegExp(highlights, highlights.ignoreCase ? "gi" : "g"),
+          (match) => `<mark>${escapeHtml(match)}</mark>`
+        );
+      }
     }
     return renderHtml(render, {
       transform: {
@@ -144,7 +161,7 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
         mark: Highlight,
       },
     });
-  }, [children, searchTerm]);
+  }, [children, searchTerm, highlights]);
 
   return (
     <span data-cy={dataCy} style={{ color }}>
