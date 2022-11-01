@@ -138,8 +138,8 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
     let render = children;
     if (searchTerm) {
       // escape the matching string to prevent XSS
-      render = render.replaceAll(
-        new RegExp(searchTerm, "g"),
+      render = render.replace(
+        new RegExp(searchTerm, searchTerm.ignoreCase ? "gi" : "g"),
         (match) => `<mark>${escapeHtml(match)}</mark>`
       );
     }
@@ -149,8 +149,8 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
         shouldCheckForOverlappingRegex &&
         hasOverlappingRegex(searchTerm, highlights, children);
       if (!hasOverlappingRegexes) {
-        render = render.replaceAll(
-          new RegExp(highlights, "g"),
+        render = render.replace(
+          new RegExp(highlights, highlights.ignoreCase ? "gi" : "g"),
           (match) => `<mark>${escapeHtml(match)}</mark>`
         );
       }
