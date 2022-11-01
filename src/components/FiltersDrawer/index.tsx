@@ -85,6 +85,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
   const deleteHighlight = (highlightName: string) => {
     const newHighlights = highlights.filter((h) => h !== highlightName);
     setHighlights(newHighlights);
+    sendEvent({ name: "Delete Highlight", highlightExpression: highlightName });
   };
   return (
     <StyledSideNav

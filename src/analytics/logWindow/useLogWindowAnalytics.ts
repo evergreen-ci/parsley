@@ -10,8 +10,8 @@ type Action =
   | { name: "Deleted Filter"; filterExpression: string }
   | { name: "Toggled Filter"; visible: boolean }
   | { name: "Edited Filter"; before: Filter; after: Filter }
-  | { name: "Add Highlight" }
-  | { name: "Delete Highlight" }
+  | { name: "Add Highlight"; highlightExpression: string }
+  | { name: "Delete Highlight"; highlightExpression: string }
   | { name: "Applied Search"; searchExpression: string }
   | { name: "Expand Lines"; option: "ALL" | "5Lines"; lineCount: number }
   | { name: "Collapse Lines" }
