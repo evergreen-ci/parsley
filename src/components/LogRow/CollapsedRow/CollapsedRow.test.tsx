@@ -119,10 +119,12 @@ const listRowProps = {
 const data = {
   expandLines: jest.fn(),
   getLine,
-  scrollToLine: jest.fn(),
   getResmokeLineColor: jest.fn(),
+  resetRowHeightAtIndex: jest.fn(),
+  scrollToLine: jest.fn(),
 
   expandedLines: [],
+  prettyPrint: false,
   range: { lowerRange: 0 },
   wrap: false,
 };

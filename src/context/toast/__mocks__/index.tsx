@@ -1,5 +1,5 @@
 import * as toast from "..";
-import { ToastContextState } from "..";
+import { useToastContext } from "..";
 
 /**
  * RenderFakeToastContext is a utility that takes a React Component which uses useToastContext and returns a
@@ -22,7 +22,7 @@ import { ToastContextState } from "..";
  * @returns {Function} response.useToastContext - A jest.fn() method which can be used to assert that the useToastContext hook was called
  */
 const RenderFakeToastContext = (Component: React.ReactElement = <div />) => {
-  const dispatchToast: ToastContextState = {
+  const dispatchToast: ReturnType<typeof useToastContext> = {
     success: jest.fn(),
     error: jest.fn(),
     info: jest.fn(),

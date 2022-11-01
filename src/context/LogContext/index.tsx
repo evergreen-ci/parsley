@@ -7,7 +7,10 @@ import {
   useRef,
   useState,
 } from "react";
+import Cookie from "js-cookie";
 import { List } from "react-virtualized";
+import { cache } from "components/LogRow/RowRenderer";
+import { PRETTY_PRINT_BOOKMARKS } from "constants/cookies";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useFilterParam } from "hooks/useFilterParam";
@@ -30,6 +33,7 @@ interface LogContextState {
   listRef: React.RefObject<List>;
   matchingLines: Set<number> | undefined;
   processedLogLines: ProcessedLogLines;
+  prettyPrint: boolean;
   range: {
     lowerRange: number;
     upperRange?: number;
@@ -44,11 +48,13 @@ interface LogContextState {
   getResmokeLineColor: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
   paginate: (dir: DIRECTION) => void;
+  resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
   setCaseSensitive: (caseSensitive: boolean) => void;
   setFileName: (fileName: string) => void;
   setLogMetadata: (logMetadata: LogMetadata) => void;
   setSearch: (search: string) => void;
+  togglePrettyPrint: (prettyPrint: boolean) => void;
 }
 
 const LogContext = createContext<LogContextState | null>(null);
@@ -88,6 +94,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
     []
   );
+  const [prettyPrint, setPrettyPrint] = useState(
+    Cookie.get(PRETTY_PRINT_BOOKMARKS) === "true"
+  );
 
   const listRef = useRef<List>(null);
 
@@ -98,7 +107,12 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const matchingLines = useMemo(
     () => getMatchingLines(state.logs, filters, filterLogic),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [stringifiedFilters, state.logs.length, filterLogic]
+    [
+      stringifiedFilters,
+      stringifiedExpandedLines,
+      state.logs.length,
+      filterLogic,
+    ]
   );
 
   useEffect(
@@ -191,6 +205,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       logMetadata: state.logMetadata,
       listRef,
       matchingLines,
+      prettyPrint,
       processedLogLines,
       range: {
         lowerRange,
@@ -208,6 +223,22 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       ingestLines: (lines: string[], logType: LogTypes) => {
         dispatch({ type: "INGEST_LOGS", logs: lines, logType });
       },
+      paginate: (direction: DIRECTION) => {
+        const { searchIndex, searchRange } = state.searchState;
+        if (searchIndex !== undefined && searchRange !== undefined) {
+          const nextPage = getNextPage(searchIndex, searchRange, direction);
+          dispatch({ type: "PAGINATE", nextPage });
+          scrollToLine(searchResults[nextPage]);
+        }
+      },
+      resetRowHeightAtIndex: (index: number) => {
+        listRef.current?.recomputeRowHeights(index);
+        cache.clear(index, 0);
+      },
+      scrollToLine,
+      setCaseSensitive: (caseSensitive: boolean) => {
+        dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive });
+      },
       setFileName: (fileName: string) => {
         dispatch({ type: "SET_FILE_NAME", fileName });
       },
@@ -217,17 +248,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       setSearch: (searchTerm: string) => {
         dispatch({ type: "SET_SEARCH_TERM", searchTerm });
       },
-      scrollToLine,
-      paginate: (direction: DIRECTION) => {
-        const { searchIndex, searchRange } = state.searchState;
-        if (searchIndex !== undefined && searchRange !== undefined) {
-          const nextPage = getNextPage(searchIndex, searchRange, direction);
-          dispatch({ type: "PAGINATE", nextPage });
-          scrollToLine(searchResults[nextPage]);
-        }
-      },
-      setCaseSensitive: (caseSensitive: boolean) => {
-        dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive });
+      togglePrettyPrint: (v: boolean) => {
+        setPrettyPrint(v);
+        Cookie.set(PRETTY_PRINT_BOOKMARKS, v.toString(), { expires: 365 });
       },
     }),
     [
@@ -238,6 +261,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       highlightedLine,
       lowerRange,
       matchingLines,
+      prettyPrint,
       processedLogLines,
       searchResults,
       upperRange,

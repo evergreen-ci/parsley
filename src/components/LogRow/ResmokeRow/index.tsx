@@ -12,11 +12,14 @@ const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
   const {
     getLine,
     getResmokeLineColor,
+    resetRowHeightAtIndex,
     scrollToLine,
     highlightedLine,
+    prettyPrint,
     range,
     searchTerm,
     wrap,
+    highlights,
   } = data;
 
   const lineContent = getLine(lineNumber);
@@ -29,7 +32,10 @@ const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
       ref={ref}
       data-cy="resmoke-row"
       highlightedLine={highlightedLine}
+      highlights={highlights}
       lineNumber={lineNumber}
+      prettyPrint={prettyPrint}
+      resetRowHeightAtIndex={resetRowHeightAtIndex}
       resmokeRowColor={lineColor}
       scrollToLine={scrollToLine}
       searchTerm={inRange ? searchTerm : undefined}

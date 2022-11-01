@@ -20,7 +20,7 @@ import {
   VisibleToast,
 } from "./types";
 
-export interface ToastContextState {
+interface ToastContextState {
   success: DispatchToast;
   warning: DispatchToast;
   error: DispatchToast;

@@ -181,8 +181,8 @@ describe("expanding collapsed rows", () => {
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
   before(() => {
     cy.login();
-    cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
+    cy.visit(logLink);
   });
 
   it("should be able to expand collapsed rows", () => {
@@ -203,5 +203,41 @@ describe("expanding collapsed rows", () => {
     cy.dataCy("log-row-1").should("be.visible");
     cy.dataCy("log-row-2").should("be.visible");
     cy.dataCy("log-row-3").should("be.visible");
+  });
+
+  it("should be able to see what rows have been expanded in the drawer", () => {
+    cy.toggleDrawer();
+    cy.dataCy("expanded-row-1-to-3").should("be.visible");
+  });
+
+  it("should be possible to re-collapse rows through the drawer", () => {
+    cy.dataCy("log-row-1").should("be.visible");
+    cy.dataCy("log-row-2").should("be.visible");
+    cy.dataCy("log-row-3").should("be.visible");
+
+    cy.dataCy("expanded-row-1-to-3").within(() => {
+      cy.get(`[aria-label="Delete range"]`).click();
+    });
+    cy.dataCy("collapsed-row-1-3").should("exist");
+  });
+});
+
+describe("pretty print", () => {
+  const logLink =
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
+  before(() => {
+    cy.login();
+    cy.setCookie("has-opened-drawer", "true");
+    cy.setCookie("pretty-print-bookmarks", "true");
+    cy.visit(logLink);
+  });
+
+  it("should pretty print bookmarks if pretty print is enabled", () => {
+    const defaultRowHeight = 18;
+
+    cy.dataCy("log-row-19").dblclick({ force: true });
+    cy.dataCy("log-row-19")
+      .invoke("height")
+      .should("be.greaterThan", defaultRowHeight);
   });
 });

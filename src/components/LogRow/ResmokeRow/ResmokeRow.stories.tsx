@@ -4,6 +4,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
+import { useLogContext } from "context/LogContext";
 import { colorList } from "utils/resmoke";
 import ResmokeRow from ".";
 
@@ -24,7 +25,9 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
       expandLines: () => undefined,
       getLine,
       getResmokeLineColor: () => undefined,
+      resetRowHeightAtIndex: () => undefined,
       scrollToLine: () => undefined,
+      prettyPrint: args.prettyPrint,
       range: { lowerRange: 0 },
       wrap: args.wrap,
     }}
@@ -44,12 +47,15 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
 export const SingleLine = SingleLineTemplate.bind({});
 
 SingleLine.args = {
+  prettyPrint: false,
   wrap: false,
 };
 
 // Multiple ResmokeRows.
 const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   const [scrollIndex, setScrollIndex] = useState<number>(-1);
+  const { resetRowHeightAtIndex } = useLogContext();
+
   return (
     <Container>
       <LogPane
@@ -62,16 +68,19 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
             expandLines: () => undefined,
             getLine,
             getResmokeLineColor: () => undefined,
+            resetRowHeightAtIndex,
             scrollToLine: setScrollIndex,
-            range: { lowerRange: 0 },
-            wrap: args.wrap,
-            searchTerm: /mongod/,
             highlightedLine: args.highlightedLine,
+            prettyPrint: args.prettyPrint,
+            range: { lowerRange: 0 },
+            searchTerm: /mongod/,
+            wrap: args.wrap,
           },
           processedLogLines,
           logType: LogTypes.RESMOKE_LOGS,
         })}
         scrollToIndex={scrollIndex}
+        wrap={args.wrap}
       />
     </Container>
   );
@@ -79,11 +88,14 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
 export const MultipleLines = MultipleLineTemplate.bind({});
 
 MultipleLines.args = {
+  prettyPrint: true,
   wrap: false,
 };
 
 const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   const [scrollIndex, setScrollIndex] = useState<number>(-1);
+  const { resetRowHeightAtIndex } = useLogContext();
+
   return (
     <Container>
       <LogPane
@@ -96,8 +108,10 @@ const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
             expandLines: () => undefined,
             getLine,
             getResmokeLineColor: (lineNumber: number) => colorList[lineNumber],
+            resetRowHeightAtIndex,
             scrollToLine: setScrollIndex,
             highlightedLine: args.highlightedLine,
+            prettyPrint: args.prettyPrint,
             range: { lowerRange: 0 },
             searchTerm: /mongod/,
             wrap: args.wrap,
@@ -106,6 +120,7 @@ const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
           logType: LogTypes.RESMOKE_LOGS,
         })}
         scrollToIndex={scrollIndex}
+        wrap={args.wrap}
       />
     </Container>
   );
@@ -114,8 +129,9 @@ const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
 export const ResmokeHighlighting = ResmokeHighlightingTemplate.bind({});
 
 ResmokeHighlighting.args = {
-  wrap: false,
+  prettyPrint: true,
   highlightedLine: 1,
+  wrap: false,
 };
 
 const logLines = [
