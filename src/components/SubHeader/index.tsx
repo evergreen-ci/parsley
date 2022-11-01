@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { Body } from "@leafygreen-ui/typography";
+import { usePreferencesAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { StyledLink } from "components/styles";
 import { getEvergreenTaskURL } from "constants/externalURLTemplates";
@@ -20,6 +21,8 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
       ? getEvergreenTaskURL(taskID, execution)
       : "";
 
+  const { sendEvent } = usePreferencesAnalytics();
+
   return (
     <Container>
       {isUploadedLog ? (
@@ -34,7 +37,11 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
           <IconWrapper>
             <Icon glyph="EvergreenLogo" />
           </IconWrapper>
-          <StyledLink href={taskLink} target="_blank">
+          <StyledLink
+            href={taskLink}
+            onClick={() => sendEvent({ name: "Open Task Link" })}
+            target="_blank"
+          >
             Task Page
           </StyledLink>
         </Header>

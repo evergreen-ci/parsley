@@ -12,7 +12,7 @@ export interface Analytics<Action> {
   sendEvent: (action: Action) => void;
 }
 
-type AnalyticsObject = "LogDrop" | "LogWindow";
+type AnalyticsObject = "LogDrop" | "LogWindow" | "Preferences";
 
 interface RequiredProperties {
   object: AnalyticsObject;

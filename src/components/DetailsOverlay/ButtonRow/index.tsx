@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Button from "@leafygreen-ui/button";
 import Tooltip from "@leafygreen-ui/tooltip";
+import { usePreferencesAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
@@ -14,7 +15,7 @@ const ButtonRow: React.FC = () => {
 
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
   const { getLine, logMetadata } = useLogContext();
-
+  const { sendEvent } = usePreferencesAnalytics();
   const { htmlLogURL, rawLogURL, jobLogsURL } = logMetadata || {};
   const tooltipText = bookmarks.length
     ? "Copy Jira Log Information"
@@ -36,6 +37,7 @@ const ButtonRow: React.FC = () => {
                 leaveBreadcrumb("copy-jira", { bookmarks }, "user");
                 copyToClipboard(getJiraFormat(bookmarks, getLine));
                 setHasCopied(!hasCopied);
+                sendEvent({ name: "Clicked Copy To Jira" });
               }}
             >
               JIRA
@@ -56,6 +58,7 @@ const ButtonRow: React.FC = () => {
               disabled={!jobLogsURL}
               href={jobLogsURL}
               leftGlyph={<Icon glyph="Export" />}
+              onClick={() => sendEvent({ name: "Open Job Logs" })}
               target="_blank"
             >
               Job Logs
@@ -75,6 +78,7 @@ const ButtonRow: React.FC = () => {
               disabled={!rawLogURL}
               href={rawLogURL}
               leftGlyph={<Icon glyph="Export" />}
+              onClick={() => sendEvent({ name: "Open Raw Logs" })}
               target="_blank"
             >
               Raw
@@ -94,6 +98,7 @@ const ButtonRow: React.FC = () => {
               disabled={!htmlLogURL}
               href={htmlLogURL}
               leftGlyph={<Icon glyph="Export" />}
+              onClick={() => sendEvent({ name: "Open HTML Logs" })}
               target="_blank"
             >
               HTML
