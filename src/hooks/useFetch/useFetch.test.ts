@@ -60,8 +60,6 @@ describe("useFetch", () => {
     rerender();
     expect(result.current.isLoading).toBe(true);
     await waitForNextUpdate();
-    expect(result.current.isLoading).toBe(false);
-    // eslint-disable-next-line jest/max-expects
-    expect(result.current.data).toBe(jsonMessage);
+    expect(mockFetchPromise).toHaveBeenCalledTimes(1);
   });
 });
