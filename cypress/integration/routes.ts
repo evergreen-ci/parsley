@@ -34,7 +34,7 @@ describe("Parsley Routes", () => {
     cy.dataCy("resmoke-row").should("be.visible");
     cy.contains(resmokeLogLine);
   });
-  it("visiting a non existent page should 404", () => {
+  it("should show 404 when visiting a nonexistent page", () => {
     cy.visit("/this/is/not/a/real/page");
     cy.dataCy("404").should("be.visible");
   });

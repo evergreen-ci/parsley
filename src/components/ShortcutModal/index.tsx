@@ -27,7 +27,7 @@ const ShortcutModal: React.FC = () => {
   useKeyboardShortcut(
     { charKey: CharKey.QuestionMark, modifierKeys: [ModifierKey.Shift] },
     () => {
-      setOpen(true);
+      setOpen(!open);
     }
   );
 
