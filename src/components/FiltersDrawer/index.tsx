@@ -146,7 +146,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
                 data-cy={`expanded-row-${e[0]}-to-${e[1]}`}
               >
                 <IconButton
-                  aria-label="Delete range button"
+                  aria-label="Delete range"
                   onClick={() => {
                     sendEvent({ name: "Collapse Lines" });
                     collapseLines(idx);
