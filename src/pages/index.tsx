@@ -1,5 +1,6 @@
 import { Suspense, lazy } from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
+import ShortcutModal from "components/ShortcutModal";
 import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
 import routes from "constants/routes";
@@ -38,6 +39,7 @@ const Content: React.FC = () => (
       />
       <Route element={<NotFound />} path="*" />
     </Routes>
+    <ShortcutModal />
   </PageLayout>
 );
 
