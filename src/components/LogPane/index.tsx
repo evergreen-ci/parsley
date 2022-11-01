@@ -28,14 +28,24 @@ const LogPane: React.FC<LogPaneProps> = ({
   wrap,
   ...rest
 }) => {
-  const { listRef, matchingLines, prettyPrint } = useLogContext();
+  const { listRef, expandedLines, matchingLines, prettyPrint } =
+    useLogContext();
 
   const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
+  const stringifiedExpandedLines = expandedLines.toString();
 
   useEffect(() => {
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
-  }, [listRef, cache, wrap, matchingLines, expandableRows, prettyPrint]);
+  }, [
+    listRef,
+    cache,
+    expandableRows,
+    matchingLines,
+    prettyPrint,
+    stringifiedExpandedLines,
+    wrap,
+  ]);
 
   return (
     <AutoSizer>
@@ -43,7 +53,7 @@ const LogPane: React.FC<LogPaneProps> = ({
         <List
           ref={listRef}
           cache={cache}
-          containerStyle={{ overflow: "scroll visible" }}
+          containerStyle={{ overflowX: "scroll" }}
           deferredMeasurementCache={cache}
           height={height}
           overscanRowCount={200}
