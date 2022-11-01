@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
+import { useLogWindowAnalytics } from "analytics";
 import DetailsOverlay from "components/DetailsOverlay";
 import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
@@ -19,6 +20,7 @@ const NavBar: React.FC = () => {
   const [filters, setFilters] = useFilterParam();
   const { hasLogs, clearLogs, setSearch, searchState, paginate } =
     useLogContext();
+  const { sendEvent } = useLogWindowAnalytics();
   const { hasSearch } = searchState;
   const handleSearch = (selected: string, value: string) => {
     if (selected === SearchBarActions.Search) {
@@ -36,6 +38,7 @@ const NavBar: React.FC = () => {
           visible: true,
         },
       ]);
+      sendEvent({ name: "Add Filter", filterExpression: value });
       setSearch("");
     }
   };
@@ -43,6 +46,7 @@ const NavBar: React.FC = () => {
   const handleOnChange = (selected: string, value: string) => {
     if (selected === SearchBarActions.Search) {
       setSearch(value);
+      sendEvent({ name: "Applied Search", searchExpression: value });
     }
   };
 

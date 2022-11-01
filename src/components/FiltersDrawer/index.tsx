@@ -6,6 +6,7 @@ import { palette } from "@leafygreen-ui/palette";
 import { SideNav, SideNavGroup } from "@leafygreen-ui/side-nav";
 import { Body, Overline } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
+import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { HAS_OPENED_DRAWER } from "constants/cookies";
 import { CaseSensitivity, MatchType } from "constants/enums";
@@ -35,15 +36,15 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
   );
 
   const [filters, setFilters] = useFilterParam();
-
+  const { sendEvent } = useLogWindowAnalytics();
   const deleteFilter = (filterName: string) => {
     const newFilters = filters.filter((f) => f.name !== filterName);
     setFilters(newFilters);
-
     if (newFilters.length === 0) {
       clearExpandedLines();
     }
     leaveBreadcrumb("delete-filter", { filterName }, "user");
+    sendEvent({ name: "Deleted Filter", filterExpression: filterName });
   };
 
   const editFilter = (
@@ -67,6 +68,11 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
       { filterName: filter.name, fieldName, fieldValue },
       "user"
     );
+    sendEvent({
+      name: "Edited Filter",
+      before: filter,
+      after: { ...filter, [fieldName]: fieldValue },
+    });
   };
 
   return (
@@ -134,7 +140,10 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
               <ExpandedLineWrapper key={`range-${e[0]}-to-${e[1]}`}>
                 <IconButton
                   aria-label="Delete range button"
-                  onClick={() => collapseLines(idx)}
+                  onClick={() => {
+                    sendEvent({ name: "Collapse Lines" });
+                    collapseLines(idx);
+                  }}
                 >
                   <Icon fill={green.dark2} glyph="X" />
                 </IconButton>

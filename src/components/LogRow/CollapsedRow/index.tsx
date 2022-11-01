@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
 import { Overline } from "@leafygreen-ui/typography";
+import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { size } from "constants/tokens";
 import { OverlineType } from "types/leafygreen";
@@ -29,6 +30,7 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
   const disableExpandFive = 2 * SKIP_NUMBER > numCollapsed;
 
   const [, startTransition] = useTransition();
+  const { sendEvent } = useLogWindowAnalytics();
 
   const expandFive = () => {
     startTransition(() => {
@@ -37,12 +39,14 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
         [end - (SKIP_NUMBER - 1), end],
       ]);
     });
+    sendEvent({ name: "Expand Lines", lineCount: 5, option: "5Lines" });
   };
 
   const expandAll = () => {
     startTransition(() => {
       expandLines([[start, end]]);
     });
+    sendEvent({ name: "Expand Lines", lineCount: numCollapsed, option: "ALL" });
   };
 
   return (
