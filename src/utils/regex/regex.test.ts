@@ -20,6 +20,12 @@ describe("hasOverlappingRegex", () => {
     const text = "a";
     expect(hasOverlappingRegex(regex1, regex2, text)).toBe(false);
   });
+  it("should return false if both regexes match a line but the results don't overlap", () => {
+    const regex1 = /a/;
+    const regex2 = /b/;
+    const text = "a doesn't match with b";
+    expect(hasOverlappingRegex(regex1, regex2, text)).toBe(false);
+  });
   it("should return false if regexes do not match", () => {
     const regex1 = /a/;
     const regex2 = /b/;
