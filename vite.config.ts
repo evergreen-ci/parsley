@@ -19,7 +19,7 @@ export default defineConfig({
           files: "dist/index.html",
           variables: [
             "%GIT_SHA%",
-            "%NODE_ENV%",
+            "%REACT_APP_RELEASE_STAGE%",
             "%NEW_RELIC_ACCOUNT_ID%",
             "%NEW_RELIC_TRUST_KEY%",
             "%NEW_RELIC_AGENT_ID%",
