@@ -182,7 +182,6 @@ const RowContainer = styled.div<{
 
 const StyledIcon = styled(Icon)`
   cursor: pointer;
-  vertical-align: text-bottom;
   user-select: none;
   flex-shrink: 0;
 `;
@@ -193,8 +192,12 @@ const Index = styled.pre`
   margin-bottom: 0;
   margin-left: ${size.s};
   margin-right: ${size.s};
-  user-select: none;
   flex-shrink: 0;
+
+  font-family: inherit;
+  line-height: inherit;
+  font-size: inherit;
+  user-select: none;
 `;
 
 const StyledPre = styled.pre<{
@@ -205,6 +208,9 @@ const StyledPre = styled.pre<{
   margin-bottom: 0;
   margin-right: ${size.xs};
 
+  font-family: inherit;
+  line-height: inherit;
+  font-size: inherit;
   ${({ shouldWrap }) =>
     shouldWrap && ` /* wrap multiple lines */ white-space: break-spaces;`}
 `;

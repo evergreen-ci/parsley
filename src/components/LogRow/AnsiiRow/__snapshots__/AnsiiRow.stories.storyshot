@@ -50,7 +50,7 @@ exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
 >
   <svg
     aria-label="Link Icon"
-    className="css-148kjxj"
+    className="css-e6tumk"
     data-cy="log-link-0"
     fill="none"
     height={14}
@@ -70,12 +70,12 @@ exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
     />
   </svg>
   <pre
-    className="css-1ye3usn"
+    className="css-1dzaw1s"
   >
     0
   </pre>
   <pre
-    className="css-1759fk7"
+    className="css-lponur"
   >
     <span
       data-cy="ansii-row"
