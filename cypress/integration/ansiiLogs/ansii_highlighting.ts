@@ -32,7 +32,6 @@ describe("Highlighting", () => {
     cy.dataCy("highlight").should("exist");
     cy.dataCy("highlight").should("have.length", 5);
     cy.dataCy("highlight").each(($el) => {
-      // Matched elements should be one of the bookmarked or selected values
       cy.wrap($el)
         .invoke("text")
         .should("match", /Starting|info/);
