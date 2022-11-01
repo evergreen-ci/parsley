@@ -20,8 +20,8 @@ describe("Basic evergreen log view", () => {
     cy.dataCy("log-row-22").isNotContainedInViewport();
     cy.get(".ReactVirtualized__Grid__innerScrollContainer").should(
       "have.css",
-      "overflow",
-      "scroll auto"
+      "overflow-x",
+      "scroll"
     );
   });
   it("long lines with wrapping turned on should fit on screen", () => {
