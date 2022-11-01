@@ -2,6 +2,7 @@ import { useCallback, useState } from "react";
 import { css } from "@emotion/react";
 import ConfirmationModal from "@leafygreen-ui/confirmation-modal";
 import { useNavigate } from "react-router-dom";
+import { useLogDropAnalytics } from "analytics";
 import { StyledRouterLink } from "components/styles";
 import routes from "constants/routes";
 import { zIndex } from "constants/tokens";
@@ -14,14 +15,17 @@ interface UploadLinkProps {
 const UploadLink: React.FC<UploadLinkProps> = ({ hasLogs, clearLogs }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const { sendEvent } = useLogDropAnalytics();
   const handleClick = useCallback(() => {
     if (hasLogs) {
+      sendEvent({ name: "Clicked Upload Link", hasLogs: true });
       setOpen(true);
     } else {
       leaveBreadcrumb("upload-link", { hasLogs }, "navigation");
+      sendEvent({ name: "Clicked Upload Link", hasLogs: false });
       navigate(routes.upload);
     }
-  }, [hasLogs, navigate]);
+  }, [hasLogs, sendEvent, navigate]);
   return (
     <>
       <StyledRouterLink
