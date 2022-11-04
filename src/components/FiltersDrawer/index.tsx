@@ -78,7 +78,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     sendEvent({
       name: "Edited Filter",
       before: filter,
-      after: { ...filter, [fieldName]: fieldValue },
+      after: newFilters[idxToReplace],
     });
   };
 

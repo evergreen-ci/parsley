@@ -13,7 +13,7 @@ type Action =
   | { name: "Added Highlight"; highlightExpression: string }
   | { name: "Delete Highlight"; highlightExpression: string }
   | { name: "Applied Search"; searchExpression: string }
-  | { name: "Expanded Lines"; option: "ALL" | "5Lines"; lineCount: number }
+  | { name: "Expanded Lines"; option: "All" | "Five"; lineCount: number }
   | { name: "Collapsed Lines" };
 
 interface P extends Properties {}

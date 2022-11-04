@@ -11,7 +11,7 @@ const CaseSensitiveToggle: React.FC = () => {
       label="Case Sensitive"
       onChange={(value) => {
         setCaseSensitive(value);
-        sendEvent({ name: "Toggle Case Sensitivity", insensitive: value });
+        sendEvent({ name: "Toggle Case Sensitivity", on: value });
       }}
       value={searchState.caseSensitive}
     />

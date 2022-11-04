@@ -12,7 +12,7 @@ type Action =
   | { name: "Opened HTML Logs" }
   | { name: "Clicked Copy To Jira" }
   | { name: "Toggle Wrap"; on: boolean }
-  | { name: "Toggle Case Sensitivity"; insensitive: boolean }
+  | { name: "Toggle Case Sensitivity"; on: boolean }
   | { name: "Toggle Pretty Print"; on: boolean }
   | { name: "Toggle Filter Logic"; logic: FilterLogic }
   | { name: "Toggle Expandable Rows"; on: boolean };
