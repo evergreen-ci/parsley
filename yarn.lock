@@ -2081,7 +2081,7 @@
   dependencies:
     lodash "^4.17.21"
 
-"@leafygreen-ui/modal@^11.0.0":
+"@leafygreen-ui/modal@11.0.0", "@leafygreen-ui/modal@^11.0.0":
   version "11.0.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/modal/-/modal-11.0.0.tgz#22b408aeb0940e627b526d80f4a3fbf0d9b6a33a"
   integrity sha512-ICUr4sxEJ3+L7Klckb2subv9OB8N55YLWOWCmqZSEE32EyPBB2aoe8S+x1F0llcCgAWSvUK5KW4uIpS00mPVMg==
