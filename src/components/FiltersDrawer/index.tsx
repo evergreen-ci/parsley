@@ -148,7 +148,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
                 <IconButton
                   aria-label="Delete range"
                   onClick={() => {
-                    sendEvent({ name: "Collapse Lines" });
+                    sendEvent({ name: "Collapsed Lines" });
                     collapseLines(idx);
                   }}
                 >

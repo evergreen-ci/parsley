@@ -58,7 +58,7 @@ const ButtonRow: React.FC = () => {
               disabled={!jobLogsURL}
               href={jobLogsURL}
               leftGlyph={<Icon glyph="Export" />}
-              onClick={() => sendEvent({ name: "Open Job Logs" })}
+              onClick={() => sendEvent({ name: "Opened Job Logs" })}
               target="_blank"
             >
               Job Logs
@@ -78,7 +78,7 @@ const ButtonRow: React.FC = () => {
               disabled={!rawLogURL}
               href={rawLogURL}
               leftGlyph={<Icon glyph="Export" />}
-              onClick={() => sendEvent({ name: "Open Raw Logs" })}
+              onClick={() => sendEvent({ name: "Opened Raw Logs" })}
               target="_blank"
             >
               Raw
@@ -98,7 +98,7 @@ const ButtonRow: React.FC = () => {
               disabled={!htmlLogURL}
               href={htmlLogURL}
               leftGlyph={<Icon glyph="Export" />}
-              onClick={() => sendEvent({ name: "Open HTML Logs" })}
+              onClick={() => sendEvent({ name: "Opened HTML Logs" })}
               target="_blank"
             >
               HTML

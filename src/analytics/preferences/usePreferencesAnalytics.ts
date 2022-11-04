@@ -6,10 +6,10 @@ import {
 import { FilterLogic } from "constants/enums";
 
 type Action =
-  | { name: "Open Task Link" }
-  | { name: "Open Job Logs" }
-  | { name: "Open Raw Logs" }
-  | { name: "Open HTML Logs" }
+  | { name: "Opened Task Link" }
+  | { name: "Opened Job Logs" }
+  | { name: "Opened Raw Logs" }
+  | { name: "Opened HTML Logs" }
   | { name: "Clicked Copy To Jira" }
   | { name: "Toggle Wrap"; on: boolean }
   | { name: "Toggle Case Sensitivity"; insensitive: boolean }

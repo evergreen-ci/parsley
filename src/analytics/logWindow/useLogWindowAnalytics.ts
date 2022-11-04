@@ -6,19 +6,15 @@ import {
 import { Filter } from "types/logs";
 
 type Action =
-  | { name: "Add Filter"; filterExpression: string }
+  | { name: "Added Filter"; filterExpression: string }
   | { name: "Deleted Filter"; filterExpression: string }
   | { name: "Toggled Filter"; visible: boolean }
   | { name: "Edited Filter"; before: Filter; after: Filter }
-  | { name: "Add Highlight"; highlightExpression: string }
+  | { name: "Added Highlight"; highlightExpression: string }
   | { name: "Delete Highlight"; highlightExpression: string }
   | { name: "Applied Search"; searchExpression: string }
-  | { name: "Expand Lines"; option: "ALL" | "5Lines"; lineCount: number }
-  | { name: "Collapse Lines" }
-  | { name: "Open Task Link" }
-  | { name: "Open Job Logs" }
-  | { name: "Open Raw Logs" }
-  | { name: "Open HTML Logs" };
+  | { name: "Expanded Lines"; option: "ALL" | "5Lines"; lineCount: number }
+  | { name: "Collapsed Lines" };
 
 interface P extends Properties {}
 interface Analytics extends A<Action> {}

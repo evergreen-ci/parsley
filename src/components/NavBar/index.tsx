@@ -45,14 +45,14 @@ const NavBar: React.FC = () => {
               visible: true,
             },
           ]);
-          sendEvent({ name: "Add Filter", filterExpression: value });
+          sendEvent({ name: "Added Filter", filterExpression: value });
         }
         break;
       case SearchBarActions.Highlight:
         if (!highlights.includes(value)) {
           setSearch("");
           setHighlights([...highlights, value]);
-          sendEvent({ name: "Add Highlight", highlightExpression: value });
+          sendEvent({ name: "Added Highlight", highlightExpression: value });
         }
         break;
       default:

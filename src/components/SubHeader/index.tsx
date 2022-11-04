@@ -39,7 +39,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
           </IconWrapper>
           <StyledLink
             href={taskLink}
-            onClick={() => sendEvent({ name: "Open Task Link" })}
+            onClick={() => sendEvent({ name: "Opened Task Link" })}
             target="_blank"
           >
             Task Page
