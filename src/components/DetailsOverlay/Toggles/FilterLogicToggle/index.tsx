@@ -1,3 +1,4 @@
+import { usePreferencesAnalytics } from "analytics";
 import { FilterLogic } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
@@ -10,12 +11,15 @@ const FilterLogicToggle: React.FC = () => {
   );
 
   const isChecked = filterLogic === FilterLogic.Or;
+  const { sendEvent } = usePreferencesAnalytics();
 
   const onChange = (checked: boolean) => {
     if (checked) {
       setFilterLogic(FilterLogic.Or);
+      sendEvent({ name: "Toggled Filter Logic", logic: FilterLogic.Or });
     } else {
       setFilterLogic(FilterLogic.And);
+      sendEvent({ name: "Toggled Filter Logic", logic: FilterLogic.And });
     }
   };
   return (

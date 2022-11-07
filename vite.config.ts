@@ -17,13 +17,21 @@ export default defineConfig({
       plugins: [
         injectVariablesInHTML({
           files: "dist/index.html",
-          variables: ["%GIT_SHA%"],
+          variables: [
+            "%GIT_SHA%",
+            "%REACT_APP_RELEASE_STAGE%",
+            "%NEW_RELIC_ACCOUNT_ID%",
+            "%NEW_RELIC_TRUST_KEY%",
+            "%NEW_RELIC_AGENT_ID%",
+            "%NEW_RELIC_LICENSE_KEY%",
+            "%NEW_RELIC_APPLICATION_ID%",
+          ],
         }),
       ],
     },
   },
   // The resolve field for @leafygreen-ui/emotion is to prevent LG from pulling in SSR dependencies.
-  // It can be potentially be removed upon the completion of https://jira.mongodb.org/browse/PD-1543.
+  // It can be potentially removed upon the completion of https://jira.mongodb.org/browse/PD-1543.
   resolve: {
     alias: {
       "@leafygreen-ui/emotion": path.resolve(

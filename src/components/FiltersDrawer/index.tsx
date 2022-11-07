@@ -6,6 +6,7 @@ import { palette } from "@leafygreen-ui/palette";
 import { SideNav, SideNavGroup } from "@leafygreen-ui/side-nav";
 import { Body, Overline } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
+import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { HAS_OPENED_DRAWER } from "constants/cookies";
 import { CaseSensitivity, MatchType } from "constants/enums";
@@ -37,7 +38,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
   );
 
   const [filters, setFilters] = useFilterParam();
-
+  const { sendEvent } = useLogWindowAnalytics();
   const [highlights, setHighlights] = useQueryParam<string[]>(
     QueryParams.Highlights,
     []
@@ -46,11 +47,11 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
   const deleteFilter = (filterName: string) => {
     const newFilters = filters.filter((f) => f.name !== filterName);
     setFilters(newFilters);
-
     if (newFilters.length === 0) {
       clearExpandedLines();
     }
     leaveBreadcrumb("delete-filter", { filterName }, "user");
+    sendEvent({ name: "Deleted Filter", filterExpression: filterName });
   };
 
   const editFilter = (
@@ -74,11 +75,17 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
       { filterName: filter.name, fieldName, fieldValue },
       "user"
     );
+    sendEvent({
+      name: "Edited Filter",
+      before: filter,
+      after: newFilters[idxToReplace],
+    });
   };
 
   const deleteHighlight = (highlightName: string) => {
     const newHighlights = highlights.filter((h) => h !== highlightName);
     setHighlights(newHighlights);
+    sendEvent({ name: "Delete Highlight", highlightExpression: highlightName });
   };
   return (
     <StyledSideNav
@@ -140,7 +147,10 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
               >
                 <IconButton
                   aria-label="Delete range"
-                  onClick={() => collapseLines(idx)}
+                  onClick={() => {
+                    sendEvent({ name: "Collapsed Lines" });
+                    collapseLines(idx);
+                  }}
                 >
                   <Icon fill={green.dark2} glyph="X" />
                 </IconButton>

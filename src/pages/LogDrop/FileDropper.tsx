@@ -5,6 +5,7 @@ import { palette } from "@leafygreen-ui/palette";
 import { Option, Select } from "@leafygreen-ui/select";
 import { Body } from "@leafygreen-ui/typography";
 import { useDropzone } from "react-dropzone";
+import { useLogDropAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { LogTypes } from "constants/enums";
 import { size } from "constants/tokens";
@@ -20,7 +21,7 @@ interface FileDropperProps {
 const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
   const { ingestLines, setFileName } = useLogContext();
   const dispatchToast = useToastContext();
-
+  const { sendEvent } = useLogDropAnalytics();
   const [hasDroppedLog, setHasDroppedLog] = useState(false);
   const [logType, setLogType] = useState<LogTypes | undefined>(undefined);
   const lineStream = useRef<FileReader["result"]>(null);
@@ -28,6 +29,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       leaveBreadcrumb("Dropped file", {}, "user");
+      sendEvent({ name: "Dropped file" });
       acceptedFiles.forEach((file) => {
         const reader = new FileReader();
 
@@ -41,18 +43,19 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
         reader.readAsText(file);
       });
     },
-    [setFileName, dispatchToast]
+    [setFileName, dispatchToast, sendEvent]
   );
 
   const onParse = useCallback(() => {
     if (logType) {
       onChangeLogType(logType);
       leaveBreadcrumb("Parsing file", { logType }, "process");
+      sendEvent({ name: "Processed Log", logType });
       if (typeof lineStream.current === "string") {
         ingestLines(lineStream.current.split("\n"), logType);
       }
     }
-  }, [ingestLines, logType, onChangeLogType]);
+  }, [ingestLines, logType, sendEvent, onChangeLogType]);
 
   const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
     onDrop,
