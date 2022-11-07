@@ -1,13 +1,6 @@
 import { useEffect } from "react";
-// @ts-expect-error
-import NewRelicAPI from "new-relic-browser";
-import { useLogContext } from "context/LogContext";
 
-declare global {
-  interface Window {
-    newrelic: typeof NewRelicAPI; // eslint-disable-line no-undef
-  }
-}
+import { useLogContext } from "context/LogContext";
 
 export const useAnalyticAttributes = () => {
   const { logMetadata } = useLogContext();
@@ -19,7 +12,7 @@ export const useAnalyticAttributes = () => {
       console.debug("Setting logType: ", logType);
       return;
     }
-    if (logType !== null) {
+    if (logType !== undefined) {
       newrelic.setCustomAttribute("logType", logType);
     }
   }, [logType, newrelic]);
