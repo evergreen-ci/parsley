@@ -28,24 +28,14 @@ const LogPane: React.FC<LogPaneProps> = ({
   wrap,
   ...rest
 }) => {
-  const { listRef, expandedLines, matchingLines, prettyPrint } =
-    useLogContext();
+  const { listRef, matchingLines, prettyPrint } = useLogContext();
 
   const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
-  const stringifiedExpandedLines = expandedLines.toString();
 
   useEffect(() => {
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
-  }, [
-    listRef,
-    cache,
-    expandableRows,
-    matchingLines,
-    prettyPrint,
-    stringifiedExpandedLines,
-    wrap,
-  ]);
+  }, [listRef, cache, wrap, matchingLines, expandableRows, prettyPrint]);
 
   return (
     <AutoSizer>
