@@ -4,6 +4,7 @@ import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
+import { useLogContext } from "context/LogContext";
 import CollapsedRow from ".";
 
 export default {
@@ -21,6 +22,13 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
   const [processedLogLines, setProcessedLogLines] = useState(
     collapsedProcessedLogLines
   );
+  const { listRef } = useLogContext();
+
+  const onExpand = () => {
+    setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]);
+    cache.clearAll();
+    listRef.current?.recomputeRowHeights();
+  };
 
   return (
     <Container>
@@ -31,7 +39,7 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
           data: {
-            expandLines: () => setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]),
+            expandLines: onExpand,
             getLine: (index: number) => ansiiLogLines[index],
             getResmokeLineColor: () => undefined,
             resetRowHeightAtIndex: () => undefined,
@@ -66,6 +74,14 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
     collapsedProcessedLogLines
   );
 
+  const { listRef } = useLogContext();
+
+  const onExpand = () => {
+    setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]);
+    cache.clearAll();
+    listRef.current?.recomputeRowHeights();
+  };
+
   return (
     <Container>
       <LogPane
@@ -75,7 +91,7 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
           data: {
-            expandLines: () => setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]),
+            expandLines: onExpand,
             getLine: (index: number) => resmokeLogLines[index],
             getResmokeLineColor: () => undefined,
             resetRowHeightAtIndex: () => undefined,

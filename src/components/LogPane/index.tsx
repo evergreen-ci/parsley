@@ -43,7 +43,7 @@ const LogPane: React.FC<LogPaneProps> = ({
         <List
           ref={listRef}
           cache={cache}
-          containerStyle={{ overflow: "scroll visible" }}
+          containerStyle={{ overflowX: "scroll" }}
           deferredMeasurementCache={cache}
           height={height}
           overscanRowCount={200}
