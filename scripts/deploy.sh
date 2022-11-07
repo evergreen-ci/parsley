@@ -8,5 +8,5 @@ echo "Deployed to S3"
 
 # If the above step succeeds, run this step
 echo "Uploading source maps to Bugsnag"
-. ./scripts/appVersion.sh && node ./scripts/upload-bugsnag-sourcemaps.js
+. ./scripts/app-version.sh && node ./scripts/upload-bugsnag-sourcemaps.js
 echo "Source maps uploaded to Bugsnag"

@@ -129,12 +129,32 @@ functions:
       permissions: public-read
       display_name: source_map
     
+
+  build-prod:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        chmod +x ./scripts/app-version.sh
+        . ./scripts/app-version.sh
+        echo "Building Production version: $REACT_APP_VERSION"
+        yarn build:production
+
   copy-cmdrc:
     command: shell.exec
     params:
       working_dir: parsley
       script: |
         cp .env-cmdrc.sample.json .env-cmdrc.json
+
+  upload-to-prod-s3:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        BUCKET=${bucket} AWS_ACCESS_KEY_ID=${aws_key} AWS_SECRET_ACCESS_KEY=${aws_secret}  yarn deploy:do-not-use;
 
   get-project:
     command: git.get_project
@@ -151,6 +171,34 @@ functions:
         curl -L -o "chrome.zip" "${chrome_download_url}"
         unzip chrome.zip
         cd -
+
+  send-email:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export AUTHOR_EMAIL=${author_email}
+        export REACT_APP_DEPLOYS_EMAIL=${REACT_APP_DEPLOYS_EMAIL}
+        export EXECUTION=${execution}
+        bash scripts/email.sh
+
+  setup-credentials:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        echo "Generating .cmdrc.json"
+        REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} REACT_APP_NEW_RELIC_ACCOUNT_ID=${REACT_APP_NEW_RELIC_ACCOUNT_ID} REACT_APP_NEW_RELIC_AGENT_ID=${REACT_APP_NEW_RELIC_AGENT_ID} REACT_APP_NEW_RELIC_APPLICATION_ID=${REACT_APP_NEW_RELIC_APPLICATION_ID} REACT_APP_NEW_RELIC_LICENSE_KEY=${REACT_APP_NEW_RELIC_LICENSE_KEY} REACT_APP_NEW_RELIC_TRUST_KEY=${REACT_APP_NEW_RELIC_TRUST_KEY} REACT_APP_DEPLOYS_EMAIL=${REACT_APP_DEPLOYS_EMAIL} node scripts/setup-credentials.js
+
+        echo "populating evergreen.yml"
+        cat <<EOF > .evergreen.yml
+        api_server_host: ${evergreen_api_server_host}
+        ui_server_host: ${evergreen_ui_server_host}
+        api_key: ${evergreen_api_key}
+        user: ${evergreen_user}
+        EOF
+
+        echo "Done populating"
 
   yarn-build:
     command: shell.exec
@@ -330,8 +378,6 @@ functions:
       bucket: parsley-test
       working_dir: parsley/logkeeper
 
-      
-
 #######################################
 #                Tasks                #
 #######################################
@@ -385,6 +431,13 @@ tasks:
   - name: snapshots
     commands:
     - func: yarn-snapshot
+  
+  - name: deploy-prod
+    commands:
+    - func: setup-credentials
+    - func: build-prod
+    - func: upload-to-prod-s3
+    - func: send-email
 
 buildvariants:
   - name: ubuntu1604-small
@@ -398,6 +451,7 @@ buildvariants:
     - name: test
     - name: storybook
     - name: snapshots
+    - name: deploy-prod
 
   - name: ubuntu1604-large
     display_name: Ubuntu 16.04 (large)

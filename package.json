@@ -5,7 +5,7 @@
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
-    "build": "tsc && . ./scripts/appVersion.sh && GIT_SHA=`git rev-parse HEAD` vite build",
+    "build": "tsc && . ./scripts/app-version.sh && GIT_SHA=`git rev-parse HEAD` vite build",
     "build:local": "env-cmd -e local yarn build",
     "build:beta": "env-cmd -e beta yarn build",
     "build:staging": "env-cmd -e staging yarn build",
@@ -15,6 +15,7 @@
     "cy:run": "cypress run",
     "deploy:beta": "yarn build:beta && env-cmd -e beta yarn deploy:do-not-use",
     "deploy:staging": "yarn build:staging && env-cmd -e staging yarn deploy:do-not-use",
+    "deploy:production": "yarn build:production && env-cmd -e production yarn deploy:do-not-use",
     "deploy:do-not-use": ". ./scripts/deploy.sh",
     "dev": "env-cmd -e devLocal vite",
     "staging": "env-cmd -e devStaging vite",
@@ -29,7 +30,7 @@
     "start": "vite",
     "verify-backend": "./scripts/verify-backend.sh",
     "storybook": "start-storybook -p 6006",
-    "storybook:build": " . ./scripts/appVersion.sh && env-cmd -e local build-storybook",
+    "storybook:build": " . ./scripts/app-version.sh && env-cmd -e local build-storybook",
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch --verbose",
     "upload-source-maps": "node ./scripts/upload-source-maps.js"
