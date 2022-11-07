@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-
 import { useLogContext } from "context/LogContext";
 
 export const useAnalyticAttributes = () => {

@@ -13,7 +13,7 @@ const WrapToggle: React.FC = () => {
       label="Wrap"
       onChange={(value) => {
         setWrap(value);
-        sendEvent({ name: "Toggle Wrap", on: value });
+        sendEvent({ name: "Toggled Wrap", on: value });
       }}
       value={wrap}
     />

@@ -11,11 +11,11 @@ type Action =
   | { name: "Opened Raw Logs" }
   | { name: "Opened HTML Logs" }
   | { name: "Clicked Copy To Jira" }
-  | { name: "Toggle Wrap"; on: boolean }
-  | { name: "Toggle Case Sensitivity"; on: boolean }
-  | { name: "Toggle Pretty Print"; on: boolean }
-  | { name: "Toggle Filter Logic"; logic: FilterLogic }
-  | { name: "Toggle Expandable Rows"; on: boolean };
+  | { name: "Toggled Wrap"; on: boolean }
+  | { name: "Toggled Case Sensitivity"; on: boolean }
+  | { name: "Toggled Pretty Print"; on: boolean }
+  | { name: "Toggled Filter Logic"; logic: FilterLogic }
+  | { name: "Toggled Expandable Rows"; on: boolean };
 
 interface P extends Properties {}
 interface Analytics extends A<Action> {}

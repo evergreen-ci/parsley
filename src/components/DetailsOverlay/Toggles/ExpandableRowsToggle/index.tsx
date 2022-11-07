@@ -15,7 +15,7 @@ const ExpandableRowsToggle: React.FC = () => {
       label="Expandable Rows"
       onChange={(value) => {
         setExpandableRows(value);
-        sendEvent({ name: "Toggle Expandable Rows", on: value });
+        sendEvent({ name: "Toggled Expandable Rows", on: value });
       }}
       value={expandableRows}
     />

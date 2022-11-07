@@ -17,7 +17,7 @@ const PrettyPrintToggle: React.FC = () => {
       label="Pretty Print Bookmarks"
       onChange={(value) => {
         togglePrettyPrint(value);
-        sendEvent({ name: "Toggle Pretty Print", on: value });
+        sendEvent({ name: "Toggled Pretty Print", on: value });
       }}
       value={prettyPrint}
     />
