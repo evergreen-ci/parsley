@@ -6,13 +6,13 @@ then
     echo "CI deploy not detected. Using local variables instead"
     # Fetch the variables from the git config.
     AUTHOR_EMAIL=$(git config user.email)
-    REACT_APP_DEPLOYS_EMAIL=$REACT_APP_DEPLOYS_EMAIL
+    DEPLOYS_EMAIL=$DEPLOYS_EMAIL
 fi
 
 # Validate necessary variables are set
-if [ '$REACT_APP_DEPLOYS_EMAIL' == '' ]
+if [ '$DEPLOYS_EMAIL' == '' ]
 then
-    echo "REACT_APP_DEPLOYS_EMAIL is not set"
+    echo "DEPLOYS_EMAIL is not set"
     exit 1
 fi
 
@@ -89,7 +89,7 @@ TITLE="Parsley Deploy to $CURRENT_COMMIT_HASH"
 BODY_HTML=$(cat body.txt)$(echo "<br /> <br /><b> To revert to previous version rerun task from previous release tag ($PREVIOUS_TAG)</b>")
 DATE=$(date +'%Y-%m-%d')
 
-COMMAND="$EVERGREEN $CREDENTIALS notify email -f $AUTHOR_EMAIL -r $REACT_APP_DEPLOYS_EMAIL -s "
+COMMAND="$EVERGREEN $CREDENTIALS notify email -f $AUTHOR_EMAIL -r $DEPLOYS_EMAIL -s "
 COMMAND+="'"
 COMMAND+="$DATE"
 COMMAND+=" $TITLE"

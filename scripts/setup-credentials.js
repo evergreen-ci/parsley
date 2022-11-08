@@ -14,11 +14,13 @@ const production = {
   NEW_RELIC_TRUST_KEY: process.env.NEW_RELIC_TRUST_KEY,
   NEW_RELIC_AGENT_ID: process.env.NEW_RELIC_AGENT_ID,
   NEW_RELIC_LICENSE_KEY: process.env.NEW_RELIC_LICENSE_KEY,
-  NEW_RELIC_APPLICATION_ID: process.env.NEW_RELIC_APPLICATION_IDh,
-  REACT_APP_DEPLOYS_EMAIL: process.env.REACT_APP_DEPLOYS_EMAIL,
+  NEW_RELIC_APPLICATION_ID: process.env.NEW_RELIC_APPLICATION_ID,
+  DEPLOYS_EMAIL: process.env.DEPLOYS_EMAIL,
 };
+
 fs.writeFile(file, JSON.stringify({ production }), (err) => {
   if (err) {
-    return console.error(err);
+    console.error(err);
+    throw new Error("Error while creating .env-cmdrc.json file");
   }
 });
