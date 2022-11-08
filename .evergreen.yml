@@ -129,7 +129,7 @@ functions:
       permissions: public-read
       display_name: source_map
 
-      build-prod:
+  build-prod:
     command: shell.exec
     params:
       working_dir: parsley
