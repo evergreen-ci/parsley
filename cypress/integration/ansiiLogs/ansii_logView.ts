@@ -136,6 +136,10 @@ describe("Jump to line", () => {
     cy.dataCy("sidebar-log-line-56").click();
     cy.dataCy("log-row-56").should("be.visible");
   });
+  it("visiting a log with a selected line should jump to that line on page load", () => {
+    cy.visit(`${logLink}?selectedLine=200`);
+    cy.dataCy("log-row-200").should("be.visible");
+  });
 });
 
 describe("expanding collapsed rows", () => {
