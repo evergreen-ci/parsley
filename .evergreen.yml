@@ -128,9 +128,8 @@ functions:
       content_type: text/html
       permissions: public-read
       display_name: source_map
-    
 
-  build-prod:
+      build-prod:
     command: shell.exec
     params:
       working_dir: parsley
@@ -154,7 +153,7 @@ functions:
       working_dir: parsley
       script: |
         export PATH=${node_path}
-        BUCKET=${bucket} AWS_ACCESS_KEY_ID=${aws_key} AWS_SECRET_ACCESS_KEY=${aws_secret}  yarn deploy:do-not-use;
+        REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} BUCKET=${bucket} AWS_ACCESS_KEY_ID=${aws_key} AWS_SECRET_ACCESS_KEY=${aws_secret}  yarn deploy:do-not-use;
 
   get-project:
     command: git.get_project
@@ -178,7 +177,7 @@ functions:
       working_dir: parsley
       script: |
         export AUTHOR_EMAIL=${author_email}
-        export REACT_APP_DEPLOYS_EMAIL=${REACT_APP_DEPLOYS_EMAIL}
+        export DEPLOYS_EMAIL=${DEPLOYS_EMAIL}
         export EXECUTION=${execution}
         bash scripts/email.sh
 
@@ -188,7 +187,7 @@ functions:
       working_dir: parsley
       script: |
         echo "Generating .cmdrc.json"
-        REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} REACT_APP_NEW_RELIC_ACCOUNT_ID=${REACT_APP_NEW_RELIC_ACCOUNT_ID} REACT_APP_NEW_RELIC_AGENT_ID=${REACT_APP_NEW_RELIC_AGENT_ID} REACT_APP_NEW_RELIC_APPLICATION_ID=${REACT_APP_NEW_RELIC_APPLICATION_ID} REACT_APP_NEW_RELIC_LICENSE_KEY=${REACT_APP_NEW_RELIC_LICENSE_KEY} REACT_APP_NEW_RELIC_TRUST_KEY=${REACT_APP_NEW_RELIC_TRUST_KEY} REACT_APP_DEPLOYS_EMAIL=${REACT_APP_DEPLOYS_EMAIL} node scripts/setup-credentials.js
+        REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} NEW_RELIC_ACCOUNT_ID=${NEW_RELIC_ACCOUNT_ID} NEW_RELIC_AGENT_ID=${NEW_RELIC_AGENT_ID} NEW_RELIC_APPLICATION_ID=${NEW_RELIC_APPLICATION_ID} NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY} NEW_RELIC_TRUST_KEY=${NEW_RELIC_TRUST_KEY} DEPLOYS_EMAIL=${DEPLOYS_EMAIL} BUCKET=${bucket} node scripts/setup-credentials.js
 
         echo "populating evergreen.yml"
         cat <<EOF > .evergreen.yml
@@ -452,6 +451,9 @@ buildvariants:
     - name: storybook
     - name: snapshots
     - name: deploy-prod
+      git_tag_only: true
+      patchable: false
+      priority: 100
 
   - name: ubuntu1604-large
     display_name: Ubuntu 16.04 (large)
