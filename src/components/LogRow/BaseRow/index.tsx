@@ -72,7 +72,6 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       setSelectedLine(undefined);
     } else {
       setSelectedLine(lineNumber);
-      scrollToLine(index);
     }
   };
 

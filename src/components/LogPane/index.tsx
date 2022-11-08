@@ -15,7 +15,6 @@ type LogPaneProps = Omit<
   "height" | "width" | "itemData" | "rowHeight"
 > & {
   cache: CellMeasurerCache;
-  initialScrollIndex: number;
   rowRenderer: ListRowRenderer;
   wrap: boolean;
 };
@@ -51,7 +50,6 @@ const LogPane: React.FC<LogPaneProps> = ({
           rowHeight={cache.rowHeight}
           rowRenderer={rowRenderer}
           scrollToAlignment="start"
-          scrollToIndex={initialScrollIndex}
           width={width}
           {...rest}
         />

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import styled from "@emotion/styled";
 import FiltersDrawer from "components/FiltersDrawer";
 import LogPane from "components/LogPane";
@@ -48,9 +48,11 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     ? new RegExp(highlights.join("|"), "i")
     : undefined;
 
-  const [initialScrollIndex] = useState(
-    findLineIndex(processedLogLines, selectedLine)
-  );
+  useEffect(() => {
+    if (selectedLine && processedLogLines) {
+      scrollToLine(findLineIndex(processedLogLines, selectedLine));
+    }
+  }, [selectedLine, processedLogLines.length > 0]);
 
   return (
     <Container data-cy="log-window">
@@ -73,7 +75,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         <LogPaneContainer>
           <LogPane
             cache={cache}
-            initialScrollIndex={initialScrollIndex}
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
               data: {
