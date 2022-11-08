@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.1",
+  "version": "1.0.2",
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
@@ -15,7 +15,7 @@
     "cy:run": "cypress run",
     "deploy:beta": "yarn build:beta && env-cmd -e beta yarn deploy:do-not-use",
     "deploy:staging": "yarn build:staging && env-cmd -e staging yarn deploy:do-not-use",
-    "deploy:production": "yarn build:production && env-cmd -e production yarn deploy:do-not-use && env-cmd -e production ./scripts/email.sh",
+    "deploy:production": "node scripts/deploy-production.js",
     "deploy:do-not-use": ". ./scripts/deploy.sh",
     "dev": "env-cmd -e devLocal vite",
     "staging": "env-cmd -e devStaging vite",
@@ -33,7 +33,8 @@
     "storybook:build": " . ./scripts/app-version.sh && env-cmd -e local build-storybook",
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch --verbose",
-    "upload-source-maps": "node ./scripts/upload-source-maps.js"
+    "upload-source-maps": "node ./scripts/upload-source-maps.js",
+    "postversion": "git push upstream && git push upstream -tags && git push && git push --tags"
   },
   "dependencies": {
     "@bugsnag/js": "7.18.0",
@@ -122,6 +123,7 @@
     "jest-watch-typeahead": "2.0.0",
     "lint-staged": "13.0.3",
     "prettier": "2.7.1",
+    "prompts": "^2.4.2",
     "replace-in-file": "^6.3.5",
     "rollup-plugin-visualizer": "^5.8.0",
     "serve": "^14.0.1",
