@@ -34,7 +34,7 @@
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch --verbose",
     "upload-source-maps": "node ./scripts/upload-source-maps.js",
-    "postversion": "git push upstream && git push upstream -tags && git push && git push --tags"
+    "postversion": "git push upstream && git push upstream --tags && git push && git push --tags"
   },
   "dependencies": {
     "@bugsnag/js": "7.18.0",
