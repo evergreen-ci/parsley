@@ -26,7 +26,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     scrollToLine,
 
     expandedLines,
-    hasLogs,
     highlightedLine,
     lineCount,
     prettyPrint,
@@ -54,20 +53,16 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
 
   return (
     <Container data-cy="log-window">
-      {hasLogs && (
-        <FiltersDrawer
-          clearExpandedLines={clearExpandedLines}
-          collapseLines={collapseLines}
-          expandedLines={expandedLines}
-        />
-      )}
-      {hasLogs && (
-        <SideBar
-          maxLineNumber={lineCount - 1}
-          processedLogLines={processedLogLines}
-          scrollToLine={scrollToLine}
-        />
-      )}
+      <FiltersDrawer
+        clearExpandedLines={clearExpandedLines}
+        collapseLines={collapseLines}
+        expandedLines={expandedLines}
+      />
+      <SideBar
+        maxLineNumber={lineCount - 1}
+        processedLogLines={processedLogLines}
+        scrollToLine={scrollToLine}
+      />
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>
