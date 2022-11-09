@@ -5,6 +5,15 @@ const localDeployScript =
   "yarn build:production && env-cmd -e production yarn deploy:do-not-use && env-cmd -e production ./scripts/email.sh";
 
 const main = async () => {
+  if (!(await isOnMainBranch())) {
+    console.log("You must be on the main branch to deploy!");
+    return;
+  }
+  if (!(await isWorkingDirectoryClean())) {
+    console.log("You must have a clean working directory to deploy");
+    return;
+  }
+
   // Print all commits between the last tag and the current commit
   const commitMessages = await getCommitMessages();
   let shouldDeployLocal = false;
@@ -20,6 +29,9 @@ const main = async () => {
       initial: false,
     });
     shouldDeployLocal = response.value;
+    if (!shouldDeployLocal) {
+      return;
+    }
   }
 
   const response = await prompts({
@@ -86,6 +98,28 @@ const runLocalDeploy = () =>
         return;
       }
       resolve(stdout);
+    });
+  });
+
+const isOnMainBranch = () =>
+  new Promise((resolve, reject) => {
+    exec("git branch --show-current", (err, stdout) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(stdout === "main");
+    });
+  });
+
+const isWorkingDirectoryClean = () =>
+  new Promise((resolve, reject) => {
+    exec("git status --porcelain", (err, stdout) => {
+      if (err) {
+        reject(err);
+        return;
+      }
+      resolve(stdout === "");
     });
   });
 
