@@ -55,7 +55,7 @@ const main = async () => {
 
 const createNewTag = () =>
   new Promise((resolve, reject) => {
-    exec("yarn version --new-version patch", (err, stdout, stderr) => {
+    exec("yarn version --new-version patch", (err, stdout) => {
       if (err) {
         reject(err);
         return;
