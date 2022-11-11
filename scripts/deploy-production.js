@@ -108,7 +108,7 @@ const isOnMainBranch = () =>
         reject(err);
         return;
       }
-      resolve(stdout === "main");
+      resolve(stdout.trim() === "main");
     });
   });
 
@@ -119,7 +119,7 @@ const isWorkingDirectoryClean = () =>
         reject(err);
         return;
       }
-      resolve(stdout === "");
+      resolve(stdout.trim() === "");
     });
   });
 
