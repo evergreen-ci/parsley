@@ -198,7 +198,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const memoizedContext = useMemo(
     () => ({
       expandedLines: state.expandedLines,
-      hasLogs: !!state.logs.length,
+      hasLogs: !!processedLogLines.length,
       hasSearch: !!state.searchState.searchTerm,
       highlightedLine,
       lineCount: state.logs.length,
