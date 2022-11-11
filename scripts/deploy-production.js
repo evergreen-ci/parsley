@@ -2,7 +2,7 @@ const prompts = require("prompts");
 const { exec } = require("child_process");
 
 const localDeployScript =
-  "yarn build:production && env-cmd -e production yarn deploy:do-not-use && env-cmd -e production ./scripts/email.sh";
+  "yarn build:prod && env-cmd -e production yarn deploy:do-not-use && env-cmd -e production ./scripts/email.sh";
 
 const main = async () => {
   if (!(await isOnMainBranch())) {
@@ -17,10 +17,7 @@ const main = async () => {
   // Print all commits between the last tag and the current commit
   const commitMessages = await getCommitMessages();
   let shouldDeployLocal = false;
-  if (commitMessages.length > 0) {
-    console.log("Commit messages:");
-    console.log(commitMessages);
-  } else {
+  if (commitMessages.length === 0) {
     // If there are no commit messages, ask the user if they want to deploy anyway
     const response = await prompts({
       type: "confirm",
@@ -32,6 +29,9 @@ const main = async () => {
     if (!shouldDeployLocal) {
       return;
     }
+  } else {
+    console.log("Commit messages:");
+    console.log(commitMessages);
   }
 
   const response = await prompts({

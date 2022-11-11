@@ -186,7 +186,7 @@ functions:
     params:
       working_dir: parsley
       script: |
-        echo "Generating .cmdrc.json"
+        echo "Generating .env-cmdrc.json"
         REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} NEW_RELIC_ACCOUNT_ID=${NEW_RELIC_ACCOUNT_ID} NEW_RELIC_AGENT_ID=${NEW_RELIC_AGENT_ID} NEW_RELIC_APPLICATION_ID=${NEW_RELIC_APPLICATION_ID} NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY} NEW_RELIC_TRUST_KEY=${NEW_RELIC_TRUST_KEY} DEPLOYS_EMAIL=${DEPLOYS_EMAIL} BUCKET=${bucket} node scripts/setup-credentials.js
 
         echo "populating evergreen.yml"
