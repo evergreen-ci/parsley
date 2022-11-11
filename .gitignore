@@ -13,6 +13,8 @@ storybook-static
 # artifacts
 /bin
 /src/**/*.css
+build.txt
+build.txt-e
 
 #env variables
 .env-cmdrc.json

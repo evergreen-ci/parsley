@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # This script fetches the version of the app from the package.json file
 # and writes it to a env variable. It also adds a flag if this is a custom build
 

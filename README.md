@@ -65,7 +65,9 @@ A `.env-cmdrc.json` file is required to deploy because it sets the environment v
 
 ### How to Deploy:
 
-Run the `deploy:beta` or `deploy:staging` yarn command
+Run the `deploy:<env>` yarn command
 
-1. `yarn deploy:beta` = deploy to https://parsley-beta.corp.mongodb.com
-2. `yarn deploy:staging` = deploy to https://parsley-staging.corp.mongodb.com
+* `yarn deploy:prod` = deploy to https://parsley.mongodb.com
+    * Deploying to production involves following the prompts in the cli command which kicks off an evergreen task that performs the deploy
+* `yarn deploy:beta` = deploy to https://parsley-beta.corp.mongodb.com
+* `yarn deploy:staging` = deploy to https://parsley-staging.corp.mongodb.com
