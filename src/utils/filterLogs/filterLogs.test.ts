@@ -25,7 +25,7 @@ describe("filterLogs", () => {
     ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
   });
 
-  it("should return the log lines as is if expandable rows are turned off", () => {
+  it("should hide collapsed rows if expandableRows is turned off", () => {
     expect(
       filterLogs({
         logLines,
@@ -35,7 +35,7 @@ describe("filterLogs", () => {
         expandedLines: [],
         expandableRows: false,
       })
-    ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
+    ).toStrictEqual([1, 2, 3]);
   });
 
   it("should collapse all of the log lines if there are no matching lines", () => {

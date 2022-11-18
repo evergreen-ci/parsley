@@ -32,7 +32,7 @@ const filterLogs = ({
 }: FilterLogsParams): (number | number[])[] => {
   // If there are no filters or expandable rows is not enabled, then we don't have to do any
   // processing.
-  if (matchingLines === undefined || !expandableRows) {
+  if (matchingLines === undefined) {
     return logLines.map((_, idx) => idx);
   }
 
@@ -55,12 +55,14 @@ const filterLogs = ({
       return arr;
     }
 
-    // If the line doesn't match the filters, collapse it.
-    const previousItem = arr[arr.length - 1];
-    if (isCollapsedRow(previousItem)) {
-      previousItem.push(idx);
-    } else {
-      arr.push([idx]);
+    if (expandableRows) {
+      // If the line doesn't match the filters, collapse it.
+      const previousItem = arr[arr.length - 1];
+      if (isCollapsedRow(previousItem)) {
+        previousItem.push(idx);
+      } else {
+        arr.push([idx]);
+      }
     }
     return arr;
   }, filteredLines);
