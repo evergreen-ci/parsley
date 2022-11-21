@@ -9,21 +9,21 @@ describe("Highlighting", () => {
     cy.dataCy("highlight-option").click();
   });
   it("applying a highlight should highlight the matching words", () => {
-    cy.dataCy("searchbar-input").type("Starting");
+    cy.dataCy("searchbar-input").type("@bugsnag/plugin-react@");
     cy.dataCy("searchbar-input").type("{enter}");
     cy.dataCy("highlight").should("exist");
     cy.dataCy("highlight").should("have.length", 1);
-    cy.dataCy("highlight").should("contain.text", "Starting");
+    cy.dataCy("highlight").should("contain.text", "@bugsnag/plugin-react@");
   });
   it("applying a search to a highlighted line should not overwrite an already highlighted term if the search matches the highlight ", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
-    cy.dataCy("searchbar-input").type("Starting");
+    cy.dataCy("searchbar-input").type("@bugsnag/plugin-react");
     cy.dataCy("searchbar-input").type("{enter}");
     cy.dataCy("highlight").should("exist");
     cy.dataCy("highlight").should("have.length", 1);
-    cy.dataCy("highlight").should("contain.text", "Starting");
+    cy.dataCy("highlight").should("contain.text", "@bugsnag/plugin-react");
   });
   it("should highlight other terms in the log if the search term does not match the highlight", () => {
     cy.dataCy("searchbar-input").clear();
@@ -34,14 +34,14 @@ describe("Highlighting", () => {
     cy.dataCy("highlight").each(($el) => {
       cy.wrap($el)
         .invoke("text")
-        .should("match", /Starting|info/);
+        .should("match", /@bugsnag\/plugin-react@|info/);
     });
   });
   it("clearing a search should not clear a highlight", () => {
     cy.dataCy("searchbar-input").clear();
     cy.dataCy("highlight").should("exist");
     cy.dataCy("highlight").should("have.length", 1);
-    cy.dataCy("highlight").should("contain.text", "Starting");
+    cy.dataCy("highlight").should("contain.text", "@bugsnag/plugin-react@");
   });
   it("removing a highlight from the sidenav should remove the highlight", () => {
     cy.toggleDrawer();

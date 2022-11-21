@@ -180,14 +180,19 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       type: "SET_MATCH_COUNT",
       matchCount: results.length,
     });
+    if (results.length > 0) {
+      scrollToLine(results[0]);
+    }
+
     return results;
   }, [
-    dispatch,
-    getLine,
     state.searchState.searchTerm,
-    lowerRange,
-    upperRange,
     processedLogLines,
+    upperRange,
+    lowerRange,
+    getLine,
+    dispatch,
+    scrollToLine,
   ]);
 
   const highlightedLine =
