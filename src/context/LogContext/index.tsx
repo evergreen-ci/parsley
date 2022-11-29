@@ -180,9 +180,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       type: "SET_MATCH_COUNT",
       matchCount: results.length,
     });
-    if (results.length > 0) {
-      scrollToLine(results[0]);
-    }
 
     return results;
   }, [
@@ -192,8 +189,15 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     lowerRange,
     getLine,
     dispatch,
-    scrollToLine,
   ]);
+
+  const stringifiedSearchResults = searchResults.toString();
+  useEffect(() => {
+    if (searchResults.length > 0) {
+      scrollToLine(searchResults[0]);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [stringifiedSearchResults, scrollToLine]);
 
   const highlightedLine =
     state.searchState.searchIndex !== undefined
