@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
 import Tooltip from "@leafygreen-ui/tooltip";
+import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
@@ -30,6 +31,7 @@ const SideBar: React.FC<SideBarProps> = ({
     QueryParams.Bookmarks,
     []
   );
+  const { sendEvent } = useLogWindowAnalytics();
   const lineNumbers = selectedLine
     ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
     : bookmarks;
@@ -55,7 +57,10 @@ const SideBar: React.FC<SideBarProps> = ({
         trigger={
           <StyledButton
             data-cy="clear-bookmarks"
-            onClick={() => setBookmarks([])}
+            onClick={() => {
+              setBookmarks([]);
+              sendEvent({ name: "Cleared All Bookmarks" });
+            }}
             size="xsmall"
           >
             Clear
@@ -69,7 +74,10 @@ const SideBar: React.FC<SideBarProps> = ({
           <LogLineNumber
             key={`sidebar-log-line-${l}`}
             data-cy={`sidebar-log-line-${l}`}
-            onClick={() => scrollToIndex(l)}
+            onClick={() => {
+              sendEvent({ name: "Navigated With Bookmark" });
+              scrollToIndex(l);
+            }}
           >
             <span>{l}</span>
             {l === selectedLine && <StyledIcon glyph="Link" size="small" />}
