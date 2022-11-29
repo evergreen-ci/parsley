@@ -7,7 +7,7 @@ describe("External Links", () => {
       );
       cy.toggleDetailsPanel(true);
     });
-    it("should render a link to the job logs page", () => {
+    it.skip("should render a link to the job logs page", () => {
       cy.dataCy("job-logs-button").should("be.visible");
       cy.dataCy("job-logs-button").should(
         "have.attr",
@@ -40,7 +40,7 @@ describe("External Links", () => {
       );
       cy.toggleDetailsPanel(true);
     });
-    it("should render a link to the job logs page", () => {
+    it.skip("should render a link to the job logs page", () => {
       cy.dataCy("job-logs-button").should("be.visible");
       cy.dataCy("job-logs-button").should(
         "have.attr",
@@ -96,7 +96,7 @@ describe("External Links", () => {
       cy.dataCy("job-logs-button").should(
         "have.attr",
         "href",
-        `http://localhost:3000/job-logs/${taskID}/0`
+        `http://localhost:8080/build/${taskID}/7e208050e166b1a9025c817b67eee48d`
       );
     });
     it("should render a link to the task page", () => {
