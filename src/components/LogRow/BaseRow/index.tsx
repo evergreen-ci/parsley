@@ -83,7 +83,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     if (bookmarks.includes(lineNumber)) {
       const newBookmarks = bookmarks.filter((b) => b !== lineNumber);
       setBookmarks(newBookmarks);
-      sendEvent({ name: "Deleted Bookmark" });
+      sendEvent({ name: "Removed Bookmark" });
     } else {
       const newBookmarks = [...bookmarks, lineNumber].sort((a, b) => a - b);
       setBookmarks(newBookmarks);

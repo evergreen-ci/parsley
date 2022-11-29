@@ -11,11 +11,11 @@ type Action =
   | { name: "Toggled Filter"; visible: boolean }
   | { name: "Added Bookmark" }
   | { name: "Navigated With Bookmark" }
-  | { name: "Deleted Bookmark" }
+  | { name: "Removed Bookmark" }
   | { name: "Cleared All Bookmarks" }
   | { name: "Edited Filter"; before: Filter; after: Filter }
   | { name: "Added Highlight"; highlightExpression: string }
-  | { name: "Delete Highlight"; highlightExpression: string }
+  | { name: "Removed Highlight"; highlightExpression: string }
   | { name: "Applied Search"; searchExpression: string }
   | { name: "Expanded Lines"; option: "All" | "Five"; lineCount: number }
   | { name: "Collapsed Lines" };
