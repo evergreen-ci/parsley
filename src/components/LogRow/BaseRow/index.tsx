@@ -2,6 +2,7 @@ import { forwardRef, memo, useMemo } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { ListRowProps } from "react-virtualized";
+import { useLogWindowAnalytics } from "analytics";
 import Highlight from "components/Highlight";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
@@ -62,6 +63,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     QueryParams.Bookmarks,
     []
   );
+  const { sendEvent } = useLogWindowAnalytics();
   const bookmarked = bookmarks.includes(lineNumber);
 
   const highlighted = highlightedLine === index;
@@ -81,9 +83,11 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     if (bookmarks.includes(lineNumber)) {
       const newBookmarks = bookmarks.filter((b) => b !== lineNumber);
       setBookmarks(newBookmarks);
+      sendEvent({ name: "Removed Bookmark" });
     } else {
       const newBookmarks = [...bookmarks, lineNumber].sort((a, b) => a - b);
       setBookmarks(newBookmarks);
+      sendEvent({ name: "Added Bookmark" });
     }
 
     if (prettyPrint) {

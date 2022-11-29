@@ -18,7 +18,7 @@ const ButtonRow: React.FC = () => {
   const { sendEvent } = usePreferencesAnalytics();
   const { htmlLogURL, rawLogURL, jobLogsURL } = logMetadata || {};
   const tooltipText = bookmarks.length
-    ? "Copy Jira Log Information"
+    ? "Copy Bookmarked Lines In Jira Format"
     : "No bookmarks to copy.";
 
   return (
