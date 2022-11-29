@@ -2,6 +2,7 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
+import Tooltip from "@leafygreen-ui/tooltip";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
@@ -50,13 +51,19 @@ const SideBar: React.FC<SideBarProps> = ({
 
   return (
     <Container>
-      <StyledButton
-        data-cy="clear-bookmarks"
-        onClick={() => setBookmarks([])}
-        size="xsmall"
+      <Tooltip
+        trigger={
+          <StyledButton
+            data-cy="clear-bookmarks"
+            onClick={() => setBookmarks([])}
+            size="xsmall"
+          >
+            Clear
+          </StyledButton>
+        }
       >
-        Clear
-      </StyledButton>
+        Clear all bookmarks
+      </Tooltip>
       <LogLineContainer data-cy="sidebar-log-line-container">
         {lineNumbers.map((l) => (
           <LogLineNumber
