@@ -4,7 +4,7 @@ import { Body } from "@leafygreen-ui/typography";
 import { useParams } from "react-router-dom";
 import Icon from "components/Icon";
 import { LogTypes } from "constants/enums";
-import { getSpruceJobLogsURL } from "constants/externalURLTemplates";
+import { getJobLogsURL } from "constants/externalURLTemplates";
 import {
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
@@ -54,11 +54,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         url = getResmokeLogURL(buildID, { raw: true });
         htmlLogURL = getResmokeLogURL(buildID, { html: true });
       }
-      if (logkeeperMetadata) {
-        jobLogsURL = getSpruceJobLogsURL(
-          logkeeperMetadata.task_id,
-          logkeeperMetadata.execution || 0
-        );
+      if (buildID) {
+        jobLogsURL = getJobLogsURL(buildID);
       }
       break;
     }
@@ -72,7 +69,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       htmlLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
         text: false,
       });
-      jobLogsURL = getSpruceJobLogsURL(taskID, execution);
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
@@ -83,7 +79,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       htmlLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
         text: false,
       });
-      jobLogsURL = getSpruceJobLogsURL(taskID, execution);
       break;
     }
     default:
