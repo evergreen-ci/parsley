@@ -85,7 +85,10 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
   const deleteHighlight = (highlightName: string) => {
     const newHighlights = highlights.filter((h) => h !== highlightName);
     setHighlights(newHighlights);
-    sendEvent({ name: "Delete Highlight", highlightExpression: highlightName });
+    sendEvent({
+      name: "Removed Highlight",
+      highlightExpression: highlightName,
+    });
   };
   return (
     <StyledSideNav
@@ -179,7 +182,7 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
             highlights.map((highlight) => (
               <NonFilterElement key={`highlight-${highlight}`}>
                 <IconButton
-                  aria-label="Delete highlight"
+                  aria-label="Removed Highlight"
                   data-cy="delete-highlight-button"
                   onClick={() => deleteHighlight(highlight)}
                 >
