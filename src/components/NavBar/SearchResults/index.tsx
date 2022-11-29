@@ -22,7 +22,6 @@ const SearchResults: React.FC<SearchResultsProps> = ({
   useKeyboardShortcut({ charKey: CharKey.Enter }, () =>
     paginate(DIRECTION.NEXT)
   );
-
   useKeyboardShortcut(
     { charKey: CharKey.Enter, modifierKeys: [ModifierKey.Shift] },
     () => paginate(DIRECTION.PREVIOUS)
