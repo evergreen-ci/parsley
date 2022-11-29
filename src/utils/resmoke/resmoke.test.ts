@@ -31,15 +31,7 @@ describe("processResmokeLine", () => {
       "[js_test:startup_recovery_commit_transaction_before_stable_timestamp] MongoDB shell version v6.2.0-alpha-250-g46817bf"
     );
   });
-  it("should process odd resmoke lines", () => {
-    expect(
-      processResmokeLine(
-        `[js_test:catalog_cache_refresh_counters] d20041| {"t":{"$date":"2022-11-29T12:42:28.889+00:00"},"s":"I",  "c":"NETWORK",  "id":6496702, "ctx":"ConfigServerCatalogCacheLoader::getDatabase","msg":"Acquired connection for remote operation and completed writing to wire","attr":{"durationMicros":73}}`
-      )
-    ).toBe(
-      '[js_test:catalog_cache_refresh_counters] d20041| 2022-11-29T12:42:28.889+00:00 I  NETWORK  6496702 [ConfigServerCatalogCacheLoader::getDatabase] "Acquired connection for remote operation and completed writing to wire","attr":{"durationMicros":73}'
-    );
-  });
+
   it("should transform a resmoke log", () => {
     resmokeLogFiles.forEach((file) => {
       const resmokeLog = readFileSync(
