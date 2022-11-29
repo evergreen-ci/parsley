@@ -118,6 +118,7 @@ const getPid = (line: string) => {
  * @example "ctx":"conn1"
  * @example "ctx":"conn2"
  * @example "ctx":"conn3"
+ * @example "ctx":"ConfigServerCatalogCacheLoader::getDatabase"
  */
 const ctxRegex = /"ctx":"([a-zA-Z0-9-:]+)"/;
 
