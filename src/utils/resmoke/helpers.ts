@@ -119,7 +119,7 @@ const getPid = (line: string) => {
  * @example "ctx":"conn2"
  * @example "ctx":"conn3"
  */
-const ctxRegex = /"ctx":"([a-zA-Z0-9-]+)"/;
+const ctxRegex = /"ctx":"([a-zA-Z0-9-:]+)"/;
 
 /** `getContext` returns the ctx associated with a resmoke line this is found in the resmoke json */
 const getContext = (line: string) => {
