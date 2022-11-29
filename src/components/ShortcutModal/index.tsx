@@ -7,13 +7,16 @@ import { size, zIndex } from "constants/tokens";
 import { useKeyboardShortcut, useOnClickOutside } from "hooks";
 
 const shortcuts = [
-  { keys: ["CTRL", "F"], description: "Focus on the search input" },
+  { keys: ["CTRL/CMD", "F"], description: "Focus on the search input" },
   {
-    keys: ["CTRL", "S"],
+    keys: ["CTRL/CMD", "S"],
     description: "Toggle between search, filter, and highlight",
   },
   { keys: ["]"], description: "Toggle the filter panel" },
-  { keys: ["N"], description: "Paginate forward to the next search result" },
+  {
+    keys: ["N/ENTER"],
+    description: "Paginate forward to the next search result",
+  },
   {
     keys: ["P"],
     description: "Paginate backwards to the previous search result",
