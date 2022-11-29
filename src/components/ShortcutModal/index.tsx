@@ -21,6 +21,10 @@ const shortcuts = [
     keys: ["P"],
     description: "Paginate backwards to the previous search result",
   },
+  {
+    keys: ["SHIFT", "ENTER"],
+    description: "Paginate backwards to the previous search result",
+  },
 ];
 
 const ShortcutModal: React.FC = () => {
