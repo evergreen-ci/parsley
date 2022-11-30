@@ -7,15 +7,27 @@ import { size, zIndex } from "constants/tokens";
 import { useKeyboardShortcut, useOnClickOutside } from "hooks";
 
 const shortcuts = [
-  { keys: ["CTRL", "F"], description: "Focus on the search input" },
   {
-    keys: ["CTRL", "S"],
+    keys: [
+      ["CTRL", "F"],
+      ["CMD", "F"],
+    ],
+    description: "Focus on the search input",
+  },
+  {
+    keys: [
+      ["CTRL", "S"],
+      ["CMD", "S"],
+    ],
     description: "Toggle between search, filter, and highlight",
   },
-  { keys: ["]"], description: "Toggle the filter panel" },
-  { keys: ["N"], description: "Paginate forward to the next search result" },
+  { keys: [["]"]], description: "Toggle the side panel" },
   {
-    keys: ["P"],
+    keys: [["N"], ["ENTER"]],
+    description: "Paginate forward to the next search result",
+  },
+  {
+    keys: [["P"], ["SHIFT", "ENTER"]],
     description: "Paginate backwards to the previous search result",
   },
 ];
@@ -46,9 +58,9 @@ const ShortcutModal: React.FC = () => {
           <ModalRow key={description}>
             <ShortcutKeys>
               {keys.map((k, idx) => (
-                <span key={`${description}_${k}`}>
-                  <InlineKeyCode>{k}</InlineKeyCode>
-                  {idx + 1 !== keys.length && "+"}
+                <span key={k[0]}>
+                  <KeyTuple keys={k} />
+                  {idx + 1 !== keys.length && <Divider>{" / "}</Divider>}
                 </span>
               ))}
             </ShortcutKeys>
@@ -59,6 +71,19 @@ const ShortcutModal: React.FC = () => {
     </StyledModal>
   );
 };
+interface KeyTupleProps {
+  keys: string[];
+}
+const KeyTuple: React.FC<KeyTupleProps> = ({ keys }) => (
+  <span>
+    {keys.map((k, idx) => (
+      <span key={`key_tuple_${k}`}>
+        <InlineKeyCode>{k}</InlineKeyCode>
+        {idx + 1 !== keys.length && <Divider>{" + "}</Divider>}
+      </span>
+    ))}
+  </span>
+);
 
 // @ts-expect-error
 const StyledModal = styled(Modal)`
@@ -77,6 +102,11 @@ const ModalRow = styled.div`
 const ShortcutKeys = styled.div`
   display: flex;
   margin-right: ${size.xs};
+  width: 200px;
+`;
+
+const Divider = styled.span`
+  margin: 0 ${size.xxs};
 `;
 
 export default ShortcutModal;
