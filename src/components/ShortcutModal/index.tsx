@@ -21,7 +21,7 @@ const shortcuts = [
     ],
     description: "Toggle between search, filter, and highlight",
   },
-  { keys: [["]"]], description: "Toggle the filter panel" },
+  { keys: [["]"]], description: "Toggle the side panel" },
   {
     keys: [["N"], ["ENTER"]],
     description: "Paginate forward to the next search result",
