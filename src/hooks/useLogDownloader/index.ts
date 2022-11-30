@@ -28,7 +28,7 @@ const useLogDownloader = (url: string) => {
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`While downloading log: ${response.status}`);
+          throw new Error(`downloading log: ${response.status}`);
         }
         return response;
       })
