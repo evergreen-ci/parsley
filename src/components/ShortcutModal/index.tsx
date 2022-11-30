@@ -15,7 +15,10 @@ const shortcuts = [
     description: "Focus on the search input",
   },
   {
-    keys: [["CTRL"], ["CMD", "S"]],
+    keys: [
+      ["CTRL", "S"],
+      ["CMD", "S"],
+    ],
     description: "Toggle between search, filter, and highlight",
   },
   { keys: [["]"]], description: "Toggle the filter panel" },
@@ -57,7 +60,7 @@ const ShortcutModal: React.FC = () => {
               {keys.map((k, idx) => (
                 <span key={k[0]}>
                   <KeyTuple keys={k} />
-                  {idx + 1 !== keys.length && <Divider>{" or "}</Divider>}
+                  {idx + 1 !== keys.length && <Divider>{" / "}</Divider>}
                 </span>
               ))}
             </ShortcutKeys>
@@ -81,6 +84,7 @@ const KeyTuple: React.FC<KeyTupleProps> = ({ keys }) => (
     ))}
   </span>
 );
+
 // @ts-expect-error
 const StyledModal = styled(Modal)`
   z-index: ${zIndex.modal};
@@ -98,6 +102,7 @@ const ModalRow = styled.div`
 const ShortcutKeys = styled.div`
   display: flex;
   margin-right: ${size.xs};
+  width: 200px;
 `;
 
 const Divider = styled.span`
