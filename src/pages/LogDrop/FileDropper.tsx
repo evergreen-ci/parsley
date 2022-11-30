@@ -98,7 +98,13 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
                   Drag and Drop a log file to view in Parsley
                 </Body>
                 <Body weight="medium">or</Body>
-                <Button leftGlyph={<Icon glyph="Upload" />} onClick={open}>
+                <Button
+                  leftGlyph={<Icon glyph="Upload" />}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    open();
+                  }}
+                >
                   Select from Files
                 </Button>
               </Dropzone>
