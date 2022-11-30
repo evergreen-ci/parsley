@@ -35,7 +35,7 @@ const useFetch = <T extends object>(
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error(`while making request: ${response.status}`);
+            throw new Error(`making request: ${response.status}`);
           }
           return response;
         })
