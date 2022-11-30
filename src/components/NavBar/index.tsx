@@ -72,7 +72,9 @@ const NavBar: React.FC = () => {
       <FlexContainer>
         <Logo glyph="ParsleyLogo" size={24} useStroke />
         <LinkContainer>
-          <StyledLink href="https://wiki.corp.mongodb.com">Wiki</StyledLink>
+          <StyledLink href="https://github.com/evergreen-ci/parsley/wiki">
+            Wiki
+          </StyledLink>
           <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
         <StyledSearchBar
