@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { isProduction } from "utils/environmentVariables";
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { leaveBreadcrumb, reportError } from "utils/errorReporting";
 /**
  * `useFetch` is a custom hook that downloads json from a given URL.
  * It returns an object with the following properties:
@@ -35,7 +35,7 @@ const useFetch = <T extends object>(
       })
         .then((response) => {
           if (!response.ok) {
-            throw new Error(response.statusText);
+            throw new Error(`making request: ${response.status}`);
           }
           return response;
         })
@@ -45,6 +45,7 @@ const useFetch = <T extends object>(
         })
         .catch((err: Error) => {
           leaveBreadcrumb("useFetch", { url, err }, "error");
+          reportError(err).severe();
           setError(err.message);
         })
         .finally(() => {
