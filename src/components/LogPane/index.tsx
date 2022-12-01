@@ -28,7 +28,7 @@ const LogPane: React.FC<LogPaneProps> = ({
   wrap,
   ...rest
 }) => {
-  const { listRef, matchingLines, prettyPrint } = useLogContext();
+  const { listRef, matchingLines, prettyPrint, scrollToLine } = useLogContext();
 
   const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
 
@@ -37,6 +37,10 @@ const LogPane: React.FC<LogPaneProps> = ({
     listRef.current?.recomputeRowHeights();
   }, [listRef, cache, wrap, matchingLines, expandableRows, prettyPrint]);
 
+  useEffect(() => {
+    scrollToLine(initialScrollIndex);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
   return (
     <AutoSizer>
       {({ height, width }) => (
@@ -51,7 +55,6 @@ const LogPane: React.FC<LogPaneProps> = ({
           rowHeight={cache.rowHeight}
           rowRenderer={rowRenderer}
           scrollToAlignment="start"
-          scrollToIndex={initialScrollIndex}
           width={width}
           {...rest}
         />
