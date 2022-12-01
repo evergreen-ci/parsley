@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.9",
+  "version": "1.0.10",
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
