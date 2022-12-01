@@ -16,7 +16,7 @@ describe("Basic resmoke log view", () => {
     cy.get(".ReactVirtualized__Grid__innerScrollContainer").should(
       "have.css",
       "overflow-x",
-      "scroll"
+      "visible"
     );
   });
   it("long lines with wrapping turned on should fit on screen", () => {
