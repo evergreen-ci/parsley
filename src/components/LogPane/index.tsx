@@ -9,6 +9,7 @@ import {
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
+import { leaveBreadcrumb } from "utils/errorReporting";
 
 type LogPaneProps = Omit<
   ListProps,
@@ -38,7 +39,12 @@ const LogPane: React.FC<LogPaneProps> = ({
   }, [listRef, cache, wrap, matchingLines, expandableRows, prettyPrint]);
 
   useEffect(() => {
-    scrollToLine(initialScrollIndex);
+    if (initialScrollIndex > -1) {
+      leaveBreadcrumb("Scrolled to initialScrollIndex", {
+        initialScrollIndex,
+      });
+      scrollToLine(initialScrollIndex);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return (
