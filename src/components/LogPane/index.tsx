@@ -44,8 +44,7 @@ const LogPane: React.FC<LogPaneProps> = ({
           ref={listRef}
           cache={cache}
           containerStyle={{
-            overflowX: "visible",
-            overflowY: "visible",
+            overflow: "visible",
             minHeight: "100%",
           }}
           deferredMeasurementCache={cache}
