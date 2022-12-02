@@ -10,13 +10,13 @@ import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
 import { leaveBreadcrumb } from "utils/errorReporting";
+import { findLineIndex } from "utils/findLineIndex";
 
 type LogPaneProps = Omit<
   ListProps,
   "height" | "width" | "itemData" | "rowHeight"
 > & {
   cache: CellMeasurerCache;
-  initialScrollIndex: number;
   rowRenderer: ListRowRenderer;
   wrap: boolean;
 };
@@ -25,13 +25,22 @@ const LogPane: React.FC<LogPaneProps> = ({
   cache,
   rowRenderer,
   rowCount,
-  initialScrollIndex,
   wrap,
   ...rest
 }) => {
-  const { listRef, matchingLines, prettyPrint, scrollToLine } = useLogContext();
+  const {
+    listRef,
+    matchingLines,
+    prettyPrint,
+    processedLogLines,
+    scrollToLine,
+  } = useLogContext();
 
   const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
+  const [selectedLine] = useQueryParam<number | undefined>(
+    QueryParams.SelectedLine,
+    undefined
+  );
 
   useEffect(() => {
     cache.clearAll();
@@ -39,6 +48,7 @@ const LogPane: React.FC<LogPaneProps> = ({
   }, [listRef, cache, wrap, matchingLines, expandableRows, prettyPrint]);
 
   useEffect(() => {
+    const initialScrollIndex = findLineIndex(processedLogLines, selectedLine);
     if (initialScrollIndex > -1) {
       leaveBreadcrumb("Scrolled to initialScrollIndex", {
         initialScrollIndex,

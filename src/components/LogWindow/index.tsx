@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import styled from "@emotion/styled";
 import FiltersDrawer from "components/FiltersDrawer";
 import LogPane from "components/LogPane";
@@ -9,7 +8,6 @@ import { LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
-import { findLineIndex } from "utils/findLineIndex";
 
 interface LogWindowProps {
   logType: LogTypes;
@@ -37,21 +35,11 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const { searchTerm } = searchState;
 
   const [wrap] = useQueryParam(QueryParams.Wrap, false);
-  const [selectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
-    undefined
-  );
   const [highlights] = useQueryParam<string[]>(QueryParams.Highlights, []);
 
   const highlightRegex = highlights.length
     ? new RegExp(highlights.join("|"), "i")
     : undefined;
-
-  const initialScrollIndex = useMemo(
-    () => findLineIndex(processedLogLines, selectedLine),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    []
-  );
 
   return (
     <Container data-cy="log-window">
@@ -70,7 +58,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         <LogPaneContainer>
           <LogPane
             cache={cache}
-            initialScrollIndex={initialScrollIndex}
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
               data: {
