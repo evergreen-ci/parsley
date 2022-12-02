@@ -12,6 +12,7 @@ import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import { leaveBreadcrumb } from "utils/errorReporting";
+import { processLogString } from "utils/string";
 
 const { green } = palette;
 interface FileDropperProps {
@@ -38,6 +39,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
         reader.onload = () => {
           setHasDroppedLog(true);
           setFileName(file.name);
+          dispatchToast.success(`Successfully loaded file: ${file.name}`);
           lineStream.current = reader.result;
         };
         reader.readAsText(file);
@@ -52,7 +54,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
       leaveBreadcrumb("Parsing file", { logType }, "process");
       sendEvent({ name: "Processed Log", logType });
       if (typeof lineStream.current === "string") {
-        ingestLines(lineStream.current.split("\n"), logType);
+        ingestLines(processLogString(lineStream.current), logType);
       }
     }
   }, [ingestLines, logType, sendEvent, onChangeLogType]);

@@ -2,6 +2,19 @@ import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
 import SideBar from ".";
 
 describe("sideBar", () => {
+  it("should not add bookmarks if there are no log lines", async () => {
+    const { history } = renderWithRouterMatch(
+      <SideBar
+        maxLineNumber={0}
+        processedLogLines={[]}
+        scrollToLine={jest.fn()}
+      />
+    );
+    await waitFor(() => {
+      expect(history.location.search).toBe("");
+    });
+  });
+
   it("should set 0 and last log line as the initial bookmarks", async () => {
     const { history } = renderWithRouterMatch(
       <SideBar

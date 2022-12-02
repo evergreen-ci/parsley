@@ -1,4 +1,9 @@
-import { copyToClipboard, getJiraFormat, stringIntersection } from ".";
+import {
+  copyToClipboard,
+  getJiraFormat,
+  processLogString,
+  stringIntersection,
+} from ".";
 
 describe("copyToClipboard", () => {
   it("should copy the correct text", () => {
@@ -46,6 +51,23 @@ describe("getJiraFormat", () => {
     expect(getJiraFormat(bookmarks, getLine)).toBe(
       `{noformat}\n${logLines[0]}\n...\n${logLines[2]}\n...\n${logLines[4]}\n${logLines[5]}\n{noformat}`
     );
+  });
+});
+
+describe("processLogString", () => {
+  it("should split by the new line character", () => {
+    expect(processLogString("process\nlog\nstring")).toStrictEqual([
+      "process",
+      "log",
+      "string",
+    ]);
+  });
+  it("should trim any trailing whitespace", () => {
+    expect(processLogString("process\nlog\nstring\n          ")).toStrictEqual([
+      "process",
+      "log",
+      "string",
+    ]);
   });
 });
 
