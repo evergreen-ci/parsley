@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo } from "react";
 import styled from "@emotion/styled";
 import FiltersDrawer from "components/FiltersDrawer";
 import LogPane from "components/LogPane";
@@ -47,8 +47,10 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     ? new RegExp(highlights.join("|"), "i")
     : undefined;
 
-  const [initialScrollIndex] = useState(
-    findLineIndex(processedLogLines, selectedLine)
+  const initialScrollIndex = useMemo(
+    () => findLineIndex(processedLogLines, selectedLine),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    []
   );
 
   return (
