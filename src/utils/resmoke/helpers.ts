@@ -65,8 +65,9 @@ const timeStampRegex =
  * @example "t":{"$date":"2021-03-03T20:54:54.000-0400"}
  * @example "t":{"$date":"2021-03-03T20:54:54.000+0400"}
  */
+
 const timestampWithOffsetRegex =
-  /{"t":{"\$date":"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}\+\d{2}:\d{2})"}/;
+  /{"t":{"\$date":"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[+-]\d{2}:\d{2})"}/;
 
 /** `getTimeStamp` returns the timestamp ran by a resmoke function this is found in the resmoke json  */
 const getTimeStamp = (line: string) => {
