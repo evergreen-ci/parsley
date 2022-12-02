@@ -335,6 +335,39 @@ exports[`storyshots Storyshots Components/IconWithTooltip Default 1`] = `
       onMouseLeave={[Function]}
     >
       <svg
+        aria-label="Biometric Icon"
+        className=""
+        color="#023430"
+        fill="none"
+        height={24}
+        role="img"
+        viewBox="0 0 16 16"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M7.5 1A5.5 5.5 0 002 6.5v3A5.5 5.5 0 007.5 15h1A5.5 5.5 0 0014 9.5v-3A5.5 5.5 0 008.5 1h-1zm1.074 6.75a.574.574 0 10-1.148 0v2.457a.574.574 0 001.148 0V7.75zM8 5.338A2.412 2.412 0 005.588 7.75v2.566a.994.994 0 01-.291.704.574.574 0 10.812.812c.402-.402.628-.947.628-1.516V7.75a1.264 1.264 0 112.527 0v2.648c0 .412-.233.79-.602.973a.574.574 0 00.514 1.028 2.237 2.237 0 001.236-2V7.75A2.412 2.412 0 008 5.338zM4.899 7.75A3.101 3.101 0 019.64 5.117a.574.574 0 10.609-.974A4.25 4.25 0 003.75 7.75v2.297a.574.574 0 101.149 0V7.75zm6.887-1.932a.574.574 0 10-1.023.522c.216.423.338.901.338 1.41v1.378a.574.574 0 101.149 0V7.75c0-.695-.167-1.352-.464-1.932z"
+          fill="currentColor"
+          fillRule="evenodd"
+        />
+      </svg>
+    </div>
+    <span>
+      Biometric
+    </span>
+  </div>
+  <div
+    className="css-141et6l"
+  >
+    <div
+      className="leafygreen-ui-cssveg css-1sg2lsz"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <svg
         aria-label="Building Icon"
         className=""
         color="#023430"
@@ -1392,6 +1425,41 @@ exports[`storyshots Storyshots Components/IconWithTooltip Default 1`] = `
       onMouseLeave={[Function]}
     >
       <svg
+        aria-label="Email Icon"
+        className=""
+        color="#023430"
+        fill="none"
+        height={24}
+        role="img"
+        viewBox="0 0 16 16"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.494 4l4.714 5.05a1.068 1.068 0 001.584 0L13.505 4H2.494zM1.133 4.256A2.12 2.12 0 001 5v6c0 .369.093.715.256 1.011L4.814 8.2l-3.68-3.944z"
+          fill="currentColor"
+        />
+        <path
+          d="M2.867 13c-.348 0-.674-.102-.953-.28l3.56-3.813 1.219 1.306a1.78 1.78 0 002.64 0l1.346-1.443 3.575 3.83c-.313.251-.7.4-1.12.4H2.866zM14.84 11.813c.103-.248.16-.523.16-.813V5c0-.255-.045-.5-.126-.724l-3.535 3.787 3.5 3.75z"
+          fill="currentColor"
+        />
+      </svg>
+    </div>
+    <span>
+      Email
+    </span>
+  </div>
+  <div
+    className="css-141et6l"
+  >
+    <div
+      className="leafygreen-ui-cssveg css-1sg2lsz"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <svg
         aria-label="Export Icon"
         className=""
         color="#023430"
@@ -1707,6 +1775,41 @@ exports[`storyshots Storyshots Components/IconWithTooltip Default 1`] = `
     </div>
     <span>
       Home
+    </span>
+  </div>
+  <div
+    className="css-141et6l"
+  >
+    <div
+      className="leafygreen-ui-cssveg css-1sg2lsz"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <svg
+        aria-label="Import Icon"
+        className=""
+        color="#023430"
+        fill="none"
+        height={24}
+        role="img"
+        viewBox="0 0 16 16"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11.623 8.799a.278.278 0 000-.385L8.818 5.498a.277.277 0 00-.477.193v1.405A3.5 3.5 0 015 3.6v-.1a1.5 1.5 0 10-3 0v.1a6.5 6.5 0 006.34 6.498v1.424c0 .25.305.372.478.192L11.623 8.8z"
+          fill="currentColor"
+        />
+        <path
+          d="M3.95 11a.75.75 0 011.5 0v1.75a.5.5 0 00.5.5h6.864a.5.5 0 00.5-.5V5.886a.5.5 0 00-.5-.5h-1.943a.75.75 0 010-1.5h1.943a2 2 0 012 2v6.864a2 2 0 01-2 2H5.95a2 2 0 01-2-2V11z"
+          fill="currentColor"
+        />
+      </svg>
+    </div>
+    <span>
+      Import
     </span>
   </div>
   <div
@@ -2732,6 +2835,39 @@ exports[`storyshots Storyshots Components/IconWithTooltip Default 1`] = `
     </div>
     <span>
       Shell
+    </span>
+  </div>
+  <div
+    className="css-141et6l"
+  >
+    <div
+      className="leafygreen-ui-cssveg css-1sg2lsz"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      onMouseEnter={[Function]}
+      onMouseLeave={[Function]}
+    >
+      <svg
+        aria-label="SMS Icon"
+        className=""
+        color="#023430"
+        fill="none"
+        height={24}
+        role="img"
+        viewBox="0 0 16 16"
+        width={24}
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clipRule="evenodd"
+          d="M1 4a2 2 0 012-2h10a2 2 0 012 2v6a2 2 0 01-2 2H7.755L4.23 14.831c-.488.392-1.23.058-1.23-.555V12a2 2 0 01-2-2V4zm2 .75A.75.75 0 013.75 4h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 013 4.75zm0 3A.75.75 0 013.75 7h5.5a.75.75 0 110 1.5h-5.5A.75.75 0 013 7.75z"
+          fill="currentColor"
+          fillRule="evenodd"
+        />
+      </svg>
+    </div>
+    <span>
+      SMS
     </span>
   </div>
   <div
