@@ -25,7 +25,7 @@ exports[`storyshots Storyshots Components/LogPane Default 1`] = `
           "boxSizing": "border-box",
           "direction": "ltr",
           "height": 0,
-          "overflowX": "hidden",
+          "overflowX": "scroll",
           "overflowY": "auto",
           "position": "relative",
           "width": 0,
