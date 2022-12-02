@@ -181,6 +181,14 @@ describe("resmoke/helpers", () => {
         getTimeStamp(`{"t":{"$date":"2022-09-13T16:57:46.852+00:00"}`)
       ).toBe("2022-09-13T16:57:46.852+00:00");
     });
+    it("handles strings with offset timestamps", () => {
+      expect(
+        getTimeStamp(`{"t":{"$date":"2022-09-13T16:57:46.852+00:00"}`)
+      ).toBe("2022-09-13T16:57:46.852+00:00");
+      expect(
+        getTimeStamp(`{"t":{"$date":"2022-09-13T16:57:46.852-00:00"}`)
+      ).toBe("2022-09-13T16:57:46.852-00:00");
+    });
   });
   describe("getState", () => {
     it("correctly returns state", () => {
