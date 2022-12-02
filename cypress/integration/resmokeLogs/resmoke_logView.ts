@@ -13,12 +13,12 @@ describe("Basic resmoke log view", () => {
   it("by default should have wrapping turned off and should be able to scroll horizontally", () => {
     cy.dataCy("log-row-16").should("be.visible");
     cy.dataCy("log-row-16").isNotContainedInViewport();
-    cy.get(".ReactVirtualized__Grid__innerScrollContainer").should(
+    cy.get(".ReactVirtualized__Grid").should(
       "have.css",
       "overflow-x",
-      "visible"
+      "scroll"
     );
-    cy.get(".ReactVirtualized__Grid.ReactVirtualized__List").scrollTo(500, 0, {
+    cy.get(".ReactVirtualized__Grid").scrollTo(500, 0, {
       ensureScrollable: true,
     });
   });
@@ -32,13 +32,13 @@ describe("Basic resmoke log view", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("Putting spruce/{enter}");
-    cy.get(".ReactVirtualized__Grid__innerScrollContainer").should(
+    cy.get(".ReactVirtualized__Grid").should(
       "have.css",
       "overflow-x",
-      "auto"
+      "scroll"
     );
     // scroll to the right
-    cy.get(".ReactVirtualized__Grid__innerScrollContainer").scrollTo("right");
+    cy.get(".ReactVirtualized__Grid").scrollTo("right");
   });
 });
 

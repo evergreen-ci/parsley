@@ -23,7 +23,7 @@ describe("Basic evergreen log view", () => {
       "overflow-x",
       "visible"
     );
-    cy.get(".ReactVirtualized__Grid.ReactVirtualized__List").scrollTo(500, 0, {
+    cy.get(".ReactVirtualized__Grid").scrollTo(500, 0, {
       ensureScrollable: true,
     });
   });
@@ -38,13 +38,13 @@ describe("Basic evergreen log view", () => {
     cy.dataCy("searchbar-select").click();
     cy.dataCy("filter-option").click();
     cy.dataCy("searchbar-input").type("Putting spruce/{enter}");
-    cy.get(".ReactVirtualized__Grid__innerScrollContainer").should(
+    cy.get(".ReactVirtualized__Grid").should(
       "have.css",
       "overflow-x",
-      "auto"
+      "scroll"
     );
     // scroll to the right
-    cy.get(".ReactVirtualized__Grid__innerScrollContainer").scrollTo("right");
+    cy.get(".ReactVirtualized__Grid").scrollTo("right");
   });
 });
 
