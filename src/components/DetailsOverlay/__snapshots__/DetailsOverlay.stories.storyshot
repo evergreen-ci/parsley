@@ -55,7 +55,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
                     value=""
                   />
                   <div
-                    className="static-lg-ui-classname leafygreen-ui-4uj7hc"
+                    className="lg-ui-icon-selector-0000 leafygreen-ui-4uj7hc"
                   />
                 </div>
               </div>
@@ -82,7 +82,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
                     value=""
                   />
                   <div
-                    className="static-lg-ui-classname leafygreen-ui-4uj7hc"
+                    className="lg-ui-icon-selector-0000 leafygreen-ui-4uj7hc"
                   />
                 </div>
               </div>
@@ -109,7 +109,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               aria-checked={false}
               aria-disabled={false}
               aria-labelledby="Wrap Toggle"
-              className="static-lg-ui-classname leafygreen-ui-1pz71rg"
+              className="lg-ui-toggle-button-0000 leafygreen-ui-1pz71rg"
               data-cy="wrap-toggle"
               disabled={false}
               onClick={[Function]}
@@ -117,12 +117,12 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               type="button"
             >
               <div
-                className="leafygreen-ui-16tiook"
+                className="leafygreen-ui-w7wsyg"
               >
                 <svg
                   aria-hidden={true}
                   aria-label="Checkmark Icon"
-                  className="leafygreen-ui-z3mrfn"
+                  className="leafygreen-ui-e8xweu"
                   height={14}
                   role="img"
                   viewBox="0 0 16 16"
@@ -164,7 +164,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               aria-checked={false}
               aria-disabled={false}
               aria-labelledby="Case Sensitive Toggle"
-              className="static-lg-ui-classname leafygreen-ui-1pz71rg"
+              className="lg-ui-toggle-button-0000 leafygreen-ui-1pz71rg"
               data-cy="case-sensitive-toggle"
               disabled={false}
               onClick={[Function]}
@@ -172,12 +172,12 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               type="button"
             >
               <div
-                className="leafygreen-ui-16tiook"
+                className="leafygreen-ui-w7wsyg"
               >
                 <svg
                   aria-hidden={true}
                   aria-label="Checkmark Icon"
-                  className="leafygreen-ui-z3mrfn"
+                  className="leafygreen-ui-e8xweu"
                   height={14}
                   role="img"
                   viewBox="0 0 16 16"
@@ -223,7 +223,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               aria-checked={false}
               aria-disabled={false}
               aria-labelledby="Filter Logic Toggle"
-              className="static-lg-ui-classname leafygreen-ui-1pz71rg"
+              className="lg-ui-toggle-button-0000 leafygreen-ui-1pz71rg"
               data-cy="filter-logic-toggle"
               disabled={false}
               onClick={[Function]}
@@ -231,12 +231,12 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               type="button"
             >
               <div
-                className="leafygreen-ui-16tiook"
+                className="leafygreen-ui-w7wsyg"
               >
                 <svg
                   aria-hidden={true}
                   aria-label="Checkmark Icon"
-                  className="leafygreen-ui-z3mrfn"
+                  className="leafygreen-ui-e8xweu"
                   height={14}
                   role="img"
                   viewBox="0 0 16 16"
@@ -278,7 +278,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               aria-checked={true}
               aria-disabled={false}
               aria-labelledby="Expandable Rows Toggle"
-              className="static-lg-ui-classname leafygreen-ui-1pz71rg"
+              className="lg-ui-toggle-button-0000 leafygreen-ui-1pz71rg"
               data-cy="expandable-rows-toggle"
               disabled={false}
               onClick={[Function]}
@@ -286,12 +286,12 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               type="button"
             >
               <div
-                className="leafygreen-ui-16tiook"
+                className="leafygreen-ui-w7wsyg"
               >
                 <svg
                   aria-hidden={true}
                   aria-label="Checkmark Icon"
-                  className="leafygreen-ui-z3mrfn"
+                  className="leafygreen-ui-e8xweu"
                   height={14}
                   role="img"
                   viewBox="0 0 16 16"
@@ -333,7 +333,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               aria-checked={false}
               aria-disabled={true}
               aria-labelledby="Pretty Print Bookmarks Toggle"
-              className="static-lg-ui-classname leafygreen-ui-1pz71rg"
+              className="lg-ui-toggle-button-0000 leafygreen-ui-1pz71rg"
               data-cy="pretty-print-toggle"
               disabled={true}
               onClick={[Function]}
@@ -341,12 +341,12 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
               type="button"
             >
               <div
-                className="leafygreen-ui-16tiook"
+                className="leafygreen-ui-w7wsyg"
               >
                 <svg
                   aria-hidden={true}
                   aria-label="Checkmark Icon"
-                  className="leafygreen-ui-z3mrfn"
+                  className="leafygreen-ui-e8xweu"
                   height={14}
                   role="img"
                   viewBox="0 0 16 16"
@@ -383,7 +383,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
       >
         <button
           aria-disabled={true}
-          className="static-lg-ui-classname leafygreen-ui-e1tz2b"
+          className="lg-ui-button-0000 leafygreen-ui-e1tz2b"
           disabled={true}
           type="button"
         >
@@ -425,7 +425,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
       >
         <button
           aria-disabled={true}
-          className="static-lg-ui-classname leafygreen-ui-e1tz2b"
+          className="lg-ui-button-0000 leafygreen-ui-e1tz2b"
           data-cy="job-logs-button"
           disabled={true}
           target="_blank"
@@ -471,7 +471,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
       >
         <button
           aria-disabled={true}
-          className="static-lg-ui-classname leafygreen-ui-e1tz2b"
+          className="lg-ui-button-0000 leafygreen-ui-e1tz2b"
           data-cy="raw-log-button"
           disabled={true}
           target="_blank"
@@ -517,7 +517,7 @@ exports[`storyshots Storyshots Components/DetailsOverlay Default 1`] = `
       >
         <button
           aria-disabled={true}
-          className="static-lg-ui-classname leafygreen-ui-e1tz2b"
+          className="lg-ui-button-0000 leafygreen-ui-e1tz2b"
           data-cy="html-log-button"
           disabled={true}
           target="_blank"
