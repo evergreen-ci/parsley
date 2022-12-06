@@ -1,7 +1,7 @@
 import { render, screen } from "test_utils";
 import renderHtml from ".";
 import { escapeHtml } from "./escapeHtml";
-import { sanitizeHtml } from "./sanitizeHtml";
+import { sanitizeTags } from "./sanitizeTags";
 
 describe("renderHtml", () => {
   it("renders a plain string with no html", () => {
@@ -57,17 +57,17 @@ describe("escapeHtml", () => {
 
 describe("sanitizeHtml", () => {
   it("sanitizes html tags", () => {
-    expect(sanitizeHtml("<nav>", [])).toBe("&lt;nav&gt;");
-    expect(sanitizeHtml("<span>some text</span>", ["span"])).toBe(
+    expect(sanitizeTags("<nav>", [])).toBe("&lt;nav&gt;");
+    expect(sanitizeTags("<span>some text</span>", ["span"])).toBe(
       "<span>some text</span>"
     );
     expect(
-      sanitizeHtml("<span withProps='test'>some text</span>", ["span"])
+      sanitizeTags("<span withProps='test'>some text</span>", ["span"])
     ).toBe("<span withProps='test'>some text</span>");
     expect(
-      sanitizeHtml("<div withProps='test'>some text</div>", ["span"])
+      sanitizeTags("<div withProps='test'>some text</div>", ["span"])
     ).toBe("&lt;div withProps='test'&gt;some text&lt;/div&gt;");
-    expect(sanitizeHtml("<script>alert('some alert')</script>", ["span"])).toBe(
+    expect(sanitizeTags("<script>alert('some alert')</script>", ["span"])).toBe(
       "&lt;script&gt;alert('some alert')&lt;/script&gt;"
     );
   });

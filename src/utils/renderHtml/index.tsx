@@ -3,7 +3,7 @@ import parse, {
   HTMLReactParserOptions,
   domToReact,
 } from "html-react-parser";
-import { sanitizeHtml } from "./sanitizeHtml";
+import { sanitizeTags } from "./sanitizeTags";
 /**
  * renderHtml takes a string and converts it into an array of domnodes and
  * parses through them and swaps elements with other elements based on if they are
@@ -29,7 +29,7 @@ interface renderHtmlOptions extends HTMLReactParserOptions {
 
 const allowedTags = ["a", "span", "mark"];
 const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
-  const sanitizedHtml = sanitizeHtml(html, allowedTags);
+  const sanitizedHtml = sanitizeTags(html, allowedTags);
 
   return parse(sanitizedHtml, {
     replace: (domNode) => {
