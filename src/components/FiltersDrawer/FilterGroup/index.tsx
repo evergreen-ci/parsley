@@ -179,7 +179,7 @@ const StyledSegmentedControl = styled(SegmentedControl)`
 
   // Set the labels to have the same width so that the controls are aligned.
   > div:first-of-type {
-    width: 52px;
+    width: 46px;
   }
 `;
 
