@@ -5,10 +5,14 @@
  */
 const sanitizeHtml = (html: string, allowedTags: string[]) =>
   html.replace(/<[^<>]+>/g, (fakeTag) => {
+    // Check if the tag is a closing tag
     if (fakeTag.includes("</")) {
-      // @ts-expect-error
-      const tagName = fakeTag.match(/^<\/([^\s>]+)/)[1];
+      const tagName = fakeTag.match(/^<\/([^\s>]+)/)?.[1];
+      if (tagName === undefined) {
+        return fakeTag;
+      }
       if (allowedTags.includes(tagName)) {
+        // Allow the tag if it is allowed
         return fakeTag;
       }
       return fakeTag.replace(/[<>]/g, (match) => {
@@ -18,8 +22,11 @@ const sanitizeHtml = (html: string, allowedTags: string[]) =>
         return "&gt;";
       });
     }
-    // @ts-expect-error
-    const tagName = fakeTag.match(/^<([^\s>]+)/)[1];
+    // handle opening tags
+    const tagName = fakeTag.match(/^<([^\s>]+)/)?.[1];
+    if (tagName === undefined) {
+      return fakeTag;
+    }
     if (allowedTags.includes(tagName)) {
       return fakeTag;
     }
