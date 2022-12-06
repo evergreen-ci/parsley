@@ -1,9 +1,9 @@
 /**
- * `sanitizeTags` is a utility function that takes a string with elements that resemble html tags and returns a string that sanitizes the tags that are not allowed
+ * `escapeTags` is a utility function that takes a string with elements that resemble html tags and returns a string that sanitizes the tags that are not allowed
  * @param html - The html string to sanitize
  * @returns The sanitized html string
  */
-const sanitizeTags = (html: string, allowedTags: string[]) =>
+const escapeTags = (html: string, allowedTags: string[]) =>
   html.replace(/<[^<>]+>/g, (tag) => {
     // Check if the tag is a closing tag
     if (tag.includes("</")) {
@@ -38,4 +38,4 @@ const sanitizeTags = (html: string, allowedTags: string[]) =>
     });
   });
 
-export { sanitizeTags };
+export { escapeTags };

@@ -1,7 +1,7 @@
 import { render, screen } from "test_utils";
 import renderHtml from ".";
 import { escapeHtml } from "./escapeHtml";
-import { sanitizeTags } from "./sanitizeTags";
+import { escapeTags } from "./escapeTags";
 
 describe("renderHtml", () => {
   it("renders a plain string with no html", () => {
@@ -55,20 +55,24 @@ describe("escapeHtml", () => {
   });
 });
 
-describe("sanitizeHtml", () => {
-  it("sanitizes html tags", () => {
-    expect(sanitizeTags("<nav>", [])).toBe("&lt;nav&gt;");
-    expect(sanitizeTags("<span>some text</span>", ["span"])).toBe(
+describe("escapeTags", () => {
+  it("escapes html tags", () => {
+    expect(escapeTags("<div withProps='test'>some text</div>", ["span"])).toBe(
+      "&lt;div withProps='test'&gt;some text&lt;/div&gt;"
+    );
+    expect(escapeTags("<script>alert('some alert')</script>", ["span"])).toBe(
+      "&lt;script&gt;alert('some alert')&lt;/script&gt;"
+    );
+  });
+  it("does not escape allowed html tags", () => {
+    expect(escapeTags("<span>some text</span>", ["span"])).toBe(
       "<span>some text</span>"
     );
     expect(
-      sanitizeTags("<span withProps='test'>some text</span>", ["span"])
+      escapeTags("<span withProps='test'>some text</span>", ["span"])
     ).toBe("<span withProps='test'>some text</span>");
-    expect(
-      sanitizeTags("<div withProps='test'>some text</div>", ["span"])
-    ).toBe("&lt;div withProps='test'&gt;some text&lt;/div&gt;");
-    expect(sanitizeTags("<script>alert('some alert')</script>", ["span"])).toBe(
-      "&lt;script&gt;alert('some alert')&lt;/script&gt;"
-    );
+  });
+  it("escapes non html tags", () => {
+    expect(escapeTags("<nav>", [])).toBe("&lt;nav&gt;");
   });
 });
