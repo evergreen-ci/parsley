@@ -7,6 +7,12 @@ describe("row", () => {
     expect(screen.getByText(testLog)).toBeVisible();
   });
 
+  it("properly escapes a log line with tags and renders its contents", () => {
+    const lineContent = `Test line with a <nil> value`;
+    renderWithRouterMatch(<Row {...rowProps}>{lineContent}</Row>);
+    expect(screen.getByText(lineContent)).toBeVisible();
+  });
+
   it("clicking log line link updates the url and and scrolls to the line", async () => {
     const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
