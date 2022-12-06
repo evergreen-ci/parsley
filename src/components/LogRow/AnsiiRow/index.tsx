@@ -24,15 +24,15 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
     highlights,
   } = data;
 
-  const lineContent = getLine(lineNumber) || "";
-  const linkifiedLine = linkifyHtml(ansiUp.ansi_to_html(lineContent), {
+  const lineContent = getLine(lineNumber);
+  const linkifiedLine = linkifyHtml(ansiUp.ansi_to_html(lineContent ?? ""), {
     validate: {
       url: (value: string) => /^(http)s?:\/\//.test(value),
     },
   });
   const inRange = isLineInRange(range, lineNumber);
 
-  return lineContent ? (
+  return lineContent !== undefined ? (
     <BaseRow
       {...listRowProps}
       ref={ref}
