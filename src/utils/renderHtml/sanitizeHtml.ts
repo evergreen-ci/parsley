@@ -4,18 +4,18 @@
  * @returns The sanitized html string
  */
 const sanitizeHtml = (html: string, allowedTags: string[]) =>
-  html.replace(/<[^<>]+>/g, (fakeTag) => {
+  html.replace(/<[^<>]+>/g, (tag) => {
     // Check if the tag is a closing tag
-    if (fakeTag.includes("</")) {
-      const tagName = fakeTag.match(/^<\/([^\s>]+)/)?.[1];
+    if (tag.includes("</")) {
+      const tagName = tag.match(/^<\/([^\s>]+)/)?.[1];
       if (tagName === undefined) {
-        return fakeTag;
+        return tag;
       }
       if (allowedTags.includes(tagName)) {
         // Allow the tag if it is allowed
-        return fakeTag;
+        return tag;
       }
-      return fakeTag.replace(/[<>]/g, (match) => {
+      return tag.replace(/[<>]/g, (match) => {
         if (match === "<") {
           return "&lt;";
         }
@@ -23,14 +23,14 @@ const sanitizeHtml = (html: string, allowedTags: string[]) =>
       });
     }
     // handle opening tags
-    const tagName = fakeTag.match(/^<([^\s>]+)/)?.[1];
+    const tagName = tag.match(/^<([^\s>]+)/)?.[1];
     if (tagName === undefined) {
-      return fakeTag;
+      return tag;
     }
     if (allowedTags.includes(tagName)) {
-      return fakeTag;
+      return tag;
     }
-    return fakeTag.replace(/[<>]/g, (match) => {
+    return tag.replace(/[<>]/g, (match) => {
       if (match === "<") {
         return "&lt;";
       }

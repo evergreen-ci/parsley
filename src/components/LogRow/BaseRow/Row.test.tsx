@@ -8,7 +8,7 @@ describe("row", () => {
   });
 
   it("properly escapes a log line with tags and renders its contents", () => {
-    const lineContent = `Test line with a <nil> value`;
+    const lineContent = "Test line with a <nil> value";
     renderWithRouterMatch(<Row {...rowProps}>{lineContent}</Row>);
     expect(screen.getByText(lineContent)).toBeVisible();
   });
