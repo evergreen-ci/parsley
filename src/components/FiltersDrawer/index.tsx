@@ -18,7 +18,7 @@ import { ExpandedLines, Filter } from "types/logs";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import FilterGroup from "./FilterGroup";
 
-const { green, gray } = palette;
+const { green } = palette;
 
 interface FiltersDrawerProps {
   ["data-cy"]?: string;
@@ -103,7 +103,8 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     >
       <PaddedContainer>
         <StyledSideNavGroup
-          glyph={<SideNavIcon active={filters.length > 0} glyph="Filter" />}
+          glyph={<Icon glyph="Filter" />}
+          hasActiveItem={filters.length > 0}
           header={
             <NavGroupHeader data-cy="filters-nav-group-header">
               <NavGroupTitle>Filters</NavGroupTitle>
@@ -132,9 +133,8 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
         </StyledSideNavGroup>
 
         <StyledSideNavGroup
-          glyph={
-            <SideNavIcon active={expandedLines.length > 0} glyph="Expand" />
-          }
+          glyph={<Icon fill={green.dark2} glyph="Expand" />}
+          hasActiveItem={expandedLines.length > 0}
           header={
             <NavGroupHeader data-cy="expanded-lines-nav-group-header">
               <NavGroupTitle>Expanded Lines</NavGroupTitle>
@@ -170,7 +170,8 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
         </StyledSideNavGroup>
 
         <StyledSideNavGroup
-          glyph={<SideNavIcon active={highlights.length > 0} glyph="Minus" />}
+          glyph={<Icon glyph="Minus" />}
+          hasActiveItem={highlights.length > 0}
           header={
             <NavGroupHeader data-cy="highlight-nav-group-header">
               <NavGroupTitle>Highlighted Terms</NavGroupTitle>
@@ -201,15 +202,6 @@ const FiltersDrawer: React.FC<FiltersDrawerProps> = ({
     </StyledSideNav>
   );
 };
-interface SideNavIconProps extends React.ComponentProps<typeof Icon> {
-  active: boolean;
-}
-
-const SideNavIcon: React.FC<SideNavIconProps> = ({ active, ...rest }) => (
-  <Icon {...rest} fill={active ? green.dark2 : gray.base} />
-);
-// Leafygreen's SideNav requires this element to have an Icon displayName
-SideNavIcon.displayName = "Icon";
 
 const StyledSideNav = styled(SideNav)`
   z-index: ${zIndex.drawer};

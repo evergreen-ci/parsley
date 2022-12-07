@@ -11,6 +11,40 @@ const wrapper = (logs: string[]) => {
 
 describe("ansiiRow", () => {
   const user = userEvent.setup();
+  it("does not render an ansii row if getLine returns undefined", () => {
+    const getLine = jest.fn().mockReturnValue(undefined);
+    renderWithRouterMatch(
+      <AnsiiRow
+        data={{
+          ...data,
+          getLine,
+        }}
+        lineNumber={0}
+        listRowProps={listRowProps}
+      />,
+      {
+        wrapper: wrapper(logLines),
+      }
+    );
+    expect(screen.queryByDataCy("ansii-row")).toBeNull();
+  });
+  it("renders an ansii row if getLine returns an empty string", () => {
+    const getLine = jest.fn().mockReturnValue("");
+    renderWithRouterMatch(
+      <AnsiiRow
+        data={{
+          ...data,
+          getLine,
+        }}
+        lineNumber={0}
+        listRowProps={listRowProps}
+      />,
+      {
+        wrapper: wrapper(logLines),
+      }
+    );
+    expect(screen.getByDataCy("ansii-row")).toBeInTheDocument();
+  });
   it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
       <AnsiiRow data={data} lineNumber={0} listRowProps={listRowProps} />,

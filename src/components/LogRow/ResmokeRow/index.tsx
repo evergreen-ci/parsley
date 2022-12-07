@@ -26,7 +26,7 @@ const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
   const lineColor = getResmokeLineColor(lineNumber);
   const inRange = isLineInRange(range, lineNumber);
 
-  return lineContent ? (
+  return lineContent !== undefined ? (
     <BaseRow
       {...listRowProps}
       ref={ref}

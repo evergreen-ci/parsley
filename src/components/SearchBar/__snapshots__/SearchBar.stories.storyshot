@@ -14,9 +14,8 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
       aria-expanded={false}
       aria-invalid={false}
       aria-labelledby="searchbar-select"
-      className="leafygreen-ui-23wnbt"
+      className="lg-ui-button-0000 leafygreen-ui-sedrjd"
       data-cy="searchbar-select"
-      data-leafygreen-ui="button"
       data-testid="leafygreen-ui-select-menubutton"
       disabled={false}
       id="select-2"
@@ -70,7 +69,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
           aria-label="searchbar-input"
           aria-labelledby="searchbar-input"
           autoComplete="on"
-          className="leafygreen-ui-1imva9i"
+          className="leafygreen-ui-6i61vl"
           data-cy="searchbar-input"
           disabled={false}
           id="textinput-5"
@@ -84,7 +83,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
           value=""
         />
         <div
-          className="static-lg-ui-classname leafygreen-ui-uy5fvv"
+          className="lg-ui-icon-selector-0000 leafygreen-ui-uy5fvv"
         />
       </div>
     </div>
