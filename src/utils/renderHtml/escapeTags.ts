@@ -1,7 +1,8 @@
 /**
- * `escapeTags` is a utility function that takes a string with elements that resemble html tags and returns a string that sanitizes the tags that are not allowed
- * @param html - The html string to sanitize
- * @returns The sanitized html string
+ * `escapeTags` is a utility function that takes a string with elements that resemble html tags and returns a string that
+ * escapes the tags that are not allowed.
+ * @param html - the html string to escape
+ * @returns The escaped html string
  */
 const escapeTags = (html: string, allowedTags: string[]) =>
   html.replace(/<[^<>]+>/g, (tag) => {
