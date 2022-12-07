@@ -6,28 +6,15 @@
 const escapeTags = (html: string, allowedTags: string[]) =>
   html.replace(/<[^<>]+>/g, (tag) => {
     // Check if the tag is a closing tag
-    if (tag.includes("</")) {
-      const tagName = tag.match(/^<\/([^\s>]+)/)?.[1];
-      if (tagName === undefined) {
-        return tag;
-      }
-      if (allowedTags.includes(tagName)) {
-        // Allow the tag if it is allowed
-        return tag;
-      }
-      return tag.replace(/[<>]/g, (match) => {
-        if (match === "<") {
-          return "&lt;";
-        }
-        return "&gt;";
-      });
-    }
-    // handle opening tags
-    const tagName = tag.match(/^<([^\s>]+)/)?.[1];
+    const isClosingTag = tag.includes("</");
+    const tagName = isClosingTag
+      ? tag.match(/^<\/([^\s>]+)/)?.[1]
+      : tag.match(/^<([^\s>]+)/)?.[1];
     if (tagName === undefined) {
       return tag;
     }
     if (allowedTags.includes(tagName)) {
+      // Allow the tag if it is allowed
       return tag;
     }
     return tag.replace(/[<>]/g, (match) => {
