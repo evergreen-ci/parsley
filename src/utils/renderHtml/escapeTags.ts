@@ -1,11 +1,12 @@
+import { escapeHtml } from "./escapeHtml";
 /**
  * `escapeTags` is a utility function that takes a string with elements that resemble html tags and returns a string that sanitizes the tags that are not allowed
  * @param html - The html string to sanitize
  * @returns The sanitized html string
  */
-const escapeTags = (html: string, allowedTags: string[]) =>
-  html.replace(/<[^<>]+>/g, (tag) => {
-    // Check if the tag is a closing tag
+const escapeTags = (html: string, allowedTags: string[]) => {
+  const matchTags = /<(\/?[a-z][a-z0-9]*)\b[^>]*>/g;
+  return html.replace(matchTags, (tag) => {
     const isClosingTag = tag.includes("</");
     const tagName = isClosingTag
       ? tag.match(/^<\/([^\s>]+)/)?.[1]
@@ -17,12 +18,8 @@ const escapeTags = (html: string, allowedTags: string[]) =>
       // Allow the tag if it is allowed
       return tag;
     }
-    return tag.replace(/[<>]/g, (match) => {
-      if (match === "<") {
-        return "&lt;";
-      }
-      return "&gt;";
-    });
+    return escapeHtml(tag);
   });
+};
 
 export { escapeTags };
