@@ -73,7 +73,7 @@ describe("escapeTags", () => {
     ).toBe('<span target="test">some text</span>');
   });
   it("escapes non html tags", () => {
-    expect(escapeTags("<nav>", {})).toBe("&lt;nav&gt;");
+    expect(escapeTags("<nil>", {})).toBe("&lt;nil&gt;");
     expect(
       escapeTags(
         ` /opt/mongodbtoolchain/revisions/549e9c72ce95de436fb83815796d54a47893c049/stow/gcc-v3.SIC/include/c++/8.5.0/thread:196:13: std::thread::_State_impl<std::thread::_Invoker<std::tuple<mongo::stdx::thread::thread<mongo::ThreadPool::Impl::_startWorkerThread_inlock()::'lambda2'(), 0>(mongo::ThreadPool::Impl::_startWorkerThread_inlock()::'lambda2'())::'lambda'()> > >::_M_run()`
