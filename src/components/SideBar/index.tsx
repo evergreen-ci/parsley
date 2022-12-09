@@ -13,16 +13,18 @@ import { findLineIndex } from "utils/findLineIndex";
 const { gray, green } = palette;
 
 interface SideBarProps {
-  maxLineNumber: number;
+  lineCount: number;
   processedLogLines: (number | number[])[];
   scrollToLine: (scrollIndex: number) => void;
 }
 
 const SideBar: React.FC<SideBarProps> = ({
-  maxLineNumber,
+  lineCount,
   processedLogLines,
   scrollToLine,
 }) => {
+  const { sendEvent } = useLogWindowAnalytics();
+
   const [selectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
@@ -31,17 +33,22 @@ const SideBar: React.FC<SideBarProps> = ({
     QueryParams.Bookmarks,
     []
   );
-  const { sendEvent } = useLogWindowAnalytics();
-  const lineNumbers = selectedLine
-    ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
-    : bookmarks;
 
-  // Set 0 and last log line to be initial bookmarks on load.
+  // Set the initial bookmarks on load.
   useEffect(() => {
-    if (bookmarks.length === 0) {
-      setBookmarks([0, maxLineNumber]);
+    if (bookmarks.length === 0 && lineCount !== 0) {
+      if (lineCount === 1) {
+        setBookmarks([0]);
+      } else {
+        setBookmarks([0, lineCount - 1]);
+      }
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const lineNumbers =
+    selectedLine !== undefined
+      ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
+      : bookmarks;
 
   // Finds the corresponding index of a line number and scrolls to it.
   const scrollToIndex = (lineNumber: number): void => {

@@ -49,7 +49,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         expandedLines={expandedLines}
       />
       <SideBar
-        maxLineNumber={lineCount - 1}
+        lineCount={lineCount}
         processedLogLines={processedLogLines}
         scrollToLine={scrollToLine}
       />

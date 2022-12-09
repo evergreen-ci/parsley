@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
+import { processLogString } from "utils/string";
+
 /**
  * `useLogDownloader` is a custom hook that downloads a log file from a given URL.
  * It downloads the log file and splits the log file into an array of strings.
@@ -34,7 +36,7 @@ const useLogDownloader = (url: string) => {
       })
       .then((response) => response.text() || "")
       .then((text) => {
-        setData(text.trimEnd().split("\n"));
+        setData(processLogString(text));
       })
       .catch((err: Error) => {
         leaveBreadcrumb("useLogDownloader", { url, err }, "error");
