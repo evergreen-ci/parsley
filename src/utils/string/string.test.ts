@@ -69,6 +69,14 @@ describe("processLogString", () => {
       "string",
     ]);
   });
+  it("does not trim any whitespace that exists between log lines", () => {
+    expect(processLogString("process\n\nlog\nstring")).toStrictEqual([
+      "process",
+      "",
+      "log",
+      "string",
+    ]);
+  });
 });
 
 describe("stringIntersection", () => {
