@@ -27,7 +27,11 @@ interface renderHtmlOptions extends HTMLReactParserOptions {
   };
 }
 
-const allowedTags = ["a", "span", "mark"];
+const allowedTags = {
+  a: ["href", "target", "rel", "class", "style"],
+  span: ["style", "data-cy"],
+  mark: ["style", "data-cy"],
+};
 const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
   const escapedHtml = escapeTags(html, allowedTags);
 

@@ -11,7 +11,6 @@ import { useQueryParam } from "hooks/useQueryParam";
 import { formatPrettyPrint } from "utils/prettyPrint";
 import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
-import { escapeHtml } from "utils/renderHtml/escapeHtml";
 
 const { yellow, red } = palette;
 
@@ -144,7 +143,7 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
       // escape the matching string to prevent XSS
       render = render.replace(
         new RegExp(searchTerm, searchTerm.ignoreCase ? "gi" : "g"),
-        (match) => `<mark>${escapeHtml(match)}</mark>`
+        (match) => `<mark>${match}</mark>`
       );
     }
     if (highlights) {
@@ -155,7 +154,7 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
       if (!hasOverlappingRegexes) {
         render = render.replace(
           new RegExp(highlights, highlights.ignoreCase ? "gi" : "g"),
-          (match) => `<mark>${escapeHtml(match)}</mark>`
+          (match) => `<mark>${match}</mark>`
         );
       }
     }
