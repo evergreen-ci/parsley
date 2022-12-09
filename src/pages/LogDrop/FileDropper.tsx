@@ -39,7 +39,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
         reader.onload = () => {
           setHasDroppedLog(true);
           setFileName(file.name);
-          dispatchToast.success(`Successfully loaded file: ${file.name}`);
+          dispatchToast.success(`Successfully uploaded file: ${file.name}`);
           lineStream.current = reader.result;
         };
         reader.readAsText(file);
