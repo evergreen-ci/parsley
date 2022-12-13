@@ -70,7 +70,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
     <Container>
       <BorderBox>
         {hasDroppedLog ? (
-          <UploadLogsContainer>
+          <DropzoneWrapper>
             <ProcessLogsContainer>
               <Select
                 label="How would you like to parse this log?"
@@ -92,9 +92,9 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
                 </Button>
               </ButtonContainer>
             </ProcessLogsContainer>
-          </UploadLogsContainer>
+          </DropzoneWrapper>
         ) : (
-          <UploadLogsContainer {...getRootProps()} data-cy="upload-zone">
+          <DropzoneWrapper {...getRootProps()} data-cy="upload-zone">
             <input {...getInputProps()} />
             <Dropzone>
               <Body weight="medium">
@@ -111,7 +111,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
                 Select from Files
               </Button>
             </Dropzone>
-          </UploadLogsContainer>
+          </DropzoneWrapper>
         )}
       </BorderBox>
     </Container>
@@ -134,7 +134,7 @@ const BorderBox = styled.div`
   border-radius: ${size.s};
 `;
 
-const UploadLogsContainer = styled.div`
+const DropzoneWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
