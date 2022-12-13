@@ -1,11 +1,17 @@
+import { useState } from "react";
 import { render, screen, userEvent, waitFor } from "test_utils";
 import ShortcutModal from ".";
+
+const ModalWrapper = () => {
+  const [open, setOpen] = useState(false);
+  return <ShortcutModal open={open} setOpen={setOpen} />;
+};
 
 describe("shortcutModal", () => {
   const user = userEvent.setup();
 
   it("should toggle open and closed when the user presses the question mark", async () => {
-    render(<ShortcutModal />);
+    render(<ModalWrapper />);
     expect(screen.queryByDataCy("shortcut-modal")).toBeNull();
 
     await user.keyboard("{Shift>}{?}{/Shift}");
@@ -20,7 +26,7 @@ describe("shortcutModal", () => {
   });
 
   it("should close when the user clicks outside of the modal", async () => {
-    render(<ShortcutModal />);
+    render(<ModalWrapper />);
     expect(screen.queryByDataCy("shortcut-modal")).toBeNull();
 
     await user.keyboard("{Shift>}{?}{/Shift}");
