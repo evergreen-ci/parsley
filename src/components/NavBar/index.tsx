@@ -95,7 +95,7 @@ const NavBar: React.FC = () => {
 
       <FlexContainer>
         <IconButton
-          aria-labelledby="Click to open shortcut modal"
+          aria-label="Click to open shortcut modal"
           onClick={() => setOpen(true)}
         >
           <Icon glyph="InfoWithCircle" />
