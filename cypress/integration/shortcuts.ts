@@ -2,10 +2,10 @@
 describe("Shortcuts", () => {
   beforeEach(() => {
     cy.login();
+    cy.visit("/");
   });
 
   it("should be able to open and close the keyboard shortcut modal using keyboard shortcut", () => {
-    cy.visit("/");
     cy.dataCy("shortcut-modal").should("not.exist");
     cy.get("body").type("{shift}", { release: false }).type("{?}");
     cy.dataCy("shortcut-modal").should("be.visible");
