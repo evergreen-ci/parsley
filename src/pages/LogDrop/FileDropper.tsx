@@ -59,9 +59,11 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
     }
   }, [ingestLines, logType, sendEvent, onChangeLogType]);
 
-  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
+  const { getRootProps, getInputProps, open } = useDropzone({
     onDrop,
     maxFiles: 1,
+    noClick: true,
+    noKeyboard: true,
   });
 
   return (
@@ -92,25 +94,21 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
         ) : (
           <UploadLogsContainer {...getRootProps()} data-cy="upload-zone">
             <input {...getInputProps()} />
-            {isDragActive ? (
-              <Body>Release to upload</Body>
-            ) : (
-              <Dropzone>
-                <Body weight="medium">
-                  Drag and Drop a log file to view in Parsley
-                </Body>
-                <Body weight="medium">or</Body>
-                <Button
-                  leftGlyph={<Icon glyph="Upload" />}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    open();
-                  }}
-                >
-                  Select from Files
-                </Button>
-              </Dropzone>
-            )}
+            <Dropzone>
+              <Body weight="medium">
+                Drag and Drop a log file to view in Parsley
+              </Body>
+              <Body weight="medium">or</Body>
+              <Button
+                leftGlyph={<Icon glyph="Upload" />}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  open();
+                }}
+              >
+                Select from Files
+              </Button>
+            </Dropzone>
           </UploadLogsContainer>
         )}
       </BorderBox>
