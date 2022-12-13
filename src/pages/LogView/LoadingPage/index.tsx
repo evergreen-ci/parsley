@@ -42,7 +42,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const { data: logkeeperMetadata } = useFetch<LogkeeperMetadata>(
     getResmokeLogURL(buildID || "", { testID, metadata: true }),
     {
-      skip: !buildID,
+      skip: buildID === undefined,
     }
   );
   switch (logType) {
