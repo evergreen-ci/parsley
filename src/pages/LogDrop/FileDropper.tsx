@@ -70,27 +70,29 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
     <Container>
       <BorderBox>
         {hasDroppedLog ? (
-          <ProcessLogsContainer>
-            <Select
-              label="How would you like to parse this log?"
-              onChange={(value) => setLogType(value as LogTypes)}
-              value={logType}
-            >
-              <Option value={LogTypes.RESMOKE_LOGS}>Resmoke</Option>
-              <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
-            </Select>
-            <ButtonContainer>
-              <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
-              <Button
-                data-cy="process-log-button"
-                disabled={!logType}
-                onClick={onParse}
-                variant="primary"
+          <UploadLogsContainer>
+            <ProcessLogsContainer>
+              <Select
+                label="How would you like to parse this log?"
+                onChange={(value) => setLogType(value as LogTypes)}
+                value={logType}
               >
-                Process Log
-              </Button>
-            </ButtonContainer>
-          </ProcessLogsContainer>
+                <Option value={LogTypes.RESMOKE_LOGS}>Resmoke</Option>
+                <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
+              </Select>
+              <ButtonContainer>
+                <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
+                <Button
+                  data-cy="process-log-button"
+                  disabled={!logType}
+                  onClick={onParse}
+                  variant="primary"
+                >
+                  Process Log
+                </Button>
+              </ButtonContainer>
+            </ProcessLogsContainer>
+          </UploadLogsContainer>
         ) : (
           <UploadLogsContainer {...getRootProps()} data-cy="upload-zone">
             <input {...getInputProps()} />
@@ -128,12 +130,17 @@ const BorderBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50vw;
-  height: 30vh;
-
-  padding: ${size.xl};
   border: ${size.xxs} dashed ${green.base};
   border-radius: ${size.s};
+`;
+
+const UploadLogsContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${size.xl};
+  width: 50vw;
+  height: 30vh;
 `;
 
 const ProcessLogsContainer = styled.div`
@@ -148,11 +155,6 @@ const ButtonContainer = styled.div`
   display: flex;
   align-self: flex-end;
   gap: ${size.xs};
-`;
-
-const UploadLogsContainer = styled.div`
-  display: flex;
-  align-items: center;
 `;
 
 const Dropzone = styled.div`
