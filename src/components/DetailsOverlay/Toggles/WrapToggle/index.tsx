@@ -1,10 +1,11 @@
+import Cookie from "js-cookie";
 import { usePreferencesAnalytics } from "analytics";
-import { QueryParams } from "constants/queryParams";
-import { useQueryParam } from "hooks/useQueryParam";
+import { WRAP } from "constants/cookies";
+import { useLogContext } from "context/LogContext";
 import BaseToggle from "../BaseToggle";
 
 const WrapToggle: React.FC = () => {
-  const [wrap, setWrap] = useQueryParam(QueryParams.Wrap, false);
+  const { wrap, setWrap } = useLogContext();
   const { sendEvent } = usePreferencesAnalytics();
 
   return (
@@ -12,6 +13,7 @@ const WrapToggle: React.FC = () => {
       data-cy="wrap-toggle"
       label="Wrap"
       onChange={(value) => {
+        Cookie.set(WRAP, value.toString());
         setWrap(value);
         sendEvent({ name: "Toggled Wrap", on: value });
       }}

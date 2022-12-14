@@ -1,4 +1,6 @@
 import { useReducer } from "react";
+import Cookie from "js-cookie";
+import { CASE_SENSITIVE } from "constants/cookies";
 import { LogTypes } from "constants/enums";
 import { ExpandedLines } from "types/logs";
 import { mergeIntervals } from "utils/expandedLines";
@@ -33,7 +35,7 @@ const initialState = (initialLogLines?: string[]): LogState => ({
     searchIndex: 0,
     searchRange: 0,
     hasSearch: false,
-    caseSensitive: false,
+    caseSensitive: Cookie.get(CASE_SENSITIVE) === "true",
   },
   expandedLines: [],
 });

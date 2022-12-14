@@ -29,6 +29,7 @@ const LogPane: React.FC<LogPaneProps> = ({
   ...rest
 }) => {
   const {
+    expandableRows,
     listRef,
     matchingLines,
     prettyPrint,
@@ -36,7 +37,6 @@ const LogPane: React.FC<LogPaneProps> = ({
     scrollToLine,
   } = useLogContext();
 
-  const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
   const [selectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
@@ -57,6 +57,7 @@ const LogPane: React.FC<LogPaneProps> = ({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   return (
     <AutoSizer>
       {({ height, width }) => (

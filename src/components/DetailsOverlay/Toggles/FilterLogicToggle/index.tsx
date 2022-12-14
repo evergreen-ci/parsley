@@ -1,23 +1,23 @@
+import Cookie from "js-cookie";
 import { usePreferencesAnalytics } from "analytics";
+import { FILTER_LOGIC } from "constants/cookies";
 import { FilterLogic } from "constants/enums";
-import { QueryParams } from "constants/queryParams";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useLogContext } from "context/LogContext";
 import BaseToggle from "../BaseToggle";
 
 const FilterLogicToggle: React.FC = () => {
-  const [filterLogic, setFilterLogic] = useQueryParam(
-    QueryParams.FilterLogic,
-    FilterLogic.And
-  );
+  const { filterLogic, setFilterLogic } = useLogContext();
 
   const isChecked = filterLogic === FilterLogic.Or;
   const { sendEvent } = usePreferencesAnalytics();
 
   const onChange = (checked: boolean) => {
     if (checked) {
+      Cookie.set(FILTER_LOGIC, FilterLogic.Or);
       setFilterLogic(FilterLogic.Or);
       sendEvent({ name: "Toggled Filter Logic", logic: FilterLogic.Or });
     } else {
+      Cookie.set(FILTER_LOGIC, FilterLogic.And);
       setFilterLogic(FilterLogic.And);
       sendEvent({ name: "Toggled Filter Logic", logic: FilterLogic.And });
     }
