@@ -7,6 +7,7 @@ import { size, zIndex } from "constants/tokens";
 import { useKeyboardShortcut, useOnClickOutside } from "hooks";
 
 const shortcuts = [
+  { keys: [["SHIFT", "?"]], description: "Open or close the shortcut modal" },
   {
     keys: [
       ["CTRL", "F"],
