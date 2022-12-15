@@ -79,7 +79,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
               </Label>
               <Select
                 aria-labelledby="parse-log-select"
-                id="parse-log-select"
+                data-cy="parse-log-select"
                 onChange={(value) => setLogType(value as LogTypes)}
                 value={logType}
               >
