@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
 import { Option, Select } from "@leafygreen-ui/select";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, InlineCode, Label } from "@leafygreen-ui/typography";
 import { useDropzone } from "react-dropzone";
 import { useLogDropAnalytics } from "analytics";
 import Icon from "components/Icon";
@@ -20,7 +20,9 @@ interface FileDropperProps {
 }
 
 const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
-  const { ingestLines, setFileName } = useLogContext();
+  const { ingestLines, setFileName, logMetadata } = useLogContext();
+  const { fileName } = logMetadata ?? {};
+
   const dispatchToast = useToastContext();
   const { sendEvent } = useLogDropAnalytics();
   const [hasDroppedLog, setHasDroppedLog] = useState(false);
@@ -69,11 +71,15 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
   return (
     <Container>
       <BorderBox>
-        {hasDroppedLog ? (
-          <DropzoneWrapper>
+        <DropzoneWrapper {...getRootProps()} data-cy="upload-zone">
+          {hasDroppedLog ? (
             <ProcessLogsContainer>
+              <Label htmlFor="parse-log-select">
+                How would you like to parse <InlineCode>{fileName}</InlineCode>?
+              </Label>
               <Select
-                label="How would you like to parse this log?"
+                aria-labelledby="parse-log-select"
+                id="parse-log-select"
                 onChange={(value) => setLogType(value as LogTypes)}
                 value={logType}
               >
@@ -92,27 +98,27 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
                 </Button>
               </ButtonContainer>
             </ProcessLogsContainer>
-          </DropzoneWrapper>
-        ) : (
-          <DropzoneWrapper {...getRootProps()} data-cy="upload-zone">
-            <input {...getInputProps()} />
-            <Dropzone>
-              <Body weight="medium">
-                Drag and Drop a log file to view in Parsley
-              </Body>
-              <Body weight="medium">or</Body>
-              <Button
-                leftGlyph={<Icon glyph="Upload" />}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  open();
-                }}
-              >
-                Select from Files
-              </Button>
-            </Dropzone>
-          </DropzoneWrapper>
-        )}
+          ) : (
+            <>
+              <input {...getInputProps()} />
+              <Dropzone>
+                <Body weight="medium">
+                  Drag and Drop a log file to view in Parsley
+                </Body>
+                <Body weight="medium">or</Body>
+                <Button
+                  leftGlyph={<Icon glyph="Upload" />}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    open();
+                  }}
+                >
+                  Select from Files
+                </Button>
+              </Dropzone>
+            </>
+          )}
+        </DropzoneWrapper>
       </BorderBox>
     </Container>
   );
