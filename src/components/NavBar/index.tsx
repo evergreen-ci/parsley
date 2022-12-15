@@ -1,10 +1,13 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
+import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import { useLogWindowAnalytics } from "analytics";
 import DetailsOverlay from "components/DetailsOverlay";
 import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import SearchBar from "components/SearchBar";
+import ShortcutModal from "components/ShortcutModal";
 import { StyledLink } from "components/styles";
 import { CaseSensitivity, MatchType, SearchBarActions } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
@@ -19,6 +22,7 @@ import UploadLink from "./UploadLink";
 const { gray, white } = palette;
 
 const NavBar: React.FC = () => {
+  const [open, setOpen] = useState(false);
   const [filters, setFilters] = useFilterParam();
   const [highlights, setHighlights] = useQueryParam<string[]>(
     QueryParams.Highlights,
@@ -89,13 +93,23 @@ const NavBar: React.FC = () => {
         )}
       </FlexContainer>
 
-      <StyledButton
-        buttonText="Details"
-        data-cy="details-button"
-        disabled={!hasLogs}
-      >
-        <DetailsOverlay data-cy="details-overlay" />
-      </StyledButton>
+      <FlexContainer>
+        <IconButton
+          aria-label="Click to open shortcut modal"
+          onClick={() => setOpen(true)}
+        >
+          <Icon glyph="InfoWithCircle" />
+        </IconButton>
+        <StyledButton
+          buttonText="Details"
+          data-cy="details-button"
+          disabled={!hasLogs}
+        >
+          <DetailsOverlay data-cy="details-overlay" />
+        </StyledButton>
+      </FlexContainer>
+
+      <ShortcutModal open={open} setOpen={setOpen} />
     </Container>
   );
 };
