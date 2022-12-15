@@ -31,6 +31,13 @@ describe("pretty print toggle", () => {
     mockedGet.mockImplementation(() => "true");
   });
 
+  it("defaults to 'false' if cookie is unset", () => {
+    mockedGet.mockImplementation(() => "");
+    render(<PrettyPrintToggle />, { wrapper });
+    const prettyPrintToggle = screen.getByDataCy("pretty-print-toggle");
+    expect(prettyPrintToggle).toHaveAttribute("aria-checked", "false");
+  });
+
   it("should read from the cookie properly", () => {
     render(<PrettyPrintToggle />, { wrapper });
     const prettyPrintToggle = screen.getByDataCy("pretty-print-toggle");

@@ -15,6 +15,13 @@ describe("case sensitivity toggle", () => {
     mockedGet.mockImplementation(() => "true");
   });
 
+  it("defaults to 'false' if cookie is unset", () => {
+    mockedGet.mockImplementation(() => "");
+    render(<CaseSensitiveToggle />, { wrapper });
+    const caseSensitiveToggle = screen.getByDataCy("case-sensitive-toggle");
+    expect(caseSensitiveToggle).toHaveAttribute("aria-checked", "false");
+  });
+
   it("should read from the cookie properly", () => {
     render(<CaseSensitiveToggle />, { wrapper });
     const caseSensitiveToggle = screen.getByDataCy("case-sensitive-toggle");

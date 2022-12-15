@@ -13,11 +13,11 @@ const FilterLogicToggle: React.FC = () => {
 
   const onChange = (checked: boolean) => {
     if (checked) {
-      Cookie.set(FILTER_LOGIC, FilterLogic.Or);
+      Cookie.set(FILTER_LOGIC, FilterLogic.Or, { expires: 365 });
       setFilterLogic(FilterLogic.Or);
       sendEvent({ name: "Toggled Filter Logic", logic: FilterLogic.Or });
     } else {
-      Cookie.set(FILTER_LOGIC, FilterLogic.And);
+      Cookie.set(FILTER_LOGIC, FilterLogic.And, { expires: 365 });
       setFilterLogic(FilterLogic.And);
       sendEvent({ name: "Toggled Filter Logic", logic: FilterLogic.And });
     }

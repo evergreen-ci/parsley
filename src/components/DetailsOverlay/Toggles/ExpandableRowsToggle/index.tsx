@@ -12,7 +12,7 @@ const ExpandableRowsToggle: React.FC = () => {
       data-cy="expandable-rows-toggle"
       label="Expandable Rows"
       onChange={(value) => {
-        Cookie.set(EXPANDABLE_ROWS, value.toString());
+        Cookie.set(EXPANDABLE_ROWS, value.toString(), { expires: 365 });
         setExpandableRows(value);
         sendEvent({ name: "Toggled Expandable Rows", on: value });
       }}

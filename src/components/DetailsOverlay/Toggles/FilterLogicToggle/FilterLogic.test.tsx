@@ -18,14 +18,14 @@ describe("filter logic toggle", () => {
   it("defaults to 'and' if cookie is unset", () => {
     mockedGet.mockImplementation(() => "");
     render(<FilterLogicToggle />, { wrapper });
-    const expandableRowsToggle = screen.getByDataCy("filter-logic-toggle");
-    expect(expandableRowsToggle).toHaveAttribute("aria-checked", "false");
+    const filterLogicToggle = screen.getByDataCy("filter-logic-toggle");
+    expect(filterLogicToggle).toHaveAttribute("aria-checked", "false");
   });
 
   it("should read from the cookie properly", () => {
     render(<FilterLogicToggle />, { wrapper });
-    const expandableRowsToggle = screen.getByDataCy("filter-logic-toggle");
-    expect(expandableRowsToggle).toHaveAttribute("aria-checked", "true");
+    const filterLogicToggle = screen.getByDataCy("filter-logic-toggle");
+    expect(filterLogicToggle).toHaveAttribute("aria-checked", "true");
   });
 
   it("should update the URL correctly", async () => {

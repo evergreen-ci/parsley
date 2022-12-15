@@ -13,7 +13,7 @@ const WrapToggle: React.FC = () => {
       data-cy="wrap-toggle"
       label="Wrap"
       onChange={(value) => {
-        Cookie.set(WRAP, value.toString());
+        Cookie.set(WRAP, value.toString(), { expires: 365 });
         setWrap(value);
         sendEvent({ name: "Toggled Wrap", on: value });
       }}

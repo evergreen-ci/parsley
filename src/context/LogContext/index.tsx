@@ -100,10 +100,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
   const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
 
-  const [wrap, setWrap] = useQueryParam(
-    QueryParams.Wrap,
-    Cookie.get(WRAP) === "true"
-  );
+  const [wrap, setWrap] = useState(Cookie.get(WRAP) === "true");
   const [filterLogic, setFilterLogic] = useQueryParam(
     QueryParams.FilterLogic,
     (Cookie.get(FILTER_LOGIC) as FilterLogic) ?? FilterLogic.And
