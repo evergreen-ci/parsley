@@ -5,12 +5,10 @@ describe("log uploading", () => {
     cy.get("input[type=file]").selectFile("sample_logs/resmoke.log", {
       force: true,
     });
-    cy.getInputByLabel("How would you like to parse this log?").should(
-      "be.visible"
-    );
+    cy.dataCy("parse-log-select").should("be.visible");
   });
   it("Selecting a logtype should render the log with the appropriate parser", () => {
-    cy.getInputByLabel("How would you like to parse this log?").click();
+    cy.dataCy("parse-log-select").click();
     cy.contains("Resmoke").click();
     cy.dataCy("process-log-button").click();
     cy.dataCy("log-window").should("be.visible");
@@ -29,8 +27,6 @@ describe("log uploading", () => {
       force: true,
       action: "drag-drop",
     });
-    cy.getInputByLabel("How would you like to parse this log?").should(
-      "be.visible"
-    );
+    cy.dataCy("parse-log-select").should("be.visible");
   });
 });

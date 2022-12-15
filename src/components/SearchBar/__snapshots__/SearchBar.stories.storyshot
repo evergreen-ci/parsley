@@ -79,7 +79,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
           placeholder="optional, regexp to search"
           required={true}
           spellCheck={false}
-          type="search"
+          type="text"
           value=""
         />
         <div

@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
 import { Option, Select } from "@leafygreen-ui/select";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, InlineCode, Label } from "@leafygreen-ui/typography";
 import { useDropzone } from "react-dropzone";
 import { useLogDropAnalytics } from "analytics";
 import Icon from "components/Icon";
@@ -20,7 +20,9 @@ interface FileDropperProps {
 }
 
 const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
-  const { ingestLines, setFileName } = useLogContext();
+  const { ingestLines, setFileName, logMetadata } = useLogContext();
+  const { fileName } = logMetadata ?? {};
+
   const dispatchToast = useToastContext();
   const { sendEvent } = useLogDropAnalytics();
   const [hasDroppedLog, setHasDroppedLog] = useState(false);
@@ -39,7 +41,6 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
         reader.onload = () => {
           setHasDroppedLog(true);
           setFileName(file.name);
-          dispatchToast.success(`Successfully uploaded file: ${file.name}`);
           lineStream.current = reader.result;
         };
         reader.readAsText(file);
@@ -59,42 +60,46 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
     }
   }, [ingestLines, logType, sendEvent, onChangeLogType]);
 
-  const { getRootProps, getInputProps, isDragActive, open } = useDropzone({
+  const { getRootProps, getInputProps, open } = useDropzone({
     onDrop,
     maxFiles: 1,
+    noClick: true,
+    noKeyboard: true,
   });
 
   return (
     <Container>
       <BorderBox>
-        {hasDroppedLog ? (
-          <ProcessLogsContainer>
-            <Select
-              label="How would you like to parse this log?"
-              onChange={(value) => setLogType(value as LogTypes)}
-              value={logType}
-            >
-              <Option value={LogTypes.RESMOKE_LOGS}>Resmoke</Option>
-              <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
-            </Select>
-            <ButtonContainer>
-              <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
-              <Button
-                data-cy="process-log-button"
-                disabled={!logType}
-                onClick={onParse}
-                variant="primary"
+        <DropzoneWrapper {...getRootProps()} data-cy="upload-zone">
+          {hasDroppedLog ? (
+            <ProcessLogsContainer>
+              <Label htmlFor="parse-log-select">
+                How would you like to parse <InlineCode>{fileName}</InlineCode>?
+              </Label>
+              <Select
+                aria-labelledby="parse-log-select"
+                data-cy="parse-log-select"
+                onChange={(value) => setLogType(value as LogTypes)}
+                value={logType}
               >
-                Process Log
-              </Button>
-            </ButtonContainer>
-          </ProcessLogsContainer>
-        ) : (
-          <UploadLogsContainer {...getRootProps()} data-cy="upload-zone">
-            <input {...getInputProps()} />
-            {isDragActive ? (
-              <Body>Release to upload</Body>
-            ) : (
+                <Option value={LogTypes.RESMOKE_LOGS}>Resmoke</Option>
+                <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
+              </Select>
+              <ButtonContainer>
+                <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
+                <Button
+                  data-cy="process-log-button"
+                  disabled={!logType}
+                  onClick={onParse}
+                  variant="primary"
+                >
+                  Process Log
+                </Button>
+              </ButtonContainer>
+            </ProcessLogsContainer>
+          ) : (
+            <UploadLogsContainer>
+              <input {...getInputProps()} />
               <Dropzone>
                 <Body weight="medium">
                   Drag and Drop a log file to view in Parsley
@@ -110,9 +115,9 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
                   Select from Files
                 </Button>
               </Dropzone>
-            )}
-          </UploadLogsContainer>
-        )}
+            </UploadLogsContainer>
+          )}
+        </DropzoneWrapper>
       </BorderBox>
     </Container>
   );
@@ -130,12 +135,17 @@ const BorderBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50vw;
-  height: 30vh;
-
-  padding: ${size.xl};
   border: ${size.xxs} dashed ${green.base};
   border-radius: ${size.s};
+`;
+
+const DropzoneWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: ${size.xl};
+  width: 50vw;
+  height: 30vh;
 `;
 
 const ProcessLogsContainer = styled.div`
