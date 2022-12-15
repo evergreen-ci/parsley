@@ -41,7 +41,6 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
         reader.onload = () => {
           setHasDroppedLog(true);
           setFileName(file.name);
-          dispatchToast.success(`Successfully uploaded file: ${file.name}`);
           lineStream.current = reader.result;
         };
         reader.readAsText(file);
@@ -99,7 +98,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
               </ButtonContainer>
             </ProcessLogsContainer>
           ) : (
-            <>
+            <UploadLogsContainer>
               <input {...getInputProps()} />
               <Dropzone>
                 <Body weight="medium">
@@ -116,7 +115,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
                   Select from Files
                 </Button>
               </Dropzone>
-            </>
+            </UploadLogsContainer>
           )}
         </DropzoneWrapper>
       </BorderBox>
@@ -161,6 +160,11 @@ const ButtonContainer = styled.div`
   display: flex;
   align-self: flex-end;
   gap: ${size.xs};
+`;
+
+const UploadLogsContainer = styled.div`
+  display: flex;
+  align-items: center;
 `;
 
 const Dropzone = styled.div`
