@@ -98,29 +98,29 @@ describe("Bookmarking and selecting lines", () => {
 
   it("should default to bookmarking 0 and the last log line on load", () => {
     cy.location("search").should("equal", "?bookmarks=0,11079");
-    cy.dataCy("sidebar-log-line-container").should("contain", "0");
-    cy.dataCy("sidebar-log-line-container").should("contain", "11079");
+    cy.dataCy("bookmark-list").should("contain", "0");
+    cy.dataCy("bookmark-list").should("contain", "11079");
   });
 
   it("should be able to bookmark and unbookmark log lines", () => {
     cy.dataCy("log-row-4").dblclick();
     cy.location("search").should("equal", "?bookmarks=0,4,11079");
-    cy.dataCy("sidebar-log-line-container").should("contain", "0");
-    cy.dataCy("sidebar-log-line-container").should("contain", "4");
-    cy.dataCy("sidebar-log-line-container").should("contain", "11079");
+    cy.dataCy("bookmark-list").should("contain", "0");
+    cy.dataCy("bookmark-list").should("contain", "4");
+    cy.dataCy("bookmark-list").should("contain", "11079");
 
     cy.dataCy("log-row-4").dblclick();
-    cy.dataCy("sidebar-log-line-container").should("not.contain", "4");
+    cy.dataCy("bookmark-list").should("not.contain", "4");
   });
 
   it("should be able to select and unselect lines", () => {
     cy.dataCy("log-link-5").click();
     cy.location("search").should("equal", "?bookmarks=0,11079&selectedLine=5");
-    cy.dataCy("sidebar-log-line-container").should("contain", "5");
+    cy.dataCy("bookmark-list").should("contain", "5");
 
     cy.dataCy("log-link-5").click();
     cy.location("search").should("equal", "?bookmarks=0,11079");
-    cy.dataCy("sidebar-log-line-container").should("not.contain", "5");
+    cy.dataCy("bookmark-list").should("not.contain", "5");
   });
 
   it("should be able to copy bookmarks as JIRA format", () => {
@@ -163,31 +163,31 @@ describe("Jump to line", () => {
 
   it("should default to bookmarking 0 and the last log line on load", () => {
     cy.location("search").should("equal", "?bookmarks=0,11079");
-    cy.dataCy("sidebar-log-line-container").should("contain", "0");
-    cy.dataCy("sidebar-log-line-container").should("contain", "11079");
+    cy.dataCy("bookmark-list").should("contain", "0");
+    cy.dataCy("bookmark-list").should("contain", "11079");
   });
 
-  it("should be able to use the sidebar to jump to a line when there are no collapsed rows", () => {
+  it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
     cy.dataCy("log-row-4").dblclick({ force: true });
 
-    cy.dataCy("sidebar-log-line-11079").click();
+    cy.dataCy("bookmark-11079").click();
     cy.dataCy("log-row-11079").should("be.visible");
     cy.dataCy("log-row-56").should("not.exist");
 
-    cy.dataCy("sidebar-log-line-4").click();
+    cy.dataCy("bookmark-4").click();
     cy.dataCy("log-row-4").should("be.visible");
   });
 
-  it("should be able to use the sidebar to jump to a line when there are collapsed rows", () => {
+  it("should be able to use the bookmarks bar to jump to a line when there are collapsed rows", () => {
     cy.addFilter("repl_hb");
 
     cy.dataCy("log-row-30").dblclick({ force: true });
 
-    cy.dataCy("sidebar-log-line-11079").click();
+    cy.dataCy("bookmark-11079").click();
     cy.dataCy("log-row-11079").should("be.visible");
     cy.dataCy("log-row-30").should("not.exist");
 
-    cy.dataCy("sidebar-log-line-30").click();
+    cy.dataCy("bookmark-30").click();
     cy.dataCy("log-row-30").should("be.visible");
   });
   it("visiting a log with a selected line should jump to that line on page load", () => {

@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
+import BookmarksBar from "components/BookmarksBar";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
-import SideBar from "components/SideBar";
 import SidePanel from "components/SidePanel";
 import SubHeader from "components/SubHeader";
 import { LogTypes } from "constants/enums";
@@ -48,7 +48,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         collapseLines={collapseLines}
         expandedLines={expandedLines}
       />
-      <SideBar
+      <BookmarksBar
         lineCount={lineCount}
         processedLogLines={processedLogLines}
         scrollToLine={scrollToLine}
@@ -93,7 +93,7 @@ const Container = styled.div`
 const ColumnContainer = styled.div`
   display: flex;
   flex-direction: column;
-  // ColumnContainer should take up the remaining page width after FiltersDrawer & SideBar.
+  // ColumnContainer should take up the remaining page width after SidePanel & BookmarksBar.
   flex: 1 1 auto;
 `;
 
