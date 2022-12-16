@@ -1,8 +1,8 @@
 import styled from "@emotion/styled";
-import FiltersDrawer from "components/FiltersDrawer";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import SideBar from "components/SideBar";
+import SidePanel from "components/SidePanel";
 import SubHeader from "components/SubHeader";
 import { LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
@@ -43,7 +43,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
 
   return (
     <Container data-cy="log-window">
-      <FiltersDrawer
+      <SidePanel
         clearExpandedLines={clearExpandedLines}
         collapseLines={collapseLines}
         expandedLines={expandedLines}
