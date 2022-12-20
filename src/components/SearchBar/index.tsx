@@ -158,7 +158,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         }
         placeholder="optional, regexp to search"
         spellCheck={false}
-        type="search"
+        type="text"
         value={input}
       />
     </Container>
