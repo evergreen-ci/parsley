@@ -138,13 +138,13 @@ describe("Bookmarking and selecting lines", () => {
     cy.enableClipboard();
     cy.dataCy("details-button").click();
     cy.dataCy("jira-button-wrapper").click();
-    cy.window()
-      .its("navigator.clipboard")
-      .invoke("readText")
-      .should(
-        "equal",
-        `{noformat}\n${logLine0}\n...\n${logLine10}\n${logLine11}\n...\n${logLine11079}\n{noformat}`
-      );
+    cy.window().then((win) => {
+      win.navigator.clipboard.readText().then((text) => {
+        expect(text).to.eq(
+          `{noformat}\n${logLine0}\n...\n${logLine10}\n${logLine11}\n...\n${logLine11079}\n{noformat}`
+        );
+      });
+    });
   });
 
   it("should be able to clear bookmarks", () => {
