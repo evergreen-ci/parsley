@@ -16,8 +16,8 @@ const Search: React.FC = () => {
     QueryParams.Highlights,
     []
   );
-  const { hasLogs, setSearch, searchState, paginate } = useLogContext();
   const { sendEvent } = useLogWindowAnalytics();
+  const { hasLogs, setSearch, searchState, paginate } = useLogContext();
   const { hasSearch } = searchState;
 
   const handleSearch = (selected: string, value: string) => {
@@ -75,7 +75,7 @@ const Search: React.FC = () => {
   );
 };
 
-const Container = styled.nav`
+const Container = styled.div`
   display: flex;
   align-items: center;
 `;

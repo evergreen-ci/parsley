@@ -23,6 +23,7 @@ const HighlightNavGroup: React.FC = () => {
       highlightExpression: highlightName,
     });
   };
+
   return (
     <BaseNavGroup
       data-cy="highlight"

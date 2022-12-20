@@ -14,7 +14,7 @@ describe("highlights", () => {
     expect(screen.getByDataCy("highlight-default-message")).toBeInTheDocument();
   });
 
-  it("highlighted terms should properly display based on URL", () => {
+  it("highlighted terms should properly display based on the URL", () => {
     render(<HighlightNavGroup />, {
       route: "?highlights=one,two",
     });

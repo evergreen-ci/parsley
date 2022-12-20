@@ -79,6 +79,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
 
 const FilterWrapper = styled.div`
   margin-top: ${size.s};
+  margin-bottom: ${size.xxs};
 `;
 
 export default FilterNavGroup;

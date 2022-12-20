@@ -39,9 +39,9 @@ const BaseNavGroup = <T extends {}>({
     {items.length ? (
       children
     ) : (
-      <SectionWrapper data-cy={`${dataCy}-default-message`}>
+      <DefaultMessageWrapper data-cy={`${dataCy}-default-message`}>
         <Body>{defaultMessage}</Body>
-      </SectionWrapper>
+      </DefaultMessageWrapper>
     )}
   </StyledSideNavGroup>
 );
@@ -62,7 +62,7 @@ const NavGroupTitle = styled.div`
   margin-right: ${size.xxs};
 `;
 
-const SectionWrapper = styled.div`
+const DefaultMessageWrapper = styled.div`
   margin-top: ${size.xs};
   margin-bottom: ${size.s};
 `;

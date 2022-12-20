@@ -16,7 +16,7 @@ describe("expanded lines", () => {
     ).toBeInTheDocument();
   });
 
-  it("expanded lines should properly display baed on props", () => {
+  it("expanded lines should properly display based on props", () => {
     render(
       <ExpandedNavGroup
         {...props}

@@ -14,7 +14,7 @@ describe("filters", () => {
     expect(screen.getByDataCy("filters-default-message")).toBeInTheDocument();
   });
 
-  it("filters should properly display based on URL", () => {
+  it("filters should properly display based on the URL", () => {
     render(<FilterNavGroup {...props} />, {
       route: "?filters=100filter1,100filter2",
     });
@@ -96,7 +96,7 @@ describe("filters", () => {
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 
-  it("deleting a filter should cause clearExpandedLines if there are no longer any filters applied", async () => {
+  it("deleting a filter should call clearExpandedLines if there are no longer any filters applied", async () => {
     const clearExpandedLines = jest.fn();
     const { history } = render(
       <FilterNavGroup {...props} clearExpandedLines={clearExpandedLines} />,
