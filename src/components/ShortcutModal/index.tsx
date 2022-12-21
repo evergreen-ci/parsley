@@ -1,4 +1,4 @@
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import styled from "@emotion/styled";
 import Modal from "@leafygreen-ui/modal";
 import { Body, H3, InlineKeyCode } from "@leafygreen-ui/typography";
@@ -7,6 +7,7 @@ import { size, zIndex } from "constants/tokens";
 import { useKeyboardShortcut, useOnClickOutside } from "hooks";
 
 const shortcuts = [
+  { keys: [["SHIFT", "?"]], description: "Open or close the shortcut modal" },
   {
     keys: [
       ["CTRL", "F"],
@@ -32,8 +33,12 @@ const shortcuts = [
   },
 ];
 
-const ShortcutModal: React.FC = () => {
-  const [open, setOpen] = useState(false);
+interface ShortcutModalProps {
+  open: boolean;
+  setOpen: (open: boolean) => void;
+}
+
+const ShortcutModal: React.FC<ShortcutModalProps> = ({ open, setOpen }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
   useKeyboardShortcut(
