@@ -27,27 +27,24 @@ import { getMatchingLines } from "utils/matchingLines";
 import { getColorMapping } from "utils/resmoke";
 import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
-import { DIRECTION, LogMetadata, SearchState } from "./types";
+import { DIRECTION, LogMetadata, Preferences, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
-  expandableRows: boolean;
   expandedLines: ExpandedLines;
-  filterLogic: FilterLogic;
   hasLogs: boolean;
   highlightedLine?: number;
   lineCount: number;
   listRef: React.RefObject<List>;
   logMetadata?: LogMetadata;
   matchingLines: Set<number> | undefined;
-  prettyPrint: boolean;
+  preferences: Preferences;
   processedLogLines: ProcessedLogLines;
   range: {
     lowerRange: number;
     upperRange?: number;
   };
   searchState: SearchState;
-  wrap: boolean;
 
   clearExpandedLines: () => void;
   clearLogs: () => void;
@@ -59,14 +56,9 @@ interface LogContextState {
   paginate: (dir: DIRECTION) => void;
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
-  setCaseSensitive: (caseSensitive: boolean) => void;
-  setExpandableRows: (expandableRows: boolean) => void;
   setFileName: (fileName: string) => void;
-  setFilterLogic: (filterLogic: FilterLogic) => void;
   setLogMetadata: (logMetadata: LogMetadata) => void;
   setSearch: (search: string) => void;
-  setWrap: (wrap: boolean) => void;
-  togglePrettyPrint: (prettyPrint: boolean) => void;
 }
 
 const LogContext = createContext<LogContextState | null>(null);
@@ -226,9 +218,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const memoizedContext = useMemo(
     () => ({
-      expandableRows,
       expandedLines: state.expandedLines,
-      filterLogic,
       hasLogs: !!processedLogLines.length,
       hasSearch: !!state.searchState.searchTerm,
       highlightedLine,
@@ -236,14 +226,39 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       logMetadata: state.logMetadata,
       listRef,
       matchingLines,
-      prettyPrint,
+      preferences: {
+        caseSensitive: state.searchState.caseSensitive,
+        expandableRows,
+        filterLogic,
+        prettyPrint,
+        wrap,
+        setCaseSensitive: (v: boolean) => {
+          dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive: v });
+          Cookie.set(CASE_SENSITIVE, v.toString(), { expires: 365 });
+        },
+        setExpandableRows: (v: boolean) => {
+          setExpandableRows(v);
+          Cookie.set(EXPANDABLE_ROWS, v.toString(), { expires: 365 });
+        },
+        setFilterLogic: (v: FilterLogic) => {
+          setFilterLogic(v);
+          Cookie.set(FILTER_LOGIC, v, { expires: 365 });
+        },
+        setPrettyPrint: (v: boolean) => {
+          setPrettyPrint(v);
+          Cookie.set(PRETTY_PRINT_BOOKMARKS, v.toString(), { expires: 365 });
+        },
+        setWrap: (v: boolean) => {
+          setWrap(v);
+          Cookie.set(WRAP, v.toString(), { expires: 365 });
+        },
+      },
       processedLogLines,
       range: {
         lowerRange,
         upperRange,
       },
       searchState: state.searchState,
-      wrap,
 
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
@@ -268,31 +283,18 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         cache.clear(index, 0);
       },
       scrollToLine,
-
-      setCaseSensitive: (caseSensitive: boolean) => {
-        dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive });
-        Cookie.set(CASE_SENSITIVE, caseSensitive.toString(), { expires: 365 });
-      },
-      setExpandableRows,
       setFileName: (fileName: string) => {
         dispatch({ type: "SET_FILE_NAME", fileName });
       },
-      setFilterLogic,
       setLogMetadata: (logMetadata: LogMetadata) => {
         dispatch({ type: "SET_LOG_METADATA", logMetadata });
       },
       setSearch: (searchTerm: string) => {
         dispatch({ type: "SET_SEARCH_TERM", searchTerm });
       },
-      setWrap,
-      togglePrettyPrint: (v: boolean) => {
-        setPrettyPrint(v);
-        Cookie.set(PRETTY_PRINT_BOOKMARKS, v.toString(), { expires: 365 });
-      },
     }),
     [
       wrap,
-      setWrap,
       filterLogic,
       setFilterLogic,
       expandableRows,

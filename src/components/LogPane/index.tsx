@@ -29,13 +29,13 @@ const LogPane: React.FC<LogPaneProps> = ({
   ...rest
 }) => {
   const {
-    expandableRows,
     listRef,
     matchingLines,
-    prettyPrint,
+    preferences,
     processedLogLines,
     scrollToLine,
   } = useLogContext();
+  const { expandableRows, prettyPrint } = preferences;
 
   const [selectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,

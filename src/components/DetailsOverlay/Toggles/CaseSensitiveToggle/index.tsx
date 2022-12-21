@@ -3,8 +3,9 @@ import { useLogContext } from "context/LogContext";
 import BaseToggle from "../BaseToggle";
 
 const CaseSensitiveToggle: React.FC = () => {
-  const { searchState, setCaseSensitive } = useLogContext();
   const { sendEvent } = usePreferencesAnalytics();
+  const { preferences } = useLogContext();
+  const { caseSensitive, setCaseSensitive } = preferences;
   return (
     <BaseToggle
       data-cy="case-sensitive-toggle"
@@ -13,7 +14,7 @@ const CaseSensitiveToggle: React.FC = () => {
         setCaseSensitive(value);
         sendEvent({ name: "Toggled Case Sensitivity", on: value });
       }}
-      value={searchState.caseSensitive}
+      value={caseSensitive}
     />
   );
 };
