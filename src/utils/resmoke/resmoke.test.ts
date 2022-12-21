@@ -23,7 +23,7 @@ describe("processResmokeLine", () => {
     expect(processResmokeLine("hello")).toBe("hello");
   });
 
-  it("should handle escaped strings", () => {
+  it("should handle strings with escaped quotes", () => {
     expect(
       processResmokeLine(
         `[j1] {"t":{"$date":"2022-12-15T14:27:56.528+00:00"},"s":"I",  "c":"-",        "id":0,       "ctx":"conn31","msg":"XOXOXO command is setting shard role { isMaster: 1, client: { application: { name: \\"MongoDB Shell\\" }, driver: { name: \\"MongoDB Internal Client\\", version: \\"6.3.0-alpha-520-g20913e4-patch-639b27313627e07bda0ca7db\\" }, os: { type: \\"Linux\\", name: \\"Red Hat Enterprise Linux release 8.0 (Ootpa)\\", architecture: \\"x86_64\\", version: \\"Kernel 4.18.0-80.1.2.el8_0.x86_64\\" } }, $db: \\"admin\\" }"}`

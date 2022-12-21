@@ -131,8 +131,9 @@ const getContext = (line: string) => {
 
 /** The message
  * @example "msg":"client metadata"
+ * @example "msg":"{ someParam: \"someValue\" }"
  */
-const msgRegex = /msg":"([^"\\]*(\\.[^"\\]*)*)"/;
+const msgRegex = /"msg":"([^"\\]*(\\.[^"\\]*)*)"/;
 
 /** `getMessage` returns the message outputted by resmoke for a given line this is found in the resmoke json */
 const getMessage = (line: string) => {
