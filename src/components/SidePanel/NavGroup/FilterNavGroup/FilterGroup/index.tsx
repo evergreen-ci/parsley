@@ -83,7 +83,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
             placeholder="New filter definition"
             sizeVariant="small"
             spellCheck={false}
-            type="search"
+            type="text"
             value={newFilterName}
           />
           <ButtonWrapper>
