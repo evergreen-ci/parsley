@@ -12,13 +12,13 @@ import { findLineIndex } from "utils/findLineIndex";
 
 const { gray, green } = palette;
 
-interface SideBarProps {
+interface BookmarksBarProps {
   lineCount: number;
   processedLogLines: (number | number[])[];
   scrollToLine: (scrollIndex: number) => void;
 }
 
-const SideBar: React.FC<SideBarProps> = ({
+const BookmarksBar: React.FC<BookmarksBarProps> = ({
   lineCount,
   processedLogLines,
   scrollToLine,
@@ -76,11 +76,11 @@ const SideBar: React.FC<SideBarProps> = ({
       >
         Clear all bookmarks
       </Tooltip>
-      <LogLineContainer data-cy="sidebar-log-line-container">
+      <LogLineContainer data-cy="bookmark-list">
         {lineNumbers.map((l) => (
           <LogLineNumber
-            key={`sidebar-log-line-${l}`}
-            data-cy={`sidebar-log-line-${l}`}
+            key={`bookmark-${l}`}
+            data-cy={`bookmark-${l}`}
             onClick={() => {
               sendEvent({ name: "Navigated With Bookmark" });
               scrollToIndex(l);
@@ -133,4 +133,4 @@ const Container = styled.div`
   z-index: 0;
 `;
 
-export default SideBar;
+export default BookmarksBar;
