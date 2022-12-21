@@ -1,10 +1,14 @@
 import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
-import SideBar from ".";
+import BookmarksBar from ".";
 
-describe("sideBar", () => {
+describe("bookmarks bar", () => {
   it("should not add bookmarks if there are no log lines", async () => {
     const { history } = renderWithRouterMatch(
-      <SideBar lineCount={0} processedLogLines={[]} scrollToLine={jest.fn()} />
+      <BookmarksBar
+        lineCount={0}
+        processedLogLines={[]}
+        scrollToLine={jest.fn()}
+      />
     );
     await waitFor(() => {
       expect(history.location.search).toBe("");
@@ -13,7 +17,11 @@ describe("sideBar", () => {
 
   it("should add a single bookmark of 0 if there is only a single log line", async () => {
     const { history } = renderWithRouterMatch(
-      <SideBar lineCount={1} processedLogLines={[1]} scrollToLine={jest.fn()} />
+      <BookmarksBar
+        lineCount={1}
+        processedLogLines={[1]}
+        scrollToLine={jest.fn()}
+      />
     );
     await waitFor(() => {
       expect(history.location.search).toBe("?bookmarks=0");
@@ -22,7 +30,7 @@ describe("sideBar", () => {
 
   it("should set 0 and last log line as the initial bookmarks", async () => {
     const { history } = renderWithRouterMatch(
-      <SideBar
+      <BookmarksBar
         lineCount={11}
         processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         scrollToLine={jest.fn()}
@@ -35,7 +43,7 @@ describe("sideBar", () => {
 
   it("should properly display sorted bookmarks and selectedLine", () => {
     renderWithRouterMatch(
-      <SideBar
+      <BookmarksBar
         lineCount={11}
         processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         scrollToLine={jest.fn()}
@@ -44,7 +52,7 @@ describe("sideBar", () => {
         route: "?bookmarks=1,7&selectedLine=5",
       }
     );
-    const { children } = screen.getByDataCy("sidebar-log-line-container");
+    const { children } = screen.getByDataCy("bookmark-list");
     expect(children).toHaveLength(3);
     expect((children.item(0) as Element).textContent).toContain("1");
     expect((children.item(1) as Element).textContent).toContain("5");
@@ -56,7 +64,7 @@ describe("sideBar", () => {
 
   it("should be able to clear all bookmarks without removing selected line", async () => {
     const { history } = renderWithRouterMatch(
-      <SideBar
+      <BookmarksBar
         lineCount={11}
         processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         scrollToLine={jest.fn()}
@@ -72,7 +80,7 @@ describe("sideBar", () => {
   it("should call scrollToLine when clicking on a log line (with no collapsed lines)", async () => {
     const scrollToLine = jest.fn();
     renderWithRouterMatch(
-      <SideBar
+      <BookmarksBar
         lineCount={5}
         processedLogLines={[0, 1, 2, 3, 4]}
         scrollToLine={scrollToLine}
@@ -81,7 +89,7 @@ describe("sideBar", () => {
         route: "?bookmarks=1,3",
       }
     );
-    await userEvent.click(screen.getByDataCy("sidebar-log-line-3"));
+    await userEvent.click(screen.getByDataCy("bookmark-3"));
     expect(scrollToLine).toHaveBeenCalledTimes(1);
     expect(scrollToLine).toHaveBeenCalledWith(3);
   });
@@ -89,7 +97,7 @@ describe("sideBar", () => {
   it("should call scrollToLine when clicking on a log line (with collapsed lines)", async () => {
     const scrollToLine = jest.fn();
     renderWithRouterMatch(
-      <SideBar
+      <BookmarksBar
         lineCount={5}
         processedLogLines={[[0, 1, 2], 3, 4]}
         scrollToLine={scrollToLine}
@@ -98,7 +106,7 @@ describe("sideBar", () => {
         route: "?bookmarks=1,3",
       }
     );
-    await userEvent.click(screen.getByDataCy("sidebar-log-line-3"));
+    await userEvent.click(screen.getByDataCy("bookmark-3"));
     expect(scrollToLine).toHaveBeenCalledTimes(1);
     expect(scrollToLine).toHaveBeenCalledWith(1);
   });
