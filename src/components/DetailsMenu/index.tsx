@@ -10,14 +10,12 @@ import {
   WrapToggle,
 } from "./Toggles";
 
-interface DetailsOverlayProps {
+interface DetailsMenuProps {
   ["data-cy"]?: string;
 }
 
-const DetailsOverlay: React.FC<DetailsOverlayProps> = ({
-  "data-cy": dataCy,
-}) => (
-  <DetailsOverlayCard data-cy={dataCy}>
+const DetailsMenu: React.FC<DetailsMenuProps> = ({ "data-cy": dataCy }) => (
+  <DetailsMenuCard data-cy={dataCy}>
     <Row>
       <Column>
         <SearchRangeInput />
@@ -31,10 +29,10 @@ const DetailsOverlay: React.FC<DetailsOverlayProps> = ({
       </Column>
     </Row>
     <ButtonRow />
-  </DetailsOverlayCard>
+  </DetailsMenuCard>
 );
 
-const DetailsOverlayCard = styled.div`
+const DetailsMenuCard = styled.div`
   width: 700px;
   padding: ${size.xs};
   display: flex;
@@ -50,4 +48,4 @@ const Column = styled.div`
   width: 300px;
 `;
 
-export default DetailsOverlay;
+export default DetailsMenu;
