@@ -10,7 +10,13 @@ import {
 import Cookie from "js-cookie";
 import { List } from "react-virtualized";
 import { cache } from "components/LogRow/RowRenderer";
-import { PRETTY_PRINT_BOOKMARKS } from "constants/cookies";
+import {
+  CASE_SENSITIVE,
+  EXPANDABLE_ROWS,
+  FILTER_LOGIC,
+  PRETTY_PRINT_BOOKMARKS,
+  WRAP,
+} from "constants/cookies";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useFilterParam } from "hooks/useFilterParam";
@@ -21,19 +27,19 @@ import { getMatchingLines } from "utils/matchingLines";
 import { getColorMapping } from "utils/resmoke";
 import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
-import { DIRECTION, LogMetadata, SearchState } from "./types";
+import { DIRECTION, LogMetadata, Preferences, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
   expandedLines: ExpandedLines;
   hasLogs: boolean;
-  logMetadata?: LogMetadata;
   highlightedLine?: number;
   lineCount: number;
   listRef: React.RefObject<List>;
+  logMetadata?: LogMetadata;
   matchingLines: Set<number> | undefined;
+  preferences: Preferences;
   processedLogLines: ProcessedLogLines;
-  prettyPrint: boolean;
   range: {
     lowerRange: number;
     upperRange?: number;
@@ -50,11 +56,9 @@ interface LogContextState {
   paginate: (dir: DIRECTION) => void;
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
-  setCaseSensitive: (caseSensitive: boolean) => void;
   setFileName: (fileName: string) => void;
   setLogMetadata: (logMetadata: LogMetadata) => void;
   setSearch: (search: string) => void;
-  togglePrettyPrint: (prettyPrint: boolean) => void;
 }
 
 const LogContext = createContext<LogContextState | null>(null);
@@ -82,20 +86,28 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     QueryParams.SelectedLine,
     undefined
   );
-  const [filterLogic] = useQueryParam(QueryParams.FilterLogic, FilterLogic.And);
   const [upperRange] = useQueryParam<undefined | number>(
     QueryParams.UpperRange,
     undefined
   );
   const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
-  const [expandableRows] = useQueryParam(QueryParams.Expandable, true);
+
+  const [wrap, setWrap] = useState(Cookie.get(WRAP) === "true");
+  const [filterLogic, setFilterLogic] = useQueryParam(
+    QueryParams.FilterLogic,
+    (Cookie.get(FILTER_LOGIC) as FilterLogic) ?? FilterLogic.And
+  );
+  const [expandableRows, setExpandableRows] = useQueryParam(
+    QueryParams.Expandable,
+    Cookie.get(EXPANDABLE_ROWS) ? Cookie.get(EXPANDABLE_ROWS) === "true" : true
+  );
+  const [prettyPrint, setPrettyPrint] = useState(
+    Cookie.get(PRETTY_PRINT_BOOKMARKS) === "true"
+  );
 
   const { state, dispatch } = useLogState(initialLogLines);
   const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
     []
-  );
-  const [prettyPrint, setPrettyPrint] = useState(
-    Cookie.get(PRETTY_PRINT_BOOKMARKS) === "true"
   );
 
   const listRef = useRef<List>(null);
@@ -214,7 +226,33 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       logMetadata: state.logMetadata,
       listRef,
       matchingLines,
-      prettyPrint,
+      preferences: {
+        caseSensitive: state.searchState.caseSensitive,
+        expandableRows,
+        filterLogic,
+        prettyPrint,
+        wrap,
+        setCaseSensitive: (v: boolean) => {
+          dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive: v });
+          Cookie.set(CASE_SENSITIVE, v.toString(), { expires: 365 });
+        },
+        setExpandableRows: (v: boolean) => {
+          setExpandableRows(v);
+          Cookie.set(EXPANDABLE_ROWS, v.toString(), { expires: 365 });
+        },
+        setFilterLogic: (v: FilterLogic) => {
+          setFilterLogic(v);
+          Cookie.set(FILTER_LOGIC, v, { expires: 365 });
+        },
+        setPrettyPrint: (v: boolean) => {
+          setPrettyPrint(v);
+          Cookie.set(PRETTY_PRINT_BOOKMARKS, v.toString(), { expires: 365 });
+        },
+        setWrap: (v: boolean) => {
+          setWrap(v);
+          Cookie.set(WRAP, v.toString(), { expires: 365 });
+        },
+      },
       processedLogLines,
       range: {
         lowerRange,
@@ -245,9 +283,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         cache.clear(index, 0);
       },
       scrollToLine,
-      setCaseSensitive: (caseSensitive: boolean) => {
-        dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive });
-      },
       setFileName: (fileName: string) => {
         dispatch({ type: "SET_FILE_NAME", fileName });
       },
@@ -256,10 +291,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
       setSearch: (searchTerm: string) => {
         dispatch({ type: "SET_SEARCH_TERM", searchTerm });
-      },
-      togglePrettyPrint: (v: boolean) => {
-        setPrettyPrint(v);
-        Cookie.set(PRETTY_PRINT_BOOKMARKS, v.toString(), { expires: 365 });
       },
     }),
     [
@@ -278,6 +309,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       getLine,
       getResmokeLineColor,
       scrollToLine,
+      wrap,
+      filterLogic,
+      setFilterLogic,
+      expandableRows,
+      setExpandableRows,
     ]
   );
 

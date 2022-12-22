@@ -327,7 +327,7 @@ describe("useLogContext", () => {
         result.current.setSearch("a line");
       });
       act(() => {
-        result.current.setCaseSensitive(true);
+        result.current.preferences.setCaseSensitive(true);
       });
       expect(result.current.searchState.searchRange).toBeUndefined();
       expect(result.current.searchState.hasSearch).toBe(true);

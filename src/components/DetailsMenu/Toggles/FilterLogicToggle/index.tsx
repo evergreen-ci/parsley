@@ -1,17 +1,13 @@
 import { usePreferencesAnalytics } from "analytics";
 import { FilterLogic } from "constants/enums";
-import { QueryParams } from "constants/queryParams";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useLogContext } from "context/LogContext";
 import BaseToggle from "../BaseToggle";
 
 const FilterLogicToggle: React.FC = () => {
-  const [filterLogic, setFilterLogic] = useQueryParam(
-    QueryParams.FilterLogic,
-    FilterLogic.And
-  );
-
-  const isChecked = filterLogic === FilterLogic.Or;
   const { sendEvent } = usePreferencesAnalytics();
+  const { preferences } = useLogContext();
+  const { filterLogic, setFilterLogic } = preferences;
+  const isChecked = filterLogic === FilterLogic.Or;
 
   const onChange = (checked: boolean) => {
     if (checked) {

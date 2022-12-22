@@ -1,14 +1,11 @@
 import { usePreferencesAnalytics } from "analytics";
-import { QueryParams } from "constants/queryParams";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useLogContext } from "context/LogContext";
 import BaseToggle from "../BaseToggle";
 
 const ExpandableRowsToggle: React.FC = () => {
-  const [expandableRows, setExpandableRows] = useQueryParam(
-    QueryParams.Expandable,
-    true
-  );
   const { sendEvent } = usePreferencesAnalytics();
+  const { preferences } = useLogContext();
+  const { expandableRows, setExpandableRows } = preferences;
   return (
     <BaseToggle
       data-cy="expandable-rows-toggle"

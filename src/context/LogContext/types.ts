@@ -1,4 +1,4 @@
-import { LogTypes } from "constants/enums";
+import { FilterLogic, LogTypes } from "constants/enums";
 
 interface SearchState {
   searchTerm?: RegExp;
@@ -21,10 +21,23 @@ interface LogMetadata {
   jobLogsURL?: string;
 }
 
+interface Preferences {
+  caseSensitive: boolean;
+  expandableRows: boolean;
+  filterLogic: FilterLogic;
+  prettyPrint: boolean;
+  wrap: boolean;
+  setCaseSensitive: (caseSensitive: boolean) => void;
+  setExpandableRows: (expandableRows: boolean) => void;
+  setFilterLogic: (filterLogic: FilterLogic) => void;
+  setWrap: (wrap: boolean) => void;
+  setPrettyPrint: (prettyPrint: boolean) => void;
+}
+
 enum DIRECTION {
   PREVIOUS,
   NEXT,
 }
 
 export { DIRECTION };
-export type { SearchState, LogMetadata };
+export type { LogMetadata, Preferences, SearchState };

@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
-import DetailsOverlay from "components/DetailsOverlay";
+import DetailsMenu from "components/DetailsMenu";
 import Icon from "components/Icon";
 import PopoverButton from "components/PopoverButton";
 import Search from "components/Search";
@@ -43,7 +43,7 @@ const NavBar: React.FC = () => {
           data-cy="details-button"
           disabled={!hasLogs}
         >
-          <DetailsOverlay data-cy="details-overlay" />
+          <DetailsMenu data-cy="details-menu" />
         </StyledButton>
       </FlexContainer>
 

@@ -26,15 +26,14 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
     expandedLines,
     highlightedLine,
     lineCount,
-    prettyPrint,
+    preferences,
     processedLogLines,
     range,
     searchState,
   } = useLogContext();
-
+  const { prettyPrint, wrap } = preferences;
   const { searchTerm } = searchState;
 
-  const [wrap] = useQueryParam(QueryParams.Wrap, false);
   const [highlights] = useQueryParam<string[]>(QueryParams.Highlights, []);
 
   const highlightRegex = highlights.length

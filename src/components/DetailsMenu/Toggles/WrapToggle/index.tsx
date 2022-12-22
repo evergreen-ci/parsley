@@ -1,12 +1,11 @@
 import { usePreferencesAnalytics } from "analytics";
-import { QueryParams } from "constants/queryParams";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useLogContext } from "context/LogContext";
 import BaseToggle from "../BaseToggle";
 
 const WrapToggle: React.FC = () => {
-  const [wrap, setWrap] = useQueryParam(QueryParams.Wrap, false);
   const { sendEvent } = usePreferencesAnalytics();
-
+  const { preferences } = useLogContext();
+  const { wrap, setWrap } = preferences;
   return (
     <BaseToggle
       data-cy="wrap-toggle"

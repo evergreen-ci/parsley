@@ -9,12 +9,12 @@ declare global {
        */
       addFilter(filter: string): void;
       /**
-       * Custom command to click one of the toggles in the Details Overlay panel.
+       * Custom command to click one of the toggles in the Details Menu panel.
        * @example cy.clickToggle('wrap-toggle', true)
        */
       clickToggle(toggleDataCy: string, enable: boolean): void;
       /**
-       * Custom command to clear the search range bounds in the Details Overlay panel.
+       * Custom command to clear the search range bounds in the Details Menu panel.
        */
       clearBounds(): void;
       /**
@@ -23,7 +23,7 @@ declare global {
        */
       dataCy(value: string): Chainable<Element>;
       /**
-       * Custom command to edit the search range bounds in the Details Overlay panel.
+       * Custom command to edit the search range bounds in the Details Menu panel.
        * @example cy.editBounds({ lower: 5, upper: 10 })
        */
       editBounds(bounds: { upper?: string; lower?: string }): void;
