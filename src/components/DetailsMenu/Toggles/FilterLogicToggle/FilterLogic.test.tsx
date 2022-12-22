@@ -34,16 +34,17 @@ describe("filter logic toggle", () => {
     const filterLogicToggle = screen.getByDataCy("filter-logic-toggle");
     expect(filterLogicToggle).toHaveAttribute("aria-checked", "true");
 
-    await userEvent.click(filterLogicToggle);
+    const user = userEvent.setup();
+    await user.click(filterLogicToggle);
     expect(filterLogicToggle).toHaveAttribute("aria-checked", "false");
     expect(history.location.search).toBe("?filterLogic=and");
 
-    await userEvent.click(filterLogicToggle);
+    await user.click(filterLogicToggle);
     expect(filterLogicToggle).toHaveAttribute("aria-checked", "true");
     expect(history.location.search).toBe("?filterLogic=or");
   });
 
-  it("url params take precedence over cookie value", () => {
+  it("url params should take precedence over cookie value", () => {
     render(<FilterLogicToggle />, {
       wrapper,
       route: "?filterLogic=and",

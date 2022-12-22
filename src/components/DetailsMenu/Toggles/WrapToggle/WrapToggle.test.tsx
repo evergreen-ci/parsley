@@ -1,6 +1,6 @@
 import Cookie from "js-cookie";
 import { LogContextProvider } from "context/LogContext";
-import { renderWithRouterMatch as render, screen } from "test_utils";
+import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import WrapToggle from ".";
 
 jest.mock("js-cookie");
@@ -26,5 +26,15 @@ describe("wrap toggle", () => {
     render(<WrapToggle />, { wrapper });
     const wrapToggle = screen.getByDataCy("wrap-toggle");
     expect(wrapToggle).toHaveAttribute("aria-checked", "true");
+  });
+
+  it("should not update the URL", async () => {
+    const { history } = render(<WrapToggle />, { wrapper });
+    const wrapToggle = screen.getByDataCy("wrap-toggle");
+
+    const user = userEvent.setup();
+    await user.click(wrapToggle);
+    expect(wrapToggle).toHaveAttribute("aria-checked", "false");
+    expect(history.location.search).toBe("");
   });
 });

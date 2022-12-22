@@ -72,9 +72,10 @@ describe("pretty print toggle", () => {
     act(() => {
       hook.current.setLogMetadata({ logType: LogTypes.RESMOKE_LOGS });
     });
-
     const prettyPrintToggle = screen.getByDataCy("pretty-print-toggle");
-    await userEvent.click(prettyPrintToggle);
+
+    const user = userEvent.setup();
+    await user.click(prettyPrintToggle);
     expect(prettyPrintToggle).toHaveAttribute("aria-checked", "false");
     expect(history.location.search).toBe("");
   });

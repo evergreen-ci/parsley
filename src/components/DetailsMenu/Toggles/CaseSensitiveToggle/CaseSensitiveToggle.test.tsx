@@ -28,13 +28,13 @@ describe("case sensitivity toggle", () => {
     expect(caseSensitiveToggle).toHaveAttribute("aria-checked", "true");
   });
 
-  it("should update the URL correctly", async () => {
-    render(<CaseSensitiveToggle />, { wrapper });
-
+  it("should not update the URL", async () => {
+    const { history } = render(<CaseSensitiveToggle />, { wrapper });
     const caseSensitiveToggle = screen.getByDataCy("case-sensitive-toggle");
-    expect(caseSensitiveToggle).toHaveAttribute("aria-checked", "true");
 
-    await userEvent.click(caseSensitiveToggle);
+    const user = userEvent.setup();
+    await user.click(caseSensitiveToggle);
     expect(caseSensitiveToggle).toHaveAttribute("aria-checked", "false");
+    expect(history.location.search).toBe("");
   });
 });

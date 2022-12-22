@@ -294,11 +294,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
     }),
     [
-      wrap,
-      filterLogic,
-      setFilterLogic,
-      expandableRows,
-      setExpandableRows,
       state.expandedLines,
       state.logMetadata,
       state.logs.length,
@@ -314,6 +309,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       getLine,
       getResmokeLineColor,
       scrollToLine,
+      wrap,
+      filterLogic,
+      setFilterLogic,
+      expandableRows,
+      setExpandableRows,
     ]
   );
 
