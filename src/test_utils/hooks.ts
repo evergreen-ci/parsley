@@ -1,5 +1,11 @@
 import { DependencyList, EffectCallback, useEffect, useRef } from "react";
 
+/**
+ * `usePrevious` is a custom hook that returns the previous value of a given value
+ * @param value
+ * @param initialValue
+ * @returns
+ */
 const usePrevious = <T>(value: T, initialValue: T) => {
   const ref = useRef(initialValue);
   useEffect(() => {
