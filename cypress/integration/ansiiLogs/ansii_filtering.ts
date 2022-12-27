@@ -199,7 +199,7 @@ describe("Filtering", () => {
         cy.get(`[aria-label="Edit filter"]`).click();
       });
       cy.dataCy("edit-filter-name").clear().type("running");
-      cy.contains("button", "OK").click();
+      cy.contains("button", "APPLY").click();
       cy.location("search").should("equal", "?filters=100running");
 
       cy.get("[data-cy^='log-row-']").each(($el) => {
