@@ -31,6 +31,11 @@ const useEffectDebugger = (
       "[use-effect-debugger] This hook should only be used in development!"
     );
   }
+  if (dependencies.length !== dependencyNames.length) {
+    console.warn(
+      "[use-effect-debugger] The number of dependencies and dependency names should be the same!"
+    );
+  }
   const previousDeps = usePrevious(dependencies, []);
 
   const changedDeps = dependencies.reduce(
