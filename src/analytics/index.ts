@@ -3,3 +3,4 @@ export { useAnalyticAttributes } from "./useAnalyticAttributes";
 export { useLogWindowAnalytics } from "./logWindow/useLogWindowAnalytics";
 export { usePreferencesAnalytics } from "./preferences/usePreferencesAnalytics";
 export { useLoadingPageAnalytics } from "./loadingPage/useLoadingPageAnalytics";
+export { useShortcutAnalytics } from "./shortcuts/useShortcutAnalytics";

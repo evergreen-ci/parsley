@@ -4,7 +4,12 @@ export interface Analytics<Action> {
   sendEvent: (action: Action) => void;
 }
 
-type AnalyticsObject = "LogDrop" | "LogWindow" | "Preferences" | "LoadingPage";
+type AnalyticsObject =
+  | "LogDrop"
+  | "LogWindow"
+  | "Preferences"
+  | "LoadingPage"
+  | "Shortcut";
 
 interface RequiredProperties {
   object: AnalyticsObject;

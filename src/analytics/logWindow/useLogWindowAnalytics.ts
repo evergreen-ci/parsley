@@ -18,7 +18,8 @@ type Action =
   | { name: "Removed Highlight"; highlightExpression: string }
   | { name: "Applied Search"; searchExpression: string }
   | { name: "Expanded Lines"; option: "All" | "Five"; lineCount: number }
-  | { name: "Collapsed Lines" };
+  | { name: "Collapsed Lines" }
+  | { name: "Used Shortcut"; shortcut: string };
 
 interface P extends Properties {}
 interface Analytics extends A<Action> {}
