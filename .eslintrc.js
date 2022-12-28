@@ -81,6 +81,7 @@ module.exports = {
       ERROR,
       { functions: false, variables: false },
     ],
+    "@typescript-eslint/unbound-method": OFF,
 
     // Rules for eslint-plugin-import. These describe rules about file imports.
     "import/extensions": [
@@ -180,6 +181,7 @@ module.exports = {
         "jest/no-hooks": OFF,
         "jest/no-mocks-import": OFF,
         "jest/prefer-expect-assertions": OFF,
+        "jest/unbound-method": OFF,
       },
     },
     // For Storybook files.
