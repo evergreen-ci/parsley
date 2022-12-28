@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoadingPageAnalytics } from "analytics/loadingPage/useLoadingPageAnalytics";
+import { useLoadingPageAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
