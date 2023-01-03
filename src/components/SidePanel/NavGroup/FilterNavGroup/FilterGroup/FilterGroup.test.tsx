@@ -40,7 +40,7 @@ describe("filters", () => {
 
     expect(screen.getByDataCy("edit-filter-name")).toHaveFocus();
     const confirmButton = screen.getByRole("button", {
-      name: "APPLY",
+      name: "Apply",
     });
     expect(confirmButton).toBeInTheDocument();
   });
@@ -60,7 +60,7 @@ describe("filters", () => {
     await user.type(screen.getByDataCy("edit-filter-name"), "newFilter");
 
     const confirmButton = screen.getByRole("button", {
-      name: "APPLY",
+      name: "Apply",
     });
     await user.click(confirmButton);
 
@@ -85,8 +85,10 @@ describe("filters", () => {
       "some [[invalid regex"
     );
     const confirmButton = screen.getByRole("button", {
-      name: "APPLY",
+      name: "Apply",
     });
+    expect(confirmButton).toBeDisabled();
+    await user.type(screen.getByDataCy("edit-filter-name"), "{clear}");
     expect(confirmButton).toBeDisabled();
   });
 

@@ -53,6 +53,11 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
     }
   };
 
+  const validationMessage =
+    newFilterName === ""
+      ? "Filter cannot be empty"
+      : "Invalid Regular Expression";
+
   return (
     <FilterContainer data-cy={dataCy}>
       <FilterHeader>
@@ -94,11 +99,11 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
             aria-labelledby="Edit filter name"
             autoFocus
             data-cy="edit-filter-name"
-            errorMessage={isValid ? "" : "Invalid regular expression"}
+            errorMessage={!isValid ? validationMessage : ""}
             onChange={(e) => {
               setNewFilterName(e.target.value);
               setIsValid(
-                validateRegexp(e.target.value) || e.target.value === ""
+                validateRegexp(e.target.value) && e.target.value !== ""
               );
             }}
             onKeyPress={(e) => e.key === "Enter" && isValid && handleSubmit()}
