@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import styled from "@emotion/styled";
 import Badge from "@leafygreen-ui/badge";
 import Button, { Variant } from "@leafygreen-ui/button";
@@ -9,11 +9,10 @@ import {
   SegmentedControl,
 } from "@leafygreen-ui/segmented-control";
 import TextInput from "@leafygreen-ui/text-input";
-import Tooltip from "@leafygreen-ui/tooltip";
 import { Body } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { CaseSensitivity, MatchType } from "constants/enums";
-import { size, zIndex } from "constants/tokens";
+import { size } from "constants/tokens";
 import { Filter } from "types/logs";
 import { validateRegexp } from "utils/validators";
 
@@ -41,7 +40,6 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
   const [newFilterName, setNewFilterName] = useState(name);
   const [isEditing, setIsEditing] = useState(false);
   const [isValid, setIsValid] = useState(true);
-  const editFieldRef = useRef<HTMLInputElement>(null);
 
   const resetEditState = () => {
     setIsEditing(false);
@@ -55,73 +53,53 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
     }
   };
 
-  useEffect(() => {
-    if (isEditing) {
-      editFieldRef.current?.focus();
-    }
-  }, [isEditing, editFieldRef]);
-
   return (
     <FilterContainer data-cy={dataCy}>
       <FilterHeader>
         <Badge>FILTER</Badge>
         <IconButtonContainer>
-          <Tooltip
-            popoverZIndex={zIndex.tooltip}
-            trigger={
-              <IconButton
-                aria-label="Edit filter"
-                onClick={() => setIsEditing(true)}
-              >
-                <Icon fill={gray.base} glyph="Edit" />
-              </IconButton>
-            }
+          <IconButton
+            aria-label="Edit filter"
+            onClick={() => setIsEditing(true)}
+            title="Edit filter"
           >
-            Edit filter
-          </Tooltip>
-          <Tooltip
-            popoverZIndex={zIndex.tooltip}
-            trigger={
-              <IconButton
-                aria-label={visible ? "Hide filter" : "Show filter"}
-                onClick={() => editFilter("visible", !visible, filter)}
-              >
-                <Icon
-                  fill={gray.base}
-                  glyph={visible ? "Visibility" : "ClosedEye"}
-                />
-              </IconButton>
-            }
+            <Icon fill={gray.base} glyph="Edit" />
+          </IconButton>
+
+          <IconButton
+            aria-label={visible ? "Hide filter" : "Show filter"}
+            onClick={() => editFilter("visible", !visible, filter)}
+            title={visible ? "Hide filter" : "Show filter"}
           >
-            {visible ? "Hide filter" : "Show filter"}
-          </Tooltip>
-          <Tooltip
-            popoverZIndex={zIndex.tooltip}
-            trigger={
-              <IconButton
-                aria-label="Delete filter"
-                onClick={() => deleteFilter(name)}
-              >
-                <Icon fill={gray.base} glyph="X" />
-              </IconButton>
-            }
+            <Icon
+              fill={gray.base}
+              glyph={visible ? "Visibility" : "ClosedEye"}
+            />
+          </IconButton>
+
+          <IconButton
+            aria-label="Delete filter"
+            onClick={() => deleteFilter(name)}
+            title="Delete filter"
           >
-            Delete filter
-          </Tooltip>
+            <Icon fill={gray.base} glyph="X" />
+          </IconButton>
         </IconButtonContainer>
       </FilterHeader>
 
       {isEditing ? (
         <>
           <StyledTextInput
-            ref={editFieldRef}
             aria-label="Edit filter name"
             aria-labelledby="Edit filter name"
+            autoFocus
             data-cy="edit-filter-name"
             errorMessage={isValid ? "" : "Invalid regular expression"}
             onChange={(e) => {
               setNewFilterName(e.target.value);
-              setIsValid(validateRegexp(e.target.value));
+              setIsValid(
+                validateRegexp(e.target.value) || e.target.value === ""
+              );
             }}
             onKeyPress={(e) => e.key === "Enter" && isValid && handleSubmit()}
             placeholder="New filter definition"
@@ -141,7 +119,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
               size="xsmall"
               variant={Variant.PrimaryOutline}
             >
-              APPLY
+              Apply
             </Button>
           </ButtonWrapper>
         </>
