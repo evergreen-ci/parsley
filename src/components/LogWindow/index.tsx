@@ -5,9 +5,8 @@ import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import SidePanel from "components/SidePanel";
 import SubHeader from "components/SubHeader";
 import { LogTypes } from "constants/enums";
-import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useHighlightParam } from "hooks/useHighlightParam";
 
 interface LogWindowProps {
   logType: LogTypes;
@@ -34,8 +33,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const { prettyPrint, wrap } = preferences;
   const { searchTerm } = searchState;
 
-  const [highlights] = useQueryParam<string[]>(QueryParams.Highlights, []);
-
+  const [highlights] = useHighlightParam();
   const highlightRegex = highlights.length
     ? new RegExp(highlights.join("|"), "i")
     : undefined;

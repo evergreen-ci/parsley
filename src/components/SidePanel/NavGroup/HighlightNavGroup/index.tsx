@@ -3,17 +3,13 @@ import IconButton from "@leafygreen-ui/icon-button";
 import { Overline } from "@leafygreen-ui/typography";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
-import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useHighlightParam } from "hooks/useHighlightParam";
 import BaseNavGroup from "../BaseNavGroup";
 
 const HighlightNavGroup: React.FC = () => {
   const { sendEvent } = useLogWindowAnalytics();
-  const [highlights, setHighlights] = useQueryParam<string[]>(
-    QueryParams.Highlights,
-    []
-  );
+  const [highlights, setHighlights] = useHighlightParam();
 
   const deleteHighlight = (highlightName: string) => {
     const newHighlights = highlights.filter((h) => h !== highlightName);

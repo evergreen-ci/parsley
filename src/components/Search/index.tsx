@@ -3,19 +3,16 @@ import { useLogWindowAnalytics } from "analytics";
 import SearchBar from "components/Search/SearchBar";
 import SearchResults from "components/Search/SearchResults";
 import { CaseSensitivity, MatchType, SearchBarActions } from "constants/enums";
-import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useFilterParam } from "hooks/useFilterParam";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useHighlightParam } from "hooks/useHighlightParam";
 import { validateRegexp } from "utils/validators";
 
 const Search: React.FC = () => {
   const [filters, setFilters] = useFilterParam();
-  const [highlights, setHighlights] = useQueryParam<string[]>(
-    QueryParams.Highlights,
-    []
-  );
+  const [highlights, setHighlights] = useHighlightParam();
+
   const { sendEvent } = useLogWindowAnalytics();
   const { hasLogs, setSearch, searchState, paginate } = useLogContext();
   const { hasSearch } = searchState;
