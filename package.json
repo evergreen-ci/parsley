@@ -134,7 +134,7 @@
     "vite-plugin-checker": "0.5.2",
     "vite-plugin-env-compatible": "1.1.1",
     "vite-plugin-imp": "2.3.1",
-    "vite-tsconfig-paths": "4.0.2",
+    "vite-tsconfig-paths": "4.0.3",
     "whatwg-fetch": "3.6.2"
   },
   "resolutions": {
