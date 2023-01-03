@@ -1,4 +1,5 @@
 import { renderHook } from "@testing-library/react-hooks";
+import { LogTypes } from "constants/enums";
 import { useLogDownloader } from ".";
 
 const API_URL = "/some/endpoint";
@@ -16,7 +17,7 @@ describe("useLogDownloader", () => {
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
     const { result, waitForNextUpdate } = renderHook(() =>
-      useLogDownloader(API_URL)
+      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
     );
     expect(result.current.isLoading).toBe(true);
     await waitForNextUpdate();
@@ -34,7 +35,7 @@ describe("useLogDownloader", () => {
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
     const { result, waitForNextUpdate } = renderHook(() =>
-      useLogDownloader(API_URL)
+      useLogDownloader(API_URL, LogTypes.EVERGREEN_TASK_LOGS)
     );
     expect(result.current.isLoading).toBe(true);
     await waitForNextUpdate();
