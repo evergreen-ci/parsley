@@ -216,6 +216,19 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       ? searchResults[state.searchState.searchIndex]
       : undefined;
 
+  const ingestLines = useCallback(
+    (lines: string[], logType: LogTypes) => {
+      dispatch({ type: "INGEST_LOGS", logs: lines, logType });
+    },
+    [dispatch]
+  );
+
+  const setLogMetadata = useCallback(
+    (logMetadata: LogMetadata) => {
+      dispatch({ type: "SET_LOG_METADATA", logMetadata });
+    },
+    [dispatch]
+  );
   const memoizedContext = useMemo(
     () => ({
       expandedLines: state.expandedLines,
@@ -267,9 +280,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         dispatch({ type: "EXPAND_LINES", expandedLines }),
       getLine,
       getResmokeLineColor,
-      ingestLines: (lines: string[], logType: LogTypes) => {
-        dispatch({ type: "INGEST_LOGS", logs: lines, logType });
-      },
+      ingestLines,
       paginate: (direction: DIRECTION) => {
         const { searchIndex, searchRange } = state.searchState;
         if (searchIndex !== undefined && searchRange !== undefined) {
@@ -286,34 +297,34 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       setFileName: (fileName: string) => {
         dispatch({ type: "SET_FILE_NAME", fileName });
       },
-      setLogMetadata: (logMetadata: LogMetadata) => {
-        dispatch({ type: "SET_LOG_METADATA", logMetadata });
-      },
+      setLogMetadata,
       setSearch: (searchTerm: string) => {
         dispatch({ type: "SET_SEARCH_TERM", searchTerm });
       },
     }),
     [
-      state.expandedLines,
-      state.logMetadata,
-      state.logs.length,
-      state.searchState,
+      expandableRows,
+      filterLogic,
       highlightedLine,
       lowerRange,
       matchingLines,
       prettyPrint,
       processedLogLines,
       searchResults,
+      state.expandedLines,
+      state.logMetadata,
+      state.logs.length,
+      state.searchState,
       upperRange,
+      wrap,
       dispatch,
       getLine,
       getResmokeLineColor,
+      ingestLines,
       scrollToLine,
-      wrap,
-      filterLogic,
-      setFilterLogic,
-      expandableRows,
       setExpandableRows,
+      setFilterLogic,
+      setLogMetadata,
     ]
   );
 
