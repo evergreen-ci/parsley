@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useLoadingPageAnalytics } from "analytics";
+import { useLogDownloadAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
@@ -16,10 +16,10 @@ import { processLogString } from "utils/string";
  *
  */
 const useLogDownloader = (url: string, logType: LogTypes) => {
-  const [data, setData] = useState<string[] | undefined>(undefined);
-  const [error, setError] = useState<string | undefined>(undefined);
+  const [data, setData] = useState<string[] | undefined>();
+  const [error, setError] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
-  const { sendEvent } = useLoadingPageAnalytics();
+  const { sendEvent } = useLogDownloadAnalytics();
   useEffect(() => {
     leaveBreadcrumb("useLogDownloader", { url }, "request");
     const req = new Request(url, { method: "GET" });
@@ -49,6 +49,11 @@ const useLogDownloader = (url: string, logType: LogTypes) => {
         leaveBreadcrumb("useLogDownloader", { url, err }, "error");
         reportError(err).severe();
         setError(err.message);
+        sendEvent({
+          name: "Log Download Failed",
+          duration: Date.now() - timeStart,
+          type: logType,
+        });
       })
       .finally(() => {
         leaveBreadcrumb(

@@ -70,7 +70,10 @@ const useKeyboardShortcut = (
             event.preventDefault();
           }
           cbRef.current();
-          sendEvent({ name: "Used Shortcut", keys: JSON.stringify(keys) });
+          sendEvent({
+            name: "Used Shortcut",
+            keys: getPressedKeysAsString(keys),
+          });
         }
       }
     },
@@ -91,4 +94,10 @@ const useKeyboardShortcut = (
   }, [handleKeydown, disabled]);
 };
 
+const getPressedKeysAsString = (keys: ShortcutKeys): string => {
+  const { modifierKeys, charKey } = keys;
+  const modifierKeysString = modifierKeys?.join("+") ?? "";
+  const charKeyString = charKey ?? "";
+  return `${modifierKeysString}${charKeyString}`;
+};
 export default useKeyboardShortcut;
