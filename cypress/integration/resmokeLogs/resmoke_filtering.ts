@@ -199,7 +199,7 @@ describe("Filtering", () => {
         cy.get(`[aria-label="Edit filter"]`).click();
       });
       cy.dataCy("edit-filter-name").clear().type("REPL_HB");
-      cy.contains("button", "APPLY").click();
+      cy.contains("button", "Apply").click();
       cy.location("search").should("equal", "?filters=100REPL_HB");
 
       cy.get("[data-cy^='log-row-']").each(($el) => {
