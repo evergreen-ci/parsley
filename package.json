@@ -60,7 +60,7 @@
     "@leafygreen-ui/tooltip": "9.0.2",
     "@leafygreen-ui/typography": "15.1.0",
     "ansi_up": "5.1.0",
-    "html-react-parser": "3.0.4",
+    "html-react-parser": "3.0.6",
     "js-cookie": "3.0.1",
     "linkify-html": "3.0.5",
     "linkifyjs": "3.0.5",
