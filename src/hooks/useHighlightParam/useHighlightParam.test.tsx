@@ -61,10 +61,10 @@ describe("useHighlightParam", () => {
       result.current.setHighlights(["something,else", "failed"]);
     });
     expect(result.current.allQueryParams).toMatchObject({
-      highlights: ["something%2Celse", "failed"],
+      highlights: ["something,else", "failed"],
     });
     expect(history.location.search).toBe(
-      "?highlights=something%25252Celse,failed"
+      "?highlights=something%252Celse,failed"
     );
   });
   it("should properly decode highlights from URL", () => {

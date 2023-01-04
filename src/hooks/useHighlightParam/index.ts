@@ -22,7 +22,7 @@ const useHighlightParam = () => {
         ...searchParams,
         highlights: newHighlights.map((highlight) =>
           // We need to encode the highlights twice because the URL will decode them once
-          encodeURIComponent(encodeURIComponent(highlight))
+          encodeURIComponent(highlight)
         ),
       });
     },
