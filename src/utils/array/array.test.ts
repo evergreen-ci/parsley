@@ -1,4 +1,4 @@
-import { arraySymmetricDifference, conditionalToArray } from ".";
+import { arraySymmetricDifference, conditionalCastToArray } from ".";
 
 describe("arraySymmetricDifference", () => {
   it("should throw an error if an object is passed in", () => {
@@ -35,14 +35,16 @@ describe("arraySymmetricDifference", () => {
   });
 });
 
-describe("conditionalToArray", () => {
+describe("conditionalCastToArray", () => {
   it("should convert a value to an array if shouldBeArray is true", () => {
-    expect(conditionalToArray("parsley", true)).toStrictEqual(["parsley"]);
+    expect(conditionalCastToArray("parsley", true)).toStrictEqual(["parsley"]);
   });
   it("should not convert a value to an array if shouldBeArray is false", () => {
-    expect(conditionalToArray("parsley", false)).toBe("parsley");
+    expect(conditionalCastToArray("parsley", false)).toBe("parsley");
   });
   it("should properly handles value if it is already an array", () => {
-    expect(conditionalToArray(["parsley"], true)).toStrictEqual(["parsley"]);
+    expect(conditionalCastToArray(["parsley"], true)).toStrictEqual([
+      "parsley",
+    ]);
   });
 });

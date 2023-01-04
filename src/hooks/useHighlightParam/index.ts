@@ -1,16 +1,20 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { useQueryParams } from "hooks/useQueryParam";
-import { conditionalToArray } from "utils/array";
+import { conditionalCastToArray } from "utils/array";
 
 /**
  * `useHighlightParam` is a specialized form of useQueryParam. It needs to encode and decode the highlights
  */
 const useHighlightParam = () => {
   const [searchParams, setSearchParams] = useQueryParams();
-  const parsedHighlights = conditionalToArray(
-    searchParams.highlights ?? [],
-    true
-  ) as string[];
+  const parsedHighlights = useMemo(
+    () =>
+      conditionalCastToArray(
+        (searchParams.highlights as string | string[] | null) ?? [],
+        true
+      ).map((h) => decodeURIComponent(h)),
+    [searchParams.highlights]
+  );
 
   const setHighlightsParam = useCallback(
     (newHighlights: string[]) => {
@@ -25,10 +29,7 @@ const useHighlightParam = () => {
     [setSearchParams, searchParams]
   );
 
-  return [
-    parsedHighlights.map((h) => decodeURIComponent(h)),
-    setHighlightsParam,
-  ] as const;
+  return [parsedHighlights, setHighlightsParam] as const;
 };
 
 export { useHighlightParam };

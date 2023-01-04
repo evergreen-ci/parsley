@@ -1,7 +1,7 @@
 import { useCallback } from "react";
 import { useQueryParams } from "hooks/useQueryParam";
 import { Filters } from "types/logs";
-import { conditionalToArray } from "utils/array";
+import { conditionalCastToArray } from "utils/array";
 import { parseFilters, stringifyFilters } from "utils/query-string";
 
 /**
@@ -12,7 +12,7 @@ const useFilterParam = () => {
   const [searchParams, setSearchParams] = useQueryParams();
 
   const parsedFilters = parseFilters(
-    conditionalToArray(searchParams.filters ?? [], true) as string[]
+    conditionalCastToArray(searchParams.filters ?? [], true) as string[]
   );
 
   const setFiltersParam = useCallback(
