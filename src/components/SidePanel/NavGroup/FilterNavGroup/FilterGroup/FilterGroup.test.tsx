@@ -88,7 +88,7 @@ describe("filters", () => {
       name: "Apply",
     });
     expect(confirmButton).toBeDisabled();
-    await user.type(screen.getByDataCy("edit-filter-name"), "{clear}");
+    await user.clear(screen.getByDataCy("edit-filter-name"));
     expect(confirmButton).toBeDisabled();
   });
 
