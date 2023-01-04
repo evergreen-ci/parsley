@@ -1,6 +1,6 @@
 import { useCallback } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { conditionalToArray } from "utils/array";
+import { conditionalCastToArray } from "utils/array";
 import { parseQueryString, stringifyQuery } from "utils/query-string";
 
 /** `useQueryParams` returns all of the query params passed into the url */
@@ -41,7 +41,7 @@ const useQueryParam = <T>(
 
   const queryParam =
     searchParams[param] !== undefined
-      ? (conditionalToArray(
+      ? (conditionalCastToArray(
           searchParams[param],
           Array.isArray(defaultParam)
         ) as unknown as T)

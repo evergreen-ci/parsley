@@ -14,6 +14,7 @@ import Icon from "components/Icon";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
 import { Filter } from "types/logs";
+import { validateRegexp } from "utils/validators";
 
 const { gray } = palette;
 
@@ -38,11 +39,25 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
 
   const [newFilterName, setNewFilterName] = useState(name);
   const [isEditing, setIsEditing] = useState(false);
+  const [isValid, setIsValid] = useState(true);
 
   const resetEditState = () => {
     setIsEditing(false);
     setNewFilterName(name);
+    setIsValid(true);
   };
+
+  const handleSubmit = () => {
+    if (isValid) {
+      editFilter("name", newFilterName, filter);
+      resetEditState();
+    }
+  };
+
+  const validationMessage =
+    newFilterName === ""
+      ? "Filter cannot be empty"
+      : "Invalid regular expression";
 
   return (
     <FilterContainer data-cy={dataCy}>
@@ -52,21 +67,26 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
           <IconButton
             aria-label="Edit filter"
             onClick={() => setIsEditing(true)}
+            title="Edit filter"
           >
             <Icon fill={gray.base} glyph="Edit" />
           </IconButton>
+
           <IconButton
             aria-label={visible ? "Hide filter" : "Show filter"}
             onClick={() => editFilter("visible", !visible, filter)}
+            title={visible ? "Hide filter" : "Show filter"}
           >
             <Icon
               fill={gray.base}
               glyph={visible ? "Visibility" : "ClosedEye"}
             />
           </IconButton>
+
           <IconButton
             aria-label="Delete filter"
             onClick={() => deleteFilter(name)}
+            title="Delete filter"
           >
             <Icon fill={gray.base} glyph="X" />
           </IconButton>
@@ -78,11 +98,20 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
           <StyledTextInput
             aria-label="Edit filter name"
             aria-labelledby="Edit filter name"
+            autoFocus
             data-cy="edit-filter-name"
-            onChange={(e) => setNewFilterName(e.target.value)}
+            errorMessage={isValid ? "" : validationMessage}
+            onChange={(e) => {
+              setNewFilterName(e.target.value);
+              setIsValid(
+                validateRegexp(e.target.value) && e.target.value !== ""
+              );
+            }}
+            onKeyPress={(e) => e.key === "Enter" && isValid && handleSubmit()}
             placeholder="New filter definition"
             sizeVariant="small"
             spellCheck={false}
+            state={isValid ? "none" : "error"}
             type="text"
             value={newFilterName}
           />
@@ -91,14 +120,12 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
               Cancel
             </Button>
             <Button
-              onClick={() => {
-                editFilter("name", newFilterName, filter);
-                resetEditState();
-              }}
+              disabled={!isValid}
+              onClick={handleSubmit}
               size="xsmall"
               variant={Variant.PrimaryOutline}
             >
-              OK
+              Apply
             </Button>
           </ButtonWrapper>
         </>

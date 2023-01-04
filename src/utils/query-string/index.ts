@@ -29,12 +29,12 @@ export const parseFilters = (filters: string[]): Filters => {
     const matchType =
       filter.charAt(2) === "1" ? MatchType.Inverse : MatchType.Exact;
     const name = filter.substring(3);
-
+    const decodedFilterName = decodeURIComponent(name);
     return {
       visible,
       caseSensitive,
       matchType,
-      name,
+      name: decodedFilterName,
     };
   });
   return parsedFilters;
@@ -45,6 +45,6 @@ export const stringifyFilters = (filters: Filters): string[] =>
     const visible = f.visible ? 1 : 0;
     const caseSensitive = f.caseSensitive === CaseSensitivity.Sensitive ? 1 : 0;
     const matchType = f.matchType === MatchType.Inverse ? 1 : 0;
-
-    return `${visible}${caseSensitive}${matchType}${f.name}`;
+    const encodedFilterName = encodeURIComponent(f.name);
+    return `${visible}${caseSensitive}${matchType}${encodedFilterName}`;
   });

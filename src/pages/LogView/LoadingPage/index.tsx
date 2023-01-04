@@ -85,7 +85,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       break;
   }
 
-  const { data, error, isLoading } = useLogDownloader(url);
+  const { data, error, isLoading } = useLogDownloader(url, logType);
 
   useEffect(() => {
     if (data) {

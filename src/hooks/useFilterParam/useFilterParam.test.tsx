@@ -10,7 +10,7 @@ const useFilterJointHook = () => {
   return { filters, setFilters, allQueryParams };
 };
 
-describe("useFiltersParam", () => {
+describe("useFilterParam", () => {
   it("setting a filter param should not update other values", () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
       <MemoryRouter initialEntries={["/?search=test"]}>{children}</MemoryRouter>

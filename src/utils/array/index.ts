@@ -16,14 +16,17 @@ const arraySymmetricDifference = <T>(a: T[], b: T[]) => {
 };
 
 /**
- * `conditionalToArray` takes in a generic value and transforms it into an array if shouldBeArray is true.
+ * `conditionalCastToArray` takes in a generic value and transforms it into an array if shouldBeArray is true.
  * The value remains unchanged if it is already an array, or if shouldBeArray is false.
  * */
-const conditionalToArray = <T>(value: T, shouldBeArray: boolean) => {
+const conditionalCastToArray = <T>(
+  value: T | T[],
+  shouldBeArray: boolean
+): T[] => {
   if (shouldBeArray) {
     return Array.isArray(value) ? value : [value];
   }
-  return value;
+  return value as T[];
 };
 
-export { arraySymmetricDifference, conditionalToArray };
+export { arraySymmetricDifference, conditionalCastToArray };
