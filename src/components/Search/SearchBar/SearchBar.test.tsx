@@ -133,24 +133,34 @@ describe("searchbar", () => {
     expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith("search", "test1");
   });
-  it("pressing Control+F puts focus on the input", async () => {
+  it("pressing Control+F puts focus on the input and selects the text content", async () => {
     const user = userEvent.setup();
     render(<SearchBar onSubmit={jest.fn()} />);
 
-    const input = screen.getByDataCy("searchbar-input");
+    const input = screen.getByDataCy("searchbar-input") as HTMLInputElement;
+    const inputText = "input text";
+    await user.type(input, inputText);
+    await user.click(document.body as HTMLElement);
     expect(input).not.toHaveFocus();
 
     await user.keyboard("{Control>}{f}");
     expect(input).toHaveFocus();
+    expect(input.selectionStart).toBe(0);
+    expect(input.selectionEnd).toBe(inputText.length);
   });
-  it("pressing Command+F puts focus on the input", async () => {
+  it("pressing Command+F puts focus on the input and selects the text content", async () => {
     const user = userEvent.setup();
     render(<SearchBar onSubmit={jest.fn()} />);
 
-    const input = screen.getByDataCy("searchbar-input");
+    const input = screen.getByDataCy("searchbar-input") as HTMLInputElement;
+    const inputText = "input text";
+    await user.type(input, inputText);
+    await user.click(document.body as HTMLElement);
     expect(input).not.toHaveFocus();
 
     await user.keyboard("{Meta>}{f}");
     expect(input).toHaveFocus();
+    expect(input.selectionStart).toBe(0);
+    expect(input.selectionEnd).toBe(inputText.length);
   });
 });

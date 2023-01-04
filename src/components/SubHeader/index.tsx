@@ -35,7 +35,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
       ) : (
         <Header>
           <IconWrapper>
-            <Icon glyph="EvergreenLogo" />
+            <Icon glyph="EvergreenLogo" size={24} />
           </IconWrapper>
           <StyledLink
             href={taskLink}

@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import { useLogDownloadAnalytics } from "analytics";
+import { LogTypes } from "constants/enums";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
 import { processLogString } from "utils/string";
@@ -13,16 +15,16 @@ import { processLogString } from "utils/string";
  * - error: an error message if the download fails
  *
  */
-const useLogDownloader = (url: string) => {
-  const [data, setData] = useState<string[] | null>(null);
-  const [error, setError] = useState<string | null>(null);
+const useLogDownloader = (url: string, logType: LogTypes) => {
+  const [data, setData] = useState<string[] | undefined>();
+  const [error, setError] = useState<string | undefined>();
   const [isLoading, setIsLoading] = useState(true);
-
+  const { sendEvent } = useLogDownloadAnalytics();
   useEffect(() => {
     leaveBreadcrumb("useLogDownloader", { url }, "request");
     const req = new Request(url, { method: "GET" });
     const abortController = new AbortController();
-
+    const timeStart = Date.now();
     fetch(req, {
       credentials: "include",
       // Conditionally define signal because AbortController throws error in development's strict mode
@@ -37,19 +39,36 @@ const useLogDownloader = (url: string) => {
       .then((response) => response.text() || "")
       .then((text) => {
         setData(processLogString(text));
+        sendEvent({
+          name: "Log Downloaded",
+          duration: Date.now() - timeStart,
+          type: logType,
+        });
       })
       .catch((err: Error) => {
         leaveBreadcrumb("useLogDownloader", { url, err }, "error");
         reportError(err).severe();
         setError(err.message);
+        sendEvent({
+          name: "Log Download Failed",
+          duration: Date.now() - timeStart,
+          type: logType,
+        });
       })
       .finally(() => {
+        leaveBreadcrumb(
+          "useLogDownloader",
+          { url, time: Date.now() - timeStart },
+          "request"
+        );
+
         setIsLoading(false);
       });
     return () => {
       // Cancel the request if the component unmounts
       abortController.abort();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
   return { data, error, isLoading };
 };

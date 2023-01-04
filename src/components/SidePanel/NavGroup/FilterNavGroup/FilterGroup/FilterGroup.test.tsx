@@ -38,14 +38,11 @@ describe("filters", () => {
       defaultFilter.name
     );
 
+    expect(screen.getByDataCy("edit-filter-name")).toHaveFocus();
     const confirmButton = screen.getByRole("button", {
-      name: "OK",
-    });
-    const cancelButton = screen.getByRole("button", {
-      name: "Cancel",
+      name: "Apply",
     });
     expect(confirmButton).toBeInTheDocument();
-    expect(cancelButton).toBeInTheDocument();
   });
 
   it("should call editFilter with the correct parameters", async () => {
@@ -63,12 +60,36 @@ describe("filters", () => {
     await user.type(screen.getByDataCy("edit-filter-name"), "newFilter");
 
     const confirmButton = screen.getByRole("button", {
-      name: "OK",
+      name: "Apply",
     });
     await user.click(confirmButton);
 
     expect(editFilter).toHaveBeenCalledTimes(1);
     expect(editFilter).toHaveBeenCalledWith("name", "newFilter", defaultFilter);
+  });
+
+  it("should prevent the user from submitting an invalid filter", async () => {
+    const editFilter = jest.fn();
+    render(
+      <FilterGroup
+        deleteFilter={jest.fn()}
+        editFilter={editFilter}
+        filter={defaultFilter}
+      />
+    );
+    // Clear the text input and submit a new filter.
+    await user.click(screen.getByLabelText("Edit filter"));
+    await user.clear(screen.getByDataCy("edit-filter-name"));
+    await user.type(
+      screen.getByDataCy("edit-filter-name"),
+      "some [[invalid regex"
+    );
+    const confirmButton = screen.getByRole("button", {
+      name: "Apply",
+    });
+    expect(confirmButton).toBeDisabled();
+    await user.clear(screen.getByDataCy("edit-filter-name"));
+    expect(confirmButton).toBeDisabled();
   });
 
   it("should toggle between visibility icons when they are clicked", async () => {

@@ -1,4 +1,5 @@
 import { useCallback, useEffect, useRef } from "react";
+import { useShortcutAnalytics } from "analytics";
 import { CharKey, ModifierKey } from "constants/keys";
 import { arraySymmetricDifference } from "utils/array";
 
@@ -25,6 +26,7 @@ const useKeyboardShortcut = (
     throw new Error("Must provide at least one key.");
   }
 
+  const { sendEvent } = useShortcutAnalytics();
   // We wrap the callback to prevent triggering unnecessary useEffect.
   const cbRef = useRef(cb);
   cbRef.current = cb;
@@ -68,10 +70,14 @@ const useKeyboardShortcut = (
             event.preventDefault();
           }
           cbRef.current();
+          sendEvent({
+            name: "Used Shortcut",
+            keys: getPressedKeysAsString(keys),
+          });
         }
       }
     },
-    [keys, preventDefault, ignoreFocus]
+    [keys, preventDefault, ignoreFocus, sendEvent]
   );
 
   useEffect(() => {
@@ -88,4 +94,10 @@ const useKeyboardShortcut = (
   }, [handleKeydown, disabled]);
 };
 
+const getPressedKeysAsString = (keys: ShortcutKeys): string => {
+  const { modifierKeys, charKey } = keys;
+  const modifierKeysString = modifierKeys?.join("+") ?? "";
+  const charKeyString = charKey ?? "";
+  return `${modifierKeysString}${charKeyString}`;
+};
 export default useKeyboardShortcut;

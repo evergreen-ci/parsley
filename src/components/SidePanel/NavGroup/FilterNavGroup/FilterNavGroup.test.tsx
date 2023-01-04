@@ -39,7 +39,7 @@ describe("filters", () => {
     await user.clear(screen.getAllByDataCy("edit-filter-name")[0]);
     await user.type(screen.getAllByDataCy("edit-filter-name")[0], "newFilter");
     const confirmButton = screen.getByRole("button", {
-      name: "OK",
+      name: "Apply",
     });
     await user.click(confirmButton);
 
@@ -58,7 +58,7 @@ describe("filters", () => {
     await user.clear(screen.getAllByDataCy("edit-filter-name")[0]);
     await user.type(screen.getAllByDataCy("edit-filter-name")[0], "filter2");
     const confirmButton = screen.getByRole("button", {
-      name: "OK",
+      name: "Apply",
     });
     await user.click(confirmButton);
 
