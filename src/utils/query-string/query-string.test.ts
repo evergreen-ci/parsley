@@ -47,8 +47,19 @@ describe("filters", () => {
         ])
       ).toStrictEqual(["011passed", "101failed", "010running"]);
     });
+    it("successfully encodes special characters", () => {
+      expect(
+        stringifyFilters([
+          {
+            caseSensitive: CaseSensitivity.Insensitive,
+            matchType: MatchType.Exact,
+            name: "ran in d{3,}",
+            visible: true,
+          },
+        ])
+      ).toStrictEqual(["100ran%20in%20d%7B3%2C%7D"]);
+    });
   });
-
   describe("parseFilters", () => {
     it("can handle empty input", () => {
       expect(parseFilters([])).toStrictEqual([]);
@@ -69,6 +80,16 @@ describe("filters", () => {
           caseSensitive: CaseSensitivity.Insensitive,
           matchType: MatchType.Exact,
           name: "12345",
+          visible: true,
+        },
+      ]);
+    });
+    it("successfully decodes special characters", () => {
+      expect(parseFilters(["100ran%20in%20d%7B3%2C%7D"])).toStrictEqual([
+        {
+          caseSensitive: CaseSensitivity.Insensitive,
+          matchType: MatchType.Exact,
+          name: "ran in d{3,}",
           visible: true,
         },
       ]);
