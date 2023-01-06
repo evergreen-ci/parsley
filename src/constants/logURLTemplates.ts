@@ -53,7 +53,7 @@ const getResmokeLogURL = (
 };
 
 enum originToType {
-  agent = "A",
+  agent = "E",
   system = "S",
   task = "T",
 }
