@@ -81,7 +81,6 @@ module.exports = {
       ERROR,
       { functions: false, variables: false },
     ],
-    "jest/unbound-method": OFF,
 
     // Rules for eslint-plugin-import. These describe rules about file imports.
     "import/extensions": [
