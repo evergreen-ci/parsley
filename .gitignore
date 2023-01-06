@@ -35,3 +35,6 @@ yarn-error.log*
 
 # logkeeper directory
 _bucketdata
+
+# memlab workdir directory
+memlab/workdir/data
