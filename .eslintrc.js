@@ -171,6 +171,9 @@ module.exports = {
         "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+ (airbnb rule)
         "react/require-default-props": OFF, // Allow not setting defaults for props (airbnb rule)
       },
+      parserOptions: {
+        project: ["./tsconfig.json"],
+      },
     },
     // For Jest files.
     {
@@ -180,6 +183,8 @@ module.exports = {
         "jest/no-hooks": OFF,
         "jest/no-mocks-import": OFF,
         "jest/prefer-expect-assertions": OFF,
+        "@typescript-eslint/unbound-method": OFF,
+        "jest/unbound-method": OFF,
       },
     },
     // For Storybook files.
@@ -194,6 +199,9 @@ module.exports = {
     {
       files: ["cypress/**/*.ts"],
       extends: ["plugin:cypress/recommended"],
+      parserOptions: {
+        project: "cypress/tsconfig.json",
+      },
     },
   ],
 };
