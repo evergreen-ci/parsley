@@ -9,10 +9,17 @@ import path from "path";
 import injectVariablesInHTML from "./config/injectVariablesInHTML";
 import reactVirtualized from "./config/reactVirtualized";
 
+const isMemlab = process.env.memlab === "true";
+
+if (isMemlab) {
+  console.log("Building for memlab");
+  console.log("Minification disabled");
+}
 // https://vitejs.dev/config/
 export default defineConfig({
   build: {
     sourcemap: true,
+    minify: isMemlab ? false : "esbuild",
     rollupOptions: {
       plugins: [
         injectVariablesInHTML({
