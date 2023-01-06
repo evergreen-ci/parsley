@@ -52,7 +52,7 @@ const getResmokeLogURL = (
   return `${logkeeperURL}/build/${buildID}/all?${stringifyQuery(params)}`;
 };
 
-enum originToType {
+enum OriginToType {
   agent = "E",
   system = "S",
   task = "T",
@@ -64,18 +64,18 @@ enum originToType {
  * @param execution - the execution number of the task
  * @param origin - the origin of the log
  * @param options.text - returns the raw log associated with the task
- * @returns /task/${taskID}/${execution}?type=${originToType[origin]}&text=true
+ * @returns /task/${taskID}/${execution}?type=${OriginToType[origin]}&text=true
  */
 const getEvergreenTaskLogURL = (
   taskID: string,
   execution: string | number,
-  origin: keyof typeof originToType,
+  origin: keyof typeof OriginToType,
   options: { text?: boolean }
 ) => {
   const { text } = options;
   const params = {
     text,
-    type: originToType[origin] || undefined,
+    type: OriginToType[origin] || undefined,
   };
   return `${evergreenURL}/task_log_raw/${taskID}/${execution}?${stringifyQuery(
     params
