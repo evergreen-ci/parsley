@@ -12,7 +12,7 @@ const wrapper = (logs: string[]) => {
 describe("ansiiRow", () => {
   it("does not render an ansii row if getLine returns undefined", () => {
     renderWithRouterMatch(
-      <AnsiiRow data={data} lineNumber={99} listRowProps={listRowProps} />,
+      <AnsiiRow {...ansiiProps} lineNumber={99} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -21,7 +21,7 @@ describe("ansiiRow", () => {
   });
   it("renders an ansii row if getLine returns an empty string", () => {
     renderWithRouterMatch(
-      <AnsiiRow data={data} lineNumber={10} listRowProps={listRowProps} />,
+      <AnsiiRow {...ansiiProps} lineNumber={10} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -30,7 +30,7 @@ describe("ansiiRow", () => {
   });
   it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
-      <AnsiiRow data={data} lineNumber={0} listRowProps={listRowProps} />,
+      <AnsiiRow {...ansiiProps} lineNumber={0} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -38,7 +38,7 @@ describe("ansiiRow", () => {
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
     renderWithRouterMatch(
       <AnsiiRow
-        data={data}
+        {...ansiiProps}
         lineNumber={1}
         listRowProps={{ ...listRowProps, index: 1 }}
       />,
@@ -51,12 +51,12 @@ describe("ansiiRow", () => {
   it("lines should be linkified if they have a url", () => {
     renderWithRouterMatch(
       <AnsiiRow
-        data={data}
+        {...ansiiProps}
         lineNumber={8}
         listRowProps={{ ...listRowProps, index: 8 }}
       />,
       {
-        wrapper: wrapper(["Some line with a url https://www.google.com"]),
+        wrapper: wrapper(logLines),
       }
     );
     expect(screen.getByText("https://www.google.com")).toBeInTheDocument();
@@ -65,28 +65,17 @@ describe("ansiiRow", () => {
       "https://www.google.com"
     );
   });
-  it("should highlight matching text on the line", () => {
-    renderWithRouterMatch(
-      <AnsiiRow
-        data={{ ...data, searchTerm: /highlight me/i }}
-        lineNumber={9}
-        listRowProps={{ ...listRowProps, index: 9 }}
-      />
-    );
-    expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
-    expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
-  });
   it("should highlight matching text if it is within range", () => {
     renderWithRouterMatch(
       <AnsiiRow
-        data={{
-          ...data,
-          searchTerm: /highlight me/i,
-          range: { lowerRange: 0, upperRange: 10 },
-        }}
+        {...ansiiProps}
         lineNumber={9}
         listRowProps={{ ...listRowProps, index: 9 }}
-      />
+      />,
+      {
+        route: "?lower=0&upper=10",
+        wrapper: wrapper(logLines),
+      }
     );
     expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
     expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
@@ -94,14 +83,15 @@ describe("ansiiRow", () => {
   it("should not highlight matching text if it is outside of range", () => {
     renderWithRouterMatch(
       <AnsiiRow
-        data={{
-          ...data,
-          searchTerm: /highlight me/i,
-          range: { lowerRange: 0, upperRange: 8 },
-        }}
+        {...ansiiProps}
         lineNumber={9}
         listRowProps={{ ...listRowProps, index: 9 }}
-      />
+        searchTerm={/highlight me/i}
+      />,
+      {
+        route: "?lower=0&upper=8",
+        wrapper: wrapper(logLines),
+      }
     );
     expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
     expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
@@ -132,16 +122,11 @@ const listRowProps = {
   style: {},
 };
 
-const getLine = (index: number) => logLines[index];
-
-const data = {
-  expandLines: jest.fn(),
-  getLine,
-  getResmokeLineColor: jest.fn(),
+const ansiiProps = {
+  getLine: (index: number) => logLines[index],
   resetRowHeightAtIndex: jest.fn(),
   scrollToLine: jest.fn(),
 
-  expandedLines: [],
   prettyPrint: false,
   range: { lowerRange: 0 },
   wrap: false,

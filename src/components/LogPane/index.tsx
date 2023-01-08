@@ -16,14 +16,12 @@ type LogPaneProps = Omit<
 > & {
   cache: CellMeasurerCache;
   rowRenderer: ListRowRenderer;
-  wrap: boolean;
 };
 
 const LogPane: React.FC<LogPaneProps> = ({
   cache,
   rowRenderer,
   rowCount,
-  wrap,
   ...rest
 }) => {
   const {
@@ -34,7 +32,7 @@ const LogPane: React.FC<LogPaneProps> = ({
     selectedLine,
     scrollToLine,
   } = useLogContext();
-  const { expandableRows, prettyPrint } = preferences;
+  const { expandableRows, prettyPrint, wrap } = preferences;
 
   useEffect(() => {
     cache.clearAll();

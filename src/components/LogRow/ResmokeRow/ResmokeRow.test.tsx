@@ -1,5 +1,5 @@
 import { LogContextProvider } from "context/LogContext";
-import { render, screen } from "test_utils";
+import { renderWithRouterMatch, screen } from "test_utils";
 import ResmokeRow from ".";
 
 const wrapper = (logs: string[]) => {
@@ -11,8 +11,12 @@ const wrapper = (logs: string[]) => {
 
 describe("resmokeRow", () => {
   it("does not render a resmoke row if getLine returns undefined", () => {
-    render(
-      <ResmokeRow data={data} lineNumber={99} listRowProps={listRowProps} />,
+    renderWithRouterMatch(
+      <ResmokeRow
+        {...resmokeProps}
+        lineNumber={99}
+        listRowProps={listRowProps}
+      />,
       {
         wrapper: wrapper(logLines),
       }
@@ -20,8 +24,12 @@ describe("resmokeRow", () => {
     expect(screen.queryByDataCy("resmoke-row")).toBeNull();
   });
   it("renders a resmoke row if getLine returns an empty string", () => {
-    render(
-      <ResmokeRow data={data} lineNumber={9} listRowProps={listRowProps} />,
+    renderWithRouterMatch(
+      <ResmokeRow
+        {...resmokeProps}
+        lineNumber={9}
+        listRowProps={listRowProps}
+      />,
       {
         wrapper: wrapper(logLines),
       }
@@ -29,16 +37,20 @@ describe("resmokeRow", () => {
     expect(screen.getByDataCy("resmoke-row")).toBeInTheDocument();
   });
   it("displays a log line and its text for a given index", () => {
-    render(
-      <ResmokeRow data={data} lineNumber={0} listRowProps={listRowProps} />,
+    renderWithRouterMatch(
+      <ResmokeRow
+        {...resmokeProps}
+        lineNumber={0}
+        listRowProps={listRowProps}
+      />,
       {
         wrapper: wrapper(logLines),
       }
     );
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
-    render(
+    renderWithRouterMatch(
       <ResmokeRow
-        data={data}
+        {...resmokeProps}
         lineNumber={1}
         listRowProps={{ ...listRowProps, index: 1 }}
       />,
@@ -50,54 +62,48 @@ describe("resmokeRow", () => {
   });
   it("should apply syntax highlighting to resmoke lines if they have a color", () => {
     const getResmokeLineColor = jest.fn().mockReturnValue("#ff0000");
-    render(
+    renderWithRouterMatch(
       <ResmokeRow
-        data={data}
+        {...resmokeProps}
+        getResmokeLineColor={getResmokeLineColor}
         lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
-      />
+      />,
+      {
+        wrapper: wrapper(logLines),
+      }
     );
     expect(getResmokeLineColor).toHaveBeenCalledWith(7);
     expect(screen.getByDataCy("resmoke-row")).toHaveStyle("color: #ff0000");
   });
-
-  it("should highlight matching text on the line", () => {
-    render(
-      <ResmokeRow
-        data={{ ...data, searchTerm: /mongod/i }}
-        lineNumber={7}
-        listRowProps={{ ...listRowProps, index: 7 }}
-      />
-    );
-    expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
-    expect(screen.getByDataCy("highlight")).toHaveTextContent("mongod");
-  });
   it("should highlight matching text if it is within range", () => {
-    render(
+    renderWithRouterMatch(
       <ResmokeRow
-        data={{
-          ...data,
-          searchTerm: /mongod/i,
-          range: { lowerRange: 0, upperRange: 8 },
-        }}
+        {...resmokeProps}
         lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
-      />
+        searchTerm={/mongod/i}
+      />,
+      {
+        route: "?lower=0&upper=8",
+        wrapper: wrapper(logLines),
+      }
     );
     expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
     expect(screen.getByDataCy("highlight")).toHaveTextContent("mongod");
   });
   it("should not highlight matching text if it is outside of range", () => {
-    render(
+    renderWithRouterMatch(
       <ResmokeRow
-        data={{
-          ...data,
-          searchTerm: /mongod/i,
-          range: { lowerRange: 0, upperRange: 6 },
-        }}
+        {...resmokeProps}
         lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
-      />
+        searchTerm={/mongod/i}
+      />,
+      {
+        route: "?lower=0&upper=6",
+        wrapper: wrapper(logLines),
+      }
     );
     expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
     expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
@@ -127,16 +133,12 @@ const listRowProps = {
   style: {},
 };
 
-const getLine = (index: number) => logLines[index];
-
-const data = {
-  expandLines: jest.fn(),
-  getLine,
+const resmokeProps = {
+  getLine: (index: number) => logLines[index],
   getResmokeLineColor: jest.fn(),
   resetRowHeightAtIndex: jest.fn(),
   scrollToLine: jest.fn(),
 
-  expandedLines: [],
   prettyPrint: false,
   range: { lowerRange: 0 },
   wrap: false,

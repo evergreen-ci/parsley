@@ -21,7 +21,7 @@ interface BaseRowProps extends ListRowProps {
   // may differ due to collapsed rows.
   lineNumber: number;
   prettyPrint?: boolean;
-  highlightedLine?: number;
+  searchLine?: number;
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
@@ -39,14 +39,14 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     children,
     "data-cy": dataCyText,
     index,
-    highlightedLine,
+    highlights,
     lineNumber,
     prettyPrint = false,
+    searchLine,
     searchTerm,
     resmokeRowColor,
     wrap,
     resetRowHeightAtIndex,
-    highlights,
     scrollToLine,
     ...rest
   } = props;
@@ -57,7 +57,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
 
   const selected = selectedLine === lineNumber;
   const bookmarked = bookmarks.includes(lineNumber);
-  const highlighted = highlightedLine === index;
+  const highlighted = searchLine === index;
 
   // Clicking link icon should set or unset the share line.
   const handleClick = () => {

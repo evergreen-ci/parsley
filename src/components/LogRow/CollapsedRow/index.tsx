@@ -1,4 +1,4 @@
-import { forwardRef, useTransition } from "react";
+import { forwardRef } from "react";
 import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
@@ -7,6 +7,7 @@ import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { size } from "constants/tokens";
 import { OverlineType } from "types/leafygreen";
+import { ExpandedLines } from "types/logs";
 import { BaseRowProps } from "../types";
 
 const { gray, black } = palette;
@@ -15,11 +16,12 @@ const SKIP_NUMBER = 5;
 
 interface CollapsedRowProps extends BaseRowProps {
   collapsedLines: number[];
+  expandLines: (expandedLines: ExpandedLines) => void;
 }
 
 const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
-  const { collapsedLines, data, listRowProps } = props;
-  const { expandLines } = data;
+  const { sendEvent } = useLogWindowAnalytics();
+  const { collapsedLines, expandLines, listRowProps } = props;
 
   const numCollapsed = collapsedLines.length;
   const start = collapsedLines[0];
@@ -29,23 +31,16 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
     numCollapsed !== 1 ? `${numCollapsed} lines skipped` : "1 line skipped";
   const disableExpandFive = 2 * SKIP_NUMBER > numCollapsed;
 
-  const [, startTransition] = useTransition();
-  const { sendEvent } = useLogWindowAnalytics();
-
   const expandFive = () => {
-    startTransition(() => {
-      expandLines([
-        [start, start + (SKIP_NUMBER - 1)],
-        [end - (SKIP_NUMBER - 1), end],
-      ]);
-    });
+    expandLines([
+      [start, start + (SKIP_NUMBER - 1)],
+      [end - (SKIP_NUMBER - 1), end],
+    ]);
     sendEvent({ name: "Expanded Lines", lineCount: 5, option: "Five" });
   };
 
   const expandAll = () => {
-    startTransition(() => {
-      expandLines([[start, end]]);
-    });
+    expandLines([[start, end]]);
     sendEvent({
       name: "Expanded Lines",
       lineCount: numCollapsed,
