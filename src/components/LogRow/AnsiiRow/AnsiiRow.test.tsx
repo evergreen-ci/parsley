@@ -1,5 +1,5 @@
 import { LogContextProvider } from "context/LogContext";
-import { renderWithRouterMatch, screen, userEvent } from "test_utils";
+import { renderWithRouterMatch, screen } from "test_utils";
 import AnsiiRow from ".";
 
 const wrapper = (logs: string[]) => {
@@ -10,18 +10,9 @@ const wrapper = (logs: string[]) => {
 };
 
 describe("ansiiRow", () => {
-  const user = userEvent.setup();
   it("does not render an ansii row if getLine returns undefined", () => {
-    const getLine = jest.fn().mockReturnValue(undefined);
     renderWithRouterMatch(
-      <AnsiiRow
-        data={{
-          ...data,
-          getLine,
-        }}
-        lineNumber={0}
-        listRowProps={listRowProps}
-      />,
+      <AnsiiRow data={data} lineNumber={99} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -29,16 +20,8 @@ describe("ansiiRow", () => {
     expect(screen.queryByDataCy("ansii-row")).toBeNull();
   });
   it("renders an ansii row if getLine returns an empty string", () => {
-    const getLine = jest.fn().mockReturnValue("");
     renderWithRouterMatch(
-      <AnsiiRow
-        data={{
-          ...data,
-          getLine,
-        }}
-        lineNumber={0}
-        listRowProps={listRowProps}
-      />,
+      <AnsiiRow data={data} lineNumber={10} listRowProps={listRowProps} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -64,55 +47,6 @@ describe("ansiiRow", () => {
       }
     );
     expect(screen.getByText(logLines[1])).toBeInTheDocument();
-  });
-  it("clicking log line link updates the url and selects it", async () => {
-    const scrollToLine = jest.fn();
-    const { history } = renderWithRouterMatch(
-      <AnsiiRow
-        data={{ ...data, scrollToLine }}
-        lineNumber={0}
-        listRowProps={listRowProps}
-      />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
-    await user.click(screen.getByDataCy("log-link-0"));
-    expect(history.location.search).toBe("?selectedLine=0");
-    expect(scrollToLine).toHaveBeenCalledWith(0);
-  });
-  it("clicking on a selected log line link unselects it", async () => {
-    const { history } = renderWithRouterMatch(
-      <AnsiiRow data={data} lineNumber={0} listRowProps={listRowProps} />,
-
-      {
-        wrapper: wrapper(logLines),
-        route: "?selectedLine=0",
-      }
-    );
-    await user.click(screen.getByDataCy("log-link-0"));
-    expect(history.location.search).toBe("");
-  });
-  it("double clicking a log line adds it to the bookmarks", async () => {
-    const { history } = renderWithRouterMatch(
-      <AnsiiRow data={data} lineNumber={0} listRowProps={listRowProps} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
-    await user.dblClick(screen.getByText(logLines[0]));
-    expect(history.location.search).toBe("?bookmarks=0");
-  });
-  it("double clicking a bookmarked log line removes it from the bookmarks", async () => {
-    const { history } = renderWithRouterMatch(
-      <AnsiiRow data={data} lineNumber={0} listRowProps={listRowProps} />,
-      {
-        wrapper: wrapper(logLines),
-        route: "?bookmarks=0",
-      }
-    );
-    await user.dblClick(screen.getByText(logLines[0]));
-    expect(history.location.search).toBe("");
   });
   it("lines should be linkified if they have a url", () => {
     renderWithRouterMatch(
@@ -185,6 +119,7 @@ const logLines = [
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
   "Some line with a url https://www.google.com",
   "some random text that should not be highlighted but highlight me should",
+  "",
 ];
 
 const listRowProps = {

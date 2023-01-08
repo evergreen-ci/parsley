@@ -31,6 +31,7 @@ import { DIRECTION, LogMetadata, Preferences, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
+  bookmarks: number[];
   expandedLines: ExpandedLines;
   hasLogs: boolean;
   highlightedLine?: number;
@@ -45,6 +46,7 @@ interface LogContextState {
     upperRange?: number;
   };
   searchState: SearchState;
+  selectedLine: number | undefined;
 
   clearExpandedLines: () => void;
   clearLogs: () => void;
@@ -56,9 +58,11 @@ interface LogContextState {
   paginate: (dir: DIRECTION) => void;
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
+  setBookmarks: (bookmarks: number[]) => void;
   setFileName: (fileName: string) => void;
   setLogMetadata: (logMetadata: LogMetadata) => void;
   setSearch: (search: string) => void;
+  setSelectedLine: (selectedLine: number | undefined) => void;
 }
 
 const LogContext = createContext<LogContextState | null>(null);
@@ -81,8 +85,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   initialLogLines,
 }) => {
   const [filters] = useFilterParam();
-  const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
-  const [selectedLine] = useQueryParam<number | undefined>(
+  const [bookmarks, setBookmarks] = useQueryParam<number[]>(
+    QueryParams.Bookmarks,
+    []
+  );
+  const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
   );
@@ -231,6 +238,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
   const memoizedContext = useMemo(
     () => ({
+      bookmarks,
       expandedLines: state.expandedLines,
       hasLogs: !!processedLogLines.length,
       hasSearch: !!state.searchState.searchTerm,
@@ -272,6 +280,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         upperRange,
       },
       searchState: state.searchState,
+      selectedLine,
 
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
@@ -294,6 +303,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         cache.clear(index, 0);
       },
       scrollToLine,
+      setBookmarks,
       setFileName: (fileName: string) => {
         dispatch({ type: "SET_FILE_NAME", fileName });
       },
@@ -301,8 +311,10 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       setSearch: (searchTerm: string) => {
         dispatch({ type: "SET_SEARCH_TERM", searchTerm });
       },
+      setSelectedLine,
     }),
     [
+      bookmarks,
       expandableRows,
       filterLogic,
       highlightedLine,
@@ -311,6 +323,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       prettyPrint,
       processedLogLines,
       searchResults,
+      selectedLine,
       state.expandedLines,
       state.logMetadata,
       state.logs.length,
@@ -322,9 +335,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       getResmokeLineColor,
       ingestLines,
       scrollToLine,
+      setBookmarks,
       setExpandableRows,
       setFilterLogic,
       setLogMetadata,
+      setSelectedLine,
     ]
   );
 

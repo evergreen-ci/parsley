@@ -6,9 +6,7 @@ import {
   ListProps,
   ListRowRenderer,
 } from "react-virtualized";
-import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
-import { useQueryParam } from "hooks/useQueryParam";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import { findLineIndex } from "utils/findLineIndex";
 
@@ -33,14 +31,10 @@ const LogPane: React.FC<LogPaneProps> = ({
     matchingLines,
     preferences,
     processedLogLines,
+    selectedLine,
     scrollToLine,
   } = useLogContext();
   const { expandableRows, prettyPrint } = preferences;
-
-  const [selectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
-    undefined
-  );
 
   useEffect(() => {
     cache.clearAll();
