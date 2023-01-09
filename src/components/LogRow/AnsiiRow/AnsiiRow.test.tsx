@@ -71,6 +71,8 @@ describe("ansiiRow", () => {
         {...ansiiProps}
         lineNumber={9}
         listRowProps={{ ...listRowProps, index: 9 }}
+        range={{ lowerRange: 0, upperRange: 10 }}
+        searchTerm={/highlight me/i}
       />,
       {
         route: "?lower=0&upper=10",
@@ -86,6 +88,7 @@ describe("ansiiRow", () => {
         {...ansiiProps}
         lineNumber={9}
         listRowProps={{ ...listRowProps, index: 9 }}
+        range={{ lowerRange: 0, upperRange: 8 }}
         searchTerm={/highlight me/i}
       />,
       {

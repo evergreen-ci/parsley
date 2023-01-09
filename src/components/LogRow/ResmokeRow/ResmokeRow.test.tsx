@@ -82,10 +82,10 @@ describe("resmokeRow", () => {
         {...resmokeProps}
         lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
+        range={{ lowerRange: 0, upperRange: 8 }}
         searchTerm={/mongod/i}
       />,
       {
-        route: "?lower=0&upper=8",
         wrapper: wrapper(logLines),
       }
     );
@@ -98,10 +98,10 @@ describe("resmokeRow", () => {
         {...resmokeProps}
         lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
+        range={{ lowerRange: 0, upperRange: 6 }}
         searchTerm={/mongod/i}
       />,
       {
-        route: "?lower=0&upper=6",
         wrapper: wrapper(logLines),
       }
     );

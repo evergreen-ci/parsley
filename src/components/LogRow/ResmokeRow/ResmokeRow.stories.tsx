@@ -82,7 +82,6 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
     <Container>
       <LogPane
         cache={cache}
-        initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({

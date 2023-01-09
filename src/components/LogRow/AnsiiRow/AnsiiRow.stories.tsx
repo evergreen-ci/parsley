@@ -20,7 +20,7 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
     useLogContext();
 
   useEffect(() => {
-    ingestLines(logLines, LogTypes.RESMOKE_LOGS);
+    ingestLines(logLines, LogTypes.EVERGREEN_TASK_LOGS);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -70,7 +70,6 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
     <Container>
       <LogPane
         cache={cache}
-        initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
