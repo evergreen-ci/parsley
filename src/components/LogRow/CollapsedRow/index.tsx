@@ -1,4 +1,4 @@
-import { forwardRef } from "react";
+import { forwardRef, useTransition } from "react";
 import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { palette } from "@leafygreen-ui/palette";
@@ -21,6 +21,8 @@ interface CollapsedRowProps extends BaseRowProps {
 
 const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
   const { sendEvent } = useLogWindowAnalytics();
+  const [, startTransition] = useTransition();
+
   const { collapsedLines, expandLines, listRowProps } = props;
 
   const numCollapsed = collapsedLines.length;
@@ -32,15 +34,17 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
   const disableExpandFive = 2 * SKIP_NUMBER > numCollapsed;
 
   const expandFive = () => {
-    expandLines([
-      [start, start + (SKIP_NUMBER - 1)],
-      [end - (SKIP_NUMBER - 1), end],
-    ]);
+    startTransition(() =>
+      expandLines([
+        [start, start + (SKIP_NUMBER - 1)],
+        [end - (SKIP_NUMBER - 1), end],
+      ])
+    );
     sendEvent({ name: "Expanded Lines", lineCount: 5, option: "Five" });
   };
 
   const expandAll = () => {
-    expandLines([[start, end]]);
+    startTransition(() => expandLines([[start, end]]));
     sendEvent({
       name: "Expanded Lines",
       lineCount: numCollapsed,
