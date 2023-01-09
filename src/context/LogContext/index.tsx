@@ -20,8 +20,9 @@ import {
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useFilterParam } from "hooks/useFilterParam";
+import { useHighlightParam } from "hooks/useHighlightParam";
 import { useQueryParam } from "hooks/useQueryParam";
-import { ExpandedLines, ProcessedLogLines } from "types/logs";
+import { ExpandedLines, Filters, ProcessedLogLines } from "types/logs";
 import filterLogs from "utils/filterLogs";
 import { getMatchingLines } from "utils/matchingLines";
 import { getColorMapping } from "utils/resmoke";
@@ -31,9 +32,11 @@ import { DIRECTION, LogMetadata, Preferences, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
+  bookmarks: number[];
   expandedLines: ExpandedLines;
+  filters: Filters;
   hasLogs: boolean;
-  highlightedLine?: number;
+  highlights: string[];
   lineCount: number;
   listRef: React.RefObject<List>;
   logMetadata?: LogMetadata;
@@ -44,7 +47,9 @@ interface LogContextState {
     lowerRange: number;
     upperRange?: number;
   };
+  searchLine?: number;
   searchState: SearchState;
+  selectedLine: number | undefined;
 
   clearExpandedLines: () => void;
   clearLogs: () => void;
@@ -56,9 +61,13 @@ interface LogContextState {
   paginate: (dir: DIRECTION) => void;
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
+  setBookmarks: (bookmarks: number[]) => void;
   setFileName: (fileName: string) => void;
+  setHighlights: (highlights: string[]) => void;
   setLogMetadata: (logMetadata: LogMetadata) => void;
   setSearch: (search: string) => void;
+  setSelectedLine: (selectedLine: number | undefined) => void;
+  setFilters: (filters: Filters) => void;
 }
 
 const LogContext = createContext<LogContextState | null>(null);
@@ -80,17 +89,22 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   children,
   initialLogLines,
 }) => {
-  const [filters] = useFilterParam();
-  const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
-  const [selectedLine] = useQueryParam<number | undefined>(
+  const [filters, setFilters] = useFilterParam();
+  const [highlights, setHighlights] = useHighlightParam();
+
+  const [bookmarks, setBookmarks] = useQueryParam<number[]>(
+    QueryParams.Bookmarks,
+    []
+  );
+  const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
     QueryParams.SelectedLine,
     undefined
   );
+  const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
   const [upperRange] = useQueryParam<undefined | number>(
     QueryParams.UpperRange,
     undefined
   );
-  const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
 
   const [wrap, setWrap] = useState(Cookie.get(WRAP) === "true");
   const [filterLogic, setFilterLogic] = useQueryParam(
@@ -211,7 +225,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stringifiedSearchResults, scrollToLine]);
 
-  const highlightedLine =
+  const searchLine =
     state.searchState.searchIndex !== undefined
       ? searchResults[state.searchState.searchIndex]
       : undefined;
@@ -231,10 +245,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
   const memoizedContext = useMemo(
     () => ({
+      bookmarks,
       expandedLines: state.expandedLines,
+      filters,
       hasLogs: !!processedLogLines.length,
-      hasSearch: !!state.searchState.searchTerm,
-      highlightedLine,
+      highlights,
       lineCount: state.logs.length,
       logMetadata: state.logMetadata,
       listRef,
@@ -271,7 +286,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         lowerRange,
         upperRange,
       },
+      searchLine,
       searchState: state.searchState,
+      selectedLine,
 
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
@@ -294,23 +311,31 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         cache.clear(index, 0);
       },
       scrollToLine,
+      setBookmarks,
       setFileName: (fileName: string) => {
         dispatch({ type: "SET_FILE_NAME", fileName });
       },
+      setFilters,
+      setHighlights,
       setLogMetadata,
       setSearch: (searchTerm: string) => {
         dispatch({ type: "SET_SEARCH_TERM", searchTerm });
       },
+      setSelectedLine,
     }),
     [
+      bookmarks,
       expandableRows,
       filterLogic,
-      highlightedLine,
+      filters,
+      highlights,
       lowerRange,
       matchingLines,
       prettyPrint,
       processedLogLines,
+      searchLine,
       searchResults,
+      selectedLine,
       state.expandedLines,
       state.logMetadata,
       state.logs.length,
@@ -322,9 +347,13 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       getResmokeLineColor,
       ingestLines,
       scrollToLine,
+      setBookmarks,
       setExpandableRows,
       setFilterLogic,
+      setFilters,
+      setHighlights,
       setLogMetadata,
+      setSelectedLine,
     ]
   );
 

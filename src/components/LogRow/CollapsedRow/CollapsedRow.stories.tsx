@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { ComponentMeta, ComponentStory } from "@storybook/react";
 import LogPane from "components/LogPane";
@@ -10,50 +10,33 @@ import CollapsedRow from ".";
 export default {
   title: "Components/LogRow/CollapsedRow",
   component: CollapsedRow,
-} as ComponentMeta<CollapsedRowProps>;
+} as ComponentMeta<LogPaneProps>;
 
-type CollapsedRowProps = React.FC<
-  React.ComponentProps<typeof CollapsedRow>["data"]
->;
+type LogPaneProps = React.FC<React.ComponentProps<typeof LogPane>>;
 
 // CollapsedRow with AnsiiRows.
-const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
-  // Used to simulate expanding lines.
-  const [processedLogLines, setProcessedLogLines] = useState(
-    collapsedProcessedLogLines
-  );
-  const { listRef } = useLogContext();
+const CollapsedAnsiiTemplate: ComponentStory<LogPaneProps> = (args) => {
+  const { ingestLines, preferences, processedLogLines } = useLogContext();
+  const { setWrap } = preferences;
 
-  const onExpand = () => {
-    setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]);
-    cache.clearAll();
-    listRef.current?.recomputeRowHeights();
-  };
+  useEffect(() => {
+    ingestLines(ansiiLogLines, LogTypes.EVERGREEN_TASK_LOGS);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    setWrap(args.wrap);
+  }, [args.wrap, setWrap]);
 
   return (
     <Container>
       <LogPane
         cache={cache}
-        initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          data: {
-            expandLines: onExpand,
-            getLine: (index: number) => ansiiLogLines[index],
-            getResmokeLineColor: () => undefined,
-            resetRowHeightAtIndex: () => undefined,
-            scrollToLine: () => {},
-            highlightedLine: args.highlightedLine,
-            prettyPrint: args.prettyPrint,
-            range: { lowerRange: 0 },
-            searchTerm: /p=debug/,
-            wrap: args.wrap,
-          },
-          processedLogLines,
+          processedLogLines: collapsedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
         })}
-        wrap={args.wrap}
       />
     </Container>
   );
@@ -62,50 +45,32 @@ const CollapsedAnsiiTemplate: ComponentStory<CollapsedRowProps> = (args) => {
 export const CollapsedAnsiiRow = CollapsedAnsiiTemplate.bind({});
 
 CollapsedAnsiiRow.args = {
-  highlightedLine: 0,
-  prettyPrint: false,
   wrap: false,
 };
 
 // CollapsedRow withs ResmokeRows.
-const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
-  // Used to simulate expanding lines.
-  const [processedLogLines, setProcessedLogLines] = useState(
-    collapsedProcessedLogLines
-  );
+const CollapsedResmokeTemplate: ComponentStory<LogPaneProps> = (args) => {
+  const { ingestLines, preferences, processedLogLines } = useLogContext();
+  const { setWrap } = preferences;
 
-  const { listRef } = useLogContext();
+  useEffect(() => {
+    ingestLines(resmokeLogLines, LogTypes.RESMOKE_LOGS);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onExpand = () => {
-    setProcessedLogLines([0, 1, 2, 3, 4, 5, 6, 7]);
-    cache.clearAll();
-    listRef.current?.recomputeRowHeights();
-  };
+  useEffect(() => {
+    setWrap(args.wrap);
+  }, [args.wrap, setWrap]);
 
   return (
     <Container>
       <LogPane
         cache={cache}
-        initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          data: {
-            expandLines: onExpand,
-            getLine: (index: number) => resmokeLogLines[index],
-            getResmokeLineColor: () => undefined,
-            resetRowHeightAtIndex: () => undefined,
-            scrollToLine: () => {},
-            highlightedLine: args.highlightedLine,
-            prettyPrint: args.prettyPrint,
-            range: { lowerRange: 0 },
-            searchTerm: /mongod/,
-            wrap: args.wrap,
-          },
-          processedLogLines,
-          logType: LogTypes.EVERGREEN_TASK_LOGS,
+          processedLogLines: collapsedLogLines,
+          logType: LogTypes.RESMOKE_LOGS,
         })}
-        wrap={args.wrap}
       />
     </Container>
   );
@@ -114,8 +79,6 @@ const CollapsedResmokeTemplate: ComponentStory<CollapsedRowProps> = (args) => {
 export const CollapsedResmokeRow = CollapsedResmokeTemplate.bind({});
 
 CollapsedResmokeRow.args = {
-  highlightedLine: 1,
-  prettyPrint: false,
   wrap: false,
 };
 
@@ -142,7 +105,7 @@ const resmokeLogLines = [
   "[j0:sec1] Starting mongod on port 20002...",
 ];
 
-const collapsedProcessedLogLines = [0, 1, 2, [3, 4, 5], 6, 7];
+const collapsedLogLines = [0, 1, 2, [3, 4, 5], 6, 7];
 
 const Container = styled.div`
   height: 400px;

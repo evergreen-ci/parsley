@@ -5,9 +5,8 @@ import { ListRowProps } from "react-virtualized";
 import { useLogWindowAnalytics } from "analytics";
 import Highlight from "components/Highlight";
 import Icon from "components/Icon";
-import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useLogContext } from "context/LogContext";
 import { formatPrettyPrint } from "utils/prettyPrint";
 import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
@@ -22,7 +21,7 @@ interface BaseRowProps extends ListRowProps {
   // may differ due to collapsed rows.
   lineNumber: number;
   prettyPrint?: boolean;
-  highlightedLine?: number;
+  searchLine?: number;
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
@@ -40,34 +39,27 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     children,
     "data-cy": dataCyText,
     index,
-    highlightedLine,
+    highlights,
     lineNumber,
     prettyPrint = false,
+    searchLine,
     searchTerm,
     resmokeRowColor,
     wrap,
     resetRowHeightAtIndex,
-    highlights,
     scrollToLine,
     ...rest
   } = props;
 
-  const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
-    undefined
-  );
-  const selected = selectedLine === lineNumber;
-
-  const [bookmarks, setBookmarks] = useQueryParam<number[]>(
-    QueryParams.Bookmarks,
-    []
-  );
   const { sendEvent } = useLogWindowAnalytics();
+  const { selectedLine, setSelectedLine, bookmarks, setBookmarks } =
+    useLogContext();
+
+  const selected = selectedLine === lineNumber;
   const bookmarked = bookmarks.includes(lineNumber);
+  const highlighted = searchLine === index;
 
-  const highlighted = highlightedLine === index;
-
-  // Clicking a line should select or deselect the line.
+  // Clicking link icon should set or unset the share line.
   const handleClick = () => {
     if (selected) {
       setSelectedLine(undefined);
