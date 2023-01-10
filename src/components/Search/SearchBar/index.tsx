@@ -1,4 +1,4 @@
-import { KeyboardEvent, useMemo, useRef, useState } from "react";
+import { KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
@@ -36,6 +36,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   const isFilter = selected === SearchBarActions.Filter;
   const isHighlight = selected === SearchBarActions.Highlight;
+  const isSearch = selected === SearchBarActions.Search;
   const isValid = validator(input);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -75,6 +76,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
     leaveBreadcrumb("search-bar-submit", { selected, input }, "user");
     onSubmit(selected, input);
   };
+
+  useEffect(() => {
+    if (isSearch && input.length > 0) {
+      handleOnSubmit();
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [isSearch]);
 
   // debounce the onChange handler to prevent excessive rerenders
   const debouncedHandleOnChangeCallback = useMemo(
