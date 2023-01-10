@@ -1,7 +1,7 @@
 import { isExpanded, mergeIntervals } from ".";
 
 describe("mergeIntervals", () => {
-  it("merges intervals if they can be merged", () => {
+  it("merges overlapping intervals when end + 1 === start", () => {
     expect(
       mergeIntervals([
         [89, 94],
@@ -9,6 +9,16 @@ describe("mergeIntervals", () => {
         [97, 102],
       ])
     ).toStrictEqual([[89, 102]]);
+  });
+
+  it("merges overlapping intervals when end + 1 > start", () => {
+    expect(
+      mergeIntervals([
+        [0, 5],
+        [3, 15],
+        [7, 28],
+      ])
+    ).toStrictEqual([[0, 28]]);
   });
 
   it("does not merge intervals if they cannot be merged", () => {
