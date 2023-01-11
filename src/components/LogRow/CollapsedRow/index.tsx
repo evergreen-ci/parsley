@@ -39,10 +39,10 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
           [end - (SKIP_NUMBER - 1), end],
         ])
       );
-      sendEvent({ name: "Expanded Lines", lineCount: 5, option: "Five" });
     } else {
-      expandAll();
+      startTransition(() => expandLines([[start, end]]));
     }
+    sendEvent({ name: "Expanded Lines", lineCount: 5, option: "Five" });
   };
 
   const expandAll = () => {
