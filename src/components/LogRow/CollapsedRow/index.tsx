@@ -28,11 +28,12 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
   const start = collapsedLines[0];
   const end = collapsedLines[collapsedLines.length - 1];
 
+  const canExpandFive = SKIP_NUMBER * 2 < numCollapsed;
   const lineText =
     numCollapsed !== 1 ? `${numCollapsed} lines skipped` : "1 line skipped";
 
   const expandFive = () => {
-    if (2 * SKIP_NUMBER < numCollapsed) {
+    if (canExpandFive) {
       startTransition(() =>
         expandLines([
           [start, start + (SKIP_NUMBER - 1)],
@@ -42,7 +43,11 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
     } else {
       startTransition(() => expandLines([[start, end]]));
     }
-    sendEvent({ name: "Expanded Lines", lineCount: 5, option: "Five" });
+    sendEvent({
+      name: "Expanded Lines",
+      lineCount: canExpandFive ? SKIP_NUMBER * 2 : numCollapsed,
+      option: "Five",
+    });
   };
 
   const expandAll = () => {
