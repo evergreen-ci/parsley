@@ -1,6 +1,6 @@
 describe("Filtering", () => {
   const logLink =
-    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e17b99558fd9c5e2faf70a00d15d";
 
   describe("Applying filters", () => {
     describe("Basic filtering", () => {
@@ -17,7 +17,7 @@ describe("Filtering", () => {
         cy.dataCy("log-row-6").dblclick();
         cy.location("search").should(
           "equal",
-          "?bookmarks=0,6,11079&selectedLine=5"
+          "?bookmarks=0,6,130&selectedLine=5"
         );
         // Apply a filter that doesn't satisfy any log line.
         cy.addFilter("notarealfilter");
@@ -25,14 +25,14 @@ describe("Filtering", () => {
         cy.get("[data-cy^='log-row-']").each(($el) => {
           cy.wrap($el)
             .should("have.attr", "data-cy")
-            .and("match", /log-row-(0|5|6|11079)/);
+            .and("match", /log-row-(0|5|6|130)/);
         });
       });
     });
 
     describe("Advanced filtering", () => {
-      const filter1 = "NETWORK";
-      const filter2 = "metadata";
+      const filter1 = "deleted";
+      const filter2 = "session";
 
       describe("filtering mode is AND", () => {
         beforeEach(() => {
@@ -48,8 +48,7 @@ describe("Filtering", () => {
             `filters=100${filter1},100${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-11079']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el).contains(filter1, { matchCase: false });
               cy.wrap($el).contains(filter2, { matchCase: false });
@@ -68,8 +67,7 @@ describe("Filtering", () => {
             `filters=110${filter1},100${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-11079']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el).contains(filter1, { matchCase: true });
               cy.wrap($el).contains(filter2, { matchCase: false });
@@ -88,8 +86,7 @@ describe("Filtering", () => {
             `filters=110${filter1},101${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-11079']")
+            .not("[data-bookmarked='true']")
             .each(($el) => {
               cy.wrap($el).contains(filter1, { matchCase: true });
               cy.wrap($el).should("not.contain.text", filter2);
@@ -128,12 +125,11 @@ describe("Filtering", () => {
             `filters=100${filter1},100${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-11079']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el)
                 .invoke("text")
-                .should("match", /NETWORK|metadata/i);
+                .should("match", /deleted|session/i);
             });
         });
 
@@ -149,15 +145,14 @@ describe("Filtering", () => {
             `filters=110${filter1},100${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-11079']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el)
                 .invoke("text")
                 .should(
                   "satisfy",
                   (text: string) =>
-                    text.match(/NETWORK/) || text.match(/metadata/i)
+                    text.match(/deleted/) || text.match(/session/i)
                 );
             });
         });
@@ -174,15 +169,14 @@ describe("Filtering", () => {
             `filters=110${filter1},101${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-11079']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el)
                 .invoke("text")
                 .should(
                   "satisfy",
                   (text: string) =>
-                    text.match(/NETWORK/) || !text.match(/metadata/i)
+                    text.match(/deleted/) || !text.match(/session/i)
                 );
             });
         });
@@ -218,28 +212,26 @@ describe("Filtering", () => {
       cy.location("search").should("contain", "filters=100notarealfilter");
 
       cy.get("[data-cy^='log-row-']")
-        .not("[data-cy='log-row-0']")
-        .not("[data-cy='log-row-11079']")
+        .not("[data-bookmarked=true]")
         .should("not.exist");
 
       cy.dataCy("filter-notarealfilter").within(() => {
         cy.get(`[aria-label="Edit filter"]`).click();
       });
-      cy.dataCy("edit-filter-name").clear().type("REPL_HB");
+      cy.dataCy("edit-filter-name").clear().type("session");
       cy.contains("button", "Apply").click();
-      cy.location("search").should("contain", "filters=100REPL_HB");
+      cy.location("search").should("contain", "filters=100session");
 
       cy.get("[data-cy^='log-row-']")
-        .not("[data-cy='log-row-0']")
-        .not("[data-cy='log-row-11079']")
+        .not("[data-bookmarked=true]")
         .each(($el) => {
-          cy.wrap($el).contains("REPL_HB", { matchCase: false });
+          cy.wrap($el).contains("session", { matchCase: false });
         });
     });
 
     it("should be able to delete a filter", () => {
-      cy.addFilter("REPL_HB");
-      cy.dataCy("filter-REPL_HB").within(() => {
+      cy.addFilter("session");
+      cy.dataCy("filter-session").within(() => {
         cy.get(`[aria-label="Delete filter"]`).click();
       });
       cy.location("search").should("not.contain", "filters");

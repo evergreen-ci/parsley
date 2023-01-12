@@ -99,6 +99,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       ref={ref}
       {...rest}
       bookmarked={bookmarked}
+      data-bookmarked={bookmarked}
       data-cy={`log-row-${lineNumber}`}
       data-highlighted={highlighted}
       data-selected={selected}

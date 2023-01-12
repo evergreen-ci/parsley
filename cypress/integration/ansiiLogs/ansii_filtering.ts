@@ -48,8 +48,7 @@ describe("Filtering", () => {
             `filters=100${filter1},100${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-297']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el).contains(filter1, { matchCase: false });
               cy.wrap($el).contains(filter2, { matchCase: false });
@@ -68,8 +67,7 @@ describe("Filtering", () => {
             `filters=110${filter1},100${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-297']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el).contains(filter1, { matchCase: true });
               cy.wrap($el).contains(filter2, { matchCase: false });
@@ -88,8 +86,7 @@ describe("Filtering", () => {
             `filters=110${filter1},101${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-297']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el).contains(filter1, { matchCase: true });
               cy.wrap($el).should("not.contain.text", filter2);
@@ -128,8 +125,7 @@ describe("Filtering", () => {
             `filters=100${filter1},100${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-297']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el)
                 .invoke("text")
@@ -149,8 +145,7 @@ describe("Filtering", () => {
             `filters=110${filter1},100${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-297']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el)
                 .invoke("text")
@@ -174,8 +169,7 @@ describe("Filtering", () => {
             `filters=110${filter1},101${filter2}`
           );
           cy.get("[data-cy^='log-row-']")
-            .not("[data-cy='log-row-0']")
-            .not("[data-cy='log-row-297']")
+            .not("[data-bookmarked=true]")
             .each(($el) => {
               cy.wrap($el)
                 .invoke("text")
@@ -218,8 +212,7 @@ describe("Filtering", () => {
       cy.location("search").should("contain", "filters=100notarealfilter");
 
       cy.get("[data-cy^='log-row-']")
-        .not("[data-cy='log-row-0']")
-        .not("[data-cy='log-row-297']")
+        .not("[data-bookmarked=true]")
         .should("not.exist");
 
       cy.dataCy("filter-notarealfilter").within(() => {
@@ -230,8 +223,7 @@ describe("Filtering", () => {
       cy.location("search").should("contain", "filters=100running");
 
       cy.get("[data-cy^='log-row-']")
-        .not("[data-cy='log-row-0']")
-        .not("[data-cy='log-row-297']")
+        .not("[data-bookmarked=true]")
         .each(($el) => {
           cy.wrap($el).contains("running", { matchCase: false });
         });
