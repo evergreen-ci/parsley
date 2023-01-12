@@ -1,10 +1,10 @@
 describe("Basic resmoke log view", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
-  before(() => {
+  beforeEach(() => {
     cy.login();
-    cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
+    cy.visit(logLink);
   });
 
   it("should render resmoke lines", () => {
@@ -23,10 +23,9 @@ describe("Basic resmoke log view", () => {
     });
   });
   it("long lines with wrapping turned on should fit on screen", () => {
-    cy.clickToggle("wrap-toggle", true); // Turn wrap on.
+    cy.clickToggle("wrap-toggle", true);
     cy.dataCy("log-row-16").should("be.visible");
     cy.dataCy("log-row-16").isContainedInViewport();
-    cy.clickToggle("wrap-toggle", false); // Turn wrap off.
   });
   it("should still allow horizontal scrolling when there are few logs on screen", () => {
     cy.dataCy("searchbar-select").click();
@@ -51,10 +50,11 @@ describe("Resmoke syntax highlighting", () => {
   };
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
-  before(() => {
+
+  beforeEach(() => {
     cy.login();
-    cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
+    cy.visit(logLink);
   });
   it("should not color non resmoke log lines", () => {
     cy.dataCy("log-row-0").within(() => {
@@ -69,7 +69,6 @@ describe("Resmoke syntax highlighting", () => {
     cy.dataCy("log-row-20").within(() => {
       cy.dataCy("resmoke-row").should("have.css", "color", colors.blue);
     });
-
     cy.dataCy("log-row-21").within(() => {
       cy.dataCy("resmoke-row").should("have.css", "color", colors.blue);
     });
@@ -87,13 +86,14 @@ describe("Resmoke syntax highlighting", () => {
     });
   });
 });
+
 describe("Bookmarking and selecting lines", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
-  before(() => {
+  beforeEach(() => {
     cy.login();
-    cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
+    cy.visit(logLink);
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
@@ -148,6 +148,7 @@ describe("Bookmarking and selecting lines", () => {
   });
 
   it("should be able to clear bookmarks", () => {
+    cy.location("search").should("equal", "?bookmarks=0,11079");
     cy.dataCy("clear-bookmarks").click();
     cy.location("search").should("equal", "");
   });
@@ -156,18 +157,13 @@ describe("Bookmarking and selecting lines", () => {
 describe("Jump to line", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
-  before(() => {
+  beforeEach(() => {
     cy.login();
-    cy.visit(logLink);
-  });
-
-  it("should default to bookmarking 0 and the last log line on load", () => {
-    cy.location("search").should("equal", "?bookmarks=0,11079");
-    cy.dataCy("bookmark-list").should("contain", "0");
-    cy.dataCy("bookmark-list").should("contain", "11079");
+    cy.setCookie("has-opened-drawer", "true");
   });
 
   it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
+    cy.visit(`${logLink}?bookmarks=0,11079`);
     cy.dataCy("log-row-4").dblclick({ force: true });
 
     cy.dataCy("bookmark-11079").click();
@@ -179,7 +175,7 @@ describe("Jump to line", () => {
   });
 
   it("should be able to use the bookmarks bar to jump to a line when there are collapsed rows", () => {
-    cy.addFilter("repl_hb");
+    cy.visit(`${logLink}?bookmarks=0,11079&filters=100repl_hb`);
 
     cy.dataCy("log-row-30").dblclick({ force: true });
 
@@ -190,27 +186,23 @@ describe("Jump to line", () => {
     cy.dataCy("bookmark-30").click();
     cy.dataCy("log-row-30").should("be.visible");
   });
+
   it("visiting a log with a selected line should jump to that line on page load", () => {
-    cy.visit(`${logLink}?selectedLine=200`);
+    cy.visit(`${logLink}?bookmarks=0,11079&selectedLine=200`);
     cy.dataCy("log-row-200").should("be.visible");
   });
 });
 
 describe("expanding collapsed rows", () => {
   const logLink =
-    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
-  before(() => {
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab?bookmarks=0,11079&filters=100ShardedClusterFixture%253Ajob0";
+  beforeEach(() => {
     cy.login();
     cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
   it("should be able to expand collapsed rows", () => {
-    // Apply a filter.
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("filter-option").click();
-    cy.dataCy("searchbar-input").type("ShardedClusterFixture:job0{enter}");
-
     cy.dataCy("log-row-1").should("not.exist");
     cy.dataCy("log-row-2").should("not.exist");
     cy.dataCy("log-row-3").should("not.exist");
@@ -226,15 +218,23 @@ describe("expanding collapsed rows", () => {
   });
 
   it("should be able to see what rows have been expanded in the drawer", () => {
+    cy.dataCy("collapsed-row-1-3").within(() => {
+      cy.contains("All").click();
+    });
+
     cy.toggleDrawer();
     cy.dataCy("expanded-row-1-to-3").should("be.visible");
   });
 
   it("should be possible to re-collapse rows through the drawer", () => {
+    cy.dataCy("collapsed-row-1-3").within(() => {
+      cy.contains("All").click();
+    });
     cy.dataCy("log-row-1").should("be.visible");
     cy.dataCy("log-row-2").should("be.visible");
     cy.dataCy("log-row-3").should("be.visible");
 
+    cy.toggleDrawer();
     cy.dataCy("expanded-row-1-to-3").within(() => {
       cy.get(`[aria-label="Delete range"]`).click();
     });
@@ -245,7 +245,7 @@ describe("expanding collapsed rows", () => {
 describe("pretty print", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
-  before(() => {
+  beforeEach(() => {
     cy.login();
     cy.setCookie("has-opened-drawer", "true");
     cy.setCookie("pretty-print-bookmarks", "true");

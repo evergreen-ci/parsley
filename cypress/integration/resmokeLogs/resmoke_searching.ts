@@ -2,10 +2,10 @@ describe("Searching", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
 
-  before(() => {
+  beforeEach(() => {
     cy.login();
+    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
-    cy.toggleDrawer();
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
   });
@@ -23,7 +23,6 @@ describe("Searching", () => {
   });
 
   it("searching for a term should snap the matching line to the top of the window", () => {
-    cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("REPL_HB");
     cy.dataCy("search-count").should("be.visible");
     cy.dataCy("search-count").should("contain.text", "1/1484");
@@ -31,6 +30,8 @@ describe("Searching", () => {
   });
 
   it("should be able to specify a range of lines to search", () => {
+    cy.dataCy("searchbar-input").type("REPL_HB");
+
     cy.toggleDetailsPanel(true);
     cy.dataCy("range-upper-bound").should("be.visible");
     cy.dataCy("range-upper-bound").type("25");
@@ -48,7 +49,6 @@ describe("Searching", () => {
     cy.dataCy("search-count").should("contain.text", "1/1484");
   });
   it("should be able to toggle case sensitivity", () => {
-    cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("Mongos0");
     cy.dataCy("search-count").should("contain.text", "1/1");
     cy.toggleDetailsPanel(true);
@@ -78,7 +78,6 @@ describe("Searching", () => {
   });
 
   it("should be able to paginate through search results", () => {
-    cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("conn49");
     cy.dataCy("search-count").should("be.visible");
     cy.dataCy("search-count").should("contain.text", "1/8");
@@ -96,7 +95,6 @@ describe("Searching", () => {
   });
 
   it("should be able to search on filtered content", () => {
-    cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("conn49");
     cy.dataCy("search-count").should("be.visible");
     cy.dataCy("search-count").should("contain.text", "1/8");

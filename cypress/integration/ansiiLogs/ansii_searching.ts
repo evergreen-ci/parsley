@@ -1,10 +1,10 @@
 describe("Searching", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
-  before(() => {
+  beforeEach(() => {
     cy.login();
+    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
-    cy.toggleDrawer();
     cy.dataCy("searchbar-select").click();
     cy.dataCy("search-option").click();
   });
@@ -19,7 +19,6 @@ describe("Searching", () => {
   });
 
   it("searching for a term should snap the matching line to the top of the window", () => {
-    cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("info");
     cy.dataCy("search-count").should("be.visible");
     cy.dataCy("search-count").should("contain.text", "1/4");
@@ -27,6 +26,8 @@ describe("Searching", () => {
   });
 
   it("should be able to specify a range of lines to search", () => {
+    cy.dataCy("searchbar-input").type("info");
+
     cy.toggleDetailsPanel(true);
     cy.dataCy("range-upper-bound").should("be.visible");
     cy.dataCy("range-upper-bound").type("25");
@@ -45,7 +46,6 @@ describe("Searching", () => {
   });
 
   it("should be able to toggle case sensitivity", () => {
-    cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("starting");
     cy.dataCy("search-count").should("contain.text", "1/1");
     cy.toggleDetailsPanel(true);
@@ -75,7 +75,6 @@ describe("Searching", () => {
   });
 
   it("should be able to paginate through search results", () => {
-    cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("info");
     cy.dataCy("search-count").should("be.visible");
     cy.dataCy("search-count").should("contain.text", "1/4");
@@ -98,7 +97,6 @@ describe("Searching", () => {
   });
 
   it("should be able to search on filtered content", () => {
-    cy.dataCy("searchbar-input").clear();
     cy.dataCy("searchbar-input").type("spruce");
     cy.dataCy("search-count").should("be.visible");
     cy.dataCy("search-count").should("contain.text", "1/27");
