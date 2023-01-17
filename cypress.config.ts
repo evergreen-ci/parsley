@@ -7,7 +7,6 @@ export default defineConfig({
     supportFile: "cypress/support/index.ts",
     specPattern: "cypress/integration/**/*.ts",
     experimentalStudio: true,
-    testIsolation: false,
     numTestsKeptInMemory: 0,
   },
   reporterOptions: {
