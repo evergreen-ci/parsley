@@ -17,12 +17,11 @@ describe("External Links", () => {
     });
     it("should render a link to the Lobster logs", () => {
       cy.dataCy("lobster-button").should("be.visible");
-      cy.dataCy("lobster-button")
-        .should("have.attr", "href")
-        .and(
-          "contains",
-          "/lobster/evergreen/task/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task"
-        );
+      cy.dataCy("lobster-button").should(
+        "have.attr",
+        "href",
+        "http://localhost:9090/lobster/evergreen/task/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task"
+      );
     });
     it("should render links to the log files", () => {
       cy.dataCy("raw-log-button").should("be.visible");
@@ -59,12 +58,11 @@ describe("External Links", () => {
     });
     it("should render a link to the Lobster logs", () => {
       cy.dataCy("lobster-button").should("be.visible");
-      cy.dataCy("lobster-button")
-        .should("have.attr", "href")
-        .and(
-          "contains",
-          "/lobster/evergreen/test/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0/JustAFakeTestInALonelyWorld"
-        );
+      cy.dataCy("lobster-button").should(
+        "have.attr",
+        "href",
+        "http://localhost:9090/lobster/evergreen/test/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0/JustAFakeTestInALonelyWorld"
+      );
     });
     it("should render links to the log files", () => {
       cy.dataCy("raw-log-button").should("be.visible");
@@ -103,12 +101,11 @@ describe("External Links", () => {
     });
     it("should render a link to the Lobster logs", () => {
       cy.dataCy("lobster-button").should("be.visible");
-      cy.dataCy("lobster-button")
-        .should("have.attr", "href")
-        .and(
-          "contains",
-          "/lobster/build/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab"
-        );
+      cy.dataCy("lobster-button").should(
+        "have.attr",
+        "href",
+        "http://localhost:9090/lobster/build/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab"
+      );
     });
     it("should render links to the log files", () => {
       cy.dataCy("raw-log-button").should("be.visible");
