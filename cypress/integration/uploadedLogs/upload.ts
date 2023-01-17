@@ -3,10 +3,10 @@ describe("Upload page", () => {
     beforeEach(() => {
       cy.login();
       cy.visit("/upload");
-      cy.dataCy("upload-zone").should("be.visible");
     });
 
     it("should be able to drag and drop a file", () => {
+      cy.dataCy("upload-zone").should("be.visible");
       cy.dataCy("upload-zone").selectFile("sample_logs/resmoke.log", {
         force: true,
         action: "drag-drop",
@@ -40,10 +40,10 @@ describe("Upload page", () => {
       cy.login();
       cy.setCookie("has-opened-drawer", "true");
       cy.visit(logLink);
-      cy.dataCy("log-window").should("be.visible");
     });
 
     it("trying to navigate away to the upload page should prompt the user", () => {
+      cy.dataCy("log-window").should("be.visible");
       cy.dataCy("upload-link").click();
       cy.dataCy("confirmation-modal").should("be.visible");
       cy.contains("button", "Confirm").click();

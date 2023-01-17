@@ -17,7 +17,7 @@ declare global {
        * Custom command to add a search.
        * @example cy.addSearch('mySearch')
        */
-      addSearch(search: string): void;
+      addSearch(search: string, shouldSubmit?: boolean): void;
       /**
        * Custom command to click one of the toggles in the Details Menu panel.
        * @example cy.clickToggle('wrap-toggle', true)
@@ -68,7 +68,7 @@ declare global {
       toggleDrawer(): void;
       /**
        * Custom command to open and close the Details Panel.
-       * @example cy.toggleDetailsPanel(open: boolean)
+       * @example cy.toggleDetailsPanel(true)
        */
       toggleDetailsPanel(open: boolean): void;
       /**
