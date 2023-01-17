@@ -72,7 +72,7 @@ describe("collapsedRow", () => {
     expect(expandLines).toHaveBeenCalledWith([[0, 10]]);
   });
 
-  it("should disable the `Expand 5 Above and Below` button if there are less than 10 log lines in the collapsed row", async () => {
+  it("should not disable `Expand 5 Above and Below` button if there are less than 10 log lines in the collapsed row", async () => {
     renderWithRouterMatch(
       <CollapsedRow
         {...collapsedProps}
@@ -86,7 +86,7 @@ describe("collapsedRow", () => {
     const expandFiveButton = screen.getByRole("button", {
       name: "Expand Icon 5 Above and Below",
     });
-    expect(expandFiveButton).toBeDisabled();
+    expect(expandFiveButton).not.toBeDisabled();
   });
 });
 

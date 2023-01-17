@@ -61,6 +61,7 @@ const useEffectDebugger = (
     console.table(changedDeps);
   }
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(effectHook, dependencies);
 };
 

@@ -5,13 +5,12 @@ import BaseRow from "components/LogRow/BaseRow";
 import { LogRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
-const ansiUp = new AnsiUp();
-
 interface AnsiiRowProps extends LogRowProps {
   lineNumber: number;
 }
 
 const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
+  const ansiUp = new AnsiUp();
   const {
     getLine,
     resetRowHeightAtIndex,

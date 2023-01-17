@@ -10,7 +10,7 @@ import { OverlineType } from "types/leafygreen";
 import { ExpandedLines } from "types/logs";
 import { BaseRowProps } from "../types";
 
-const { gray, black } = palette;
+const { gray } = palette;
 
 const SKIP_NUMBER = 5;
 
@@ -29,18 +29,26 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
   const start = collapsedLines[0];
   const end = collapsedLines[collapsedLines.length - 1];
 
+  const canExpandFive = SKIP_NUMBER * 2 < numCollapsed;
   const lineText =
     numCollapsed !== 1 ? `${numCollapsed} lines skipped` : "1 line skipped";
-  const disableExpandFive = 2 * SKIP_NUMBER > numCollapsed;
 
   const expandFive = () => {
-    startTransition(() =>
-      expandLines([
-        [start, start + (SKIP_NUMBER - 1)],
-        [end - (SKIP_NUMBER - 1), end],
-      ])
-    );
-    sendEvent({ name: "Expanded Lines", lineCount: 5, option: "Five" });
+    if (canExpandFive) {
+      startTransition(() =>
+        expandLines([
+          [start, start + (SKIP_NUMBER - 1)],
+          [end - (SKIP_NUMBER - 1), end],
+        ])
+      );
+    } else {
+      startTransition(() => expandLines([[start, end]]));
+    }
+    sendEvent({
+      name: "Expanded Lines",
+      lineCount: canExpandFive ? SKIP_NUMBER * 2 : numCollapsed,
+      option: "Five",
+    });
   };
 
   const expandAll = () => {
@@ -67,11 +75,7 @@ const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
         All
       </StyledButton>
       <StyledButton
-        disabled={disableExpandFive}
-        leftGlyph={
-          // TODO: Remove conditional color when LG-2528 is completed.
-          <Icon fill={disableExpandFive ? gray.base : black} glyph="Expand" />
-        }
+        leftGlyph={<Icon glyph="Expand" />}
         onClick={expandFive}
         size="xsmall"
       >
