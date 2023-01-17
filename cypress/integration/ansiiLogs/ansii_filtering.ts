@@ -12,16 +12,13 @@ describe("Filtering", () => {
       });
 
       it("should not collapse bookmarks and selected line", () => {
-        // Bookmark and select a line, with the expectation that they won't be collapsed by the filter.
         cy.dataCy("log-link-5").click();
         cy.dataCy("log-row-6").dblclick();
         cy.location("search").should(
           "equal",
           "?bookmarks=0,6,297&selectedLine=5"
         );
-        // Apply a filter that doesn't satisfy any log line.
-        cy.addFilter("notarealfilter");
-        // Matched elements should be one of the bookmarked or selected values.
+        cy.addFilter("doesNotMatchAnything");
         cy.get("[data-cy^='log-row-']").each(($el) => {
           cy.wrap($el)
             .should("have.attr", "data-cy")
@@ -202,26 +199,21 @@ describe("Filtering", () => {
   });
 
   describe("Deleting and editing filters", () => {
+    const filter = "doesNotMatchAnything";
+
     beforeEach(() => {
       cy.login();
-      cy.visit(logLink);
+      cy.visit(`${logLink}?filters=100${filter}`);
+      cy.get("[data-cy^='collapsed-row-']").should("exist");
     });
 
     it("should be able to edit a filter", () => {
-      cy.addFilter("notarealfilter");
-      cy.location("search").should("contain", "filters=100notarealfilter");
-
-      cy.get("[data-cy^='log-row-']")
-        .not("[data-bookmarked=true]")
-        .should("not.exist");
-
-      cy.dataCy("filter-notarealfilter").within(() => {
+      cy.dataCy(`filter-${filter}`).within(() => {
         cy.get(`[aria-label="Edit filter"]`).click();
       });
       cy.dataCy("edit-filter-name").clear().type("running");
       cy.contains("button", "Apply").click();
       cy.location("search").should("contain", "filters=100running");
-
       cy.get("[data-cy^='log-row-']")
         .not("[data-bookmarked=true]")
         .each(($el) => {
@@ -230,8 +222,7 @@ describe("Filtering", () => {
     });
 
     it("should be able to delete a filter", () => {
-      cy.addFilter("running");
-      cy.dataCy("filter-running").within(() => {
+      cy.dataCy(`filter-${filter}`).within(() => {
         cy.get(`[aria-label="Delete filter"]`).click();
       });
       cy.location("search").should("not.contain", "filters");

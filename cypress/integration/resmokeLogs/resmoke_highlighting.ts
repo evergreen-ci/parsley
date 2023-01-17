@@ -6,47 +6,31 @@ describe("Highlighting", () => {
     cy.login();
     cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("highlight-option").click();
   });
 
   it("applying a highlight should highlight matching words ", () => {
-    cy.dataCy("searchbar-input").type(
-      "ShardedClusterFixture:job0:mongos0{enter}"
-    );
+    cy.addHighlight("ShardedClusterFixture:job0:mongos0 ");
     cy.dataCy("highlight").should("exist");
     cy.dataCy("highlight").should("have.length", 1);
     cy.dataCy("highlight").should(
       "contain.text",
-      "ShardedClusterFixture:job0:mongos0"
+      "ShardedClusterFixture:job0:mongos0 "
     );
   });
 
   it("applying a search to a highlighted line should not overwrite an already highlighted term if the search matches the highlight", () => {
-    cy.dataCy("searchbar-input").type(
-      "ShardedClusterFixture:job0:mongos0{enter}"
-    );
-
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("search-option").click();
-    cy.dataCy("searchbar-input").type(
-      "ShardedClusterFixture:job0:mongos0{enter}"
-    );
-
+    cy.addHighlight("ShardedClusterFixture:job0:mongos0 ");
+    cy.addSearch("ShardedClusterFixture:job0:mongos0 ");
     cy.dataCy("highlight").should("exist");
     cy.dataCy("highlight").should("have.length", 1);
     cy.dataCy("highlight").should(
       "contain.text",
-      "ShardedClusterFixture:job0:mongos0"
+      "ShardedClusterFixture:job0:mongos0 "
     );
   });
   it("should highlight other terms in the log if the search term does not match the highlight", () => {
-    cy.dataCy("searchbar-input").type(
-      "ShardedClusterFixture:job0:mongos0{enter}"
-    );
-    cy.dataCy("searchbar-input").type(
-      "ShardedClusterFixture:job0:shard0:node1{enter}"
-    );
+    cy.addHighlight("ShardedClusterFixture:job0:mongos0 ");
+    cy.addSearch("ShardedClusterFixture:job0:shard0:node1");
     cy.dataCy("highlight").should("exist");
     cy.dataCy("highlight").should("have.length", 2);
     cy.dataCy("highlight").each(($el) => {
@@ -58,10 +42,8 @@ describe("Highlighting", () => {
         );
     });
   });
-  it("removing a highlight from the sidenav should remove the highlight", () => {
-    cy.dataCy("searchbar-input").type(
-      "ShardedClusterFixture:job0:shard0:node1{enter}"
-    );
+  it("removing a highlight from the side panel should remove the highlight", () => {
+    cy.addHighlight("ShardedClusterFixture:job0:shard0:node1");
     cy.dataCy("highlight").should("exist");
     cy.toggleDrawer();
     cy.dataCy("delete-highlight-button").should("be.visible");

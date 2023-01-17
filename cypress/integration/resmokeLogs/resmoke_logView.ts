@@ -28,15 +28,12 @@ describe("Basic resmoke log view", () => {
     cy.dataCy("log-row-16").isContainedInViewport();
   });
   it("should still allow horizontal scrolling when there are few logs on screen", () => {
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("filter-option").click();
-    cy.dataCy("searchbar-input").type("Putting spruce/{enter}");
+    cy.addFilter("Putting spruce/");
     cy.get(".ReactVirtualized__Grid").should(
       "have.css",
       "overflow-x",
       "scroll"
     );
-    // scroll to the right
     cy.get(".ReactVirtualized__Grid").scrollTo("right");
   });
 });
@@ -56,7 +53,7 @@ describe("Resmoke syntax highlighting", () => {
     cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
-  it("should not color non resmoke log lines", () => {
+  it("should not color non-resmoke log lines", () => {
     cy.dataCy("log-row-0").within(() => {
       cy.dataCy("resmoke-row").should("have.css", "color", colors.black);
     });
@@ -108,16 +105,17 @@ describe("Bookmarking and selecting lines", () => {
     cy.dataCy("bookmark-list").should("contain", "0");
     cy.dataCy("bookmark-list").should("contain", "4");
     cy.dataCy("bookmark-list").should("contain", "11079");
-
     cy.dataCy("log-row-4").dblclick();
+    cy.location("search").should("equal", "?bookmarks=0,11079");
     cy.dataCy("bookmark-list").should("not.contain", "4");
   });
 
-  it("should be able to select and unselect lines", () => {
+  it("should be able to set and unset the share line", () => {
     cy.dataCy("log-link-5").click();
     cy.location("search").should("equal", "?bookmarks=0,11079&selectedLine=5");
+    cy.dataCy("bookmark-list").should("contain", "0");
     cy.dataCy("bookmark-list").should("contain", "5");
-
+    cy.dataCy("bookmark-list").should("contain", "11079");
     cy.dataCy("log-link-5").click();
     cy.location("search").should("equal", "?bookmarks=0,11079");
     cy.dataCy("bookmark-list").should("not.contain", "5");
@@ -168,7 +166,7 @@ describe("Jump to line", () => {
 
     cy.dataCy("bookmark-11079").click();
     cy.dataCy("log-row-11079").should("be.visible");
-    cy.dataCy("log-row-56").should("not.exist");
+    cy.dataCy("log-row-4").should("not.exist");
 
     cy.dataCy("bookmark-4").click();
     cy.dataCy("log-row-4").should("be.visible");
@@ -176,7 +174,6 @@ describe("Jump to line", () => {
 
   it("should be able to use the bookmarks bar to jump to a line when there are collapsed rows", () => {
     cy.visit(`${logLink}?bookmarks=0,11079&filters=100repl_hb`);
-
     cy.dataCy("log-row-30").dblclick({ force: true });
 
     cy.dataCy("bookmark-11079").click();
@@ -221,7 +218,6 @@ describe("expanding collapsed rows", () => {
     cy.dataCy("collapsed-row-1-3").within(() => {
       cy.contains("All").click();
     });
-
     cy.toggleDrawer();
     cy.dataCy("expanded-row-1-to-3").should("be.visible");
   });
@@ -230,9 +226,7 @@ describe("expanding collapsed rows", () => {
     cy.dataCy("collapsed-row-1-3").within(() => {
       cy.contains("All").click();
     });
-    cy.dataCy("log-row-1").should("be.visible");
-    cy.dataCy("log-row-2").should("be.visible");
-    cy.dataCy("log-row-3").should("be.visible");
+    cy.dataCy("collapsed-row-1-3").should("not.exist");
 
     cy.toggleDrawer();
     cy.dataCy("expanded-row-1-to-3").within(() => {

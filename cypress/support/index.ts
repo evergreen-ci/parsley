@@ -9,6 +9,16 @@ declare global {
        */
       addFilter(filter: string): void;
       /**
+       * Custom command to add a highlight.
+       * @example cy.addHighlight('myHighlight')
+       */
+      addHighlight(highlight: string): void;
+      /**
+       * Custom command to add a search.
+       * @example cy.addSearch('mySearch')
+       */
+      addSearch(search: string): void;
+      /**
        * Custom command to click one of the toggles in the Details Menu panel.
        * @example cy.clickToggle('wrap-toggle', true)
        */

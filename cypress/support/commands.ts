@@ -12,6 +12,18 @@ Cypress.Commands.add("addFilter", (filter: string) => {
   cy.dataCy("searchbar-input").type(`${filter}{enter}`);
 });
 
+Cypress.Commands.add("addHighlight", (highlight: string) => {
+  cy.dataCy("searchbar-select").click();
+  cy.dataCy("highlight-option").click();
+  cy.dataCy("searchbar-input").type(`${highlight}{enter}`);
+});
+
+Cypress.Commands.add("addSearch", (search: string) => {
+  cy.dataCy("searchbar-select").click();
+  cy.dataCy("search-option").click();
+  cy.dataCy("searchbar-input").type(`${search}{enter}`);
+});
+
 Cypress.Commands.add("clearBounds", () => {
   cy.dataCy("details-button").click();
   cy.get(`[data-cy="details-menu"]`).should("be.visible");

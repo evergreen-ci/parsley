@@ -3,6 +3,7 @@ describe("Upload page", () => {
     beforeEach(() => {
       cy.login();
       cy.visit("/upload");
+      cy.dataCy("upload-zone").should("be.visible");
     });
 
     it("should be able to drag and drop a file", () => {
@@ -13,14 +14,12 @@ describe("Upload page", () => {
       cy.dataCy("parse-log-select").should("be.visible");
     });
     it("should be able to select a file", () => {
-      cy.dataCy("upload-zone").should("be.visible");
       cy.get("input[type=file]").selectFile("sample_logs/resmoke.log", {
         force: true,
       });
       cy.dataCy("parse-log-select").should("be.visible");
     });
     it("selecting a log type should render the log with the appropriate parser", () => {
-      cy.dataCy("upload-zone").should("be.visible");
       cy.get("input[type=file]").selectFile("sample_logs/resmoke.log", {
         force: true,
       });
@@ -39,7 +38,9 @@ describe("Upload page", () => {
 
     beforeEach(() => {
       cy.login();
+      cy.setCookie("has-opened-drawer", "true");
       cy.visit(logLink);
+      cy.dataCy("log-window").should("be.visible");
     });
 
     it("trying to navigate away to the upload page should prompt the user", () => {

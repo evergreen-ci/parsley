@@ -5,31 +5,23 @@ describe("Highlighting", () => {
     cy.login();
     cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("highlight-option").click();
   });
   it("applying a highlight should highlight the matching words", () => {
-    cy.dataCy("searchbar-input").type("@bugsnag/plugin-react@{enter}");
+    cy.addHighlight("@bugsnag/plugin-react@");
     cy.dataCy("highlight").should("exist");
     cy.dataCy("highlight").should("have.length", 1);
     cy.dataCy("highlight").should("contain.text", "@bugsnag/plugin-react@");
   });
   it("applying a search to a highlighted line should not overwrite an already highlighted term if the search matches the highlight ", () => {
-    cy.dataCy("searchbar-input").type("@bugsnag/plugin-react{enter}");
-
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("search-option").click();
-    cy.dataCy("searchbar-input").type("@bugsnag/plugin-react@{enter}");
+    cy.addHighlight("@bugsnag/plugin-react@");
+    cy.addSearch("@bugsnag/plugin-react@");
     cy.dataCy("highlight").should("exist");
     cy.dataCy("highlight").should("have.length", 1);
     cy.dataCy("highlight").should("contain.text", "@bugsnag/plugin-react");
   });
   it("should highlight other terms in the log if the search term does not match the highlight", () => {
-    cy.dataCy("searchbar-input").type("@bugsnag/plugin-react@{enter}");
-
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("search-option").click();
-    cy.dataCy("searchbar-input").type("info{enter}");
+    cy.addHighlight("@bugsnag/plugin-react@");
+    cy.addSearch("info");
     cy.dataCy("highlight").should("exist");
     cy.dataCy("highlight").should("have.length", 5);
     cy.dataCy("highlight").each(($el) => {
@@ -38,8 +30,8 @@ describe("Highlighting", () => {
         .should("match", /@bugsnag\/plugin-react@|info/);
     });
   });
-  it("removing a highlight from the sidenav should remove the highlight", () => {
-    cy.dataCy("searchbar-input").type("@bugsnag/plugin-react{enter}");
+  it("removing a highlight from the side panel should remove the highlight", () => {
+    cy.addHighlight("@bugsnag/plugin-react@");
     cy.dataCy("highlight").should("exist");
     cy.toggleDrawer();
     cy.dataCy("delete-highlight-button").should("be.visible");
