@@ -12,12 +12,11 @@ export default {
   component: ResmokeRow,
 } as ComponentMeta<ResmokeRowProps>;
 
-type ResmokeRowProps = React.FC<React.ComponentProps<typeof LogPane>>;
+type ResmokeRowProps = React.FC<React.ComponentProps<typeof ResmokeRow>>;
 
 // Single ResmokeRow.
 const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   const {
-    getLine,
     getResmokeLineColor,
     ingestLines,
     resetRowHeightAtIndex,
@@ -31,7 +30,7 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   return (
     <ResmokeRow
       key={logLines[8]}
-      getLine={getLine}
+      getLine={() => logLines[8]}
       getResmokeLineColor={getResmokeLineColor}
       highlightRegex={undefined}
       lineNumber={8}
@@ -41,7 +40,7 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
         columnIndex: 0,
         isScrolling: false,
         isVisible: true,
-        key: getLine(8) || "",
+        key: logLines[8] || "",
         parent: {} as any,
       }}
       prettyPrint={args.prettyPrint}

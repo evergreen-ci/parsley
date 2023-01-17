@@ -12,12 +12,11 @@ export default {
   component: AnsiiRow,
 } as ComponentMeta<AnsiiRowProps>;
 
-type AnsiiRowProps = React.FC<React.ComponentProps<typeof LogPane>>;
+type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>>;
 
 // Single AnsiiRow.
 const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
-  const { getLine, ingestLines, resetRowHeightAtIndex, scrollToLine } =
-    useLogContext();
+  const { ingestLines, resetRowHeightAtIndex, scrollToLine } = useLogContext();
 
   useEffect(() => {
     ingestLines(logLines, LogTypes.EVERGREEN_TASK_LOGS);
@@ -26,7 +25,7 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
   return (
     <AnsiiRow
       key={logLines[0]}
-      getLine={getLine}
+      getLine={() => logLines[0]}
       highlightRegex={undefined}
       lineNumber={0}
       listRowProps={{
@@ -35,7 +34,7 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
         columnIndex: 0,
         isScrolling: false,
         isVisible: true,
-        key: getLine(0) || "",
+        key: logLines[0] || "",
         parent: {} as any,
       }}
       range={{ lowerRange: 0 }}
