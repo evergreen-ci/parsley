@@ -8,6 +8,9 @@ import { getJobLogsURL } from "constants/externalURLTemplates";
 import {
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
+  getLobsterResmokeURL,
+  getLobsterTaskURL,
+  getLobsterTestURL,
   getResmokeLogURL,
 } from "constants/logURLTemplates";
 import { slugs } from "constants/routes";
@@ -31,14 +34,16 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     [slugs.origin]: origin,
     [slugs.testID]: testID,
     [slugs.taskID]: taskID,
+    [slugs.groupID]: groupID,
     [slugs.execution]: execution,
   } = useParams();
   const dispatchToast = useToastContext();
   const { ingestLines, setLogMetadata } = useLogContext();
 
-  let url = "";
+  let rawLogURL = "";
   let htmlLogURL = "";
   let jobLogsURL = "";
+  let lobsterURL = "";
   const { data: logkeeperMetadata } = useFetch<LogkeeperMetadata>(
     getResmokeLogURL(buildID || "", { testID, metadata: true }),
     {
@@ -48,11 +53,13 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
-        url = getResmokeLogURL(buildID, { testID, raw: true });
+        rawLogURL = getResmokeLogURL(buildID, { testID, raw: true });
         htmlLogURL = getResmokeLogURL(buildID, { testID, html: true });
+        lobsterURL = getLobsterResmokeURL(buildID, testID);
       } else if (buildID) {
-        url = getResmokeLogURL(buildID, { raw: true });
+        rawLogURL = getResmokeLogURL(buildID, { raw: true });
         htmlLogURL = getResmokeLogURL(buildID, { html: true });
+        lobsterURL = getLobsterResmokeURL(buildID);
       }
       if (buildID) {
         jobLogsURL = getJobLogsURL(buildID);
@@ -63,29 +70,35 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       if (!taskID || !execution || !origin) {
         break;
       }
-      url = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+      rawLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
         text: true,
       });
       htmlLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
         text: false,
       });
+      lobsterURL = getLobsterTaskURL(taskID, execution, origin);
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
       if (!taskID || !execution || !testID) {
         break;
       }
-      url = getEvergreenTestLogURL(taskID, execution, testID, { text: true });
+      rawLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
+        text: true,
+        groupID,
+      });
       htmlLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
         text: false,
+        groupID,
       });
+      lobsterURL = getLobsterTestURL(taskID, execution, testID, groupID);
       break;
     }
     default:
       break;
   }
 
-  const { data, error, isLoading } = useLogDownloader(url, logType);
+  const { data, error, isLoading } = useLogDownloader(rawLogURL, logType);
 
   useEffect(() => {
     if (data) {
@@ -97,9 +110,10 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         testID,
         origin,
         buildID,
-        rawLogURL: url,
+        rawLogURL,
         htmlLogURL,
         jobLogsURL,
+        lobsterURL,
       });
       ingestLines(data, logType);
     }
@@ -118,9 +132,10 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     testID,
     origin,
     buildID,
-    url,
+    rawLogURL,
     htmlLogURL,
     jobLogsURL,
+    lobsterURL,
     logkeeperMetadata?.task_id,
     logkeeperMetadata?.execution,
   ]);

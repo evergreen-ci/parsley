@@ -1,5 +1,50 @@
-import { evergreenURL, logkeeperURL } from "utils/environmentVariables";
+import {
+  evergreenURL,
+  lobsterURL,
+  logkeeperURL,
+} from "utils/environmentVariables";
 import { stringifyQuery } from "utils/query-string";
+
+/**
+ * @param taskID - the task ID
+ * @param execution - the execution number of the task
+ * @param origin - the origin of the log
+ * @returns a Lobster URL of the format `/evergreen/task/${taskID}/${execution}/${origin}`
+ */
+const getLobsterTaskURL = (
+  taskID: string,
+  execution: string | number,
+  origin: string
+) => `${lobsterURL}/evergreen/task/${taskID}/${execution}/${origin}`;
+
+/**
+ * @param taskID - the task ID
+ * @param execution - the execution number of the task
+ * @param testID - the test ID
+ * @param groupID - the group ID (optional)
+ * @returns a Lobster URL of the format `/evergreen/test/${taskID}/${execution}/${testID}/${groupID}`
+ */
+const getLobsterTestURL = (
+  taskID: string,
+  execution: string | number,
+  testID: string,
+  groupId?: string
+) =>
+  `${lobsterURL}/evergreen/test/${taskID}/${execution}/${testID}${
+    groupId ? `/${groupId}` : ""
+  }`;
+
+/**
+ * @param buildID - the build ID of the resmoke job
+ * @param testID - the test ID of the resmoke log
+ * @returns a Lobster URL of the format `/build/${buildID}/test/${testID}`
+ */
+const getLobsterResmokeURL = (buildID: string, testID?: string) => {
+  if (testID) {
+    return `${lobsterURL}/build/${buildID}/test/${testID}`;
+  }
+  return `${lobsterURL}/build/${buildID}/all`;
+};
 
 /**
  *
@@ -7,17 +52,19 @@ import { stringifyQuery } from "utils/query-string";
  * @param execution - the execution number of the task
  * @param testID - the test ID of the test
  * @param options.text - returns the raw test log
- * @returns /test_log/${taskID}/${execution}?test_name=${testID}&text=true
+ * @param options.groupID - the group ID
+ * @returns /test_log/${taskID}/${execution}?test_name=${testID}&group_id=${groupID}text=true
  */
 const getEvergreenTestLogURL = (
   taskID: string,
   execution: string | number,
   testID: string,
-  options: { text?: boolean }
+  options: { text?: boolean; groupID?: string }
 ) => {
-  const { text } = options;
+  const { text, groupID } = options;
   const params = {
     test_name: testID,
+    group_id: groupID,
     text,
   };
   return `${evergreenURL}/test_log/${taskID}/${execution}?${stringifyQuery(
@@ -82,4 +129,11 @@ const getEvergreenTaskLogURL = (
   )}`;
 };
 
-export { getEvergreenTestLogURL, getResmokeLogURL, getEvergreenTaskLogURL };
+export {
+  getLobsterTaskURL,
+  getLobsterTestURL,
+  getLobsterResmokeURL,
+  getEvergreenTaskLogURL,
+  getEvergreenTestLogURL,
+  getResmokeLogURL,
+};
