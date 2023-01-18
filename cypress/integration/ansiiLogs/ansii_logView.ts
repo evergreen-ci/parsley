@@ -70,7 +70,7 @@ describe("Bookmarking and selecting lines", () => {
 
   it("should be able to set and unset the share line", () => {
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,297&selectedLine=5");
+    cy.location("search").should("equal", "?bookmarks=0,297&shareLine=5");
     cy.dataCy("bookmark-list").should("contain", "0");
     cy.dataCy("bookmark-list").should("contain", "5");
     cy.dataCy("bookmark-list").should("contain", "297");
@@ -140,8 +140,8 @@ describe("Jump to line", () => {
     cy.dataCy("log-row-56").should("be.visible");
   });
 
-  it("visiting a log with a selected line should jump to that line on page load", () => {
-    cy.visit(`${logLink}?bookmarks=0,297&selectedLine=200`);
+  it("visiting a log with a share line should jump to that line on page load", () => {
+    cy.visit(`${logLink}?bookmarks=0,297&shareLine=200`);
     cy.dataCy("log-row-200").should("be.visible");
   });
 });

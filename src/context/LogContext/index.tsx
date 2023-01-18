@@ -82,10 +82,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 }) => {
   const [filters] = useFilterParam();
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
-  const [selectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
+  const [shareLine] = useQueryParam<number | undefined>(
+    QueryParams.ShareLine,
     undefined
   );
+
   const [upperRange] = useQueryParam<undefined | number>(
     QueryParams.UpperRange,
     undefined
@@ -134,7 +135,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           logLines: state.logs,
           matchingLines,
           bookmarks,
-          selectedLine,
+          shareLine,
           expandedLines: state.expandedLines,
           expandableRows,
         })
@@ -145,7 +146,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       state.logs.length,
       matchingLines,
       stringifiedBookmarks,
-      selectedLine,
+      shareLine,
       stringifiedExpandedLines,
       expandableRows,
     ]

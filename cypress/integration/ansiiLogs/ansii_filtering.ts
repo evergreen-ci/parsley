@@ -11,13 +11,10 @@ describe("Filtering", () => {
         cy.get(".ReactVirtualized__Grid").should("be.visible");
       });
 
-      it("should not collapse bookmarks and selected line", () => {
+      it("should not collapse bookmarks and share line", () => {
         cy.dataCy("log-link-5").click();
         cy.dataCy("log-row-6").dblclick();
-        cy.location("search").should(
-          "equal",
-          "?bookmarks=0,6,297&selectedLine=5"
-        );
+        cy.location("search").should("equal", "?bookmarks=0,6,297&shareLine=5");
         cy.addFilter("doesNotMatchAnything");
         cy.get("[data-cy^='log-row-']").each(($el) => {
           cy.wrap($el)

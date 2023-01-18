@@ -38,4 +38,16 @@ describe("Parsley Routes", () => {
     cy.visit("/this/is/not/a/real/page");
     cy.dataCy("404").should("be.visible");
   });
+
+  // This test can be deleted in EVG-18748.
+  it("should redirect selectedLine to shareLine, preserving all other query params", () => {
+    cy.visit(
+      "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task?bookmarks=0,297&filters=100this%2520is%2520a%2520filter&highlights=this%2520is%2520a%2520highlight&selectedLine=7"
+    );
+    cy.location("search").should("not.contain", "selectedLine");
+    cy.location("search").should(
+      "equal",
+      "?bookmarks=0,297&filters=100this%2520is%2520a%2520filter&highlights=this%2520is%2520a%2520highlight&shareLine=7"
+    );
+  });
 });
