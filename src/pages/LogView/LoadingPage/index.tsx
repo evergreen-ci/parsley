@@ -31,11 +31,11 @@ interface LoadingPageProps {
 const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const {
     [slugs.buildID]: buildID,
+    [slugs.execution]: execution,
+    [slugs.groupID]: groupID,
     [slugs.origin]: origin,
     [slugs.testID]: testID,
     [slugs.taskID]: taskID,
-    [slugs.groupID]: groupID,
-    [slugs.execution]: execution,
   } = useParams();
   const dispatchToast = useToastContext();
   const { ingestLines, setLogMetadata } = useLogContext();

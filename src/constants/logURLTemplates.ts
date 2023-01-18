@@ -36,8 +36,8 @@ const getLobsterTestURL = (
 
 /**
  * @param buildID - the build ID of the resmoke job
- * @param testID - the test ID of the resmoke log
- * @returns a Lobster URL of the format `/build/${buildID}/test/${testID}`
+ * @param testID - the test ID of the resmoke log (optional)
+ * @returns a Lobster URL of the format `/build/${buildID}/test/${testID}` or `/build/${buildID}/all`
  */
 const getLobsterResmokeURL = (buildID: string, testID?: string) => {
   if (testID) {
@@ -53,7 +53,7 @@ const getLobsterResmokeURL = (buildID: string, testID?: string) => {
  * @param testID - the test ID of the test
  * @param options.text - returns the raw test log
  * @param options.groupID - the group ID
- * @returns /test_log/${taskID}/${execution}?test_name=${testID}&group_id=${groupID}text=true
+ * @returns an Evergreen URL of the format `/test_log/${taskID}/${execution}?test_name=${testID}&group_id=${groupID}text=true`
  */
 const getEvergreenTestLogURL = (
   taskID: string,
@@ -79,7 +79,7 @@ const getEvergreenTestLogURL = (
  * @param options.raw - returns the raw task log
  * @param options.html - returns the html viewer for the log
  * @param options.metadata - returns the build metadata associated with the log
- * @returns `/build/${buildID}/test/${testID}`
+ * @returns a Logkeeper URL of the format `/build/${buildID}/test/${testID}` or `/build/${buildID}/all`
  */
 const getResmokeLogURL = (
   buildID: string,
@@ -103,6 +103,7 @@ enum OriginToType {
   agent = "E",
   system = "S",
   task = "T",
+  all = "ALL",
 }
 
 /**
@@ -111,7 +112,7 @@ enum OriginToType {
  * @param execution - the execution number of the task
  * @param origin - the origin of the log
  * @param options.text - returns the raw log associated with the task
- * @returns /task/${taskID}/${execution}?type=${OriginToType[origin]}&text=true
+ * @returns an Evergreen URL of the format `/task/${taskID}/${execution}?type=${OriginToType[origin]}&text=true`
  */
 const getEvergreenTaskLogURL = (
   taskID: string,
