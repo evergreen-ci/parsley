@@ -7,11 +7,12 @@ const paths = {
 };
 
 enum slugs {
-  taskID = "task_id",
+  taskID = "taskId",
   execution = "execution",
   origin = "origin",
-  testID = "test_id",
-  buildID = "build_id",
+  testID = "testId",
+  buildID = "buildId",
+  groupID = "groupId",
 }
 
 const routes = {
