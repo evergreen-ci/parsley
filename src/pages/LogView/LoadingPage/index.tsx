@@ -145,9 +145,9 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       {isLoading || !error ? (
         <LoadingBarContainer>
           <LogoContainer>
-            <Animation>
+            <AnimationWrapper>
               <Icon glyph="ParsleyLogo" size={40} useStroke />
-            </Animation>
+            </AnimationWrapper>
             <StyledBody>Loading Parsley...</StyledBody>
           </LogoContainer>
           <LoadingBar indeterminate />
@@ -170,14 +170,10 @@ const LoadingBarContainer = styled.div`
 const LogoContainer = styled.div`
   display: flex;
   align-items: flex-end;
+  gap: ${size.s};
 `;
 
-const StyledBody = styled(Body)`
-  font-size: ${fontSize.l};
-`;
-
-const Animation = styled.div`
-  margin-right: ${size.s};
+const AnimationWrapper = styled.div`
   animation: sway 3s infinite ease-in-out;
   transform-origin: bottom;
   @keyframes sway {
@@ -197,6 +193,10 @@ const Animation = styled.div`
       transform: rotateZ(0deg);
     }
   }
+`;
+
+const StyledBody = styled(Body)`
+  font-size: ${fontSize.l};
 `;
 
 const Container = styled.div`
