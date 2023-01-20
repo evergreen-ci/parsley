@@ -208,6 +208,14 @@ functions:
       script: |
         export PATH=${node_path}
         yarn build:local
+    
+  yarn-build-memlab:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn build:memlab
 
   yarn-cypress:
     command: shell.exec
@@ -232,6 +240,14 @@ functions:
       script: |
         export PATH=${node_path}
         yarn
+  
+  yarn-memlab:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        export PATH=${node_path}
+        yarn memlab:e2e
 
   yarn-preview:
     command: shell.exec
@@ -420,6 +436,24 @@ tasks:
     - func: yarn-verify-backend
     - func: yarn-cypress
 
+  - name: memlab
+    commands:
+    - func: get-evergreen-project
+    - func: get-logkeeper-project
+    - func: setup-mongodb
+    - func: run-make-background
+      vars:
+        target: local-evergreen
+    - func: seed-logkeeper
+    - func: run-logkeeper
+    - func: copy-cmdrc
+    - func: yarn-install
+    - func: yarn-build-memlab
+    - func: yarn-preview
+    - func: wait-for-evergreen
+    - func: yarn-verify-backend
+    - func: yarn-memlab
+
   - name: storybook
     commands:
     - func: copy-cmdrc
@@ -466,6 +500,7 @@ buildvariants:
       - logkeeper
     tasks:
     - name: e2e_test
+    - name: memlab
 
 pre:
   - func: get-project

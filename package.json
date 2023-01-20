@@ -28,6 +28,7 @@
     "memlab:scenario": "yarn memlab run --scenario",
     "memlab:e2e": "ts-node --esm ./memlab/index.ts",
     "memlab:reader": "ts-node --esm ./memlab/reader.ts",
+    "memlab:analysis": "ts-node --esm ./memlab/utils/analysis.ts",
     "prepare": "husky install",
     "prettier": "prettier --write",
     "preview": "serve -s dist -p 4173",
