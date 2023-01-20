@@ -145,7 +145,9 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       {isLoading || !error ? (
         <LoadingBarContainer>
           <LogoContainer>
-            <StyledIcon glyph="ParsleyLogo" size={40} useStroke />
+            <Animation>
+              <Icon glyph="ParsleyLogo" size={40} useStroke />
+            </Animation>
             <StyledBody>Loading Parsley...</StyledBody>
           </LogoContainer>
           <LoadingBar indeterminate />
@@ -174,25 +176,25 @@ const StyledBody = styled(Body)`
   font-size: ${fontSize.l};
 `;
 
-const StyledIcon = styled(Icon)`
+const Animation = styled.div`
   margin-right: ${size.s};
-  animation: sway infinite 3s ease-in-out;
+  animation: sway 3s infinite ease-in-out;
   transform-origin: bottom;
   @keyframes sway {
     0% {
-      transform: rotate(0deg);
+      transform: rotateZ(0deg);
     }
     25% {
-      transform: rotate(-5deg);
+      transform: rotateZ(-5deg);
     }
     50% {
-      transform: rotate(5deg);
+      transform: rotateZ(5deg);
     }
     75% {
-      transform: rotate(-5deg);
+      transform: rotateZ(-5deg);
     }
     100% {
-      transform: rotate(0deg);
+      transform: rotateZ(0deg);
     }
   }
 `;
