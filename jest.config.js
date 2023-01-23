@@ -14,7 +14,7 @@ module.exports = {
   preset: "ts-jest",
   resetMocks: true,
   // jest-dom adds custom jest matchers for asserting on DOM nodes.
-  setupFilesAfterEnv: ["@testing-library/jest-dom/extend-expect"],
+  setupFilesAfterEnv: ["<rootDir>/config/jest/setupTests.ts"],
   snapshotSerializers: ["@emotion/jest/serializer"],
   testEnvironment: "jsdom",
   testMatch: ["<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"],

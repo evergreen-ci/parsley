@@ -25,6 +25,5 @@ Default.argTypes = {
   validator: {
     control: "func",
     description: "Function to validate input",
-    defaultValue: "() => true",
   },
 };

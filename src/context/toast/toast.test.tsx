@@ -28,15 +28,10 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 
 describe("toast", () => {
   it("should error when rendered outside of ToastProvider context", () => {
-    // This test intentionally throws an error, so we need to mock the error object to prevent it
-    // from flooding the test runner.
-    const errorObject = console.error;
-    jest.spyOn(console, "error").mockImplementation();
     const { Component } = renderComponentWithHook();
     expect(() => render(<Component />)).toThrow(
       "useToastContext must be used within a ToastProvider"
     );
-    console.error = errorObject;
   });
 
   it("should not display a toast by default", () => {
