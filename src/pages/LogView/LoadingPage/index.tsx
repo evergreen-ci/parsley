@@ -145,7 +145,9 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       {isLoading || !error ? (
         <LoadingBarContainer>
           <LogoContainer>
-            <StyledIcon glyph="ParsleyLogo" size={40} useStroke />
+            <AnimationWrapper>
+              <Icon glyph="ParsleyLogo" size={40} useStroke />
+            </AnimationWrapper>
             <StyledBody>Loading Parsley...</StyledBody>
           </LogoContainer>
           <LoadingBar indeterminate />
@@ -168,33 +170,33 @@ const LoadingBarContainer = styled.div`
 const LogoContainer = styled.div`
   display: flex;
   align-items: flex-end;
+  gap: ${size.s};
+`;
+
+const AnimationWrapper = styled.div`
+  animation: sway 3s infinite ease-in-out;
+  transform-origin: bottom;
+  @keyframes sway {
+    0% {
+      transform: rotateZ(0deg);
+    }
+    25% {
+      transform: rotateZ(-5deg);
+    }
+    50% {
+      transform: rotateZ(5deg);
+    }
+    75% {
+      transform: rotateZ(-5deg);
+    }
+    100% {
+      transform: rotateZ(0deg);
+    }
+  }
 `;
 
 const StyledBody = styled(Body)`
   font-size: ${fontSize.l};
-`;
-
-const StyledIcon = styled(Icon)`
-  margin-right: ${size.s};
-  animation: sway infinite 3s ease-in-out;
-  transform-origin: bottom;
-  @keyframes sway {
-    0% {
-      transform: rotate(0deg);
-    }
-    25% {
-      transform: rotate(-5deg);
-    }
-    50% {
-      transform: rotate(5deg);
-    }
-    75% {
-      transform: rotate(-5deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  }
 `;
 
 const Container = styled.div`
