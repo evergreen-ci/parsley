@@ -7,7 +7,7 @@ import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
-import { useQueryParam, useQueryParams } from "hooks/useQueryParam";
+import { useQueryParam } from "hooks/useQueryParam";
 import { findLineIndex } from "utils/findLineIndex";
 
 const { gray, green } = palette;
@@ -24,12 +24,7 @@ const BookmarksBar: React.FC<BookmarksBarProps> = ({
   scrollToLine,
 }) => {
   const { sendEvent } = useLogWindowAnalytics();
-  const [searchParams, setSearchParams] = useQueryParams();
 
-  const [selectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
-    undefined
-  );
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
     undefined
@@ -38,18 +33,6 @@ const BookmarksBar: React.FC<BookmarksBarProps> = ({
     QueryParams.Bookmarks,
     []
   );
-
-  // If selectedLine is in the URL, replace it with shareLine.
-  // This code can be deleted in EVG-18748.
-  useEffect(() => {
-    if (selectedLine) {
-      setSearchParams({
-        ...searchParams,
-        shareLine: selectedLine,
-        selectedLine: undefined,
-      });
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Set the initial bookmarks on load.
   useEffect(() => {
