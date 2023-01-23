@@ -4,12 +4,12 @@ import { Overline } from "@leafygreen-ui/typography";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { size } from "constants/tokens";
-import { useLogContext } from "context/LogContext";
+import { useHighlightParam } from "hooks/useHighlightParam";
 import BaseNavGroup from "../BaseNavGroup";
 
 const HighlightNavGroup: React.FC = () => {
   const { sendEvent } = useLogWindowAnalytics();
-  const { highlights, setHighlights } = useLogContext();
+  const [highlights, setHighlights] = useHighlightParam();
 
   const deleteHighlight = (highlightName: string) => {
     const newHighlights = highlights.filter((h) => h !== highlightName);

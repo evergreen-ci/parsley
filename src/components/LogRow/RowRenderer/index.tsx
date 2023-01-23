@@ -6,6 +6,7 @@ import {
 } from "react-virtualized";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
+import { useHighlightParam } from "hooks/useHighlightParam";
 import { ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
 import AnsiiRow from "../AnsiiRow";
@@ -25,7 +26,6 @@ const RowRenderer: RowRendererFunction = (props) => {
     getResmokeLineColor,
     resetRowHeightAtIndex,
     scrollToLine,
-    highlights,
     preferences,
     range,
     searchLine,
@@ -33,6 +33,8 @@ const RowRenderer: RowRendererFunction = (props) => {
   } = useLogContext();
   const { searchTerm } = searchState;
   const { wrap, prettyPrint } = preferences;
+
+  const [highlights] = useHighlightParam();
   const highlightRegex = highlights.length
     ? new RegExp(highlights.join("|"), "i")
     : undefined;

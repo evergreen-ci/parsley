@@ -3,16 +3,20 @@ import Button from "@leafygreen-ui/button";
 import Tooltip from "@leafygreen-ui/tooltip";
 import { usePreferencesAnalytics } from "analytics";
 import Icon from "components/Icon";
+import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
+import { useQueryParam } from "hooks/useQueryParam";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import { copyToClipboard, getJiraFormat } from "utils/string";
 import { DetailRow } from "../styles";
 
 const ButtonRow: React.FC = () => {
-  const [hasCopied, setHasCopied] = useState(false);
-
-  const { getLine, bookmarks, logMetadata } = useLogContext();
   const { sendEvent } = usePreferencesAnalytics();
+  const { getLine, logMetadata } = useLogContext();
+
+  const [hasCopied, setHasCopied] = useState(false);
+  const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
+
   const { htmlLogURL, rawLogURL, jobLogsURL, lobsterURL } = logMetadata || {};
   const tooltipText = bookmarks.length
     ? "Copy Bookmarked Lines In Jira Format"

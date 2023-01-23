@@ -5,8 +5,9 @@ import { ListRowProps } from "react-virtualized";
 import { useLogWindowAnalytics } from "analytics";
 import Highlight from "components/Highlight";
 import Icon from "components/Icon";
+import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
-import { useLogContext } from "context/LogContext";
+import { useQueryParam } from "hooks/useQueryParam";
 import { formatPrettyPrint } from "utils/prettyPrint";
 import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
@@ -52,8 +53,15 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
   } = props;
 
   const { sendEvent } = useLogWindowAnalytics();
-  const { selectedLine, setSelectedLine, bookmarks, setBookmarks } =
-    useLogContext();
+
+  const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
+    QueryParams.SelectedLine,
+    undefined
+  );
+  const [bookmarks, setBookmarks] = useQueryParam<number[]>(
+    QueryParams.Bookmarks,
+    []
+  );
 
   const selected = selectedLine === lineNumber;
   const bookmarked = bookmarks.includes(lineNumber);

@@ -5,21 +5,17 @@ import SearchResults from "components/Search/SearchResults";
 import { CaseSensitivity, MatchType, SearchBarActions } from "constants/enums";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
+import { useFilterParam } from "hooks/useFilterParam";
+import { useHighlightParam } from "hooks/useHighlightParam";
 import { validateRegexp } from "utils/validators";
 
 const Search: React.FC = () => {
   const { sendEvent } = useLogWindowAnalytics();
-  const {
-    paginate,
-    setFilters,
-    setHighlights,
-    setSearch,
-    filters,
-    hasLogs,
-    highlights,
-    searchState,
-  } = useLogContext();
+  const { paginate, setSearch, hasLogs, searchState } = useLogContext();
   const { hasSearch } = searchState;
+
+  const [filters, setFilters] = useFilterParam();
+  const [highlights, setHighlights] = useHighlightParam();
 
   const handleSearch = (selected: string, value: string) => {
     switch (selected) {

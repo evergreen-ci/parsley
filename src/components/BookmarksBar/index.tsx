@@ -5,8 +5,9 @@ import { palette } from "@leafygreen-ui/palette";
 import Tooltip from "@leafygreen-ui/tooltip";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
+import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
-import { useLogContext } from "context/LogContext";
+import { useQueryParam } from "hooks/useQueryParam";
 import { findLineIndex } from "utils/findLineIndex";
 
 const { gray, green } = palette;
@@ -23,21 +24,25 @@ const BookmarksBar: React.FC<BookmarksBarProps> = ({
   scrollToLine,
 }) => {
   const { sendEvent } = useLogWindowAnalytics();
-  const { selectedLine, bookmarks, setBookmarks } = useLogContext();
+
+  const [selectedLine] = useQueryParam<number | undefined>(
+    QueryParams.SelectedLine,
+    undefined
+  );
+  const [bookmarks, setBookmarks] = useQueryParam<number[]>(
+    QueryParams.Bookmarks,
+    []
+  );
 
   // Set the initial bookmarks on load.
   useEffect(() => {
-    // This is a workaround for a known issue in Jest tests.
-    // https://github.com/remix-run/react-router/issues/9314
-    setTimeout(() => {
-      if (bookmarks.length === 0 && lineCount !== 0) {
-        if (lineCount === 1) {
-          setBookmarks([0]);
-        } else {
-          setBookmarks([0, lineCount - 1]);
-        }
+    if (bookmarks.length === 0 && lineCount !== 0) {
+      if (lineCount === 1) {
+        setBookmarks([0]);
+      } else {
+        setBookmarks([0, lineCount - 1]);
       }
-    }, 0);
+    }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const lineNumbers =

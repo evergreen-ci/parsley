@@ -1,10 +1,5 @@
-import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
 import BookmarksBar from ".";
-
-const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
-);
 
 describe("bookmarks bar", () => {
   it("should not add bookmarks if there are no log lines", async () => {
@@ -13,8 +8,7 @@ describe("bookmarks bar", () => {
         lineCount={0}
         processedLogLines={[]}
         scrollToLine={jest.fn()}
-      />,
-      { wrapper }
+      />
     );
     await waitFor(() => {
       expect(history.location.search).toBe("");
@@ -27,8 +21,7 @@ describe("bookmarks bar", () => {
         lineCount={1}
         processedLogLines={[1]}
         scrollToLine={jest.fn()}
-      />,
-      { wrapper }
+      />
     );
     await waitFor(() => {
       expect(history.location.search).toBe("?bookmarks=0");
@@ -41,8 +34,7 @@ describe("bookmarks bar", () => {
         lineCount={11}
         processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         scrollToLine={jest.fn()}
-      />,
-      { wrapper }
+      />
     );
     await waitFor(() => {
       expect(history.location.search).toBe("?bookmarks=0,10");
@@ -58,7 +50,6 @@ describe("bookmarks bar", () => {
       />,
       {
         route: "?bookmarks=1,7&selectedLine=5",
-        wrapper,
       }
     );
     const { children } = screen.getByDataCy("bookmark-list");
@@ -80,7 +71,6 @@ describe("bookmarks bar", () => {
       />,
       {
         route: "?bookmarks=1,3&selectedLine=5",
-        wrapper,
       }
     );
     await userEvent.click(screen.getByDataCy("clear-bookmarks"));
@@ -97,7 +87,6 @@ describe("bookmarks bar", () => {
       />,
       {
         route: "?bookmarks=1,3",
-        wrapper,
       }
     );
     await userEvent.click(screen.getByDataCy("bookmark-3"));
@@ -115,7 +104,6 @@ describe("bookmarks bar", () => {
       />,
       {
         route: "?bookmarks=1,3",
-        wrapper,
       }
     );
     await userEvent.click(screen.getByDataCy("bookmark-3"));
