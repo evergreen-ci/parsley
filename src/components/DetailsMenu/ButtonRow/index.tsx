@@ -13,7 +13,7 @@ const ButtonRow: React.FC = () => {
 
   const { getLine, bookmarks, logMetadata } = useLogContext();
   const { sendEvent } = usePreferencesAnalytics();
-  const { htmlLogURL, rawLogURL, jobLogsURL } = logMetadata || {};
+  const { htmlLogURL, rawLogURL, jobLogsURL, lobsterURL } = logMetadata || {};
   const tooltipText = bookmarks.length
     ? "Copy Bookmarked Lines In Jira Format"
     : "No bookmarks to copy.";
@@ -104,6 +104,26 @@ const ButtonRow: React.FC = () => {
         }
       >
         Open log in standard HTML format in a new tab
+      </Tooltip>
+      <Tooltip
+        align="top"
+        justify="middle"
+        trigger={
+          <div data-cy="lobster-button-wrapper">
+            <Button
+              data-cy="lobster-button"
+              disabled={!lobsterURL}
+              href={lobsterURL}
+              leftGlyph={<Icon glyph="Export" />}
+              onClick={() => sendEvent({ name: "Opened Lobster Logs" })}
+              target="_blank"
+            >
+              Lobster
+            </Button>
+          </div>
+        }
+      >
+        View the log using the legacy logviewer in a new tab
       </Tooltip>
     </DetailRow>
   );

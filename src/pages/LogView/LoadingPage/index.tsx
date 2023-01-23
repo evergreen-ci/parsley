@@ -8,6 +8,9 @@ import { getJobLogsURL } from "constants/externalURLTemplates";
 import {
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
+  getLobsterResmokeURL,
+  getLobsterTaskURL,
+  getLobsterTestURL,
   getResmokeLogURL,
 } from "constants/logURLTemplates";
 import { slugs } from "constants/routes";
@@ -28,17 +31,19 @@ interface LoadingPageProps {
 const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const {
     [slugs.buildID]: buildID,
+    [slugs.execution]: execution,
+    [slugs.groupID]: groupID,
     [slugs.origin]: origin,
     [slugs.testID]: testID,
     [slugs.taskID]: taskID,
-    [slugs.execution]: execution,
   } = useParams();
   const dispatchToast = useToastContext();
   const { ingestLines, setLogMetadata } = useLogContext();
 
-  let url = "";
+  let rawLogURL = "";
   let htmlLogURL = "";
   let jobLogsURL = "";
+  let lobsterURL = "";
   const { data: logkeeperMetadata } = useFetch<LogkeeperMetadata>(
     getResmokeLogURL(buildID || "", { testID, metadata: true }),
     {
@@ -48,11 +53,13 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
-        url = getResmokeLogURL(buildID, { testID, raw: true });
+        rawLogURL = getResmokeLogURL(buildID, { testID, raw: true });
         htmlLogURL = getResmokeLogURL(buildID, { testID, html: true });
+        lobsterURL = getLobsterResmokeURL(buildID, testID);
       } else if (buildID) {
-        url = getResmokeLogURL(buildID, { raw: true });
+        rawLogURL = getResmokeLogURL(buildID, { raw: true });
         htmlLogURL = getResmokeLogURL(buildID, { html: true });
+        lobsterURL = getLobsterResmokeURL(buildID);
       }
       if (buildID) {
         jobLogsURL = getJobLogsURL(buildID);
@@ -63,29 +70,35 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       if (!taskID || !execution || !origin) {
         break;
       }
-      url = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+      rawLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
         text: true,
       });
       htmlLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
         text: false,
       });
+      lobsterURL = getLobsterTaskURL(taskID, execution, origin);
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
       if (!taskID || !execution || !testID) {
         break;
       }
-      url = getEvergreenTestLogURL(taskID, execution, testID, { text: true });
+      rawLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
+        text: true,
+        groupID,
+      });
       htmlLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
         text: false,
+        groupID,
       });
+      lobsterURL = getLobsterTestURL(taskID, execution, testID, groupID);
       break;
     }
     default:
       break;
   }
 
-  const { data, error, isLoading } = useLogDownloader(url, logType);
+  const { data, error, isLoading } = useLogDownloader(rawLogURL, logType);
 
   useEffect(() => {
     if (data) {
@@ -97,9 +110,10 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         testID,
         origin,
         buildID,
-        rawLogURL: url,
+        rawLogURL,
         htmlLogURL,
         jobLogsURL,
+        lobsterURL,
       });
       ingestLines(data, logType);
     }
@@ -118,9 +132,10 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     testID,
     origin,
     buildID,
-    url,
+    rawLogURL,
     htmlLogURL,
     jobLogsURL,
+    lobsterURL,
     logkeeperMetadata?.task_id,
     logkeeperMetadata?.execution,
   ]);
@@ -130,7 +145,9 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       {isLoading || !error ? (
         <LoadingBarContainer>
           <LogoContainer>
-            <StyledIcon glyph="ParsleyLogo" size={40} useStroke />
+            <AnimationWrapper>
+              <Icon glyph="ParsleyLogo" size={40} useStroke />
+            </AnimationWrapper>
             <StyledBody>Loading Parsley...</StyledBody>
           </LogoContainer>
           <LoadingBar indeterminate />
@@ -153,33 +170,33 @@ const LoadingBarContainer = styled.div`
 const LogoContainer = styled.div`
   display: flex;
   align-items: flex-end;
+  gap: ${size.s};
+`;
+
+const AnimationWrapper = styled.div`
+  animation: sway 3s infinite ease-in-out;
+  transform-origin: bottom;
+  @keyframes sway {
+    0% {
+      transform: rotateZ(0deg);
+    }
+    25% {
+      transform: rotateZ(-5deg);
+    }
+    50% {
+      transform: rotateZ(5deg);
+    }
+    75% {
+      transform: rotateZ(-5deg);
+    }
+    100% {
+      transform: rotateZ(0deg);
+    }
+  }
 `;
 
 const StyledBody = styled(Body)`
   font-size: ${fontSize.l};
-`;
-
-const StyledIcon = styled(Icon)`
-  margin-right: ${size.s};
-  animation: sway infinite 3s ease-in-out;
-  transform-origin: bottom;
-  @keyframes sway {
-    0% {
-      transform: rotate(0deg);
-    }
-    25% {
-      transform: rotate(-5deg);
-    }
-    50% {
-      transform: rotate(5deg);
-    }
-    75% {
-      transform: rotate(-5deg);
-    }
-    100% {
-      transform: rotate(0deg);
-    }
-  }
 `;
 
 const Container = styled.div`

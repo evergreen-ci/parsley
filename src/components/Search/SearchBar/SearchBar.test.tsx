@@ -36,6 +36,31 @@ describe("searchbar", () => {
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith("search", "test");
   });
+  it("switching selected type to `search` triggers a search", async () => {
+    const user = userEvent.setup();
+    const onSubmit = jest.fn();
+    render(<SearchBar onSubmit={onSubmit} />);
+    await user.click(screen.getByDataCy("searchbar-select"));
+    await user.click(screen.getByDataCy("filter-option"));
+    const input = screen.getByDataCy("searchbar-input");
+    await user.type(input, "test");
+    await user.click(screen.getByDataCy("searchbar-select"));
+    await user.click(screen.getByDataCy("search-option"));
+    expect(onSubmit).toHaveBeenCalledTimes(1);
+  });
+  it("switching to any other selected type apart from `search` does not submit them", async () => {
+    const user = userEvent.setup();
+    const onSubmit = jest.fn();
+    render(<SearchBar onSubmit={onSubmit} />);
+    const input = screen.getByDataCy("searchbar-input");
+    await user.type(input, "test");
+    await user.click(screen.getByDataCy("searchbar-select"));
+    await user.click(screen.getByDataCy("filter-option"));
+    expect(onSubmit).not.toHaveBeenCalled();
+    await user.click(screen.getByDataCy("searchbar-select"));
+    await user.click(screen.getByDataCy("highlight-option"));
+    expect(onSubmit).not.toHaveBeenCalled();
+  });
   it("shows a warning icon if input is invalid", async () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn();

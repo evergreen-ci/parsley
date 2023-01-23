@@ -31,6 +31,12 @@ const Content: React.FC = () => {
         <Route
           element={<LogView logType={LogTypes.EVERGREEN_TEST_LOGS} />}
           path={routes.testLogs}
+        >
+          <Route element={null} path=":groupId" />
+        </Route>
+        <Route
+          element={<LogView logType={LogTypes.EVERGREEN_TEST_LOGS} />}
+          path={routes.testLogs}
         />
         <Route
           element={<LogView logType={LogTypes.RESMOKE_LOGS} />}

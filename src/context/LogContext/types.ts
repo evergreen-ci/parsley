@@ -19,6 +19,7 @@ interface LogMetadata {
   htmlLogURL?: string;
   rawLogURL?: string;
   jobLogsURL?: string;
+  lobsterURL?: string;
 }
 
 interface Preferences {

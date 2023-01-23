@@ -10,6 +10,7 @@ type Action =
   | { name: "Opened Job Logs" }
   | { name: "Opened Raw Logs" }
   | { name: "Opened HTML Logs" }
+  | { name: "Opened Lobster Logs" }
   | { name: "Clicked Copy To Jira" }
   | { name: "Toggled Wrap"; on: boolean }
   | { name: "Toggled Case Sensitivity"; on: boolean }
