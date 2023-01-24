@@ -17,7 +17,7 @@ declare global {
        * Custom command to add a search.
        * @example cy.addSearch('mySearch')
        */
-      addSearch(search: string, shouldSubmit?: boolean): void;
+      addSearch(search: string): void;
       /**
        * Custom command to click one of the toggles in the Details Menu panel.
        * @example cy.clickToggle('wrap-toggle', true)
@@ -87,3 +87,9 @@ declare global {
     }
   }
 }
+
+beforeEach(() => {
+  cy.login();
+  cy.setCookie("has-opened-drawer", "true");
+  cy.setCookie("has-seen-searchbar-guide-cue", "true");
+});

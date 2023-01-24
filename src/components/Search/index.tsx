@@ -1,6 +1,8 @@
+import { useState } from "react";
 import styled from "@emotion/styled";
 import { useLogWindowAnalytics } from "analytics";
 import SearchBar from "components/Search/SearchBar";
+import SearchBarGuideCue from "components/Search/SearchBarGuideCue";
 import SearchResults from "components/Search/SearchResults";
 import { CaseSensitivity, MatchType, SearchBarActions } from "constants/enums";
 import { size } from "constants/tokens";
@@ -17,11 +19,8 @@ const Search: React.FC = () => {
   const { hasLogs, setSearch, searchState, paginate } = useLogContext();
   const { hasSearch } = searchState;
 
-  const handleSearch = (selected: string, value: string) => {
+  const handleOnSubmit = (selected: string, value: string) => {
     switch (selected) {
-      case SearchBarActions.Search:
-        setSearch(value);
-        break;
       case SearchBarActions.Filter:
         if (!filters.some((f) => f.name === value)) {
           setSearch("");
@@ -49,19 +48,22 @@ const Search: React.FC = () => {
     }
   };
 
-  const handleOnChange = (selected: string, value: string) => {
-    if (selected === SearchBarActions.Search) {
-      setSearch(value);
-      sendEvent({ name: "Applied Search", searchExpression: value });
-    }
+  const handleOnChange = (value: string) => {
+    setSearch(value);
+    sendEvent({ name: "Applied Search", searchExpression: value });
   };
 
+  const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
+
   return (
-    <Container>
+    <Container ref={(el) => setContainerRef(el)}>
+      {hasLogs && containerRef && (
+        <SearchBarGuideCue containerRef={containerRef} />
+      )}
       <StyledSearchBar
         disabled={!hasLogs}
         onChange={handleOnChange}
-        onSubmit={handleSearch}
+        onSubmit={handleOnSubmit}
         validator={validateRegexp}
         validatorMessage="Invalid Regular Expression"
       />

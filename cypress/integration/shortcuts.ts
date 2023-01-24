@@ -1,7 +1,6 @@
 // Follow guidance from https://docs.cypress.io/api/commands/type#Global-Shortcuts.
 describe("Shortcuts", () => {
   beforeEach(() => {
-    cy.login();
     cy.visit("/");
   });
 
