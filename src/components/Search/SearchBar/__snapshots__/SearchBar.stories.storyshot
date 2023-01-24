@@ -21,7 +21,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
       id="select-2"
       onClick={[Function]}
       type="button"
-      value="search"
+      value="filter"
     >
       <div
         className="leafygreen-ui-v038xi"
@@ -35,7 +35,7 @@ exports[`storyshots Storyshots Components/SearchBar Default 1`] = `
           <div
             className="leafygreen-ui-17aj16e"
           >
-            Search
+            Filter
           </div>
         </div>
         <svg
