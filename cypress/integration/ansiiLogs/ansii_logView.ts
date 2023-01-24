@@ -1,16 +1,14 @@
 describe("Basic evergreen log view", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
-  before(() => {
+  const longLogLine = `[2022/03/02 17:02:18.500] warning Pattern ["@apollo/client@latest"] is trying to unpack in the same destination "/home/ubuntu/.cache/yarn/v6/npm-@apollo-client-3.3.7-f15bf961dc0c2bee37a47bf86b8881fdc6183810-integrity/node_modules/@apollo/client" as pattern ["@apollo/client@3.3.7"]. This could result in non-deterministic behavior, skipping.`;
+
+  beforeEach(() => {
     cy.login();
-    cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
+    cy.visit(logLink);
   });
 
-  const longLogLine = `[2022/03/02 17:02:18.500] warning Pattern ["@apollo/client@latest"] is trying to unpack in the same destination "/home/ubuntu/.cache/yarn/v6/npm-@apollo-client-3.3.7-f15bf961dc0c2bee37a47bf86b8881fdc6183810-integrity/node_modules/@apollo/client" as pattern ["@apollo/client@3.3.7"]. This could result in non-deterministic behavior, skipping.`;
-  it("should be able to see log lines", () => {
-    cy.dataCy("log-row-0").should("be.visible");
-  });
   it("should render ansii lines", () => {
     cy.dataCy("ansii-row").should("be.visible");
   });
@@ -28,22 +26,18 @@ describe("Basic evergreen log view", () => {
     });
   });
   it("long lines with wrapping turned on should fit on screen", () => {
-    cy.clickToggle("wrap-toggle", true); // Turn wrap on.
+    cy.clickToggle("wrap-toggle", true);
     cy.dataCy("log-row-22").should("be.visible");
     cy.dataCy("log-row-22").should("contain.text", longLogLine);
     cy.dataCy("log-row-22").isContainedInViewport();
-    cy.clickToggle("wrap-toggle", false); // Turn wrap off.
   });
   it("should still allow horizontal scrolling when there are few logs on screen", () => {
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("filter-option").click();
-    cy.dataCy("searchbar-input").type("Putting spruce/{enter}");
+    cy.addFilter("Putting spruce/");
     cy.get(".ReactVirtualized__Grid").should(
       "have.css",
       "overflow-x",
       "scroll"
     );
-    // scroll to the right
     cy.get(".ReactVirtualized__Grid").scrollTo("right");
   });
 });
@@ -51,10 +45,10 @@ describe("Basic evergreen log view", () => {
 describe("Bookmarking and selecting lines", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
-  before(() => {
+  beforeEach(() => {
     cy.login();
-    cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
+    cy.visit(logLink);
   });
 
   it("should default to bookmarking 0 and the last log line on load", () => {
@@ -69,16 +63,17 @@ describe("Bookmarking and selecting lines", () => {
     cy.dataCy("bookmark-list").should("contain", "0");
     cy.dataCy("bookmark-list").should("contain", "4");
     cy.dataCy("bookmark-list").should("contain", "297");
-
     cy.dataCy("log-row-4").dblclick();
+    cy.location("search").should("equal", "?bookmarks=0,297");
     cy.dataCy("bookmark-list").should("not.contain", "4");
   });
 
-  it("should be able to select and unselect lines", () => {
+  it("should be able to set and unset the share line", () => {
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,297&selectedLine=5");
+    cy.location("search").should("equal", "?bookmarks=0,297&shareLine=5");
+    cy.dataCy("bookmark-list").should("contain", "0");
     cy.dataCy("bookmark-list").should("contain", "5");
-
+    cy.dataCy("bookmark-list").should("contain", "297");
     cy.dataCy("log-link-5").click();
     cy.location("search").should("equal", "?bookmarks=0,297");
     cy.dataCy("bookmark-list").should("not.contain", "5");
@@ -118,62 +113,50 @@ describe("Bookmarking and selecting lines", () => {
 describe("Jump to line", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
-  before(() => {
+  beforeEach(() => {
     cy.login();
-    cy.visit(logLink);
-  });
-
-  it("should default to bookmarking 0 and the last log line on load", () => {
-    cy.location("search").should("equal", "?bookmarks=0,297");
-    cy.dataCy("bookmark-list").should("contain", "0");
-    cy.dataCy("bookmark-list").should("contain", "297");
+    cy.setCookie("has-opened-drawer", "true");
   });
 
   it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
+    cy.visit(`${logLink}?bookmarks=0,297`);
     cy.dataCy("log-row-4").dblclick({ force: true });
 
     cy.dataCy("bookmark-297").click();
     cy.dataCy("log-row-297").should("be.visible");
-    cy.dataCy("log-row-56").should("not.exist");
-
+    cy.dataCy("log-row-4").should("not.exist");
     cy.dataCy("bookmark-4").click();
     cy.dataCy("log-row-4").should("be.visible");
   });
 
   it("should be able to use the bookmarks bar to jump to a line when there are collapsed rows", () => {
-    cy.addFilter("pass");
-
+    cy.visit(`${logLink}?bookmarks=0,297&filters=100pass`);
     cy.dataCy("log-row-56").dblclick({ force: true });
 
     cy.dataCy("bookmark-297").click();
     cy.dataCy("log-row-297").should("be.visible");
     cy.dataCy("log-row-56").should("not.exist");
-
     cy.dataCy("bookmark-56").click();
     cy.dataCy("log-row-56").should("be.visible");
   });
-  it("visiting a log with a selected line should jump to that line on page load", () => {
-    cy.login();
-    cy.visit(`${logLink}?selectedLine=200`);
+
+  it("visiting a log with a share line should jump to that line on page load", () => {
+    cy.visit(`${logLink}?bookmarks=0,297&shareLine=200`);
     cy.dataCy("log-row-200").should("be.visible");
   });
 });
 
 describe("expanding collapsed rows", () => {
   const logLink =
-    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
-  before(() => {
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task?bookmarks=0,297&filters=100evg";
+
+  beforeEach(() => {
     cy.login();
-    cy.visit(logLink);
     cy.setCookie("has-opened-drawer", "true");
+    cy.visit(logLink);
   });
 
   it("should be able to expand collapsed rows", () => {
-    // Apply a filter.
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("filter-option").click();
-    cy.dataCy("searchbar-input").type("evg{enter}");
-
     cy.dataCy("log-row-1").should("not.exist");
     cy.dataCy("log-row-2").should("not.exist");
     cy.dataCy("log-row-3").should("not.exist");
@@ -191,16 +174,20 @@ describe("expanding collapsed rows", () => {
   });
 
   it("should be able to see what rows have been expanded in the drawer", () => {
+    cy.dataCy("collapsed-row-1-4").within(() => {
+      cy.contains("All").click();
+    });
     cy.toggleDrawer();
     cy.dataCy("expanded-row-1-to-4").should("be.visible");
   });
 
   it("should be possible to re-collapse rows through the drawer", () => {
-    cy.dataCy("log-row-1").should("be.visible");
-    cy.dataCy("log-row-2").should("be.visible");
-    cy.dataCy("log-row-3").should("be.visible");
-    cy.dataCy("log-row-4").should("be.visible");
+    cy.dataCy("collapsed-row-1-4").within(() => {
+      cy.contains("All").click();
+    });
+    cy.dataCy("collapsed-row-1-4").should("not.exist");
 
+    cy.toggleDrawer();
     cy.dataCy("expanded-row-1-to-4").within(() => {
       cy.get(`[aria-label="Delete range"]`).click();
     });

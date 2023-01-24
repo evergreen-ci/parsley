@@ -33,7 +33,7 @@ interface BaseRowProps extends ListRowProps {
 
 /**
  * BaseRow is meant to be used as a wrapper for all rows in the log view.
- * It is responsible for handling the highlighting of the selected line
+ * It is responsible for handling the highlighting of the share line and bookmarks.
  */
 const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
   const {
@@ -52,11 +52,11 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     ...rest
   } = props;
 
-  const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
+  const [shareLine, setShareLine] = useQueryParam<number | undefined>(
+    QueryParams.ShareLine,
     undefined
   );
-  const selected = selectedLine === lineNumber;
+  const shared = shareLine === lineNumber;
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
@@ -69,10 +69,10 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
 
   // Clicking a line should select or deselect the line.
   const handleClick = () => {
-    if (selected) {
-      setSelectedLine(undefined);
+    if (shared) {
+      setShareLine(undefined);
     } else {
-      setSelectedLine(lineNumber);
+      setShareLine(lineNumber);
       scrollToLine(index);
     }
   };
@@ -99,16 +99,17 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       ref={ref}
       {...rest}
       bookmarked={bookmarked}
+      data-bookmarked={bookmarked}
       data-cy={`log-row-${lineNumber}`}
       data-highlighted={highlighted}
-      data-selected={selected}
+      data-shared={shared}
       highlighted={highlighted}
       onDoubleClick={handleDoubleClick}
-      selected={selected}
+      shared={shared}
     >
       <StyledIcon
         data-cy={`log-link-${lineNumber}`}
-        glyph={selected ? "ArrowWithCircle" : "Link"}
+        glyph={shared ? "ArrowWithCircle" : "Link"}
         onClick={handleClick}
         size="small"
       />
@@ -177,7 +178,7 @@ ProcessedBaseRow.displayName = "ProcessedBaseRow";
 BaseRow.displayName = "BaseRow";
 
 const RowContainer = styled.div<{
-  selected: boolean;
+  shared: boolean;
   bookmarked: boolean;
   highlighted: boolean;
 }>`
@@ -189,7 +190,7 @@ const RowContainer = styled.div<{
   font-size: ${fontSize.m};
 
   ${({ color }) => color && `color: ${color};`}
-  ${({ selected }) => selected && `background-color: ${yellow.light3};`}
+  ${({ shared }) => shared && `background-color: ${yellow.light3};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
   ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
 

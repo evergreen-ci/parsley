@@ -18,7 +18,7 @@ describe("filterLogs", () => {
         logLines,
         matchingLines: undefined,
         bookmarks: [],
-        selectedLine: undefined,
+        shareLine: undefined,
         expandedLines: [],
         expandableRows: true,
       })
@@ -31,7 +31,7 @@ describe("filterLogs", () => {
         logLines,
         matchingLines: new Set([1, 2, 3]),
         bookmarks: [],
-        selectedLine: undefined,
+        shareLine: undefined,
         expandedLines: [],
         expandableRows: false,
       })
@@ -44,7 +44,7 @@ describe("filterLogs", () => {
         logLines,
         matchingLines: new Set([]),
         bookmarks: [],
-        selectedLine: undefined,
+        shareLine: undefined,
         expandedLines: [],
         expandableRows: true,
       })
@@ -58,20 +58,20 @@ describe("filterLogs", () => {
           logLines,
           matchingLines: new Set([1]),
           bookmarks: [7],
-          selectedLine: undefined,
+          shareLine: undefined,
           expandedLines: [],
           expandableRows: true,
         })
       ).toStrictEqual([[0], 1, [2, 3, 4, 5, 6], 7]);
     });
 
-    it("should not collapse selected lines", () => {
+    it("should not collapse the share line", () => {
       expect(
         filterLogs({
           logLines,
           matchingLines: new Set([1]),
           bookmarks: [],
-          selectedLine: 7,
+          shareLine: 7,
           expandedLines: [],
           expandableRows: true,
         })
@@ -84,7 +84,7 @@ describe("filterLogs", () => {
           logLines,
           matchingLines: new Set([1]),
           bookmarks: [],
-          selectedLine: undefined,
+          shareLine: undefined,
           expandedLines: [[4, 6]],
           expandableRows: true,
         })
