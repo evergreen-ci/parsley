@@ -37,8 +37,8 @@ const LogPane: React.FC<LogPaneProps> = ({
   } = useLogContext();
   const { expandableRows, prettyPrint } = preferences;
 
-  const [selectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
+  const [shareLine] = useQueryParam<number | undefined>(
+    QueryParams.ShareLine,
     undefined
   );
 
@@ -48,7 +48,7 @@ const LogPane: React.FC<LogPaneProps> = ({
   }, [listRef, cache, wrap, matchingLines, expandableRows, prettyPrint]);
 
   useEffect(() => {
-    const initialScrollIndex = findLineIndex(processedLogLines, selectedLine);
+    const initialScrollIndex = findLineIndex(processedLogLines, shareLine);
     if (initialScrollIndex > -1) {
       leaveBreadcrumb("Scrolled to initialScrollIndex", {
         initialScrollIndex,

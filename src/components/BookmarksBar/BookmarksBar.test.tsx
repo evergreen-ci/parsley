@@ -41,7 +41,7 @@ describe("bookmarks bar", () => {
     });
   });
 
-  it("should properly display sorted bookmarks and selectedLine", () => {
+  it("should properly display sorted bookmarks and shareLine", () => {
     renderWithRouterMatch(
       <BookmarksBar
         lineCount={11}
@@ -49,7 +49,7 @@ describe("bookmarks bar", () => {
         scrollToLine={jest.fn()}
       />,
       {
-        route: "?bookmarks=1,7&selectedLine=5",
+        route: "?bookmarks=1,7&shareLine=5",
       }
     );
     const { children } = screen.getByDataCy("bookmark-list");
@@ -62,7 +62,7 @@ describe("bookmarks bar", () => {
     expect((children.item(2) as Element).textContent).toContain("7");
   });
 
-  it("should be able to clear all bookmarks without removing selected line", async () => {
+  it("should be able to clear all bookmarks without removing share line", async () => {
     const { history } = renderWithRouterMatch(
       <BookmarksBar
         lineCount={11}
@@ -70,11 +70,11 @@ describe("bookmarks bar", () => {
         scrollToLine={jest.fn()}
       />,
       {
-        route: "?bookmarks=1,3&selectedLine=5",
+        route: "?bookmarks=1,3&shareLine=5",
       }
     );
     await userEvent.click(screen.getByDataCy("clear-bookmarks"));
-    expect(history.location.search).toBe("?selectedLine=5");
+    expect(history.location.search).toBe("?shareLine=5");
   });
 
   it("should call scrollToLine when clicking on a log line (with no collapsed lines)", async () => {
