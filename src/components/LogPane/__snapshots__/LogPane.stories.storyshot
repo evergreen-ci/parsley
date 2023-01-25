@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots Components/LogPane Default 1`] = `
+exports[`storyshots Storyshots components/LogPane Default 1`] = `
 <div
   className="css-oic1sx"
 >

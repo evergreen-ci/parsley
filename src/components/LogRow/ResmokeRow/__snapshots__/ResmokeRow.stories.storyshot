@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multiple Lines 1`] = `
+exports[`storyshots Storyshots components/LogRow/ResmokeRow Multiple Lines 1`] = `
 <div
   className="css-1mysoqc"
 >
@@ -38,7 +38,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multiple Lines 1`] =
 </div>
 `;
 
-exports[`storyshots Storyshots Components/LogRow/ResmokeRow Resmoke Highlighting 1`] = `
+exports[`storyshots Storyshots components/LogRow/ResmokeRow Resmoke Highlighting 1`] = `
 <div
   className="css-1mysoqc"
 >
@@ -76,11 +76,11 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Resmoke Highlighting
 </div>
 `;
 
-exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
+exports[`storyshots Storyshots components/LogRow/ResmokeRow Single Line 1`] = `
 <div
   className="css-8iuxnu"
   data-bookmarked={false}
-  data-cy="log-row-0"
+  data-cy="log-row-8"
   data-highlighted={false}
   data-shared={false}
   onDoubleClick={[Function]}
@@ -89,7 +89,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
   <svg
     aria-label="Link Icon"
     className="css-e6tumk"
-    data-cy="log-link-0"
+    data-cy="log-link-8"
     fill="none"
     height={14}
     onClick={[Function]}
@@ -110,7 +110,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
   <pre
     className="css-1dzaw1s"
   >
-    0
+    8
   </pre>
   <pre
     className="css-lponur"
@@ -123,7 +123,7 @@ exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
         }
       }
     >
-      [js_test:job0_fixture_setup_0] Starting the setup of ReplicaSetFixture (Job #0).
+      [j0:s0:n0] | 2022-09-21T12:50:19.923+00:00 D2 REPL_HB  24095   [conn32] "Received heartbeat request","attr":{"from":"localhost:20005","cmdObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":1,"hbv":1,"from":"localhost:20005","fromId":2,"term":1,"primaryId":0,"maxTimeMSOpOnly":10000,"$replData":1,"$clusterTime":{"clusterTime":{"$timestamp":{"t":1663764619,"i":24}},"signature":{"hash":{"$binary":{"base64":"vGCk1d5olY4L+VYegDslPFKywsU=","subType":"0"}},"keyId":7145814532357619736}},"$configTime":{"$timestamp":{"t":1663764618,"i":38}},"$topologyTime":{"$timestamp":{"t":1663764618,"i":6}},"$db":"admin"}}
     </span>
   </pre>
 </div>

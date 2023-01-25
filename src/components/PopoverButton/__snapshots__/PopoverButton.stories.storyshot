@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots Components/PopoverButton Default 1`] = `
+exports[`storyshots Storyshots components/PopoverButton Default 1`] = `
 <button
   aria-disabled={false}
   className="lg-ui-button-0000 leafygreen-ui-1t94nwe"

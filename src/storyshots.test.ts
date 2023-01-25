@@ -12,7 +12,7 @@ describe("storyshots", () => {
         story,
         context,
         renderTree,
-        snapshotFileName: snapshotFileName.replace("src", "."),
+        snapshotFileName,
       });
     },
   });
