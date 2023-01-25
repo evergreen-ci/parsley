@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/LogPane Default 1`] = `
+<div
+  className="css-oic1sx"
+>
+  <div
+    style={
+      Object {
+        "height": 0,
+        "overflow": "visible",
+        "width": 0,
+      }
+    }
+  >
+    <div
+      aria-label="grid"
+      aria-readonly={true}
+      className="ReactVirtualized__Grid ReactVirtualized__List"
+      onScroll={[Function]}
+      role="grid"
+      style={
+        Object {
+          "WebkitOverflowScrolling": "touch",
+          "boxSizing": "border-box",
+          "direction": "ltr",
+          "height": 0,
+          "overflowX": "scroll",
+          "overflowY": "auto",
+          "position": "relative",
+          "width": 0,
+          "willChange": "transform",
+        }
+      }
+      tabIndex={0}
+    />
+  </div>
+</div>
+`;

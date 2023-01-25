@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots pages/LoadingPage/LoadingBar Default 1`] = `
+<div
+  className="css-gv4jhe"
+>
+  <div
+    className="css-gsef79"
+  />
+</div>
+`;
