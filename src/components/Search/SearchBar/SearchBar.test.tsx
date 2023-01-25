@@ -11,7 +11,33 @@ describe("searchbar", () => {
     expect(screen.getByDataCy("searchbar-select")).toBeDisabled();
     expect(screen.getByDataCy("searchbar-input")).toBeDisabled();
   });
-  it("should be able to submit an input by pressing Shift + Enter", async () => {
+  it("should be able to paginate forwards by pressing Enter and keep focus", async () => {
+    const user = userEvent.setup();
+    const paginate = jest.fn();
+    render(<SearchBar paginate={paginate} />);
+
+    const input = screen.getByDataCy("searchbar-input");
+    await user.type(input, "test");
+    expect(input).toHaveValue("test");
+    await user.type(input, "{enter}");
+    expect(paginate).toHaveBeenCalledTimes(1);
+    expect(paginate).toHaveBeenCalledWith(1);
+    expect(input).toHaveFocus();
+  });
+  it("should be able to paginate backwards by pressing Shift + Enter and keep focus", async () => {
+    const user = userEvent.setup();
+    const paginate = jest.fn();
+    render(<SearchBar paginate={paginate} />);
+
+    const input = screen.getByDataCy("searchbar-input");
+    await user.type(input, "test");
+    expect(input).toHaveValue("test");
+    await user.type(input, "{Shift>}{enter}");
+    expect(paginate).toHaveBeenCalledTimes(1);
+    expect(paginate).toHaveBeenCalledWith(0);
+    expect(input).toHaveFocus();
+  });
+  it("should be able to submit an input by pressing Ctrl + Shift + Enter", async () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn();
     render(<SearchBar onSubmit={onSubmit} />);
@@ -19,7 +45,7 @@ describe("searchbar", () => {
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
-    await user.type(input, "{Shift>}{enter}");
+    await user.type(input, "{Control>}{Shift>}{enter}");
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith("filter", "test");
     expect(input).not.toHaveFocus();
@@ -55,7 +81,7 @@ describe("searchbar", () => {
 
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
-    await user.type(input, "{Shift>}{enter}");
+    await user.type(input, "{Control>}{Shift>}{enter}");
     expect(input).toHaveValue("test");
     expect(onSubmit).not.toHaveBeenCalled();
   });
@@ -67,7 +93,7 @@ describe("searchbar", () => {
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
-    await user.type(input, "{Shift>}{enter}");
+    await user.type(input, "{Control>}{Shift>}{enter}");
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith("filter", "test");
 
@@ -75,7 +101,7 @@ describe("searchbar", () => {
     await user.click(screen.getByDataCy("highlight-option"));
     await user.type(input, "test");
     expect(input).toHaveValue("test");
-    await user.type(input, "{Shift>}{enter}");
+    await user.type(input, "{Control>}{Shift>}{enter}");
     expect(onSubmit).toHaveBeenCalledWith("highlight", "test");
   });
   it("should clear input if a user is applying a filter and should reset search", async () => {
@@ -87,7 +113,7 @@ describe("searchbar", () => {
     await user.click(screen.getByDataCy("searchbar-select"));
     await user.click(screen.getByDataCy("filter-option"));
     await user.type(input, "test");
-    await user.type(input, "{Shift>}{enter}");
+    await user.type(input, "{Control>}{Shift>}{enter}");
     expect(input).toHaveValue("");
     expect(onSubmit).toHaveBeenCalledWith("filter", "test");
   });

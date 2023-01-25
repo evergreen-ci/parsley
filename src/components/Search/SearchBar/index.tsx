@@ -10,17 +10,19 @@ import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
 import { CharKey, ModifierKey } from "constants/keys";
 import { zIndex } from "constants/tokens";
+import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
 import { leaveBreadcrumb } from "utils/errorReporting";
 
 const { yellow } = palette;
 interface SearchBarProps {
+  className?: string;
   disabled?: boolean;
+  onChange?: (value: string) => void;
+  onSubmit?: (selected: string, value: string) => void;
+  paginate?: (dir: DIRECTION) => void;
   validator?: (value: string) => boolean;
   validatorMessage?: string;
-  className?: string;
-  onSubmit?: (selected: string, value: string) => void;
-  onChange?: (value: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -28,6 +30,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   disabled = false,
   onChange = () => {},
   onSubmit = () => {},
+  paginate = () => {},
   validator = () => true,
   validatorMessage = "Invalid Input",
 }) => {
@@ -65,7 +68,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const debounceSearch = useRef(
     debounce((value: string) => {
       onChange(value);
-    }, 1000)
+    }, 500)
   ).current;
 
   const handleOnSubmit = () => {
@@ -88,6 +91,18 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const handleChangeSelect = (value: string) => {
     setSelected(value as SearchBarActions);
     leaveBreadcrumb("search-bar-select", { value }, "user");
+  };
+
+  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    const { key, ctrlKey, metaKey, shiftKey } = e;
+    const commandKey = ctrlKey || metaKey;
+    if (key === "Enter" && shiftKey && commandKey && isValid) {
+      handleOnSubmit();
+    } else if (key === "Enter" && shiftKey) {
+      paginate(DIRECTION.PREVIOUS);
+    } else if (key === "Enter") {
+      paginate(DIRECTION.NEXT);
+    }
   };
 
   return (
@@ -143,9 +158,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           )
         }
         onChange={(e) => handleOnChange(e.target.value)}
-        onKeyPress={(e: KeyboardEvent<HTMLInputElement>) =>
-          e.key === "Enter" && e.shiftKey && isValid && handleOnSubmit()
-        }
+        onKeyDown={onKeyDown}
         placeholder="optional, regexp to search"
         spellCheck={false}
         type="text"

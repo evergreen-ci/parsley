@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useRef } from "react";
 import styled from "@emotion/styled";
 import { useLogWindowAnalytics } from "analytics";
 import SearchBar from "components/Search/SearchBar";
@@ -12,6 +12,7 @@ import { useHighlightParam } from "hooks/useHighlightParam";
 import { validateRegexp } from "utils/validators";
 
 const Search: React.FC = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
   const [filters, setFilters] = useFilterParam();
   const [highlights, setHighlights] = useHighlightParam();
 
@@ -53,17 +54,16 @@ const Search: React.FC = () => {
     sendEvent({ name: "Applied Search", searchExpression: value });
   };
 
-  const [containerRef, setContainerRef] = useState<HTMLDivElement | null>(null);
-
   return (
-    <Container ref={(el) => setContainerRef(el)}>
-      {hasLogs && containerRef && (
-        <SearchBarGuideCue containerRef={containerRef} />
+    <Container ref={containerRef}>
+      {hasLogs && containerRef.current && (
+        <SearchBarGuideCue containerRef={containerRef.current} />
       )}
       <StyledSearchBar
         disabled={!hasLogs}
         onChange={handleOnChange}
         onSubmit={handleOnSubmit}
+        paginate={paginate}
         validator={validateRegexp}
         validatorMessage="Invalid Regular Expression"
       />

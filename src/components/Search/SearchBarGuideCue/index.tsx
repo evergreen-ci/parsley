@@ -47,7 +47,7 @@ const SearchBarGuideCue: React.FC<SearchBarGuideCueProps> = ({
         </span>
         <span>
           To submit a filter or highlight, you&apos;ll need to press{" "}
-          <CommandText>Shift + Enter</CommandText> or use the plus button.
+          <CommandText>Cmd + Shift + Enter</CommandText> or use the plus button.
         </span>
       </GuideCueText>
     </GuideCue>

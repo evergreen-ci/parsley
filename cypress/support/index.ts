@@ -63,14 +63,19 @@ declare global {
        */
       login(): void;
       /**
-       * Custom command to open and close the Leafygreen SideNav.
-       */
-      toggleDrawer(): void;
-      /**
        * Custom command to open and close the Details Panel.
        * @example cy.toggleDetailsPanel(true)
        */
       toggleDetailsPanel(open: boolean): void;
+      /**
+       * Custom command to open and close the Leafygreen SideNav.
+       */
+      toggleDrawer(): void;
+      /**
+       * Custom command to unset the drawer cookie.
+       * @example cy.unsetDrawerCookie()
+       */
+      unsetDrawerCookie(): void;
       /**
        * Custom command to validate a toast was rendered
        * @example cy.validateToast("success", "This succeeded")

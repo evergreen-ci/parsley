@@ -11,6 +11,7 @@ Cypress.Commands.add("addFilter", (filter: string) => {
   cy.dataCy("filter-option").click();
   cy.dataCy("searchbar-input")
     .type(`${filter}`)
+    .type("{ctrl}", { release: false })
     .type("{shift}", { release: false })
     .type("{enter}");
 });
@@ -20,6 +21,7 @@ Cypress.Commands.add("addHighlight", (highlight: string) => {
   cy.dataCy("highlight-option").click();
   cy.dataCy("searchbar-input")
     .type(`${highlight}`)
+    .type("{ctrl}", { release: false })
     .type("{shift}", { release: false })
     .type("{enter}");
 });
@@ -160,10 +162,6 @@ Cypress.Commands.add("login", () => {
   );
 });
 
-Cypress.Commands.add("toggleDrawer", () => {
-  cy.get(`[aria-label="Collapse navigation"]`).click();
-});
-
 Cypress.Commands.add("toggleDetailsPanel", (open: boolean) => {
   if (open) {
     cy.get(`[data-cy="details-menu"]`).should("not.exist");
@@ -174,6 +172,14 @@ Cypress.Commands.add("toggleDetailsPanel", (open: boolean) => {
     cy.get(`[data-cy="details-button"]`).click();
     cy.get(`[data-cy="details-menu"]`).should("not.exist");
   }
+});
+
+Cypress.Commands.add("toggleDrawer", () => {
+  cy.get(`[aria-label="Collapse navigation"]`).click();
+});
+
+Cypress.Commands.add("unsetDrawerCookie", () => {
+  cy.clearCookie("has-opened-drawer");
 });
 
 Cypress.Commands.add(
