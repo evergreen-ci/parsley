@@ -1,6 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
@@ -9,50 +9,47 @@ import { colorList } from "utils/resmoke";
 import ResmokeRow from ".";
 
 export default {
-  title: "Components/LogRow/ResmokeRow",
   component: ResmokeRow,
-} as ComponentMeta<ResmokeRowProps>;
+};
 
 type ResmokeRowProps = React.FC<
   React.ComponentProps<typeof ResmokeRow>["data"]
 >;
 
-// Single ResmokeRow.
-const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
-  <ResmokeRow
-    key={logLines[0]}
-    data={{
-      expandLines: () => undefined,
-      getLine,
-      getResmokeLineColor: () => undefined,
-      resetRowHeightAtIndex: () => undefined,
-      scrollToLine: () => undefined,
-      prettyPrint: args.prettyPrint,
-      range: { lowerRange: 0 },
-      wrap: args.wrap,
-    }}
-    lineNumber={0}
-    listRowProps={{
-      index: 2,
-      style: {},
-      columnIndex: 0,
-      isScrolling: false,
-      isVisible: true,
-      key: getLine(2) || "",
-      parent: {} as any,
-    }}
-  />
-);
+export const SingleLine: StoryObj<ResmokeRowProps> = {
+  render: (args) => (
+    <ResmokeRow
+      key={logLines[8]}
+      data={{
+        expandLines: () => undefined,
+        getLine,
+        getResmokeLineColor: () => undefined,
+        resetRowHeightAtIndex: () => undefined,
+        scrollToLine: () => undefined,
+        prettyPrint: args.prettyPrint,
+        range: { lowerRange: 0 },
+        wrap: args.wrap,
+      }}
+      lineNumber={8}
+      listRowProps={{
+        index: 8,
+        style: {},
+        columnIndex: 0,
+        isScrolling: false,
+        isVisible: true,
+        key: getLine(8) || "",
+        parent: {} as any,
+      }}
+    />
+  ),
 
-export const SingleLine = SingleLineTemplate.bind({});
-
-SingleLine.args = {
-  prettyPrint: false,
-  wrap: false,
+  args: {
+    prettyPrint: false,
+    wrap: false,
+  },
 };
 
-// Multiple ResmokeRows.
-const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
+const MultipleLinesStory = (args: any) => {
   const [scrollIndex, setScrollIndex] = useState<number>(-1);
   const { resetRowHeightAtIndex } = useLogContext();
 
@@ -85,14 +82,16 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
     </Container>
   );
 };
-export const MultipleLines = MultipleLineTemplate.bind({});
 
-MultipleLines.args = {
-  prettyPrint: true,
-  wrap: false,
+export const MultipleLines: StoryObj<ResmokeRowProps> = {
+  render: (args) => <MultipleLinesStory {...args} />,
+  args: {
+    prettyPrint: true,
+    wrap: false,
+  },
 };
 
-const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
+const ResmokeHighlightingStory = (args: any) => {
   const [scrollIndex, setScrollIndex] = useState<number>(-1);
   const { resetRowHeightAtIndex } = useLogContext();
 
@@ -126,12 +125,13 @@ const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   );
 };
 
-export const ResmokeHighlighting = ResmokeHighlightingTemplate.bind({});
-
-ResmokeHighlighting.args = {
-  prettyPrint: true,
-  highlightedLine: 1,
-  wrap: false,
+export const ResmokeHighlighting: StoryObj<ResmokeRowProps> = {
+  render: (args) => <ResmokeHighlightingStory {...args} />,
+  args: {
+    prettyPrint: true,
+    highlightedLine: 1,
+    wrap: false,
+  },
 };
 
 const logLines = [

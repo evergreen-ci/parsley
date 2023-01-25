@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ComponentStory } from "@storybook/react";
+import { StoryObj } from "@storybook/react";
 import { ErrorBoundary } from ".";
 import ErrorFallback from "./ErrorFallback";
 
@@ -8,20 +8,21 @@ export default {
   component: ErrorFallback,
 };
 
-export const Template: ComponentStory<typeof ErrorFallback> = () => (
-  <ErrorFallback />
-);
+export const Template: StoryObj<typeof ErrorFallback> = {
+  render: () => <ErrorFallback />,
+  name: "Error Fallback",
+};
 
-Template.storyName = "Error Fallback";
+export const ErrorBoundaryTemplate: StoryObj<typeof ErrorBoundary> = {
+  render: () => (
+    <ErrorBoundary>
+      <div>Test</div>
+      <SampleComponent />
+    </ErrorBoundary>
+  ),
 
-export const ErrorBoundaryTemplate: ComponentStory<
-  typeof ErrorBoundary
-> = () => (
-  <ErrorBoundary>
-    <div>Test</div>
-    <SampleComponent />
-  </ErrorBoundary>
-);
+  name: "Error Boundary",
+};
 
 const SampleComponent = () => {
   const [hasError, setHasError] = useState(false);
@@ -41,5 +42,3 @@ const SampleComponent = () => {
     </div>
   );
 };
-
-ErrorBoundaryTemplate.storyName = "Error Boundary";

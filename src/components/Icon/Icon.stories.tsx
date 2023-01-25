@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { StoryObj } from "@storybook/react";
 import { size } from "constants/tokens";
 import Icon, { Size, glyphs } from ".";
 
@@ -16,28 +16,29 @@ const Sizes = {
 export default {
   title: "Components/Icon",
   component: Icon,
-} as ComponentMeta<typeof Icon>;
-
-const Template: ComponentStory<typeof Icon> = (args) => (
-  <Container>
-    {Object.keys(glyphs).map((name) => (
-      <IconContainer key={name}>
-        <Icon {...args} glyph={name} />
-        <span>{name}</span>
-      </IconContainer>
-    ))}
-  </Container>
-);
-
-export const Default = Template.bind({});
-
-Default.argTypes = {
-  color: { control: "color" },
-  size: { control: { type: "select", options: Sizes } },
 };
-Default.args = {
-  color: green.dark3,
-  size: Sizes[Size.XLarge],
+
+export const Default: StoryObj<typeof Icon> = {
+  render: (args) => (
+    <Container>
+      {Object.keys(glyphs).map((name) => (
+        <IconContainer key={name}>
+          <Icon {...args} glyph={name} />
+          <span>{name}</span>
+        </IconContainer>
+      ))}
+    </Container>
+  ),
+
+  argTypes: {
+    color: { control: "color" },
+    size: { control: { type: "select", options: Sizes } },
+  },
+
+  args: {
+    color: green.dark3,
+    size: Sizes[Size.XLarge],
+  },
 };
 
 const Container = styled.div`

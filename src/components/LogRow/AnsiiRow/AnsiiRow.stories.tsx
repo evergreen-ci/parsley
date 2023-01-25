@@ -1,54 +1,51 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import AnsiiRow from ".";
 import { RowRenderer, cache } from "../RowRenderer";
 
-export default {
-  title: "Components/LogRow/AnsiiRow",
-  component: AnsiiRow,
-} as ComponentMeta<AnsiiRowProps>;
-
 type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>["data"]>;
 
-// Single AnsiiRow.
-const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => (
-  <AnsiiRow
-    key={logLines[0]}
-    data={{
-      expandLines: () => undefined,
-      getLine,
-      getResmokeLineColor: () => undefined,
-      resetRowHeightAtIndex: () => undefined,
-      scrollToLine: () => undefined,
-      prettyPrint: args.prettyPrint,
-      range: { lowerRange: 0 },
-      wrap: args.wrap,
-    }}
-    lineNumber={0}
-    listRowProps={{
-      index: 0,
-      style: {},
-      columnIndex: 0,
-      isScrolling: false,
-      isVisible: true,
-      key: getLine(0) || "",
-      parent: {} as any,
-    }}
-  />
-);
-
-export const SingleLine = SingleLineTemplate.bind({});
-
-SingleLine.args = {
-  prettyPrint: false,
-  wrap: false,
+export default {
+  component: AnsiiRow,
 };
 
-// Multiple AnsiiRows.
-const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
+export const SingleLine: StoryObj<AnsiiRowProps> = {
+  render: (args) => (
+    <AnsiiRow
+      key={logLines[0]}
+      data={{
+        expandLines: () => undefined,
+        getLine,
+        getResmokeLineColor: () => undefined,
+        resetRowHeightAtIndex: () => undefined,
+        scrollToLine: () => undefined,
+        prettyPrint: args.prettyPrint,
+        range: { lowerRange: 0 },
+        wrap: args.wrap,
+      }}
+      lineNumber={0}
+      listRowProps={{
+        index: 0,
+        style: {},
+        columnIndex: 0,
+        isScrolling: false,
+        isVisible: true,
+        key: getLine(0) || "",
+        parent: {} as any,
+      }}
+    />
+  ),
+
+  args: {
+    prettyPrint: false,
+    wrap: false,
+  },
+};
+
+const MultiLineStory = (args: any) => {
   const [scrollIndex, setScrollIndex] = useState<number>(-1);
 
   return (
@@ -80,12 +77,13 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
     </Container>
   );
 };
-
-export const MultiLines = MultiLineTemplate.bind({});
-MultiLines.args = {
-  highlightedLine: 0,
-  prettyPrint: false,
-  wrap: false,
+export const MultiLines: StoryObj<AnsiiRowProps> = {
+  render: (args) => <MultiLineStory {...args} />,
+  args: {
+    highlightedLine: 0,
+    prettyPrint: false,
+    wrap: false,
+  },
 };
 
 const logLines = [
