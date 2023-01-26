@@ -12,7 +12,6 @@ Cypress.Commands.add("addFilter", (filter: string) => {
   cy.dataCy("searchbar-input")
     .type(`${filter}`)
     .type("{ctrl}", { release: false })
-    .type("{shift}", { release: false })
     .type("{enter}");
 });
 
@@ -22,7 +21,6 @@ Cypress.Commands.add("addHighlight", (highlight: string) => {
   cy.dataCy("searchbar-input")
     .type(`${highlight}`)
     .type("{ctrl}", { release: false })
-    .type("{shift}", { release: false })
     .type("{enter}");
 });
 

@@ -45,7 +45,7 @@ describe("searchbar", () => {
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
-    await user.type(input, "{Control>}{Shift>}{enter}");
+    await user.type(input, "{Control>}{enter}");
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith("filter", "test");
     expect(input).not.toHaveFocus();
@@ -81,7 +81,7 @@ describe("searchbar", () => {
 
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
-    await user.type(input, "{Control>}{Shift>}{enter}");
+    await user.type(input, "{Control>}{enter}");
     expect(input).toHaveValue("test");
     expect(onSubmit).not.toHaveBeenCalled();
   });
@@ -93,7 +93,7 @@ describe("searchbar", () => {
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
-    await user.type(input, "{Control>}{Shift>}{enter}");
+    await user.type(input, "{Control>}{enter}");
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith("filter", "test");
 
@@ -101,7 +101,7 @@ describe("searchbar", () => {
     await user.click(screen.getByDataCy("highlight-option"));
     await user.type(input, "test");
     expect(input).toHaveValue("test");
-    await user.type(input, "{Control>}{Shift>}{enter}");
+    await user.type(input, "{Control>}{enter}");
     expect(onSubmit).toHaveBeenCalledWith("highlight", "test");
   });
   it("should clear input if a user is applying a filter and should reset search", async () => {
@@ -113,7 +113,7 @@ describe("searchbar", () => {
     await user.click(screen.getByDataCy("searchbar-select"));
     await user.click(screen.getByDataCy("filter-option"));
     await user.type(input, "test");
-    await user.type(input, "{Control>}{Shift>}{enter}");
+    await user.type(input, "{Control>}{enter}");
     expect(input).toHaveValue("");
     expect(onSubmit).toHaveBeenCalledWith("filter", "test");
   });

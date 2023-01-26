@@ -94,13 +94,12 @@ const SearchBar: React.FC<SearchBarProps> = ({
   };
 
   const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
-    const { key, ctrlKey, metaKey, shiftKey } = e;
-    const commandKey = ctrlKey || metaKey;
-    if (key === "Enter" && shiftKey && commandKey && isValid) {
+    const commandKey = e.ctrlKey || e.metaKey;
+    if (e.key === "Enter" && commandKey && isValid) {
       handleOnSubmit();
-    } else if (key === "Enter" && shiftKey) {
+    } else if (e.key === "Enter" && e.shiftKey) {
       paginate(DIRECTION.PREVIOUS);
-    } else if (key === "Enter") {
+    } else if (e.key === "Enter") {
       paginate(DIRECTION.NEXT);
     }
   };
