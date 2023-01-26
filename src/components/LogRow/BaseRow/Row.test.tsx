@@ -27,15 +27,15 @@ describe("row", () => {
       { wrapper }
     );
     await userEvent.click(screen.getByDataCy("log-link-54"));
-    expect(history.location.search).toBe("?selectedLine=54");
+    expect(history.location.search).toBe("?shareLine=54");
     expect(scrollToLine).toHaveBeenCalledWith(7);
   });
 
-  it("clicking on a selected log line link unselects it", async () => {
+  it("clicking on a share line's link icon updates the URL correctly", async () => {
     const { history } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>,
       {
-        route: "?selectedLine=0",
+        route: "?shareLine=0",
         wrapper,
       }
     );
@@ -64,14 +64,14 @@ describe("row", () => {
     expect(history.location.search).toBe("");
   });
 
-  it("a log line can be selected and bookmarked at the same time", async () => {
+  it("a log line can be shared and bookmarked at the same time", async () => {
     const { history } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>,
       { wrapper }
     );
     await userEvent.click(screen.getByDataCy("log-link-0"));
     await userEvent.dblClick(screen.getByText(testLog));
-    expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");
+    expect(history.location.search).toBe("?bookmarks=0&shareLine=0");
   });
   describe("search", () => {
     it("a search term highlights the matching text", () => {

@@ -44,9 +44,8 @@ exports[`storyshots Storyshots Components/LogRow/AnsiiRow Single Line 1`] = `
   data-bookmarked={false}
   data-cy="log-row-0"
   data-highlighted={false}
-  data-selected={false}
+  data-shared={false}
   onDoubleClick={[Function]}
-  selected={false}
   style={Object {}}
 >
   <svg

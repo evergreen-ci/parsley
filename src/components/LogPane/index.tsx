@@ -35,18 +35,18 @@ const LogPane: React.FC<LogPaneProps> = ({
   } = useLogContext();
   const { expandableRows, prettyPrint, wrap } = preferences;
 
+  const [shareLine] = useQueryParam<number | undefined>(
+    QueryParams.ShareLine,
+    undefined
+  );
+
   useEffect(() => {
     cache.clearAll();
     listRef.current?.recomputeRowHeights();
   }, [listRef, cache, wrap, matchingLines, expandableRows, prettyPrint]);
 
-  const [selectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
-    undefined
-  );
-
   useEffect(() => {
-    const initialScrollIndex = findLineIndex(processedLogLines, selectedLine);
+    const initialScrollIndex = findLineIndex(processedLogLines, shareLine);
     if (initialScrollIndex > -1) {
       leaveBreadcrumb("Scrolled to initialScrollIndex", {
         initialScrollIndex,
