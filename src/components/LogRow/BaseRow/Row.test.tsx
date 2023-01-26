@@ -1,20 +1,15 @@
-import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen, userEvent } from "test_utils";
 import Row from ".";
 
-const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
-);
-
 describe("row", () => {
   it("renders a log line", () => {
-    renderWithRouterMatch(<Row {...rowProps}>{testLog}</Row>, { wrapper });
+    renderWithRouterMatch(<Row {...rowProps}>{testLog}</Row>);
     expect(screen.getByText(testLog)).toBeVisible();
   });
 
   it("properly escapes a log line with tags and renders its contents", () => {
     const lineContent = "Test line with a <nil> value";
-    renderWithRouterMatch(<Row {...rowProps}>{lineContent}</Row>, { wrapper });
+    renderWithRouterMatch(<Row {...rowProps}>{lineContent}</Row>);
     expect(screen.getByText(lineContent)).toBeVisible();
   });
 
@@ -23,8 +18,7 @@ describe("row", () => {
     const { history } = renderWithRouterMatch(
       <Row {...rowProps} index={7} lineNumber={54} scrollToLine={scrollToLine}>
         {testLog}
-      </Row>,
-      { wrapper }
+      </Row>
     );
     await userEvent.click(screen.getByDataCy("log-link-54"));
     expect(history.location.search).toBe("?shareLine=54");
@@ -36,7 +30,6 @@ describe("row", () => {
       <Row {...rowProps}>{testLog}</Row>,
       {
         route: "?shareLine=0",
-        wrapper,
       }
     );
     await userEvent.click(screen.getByDataCy("log-link-0"));
@@ -45,8 +38,7 @@ describe("row", () => {
 
   it("double clicking a log line adds it to the bookmarks", async () => {
     const { history } = renderWithRouterMatch(
-      <Row {...rowProps}>{testLog}</Row>,
-      { wrapper }
+      <Row {...rowProps}>{testLog}</Row>
     );
     await userEvent.dblClick(screen.getByText(testLog));
     expect(history.location.search).toBe("?bookmarks=0");
@@ -57,7 +49,6 @@ describe("row", () => {
       <Row {...rowProps}>{testLog}</Row>,
       {
         route: "?bookmarks=0",
-        wrapper,
       }
     );
     await userEvent.dblClick(screen.getByText(testLog));
@@ -66,8 +57,7 @@ describe("row", () => {
 
   it("a log line can be shared and bookmarked at the same time", async () => {
     const { history } = renderWithRouterMatch(
-      <Row {...rowProps}>{testLog}</Row>,
-      { wrapper }
+      <Row {...rowProps}>{testLog}</Row>
     );
     await userEvent.click(screen.getByDataCy("log-link-0"));
     await userEvent.dblClick(screen.getByText(testLog));
@@ -79,8 +69,7 @@ describe("row", () => {
       renderWithRouterMatch(
         <Row {...rowProps} searchTerm={regexp}>
           {testLog}
-        </Row>,
-        { wrapper }
+        </Row>
       );
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
     });
@@ -90,8 +79,7 @@ describe("row", () => {
       const { rerender } = renderWithRouterMatch(
         <Row {...rowProps} searchTerm={regexp}>
           {testLog}
-        </Row>,
-        { wrapper }
+        </Row>
       );
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
       regexp = /test/;
@@ -109,8 +97,7 @@ describe("row", () => {
       renderWithRouterMatch(
         <Row {...rowProps} highlights={regexp}>
           {testLog}
-        </Row>,
-        { wrapper }
+        </Row>
       );
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
     });
@@ -120,8 +107,7 @@ describe("row", () => {
       renderWithRouterMatch(
         <Row {...rowProps} highlights={regexp}>
           {testLog}
-        </Row>,
-        { wrapper }
+        </Row>
       );
       expect(screen.queryAllByDataCy("highlight")).toHaveLength(2);
       screen.getAllByDataCy("highlight").forEach((highlight) => {
@@ -133,8 +119,7 @@ describe("row", () => {
       renderWithRouterMatch(
         <Row {...rowProps} highlights={regexp} searchTerm={regexp}>
           {testLog}
-        </Row>,
-        { wrapper }
+        </Row>
       );
       expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
@@ -145,8 +130,7 @@ describe("row", () => {
       renderWithRouterMatch(
         <Row {...rowProps} highlights={highlightRegex} searchTerm={searchRegex}>
           {testLog}
-        </Row>,
-        { wrapper }
+        </Row>
       );
       expect(screen.queryAllByDataCy("highlight")).toHaveLength(2);
       screen.getAllByDataCy("highlight").forEach((highlight) => {
@@ -168,7 +152,6 @@ describe("row", () => {
         </Row>,
         {
           route: "?bookmarks=0",
-          wrapper,
         }
       );
       await userEvent.dblClick(screen.getByText(testLog));
@@ -189,7 +172,6 @@ describe("row", () => {
         </Row>,
         {
           route: "?bookmarks=0",
-          wrapper,
         }
       );
       await userEvent.dblClick(screen.getByText(testLog));
