@@ -28,7 +28,7 @@ describe("Filtering", () => {
 
       describe("filtering mode is AND", () => {
         beforeEach(() => {
-          cy.unsetDrawerCookie();
+          cy.resetDrawerState();
         });
 
         it("should be able to apply two default filters (case insensitive, exact match)", () => {
@@ -105,7 +105,7 @@ describe("Filtering", () => {
 
       describe("filtering mode is OR", () => {
         beforeEach(() => {
-          cy.unsetDrawerCookie();
+          cy.resetDrawerState();
         });
 
         it("should be able to apply two default filters (case insensitive, exact match)", () => {
@@ -197,7 +197,7 @@ describe("Filtering", () => {
     const filter = "doesNotMatchAnything";
 
     beforeEach(() => {
-      cy.unsetDrawerCookie();
+      cy.resetDrawerState();
       cy.visit(`${logLink}?filters=100${filter}`);
       cy.get("[data-cy^='collapsed-row-']").should("exist");
     });

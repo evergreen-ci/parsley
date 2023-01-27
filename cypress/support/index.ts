@@ -72,10 +72,10 @@ declare global {
        */
       toggleDrawer(): void;
       /**
-       * Custom command to unset the drawer cookie.
-       * @example cy.unsetDrawerCookie()
+       * Custom command to reset the drawer cookie.
+       * @example cy.resetDrawerState()
        */
-      unsetDrawerCookie(): void;
+      resetDrawerState(): void;
       /**
        * Custom command to validate a toast was rendered
        * @example cy.validateToast("success", "This succeeded")

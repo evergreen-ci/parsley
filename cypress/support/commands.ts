@@ -176,7 +176,7 @@ Cypress.Commands.add("toggleDrawer", () => {
   cy.get(`[aria-label="Collapse navigation"]`).click();
 });
 
-Cypress.Commands.add("unsetDrawerCookie", () => {
+Cypress.Commands.add("resetDrawerState", () => {
   cy.clearCookie("has-opened-drawer");
 });
 
