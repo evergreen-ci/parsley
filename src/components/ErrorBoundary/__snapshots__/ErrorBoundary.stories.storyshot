@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots Components/ErrorBoundary Error Boundary 1`] = `
+exports[`storyshots Storyshots components/ErrorBoundary Error Boundary 1`] = `
 Array [
   <div>
     Test
@@ -16,7 +16,7 @@ Array [
 ]
 `;
 
-exports[`storyshots Storyshots Components/ErrorBoundary Error Fallback 1`] = `
+exports[`storyshots Storyshots components/ErrorBoundary Error Fallback 1`] = `
 <div>
   <div
     className="css-1xl0rym"

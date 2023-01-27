@@ -8,7 +8,6 @@ import { useLogContext } from "context/LogContext";
 import CollapsedRow from ".";
 
 export default {
-  title: "Components/LogRow/CollapsedRow",
   component: CollapsedRow,
 };
 

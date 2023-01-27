@@ -14,7 +14,6 @@ const Sizes = {
 };
 
 export default {
-  title: "Components/Icon",
   component: Icon,
 };
 

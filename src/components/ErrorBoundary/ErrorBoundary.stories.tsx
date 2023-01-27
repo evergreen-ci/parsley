@@ -4,7 +4,6 @@ import { ErrorBoundary } from ".";
 import ErrorFallback from "./ErrorFallback";
 
 export default {
-  title: "Components/ErrorBoundary",
   component: ErrorFallback,
 };
 

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots Components/LogRow/CollapsedRow Collapsed Ansii Row 1`] = `
+exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Ansii Row 1`] = `
 <div
   className="css-1mysoqc"
 >
@@ -38,7 +38,7 @@ exports[`storyshots Storyshots Components/LogRow/CollapsedRow Collapsed Ansii Ro
 </div>
 `;
 
-exports[`storyshots Storyshots Components/LogRow/CollapsedRow Collapsed Resmoke Row 1`] = `
+exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Resmoke Row 1`] = `
 <div
   className="css-1mysoqc"
 >

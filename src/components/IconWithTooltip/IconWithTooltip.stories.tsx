@@ -15,7 +15,6 @@ const Sizes = {
 };
 
 export default {
-  title: "Components/IconWithTooltip",
   component: IconWithTooltip,
 };
 
