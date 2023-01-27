@@ -64,6 +64,17 @@ describe("Searching", () => {
     cy.dataCy("search-count").should("contain.text", "1/4");
   });
 
+  it("should not reset search index when a bookmark is applied", () => {
+    cy.addSearch("info");
+    cy.dataCy("search-count").should("be.visible");
+    cy.dataCy("search-count").should("contain.text", "1/4");
+    cy.dataCy("next-button").click();
+    cy.dataCy("search-count").should("contain.text", "2/4");
+    cy.dataCy("log-row-27").dblclick();
+    cy.location("search").should("equal", "?bookmarks=0,27,297");
+    cy.dataCy("search-count").should("contain.text", "2/4");
+  });
+
   it("should be able to search on filtered content", () => {
     cy.addFilter("installation");
     cy.get("[data-cy^='collapsed-row-']").should("exist");

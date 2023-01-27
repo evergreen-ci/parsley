@@ -65,7 +65,7 @@ describe("ansiiRow", () => {
     );
     expect(screen.getByText(logLines[1])).toBeInTheDocument();
   });
-  it("clicking log line link updates the url and selects it", async () => {
+  it("clicking log line link updates the url and marks it as a share line", async () => {
     const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
       <AnsiiRow
@@ -78,16 +78,16 @@ describe("ansiiRow", () => {
       }
     );
     await user.click(screen.getByDataCy("log-link-0"));
-    expect(history.location.search).toBe("?selectedLine=0");
+    expect(history.location.search).toBe("?shareLine=0");
     expect(scrollToLine).toHaveBeenCalledWith(0);
   });
-  it("clicking on a selected log line link unselects it", async () => {
+  it("clicking on a share line's link icon updates the URL correctly", async () => {
     const { history } = renderWithRouterMatch(
       <AnsiiRow data={data} lineNumber={0} listRowProps={listRowProps} />,
 
       {
         wrapper: wrapper(logLines),
-        route: "?selectedLine=0",
+        route: "?shareLine=0",
       }
     );
     await user.click(screen.getByDataCy("log-link-0"));
