@@ -33,9 +33,9 @@ const ButtonRow: React.FC = () => {
             <Button
               disabled={!bookmarks.length}
               leftGlyph={<Icon glyph="Copy" />}
-              onClick={() => {
+              onClick={async () => {
                 leaveBreadcrumb("copy-jira", { bookmarks }, "user");
-                copyToClipboard(getJiraFormat(bookmarks, getLine));
+                await copyToClipboard(getJiraFormat(bookmarks, getLine));
                 setHasCopied(!hasCopied);
                 sendEvent({ name: "Clicked Copy To Jira" });
               }}
