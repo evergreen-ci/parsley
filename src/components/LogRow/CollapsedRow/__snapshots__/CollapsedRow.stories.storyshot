@@ -1,77 +1,71 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Ansii Row 1`] = `
-<div
-  className="css-1mysoqc"
->
+<div>
   <div
-    style={
-      Object {
-        "height": 0,
-        "overflow": "visible",
-        "width": 0,
-      }
-    }
+    class="css-1mysoqc"
   >
     <div
-      aria-label="grid"
-      aria-readonly={true}
-      className="ReactVirtualized__Grid ReactVirtualized__List"
-      onScroll={[Function]}
-      role="grid"
-      style={
-        Object {
-          "WebkitOverflowScrolling": "touch",
-          "boxSizing": "border-box",
-          "direction": "ltr",
-          "height": 0,
-          "overflowX": "scroll",
-          "overflowY": "auto",
-          "position": "relative",
-          "width": 0,
-          "willChange": "transform",
-        }
-      }
-      tabIndex={0}
-    />
+      style="overflow: visible; height: 0px; width: 0px;"
+    >
+      <div
+        aria-label="grid"
+        aria-readonly="true"
+        class="ReactVirtualized__Grid ReactVirtualized__List"
+        role="grid"
+        style="box-sizing: border-box; direction: ltr; height: 0px; position: relative; width: 0px; will-change: transform; overflow-x: scroll; overflow-y: auto;"
+        tabindex="0"
+      />
+    </div>
+    <div
+      class="resize-triggers"
+    >
+      <div
+        class="expand-trigger"
+      >
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
   </div>
 </div>
 `;
 
 exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Resmoke Row 1`] = `
-<div
-  className="css-1mysoqc"
->
+<div>
   <div
-    style={
-      Object {
-        "height": 0,
-        "overflow": "visible",
-        "width": 0,
-      }
-    }
+    class="css-1mysoqc"
   >
     <div
-      aria-label="grid"
-      aria-readonly={true}
-      className="ReactVirtualized__Grid ReactVirtualized__List"
-      onScroll={[Function]}
-      role="grid"
-      style={
-        Object {
-          "WebkitOverflowScrolling": "touch",
-          "boxSizing": "border-box",
-          "direction": "ltr",
-          "height": 0,
-          "overflowX": "scroll",
-          "overflowY": "auto",
-          "position": "relative",
-          "width": 0,
-          "willChange": "transform",
-        }
-      }
-      tabIndex={0}
-    />
+      style="overflow: visible; height: 0px; width: 0px;"
+    >
+      <div
+        aria-label="grid"
+        aria-readonly="true"
+        class="ReactVirtualized__Grid ReactVirtualized__List"
+        role="grid"
+        style="box-sizing: border-box; direction: ltr; height: 0px; position: relative; width: 0px; will-change: transform; overflow-x: scroll; overflow-y: auto;"
+        tabindex="0"
+      />
+    </div>
+    <div
+      class="resize-triggers"
+    >
+      <div
+        class="expand-trigger"
+      >
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
   </div>
 </div>
 `;
