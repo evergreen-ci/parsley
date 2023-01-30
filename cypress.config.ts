@@ -7,7 +7,6 @@ export default defineConfig({
     supportFile: "cypress/support/index.ts",
     specPattern: "cypress/integration/**/*.ts",
     experimentalStudio: true,
-    numTestsKeptInMemory: 0,
   },
   reporterOptions: {
     mochaFile: "bin/cypress/cypress-[hash].xml",
