@@ -42,8 +42,8 @@ const SearchBarGuideCue: React.FC<SearchBarGuideCueProps> = ({
     >
       <GuideCueText>
         <span>
-          We&apos;ve removed the search option. The text input will now perform
-          search by default.
+          The text input will now perform search by default. You can also use
+          Enter or Shift + Enter while being focused on the input.
         </span>
         <span>
           To submit a filter or highlight, you&apos;ll need to press{" "}

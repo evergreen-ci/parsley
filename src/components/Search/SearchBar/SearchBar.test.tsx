@@ -1,3 +1,4 @@
+import { DIRECTION } from "context/LogContext/types";
 import { render, screen, userEvent } from "test_utils";
 import SearchBar from ".";
 
@@ -21,7 +22,7 @@ describe("searchbar", () => {
     expect(input).toHaveValue("test");
     await user.type(input, "{enter}");
     expect(paginate).toHaveBeenCalledTimes(1);
-    expect(paginate).toHaveBeenCalledWith(1);
+    expect(paginate).toHaveBeenCalledWith(DIRECTION.NEXT);
     expect(input).toHaveFocus();
   });
   it("should be able to paginate backwards by pressing Shift + Enter and keep focus", async () => {
@@ -34,10 +35,10 @@ describe("searchbar", () => {
     expect(input).toHaveValue("test");
     await user.type(input, "{Shift>}{enter}");
     expect(paginate).toHaveBeenCalledTimes(1);
-    expect(paginate).toHaveBeenCalledWith(0);
+    expect(paginate).toHaveBeenCalledWith(DIRECTION.PREVIOUS);
     expect(input).toHaveFocus();
   });
-  it("should be able to submit an input by pressing Ctrl + Shift + Enter", async () => {
+  it("should be able to submit an input by pressing Ctrl + Enter", async () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn();
     render(<SearchBar onSubmit={onSubmit} />);

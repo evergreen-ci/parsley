@@ -160,6 +160,10 @@ Cypress.Commands.add("login", () => {
   );
 });
 
+Cypress.Commands.add("resetDrawerState", () => {
+  cy.clearCookie("has-opened-drawer");
+});
+
 Cypress.Commands.add("toggleDetailsPanel", (open: boolean) => {
   if (open) {
     cy.get(`[data-cy="details-menu"]`).should("not.exist");
@@ -174,10 +178,6 @@ Cypress.Commands.add("toggleDetailsPanel", (open: boolean) => {
 
 Cypress.Commands.add("toggleDrawer", () => {
   cy.get(`[aria-label="Collapse navigation"]`).click();
-});
-
-Cypress.Commands.add("resetDrawerState", () => {
-  cy.clearCookie("has-opened-drawer");
 });
 
 Cypress.Commands.add(

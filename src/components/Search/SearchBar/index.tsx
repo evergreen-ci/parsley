@@ -4,6 +4,7 @@ import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import { Option, Select } from "@leafygreen-ui/select";
 import debounce from "lodash.debounce";
+import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import IconWithTooltip from "components/IconWithTooltip";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
@@ -34,6 +35,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   validator = () => true,
   validatorMessage = "Invalid Input",
 }) => {
+  const { sendEvent } = useLogWindowAnalytics();
   const inputRef = useRef<HTMLInputElement>(null);
   const [input, setInput] = useState("");
   const [selected, setSelected] = useState(SearchBarActions.Filter);
@@ -99,8 +101,16 @@ const SearchBar: React.FC<SearchBarProps> = ({
       handleOnSubmit();
     } else if (e.key === "Enter" && e.shiftKey) {
       paginate(DIRECTION.PREVIOUS);
+      sendEvent({
+        name: "Paginated Through Search Results",
+        direction: DIRECTION.PREVIOUS,
+      });
     } else if (e.key === "Enter") {
       paginate(DIRECTION.NEXT);
+      sendEvent({
+        name: "Paginated Through Search Results",
+        direction: DIRECTION.NEXT,
+      });
     }
   };
 
