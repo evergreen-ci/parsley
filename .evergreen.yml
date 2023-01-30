@@ -163,16 +163,6 @@ functions:
     params:
       directory: parsley
 
-  install-chrome:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      script: |
-        cd /tmp
-        curl -L -o "chrome.zip" "${chrome_download_url}"
-        unzip chrome.zip
-        cd -
-
   send-email:
     command: shell.exec
     params:
@@ -215,7 +205,7 @@ functions:
       working_dir: parsley
       script: |
         export PATH=${node_path}
-        yarn cy:run --browser /tmp/chrome-linux/chrome --record --key ${cypress_record_key} --reporter junit
+        yarn cy:run --record --key ${cypress_record_key} --reporter junit
 
   yarn-eslint:
     command: shell.exec
@@ -415,7 +405,6 @@ tasks:
     - func: yarn-install
     - func: yarn-build
     - func: yarn-preview
-    - func: install-chrome
     - func: wait-for-evergreen
     - func: yarn-verify-backend
     - func: yarn-cypress

@@ -76,19 +76,6 @@ Cypress.Commands.add(
   }
 );
 
-// Source: https://stackoverflow.com/questions/60174546/how-grant-cypress-test-application-some-permissions
-Cypress.Commands.add("enableClipboard", () => {
-  cy.wrap(
-    Cypress.automation("remote:debugger:protocol", {
-      command: "Browser.grantPermissions",
-      params: {
-        permissions: ["clipboardReadWrite", "clipboardSanitizedWrite"],
-        origin: window.location.origin,
-      },
-    })
-  );
-});
-
 Cypress.Commands.add(
   "isContainedInViewport",
   { prevSubject: true },

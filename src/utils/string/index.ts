@@ -2,8 +2,8 @@
  * `copyToClipboard` copies text to a user's clipboard.
  * @param textToCopy - text to be copied
  */
-export const copyToClipboard = (textToCopy: string) => {
-  navigator.clipboard.writeText(textToCopy);
+export const copyToClipboard = async (textToCopy: string) => {
+  await navigator.clipboard.writeText(textToCopy);
 };
 
 /**
