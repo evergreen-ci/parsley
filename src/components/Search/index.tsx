@@ -65,7 +65,7 @@ const Search: React.FC = () => {
         onSubmit={handleOnSubmit}
         paginate={paginate}
         validator={validateRegexp}
-        validatorMessage="Invalid Regular Expression"
+        validatorMessage="Invalid regular expression"
       />
       {hasSearch && (
         <SearchResults paginate={paginate} searchState={searchState} />

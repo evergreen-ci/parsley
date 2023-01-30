@@ -33,7 +33,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onSubmit = () => {},
   paginate = () => {},
   validator = () => true,
-  validatorMessage = "Invalid Input",
+  validatorMessage = "Invalid input",
 }) => {
   const { sendEvent } = useLogWindowAnalytics();
   const inputRef = useRef<HTMLInputElement>(null);
@@ -41,6 +41,11 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const [selected, setSelected] = useState(SearchBarActions.Filter);
 
   const isValid = validator(input);
+  const debounceSearch = useRef(
+    debounce((value: string) => {
+      onChange(value);
+    }, 500)
+  ).current;
 
   useKeyboardShortcut(
     { charKey: CharKey.F, modifierKeys: [ModifierKey.Control] },
@@ -67,18 +72,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
     { disabled, ignoreFocus: true }
   );
 
-  const debounceSearch = useRef(
-    debounce((value: string) => {
-      onChange(value);
-    }, 500)
-  ).current;
+  const handleChangeSelect = (value: string) => {
+    setSelected(value as SearchBarActions);
+    leaveBreadcrumb("search-bar-select", { value }, "user");
+  };
 
   const handleOnSubmit = () => {
-    // Cancel the debounce request and clear input.
-    debounceSearch.cancel();
+    debounceSearch.cancel(); // Cancel the debounce request to prevent delayed search.
     inputRef.current?.blur();
     setInput("");
-
     leaveBreadcrumb("search-bar-submit", { selected, input }, "user");
     onSubmit(selected, input);
   };
@@ -90,12 +92,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     }
   };
 
-  const handleChangeSelect = (value: string) => {
-    setSelected(value as SearchBarActions);
-    leaveBreadcrumb("search-bar-select", { value }, "user");
-  };
-
-  const onKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
     const commandKey = e.ctrlKey || e.metaKey;
     if (e.key === "Enter" && commandKey && isValid) {
       handleOnSubmit();
@@ -167,7 +164,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           )
         }
         onChange={(e) => handleOnChange(e.target.value)}
-        onKeyDown={onKeyDown}
+        onKeyDown={handleKeyDown}
         placeholder="optional, regexp to search"
         spellCheck={false}
         type="text"
