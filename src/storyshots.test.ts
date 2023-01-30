@@ -12,7 +12,9 @@ describe("storyshots", () => {
       // eslint-disable-next-line testing-library/render-result-naming-convention
       const component = story.render();
       const { container } = render(component);
-      // wait until the mount is updated
+      // Mount components asynchronously to allow for initial state to be set
+      // Some components have a loading state that is set on mount we should wait for it to finish
+      // before taking a snapshot
       const waitTime = 1;
       setTimeout(() => {
         if (snapshotFileName) {
