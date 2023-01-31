@@ -163,7 +163,7 @@ describe("searchbar", () => {
     expect(input.selectionStart).toBe(0);
     expect(input.selectionEnd).toBe(inputText.length);
   });
-  it("pressing Command+F puts focus on the input and selects the text content", async () => {
+  it("pressing ⌘+F puts focus on the input and selects the text content", async () => {
     const user = userEvent.setup();
     render(<SearchBar onSubmit={jest.fn()} />);
 

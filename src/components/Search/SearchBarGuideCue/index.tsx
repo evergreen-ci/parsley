@@ -2,6 +2,7 @@ import { useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { GuideCue } from "@leafygreen-ui/guide-cue";
 import { palette } from "@leafygreen-ui/palette";
+import { InlineKeyCode } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
 import { HAS_SEEN_SEARCHBAR_GUIDE_CUE } from "constants/cookies";
 import { size, zIndex } from "constants/tokens";
@@ -42,12 +43,16 @@ const SearchBarGuideCue: React.FC<SearchBarGuideCueProps> = ({
     >
       <GuideCueText>
         <span>
-          The text input will now perform search by default. You can also use
-          Enter or Shift + Enter while being focused on the input.
+          The text input will perform search by default. You can also use{" "}
+          <InlineKeyCode>Enter</InlineKeyCode> or{" "}
+          <InlineKeyCode>Shift</InlineKeyCode> +{" "}
+          <InlineKeyCode>Enter</InlineKeyCode> to navigate through search
+          results.
         </span>
         <span>
           To submit a filter or highlight, you&apos;ll need to press{" "}
-          <CommandText>⌘/Ctrl + Enter</CommandText> or use the plus button.
+          <CommandText>⌘/Ctrl</CommandText> + <CommandText>Enter</CommandText>{" "}
+          or use the plus button.
         </span>
       </GuideCueText>
     </GuideCue>
@@ -60,9 +65,8 @@ const GuideCueText = styled.div`
   gap: ${size.s};
 `;
 
-const CommandText = styled.span`
+const CommandText = styled(InlineKeyCode)`
   color: ${green.base};
-  font-weight: bold;
 `;
 
 export default SearchBarGuideCue;
