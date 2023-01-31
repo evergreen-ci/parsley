@@ -1,7 +1,7 @@
 import React from "react";
+import { MemoryRouter } from "react-router-dom";
 import { GlobalStyles } from "../src/components/styles";
 import { LogContextProvider } from "../src/context/LogContext";
-import { MemoryRouter } from "react-router-dom";
 
 export const parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
