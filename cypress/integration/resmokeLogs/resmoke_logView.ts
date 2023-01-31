@@ -2,8 +2,6 @@ describe("Basic resmoke log view", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -49,8 +47,6 @@ describe("Resmoke syntax highlighting", () => {
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
 
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
   it("should not color non-resmoke log lines", () => {
@@ -88,8 +84,6 @@ describe("Bookmarking and selecting lines", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -154,10 +148,6 @@ describe("Bookmarking and selecting lines", () => {
 describe("Jump to line", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
-  beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
-  });
 
   it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
     cy.visit(`${logLink}?bookmarks=0,11079`);
@@ -193,8 +183,6 @@ describe("expanding collapsed rows", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab?bookmarks=0,11079&filters=100ShardedClusterFixture%253Ajob0";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -239,8 +227,6 @@ describe("pretty print", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.setCookie("pretty-print-bookmarks", "true");
     cy.visit(logLink);
   });

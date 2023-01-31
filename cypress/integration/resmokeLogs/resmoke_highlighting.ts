@@ -3,8 +3,6 @@ describe("Highlighting", () => {
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
 
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 

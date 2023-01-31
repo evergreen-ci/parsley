@@ -1,3 +1,4 @@
+import { DIRECTION } from "context/LogContext/types";
 import { render, screen, userEvent } from "test_utils";
 import SearchBar from ".";
 
@@ -11,7 +12,33 @@ describe("searchbar", () => {
     expect(screen.getByDataCy("searchbar-select")).toBeDisabled();
     expect(screen.getByDataCy("searchbar-input")).toBeDisabled();
   });
-  it("should be able to submit an input by pressing enter", async () => {
+  it("should be able to paginate forwards by pressing Enter and keep focus", async () => {
+    const user = userEvent.setup();
+    const paginate = jest.fn();
+    render(<SearchBar paginate={paginate} />);
+
+    const input = screen.getByDataCy("searchbar-input");
+    await user.type(input, "test");
+    expect(input).toHaveValue("test");
+    await user.type(input, "{enter}");
+    expect(paginate).toHaveBeenCalledTimes(1);
+    expect(paginate).toHaveBeenCalledWith(DIRECTION.NEXT);
+    expect(input).toHaveFocus();
+  });
+  it("should be able to paginate backwards by pressing Shift + Enter and keep focus", async () => {
+    const user = userEvent.setup();
+    const paginate = jest.fn();
+    render(<SearchBar paginate={paginate} />);
+
+    const input = screen.getByDataCy("searchbar-input");
+    await user.type(input, "test");
+    expect(input).toHaveValue("test");
+    await user.type(input, "{Shift>}{enter}");
+    expect(paginate).toHaveBeenCalledTimes(1);
+    expect(paginate).toHaveBeenCalledWith(DIRECTION.PREVIOUS);
+    expect(input).toHaveFocus();
+  });
+  it("should be able to submit an input by pressing Ctrl + Enter", async () => {
     const user = userEvent.setup();
     const onSubmit = jest.fn();
     render(<SearchBar onSubmit={onSubmit} />);
@@ -19,9 +46,9 @@ describe("searchbar", () => {
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
-    await user.type(input, "{enter}");
+    await user.type(input, "{Control>}{enter}");
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit).toHaveBeenCalledWith("search", "test");
+    expect(onSubmit).toHaveBeenCalledWith("filter", "test");
     expect(input).not.toHaveFocus();
   });
   it("should be able to submit an input by clicking the submit button", async () => {
@@ -34,32 +61,7 @@ describe("searchbar", () => {
     expect(input).toHaveValue("test");
     await user.click(screen.getByDataCy("searchbar-submit"));
     expect(onSubmit).toHaveBeenCalledTimes(1);
-    expect(onSubmit).toHaveBeenCalledWith("search", "test");
-  });
-  it("switching selected type to `search` triggers a search", async () => {
-    const user = userEvent.setup();
-    const onSubmit = jest.fn();
-    render(<SearchBar onSubmit={onSubmit} />);
-    await user.click(screen.getByDataCy("searchbar-select"));
-    await user.click(screen.getByDataCy("filter-option"));
-    const input = screen.getByDataCy("searchbar-input");
-    await user.type(input, "test");
-    await user.click(screen.getByDataCy("searchbar-select"));
-    await user.click(screen.getByDataCy("search-option"));
-    expect(onSubmit).toHaveBeenCalledTimes(1);
-  });
-  it("switching to any other selected type apart from `search` does not submit them", async () => {
-    const user = userEvent.setup();
-    const onSubmit = jest.fn();
-    render(<SearchBar onSubmit={onSubmit} />);
-    const input = screen.getByDataCy("searchbar-input");
-    await user.type(input, "test");
-    await user.click(screen.getByDataCy("searchbar-select"));
-    await user.click(screen.getByDataCy("filter-option"));
-    expect(onSubmit).not.toHaveBeenCalled();
-    await user.click(screen.getByDataCy("searchbar-select"));
-    await user.click(screen.getByDataCy("highlight-option"));
-    expect(onSubmit).not.toHaveBeenCalled();
+    expect(onSubmit).toHaveBeenCalledWith("filter", "test");
   });
   it("shows a warning icon if input is invalid", async () => {
     const user = userEvent.setup();
@@ -80,7 +82,7 @@ describe("searchbar", () => {
 
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
-    await user.type(input, "{enter}");
+    await user.type(input, "{Control>}{enter}");
     expect(input).toHaveValue("test");
     expect(onSubmit).not.toHaveBeenCalled();
   });
@@ -92,28 +94,16 @@ describe("searchbar", () => {
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
-    await user.click(screen.getByDataCy("searchbar-select"));
-    await user.click(screen.getByDataCy("filter-option"));
-    await user.type(input, "{enter}");
+    await user.type(input, "{Control>}{enter}");
     expect(onSubmit).toHaveBeenCalledTimes(1);
     expect(onSubmit).toHaveBeenCalledWith("filter", "test");
-    await user.click(screen.getByDataCy("searchbar-select"));
-    await user.click(screen.getByDataCy("search-option"));
-    await user.type(input, "test");
-    expect(input).toHaveValue("test");
-    await user.type(input, "{enter}");
-    expect(onSubmit).toHaveBeenCalledWith("search", "test");
-  });
-  it("should not clear input if a user is searching", async () => {
-    const user = userEvent.setup();
-    const onSubmit = jest.fn();
-    render(<SearchBar onSubmit={onSubmit} validator={() => true} />);
 
-    const input = screen.getByDataCy("searchbar-input");
+    await user.click(screen.getByDataCy("searchbar-select"));
+    await user.click(screen.getByDataCy("highlight-option"));
     await user.type(input, "test");
-    await user.type(input, "{enter}");
     expect(input).toHaveValue("test");
-    expect(onSubmit).toHaveBeenCalledWith("search", "test");
+    await user.type(input, "{Control>}{enter}");
+    expect(onSubmit).toHaveBeenCalledWith("highlight", "test");
   });
   it("should clear input if a user is applying a filter and should reset search", async () => {
     const user = userEvent.setup();
@@ -124,7 +114,7 @@ describe("searchbar", () => {
     await user.click(screen.getByDataCy("searchbar-select"));
     await user.click(screen.getByDataCy("filter-option"));
     await user.type(input, "test");
-    await user.type(input, "{enter}");
+    await user.type(input, "{Control>}{enter}");
     expect(input).toHaveValue("");
     expect(onSubmit).toHaveBeenCalledWith("filter", "test");
   });
@@ -139,7 +129,7 @@ describe("searchbar", () => {
     expect(input).toHaveValue("test");
     jest.advanceTimersByTime(1000);
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith("search", "test");
+    expect(onChange).toHaveBeenCalledWith("test");
   });
   it("should not call onChange if input is invalid", async () => {
     jest.useFakeTimers();
@@ -156,7 +146,7 @@ describe("searchbar", () => {
     expect(input).toHaveValue("test1");
     jest.advanceTimersByTime(1000);
     expect(onChange).toHaveBeenCalledTimes(1);
-    expect(onChange).toHaveBeenCalledWith("search", "test1");
+    expect(onChange).toHaveBeenCalledWith("test1");
   });
   it("pressing Control+F puts focus on the input and selects the text content", async () => {
     const user = userEvent.setup();
@@ -173,7 +163,7 @@ describe("searchbar", () => {
     expect(input.selectionStart).toBe(0);
     expect(input.selectionEnd).toBe(inputText.length);
   });
-  it("pressing Command+F puts focus on the input and selects the text content", async () => {
+  it("pressing ⌘+F puts focus on the input and selects the text content", async () => {
     const user = userEvent.setup();
     render(<SearchBar onSubmit={jest.fn()} />);
 

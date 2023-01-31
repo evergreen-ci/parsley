@@ -9,27 +9,24 @@ const toastDataCy = "toast";
 Cypress.Commands.add("addFilter", (filter: string) => {
   cy.dataCy("searchbar-select").click();
   cy.dataCy("filter-option").click();
-  cy.dataCy("searchbar-input").type(`${filter}{enter}`);
+  cy.dataCy("searchbar-input")
+    .type(`${filter}`)
+    .type("{ctrl}", { release: false })
+    .type("{enter}");
 });
 
 Cypress.Commands.add("addHighlight", (highlight: string) => {
   cy.dataCy("searchbar-select").click();
   cy.dataCy("highlight-option").click();
-  cy.dataCy("searchbar-input").type(`${highlight}{enter}`);
+  cy.dataCy("searchbar-input")
+    .type(`${highlight}`)
+    .type("{ctrl}", { release: false })
+    .type("{enter}");
 });
 
-Cypress.Commands.add(
-  "addSearch",
-  (search: string, shouldSubmit: boolean = false) => {
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("search-option").click();
-    if (shouldSubmit) {
-      cy.dataCy("searchbar-input").type(`${search}{enter}`);
-    } else {
-      cy.dataCy("searchbar-input").type(`${search}`);
-    }
-  }
-);
+Cypress.Commands.add("addSearch", (search: string) => {
+  cy.dataCy("searchbar-input").type(`${search}`);
+});
 
 Cypress.Commands.add("clearBounds", () => {
   cy.dataCy("details-button").click();
@@ -150,8 +147,8 @@ Cypress.Commands.add("login", () => {
   );
 });
 
-Cypress.Commands.add("toggleDrawer", () => {
-  cy.get(`[aria-label="Collapse navigation"]`).click();
+Cypress.Commands.add("resetDrawerState", () => {
+  cy.clearCookie("has-opened-drawer");
 });
 
 Cypress.Commands.add("toggleDetailsPanel", (open: boolean) => {
@@ -164,6 +161,10 @@ Cypress.Commands.add("toggleDetailsPanel", (open: boolean) => {
     cy.get(`[data-cy="details-button"]`).click();
     cy.get(`[data-cy="details-menu"]`).should("not.exist");
   }
+});
+
+Cypress.Commands.add("toggleDrawer", () => {
+  cy.get(`[aria-label="Collapse navigation"]`).click();
 });
 
 Cypress.Commands.add(

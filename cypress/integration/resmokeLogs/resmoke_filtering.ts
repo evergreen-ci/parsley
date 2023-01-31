@@ -5,8 +5,6 @@ describe("Filtering", () => {
   describe("Applying filters", () => {
     describe("Basic filtering", () => {
       beforeEach(() => {
-        cy.login();
-        cy.setCookie("has-opened-drawer", "true");
         cy.visit(logLink);
         cy.get(".ReactVirtualized__Grid").should("be.visible");
       });
@@ -30,7 +28,7 @@ describe("Filtering", () => {
 
       describe("filtering mode is AND", () => {
         beforeEach(() => {
-          cy.login();
+          cy.resetDrawerState();
         });
 
         it("should be able to apply two default filters (case insensitive, exact match)", () => {
@@ -107,7 +105,7 @@ describe("Filtering", () => {
 
       describe("filtering mode is OR", () => {
         beforeEach(() => {
-          cy.login();
+          cy.resetDrawerState();
         });
 
         it("should be able to apply two default filters (case insensitive, exact match)", () => {
@@ -199,7 +197,7 @@ describe("Filtering", () => {
     const filter = "doesNotMatchAnything";
 
     beforeEach(() => {
-      cy.login();
+      cy.resetDrawerState();
       cy.visit(`${logLink}?filters=100${filter}`);
       cy.get("[data-cy^='collapsed-row-']").should("exist");
     });

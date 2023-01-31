@@ -20,7 +20,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
         data-testid="leafygreen-ui-select-menubutton"
         id="select-2"
         type="button"
-        value="search"
+        value="filter"
       >
         <div
           class="leafygreen-ui-v038xi"
@@ -34,7 +34,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
             <div
               class="leafygreen-ui-17aj16e"
             >
-              Search
+              Filter
             </div>
           </div>
           <svg
