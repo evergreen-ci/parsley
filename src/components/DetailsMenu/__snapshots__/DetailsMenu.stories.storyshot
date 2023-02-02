@@ -1,0 +1,568 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
+<div>
+  <div
+    class="leafygreen-ui-1v4ednr"
+    style="max-width: 750px;"
+  >
+    <div
+      class="css-k81f8b"
+    >
+      <div
+        class="css-f24dyb"
+      >
+        <div
+          class="css-pzjbf8"
+        >
+          <div
+            class="css-qzhvvy"
+          >
+            <h6
+              class="css-teqmh5 leafygreen-ui-41zalo"
+            >
+              Range
+            </h6>
+            <div
+              class="css-1iyoj2o"
+            >
+              <div
+                class="css-1sg2lsz"
+              >
+                <div
+                  class="css-1b84j75 leafygreen-ui-xtefr5"
+                >
+                  <div
+                    class="leafygreen-ui-lzja97"
+                  >
+                    <input
+                      aria-invalid="false"
+                      aria-labelledby="Range Lower Bound"
+                      autocomplete="on"
+                      class="leafygreen-ui-1i9nzom"
+                      data-cy="range-lower-bound"
+                      id="textinput-1"
+                      min="0"
+                      placeholder="0"
+                      required=""
+                      type="number"
+                      value=""
+                    />
+                    <div
+                      class="lg-ui-icon-selector-0000 leafygreen-ui-4uj7hc"
+                    />
+                  </div>
+                </div>
+                <div
+                  class="css-1b84j75 leafygreen-ui-xtefr5"
+                >
+                  <div
+                    class="leafygreen-ui-lzja97"
+                  >
+                    <input
+                      aria-invalid="false"
+                      aria-labelledby="Range Upper Bound"
+                      autocomplete="on"
+                      class="leafygreen-ui-1i9nzom"
+                      data-cy="range-upper-bound"
+                      id="textinput-2"
+                      min="0"
+                      placeholder="100"
+                      required=""
+                      type="number"
+                      value=""
+                    />
+                    <div
+                      class="lg-ui-icon-selector-0000 leafygreen-ui-4uj7hc"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div
+            class="css-91jh6a"
+          >
+            <h6
+              class="css-teqmh5 leafygreen-ui-41zalo"
+            >
+              Wrap
+            </h6>
+            <div
+              class="css-1sg2lsz"
+            >
+              <small
+                class="css-155nmlp leafygreen-ui-ppjyot"
+              >
+                OFF
+              </small>
+              <button
+                aria-checked="false"
+                aria-disabled="false"
+                aria-labelledby="Wrap Toggle"
+                class="lg-ui-toggle-button-0000 leafygreen-ui-1pz71rg"
+                data-cy="wrap-toggle"
+                role="switch"
+                type="button"
+              >
+                <div
+                  class="leafygreen-ui-w7wsyg"
+                >
+                  <svg
+                    aria-hidden="true"
+                    aria-label="Checkmark Icon"
+                    class="leafygreen-ui-e8xweu"
+                    height="14"
+                    role="img"
+                    viewBox="0 0 16 16"
+                    width="14"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M6.30583 9.05037L11.7611 3.59509C12.1516 3.20457 12.7848 3.20457 13.1753 3.59509L13.8824 4.3022C14.273 4.69273 14.273 5.32589 13.8824 5.71642L6.81525 12.7836C6.38819 13.2106 5.68292 13.1646 5.31505 12.6856L2.26638 8.71605C1.92998 8.27804 2.01235 7.65025 2.45036 7.31385L3.04518 6.85702C3.59269 6.43652 4.37742 6.53949 4.79792 7.087L6.30583 9.05037Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <small
+                class="css-155nmlp leafygreen-ui-ppjyot"
+              >
+                ON
+              </small>
+            </div>
+          </div>
+          <div
+            class="css-91jh6a"
+          >
+            <h6
+              class="css-teqmh5 leafygreen-ui-41zalo"
+            >
+              Case Sensitive
+            </h6>
+            <div
+              class="css-1sg2lsz"
+            >
+              <small
+                class="css-155nmlp leafygreen-ui-ppjyot"
+              >
+                OFF
+              </small>
+              <button
+                aria-checked="false"
+                aria-disabled="false"
+                aria-labelledby="Case Sensitive Toggle"
+                class="lg-ui-toggle-button-0000 leafygreen-ui-1pz71rg"
+                data-cy="case-sensitive-toggle"
+                role="switch"
+                type="button"
+              >
+                <div
+                  class="leafygreen-ui-w7wsyg"
+                >
+                  <svg
+                    aria-hidden="true"
+                    aria-label="Checkmark Icon"
+                    class="leafygreen-ui-e8xweu"
+                    height="14"
+                    role="img"
+                    viewBox="0 0 16 16"
+                    width="14"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M6.30583 9.05037L11.7611 3.59509C12.1516 3.20457 12.7848 3.20457 13.1753 3.59509L13.8824 4.3022C14.273 4.69273 14.273 5.32589 13.8824 5.71642L6.81525 12.7836C6.38819 13.2106 5.68292 13.1646 5.31505 12.6856L2.26638 8.71605C1.92998 8.27804 2.01235 7.65025 2.45036 7.31385L3.04518 6.85702C3.59269 6.43652 4.37742 6.53949 4.79792 7.087L6.30583 9.05037Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <small
+                class="css-155nmlp leafygreen-ui-ppjyot"
+              >
+                ON
+              </small>
+            </div>
+          </div>
+        </div>
+        <div
+          class="css-pzjbf8"
+        >
+          <div
+            class="css-91jh6a"
+          >
+            <h6
+              class="css-teqmh5 leafygreen-ui-41zalo"
+            >
+              Filter Logic
+            </h6>
+            <div
+              class="css-1sg2lsz"
+            >
+              <small
+                class="css-155nmlp leafygreen-ui-ppjyot"
+              >
+                AND
+              </small>
+              <button
+                aria-checked="false"
+                aria-disabled="false"
+                aria-labelledby="Filter Logic Toggle"
+                class="lg-ui-toggle-button-0000 leafygreen-ui-1pz71rg"
+                data-cy="filter-logic-toggle"
+                role="switch"
+                type="button"
+              >
+                <div
+                  class="leafygreen-ui-w7wsyg"
+                >
+                  <svg
+                    aria-hidden="true"
+                    aria-label="Checkmark Icon"
+                    class="leafygreen-ui-e8xweu"
+                    height="14"
+                    role="img"
+                    viewBox="0 0 16 16"
+                    width="14"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M6.30583 9.05037L11.7611 3.59509C12.1516 3.20457 12.7848 3.20457 13.1753 3.59509L13.8824 4.3022C14.273 4.69273 14.273 5.32589 13.8824 5.71642L6.81525 12.7836C6.38819 13.2106 5.68292 13.1646 5.31505 12.6856L2.26638 8.71605C1.92998 8.27804 2.01235 7.65025 2.45036 7.31385L3.04518 6.85702C3.59269 6.43652 4.37742 6.53949 4.79792 7.087L6.30583 9.05037Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <small
+                class="css-155nmlp leafygreen-ui-ppjyot"
+              >
+                OR
+              </small>
+            </div>
+          </div>
+          <div
+            class="css-91jh6a"
+          >
+            <h6
+              class="css-teqmh5 leafygreen-ui-41zalo"
+            >
+              Expandable Rows
+            </h6>
+            <div
+              class="css-1sg2lsz"
+            >
+              <small
+                class="css-155nmlp leafygreen-ui-ppjyot"
+              >
+                OFF
+              </small>
+              <button
+                aria-checked="true"
+                aria-disabled="false"
+                aria-labelledby="Expandable Rows Toggle"
+                class="lg-ui-toggle-button-0000 leafygreen-ui-1pz71rg"
+                data-cy="expandable-rows-toggle"
+                role="switch"
+                type="button"
+              >
+                <div
+                  class="leafygreen-ui-w7wsyg"
+                >
+                  <svg
+                    aria-hidden="true"
+                    aria-label="Checkmark Icon"
+                    class="leafygreen-ui-e8xweu"
+                    height="14"
+                    role="img"
+                    viewBox="0 0 16 16"
+                    width="14"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M6.30583 9.05037L11.7611 3.59509C12.1516 3.20457 12.7848 3.20457 13.1753 3.59509L13.8824 4.3022C14.273 4.69273 14.273 5.32589 13.8824 5.71642L6.81525 12.7836C6.38819 13.2106 5.68292 13.1646 5.31505 12.6856L2.26638 8.71605C1.92998 8.27804 2.01235 7.65025 2.45036 7.31385L3.04518 6.85702C3.59269 6.43652 4.37742 6.53949 4.79792 7.087L6.30583 9.05037Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <small
+                class="css-155nmlp leafygreen-ui-ppjyot"
+              >
+                ON
+              </small>
+            </div>
+          </div>
+          <div
+            class="css-91jh6a"
+          >
+            <h6
+              class="css-teqmh5 leafygreen-ui-41zalo"
+            >
+              Pretty Print Bookmarks
+            </h6>
+            <div
+              class="css-1sg2lsz"
+            >
+              <small
+                class="css-155nmlp leafygreen-ui-ppjyot"
+              >
+                OFF
+              </small>
+              <button
+                aria-checked="false"
+                aria-disabled="true"
+                aria-labelledby="Pretty Print Bookmarks Toggle"
+                class="lg-ui-toggle-button-0000 leafygreen-ui-1pz71rg"
+                data-cy="pretty-print-toggle"
+                disabled=""
+                role="switch"
+                type="button"
+              >
+                <div
+                  class="leafygreen-ui-w7wsyg"
+                >
+                  <svg
+                    aria-hidden="true"
+                    aria-label="Checkmark Icon"
+                    class="leafygreen-ui-e8xweu"
+                    height="14"
+                    role="img"
+                    viewBox="0 0 16 16"
+                    width="14"
+                  >
+                    <path
+                      clip-rule="evenodd"
+                      d="M6.30583 9.05037L11.7611 3.59509C12.1516 3.20457 12.7848 3.20457 13.1753 3.59509L13.8824 4.3022C14.273 4.69273 14.273 5.32589 13.8824 5.71642L6.81525 12.7836C6.38819 13.2106 5.68292 13.1646 5.31505 12.6856L2.26638 8.71605C1.92998 8.27804 2.01235 7.65025 2.45036 7.31385L3.04518 6.85702C3.59269 6.43652 4.37742 6.53949 4.79792 7.087L6.30583 9.05037Z"
+                      fill="currentColor"
+                      fill-rule="evenodd"
+                    />
+                  </svg>
+                </div>
+              </button>
+              <small
+                class="css-155nmlp leafygreen-ui-ppjyot"
+              >
+                ON
+              </small>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        class="css-91jh6a"
+      >
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="jira-button-wrapper"
+        >
+          <button
+            aria-disabled="true"
+            class="lg-ui-button-0000 leafygreen-ui-e1tz2b"
+            disabled=""
+            type="button"
+          >
+            <div
+              class="leafygreen-ui-v038xi"
+            />
+            <div
+              class="leafygreen-ui-1qmzz4y"
+            >
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="leafygreen-ui-169mpis"
+                fill="none"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1zm8-.928L7.257 6.498A.857.857 0 007 7.11v.688h3.01a.857.857 0 00.857-.858V4h-.717a.857.857 0 00-.6.246l-.55.54zM4.867 1H4.15a.857.857 0 00-.601.246L1.257 3.498A.857.857 0 001 4.11v.688h3.01a.857.857 0 00.857-.858V1zM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 017 13.286V12z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+              JIRA
+            </div>
+          </button>
+        </div>
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="job-logs-button-wrapper"
+        >
+          <button
+            aria-disabled="true"
+            class="lg-ui-button-0000 leafygreen-ui-e1tz2b"
+            data-cy="job-logs-button"
+            disabled=""
+            target="_blank"
+            type="button"
+          >
+            <div
+              class="leafygreen-ui-v038xi"
+            />
+            <div
+              class="leafygreen-ui-1qmzz4y"
+            >
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="leafygreen-ui-169mpis"
+                fill="none"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.623 5.186a.278.278 0 000-.385l-2.805-2.915a.277.277 0 00-.477.192v1.424A6.5 6.5 0 005 10v.1a1.5 1.5 0 003 0V10a3.5 3.5 0 013.34-3.496v1.405c0 .25.305.373.478.193l2.805-2.916z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M6.5 3.879a.75.75 0 00-.75-.75H4a2 2 0 00-2 2v6.864a2 2 0 002 2h6.864a2 2 0 002-2V10.05a.75.75 0 00-1.5 0v1.943a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5V5.129a.5.5 0 01.5-.5h1.75a.75.75 0 00.75-.75z"
+                  fill="currentColor"
+                />
+              </svg>
+              Job Logs
+            </div>
+          </button>
+        </div>
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="raw-logs-button-wrapper"
+        >
+          <button
+            aria-disabled="true"
+            class="lg-ui-button-0000 leafygreen-ui-e1tz2b"
+            data-cy="raw-log-button"
+            disabled=""
+            target="_blank"
+            type="button"
+          >
+            <div
+              class="leafygreen-ui-v038xi"
+            />
+            <div
+              class="leafygreen-ui-1qmzz4y"
+            >
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="leafygreen-ui-169mpis"
+                fill="none"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.623 5.186a.278.278 0 000-.385l-2.805-2.915a.277.277 0 00-.477.192v1.424A6.5 6.5 0 005 10v.1a1.5 1.5 0 003 0V10a3.5 3.5 0 013.34-3.496v1.405c0 .25.305.373.478.193l2.805-2.916z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M6.5 3.879a.75.75 0 00-.75-.75H4a2 2 0 00-2 2v6.864a2 2 0 002 2h6.864a2 2 0 002-2V10.05a.75.75 0 00-1.5 0v1.943a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5V5.129a.5.5 0 01.5-.5h1.75a.75.75 0 00.75-.75z"
+                  fill="currentColor"
+                />
+              </svg>
+              Raw
+            </div>
+          </button>
+        </div>
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="html-logs-button-wrapper"
+        >
+          <button
+            aria-disabled="true"
+            class="lg-ui-button-0000 leafygreen-ui-e1tz2b"
+            data-cy="html-log-button"
+            disabled=""
+            target="_blank"
+            type="button"
+          >
+            <div
+              class="leafygreen-ui-v038xi"
+            />
+            <div
+              class="leafygreen-ui-1qmzz4y"
+            >
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="leafygreen-ui-169mpis"
+                fill="none"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.623 5.186a.278.278 0 000-.385l-2.805-2.915a.277.277 0 00-.477.192v1.424A6.5 6.5 0 005 10v.1a1.5 1.5 0 003 0V10a3.5 3.5 0 013.34-3.496v1.405c0 .25.305.373.478.193l2.805-2.916z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M6.5 3.879a.75.75 0 00-.75-.75H4a2 2 0 00-2 2v6.864a2 2 0 002 2h6.864a2 2 0 002-2V10.05a.75.75 0 00-1.5 0v1.943a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5V5.129a.5.5 0 01.5-.5h1.75a.75.75 0 00.75-.75z"
+                  fill="currentColor"
+                />
+              </svg>
+              HTML
+            </div>
+          </button>
+        </div>
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="lobster-button-wrapper"
+        >
+          <button
+            aria-disabled="true"
+            class="lg-ui-button-0000 leafygreen-ui-e1tz2b"
+            data-cy="lobster-button"
+            disabled=""
+            target="_blank"
+            type="button"
+          >
+            <div
+              class="leafygreen-ui-v038xi"
+            />
+            <div
+              class="leafygreen-ui-1qmzz4y"
+            >
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="leafygreen-ui-169mpis"
+                fill="none"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M14.623 5.186a.278.278 0 000-.385l-2.805-2.915a.277.277 0 00-.477.192v1.424A6.5 6.5 0 005 10v.1a1.5 1.5 0 003 0V10a3.5 3.5 0 013.34-3.496v1.405c0 .25.305.373.478.193l2.805-2.916z"
+                  fill="currentColor"
+                />
+                <path
+                  d="M6.5 3.879a.75.75 0 00-.75-.75H4a2 2 0 00-2 2v6.864a2 2 0 002 2h6.864a2 2 0 002-2V10.05a.75.75 0 00-1.5 0v1.943a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5V5.129a.5.5 0 01.5-.5h1.75a.75.75 0 00.75-.75z"
+                  fill="currentColor"
+                />
+              </svg>
+              Lobster
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;
