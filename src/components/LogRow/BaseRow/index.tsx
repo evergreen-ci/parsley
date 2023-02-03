@@ -143,10 +143,6 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
     let render = children;
     if (searchTerm) {
       // escape the matching string to prevent XSS
-      render = render.replace(
-        new RegExp(searchTerm, searchTerm.ignoreCase ? "gi" : "g"),
-        (match) => `<mark>${match}</mark>`
-      );
       render = highlighter(
         new RegExp(searchTerm, searchTerm.ignoreCase ? "gi" : "g"),
         render,
