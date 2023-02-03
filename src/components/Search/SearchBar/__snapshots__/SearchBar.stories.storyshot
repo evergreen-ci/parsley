@@ -64,11 +64,11 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
           class="leafygreen-ui-lzja97"
         >
           <input
-            aria-invalid="true"
+            aria-invalid="false"
             aria-label="searchbar-input"
             aria-labelledby="searchbar-input"
             autocomplete="on"
-            class="leafygreen-ui-flga8a"
+            class="leafygreen-ui-6i61vl"
             data-cy="searchbar-input"
             id="textinput-1"
             placeholder="optional, regexp to search"
@@ -79,24 +79,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
           />
           <div
             class="lg-ui-icon-selector-0000 leafygreen-ui-uy5fvv"
-          >
-            <svg
-              alt=""
-              aria-hidden="true"
-              class="leafygreen-ui-tbogr5"
-              height="16"
-              role="presentation"
-              viewBox="0 0 16 16"
-              width="16"
-            >
-              <path
-                clip-rule="evenodd"
-                d="M8.8639 2.51357C8.49039 1.82881 7.50961 1.82881 7.1361 2.51357L1.12218 13.5388C0.763263 14.1968 1.23814 15 1.98608 15H14.0139C14.7619 15 15.2367 14.1968 14.8778 13.5388L8.8639 2.51357ZM7 6C7 5.44772 7.44772 5 8 5C8.55228 5 9 5.44772 9 6V10C9 10.5523 8.55228 11 8 11C7.44772 11 7 10.5523 7 10V6ZM9 13C9 13.5523 8.55228 14 8 14C7.44772 14 7 13.5523 7 13C7 12.4477 7.44772 12 8 12C8.55228 12 9 12.4477 9 13Z"
-                fill="currentColor"
-                fill-rule="evenodd"
-              />
-            </svg>
-          </div>
+          />
         </div>
       </div>
       <div
@@ -108,7 +91,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
         >
           <svg
             aria-label="Warning Icon"
-            class="leafygreen-ui-1xsx4zj"
+            class="leafygreen-ui-1o1t3sx"
             fill="none"
             height="16"
             role="img"
