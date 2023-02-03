@@ -2,8 +2,6 @@ describe("Searching", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 

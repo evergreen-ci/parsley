@@ -11,14 +11,14 @@ const shortcuts = [
   {
     keys: [
       ["CTRL", "F"],
-      ["CMD", "F"],
+      ["⌘", "F"],
     ],
     description: "Focus on the search input",
   },
   {
     keys: [
       ["CTRL", "S"],
-      ["CMD", "S"],
+      ["⌘", "S"],
     ],
     description: "Toggle between search, filter, and highlight",
   },

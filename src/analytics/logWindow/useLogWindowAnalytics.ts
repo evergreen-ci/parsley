@@ -3,6 +3,7 @@ import {
   Properties,
   addPageAction,
 } from "analytics/addPageAction";
+import { DIRECTION } from "context/LogContext/types";
 import { Filter } from "types/logs";
 
 type Action =
@@ -18,7 +19,8 @@ type Action =
   | { name: "Removed Highlight"; highlightExpression: string }
   | { name: "Applied Search"; searchExpression: string }
   | { name: "Expanded Lines"; option: "All" | "Five"; lineCount: number }
-  | { name: "Collapsed Lines" };
+  | { name: "Collapsed Lines" }
+  | { name: "Paginated Through Search Results"; direction: DIRECTION };
 
 interface P extends Properties {}
 interface Analytics extends A<Action> {}

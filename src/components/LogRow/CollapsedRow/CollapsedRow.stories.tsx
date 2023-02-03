@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
@@ -8,14 +8,13 @@ import { useLogContext } from "context/LogContext";
 import CollapsedRow from ".";
 
 export default {
-  title: "Components/LogRow/CollapsedRow",
   component: CollapsedRow,
-} as ComponentMeta<LogPaneProps>;
+};
 
-type LogPaneProps = React.FC<React.ComponentProps<typeof LogPane>>;
+type CollapsedRowProps = React.FC<React.ComponentProps<typeof LogPane>>;
 
 // CollapsedRow with AnsiiRows.
-const CollapsedAnsiiTemplate: ComponentStory<LogPaneProps> = (args) => {
+const CollapsedAnsiiRowStory = (args: any) => {
   const { ingestLines, preferences, processedLogLines } = useLogContext();
   const { setWrap } = preferences;
 
@@ -42,14 +41,15 @@ const CollapsedAnsiiTemplate: ComponentStory<LogPaneProps> = (args) => {
   );
 };
 
-export const CollapsedAnsiiRow = CollapsedAnsiiTemplate.bind({});
-
-CollapsedAnsiiRow.args = {
-  wrap: false,
+export const CollapsedAnsiiRow: StoryObj<CollapsedRowProps> = {
+  render: (args) => <CollapsedAnsiiRowStory {...args} />,
+  args: {
+    wrap: false,
+  },
 };
 
 // CollapsedRow withs ResmokeRows.
-const CollapsedResmokeTemplate: ComponentStory<LogPaneProps> = (args) => {
+const CollapsedResmokeRowStory = (args: any) => {
   const { ingestLines, preferences, processedLogLines } = useLogContext();
   const { setWrap } = preferences;
 
@@ -76,10 +76,11 @@ const CollapsedResmokeTemplate: ComponentStory<LogPaneProps> = (args) => {
   );
 };
 
-export const CollapsedResmokeRow = CollapsedResmokeTemplate.bind({});
-
-CollapsedResmokeRow.args = {
-  wrap: false,
+export const CollapsedResmokeRow: StoryObj<CollapsedRowProps> = {
+  render: (args) => <CollapsedResmokeRowStory {...args} />,
+  args: {
+    wrap: false,
+  },
 };
 
 const ansiiLogLines = [

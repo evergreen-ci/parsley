@@ -50,12 +50,14 @@ describe("uploadLink", () => {
 
   it("confirming the modal clears logs and navigates to /upload", async () => {
     const clearLogs = jest.fn();
-    const { history } = render(<UploadLink clearLogs={clearLogs} hasLogs />);
+    const { history } = render(<UploadLink clearLogs={clearLogs} hasLogs />, {
+      route: "/upload",
+      path: "/upload",
+    });
     await user.click(screen.getByText("Upload"));
     await waitFor(() => {
       expect(screen.queryByDataCy("confirmation-modal")).toBeVisible();
     });
-
     const confirmButton = screen.getByRole("button", {
       name: "Confirm",
     });

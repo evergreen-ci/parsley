@@ -1,92 +1,118 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots Components/LogRow/ResmokeRow Multiple Lines 1`] = `
-<div
-  className="css-1mysoqc"
->
+exports[`storyshots Storyshots components/LogRow/ResmokeRow Multiple Lines 1`] = `
+<div>
   <div
-    style={
-      Object {
-        "height": 0,
-        "overflow": "visible",
-        "width": 0,
-      }
-    }
+    class="css-1mysoqc"
   >
     <div
-      aria-label="grid"
-      aria-readonly={true}
-      className="ReactVirtualized__Grid ReactVirtualized__List"
-      onScroll={[Function]}
-      role="grid"
-      style={
-        Object {
-          "WebkitOverflowScrolling": "touch",
-          "boxSizing": "border-box",
-          "direction": "ltr",
-          "height": 0,
-          "overflowX": "scroll",
-          "overflowY": "auto",
-          "position": "relative",
-          "width": 0,
-          "willChange": "transform",
-        }
-      }
-      tabIndex={0}
-    />
+      style="overflow: visible; height: 0px; width: 0px;"
+    >
+      <div
+        aria-label="grid"
+        aria-readonly="true"
+        class="ReactVirtualized__Grid ReactVirtualized__List"
+        role="grid"
+        style="box-sizing: border-box; direction: ltr; height: 0px; position: relative; width: 0px; will-change: transform; overflow-x: scroll; overflow-y: auto;"
+        tabindex="0"
+      />
+    </div>
+    <div
+      class="resize-triggers"
+    >
+      <div
+        class="expand-trigger"
+      >
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
   </div>
 </div>
 `;
 
-exports[`storyshots Storyshots Components/LogRow/ResmokeRow Single Line 1`] = `
-<div
-  className="css-8iuxnu"
-  data-bookmarked={false}
-  data-cy="log-row-8"
-  data-highlighted={false}
-  data-shared={false}
-  onDoubleClick={[Function]}
-  style={Object {}}
->
-  <svg
-    aria-label="Link Icon"
-    className="css-e6tumk"
-    data-cy="log-link-8"
-    fill="none"
-    height={14}
-    onClick={[Function]}
-    role="img"
-    viewBox="0 0 16 16"
-    width={14}
-    xmlns="http://www.w3.org/2000/svg"
+exports[`storyshots Storyshots components/LogRow/ResmokeRow Resmoke Highlighting 1`] = `
+<div>
+  <div
+    class="css-1mysoqc"
   >
-    <path
-      d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-      fill="currentColor"
-    />
-    <path
-      d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-      fill="currentColor"
-    />
-  </svg>
-  <pre
-    className="css-1dzaw1s"
-  >
-    8
-  </pre>
-  <pre
-    className="css-lponur"
-  >
-    <span
-      data-cy="resmoke-row"
-      style={
-        Object {
-          "color": undefined,
-        }
-      }
+    <div
+      style="overflow: visible; height: 0px; width: 0px;"
     >
-      [j0:s0:n0] | 2022-09-21T12:50:19.923+00:00 D2 REPL_HB  24095   [conn32] "Received heartbeat request","attr":{"from":"localhost:20005","cmdObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":1,"hbv":1,"from":"localhost:20005","fromId":2,"term":1,"primaryId":0,"maxTimeMSOpOnly":10000,"$replData":1,"$clusterTime":{"clusterTime":{"$timestamp":{"t":1663764619,"i":24}},"signature":{"hash":{"$binary":{"base64":"vGCk1d5olY4L+VYegDslPFKywsU=","subType":"0"}},"keyId":7145814532357619736}},"$configTime":{"$timestamp":{"t":1663764618,"i":38}},"$topologyTime":{"$timestamp":{"t":1663764618,"i":6}},"$db":"admin"}}
-    </span>
-  </pre>
+      <div
+        aria-label="grid"
+        aria-readonly="true"
+        class="ReactVirtualized__Grid ReactVirtualized__List"
+        role="grid"
+        style="box-sizing: border-box; direction: ltr; height: 0px; position: relative; width: 0px; will-change: transform; overflow-x: scroll; overflow-y: auto;"
+        tabindex="0"
+      />
+    </div>
+    <div
+      class="resize-triggers"
+    >
+      <div
+        class="expand-trigger"
+      >
+        <div
+          style="width: 1px; height: 1px;"
+        />
+      </div>
+      <div
+        class="contract-trigger"
+      />
+    </div>
+  </div>
+</div>
+`;
+
+exports[`storyshots Storyshots components/LogRow/ResmokeRow Single Line 1`] = `
+<div>
+  <div
+    class="css-8iuxnu"
+    data-bookmarked="false"
+    data-cy="log-row-8"
+    data-highlighted="false"
+    data-shared="false"
+  >
+    <svg
+      aria-label="Link Icon"
+      class="css-e6tumk"
+      data-cy="log-link-8"
+      fill="none"
+      height="14"
+      role="img"
+      viewBox="0 0 16 16"
+      width="14"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+        fill="currentColor"
+      />
+      <path
+        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+        fill="currentColor"
+      />
+    </svg>
+    <pre
+      class="css-1dzaw1s"
+    >
+      8
+    </pre>
+    <pre
+      class="css-lponur"
+    >
+      <span
+        data-cy="resmoke-row"
+      >
+        [j0:s0:n0] | 2022-09-21T12:50:19.923+00:00 D2 REPL_HB  24095   [conn32] "Received heartbeat request","attr":{"from":"localhost:20005","cmdObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":1,"hbv":1,"from":"localhost:20005","fromId":2,"term":1,"primaryId":0,"maxTimeMSOpOnly":10000,"$replData":1,"$clusterTime":{"clusterTime":{"$timestamp":{"t":1663764619,"i":24}},"signature":{"hash":{"$binary":{"base64":"vGCk1d5olY4L+VYegDslPFKywsU=","subType":"0"}},"keyId":7145814532357619736}},"$configTime":{"$timestamp":{"t":1663764618,"i":38}},"$topologyTime":{"$timestamp":{"t":1663764618,"i":6}},"$db":"admin"}}
+      </span>
+    </pre>
+  </div>
 </div>
 `;

@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
@@ -8,14 +8,13 @@ import { useLogContext } from "context/LogContext";
 import ResmokeRow from ".";
 
 export default {
-  title: "Components/LogRow/ResmokeRow",
   component: ResmokeRow,
-} as ComponentMeta<ResmokeRowProps>;
+};
 
 type ResmokeRowProps = React.FC<React.ComponentProps<typeof ResmokeRow>>;
 
 // Single ResmokeRow.
-const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
+const SingleLineStory = (args: any) => {
   const {
     getResmokeLineColor,
     ingestLines,
@@ -53,15 +52,16 @@ const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
   );
 };
 
-export const SingleLine = SingleLineTemplate.bind({});
-
-SingleLine.args = {
-  prettyPrint: false,
-  wrap: false,
+export const SingleLine: StoryObj<ResmokeRowProps> = {
+  render: (args) => <SingleLineStory {...args} />,
+  args: {
+    prettyPrint: true,
+    wrap: false,
+  },
 };
 
 // Multiple ResmokeRows.
-const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
+const MultipleLinesStory = (args: any) => {
   const { ingestLines, processedLogLines, preferences } = useLogContext();
   const { setWrap, setPrettyPrint } = preferences;
 
@@ -91,11 +91,13 @@ const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
     </Container>
   );
 };
-export const MultipleLines = MultipleLineTemplate.bind({});
 
-MultipleLines.args = {
-  prettyPrint: true,
-  wrap: false,
+export const MultipleLines: StoryObj<ResmokeRowProps> = {
+  render: (args) => <MultipleLinesStory {...args} />,
+  args: {
+    prettyPrint: true,
+    wrap: false,
+  },
 };
 
 const logLines = [

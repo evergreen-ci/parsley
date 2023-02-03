@@ -1,26 +1,29 @@
-import { KeyboardEvent, useEffect, useMemo, useRef, useState } from "react";
+import { KeyboardEvent, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import { Option, Select } from "@leafygreen-ui/select";
+import debounce from "lodash.debounce";
+import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import IconWithTooltip from "components/IconWithTooltip";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
 import { CharKey, ModifierKey } from "constants/keys";
 import { zIndex } from "constants/tokens";
+import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
-import debounce from "utils/debounce";
 import { leaveBreadcrumb } from "utils/errorReporting";
 
 const { yellow } = palette;
 interface SearchBarProps {
+  className?: string;
   disabled?: boolean;
+  onChange?: (value: string) => void;
+  onSubmit?: (selected: string, value: string) => void;
+  paginate?: (dir: DIRECTION) => void;
   validator?: (value: string) => boolean;
   validatorMessage?: string;
-  className?: string;
-  onSubmit?: (selected: string, value: string) => void;
-  onChange?: (selected: string, value: string) => void;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
@@ -28,18 +31,21 @@ const SearchBar: React.FC<SearchBarProps> = ({
   disabled = false,
   onChange = () => {},
   onSubmit = () => {},
+  paginate = () => {},
   validator = () => true,
-  validatorMessage = "Invalid Input",
+  validatorMessage = "Invalid input",
 }) => {
-  const [input, setInput] = useState("");
-  const [selected, setSelected] = useState(SearchBarActions.Search);
-
-  const isFilter = selected === SearchBarActions.Filter;
-  const isHighlight = selected === SearchBarActions.Highlight;
-  const isSearch = selected === SearchBarActions.Search;
-  const isValid = validator(input);
-
+  const { sendEvent } = useLogWindowAnalytics();
   const inputRef = useRef<HTMLInputElement>(null);
+  const [input, setInput] = useState("");
+  const [selected, setSelected] = useState(SearchBarActions.Filter);
+
+  const isValid = validator(input);
+  const debounceSearch = useRef(
+    debounce((value: string) => {
+      onChange(value);
+    }, 500)
+  ).current;
 
   useKeyboardShortcut(
     { charKey: CharKey.F, modifierKeys: [ModifierKey.Control] },
@@ -66,40 +72,43 @@ const SearchBar: React.FC<SearchBarProps> = ({
     { disabled, ignoreFocus: true }
   );
 
+  const handleChangeSelect = (value: string) => {
+    setSelected(value as SearchBarActions);
+    leaveBreadcrumb("search-bar-select", { value }, "user");
+  };
+
   const handleOnSubmit = () => {
-    if (inputRef.current) {
-      inputRef.current.blur();
-    }
-    if (isFilter || isHighlight) {
-      setInput("");
-    }
+    debounceSearch.cancel(); // Cancel the debounce request to prevent delayed search.
+    inputRef.current?.blur();
+    setInput("");
     leaveBreadcrumb("search-bar-submit", { selected, input }, "user");
     onSubmit(selected, input);
   };
 
-  useEffect(() => {
-    if (isSearch && input.length > 0) {
-      handleOnSubmit();
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isSearch]);
-
-  // debounce the onChange handler to prevent excessive rerenders
-  const debouncedHandleOnChangeCallback = useMemo(
-    () => debounce((value: string) => onChange(selected, value), 1000),
-    [selected, onChange]
-  );
-
   const handleOnChange = (value: string) => {
     setInput(value);
     if (validator(value)) {
-      debouncedHandleOnChangeCallback(value);
+      debounceSearch(value);
     }
   };
 
-  const handleChangeSelect = (value: string) => {
-    setSelected(value as SearchBarActions);
-    leaveBreadcrumb("search-bar-select", { value }, "user");
+  const handleKeyDown = (e: KeyboardEvent<HTMLInputElement>) => {
+    const commandKey = e.ctrlKey || e.metaKey;
+    if (e.key === "Enter" && commandKey && isValid) {
+      handleOnSubmit();
+    } else if (e.key === "Enter" && e.shiftKey) {
+      paginate(DIRECTION.PREVIOUS);
+      sendEvent({
+        name: "Paginated Through Search Results",
+        direction: DIRECTION.PREVIOUS,
+      });
+    } else if (e.key === "Enter") {
+      paginate(DIRECTION.NEXT);
+      sendEvent({
+        name: "Paginated Through Search Results",
+        direction: DIRECTION.NEXT,
+      });
+    }
   };
 
   return (
@@ -113,13 +122,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
         popoverZIndex={zIndex.popover}
         value={selected}
       >
-        <Option
-          key={SearchBarActions.Search}
-          data-cy="search-option"
-          value={SearchBarActions.Search}
-        >
-          Search
-        </Option>
         <Option
           key={SearchBarActions.Filter}
           data-cy="filter-option"
@@ -162,9 +164,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           )
         }
         onChange={(e) => handleOnChange(e.target.value)}
-        onKeyPress={(e: KeyboardEvent<HTMLInputElement>) =>
-          e.key === "Enter" && isValid && handleOnSubmit()
-        }
+        onKeyDown={handleKeyDown}
         placeholder="optional, regexp to search"
         spellCheck={false}
         type="text"

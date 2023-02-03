@@ -1,2878 +1,2880 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots Components/Icon Default 1`] = `
-<div
-  className="css-rtde4j"
->
+exports[`storyshots Storyshots components/Icon Default 1`] = `
+<div>
   <div
-    className="css-141et6l"
+    class="css-rtde4j"
   >
-    <svg
-      aria-label="Activity Feed Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
+    <div
+      class="css-141et6l"
     >
-      <path
-        clipRule="evenodd"
-        d="M1 13V7h4.5A1.5 1.5 0 007 5.5V1h2a2 2 0 012 2v4.515a2.5 2.5 0 00-2.612 1.602l-1.06 2.808A2.501 2.501 0 005.59 15H3a2 2 0 01-2-2zM4.914 1h.92v3.833a1 1 0 01-1 1H1v-.919a1 1 0 01.293-.707L2.5 3l1.707-1.707A1 1 0 014.914 1zM10.8 9.003a1 1 0 01.904.784l.61 2.792.508-.714a1 1 0 01.814-.42H15a1 1 0 010 2h-.848l-1.519 2.135a1 1 0 01-1.792-.367l-.371-1.701-.444 1.175a1 1 0 01-.935.646H8a1 1 0 110-2h.4l1.392-3.686a1 1 0 011.008-.644z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      ActivityFeed
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Add File Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M1 7v6a2 2 0 002 2h5.968a2.25 2.25 0 01.794-4.238A2.251 2.251 0 0111 8.984V3a2 2 0 00-2-2H7v4.5A1.5 1.5 0 015.5 7H1zm8 6a1 1 0 001 1h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1v-1a1 1 0 10-2 0v1h-1a1 1 0 00-1 1zM5.833 1h-.919a1 1 0 00-.707.293L2.5 3 1.293 4.207A1 1 0 001 4.914v.92h3.833a1 1 0 001-1V1z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      AddFile
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Apps Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M7 3H3v4h4V3zm0 6H3v4h4V9zm2-6h4v4H9V3zm4 6H9v4h4V9z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Apps
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Array Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M2.5 1a.5.5 0 00-.5.5v13a.5.5 0 00.5.5h4a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5H4V3h2.5a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5h-4zM13.5 1a.5.5 0 01.5.5v13a.5.5 0 01-.5.5h-4a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5H12V3H9.5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h4z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Array
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Arrow Down Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M9.168 3v6.944l1.535-1.535a1 1 0 011.414 0l.239.24a1 1 0 010 1.414l-3.383 3.382c-.008.01-.017.018-.026.027l-.239.24a1 1 0 01-1.414 0L3.643 10.06a1 1 0 010-1.414l.239-.239a1 1 0 011.414 0L6.83 9.941V3a1 1 0 011-1h.338a1 1 0 011 1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      ArrowDown
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Arrow Left Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M13 6.832H6.056L7.59 5.297a1 1 0 000-1.414l-.24-.239a1 1 0 00-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 000 1.414l3.652 3.651a1 1 0 001.414 0l.239-.239a1 1 0 000-1.414L6.059 9.17H13a1 1 0 001-1v-.338a1 1 0 00-1-1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      ArrowLeft
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Arrow Right Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3 6.832h6.944L8.41 5.297a1 1 0 010-1.414l.24-.239a1 1 0 011.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 010 1.414l-3.652 3.651a1 1 0 01-1.414 0l-.239-.239a1 1 0 010-1.414L9.941 9.17H3a1 1 0 01-1-1v-.338a1 1 0 011-1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      ArrowRight
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Arrow Up Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M9.168 13V6.056l1.535 1.535a1 1 0 001.414 0l.239-.24a1 1 0 000-1.414L8.973 2.555a1.023 1.023 0 00-.026-.027l-.239-.24a1 1 0 00-1.414 0L3.643 5.94a1 1 0 000 1.414l.239.239a1 1 0 001.414 0L6.83 6.059V13a1 1 0 001 1h.338a1 1 0 001-1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      ArrowUp
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Beaker Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M5.953 1.8c0-.28 0-.42.054-.527a.5.5 0 01.219-.218C6.333 1 6.473 1 6.753 1h2.4c.28 0 .42 0 .527.054a.5.5 0 01.218.219c.055.107.055.247.055.527v.4c0 .28 0 .42-.055.527a.5.5 0 01-.218.219C9.573 3 9.433 3 9.153 3h-2.4c-.28 0-.42 0-.527-.054a.5.5 0 01-.219-.219c-.054-.107-.054-.247-.054-.527v-.4zm.056 2.47c-.056.108-.056.25-.056.535V6l-3.007 5.412c-.663 1.193-.994 1.79-.932 2.277a1.5 1.5 0 00.6 1.02C3.01 15 3.693 15 5.057 15h5.791c1.365 0 2.047 0 2.444-.291a1.5 1.5 0 00.6-1.02c.062-.488-.27-1.084-.932-2.277L9.953 6V4.805c0-.285 0-.427-.056-.535a.5.5 0 00-.214-.214C9.575 4 9.433 4 9.148 4h-2.39c-.285 0-.427 0-.536.056a.5.5 0 00-.213.214zM9.333 9l-3.03.5-1.287 2.31c-.218.392-.327.588-.309.748a.5.5 0 00.205.348c.13.094.355.094.802.094h4.48c.447 0 .67 0 .801-.094a.5.5 0 00.205-.348c.019-.16-.09-.355-.307-.746L9.333 9z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Beaker
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Bell Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M12.625 6.138a4.656 4.656 0 00-3.268-3.925C9.228 1.52 8.67 1 8 1c-.67 0-1.228.52-1.357 1.213a4.656 4.656 0 00-3.268 3.925l-.452 3.963h.026a.95.95 0 000 1.899h10.102a.95.95 0 000-1.899h.026l-.452-3.963zM8 15a2 2 0 01-2-2h4a2 2 0 01-2 2z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Bell
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Biometric Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M7.5 1A5.5 5.5 0 002 6.5v3A5.5 5.5 0 007.5 15h1A5.5 5.5 0 0014 9.5v-3A5.5 5.5 0 008.5 1h-1zm1.074 6.75a.574.574 0 10-1.148 0v2.457a.574.574 0 001.148 0V7.75zM8 5.338A2.412 2.412 0 005.588 7.75v2.566a.994.994 0 01-.291.704.574.574 0 10.812.812c.402-.402.628-.947.628-1.516V7.75a1.264 1.264 0 112.527 0v2.648c0 .412-.233.79-.602.973a.574.574 0 00.514 1.028 2.237 2.237 0 001.236-2V7.75A2.412 2.412 0 008 5.338zM4.899 7.75A3.101 3.101 0 019.64 5.117a.574.574 0 10.609-.974A4.25 4.25 0 003.75 7.75v2.297a.574.574 0 101.149 0V7.75zm6.887-1.932a.574.574 0 10-1.023.522c.216.423.338.901.338 1.41v1.378a.574.574 0 101.149 0V7.75c0-.695-.167-1.352-.464-1.932z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Biometric
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Building Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M1 2a1 1 0 011-1h5a1 1 0 011 1v13H6v-2H4v2H1v-4h4.5a.5.5 0 000-1H1V8h4.5a.5.5 0 000-1H1V5h4.5a.5.5 0 000-1H1V2zm8 9h4.5a.5.5 0 000-1H9V8h4.5a.5.5 0 000-1H9V5a1 1 0 011-1h5a1 1 0 011 1v10h-2v-2h-2v2H9v-4z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Building
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Bulb Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M12.331 8.5a5 5 0 10-8.612.086L5.408 11.5a1 1 0 00.866.499H6.5V6a1.5 1.5 0 113 0v6h.224a1 1 0 00.863-.496L12.34 8.5h-.009z"
-        fill="currentColor"
-      />
-      <path
-        d="M7.5 6v6h1V6a.5.5 0 00-1 0zM10 14v-1H6v1a1 1 0 001 1h2a1 1 0 001-1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Bulb
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Calendar Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M5 2a1 1 0 012 0v1a1 1 0 01-2 0V2zm5 1H8a2 2 0 11-4 0 2 2 0 00-2 2v7a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2 2 2 0 11-4 0zm1 0a1 1 0 102 0V2a1 1 0 10-2 0v1zm2 4h-3v3h3V7z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Calendar
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Caret Down Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      CaretDown
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Caret Left Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M5.204 8.679a.553.553 0 010-.858l3.82-3.181c.382-.319.976-.058.976.429v6.362c0 .487-.594.748-.976.43l-3.82-3.182z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      CaretLeft
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Caret Right Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M10.796 7.321a.554.554 0 010 .858l-3.82 3.181c-.382.319-.976.058-.976-.429V4.57c0-.487.594-.748.976-.43l3.82 3.182z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      CaretRight
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Caret Up Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M7.321 5.204a.553.553 0 01.858 0l3.181 3.82c.319.382.058.976-.429.976H4.57c-.487 0-.748-.594-.43-.976l3.182-3.82z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      CaretUp
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Charts Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11.5 13a1 1 0 001 1h1a1 1 0 001-1V3a1 1 0 00-1-1h-1a1 1 0 00-1 1v10zM7.5 14a1 1 0 01-1-1V6a1 1 0 011-1h1a1 1 0 011 1v7a1 1 0 01-1 1h-1zM2.5 14a1 1 0 01-1-1V9a1 1 0 011-1h1a1 1 0 011 1v4a1 1 0 01-1 1h-1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Charts
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Checkmark Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M6.306 9.05l5.455-5.455a1 1 0 011.414 0l.707.707a1 1 0 010 1.414l-7.067 7.068a1 1 0 01-1.5-.098l-3.049-3.97a1 1 0 01.184-1.402l.595-.457a1.25 1.25 0 011.753.23L6.306 9.05z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Checkmark
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Checkmark With Circle Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M8 15A7 7 0 108 1a7 7 0 000 14zm2.448-10.104a.997.997 0 111.508 1.306l-4.572 5.28a1 1 0 01-1.64-.07l-1.82-2.868a1 1 0 111.69-1.07l1.1 1.734 3.734-4.312z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      CheckmarkWithCircle
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Chevron Down Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M1.636 5.364a1 1 0 000 1.414l4.95 4.95.707.707a1 1 0 001.414 0l.707-.707 4.95-4.95a1 1 0 000-1.414l-.707-.707a1 1 0 00-1.414 0L8 8.899 3.757 4.657a1 1 0 00-1.414 0l-.707.707z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      ChevronDown
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Chevron Left Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M10.778 1.636a1 1 0 00-1.414 0l-4.95 4.95-.707.707a1 1 0 000 1.414l.707.707 4.95 4.95a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L7.243 8l4.242-4.243a1 1 0 000-1.414l-.707-.707z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      ChevronLeft
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Chevron Right Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      ChevronRight
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Chevron Up Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M14.364 10.778a1 1 0 000-1.414l-4.95-4.95-.707-.707a1 1 0 00-1.414 0l-.707.707-4.95 4.95a1 1 0 000 1.414l.707.707a1 1 0 001.414 0L8 7.243l4.243 4.242a1 1 0 001.414 0l.707-.707z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      ChevronUp
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Clock Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M8 14A6 6 0 108 2a6 6 0 000 12zm-.75-9.25a.75.75 0 011.5 0v3.16l1.744 1.526a.75.75 0 01-.988 1.128L7.511 8.818a.761.761 0 01-.19-.25.747.747 0 01-.071-.318v-3.5z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Clock
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Clock With Arrow Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M13 8a5 5 0 01-7.304 4.438c-.348-.18-.787-.13-1.038.172l-.33.398c-.276.33-.22.828.152 1.044a7 7 0 10-1.452-10.98L1.97 2.146a.584.584 0 00-.964.521l.455 3.252c.04.287.285.51.576.511H5.32a.58.58 0 00.387-1.018l-1.168-1.02A5 5 0 0113 8z"
-        fill="currentColor"
-      />
-      <path
-        d="M7.25 5.25a.75.75 0 011.5 0v2.668l1.68 1.524a.75.75 0 11-.988 1.129L7.507 8.815a.758.758 0 01-.257-.565v-3z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      ClockWithArrow
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Clone Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M5.5 12a2 2 0 002 2h5a2 2 0 002-2V8a2 2 0 00-2-2h-5a2 2 0 00-2 2v4z"
-        fill="currentColor"
-      />
-      <path
-        d="M4.25 10H3.5a2 2 0 01-2-2V4a2 2 0 012-2h5a2 2 0 012 2v.75h-2V4h-5v4h.75v2z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Clone
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Cloud Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M12.571 8.143c0 1.775-.899 3.34-2.267 4.264l-.014.01a5.12 5.12 0 01-2.861.869H2.857a2.857 2.857 0 01-.545-5.663 5.144 5.144 0 0110.26.52zM13.821 8.143a6.38 6.38 0 01-2.358 4.96 3.429 3.429 0 102.17-6.506c.123.494.188 1.013.188 1.546z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Cloud
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Code Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-    >
-      <path
-        d="M6.11 13.262a.5.5 0 00.395.586l.737.143a.5.5 0 00.585-.396L9.926 2.738a.5.5 0 00-.396-.586l-.737-.143a.5.5 0 00-.585.396L6.109 13.262zM1.36 7.246L3.976 5.11a.507.507 0 01.704.063l.64.752a.483.483 0 01-.064.69L3.562 7.998 5.256 9.38c.212.173.24.482.064.69l-.64.752a.507.507 0 01-.704.062L1.36 8.75A.971.971 0 011 7.998c0-.29.132-.566.36-.752zM14.636 7.246L12.02 5.11a.507.507 0 00-.704.063l-.64.752a.483.483 0 00.064.69l1.694 1.382L10.74 9.38a.483.483 0 00-.064.69l.64.752a.507.507 0 00.704.062l2.616-2.134a.971.971 0 00.36-.752.971.971 0 00-.36-.752z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Code
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Connect Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M12.867 8.898a4.048 4.048 0 00.687-4.8l1.275-1.275a.584.584 0 000-.826l-.826-.826a.584.584 0 00-.826 0l-1.29 1.29a4.048 4.048 0 00-4.734.722L5.277 5.058a.323.323 0 00-.041.035L3.182 7.148a4.048 4.048 0 00-.72 4.738l-1.29 1.29a.584.584 0 000 .827l.825.826a.584.584 0 00.826 0l1.278-1.278a4.048 4.048 0 004.795-.689l1.876-1.875a.324.324 0 00.041-.035l2.054-2.054zM6.561 6.776L4.685 8.65a1.916 1.916 0 000 2.707c.747.746 1.961.747 2.707 0l2.055-2.054a.321.321 0 01.04-.035l1.877-1.875a1.916 1.916 0 000-2.707 1.916 1.916 0 00-2.707 0L6.602 6.74a.32.32 0 01-.04.035z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Connect
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Copy Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1zm8-.928L7.257 6.498A.857.857 0 007 7.11v.688h3.01a.857.857 0 00.857-.858V4h-.717a.857.857 0 00-.6.246l-.55.54zM4.867 1H4.15a.857.857 0 00-.601.246L1.257 3.498A.857.857 0 001 4.11v.688h3.01a.857.857 0 00.857-.858V1zM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 017 13.286V12z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Copy
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Credit Card Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3 3a2 2 0 00-2 2h14a2 2 0 00-2-2H3zM15 7H1v4a2 2 0 002 2h10a2 2 0 002-2V7z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      CreditCard
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Curly Braces Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3 3.544a2.5 2.5 0 012.5-2.5h1a.5.5 0 01.5.5v1.105a.353.353 0 01-.353.353h-.79A.858.858 0 005 3.86v2.802a1.5 1.5 0 01-.816 1.335A1.5 1.5 0 015 9.332v2.803c0 .473.384.857.858.857h.789c.195 0 .353.158.353.353v1.105a.5.5 0 01-.5.5h-1a2.5 2.5 0 01-2.5-2.5v-1.956a1.5 1.5 0 00-1.5-1.5.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5 1.5 1.5 0 001.5-1.5v-1.95zM13 12.45a2.5 2.5 0 01-2.5 2.5h-1a.5.5 0 01-.5-.5v-1.105c0-.195.158-.353.353-.353h.79a.858.858 0 00.857-.858V9.332a1.5 1.5 0 01.816-1.335A1.5 1.5 0 0111 6.662V3.859a.858.858 0 00-.858-.857h-.789A.353.353 0 019 2.65V1.544a.5.5 0 01.5-.5h1a2.5 2.5 0 012.5 2.5V5.5A1.5 1.5 0 0014.5 7a.5.5 0 01.5.5v1a.5.5 0 01-.5.5 1.5 1.5 0 00-1.5 1.5v1.95z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      CurlyBraces
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Cursor Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M8.534 8.534l.473-.27 2.389-1.366-6.748-2.25 2.25 6.748 1.366-2.389.27-.473zM10 10l4.48-2.563c.734-.333.678-1.393-.086-1.648L3.169 2.047A.887.887 0 002.047 3.17l3.742 11.225c.255.764 1.315.82 1.648.086L10 10z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Cursor
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Database Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M14 4.111c0 .098 0 .193-.002.286L14 4.5v.25c0 .328-.148.642-.472.95-.33.314-.818.598-1.424.834-1.211.473-2.772.716-4.104.716-1.332 0-2.893-.243-4.104-.716-.606-.236-1.094-.52-1.424-.834C2.148 5.392 2 5.078 2 4.75V4.5c0-.039 0-.077.003-.115C2 4.295 2 4.205 2 4.11 2 2 5.041 1 8 1s6 1 6 3.111z"
-        fill="currentColor"
-      />
-      <path
-        d="M2 6.615V8.75c0 .328.148.642.472.95.33.315.818.598 1.424.834 1.211.473 2.772.716 4.104.716 1.332 0 2.893-.243 4.104-.716.606-.237 1.094-.52 1.424-.834.324-.308.472-.622.472-.95V6.615c-.428.347-.96.627-1.533.85-1.349.528-3.037.785-4.467.785-1.43 0-3.118-.257-4.467-.784-.573-.224-1.105-.504-1.533-.85z"
-        fill="currentColor"
-      />
-      <path
-        d="M12.467 11.466c.573-.224 1.105-.504 1.533-.85v.884c0 .038 0 .076-.003.114.002.09.003.182.003.275C14 14 10.959 15 8 15s-6-1-6-3.111c0-.097 0-.193.002-.287A2.546 2.546 0 012 11.5v-.885c.428.347.96.627 1.533.85 1.349.528 3.037.785 4.467.785 1.43 0 3.118-.257 4.467-.784z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Database
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Diagram Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6 2.75A.75.75 0 016.75 2h2.5a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75H8.5v2h4.75a.75.75 0 01.75.75V10h.25a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-2a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75H13V8H8.5v2H9a.75.75 0 01.75.75v1.5A.75.75 0 019 13H7a.75.75 0 01-.75-.75v-1.5A.75.75 0 017 10h.5V8H3v2h.75a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-2a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75H2V7.75A.75.75 0 012.75 7H7.5V5h-.75A.75.75 0 016 4.25v-1.5z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Diagram
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Diagram2 Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M10.72 1c-.398 0-.72.336-.72.75V2H7.48a.49.49 0 00-.48.5V7H5v-.25C5 6.336 4.678 6 4.28 6H1.72c-.398 0-.72.336-.72.75v1.5c0 .414.322.75.72.75h2.56c.398 0 .72-.336.72-.75V8h2v4.5c0 .276.215.5.48.5H10v.25c0 .414.322.75.72.75h2.06c.398 0 .72-.336.72-.75v-1.5c0-.414-.322-.75-.72-.75h-2.06c-.398 0-.72.336-.72.75V12H8V8h2v.25c0 .414.322.75.72.75h2.06c.398 0 .72-.336.72-.75v-1.5c0-.414-.322-.75-.72-.75h-2.06c-.398 0-.72.336-.72.75V7H8V3h2v.25c0 .414.322.75.72.75h2.06c.398 0 .72-.336.72-.75v-1.5c0-.414-.322-.75-.72-.75h-2.06z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Diagram2
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Diagram3 Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M1.75 1a.75.75 0 00-.75.75v1.5c0 .414.336.75.75.75h2.5A.75.75 0 005 3.25v-1.5A.75.75 0 004.25 1h-2.5zm9.25.75a.75.75 0 01.75-.75h2.5a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-2.5a.75.75 0 01-.75-.75v-1.5zm0 9a.75.75 0 01.75-.75h2.5a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-2.5a.75.75 0 01-.75-.75v-1.5zm-10 0a.75.75 0 01.75-.75h2.5a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-2.5a.75.75 0 01-.75-.75v-1.5zM6 5a1 1 0 00-1 1v2a1 1 0 001 1h4a1 1 0 001-1V6a1 1 0 00-1-1H6z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Diagram3
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Disconnect Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M7.093 3.671a.317.317 0 010-.448L8.14 2.175a4.024 4.024 0 015.685 0 4.024 4.024 0 010 5.685l-1.048 1.047a.317.317 0 01-.448 0L11.28 7.86a.317.317 0 010-.449l1.048-1.047a1.906 1.906 0 000-2.693 1.906 1.906 0 00-2.693 0L8.59 4.718a.317.317 0 01-.449 0L7.093 3.671zM1.293 1.293a1.001 1.001 0 011.416 0l11.998 11.998a1.001 1.001 0 01-1.416 1.416l-3.159-3.16-2.272 2.277a4.024 4.024 0 01-5.685 0 4.024 4.024 0 010-5.684l2.273-2.277L1.293 2.71a1.001 1.001 0 010-1.416zm4.65 6.066L3.672 9.636a1.906 1.906 0 000 2.693c.743.742 1.95.742 2.693 0l2.272-2.277-2.692-2.693z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Disconnect
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Download Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M9.524 2.575v5.557h1.712c.706 0 1.033.783.5 1.196l-3.237 2.506a.832.832 0 01-.998 0L4.265 9.328c-.534-.413-.207-1.196.499-1.196h1.611V2.575a1.575 1.575 0 013.15 0zM2.5 11h1.8l2.405 1.862a2.132 2.132 0 002.59 0L11.7 11h1.8a1.5 1.5 0 010 3h-11a1.5 1.5 0 010-3z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Download
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Edit Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <g
-        clipPath="url(#Edit_svg__clip0)"
+      <svg
+        aria-label="Activity Feed Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          clipRule="evenodd"
-          d="M11.922 1.681a.963.963 0 011.362 0l1.363 1.363a.963.963 0 010 1.362L13.284 5.77 10.56 3.044 9.538 4.066l2.725 2.725-7.154 7.153-3.746 1.022 1.021-3.747 9.538-9.538z"
+          clip-rule="evenodd"
+          d="M1 13V7h4.5A1.5 1.5 0 007 5.5V1h2a2 2 0 012 2v4.515a2.5 2.5 0 00-2.612 1.602l-1.06 2.808A2.501 2.501 0 005.59 15H3a2 2 0 01-2-2zM4.914 1h.92v3.833a1 1 0 01-1 1H1v-.919a1 1 0 01.293-.707L2.5 3l1.707-1.707A1 1 0 014.914 1zM10.8 9.003a1 1 0 01.904.784l.61 2.792.508-.714a1 1 0 01.814-.42H15a1 1 0 010 2h-.848l-1.519 2.135a1 1 0 01-1.792-.367l-.371-1.701-.444 1.175a1 1 0 01-.935.646H8a1 1 0 110-2h.4l1.392-3.686a1 1 0 011.008-.644z"
           fill="currentColor"
-          fillRule="evenodd"
+          fill-rule="evenodd"
         />
-      </g>
-      <defs>
-        <clipPath
-          id="Edit_svg__clip0"
+      </svg>
+      <span>
+        ActivityFeed
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Add File Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1 7v6a2 2 0 002 2h5.968a2.25 2.25 0 01.794-4.238A2.251 2.251 0 0111 8.984V3a2 2 0 00-2-2H7v4.5A1.5 1.5 0 015.5 7H1zm8 6a1 1 0 001 1h1v1a1 1 0 102 0v-1h1a1 1 0 100-2h-1v-1a1 1 0 10-2 0v1h-1a1 1 0 00-1 1zM5.833 1h-.919a1 1 0 00-.707.293L2.5 3 1.293 4.207A1 1 0 001 4.914v.92h3.833a1 1 0 001-1V1z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        AddFile
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Apps Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M7 3H3v4h4V3zm0 6H3v4h4V9zm2-6h4v4H9V3zm4 6H9v4h4V9z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Apps
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Array Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.5 1a.5.5 0 00-.5.5v13a.5.5 0 00.5.5h4a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5H4V3h2.5a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5h-4zM13.5 1a.5.5 0 01.5.5v13a.5.5 0 01-.5.5h-4a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5H12V3H9.5a.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5h4z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Array
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Arrow Down Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9.168 3v6.944l1.535-1.535a1 1 0 011.414 0l.239.24a1 1 0 010 1.414l-3.383 3.382c-.008.01-.017.018-.026.027l-.239.24a1 1 0 01-1.414 0L3.643 10.06a1 1 0 010-1.414l.239-.239a1 1 0 011.414 0L6.83 9.941V3a1 1 0 011-1h.338a1 1 0 011 1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        ArrowDown
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Arrow Left Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M13 6.832H6.056L7.59 5.297a1 1 0 000-1.414l-.24-.239a1 1 0 00-1.414 0L2.555 7.027c-.01.008-.018.017-.027.026l-.24.239a1 1 0 000 1.414l3.652 3.651a1 1 0 001.414 0l.239-.239a1 1 0 000-1.414L6.059 9.17H13a1 1 0 001-1v-.338a1 1 0 00-1-1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        ArrowLeft
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Arrow Right Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M3 6.832h6.944L8.41 5.297a1 1 0 010-1.414l.24-.239a1 1 0 011.414 0l3.382 3.383c.01.008.018.017.027.026l.24.239a1 1 0 010 1.414l-3.652 3.651a1 1 0 01-1.414 0l-.239-.239a1 1 0 010-1.414L9.941 9.17H3a1 1 0 01-1-1v-.338a1 1 0 011-1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        ArrowRight
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Arrow Up Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M9.168 13V6.056l1.535 1.535a1 1 0 001.414 0l.239-.24a1 1 0 000-1.414L8.973 2.555a1.023 1.023 0 00-.026-.027l-.239-.24a1 1 0 00-1.414 0L3.643 5.94a1 1 0 000 1.414l.239.239a1 1 0 001.414 0L6.83 6.059V13a1 1 0 001 1h.338a1 1 0 001-1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        ArrowUp
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Beaker Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M5.953 1.8c0-.28 0-.42.054-.527a.5.5 0 01.219-.218C6.333 1 6.473 1 6.753 1h2.4c.28 0 .42 0 .527.054a.5.5 0 01.218.219c.055.107.055.247.055.527v.4c0 .28 0 .42-.055.527a.5.5 0 01-.218.219C9.573 3 9.433 3 9.153 3h-2.4c-.28 0-.42 0-.527-.054a.5.5 0 01-.219-.219c-.054-.107-.054-.247-.054-.527v-.4zm.056 2.47c-.056.108-.056.25-.056.535V6l-3.007 5.412c-.663 1.193-.994 1.79-.932 2.277a1.5 1.5 0 00.6 1.02C3.01 15 3.693 15 5.057 15h5.791c1.365 0 2.047 0 2.444-.291a1.5 1.5 0 00.6-1.02c.062-.488-.27-1.084-.932-2.277L9.953 6V4.805c0-.285 0-.427-.056-.535a.5.5 0 00-.214-.214C9.575 4 9.433 4 9.148 4h-2.39c-.285 0-.427 0-.536.056a.5.5 0 00-.213.214zM9.333 9l-3.03.5-1.287 2.31c-.218.392-.327.588-.309.748a.5.5 0 00.205.348c.13.094.355.094.802.094h4.48c.447 0 .67 0 .801-.094a.5.5 0 00.205-.348c.019-.16-.09-.355-.307-.746L9.333 9z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Beaker
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Bell Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M12.625 6.138a4.656 4.656 0 00-3.268-3.925C9.228 1.52 8.67 1 8 1c-.67 0-1.228.52-1.357 1.213a4.656 4.656 0 00-3.268 3.925l-.452 3.963h.026a.95.95 0 000 1.899h10.102a.95.95 0 000-1.899h.026l-.452-3.963zM8 15a2 2 0 01-2-2h4a2 2 0 01-2 2z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Bell
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Biometric Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M7.5 1A5.5 5.5 0 002 6.5v3A5.5 5.5 0 007.5 15h1A5.5 5.5 0 0014 9.5v-3A5.5 5.5 0 008.5 1h-1zm1.074 6.75a.574.574 0 10-1.148 0v2.457a.574.574 0 001.148 0V7.75zM8 5.338A2.412 2.412 0 005.588 7.75v2.566a.994.994 0 01-.291.704.574.574 0 10.812.812c.402-.402.628-.947.628-1.516V7.75a1.264 1.264 0 112.527 0v2.648c0 .412-.233.79-.602.973a.574.574 0 00.514 1.028 2.237 2.237 0 001.236-2V7.75A2.412 2.412 0 008 5.338zM4.899 7.75A3.101 3.101 0 019.64 5.117a.574.574 0 10.609-.974A4.25 4.25 0 003.75 7.75v2.297a.574.574 0 101.149 0V7.75zm6.887-1.932a.574.574 0 10-1.023.522c.216.423.338.901.338 1.41v1.378a.574.574 0 101.149 0V7.75c0-.695-.167-1.352-.464-1.932z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Biometric
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Building Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1 2a1 1 0 011-1h5a1 1 0 011 1v13H6v-2H4v2H1v-4h4.5a.5.5 0 000-1H1V8h4.5a.5.5 0 000-1H1V5h4.5a.5.5 0 000-1H1V2zm8 9h4.5a.5.5 0 000-1H9V8h4.5a.5.5 0 000-1H9V5a1 1 0 011-1h5a1 1 0 011 1v10h-2v-2h-2v2H9v-4z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Building
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Bulb Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12.331 8.5a5 5 0 10-8.612.086L5.408 11.5a1 1 0 00.866.499H6.5V6a1.5 1.5 0 113 0v6h.224a1 1 0 00.863-.496L12.34 8.5h-.009z"
+          fill="currentColor"
+        />
+        <path
+          d="M7.5 6v6h1V6a.5.5 0 00-1 0zM10 14v-1H6v1a1 1 0 001 1h2a1 1 0 001-1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Bulb
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Calendar Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M5 2a1 1 0 012 0v1a1 1 0 01-2 0V2zm5 1H8a2 2 0 11-4 0 2 2 0 00-2 2v7a2 2 0 002 2h10a2 2 0 002-2V5a2 2 0 00-2-2 2 2 0 11-4 0zm1 0a1 1 0 102 0V2a1 1 0 10-2 0v1zm2 4h-3v3h3V7z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Calendar
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Caret Down Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        CaretDown
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Caret Left Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5.204 8.679a.553.553 0 010-.858l3.82-3.181c.382-.319.976-.058.976.429v6.362c0 .487-.594.748-.976.43l-3.82-3.182z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        CaretLeft
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Caret Right Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10.796 7.321a.554.554 0 010 .858l-3.82 3.181c-.382.319-.976.058-.976-.429V4.57c0-.487.594-.748.976-.43l3.82 3.182z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        CaretRight
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Caret Up Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.321 5.204a.553.553 0 01.858 0l3.181 3.82c.319.382.058.976-.429.976H4.57c-.487 0-.748-.594-.43-.976l3.182-3.82z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        CaretUp
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Charts Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11.5 13a1 1 0 001 1h1a1 1 0 001-1V3a1 1 0 00-1-1h-1a1 1 0 00-1 1v10zM7.5 14a1 1 0 01-1-1V6a1 1 0 011-1h1a1 1 0 011 1v7a1 1 0 01-1 1h-1zM2.5 14a1 1 0 01-1-1V9a1 1 0 011-1h1a1 1 0 011 1v4a1 1 0 01-1 1h-1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Charts
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Checkmark Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M6.306 9.05l5.455-5.455a1 1 0 011.414 0l.707.707a1 1 0 010 1.414l-7.067 7.068a1 1 0 01-1.5-.098l-3.049-3.97a1 1 0 01.184-1.402l.595-.457a1.25 1.25 0 011.753.23L6.306 9.05z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Checkmark
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Checkmark With Circle Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8 15A7 7 0 108 1a7 7 0 000 14zm2.448-10.104a.997.997 0 111.508 1.306l-4.572 5.28a1 1 0 01-1.64-.07l-1.82-2.868a1 1 0 111.69-1.07l1.1 1.734 3.734-4.312z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        CheckmarkWithCircle
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Chevron Down Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1.636 5.364a1 1 0 000 1.414l4.95 4.95.707.707a1 1 0 001.414 0l.707-.707 4.95-4.95a1 1 0 000-1.414l-.707-.707a1 1 0 00-1.414 0L8 8.899 3.757 4.657a1 1 0 00-1.414 0l-.707.707z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        ChevronDown
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Chevron Left Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M10.778 1.636a1 1 0 00-1.414 0l-4.95 4.95-.707.707a1 1 0 000 1.414l.707.707 4.95 4.95a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L7.243 8l4.242-4.243a1 1 0 000-1.414l-.707-.707z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        ChevronLeft
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Chevron Right Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        ChevronRight
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Chevron Up Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M14.364 10.778a1 1 0 000-1.414l-4.95-4.95-.707-.707a1 1 0 00-1.414 0l-.707.707-4.95 4.95a1 1 0 000 1.414l.707.707a1 1 0 001.414 0L8 7.243l4.243 4.242a1 1 0 001.414 0l.707-.707z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        ChevronUp
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Clock Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8 14A6 6 0 108 2a6 6 0 000 12zm-.75-9.25a.75.75 0 011.5 0v3.16l1.744 1.526a.75.75 0 01-.988 1.128L7.511 8.818a.761.761 0 01-.19-.25.747.747 0 01-.071-.318v-3.5z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Clock
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Clock With Arrow Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M13 8a5 5 0 01-7.304 4.438c-.348-.18-.787-.13-1.038.172l-.33.398c-.276.33-.22.828.152 1.044a7 7 0 10-1.452-10.98L1.97 2.146a.584.584 0 00-.964.521l.455 3.252c.04.287.285.51.576.511H5.32a.58.58 0 00.387-1.018l-1.168-1.02A5 5 0 0113 8z"
+          fill="currentColor"
+        />
+        <path
+          d="M7.25 5.25a.75.75 0 011.5 0v2.668l1.68 1.524a.75.75 0 11-.988 1.129L7.507 8.815a.758.758 0 01-.257-.565v-3z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        ClockWithArrow
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Clone Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5.5 12a2 2 0 002 2h5a2 2 0 002-2V8a2 2 0 00-2-2h-5a2 2 0 00-2 2v4z"
+          fill="currentColor"
+        />
+        <path
+          d="M4.25 10H3.5a2 2 0 01-2-2V4a2 2 0 012-2h5a2 2 0 012 2v.75h-2V4h-5v4h.75v2z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Clone
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Cloud Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M12.571 8.143c0 1.775-.899 3.34-2.267 4.264l-.014.01a5.12 5.12 0 01-2.861.869H2.857a2.857 2.857 0 01-.545-5.663 5.144 5.144 0 0110.26.52zM13.821 8.143a6.38 6.38 0 01-2.358 4.96 3.429 3.429 0 102.17-6.506c.123.494.188 1.013.188 1.546z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Cloud
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Code Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+      >
+        <path
+          d="M6.11 13.262a.5.5 0 00.395.586l.737.143a.5.5 0 00.585-.396L9.926 2.738a.5.5 0 00-.396-.586l-.737-.143a.5.5 0 00-.585.396L6.109 13.262zM1.36 7.246L3.976 5.11a.507.507 0 01.704.063l.64.752a.483.483 0 01-.064.69L3.562 7.998 5.256 9.38c.212.173.24.482.064.69l-.64.752a.507.507 0 01-.704.062L1.36 8.75A.971.971 0 011 7.998c0-.29.132-.566.36-.752zM14.636 7.246L12.02 5.11a.507.507 0 00-.704.063l-.64.752a.483.483 0 00.064.69l1.694 1.382L10.74 9.38a.483.483 0 00-.064.69l.64.752a.507.507 0 00.704.062l2.616-2.134a.971.971 0 00.36-.752.971.971 0 00-.36-.752z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Code
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Connect Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M12.867 8.898a4.048 4.048 0 00.687-4.8l1.275-1.275a.584.584 0 000-.826l-.826-.826a.584.584 0 00-.826 0l-1.29 1.29a4.048 4.048 0 00-4.734.722L5.277 5.058a.323.323 0 00-.041.035L3.182 7.148a4.048 4.048 0 00-.72 4.738l-1.29 1.29a.584.584 0 000 .827l.825.826a.584.584 0 00.826 0l1.278-1.278a4.048 4.048 0 004.795-.689l1.876-1.875a.324.324 0 00.041-.035l2.054-2.054zM6.561 6.776L4.685 8.65a1.916 1.916 0 000 2.707c.747.746 1.961.747 2.707 0l2.055-2.054a.321.321 0 01.04-.035l1.877-1.875a1.916 1.916 0 000-2.707 1.916 1.916 0 00-2.707 0L6.602 6.74a.32.32 0 01-.04.035z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Connect
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Copy Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1 5.714v4.572C1 11.233 1.768 12 2.714 12H5.75V7.11c0-.566.227-1.108.63-1.504l2.294-2.252c.1-.099.21-.186.326-.262v-.378C9 1.768 8.232 1 7.286 1H5.8v3.429c0 .71-.576 1.285-1.286 1.285H1zm8-.928L7.257 6.498A.857.857 0 007 7.11v.688h3.01a.857.857 0 00.857-.858V4h-.717a.857.857 0 00-.6.246l-.55.54zM4.867 1H4.15a.857.857 0 00-.601.246L1.257 3.498A.857.857 0 001 4.11v.688h3.01a.857.857 0 00.857-.858V1zM7 12V8.714H10.514c.71 0 1.286-.575 1.286-1.285V4h1.486C14.233 4 15 4.768 15 5.714v7.572c0 .947-.768 1.714-1.714 1.714H8.714A1.714 1.714 0 017 13.286V12z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Copy
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Credit Card Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M3 3a2 2 0 00-2 2h14a2 2 0 00-2-2H3zM15 7H1v4a2 2 0 002 2h10a2 2 0 002-2V7z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        CreditCard
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Curly Braces Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M3 3.544a2.5 2.5 0 012.5-2.5h1a.5.5 0 01.5.5v1.105a.353.353 0 01-.353.353h-.79A.858.858 0 005 3.86v2.802a1.5 1.5 0 01-.816 1.335A1.5 1.5 0 015 9.332v2.803c0 .473.384.857.858.857h.789c.195 0 .353.158.353.353v1.105a.5.5 0 01-.5.5h-1a2.5 2.5 0 01-2.5-2.5v-1.956a1.5 1.5 0 00-1.5-1.5.5.5 0 01-.5-.5v-1a.5.5 0 01.5-.5 1.5 1.5 0 001.5-1.5v-1.95zM13 12.45a2.5 2.5 0 01-2.5 2.5h-1a.5.5 0 01-.5-.5v-1.105c0-.195.158-.353.353-.353h.79a.858.858 0 00.857-.858V9.332a1.5 1.5 0 01.816-1.335A1.5 1.5 0 0111 6.662V3.859a.858.858 0 00-.858-.857h-.789A.353.353 0 019 2.65V1.544a.5.5 0 01.5-.5h1a2.5 2.5 0 012.5 2.5V5.5A1.5 1.5 0 0014.5 7a.5.5 0 01.5.5v1a.5.5 0 01-.5.5 1.5 1.5 0 00-1.5 1.5v1.95z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        CurlyBraces
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Cursor Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8.534 8.534l.473-.27 2.389-1.366-6.748-2.25 2.25 6.748 1.366-2.389.27-.473zM10 10l4.48-2.563c.734-.333.678-1.393-.086-1.648L3.169 2.047A.887.887 0 002.047 3.17l3.742 11.225c.255.764 1.315.82 1.648.086L10 10z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Cursor
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Database Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M14 4.111c0 .098 0 .193-.002.286L14 4.5v.25c0 .328-.148.642-.472.95-.33.314-.818.598-1.424.834-1.211.473-2.772.716-4.104.716-1.332 0-2.893-.243-4.104-.716-.606-.236-1.094-.52-1.424-.834C2.148 5.392 2 5.078 2 4.75V4.5c0-.039 0-.077.003-.115C2 4.295 2 4.205 2 4.11 2 2 5.041 1 8 1s6 1 6 3.111z"
+          fill="currentColor"
+        />
+        <path
+          d="M2 6.615V8.75c0 .328.148.642.472.95.33.315.818.598 1.424.834 1.211.473 2.772.716 4.104.716 1.332 0 2.893-.243 4.104-.716.606-.237 1.094-.52 1.424-.834.324-.308.472-.622.472-.95V6.615c-.428.347-.96.627-1.533.85-1.349.528-3.037.785-4.467.785-1.43 0-3.118-.257-4.467-.784-.573-.224-1.105-.504-1.533-.85z"
+          fill="currentColor"
+        />
+        <path
+          d="M12.467 11.466c.573-.224 1.105-.504 1.533-.85v.884c0 .038 0 .076-.003.114.002.09.003.182.003.275C14 14 10.959 15 8 15s-6-1-6-3.111c0-.097 0-.193.002-.287A2.546 2.546 0 012 11.5v-.885c.428.347.96.627 1.533.85 1.349.528 3.037.785 4.467.785 1.43 0 3.118-.257 4.467-.784z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Database
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Diagram Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6 2.75A.75.75 0 016.75 2h2.5a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75H8.5v2h4.75a.75.75 0 01.75.75V10h.25a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-2a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75H13V8H8.5v2H9a.75.75 0 01.75.75v1.5A.75.75 0 019 13H7a.75.75 0 01-.75-.75v-1.5A.75.75 0 017 10h.5V8H3v2h.75a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-2a.75.75 0 01-.75-.75v-1.5a.75.75 0 01.75-.75H2V7.75A.75.75 0 012.75 7H7.5V5h-.75A.75.75 0 016 4.25v-1.5z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Diagram
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Diagram2 Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10.72 1c-.398 0-.72.336-.72.75V2H7.48a.49.49 0 00-.48.5V7H5v-.25C5 6.336 4.678 6 4.28 6H1.72c-.398 0-.72.336-.72.75v1.5c0 .414.322.75.72.75h2.56c.398 0 .72-.336.72-.75V8h2v4.5c0 .276.215.5.48.5H10v.25c0 .414.322.75.72.75h2.06c.398 0 .72-.336.72-.75v-1.5c0-.414-.322-.75-.72-.75h-2.06c-.398 0-.72.336-.72.75V12H8V8h2v.25c0 .414.322.75.72.75h2.06c.398 0 .72-.336.72-.75v-1.5c0-.414-.322-.75-.72-.75h-2.06c-.398 0-.72.336-.72.75V7H8V3h2v.25c0 .414.322.75.72.75h2.06c.398 0 .72-.336.72-.75v-1.5c0-.414-.322-.75-.72-.75h-2.06z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Diagram2
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Diagram3 Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1.75 1a.75.75 0 00-.75.75v1.5c0 .414.336.75.75.75h2.5A.75.75 0 005 3.25v-1.5A.75.75 0 004.25 1h-2.5zm9.25.75a.75.75 0 01.75-.75h2.5a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-2.5a.75.75 0 01-.75-.75v-1.5zm0 9a.75.75 0 01.75-.75h2.5a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-2.5a.75.75 0 01-.75-.75v-1.5zm-10 0a.75.75 0 01.75-.75h2.5a.75.75 0 01.75.75v1.5a.75.75 0 01-.75.75h-2.5a.75.75 0 01-.75-.75v-1.5zM6 5a1 1 0 00-1 1v2a1 1 0 001 1h4a1 1 0 001-1V6a1 1 0 00-1-1H6z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Diagram3
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Disconnect Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.093 3.671a.317.317 0 010-.448L8.14 2.175a4.024 4.024 0 015.685 0 4.024 4.024 0 010 5.685l-1.048 1.047a.317.317 0 01-.448 0L11.28 7.86a.317.317 0 010-.449l1.048-1.047a1.906 1.906 0 000-2.693 1.906 1.906 0 00-2.693 0L8.59 4.718a.317.317 0 01-.449 0L7.093 3.671zM1.293 1.293a1.001 1.001 0 011.416 0l11.998 11.998a1.001 1.001 0 01-1.416 1.416l-3.159-3.16-2.272 2.277a4.024 4.024 0 01-5.685 0 4.024 4.024 0 010-5.684l2.273-2.277L1.293 2.71a1.001 1.001 0 010-1.416zm4.65 6.066L3.672 9.636a1.906 1.906 0 000 2.693c.743.742 1.95.742 2.693 0l2.272-2.277-2.692-2.693z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Disconnect
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Download Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M9.524 2.575v5.557h1.712c.706 0 1.033.783.5 1.196l-3.237 2.506a.832.832 0 01-.998 0L4.265 9.328c-.534-.413-.207-1.196.499-1.196h1.611V2.575a1.575 1.575 0 013.15 0zM2.5 11h1.8l2.405 1.862a2.132 2.132 0 002.59 0L11.7 11h1.8a1.5 1.5 0 010 3h-11a1.5 1.5 0 010-3z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Download
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Edit Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <g
+          clip-path="url(#Edit_svg__clip0)"
         >
           <path
-            d="M0 0h16v16H0z"
+            clip-rule="evenodd"
+            d="M11.922 1.681a.963.963 0 011.362 0l1.363 1.363a.963.963 0 010 1.362L13.284 5.77 10.56 3.044 9.538 4.066l2.725 2.725-7.154 7.153-3.746 1.022 1.021-3.747 9.538-9.538z"
             fill="currentColor"
+            fill-rule="evenodd"
           />
-        </clipPath>
-      </defs>
-    </svg>
-    <span>
-      Edit
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Ellipsis Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M2.75 6a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm5 0a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm6.75 1.75a1.75 1.75 0 10-3.5 0 1.75 1.75 0 003.5 0z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Ellipsis
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Email Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M2.494 4l4.714 5.05a1.068 1.068 0 001.584 0L13.505 4H2.494zM1.133 4.256A2.12 2.12 0 001 5v6c0 .369.093.715.256 1.011L4.814 8.2l-3.68-3.944z"
-        fill="currentColor"
-      />
-      <path
-        d="M2.867 13c-.348 0-.674-.102-.953-.28l3.56-3.813 1.219 1.306a1.78 1.78 0 002.64 0l1.346-1.443 3.575 3.83c-.313.251-.7.4-1.12.4H2.866zM14.84 11.813c.103-.248.16-.523.16-.813V5c0-.255-.045-.5-.126-.724l-3.535 3.787 3.5 3.75z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Email
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Export Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M14.623 5.186a.278.278 0 000-.385l-2.805-2.915a.277.277 0 00-.477.192v1.424A6.5 6.5 0 005 10v.1a1.5 1.5 0 003 0V10a3.5 3.5 0 013.34-3.496v1.405c0 .25.305.373.478.193l2.805-2.916z"
-        fill="currentColor"
-      />
-      <path
-        d="M6.5 3.879a.75.75 0 00-.75-.75H4a2 2 0 00-2 2v6.864a2 2 0 002 2h6.864a2 2 0 002-2V10.05a.75.75 0 00-1.5 0v1.943a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5V5.129a.5.5 0 01.5-.5h1.75a.75.75 0 00.75-.75z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Export
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Favorite Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M7.538 1.11a.5.5 0 01.924 0l1.537 3.696a.5.5 0 00.421.306l3.99.32a.5.5 0 01.285.878l-3.04 2.604a.5.5 0 00-.16.496l.928 3.893a.5.5 0 01-.747.542L8.261 11.76a.5.5 0 00-.522 0l-3.415 2.086a.5.5 0 01-.747-.542l.928-3.893a.5.5 0 00-.16-.496L1.304 6.31a.5.5 0 01.285-.878l3.99-.32A.5.5 0 006 4.806L7.538 1.11z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Favorite
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="File Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-    >
-      <path
-        d="M3 13V7h4.5A1.5 1.5 0 009 5.5V1h2a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"
-        fill="currentColor"
-      />
-      <path
-        d="M7.833 1h-.919a1 1 0 00-.707.293L3.293 4.207A1 1 0 003 4.914v.92h3.833a1 1 0 001-1V1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      File
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Filter Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M6 6.148l-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 01-.17.376l-3 2.625a.5.5 0 01-.83-.376v-8.25z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Filter
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Full Screen Enter Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-    >
-      <path
-        d="M1.5 2a.5.5 0 00-.5.5v4a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-2a.5.5 0 01.5-.5h2a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5h-4zM15 2.5a.5.5 0 00-.5-.5h-4a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h2a.5.5 0 01.5.5v2a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-4zM1.5 14a.5.5 0 01-.5-.5v-4a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v2a.5.5 0 00.5.5h2a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-4zM14.5 14a.5.5 0 00.5-.5v-4a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h4z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      FullScreenEnter
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Full Screen Exit Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-    >
-      <path
-        d="M10.5 7a.5.5 0 01-.5-.5v-4a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v2a.5.5 0 00.5.5h2a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-4zM6 9.5a.5.5 0 00-.5-.5h-4a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h2a.5.5 0 01.5.5v2a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-4zM10.5 9a.5.5 0 00-.5.5v4a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-2a.5.5 0 01.5-.5h2a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5h-4zM5.5 7a.5.5 0 00.5-.5v-4a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h4z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      FullScreenExit
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Folder Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M2 2a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 00-1-1H8a1 1 0 01-1-1 1 1 0 00-1-1H2z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Folder
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Globe Americas Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-    >
-      <path
-        clipRule="evenodd"
-        d="M14 8A6 6 0 112 8a6 6 0 0112 0zm-5.301 4.699A4.73 4.73 0 015 11.683V10L3.257 8.257A4.75 4.75 0 018 3.25V4.5L6.5 6v1l-.5.5-.5-.5-1 1 .5.5h2.5L8 9v1l-1 1 1.699 1.699zm4.047-4.496a4.73 4.73 0 00-.924-3.025L10.5 6.5V9h1.25l.996-.797z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      GlobeAmericas
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Government Building Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11 5V4a3 3 0 00-6 0v1h6z"
-        fill="currentColor"
-      />
-      <path
-        clipRule="evenodd"
-        d="M1.5 6a.5.5 0 000 1H2v6h-.5a.5.5 0 000 1h13a.5.5 0 000-1H14V7h.5a.5.5 0 000-1h-13zm3 2.5a.5.5 0 011 0v3a.5.5 0 01-1 0v-3zM8 8a.5.5 0 00-.5.5v3a.5.5 0 001 0v-3A.5.5 0 008 8zm2.5.5a.5.5 0 011 0v3a.5.5 0 01-1 0v-3z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      GovernmentBuilding
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Home Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M7.52 2.4a.75.75 0 01.96 0l5.13 4.275a.5.5 0 01.06.71l-.217.253a.5.5 0 01-.686.07l-4.46-3.47a.5.5 0 00-.614 0l-4.46 3.47a.5.5 0 01-.686-.07l-.217-.253a.5.5 0 01.06-.71L7.52 2.4z"
-        fill="currentColor"
-      />
-      <path
-        d="M7.685 5.43L4 8.316v4.922c0 .42.336.762.75.762H6.5a.5.5 0 00.5-.5v-2.04c0-.281.224-.509.5-.509h1c.276 0 .5.228.5.508V13.5a.5.5 0 00.5.5h1.75c.414 0 .75-.341.75-.762V8.316L8.315 5.43a.494.494 0 00-.63 0z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Home
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Import Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11.623 8.799a.278.278 0 000-.385L8.818 5.498a.277.277 0 00-.477.193v1.405A3.5 3.5 0 015 3.6v-.1a1.5 1.5 0 10-3 0v.1a6.5 6.5 0 006.34 6.498v1.424c0 .25.305.372.478.192L11.623 8.8z"
-        fill="currentColor"
-      />
-      <path
-        d="M3.95 11a.75.75 0 011.5 0v1.75a.5.5 0 00.5.5h6.864a.5.5 0 00.5-.5V5.886a.5.5 0 00-.5-.5h-1.943a.75.75 0 010-1.5h1.943a2 2 0 012 2v6.864a2 2 0 01-2 2H5.95a2 2 0 01-2-2V11z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Import
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Important With Circle Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      ImportantWithCircle
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Info With Circle Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M8 15A7 7 0 108 1a7 7 0 000 14zM9 4a1 1 0 11-2 0 1 1 0 012 0zM8 6a1 1 0 011 1v4h.5a.5.5 0 010 1h-3a.5.5 0 010-1H7V7h-.5a.5.5 0 010-1H8z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      InfoWithCircle
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Invite User Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M8.418 7.428a3.5 3.5 0 10-3.836-5.856 3.5 3.5 0 003.836 5.856zM3.091 8.562c.308-.357.838-.339 1.252-.112.64.35 1.375.55 2.157.55s1.517-.2 2.157-.55c.414-.227.944-.245 1.252.112.11.128.214.263.31.403A1.996 1.996 0 009.5 10.5 2 2 0 008.177 14H2v-2.5c0-1.123.411-2.15 1.091-2.938z"
-        fill="currentColor"
-      />
-      <path
-        d="M10.5 10.5a.998.998 0 011-1 1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      InviteUser
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Key Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M6 10c.554 0 1.082-.113 1.562-.317L8.88 11l-.44.44a1.5 1.5 0 002.122 2.12l.439-.439.44.44a1.5 1.5 0 002.12-2.122L9.684 7.562A4 4 0 106 10zm-.75-3.5a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Key
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Laptop Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M5 6a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5A.5.5 0 015 6zM5.5 7.5a.5.5 0 000 1h3a.5.5 0 000-1h-3z"
-        fill="currentColor"
-      />
-      <path
-        clipRule="evenodd"
-        d="M3 2.5a1 1 0 00-1 1v7.813l-.29.49a.91.91 0 00-.068.1L1 13a1 1 0 001 1h12a1 1 0 001-1l-.642-1.096a.901.901 0 00-.067-.1L14 11.313V3.5a1 1 0 00-1-1H3zM12.5 4h-9v6.5h9V4z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Laptop
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Link Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
-        fill="currentColor"
-      />
-      <path
-        d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Link
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Lock Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M4 7V5a4 4 0 118 0v2a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8a1 1 0 011-1zm2-2a2 2 0 114 0v2H6V5zm2.587 5.81A.999.999 0 008 9a1 1 0 00-.58 1.815v1.852a.583.583 0 001.167 0V10.81z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Lock
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Magnifying Glass Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M2.323 9.819a5.302 5.302 0 006.463.805l4.144 4.144a1.3 1.3 0 101.838-1.838l-4.144-4.144a5.302 5.302 0 00-8.3-6.463 5.3 5.3 0 000 7.496zM7.98 4.162A2.7 2.7 0 114.162 7.98 2.7 2.7 0 017.98 4.162z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      MagnifyingGlass
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Megaphone Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M6 3l5.725-1.636A1 1 0 0113 2.326v7.348a1 1 0 01-1.275.962L6 9H3a2 2 0 01-2-2V5a2 2 0 012-2h3zm-.657 7H3v5h2.98a1 1 0 00.918-1.396L5.343 10zM16 6a2 2 0 01-2 2V4a2 2 0 012 2z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Megaphone
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Menu Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M2 4a1 1 0 011-1h10a1 1 0 110 2H3a1 1 0 01-1-1zM2 8a1 1 0 011-1h10a1 1 0 110 2H3a1 1 0 01-1-1zM3 11a1 1 0 100 2h10a1 1 0 100-2H3z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Menu
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Minus Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3 6.5a1 1 0 00-1 1v1a1 1 0 001 1h10a1 1 0 001-1v-1a1 1 0 00-1-1H3z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Minus
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Not Allowed Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M11.75 8a3.75 3.75 0 01-5.485 3.326l5.06-5.06c.272.518.425 1.108.425 1.734zM4.674 9.735l5.06-5.06a3.75 3.75 0 00-5.06 5.06zM14 8A6 6 0 112 8a6 6 0 0112 0z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      NotAllowed
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Note Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4.5 6.25a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75zM4.5 8.75A.75.75 0 015.25 8h1.5a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75z"
-        fill="currentColor"
-      />
-      <path
-        clipRule="evenodd"
-        d="M15 10l-4 4H3a2 2 0 01-2-2V4a2 2 0 012-2h10a2 2 0 012 2v6zm-2-6H3v8h7v-2a1 1 0 011-1h2V4z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Note
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Open New Tab Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M13.823 2.45a.278.278 0 00-.272-.273l-4.045-.079a.277.277 0 00-.201.474l1.08 1.08-2.45 2.452a1.395 1.395 0 00-.148.174L5.999 8.065a1.369 1.369 0 101.936 1.936l1.787-1.788c.061-.043.12-.093.174-.147l2.451-2.452 1.081 1.081a.277.277 0 00.474-.201l-.079-4.045z"
-        fill="currentColor"
-      />
-      <path
-        d="M7.25 3.129a.75.75 0 010 1.5H4a.5.5 0 00-.5.5v6.864a.5.5 0 00.5.5h6.864a.5.5 0 00.5-.5V8.75a.75.75 0 011.5 0v3.243a2 2 0 01-2 2H4a2 2 0 01-2-2V5.129a2 2 0 012-2h3.25z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      OpenNewTab
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Pause Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4.5 2a1 1 0 00-1 1v10a1 1 0 001 1h1a1 1 0 001-1V3a1 1 0 00-1-1h-1zM10.5 2a1 1 0 00-1 1v10a1 1 0 001 1h1a1 1 0 001-1V3a1 1 0 00-1-1h-1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Pause
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Person Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11.5 4.5a3.5 3.5 0 11-7 0 3.5 3.5 0 017 0z"
-        fill="currentColor"
-      />
-      <path
-        d="M8 8c-.708 0-1.367-.21-1.918-.572A4.483 4.483 0 018 7c.686 0 1.336.154 1.918.428C9.368 7.79 8.708 8 8 8zM4.591 8.562c.308-.357.838-.339 1.252-.112C6.483 8.8 7.218 9 8 9s1.517-.2 2.158-.55c.413-.227.943-.245 1.251.112A4.482 4.482 0 0112.5 11.5V14h-9v-2.5c0-1.123.411-2.15 1.091-2.938z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Person
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Person Group Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-    >
-      <path
-        d="M4.808 8.923a2.962 2.962 0 100-5.923 2.962 2.962 0 000 5.923zM2.982 9.304c-.35-.192-.798-.207-1.059.095A3.793 3.793 0 001 11.885V14h7.615v-2.115c0-.95-.347-1.819-.923-2.486-.26-.302-.708-.287-1.059-.095a3.79 3.79 0 01-1.825.465 3.79 3.79 0 01-1.826-.465zM9.615 11.885V13H15v-1.906c0-.734-.274-1.405-.727-1.92-.206-.234-.559-.222-.835-.074-.427.23-.917.36-1.438.36-.521 0-1.011-.13-1.438-.36-.276-.148-.63-.16-.835.073-.21.239-.38.51-.504.806.252.585.392 1.23.392 1.906zM14.333 6.288c0 1.264-1.044 2.289-2.333 2.289-1.289 0-2.333-1.025-2.333-2.289C9.667 5.025 10.71 4 12 4c1.289 0 2.333 1.025 2.333 2.288z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      PersonGroup
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Person With Lock Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M10 4.5A3.497 3.497 0 016.5 8a3.484 3.484 0 01-1.918-.572A3.5 3.5 0 1110 4.5zM4.343 8.45c-.414-.227-.944-.245-1.252.112A4.482 4.482 0 002 11.5V14h6v-2.5c0-.445.194-.845.502-1.12.033-.82.393-1.554.954-2.076-.259-.051-.55.01-.799.146A4.48 4.48 0 016.5 9a4.48 4.48 0 01-2.157-.55z"
-        fill="currentColor"
-      />
-      <path
-        clipRule="evenodd"
-        d="M9.5 10.5v.5a.5.5 0 00-.5.5v3a.5.5 0 00.5.5h4a.5.5 0 00.5-.5v-3a.5.5 0 00-.5-.5v-.5a2 2 0 10-4 0zm2-1a1 1 0 00-1 1v.5h2v-.5a1 1 0 00-1-1z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      PersonWithLock
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Play Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M13.779 6.704a1.5 1.5 0 010 2.592l-7.523 4.388A1.5 1.5 0 014 12.388V3.612a1.5 1.5 0 012.256-1.296l7.523 4.388z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Play
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Plus Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M7.5 2a1 1 0 00-1 1v3.5H3a1 1 0 00-1 1v1a1 1 0 001 1h3.5V13a1 1 0 001 1h1a1 1 0 001-1V9.5H13a1 1 0 001-1v-1a1 1 0 00-1-1H9.5V3a1 1 0 00-1-1h-1z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Plus
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Plus With Circle Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 5a1 1 0 012 0v2h2a1 1 0 110 2H9v2a1 1 0 11-2 0V9H5a1 1 0 110-2h2V5z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      PlusWithCircle
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Question Mark With Circle Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M8 15A7 7 0 108 1a7 7 0 000 14zM6.932 5.612C7.054 5.298 7.425 5 7.942 5 8.615 5 9 5.478 9 5.875c0 .162-.057.33-.172.476a.985.985 0 01-.242.216l-.016.01a1.141 1.141 0 01-.098.054c-.59.286-1.53.967-1.53 2.119V9a1 1 0 002 0c0-.035.011-.12.138-.27a2.66 2.66 0 01.587-.48 3 3 0 00.726-.656A2.742 2.742 0 0011 5.875C11 4.201 9.54 3 7.941 3c-1.275 0-2.43.745-2.873 1.888a1 1 0 101.864.724zM8 13a1 1 0 100-2 1 1 0 000 2z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      QuestionMarkWithCircle
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Redo Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4.018 9.402c-.05.328-.313.598-.645.598h-.8c-.331 0-.603-.27-.57-.6a5.996 5.996 0 012.543-4.325A5.997 5.997 0 017.974 4h.028c2.699 0 4.95 1.718 5.467 4h1.414c.541 0 .792.672.383 1.026l-2.482 2.15a.585.585 0 01-.765 0l-2.482-2.15A.584.584 0 019.92 8h1.446c-.468-1.085-1.68-2-3.364-2a3.98 3.98 0 00-2.543.89 3.996 3.996 0 00-1.441 2.512z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Redo
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Refresh Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M8.033 2c2.699 0 4.95 1.718 5.467 4h1.414c.542 0 .792.672.383 1.026l-2.482 2.15a.584.584 0 01-.765 0l-2.482-2.15A.584.584 0 019.951 6h1.447c-.469-1.085-1.68-2-3.365-2-1.026 0-1.877.34-2.491.85-.243.202-.618.203-.817-.043l-.61-.754a.468.468 0 01.044-.651C5.163 2.534 6.53 2 8.033 2zM3.95 6.843a.584.584 0 00-.765 0L.703 8.992a.584.584 0 00.383 1.026h1.418C3.03 12.291 5.275 14 7.967 14c1.505 0 2.87-.534 3.874-1.402a.468.468 0 00.044-.65l-.61-.755c-.2-.246-.574-.245-.817-.043-.614.51-1.465.85-2.49.85-1.676 0-2.883-.904-3.358-1.982H6.05a.584.584 0 00.383-1.026L3.95 6.842z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Refresh
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Relationship Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M.5 2a1 1 0 011-1h2a1 1 0 011 1v1H6a2.5 2.5 0 012.5 2.5v5A1.5 1.5 0 0010 12h1.5v-1a1 1 0 011-1h2a1 1 0 011 1v3a1 1 0 01-1 1h-2a1 1 0 01-1-1v-1H10a2.5 2.5 0 01-2.5-2.5v-5A1.5 1.5 0 006 4H4.5v1a1 1 0 01-1 1h-2a1 1 0 01-1-1V2z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Relationship
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Replica Set Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M9.39 7.713A3.488 3.488 0 018 8c-.494 0-.964-.102-1.39-.287L5.264 9.729a2.5 2.5 0 11-1.08-.634L5.57 7.02a3.5 3.5 0 114.86 0l1.385 2.076A2.501 2.501 0 0115 11.5a2.5 2.5 0 11-4.265-1.77L9.391 7.712zM9.75 4.5a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      ReplicaSet
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Save Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M2 3.6c0-.56 0-.84.109-1.054a1 1 0 01.437-.437C2.76 2 3.04 2 3.6 2h7.737c.245 0 .367 0 .482.028a1 1 0 01.29.12c.1.061.187.148.36.32l1.062 1.063c.173.173.26.26.322.36.055.09.095.188.12.29.027.115.027.237.027.482V12.4c0 .56 0 .84-.109 1.054a1 1 0 01-.437.437c-.2.102-.46.109-.954.109V9.284c0-.126 0-.25-.008-.353a1.01 1.01 0 00-.101-.385 1 1 0 00-.437-.437 1.01 1.01 0 00-.385-.1C11.465 8 11.342 8 11.216 8H4.784c-.126 0-.249 0-.353.008a1.01 1.01 0 00-.385.101 1 1 0 00-.437.437 1.01 1.01 0 00-.1.385c-.009.104-.009.227-.009.353V14c-.494 0-.753-.007-.954-.109a1 1 0 01-.437-.437C2 13.24 2 12.96 2 12.4V3.6zm2-.1a.5.5 0 00-.5.5v2a.5.5 0 00.5.5h5a.5.5 0 00.5-.5V4a.5.5 0 00-.5-.5H4z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-      <path
-        d="M11.5 9.3V14h-7V9.3c0-.148 0-.23.005-.288v-.006h.007C4.571 9 4.652 9 4.8 9h6.4c.148 0 .23 0 .288.005h.006v.007c.006.059.006.14.006.288z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Save
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Serverless Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M2.132 10.849a5.5 5.5 0 118.4-6.571 4 4 0 014.398 6.444 1 1 0 01-.15.192l-1.77 1.898a1.995 1.995 0 01-1.51.688H7.792a2.5 2.5 0 110-2H11.5l1.166-1.25H8.5a3.75 3.75 0 00-6.368.599z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Serverless
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Sharded Cluster Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M13 2.75a1.75 1.75 0 01-2.123 1.71l-.619.866a3.497 3.497 0 011.186 2.049h1.17a1.75 1.75 0 110 1.25h-1.17a3.497 3.497 0 01-1.186 2.05l.619.865a1.75 1.75 0 11-1.046.686l-.662-.926a3.495 3.495 0 01-2.331.002l-.664.93a1.75 1.75 0 11-1.043-.69l.616-.863a3.497 3.497 0 01-1.191-2.054h-1.17a1.75 1.75 0 110-1.25h1.17c.147-.819.58-1.54 1.191-2.054l-.616-.863a1.75 1.75 0 111.043-.69l.664.93A3.494 3.494 0 018 4.5c.41 0 .803.07 1.17.2l.66-.926A1.75 1.75 0 1113 2.75zM9.75 8a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      ShardedCluster
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Settings Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M10.207 1.067a.75.75 0 00-.89.247l-.374.506a6.214 6.214 0 00-1.894.002l-.375-.506a.75.75 0 00-.89-.246l-1.126.467a.75.75 0 00-.454.804l.093.623c-.505.37-.958.82-1.338 1.34l-.623-.093a.75.75 0 00-.803.455l-.466 1.127a.75.75 0 00.247.89l.506.374a6.214 6.214 0 00.002 1.893l-.506.376a.75.75 0 00-.246.89l.467 1.126a.75.75 0 00.804.454l.623-.093c.37.505.82.958 1.34 1.338l-.093.623a.75.75 0 00.455.803l1.127.466a.75.75 0 00.89-.247l.374-.506a6.218 6.218 0 001.894-.002l.375.506a.75.75 0 00.89.246l1.126-.467a.75.75 0 00.454-.804l-.093-.623c.505-.37.958-.82 1.338-1.34l.623.093a.75.75 0 00.803-.455l.466-1.127a.75.75 0 00-.247-.89l-.506-.374a6.218 6.218 0 00-.002-1.894l.506-.375a.75.75 0 00.246-.89l-.467-1.126a.75.75 0 00-.804-.454l-.623.093a6.214 6.214 0 00-1.34-1.338l.093-.623a.75.75 0 00-.455-.803l-1.127-.466zm.334 7.984A2.75 2.75 0 115.46 6.949a2.75 2.75 0 015.082 2.102z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Settings
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Shell Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-    >
-      <path
-        d="M1.8 5.2l3.4 2.2-3.79 2.526a.5.5 0 00-.142.688l.557.86a.5.5 0 00.697.145L7.5 8.3c.3-.2.5-.5.5-.8 0-.3-.2-.6-.4-.8L2.522 3.284a.5.5 0 00-.699.143l-.547.847a.5.5 0 00.155.695L1.8 5.2zM6.7 13a.5.5 0 00.5.5h7.7a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5H7.2a.5.5 0 00-.5.5v1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Shell
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="SMS Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M1 4a2 2 0 012-2h10a2 2 0 012 2v6a2 2 0 01-2 2H7.755L4.23 14.831c-.488.392-1.23.058-1.23-.555V12a2 2 0 01-2-2V4zm2 .75A.75.75 0 013.75 4h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 013 4.75zm0 3A.75.75 0 013.75 7h5.5a.75.75 0 110 1.5h-5.5A.75.75 0 013 7.75z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      SMS
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Sort Ascending Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4.45 1.143a.584.584 0 00-.765 0L1.203 3.292a.584.584 0 00.383 1.026h1.312v9.352a1.169 1.169 0 102.338 0V4.318H6.55a.584.584 0 00.383-1.026L4.45 1.142zM8 5a1 1 0 000 2h6a1 1 0 100-2H8zM7 9a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zM8 11a1 1 0 100 2h2a1 1 0 100-2H8z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      SortAscending
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Sort Descending Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M4.45 14.696a.584.584 0 01-.765 0l-2.482-2.15a.584.584 0 01.383-1.025h1.312V2.168a1.169 1.169 0 112.338 0v9.351H6.55c.541 0 .792.673.383 1.027L4.45 14.696zM8 3a1 1 0 000 2h6a1 1 0 100-2H8zM7 7a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zM8 9a1 1 0 100 2h2a1 1 0 100-2H8z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      SortDescending
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Split Horizontal Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M15 11a2 2 0 01-2 2H3a2 2 0 01-2-2V3a2 2 0 012-2h10a2 2 0 012 2v8zm-2-4.5V3H3v3.5h10zm-10 1V11h10V7.5H3z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      SplitHorizontal
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Split Vertical Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M13 1a2 2 0 012 2v8a2 2 0 01-2 2H3a2 2 0 01-2-2V3a2 2 0 012-2h10zM7.5 3H3v8h4.5V3zm1 8H13V3H8.5v8z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      SplitVertical
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Stitch Icon"
-      className=""
-      color="#023430"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M0 0h16v16H0V0zm14 4V2H2v2h12zm0 10V5H2v9h12zM8 6v7H6V6h2zm5 0v4H9V6h4zM5 8v5H3V8h2zm8 3v2H9v-2h4z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Stitch
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Support Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M5 7a3 3 0 016 0v2.5c0 1.51-.957 2.798-2.298 3.288a1 1 0 10.265.967 4.512 4.512 0 002.787-2.785c.08.02.161.03.246.03h.5a2.5 2.5 0 00.406-4.967 5.002 5.002 0 00-9.813 0A2.5 2.5 0 003.5 11H4a1 1 0 001-1V7z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Support
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Sweep Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M3 14.465L4 12.734c.292.169.631.266.999.266h2v2H5a3.982 3.982 0 01-2-.535zM9 15v-2h2c.368 0 .707-.097.999-.266L13 14.464A3.982 3.982 0 0111 15H9zm6-8h-2V5c0-.368-.097-.707-.266-.999L14.464 3c.341.588.536 1.271.536 2v2zM7 1H5c-.729 0-1.412.195-2 .535L4 3.266C4.293 3.097 4.632 3 5 3h2V1zM1 9h2v2c0 .368.097.707.266.999L1.536 13A3.982 3.982 0 011 11V9zm0-2h2V5c0-.368.097-.707.266-.999L1.536 3A3.982 3.982 0 001 5v2zm8-6v2h2c.368 0 .707.097.999.266L13 1.536A3.982 3.982 0 0011 1H9zm6 8h-2v2c0 .368-.097.707-.266.999L14.464 13c.341-.588.536-1.271.536-2V9z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Sweep
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Table Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M1 3.25C1 2.56 1.56 2 2.25 2h11.5c.69 0 1.25.56 1.25 1.25v9.5c0 .69-.56 1.25-1.25 1.25H2.25C1.56 14 1 13.44 1 12.75v-9.5zm2 4.12V4h4.37v3.37H3zm0 1.25V12h4.37V8.62H3zM8.62 12H13V8.62H8.62V12zM13 7.37V4H8.62v3.37H13z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Table
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Time Series Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M7.023 1.518c.513.024.957.363 1.12.853L9.38 6.108l1.56-2.092a1.24 1.24 0 011.872-.134l1.897 1.91c.388.39.388 1.023 0 1.413l-.377.354a.99.99 0 01-1.405 0l-.86-.89-2.122 2.847a1.239 1.239 0 01-2.172-.355L6.798 6.22 6.11 7.774c-.2.451-.644.742-1.135.742H1.994a.997.997 0 01-.994-1v-.5c0-.552.445-1 .994-1h2.174l1.66-3.758a1.242 1.242 0 011.195-.74zM14 12a1 1 0 011 1v.5a1 1 0 01-1 1H2a1 1 0 01-1-1V13a1 1 0 011-1h12z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      TimeSeries
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Trash Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M5 2a1 1 0 011-1h4a1 1 0 011 1h2a1 1 0 011 1v1H2V3a1 1 0 011-1h2zm9 3H2l1.678 8.392A2 2 0 005.64 15h4.72a2 2 0 001.962-1.608L14 5z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Trash
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Undo Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M11.981 9.402c.05.328.313.598.645.598h.8c.331 0 .603-.27.57-.6a5.996 5.996 0 00-2.543-4.325A5.997 5.997 0 008.026 4h-.029C5.298 4 3.047 5.718 2.53 8H1.116a.584.584 0 00-.383 1.026l2.482 2.15c.22.19.545.19.765 0l2.482-2.15A.584.584 0 006.079 8H4.632c.47-1.085 1.68-2 3.365-2a3.98 3.98 0 012.543.89 3.996 3.996 0 011.441 2.512z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Undo
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="University Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M8.5 4.613c0-.383.191-.74.51-.953a6.87 6.87 0 012.145-.949l2.406-.601a.353.353 0 01.439.342v7.88c0 .238 0 .357-.043.453a.5.5 0 01-.176.211c-.087.06-.204.081-.438.123l-3.9.71c-.324.058-.486.088-.612.042a.5.5 0 01-.264-.22c-.067-.116-.067-.28-.067-.61V4.613zM2 2.452c0-.23.216-.398.439-.342l2.407.601a6.87 6.87 0 012.144.95c.319.211.51.569.51.952v6.428c0 .33 0 .494-.067.61a.5.5 0 01-.264.22c-.126.046-.288.016-.612-.043l-3.9-.709c-.234-.042-.35-.063-.438-.123a.5.5 0 01-.176-.21C2 10.688 2 10.57 2 10.331v-7.88zM2.008 12.41a.5.5 0 01.581-.402l5.143.935c.177.032.359.032.536 0l5.143-.935a.5.5 0 01.178.984l-4.134.752c-.163.434-.753.756-1.455.756-.702 0-1.292-.322-1.455-.756l-4.134-.752a.5.5 0 01-.403-.581z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      University
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Unlock Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M6.157 4.221A2 2 0 0110 5v2H4a1 1 0 00-1 1v6a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1V5a4 4 0 00-7.822-1.182C3.982 4.45 4.538 5 5.2 5c.442 0 .785-.372.957-.779zm2.43 6.589A.999.999 0 008 9a1 1 0 00-.58 1.815v1.852a.583.583 0 001.167 0V10.81z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Unlock
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Unsorted Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M3.685 1.143c.22-.19.545-.19.765 0l2.482 2.149a.584.584 0 01-.383 1.026H5.236v7.364H6.55c.541 0 .792.672.383 1.026l-2.482 2.15a.584.584 0 01-.765 0l-2.482-2.15a.584.584 0 01.383-1.026h1.312V4.318H1.586a.584.584 0 01-.383-1.026l2.482-2.15zM8 8a1 1 0 011-1h5a1 1 0 110 2H9a1 1 0 01-1-1zM9 4a1 1 0 000 2h5a1 1 0 100-2H9zM8 11a1 1 0 011-1h5a1 1 0 110 2H9a1 1 0 01-1-1z"
-        fill="currentColor"
-      />
-    </svg>
-    <span>
-      Unsorted
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Up Down Carets Icon"
-      className=""
-      color="#023430"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M7.527 1.21a.638.638 0 01.948 0l3.327 3.563c.422.452.123 1.227-.475 1.227H4.673c-.599 0-.898-.775-.476-1.227l3.33-3.562zm3.8 8.79c.598 0 .897.775.475 1.228l-3.327 3.56a.638.638 0 01-.948 0l-3.33-3.56C3.775 10.775 4.074 10 4.673 10h6.654z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      UpDownCarets
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Upload Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M11.297 11v.938a4 4 0 10-.764-7.66A5.501 5.501 0 000 6.5a5.5 5.5 0 005.797 5.492V11h-.403c-1.395 0-2.08-1.7-1.075-2.667L7.472 5.3a1.55 1.55 0 012.15 0l3.152 3.034C13.78 9.301 13.094 11 11.7 11h-.402zM8.339 6.2a.3.3 0 01.416 0l3.152 3.034a.3.3 0 01-.208.516h-1.652v3.75a1.5 1.5 0 01-3 0V9.75H5.394a.3.3 0 01-.208-.516L8.339 6.2z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Upload
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Vertical Ellipsis Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M9.5 2.75a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0zm0 5a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0zM7.75 14.5a1.75 1.75 0 100-3.5 1.75 1.75 0 000 3.5z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      VerticalEllipsis
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Visibility Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M8 2.008c3.934 0 6.473 3.129 7.455 4.583l.043.064C15.713 6.97 16 7.391 16 8s-.287 1.03-.502 1.345l-.043.064c-.982 1.454-3.521 4.583-7.455 4.583S1.527 10.863.545 9.41l-.043-.064C.287 9.03 0 8.609 0 8s.287-1.03.502-1.345l.043-.064C1.527 5.137 4.066 2.008 8 2.008zM9.13 4.13A5.147 5.147 0 008 4.005C5.75 4.005 3.927 5.794 3.927 8c0 2.206 1.824 3.995 4.073 3.995 2.25 0 4.073-1.789 4.073-3.995 0-2.206-1.824-3.995-4.073-3.995.378 0 .756.045 1.13.126zM8 10.996c1.687 0 3.055-1.341 3.055-2.996S9.687 5.004 8 5.004 4.945 6.345 4.945 8 6.313 10.996 8 10.996z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Visibility
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Visibility Off Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M14.601 1.266a1.03 1.03 0 00-1.433.049L1.704 13.486a.987.987 0 00.062 1.407 1.03 1.03 0 001.433-.049l1.793-1.904A7.348 7.348 0 008 13.587c3.934 0 6.473-3.133 7.455-4.59l.043-.063c.215-.316.502-.737.502-1.347s-.287-1.03-.502-1.346l-.043-.065a12.85 12.85 0 00-1.949-2.275l1.157-1.228a.987.987 0 00-.062-1.407zm-2.93 4.585l-.764.81c.096.292.148.603.148.926 0 1.657-1.368 3-3.055 3-.246 0-.485-.028-.714-.082l-.763.81c.458.176.956.272 1.477.272 2.25 0 4.073-1.79 4.073-4 0-.622-.145-1.211-.403-1.736zM8 1.587c.919 0 1.762.171 2.526.452L8.98 3.68A5.13 5.13 0 008 3.587c-2.25 0-4.073 1.79-4.073 4 0 .435.07.853.201 1.245l-1.985 2.107A13.06 13.06 0 01.545 8.998l-.043-.064C.287 8.618 0 8.197 0 7.587s.287-1.03.502-1.346l.043-.065C1.527 4.72 4.066 1.587 8 1.587zm0 2c.327 0 .654.034.978.095l-.016.017A4.155 4.155 0 008 3.587zm0 1c.041 0 .083 0 .124.002L4.966 7.942a2.978 2.978 0 01-.02-.355c0-1.657 1.367-3 3.054-3z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      VisibilityOff
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Warning Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M8.864 2.514a.983.983 0 00-1.728 0L1.122 13.539A.987.987 0 001.986 15h12.028a.987.987 0 00.864-1.461L8.864 2.514zM7 6a1 1 0 012 0v4a1 1 0 11-2 0V6zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      Warning
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="X Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      X
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="XWith Circle Icon"
-      className=""
-      color="#023430"
-      fill="none"
-      height={24}
-      role="img"
-      viewBox="0 0 16 16"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M8 15A7 7 0 108 1a7 7 0 000 14zm1.414-9.828a1 1 0 111.414 1.414L9.414 8l1.414 1.414a1 1 0 11-1.414 1.414L8 9.414l-1.414 1.414a1 1 0 11-1.414-1.414L6.586 8 5.172 6.586a1 1 0 011.414-1.414L8 6.586l1.414-1.414z"
-        fill="currentColor"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      XWithCircle
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Closed Eye Icon"
-      fill="none"
-      height="16"
-      width="16"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M15 7h-1.385c0 1.436-3.769 4.308-5.615 4.308v1.077c2.154 0 7-2.244 7-5.385ZM1 7h1.385c0 1.436 3.769 4.308 5.615 4.308v1.077c-2.154 0-7-2.244-7-5.385Z"
-        fill="#001E2B"
-      />
-      <path
-        d="M8 12.385c-2.154 0-7-2.244-7-5.385h1.385c0 1.436 3.769 4.308 5.615 4.308m0 1.077v-1.077m0 1.077c2.154 0 7-2.244 7-5.385h-1.385c0 1.436-3.769 4.308-5.615 4.308M1 11.038l.862-.808.43.404-.861.808L1 11.038Z"
-        stroke="#001E2B"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M5.308 11.846h-.862l-.861 1.211L4 13.5l1.308-1.654ZM15 11.038l-.861-.808-.431.404.861.808.431-.404ZM10.421 11.757h.862l1.132 1.3-.43.404-1.564-1.704Z"
-        stroke="#001E2B"
-        strokeLinejoin="round"
-      />
-      <path
-        d="M7.462 12.385h1.076V14H7.462v-1.615Z"
-        fill="#001E2B"
-        stroke="#001E2B"
-        strokeLinejoin="round"
-      />
-    </svg>
-    <span>
-      ClosedEye
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="ArrowWithCircle Icon"
-      fill="none"
-      height="14"
-      width="14"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        clipRule="evenodd"
-        d="M7 14A7 7 0 1 0 7 0a7 7 0 0 0 0 14Zm1.512-7.909h-5.4a.778.778 0 0 0-.779.778v.263c0 .43.349.778.778.778H8.51L7.317 9.103a.778.778 0 0 0 0 1.1l.186.186a.778.778 0 0 0 1.1 0l2.84-2.84a.778.778 0 0 0 0-1.1l-.187-.186a.966.966 0 0 0-.02-.02L8.603 3.612a.778.778 0 0 0-1.1 0l-.186.186a.778.778 0 0 0 0 1.1L8.512 6.09Z"
-        fill="#001E2B"
-        fillRule="evenodd"
-      />
-    </svg>
-    <span>
-      ArrowWithCircle
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Expand Icon"
-      fill="none"
-      height={24}
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
-        fill="#001E2B"
-      />
-      <path
-        d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
-        stroke="#001E2B"
-      />
-      <path
-        d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
-        fill="#001E2B"
-      />
-      <path
-        d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
-        stroke="#001E2B"
-      />
-    </svg>
-    <span>
-      Expand
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      aria-label="Evergreen Icon"
-      fill="none"
-      height={24}
-      viewBox="0 0 258 258"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M144.206 213.445H114.693C110.693 213.445 107.449 216.688 107.449 220.689V250.201C107.449 254.202 110.693 257.445 114.693 257.445H144.206C148.206 257.445 151.449 254.202 151.449 250.201V220.689C151.449 216.688 148.206 213.445 144.206 213.445Z"
-        fill="#00A35C"
-      />
-      <path
-        d="M237.92 218.638L188.116 155.363H71.0083L20.5234 218.649C16.5211 224.712 20.8722 232.791 28.1364 232.791H230.312C237.582 232.791 241.933 224.701 237.92 218.638Z"
-        fill="#00A35C"
-      />
-      <path
-        d="M208.375 146.21L167.82 89.1536H90.4297L49.6287 146.227C45.6264 152.289 49.9774 160.369 57.2417 160.369H200.767C208.037 160.369 212.388 152.278 208.375 146.216V146.21Z"
-        fill="#00A35C"
-      />
-      <path
-        d="M184.463 79.9953L132.867 2.05749C131.048 -0.689405 127.019 -0.684039 125.2 2.06286L73.7767 80.006C69.7744 86.0685 74.1254 94.1482 81.3897 94.1482H176.85C184.119 94.1482 188.47 86.0577 184.457 79.9953H184.463Z"
-        fill="#00A35C"
-      />
-    </svg>
-    <span>
-      EvergreenLogo
-    </span>
-  </div>
-  <div
-    className="css-141et6l"
-  >
-    <svg
-      fill="none"
-      height={24}
-      viewBox="0 0 279 279"
-      width={24}
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        d="M146.034 172.244V91.7977C146.034 88.1885 143.109 85.2637 139.5 85.2637V178.778C143.109 178.778 146.034 175.853 146.034 172.244Z"
-        fill="#00ED64"
-      />
-      <path
-        d="M220.231 225.9C221.751 225.962 223.254 225.548 224.53 224.713C230.696 220.471 232.625 211.551 229.69 200.853C229.161 198.919 229.55 196.845 230.743 195.232C231.935 193.619 233.807 192.649 235.814 192.592C253.752 192.105 265.798 183.32 265.803 175.423C265.803 167.525 253.752 158.745 235.814 158.263C233.807 158.206 231.935 157.236 230.743 155.623C229.55 154.011 229.161 151.942 229.69 150.002C232.625 139.304 230.696 130.385 224.525 126.137C222.98 125.074 221.134 124.525 219.256 124.571C212.93 124.571 203.927 129.27 193.504 134.715C186.98 138.122 179.58 141.985 171.444 145.439C168.986 146.481 166.139 145.921 164.257 144.028C162.374 142.135 161.835 139.288 162.893 136.83C168.773 123.835 175.541 111.26 183.159 99.1977C192.337 84.0036 200.256 70.8785 196.605 64.9824C194.743 61.9747 191.248 60.4449 186.223 60.4449C181.976 60.559 177.781 61.3835 173.803 62.8822C171.823 63.5874 169.624 63.297 167.892 62.0939C166.16 60.896 165.112 58.941 165.076 56.8356C164.671 33.1991 152.957 13.2341 139.5 13.2289V85.2585C143.109 85.2585 146.034 88.1833 146.034 91.7925V172.239C146.034 175.848 143.109 178.772 139.5 178.772V196.145C158.625 196.145 176.609 205.899 192.482 214.507C203.279 220.362 213.485 225.895 220.231 225.895V225.9ZM168.016 178.327C166.403 177.678 165.107 176.413 164.433 174.811C163.754 173.208 163.738 171.404 164.397 169.791C165.055 168.178 166.326 166.897 167.933 166.223C175.577 162.977 182.723 159.248 189.024 155.955C191.881 154.462 194.619 153.036 197.243 151.729C198.793 150.956 200.588 150.832 202.232 151.382C203.875 151.931 205.234 153.114 206.002 154.664C206.774 156.215 206.899 158.009 206.354 159.653C205.805 161.297 204.622 162.655 203.072 163.428C200.52 164.698 197.86 166.093 195.075 167.54C188.557 170.942 181.167 174.8 173.041 178.254C171.444 178.944 169.634 178.97 168.021 178.321L168.016 178.327Z"
-        fill="#00ED64"
-      />
-      <path
-        d="M203.072 163.433C204.622 162.661 205.805 161.302 206.354 159.658C206.904 158.014 206.78 156.22 206.002 154.669C205.234 153.119 203.876 151.936 202.232 151.387C200.588 150.837 198.794 150.962 197.243 151.734C194.619 153.041 191.881 154.467 189.024 155.961C182.723 159.253 175.577 162.982 167.933 166.228C166.326 166.897 165.055 168.183 164.397 169.796C163.738 171.409 163.754 173.213 164.433 174.816C165.112 176.418 166.404 177.684 168.016 178.332C169.634 178.98 171.439 178.954 173.036 178.264C181.162 174.816 188.552 170.958 195.07 167.551C197.855 166.099 200.515 164.709 203.067 163.438L203.072 163.433Z"
-        fill="#00ED64"
-      />
-      <path
-        d="M146.034 272.427V209.705C159.782 211.655 173.736 219.206 186.249 225.994C199.084 232.958 210.166 238.968 220.231 238.968C224.401 239.036 228.487 237.822 231.936 235.478C241.14 229.141 245.341 218.075 243.8 205.028C264.248 202.16 278.871 190.223 278.871 175.428C278.871 160.643 264.248 148.701 243.806 145.838C245.351 132.786 241.145 121.719 231.936 115.382C228.207 112.815 223.778 111.467 219.256 111.514C209.72 111.514 199.4 116.902 187.452 123.145C186.011 123.897 184.528 124.67 183.008 125.458C186.778 118.504 190.704 112.006 194.349 105.965C206.209 86.3216 215.575 70.8111 207.718 58.1217C202.211 49.2178 191 45.6086 177.615 48.2948C174.53 20.7327 158.739 0.181702 139.505 0.181702V13.2497C152.962 13.2497 164.677 33.2199 165.081 56.8564C165.118 58.9618 166.165 60.9168 167.897 62.1147C169.624 63.3126 171.823 63.6082 173.809 62.9029C177.781 61.4042 181.982 60.5797 186.229 60.4656C191.254 60.4656 194.749 61.9954 196.61 65.0031C200.261 70.8993 192.343 84.0191 183.164 99.2185C175.546 111.28 168.774 123.856 162.898 136.851C161.84 139.304 162.38 142.151 164.262 144.049C166.144 145.942 168.991 146.502 171.449 145.459C179.591 142.006 186.986 138.142 193.509 134.735C203.933 129.29 212.935 124.592 219.262 124.592C221.139 124.546 222.985 125.09 224.53 126.158C230.701 130.405 232.625 139.325 229.695 150.023C229.166 151.957 229.555 154.031 230.748 155.644C231.941 157.257 233.813 158.227 235.82 158.284C253.757 158.766 265.809 167.545 265.809 175.443C265.809 183.341 253.757 192.126 235.82 192.608C233.813 192.665 231.941 193.635 230.748 195.248C229.555 196.86 229.166 198.929 229.695 200.869C232.63 211.567 230.701 220.486 224.536 224.728C223.265 225.563 221.761 225.978 220.237 225.916C213.49 225.916 203.284 220.383 192.488 214.528C176.62 205.92 158.635 196.171 139.505 196.165V278.976C143.115 278.976 146.039 276.051 146.039 272.442L146.034 272.427Z"
-        fill="#00ED64"
-      />
-      <path
-        d="M132.966 91.7977V172.244C132.966 175.853 135.891 178.778 139.5 178.778V85.2585C135.891 85.2585 132.966 88.1833 132.966 91.7925V91.7977Z"
-        fill="#71F6BA"
-      />
-      <path
-        d="M113.924 56.8512C113.888 58.9566 112.84 60.9116 111.108 62.1095C109.382 63.3074 107.183 63.603 105.197 62.8977C101.224 61.3991 97.024 60.5745 92.7769 60.4604C87.7467 60.4604 84.2567 61.9902 82.3899 65.0031C78.7391 70.8941 86.6629 84.014 95.8313 99.2029C103.449 111.27 110.227 123.845 116.102 136.851C117.16 139.304 116.621 142.151 114.738 144.044C112.856 145.937 110.009 146.497 107.551 145.454C99.4146 142.001 92.0249 138.142 85.5013 134.73C75.0728 129.285 66.0704 124.582 59.7387 124.582C57.8563 124.53 56.0102 125.08 54.4596 126.148C48.2938 130.39 46.3647 139.309 49.2998 150.007C49.8288 151.942 49.4399 154.016 48.2471 155.629C47.0544 157.241 45.1824 158.216 43.1755 158.268C25.2381 158.756 13.1865 167.53 13.1865 175.428C13.1865 183.326 25.2381 192.11 43.1755 192.592C45.1824 192.649 47.0544 193.619 48.2471 195.232C49.4399 196.845 49.8288 198.914 49.2998 200.853C46.3647 211.551 48.2938 220.466 54.4648 224.713C60.1535 228.628 72.9 221.887 86.5073 214.507C102.376 205.899 120.36 196.145 139.49 196.145V178.773C135.881 178.773 132.956 175.848 132.956 172.239V91.7977C132.956 88.1885 135.881 85.2637 139.49 85.2637V13.2445C126.033 13.2445 114.324 33.2147 113.914 56.8512H113.924ZM114.531 174.795C113.857 176.392 112.576 177.652 110.968 178.301C109.361 178.949 107.561 178.933 105.964 178.254C97.8329 174.8 90.4381 170.942 83.9145 167.54C81.1349 166.093 78.4747 164.704 75.9285 163.428C72.7704 161.784 71.5103 157.91 73.0971 154.721C74.6839 151.532 78.5369 150.204 81.7572 151.734C84.376 153.041 87.1089 154.467 89.961 155.955C96.2669 159.248 103.418 162.982 111.067 166.228C114.391 167.634 115.941 171.471 114.531 174.795Z"
-        fill="#71F6BA"
-      />
-      <path
-        d="M111.072 166.233C103.418 162.987 96.2717 159.253 89.9659 155.961C87.1138 154.472 84.3809 153.046 81.7621 151.739C78.5418 150.21 74.694 151.537 73.102 154.726C71.5151 157.916 72.7753 161.789 75.9334 163.433C78.4796 164.704 81.1398 166.093 83.9194 167.545C90.443 170.952 97.8378 174.811 105.969 178.259C107.566 178.938 109.366 178.954 110.973 178.306C112.581 177.658 113.862 176.392 114.536 174.795C115.946 171.471 114.396 167.639 111.072 166.228V166.233Z"
-        fill="#71F6BA"
-      />
-      <path
-        d="M139.5 0.181702C120.266 0.181702 104.481 20.7275 101.395 48.2896C87.9953 45.6086 76.7994 49.2126 71.2818 58.1165C63.4254 70.8059 72.7908 86.3164 84.6454 105.955C88.2909 111.996 92.2165 118.494 95.9917 125.453C94.4723 124.67 92.9996 123.902 91.5579 123.145C79.6049 116.907 69.2853 111.514 59.7488 111.514C55.2216 111.467 50.793 112.821 47.0645 115.382C37.8599 121.719 33.6542 132.786 35.1996 145.838C14.7523 148.701 0.133789 160.643 0.133789 175.428C0.133789 190.217 14.7523 202.16 35.1996 205.028C33.6542 218.075 37.8547 229.141 47.0697 235.483C50.5182 237.822 54.6045 239.041 58.7738 238.968C68.8393 238.968 79.9212 232.958 92.7507 225.994C105.264 219.206 119.219 211.655 132.966 209.705V272.427C132.966 276.036 135.891 278.961 139.5 278.961V196.15C120.37 196.15 102.386 205.904 86.5174 214.512C72.9049 221.892 60.1636 228.628 54.4749 224.718C48.3091 220.471 46.3748 211.551 49.3099 200.853C49.8389 198.919 49.4499 196.845 48.2572 195.237C47.0645 193.624 45.1925 192.655 43.1856 192.598C25.2482 192.115 13.1966 183.336 13.1966 175.433C13.1966 167.53 25.2482 158.756 43.1856 158.273C45.1925 158.216 47.0645 157.247 48.2572 155.634C49.4499 154.021 49.8389 151.952 49.3099 150.013C46.3748 139.314 48.3039 130.395 54.4697 126.148C56.015 125.08 57.8664 124.53 59.7488 124.582C66.0805 124.582 75.0829 129.285 85.5114 134.73C92.0298 138.137 99.4247 142.001 107.561 145.454C110.019 146.497 112.866 145.937 114.748 144.044C116.631 142.151 117.17 139.304 116.112 136.851C110.232 123.851 103.459 111.27 95.8413 99.2029C86.673 84.014 78.7544 70.8941 82.4 65.0031C84.2668 61.9902 87.762 60.4656 92.787 60.4656C97.0341 60.5797 101.234 61.4042 105.207 62.9029C107.188 63.6082 109.392 63.3178 111.118 62.1147C112.85 60.9168 113.898 58.9618 113.934 56.8564C114.339 33.2199 126.053 13.2497 139.51 13.2497V0.181702H139.5Z"
-        fill="#71F6BA"
-      />
-    </svg>
-    <span>
-      ParsleyLogo
-    </span>
+        </g>
+        <defs>
+          <clippath
+            id="Edit_svg__clip0"
+          >
+            <path
+              d="M0 0h16v16H0z"
+              fill="currentColor"
+            />
+          </clippath>
+        </defs>
+      </svg>
+      <span>
+        Edit
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Ellipsis Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M2.75 6a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm5 0a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm6.75 1.75a1.75 1.75 0 10-3.5 0 1.75 1.75 0 003.5 0z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Ellipsis
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Email Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.494 4l4.714 5.05a1.068 1.068 0 001.584 0L13.505 4H2.494zM1.133 4.256A2.12 2.12 0 001 5v6c0 .369.093.715.256 1.011L4.814 8.2l-3.68-3.944z"
+          fill="currentColor"
+        />
+        <path
+          d="M2.867 13c-.348 0-.674-.102-.953-.28l3.56-3.813 1.219 1.306a1.78 1.78 0 002.64 0l1.346-1.443 3.575 3.83c-.313.251-.7.4-1.12.4H2.866zM14.84 11.813c.103-.248.16-.523.16-.813V5c0-.255-.045-.5-.126-.724l-3.535 3.787 3.5 3.75z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Email
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Export Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M14.623 5.186a.278.278 0 000-.385l-2.805-2.915a.277.277 0 00-.477.192v1.424A6.5 6.5 0 005 10v.1a1.5 1.5 0 003 0V10a3.5 3.5 0 013.34-3.496v1.405c0 .25.305.373.478.193l2.805-2.916z"
+          fill="currentColor"
+        />
+        <path
+          d="M6.5 3.879a.75.75 0 00-.75-.75H4a2 2 0 00-2 2v6.864a2 2 0 002 2h6.864a2 2 0 002-2V10.05a.75.75 0 00-1.5 0v1.943a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5V5.129a.5.5 0 01.5-.5h1.75a.75.75 0 00.75-.75z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Export
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Favorite Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.538 1.11a.5.5 0 01.924 0l1.537 3.696a.5.5 0 00.421.306l3.99.32a.5.5 0 01.285.878l-3.04 2.604a.5.5 0 00-.16.496l.928 3.893a.5.5 0 01-.747.542L8.261 11.76a.5.5 0 00-.522 0l-3.415 2.086a.5.5 0 01-.747-.542l.928-3.893a.5.5 0 00-.16-.496L1.304 6.31a.5.5 0 01.285-.878l3.99-.32A.5.5 0 006 4.806L7.538 1.11z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Favorite
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="File Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+      >
+        <path
+          d="M3 13V7h4.5A1.5 1.5 0 009 5.5V1h2a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+          fill="currentColor"
+        />
+        <path
+          d="M7.833 1h-.919a1 1 0 00-.707.293L3.293 4.207A1 1 0 003 4.914v.92h3.833a1 1 0 001-1V1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        File
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Filter Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M6 6.148l-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 01-.17.376l-3 2.625a.5.5 0 01-.83-.376v-8.25z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Filter
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Full Screen Enter Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+      >
+        <path
+          d="M1.5 2a.5.5 0 00-.5.5v4a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-2a.5.5 0 01.5-.5h2a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5h-4zM15 2.5a.5.5 0 00-.5-.5h-4a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h2a.5.5 0 01.5.5v2a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-4zM1.5 14a.5.5 0 01-.5-.5v-4a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v2a.5.5 0 00.5.5h2a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-4zM14.5 14a.5.5 0 00.5-.5v-4a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h4z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        FullScreenEnter
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Full Screen Exit Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+      >
+        <path
+          d="M10.5 7a.5.5 0 01-.5-.5v-4a.5.5 0 01.5-.5h1a.5.5 0 01.5.5v2a.5.5 0 00.5.5h2a.5.5 0 01.5.5v1a.5.5 0 01-.5.5h-4zM6 9.5a.5.5 0 00-.5-.5h-4a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h2a.5.5 0 01.5.5v2a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-4zM10.5 9a.5.5 0 00-.5.5v4a.5.5 0 00.5.5h1a.5.5 0 00.5-.5v-2a.5.5 0 01.5-.5h2a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5h-4zM5.5 7a.5.5 0 00.5-.5v-4a.5.5 0 00-.5-.5h-1a.5.5 0 00-.5.5v2a.5.5 0 01-.5.5h-2a.5.5 0 00-.5.5v1a.5.5 0 00.5.5h4z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        FullScreenExit
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Folder Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2 2a1 1 0 00-1 1v10a1 1 0 001 1h12a1 1 0 001-1V5a1 1 0 00-1-1H8a1 1 0 01-1-1 1 1 0 00-1-1H2z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Folder
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Globe Americas Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M14 8A6 6 0 112 8a6 6 0 0112 0zm-5.301 4.699A4.73 4.73 0 015 11.683V10L3.257 8.257A4.75 4.75 0 018 3.25V4.5L6.5 6v1l-.5.5-.5-.5-1 1 .5.5h2.5L8 9v1l-1 1 1.699 1.699zm4.047-4.496a4.73 4.73 0 00-.924-3.025L10.5 6.5V9h1.25l.996-.797z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        GlobeAmericas
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Government Building Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11 5V4a3 3 0 00-6 0v1h6z"
+          fill="currentColor"
+        />
+        <path
+          clip-rule="evenodd"
+          d="M1.5 6a.5.5 0 000 1H2v6h-.5a.5.5 0 000 1h13a.5.5 0 000-1H14V7h.5a.5.5 0 000-1h-13zm3 2.5a.5.5 0 011 0v3a.5.5 0 01-1 0v-3zM8 8a.5.5 0 00-.5.5v3a.5.5 0 001 0v-3A.5.5 0 008 8zm2.5.5a.5.5 0 011 0v3a.5.5 0 01-1 0v-3z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        GovernmentBuilding
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Home Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.52 2.4a.75.75 0 01.96 0l5.13 4.275a.5.5 0 01.06.71l-.217.253a.5.5 0 01-.686.07l-4.46-3.47a.5.5 0 00-.614 0l-4.46 3.47a.5.5 0 01-.686-.07l-.217-.253a.5.5 0 01.06-.71L7.52 2.4z"
+          fill="currentColor"
+        />
+        <path
+          d="M7.685 5.43L4 8.316v4.922c0 .42.336.762.75.762H6.5a.5.5 0 00.5-.5v-2.04c0-.281.224-.509.5-.509h1c.276 0 .5.228.5.508V13.5a.5.5 0 00.5.5h1.75c.414 0 .75-.341.75-.762V8.316L8.315 5.43a.494.494 0 00-.63 0z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Home
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Import Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11.623 8.799a.278.278 0 000-.385L8.818 5.498a.277.277 0 00-.477.193v1.405A3.5 3.5 0 015 3.6v-.1a1.5 1.5 0 10-3 0v.1a6.5 6.5 0 006.34 6.498v1.424c0 .25.305.372.478.192L11.623 8.8z"
+          fill="currentColor"
+        />
+        <path
+          d="M3.95 11a.75.75 0 011.5 0v1.75a.5.5 0 00.5.5h6.864a.5.5 0 00.5-.5V5.886a.5.5 0 00-.5-.5h-1.943a.75.75 0 010-1.5h1.943a2 2 0 012 2v6.864a2 2 0 01-2 2H5.95a2 2 0 01-2-2V11z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Import
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Important With Circle Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 4.5a1 1 0 012 0v4a1 1 0 01-2 0v-4zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        ImportantWithCircle
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Info With Circle Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8 15A7 7 0 108 1a7 7 0 000 14zM9 4a1 1 0 11-2 0 1 1 0 012 0zM8 6a1 1 0 011 1v4h.5a.5.5 0 010 1h-3a.5.5 0 010-1H7V7h-.5a.5.5 0 010-1H8z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        InfoWithCircle
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Invite User Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.418 7.428a3.5 3.5 0 10-3.836-5.856 3.5 3.5 0 003.836 5.856zM3.091 8.562c.308-.357.838-.339 1.252-.112.64.35 1.375.55 2.157.55s1.517-.2 2.157-.55c.414-.227.944-.245 1.252.112.11.128.214.263.31.403A1.996 1.996 0 009.5 10.5 2 2 0 008.177 14H2v-2.5c0-1.123.411-2.15 1.091-2.938z"
+          fill="currentColor"
+        />
+        <path
+          d="M10.5 10.5a.998.998 0 011-1 1 1 0 011 1v1h1a1 1 0 110 2h-1v1a1 1 0 11-2 0v-1h-1a1 1 0 110-2h1v-1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        InviteUser
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Key Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M6 10c.554 0 1.082-.113 1.562-.317L8.88 11l-.44.44a1.5 1.5 0 002.122 2.12l.439-.439.44.44a1.5 1.5 0 002.12-2.122L9.684 7.562A4 4 0 106 10zm-.75-3.5a1.25 1.25 0 100-2.5 1.25 1.25 0 000 2.5z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Key
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Laptop Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M5 6a.5.5 0 01.5-.5h5a.5.5 0 010 1h-5A.5.5 0 015 6zM5.5 7.5a.5.5 0 000 1h3a.5.5 0 000-1h-3z"
+          fill="currentColor"
+        />
+        <path
+          clip-rule="evenodd"
+          d="M3 2.5a1 1 0 00-1 1v7.813l-.29.49a.91.91 0 00-.068.1L1 13a1 1 0 001 1h12a1 1 0 001-1l-.642-1.096a.901.901 0 00-.067-.1L14 11.313V3.5a1 1 0 00-1-1H3zM12.5 4h-9v6.5h9V4z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Laptop
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Link Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+          fill="currentColor"
+        />
+        <path
+          d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Link
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Lock Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M4 7V5a4 4 0 118 0v2a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1V8a1 1 0 011-1zm2-2a2 2 0 114 0v2H6V5zm2.587 5.81A.999.999 0 008 9a1 1 0 00-.58 1.815v1.852a.583.583 0 001.167 0V10.81z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Lock
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Magnifying Glass Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M2.323 9.819a5.302 5.302 0 006.463.805l4.144 4.144a1.3 1.3 0 101.838-1.838l-4.144-4.144a5.302 5.302 0 00-8.3-6.463 5.3 5.3 0 000 7.496zM7.98 4.162A2.7 2.7 0 114.162 7.98 2.7 2.7 0 017.98 4.162z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        MagnifyingGlass
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Megaphone Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M6 3l5.725-1.636A1 1 0 0113 2.326v7.348a1 1 0 01-1.275.962L6 9H3a2 2 0 01-2-2V5a2 2 0 012-2h3zm-.657 7H3v5h2.98a1 1 0 00.918-1.396L5.343 10zM16 6a2 2 0 01-2 2V4a2 2 0 012 2z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Megaphone
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Menu Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2 4a1 1 0 011-1h10a1 1 0 110 2H3a1 1 0 01-1-1zM2 8a1 1 0 011-1h10a1 1 0 110 2H3a1 1 0 01-1-1zM3 11a1 1 0 100 2h10a1 1 0 100-2H3z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Menu
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Minus Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M3 6.5a1 1 0 00-1 1v1a1 1 0 001 1h10a1 1 0 001-1v-1a1 1 0 00-1-1H3z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Minus
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Not Allowed Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M11.75 8a3.75 3.75 0 01-5.485 3.326l5.06-5.06c.272.518.425 1.108.425 1.734zM4.674 9.735l5.06-5.06a3.75 3.75 0 00-5.06 5.06zM14 8A6 6 0 112 8a6 6 0 0112 0z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        NotAllowed
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Note Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4.5 6.25a.75.75 0 01.75-.75h3.5a.75.75 0 010 1.5h-3.5a.75.75 0 01-.75-.75zM4.5 8.75A.75.75 0 015.25 8h1.5a.75.75 0 010 1.5h-1.5a.75.75 0 01-.75-.75z"
+          fill="currentColor"
+        />
+        <path
+          clip-rule="evenodd"
+          d="M15 10l-4 4H3a2 2 0 01-2-2V4a2 2 0 012-2h10a2 2 0 012 2v6zm-2-6H3v8h7v-2a1 1 0 011-1h2V4z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Note
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Open New Tab Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M13.823 2.45a.278.278 0 00-.272-.273l-4.045-.079a.277.277 0 00-.201.474l1.08 1.08-2.45 2.452a1.395 1.395 0 00-.148.174L5.999 8.065a1.369 1.369 0 101.936 1.936l1.787-1.788c.061-.043.12-.093.174-.147l2.451-2.452 1.081 1.081a.277.277 0 00.474-.201l-.079-4.045z"
+          fill="currentColor"
+        />
+        <path
+          d="M7.25 3.129a.75.75 0 010 1.5H4a.5.5 0 00-.5.5v6.864a.5.5 0 00.5.5h6.864a.5.5 0 00.5-.5V8.75a.75.75 0 011.5 0v3.243a2 2 0 01-2 2H4a2 2 0 01-2-2V5.129a2 2 0 012-2h3.25z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        OpenNewTab
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Pause Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4.5 2a1 1 0 00-1 1v10a1 1 0 001 1h1a1 1 0 001-1V3a1 1 0 00-1-1h-1zM10.5 2a1 1 0 00-1 1v10a1 1 0 001 1h1a1 1 0 001-1V3a1 1 0 00-1-1h-1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Pause
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Person Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11.5 4.5a3.5 3.5 0 11-7 0 3.5 3.5 0 017 0z"
+          fill="currentColor"
+        />
+        <path
+          d="M8 8c-.708 0-1.367-.21-1.918-.572A4.483 4.483 0 018 7c.686 0 1.336.154 1.918.428C9.368 7.79 8.708 8 8 8zM4.591 8.562c.308-.357.838-.339 1.252-.112C6.483 8.8 7.218 9 8 9s1.517-.2 2.158-.55c.413-.227.943-.245 1.251.112A4.482 4.482 0 0112.5 11.5V14h-9v-2.5c0-1.123.411-2.15 1.091-2.938z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Person
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Person Group Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+      >
+        <path
+          d="M4.808 8.923a2.962 2.962 0 100-5.923 2.962 2.962 0 000 5.923zM2.982 9.304c-.35-.192-.798-.207-1.059.095A3.793 3.793 0 001 11.885V14h7.615v-2.115c0-.95-.347-1.819-.923-2.486-.26-.302-.708-.287-1.059-.095a3.79 3.79 0 01-1.825.465 3.79 3.79 0 01-1.826-.465zM9.615 11.885V13H15v-1.906c0-.734-.274-1.405-.727-1.92-.206-.234-.559-.222-.835-.074-.427.23-.917.36-1.438.36-.521 0-1.011-.13-1.438-.36-.276-.148-.63-.16-.835.073-.21.239-.38.51-.504.806.252.585.392 1.23.392 1.906zM14.333 6.288c0 1.264-1.044 2.289-2.333 2.289-1.289 0-2.333-1.025-2.333-2.289C9.667 5.025 10.71 4 12 4c1.289 0 2.333 1.025 2.333 2.288z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        PersonGroup
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Person With Lock Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10 4.5A3.497 3.497 0 016.5 8a3.484 3.484 0 01-1.918-.572A3.5 3.5 0 1110 4.5zM4.343 8.45c-.414-.227-.944-.245-1.252.112A4.482 4.482 0 002 11.5V14h6v-2.5c0-.445.194-.845.502-1.12.033-.82.393-1.554.954-2.076-.259-.051-.55.01-.799.146A4.48 4.48 0 016.5 9a4.48 4.48 0 01-2.157-.55z"
+          fill="currentColor"
+        />
+        <path
+          clip-rule="evenodd"
+          d="M9.5 10.5v.5a.5.5 0 00-.5.5v3a.5.5 0 00.5.5h4a.5.5 0 00.5-.5v-3a.5.5 0 00-.5-.5v-.5a2 2 0 10-4 0zm2-1a1 1 0 00-1 1v.5h2v-.5a1 1 0 00-1-1z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        PersonWithLock
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Play Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M13.779 6.704a1.5 1.5 0 010 2.592l-7.523 4.388A1.5 1.5 0 014 12.388V3.612a1.5 1.5 0 012.256-1.296l7.523 4.388z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Play
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Plus Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M7.5 2a1 1 0 00-1 1v3.5H3a1 1 0 00-1 1v1a1 1 0 001 1h3.5V13a1 1 0 001 1h1a1 1 0 001-1V9.5H13a1 1 0 001-1v-1a1 1 0 00-1-1H9.5V3a1 1 0 00-1-1h-1z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Plus
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Plus With Circle Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8 15A7 7 0 108 1a7 7 0 000 14zM7 5a1 1 0 012 0v2h2a1 1 0 110 2H9v2a1 1 0 11-2 0V9H5a1 1 0 110-2h2V5z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        PlusWithCircle
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Question Mark With Circle Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8 15A7 7 0 108 1a7 7 0 000 14zM6.932 5.612C7.054 5.298 7.425 5 7.942 5 8.615 5 9 5.478 9 5.875c0 .162-.057.33-.172.476a.985.985 0 01-.242.216l-.016.01a1.141 1.141 0 01-.098.054c-.59.286-1.53.967-1.53 2.119V9a1 1 0 002 0c0-.035.011-.12.138-.27a2.66 2.66 0 01.587-.48 3 3 0 00.726-.656A2.742 2.742 0 0011 5.875C11 4.201 9.54 3 7.941 3c-1.275 0-2.43.745-2.873 1.888a1 1 0 101.864.724zM8 13a1 1 0 100-2 1 1 0 000 2z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        QuestionMarkWithCircle
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Redo Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4.018 9.402c-.05.328-.313.598-.645.598h-.8c-.331 0-.603-.27-.57-.6a5.996 5.996 0 012.543-4.325A5.997 5.997 0 017.974 4h.028c2.699 0 4.95 1.718 5.467 4h1.414c.541 0 .792.672.383 1.026l-2.482 2.15a.585.585 0 01-.765 0l-2.482-2.15A.584.584 0 019.92 8h1.446c-.468-1.085-1.68-2-3.364-2a3.98 3.98 0 00-2.543.89 3.996 3.996 0 00-1.441 2.512z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Redo
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Refresh Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.033 2c2.699 0 4.95 1.718 5.467 4h1.414c.542 0 .792.672.383 1.026l-2.482 2.15a.584.584 0 01-.765 0l-2.482-2.15A.584.584 0 019.951 6h1.447c-.469-1.085-1.68-2-3.365-2-1.026 0-1.877.34-2.491.85-.243.202-.618.203-.817-.043l-.61-.754a.468.468 0 01.044-.651C5.163 2.534 6.53 2 8.033 2zM3.95 6.843a.584.584 0 00-.765 0L.703 8.992a.584.584 0 00.383 1.026h1.418C3.03 12.291 5.275 14 7.967 14c1.505 0 2.87-.534 3.874-1.402a.468.468 0 00.044-.65l-.61-.755c-.2-.246-.574-.245-.817-.043-.614.51-1.465.85-2.49.85-1.676 0-2.883-.904-3.358-1.982H6.05a.584.584 0 00.383-1.026L3.95 6.842z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Refresh
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Relationship Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M.5 2a1 1 0 011-1h2a1 1 0 011 1v1H6a2.5 2.5 0 012.5 2.5v5A1.5 1.5 0 0010 12h1.5v-1a1 1 0 011-1h2a1 1 0 011 1v3a1 1 0 01-1 1h-2a1 1 0 01-1-1v-1H10a2.5 2.5 0 01-2.5-2.5v-5A1.5 1.5 0 006 4H4.5v1a1 1 0 01-1 1h-2a1 1 0 01-1-1V2z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Relationship
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Replica Set Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M9.39 7.713A3.488 3.488 0 018 8c-.494 0-.964-.102-1.39-.287L5.264 9.729a2.5 2.5 0 11-1.08-.634L5.57 7.02a3.5 3.5 0 114.86 0l1.385 2.076A2.501 2.501 0 0115 11.5a2.5 2.5 0 11-4.265-1.77L9.391 7.712zM9.75 4.5a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        ReplicaSet
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Save Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M2 3.6c0-.56 0-.84.109-1.054a1 1 0 01.437-.437C2.76 2 3.04 2 3.6 2h7.737c.245 0 .367 0 .482.028a1 1 0 01.29.12c.1.061.187.148.36.32l1.062 1.063c.173.173.26.26.322.36.055.09.095.188.12.29.027.115.027.237.027.482V12.4c0 .56 0 .84-.109 1.054a1 1 0 01-.437.437c-.2.102-.46.109-.954.109V9.284c0-.126 0-.25-.008-.353a1.01 1.01 0 00-.101-.385 1 1 0 00-.437-.437 1.01 1.01 0 00-.385-.1C11.465 8 11.342 8 11.216 8H4.784c-.126 0-.249 0-.353.008a1.01 1.01 0 00-.385.101 1 1 0 00-.437.437 1.01 1.01 0 00-.1.385c-.009.104-.009.227-.009.353V14c-.494 0-.753-.007-.954-.109a1 1 0 01-.437-.437C2 13.24 2 12.96 2 12.4V3.6zm2-.1a.5.5 0 00-.5.5v2a.5.5 0 00.5.5h5a.5.5 0 00.5-.5V4a.5.5 0 00-.5-.5H4z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+        <path
+          d="M11.5 9.3V14h-7V9.3c0-.148 0-.23.005-.288v-.006h.007C4.571 9 4.652 9 4.8 9h6.4c.148 0 .23 0 .288.005h.006v.007c.006.059.006.14.006.288z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Save
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Serverless Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.132 10.849a5.5 5.5 0 118.4-6.571 4 4 0 014.398 6.444 1 1 0 01-.15.192l-1.77 1.898a1.995 1.995 0 01-1.51.688H7.792a2.5 2.5 0 110-2H11.5l1.166-1.25H8.5a3.75 3.75 0 00-6.368.599z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Serverless
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Sharded Cluster Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M13 2.75a1.75 1.75 0 01-2.123 1.71l-.619.866a3.497 3.497 0 011.186 2.049h1.17a1.75 1.75 0 110 1.25h-1.17a3.497 3.497 0 01-1.186 2.05l.619.865a1.75 1.75 0 11-1.046.686l-.662-.926a3.495 3.495 0 01-2.331.002l-.664.93a1.75 1.75 0 11-1.043-.69l.616-.863a3.497 3.497 0 01-1.191-2.054h-1.17a1.75 1.75 0 110-1.25h1.17c.147-.819.58-1.54 1.191-2.054l-.616-.863a1.75 1.75 0 111.043-.69l.664.93A3.494 3.494 0 018 4.5c.41 0 .803.07 1.17.2l.66-.926A1.75 1.75 0 1113 2.75zM9.75 8a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        ShardedCluster
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Settings Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M10.207 1.067a.75.75 0 00-.89.247l-.374.506a6.214 6.214 0 00-1.894.002l-.375-.506a.75.75 0 00-.89-.246l-1.126.467a.75.75 0 00-.454.804l.093.623c-.505.37-.958.82-1.338 1.34l-.623-.093a.75.75 0 00-.803.455l-.466 1.127a.75.75 0 00.247.89l.506.374a6.214 6.214 0 00.002 1.893l-.506.376a.75.75 0 00-.246.89l.467 1.126a.75.75 0 00.804.454l.623-.093c.37.505.82.958 1.34 1.338l-.093.623a.75.75 0 00.455.803l1.127.466a.75.75 0 00.89-.247l.374-.506a6.218 6.218 0 001.894-.002l.375.506a.75.75 0 00.89.246l1.126-.467a.75.75 0 00.454-.804l-.093-.623c.505-.37.958-.82 1.338-1.34l.623.093a.75.75 0 00.803-.455l.466-1.127a.75.75 0 00-.247-.89l-.506-.374a6.218 6.218 0 00-.002-1.894l.506-.375a.75.75 0 00.246-.89l-.467-1.126a.75.75 0 00-.804-.454l-.623.093a6.214 6.214 0 00-1.34-1.338l.093-.623a.75.75 0 00-.455-.803l-1.127-.466zm.334 7.984A2.75 2.75 0 115.46 6.949a2.75 2.75 0 015.082 2.102z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Settings
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Shell Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+      >
+        <path
+          d="M1.8 5.2l3.4 2.2-3.79 2.526a.5.5 0 00-.142.688l.557.86a.5.5 0 00.697.145L7.5 8.3c.3-.2.5-.5.5-.8 0-.3-.2-.6-.4-.8L2.522 3.284a.5.5 0 00-.699.143l-.547.847a.5.5 0 00.155.695L1.8 5.2zM6.7 13a.5.5 0 00.5.5h7.7a.5.5 0 00.5-.5v-1a.5.5 0 00-.5-.5H7.2a.5.5 0 00-.5.5v1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Shell
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="SMS Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1 4a2 2 0 012-2h10a2 2 0 012 2v6a2 2 0 01-2 2H7.755L4.23 14.831c-.488.392-1.23.058-1.23-.555V12a2 2 0 01-2-2V4zm2 .75A.75.75 0 013.75 4h7.5a.75.75 0 010 1.5h-7.5A.75.75 0 013 4.75zm0 3A.75.75 0 013.75 7h5.5a.75.75 0 110 1.5h-5.5A.75.75 0 013 7.75z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        SMS
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Sort Ascending Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4.45 1.143a.584.584 0 00-.765 0L1.203 3.292a.584.584 0 00.383 1.026h1.312v9.352a1.169 1.169 0 102.338 0V4.318H6.55a.584.584 0 00.383-1.026L4.45 1.142zM8 5a1 1 0 000 2h6a1 1 0 100-2H8zM7 9a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zM8 11a1 1 0 100 2h2a1 1 0 100-2H8z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        SortAscending
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Sort Descending Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4.45 14.696a.584.584 0 01-.765 0l-2.482-2.15a.584.584 0 01.383-1.025h1.312V2.168a1.169 1.169 0 112.338 0v9.351H6.55c.541 0 .792.673.383 1.027L4.45 14.696zM8 3a1 1 0 000 2h6a1 1 0 100-2H8zM7 7a1 1 0 011-1h4a1 1 0 110 2H8a1 1 0 01-1-1zM8 9a1 1 0 100 2h2a1 1 0 100-2H8z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        SortDescending
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Split Horizontal Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M15 11a2 2 0 01-2 2H3a2 2 0 01-2-2V3a2 2 0 012-2h10a2 2 0 012 2v8zm-2-4.5V3H3v3.5h10zm-10 1V11h10V7.5H3z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        SplitHorizontal
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Split Vertical Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M13 1a2 2 0 012 2v8a2 2 0 01-2 2H3a2 2 0 01-2-2V3a2 2 0 012-2h10zM7.5 3H3v8h4.5V3zm1 8H13V3H8.5v8z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        SplitVertical
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Stitch Icon"
+        class=""
+        color="#023430"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 0h16v16H0V0zm14 4V2H2v2h12zm0 10V5H2v9h12zM8 6v7H6V6h2zm5 0v4H9V6h4zM5 8v5H3V8h2zm8 3v2H9v-2h4z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Stitch
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Support Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M5 7a3 3 0 016 0v2.5c0 1.51-.957 2.798-2.298 3.288a1 1 0 10.265.967 4.512 4.512 0 002.787-2.785c.08.02.161.03.246.03h.5a2.5 2.5 0 00.406-4.967 5.002 5.002 0 00-9.813 0A2.5 2.5 0 003.5 11H4a1 1 0 001-1V7z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Support
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Sweep Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M3 14.465L4 12.734c.292.169.631.266.999.266h2v2H5a3.982 3.982 0 01-2-.535zM9 15v-2h2c.368 0 .707-.097.999-.266L13 14.464A3.982 3.982 0 0111 15H9zm6-8h-2V5c0-.368-.097-.707-.266-.999L14.464 3c.341.588.536 1.271.536 2v2zM7 1H5c-.729 0-1.412.195-2 .535L4 3.266C4.293 3.097 4.632 3 5 3h2V1zM1 9h2v2c0 .368.097.707.266.999L1.536 13A3.982 3.982 0 011 11V9zm0-2h2V5c0-.368.097-.707.266-.999L1.536 3A3.982 3.982 0 001 5v2zm8-6v2h2c.368 0 .707.097.999.266L13 1.536A3.982 3.982 0 0011 1H9zm6 8h-2v2c0 .368-.097.707-.266.999L14.464 13c.341-.588.536-1.271.536-2V9z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Sweep
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Table Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1 3.25C1 2.56 1.56 2 2.25 2h11.5c.69 0 1.25.56 1.25 1.25v9.5c0 .69-.56 1.25-1.25 1.25H2.25C1.56 14 1 13.44 1 12.75v-9.5zm2 4.12V4h4.37v3.37H3zm0 1.25V12h4.37V8.62H3zM8.62 12H13V8.62H8.62V12zM13 7.37V4H8.62v3.37H13z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Table
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Time Series Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.023 1.518c.513.024.957.363 1.12.853L9.38 6.108l1.56-2.092a1.24 1.24 0 011.872-.134l1.897 1.91c.388.39.388 1.023 0 1.413l-.377.354a.99.99 0 01-1.405 0l-.86-.89-2.122 2.847a1.239 1.239 0 01-2.172-.355L6.798 6.22 6.11 7.774c-.2.451-.644.742-1.135.742H1.994a.997.997 0 01-.994-1v-.5c0-.552.445-1 .994-1h2.174l1.66-3.758a1.242 1.242 0 011.195-.74zM14 12a1 1 0 011 1v.5a1 1 0 01-1 1H2a1 1 0 01-1-1V13a1 1 0 011-1h12z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        TimeSeries
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Trash Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M5 2a1 1 0 011-1h4a1 1 0 011 1h2a1 1 0 011 1v1H2V3a1 1 0 011-1h2zm9 3H2l1.678 8.392A2 2 0 005.64 15h4.72a2 2 0 001.962-1.608L14 5z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Trash
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Undo Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M11.981 9.402c.05.328.313.598.645.598h.8c.331 0 .603-.27.57-.6a5.996 5.996 0 00-2.543-4.325A5.997 5.997 0 008.026 4h-.029C5.298 4 3.047 5.718 2.53 8H1.116a.584.584 0 00-.383 1.026l2.482 2.15c.22.19.545.19.765 0l2.482-2.15A.584.584 0 006.079 8H4.632c.47-1.085 1.68-2 3.365-2a3.98 3.98 0 012.543.89 3.996 3.996 0 011.441 2.512z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Undo
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="University Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.5 4.613c0-.383.191-.74.51-.953a6.87 6.87 0 012.145-.949l2.406-.601a.353.353 0 01.439.342v7.88c0 .238 0 .357-.043.453a.5.5 0 01-.176.211c-.087.06-.204.081-.438.123l-3.9.71c-.324.058-.486.088-.612.042a.5.5 0 01-.264-.22c-.067-.116-.067-.28-.067-.61V4.613zM2 2.452c0-.23.216-.398.439-.342l2.407.601a6.87 6.87 0 012.144.95c.319.211.51.569.51.952v6.428c0 .33 0 .494-.067.61a.5.5 0 01-.264.22c-.126.046-.288.016-.612-.043l-3.9-.709c-.234-.042-.35-.063-.438-.123a.5.5 0 01-.176-.21C2 10.688 2 10.57 2 10.331v-7.88zM2.008 12.41a.5.5 0 01.581-.402l5.143.935c.177.032.359.032.536 0l5.143-.935a.5.5 0 01.178.984l-4.134.752c-.163.434-.753.756-1.455.756-.702 0-1.292-.322-1.455-.756l-4.134-.752a.5.5 0 01-.403-.581z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        University
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Unlock Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M6.157 4.221A2 2 0 0110 5v2H4a1 1 0 00-1 1v6a1 1 0 001 1h8a1 1 0 001-1V8a1 1 0 00-1-1V5a4 4 0 00-7.822-1.182C3.982 4.45 4.538 5 5.2 5c.442 0 .785-.372.957-.779zm2.43 6.589A.999.999 0 008 9a1 1 0 00-.58 1.815v1.852a.583.583 0 001.167 0V10.81z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Unlock
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Unsorted Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M3.685 1.143c.22-.19.545-.19.765 0l2.482 2.149a.584.584 0 01-.383 1.026H5.236v7.364H6.55c.541 0 .792.672.383 1.026l-2.482 2.15a.584.584 0 01-.765 0l-2.482-2.15a.584.584 0 01.383-1.026h1.312V4.318H1.586a.584.584 0 01-.383-1.026l2.482-2.15zM8 8a1 1 0 011-1h5a1 1 0 110 2H9a1 1 0 01-1-1zM9 4a1 1 0 000 2h5a1 1 0 100-2H9zM8 11a1 1 0 011-1h5a1 1 0 110 2H9a1 1 0 01-1-1z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Unsorted
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Up Down Carets Icon"
+        class=""
+        color="#023430"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7.527 1.21a.638.638 0 01.948 0l3.327 3.563c.422.452.123 1.227-.475 1.227H4.673c-.599 0-.898-.775-.476-1.227l3.33-3.562zm3.8 8.79c.598 0 .897.775.475 1.228l-3.327 3.56a.638.638 0 01-.948 0l-3.33-3.56C3.775 10.775 4.074 10 4.673 10h6.654z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        UpDownCarets
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Upload Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M11.297 11v.938a4 4 0 10-.764-7.66A5.501 5.501 0 000 6.5a5.5 5.5 0 005.797 5.492V11h-.403c-1.395 0-2.08-1.7-1.075-2.667L7.472 5.3a1.55 1.55 0 012.15 0l3.152 3.034C13.78 9.301 13.094 11 11.7 11h-.402zM8.339 6.2a.3.3 0 01.416 0l3.152 3.034a.3.3 0 01-.208.516h-1.652v3.75a1.5 1.5 0 01-3 0V9.75H5.394a.3.3 0 01-.208-.516L8.339 6.2z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Upload
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Vertical Ellipsis Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M9.5 2.75a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0zm0 5a1.75 1.75 0 11-3.5 0 1.75 1.75 0 013.5 0zM7.75 14.5a1.75 1.75 0 100-3.5 1.75 1.75 0 000 3.5z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        VerticalEllipsis
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Visibility Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8 2.008c3.934 0 6.473 3.129 7.455 4.583l.043.064C15.713 6.97 16 7.391 16 8s-.287 1.03-.502 1.345l-.043.064c-.982 1.454-3.521 4.583-7.455 4.583S1.527 10.863.545 9.41l-.043-.064C.287 9.03 0 8.609 0 8s.287-1.03.502-1.345l.043-.064C1.527 5.137 4.066 2.008 8 2.008zM9.13 4.13A5.147 5.147 0 008 4.005C5.75 4.005 3.927 5.794 3.927 8c0 2.206 1.824 3.995 4.073 3.995 2.25 0 4.073-1.789 4.073-3.995 0-2.206-1.824-3.995-4.073-3.995.378 0 .756.045 1.13.126zM8 10.996c1.687 0 3.055-1.341 3.055-2.996S9.687 5.004 8 5.004 4.945 6.345 4.945 8 6.313 10.996 8 10.996z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Visibility
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Visibility Off Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M14.601 1.266a1.03 1.03 0 00-1.433.049L1.704 13.486a.987.987 0 00.062 1.407 1.03 1.03 0 001.433-.049l1.793-1.904A7.348 7.348 0 008 13.587c3.934 0 6.473-3.133 7.455-4.59l.043-.063c.215-.316.502-.737.502-1.347s-.287-1.03-.502-1.346l-.043-.065a12.85 12.85 0 00-1.949-2.275l1.157-1.228a.987.987 0 00-.062-1.407zm-2.93 4.585l-.764.81c.096.292.148.603.148.926 0 1.657-1.368 3-3.055 3-.246 0-.485-.028-.714-.082l-.763.81c.458.176.956.272 1.477.272 2.25 0 4.073-1.79 4.073-4 0-.622-.145-1.211-.403-1.736zM8 1.587c.919 0 1.762.171 2.526.452L8.98 3.68A5.13 5.13 0 008 3.587c-2.25 0-4.073 1.79-4.073 4 0 .435.07.853.201 1.245l-1.985 2.107A13.06 13.06 0 01.545 8.998l-.043-.064C.287 8.618 0 8.197 0 7.587s.287-1.03.502-1.346l.043-.065C1.527 4.72 4.066 1.587 8 1.587zm0 2c.327 0 .654.034.978.095l-.016.017A4.155 4.155 0 008 3.587zm0 1c.041 0 .083 0 .124.002L4.966 7.942a2.978 2.978 0 01-.02-.355c0-1.657 1.367-3 3.054-3z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        VisibilityOff
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Warning Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8.864 2.514a.983.983 0 00-1.728 0L1.122 13.539A.987.987 0 001.986 15h12.028a.987.987 0 00.864-1.461L8.864 2.514zM7 6a1 1 0 012 0v4a1 1 0 11-2 0V6zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Warning
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="X Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        X
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="XWith Circle Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M8 15A7 7 0 108 1a7 7 0 000 14zm1.414-9.828a1 1 0 111.414 1.414L9.414 8l1.414 1.414a1 1 0 11-1.414 1.414L8 9.414l-1.414 1.414a1 1 0 11-1.414-1.414L6.586 8 5.172 6.586a1 1 0 011.414-1.414L8 6.586l1.414-1.414z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        XWithCircle
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Closed Eye Icon"
+        fill="none"
+        height="16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M15 7h-1.385c0 1.436-3.769 4.308-5.615 4.308v1.077c2.154 0 7-2.244 7-5.385ZM1 7h1.385c0 1.436 3.769 4.308 5.615 4.308v1.077c-2.154 0-7-2.244-7-5.385Z"
+          fill="#001E2B"
+        />
+        <path
+          d="M8 12.385c-2.154 0-7-2.244-7-5.385h1.385c0 1.436 3.769 4.308 5.615 4.308m0 1.077v-1.077m0 1.077c2.154 0 7-2.244 7-5.385h-1.385c0 1.436-3.769 4.308-5.615 4.308M1 11.038l.862-.808.43.404-.861.808L1 11.038Z"
+          stroke="#001E2B"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M5.308 11.846h-.862l-.861 1.211L4 13.5l1.308-1.654ZM15 11.038l-.861-.808-.431.404.861.808.431-.404ZM10.421 11.757h.862l1.132 1.3-.43.404-1.564-1.704Z"
+          stroke="#001E2B"
+          stroke-linejoin="round"
+        />
+        <path
+          d="M7.462 12.385h1.076V14H7.462v-1.615Z"
+          fill="#001E2B"
+          stroke="#001E2B"
+          stroke-linejoin="round"
+        />
+      </svg>
+      <span>
+        ClosedEye
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="ArrowWithCircle Icon"
+        fill="none"
+        height="14"
+        width="14"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M7 14A7 7 0 1 0 7 0a7 7 0 0 0 0 14Zm1.512-7.909h-5.4a.778.778 0 0 0-.779.778v.263c0 .43.349.778.778.778H8.51L7.317 9.103a.778.778 0 0 0 0 1.1l.186.186a.778.778 0 0 0 1.1 0l2.84-2.84a.778.778 0 0 0 0-1.1l-.187-.186a.966.966 0 0 0-.02-.02L8.603 3.612a.778.778 0 0 0-1.1 0l-.186.186a.778.778 0 0 0 0 1.1L8.512 6.09Z"
+          fill="#001E2B"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        ArrowWithCircle
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Expand Icon"
+        fill="none"
+        height="24"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
+          fill="#001E2B"
+        />
+        <path
+          d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
+          stroke="#001E2B"
+        />
+        <path
+          d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
+          fill="#001E2B"
+        />
+        <path
+          d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
+          stroke="#001E2B"
+        />
+      </svg>
+      <span>
+        Expand
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Evergreen Icon"
+        fill="none"
+        height="24"
+        viewBox="0 0 258 258"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M144.206 213.445H114.693C110.693 213.445 107.449 216.688 107.449 220.689V250.201C107.449 254.202 110.693 257.445 114.693 257.445H144.206C148.206 257.445 151.449 254.202 151.449 250.201V220.689C151.449 216.688 148.206 213.445 144.206 213.445Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M237.92 218.638L188.116 155.363H71.0083L20.5234 218.649C16.5211 224.712 20.8722 232.791 28.1364 232.791H230.312C237.582 232.791 241.933 224.701 237.92 218.638Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M208.375 146.21L167.82 89.1536H90.4297L49.6287 146.227C45.6264 152.289 49.9774 160.369 57.2417 160.369H200.767C208.037 160.369 212.388 152.278 208.375 146.216V146.21Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M184.463 79.9953L132.867 2.05749C131.048 -0.689405 127.019 -0.684039 125.2 2.06286L73.7767 80.006C69.7744 86.0685 74.1254 94.1482 81.3897 94.1482H176.85C184.119 94.1482 188.47 86.0577 184.457 79.9953H184.463Z"
+          fill="#00A35C"
+        />
+      </svg>
+      <span>
+        EvergreenLogo
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        fill="none"
+        height="24"
+        viewBox="0 0 279 279"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M146.034 172.244V91.7977C146.034 88.1885 143.109 85.2637 139.5 85.2637V178.778C143.109 178.778 146.034 175.853 146.034 172.244Z"
+          fill="#00ED64"
+        />
+        <path
+          d="M220.231 225.9C221.751 225.962 223.254 225.548 224.53 224.713C230.696 220.471 232.625 211.551 229.69 200.853C229.161 198.919 229.55 196.845 230.743 195.232C231.935 193.619 233.807 192.649 235.814 192.592C253.752 192.105 265.798 183.32 265.803 175.423C265.803 167.525 253.752 158.745 235.814 158.263C233.807 158.206 231.935 157.236 230.743 155.623C229.55 154.011 229.161 151.942 229.69 150.002C232.625 139.304 230.696 130.385 224.525 126.137C222.98 125.074 221.134 124.525 219.256 124.571C212.93 124.571 203.927 129.27 193.504 134.715C186.98 138.122 179.58 141.985 171.444 145.439C168.986 146.481 166.139 145.921 164.257 144.028C162.374 142.135 161.835 139.288 162.893 136.83C168.773 123.835 175.541 111.26 183.159 99.1977C192.337 84.0036 200.256 70.8785 196.605 64.9824C194.743 61.9747 191.248 60.4449 186.223 60.4449C181.976 60.559 177.781 61.3835 173.803 62.8822C171.823 63.5874 169.624 63.297 167.892 62.0939C166.16 60.896 165.112 58.941 165.076 56.8356C164.671 33.1991 152.957 13.2341 139.5 13.2289V85.2585C143.109 85.2585 146.034 88.1833 146.034 91.7925V172.239C146.034 175.848 143.109 178.772 139.5 178.772V196.145C158.625 196.145 176.609 205.899 192.482 214.507C203.279 220.362 213.485 225.895 220.231 225.895V225.9ZM168.016 178.327C166.403 177.678 165.107 176.413 164.433 174.811C163.754 173.208 163.738 171.404 164.397 169.791C165.055 168.178 166.326 166.897 167.933 166.223C175.577 162.977 182.723 159.248 189.024 155.955C191.881 154.462 194.619 153.036 197.243 151.729C198.793 150.956 200.588 150.832 202.232 151.382C203.875 151.931 205.234 153.114 206.002 154.664C206.774 156.215 206.899 158.009 206.354 159.653C205.805 161.297 204.622 162.655 203.072 163.428C200.52 164.698 197.86 166.093 195.075 167.54C188.557 170.942 181.167 174.8 173.041 178.254C171.444 178.944 169.634 178.97 168.021 178.321L168.016 178.327Z"
+          fill="#00ED64"
+        />
+        <path
+          d="M203.072 163.433C204.622 162.661 205.805 161.302 206.354 159.658C206.904 158.014 206.78 156.22 206.002 154.669C205.234 153.119 203.876 151.936 202.232 151.387C200.588 150.837 198.794 150.962 197.243 151.734C194.619 153.041 191.881 154.467 189.024 155.961C182.723 159.253 175.577 162.982 167.933 166.228C166.326 166.897 165.055 168.183 164.397 169.796C163.738 171.409 163.754 173.213 164.433 174.816C165.112 176.418 166.404 177.684 168.016 178.332C169.634 178.98 171.439 178.954 173.036 178.264C181.162 174.816 188.552 170.958 195.07 167.551C197.855 166.099 200.515 164.709 203.067 163.438L203.072 163.433Z"
+          fill="#00ED64"
+        />
+        <path
+          d="M146.034 272.427V209.705C159.782 211.655 173.736 219.206 186.249 225.994C199.084 232.958 210.166 238.968 220.231 238.968C224.401 239.036 228.487 237.822 231.936 235.478C241.14 229.141 245.341 218.075 243.8 205.028C264.248 202.16 278.871 190.223 278.871 175.428C278.871 160.643 264.248 148.701 243.806 145.838C245.351 132.786 241.145 121.719 231.936 115.382C228.207 112.815 223.778 111.467 219.256 111.514C209.72 111.514 199.4 116.902 187.452 123.145C186.011 123.897 184.528 124.67 183.008 125.458C186.778 118.504 190.704 112.006 194.349 105.965C206.209 86.3216 215.575 70.8111 207.718 58.1217C202.211 49.2178 191 45.6086 177.615 48.2948C174.53 20.7327 158.739 0.181702 139.505 0.181702V13.2497C152.962 13.2497 164.677 33.2199 165.081 56.8564C165.118 58.9618 166.165 60.9168 167.897 62.1147C169.624 63.3126 171.823 63.6082 173.809 62.9029C177.781 61.4042 181.982 60.5797 186.229 60.4656C191.254 60.4656 194.749 61.9954 196.61 65.0031C200.261 70.8993 192.343 84.0191 183.164 99.2185C175.546 111.28 168.774 123.856 162.898 136.851C161.84 139.304 162.38 142.151 164.262 144.049C166.144 145.942 168.991 146.502 171.449 145.459C179.591 142.006 186.986 138.142 193.509 134.735C203.933 129.29 212.935 124.592 219.262 124.592C221.139 124.546 222.985 125.09 224.53 126.158C230.701 130.405 232.625 139.325 229.695 150.023C229.166 151.957 229.555 154.031 230.748 155.644C231.941 157.257 233.813 158.227 235.82 158.284C253.757 158.766 265.809 167.545 265.809 175.443C265.809 183.341 253.757 192.126 235.82 192.608C233.813 192.665 231.941 193.635 230.748 195.248C229.555 196.86 229.166 198.929 229.695 200.869C232.63 211.567 230.701 220.486 224.536 224.728C223.265 225.563 221.761 225.978 220.237 225.916C213.49 225.916 203.284 220.383 192.488 214.528C176.62 205.92 158.635 196.171 139.505 196.165V278.976C143.115 278.976 146.039 276.051 146.039 272.442L146.034 272.427Z"
+          fill="#00ED64"
+        />
+        <path
+          d="M132.966 91.7977V172.244C132.966 175.853 135.891 178.778 139.5 178.778V85.2585C135.891 85.2585 132.966 88.1833 132.966 91.7925V91.7977Z"
+          fill="#71F6BA"
+        />
+        <path
+          d="M113.924 56.8512C113.888 58.9566 112.84 60.9116 111.108 62.1095C109.382 63.3074 107.183 63.603 105.197 62.8977C101.224 61.3991 97.024 60.5745 92.7769 60.4604C87.7467 60.4604 84.2567 61.9902 82.3899 65.0031C78.7391 70.8941 86.6629 84.014 95.8313 99.2029C103.449 111.27 110.227 123.845 116.102 136.851C117.16 139.304 116.621 142.151 114.738 144.044C112.856 145.937 110.009 146.497 107.551 145.454C99.4146 142.001 92.0249 138.142 85.5013 134.73C75.0728 129.285 66.0704 124.582 59.7387 124.582C57.8563 124.53 56.0102 125.08 54.4596 126.148C48.2938 130.39 46.3647 139.309 49.2998 150.007C49.8288 151.942 49.4399 154.016 48.2471 155.629C47.0544 157.241 45.1824 158.216 43.1755 158.268C25.2381 158.756 13.1865 167.53 13.1865 175.428C13.1865 183.326 25.2381 192.11 43.1755 192.592C45.1824 192.649 47.0544 193.619 48.2471 195.232C49.4399 196.845 49.8288 198.914 49.2998 200.853C46.3647 211.551 48.2938 220.466 54.4648 224.713C60.1535 228.628 72.9 221.887 86.5073 214.507C102.376 205.899 120.36 196.145 139.49 196.145V178.773C135.881 178.773 132.956 175.848 132.956 172.239V91.7977C132.956 88.1885 135.881 85.2637 139.49 85.2637V13.2445C126.033 13.2445 114.324 33.2147 113.914 56.8512H113.924ZM114.531 174.795C113.857 176.392 112.576 177.652 110.968 178.301C109.361 178.949 107.561 178.933 105.964 178.254C97.8329 174.8 90.4381 170.942 83.9145 167.54C81.1349 166.093 78.4747 164.704 75.9285 163.428C72.7704 161.784 71.5103 157.91 73.0971 154.721C74.6839 151.532 78.5369 150.204 81.7572 151.734C84.376 153.041 87.1089 154.467 89.961 155.955C96.2669 159.248 103.418 162.982 111.067 166.228C114.391 167.634 115.941 171.471 114.531 174.795Z"
+          fill="#71F6BA"
+        />
+        <path
+          d="M111.072 166.233C103.418 162.987 96.2717 159.253 89.9659 155.961C87.1138 154.472 84.3809 153.046 81.7621 151.739C78.5418 150.21 74.694 151.537 73.102 154.726C71.5151 157.916 72.7753 161.789 75.9334 163.433C78.4796 164.704 81.1398 166.093 83.9194 167.545C90.443 170.952 97.8378 174.811 105.969 178.259C107.566 178.938 109.366 178.954 110.973 178.306C112.581 177.658 113.862 176.392 114.536 174.795C115.946 171.471 114.396 167.639 111.072 166.228V166.233Z"
+          fill="#71F6BA"
+        />
+        <path
+          d="M139.5 0.181702C120.266 0.181702 104.481 20.7275 101.395 48.2896C87.9953 45.6086 76.7994 49.2126 71.2818 58.1165C63.4254 70.8059 72.7908 86.3164 84.6454 105.955C88.2909 111.996 92.2165 118.494 95.9917 125.453C94.4723 124.67 92.9996 123.902 91.5579 123.145C79.6049 116.907 69.2853 111.514 59.7488 111.514C55.2216 111.467 50.793 112.821 47.0645 115.382C37.8599 121.719 33.6542 132.786 35.1996 145.838C14.7523 148.701 0.133789 160.643 0.133789 175.428C0.133789 190.217 14.7523 202.16 35.1996 205.028C33.6542 218.075 37.8547 229.141 47.0697 235.483C50.5182 237.822 54.6045 239.041 58.7738 238.968C68.8393 238.968 79.9212 232.958 92.7507 225.994C105.264 219.206 119.219 211.655 132.966 209.705V272.427C132.966 276.036 135.891 278.961 139.5 278.961V196.15C120.37 196.15 102.386 205.904 86.5174 214.512C72.9049 221.892 60.1636 228.628 54.4749 224.718C48.3091 220.471 46.3748 211.551 49.3099 200.853C49.8389 198.919 49.4499 196.845 48.2572 195.237C47.0645 193.624 45.1925 192.655 43.1856 192.598C25.2482 192.115 13.1966 183.336 13.1966 175.433C13.1966 167.53 25.2482 158.756 43.1856 158.273C45.1925 158.216 47.0645 157.247 48.2572 155.634C49.4499 154.021 49.8389 151.952 49.3099 150.013C46.3748 139.314 48.3039 130.395 54.4697 126.148C56.015 125.08 57.8664 124.53 59.7488 124.582C66.0805 124.582 75.0829 129.285 85.5114 134.73C92.0298 138.137 99.4247 142.001 107.561 145.454C110.019 146.497 112.866 145.937 114.748 144.044C116.631 142.151 117.17 139.304 116.112 136.851C110.232 123.851 103.459 111.27 95.8413 99.2029C86.673 84.014 78.7544 70.8941 82.4 65.0031C84.2668 61.9902 87.762 60.4656 92.787 60.4656C97.0341 60.5797 101.234 61.4042 105.207 62.9029C107.188 63.6082 109.392 63.3178 111.118 62.1147C112.85 60.9168 113.898 58.9618 113.934 56.8564C114.339 33.2199 126.053 13.2497 139.51 13.2497V0.181702H139.5Z"
+          fill="#71F6BA"
+        />
+      </svg>
+      <span>
+        ParsleyLogo
+      </span>
+    </div>
   </div>
 </div>
 `;

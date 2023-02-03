@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
@@ -8,14 +8,13 @@ import AnsiiRow from ".";
 import { RowRenderer, cache } from "../RowRenderer";
 
 export default {
-  title: "Components/LogRow/AnsiiRow",
   component: AnsiiRow,
-} as ComponentMeta<AnsiiRowProps>;
+};
 
 type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>>;
 
 // Single AnsiiRow.
-const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
+const SingleLineStory = (args: any) => {
   const { ingestLines, resetRowHeightAtIndex, scrollToLine } = useLogContext();
 
   useEffect(() => {
@@ -46,14 +45,15 @@ const SingleLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
   );
 };
 
-export const SingleLine = SingleLineTemplate.bind({});
-
-SingleLine.args = {
-  wrap: false,
+export const SingleLine: StoryObj<AnsiiRowProps> = {
+  render: (args) => <SingleLineStory {...args} />,
+  args: {
+    wrap: false,
+  },
 };
 
 // Multiple AnsiiRows.
-const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
+const MultiLineStory = (args: any) => {
   const { ingestLines, processedLogLines, preferences } = useLogContext();
   const { setWrap } = preferences;
 
@@ -80,10 +80,11 @@ const MultiLineTemplate: ComponentStory<AnsiiRowProps> = (args) => {
   );
 };
 
-export const MultiLines = MultiLineTemplate.bind({});
-
-MultiLines.args = {
-  wrap: false,
+export const MultiLines: StoryObj<AnsiiRowProps> = {
+  render: (args) => <MultiLineStory {...args} />,
+  args: {
+    wrap: false,
+  },
 };
 
 const logLines = [

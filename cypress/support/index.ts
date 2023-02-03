@@ -17,7 +17,7 @@ declare global {
        * Custom command to add a search.
        * @example cy.addSearch('mySearch')
        */
-      addSearch(search: string, shouldSubmit?: boolean): void;
+      addSearch(search: string): void;
       /**
        * Custom command to click one of the toggles in the Details Menu panel.
        * @example cy.clickToggle('wrap-toggle', true)
@@ -37,10 +37,6 @@ declare global {
        * @example cy.editBounds({ lower: 5, upper: 10 })
        */
       editBounds(bounds: { upper?: string; lower?: string }): void;
-      /**
-       * Custom command to enable clipboard interactions.
-       */
-      enableClipboard(): void;
       /** Custom command to determine if an element is not contained in the viewport.
        * @example cy.isNotContainedInViewport()
        * @example cy.isNotContainedInViewport().should('be.visible')
@@ -63,14 +59,19 @@ declare global {
        */
       login(): void;
       /**
-       * Custom command to open and close the Leafygreen SideNav.
+       * Custom command to reset the drawer cookie.
+       * @example cy.resetDrawerState()
        */
-      toggleDrawer(): void;
+      resetDrawerState(): void;
       /**
        * Custom command to open and close the Details Panel.
        * @example cy.toggleDetailsPanel(true)
        */
       toggleDetailsPanel(open: boolean): void;
+      /**
+       * Custom command to open and close the Leafygreen SideNav.
+       */
+      toggleDrawer(): void;
       /**
        * Custom command to validate a toast was rendered
        * @example cy.validateToast("success", "This succeeded")
@@ -87,3 +88,9 @@ declare global {
     }
   }
 }
+
+beforeEach(() => {
+  cy.login();
+  cy.setCookie("has-opened-drawer", "true");
+  cy.setCookie("has-seen-searchbar-guide-cue", "true");
+});
