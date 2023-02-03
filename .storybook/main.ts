@@ -1,5 +1,6 @@
 // eslint-disable-next-line import/no-import-module-exports
 import type { StorybookConfig } from "@storybook/react-vite";
+import { defineConfig, mergeConfig } from "vite";
 
 const config: StorybookConfig = {
   stories: ["../src/**/*.stories.@(js|jsx|ts|tsx)"],
@@ -13,6 +14,15 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
+  viteFinal: async (c) =>
+    mergeConfig(
+      c,
+      defineConfig({
+        build: {
+          assetsDir: "",
+        },
+      })
+    ),
   docs: {
     autodocs: true,
   },
