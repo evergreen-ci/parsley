@@ -1,0 +1,151 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/SidePanel/NavGroup/ExpandedNavGroup Default 1`] = `
+<div>
+  <li
+    class="leafygreen-ui-h8f4g2 css-1hr1o5a"
+  >
+    <div
+      class="leafygreen-ui-17ychji"
+      data-testid="side-nav-group-header-label"
+      id="menu-group-label-id-1"
+    >
+      <div
+        class="leafygreen-ui-y6v9s0"
+      >
+        <svg
+          aria-label="Expand Icon"
+          class="leafygreen-ui-nckpfs"
+          fill="none"
+          height="16"
+          width="16"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
+            fill="#00684A"
+          />
+          <path
+            d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
+            stroke="#00684A"
+          />
+          <path
+            d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
+            fill="#00684A"
+          />
+          <path
+            d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
+            stroke="#00684A"
+          />
+        </svg>
+        <div
+          class="leafygreen-ui-4ct6n4"
+        >
+          <div
+            class="css-1sg2lsz"
+            data-cy="expanded-lines-nav-group-header"
+          >
+            <div
+              class="css-10scxvy"
+            >
+              Expanded Lines
+            </div>
+            <div
+              class="leafygreen-ui-1w3euls"
+            >
+              2
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <ul
+      aria-labelledby="menu-group-label-id-1"
+      class="leafygreen-ui-bdnco"
+    >
+      <div
+        class="css-ewb44i"
+        data-cy="expanded-row-0-to-10"
+      >
+        <button
+          aria-disabled="false"
+          aria-label="Delete range"
+          class="leafygreen-ui-6obv0c"
+          tabindex="0"
+        >
+          <div
+            class="leafygreen-ui-xhlipt"
+          >
+            <svg
+              aria-label="X Icon"
+              class=""
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+        </button>
+        <div
+          class="leafygreen-ui-114muox"
+        >
+          Row 
+          0
+           to 
+          10
+        </div>
+      </div>
+      <div
+        class="css-ewb44i"
+        data-cy="expanded-row-20-to-30"
+      >
+        <button
+          aria-disabled="false"
+          aria-label="Delete range"
+          class="leafygreen-ui-6obv0c"
+          tabindex="0"
+        >
+          <div
+            class="leafygreen-ui-xhlipt"
+          >
+            <svg
+              aria-label="X Icon"
+              class=""
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
+        </button>
+        <div
+          class="leafygreen-ui-114muox"
+        >
+          Row 
+          20
+           to 
+          30
+        </div>
+      </div>
+    </ul>
+  </li>
+</div>
+`;
