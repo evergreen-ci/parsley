@@ -1,0 +1,16 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/Highlight Default 1`] = `
+<div>
+  <span>
+    Should be 
+    <mark
+      class="css-isit1e"
+      color="#FFCDC7"
+      data-cy="highlight"
+    >
+      highlighted
+    </mark>
+  </span>
+</div>
+`;
