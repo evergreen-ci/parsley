@@ -126,7 +126,7 @@ describe("row", () => {
     });
     it("should show both highlights and searches if they are on the same line", () => {
       const searchRegex = /Test/i;
-      const highlightRegex = /Log/i;
+      const highlightRegex = /(Log)/i;
       renderWithRouterMatch(
         <Row {...rowProps} highlights={highlightRegex} searchTerm={searchRegex}>
           {testLog}

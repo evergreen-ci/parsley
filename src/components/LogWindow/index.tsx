@@ -34,9 +34,12 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const { searchTerm } = searchState;
 
   const [highlights] = useHighlightParam();
-  const highlightRegex = highlights.length
-    ? new RegExp(highlights.join("|"), "i")
-    : undefined;
+  // Join the highlights into a single regex to match against. Use capture groups
+  // to highlight each match.
+  const highlightRegex =
+    highlights.length > 0
+      ? new RegExp(`${highlights.map((h) => `(${h})`).join("|")}`, "g")
+      : undefined;
 
   return (
     <Container data-cy="log-window">
