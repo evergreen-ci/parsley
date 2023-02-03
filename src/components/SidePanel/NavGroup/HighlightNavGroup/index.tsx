@@ -39,7 +39,12 @@ const HighlightNavGroup: React.FC = () => {
             <Icon glyph="X" />
           </IconButton>
           <Overline>
-            <Highlight color={highlightColorList[index]}>{highlight}</Highlight>
+            <Highlight
+              color={highlightColorList[index]}
+              data-cy="side-nav-highlight"
+            >
+              {highlight}
+            </Highlight>
           </Overline>
         </HighlightedTerm>
       ))}
