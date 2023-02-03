@@ -48,4 +48,29 @@ describe("Highlighting", () => {
     cy.dataCy("delete-highlight-button").click();
     cy.dataCy("highlight").should("not.exist");
   });
+  it("applying multiple highlights should use different colors", () => {
+    cy.addHighlight("ShardedClusterFixture:job0:mongos0 ");
+    cy.addHighlight("ShardedClusterFixture:job0:shard0:node1");
+    cy.dataCy("highlight").should("exist");
+    cy.dataCy("highlight").should("have.length", 2);
+    cy.dataCy("highlight").each(($el) => {
+      cy.wrap($el)
+        .invoke("text")
+        .should(
+          "match",
+          /ShardedClusterFixture:job0:mongos0|ShardedClusterFixture:job0:shard0:node1/
+        );
+    });
+    const colors = new Set();
+    cy.dataCy("highlight")
+      .each(($el) => {
+        cy.log("el", $el);
+        cy.wrap($el).then(($e) => {
+          colors.add($e.css("background-color"));
+        });
+      })
+      .then(() => {
+        expect(colors.size).to.eq(2);
+      });
+  });
 });

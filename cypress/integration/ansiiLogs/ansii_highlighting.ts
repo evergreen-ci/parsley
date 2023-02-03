@@ -36,4 +36,26 @@ describe("Highlighting", () => {
     cy.dataCy("delete-highlight-button").click();
     cy.dataCy("highlight").should("not.exist");
   });
+  it("applying multiple highlights should use different colors", () => {
+    cy.addHighlight("@bugsnag/plugin-react@");
+    cy.addHighlight("info");
+    cy.dataCy("highlight").should("exist");
+    cy.dataCy("highlight").should("have.length", 5);
+    cy.dataCy("highlight").each(($el) => {
+      cy.wrap($el)
+        .invoke("text")
+        .should("match", /@bugsnag\/plugin-react@|info/);
+    });
+    const colors = new Set();
+    cy.dataCy("highlight")
+      .each(($el) => {
+        cy.log("el", $el);
+        cy.wrap($el).then(($e) => {
+          colors.add($e.css("background-color"));
+        });
+      })
+      .then(() => {
+        expect(colors.size).to.eq(2);
+      });
+  });
 });
