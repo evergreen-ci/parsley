@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
 import { Overline } from "@leafygreen-ui/typography";
 import { useLogWindowAnalytics } from "analytics";
+import Highlight, { highlightColorList } from "components/Highlight";
 import Icon from "components/Icon";
 import { size } from "constants/tokens";
 import { useHighlightParam } from "hooks/useHighlightParam";
@@ -28,7 +29,7 @@ const HighlightNavGroup: React.FC = () => {
       items={highlights}
       navGroupTitle="Highlighted Terms"
     >
-      {highlights.map((highlight) => (
+      {highlights.map((highlight, index) => (
         <HighlightedTerm key={`highlight-${highlight}`}>
           <IconButton
             aria-label="Delete highlight"
@@ -37,7 +38,9 @@ const HighlightNavGroup: React.FC = () => {
           >
             <Icon glyph="X" />
           </IconButton>
-          <Overline>{highlight}</Overline>
+          <Overline>
+            <Highlight color={highlightColorList[index]}>{highlight}</Highlight>
+          </Overline>
         </HighlightedTerm>
       ))}
     </BaseNavGroup>
