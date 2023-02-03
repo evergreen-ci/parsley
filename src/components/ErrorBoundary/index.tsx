@@ -37,7 +37,7 @@ class DefaultErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, errorInfo: any) {
-    leaveBreadcrumb("Saw error page", { error, errorInfo }, "error");
+    leaveBreadcrumb("Reached error page", { error, errorInfo }, "error");
     console.error({ error, errorInfo });
   }
 
