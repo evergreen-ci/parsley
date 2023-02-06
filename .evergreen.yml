@@ -60,71 +60,71 @@ functions:
         - "./parsley/bin/jest/*.xml"
 
   attach-storybook:
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/*.html"]
-      remote_file: parsley/${task_id}/storybook/
-      bucket: mciuploads
-      content_type: text/html
-      permissions: public-read
-      display_name: storybook_
-      preserve_path: true
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/**/*.js", "parsley/storybook-static/**/*.mjs"]
-      remote_file: parsley/${task_id}/storybook/
-      bucket: mciuploads
-      content_type: application/javascript
-      permissions: public-read
-      display_name: storybook_assets_js_
-      preserve_path: true
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/**/*.js.map"]
-      remote_file: parsley/${task_id}/storybook/
-      bucket: mciuploads
-      content_type: application/json
-      permissions: public-read
-      display_name: storybook_assets_map_
-      preserve_path: true
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/**/*.svg"]
-      remote_file: parsley/${task_id}/storybook/
-      bucket: mciuploads
-      content_type: image/svg+xml
-      permissions: public-read
-      display_name: storybook_assets_svg_
-      preserve_path: true
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/**/*.json"]
-      remote_file: parsley/${task_id}/storybook/
-      bucket: mciuploads
-      content_type: application/json
-      permissions: public-read
-      display_name: storybook_json_
-      preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/*.html"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: text/html
+        permissions: public-read
+        display_name: storybook_
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.js", "parsley/storybook-static/**/*.mjs"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: application/javascript
+        permissions: public-read
+        display_name: storybook_assets_js_
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.js.map"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: application/json
+        permissions: public-read
+        display_name: storybook_assets_map_
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.svg"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: image/svg+xml
+        permissions: public-read
+        display_name: storybook_assets_svg_
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.json"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: application/json
+        permissions: public-read
+        display_name: storybook_json_
+        preserve_path: true
 
   link-to-storybook:
     command: shell.exec
