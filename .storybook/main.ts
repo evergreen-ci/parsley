@@ -14,15 +14,6 @@ const config: StorybookConfig = {
     name: "@storybook/react-vite",
     options: {},
   },
-  viteFinal: async (c) =>
-    mergeConfig(
-      c,
-      defineConfig({
-        build: {
-          assetsDir: "",
-        },
-      })
-    ),
   docs: {
     autodocs: true,
   },
