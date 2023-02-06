@@ -66,14 +66,14 @@ functions:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
       local_files_include_filter:
-        ["parsley/storybook-static/*"]
+        ["parsley/storybook-static/*.html"]
       remote_file: parsley/${task_id}/storybook/
       bucket: mciuploads
       content_type: text/html
       permissions: public-read
       display_name: storybook_
+      preserve_path: true
 
-  # Ideally we can get rid of this command upon the completion of EVG-17334.
   attach-storybook-assets-js:
     command: s3.put
     type: system
@@ -81,14 +81,14 @@ functions:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
       local_files_include_filter:
-        ["parsley/storybook-static/assets/*.js"]
-      remote_file: parsley/${task_id}/storybook/assets/
+        ["parsley/storybook-static/**/*.js", "parsley/storybook-static/**/*.mjs"]
+      remote_file: parsley/${task_id}/storybook/
       bucket: mciuploads
       content_type: application/javascript
       permissions: public-read
       display_name: storybook_assets_js_
+      preserve_path: true
 
-  # Ideally we can get rid of this command upon the completion of EVG-17334.
   attach-storybook-assets-map:
     command: s3.put
     type: system
@@ -96,14 +96,14 @@ functions:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
       local_files_include_filter:
-        ["parsley/storybook-static/assets/*.js.map"]
-      remote_file: parsley/${task_id}/storybook/assets/
+        ["parsley/storybook-static/**/*.js.map"]
+      remote_file: parsley/${task_id}/storybook/
       bucket: mciuploads
       content_type: application/json
       permissions: public-read
       display_name: storybook_assets_map_
-  
-  # Ideally we can get rid of this command upon the completion of EVG-17334.
+      preserve_path: true
+
   attach-storybook-assets-svg:
     command: s3.put
     type: system
@@ -111,12 +111,37 @@ functions:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
       local_files_include_filter:
-        ["parsley/storybook-static/assets/*.svg"]
-      remote_file: parsley/${task_id}/storybook/assets/
+        ["parsley/storybook-static/**/*.svg"]
+      remote_file: parsley/${task_id}/storybook/
       bucket: mciuploads
       content_type: image/svg+xml
       permissions: public-read
       display_name: storybook_assets_svg_
+      preserve_path: true
+
+  attach-storybook-json:
+    command: s3.put
+    type: system
+    params:
+      aws_key: ${aws_key}
+      aws_secret: ${aws_secret}
+      local_files_include_filter:
+        ["parsley/storybook-static/**/*.json"]
+      remote_file: parsley/${task_id}/storybook/
+      bucket: mciuploads
+      content_type: application/json
+      permissions: public-read
+      display_name: storybook_json_
+      preserve_path: true
+
+  link-to-storybook:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      script: |
+        echo "#############################################"
+        echo "Link to Storybook: https://mciuploads.s3.amazonaws.com/parsley/${task_id}/storybook/parsley/storybook-static/index.html"
+        echo "#############################################"
 
   attach-source-map:
     command: s3.put
@@ -417,6 +442,8 @@ tasks:
     - func: attach-storybook-assets-js
     - func: attach-storybook-assets-svg
     - func: attach-storybook-assets-map
+    - func: attach-storybook-json
+    - func: link-to-storybook
 
   - name: snapshots
     commands:
