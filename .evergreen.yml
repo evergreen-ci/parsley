@@ -73,8 +73,6 @@ functions:
       permissions: public-read
       display_name: storybook_
       preserve_path: true
-
-  attach-storybook-assets-js:
     command: s3.put
     type: system
     params:
@@ -88,8 +86,6 @@ functions:
       permissions: public-read
       display_name: storybook_assets_js_
       preserve_path: true
-
-  attach-storybook-assets-map:
     command: s3.put
     type: system
     params:
@@ -103,8 +99,6 @@ functions:
       permissions: public-read
       display_name: storybook_assets_map_
       preserve_path: true
-
-  attach-storybook-assets-svg:
     command: s3.put
     type: system
     params:
@@ -118,8 +112,6 @@ functions:
       permissions: public-read
       display_name: storybook_assets_svg_
       preserve_path: true
-
-  attach-storybook-json:
     command: s3.put
     type: system
     params:
@@ -439,10 +431,6 @@ tasks:
     - func: copy-cmdrc
     - func: yarn-storybook
     - func: attach-storybook
-    - func: attach-storybook-assets-js
-    - func: attach-storybook-assets-svg
-    - func: attach-storybook-assets-map
-    - func: attach-storybook-json
     - func: link-to-storybook
 
   - name: snapshots
