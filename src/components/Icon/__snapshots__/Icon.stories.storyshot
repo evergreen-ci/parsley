@@ -1011,6 +1011,29 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       class="css-141et6l"
     >
       <svg
+        aria-label="Drag Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M4 4a1 1 0 11-2 0 1 1 0 012 0zM8 4a1 1 0 11-2 0 1 1 0 012 0zM4 8a1 1 0 11-2 0 1 1 0 012 0zM4 12a1 1 0 11-2 0 1 1 0 012 0zM8 8a1 1 0 11-2 0 1 1 0 012 0zM8 12a1 1 0 11-2 0 1 1 0 012 0z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Drag
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
         aria-label="Edit Icon"
         class=""
         color="#023430"
@@ -1021,26 +1044,10 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
         width="24"
         xmlns="http://www.w3.org/2000/svg"
       >
-        <g
-          clip-path="url(#Edit_svg__clip0)"
-        >
-          <path
-            clip-rule="evenodd"
-            d="M11.922 1.681a.963.963 0 011.362 0l1.363 1.363a.963.963 0 010 1.362L13.284 5.77 10.56 3.044 9.538 4.066l2.725 2.725-7.154 7.153-3.746 1.022 1.021-3.747 9.538-9.538z"
-            fill="currentColor"
-            fill-rule="evenodd"
-          />
-        </g>
-        <defs>
-          <clippath
-            id="Edit_svg__clip0"
-          >
-            <path
-              d="M0 0h16v16H0z"
-              fill="currentColor"
-            />
-          </clippath>
-        </defs>
+        <path
+          d="M10.922.681a.963.963 0 011.362 0l1.363 1.363a.963.963 0 010 1.362L12.284 4.77 9.56 2.044 8.538 3.066l2.724 2.725-7.153 7.153-3.747 1.022 1.022-3.747L10.922.68z"
+          fill="currentColor"
+        />
       </svg>
       <span>
         Edit
@@ -1656,6 +1663,29 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       class="css-141et6l"
     >
       <svg
+        aria-label="No Filter Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M2.606 1.204a1 1 0 00-1.313 1.503L7 8.414v5.984a.5.5 0 00.83.376l2.949-2.58 2.512 2.511a1 1 0 001.414-1.414l-1.818-1.818-.006.006L2.606 1.204zM10.573 7.15A.25.25 0 0011 6.972v-.825l3.8-3.94C15.202 1.79 14.957 1 14.425 1H5.027a.25.25 0 00-.176.427l5.722 5.722z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        NoFilter
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
         aria-label="Not Allowed Icon"
         class=""
         color="#023430"
@@ -1936,6 +1966,33 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       class="css-141et6l"
     >
       <svg
+        aria-label="Read Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M10.011 8.762V4.185h-1.39c-.574 0-.84-.645-.406-.985l2.63-2.063a.669.669 0 01.81 0l2.63 2.063c.433.34.168.985-.405.985h-1.31v4.577c0 .716-.572 1.297-1.28 1.297-.706 0-1.279-.58-1.279-1.297zM8.823 9.158c-.814.19-1.677.283-2.448.283-1.162 0-2.534-.212-3.63-.646-.465-.184-.897-.415-1.245-.7v1.758c0 .27.12.529.384.783.267.258.664.491 1.157.686.983.39 2.252.59 3.334.59 1.082 0 2.35-.2 3.334-.59.2-.079.383-.164.548-.254a2.53 2.53 0 01-1.434-1.91z"
+          fill="currentColor"
+        />
+        <path
+          d="M6.787 3.479a10.514 10.514 0 00-.412-.008c-2.404 0-4.875.823-4.875 2.562 0 .077 0 .152.002.225a2.117 2.117 0 00-.002.095v.206c0 .27.12.529.384.783.267.258.664.491 1.157.686.983.39 2.252.59 3.334.59.768 0 1.63-.101 2.418-.299V5.421H8.62c-.767 0-1.428-.45-1.706-1.125-.107-.26-.15-.54-.128-.817zM11.25 11.39c-.348.284-.78.515-1.245.7-1.096.433-2.468.645-3.63.645s-2.534-.212-3.63-.646c-.465-.184-.897-.415-1.245-.7v.729c0 .028 0 .056.002.084l-.002.236C1.5 14.177 3.971 15 6.375 15s4.875-.823 4.875-2.562c0-.076 0-.152-.002-.226l.002-.094v-.729z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Read
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
         aria-label="Redo Icon"
         class=""
         color="#023430"
@@ -2024,6 +2081,31 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       </svg>
       <span>
         ReplicaSet
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Resize Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M14.77 5.72a.75.75 0 010 1.06l-7.991 8a.749.749 0 11-1.06-1.06l7.992-8a.749.749 0 011.06 0zM14.78 10.22a.75.75 0 010 1.06l-3.496 3.5a.749.749 0 11-1.06-1.06l3.497-3.5a.749.749 0 011.06 0z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Resize
       </span>
     </div>
     <div
@@ -2657,6 +2739,33 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       </svg>
       <span>
         Warning
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Write Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.71 3.75a9.487 9.487 0 00-2.335-.28c-2.404 0-4.875.824-4.875 2.563 0 .077 0 .152.002.225a2.117 2.117 0 00-.002.095v.206c0 .27.12.529.384.783.267.258.664.491 1.157.686.983.39 2.252.59 3.334.59.267 0 .546-.013.828-.037a1.76 1.76 0 01-.288-1.818 1.826 1.826 0 011.706-1.125h.09V3.75zM8.068 9.305c-.578.091-1.158.136-1.693.136-1.162 0-2.534-.212-3.63-.646-.465-.184-.897-.415-1.245-.7v1.758c0 .27.12.529.384.783.267.258.664.491 1.157.686.983.39 2.252.59 3.334.59 1.082 0 2.35-.2 3.334-.59.22-.086.42-.18.598-.282a1.85 1.85 0 01-.209-.141l-2.03-1.594z"
+          fill="currentColor"
+        />
+        <path
+          d="M11.25 11.39c-.348.284-.78.515-1.245.7-1.096.433-2.468.645-3.63.645s-2.534-.212-3.63-.646c-.465-.184-.897-.415-1.245-.7v.729c0 .028 0 .056.002.084l-.002.236C1.5 14.177 3.971 15 6.375 15s4.875-.823 4.875-2.562c0-.076 0-.152-.002-.226l.002-.094v-.729zM12.489 2.297v4.576h1.39c.574 0 .84.646.406.986l-2.63 2.063a.668.668 0 01-.81 0l-2.63-2.063c-.433-.34-.168-.986.406-.986H9.93V2.297C9.93 1.58 10.502 1 11.21 1c.706 0 1.279.58 1.279 1.297z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Write
       </span>
     </div>
     <div
