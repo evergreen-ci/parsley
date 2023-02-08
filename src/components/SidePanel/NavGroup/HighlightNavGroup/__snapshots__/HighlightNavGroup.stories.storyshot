@@ -87,17 +87,13 @@ exports[`storyshots Storyshots components/SidePanel/NavGroup/HighlightNavGroup D
             </svg>
           </div>
         </button>
-        <div
-          class="leafygreen-ui-114muox"
+        <mark
+          class="css-1ksw08g"
+          color="#71F6BA"
+          data-cy="side-nav-highlight"
         >
-          <mark
-            class="css-1ksw08g"
-            color="#71F6BA"
-            data-cy="side-nav-highlight"
-          >
-            highlight
-          </mark>
-        </div>
+          highlight
+        </mark>
       </div>
       <div
         class="css-ewb44i"
@@ -131,17 +127,13 @@ exports[`storyshots Storyshots components/SidePanel/NavGroup/HighlightNavGroup D
             </svg>
           </div>
         </button>
-        <div
-          class="leafygreen-ui-114muox"
+        <mark
+          class="css-17byylf"
+          color="#C3E7FE"
+          data-cy="side-nav-highlight"
         >
-          <mark
-            class="css-17byylf"
-            color="#C3E7FE"
-            data-cy="side-nav-highlight"
-          >
-            highlight2
-          </mark>
-        </div>
+          highlight2
+        </mark>
       </div>
     </ul>
   </li>

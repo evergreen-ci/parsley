@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
-import { Overline } from "@leafygreen-ui/typography";
 import { useLogWindowAnalytics } from "analytics";
 import Highlight, { highlightColorList } from "components/Highlight";
 import Icon from "components/Icon";
@@ -38,14 +37,12 @@ const HighlightNavGroup: React.FC = () => {
           >
             <Icon glyph="X" />
           </IconButton>
-          <Overline>
-            <Highlight
-              color={highlightColorList[index]}
-              data-cy="side-nav-highlight"
-            >
-              {highlight}
-            </Highlight>
-          </Overline>
+          <Highlight
+            color={highlightColorList[index]}
+            data-cy="side-nav-highlight"
+          >
+            {highlight}
+          </Highlight>
         </HighlightedTerm>
       ))}
     </BaseNavGroup>
