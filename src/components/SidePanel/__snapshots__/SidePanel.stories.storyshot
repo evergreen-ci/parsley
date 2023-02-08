@@ -83,7 +83,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   >
                     <div
                       class="css-1mnkoet"
-                      data-cy="filter-newfilter"
+                      data-cy="filter-newFilter"
                     >
                       <div
                         class="css-1iyoj2o"
@@ -189,7 +189,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         <p
                           class="css-1qcpvpc leafygreen-ui-1yli3c0"
                         >
-                          newfilter
+                          newFilter
                         </p>
                         <div
                           class="leafygreen-ui-1gmp0zo css-jw6p18"
@@ -502,7 +502,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           <div
                             class="leafygreen-ui-1w3euls"
                           >
-                            0
+                            2
                           </div>
                         </div>
                       </div>
@@ -513,14 +513,84 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     class="leafygreen-ui-bdnco"
                   >
                     <div
-                      class="css-1ae7zql"
-                      data-cy="highlight-default-message"
+                      class="css-ewb44i"
                     >
-                      <p
-                        class="leafygreen-ui-1yli3c0"
+                      <button
+                        aria-disabled="false"
+                        aria-label="Delete highlight"
+                        class="leafygreen-ui-6obv0c"
+                        data-cy="delete-highlight-button"
+                        tabindex="0"
                       >
-                        No terms have been highlighted.
-                      </p>
+                        <div
+                          class="leafygreen-ui-xhlipt"
+                        >
+                          <svg
+                            aria-label="X Icon"
+                            class=""
+                            fill="none"
+                            height="16"
+                            role="img"
+                            viewBox="0 0 16 16"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              clip-rule="evenodd"
+                              d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+                              fill="currentColor"
+                              fill-rule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      </button>
+                      <mark
+                        class="css-1ksw08g"
+                        color="#71F6BA"
+                        data-cy="side-nav-highlight"
+                      >
+                        highlight
+                      </mark>
+                    </div>
+                    <div
+                      class="css-ewb44i"
+                    >
+                      <button
+                        aria-disabled="false"
+                        aria-label="Delete highlight"
+                        class="leafygreen-ui-6obv0c"
+                        data-cy="delete-highlight-button"
+                        tabindex="0"
+                      >
+                        <div
+                          class="leafygreen-ui-xhlipt"
+                        >
+                          <svg
+                            aria-label="X Icon"
+                            class=""
+                            fill="none"
+                            height="16"
+                            role="img"
+                            viewBox="0 0 16 16"
+                            width="16"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              clip-rule="evenodd"
+                              d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+                              fill="currentColor"
+                              fill-rule="evenodd"
+                            />
+                          </svg>
+                        </div>
+                      </button>
+                      <mark
+                        class="css-17byylf"
+                        color="#C3E7FE"
+                        data-cy="side-nav-highlight"
+                      >
+                        highlight2
+                      </mark>
                     </div>
                   </ul>
                 </li>
@@ -587,7 +657,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                 </svg>
               </li>
               <li
-                class="leafygreen-ui-1b3xt3f"
+                class="leafygreen-ui-44abhg"
               >
                 <svg
                   alt=""

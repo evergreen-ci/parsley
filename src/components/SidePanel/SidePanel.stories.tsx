@@ -3,28 +3,21 @@ import styled from "@emotion/styled";
 import { actions } from "@storybook/addon-actions";
 import { StoryObj } from "@storybook/react";
 import { userEvent } from "@storybook/testing-library";
-import { CaseSensitivity, MatchType } from "constants/enums";
-import { useFilterParam } from "hooks/useFilterParam";
-import { useHighlightParam } from "hooks/useHighlightParam";
+
+import { useQueryParams } from "hooks/useQueryParam";
 import SidePanel from ".";
 
 export default {
   component: SidePanel,
 };
 const Story = ({ ...args }) => {
-  const [, setFilters] = useFilterParam();
-  const [, setHighlights] = useHighlightParam();
+  const [, setSearchParams] = useQueryParams();
 
   useEffect(() => {
-    setHighlights(["highlight", "highlight2"]);
-    setFilters([
-      {
-        caseSensitive: CaseSensitivity.Insensitive,
-        matchType: MatchType.Exact,
-        name: "newfilter",
-        visible: true,
-      },
-    ]);
+    setSearchParams({
+      highlights: ["highlight", "highlight2"],
+      filters: ["100newFilter"],
+    });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   const clearExpandedLines = () => actions("clearExpandedLines");
