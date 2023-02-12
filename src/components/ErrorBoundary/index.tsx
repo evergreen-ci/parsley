@@ -11,6 +11,7 @@ import {
   isProductionBuild,
   releaseStage,
 } from "utils/environmentVariables";
+import { leaveBreadcrumb } from "utils/errorReporting";
 import ErrorFallback from "./ErrorFallback";
 
 let bugsnagStarted = false;
@@ -20,7 +21,7 @@ type DefaultErrorBoundaryProps = {
   children: React.ReactNode;
 };
 
-// This error boundary is used during local development
+// This error boundary is used during local development.
 class DefaultErrorBoundary extends Component<
   DefaultErrorBoundaryProps,
   { hasError: boolean }
@@ -36,6 +37,7 @@ class DefaultErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, errorInfo: any) {
+    leaveBreadcrumb("Reached error page", { error, errorInfo }, "error");
     console.error({ error, errorInfo });
   }
 
@@ -64,7 +66,7 @@ const getBoundary = () => {
 };
 
 const initializeBugsnag = () => {
-  // Only need to Bugsnag.start once, will throw console warnings otherwise
+  // Only need to Bugsnag.start once, will throw console warnings otherwise.
   if (bugsnagStarted || !isProductionBuild || isLocal) {
     console.log("Bugsnag started");
     return;
@@ -79,7 +81,7 @@ const initializeBugsnag = () => {
     });
     bugsnagStarted = true;
   } catch (e) {
-    // If bugsnag fails we have no where to log it and we can't do anything about it
+    // If Bugsnag fails we have no where to log it and we can't do anything about it.
     console.error("Failed to initialize Bugsnag", e);
   }
 };
@@ -87,8 +89,8 @@ const initializeBugsnag = () => {
 const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // In some cases we do not want to enable bugsnag (ex: testing environments).
-  // In these cases we will return a fallback element
+  // In some cases we do not want to enable Bugsnag (ex: testing environments).
+  // In these cases we will return a fallback element.
   const ErrorBoundaryComp = getBoundary();
   return (
     <ErrorBoundaryComp FallbackComponent={ErrorFallback}>

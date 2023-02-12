@@ -60,63 +60,81 @@ functions:
         - "./parsley/bin/jest/*.xml"
 
   attach-storybook:
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/*"]
-      remote_file: parsley/${task_id}/storybook/
-      bucket: mciuploads
-      content_type: text/html
-      permissions: public-read
-      display_name: storybook_
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/*.html"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: text/html
+        permissions: public-read
+        display_name: storybook_
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.js", "parsley/storybook-static/**/*.mjs"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: application/javascript
+        permissions: public-read
+        display_name: storybook_assets_js_
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.js.map"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: application/json
+        permissions: public-read
+        display_name: storybook_assets_map_
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.svg"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: image/svg+xml
+        permissions: public-read
+        display_name: storybook_assets_svg_
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.json"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: application/json
+        permissions: public-read
+        display_name: storybook_json_
+        preserve_path: true
 
-  # Ideally we can get rid of this command upon the completion of EVG-17334.
-  attach-storybook-assets-js:
-    command: s3.put
-    type: system
+  link-to-storybook:
+    command: shell.exec
     params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/assets/*.js"]
-      remote_file: parsley/${task_id}/storybook/assets/
-      bucket: mciuploads
-      content_type: application/javascript
-      permissions: public-read
-      display_name: storybook_assets_js_
-
-  # Ideally we can get rid of this command upon the completion of EVG-17334.
-  attach-storybook-assets-map:
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/assets/*.js.map"]
-      remote_file: parsley/${task_id}/storybook/assets/
-      bucket: mciuploads
-      content_type: application/json
-      permissions: public-read
-      display_name: storybook_assets_map_
-  
-  # Ideally we can get rid of this command upon the completion of EVG-17334.
-  attach-storybook-assets-svg:
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/assets/*.svg"]
-      remote_file: parsley/${task_id}/storybook/assets/
-      bucket: mciuploads
-      content_type: image/svg+xml
-      permissions: public-read
-      display_name: storybook_assets_svg_
+      working_dir: parsley
+      shell: bash
+      script: |
+        echo "#############################################"
+        echo "Link to Storybook: https://mciuploads.s3.amazonaws.com/parsley/${task_id}/storybook/parsley/storybook-static/index.html"
+        echo "#############################################"
 
   attach-source-map:
     command: s3.put
@@ -135,8 +153,9 @@ functions:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         chmod +x ./scripts/app-version.sh
         . ./scripts/app-version.sh
         echo "Building Production version: $REACT_APP_VERSION"
@@ -146,6 +165,7 @@ functions:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
         cp .env-cmdrc.sample.json .env-cmdrc.json
 
@@ -153,8 +173,9 @@ functions:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} BUCKET=${bucket} AWS_ACCESS_KEY_ID=${aws_key} AWS_SECRET_ACCESS_KEY=${aws_secret}  yarn deploy:do-not-use;
 
   get-project:
@@ -167,6 +188,7 @@ functions:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
         export AUTHOR_EMAIL=${author_email}
         export DEPLOYS_EMAIL=${DEPLOYS_EMAIL}
@@ -177,6 +199,7 @@ functions:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
         echo "Generating .env-cmdrc.json"
         REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} NEW_RELIC_ACCOUNT_ID=${NEW_RELIC_ACCOUNT_ID} NEW_RELIC_AGENT_ID=${NEW_RELIC_AGENT_ID} NEW_RELIC_APPLICATION_ID=${NEW_RELIC_APPLICATION_ID} NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY} NEW_RELIC_TRUST_KEY=${NEW_RELIC_TRUST_KEY} DEPLOYS_EMAIL=${DEPLOYS_EMAIL} BUCKET=${bucket} node scripts/setup-credentials.js
@@ -191,85 +214,119 @@ functions:
 
         echo "Done populating"
 
+  setup-node:
+    - command: subprocess.exec
+      params:
+        binary: bash
+        args:
+          - parsley/scripts/prepare-shell.sh
+    - command: expansions.update
+      params:
+        file: expansion.yml
+    - command: shell.exec
+      params:
+        shell: bash
+        script: |
+          ${PREPARE_SHELL}
+          # Fetch NVM and install it into this task's .nvm directory
+          # Once downloaded, source nvm and install yarn
+          git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+          cd "$NVM_DIR"
+          git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          cd -
+          nvm install --no-progress --default ${node_version}
+          npm install -g yarn
+
   yarn-build:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn build:local
 
   yarn-cypress:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn cy:run --record --key ${cypress_record_key} --reporter junit
 
   yarn-eslint:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn eslint:strict
 
   yarn-install:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
-        yarn
+        ${PREPARE_SHELL}
+        yarn install
 
   yarn-preview:
     command: shell.exec
     params:
       working_dir: parsley
       background: true
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn preview
 
   yarn-snapshot:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn test --ci --testPathPattern=storyshots.test.ts
 
   yarn-storybook:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn storybook:build
 
   yarn-test:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn test --ci --testPathIgnorePatterns=storyshots.test.ts
 
   yarn-tsc:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn check-types
 
   yarn-verify-backend:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn verify-backend
 
 #######################################
@@ -289,7 +346,7 @@ functions:
       params:
         env:
           gobin: ${goroot}/bin/go
-          MONGODB_URL: ${mongodb_url}
+          MONGODB_URL: ${mongodb_url_50}
           DECOMPRESS: ${decompress}
         working_dir: parsley/evergreen
         command: make get-mongodb
@@ -321,6 +378,7 @@ functions:
     type: setup
     params:
       working_dir: parsley
+      shell: bash
       script: ./scripts/wait-for-evergreen.sh
 
 
@@ -341,6 +399,7 @@ functions:
       working_dir: parsley/logkeeper
       background: true
       script: go run main/logkeeper.go --localPath _bucketdata
+      shell: bash
       env:
         GOROOT: ${goroot}
         PATH: ${goroot}/bin:$PATH
@@ -414,9 +473,7 @@ tasks:
     - func: copy-cmdrc
     - func: yarn-storybook
     - func: attach-storybook
-    - func: attach-storybook-assets-js
-    - func: attach-storybook-assets-svg
-    - func: attach-storybook-assets-map
+    - func: link-to-storybook
 
   - name: snapshots
     commands:
@@ -430,10 +487,13 @@ tasks:
     - func: send-email
 
 buildvariants:
-  - name: ubuntu1604-small
-    display_name: Ubuntu 16.04 (small)
+  - name: ubuntu2004-small
+    display_name: Ubuntu 20.04 (small)
+    expansions:
+      mongodb_url_50: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-5.0.14.tgz
+      node_version: 16.17.0
     run_on:
-    - ubuntu1604-small
+    - ubuntu2004-small
     tasks:
     - name: compile
     - name: type_check
@@ -446,10 +506,13 @@ buildvariants:
       patchable: false
       priority: 100
 
-  - name: ubuntu1604-large
-    display_name: Ubuntu 16.04 (large)
+  - name: ubuntu2004-large
+    display_name: Ubuntu 20.04 (large)
+    expansions:
+      mongodb_url_50: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-5.0.14.tgz
+      node_version: 16.17.0
     run_on:
-    - ubuntu1604-large
+    - ubuntu2004-large
     modules:
       - evergreen
       - logkeeper
@@ -458,6 +521,7 @@ buildvariants:
 
 pre:
   - func: get-project
+  - func: setup-node
   - func: yarn-install
 
 post:
