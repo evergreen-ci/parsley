@@ -75,7 +75,6 @@ const LogPane: React.FC<LogPaneProps> = ({
           scrollToAlignment="start"
           style={{
             overflowX: "scroll",
-            overflowY: "auto",
           }}
           width={width}
           {...rest}
