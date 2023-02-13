@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.35",
+  "version": "1.0.36",
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
@@ -50,7 +50,7 @@
     "@leafygreen-ui/guide-cue": "4.0.0",
     "@leafygreen-ui/icon-button": "15.0.1",
     "@leafygreen-ui/leafygreen-provider": "3.1.0",
-    "@leafygreen-ui/modal": "12.0.1",
+    "@leafygreen-ui/modal": "14.0.1",
     "@leafygreen-ui/palette": "3.4.4",
     "@leafygreen-ui/segmented-control": "7.0.0",
     "@leafygreen-ui/select": "10.1.0",

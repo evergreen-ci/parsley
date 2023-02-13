@@ -90,7 +90,6 @@ const KeyTuple: React.FC<KeyTupleProps> = ({ keys }) => (
   </span>
 );
 
-// @ts-expect-error
 const StyledModal = styled(Modal)`
   z-index: ${zIndex.modal};
 `;
