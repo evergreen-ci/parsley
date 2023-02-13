@@ -1,4 +1,4 @@
-import { forwardRef, memo, useMemo } from "react";
+import { forwardRef, memo, useCallback, useMemo } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { ListRowProps } from "react-virtualized";
@@ -69,17 +69,17 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
   const highlighted = searchLine === index;
 
   // Clicking link icon should set or unset the share line.
-  const handleClick = () => {
+  const handleClick = useCallback(() => {
     if (shared) {
       setShareLine(undefined);
     } else {
       setShareLine(lineNumber);
       scrollToLine(index);
     }
-  };
+  }, [index, lineNumber, shared, scrollToLine, setShareLine]);
 
   // Double clicking a line should add or remove the line from bookmarks.
-  const handleDoubleClick = () => {
+  const handleDoubleClick = useCallback(() => {
     if (bookmarks.includes(lineNumber)) {
       const newBookmarks = bookmarks.filter((b) => b !== lineNumber);
       setBookmarks(newBookmarks);
@@ -93,7 +93,15 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     if (prettyPrint) {
       resetRowHeightAtIndex(index);
     }
-  };
+  }, [
+    bookmarks,
+    index,
+    lineNumber,
+    prettyPrint,
+    resetRowHeightAtIndex,
+    sendEvent,
+    setBookmarks,
+  ]);
 
   return (
     <RowContainer
