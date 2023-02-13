@@ -9,7 +9,9 @@ import { parseFilters, stringifyFilters } from "utils/query-string";
  * filters to and from URLs.
  */
 const useFilterParam = () => {
-  const [searchParams, setSearchParams] = useQueryParams();
+  const [searchParams, setSearchParams] = useQueryParams({
+    arrayFormat: "comma",
+  });
 
   const parsedFilters = parseFilters(
     conditionalCastToArray(searchParams.filters ?? [], true) as string[]

@@ -79,4 +79,13 @@ describe("useHighlightParam", () => {
       "failed",
     ]);
   });
+  it("should not corrupt large numerical values when decoding highlights from URL", () => {
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+      <MemoryRouter initialEntries={["/?highlights=1234567890123456789"]}>
+        {children}
+      </MemoryRouter>
+    );
+    const { result } = renderHook(() => useHighlightJointHook(), { wrapper });
+    expect(result.current.highlights).toStrictEqual(["1234567890123456789"]);
+  });
 });
