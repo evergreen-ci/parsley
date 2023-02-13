@@ -5,8 +5,8 @@ import { size } from "constants/tokens";
 import { useFilterParam } from "hooks/useFilterParam";
 import { Filter } from "types/logs";
 import { leaveBreadcrumb } from "utils/errorReporting";
-import BaseNavGroup from "../BaseNavGroup";
 import FilterGroup from "./FilterGroup";
+import BaseNavGroup from "../BaseNavGroup";
 
 interface FilterNavGroupProps {
   clearExpandedLines: () => void;
