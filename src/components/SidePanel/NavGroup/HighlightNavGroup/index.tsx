@@ -3,7 +3,7 @@ import IconButton from "@leafygreen-ui/icon-button";
 import { useLogWindowAnalytics } from "analytics";
 import Highlight, { highlightColorList } from "components/Highlight";
 import Icon from "components/Icon";
-import { size } from "constants/tokens";
+import { fontSize, size } from "constants/tokens";
 import { useHighlightParam } from "hooks/useHighlightParam";
 import BaseNavGroup from "../BaseNavGroup";
 
@@ -37,12 +37,12 @@ const HighlightNavGroup: React.FC = () => {
           >
             <Icon glyph="X" />
           </IconButton>
-          <Highlight
+          <StyledHighlight
             color={highlightColorList[index]}
             data-cy="side-nav-highlight"
           >
             {highlight}
-          </Highlight>
+          </StyledHighlight>
         </HighlightedTerm>
       ))}
     </BaseNavGroup>
@@ -54,6 +54,10 @@ const HighlightedTerm = styled.div`
   align-items: center;
   gap: ${size.xxs};
   margin: ${size.xxs} 0;
+`;
+
+const StyledHighlight = styled(Highlight)`
+  font-size: ${fontSize.m};
 `;
 
 export default HighlightNavGroup;
