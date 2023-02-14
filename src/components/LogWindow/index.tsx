@@ -6,7 +6,6 @@ import SidePanel from "components/SidePanel";
 import SubHeader from "components/SubHeader";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
-import { useHighlightParam } from "hooks/useHighlightParam";
 
 interface LogWindowProps {
   logType: LogTypes;
@@ -16,30 +15,11 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
   const {
     clearExpandedLines,
     collapseLines,
-    expandLines,
-    getLine,
-    getResmokeLineColor,
-    resetRowHeightAtIndex,
     scrollToLine,
-
     expandedLines,
-    highlightedLine,
     lineCount,
-    preferences,
     processedLogLines,
-    range,
-    searchState,
   } = useLogContext();
-  const { prettyPrint, wrap } = preferences;
-  const { searchTerm } = searchState;
-
-  const [highlights] = useHighlightParam();
-  // Join the highlights into a single regex to match against. Use capture groups
-  // to highlight each match.
-  const highlightRegex =
-    highlights.length > 0
-      ? new RegExp(`${highlights.map((h) => `(${h})`).join("|")}`, "g")
-      : undefined;
 
   return (
     <Container data-cy="log-window">
@@ -60,23 +40,9 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
             cache={cache}
             rowCount={processedLogLines.length}
             rowRenderer={RowRenderer({
-              data: {
-                expandLines,
-                getLine,
-                getResmokeLineColor,
-                resetRowHeightAtIndex,
-                scrollToLine,
-                highlightedLine,
-                highlights: highlightRegex,
-                prettyPrint,
-                range,
-                searchTerm,
-                wrap,
-              },
               processedLogLines,
               logType,
             })}
-            wrap={wrap}
           />
         </LogPaneContainer>
       </ColumnContainer>

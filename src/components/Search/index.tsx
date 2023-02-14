@@ -12,11 +12,11 @@ import { useHighlightParam } from "hooks/useHighlightParam";
 import { validateRegexp } from "utils/validators";
 
 const Search: React.FC = () => {
+  const { sendEvent } = useLogWindowAnalytics();
+
   const containerRef = useRef<HTMLDivElement>(null);
   const [filters, setFilters] = useFilterParam();
   const [highlights, setHighlights] = useHighlightParam();
-
-  const { sendEvent } = useLogWindowAnalytics();
   const { hasLogs, setSearch, searchState, paginate } = useLogContext();
   const { hasSearch } = searchState;
 

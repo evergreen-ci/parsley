@@ -139,43 +139,45 @@ describe("row", () => {
     });
   });
 
-  it("bookmarking a line when pretty print is enabled should call resetRowHeightAtIndex", async () => {
-    const resetRowHeightAtIndex = jest.fn();
-    const { history } = renderWithRouterMatch(
-      <Row
-        {...rowProps}
-        prettyPrint
-        resetRowHeightAtIndex={resetRowHeightAtIndex}
-      >
-        {testLog}
-      </Row>,
-      {
-        route: "?bookmarks=0",
-      }
-    );
-    await userEvent.dblClick(screen.getByText(testLog));
-    expect(history.location.search).toBe("");
-    expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(1);
-    expect(resetRowHeightAtIndex).toHaveBeenCalledWith(0);
-  });
+  describe("pretty print", () => {
+    it("bookmarking a line when pretty print is enabled should call resetRowHeightAtIndex", async () => {
+      const resetRowHeightAtIndex = jest.fn();
+      const { history } = renderWithRouterMatch(
+        <Row
+          {...rowProps}
+          prettyPrint
+          resetRowHeightAtIndex={resetRowHeightAtIndex}
+        >
+          {testLog}
+        </Row>,
+        {
+          route: "?bookmarks=0",
+        }
+      );
+      await userEvent.dblClick(screen.getByText(testLog));
+      expect(history.location.search).toBe("");
+      expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(1);
+      expect(resetRowHeightAtIndex).toHaveBeenCalledWith(0);
+    });
 
-  it("bookmarking a line when pretty print is not enabled should not call resetRowHeightAtIndex", async () => {
-    const resetRowHeightAtIndex = jest.fn();
-    const { history } = renderWithRouterMatch(
-      <Row
-        {...rowProps}
-        prettyPrint={false}
-        resetRowHeightAtIndex={resetRowHeightAtIndex}
-      >
-        {testLog}
-      </Row>,
-      {
-        route: "?bookmarks=0",
-      }
-    );
-    await userEvent.dblClick(screen.getByText(testLog));
-    expect(history.location.search).toBe("");
-    expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(0);
+    it("bookmarking a line when pretty print is not enabled should not call resetRowHeightAtIndex", async () => {
+      const resetRowHeightAtIndex = jest.fn();
+      const { history } = renderWithRouterMatch(
+        <Row
+          {...rowProps}
+          prettyPrint={false}
+          resetRowHeightAtIndex={resetRowHeightAtIndex}
+        >
+          {testLog}
+        </Row>,
+        {
+          route: "?bookmarks=0",
+        }
+      );
+      await userEvent.dblClick(screen.getByText(testLog));
+      expect(history.location.search).toBe("");
+      expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(0);
+    });
   });
 });
 
