@@ -73,8 +73,8 @@ exports[`storyshots Storyshots components/Highlight All Colors 1`] = `
       Should be
        
       <mark
-        class="css-ketqv5"
-        color="#016BF8"
+        class="css-9tvxfk"
+        color="#0498EC"
         data-cy="highlight"
       >
         highlighted
@@ -97,17 +97,6 @@ exports[`storyshots Storyshots components/Highlight All Colors 1`] = `
       <mark
         class="css-isit1e"
         color="#FFCDC7"
-        data-cy="highlight"
-      >
-        highlighted
-      </mark>
-    </div>
-    <div>
-      Should be
-       
-      <mark
-        class="css-10y9r2r"
-        color="#FEF7DB"
         data-cy="highlight"
       >
         highlighted

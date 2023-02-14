@@ -6,7 +6,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
     class="css-3ieiu4"
   >
     <div
-      class="lg-ui-side-nav-0000 css-9jz470 leafygreen-ui-11zkn7z"
+      class="lg-ui-side-nav-0000 css-9jz470 leafygreen-ui-1us1h4n"
       data-testid="side-nav-container"
     >
       <div
@@ -14,50 +14,54 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
       >
         <nav
           aria-label="Side panel"
-          class="leafygreen-ui-79z8rq"
+          class="leafygreen-ui-n13rbw"
           id="side-nav-1"
         >
           <div
             class="leafygreen-ui-1nmawjt"
           >
             <ul
-              class="leafygreen-ui-1rh7fdg"
+              class="leafygreen-ui-13ths9k"
             >
               <div
                 class="css-6eonsj"
               >
                 <li
-                  class="leafygreen-ui-h8f4g2 css-1hr1o5a"
+                  class="leafygreen-ui-la0n3e css-1hr1o5a"
                 >
                   <div
-                    class="leafygreen-ui-17ychji"
+                    class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
                     id="menu-group-label-id-1"
                   >
                     <div
-                      class="leafygreen-ui-y6v9s0"
+                      class="leafygreen-ui-1rnl6t5"
                     >
-                      <svg
-                        alt=""
-                        aria-hidden="true"
-                        class="leafygreen-ui-tg5uuh"
-                        data-testid="side-nav-group-header-icon"
-                        fill="none"
-                        height="16"
-                        role="presentation"
-                        viewBox="0 0 16 16"
-                        width="16"
-                        xmlns="http://www.w3.org/2000/svg"
+                      <span
+                        class="leafygreen-ui-z2gibr"
                       >
-                        <path
-                          clip-rule="evenodd"
-                          d="M6 6.148l-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 01-.17.376l-3 2.625a.5.5 0 01-.83-.376v-8.25z"
-                          fill="currentColor"
-                          fill-rule="evenodd"
-                        />
-                      </svg>
+                        <svg
+                          alt=""
+                          aria-hidden="true"
+                          class="leafygreen-ui-1nviasz"
+                          data-testid="side-nav-group-header-icon"
+                          fill="none"
+                          height="16"
+                          role="presentation"
+                          viewBox="0 0 16 16"
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            clip-rule="evenodd"
+                            d="M6 6.148l-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 01-.17.376l-3 2.625a.5.5 0 01-.83-.376v-8.25z"
+                            fill="currentColor"
+                            fill-rule="evenodd"
+                          />
+                        </svg>
+                      </span>
                       <div
-                        class="leafygreen-ui-i0xt7x"
+                        class="leafygreen-ui-1tm4spc"
                       >
                         <div
                           class="css-1sg2lsz"
@@ -356,43 +360,46 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   </ul>
                 </li>
                 <li
-                  class="leafygreen-ui-h8f4g2 css-1hr1o5a"
+                  class="leafygreen-ui-la0n3e css-1hr1o5a"
                 >
                   <div
-                    class="leafygreen-ui-17ychji"
+                    class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
                     id="menu-group-label-id-2"
                   >
                     <div
-                      class="leafygreen-ui-y6v9s0"
+                      class="leafygreen-ui-1rnl6t5"
                     >
-                      <svg
-                        aria-label="Expand Icon"
-                        class="leafygreen-ui-nckpfs"
-                        fill="none"
-                        height="16"
-                        width="16"
-                        xmlns="http://www.w3.org/2000/svg"
+                      <span
+                        class="leafygreen-ui-z2gibr"
                       >
-                        <path
-                          d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
-                          fill="#00684A"
-                        />
-                        <path
-                          d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
-                          stroke="#00684A"
-                        />
-                        <path
-                          d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
-                          fill="#00684A"
-                        />
-                        <path
-                          d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
-                          stroke="#00684A"
-                        />
-                      </svg>
+                        <svg
+                          aria-label="Expand Icon"
+                          fill="none"
+                          height="16"
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
+                            fill="#00684A"
+                          />
+                          <path
+                            d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
+                            stroke="#00684A"
+                          />
+                          <path
+                            d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
+                            fill="#00684A"
+                          />
+                          <path
+                            d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
+                            stroke="#00684A"
+                          />
+                        </svg>
+                      </span>
                       <div
-                        class="leafygreen-ui-i0xt7x"
+                        class="leafygreen-ui-1tm4spc"
                       >
                         <div
                           class="css-1sg2lsz"
@@ -460,35 +467,39 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   </ul>
                 </li>
                 <li
-                  class="leafygreen-ui-h8f4g2 css-1hr1o5a"
+                  class="leafygreen-ui-la0n3e css-1hr1o5a"
                 >
                   <div
-                    class="leafygreen-ui-17ychji"
+                    class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
                     id="menu-group-label-id-3"
                   >
                     <div
-                      class="leafygreen-ui-y6v9s0"
+                      class="leafygreen-ui-1rnl6t5"
                     >
-                      <svg
-                        alt=""
-                        aria-hidden="true"
-                        class="leafygreen-ui-tg5uuh"
-                        data-testid="side-nav-group-header-icon"
-                        fill="none"
-                        height="16"
-                        role="presentation"
-                        viewBox="0 0 16 16"
-                        width="16"
-                        xmlns="http://www.w3.org/2000/svg"
+                      <span
+                        class="leafygreen-ui-z2gibr"
                       >
-                        <path
-                          d="M3 6.5a1 1 0 00-1 1v1a1 1 0 001 1h10a1 1 0 001-1v-1a1 1 0 00-1-1H3z"
-                          fill="currentColor"
-                        />
-                      </svg>
+                        <svg
+                          alt=""
+                          aria-hidden="true"
+                          class="leafygreen-ui-1nviasz"
+                          data-testid="side-nav-group-header-icon"
+                          fill="none"
+                          height="16"
+                          role="presentation"
+                          viewBox="0 0 16 16"
+                          width="16"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M3 6.5a1 1 0 00-1 1v1a1 1 0 001 1h10a1 1 0 001-1v-1a1 1 0 00-1-1H3z"
+                            fill="currentColor"
+                          />
+                        </svg>
+                      </span>
                       <div
-                        class="leafygreen-ui-i0xt7x"
+                        class="leafygreen-ui-1tm4spc"
                       >
                         <div
                           class="css-1sg2lsz"
@@ -605,12 +616,12 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
               class="leafygreen-ui-1b7jm2c"
             >
               <li
-                class="leafygreen-ui-44abhg"
+                class="leafygreen-ui-ntn8a7"
               >
                 <svg
                   alt=""
                   aria-hidden="true"
-                  class="leafygreen-ui-tg5uuh"
+                  class="leafygreen-ui-1nviasz"
                   data-testid="side-nav-group-header-icon"
                   fill="none"
                   height="16"
@@ -628,11 +639,10 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                 </svg>
               </li>
               <li
-                class="leafygreen-ui-44abhg"
+                class="leafygreen-ui-ntn8a7"
               >
                 <svg
                   aria-label="Expand Icon"
-                  class="leafygreen-ui-nckpfs"
                   fill="none"
                   height="16"
                   width="16"
@@ -657,12 +667,12 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                 </svg>
               </li>
               <li
-                class="leafygreen-ui-44abhg"
+                class="leafygreen-ui-ntn8a7"
               >
                 <svg
                   alt=""
                   aria-hidden="true"
-                  class="leafygreen-ui-tg5uuh"
+                  class="leafygreen-ui-1nviasz"
                   data-testid="side-nav-group-header-icon"
                   fill="none"
                   height="16"
@@ -684,7 +694,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
           aria-controls="side-nav-1"
           aria-expanded="true"
           aria-label="Collapse navigation"
-          class="leafygreen-ui-1os2sye"
+          class="leafygreen-ui-v87gj9"
           data-testid="side-nav-collapse-toggle"
         >
           <div
