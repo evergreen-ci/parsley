@@ -1,4 +1,4 @@
-import { forwardRef, memo, useMemo } from "react";
+import { forwardRef, memo, useCallback, useMemo } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { ListRowProps } from "react-virtualized";
@@ -22,7 +22,7 @@ interface BaseRowProps extends ListRowProps {
   // may differ due to collapsed rows.
   lineNumber: number;
   prettyPrint?: boolean;
-  highlightedLine?: number;
+  searchLine?: number;
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
@@ -40,45 +40,46 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     children,
     "data-cy": dataCyText,
     index,
-    highlightedLine,
+    highlights,
     lineNumber,
     prettyPrint = false,
+    searchLine,
     searchTerm,
     resmokeRowColor,
     wrap,
     resetRowHeightAtIndex,
-    highlights,
     scrollToLine,
     ...rest
   } = props;
+
+  const { sendEvent } = useLogWindowAnalytics();
 
   const [shareLine, setShareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
     undefined
   );
-  const shared = shareLine === lineNumber;
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
     []
   );
-  const { sendEvent } = useLogWindowAnalytics();
+
+  const shared = shareLine === lineNumber;
   const bookmarked = bookmarks.includes(lineNumber);
+  const highlighted = searchLine === index;
 
-  const highlighted = highlightedLine === index;
-
-  // Clicking a line should select or deselect the line.
-  const handleClick = () => {
+  // Clicking link icon should set or unset the share line.
+  const handleClick = useCallback(() => {
     if (shared) {
       setShareLine(undefined);
     } else {
       setShareLine(lineNumber);
       scrollToLine(index);
     }
-  };
+  }, [index, lineNumber, shared, scrollToLine, setShareLine]);
 
   // Double clicking a line should add or remove the line from bookmarks.
-  const handleDoubleClick = () => {
+  const handleDoubleClick = useCallback(() => {
     if (bookmarks.includes(lineNumber)) {
       const newBookmarks = bookmarks.filter((b) => b !== lineNumber);
       setBookmarks(newBookmarks);
@@ -92,7 +93,15 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     if (prettyPrint) {
       resetRowHeightAtIndex(index);
     }
-  };
+  }, [
+    bookmarks,
+    index,
+    lineNumber,
+    prettyPrint,
+    resetRowHeightAtIndex,
+    sendEvent,
+    setBookmarks,
+  ]);
 
   return (
     <RowContainer

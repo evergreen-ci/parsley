@@ -11,11 +11,12 @@ import { copyToClipboard, getJiraFormat } from "utils/string";
 import { DetailRow } from "../styles";
 
 const ButtonRow: React.FC = () => {
-  const [hasCopied, setHasCopied] = useState(false);
-
-  const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
-  const { getLine, logMetadata } = useLogContext();
   const { sendEvent } = usePreferencesAnalytics();
+  const { getLine, logMetadata } = useLogContext();
+
+  const [hasCopied, setHasCopied] = useState(false);
+  const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
+
   const { htmlLogURL, rawLogURL, jobLogsURL, lobsterURL } = logMetadata || {};
   const tooltipText = bookmarks.length
     ? "Copy Bookmarked Lines In Jira Format"

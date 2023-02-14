@@ -1,27 +1,23 @@
 import { ListRowProps } from "react-virtualized";
-import { ExpandedLines } from "types/logs";
 
 interface BaseRowProps {
   listRowProps: ListRowProps;
-  data: RowData;
 }
 
-interface RowData {
-  expandLines: (expandedLines: ExpandedLines) => void;
+interface LogRowProps extends BaseRowProps {
   getLine: (index: number) => string | undefined;
-  getResmokeLineColor: (index: number) => string | undefined;
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
 
-  highlightedLine?: number;
+  highlightRegex?: RegExp;
   highlights?: RegExp;
-  prettyPrint: boolean;
   range: {
     lowerRange: number;
     upperRange?: number;
   };
+  searchLine?: number;
   searchTerm?: RegExp;
   wrap: boolean;
 }
 
-export type { BaseRowProps, RowData };
+export type { BaseRowProps, LogRowProps };

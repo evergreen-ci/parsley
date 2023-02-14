@@ -41,10 +41,8 @@ export const Default: StoryObj<typeof LogPane> = {
         cache={cache}
         rowCount={list.length}
         rowRenderer={RowRenderer}
-        wrap={false}
       />
     </Container>
   ),
-
   args: {},
 };

@@ -35,41 +35,6 @@ exports[`storyshots Storyshots components/LogRow/ResmokeRow Multiple Lines 1`] =
 </div>
 `;
 
-exports[`storyshots Storyshots components/LogRow/ResmokeRow Resmoke Highlighting 1`] = `
-<div>
-  <div
-    class="css-1mysoqc"
-  >
-    <div
-      style="overflow: visible; height: 0px; width: 0px;"
-    >
-      <div
-        aria-label="grid"
-        aria-readonly="true"
-        class="ReactVirtualized__Grid ReactVirtualized__List"
-        role="grid"
-        style="box-sizing: border-box; direction: ltr; height: 0px; position: relative; width: 0px; will-change: transform; overflow-x: scroll; overflow-y: auto;"
-        tabindex="0"
-      />
-    </div>
-    <div
-      class="resize-triggers"
-    >
-      <div
-        class="expand-trigger"
-      >
-        <div
-          style="width: 1px; height: 1px;"
-        />
-      </div>
-      <div
-        class="contract-trigger"
-      />
-    </div>
-  </div>
-</div>
-`;
-
 exports[`storyshots Storyshots components/LogRow/ResmokeRow Single Line 1`] = `
 <div>
   <div
@@ -109,6 +74,7 @@ exports[`storyshots Storyshots components/LogRow/ResmokeRow Single Line 1`] = `
     >
       <span
         data-cy="resmoke-row"
+        style="color: rgb(148, 79, 1);"
       >
         [j0:s0:n0] | 2022-09-21T12:50:19.923+00:00 D2 REPL_HB  24095   [conn32] "Received heartbeat request","attr":{"from":"localhost:20005","cmdObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":1,"hbv":1,"from":"localhost:20005","fromId":2,"term":1,"primaryId":0,"maxTimeMSOpOnly":10000,"$replData":1,"$clusterTime":{"clusterTime":{"$timestamp":{"t":1663764619,"i":24}},"signature":{"hash":{"$binary":{"base64":"vGCk1d5olY4L+VYegDslPFKywsU=","subType":"0"}},"keyId":7145814532357619736}},"$configTime":{"$timestamp":{"t":1663764618,"i":38}},"$topologyTime":{"$timestamp":{"t":1663764618,"i":6}},"$db":"admin"}}
       </span>

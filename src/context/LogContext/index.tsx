@@ -33,7 +33,6 @@ import { getNextPage } from "./utils";
 interface LogContextState {
   expandedLines: ExpandedLines;
   hasLogs: boolean;
-  highlightedLine?: number;
   lineCount: number;
   listRef: React.RefObject<List>;
   logMetadata?: LogMetadata;
@@ -44,6 +43,7 @@ interface LogContextState {
     lowerRange: number;
     upperRange?: number;
   };
+  searchLine?: number;
   searchState: SearchState;
 
   clearExpandedLines: () => void;
@@ -91,12 +91,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     QueryParams.SelectedLine,
     undefined
   );
-
+  const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
   const [upperRange] = useQueryParam<undefined | number>(
     QueryParams.UpperRange,
     undefined
   );
-  const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
 
   const [wrap, setWrap] = useState(Cookie.get(WRAP) === "true");
   const [filterLogic, setFilterLogic] = useQueryParam(
@@ -229,7 +228,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [stringifiedSearchResults, scrollToLine]);
 
-  const highlightedLine =
+  const searchLine =
     state.searchState.searchIndex !== undefined
       ? searchResults[state.searchState.searchIndex]
       : undefined;
@@ -251,8 +250,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     () => ({
       expandedLines: state.expandedLines,
       hasLogs: !!processedLogLines.length,
-      hasSearch: !!state.searchState.searchTerm,
-      highlightedLine,
       lineCount: state.logs.length,
       logMetadata: state.logMetadata,
       listRef,
@@ -289,6 +286,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         lowerRange,
         upperRange,
       },
+      searchLine,
       searchState: state.searchState,
 
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
@@ -323,11 +321,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     [
       expandableRows,
       filterLogic,
-      highlightedLine,
       lowerRange,
       matchingLines,
       prettyPrint,
       processedLogLines,
+      searchLine,
       searchResults,
       state.expandedLines,
       state.logMetadata,
