@@ -23,7 +23,6 @@ const highlightColorList = [
   blue.base,
   green.light3,
   red.light2,
-  yellow.light3,
 ];
 
 export { highlightColorList };
