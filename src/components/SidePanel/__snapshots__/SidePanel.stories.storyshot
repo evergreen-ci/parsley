@@ -14,7 +14,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
       >
         <nav
           aria-label="Side panel"
-          class="leafygreen-ui-1mwlsu7"
+          class="leafygreen-ui-79z8rq"
           id="side-nav-1"
         >
           <div
@@ -32,7 +32,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   <div
                     class="leafygreen-ui-17ychji"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-6"
+                    id="menu-group-label-id-1"
                   >
                     <div
                       class="leafygreen-ui-y6v9s0"
@@ -57,7 +57,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         />
                       </svg>
                       <div
-                        class="leafygreen-ui-4ct6n4"
+                        class="leafygreen-ui-i0xt7x"
                       >
                         <div
                           class="css-1sg2lsz"
@@ -78,7 +78,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-6"
+                    aria-labelledby="menu-group-label-id-1"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -361,7 +361,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   <div
                     class="leafygreen-ui-17ychji"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-7"
+                    id="menu-group-label-id-2"
                   >
                     <div
                       class="leafygreen-ui-y6v9s0"
@@ -392,7 +392,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         />
                       </svg>
                       <div
-                        class="leafygreen-ui-4ct6n4"
+                        class="leafygreen-ui-i0xt7x"
                       >
                         <div
                           class="css-1sg2lsz"
@@ -413,7 +413,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-7"
+                    aria-labelledby="menu-group-label-id-2"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -465,7 +465,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   <div
                     class="leafygreen-ui-17ychji"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-8"
+                    id="menu-group-label-id-3"
                   >
                     <div
                       class="leafygreen-ui-y6v9s0"
@@ -488,7 +488,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         />
                       </svg>
                       <div
-                        class="leafygreen-ui-4ct6n4"
+                        class="leafygreen-ui-i0xt7x"
                       >
                         <div
                           class="css-1sg2lsz"
@@ -509,7 +509,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-8"
+                    aria-labelledby="menu-group-label-id-3"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -545,7 +545,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         </div>
                       </button>
                       <mark
-                        class="css-1ksw08g"
+                        class="css-1irhuyo"
                         color="#71F6BA"
                         data-cy="side-nav-highlight"
                       >
@@ -585,7 +585,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         </div>
                       </button>
                       <mark
-                        class="css-17byylf"
+                        class="css-123ogo0"
                         color="#C3E7FE"
                         data-cy="side-nav-highlight"
                       >
