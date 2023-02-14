@@ -168,7 +168,9 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
           new RegExp(highlights, highlights.ignoreCase ? "gi" : "g"),
           render,
           (match, index) =>
-            `<mark color="${highlightColorList[index]}">${match}</mark>`
+            `<mark color="${
+              highlightColorList[index] ?? red.light2
+            }">${match}</mark>`
         );
       }
     }
