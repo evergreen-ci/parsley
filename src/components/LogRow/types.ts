@@ -10,7 +10,6 @@ interface LogRowProps extends BaseRowProps {
   scrollToLine: (lineNumber: number) => void;
 
   highlightRegex?: RegExp;
-  highlights?: RegExp;
   range: {
     lowerRange: number;
     upperRange?: number;

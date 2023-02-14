@@ -38,7 +38,7 @@ const HighlightNavGroup: React.FC = () => {
             <Icon glyph="X" />
           </IconButton>
           <StyledHighlight
-            color={highlightColorList[index]}
+            color={highlightColorList[index % highlightColorList.length]}
             data-cy="side-nav-highlight"
           >
             {highlight}

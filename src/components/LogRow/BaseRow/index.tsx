@@ -169,7 +169,7 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
           render,
           (match, index) =>
             `<mark color="${
-              highlightColorList[index] ?? red.light2
+              highlightColorList[index % highlightColorList.length]
             }">${match}</mark>`
         );
       }
