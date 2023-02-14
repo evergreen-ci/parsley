@@ -20,7 +20,7 @@ const highlightColorList = [
   yellow.light2,
   green.light2,
   purple.light2,
-  blue.base,
+  blue.light1,
   green.light3,
   red.light2,
 ];
