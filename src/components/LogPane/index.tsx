@@ -68,7 +68,7 @@ const LogPane: React.FC<LogPaneProps> = ({
           }}
           deferredMeasurementCache={cache}
           height={height}
-          overscanRowCount={200}
+          overscanRowCount={50}
           rowCount={rowCount}
           rowHeight={cache.rowHeight}
           rowRenderer={rowRenderer}
