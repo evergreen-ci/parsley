@@ -49,7 +49,6 @@ describe("Highlighting", () => {
     const colors = new Set();
     cy.dataCy("highlight")
       .each(($el) => {
-        cy.log("el", $el);
         cy.wrap($el).then(($e) => {
           colors.add($e.css("background-color"));
         });
