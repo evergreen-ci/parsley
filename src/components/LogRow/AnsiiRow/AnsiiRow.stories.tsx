@@ -1,31 +1,31 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
+import { useLogContext } from "context/LogContext";
 import AnsiiRow from ".";
 import { RowRenderer, cache } from "../RowRenderer";
-
-type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>["data"]>;
 
 export default {
   component: AnsiiRow,
 };
 
-export const SingleLine: StoryObj<AnsiiRowProps> = {
-  render: (args) => (
+type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>>;
+
+// Single AnsiiRow.
+const SingleLineStory = (args: any) => {
+  const { ingestLines, resetRowHeightAtIndex, scrollToLine } = useLogContext();
+
+  useEffect(() => {
+    ingestLines(logLines, LogTypes.EVERGREEN_TASK_LOGS);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  return (
     <AnsiiRow
       key={logLines[0]}
-      data={{
-        expandLines: () => undefined,
-        getLine,
-        getResmokeLineColor: () => undefined,
-        resetRowHeightAtIndex: () => undefined,
-        scrollToLine: () => undefined,
-        prettyPrint: args.prettyPrint,
-        range: { lowerRange: 0 },
-        wrap: args.wrap,
-      }}
+      getLine={() => logLines[0]}
+      highlightRegex={undefined}
       lineNumber={0}
       listRowProps={{
         index: 0,
@@ -33,55 +33,56 @@ export const SingleLine: StoryObj<AnsiiRowProps> = {
         columnIndex: 0,
         isScrolling: false,
         isVisible: true,
-        key: getLine(0) || "",
+        key: logLines[0] || "",
         parent: {} as any,
       }}
+      range={{ lowerRange: 0 }}
+      resetRowHeightAtIndex={resetRowHeightAtIndex}
+      scrollToLine={scrollToLine}
+      searchTerm={undefined}
+      wrap={args.wrap}
     />
-  ),
+  );
+};
 
+export const SingleLine: StoryObj<AnsiiRowProps> = {
+  render: (args) => <SingleLineStory {...args} />,
   args: {
-    prettyPrint: false,
     wrap: false,
   },
 };
 
+// Multiple AnsiiRows.
 const MultiLineStory = (args: any) => {
-  const [scrollIndex, setScrollIndex] = useState<number>(-1);
+  const { ingestLines, processedLogLines, preferences } = useLogContext();
+  const { setWrap } = preferences;
+
+  useEffect(() => {
+    ingestLines(logLines, LogTypes.EVERGREEN_TASK_LOGS);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    setWrap(args.wrap);
+  }, [args.wrap, setWrap]);
 
   return (
     <Container>
       <LogPane
         cache={cache}
-        initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          data: {
-            expandLines: () => {},
-            getLine,
-            getResmokeLineColor: () => undefined,
-            resetRowHeightAtIndex: () => undefined,
-            scrollToLine: setScrollIndex,
-            highlightedLine: args.highlightedLine,
-            prettyPrint: args.prettyPrint,
-            range: { lowerRange: 0 },
-            searchTerm: /p=debug/,
-            wrap: args.wrap,
-          },
           processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
         })}
-        scrollToIndex={scrollIndex}
-        wrap={args.wrap}
       />
     </Container>
   );
 };
+
 export const MultiLines: StoryObj<AnsiiRowProps> = {
   render: (args) => <MultiLineStory {...args} />,
   args: {
-    highlightedLine: 0,
-    prettyPrint: false,
     wrap: false,
   },
 };
@@ -118,10 +119,6 @@ const logLines = [
   "[2022/09/09 19:49:46.899] \u001b[0m  (\u001b[4m\u001b[1mRun Finished\u001b[22m\u001b[24m)\u001b[0m",
   "[2022/09/09 19:49:46.899] \u001b[90m   \u001b[39m    \u001b[90mSpec\u001b[39m                                              \u001b[90mTests\u001b[39m  \u001b[90mPassing\u001b[39m  \u001b[90mFailing\u001b[39m  \u001b[90mPending\u001b[39m  \u001b[90mSkipped\u001b[39m \u001b[90m \u001b[39m",
 ];
-
-const processedLogLines = logLines.map((_, index) => index);
-
-const getLine = (index: number) => logLines[index];
 
 const Container = styled.div`
   height: 400px;

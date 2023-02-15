@@ -5,21 +5,39 @@ import {
   ListRowRenderer,
 } from "react-virtualized";
 import { LogTypes } from "constants/enums";
+import { useLogContext } from "context/LogContext";
+import { useHighlightParam } from "hooks/useHighlightParam";
 import { ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
 import AnsiiRow from "../AnsiiRow";
 import CollapsedRow from "../CollapsedRow";
 import ResmokeRow from "../ResmokeRow";
-import { RowData } from "../types";
 
 type RowRendererFunction = (props: {
-  data: RowData;
   processedLogLines: ProcessedLogLines;
   logType: LogTypes;
 }) => ListRowRenderer;
 
 const RowRenderer: RowRendererFunction = (props) => {
-  const { logType, processedLogLines, data } = props;
+  const { logType, processedLogLines } = props;
+  const {
+    expandLines,
+    getLine,
+    getResmokeLineColor,
+    resetRowHeightAtIndex,
+    scrollToLine,
+    preferences,
+    range,
+    searchLine,
+    searchState,
+  } = useLogContext();
+  const { searchTerm } = searchState;
+  const { wrap, prettyPrint } = preferences;
+
+  const [highlights] = useHighlightParam();
+  const highlightRegex = highlights.length
+    ? new RegExp(highlights.join("|"), "i")
+    : undefined;
 
   const result = (listRowProps: ListRowProps) => {
     const { index, key, parent } = listRowProps;
@@ -33,7 +51,7 @@ const RowRenderer: RowRendererFunction = (props) => {
               <CollapsedRow
                 ref={registerChild}
                 collapsedLines={processedLogLine}
-                data={data}
+                expandLines={expandLines}
                 listRowProps={listRowProps}
               />
             );
@@ -42,9 +60,18 @@ const RowRenderer: RowRendererFunction = (props) => {
           return (
             <Row
               ref={registerChild}
-              data={data}
+              getLine={getLine}
+              getResmokeLineColor={getResmokeLineColor}
+              highlightRegex={highlightRegex}
               lineNumber={processedLogLine}
               listRowProps={listRowProps}
+              prettyPrint={prettyPrint}
+              range={range}
+              resetRowHeightAtIndex={resetRowHeightAtIndex}
+              scrollToLine={scrollToLine}
+              searchLine={searchLine}
+              searchTerm={searchTerm}
+              wrap={wrap}
             />
           );
         }}
@@ -63,7 +90,7 @@ const rowRendererMap = {
 
 const cache = new CellMeasurerCache({
   fixedWidth: true,
-  defaultHeight: 16,
+  defaultHeight: 18,
 });
 
 export { RowRenderer, cache };
