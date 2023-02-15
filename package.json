@@ -30,7 +30,7 @@
     "start": "vite",
     "verify-backend": "./scripts/verify-backend.sh",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": " . ./scripts/app-version.sh && env-cmd -e local storybook build",
+    "storybook:build": " . ./scripts/app-version.sh && env-cmd -e local -r .env-cmdrc.local.json storybook build",
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch --verbose",
     "upload-source-maps": "node ./scripts/upload-source-maps.js",
