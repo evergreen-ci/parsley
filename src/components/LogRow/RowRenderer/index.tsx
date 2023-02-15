@@ -63,7 +63,7 @@ const rowRendererMap = {
 
 const cache = new CellMeasurerCache({
   fixedWidth: true,
-  defaultHeight: 16,
+  defaultHeight: 18,
 });
 
 export { RowRenderer, cache };
