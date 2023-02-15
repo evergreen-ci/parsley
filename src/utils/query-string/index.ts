@@ -4,12 +4,16 @@ import { Filters } from "types/logs";
 
 export const parseQueryString = (
   search: string,
-  options: ParseOptions = {
+  options: ParseOptions = {}
+) => {
+  const parseOptions: ParseOptions = {
     arrayFormat: "comma",
     parseBooleans: true,
     parseNumbers: true,
-  }
-) => parse(search, options);
+    ...options,
+  };
+  return parse(search, parseOptions);
+};
 
 export const stringifyQuery = (object: { [key: string]: any }) =>
   stringify(object, {

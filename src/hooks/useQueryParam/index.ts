@@ -4,7 +4,10 @@ import { useNavigate, useSearchParams } from "react-router-dom";
 import { conditionalCastToArray } from "utils/array";
 import { parseQueryString, stringifyQuery } from "utils/query-string";
 
-/** `useQueryParams` returns all of the query params passed into the url */
+/**
+ * `useQueryParams` returns all of the query params that exist in the url.
+ * @param parseOptions - options which define how to parse params from the url (optional)
+ */
 const useQueryParams = (parseOptions?: ParseOptions) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();

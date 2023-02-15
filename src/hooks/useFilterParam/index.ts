@@ -10,7 +10,7 @@ import { parseFilters, stringifyFilters } from "utils/query-string";
  */
 const useFilterParam = () => {
   const [searchParams, setSearchParams] = useQueryParams({
-    arrayFormat: "comma",
+    parseNumbers: false,
   });
 
   const parsedFilters = parseFilters(

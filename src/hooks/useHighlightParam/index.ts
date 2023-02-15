@@ -7,8 +7,9 @@ import { conditionalCastToArray } from "utils/array";
  */
 const useHighlightParam = () => {
   const [searchParams, setSearchParams] = useQueryParams({
-    arrayFormat: "comma",
+    parseNumbers: false,
   });
+
   const parsedHighlights = useMemo(
     () =>
       (
