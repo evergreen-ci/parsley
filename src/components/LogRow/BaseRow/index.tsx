@@ -3,11 +3,12 @@ import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { ListRowProps } from "react-virtualized";
 import { useLogWindowAnalytics } from "analytics";
-import Highlight from "components/Highlight";
+import Highlight, { highlightColorList } from "components/Highlight";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { highlighter } from "utils/highlighters";
 import { formatPrettyPrint } from "utils/prettyPrint";
 import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
@@ -151,8 +152,9 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
     let render = children;
     if (searchTerm) {
       // escape the matching string to prevent XSS
-      render = render.replace(
+      render = highlighter(
         new RegExp(searchTerm, searchTerm.ignoreCase ? "gi" : "g"),
+        render,
         (match) => `<mark>${match}</mark>`
       );
     }
@@ -162,13 +164,18 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
         shouldCheckForOverlappingRegex &&
         hasOverlappingRegex(searchTerm, highlights, children);
       if (!hasOverlappingRegexes) {
-        render = render.replace(
+        render = highlighter(
           new RegExp(highlights, highlights.ignoreCase ? "gi" : "g"),
-          (match) => `<mark>${match}</mark>`
+          render,
+          (match, index) =>
+            `<mark color="${
+              highlightColorList[index % highlightColorList.length]
+            }">${match}</mark>`
         );
       }
     }
     return renderHtml(render, {
+      preserveAttributes: ["mark"],
       transform: {
         // @ts-expect-error - This is expecting a react component but its an Emotion component which are virtually the same thing
         mark: Highlight,
