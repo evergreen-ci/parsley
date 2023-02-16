@@ -60,7 +60,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
     [ingestLines, sendEvent, onChangeLogType]
   );
 
-  const { getRootProps, open } = useDropzone({
+  const { getRootProps, getInputProps, open } = useDropzone({
     onDrop,
     maxFiles: 1,
     multiple: false,
@@ -79,7 +79,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
               setHasDroppedLog={setHasDroppedLog}
             />
           ) : (
-            <FileSelector open={open} />
+            <FileSelector getInputProps={getInputProps} open={open} />
           )}
         </Dropzone>
       </BorderBox>
