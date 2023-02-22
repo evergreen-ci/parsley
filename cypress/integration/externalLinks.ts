@@ -6,7 +6,7 @@ describe("External Links", () => {
       );
       cy.toggleDetailsPanel(true);
     });
-    it.skip("should render a link to the job logs page", () => {
+    it("should render a link to the job logs page", () => {
       cy.dataCy("job-logs-button").should("be.visible");
       cy.dataCy("job-logs-button").should(
         "have.attr",
@@ -14,7 +14,9 @@ describe("External Links", () => {
         "http://localhost:3000/job-logs/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0"
       );
     });
-    it("should render a link to the Lobster logs", () => {
+    it("should render a link to the Lobster logs in the secondary logs menu", () => {
+      cy.dataCy("lobster-button").should("not.be.visible");
+      cy.dataCy.click("secondary-links-button");
       cy.dataCy("lobster-button").should("be.visible");
       cy.dataCy("lobster-button").should(
         "have.attr",
@@ -46,7 +48,7 @@ describe("External Links", () => {
       );
       cy.toggleDetailsPanel(true);
     });
-    it.skip("should render a link to the job logs page", () => {
+    it("should render a link to the job logs page", () => {
       cy.dataCy("job-logs-button").should("be.visible");
       cy.dataCy("job-logs-button").should(
         "have.attr",
@@ -55,6 +57,8 @@ describe("External Links", () => {
       );
     });
     it("should render a link to the Lobster logs", () => {
+      cy.dataCy("lobster-button").should("not.be.visible");
+      cy.dataCy.click("secondary-links-button");
       cy.dataCy("lobster-button").should("be.visible");
       cy.dataCy("lobster-button").should(
         "have.attr",
@@ -97,6 +101,8 @@ describe("External Links", () => {
       );
     });
     it("should render a link to the Lobster logs", () => {
+      cy.dataCy("lobster-button").should("not.be.visible");
+      cy.dataCy.click("secondary-links-button");
       cy.dataCy("lobster-button").should("be.visible");
       cy.dataCy("lobster-button").should(
         "have.attr",

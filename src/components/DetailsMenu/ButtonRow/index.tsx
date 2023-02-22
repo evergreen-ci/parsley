@@ -64,7 +64,7 @@ const ButtonRow: React.FC = () => {
               onClick={() => sendEvent({ name: "Opened Job Logs" })}
               target="_blank"
             >
-              Job Logs
+              Job logs
             </Button>
           </div>
         }
@@ -111,7 +111,10 @@ const ButtonRow: React.FC = () => {
       >
         Open log in standard HTML format in a new tab
       </Tooltip>
-      <Menu trigger={<Button leftGlyph={<Icon glyph="Ellipsis" />} />}>
+      <Menu
+        data-cy="secondary-links-button"
+        trigger={<Button leftGlyph={<Icon glyph="Ellipsis" />} />}
+      >
         <MenuItem
           as="a"
           data-cy="lobster-button"
@@ -132,7 +135,7 @@ const ButtonRow: React.FC = () => {
           onClick={() => sendEvent({ name: "Opened Legacy Job Logs" })}
           target="_blank"
         >
-          Legacy Job Logs
+          Legacy job logs
         </MenuItem>
       </Menu>
     </DetailRow>
