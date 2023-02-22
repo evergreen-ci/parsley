@@ -128,7 +128,7 @@ describe("Bookmarking and selecting lines", () => {
     const logLine11079 = `[j0:s1] | 2022-09-21T12:50:28.489+00:00 I  NETWORK  22944   [conn60] "Connection ended","attr":{"remote":"127.0.0.1:47362","uuid":{"uuid":{"$uuid":"b28d7d9f-03b6-4f93-a7cd-5e1948135f69"}},"connectionId":60,"connectionCount":2}`;
 
     cy.dataCy("details-button").click();
-    cy.dataCy("jira-button-wrapper").click();
+    cy.dataCy("jira-button").click();
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
         expect(text).to.eq(
