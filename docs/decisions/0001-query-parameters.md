@@ -8,8 +8,6 @@
 
  Parsley URLs often contain query parameters that provide additional information about the applications functionality or specify what data should be displayed. These query parameters allow for a reproducable view that enables engineers to share pages and see the same content.
 
-<!-- This is an optional element. Feel free to remove. -->
-## Considered Options
 
 ## Decision Outcome
 Query parameters are an important component of Parsley URLs and should be documented. Query parameters are appended to a URL using a ? character followed by key-value pairs separated by &. In general, Parsley URLs may contain a large number of query parameters, and their meanings can vary depending on the context.

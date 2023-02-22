@@ -8,9 +8,6 @@
 
 The Parsley application is a web-based tool used for viewing and analyzing logs files from both Evergreen and user uploaded logs. The application has several pages, and each page has its unique URL pattern.
 
-<!-- This is an optional element. Feel free to remove. -->
-## Considered Options
-
 ## Decision Outcome
 We decided to use the following URL patterns for the pages in the Parsley application:
 
