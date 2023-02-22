@@ -30,22 +30,19 @@ const ButtonRow: React.FC = () => {
         align="top"
         justify="middle"
         trigger={
-          // We need to wrap the button in a div because mouse events are not triggered on
-          // disabled elements.
-          <div data-cy="jira-button-wrapper">
-            <Button
-              disabled={!bookmarks.length}
-              leftGlyph={<Icon glyph="Copy" />}
-              onClick={async () => {
-                leaveBreadcrumb("copy-jira", { bookmarks }, "user");
-                await copyToClipboard(getJiraFormat(bookmarks, getLine));
-                setHasCopied(!hasCopied);
-                sendEvent({ name: "Clicked Copy To Jira" });
-              }}
-            >
-              JIRA
-            </Button>
-          </div>
+          <Button
+            data-cy="jira-button"
+            disabled={!bookmarks.length}
+            leftGlyph={<Icon glyph="Copy" />}
+            onClick={async () => {
+              leaveBreadcrumb("copy-jira", { bookmarks }, "user");
+              await copyToClipboard(getJiraFormat(bookmarks, getLine));
+              setHasCopied(!hasCopied);
+              sendEvent({ name: "Clicked Copy To Jira" });
+            }}
+          >
+            JIRA
+          </Button>
         }
         triggerEvent="hover"
       >
@@ -55,18 +52,16 @@ const ButtonRow: React.FC = () => {
         align="top"
         justify="middle"
         trigger={
-          <div data-cy="job-logs-button-wrapper">
-            <Button
-              data-cy="job-logs-button"
-              disabled={!jobLogsURL}
-              href={jobLogsURL}
-              leftGlyph={<Icon glyph="Export" />}
-              onClick={() => sendEvent({ name: "Opened Job Logs" })}
-              target="_blank"
-            >
-              Job logs
-            </Button>
-          </div>
+          <Button
+            data-cy="job-logs-button"
+            disabled={!jobLogsURL}
+            href={jobLogsURL}
+            leftGlyph={<Icon glyph="Export" />}
+            onClick={() => sendEvent({ name: "Opened Job Logs" })}
+            target="_blank"
+          >
+            Job logs
+          </Button>
         }
       >
         View all logs for this job
@@ -75,18 +70,16 @@ const ButtonRow: React.FC = () => {
         align="top"
         justify="middle"
         trigger={
-          <div data-cy="raw-logs-button-wrapper">
-            <Button
-              data-cy="raw-log-button"
-              disabled={!rawLogURL}
-              href={rawLogURL}
-              leftGlyph={<Icon glyph="Export" />}
-              onClick={() => sendEvent({ name: "Opened Raw Logs" })}
-              target="_blank"
-            >
-              Raw
-            </Button>
-          </div>
+          <Button
+            data-cy="raw-log-button"
+            disabled={!rawLogURL}
+            href={rawLogURL}
+            leftGlyph={<Icon glyph="Export" />}
+            onClick={() => sendEvent({ name: "Opened Raw Logs" })}
+            target="_blank"
+          >
+            Raw
+          </Button>
         }
       >
         Open Raw log in a new tab
@@ -95,18 +88,16 @@ const ButtonRow: React.FC = () => {
         align="top"
         justify="middle"
         trigger={
-          <div data-cy="html-logs-button-wrapper">
-            <Button
-              data-cy="html-log-button"
-              disabled={!htmlLogURL}
-              href={htmlLogURL}
-              leftGlyph={<Icon glyph="Export" />}
-              onClick={() => sendEvent({ name: "Opened HTML Logs" })}
-              target="_blank"
-            >
-              HTML
-            </Button>
-          </div>
+          <Button
+            data-cy="html-log-button"
+            disabled={!htmlLogURL}
+            href={htmlLogURL}
+            leftGlyph={<Icon glyph="Export" />}
+            onClick={() => sendEvent({ name: "Opened HTML Logs" })}
+            target="_blank"
+          >
+            HTML
+          </Button>
         }
       >
         Open log in standard HTML format in a new tab

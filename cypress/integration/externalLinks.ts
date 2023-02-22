@@ -7,7 +7,7 @@ describe("External Links", () => {
       cy.toggleDetailsPanel(true);
     });
     it("should disable the link to the job logs page since there are no resmoke logs", () => {
-      cy.dataCy("job-logs-button").should("be.disabled");
+      cy.dataCy("job-logs-button").should("have.attr", "aria-disabled", "true");
     });
     it("should render a link to the Lobster logs in the secondary logs menu", () => {
       cy.dataCy("lobster-button").should("not.exist");
@@ -44,7 +44,7 @@ describe("External Links", () => {
       cy.toggleDetailsPanel(true);
     });
     it("should disable the link to the job logs page since there are no resmoke logs", () => {
-      cy.dataCy("job-logs-button").should("be.disabled");
+      cy.dataCy("job-logs-button").should("have.attr", "aria-disabled", "true");
     });
     it("should render a link to the Lobster logs", () => {
       cy.dataCy("lobster-button").should("not.exist");
@@ -87,7 +87,7 @@ describe("External Links", () => {
       cy.dataCy("job-logs-button").should(
         "have.attr",
         "href",
-        `http://localhost:3000/build/7e208050e166b1a9025c817b67eee48d`
+        `http://localhost:3000/job-logs/7e208050e166b1a9025c817b67eee48d`
       );
     });
     it("should render a link to the Lobster logs", () => {
