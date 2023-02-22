@@ -1,5 +1,5 @@
 import { LogContextProvider } from "context/LogContext";
-import { renderWithRouterMatch, screen, userEvent } from "test_utils";
+import { renderWithRouterMatch, screen } from "test_utils";
 import ResmokeRow from ".";
 
 const wrapper = (logs: string[]) => {
@@ -10,16 +10,11 @@ const wrapper = (logs: string[]) => {
 };
 
 describe("resmokeRow", () => {
-  const user = userEvent.setup();
   it("does not render a resmoke row if getLine returns undefined", () => {
-    const getLine = jest.fn().mockReturnValue(undefined);
     renderWithRouterMatch(
       <ResmokeRow
-        data={{
-          ...data,
-          getLine,
-        }}
-        lineNumber={0}
+        {...resmokeProps}
+        lineNumber={99}
         listRowProps={listRowProps}
       />,
       {
@@ -29,14 +24,10 @@ describe("resmokeRow", () => {
     expect(screen.queryByDataCy("resmoke-row")).toBeNull();
   });
   it("renders a resmoke row if getLine returns an empty string", () => {
-    const getLine = jest.fn().mockReturnValue("");
     renderWithRouterMatch(
       <ResmokeRow
-        data={{
-          ...data,
-          getLine,
-        }}
-        lineNumber={0}
+        {...resmokeProps}
+        lineNumber={9}
         listRowProps={listRowProps}
       />,
       {
@@ -47,7 +38,11 @@ describe("resmokeRow", () => {
   });
   it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
-      <ResmokeRow data={data} lineNumber={0} listRowProps={listRowProps} />,
+      <ResmokeRow
+        {...resmokeProps}
+        lineNumber={0}
+        listRowProps={listRowProps}
+      />,
       {
         wrapper: wrapper(logLines),
       }
@@ -55,7 +50,7 @@ describe("resmokeRow", () => {
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
     renderWithRouterMatch(
       <ResmokeRow
-        data={data}
+        {...resmokeProps}
         lineNumber={1}
         listRowProps={{ ...listRowProps, index: 1 }}
       />,
@@ -65,77 +60,34 @@ describe("resmokeRow", () => {
     );
     expect(screen.getByText(logLines[1])).toBeInTheDocument();
   });
-  it("clicking log line link updates the url and marks it as a share line", async () => {
-    const scrollToLine = jest.fn();
-    const { history } = renderWithRouterMatch(
+  it("should apply syntax highlighting to resmoke lines if they have a color", () => {
+    const getResmokeLineColor = jest.fn().mockReturnValue("#ff0000");
+    renderWithRouterMatch(
       <ResmokeRow
-        data={{ ...data, scrollToLine }}
-        lineNumber={0}
-        listRowProps={listRowProps}
+        {...resmokeProps}
+        getResmokeLineColor={getResmokeLineColor}
+        lineNumber={7}
+        listRowProps={{ ...listRowProps, index: 7 }}
       />,
       {
         wrapper: wrapper(logLines),
       }
     );
-    await user.click(screen.getByDataCy("log-link-0"));
-    expect(history.location.search).toBe("?shareLine=0");
-    expect(scrollToLine).toHaveBeenCalledWith(0);
-  });
-  it("clicking on a share line's link icon updates the URL correctly", async () => {
-    const { history } = renderWithRouterMatch(
-      <ResmokeRow data={data} lineNumber={0} listRowProps={listRowProps} />,
-
-      {
-        wrapper: wrapper(logLines),
-        route: "?shareLine=0",
-      }
-    );
-    await user.click(screen.getByDataCy("log-link-0"));
-    expect(history.location.search).toBe("");
-  });
-  it("double clicking a log line adds it to the bookmarks", async () => {
-    const { history } = renderWithRouterMatch(
-      <ResmokeRow data={data} lineNumber={0} listRowProps={listRowProps} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
-    await user.dblClick(screen.getByText(logLines[0]));
-    expect(history.location.search).toBe("?bookmarks=0");
-  });
-  it("double clicking a bookmarked log line removes it from the bookmarks", async () => {
-    const { history } = renderWithRouterMatch(
-      <ResmokeRow data={data} lineNumber={0} listRowProps={listRowProps} />,
-      {
-        wrapper: wrapper(logLines),
-        route: "?bookmarks=0",
-      }
-    );
-    await user.dblClick(screen.getByText(logLines[0]));
-    expect(history.location.search).toBe("");
-  });
-  it("should highlight matching text on the line", () => {
-    renderWithRouterMatch(
-      <ResmokeRow
-        data={{ ...data, searchTerm: /mongod/i }}
-        lineNumber={7}
-        listRowProps={{ ...listRowProps, index: 7 }}
-      />
-    );
-    expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
-    expect(screen.getByDataCy("highlight")).toHaveTextContent("mongod");
+    expect(getResmokeLineColor).toHaveBeenCalledWith(7);
+    expect(screen.getByDataCy("resmoke-row")).toHaveStyle("color: #ff0000");
   });
   it("should highlight matching text if it is within range", () => {
     renderWithRouterMatch(
       <ResmokeRow
-        data={{
-          ...data,
-          searchTerm: /mongod/i,
-          range: { lowerRange: 0, upperRange: 8 },
-        }}
+        {...resmokeProps}
         lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
-      />
+        range={{ lowerRange: 0, upperRange: 8 }}
+        searchTerm={/mongod/i}
+      />,
+      {
+        wrapper: wrapper(logLines),
+      }
     );
     expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
     expect(screen.getByDataCy("highlight")).toHaveTextContent("mongod");
@@ -143,32 +95,18 @@ describe("resmokeRow", () => {
   it("should not highlight matching text if it is outside of range", () => {
     renderWithRouterMatch(
       <ResmokeRow
-        data={{
-          ...data,
-          searchTerm: /mongod/i,
-          range: { lowerRange: 0, upperRange: 6 },
-        }}
+        {...resmokeProps}
         lineNumber={7}
         listRowProps={{ ...listRowProps, index: 7 }}
-      />
+        range={{ lowerRange: 0, upperRange: 6 }}
+        searchTerm={/mongod/i}
+      />,
+      {
+        wrapper: wrapper(logLines),
+      }
     );
     expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
     expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
-  });
-  it("should apply syntax highlighting to resmoke lines if they have a color", () => {
-    const getResmokeLineColor = jest.fn().mockReturnValue("#ff0000");
-    renderWithRouterMatch(
-      <ResmokeRow
-        data={{
-          ...data,
-          getResmokeLineColor,
-        }}
-        lineNumber={7}
-        listRowProps={{ ...listRowProps, index: 7 }}
-      />
-    );
-    expect(getResmokeLineColor).toHaveBeenCalledWith(7);
-    expect(screen.getByDataCy("resmoke-row")).toHaveStyle("color: #ff0000");
   });
 });
 
@@ -182,6 +120,7 @@ const logLines = [
   "[j0:sec0] mongod started on port 20001 with pid 30681.",
   "[j0:sec1] Starting mongod on port 20002...",
   `[j0:s0:n0] | 2022-09-21T12:50:19.899+00:00 D2 REPL_HB  4615618 [ReplCoord-0] "Scheduling heartbeat","attr":{"target":"localhost:20004","when":{"$date":"2022-09-21T12:50:21.899Z"}}`,
+  "",
 ];
 
 const listRowProps = {
@@ -194,16 +133,12 @@ const listRowProps = {
   style: {},
 };
 
-const getLine = (index: number) => logLines[index];
-
-const data = {
-  expandLines: jest.fn(),
-  getLine,
+const resmokeProps = {
+  getLine: (index: number) => logLines[index],
   getResmokeLineColor: jest.fn(),
   resetRowHeightAtIndex: jest.fn(),
   scrollToLine: jest.fn(),
 
-  expandedLines: [],
   prettyPrint: false,
   range: { lowerRange: 0 },
   wrap: false,

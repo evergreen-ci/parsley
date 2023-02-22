@@ -15,8 +15,8 @@ describe("collapsedRow", () => {
   it("renders a collapsed log line", () => {
     renderWithRouterMatch(
       <CollapsedRow
+        {...collapsedProps}
         collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        data={data}
         listRowProps={listRowProps}
       />,
       {
@@ -30,8 +30,9 @@ describe("collapsedRow", () => {
     const expandLines = jest.fn();
     renderWithRouterMatch(
       <CollapsedRow
+        {...collapsedProps}
         collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        data={{ ...data, expandLines }}
+        expandLines={expandLines}
         listRowProps={listRowProps}
       />,
       {
@@ -54,8 +55,9 @@ describe("collapsedRow", () => {
     const expandLines = jest.fn();
     renderWithRouterMatch(
       <CollapsedRow
+        {...collapsedProps}
         collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        data={{ ...data, expandLines }}
+        expandLines={expandLines}
         listRowProps={listRowProps}
       />,
       {
@@ -73,10 +75,8 @@ describe("collapsedRow", () => {
   it("should not disable `Expand 5 Above and Below` button if there are less than 10 log lines in the collapsed row", async () => {
     renderWithRouterMatch(
       <CollapsedRow
+        {...collapsedProps}
         collapsedLines={[0, 1, 2]}
-        data={{
-          ...data,
-        }}
         listRowProps={listRowProps}
       />,
       {
@@ -104,8 +104,6 @@ const logLines = [
   "filler",
 ];
 
-const getLine = (index: number) => logLines[index];
-
 const listRowProps = {
   key: "collapsed-row",
   columnIndex: 0,
@@ -116,15 +114,6 @@ const listRowProps = {
   style: {},
 };
 
-const data = {
+const collapsedProps = {
   expandLines: jest.fn(),
-  getLine,
-  getResmokeLineColor: jest.fn(),
-  resetRowHeightAtIndex: jest.fn(),
-  scrollToLine: jest.fn(),
-
-  expandedLines: [],
-  prettyPrint: false,
-  range: { lowerRange: 0 },
-  wrap: false,
 };

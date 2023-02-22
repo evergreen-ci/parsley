@@ -18,14 +18,12 @@ type LogPaneProps = Omit<
 > & {
   cache: CellMeasurerCache;
   rowRenderer: ListRowRenderer;
-  wrap: boolean;
 };
 
 const LogPane: React.FC<LogPaneProps> = ({
   cache,
   rowRenderer,
   rowCount,
-  wrap,
   ...rest
 }) => {
   const {
@@ -35,7 +33,7 @@ const LogPane: React.FC<LogPaneProps> = ({
     processedLogLines,
     scrollToLine,
   } = useLogContext();
-  const { expandableRows, prettyPrint } = preferences;
+  const { expandableRows, prettyPrint, wrap } = preferences;
 
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
@@ -70,7 +68,7 @@ const LogPane: React.FC<LogPaneProps> = ({
           }}
           deferredMeasurementCache={cache}
           height={height}
-          overscanRowCount={200}
+          overscanRowCount={50}
           rowCount={rowCount}
           rowHeight={cache.rowHeight}
           rowRenderer={rowRenderer}
