@@ -32,6 +32,20 @@ In this URL, the query parameters are:
 * `lower`: An integer value that specifies the lower limit of the lines to search
 
 ### Filter Expressions
+A filter expression is a special string that represents some boolean values representing filter state followed by url encoded regular expression representing the filter.
+
+An example filter looks like this
+```ts
+const filter = `100someFilter`
+```
+The below is a breakdown of the above filter
+* `filter[0]` - This represent the visibility state for a specific filter. If a filter it "visible" it will be applied to the current log. `1` represents visible and `0` represents not visible.
+* `filter[1]` - This represents the caseSensitivity of a filter. Think of this as the `i` pattern modifier in a regular expression. `1` for case sensitive and `0` for insensitive.
+* `filter[2]` - This represents the match type if the filter should perform an exact match or inverse match. An inverse match will match on any line that does not match the filter. `1` for inverse match and `0` for exact match.
+* `rest of filter` - The rest of the filter is the URI encoded regular expression string. When generating these filters ensure you are only passing in the regular expression string and not including any pattern modifiers. 
 
 <!-- This is an optional element. Feel free to remove. -->
 ## More Information
+Note:
+
+**Parsley is a Javascript application and thus only supports Regular Expressions written in the Javascript flavor if you are unsure you can test your regular expressions [here](https://regex101.com/) or on the Parsley application.**
