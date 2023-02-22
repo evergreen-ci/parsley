@@ -421,7 +421,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                 fill="currentColor"
               />
             </svg>
-            Job Logs
+            Job logs
           </div>
         </button>
         <button
@@ -497,10 +497,9 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
           </div>
         </button>
         <button
-          aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-10mo38b"
-          data-cy="lobster-button"
-          target="_blank"
+          aria-disabled="false"
+          class="lg-ui-button-0000 leafygreen-ui-10g1wb5"
+          data-cy="secondary-links-button"
           type="button"
         >
           <div
@@ -512,7 +511,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-169mpis"
+              class="leafygreen-ui-6juzfh"
               fill="none"
               height="16"
               role="presentation"
@@ -521,15 +520,12 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M14.623 5.186a.278.278 0 000-.385l-2.805-2.915a.277.277 0 00-.477.192v1.424A6.5 6.5 0 005 10v.1a1.5 1.5 0 003 0V10a3.5 3.5 0 013.34-3.496v1.405c0 .25.305.373.478.193l2.805-2.916z"
+                clip-rule="evenodd"
+                d="M2.75 6a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm5 0a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm6.75 1.75a1.75 1.75 0 10-3.5 0 1.75 1.75 0 003.5 0z"
                 fill="currentColor"
-              />
-              <path
-                d="M6.5 3.879a.75.75 0 00-.75-.75H4a2 2 0 00-2 2v6.864a2 2 0 002 2h6.864a2 2 0 002-2V10.05a.75.75 0 00-1.5 0v1.943a.5.5 0 01-.5.5H4a.5.5 0 01-.5-.5V5.129a.5.5 0 01.5-.5h1.75a.75.75 0 00.75-.75z"
-                fill="currentColor"
+                fill-rule="evenodd"
               />
             </svg>
-            Lobster
           </div>
         </button>
       </div>

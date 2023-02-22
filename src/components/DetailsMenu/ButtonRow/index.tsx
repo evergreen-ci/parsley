@@ -121,17 +121,19 @@ const ButtonRow: React.FC = () => {
         >
           Lobster
         </MenuItem>
-        <MenuItem
-          as="a"
-          data-cy="legacy-job-logs-button"
-          disabled={!legacyJobLogsURL}
-          glyph={<Icon glyph="Export" />}
-          href={legacyJobLogsURL || ""}
-          onClick={() => sendEvent({ name: "Opened Legacy Job Logs" })}
-          target="_blank"
-        >
-          Legacy job logs
-        </MenuItem>
+        {legacyJobLogsURL && (
+          <MenuItem
+            as="a"
+            data-cy="legacy-job-logs-button"
+            disabled={!legacyJobLogsURL}
+            glyph={<Icon glyph="Export" />}
+            href={legacyJobLogsURL}
+            onClick={() => sendEvent({ name: "Opened Legacy Job Logs" })}
+            target="_blank"
+          >
+            Legacy job logs
+          </MenuItem>
+        )}
       </Menu>
     </DetailRow>
   );
