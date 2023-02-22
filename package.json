@@ -73,6 +73,7 @@
     "react-dropzone": "14.2.3",
     "react-router-dom": "6.3.0",
     "react-virtualized": "9.22.3",
+    "react-virtuoso": "4.1.0",
     "xss": "1.0.14"
   },
   "devDependencies": {
