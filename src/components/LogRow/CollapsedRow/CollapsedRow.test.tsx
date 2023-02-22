@@ -86,7 +86,7 @@ describe("collapsedRow", () => {
     const expandFiveButton = screen.getByRole("button", {
       name: "Expand Icon 5 Above and Below",
     });
-    expect(expandFiveButton).not.toBeDisabled();
+    expect(expandFiveButton).not.toHaveAttribute("aria-disabled", "true");
   });
 });
 

@@ -87,9 +87,9 @@ describe("filters", () => {
     const confirmButton = screen.getByRole("button", {
       name: "Apply",
     });
-    expect(confirmButton).toBeDisabled();
+    expect(confirmButton).toHaveAttribute("aria-disabled", "true");
     await user.clear(screen.getByDataCy("edit-filter-name"));
-    expect(confirmButton).toBeDisabled();
+    expect(confirmButton).toHaveAttribute("aria-disabled", "true");
   });
 
   it("should toggle between visibility icons when they are clicked", async () => {

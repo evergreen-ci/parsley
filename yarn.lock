@@ -2462,9 +2462,9 @@
     lodash "^4.17.21"
 
 "@leafygreen-ui/lib@^10.1.0":
-  version "10.1.0"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/lib/-/lib-10.1.0.tgz#89b0f5fa23e2522222bf2d37f352d8102b9eb61a"
-  integrity sha512-r466/4fSQo5QVlEQ+Txua6tbbapMJxsUFCEdgDWPiT6McBBr4LWU8p94YEzkU3DHDpNfjvDN72KeRfUL4PKNug==
+  version "10.2.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/lib/-/lib-10.2.0.tgz#789cf8e5cd1a23da1766d7fd0ba2b5f325badf2f"
+  integrity sha512-XrqBEyb41si4/Am8Cu2KcgAvd9xGj1bBqnwtHK0qmNlyifRM46DSxAnPXCH7S9J+Jl+AhhZ9DFNDk7+CtIieHg==
   dependencies:
     lodash "^4.17.21"
 
