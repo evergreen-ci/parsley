@@ -40,7 +40,7 @@ Parsley is capable of fetching logs from both [evergreen](https://github.com/eve
 
 ### Environment Variables
 
-[env-cmd](https://github.com/toddbluhm/env-cmd#readme) is used to configure build environments for production, staging and development. This file is git ignored because it contains API keys that we do not want to publish. It should be named `.env-cmdrc.json` and placed at the root of the project. This file is required to deploy Parsley to production and to staging. Ask a team member to send you their copy of the file, which should look like the following:
+[env-cmd](https://github.com/toddbluhm/env-cmd#readme) is used to configure build environments for production, staging and development. We use two files to represent these various environments: `.cmdrc-local.json` for local builds with non-sensitive information, and `.cmdrc.json` for builds deployed to S3. This file is git ignored because it contains API keys that we do not want to publish. It should be named `.env-cmdrc.json` and placed at the root of the project. This file is required to deploy Parsley to production and to staging. Ask a team member to send you their copy of the file, which should look like the following:
 
 ```js
 {
