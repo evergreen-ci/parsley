@@ -29,25 +29,21 @@ Cypress.Commands.add("addSearch", (search: string) => {
 });
 
 Cypress.Commands.add("clearBounds", () => {
-  cy.dataCy("details-button").click();
-  cy.get(`[data-cy="details-menu"]`).should("be.visible");
+  cy.toggleDetailsPanel(true);
 
   cy.dataCy("range-lower-bound").clear();
   cy.dataCy("range-upper-bound").clear();
 
-  cy.dataCy("details-button").click();
-  cy.get(`[data-cy="details-menu"]`).should("not.exist");
+  cy.toggleDetailsPanel(false);
 });
 
 Cypress.Commands.add(
   "clickToggle",
   (toggleDataCy: string, enabled: boolean) => {
-    cy.dataCy("details-button").click();
-    cy.get(`[data-cy="details-menu"]`).should("be.visible");
+    cy.toggleDetailsPanel(true);
     cy.dataCy(toggleDataCy).click();
     cy.dataCy(toggleDataCy).should("have.attr", "aria-checked", `${enabled}`);
-    cy.dataCy("details-button").click();
-    cy.get(`[data-cy="details-menu"]`).should("not.exist");
+    cy.toggleDetailsPanel(false);
   }
 );
 
@@ -58,8 +54,7 @@ Cypress.Commands.add("dataCy", (value: string) => {
 Cypress.Commands.add(
   "editBounds",
   (bounds: { upper: string; lower: string }) => {
-    cy.dataCy("details-button").click();
-    cy.get(`[data-cy="details-menu"]`).should("be.visible");
+    cy.toggleDetailsPanel(true);
 
     if (bounds.upper !== undefined) {
       cy.dataCy("range-upper-bound").should("be.visible");
@@ -71,8 +66,7 @@ Cypress.Commands.add(
       cy.dataCy("range-lower-bound").type(bounds.lower);
     }
 
-    cy.dataCy("details-button").click();
-    cy.get(`[data-cy="details-menu"]`).should("not.exist");
+    cy.toggleDetailsPanel(false);
   }
 );
 
@@ -152,14 +146,15 @@ Cypress.Commands.add("resetDrawerState", () => {
 });
 
 Cypress.Commands.add("toggleDetailsPanel", (open: boolean) => {
+  cy.dataCy("details-button").should("not.have.attr", "aria-disabled", "true");
   if (open) {
-    cy.get(`[data-cy="details-menu"]`).should("not.exist");
-    cy.get(`[data-cy="details-button"]`).click();
-    cy.get(`[data-cy="details-menu"]`).should("be.visible");
+    cy.dataCy("details-menu").should("not.exist");
+    cy.dataCy("details-button").click();
+    cy.dataCy("details-menu").should("be.visible");
   } else {
-    cy.get(`[data-cy="details-menu"]`).should("be.visible");
-    cy.get(`[data-cy="details-button"]`).click();
-    cy.get(`[data-cy="details-menu"]`).should("not.exist");
+    cy.dataCy("details-menu").should("be.visible");
+    cy.dataCy("details-button").click();
+    cy.dataCy("details-menu").should("not.exist");
   }
 });
 
