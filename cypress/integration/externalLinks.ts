@@ -6,17 +6,12 @@ describe("External Links", () => {
       );
       cy.toggleDetailsPanel(true);
     });
-    it("should render a link to the job logs page", () => {
-      cy.dataCy("job-logs-button").should("be.visible");
-      cy.dataCy("job-logs-button").should(
-        "have.attr",
-        "href",
-        "http://localhost:3000/job-logs/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0"
-      );
+    it("should disable the link to the job logs page since there are no resmoke logs", () => {
+      cy.dataCy("job-logs-button").should("be.disabled");
     });
     it("should render a link to the Lobster logs in the secondary logs menu", () => {
-      cy.dataCy("lobster-button").should("not.be.visible");
-      cy.dataCy.click("secondary-links-button");
+      cy.dataCy("lobster-button").should("not.exist");
+      cy.dataCy("secondary-links-button").click();
       cy.dataCy("lobster-button").should("be.visible");
       cy.dataCy("lobster-button").should(
         "have.attr",
@@ -48,17 +43,12 @@ describe("External Links", () => {
       );
       cy.toggleDetailsPanel(true);
     });
-    it("should render a link to the job logs page", () => {
-      cy.dataCy("job-logs-button").should("be.visible");
-      cy.dataCy("job-logs-button").should(
-        "have.attr",
-        "href",
-        "http://localhost:3000/job-logs/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0"
-      );
+    it("should disable the link to the job logs page since there are no resmoke logs", () => {
+      cy.dataCy("job-logs-button").should("be.disabled");
     });
     it("should render a link to the Lobster logs", () => {
-      cy.dataCy("lobster-button").should("not.be.visible");
-      cy.dataCy.click("secondary-links-button");
+      cy.dataCy("lobster-button").should("not.exist");
+      cy.dataCy("secondary-links-button").click();
       cy.dataCy("lobster-button").should("be.visible");
       cy.dataCy("lobster-button").should(
         "have.attr",
@@ -97,12 +87,12 @@ describe("External Links", () => {
       cy.dataCy("job-logs-button").should(
         "have.attr",
         "href",
-        `http://localhost:8080/build/7e208050e166b1a9025c817b67eee48d`
+        `http://localhost:3000/build/7e208050e166b1a9025c817b67eee48d`
       );
     });
     it("should render a link to the Lobster logs", () => {
-      cy.dataCy("lobster-button").should("not.be.visible");
-      cy.dataCy.click("secondary-links-button");
+      cy.dataCy("lobster-button").should("not.exist");
+      cy.dataCy("secondary-links-button").click();
       cy.dataCy("lobster-button").should("be.visible");
       cy.dataCy("lobster-button").should(
         "have.attr",

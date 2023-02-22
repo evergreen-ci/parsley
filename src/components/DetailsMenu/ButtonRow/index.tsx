@@ -112,8 +112,12 @@ const ButtonRow: React.FC = () => {
         Open log in standard HTML format in a new tab
       </Tooltip>
       <Menu
-        data-cy="secondary-links-button"
-        trigger={<Button leftGlyph={<Icon glyph="Ellipsis" />} />}
+        trigger={
+          <Button
+            data-cy="secondary-links-button"
+            leftGlyph={<Icon glyph="Ellipsis" />}
+          />
+        }
       >
         <MenuItem
           as="a"
