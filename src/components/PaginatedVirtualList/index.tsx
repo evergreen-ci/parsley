@@ -27,39 +27,55 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
   const [currentPage, setCurrentPage] = useState(0);
   const totalPageCount = Math.ceil(count / paginationThreshold);
   const linesOnPage = Math.min(
-    paginationThreshold,
+    paginationThreshold + paginationOffset,
     count - currentPage * paginationThreshold
   );
 
   const listRef = useRef<VirtuosoHandle>(null);
 
   const scrollToNextPage = useCallback(() => {
-    if (currentPage + 1 < totalPageCount) {
-      setCurrentPage((prev) => prev + 1);
+    const nextPage = currentPage + 1;
+    if (nextPage < totalPageCount) {
+      setCurrentPage(nextPage);
+      const shouldCompensateForOffset = nextPage > 0;
+      const offsetCompensation = shouldCompensateForOffset
+        ? paginationOffset
+        : 0;
+
       // Scroll by the paginationOffset to avoid the scroll event firing again
       // and causing an infinite loop
-      listRef.current?.scrollToIndex(paginationOffset);
+      listRef.current?.scrollToIndex(offsetCompensation);
     }
   }, [currentPage, paginationOffset, totalPageCount]);
 
   const scrollToPrevPage = useCallback(() => {
+    const prevPage = currentPage - 1;
     if (currentPage !== 0) {
-      setCurrentPage((prev) => prev - 1);
+      setCurrentPage(prevPage);
+      const shouldCompensateForOffset = currentPage > 0;
+
+      const offsetCompensation = shouldCompensateForOffset
+        ? paginationOffset
+        : 0;
+
       // Scroll by the paginationOffset to avoid the scroll event firing again
       // and causing an infinite loop
-      listRef.current?.scrollToIndex(linesOnPage - paginationOffset);
+      listRef.current?.scrollToIndex(linesOnPage - 1 - offsetCompensation);
       // listRef.current?.scrollToIndex(count);
     }
   }, [currentPage, linesOnPage, paginationOffset]);
 
+  // const offsetCompensation = shouldCompensateForOffset ? paginationOffset : 0;
+  const startingIndex = currentPage * paginationThreshold;
+
   // itemContent maps the paginated index to the actual index in the list
   const itemContent = useCallback(
     (index: number) => {
-      const lineIndex = index + currentPage * paginationThreshold;
+      const lineIndex = index + startingIndex;
 
       return row(lineIndex, undefined, undefined);
     },
-    [currentPage, paginationThreshold, row]
+    [row, startingIndex]
   );
 
   return (
@@ -76,6 +92,7 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
         }
       }}
       itemContent={itemContent}
+      overscan={5000}
       style={{ height: "100%", width: "100%" }}
       totalCount={linesOnPage}
     />
