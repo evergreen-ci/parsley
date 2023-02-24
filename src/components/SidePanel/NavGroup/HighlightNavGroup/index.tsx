@@ -1,9 +1,9 @@
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
-import { Overline } from "@leafygreen-ui/typography";
 import { useLogWindowAnalytics } from "analytics";
+import Highlight, { highlightColorList } from "components/Highlight";
 import Icon from "components/Icon";
-import { size } from "constants/tokens";
+import { fontSize, size } from "constants/tokens";
 import { useHighlightParam } from "hooks/useHighlightParam";
 import BaseNavGroup from "../BaseNavGroup";
 
@@ -28,7 +28,7 @@ const HighlightNavGroup: React.FC = () => {
       items={highlights}
       navGroupTitle="Highlighted Terms"
     >
-      {highlights.map((highlight) => (
+      {highlights.map((highlight, index) => (
         <HighlightedTerm key={`highlight-${highlight}`}>
           <IconButton
             aria-label="Delete highlight"
@@ -37,7 +37,12 @@ const HighlightNavGroup: React.FC = () => {
           >
             <Icon glyph="X" />
           </IconButton>
-          <Overline>{highlight}</Overline>
+          <StyledHighlight
+            color={highlightColorList[index % highlightColorList.length]}
+            data-cy="side-nav-highlight"
+          >
+            {highlight}
+          </StyledHighlight>
         </HighlightedTerm>
       ))}
     </BaseNavGroup>
@@ -49,6 +54,10 @@ const HighlightedTerm = styled.div`
   align-items: center;
   gap: ${size.xxs};
   margin: ${size.xxs} 0;
+`;
+
+const StyledHighlight = styled(Highlight)`
+  font-size: ${fontSize.m};
 `;
 
 export default HighlightNavGroup;

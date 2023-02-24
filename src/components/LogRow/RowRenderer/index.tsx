@@ -35,9 +35,12 @@ const RowRenderer: RowRendererFunction = (props) => {
   const { wrap, prettyPrint } = preferences;
 
   const [highlights] = useHighlightParam();
-  const highlightRegex = highlights.length
-    ? new RegExp(highlights.join("|"), "i")
-    : undefined;
+  // Join the highlights into a single regex to match against. Use capture groups
+  // to highlight each match.
+  const highlightRegex =
+    highlights.length > 0
+      ? new RegExp(`${highlights.map((h) => `(${h})`).join("|")}`, "gi")
+      : undefined;
 
   const result = (listRowProps: ListRowProps) => {
     const { index, key, parent } = listRowProps;

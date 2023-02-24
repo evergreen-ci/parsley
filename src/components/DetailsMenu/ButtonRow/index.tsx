@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "@leafygreen-ui/button";
+import { Menu, MenuItem } from "@leafygreen-ui/menu";
 import Tooltip from "@leafygreen-ui/tooltip";
 import { usePreferencesAnalytics } from "analytics";
 import Icon from "components/Icon";
@@ -17,7 +18,8 @@ const ButtonRow: React.FC = () => {
   const [hasCopied, setHasCopied] = useState(false);
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
 
-  const { htmlLogURL, rawLogURL, jobLogsURL, lobsterURL } = logMetadata || {};
+  const { htmlLogURL, rawLogURL, jobLogsURL, legacyJobLogsURL, lobsterURL } =
+    logMetadata || {};
   const tooltipText = bookmarks.length
     ? "Copy Bookmarked Lines In Jira Format"
     : "No bookmarks to copy.";
@@ -28,22 +30,19 @@ const ButtonRow: React.FC = () => {
         align="top"
         justify="middle"
         trigger={
-          // We need to wrap the button in a div because mouse events are not triggered on
-          // disabled elements.
-          <div data-cy="jira-button-wrapper">
-            <Button
-              disabled={!bookmarks.length}
-              leftGlyph={<Icon glyph="Copy" />}
-              onClick={async () => {
-                leaveBreadcrumb("copy-jira", { bookmarks }, "user");
-                await copyToClipboard(getJiraFormat(bookmarks, getLine));
-                setHasCopied(!hasCopied);
-                sendEvent({ name: "Clicked Copy To Jira" });
-              }}
-            >
-              JIRA
-            </Button>
-          </div>
+          <Button
+            data-cy="jira-button"
+            disabled={!bookmarks.length}
+            leftGlyph={<Icon glyph="Copy" />}
+            onClick={async () => {
+              leaveBreadcrumb("copy-jira", { bookmarks }, "user");
+              await copyToClipboard(getJiraFormat(bookmarks, getLine));
+              setHasCopied(!hasCopied);
+              sendEvent({ name: "Clicked Copy To Jira" });
+            }}
+          >
+            JIRA
+          </Button>
         }
         triggerEvent="hover"
       >
@@ -53,18 +52,16 @@ const ButtonRow: React.FC = () => {
         align="top"
         justify="middle"
         trigger={
-          <div data-cy="job-logs-button-wrapper">
-            <Button
-              data-cy="job-logs-button"
-              disabled={!jobLogsURL}
-              href={jobLogsURL}
-              leftGlyph={<Icon glyph="Export" />}
-              onClick={() => sendEvent({ name: "Opened Job Logs" })}
-              target="_blank"
-            >
-              Job Logs
-            </Button>
-          </div>
+          <Button
+            data-cy="job-logs-button"
+            disabled={!jobLogsURL}
+            href={jobLogsURL}
+            leftGlyph={<Icon glyph="Export" />}
+            onClick={() => sendEvent({ name: "Opened Job Logs" })}
+            target="_blank"
+          >
+            Job logs
+          </Button>
         }
       >
         View all logs for this job
@@ -73,18 +70,16 @@ const ButtonRow: React.FC = () => {
         align="top"
         justify="middle"
         trigger={
-          <div data-cy="raw-logs-button-wrapper">
-            <Button
-              data-cy="raw-log-button"
-              disabled={!rawLogURL}
-              href={rawLogURL}
-              leftGlyph={<Icon glyph="Export" />}
-              onClick={() => sendEvent({ name: "Opened Raw Logs" })}
-              target="_blank"
-            >
-              Raw
-            </Button>
-          </div>
+          <Button
+            data-cy="raw-log-button"
+            disabled={!rawLogURL}
+            href={rawLogURL}
+            leftGlyph={<Icon glyph="Export" />}
+            onClick={() => sendEvent({ name: "Opened Raw Logs" })}
+            target="_blank"
+          >
+            Raw
+          </Button>
         }
       >
         Open Raw log in a new tab
@@ -93,42 +88,53 @@ const ButtonRow: React.FC = () => {
         align="top"
         justify="middle"
         trigger={
-          <div data-cy="html-logs-button-wrapper">
-            <Button
-              data-cy="html-log-button"
-              disabled={!htmlLogURL}
-              href={htmlLogURL}
-              leftGlyph={<Icon glyph="Export" />}
-              onClick={() => sendEvent({ name: "Opened HTML Logs" })}
-              target="_blank"
-            >
-              HTML
-            </Button>
-          </div>
+          <Button
+            data-cy="html-log-button"
+            disabled={!htmlLogURL}
+            href={htmlLogURL}
+            leftGlyph={<Icon glyph="Export" />}
+            onClick={() => sendEvent({ name: "Opened HTML Logs" })}
+            target="_blank"
+          >
+            HTML
+          </Button>
         }
       >
         Open log in standard HTML format in a new tab
       </Tooltip>
-      <Tooltip
-        align="top"
-        justify="middle"
+      <Menu
         trigger={
-          <div data-cy="lobster-button-wrapper">
-            <Button
-              data-cy="lobster-button"
-              disabled={!lobsterURL}
-              href={lobsterURL}
-              leftGlyph={<Icon glyph="Export" />}
-              onClick={() => sendEvent({ name: "Opened Lobster Logs" })}
-              target="_blank"
-            >
-              Lobster
-            </Button>
-          </div>
+          <Button
+            data-cy="secondary-links-button"
+            leftGlyph={<Icon glyph="Ellipsis" />}
+          />
         }
       >
-        View the log using the legacy logviewer in a new tab
-      </Tooltip>
+        <MenuItem
+          as="a"
+          data-cy="lobster-button"
+          disabled={!lobsterURL}
+          glyph={<Icon glyph="Export" />}
+          href={lobsterURL || ""}
+          onClick={() => sendEvent({ name: "Opened Lobster Logs" })}
+          target="_blank"
+        >
+          Lobster
+        </MenuItem>
+        {legacyJobLogsURL && (
+          <MenuItem
+            as="a"
+            data-cy="legacy-job-logs-button"
+            disabled={!legacyJobLogsURL}
+            glyph={<Icon glyph="Export" />}
+            href={legacyJobLogsURL}
+            onClick={() => sendEvent({ name: "Opened Legacy Job Logs" })}
+            target="_blank"
+          >
+            Legacy job logs
+          </MenuItem>
+        )}
+      </Menu>
     </DetailRow>
   );
 };

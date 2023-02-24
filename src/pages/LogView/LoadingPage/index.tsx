@@ -4,7 +4,10 @@ import { Body } from "@leafygreen-ui/typography";
 import { useParams } from "react-router-dom";
 import Icon from "components/Icon";
 import { LogTypes } from "constants/enums";
-import { getJobLogsURL } from "constants/externalURLTemplates";
+import {
+  getJobLogsURL,
+  getLegacyJobLogsURL,
+} from "constants/externalURLTemplates";
 import {
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
@@ -43,6 +46,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   let rawLogURL = "";
   let htmlLogURL = "";
   let jobLogsURL = "";
+  let legacyJobLogsURL = "";
   let lobsterURL = "";
   const { data: logkeeperMetadata } = useFetch<LogkeeperMetadata>(
     getResmokeLogURL(buildID || "", { testID, metadata: true }),
@@ -63,6 +67,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       }
       if (buildID) {
         jobLogsURL = getJobLogsURL(buildID);
+        legacyJobLogsURL = getLegacyJobLogsURL(buildID);
       }
       break;
     }
@@ -113,6 +118,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         rawLogURL,
         htmlLogURL,
         jobLogsURL,
+        legacyJobLogsURL,
         lobsterURL,
       });
       ingestLines(data, logType);
@@ -135,6 +141,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     rawLogURL,
     htmlLogURL,
     jobLogsURL,
+    legacyJobLogsURL,
     lobsterURL,
     logkeeperMetadata?.task_id,
     logkeeperMetadata?.execution,

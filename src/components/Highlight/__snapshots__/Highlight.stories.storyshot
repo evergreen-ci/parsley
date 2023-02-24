@@ -1,0 +1,122 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/Highlight All Colors 1`] = `
+<div>
+  <div>
+    <div>
+      Should be
+       
+      <mark
+        class="css-1ksw08g"
+        color="#71F6BA"
+        data-cy="highlight"
+      >
+        highlighted
+      </mark>
+    </div>
+    <div>
+      Should be
+       
+      <mark
+        class="css-17byylf"
+        color="#C3E7FE"
+        data-cy="highlight"
+      >
+        highlighted
+      </mark>
+    </div>
+    <div>
+      Should be
+       
+      <mark
+        class="css-1y88103"
+        color="#FFEAE5"
+        data-cy="highlight"
+      >
+        highlighted
+      </mark>
+    </div>
+    <div>
+      Should be
+       
+      <mark
+        class="css-9h2dxy"
+        color="#FFEC9E"
+        data-cy="highlight"
+      >
+        highlighted
+      </mark>
+    </div>
+    <div>
+      Should be
+       
+      <mark
+        class="css-139h9nl"
+        color="#C0FAE6"
+        data-cy="highlight"
+      >
+        highlighted
+      </mark>
+    </div>
+    <div>
+      Should be
+       
+      <mark
+        class="css-1okxez6"
+        color="#F1D4FD"
+        data-cy="highlight"
+      >
+        highlighted
+      </mark>
+    </div>
+    <div>
+      Should be
+       
+      <mark
+        class="css-9tvxfk"
+        color="#0498EC"
+        data-cy="highlight"
+      >
+        highlighted
+      </mark>
+    </div>
+    <div>
+      Should be
+       
+      <mark
+        class="css-o384z0"
+        color="#E3FCF7"
+        data-cy="highlight"
+      >
+        highlighted
+      </mark>
+    </div>
+    <div>
+      Should be
+       
+      <mark
+        class="css-isit1e"
+        color="#FFCDC7"
+        data-cy="highlight"
+      >
+        highlighted
+      </mark>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`storyshots Storyshots components/Highlight Default 1`] = `
+<div>
+  <span>
+    Should be 
+    <mark
+      class="css-isit1e"
+      color="#FFCDC7"
+      data-cy="highlight"
+    >
+      highlighted
+    </mark>
+  </span>
+</div>
+`;

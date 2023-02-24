@@ -161,14 +161,6 @@ functions:
         echo "Building Production version: $REACT_APP_VERSION"
         yarn build:prod
 
-  copy-cmdrc:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      shell: bash
-      script: |
-        cp .env-cmdrc.sample.json .env-cmdrc.json
-
   upload-to-prod-s3:
     command: shell.exec
     params:
@@ -434,7 +426,6 @@ functions:
 tasks:
   - name: compile
     commands:
-    - func: copy-cmdrc
     - func: yarn-build
     - func: attach-source-map
 
@@ -460,7 +451,6 @@ tasks:
         target: local-evergreen
     - func: seed-logkeeper
     - func: run-logkeeper
-    - func: copy-cmdrc
     - func: yarn-install
     - func: yarn-build
     - func: yarn-preview
@@ -470,7 +460,6 @@ tasks:
 
   - name: storybook
     commands:
-    - func: copy-cmdrc
     - func: yarn-storybook
     - func: attach-storybook
     - func: link-to-storybook

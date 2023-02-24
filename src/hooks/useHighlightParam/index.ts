@@ -6,12 +6,14 @@ import { conditionalCastToArray } from "utils/array";
  * `useHighlightParam` is a specialized form of useQueryParam. It needs to encode and decode the highlights
  */
 const useHighlightParam = () => {
-  const [searchParams, setSearchParams] = useQueryParams();
+  const [searchParams, setSearchParams] = useQueryParams({
+    parseNumbers: false,
+  });
+
   const parsedHighlights = useMemo(
     () =>
-      conditionalCastToArray(
-        (searchParams.highlights as string | string[] | null) ?? [],
-        true
+      (
+        conditionalCastToArray(searchParams.highlights ?? [], true) as string[]
       ).map((h) => decodeURIComponent(h)),
     [searchParams.highlights]
   );
