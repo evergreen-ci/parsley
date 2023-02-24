@@ -7,7 +7,7 @@ jest.mock("js-cookie");
 const mockedGet = Cookie.get as unknown as jest.Mock<string>;
 
 describe("parse log select", () => {
-  it("defaults to 'Select' option if cookie is unset", () => {
+  it("defaults to 'Select...' option if cookie is unset", () => {
     mockedGet.mockImplementation(() => "");
     render(
       <ParseLogSelect
@@ -17,7 +17,10 @@ describe("parse log select", () => {
       />
     );
     expect(screen.getByText("Select...")).toBeInTheDocument();
-    expect(screen.getByDataCy("process-log-button")).toBeDisabled();
+    expect(screen.getByDataCy("process-log-button")).toHaveAttribute(
+      "aria-disabled",
+      "true"
+    );
   });
 
   it("defaults to 'Raw' option if cookie is set to evergreen logs", () => {
