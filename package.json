@@ -19,7 +19,7 @@
     "deploy:do-not-use": ". ./scripts/deploy.sh",
     "dev": "env-cmd -e devLocal -r .env-cmdrc.local.json vite",
     "staging": "env-cmd -e devStaging -r .env-cmdrc.local.json vite",
-    "production": "env-cmd -e devProduction -r .env-cmdrc.local.json vite",
+    "prod": "env-cmd -e devProduction -r .env-cmdrc.local.json vite",
     "eslint:fix": "yarn eslint:strict --fix",
     "eslint:staged": "STRICT=1 eslint",
     "eslint:strict": "STRICT=1 eslint '*.{js,ts,tsx}' 'src/**/*.ts?(x)' 'cypress/**/*.ts'",
