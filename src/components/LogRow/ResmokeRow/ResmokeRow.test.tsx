@@ -12,11 +12,7 @@ const wrapper = (logs: string[]) => {
 describe("resmokeRow", () => {
   it("does not render a resmoke row if getLine returns undefined", () => {
     renderWithRouterMatch(
-      <ResmokeRow
-        {...resmokeProps}
-        lineNumber={99}
-        listRowProps={listRowProps}
-      />,
+      <ResmokeRow {...resmokeProps} lineIndex={99} lineNumber={99} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -25,11 +21,7 @@ describe("resmokeRow", () => {
   });
   it("renders a resmoke row if getLine returns an empty string", () => {
     renderWithRouterMatch(
-      <ResmokeRow
-        {...resmokeProps}
-        lineNumber={9}
-        listRowProps={listRowProps}
-      />,
+      <ResmokeRow {...resmokeProps} lineIndex={9} lineNumber={9} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -38,22 +30,14 @@ describe("resmokeRow", () => {
   });
   it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
-      <ResmokeRow
-        {...resmokeProps}
-        lineNumber={0}
-        listRowProps={listRowProps}
-      />,
+      <ResmokeRow {...resmokeProps} lineIndex={0} lineNumber={0} />,
       {
         wrapper: wrapper(logLines),
       }
     );
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
     renderWithRouterMatch(
-      <ResmokeRow
-        {...resmokeProps}
-        lineNumber={1}
-        listRowProps={{ ...listRowProps, index: 1 }}
-      />,
+      <ResmokeRow {...resmokeProps} lineIndex={1} lineNumber={1} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -66,8 +50,8 @@ describe("resmokeRow", () => {
       <ResmokeRow
         {...resmokeProps}
         getResmokeLineColor={getResmokeLineColor}
+        lineIndex={7}
         lineNumber={7}
-        listRowProps={{ ...listRowProps, index: 7 }}
       />,
       {
         wrapper: wrapper(logLines),
@@ -80,8 +64,8 @@ describe("resmokeRow", () => {
     renderWithRouterMatch(
       <ResmokeRow
         {...resmokeProps}
+        lineIndex={7}
         lineNumber={7}
-        listRowProps={{ ...listRowProps, index: 7 }}
         range={{ lowerRange: 0, upperRange: 8 }}
         searchTerm={/mongod/i}
       />,
@@ -96,8 +80,8 @@ describe("resmokeRow", () => {
     renderWithRouterMatch(
       <ResmokeRow
         {...resmokeProps}
+        lineIndex={7}
         lineNumber={7}
-        listRowProps={{ ...listRowProps, index: 7 }}
         range={{ lowerRange: 0, upperRange: 6 }}
         searchTerm={/mongod/i}
       />,
@@ -122,16 +106,6 @@ const logLines = [
   `[j0:s0:n0] | 2022-09-21T12:50:19.899+00:00 D2 REPL_HB  4615618 [ReplCoord-0] "Scheduling heartbeat","attr":{"target":"localhost:20004","when":{"$date":"2022-09-21T12:50:21.899Z"}}`,
   "",
 ];
-
-const listRowProps = {
-  key: logLines[0],
-  columnIndex: 0,
-  index: 0,
-  isScrolling: false,
-  isVisible: true,
-  parent: {} as any,
-  style: {},
-};
 
 const resmokeProps = {
   getLine: (index: number) => logLines[index],

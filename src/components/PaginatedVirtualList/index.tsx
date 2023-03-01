@@ -3,7 +3,7 @@ import { ItemContent, Virtuoso, VirtuosoHandle } from "react-virtuoso";
 
 interface PaginatedVirtualListProps {
   count: number;
-  row: ItemContent<any, any>;
+  rowRenderer: ItemContent<any, any>;
   /**
    * The number of lines to render on each page.
    */
@@ -17,7 +17,7 @@ interface PaginatedVirtualListProps {
 }
 const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
   count,
-  row,
+  rowRenderer,
   paginationThreshold = 10000,
   paginationOffset = 10,
 }) => {
@@ -73,9 +73,9 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
     (index: number) => {
       const lineIndex = index + startingIndex;
 
-      return row(lineIndex, undefined, undefined);
+      return rowRenderer(lineIndex, undefined, undefined);
     },
-    [row, startingIndex]
+    [rowRenderer, startingIndex]
   );
 
   return (

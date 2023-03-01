@@ -1,7 +1,6 @@
 import { forwardRef, memo, useCallback, useMemo } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import { ListRowProps } from "react-virtualized";
 import { useLogWindowAnalytics } from "analytics";
 import Highlight, { highlightColorList } from "components/Highlight";
 import Icon from "components/Icon";
@@ -15,7 +14,7 @@ import renderHtml from "utils/renderHtml";
 
 const { yellow, red } = palette;
 
-interface BaseRowProps extends ListRowProps {
+interface BaseRowProps {
   children: string;
   "data-cy"?: string;
   index: number;

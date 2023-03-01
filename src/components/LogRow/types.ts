@@ -1,7 +1,5 @@
-import { ListRowProps } from "react-virtualized";
-
 interface BaseRowProps {
-  listRowProps: ListRowProps;
+  lineIndex: number;
 }
 
 interface LogRowProps extends BaseRowProps {

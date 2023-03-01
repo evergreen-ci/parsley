@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import BaseRow from "components/LogRow/BaseRow";
 import { LogRowProps } from "../types";
 import { isLineInRange } from "../utils";
@@ -9,7 +8,7 @@ interface ResmokeRowProps extends LogRowProps {
   getResmokeLineColor: (lineNumber: number) => string | undefined;
 }
 
-const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
+const ResmokeRow: React.FC<ResmokeRowProps> = (rowProps) => {
   const {
     getLine,
     resetRowHeightAtIndex,
@@ -17,7 +16,7 @@ const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
     getResmokeLineColor,
     highlightRegex,
     lineNumber,
-    listRowProps,
+    lineIndex,
     searchLine,
     searchTerm,
     wrap,
@@ -31,10 +30,9 @@ const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
 
   return lineContent !== undefined ? (
     <BaseRow
-      {...listRowProps}
-      ref={ref}
       data-cy="resmoke-row"
       highlights={highlightRegex}
+      index={lineIndex}
       lineNumber={lineNumber}
       prettyPrint={prettyPrint}
       resetRowHeightAtIndex={resetRowHeightAtIndex}
@@ -47,7 +45,7 @@ const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
       {lineContent}
     </BaseRow>
   ) : null;
-});
+};
 
 ResmokeRow.displayName = "ResmokeRow";
 

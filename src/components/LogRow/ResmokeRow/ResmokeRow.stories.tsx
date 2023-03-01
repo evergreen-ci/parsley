@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
-import { RowRenderer, cache } from "components/LogRow/RowRenderer";
+import { ParsleyRow } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import ResmokeRow from ".";
@@ -32,16 +32,8 @@ const SingleLineStory = (args: any) => {
       getLine={() => logLines[8]}
       getResmokeLineColor={getResmokeLineColor}
       highlightRegex={undefined}
+      lineIndex={8}
       lineNumber={8}
-      listRowProps={{
-        index: 8,
-        style: {},
-        columnIndex: 0,
-        isScrolling: false,
-        isVisible: true,
-        key: logLines[8] || "",
-        parent: {} as any,
-      }}
       prettyPrint={args.prettyPrint}
       range={{ lowerRange: 0 }}
       resetRowHeightAtIndex={resetRowHeightAtIndex}
@@ -80,10 +72,8 @@ const MultipleLinesStory = (args: any) => {
   return (
     <Container>
       <LogPane
-        cache={cache}
-        logLines={processedLogLines}
         rowCount={processedLogLines.length}
-        rowRenderer={RowRenderer({
+        rowRenderer={ParsleyRow({
           processedLogLines,
           logType: LogTypes.RESMOKE_LOGS,
         })}

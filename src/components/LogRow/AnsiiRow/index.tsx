@@ -1,4 +1,3 @@
-import { forwardRef } from "react";
 import AnsiUp from "ansi_up";
 import linkifyHtml from "linkify-html";
 import BaseRow from "components/LogRow/BaseRow";
@@ -9,7 +8,7 @@ interface AnsiiRowProps extends LogRowProps {
   lineNumber: number;
 }
 
-const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
+const AnsiiRow: React.FC<AnsiiRowProps> = (rowProps) => {
   const ansiUp = new AnsiUp();
   const {
     getLine,
@@ -17,7 +16,7 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
     scrollToLine,
     highlightRegex,
     lineNumber,
-    listRowProps,
+    lineIndex,
     range,
     searchLine,
     searchTerm,
@@ -34,10 +33,9 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
 
   return lineContent !== undefined ? (
     <BaseRow
-      {...listRowProps}
-      ref={ref}
       data-cy="ansii-row"
       highlights={highlightRegex}
+      index={lineIndex}
       lineNumber={lineNumber}
       resetRowHeightAtIndex={resetRowHeightAtIndex}
       scrollToLine={scrollToLine}
@@ -48,7 +46,7 @@ const AnsiiRow = forwardRef<any, AnsiiRowProps>((rowProps, ref) => {
       {linkifiedLine}
     </BaseRow>
   ) : null;
-});
+};
 
 AnsiiRow.displayName = "AnsiiRow";
 

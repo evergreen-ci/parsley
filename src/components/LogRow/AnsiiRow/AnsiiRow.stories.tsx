@@ -5,7 +5,7 @@ import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import AnsiiRow from ".";
-import { RowRenderer, cache } from "../RowRenderer";
+import { ParsleyRow } from "../RowRenderer";
 
 export default {
   component: AnsiiRow,
@@ -26,16 +26,8 @@ const SingleLineStory = (args: any) => {
       key={logLines[0]}
       getLine={() => logLines[0]}
       highlightRegex={undefined}
+      lineIndex={0}
       lineNumber={0}
-      listRowProps={{
-        index: 0,
-        style: {},
-        columnIndex: 0,
-        isScrolling: false,
-        isVisible: true,
-        key: logLines[0] || "",
-        parent: {} as any,
-      }}
       range={{ lowerRange: 0 }}
       resetRowHeightAtIndex={resetRowHeightAtIndex}
       scrollToLine={scrollToLine}
@@ -68,10 +60,8 @@ const MultiLineStory = (args: any) => {
   return (
     <Container>
       <LogPane
-        cache={cache}
-        logLines={processedLogLines}
         rowCount={processedLogLines.length}
-        rowRenderer={RowRenderer({
+        rowRenderer={ParsleyRow({
           processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
         })}

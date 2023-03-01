@@ -10,7 +10,7 @@ const line = `[js_test:startup_recovery_commit_transaction_before_stable_timesta
 export const Default: StoryObj<typeof PaginatedVirtualList> = {
   render: (args) => (
     <Container>
-      <PaginatedVirtualList {...args} row={row} />
+      <PaginatedVirtualList {...args} rowRenderer={row} />
     </Container>
   ),
 };
@@ -26,7 +26,7 @@ const row = (i: number) => (
 
 Default.args = {
   count: 50000,
-  paginationThreshold: 100,
+  paginationThreshold: 10000,
 };
 
 const Container = styled.div`

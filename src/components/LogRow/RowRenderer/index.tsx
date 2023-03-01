@@ -1,9 +1,3 @@
-import {
-  CellMeasurer,
-  CellMeasurerCache,
-  ListRowProps,
-  ListRowRenderer,
-} from "react-virtualized";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { useHighlightParam } from "hooks/useHighlightParam";
@@ -16,9 +10,9 @@ import ResmokeRow from "../ResmokeRow";
 type RowRendererFunction = (props: {
   processedLogLines: ProcessedLogLines;
   logType: LogTypes;
-}) => ListRowRenderer;
+}) => (index: number) => JSX.Element;
 
-const RowRenderer: RowRendererFunction = (props) => {
+const ParsleyRow: RowRendererFunction = (props) => {
   const { logType, processedLogLines } = props;
   const {
     expandLines,
@@ -42,45 +36,36 @@ const RowRenderer: RowRendererFunction = (props) => {
       ? new RegExp(`${highlights.map((h) => `(${h})`).join("|")}`, "gi")
       : undefined;
 
-  const result = (listRowProps: ListRowProps) => {
-    const { index, key, parent } = listRowProps;
-
+  const result = (index: number) => {
+    const processedLogLine = processedLogLines[index];
+    if (isCollapsedRow(processedLogLine)) {
+      return (
+        <CollapsedRow
+          collapsedLines={processedLogLine}
+          expandLines={expandLines}
+          lineIndex={index}
+        />
+      );
+    }
+    const Row = rowRendererMap[logType];
     return (
-      <CellMeasurer key={key} cache={cache} parent={parent} rowIndex={index}>
-        {({ registerChild }) => {
-          const processedLogLine = processedLogLines[index];
-          if (isCollapsedRow(processedLogLine)) {
-            return (
-              <CollapsedRow
-                ref={registerChild}
-                collapsedLines={processedLogLine}
-                expandLines={expandLines}
-                listRowProps={listRowProps}
-              />
-            );
-          }
-          const Row = rowRendererMap[logType];
-          return (
-            <Row
-              ref={registerChild}
-              getLine={getLine}
-              getResmokeLineColor={getResmokeLineColor}
-              highlightRegex={highlightRegex}
-              lineNumber={processedLogLine}
-              listRowProps={listRowProps}
-              prettyPrint={prettyPrint}
-              range={range}
-              resetRowHeightAtIndex={resetRowHeightAtIndex}
-              scrollToLine={scrollToLine}
-              searchLine={searchLine}
-              searchTerm={searchTerm}
-              wrap={wrap}
-            />
-          );
-        }}
-      </CellMeasurer>
+      <Row
+        getLine={getLine}
+        getResmokeLineColor={getResmokeLineColor}
+        highlightRegex={highlightRegex}
+        lineIndex={index}
+        lineNumber={processedLogLine}
+        prettyPrint={prettyPrint}
+        range={range}
+        resetRowHeightAtIndex={resetRowHeightAtIndex}
+        scrollToLine={scrollToLine}
+        searchLine={searchLine}
+        searchTerm={searchTerm}
+        wrap={wrap}
+      />
     );
   };
+
   result.displayName = `${logType}RowRenderer`;
   return result;
 };
@@ -91,9 +76,4 @@ const rowRendererMap = {
   [LogTypes.RESMOKE_LOGS]: ResmokeRow,
 };
 
-const cache = new CellMeasurerCache({
-  fixedWidth: true,
-  defaultHeight: 18,
-});
-
-export { RowRenderer, cache };
+export { ParsleyRow };

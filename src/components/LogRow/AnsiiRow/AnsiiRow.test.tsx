@@ -12,7 +12,7 @@ const wrapper = (logs: string[]) => {
 describe("ansiiRow", () => {
   it("does not render an ansii row if getLine returns undefined", () => {
     renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineNumber={99} listRowProps={listRowProps} />,
+      <AnsiiRow {...ansiiProps} lineIndex={99} lineNumber={99} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -21,7 +21,7 @@ describe("ansiiRow", () => {
   });
   it("renders an ansii row if getLine returns an empty string", () => {
     renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineNumber={10} listRowProps={listRowProps} />,
+      <AnsiiRow {...ansiiProps} lineIndex={10} lineNumber={10} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -30,18 +30,14 @@ describe("ansiiRow", () => {
   });
   it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineNumber={0} listRowProps={listRowProps} />,
+      <AnsiiRow {...ansiiProps} lineIndex={0} lineNumber={0} />,
       {
         wrapper: wrapper(logLines),
       }
     );
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
     renderWithRouterMatch(
-      <AnsiiRow
-        {...ansiiProps}
-        lineNumber={1}
-        listRowProps={{ ...listRowProps, index: 1 }}
-      />,
+      <AnsiiRow {...ansiiProps} lineIndex={1} lineNumber={1} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -50,11 +46,7 @@ describe("ansiiRow", () => {
   });
   it("lines should be linkified if they have a url", () => {
     renderWithRouterMatch(
-      <AnsiiRow
-        {...ansiiProps}
-        lineNumber={8}
-        listRowProps={{ ...listRowProps, index: 8 }}
-      />,
+      <AnsiiRow {...ansiiProps} lineIndex={8} lineNumber={8} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -69,8 +61,8 @@ describe("ansiiRow", () => {
     renderWithRouterMatch(
       <AnsiiRow
         {...ansiiProps}
+        lineIndex={9}
         lineNumber={9}
-        listRowProps={{ ...listRowProps, index: 9 }}
         range={{ lowerRange: 0, upperRange: 10 }}
         searchTerm={/highlight me/i}
       />,
@@ -86,8 +78,8 @@ describe("ansiiRow", () => {
     renderWithRouterMatch(
       <AnsiiRow
         {...ansiiProps}
+        lineIndex={9}
         lineNumber={9}
-        listRowProps={{ ...listRowProps, index: 9 }}
         range={{ lowerRange: 0, upperRange: 8 }}
         searchTerm={/highlight me/i}
       />,
@@ -114,16 +106,6 @@ const logLines = [
   "some random text that should not be highlighted but highlight me should",
   "",
 ];
-
-const listRowProps = {
-  key: logLines[0],
-  columnIndex: 0,
-  index: 0,
-  isScrolling: false,
-  isVisible: true,
-  parent: {} as any,
-  style: {},
-};
 
 const ansiiProps = {
   getLine: (index: number) => logLines[index],

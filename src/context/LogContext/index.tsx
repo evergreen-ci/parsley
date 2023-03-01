@@ -9,7 +9,6 @@ import {
 } from "react";
 import Cookie from "js-cookie";
 import { List } from "react-virtualized";
-import { cache } from "components/LogRow/RowRenderer";
 import {
   CASE_SENSITIVE,
   EXPANDABLE_ROWS,
@@ -307,7 +306,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
       resetRowHeightAtIndex: (index: number) => {
         listRef.current?.recomputeRowHeights(index);
-        cache.clear(index, 0);
       },
       scrollToLine,
       setFileName: (fileName: string) => {

@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
-import { RowRenderer, cache } from "components/LogRow/RowRenderer";
+import { ParsleyRow } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import CollapsedRow from ".";
@@ -29,10 +29,8 @@ const CollapsedAnsiiRowStory = (args: any) => {
   return (
     <Container>
       <LogPane
-        cache={cache}
-        logLines={processedLogLines}
         rowCount={processedLogLines.length}
-        rowRenderer={RowRenderer({
+        rowRenderer={ParsleyRow({
           processedLogLines: collapsedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
         })}
@@ -43,9 +41,7 @@ const CollapsedAnsiiRowStory = (args: any) => {
 
 export const CollapsedAnsiiRow: StoryObj<CollapsedRowProps> = {
   render: (args) => <CollapsedAnsiiRowStory {...args} />,
-  args: {
-    wrap: false,
-  },
+  args: {},
 };
 
 // CollapsedRow withs ResmokeRows.
@@ -64,10 +60,8 @@ const CollapsedResmokeRowStory = (args: any) => {
   return (
     <Container>
       <LogPane
-        cache={cache}
-        logLines={processedLogLines}
         rowCount={processedLogLines.length}
-        rowRenderer={RowRenderer({
+        rowRenderer={ParsleyRow({
           processedLogLines: collapsedLogLines,
           logType: LogTypes.RESMOKE_LOGS,
         })}
@@ -78,9 +72,7 @@ const CollapsedResmokeRowStory = (args: any) => {
 
 export const CollapsedResmokeRow: StoryObj<CollapsedRowProps> = {
   render: (args) => <CollapsedResmokeRowStory {...args} />,
-  args: {
-    wrap: false,
-  },
+  args: {},
 };
 
 const ansiiLogLines = [
