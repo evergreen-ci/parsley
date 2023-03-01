@@ -2380,21 +2380,7 @@
     focus-trap-react "^10.0.0"
     polished "^4.2.2"
 
-"@leafygreen-ui/hooks@^7.3.3":
-  version "7.3.3"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/hooks/-/hooks-7.3.3.tgz#9b545acaaac59861687af744912f4b9abd8fd72b"
-  integrity sha512-I/gru6fwr9d3e6gCd2TWvAxqCBFSxgcBOlQdTXdhWEknqm8mnHGgxUayfvj0Qkz7TwJLdwKoxdo6Kk1qbOzSVg==
-  dependencies:
-    lodash "^4.17.21"
-
-"@leafygreen-ui/hooks@^7.4.0":
-  version "7.4.0"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/hooks/-/hooks-7.4.0.tgz#1b4a11cae74b156fb823faa81097dc363ce7dd65"
-  integrity sha512-oIYqq3lmi3BDjdNf9zWg9PGgWWLOyrdDUAOvOhY+wlcG0U1ZTB38PB6es5vXnVzDGXQurTdIV/GDh4x3QcwZRg==
-  dependencies:
-    lodash "^4.17.21"
-
-"@leafygreen-ui/hooks@^7.5.0":
+"@leafygreen-ui/hooks@^7.3.3", "@leafygreen-ui/hooks@^7.4.0", "@leafygreen-ui/hooks@^7.5.0":
   version "7.5.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/hooks/-/hooks-7.5.0.tgz#dec0a90a5691a42278d4f80e35ef9b8db3e02c63"
   integrity sha512-ZT6X6n/D/714eHwqNCk8KPx2QthrQVP4Yn+fZpIgUr7BCogC8Jp9NrAsyPJvjq4qJT6lMw7LyuL8r11/jbZVPg==
@@ -2454,14 +2440,7 @@
     "@leafygreen-ui/hooks" "^7.3.3"
     "@leafygreen-ui/lib" "^10.0.0"
 
-"@leafygreen-ui/lib@^10.0.0":
-  version "10.0.0"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/lib/-/lib-10.0.0.tgz#082155cbea1698ea1feb20ebbf9eec8f4b45ddc7"
-  integrity sha512-l9W05IYJ/Bmyu5TayuadlsSR1DTF3W05o8Lk6HQk1qK+1xMLMwrxysbwzI6jKb6wAALU9/1dmw9kLDKE2n+EWg==
-  dependencies:
-    lodash "^4.17.21"
-
-"@leafygreen-ui/lib@^10.1.0":
+"@leafygreen-ui/lib@^10.0.0", "@leafygreen-ui/lib@^10.1.0":
   version "10.2.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/lib/-/lib-10.2.0.tgz#789cf8e5cd1a23da1766d7fd0ba2b5f325badf2f"
   integrity sha512-XrqBEyb41si4/Am8Cu2KcgAvd9xGj1bBqnwtHK0qmNlyifRM46DSxAnPXCH7S9J+Jl+AhhZ9DFNDk7+CtIieHg==
@@ -2519,19 +2498,7 @@
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/polymorphic/-/polymorphic-1.1.0.tgz#c618d8432d667e7ab21bfeaf09501b1001fb2a10"
   integrity sha512-QS8UrJpKatqhms5LC3TImyYZx5DeMbme9Z+4R6EUiYcmyIQSlFvCvmh8+f7MKki2fiNpgU6U5E31seSfSz4l0A==
 
-"@leafygreen-ui/popover@^11.0.1":
-  version "11.0.1"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/popover/-/popover-11.0.1.tgz#864fb3d39cab2e98b600bd1b5bf930f3592af188"
-  integrity sha512-OLAjYWomhc3wL+pZnmzrbQOOLtCH0Fm0cLfK0AY3h1QVV0XGZQVDt1+soa6KKZInb7wcAtHZpDHqxWzVlwkuZg==
-  dependencies:
-    "@leafygreen-ui/emotion" "^4.0.3"
-    "@leafygreen-ui/hooks" "^7.3.3"
-    "@leafygreen-ui/lib" "^10.0.0"
-    "@leafygreen-ui/portal" "^4.0.7"
-    "@leafygreen-ui/tokens" "^1.4.0"
-    react-transition-group "^4.4.1"
-
-"@leafygreen-ui/popover@^11.0.4":
+"@leafygreen-ui/popover@^11.0.1", "@leafygreen-ui/popover@^11.0.4":
   version "11.0.4"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/popover/-/popover-11.0.4.tgz#93fa683a5d2231503502abd3e870904773c1ec51"
   integrity sha512-MLgoubMKByplZHrECbDD88gNuzi+npxRleRxFHWgiSMG1+HbSRHLeCQEV836toIXDmU2Jv7KN9zImSfo2h8voQ==
@@ -2696,23 +2663,7 @@
   dependencies:
     "@leafygreen-ui/palette" "^3.4.7"
 
-"@leafygreen-ui/tooltip@9.0.2":
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/tooltip/-/tooltip-9.0.2.tgz#99a2bd95d1dcdcf4ccfbdd680e99670e7bee61cc"
-  integrity sha512-yGKdBu0+Wkf1oNGiC8CyEtMYZimiHmhIwy4czdVXdQe2Mi2BEX5Jtb39g2+4q+Rw+tMj3OKEJIb1XNqD14hf+w==
-  dependencies:
-    "@leafygreen-ui/emotion" "^4.0.3"
-    "@leafygreen-ui/hooks" "^7.3.3"
-    "@leafygreen-ui/icon" "^11.12.1"
-    "@leafygreen-ui/lib" "^10.0.0"
-    "@leafygreen-ui/palette" "^3.4.4"
-    "@leafygreen-ui/popover" "^11.0.1"
-    "@leafygreen-ui/tokens" "^1.4.0"
-    "@leafygreen-ui/typography" "^15.1.0"
-    lodash "^4.17.21"
-    polished "^4.2.2"
-
-"@leafygreen-ui/tooltip@^9.1.3":
+"@leafygreen-ui/tooltip@9.1.3", "@leafygreen-ui/tooltip@^9.1.3":
   version "9.1.3"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/tooltip/-/tooltip-9.1.3.tgz#559979294aabe5ce0af11800efb1349379ccc1f0"
   integrity sha512-a9XEwUeWAN4t7822meMnKc0e6TcXVcK56OYf72+3ZxyVuxupO5V4HdDTocMqigGgkO7XZzOljNGJHNa65E9LNw==
