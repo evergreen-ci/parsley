@@ -110,7 +110,6 @@ const logLines = [
 const resmokeProps = {
   getLine: (index: number) => logLines[index],
   getResmokeLineColor: jest.fn(),
-  resetRowHeightAtIndex: jest.fn(),
   scrollToLine: jest.fn(),
 
   prettyPrint: false,

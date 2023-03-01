@@ -12,7 +12,6 @@ const AnsiiRow: React.FC<AnsiiRowProps> = (rowProps) => {
   const ansiUp = new AnsiUp();
   const {
     getLine,
-    resetRowHeightAtIndex,
     scrollToLine,
     highlightRegex,
     lineNumber,
@@ -37,7 +36,6 @@ const AnsiiRow: React.FC<AnsiiRowProps> = (rowProps) => {
       highlights={highlightRegex}
       index={lineIndex}
       lineNumber={lineNumber}
-      resetRowHeightAtIndex={resetRowHeightAtIndex}
       scrollToLine={scrollToLine}
       searchLine={searchLine}
       searchTerm={inRange ? searchTerm : undefined}

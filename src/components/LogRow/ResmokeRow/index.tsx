@@ -11,7 +11,6 @@ interface ResmokeRowProps extends LogRowProps {
 const ResmokeRow: React.FC<ResmokeRowProps> = (rowProps) => {
   const {
     getLine,
-    resetRowHeightAtIndex,
     scrollToLine,
     getResmokeLineColor,
     highlightRegex,
@@ -35,7 +34,6 @@ const ResmokeRow: React.FC<ResmokeRowProps> = (rowProps) => {
       index={lineIndex}
       lineNumber={lineNumber}
       prettyPrint={prettyPrint}
-      resetRowHeightAtIndex={resetRowHeightAtIndex}
       resmokeRowColor={lineColor}
       scrollToLine={scrollToLine}
       searchLine={searchLine}

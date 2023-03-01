@@ -15,7 +15,7 @@ type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>>;
 
 // Single AnsiiRow.
 const SingleLineStory = (args: any) => {
-  const { ingestLines, resetRowHeightAtIndex, scrollToLine } = useLogContext();
+  const { ingestLines, scrollToLine } = useLogContext();
 
   useEffect(() => {
     ingestLines(logLines, LogTypes.EVERGREEN_TASK_LOGS);
@@ -29,7 +29,6 @@ const SingleLineStory = (args: any) => {
       lineIndex={0}
       lineNumber={0}
       range={{ lowerRange: 0 }}
-      resetRowHeightAtIndex={resetRowHeightAtIndex}
       scrollToLine={scrollToLine}
       searchTerm={undefined}
       wrap={args.wrap}

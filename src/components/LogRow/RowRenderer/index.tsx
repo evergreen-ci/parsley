@@ -18,7 +18,6 @@ const ParsleyRow: RowRendererFunction = (props) => {
     expandLines,
     getLine,
     getResmokeLineColor,
-    resetRowHeightAtIndex,
     scrollToLine,
     preferences,
     range,
@@ -57,7 +56,6 @@ const ParsleyRow: RowRendererFunction = (props) => {
         lineNumber={processedLogLine}
         prettyPrint={prettyPrint}
         range={range}
-        resetRowHeightAtIndex={resetRowHeightAtIndex}
         scrollToLine={scrollToLine}
         searchLine={searchLine}
         searchTerm={searchTerm}

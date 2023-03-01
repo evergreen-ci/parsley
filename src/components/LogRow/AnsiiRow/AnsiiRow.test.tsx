@@ -109,7 +109,6 @@ const logLines = [
 
 const ansiiProps = {
   getLine: (index: number) => logLines[index],
-  resetRowHeightAtIndex: jest.fn(),
   scrollToLine: jest.fn(),
 
   prettyPrint: false,

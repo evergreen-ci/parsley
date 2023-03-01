@@ -4,7 +4,6 @@ interface BaseRowProps {
 
 interface LogRowProps extends BaseRowProps {
   getLine: (index: number) => string | undefined;
-  resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
 
   highlightRegex?: RegExp;

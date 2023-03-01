@@ -23,7 +23,6 @@ interface BaseRowProps {
   lineNumber: number;
   prettyPrint?: boolean;
   searchLine?: number;
-  resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
   highlights?: RegExp;
@@ -47,7 +46,6 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     searchTerm,
     resmokeRowColor,
     wrap,
-    resetRowHeightAtIndex,
     scrollToLine,
     ...rest
   } = props;
@@ -89,19 +87,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       setBookmarks(newBookmarks);
       sendEvent({ name: "Added Bookmark" });
     }
-
-    if (prettyPrint) {
-      resetRowHeightAtIndex(index);
-    }
-  }, [
-    bookmarks,
-    index,
-    lineNumber,
-    prettyPrint,
-    resetRowHeightAtIndex,
-    sendEvent,
-    setBookmarks,
-  ]);
+  }, [bookmarks, lineNumber, sendEvent, setBookmarks]);
 
   return (
     <RowContainer
