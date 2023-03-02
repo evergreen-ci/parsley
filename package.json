@@ -97,7 +97,7 @@
     "@testing-library/user-event": "14.4.3",
     "@types/axios": "0.14.0",
     "@types/jest": "29.4.0",
-    "@types/js-cookie": "3.0.2",
+    "@types/js-cookie": "3.0.3",
     "@types/new-relic-browser": "0.1212.1",
     "@types/node": "16.11.47",
     "@types/react": "18.0.15",
