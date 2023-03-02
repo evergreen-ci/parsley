@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Button from "@leafygreen-ui/button";
+import { Menu, MenuItem } from "@leafygreen-ui/menu";
 import Tooltip from "@leafygreen-ui/tooltip";
 import { usePreferencesAnalytics } from "analytics";
 import Icon from "components/Icon";
@@ -17,7 +18,8 @@ const ButtonRow: React.FC = () => {
   const [hasCopied, setHasCopied] = useState(false);
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
 
-  const { htmlLogURL, rawLogURL, jobLogsURL, lobsterURL } = logMetadata || {};
+  const { htmlLogURL, rawLogURL, jobLogsURL, legacyJobLogsURL, lobsterURL } =
+    logMetadata || {};
   const tooltipText = bookmarks.length
     ? "Copy Bookmarked Lines In Jira Format"
     : "No bookmarks to copy.";
@@ -58,7 +60,7 @@ const ButtonRow: React.FC = () => {
             onClick={() => sendEvent({ name: "Opened Job Logs" })}
             target="_blank"
           >
-            Job Logs
+            Job logs
           </Button>
         }
       >
@@ -100,24 +102,39 @@ const ButtonRow: React.FC = () => {
       >
         Open log in standard HTML format in a new tab
       </Tooltip>
-      <Tooltip
-        align="top"
-        justify="middle"
+      <Menu
         trigger={
           <Button
-            data-cy="lobster-button"
-            disabled={!lobsterURL}
-            href={lobsterURL}
-            leftGlyph={<Icon glyph="Export" />}
-            onClick={() => sendEvent({ name: "Opened Lobster Logs" })}
-            target="_blank"
-          >
-            Lobster
-          </Button>
+            data-cy="secondary-links-button"
+            leftGlyph={<Icon glyph="Ellipsis" />}
+          />
         }
       >
-        View the log using the legacy logviewer in a new tab
-      </Tooltip>
+        <MenuItem
+          as="a"
+          data-cy="lobster-button"
+          disabled={!lobsterURL}
+          glyph={<Icon glyph="Export" />}
+          href={lobsterURL || ""}
+          onClick={() => sendEvent({ name: "Opened Lobster Logs" })}
+          target="_blank"
+        >
+          Lobster
+        </MenuItem>
+        {legacyJobLogsURL && (
+          <MenuItem
+            as="a"
+            data-cy="legacy-job-logs-button"
+            disabled={!legacyJobLogsURL}
+            glyph={<Icon glyph="Export" />}
+            href={legacyJobLogsURL}
+            onClick={() => sendEvent({ name: "Opened Legacy Job Logs" })}
+            target="_blank"
+          >
+            Legacy job logs
+          </MenuItem>
+        )}
+      </Menu>
     </DetailRow>
   );
 };
