@@ -194,8 +194,8 @@ const RowContainer = styled.div<{
   ${({ shared }) => shared && `background-color: ${yellow.light3};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
   ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
-
-  width: unset !important;
+  
+  width: fit-content;
   // Hover should be an overlay shadow so that the user can see the color underneath.
   :hover {
     box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.1);
@@ -229,7 +229,8 @@ const StyledPre = styled.pre<{
   margin-top: 0;
   margin-bottom: 0;
   margin-right: ${size.xs};
-
+  /* Remove overflow on pre */
+  overflow: visible;
   font-family: inherit;
   line-height: inherit;
   font-size: inherit;

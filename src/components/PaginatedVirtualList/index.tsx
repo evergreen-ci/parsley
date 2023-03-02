@@ -92,8 +92,6 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
         }
       }}
       itemContent={itemContent}
-      overscan={5000}
-      style={{ height: "100%", width: "100%" }}
       totalCount={linesOnPage}
     />
   );
