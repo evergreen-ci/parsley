@@ -29,7 +29,13 @@ const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  return <PaginatedVirtualList count={rowCount} rowRenderer={rowRenderer} />;
+  return (
+    <PaginatedVirtualList
+      count={rowCount}
+      paginationThreshold={500000}
+      rowRenderer={rowRenderer}
+    />
+  );
 };
 
 LogPane.displayName = "VirtuosoLogPane";
