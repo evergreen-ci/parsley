@@ -8,19 +8,18 @@ interface AnsiiRowProps extends LogRowProps {
   lineNumber: number;
 }
 
-const AnsiiRow: React.FC<AnsiiRowProps> = (rowProps) => {
+const AnsiiRow: React.FC<AnsiiRowProps> = ({
+  getLine,
+  scrollToLine,
+  highlightRegex,
+  lineNumber,
+  lineIndex,
+  range,
+  searchLine,
+  searchTerm,
+  wrap,
+}) => {
   const ansiUp = new AnsiUp();
-  const {
-    getLine,
-    scrollToLine,
-    highlightRegex,
-    lineNumber,
-    lineIndex,
-    range,
-    searchLine,
-    searchTerm,
-    wrap,
-  } = rowProps;
 
   const lineContent = getLine(lineNumber);
   const linkifiedLine = linkifyHtml(ansiUp.ansi_to_html(lineContent ?? ""), {

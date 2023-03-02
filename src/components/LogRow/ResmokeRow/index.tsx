@@ -8,21 +8,19 @@ interface ResmokeRowProps extends LogRowProps {
   getResmokeLineColor: (lineNumber: number) => string | undefined;
 }
 
-const ResmokeRow: React.FC<ResmokeRowProps> = (rowProps) => {
-  const {
-    getLine,
-    scrollToLine,
-    getResmokeLineColor,
-    highlightRegex,
-    lineNumber,
-    lineIndex,
-    searchLine,
-    searchTerm,
-    wrap,
-    prettyPrint,
-    range,
-  } = rowProps;
-
+const ResmokeRow: React.FC<ResmokeRowProps> = ({
+  getLine,
+  scrollToLine,
+  getResmokeLineColor,
+  highlightRegex,
+  lineNumber,
+  lineIndex,
+  searchLine,
+  searchTerm,
+  wrap,
+  prettyPrint,
+  range,
+}) => {
   const lineContent = getLine(lineNumber);
   const lineColor = getResmokeLineColor(lineNumber);
   const inRange = isLineInRange(range, lineNumber);

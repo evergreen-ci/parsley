@@ -19,11 +19,12 @@ interface CollapsedRowProps extends BaseRowProps {
   expandLines: (expandedLines: ExpandedLines) => void;
 }
 
-const CollapsedRow: React.FC<CollapsedRowProps> = (props) => {
+const CollapsedRow: React.FC<CollapsedRowProps> = ({
+  collapsedLines,
+  expandLines,
+}) => {
   const { sendEvent } = useLogWindowAnalytics();
   const [, startTransition] = useTransition();
-
-  const { collapsedLines, expandLines } = props;
 
   const numCollapsed = collapsedLines.length;
   const start = collapsedLines[0];

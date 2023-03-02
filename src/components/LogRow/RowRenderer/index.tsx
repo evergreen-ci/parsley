@@ -12,8 +12,7 @@ type RowRendererFunction = (props: {
   logType: LogTypes;
 }) => (index: number) => JSX.Element;
 
-const ParsleyRow: RowRendererFunction = (props) => {
-  const { logType, processedLogLines } = props;
+const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
   const {
     expandLines,
     getLine,

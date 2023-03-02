@@ -1,4 +1,4 @@
-import { forwardRef, memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { useLogWindowAnalytics } from "analytics";
@@ -34,22 +34,20 @@ interface BaseRowProps {
  * BaseRow is meant to be used as a wrapper for all rows in the log view.
  * It is responsible for handling the highlighting of the share line and bookmarks.
  */
-const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
-  const {
-    children,
-    "data-cy": dataCyText,
-    index,
-    highlights,
-    lineNumber,
-    prettyPrint = false,
-    searchLine,
-    searchTerm,
-    resmokeRowColor,
-    wrap,
-    scrollToLine,
-    ...rest
-  } = props;
-
+const BaseRow: React.FC<BaseRowProps> = ({
+  children,
+  "data-cy": dataCyText,
+  index,
+  highlights,
+  lineNumber,
+  prettyPrint = false,
+  searchLine,
+  searchTerm,
+  resmokeRowColor,
+  wrap,
+  scrollToLine,
+  ...rest
+}) => {
   const { sendEvent } = useLogWindowAnalytics();
 
   const [shareLine, setShareLine] = useQueryParam<number | undefined>(
@@ -91,7 +89,6 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
 
   return (
     <RowContainer
-      ref={ref}
       {...rest}
       bookmarked={bookmarked}
       data-bookmarked={bookmarked}
@@ -121,7 +118,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       </StyledPre>
     </RowContainer>
   );
-});
+};
 
 interface ProcessedBaseRowProps {
   children: string;
