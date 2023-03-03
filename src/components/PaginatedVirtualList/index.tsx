@@ -93,6 +93,7 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
       }}
       data-cy="paginated-virtual-list"
       itemContent={itemContent}
+      overscan={300}
       totalCount={linesOnPage}
     />
   );
