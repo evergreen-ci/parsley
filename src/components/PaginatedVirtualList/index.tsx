@@ -1,5 +1,6 @@
 import { useCallback, useRef, useState } from "react";
 import { ItemContent, Virtuoso, VirtuosoHandle } from "react-virtuoso";
+import { leaveBreadcrumb } from "utils/errorReporting";
 
 interface PaginatedVirtualListProps {
   count: number;
@@ -31,6 +32,15 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
     count - currentPage * paginationThreshold
   );
 
+  leaveBreadcrumb(
+    "PaginatedVirtualList",
+    {
+      linesOnPage,
+      currentPage,
+      totalPageCount,
+    },
+    "process"
+  );
   const listRef = useRef<VirtuosoHandle>(null);
 
   const scrollToNextPage = useCallback(() => {
@@ -42,11 +52,30 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
         ? paginationOffset
         : 0;
 
+      leaveBreadcrumb(
+        "PaginatedVirtualList",
+        {
+          message: "scrollToNextPage",
+          offsetCompensation,
+          linesOnPage,
+          paginationOffset,
+          paginationThreshold,
+          currentPage,
+          totalPageCount,
+        },
+        "process"
+      );
       // Scroll by the paginationOffset to avoid the scroll event firing again
       // and causing an infinite loop
       listRef.current?.scrollToIndex(offsetCompensation);
     }
-  }, [currentPage, paginationOffset, totalPageCount]);
+  }, [
+    currentPage,
+    linesOnPage,
+    paginationOffset,
+    paginationThreshold,
+    totalPageCount,
+  ]);
 
   const scrollToPrevPage = useCallback(() => {
     const prevPage = currentPage - 1;
@@ -57,13 +86,32 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
       const offsetCompensation = shouldCompensateForOffset
         ? paginationOffset
         : 0;
+      leaveBreadcrumb(
+        "PaginatedVirtualList",
+        {
+          message: "scrollToPrevPage",
+          offsetCompensation,
+          linesOnPage,
+          paginationOffset,
+          paginationThreshold,
+          currentPage,
+          totalPageCount,
+        },
+        "process"
+      );
 
       // Scroll by the paginationOffset to avoid the scroll event firing again
       // and causing an infinite loop
       listRef.current?.scrollToIndex(linesOnPage - 1 - offsetCompensation);
       // listRef.current?.scrollToIndex(count);
     }
-  }, [currentPage, linesOnPage, paginationOffset]);
+  }, [
+    currentPage,
+    linesOnPage,
+    paginationOffset,
+    paginationThreshold,
+    totalPageCount,
+  ]);
 
   // const offsetCompensation = shouldCompensateForOffset ? paginationOffset : 0;
   const startingIndex = currentPage * paginationThreshold;
