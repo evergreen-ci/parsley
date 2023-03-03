@@ -6,7 +6,7 @@ describe("Filtering", () => {
     describe("Basic filtering", () => {
       beforeEach(() => {
         cy.visit(logLink);
-        cy.get(".ReactVirtualized__Grid").should("be.visible");
+        cy.dataCy("paginated-virtual-list").should("be.visible");
       });
 
       it("should not collapse bookmarks and share line", () => {

@@ -91,6 +91,7 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
           scrollToPrevPage();
         }
       }}
+      data-cy="paginated-virtual-list"
       itemContent={itemContent}
       totalCount={linesOnPage}
     />
