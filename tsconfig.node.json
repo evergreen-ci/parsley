@@ -7,7 +7,6 @@
   },
   "include": [
     "vite.config.ts",
-    "config/reactVirtualized/index.ts",
     "config/injectVariablesInHTML.ts"
   ]
 }
