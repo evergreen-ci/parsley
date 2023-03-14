@@ -40,7 +40,7 @@ Parsley is capable of fetching logs from both [evergreen](https://github.com/eve
 ### GraphQL Type Generation
 To be able to use code generation, you'll need to create a symlink to the `schema` folder in Evergreen. This folder contains the definitions for our GraphQL queries, mutations, and types.
 
-To set up a symlink, run the following command:
+To create a symlink, run the following command:
 ```
 ln -s <path_to_evergreen_repo>/graphql/schema sdlschema
 ```
