@@ -1,6 +1,8 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { ItemContent, Virtuoso, VirtuosoHandle } from "react-virtuoso";
+import usePrevious from "hooks/usePrevious";
 import { leaveBreadcrumb } from "utils/errorReporting";
+import { calculatePageSize } from "./utils";
 
 interface PaginatedVirtualListProps {
   count: number;
@@ -26,18 +28,23 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
     throw new Error("paginationOffset must be less than paginationThreshold");
   }
   const [currentPage, setCurrentPage] = useState(0);
+  const prevPage = usePrevious(currentPage);
   const totalPageCount = Math.ceil(count / paginationThreshold);
-  const linesOnPage = Math.min(
-    paginationThreshold + paginationOffset,
-    count - currentPage * paginationThreshold
+  const offsetCompensation = currentPage > 0 ? -paginationOffset : 0;
+
+  const pageSize = calculatePageSize(
+    paginationThreshold,
+    count,
+    currentPage,
+    paginationOffset
   );
 
   leaveBreadcrumb(
     "PaginatedVirtualList",
     {
-      linesOnPage,
       currentPage,
       totalPageCount,
+      pageSize,
     },
     "process"
   );
@@ -47,17 +54,11 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
     const nextPage = currentPage + 1;
     if (nextPage < totalPageCount) {
       setCurrentPage(nextPage);
-      const shouldCompensateForOffset = nextPage > 0;
-      const offsetCompensation = shouldCompensateForOffset
-        ? paginationOffset
-        : 0;
 
       leaveBreadcrumb(
         "PaginatedVirtualList",
         {
           message: "scrollToNextPage",
-          offsetCompensation,
-          linesOnPage,
           paginationOffset,
           paginationThreshold,
           currentPage,
@@ -65,33 +66,19 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
         },
         "process"
       );
-      // Scroll by the paginationOffset to avoid the scroll event firing again
-      // and causing an infinite loop
-      listRef.current?.scrollToIndex(offsetCompensation);
     }
-  }, [
-    currentPage,
-    linesOnPage,
-    paginationOffset,
-    paginationThreshold,
-    totalPageCount,
-  ]);
+  }, [currentPage, paginationOffset, paginationThreshold, totalPageCount]);
 
   const scrollToPrevPage = useCallback(() => {
-    const prevPage = currentPage - 1;
+    const nextPage = currentPage - 1;
     if (currentPage !== 0) {
-      setCurrentPage(prevPage);
-      const shouldCompensateForOffset = currentPage > 0;
+      setCurrentPage(nextPage);
 
-      const offsetCompensation = shouldCompensateForOffset
-        ? paginationOffset
-        : 0;
       leaveBreadcrumb(
         "PaginatedVirtualList",
         {
           message: "scrollToPrevPage",
           offsetCompensation,
-          linesOnPage,
           paginationOffset,
           paginationThreshold,
           currentPage,
@@ -99,22 +86,41 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
         },
         "process"
       );
-
-      // Scroll by the paginationOffset to avoid the scroll event firing again
-      // and causing an infinite loop
-      listRef.current?.scrollToIndex(linesOnPage - 1 - offsetCompensation);
-      // listRef.current?.scrollToIndex(count);
     }
   }, [
     currentPage,
-    linesOnPage,
+    offsetCompensation,
     paginationOffset,
     paginationThreshold,
     totalPageCount,
   ]);
 
+  useEffect(() => {
+    if (prevPage === undefined) {
+      return;
+    }
+    if (prevPage < currentPage) {
+      listRef.current?.scrollIntoView({ index: paginationOffset });
+    } else {
+      listRef.current?.scrollIntoView({
+        index: pageSize - paginationOffset,
+        done: () => {
+          console.log("done scrolling");
+        },
+      });
+      setTimeout(() => {
+        listRef.current?.scrollIntoView({
+          index: pageSize - paginationOffset,
+          done: () => {
+            console.log("done scrolling");
+          },
+        });
+      });
+    }
+  }, [currentPage]);
+
   // const offsetCompensation = shouldCompensateForOffset ? paginationOffset : 0;
-  const startingIndex = currentPage * paginationThreshold;
+  const startingIndex = currentPage * paginationThreshold + offsetCompensation;
 
   // itemContent maps the paginated index to the actual index in the list
   const itemContent = useCallback(
@@ -142,7 +148,7 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
       data-cy="paginated-virtual-list"
       itemContent={itemContent}
       overscan={300}
-      totalCount={linesOnPage}
+      totalCount={pageSize}
     />
   );
 };
