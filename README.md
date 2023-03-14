@@ -37,6 +37,14 @@ Parsley is capable of fetching logs from both [evergreen](https://github.com/eve
     Note that all log output is piped to a file named `logkeeperapp.log`.
     You can use `tail -f logkeeperapp.log` to view the log output
 
+### GraphQL Type Generation
+To be able to use code generation, you'll need to create a symlink to the `schema` folder in Evergreen. This folder contains the definitions for our GraphQL queries, mutations, and types.
+
+To set up a symlink, run the following command:
+```
+ln -s <path_to_evergreen_repo>/graphql/schema sdlschema
+```
+
 
 ### Environment Variables
 
