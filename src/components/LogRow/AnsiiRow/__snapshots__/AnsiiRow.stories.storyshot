@@ -6,9 +6,10 @@ exports[`storyshots Storyshots components/LogRow/AnsiiRow Multi Lines 1`] = `
     class="css-1mysoqc"
   >
     <div
+      data-cy="paginated-virtual-list"
       data-test-id="virtuoso-scroller"
       data-virtuoso-scroller="true"
-      style="height: 100%; outline: none; overflow-y: auto; position: relative; width: 100%;"
+      style="height: 100%; outline: none; overflow-y: auto; position: relative;"
       tabindex="0"
     >
       <div
@@ -28,7 +29,7 @@ exports[`storyshots Storyshots components/LogRow/AnsiiRow Multi Lines 1`] = `
 exports[`storyshots Storyshots components/LogRow/AnsiiRow Single Line 1`] = `
 <div>
   <div
-    class="css-8iuxnu"
+    class="css-kx12k1"
     data-bookmarked="false"
     data-cy="log-row-0"
     data-highlighted="false"
@@ -60,7 +61,7 @@ exports[`storyshots Storyshots components/LogRow/AnsiiRow Single Line 1`] = `
       0
     </pre>
     <pre
-      class="css-lponur"
+      class="css-5l1bqm"
     >
       <span
         data-cy="ansii-row"
