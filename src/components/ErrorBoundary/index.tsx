@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Bugsnag from "@bugsnag/js";
+import Bugsnag, { Event } from "@bugsnag/js";
 import BugsnagPluginReact, {
   BugsnagErrorBoundary,
 } from "@bugsnag/plugin-react";
@@ -11,7 +11,6 @@ import {
   isProductionBuild,
   releaseStage,
 } from "utils/environmentVariables";
-import { leaveBreadcrumb } from "utils/errorReporting";
 import ErrorFallback from "./ErrorFallback";
 
 let bugsnagStarted = false;
@@ -21,7 +20,8 @@ type DefaultErrorBoundaryProps = {
   children: React.ReactNode;
 };
 
-// This error boundary is used during local development.
+// This error boundary is ONLY used during local development. Any changes to this component will not be
+// reflected in production.
 class DefaultErrorBoundary extends Component<
   DefaultErrorBoundaryProps,
   { hasError: boolean }
@@ -37,7 +37,6 @@ class DefaultErrorBoundary extends Component<
   }
 
   componentDidCatch(error: Error, errorInfo: any) {
-    leaveBreadcrumb("Reached error page", { error, errorInfo }, "error");
     console.error({ error, errorInfo });
   }
 
@@ -92,8 +91,15 @@ const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({
   // In some cases we do not want to enable Bugsnag (ex: testing environments).
   // In these cases we will return a fallback element.
   const ErrorBoundaryComp = getBoundary();
+
+  const onError = (event: Event) => {
+    event.addMetadata("metadata", {
+      viewedErrorPage: true,
+    });
+  };
+
   return (
-    <ErrorBoundaryComp FallbackComponent={ErrorFallback}>
+    <ErrorBoundaryComp FallbackComponent={ErrorFallback} onError={onError}>
       {children}
     </ErrorBoundaryComp>
   );
