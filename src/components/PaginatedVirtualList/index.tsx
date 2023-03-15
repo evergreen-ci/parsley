@@ -117,6 +117,7 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
         });
       });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
   // const offsetCompensation = shouldCompensateForOffset ? paginationOffset : 0;

@@ -32,6 +32,7 @@ const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
   return (
     <PaginatedVirtualList
       count={rowCount}
+      paginationOffset={50}
       paginationThreshold={500000}
       rowRenderer={rowRenderer}
     />
