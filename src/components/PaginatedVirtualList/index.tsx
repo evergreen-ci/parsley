@@ -102,18 +102,13 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
     if (prevPage < currentPage) {
       listRef.current?.scrollIntoView({ index: paginationOffset });
     } else {
+      // Need to call scrollIntoView twice since the initial one does not actually scroll fully.
       listRef.current?.scrollIntoView({
         index: pageSize - paginationOffset,
-        done: () => {
-          console.log("done scrolling");
-        },
       });
       setTimeout(() => {
         listRef.current?.scrollIntoView({
           index: pageSize - paginationOffset,
-          done: () => {
-            console.log("done scrolling");
-          },
         });
       });
     }
