@@ -237,7 +237,7 @@ const Index = styled.pre<{ lineNumber: number }>`
   user-select: none;
 
   ::before {
-    ${({ lineNumber }) => lineNumber && `content: "${lineNumber}";`}
+    ${({ lineNumber }) => `content: "${lineNumber}";`}
   }
 `;
 
