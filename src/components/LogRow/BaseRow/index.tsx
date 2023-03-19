@@ -105,7 +105,7 @@ const BaseRow: React.FC<BaseRowProps> = ({
         onClick={handleClick}
         size="small"
       />
-      <Index>{lineNumber}</Index>
+      <Index lineNumber={lineNumber} />
       <StyledPre shouldWrap={wrap}>
         <ProcessedBaseRow
           color={resmokeRowColor}
@@ -205,7 +205,7 @@ const StyledIcon = styled(Icon)`
   flex-shrink: 0;
 `;
 
-const Index = styled.pre`
+const Index = styled.pre<{ lineNumber: number }>`
   width: ${size.xl};
   margin-top: 0;
   margin-bottom: 0;
@@ -217,6 +217,10 @@ const Index = styled.pre`
   line-height: inherit;
   font-size: inherit;
   user-select: none;
+
+  ::before {
+    ${({ lineNumber }) => `content: "${lineNumber}";`}
+  }
 `;
 
 const StyledPre = styled.pre<{

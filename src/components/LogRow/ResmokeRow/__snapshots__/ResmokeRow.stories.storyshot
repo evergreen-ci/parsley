@@ -56,10 +56,8 @@ exports[`storyshots Storyshots components/LogRow/ResmokeRow Single Line 1`] = `
       />
     </svg>
     <pre
-      class="css-1dzaw1s"
-    >
-      8
-    </pre>
+      class="css-1imicns"
+    />
     <pre
       class="css-5l1bqm"
     >

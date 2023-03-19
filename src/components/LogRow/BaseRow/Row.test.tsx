@@ -63,6 +63,17 @@ describe("row", () => {
     await userEvent.dblClick(screen.getByText(testLog));
     expect(history.location.search).toBe("?bookmarks=0&shareLine=0");
   });
+
+  it("should not copy line numbers to clipboard", async () => {
+    const user = userEvent.setup({ writeToClipboard: true });
+
+    renderWithRouterMatch(<Row {...rowProps}>{testLog}</Row>);
+    expect(screen.getByText(/.+/).textContent).toBe("Test Log");
+    // select all of the text
+    await user.tripleClick(screen.getByText(/.+/));
+    const dataTransfer = await user.copy();
+    expect(dataTransfer?.getData("text")).toBe("Test Log");
+  });
   describe("search", () => {
     it("a search term highlights the matching text", () => {
       const regexp = /Test/i;
