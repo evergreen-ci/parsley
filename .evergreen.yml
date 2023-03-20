@@ -338,7 +338,7 @@ functions:
       params:
         env:
           gobin: ${goroot}/bin/go
-          MONGODB_URL: ${mongodb_url_50}
+          MONGODB_URL: ${mongodb_url_60}
           DECOMPRESS: ${decompress}
         working_dir: parsley/evergreen
         command: make get-mongodb
@@ -479,7 +479,7 @@ buildvariants:
   - name: ubuntu2004-small
     display_name: Ubuntu 20.04 (small)
     expansions:
-      mongodb_url_50: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-5.0.14.tgz
+      mongodb_url_60: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-6.0.5.tgz
       node_version: 16.17.0
     run_on:
     - ubuntu2004-small
@@ -498,7 +498,7 @@ buildvariants:
   - name: ubuntu2004-large
     display_name: Ubuntu 20.04 (large)
     expansions:
-      mongodb_url_50: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-5.0.14.tgz
+      mongodb_url_60: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-6.0.5.tgz
       node_version: 16.17.0
     run_on:
     - ubuntu2004-large
