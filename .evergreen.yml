@@ -19,39 +19,48 @@ modules:
 #            Parsley Functions        #
 #######################################
 functions:
-  attach-cypress-results:
-    command: attach.xunit_results
-    params:
-      files:
-        - "./parsley/bin/cypress/*.xml"
-
-  attach-cypress-screenshots:
+  attach-codegen-diff:
     command: s3.put
     type: system
     params:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
       local_files_include_filter:
-        ["parsley/cypress/screenshots/*"]
-      remote_file: parsley/${task_id}/
+        - "parsley/bin/codegen.diff"
+      remote_file: parsley/${task_id}/codegen/
       bucket: mciuploads
-      content_type: image/png
+      content_type: text/plain
       permissions: public-read
-      display_name: "screenshot:"
 
-  attach-cypress-videos:
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/cypress/videos/*"]
-      remote_file: parsley/${task_id}/
-      bucket: mciuploads
-      content_type: video/mp4
-      permissions: public-read
-      display_name: "video:"
+  attach-cypress:
+    - command: attach.xunit_results
+      params:
+        files:
+          - "./parsley/bin/cypress/*.xml"
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/cypress/screenshots/*"]
+        remote_file: parsley/${task_id}/
+        bucket: mciuploads
+        content_type: image/png
+        permissions: public-read
+        display_name: "screenshot:"
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/cypress/videos/*"]
+        remote_file: parsley/${task_id}/
+        bucket: mciuploads
+        content_type: video/mp4
+        permissions: public-read
+        display_name: "video:"
 
   attach-test-results:
     command: attach.xunit_results
@@ -230,6 +239,24 @@ functions:
           nvm install --no-progress --default ${node_version}
           npm install -g yarn
 
+  sym-link:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      shell: bash
+      script: |
+        ln -s evergreen/graphql/schema sdlschema
+
+  yarn-codegen:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      shell: bash
+      script: |
+        ${PREPARE_SHELL}
+        chmod +x ./scripts/check_codegen.sh
+        ./scripts/check_codegen.sh
+
   yarn-build:
     command: shell.exec
     params:
@@ -324,14 +351,6 @@ functions:
 #######################################
 #      Local Evergreen Functions      #
 #######################################
-  get-evergreen-project:
-    command: git.get_project
-    type: setup
-    params:
-      directory: parsley
-      revisions:
-        evergreen: ${evergreen_rev}
-
   setup-mongodb:
     - command: subprocess.exec
       type: setup
@@ -377,14 +396,6 @@ functions:
 #######################################
 #      Local Logkeeper Functions      #
 #######################################
-  get-logkeeper-project:
-    command: git.get_project
-    type: setup
-    params:
-      directory: parsley
-      revisions:
-        logkeeper: ${logkeeper_rev}
-
   run-logkeeper:
     command: shell.exec
     params:
@@ -424,6 +435,11 @@ functions:
 #                Tasks                #
 #######################################
 tasks:
+  - name: check_codegen
+    commands:
+      - func: sym-link
+      - func: yarn-codegen
+
   - name: compile
     commands:
     - func: yarn-build
@@ -443,8 +459,6 @@ tasks:
 
   - name: e2e_test
     commands:
-    - func: get-evergreen-project
-    - func: get-logkeeper-project
     - func: setup-mongodb
     - func: run-make-background
       vars:
@@ -482,18 +496,21 @@ buildvariants:
       mongodb_url_50: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-5.0.14.tgz
       node_version: 16.17.0
     run_on:
-    - ubuntu2004-small
+      - ubuntu2004-small
+    modules:
+      - evergreen
     tasks:
-    - name: compile
-    - name: type_check
-    - name: lint
-    - name: test
-    - name: storybook
-    - name: snapshots
-    - name: deploy-prod
-      git_tag_only: true
-      patchable: false
-      priority: 100
+      - name: compile
+      - name: type_check
+      - name: lint
+      - name: test
+      - name: storybook
+      - name: snapshots
+      - name: check_codegen
+      - name: deploy-prod
+        git_tag_only: true
+        patchable: false
+        priority: 100
 
   - name: ubuntu2004-large
     display_name: Ubuntu 20.04 (large)
@@ -501,12 +518,12 @@ buildvariants:
       mongodb_url_50: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-5.0.14.tgz
       node_version: 16.17.0
     run_on:
-    - ubuntu2004-large
+      - ubuntu2004-large
     modules:
       - evergreen
       - logkeeper
     tasks:
-    - name: e2e_test
+      - name: e2e_test
 
 pre:
   - func: get-project
@@ -514,8 +531,7 @@ pre:
   - func: yarn-install
 
 post:
-  - func: attach-cypress-results
-  - func: attach-cypress-screenshots
-  - func: attach-cypress-videos
+  - func: attach-cypress
   - func: attach-logkeeper-logs
   - func: attach-test-results
+  - func: attach-codegen-diff
