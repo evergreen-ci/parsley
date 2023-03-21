@@ -2,11 +2,8 @@ import AnsiUp from "ansi_up";
 import linkifyHtml from "linkify-html";
 import BaseRow from "components/LogRow/BaseRow";
 import { LogRowProps } from "../types";
-import { isLineInRange } from "../utils";
 
-interface AnsiiRowProps extends LogRowProps {
-  lineNumber: number;
-}
+interface AnsiiRowProps extends LogRowProps {}
 
 const AnsiiRow: React.FC<AnsiiRowProps> = ({
   getLine,
@@ -27,17 +24,17 @@ const AnsiiRow: React.FC<AnsiiRowProps> = ({
       url: (value: string) => /^(http)s?:\/\//.test(value),
     },
   });
-  const inRange = isLineInRange(range, lineNumber);
 
   return lineContent !== undefined ? (
     <BaseRow
       data-cy="ansii-row"
-      highlights={highlightRegex}
-      index={lineIndex}
+      highlightRegex={highlightRegex}
+      lineIndex={lineIndex}
       lineNumber={lineNumber}
+      range={range}
       scrollToLine={scrollToLine}
       searchLine={searchLine}
-      searchTerm={inRange ? searchTerm : undefined}
+      searchTerm={searchTerm}
       wrap={wrap}
     >
       {linkifiedLine}

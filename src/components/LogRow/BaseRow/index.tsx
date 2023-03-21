@@ -11,23 +11,18 @@ import { highlighter } from "utils/highlighters";
 import { formatPrettyPrint } from "utils/prettyPrint";
 import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
+import { LogRowProps } from "../types";
+import { isLineInRange } from "../utils";
 
 const { yellow, red } = palette;
 
-interface BaseRowProps {
+interface BaseRowProps extends Omit<LogRowProps, "getLine"> {
   children: string;
   "data-cy"?: string;
-  index: number;
   // The line number associated with a log line and its index within the context of the virtualized list
   // may differ due to collapsed rows.
-  lineNumber: number;
   prettyPrint?: boolean;
-  searchLine?: number;
-  scrollToLine: (lineNumber: number) => void;
-  searchTerm?: RegExp;
-  highlights?: RegExp;
   resmokeRowColor?: string;
-  wrap: boolean;
 }
 
 /**
@@ -37,8 +32,8 @@ interface BaseRowProps {
 const BaseRow: React.FC<BaseRowProps> = ({
   children,
   "data-cy": dataCyText,
-  index,
-  highlights,
+  lineIndex,
+  highlightRegex,
   lineNumber,
   prettyPrint = false,
   searchLine,
@@ -46,6 +41,7 @@ const BaseRow: React.FC<BaseRowProps> = ({
   resmokeRowColor,
   wrap,
   scrollToLine,
+  range,
   ...rest
 }) => {
   const { sendEvent } = useLogWindowAnalytics();
@@ -59,10 +55,11 @@ const BaseRow: React.FC<BaseRowProps> = ({
     QueryParams.Bookmarks,
     []
   );
+  const inRange = isLineInRange(range, lineNumber);
 
   const shared = shareLine === lineNumber;
   const bookmarked = bookmarks.includes(lineNumber);
-  const highlighted = searchLine === index;
+  const highlighted = searchLine === lineIndex;
 
   // Clicking link icon should set or unset the share line.
   const handleClick = useCallback(() => {
@@ -70,9 +67,9 @@ const BaseRow: React.FC<BaseRowProps> = ({
       setShareLine(undefined);
     } else {
       setShareLine(lineNumber);
-      scrollToLine(index);
+      scrollToLine(lineIndex);
     }
-  }, [index, lineNumber, shared, scrollToLine, setShareLine]);
+  }, [lineIndex, lineNumber, shared, scrollToLine, setShareLine]);
 
   // Double clicking a line should add or remove the line from bookmarks.
   const handleDoubleClick = useCallback(() => {
@@ -110,8 +107,8 @@ const BaseRow: React.FC<BaseRowProps> = ({
         <ProcessedBaseRow
           color={resmokeRowColor}
           data-cy={dataCyText}
-          highlights={highlights}
-          searchTerm={searchTerm}
+          highlights={highlightRegex}
+          searchTerm={inRange ? searchTerm : undefined}
         >
           {bookmarked && prettyPrint ? formatPrettyPrint(children) : children}
         </ProcessedBaseRow>

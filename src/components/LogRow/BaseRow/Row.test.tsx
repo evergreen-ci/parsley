@@ -16,7 +16,12 @@ describe("row", () => {
   it("clicking log line link updates the url and and scrolls to the line", async () => {
     const scrollToLine = jest.fn();
     const { history } = renderWithRouterMatch(
-      <Row {...rowProps} index={7} lineNumber={54} scrollToLine={scrollToLine}>
+      <Row
+        {...rowProps}
+        lineIndex={7}
+        lineNumber={54}
+        scrollToLine={scrollToLine}
+      >
         {testLog}
       </Row>
     );
@@ -106,7 +111,7 @@ describe("row", () => {
     it("highlighted terms should highlight the matching text", () => {
       const regexp = /Test/i;
       renderWithRouterMatch(
-        <Row {...rowProps} highlights={regexp}>
+        <Row {...rowProps} highlightRegex={regexp}>
           {testLog}
         </Row>
       );
@@ -116,7 +121,7 @@ describe("row", () => {
     it("should highlight every matching term on a line", () => {
       const regexp = /Test|Log/i;
       renderWithRouterMatch(
-        <Row {...rowProps} highlights={regexp}>
+        <Row {...rowProps} highlightRegex={regexp}>
           {testLog}
         </Row>
       );
@@ -128,7 +133,7 @@ describe("row", () => {
     it("should deduplicate highlights and searches on the same string", () => {
       const regexp = /Test/i;
       renderWithRouterMatch(
-        <Row {...rowProps} highlights={regexp} searchTerm={regexp}>
+        <Row {...rowProps} highlightRegex={regexp} searchTerm={regexp}>
           {testLog}
         </Row>
       );
@@ -139,7 +144,11 @@ describe("row", () => {
       const searchRegex = /Test/i;
       const highlightRegex = /(Log)/i;
       renderWithRouterMatch(
-        <Row {...rowProps} highlights={highlightRegex} searchTerm={searchRegex}>
+        <Row
+          {...rowProps}
+          highlightRegex={highlightRegex}
+          searchTerm={searchRegex}
+        >
           {testLog}
         </Row>
       );
@@ -156,14 +165,14 @@ const testLog = "Test Log";
 const rowProps = {
   key: testLog,
   columnIndex: 0,
-  index: 0,
-  isVisible: true,
-  isScrolling: false,
-  parent: {} as any,
-  style: {},
+  lineIndex: 0,
 
   scrollToLine: jest.fn(),
   lineNumber: 0,
   prettyPrint: false,
   wrap: false,
+  range: {
+    lowerRange: 0,
+    upperRange: undefined,
+  },
 };

@@ -8,13 +8,13 @@ import Icon from "components/Icon";
 import { size } from "constants/tokens";
 import { OverlineType } from "types/leafygreen";
 import { ExpandedLines } from "types/logs";
-import { BaseRowProps } from "../types";
+import { RootRowProps } from "../types";
 
 const { gray } = palette;
 
 const SKIP_NUMBER = 5;
 
-interface CollapsedRowProps extends BaseRowProps {
+interface CollapsedRowProps extends RootRowProps {
   collapsedLines: number[];
   expandLines: (expandedLines: ExpandedLines) => void;
 }
