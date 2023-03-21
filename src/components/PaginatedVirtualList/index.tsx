@@ -45,7 +45,26 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
     const nextPage = currentPage + 1;
     if (nextPage < totalPageCount) {
       setCurrentPage(nextPage);
+    }
+  }, [currentPage, totalPageCount]);
 
+  const scrollToPrevPage = useCallback(() => {
+    const nextPage = currentPage - 1;
+    if (currentPage !== 0) {
+      setCurrentPage(nextPage);
+    }
+  }, [currentPage]);
+
+  useEffect(() => {
+    if (prevPage === undefined) {
+      return;
+    }
+    if (prevPage < currentPage) {
+      // If we're scrolling to the next page, we want to scroll to the top of the next page
+      listRef.current?.scrollToIndex({
+        index: paginationOffset,
+        align: "end",
+      });
       leaveBreadcrumb(
         "PaginatedVirtualList",
         {
@@ -57,14 +76,21 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
         },
         "process"
       );
-    }
-  }, [currentPage, paginationOffset, paginationThreshold, totalPageCount]);
+    } else {
+      // If we're scrolling to the previous page, we want to scroll to the bottom of the previous page
+      listRef.current?.scrollToIndex({
+        index: pageSize - paginationOffset,
+        align: "start",
+      });
 
-  const scrollToPrevPage = useCallback(() => {
-    const nextPage = currentPage - 1;
-    if (currentPage !== 0) {
-      setCurrentPage(nextPage);
-
+      // This second scroll is necessary because the first scroll doesn't always work
+      // I'm not sure why, but this seems to fix it ¯\_(ツ)_/¯
+      setTimeout(() => {
+        listRef.current?.scrollToIndex({
+          index: pageSize - paginationOffset,
+          align: "start",
+        });
+      });
       leaveBreadcrumb(
         "PaginatedVirtualList",
         {
@@ -77,39 +103,6 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
         },
         "process"
       );
-    }
-  }, [
-    currentPage,
-    offsetCompensation,
-    paginationOffset,
-    paginationThreshold,
-    totalPageCount,
-  ]);
-
-  useEffect(() => {
-    if (prevPage === undefined) {
-      return;
-    }
-    if (prevPage < currentPage) {
-      // If we're scrolling to the next page, we want to scroll to the top of the next page
-      listRef.current?.scrollToIndex({
-        index: paginationOffset,
-        align: "end",
-      });
-    } else {
-      // If we're scrolling to the previous page, we want to scroll to the bottom of the previous page
-      listRef.current?.scrollToIndex({
-        index: pageSize - paginationOffset,
-        align: "start",
-      });
-      // This second scroll is necessary because the first scroll doesn't always work
-      // I'm not sure why, but this seems to fix it ¯\_(ツ)_/¯
-      setTimeout(() => {
-        listRef.current?.scrollToIndex({
-          index: pageSize - paginationOffset,
-          align: "start",
-        });
-      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
