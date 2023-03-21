@@ -149,8 +149,6 @@ describe("row", () => {
       });
     });
   });
-
-  describe("pretty print", () => {});
 });
 
 const testLog = "Test Log";
