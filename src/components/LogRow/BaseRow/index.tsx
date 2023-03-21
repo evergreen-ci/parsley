@@ -8,7 +8,6 @@ import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import { highlighter } from "utils/highlighters";
-import { formatPrettyPrint } from "utils/prettyPrint";
 import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
 import { LogRowProps } from "../types";
@@ -19,10 +18,7 @@ const { yellow, red } = palette;
 interface BaseRowProps extends Omit<LogRowProps, "getLine"> {
   children: string;
   "data-cy"?: string;
-  // The line number associated with a log line and its index within the context of the virtualized list
-  // may differ due to collapsed rows.
-  prettyPrint?: boolean;
-  resmokeRowColor?: string;
+  color?: string;
 }
 
 /**
@@ -35,10 +31,9 @@ const BaseRow: React.FC<BaseRowProps> = ({
   lineIndex,
   highlightRegex,
   lineNumber,
-  prettyPrint = false,
   searchLine,
   searchTerm,
-  resmokeRowColor,
+  color,
   wrap,
   scrollToLine,
   range,
@@ -105,12 +100,12 @@ const BaseRow: React.FC<BaseRowProps> = ({
       <Index lineNumber={lineNumber} />
       <StyledPre shouldWrap={wrap}>
         <ProcessedBaseRow
-          color={resmokeRowColor}
+          color={color}
           data-cy={dataCyText}
           highlights={highlightRegex}
           searchTerm={inRange ? searchTerm : undefined}
         >
-          {bookmarked && prettyPrint ? formatPrettyPrint(children) : children}
+          {children}
         </ProcessedBaseRow>
       </StyledPre>
     </RowContainer>

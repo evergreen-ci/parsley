@@ -7,14 +7,8 @@ interface AnsiiRowProps extends LogRowProps {}
 
 const AnsiiRow: React.FC<AnsiiRowProps> = ({
   getLine,
-  scrollToLine,
-  highlightRegex,
   lineNumber,
-  lineIndex,
-  range,
-  searchLine,
-  searchTerm,
-  wrap,
+  ...rest
 }) => {
   const ansiUp = new AnsiUp();
 
@@ -26,17 +20,7 @@ const AnsiiRow: React.FC<AnsiiRowProps> = ({
   });
 
   return lineContent !== undefined ? (
-    <BaseRow
-      data-cy="ansii-row"
-      highlightRegex={highlightRegex}
-      lineIndex={lineIndex}
-      lineNumber={lineNumber}
-      range={range}
-      scrollToLine={scrollToLine}
-      searchLine={searchLine}
-      searchTerm={searchTerm}
-      wrap={wrap}
-    >
+    <BaseRow data-cy="ansii-row" lineNumber={lineNumber} {...rest}>
       {linkifiedLine}
     </BaseRow>
   ) : null;

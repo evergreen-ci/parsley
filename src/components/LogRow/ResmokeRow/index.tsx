@@ -1,4 +1,7 @@
 import BaseRow from "components/LogRow/BaseRow";
+import { QueryParams } from "constants/queryParams";
+import { useQueryParam } from "hooks/useQueryParam";
+import { formatPrettyPrint } from "utils/prettyPrint";
 import { LogRowProps } from "../types";
 
 interface ResmokeRowProps extends LogRowProps {
@@ -8,35 +11,24 @@ interface ResmokeRowProps extends LogRowProps {
 
 const ResmokeRow: React.FC<ResmokeRowProps> = ({
   getLine,
-  scrollToLine,
   getResmokeLineColor,
-  highlightRegex,
   lineNumber,
-  lineIndex,
-  searchLine,
-  searchTerm,
-  wrap,
-  prettyPrint,
-  range,
+  prettyPrint = false,
+  ...rest
 }) => {
   const lineContent = getLine(lineNumber);
   const lineColor = getResmokeLineColor(lineNumber);
+  const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
+  const bookmarked = bookmarks.includes(lineNumber);
 
   return lineContent !== undefined ? (
     <BaseRow
+      color={lineColor}
       data-cy="resmoke-row"
-      highlightRegex={highlightRegex}
-      lineIndex={lineIndex}
       lineNumber={lineNumber}
-      prettyPrint={prettyPrint}
-      range={range}
-      resmokeRowColor={lineColor}
-      scrollToLine={scrollToLine}
-      searchLine={searchLine}
-      searchTerm={searchTerm}
-      wrap={wrap}
+      {...rest}
     >
-      {lineContent}
+      {bookmarked && prettyPrint ? formatPrettyPrint(lineContent) : lineContent}
     </BaseRow>
   ) : null;
 };
