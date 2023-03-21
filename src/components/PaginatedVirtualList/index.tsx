@@ -5,7 +5,7 @@ import { leaveBreadcrumb } from "utils/errorReporting";
 import { calculatePageSize } from "./utils";
 
 interface PaginatedVirtualListProps {
-  count: number;
+  rowCount: number;
   rowRenderer: ItemContent<any, any>;
   /**
    * The number of lines to render on each page.
@@ -19,7 +19,7 @@ interface PaginatedVirtualListProps {
   paginationOffset?: number;
 }
 const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
-  count,
+  rowCount,
   rowRenderer,
   paginationThreshold = 10000,
   paginationOffset = 10,
@@ -29,12 +29,12 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
   }
   const [currentPage, setCurrentPage] = useState(0);
   const prevPage = usePrevious(currentPage);
-  const totalPageCount = Math.ceil(count / paginationThreshold);
+  const totalPageCount = Math.ceil(rowCount / paginationThreshold);
   const offsetCompensation = currentPage > 0 ? -paginationOffset : 0;
 
   const pageSize = calculatePageSize(
     paginationThreshold,
-    count,
+    rowCount,
     currentPage,
     paginationOffset
   );
@@ -115,7 +115,6 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
-  // const offsetCompensation = shouldCompensateForOffset ? paginationOffset : 0;
   const startingIndex = currentPage * paginationThreshold + offsetCompensation;
 
   // itemContent maps the paginated index to the actual index in the list

@@ -25,7 +25,7 @@ const row = (i: number) => (
 );
 
 Default.args = {
-  count: 50000,
+  rowCount: 50000,
   paginationThreshold: 10000,
 };
 
