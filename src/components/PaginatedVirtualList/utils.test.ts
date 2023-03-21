@@ -1,18 +1,88 @@
 import { calculatePageSize } from "./utils";
 
 describe("calculatePageSize", () => {
-  it("the first page should have the pageSize or totalItemCount, whichever is smaller", () => {
-    expect(calculatePageSize(10, 100, 0, 0)).toBe(10);
-    expect(calculatePageSize(10, 5, 0, 0)).toBe(5);
-    expect(calculatePageSize(10, 0, 0, 0)).toBe(0);
-    expect(calculatePageSize(10, 100, 0, 5)).toBe(10);
-    expect(calculatePageSize(10, 5, 0, 5)).toBe(5);
+  it("the first page should have the maxPageSize or totalItemCount, whichever is smaller", () => {
+    expect(
+      calculatePageSize({
+        maxPageSize: 10,
+        totalItemCount: 100,
+        currentPage: 0,
+        offset: 0,
+      })
+    ).toBe(10);
+    expect(
+      calculatePageSize({
+        maxPageSize: 10,
+        totalItemCount: 5,
+        currentPage: 0,
+        offset: 0,
+      })
+    ).toBe(5);
+    expect(
+      calculatePageSize({
+        maxPageSize: 10,
+        totalItemCount: 0,
+        currentPage: 0,
+        offset: 0,
+      })
+    ).toBe(0);
+    expect(
+      calculatePageSize({
+        maxPageSize: 10,
+        totalItemCount: 100,
+        currentPage: 0,
+        offset: 5,
+      })
+    ).toBe(10);
+    expect(
+      calculatePageSize({
+        maxPageSize: 10,
+        totalItemCount: 5,
+        currentPage: 0,
+        offset: 5,
+      })
+    ).toBe(5);
   });
-  it("subsequent pages should have the pageSize + the offset, or the remaining items, whichever is smaller", () => {
-    expect(calculatePageSize(15, 100, 1, 5)).toBe(20);
-    expect(calculatePageSize(15, 100, 2, 5)).toBe(20);
-    expect(calculatePageSize(15, 100, 3, 5)).toBe(20);
-    expect(calculatePageSize(15, 100, 4, 5)).toBe(20);
-    expect(calculatePageSize(15, 100, 6, 5)).toBe(10);
+  it("subsequent pages should have the maxPageSize + the offset, or the remaining items, whichever is smaller", () => {
+    expect(
+      calculatePageSize({
+        maxPageSize: 15,
+        totalItemCount: 100,
+        currentPage: 1,
+        offset: 5,
+      })
+    ).toBe(20);
+    expect(
+      calculatePageSize({
+        maxPageSize: 15,
+        totalItemCount: 100,
+        currentPage: 2,
+        offset: 5,
+      })
+    ).toBe(20);
+    expect(
+      calculatePageSize({
+        maxPageSize: 15,
+        totalItemCount: 100,
+        currentPage: 3,
+        offset: 5,
+      })
+    ).toBe(20);
+    expect(
+      calculatePageSize({
+        maxPageSize: 15,
+        totalItemCount: 100,
+        currentPage: 4,
+        offset: 5,
+      })
+    ).toBe(20);
+    expect(
+      calculatePageSize({
+        maxPageSize: 15,
+        totalItemCount: 100,
+        currentPage: 6,
+        offset: 5,
+      })
+    ).toBe(10);
   });
 });

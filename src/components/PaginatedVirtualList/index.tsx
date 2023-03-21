@@ -32,12 +32,12 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
   const totalPageCount = Math.ceil(rowCount / paginationThreshold);
   const offsetCompensation = currentPage > 0 ? -paginationOffset : 0;
 
-  const pageSize = calculatePageSize(
-    paginationThreshold,
-    rowCount,
+  const pageSize = calculatePageSize({
+    maxPageSize: paginationThreshold,
+    totalItemCount: rowCount,
     currentPage,
-    paginationOffset
-  );
+    offset: paginationOffset,
+  });
 
   leaveBreadcrumb(
     "PaginatedVirtualList",
