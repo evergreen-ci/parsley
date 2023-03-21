@@ -39,15 +39,6 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
     offset: paginationOffset,
   });
 
-  leaveBreadcrumb(
-    "PaginatedVirtualList",
-    {
-      currentPage,
-      totalPageCount,
-      pageSize,
-    },
-    "process"
-  );
   const listRef = useRef<VirtuosoHandle>(null);
 
   const scrollToNextPage = useCallback(() => {
@@ -100,16 +91,12 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
       return;
     }
     if (prevPage < currentPage) {
-      listRef.current?.scrollIntoView({ index: paginationOffset });
+      // If we're scrolling to the next page, we want to scroll to the top of the next page
+      listRef.current?.scrollToIndex({ index: paginationOffset });
     } else {
-      // Need to call scrollIntoView twice since the initial one does not actually scroll fully.
-      listRef.current?.scrollIntoView({
+      // If we're scrolling to the previous page, we want to scroll to the bottom of the previous page
+      listRef.current?.scrollToIndex({
         index: pageSize - paginationOffset,
-      });
-      setTimeout(() => {
-        listRef.current?.scrollIntoView({
-          index: pageSize - paginationOffset,
-        });
       });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
