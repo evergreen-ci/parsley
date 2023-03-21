@@ -6,30 +6,21 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Ansii Ro
     class="css-1mysoqc"
   >
     <div
-      style="overflow: visible; height: 0px; width: 0px;"
+      data-cy="paginated-virtual-list"
+      data-test-id="virtuoso-scroller"
+      data-virtuoso-scroller="true"
+      style="height: 100%; outline: none; overflow-y: auto; position: relative;"
+      tabindex="0"
     >
       <div
-        aria-label="grid"
-        aria-readonly="true"
-        class="ReactVirtualized__Grid ReactVirtualized__List"
-        role="grid"
-        style="box-sizing: border-box; direction: ltr; height: 0px; position: relative; width: 0px; will-change: transform; overflow-x: scroll; overflow-y: auto;"
-        tabindex="0"
-      />
-    </div>
-    <div
-      class="resize-triggers"
-    >
-      <div
-        class="expand-trigger"
+        data-viewport-type="element"
+        style="width: 100%; height: 100%; position: absolute; top: 0px;"
       >
         <div
-          style="width: 1px; height: 1px;"
+          data-test-id="virtuoso-item-list"
+          style="box-sizing: border-box; padding-top: 0px; padding-bottom: 0px; margin-top: 0px;"
         />
       </div>
-      <div
-        class="contract-trigger"
-      />
     </div>
   </div>
 </div>
@@ -41,30 +32,119 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Resmoke 
     class="css-1mysoqc"
   >
     <div
-      style="overflow: visible; height: 0px; width: 0px;"
+      data-cy="paginated-virtual-list"
+      data-test-id="virtuoso-scroller"
+      data-virtuoso-scroller="true"
+      style="height: 100%; outline: none; overflow-y: auto; position: relative;"
+      tabindex="0"
     >
       <div
-        aria-label="grid"
-        aria-readonly="true"
-        class="ReactVirtualized__Grid ReactVirtualized__List"
-        role="grid"
-        style="box-sizing: border-box; direction: ltr; height: 0px; position: relative; width: 0px; will-change: transform; overflow-x: scroll; overflow-y: auto;"
-        tabindex="0"
-      />
-    </div>
-    <div
-      class="resize-triggers"
-    >
-      <div
-        class="expand-trigger"
+        data-viewport-type="element"
+        style="width: 100%; height: 100%; position: absolute; top: 0px;"
       >
         <div
-          style="width: 1px; height: 1px;"
+          data-test-id="virtuoso-item-list"
+          style="box-sizing: border-box; padding-top: 0px; padding-bottom: 0px; margin-top: 0px;"
         />
       </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Row Single 1`] = `
+<div>
+  <div
+    class="css-1mysoqc"
+  >
+    <div
+      class="css-1hak4ne"
+      data-cy="collapsed-row-0-99"
+    >
       <div
-        class="contract-trigger"
-      />
+        class="css-end8kr leafygreen-ui-114muox"
+      >
+        100 lines skipped
+      </div>
+      <button
+        aria-disabled="false"
+        class="lg-ui-button-0000 leafygreen-ui-iff687 css-7d8zx8"
+        type="button"
+      >
+        <div
+          class="leafygreen-ui-v038xi"
+        />
+        <div
+          class="leafygreen-ui-1hhc9ms"
+        >
+          <svg
+            aria-label="Expand Icon"
+            class="leafygreen-ui-11cndel"
+            fill="none"
+            height="16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
+              fill="#001E2B"
+            />
+            <path
+              d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
+              stroke="#001E2B"
+            />
+            <path
+              d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
+              fill="#001E2B"
+            />
+            <path
+              d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
+              stroke="#001E2B"
+            />
+          </svg>
+          All
+        </div>
+      </button>
+      <button
+        aria-disabled="false"
+        class="lg-ui-button-0000 leafygreen-ui-iff687 css-7d8zx8"
+        type="button"
+      >
+        <div
+          class="leafygreen-ui-v038xi"
+        />
+        <div
+          class="leafygreen-ui-1hhc9ms"
+        >
+          <svg
+            aria-label="Expand Icon"
+            class="leafygreen-ui-11cndel"
+            fill="none"
+            height="16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M14 3v2.5a.5.5 0 1 1-1 0V4l-2.5 2.5a.707.707 0 0 1-1-1L12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1Z"
+              fill="#001E2B"
+            />
+            <path
+              d="M12 3h-1.5a.5.5 0 1 1 0-1H13a1 1 0 0 1 1 1v2.5a.5.5 0 0 1-1 0V4m-1-1a1 1 0 0 1 1 1m-1-1L9.5 5.5a.707.707 0 0 0 1 1L13 4"
+              stroke="#001E2B"
+            />
+            <path
+              d="M2 12V9a.5.5 0 1 1 1 0v2l2.5-2.5a.707.707 0 1 1 1 1L4 12h1.5a.5.5 0 1 1 0 1H3a1 1 0 0 1-1-1Z"
+              fill="#001E2B"
+            />
+            <path
+              d="M4 12h1.5a.5.5 0 0 1 0 1H3a1 1 0 0 1-1-1V9a.5.5 0 0 1 1 0v2m1 1a1 1 0 0 1-1-1m1 1 2.5-2.5a.707.707 0 1 0-1-1L3 11"
+              stroke="#001E2B"
+            />
+          </svg>
+          5
+           Above and Below
+        </div>
+      </button>
     </div>
   </div>
 </div>

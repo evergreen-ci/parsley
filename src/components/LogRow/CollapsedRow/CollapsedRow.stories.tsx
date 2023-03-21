@@ -1,20 +1,59 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { ParsleyRow } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
+import { ExpandedLine, ExpandedLines } from "types/logs";
 import CollapsedRow from ".";
 
 export default {
   component: CollapsedRow,
 };
 
-type CollapsedRowProps = React.FC<React.ComponentProps<typeof LogPane>>;
+const CollapsedRowStory = (args: React.ComponentProps<typeof CollapsedRow>) => {
+  const [rows, setRows] = useState(args.collapsedLines);
+  const expandLines = (expandedLines: ExpandedLines) => {
+    const withinRange = (index: number, line: ExpandedLine) =>
+      index >= line[0] && index <= line[1];
+
+    const intervals = rows.filter(
+      (line) =>
+        !withinRange(line, expandedLines[0]) &&
+        !withinRange(line, expandedLines[1])
+    );
+    setRows(intervals);
+  };
+
+  return (
+    <Container>
+      <CollapsedRow
+        collapsedLines={rows}
+        expandLines={expandLines}
+        lineIndex={args.lineIndex}
+      />
+    </Container>
+  );
+};
+
+export const CollapsedRowSingle: StoryObj<typeof CollapsedRow> = {
+  render: (args) => <CollapsedRowStory {...args} />,
+  args: {
+    // Initialize an array with 100 collapsed lines.
+    collapsedLines: Array.from({ length: 100 }, (_, i) => i),
+  },
+  argTypes: {
+    expandLines: { action: "expandLines" },
+  },
+};
 
 // CollapsedRow with AnsiiRows.
-const CollapsedAnsiiRowStory = (args: any) => {
+const CollapsedAnsiiRowStory = (
+  args: React.ComponentProps<typeof CollapsedRow> & {
+    wrap: boolean;
+  }
+) => {
   const { ingestLines, preferences, processedLogLines } = useLogContext();
   const { setWrap } = preferences;
 
@@ -39,13 +78,23 @@ const CollapsedAnsiiRowStory = (args: any) => {
   );
 };
 
-export const CollapsedAnsiiRow: StoryObj<CollapsedRowProps> = {
+export const CollapsedAnsiiRow: StoryObj<
+  React.ComponentProps<typeof CollapsedRow> & {
+    wrap: boolean;
+  }
+> = {
   render: (args) => <CollapsedAnsiiRowStory {...args} />,
-  args: {},
+  args: {
+    wrap: false,
+  },
 };
 
 // CollapsedRow withs ResmokeRows.
-const CollapsedResmokeRowStory = (args: any) => {
+const CollapsedResmokeRowStory = (
+  args: React.ComponentProps<typeof CollapsedRow> & {
+    wrap: boolean;
+  }
+) => {
   const { ingestLines, preferences, processedLogLines } = useLogContext();
   const { setWrap } = preferences;
 
@@ -70,9 +119,15 @@ const CollapsedResmokeRowStory = (args: any) => {
   );
 };
 
-export const CollapsedResmokeRow: StoryObj<CollapsedRowProps> = {
+export const CollapsedResmokeRow: StoryObj<
+  React.ComponentProps<typeof CollapsedRow> & {
+    wrap: boolean;
+  }
+> = {
   render: (args) => <CollapsedResmokeRowStory {...args} />,
-  args: {},
+  args: {
+    wrap: false,
+  },
 };
 
 const ansiiLogLines = [
