@@ -1,4 +1,4 @@
-# This is a script which checks the result of yarn codegen. It used by the check_codegen task.
+# This is a script which checks the result of yarn codegen. It is used by the check_codegen task.
 
 types_file="src/gql/generated/types.ts" # path to generated types
 BEFORE=$(git status --porcelain | grep "$types_file")

@@ -160,6 +160,7 @@ functions:
       shell: bash
       script: |
         ${PREPARE_SHELL}
+        chmod +x ./scripts/app-version.sh
         . ./scripts/app-version.sh
         echo "Building Production version: $REACT_APP_VERSION"
         yarn build:prod
@@ -241,15 +242,6 @@ functions:
       script: |
         ln -s evergreen/graphql/schema sdlschema
 
-  yarn-codegen:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      shell: bash
-      script: |
-        ${PREPARE_SHELL}
-        ./scripts/check_codegen.sh
-
   yarn-build:
     command: shell.exec
     params:
@@ -258,6 +250,16 @@ functions:
       script: |
         ${PREPARE_SHELL}
         yarn build:local
+
+  yarn-codegen:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      shell: bash
+      script: |
+        ${PREPARE_SHELL}
+        chmod +x ./scripts/check_codegen.sh
+        ./scripts/check_codegen.sh
 
   yarn-cypress:
     command: shell.exec
@@ -428,11 +430,6 @@ functions:
 #                Tasks                #
 #######################################
 tasks:
-  - name: check_codegen
-    commands:
-      - func: sym-link
-      - func: yarn-codegen
-
   - name: compile
     commands:
     - func: yarn-build
@@ -474,7 +471,12 @@ tasks:
   - name: snapshots
     commands:
     - func: yarn-snapshot
-  
+
+  - name: check_codegen
+    commands:
+      - func: sym-link
+      - func: yarn-codegen
+
   - name: deploy-prod
     commands:
     - func: setup-credentials
