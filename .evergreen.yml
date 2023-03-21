@@ -80,7 +80,6 @@ functions:
         bucket: mciuploads
         content_type: text/html
         permissions: public-read
-        display_name: storybook_
         preserve_path: true
     - command: s3.put
       type: system
@@ -93,7 +92,6 @@ functions:
         bucket: mciuploads
         content_type: application/javascript
         permissions: public-read
-        display_name: storybook_assets_js_
         preserve_path: true
     - command: s3.put
       type: system
@@ -106,7 +104,6 @@ functions:
         bucket: mciuploads
         content_type: application/json
         permissions: public-read
-        display_name: storybook_assets_map_
         preserve_path: true
     - command: s3.put
       type: system
@@ -119,7 +116,6 @@ functions:
         bucket: mciuploads
         content_type: image/svg+xml
         permissions: public-read
-        display_name: storybook_assets_svg_
         preserve_path: true
     - command: s3.put
       type: system
@@ -132,7 +128,6 @@ functions:
         bucket: mciuploads
         content_type: application/json
         permissions: public-read
-        display_name: storybook_json_
         preserve_path: true
 
   link-to-storybook:
@@ -165,7 +160,6 @@ functions:
       shell: bash
       script: |
         ${PREPARE_SHELL}
-        chmod +x ./scripts/app-version.sh
         . ./scripts/app-version.sh
         echo "Building Production version: $REACT_APP_VERSION"
         yarn build:prod
@@ -254,7 +248,6 @@ functions:
       shell: bash
       script: |
         ${PREPARE_SHELL}
-        chmod +x ./scripts/check_codegen.sh
         ./scripts/check_codegen.sh
 
   yarn-build:
