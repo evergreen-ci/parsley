@@ -1,4 +1,4 @@
-# Decisions
+# Record and View Decisions for Parsley
 
 This directory contains decision records for parsley.
 
