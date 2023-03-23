@@ -77,13 +77,7 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
         "process"
       );
     } else {
-      // If we're scrolling to the previous page, we want to scroll to the bottom of the previous page
-      listRef.current?.scrollToIndex({
-        index: pageSize - paginationOffset,
-        align: "start",
-      });
-
-      // This second scroll is necessary because the first scroll doesn't always work
+      // This setTimeout is necessary because the first scroll doesn't always work
       // I'm not sure why, but this seems to fix it ¯\_(ツ)_/¯
       setTimeout(() => {
         listRef.current?.scrollToIndex({
