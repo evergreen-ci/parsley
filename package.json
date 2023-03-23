@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.46",
+  "version": "1.0.47",
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
@@ -11,6 +11,7 @@
     "build:staging": "env-cmd -e staging yarn build",
     "build:prod": "env-cmd -e production yarn build",
     "check-types": "tsc -p tsconfig.json --noEmit",
+    "codegen": "graphql-codegen --config codegen.ts",
     "cy:open": "cypress open",
     "cy:run": "cypress run",
     "deploy:beta": "yarn build:beta && env-cmd -e beta yarn deploy:do-not-use",
@@ -98,7 +99,6 @@
     "@testing-library/react": "13.4.0",
     "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.4.3",
-    "@types/axios": "0.14.0",
     "@types/jest": "29.4.0",
     "@types/js-cookie": "3.0.3",
     "@types/lodash.debounce": "4.0.7",
