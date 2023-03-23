@@ -29,7 +29,7 @@ exports[`storyshots Storyshots components/LogRow/AnsiiRow Multi Lines 1`] = `
 exports[`storyshots Storyshots components/LogRow/AnsiiRow Single Line 1`] = `
 <div>
   <div
-    class="css-kx12k1"
+    class="css-6apccn"
     data-bookmarked="false"
     data-cy="log-row-0"
     data-highlighted="false"

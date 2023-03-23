@@ -1,6 +1,5 @@
 import styled from "@emotion/styled";
 import { StoryObj } from "@storybook/react";
-
 import LogPane from ".";
 
 export default {

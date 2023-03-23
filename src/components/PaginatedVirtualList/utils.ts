@@ -12,7 +12,7 @@ type calculatePageSizeOptions = {
  * @param options.totalItemCount - The total number of items in the list
  * @param options.currentPage - The current page number
  * @param options.offset - The additional number of items to render beyond the maxPageSize
- * @returns
+ * @returns The number of items to render on the current page
  */
 const calculatePageSize = (options: calculatePageSizeOptions) => {
   const { maxPageSize, totalItemCount, currentPage, offset } = options;

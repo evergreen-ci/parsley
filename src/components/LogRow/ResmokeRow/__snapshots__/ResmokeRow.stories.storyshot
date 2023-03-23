@@ -29,7 +29,7 @@ exports[`storyshots Storyshots components/LogRow/ResmokeRow Multiple Lines 1`] =
 exports[`storyshots Storyshots components/LogRow/ResmokeRow Single Line 1`] = `
 <div>
   <div
-    class="css-kx12k1"
+    class="css-6apccn"
     data-bookmarked="false"
     data-cy="log-row-8"
     data-highlighted="false"

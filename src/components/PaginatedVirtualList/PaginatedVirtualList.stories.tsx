@@ -13,6 +13,10 @@ export const Default: StoryObj<typeof PaginatedVirtualList> = {
       <PaginatedVirtualList {...args} rowRenderer={row} />
     </Container>
   ),
+  args: {
+    rowCount: 50000,
+    paginationThreshold: 10000,
+  },
 };
 
 const row = (i: number) => (
@@ -23,11 +27,6 @@ const row = (i: number) => (
     </pre>
   </div>
 );
-
-Default.args = {
-  rowCount: 50000,
-  paginationThreshold: 10000,
-};
 
 const Container = styled.div`
   height: 500px;

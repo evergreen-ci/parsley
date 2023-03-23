@@ -183,7 +183,7 @@ const RowContainer = styled.div<{
   ${({ shared }) => shared && `background-color: ${yellow.light3};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
   ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
-  
+
   width: fit-content;
   // Hover should be an overlay shadow so that the user can see the color underneath.
   :hover {
