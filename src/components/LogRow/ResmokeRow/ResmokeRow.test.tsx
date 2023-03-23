@@ -60,37 +60,33 @@ describe("resmokeRow", () => {
     expect(getResmokeLineColor).toHaveBeenCalledWith(7);
     expect(screen.getByDataCy("resmoke-row")).toHaveStyle("color: #ff0000");
   });
-  it("should highlight matching text if it is within range", () => {
+  it("should highlight text that match a search term", () => {
     renderWithRouterMatch(
       <ResmokeRow
         {...resmokeProps}
         lineIndex={7}
         lineNumber={7}
-        range={{ lowerRange: 0, upperRange: 8 }}
-        searchTerm={/mongod/i}
+        searchTerm={/mongod/}
       />,
       {
         wrapper: wrapper(logLines),
       }
     );
-    expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
-    expect(screen.getByDataCy("highlight")).toHaveTextContent("mongod");
+    expect(screen.queryByDataCy("highlight")).toHaveTextContent("mongod");
   });
-  it("should not highlight matching text if it is outside of range", () => {
+  it("should highlight text that have a matching highlight term", () => {
     renderWithRouterMatch(
       <ResmokeRow
         {...resmokeProps}
+        highlightRegex={/mongod/}
         lineIndex={7}
         lineNumber={7}
-        range={{ lowerRange: 0, upperRange: 6 }}
-        searchTerm={/mongod/i}
       />,
       {
         wrapper: wrapper(logLines),
       }
     );
-    expect(screen.queryByDataCy("resmoke-row")).toHaveTextContent("mongod");
-    expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
+    expect(screen.queryByDataCy("highlight")).toHaveTextContent("mongod");
   });
 });
 

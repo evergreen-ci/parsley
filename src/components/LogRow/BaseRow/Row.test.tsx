@@ -106,6 +106,38 @@ describe("row", () => {
       );
       expect(screen.queryByDataCy("highlight")).toBeNull();
     });
+    it("should highlight matching text if it is within range", () => {
+      const regexp = /Test/i;
+      renderWithRouterMatch(
+        <Row
+          {...rowProps}
+          range={{
+            lowerRange: 0,
+            upperRange: 10,
+          }}
+          searchTerm={regexp}
+        >
+          {testLog}
+        </Row>
+      );
+      expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
+    });
+    it("should not highlight matching text if it is outside of range", () => {
+      const regexp = /Test/i;
+      renderWithRouterMatch(
+        <Row
+          {...rowProps}
+          range={{
+            lowerRange: 1,
+            upperRange: 2,
+          }}
+          searchTerm={regexp}
+        >
+          {testLog}
+        </Row>
+      );
+      expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
+    });
   });
   describe("highlights", () => {
     it("highlighted terms should highlight the matching text", () => {

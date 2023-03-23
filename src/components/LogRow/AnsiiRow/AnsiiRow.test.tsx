@@ -57,39 +57,33 @@ describe("ansiiRow", () => {
       "https://www.google.com"
     );
   });
-  it("should highlight matching text if it is within range", () => {
+  it("should highlight terms that match a search term", () => {
     renderWithRouterMatch(
       <AnsiiRow
         {...ansiiProps}
         lineIndex={9}
         lineNumber={9}
-        range={{ lowerRange: 0, upperRange: 10 }}
-        searchTerm={/highlight me/i}
+        searchTerm={/highlight me/}
       />,
       {
-        route: "?lower=0&upper=10",
         wrapper: wrapper(logLines),
       }
     );
-    expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
     expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
   });
-  it("should not highlight matching text if it is outside of range", () => {
+  it("should highlight terms that have matching highlights", () => {
     renderWithRouterMatch(
       <AnsiiRow
         {...ansiiProps}
+        highlightRegex={/highlight me/}
         lineIndex={9}
         lineNumber={9}
-        range={{ lowerRange: 0, upperRange: 8 }}
-        searchTerm={/highlight me/i}
       />,
       {
-        route: "?lower=0&upper=8",
         wrapper: wrapper(logLines),
       }
     );
-    expect(screen.queryByDataCy("ansii-row")).toHaveTextContent("highlight me");
-    expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
   });
 });
 
