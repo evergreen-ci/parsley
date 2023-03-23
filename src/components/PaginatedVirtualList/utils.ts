@@ -6,12 +6,12 @@ type calculatePageSizeOptions = {
 };
 /**
  * `calculatePageSize` is used to calculate the number of items to render on the current page.
- * It takes into account the offset, which allows us to render more items than the pageSize. This is
- * necessary to ensure that the user can scroll back up without seeing a pagination event.
- * @param maxPageSize - The number of items to render per page
- * @param totalItemCount - The total number of items in the list
- * @param currentPage - The current page number
- * @param offset - The number of items to render beyond the pageSize
+ * It takes into account the offset, which is used to render more items than the maxPageSize. The offset is
+ * necessary to ensure that the user can scroll to other pages without seeing a pagination event.
+ * @param options.maxPageSize - The maximum number of items to render per page
+ * @param options.totalItemCount - The total number of items in the list
+ * @param options.currentPage - The current page number
+ * @param options.offset - The additional number of items to render beyond the maxPageSize
  * @returns
  */
 const calculatePageSize = (options: calculatePageSizeOptions) => {
