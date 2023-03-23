@@ -57,7 +57,7 @@ describe("ansiiRow", () => {
       "https://www.google.com"
     );
   });
-  it("should highlight terms that match a search term", () => {
+  it("should highlight text that match a search term", () => {
     renderWithRouterMatch(
       <AnsiiRow
         {...ansiiProps}
@@ -71,7 +71,7 @@ describe("ansiiRow", () => {
     );
     expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
   });
-  it("should highlight terms that have matching highlights", () => {
+  it("should highlight text that have matching highlights", () => {
     renderWithRouterMatch(
       <AnsiiRow
         {...ansiiProps}
