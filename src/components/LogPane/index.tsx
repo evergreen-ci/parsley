@@ -11,7 +11,7 @@ interface LogPaneProps {
   rowCount: number;
 }
 const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
-  const { processedLogLines, scrollToLine } = useLogContext();
+  const { processedLogLines, scrollToLine, listRef } = useLogContext();
 
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
@@ -31,6 +31,7 @@ const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
 
   return (
     <PaginatedVirtualList
+      ref={listRef}
       paginationOffset={50}
       paginationThreshold={500000}
       rowCount={rowCount}

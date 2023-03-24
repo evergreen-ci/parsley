@@ -97,7 +97,7 @@ describe("Bookmarking and selecting lines", () => {
   });
 });
 
-describe.skip("Jump to line", () => {
+describe("Jump to line", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
 

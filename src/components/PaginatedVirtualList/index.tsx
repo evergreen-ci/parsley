@@ -1,7 +1,8 @@
-import { useCallback, useEffect, useRef, useState } from "react";
+import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
 import { ItemContent, Virtuoso, VirtuosoHandle } from "react-virtuoso";
 import usePrevious from "hooks/usePrevious";
 import { leaveBreadcrumb } from "utils/errorReporting";
+import { PaginatedVirtualListRef } from "./types";
 import { calculatePageSize } from "./utils";
 
 interface PaginatedVirtualListProps {
@@ -18,12 +19,17 @@ interface PaginatedVirtualListProps {
    */
   paginationOffset?: number;
 }
-const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
-  rowCount,
-  rowRenderer,
-  paginationThreshold = 10000,
-  paginationOffset = 10,
-}) => {
+
+const PaginatedVirtualList = forwardRef<
+  PaginatedVirtualListRef,
+  PaginatedVirtualListProps
+>((props, ref) => {
+  const {
+    rowCount,
+    rowRenderer,
+    paginationThreshold = 10000,
+    paginationOffset = 10,
+  } = props;
   if (paginationOffset >= paginationThreshold) {
     throw new Error("paginationOffset must be less than paginationThreshold");
   }
@@ -113,6 +119,31 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
     [rowRenderer, startingIndex]
   );
 
+  const scrollToIndex = useCallback(
+    (index: number) => {
+      const page = Math.floor(index / paginationThreshold);
+      if (page !== currentPage) {
+        setCurrentPage(page);
+      }
+      const indexToScrollTo = currentPage === 0 ? index : startingIndex - index;
+      listRef.current?.scrollToIndex({
+        index: indexToScrollTo,
+        align: "start",
+      });
+    },
+    [paginationThreshold, startingIndex, currentPage]
+  );
+
+  // Expose scrollToIndex as a ref
+  useEffect(() => {
+    if (ref) {
+      // eslint-disable-next-line no-param-reassign
+      (ref as any).current = {
+        scrollToIndex,
+      };
+    }
+  }, [ref, scrollToIndex]);
+
   return (
     <Virtuoso
       ref={listRef}
@@ -132,6 +163,8 @@ const PaginatedVirtualList: React.FC<PaginatedVirtualListProps> = ({
       totalCount={pageSize}
     />
   );
-};
+});
+
+PaginatedVirtualList.displayName = "PaginatedVirtualList";
 
 export default PaginatedVirtualList;
