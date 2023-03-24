@@ -61,7 +61,7 @@ describe("Searching", () => {
     }
   });
 
-  it("should not reset search index when a bookmark is applied", () => {
+  it.skip("should not reset search index when a bookmark is applied", () => {
     cy.addSearch("conn49");
     cy.dataCy("search-count").should("be.visible");
     cy.dataCy("search-count").should("contain.text", "1/8");

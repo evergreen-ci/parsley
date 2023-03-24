@@ -4,12 +4,9 @@ import {
   useContext,
   useEffect,
   useMemo,
-  useRef,
   useState,
 } from "react";
 import Cookie from "js-cookie";
-import { List } from "react-virtualized";
-import { cache } from "components/LogRow/RowRenderer";
 import {
   CASE_SENSITIVE,
   EXPANDABLE_ROWS,
@@ -34,7 +31,6 @@ interface LogContextState {
   expandedLines: ExpandedLines;
   hasLogs: boolean;
   lineCount: number;
-  listRef: React.RefObject<List>;
   logMetadata?: LogMetadata;
   matchingLines: Set<number> | undefined;
   preferences: Preferences;
@@ -54,7 +50,6 @@ interface LogContextState {
   getResmokeLineColor: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
   paginate: (dir: DIRECTION) => void;
-  resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
   setFileName: (fileName: string) => void;
   setLogMetadata: (logMetadata: LogMetadata) => void;
@@ -114,8 +109,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
     []
   );
-
-  const listRef = useRef<List>(null);
 
   const stringifiedFilters = JSON.stringify(filters);
   const stringifiedBookmarks = bookmarks.toString();
@@ -187,12 +180,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
 
   const scrollToLine = useCallback((lineNumber: number) => {
-    // We need to call scrollToRow twice because of https://github.com/bvaughn/react-virtualized/issues/995.
-    // When we switch to a different virtual list library we should not do this.
-    listRef.current?.scrollToRow(lineNumber);
-    setTimeout(() => {
-      listRef.current?.scrollToRow(lineNumber);
-    }, 0);
+    console.error("NOT IMPLEMENTED", { lineNumber });
   }, []);
 
   const searchResults = useMemo(() => {
@@ -252,7 +240,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       hasLogs: !!processedLogLines.length,
       lineCount: state.logs.length,
       logMetadata: state.logMetadata,
-      listRef,
       matchingLines,
       preferences: {
         caseSensitive: state.searchState.caseSensitive,
@@ -304,10 +291,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           dispatch({ type: "PAGINATE", nextPage });
           scrollToLine(searchResults[nextPage]);
         }
-      },
-      resetRowHeightAtIndex: (index: number) => {
-        listRef.current?.recomputeRowHeights(index);
-        cache.clear(index, 0);
       },
       scrollToLine,
       setFileName: (fileName: string) => {

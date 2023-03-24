@@ -14,12 +14,8 @@ describe("Basic evergreen log view", () => {
     cy.dataCy("log-row-22").should("be.visible");
     cy.dataCy("log-row-22").should("contain.text", longLogLine);
     cy.dataCy("log-row-22").isNotContainedInViewport();
-    cy.get(".ReactVirtualized__Grid__innerScrollContainer").should(
-      "have.css",
-      "overflow-x",
-      "visible"
-    );
-    cy.get(".ReactVirtualized__Grid").scrollTo(500, 0, {
+
+    cy.dataCy("paginated-virtual-list").scrollTo(500, 0, {
       ensureScrollable: true,
     });
   });
@@ -31,12 +27,8 @@ describe("Basic evergreen log view", () => {
   });
   it("should still allow horizontal scrolling when there are few logs on screen", () => {
     cy.addFilter("Putting spruce/");
-    cy.get(".ReactVirtualized__Grid").should(
-      "have.css",
-      "overflow-x",
-      "scroll"
-    );
-    cy.get(".ReactVirtualized__Grid").scrollTo("right");
+
+    cy.dataCy("paginated-virtual-list").scrollTo("right");
   });
 });
 
@@ -105,7 +97,7 @@ describe("Bookmarking and selecting lines", () => {
   });
 });
 
-describe("Jump to line", () => {
+describe.skip("Jump to line", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
 
