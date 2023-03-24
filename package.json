@@ -38,6 +38,7 @@
     "postversion": "git push upstream && git push upstream --tags && git push && git push --tags"
   },
   "dependencies": {
+    "@apollo/client": "3.7.10",
     "@bugsnag/js": "7.18.0",
     "@bugsnag/plugin-react": "7.18.0",
     "@emotion/react": "11.10.5",
