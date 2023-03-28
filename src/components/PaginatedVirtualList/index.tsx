@@ -1,4 +1,10 @@
-import { forwardRef, useCallback, useEffect, useRef, useState } from "react";
+import React, {
+  forwardRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { ItemContent, Virtuoso, VirtuosoHandle } from "react-virtuoso";
 import usePrevious from "hooks/usePrevious";
 import { leaveBreadcrumb } from "utils/errorReporting";
@@ -61,6 +67,8 @@ const PaginatedVirtualList = forwardRef<
     }
   }, [currentPage]);
 
+  // The following useEffect is necessary to scroll to the correct position when the user
+  // scrolls to the next or previous page.
   useEffect(() => {
     if (prevPage === undefined) {
       return;
@@ -107,6 +115,7 @@ const PaginatedVirtualList = forwardRef<
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage]);
 
+  // startingIndex is the index of the first item in the list with respect to the visible page
   const startingIndex = currentPage * paginationThreshold + offsetCompensation;
 
   // itemContent maps the paginated index to the actual index in the list
@@ -125,12 +134,30 @@ const PaginatedVirtualList = forwardRef<
       if (page !== currentPage) {
         setCurrentPage(page);
       }
-      const indexToScrollTo = currentPage === 0 ? index : startingIndex - index;
-      listRef.current?.scrollToIndex({
-        index: indexToScrollTo,
-        align: "start",
-      });
+      const indexToScrollTo =
+        currentPage === 0 ? index : Math.abs(startingIndex - index);
+      leaveBreadcrumb(
+        "PaginatedVirtualList",
+        {
+          message: "scrollToIndex",
+          index,
+          indexToScrollTo,
+          newPage: page,
+          currentPage,
+          paginationThreshold,
+          paginationOffset,
+          startingIndex,
+        },
+        "process"
+      );
+      setTimeout(() => {
+        listRef.current?.scrollToIndex({
+          index: indexToScrollTo,
+          align: "start",
+        });
+      }, 50);
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [paginationThreshold, startingIndex, currentPage]
   );
 
