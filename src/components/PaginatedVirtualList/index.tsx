@@ -42,13 +42,12 @@ const PaginatedVirtualList = forwardRef<
   const [currentPage, setCurrentPage] = useState(0);
   const prevPage = usePrevious(currentPage);
   const totalPageCount = Math.ceil(rowCount / paginationThreshold);
-  const offsetCompensation = currentPage > 0 ? -paginationOffset : 0;
+  const offsetCompensation = currentPage > 0 ? paginationOffset : 0;
 
   const pageSize = calculatePageSize({
     maxPageSize: paginationThreshold,
     totalItemCount: rowCount,
     currentPage,
-    offset: paginationOffset,
   });
 
   const listRef = useRef<VirtuosoHandle>(null);
@@ -116,7 +115,7 @@ const PaginatedVirtualList = forwardRef<
   }, [currentPage]);
 
   // startingIndex is the index of the first item in the list with respect to the visible page
-  const startingIndex = currentPage * paginationThreshold + offsetCompensation;
+  const startingIndex = currentPage * paginationThreshold - offsetCompensation;
 
   // itemContent maps the paginated index to the actual index in the list
   const itemContent = useCallback(
@@ -187,7 +186,7 @@ const PaginatedVirtualList = forwardRef<
       data-cy="paginated-virtual-list"
       itemContent={itemContent}
       overscan={300}
-      totalCount={pageSize}
+      totalCount={pageSize + offsetCompensation}
     />
   );
 });
