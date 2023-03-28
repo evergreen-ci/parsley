@@ -2,8 +2,7 @@ import type { CodegenConfig } from "@graphql-codegen/cli";
 
 const config: CodegenConfig = {
   schema: "sdlschema/**/*.graphql",
-  // The documents field will need to be populated later in EVG-18101.
-  documents: [],
+  documents: ["./src/**/*.ts", "./src/**/*.graphql", "./src/**/*.gql"],
   generates: {
     "./src/gql/generated/types.ts": {
       plugins: ["typescript", "typescript-operations"],

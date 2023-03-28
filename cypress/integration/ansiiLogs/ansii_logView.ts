@@ -38,6 +38,17 @@ describe("Basic evergreen log view", () => {
     );
     cy.get(".ReactVirtualized__Grid").scrollTo("right");
   });
+  it("log header should show the log name and status and link to Spruce", () => {
+    cy.dataCy("log-header").within(() => {
+      cy.dataCy("spruce-link").should("contain.text", "test");
+      cy.dataCy("spruce-link").should(
+        "have.attr",
+        "href",
+        "http://localhost:9090/task/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0?redirect_spruce_users=true"
+      );
+      cy.dataCy("task-status-badge").should("contain.text", "Succeeded");
+    });
+  });
 });
 
 describe("Bookmarking and selecting lines", () => {

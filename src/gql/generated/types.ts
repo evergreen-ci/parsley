@@ -2515,3 +2515,13 @@ export type WorkstationSetupCommandInput = {
   command: Scalars["String"];
   directory?: InputMaybe<Scalars["String"]>;
 };
+
+export type GetTaskQueryVariables = Exact<{
+  taskId: Scalars["String"];
+  execution?: InputMaybe<Scalars["Int"]>;
+}>;
+
+export type GetTaskQuery = {
+  __typename?: "Query";
+  task?: { __typename?: "Task"; displayName: string; status: string } | null;
+};
