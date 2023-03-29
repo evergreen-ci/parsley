@@ -1,3 +1,5 @@
+# Search a Log
+
 **Line Wrapping:** 
 Log lines can be wrapped/unwrapped by toggling the wrap button under show details. 
 
