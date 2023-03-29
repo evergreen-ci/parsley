@@ -2523,5 +2523,18 @@ export type GetTaskQueryVariables = Exact<{
 
 export type GetTaskQuery = {
   __typename?: "Query";
-  task?: { __typename?: "Task"; displayName: string; status: string } | null;
+  task?: {
+    __typename?: "Task";
+    displayName: string;
+    patchNumber?: number | null;
+    status: string;
+    versionMetadata: {
+      __typename?: "Version";
+      id: string;
+      isPatch: boolean;
+      projectIdentifier: string;
+      message: string;
+      revision: string;
+    };
+  } | null;
 };

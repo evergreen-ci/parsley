@@ -1,11 +1,16 @@
 import { useQuery } from "@apollo/client";
 import { usePreferencesAnalytics } from "analytics";
+import Breadcrumbs from "components/Breadcrumbs";
 import Icon from "components/Icon";
-import { StyledLink } from "components/styles";
 import TaskStatusBadge from "components/TaskStatusBadge";
-import { getEvergreenTaskURL } from "constants/externalURLTemplates";
+import {
+  getEvergreenTaskURL,
+  getEvergreenVersionURL,
+  getSpruceCommitQueueURL,
+} from "constants/externalURLTemplates";
 import { GetTaskQuery, GetTaskQueryVariables } from "gql/generated/types";
 import { GET_TASK } from "gql/queries";
+import { shortenGithash } from "utils/string";
 
 interface Props {
   taskID: string;
@@ -19,31 +24,52 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   const { sendEvent } = usePreferencesAnalytics();
   const { data, loading } = useQuery<GetTaskQuery, GetTaskQueryVariables>(
     GET_TASK,
-    {
-      variables: { taskId: taskID as string, execution: Number(execution) },
-    }
+    { variables: { taskId: taskID, execution } }
   );
 
   const { task } = data ?? {};
-  const taskLink = getEvergreenTaskURL(taskID, execution);
+
+  if (loading || !task) {
+    return <Icon glyph="EvergreenLogo" size={24} />;
+  }
+
+  const { id, isPatch, projectIdentifier, message, revision } =
+    task.versionMetadata ?? {};
+
+  const breadcrumbs = [
+    {
+      href: getSpruceCommitQueueURL(projectIdentifier),
+      text: projectIdentifier,
+      "data-cy": "project-link",
+      onClick: () => {
+        sendEvent({ name: "Opened Task Link" });
+      },
+    },
+    {
+      href: getEvergreenVersionURL(id),
+      text: `${
+        isPatch ? `Patch ${task.patchNumber}` : shortenGithash(revision)
+      } - ${message}`,
+      "data-cy": "version-link",
+      onClick: () => {
+        sendEvent({ name: "Opened Task Link" });
+      },
+    },
+    {
+      href: getEvergreenTaskURL(taskID, execution),
+      text: task.displayName,
+      "data-cy": "task-link",
+      onClick: () => {
+        sendEvent({ name: "Opened Task Link" });
+      },
+    },
+  ];
 
   return (
     <>
       <Icon glyph="EvergreenLogo" size={24} />
-      {!loading && (
-        <>
-          <StyledLink
-            data-cy="spruce-link"
-            href={taskLink}
-            onClick={() => sendEvent({ name: "Opened Task Link" })}
-            target="_blank"
-            title="Open task in Spruce"
-          >
-            {task?.displayName || "Task"}
-          </StyledLink>
-          {task?.status && <TaskStatusBadge status={task.status} />}
-        </>
-      )}
+      <Breadcrumbs breadcrumbs={breadcrumbs} />
+      <TaskStatusBadge status={task.status} />
     </>
   );
 };

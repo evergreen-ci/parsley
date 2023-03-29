@@ -5,18 +5,28 @@ import {
 } from "utils/environmentVariables";
 import { stringifyQuery } from "utils/query-string";
 
-const getEvergreenTaskURL = (taskID: string, execution: string | number) => {
-  const params = {
-    redirect_spruce_users: true,
-  };
-  return `${evergreenURL}/task/${taskID}/${execution}?${stringifyQuery(
-    params
+const evergreenParams = { redirect_spruce_users: true };
+
+const getSpruceCommitQueueURL = (projectIdentifier: string) =>
+  `${spruceURL}/commits/${projectIdentifier}`;
+
+const getEvergreenVersionURL = (versionId: string) =>
+  `${evergreenURL}/version/${versionId}?${stringifyQuery(evergreenParams)}`;
+
+const getEvergreenTaskURL = (taskID: string, execution: string | number) =>
+  `${evergreenURL}/task/${taskID}/${execution}?${stringifyQuery(
+    evergreenParams
   )}`;
-};
 
 const getJobLogsURL = (buildID: string) => `${spruceURL}/job-logs/${buildID}`;
 
 const getLegacyJobLogsURL = (buildID: string) =>
   `${logkeeperURL}/build/${buildID}`;
 
-export { getEvergreenTaskURL, getJobLogsURL, getLegacyJobLogsURL };
+export {
+  getEvergreenTaskURL,
+  getEvergreenVersionURL,
+  getJobLogsURL,
+  getLegacyJobLogsURL,
+  getSpruceCommitQueueURL,
+};

@@ -34,6 +34,9 @@ describe("Basic resmoke log view", () => {
     );
     cy.get(".ReactVirtualized__Grid").scrollTo("right");
   });
+  it("log header should not show breadcrumbs since the task is not found by Evergreen", () => {
+    cy.dataCy("breadcrumb-container").should("not.exist");
+  });
 });
 
 describe("Resmoke syntax highlighting", () => {

@@ -1,6 +1,14 @@
 query GetTask($taskId: String!, $execution: Int) {
   task(taskId: $taskId, execution: $execution) {
     displayName
+    patchNumber
     status
+    versionMetadata {
+      id
+      isPatch
+      projectIdentifier
+      message
+      revision
+    }
   }
 }

@@ -4,7 +4,6 @@ import Badge, { Variant } from "@leafygreen-ui/badge";
 import { palette } from "@leafygreen-ui/palette";
 import { taskStatusToCopy } from "constants/task";
 import { TaskStatus } from "types/task";
-import { reportError } from "utils/errorReporting";
 
 const { purple } = palette;
 
@@ -29,18 +28,12 @@ const StyledBadge = styled(Badge)<BadgeColorProps>`
 interface TaskStatusBadgeProps {
   status: string;
 }
-const TaskStatusBadge: React.VFC<TaskStatusBadgeProps> = ({ status }) => {
+const TaskStatusBadge: React.FC<TaskStatusBadgeProps> = ({ status }) => {
   if (!status) {
     return null;
   }
 
-  let displayStatus = status;
-  if (taskStatusToCopy[status] === undefined) {
-    const err = new Error(`Status '${status}' is not a valid task status`);
-    reportError(err).warning();
-  } else {
-    displayStatus = taskStatusToCopy[status];
-  }
+  const statusText = taskStatusToCopy[status] ?? status;
 
   if (status in mapTaskStatusToBadgeVariant) {
     return (
@@ -50,7 +43,7 @@ const TaskStatusBadge: React.VFC<TaskStatusBadgeProps> = ({ status }) => {
         data-cy="task-status-badge"
         variant={mapTaskStatusToBadgeVariant[status]}
       >
-        {displayStatus}
+        {statusText}
       </StyledBadge>
     );
   }
@@ -61,7 +54,7 @@ const TaskStatusBadge: React.VFC<TaskStatusBadgeProps> = ({ status }) => {
       data-cy="task-status-badge"
       {...customBadgeColors(status)}
     >
-      {displayStatus}
+      {statusText}
     </StyledBadge>
   );
 };

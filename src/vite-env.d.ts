@@ -1,11 +1,15 @@
 /// <reference types="vite/client" />
 
 declare module "*.gql" {
-  const content: any;
+  import { DocumentNode } from "graphql";
+
+  const content: DocumentNode;
   export default content;
 }
 
 declare module "*.graphql" {
-  const content: any;
+  import { DocumentNode } from "graphql";
+
+  const content: DocumentNode;
   export default content;
 }
