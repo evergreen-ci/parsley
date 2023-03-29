@@ -56,6 +56,7 @@ describe("usePaginatedVirtualList", () => {
       act(() => {
         result.current.scrollToNextPage();
       });
+      expect(result.current.currentPage).toBe(1);
       expect(result.current.startingIndex).toBe(4900);
       expect(scrollToIndexMock).toHaveBeenCalledWith({
         index: paginationOffset,
@@ -90,6 +91,7 @@ describe("usePaginatedVirtualList", () => {
       });
       expect(result.current.startingIndex).toBe(9900);
       expect(scrollToIndexMock).toHaveBeenCalledTimes(2);
+      expect(result.current.currentPage).toBe(2);
     });
     it("last page should have the remaining rows", () => {
       const { result } = renderHook(() =>
@@ -113,6 +115,7 @@ describe("usePaginatedVirtualList", () => {
       });
       expect(result.current.startingIndex).toBe(9900);
       expect(result.current.pageSize).toBe(1600);
+      expect(result.current.currentPage).toBe(2);
     });
     it("should not scroll to next page if there is only one page", () => {
       const scrollToIndexMock = jest.fn();
@@ -178,12 +181,56 @@ describe("usePaginatedVirtualList", () => {
           virtuosoScrollToIndex: scrollToIndexMock,
         })
       );
-
+      expect(result.current.currentPage).toBe(0);
       act(() => {
         result.current.scrollToPrevPage();
       });
       expect(result.current.startingIndex).toBe(0);
       expect(scrollToIndexMock).not.toHaveBeenCalled();
+      expect(result.current.currentPage).toBe(0);
+    });
+  });
+
+  describe("scrolling to a line", () => {
+    it("scrolling to a line on the current page should not change the page", () => {
+      const { result } = renderHook(() =>
+        usePaginatedVirtualList({
+          rowCount,
+          paginationThreshold,
+          paginationOffset,
+        })
+      );
+      act(() => {
+        result.current.scrollToLine(1000);
+      });
+      expect(result.current.startingIndex).toBe(0);
+      expect(result.current.pageSize).toBe(paginationThreshold);
+      expect(result.current.currentPage).toBe(0);
+    });
+    it("scrolling to a line on a different page should change the page", () => {
+      const { result } = renderHook(() =>
+        usePaginatedVirtualList({
+          rowCount,
+          paginationThreshold,
+          paginationOffset,
+        })
+      );
+      act(() => {
+        result.current.scrollToLine(5000);
+      });
+      expect(result.current.startingIndex).toBe(4900);
+      expect(result.current.pageSize).toBe(
+        paginationThreshold + paginationOffset
+      );
+      expect(result.current.currentPage).toBe(1);
+      act(() => {
+        result.current.scrollToLine(11500);
+      });
+      expect(result.current.currentPage).toBe(2);
+      act(() => {
+        result.current.scrollToLine(0);
+      });
+      expect(result.current.currentPage).toBe(0);
     });
   });
 });

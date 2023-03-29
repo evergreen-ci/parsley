@@ -94,7 +94,7 @@ const usePaginatedVirtualList = ({
   // startingIndex is the index of the first item in the list with respect to the visible page
   const startingIndex = currentPage * paginationThreshold - offsetCompensation;
 
-  const scrollToIndex = useCallback(
+  const scrollToLine = useCallback(
     (index: number) => {
       const page = Math.floor(index / paginationThreshold);
       if (page !== currentPage) {
@@ -132,7 +132,8 @@ const usePaginatedVirtualList = ({
     scrollToPrevPage,
     startingIndex,
     pageSize: pageSize + offsetCompensation,
-    scrollToIndex,
+    scrollToLine,
+    currentPage,
   };
 };
 
