@@ -1,3 +1,5 @@
+# Keyboard Shortcuts
+
 Parsley lets you perform certain tasks directly from the keyboard.
 
 Pressing `Shift` and `?` brings up the shortcut menu for Parsley: 
