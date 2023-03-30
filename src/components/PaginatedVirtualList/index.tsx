@@ -45,7 +45,7 @@ const PaginatedVirtualList = forwardRef<
     rowCount,
     paginationThreshold,
     paginationOffset,
-    virtuosoScrollToIndex: listRef.current?.scrollToIndex,
+    ref: listRef,
   });
 
   // itemContent maps the paginated index to the actual index in the list

@@ -6,13 +6,16 @@ describe("usePaginatedVirtualList", () => {
   const rowCount = 11500;
   const paginationThreshold = 5000;
   const paginationOffset = 100;
-
+  const ref = {
+    current: null,
+  };
   it("should return correct startingIndex and page size on the first page", () => {
     const { result } = renderHook(() =>
       usePaginatedVirtualList({
         rowCount,
         paginationThreshold,
         paginationOffset,
+        ref,
       })
     );
     expect(result.current.startingIndex).toBe(0);
@@ -25,6 +28,7 @@ describe("usePaginatedVirtualList", () => {
         rowCount,
         paginationThreshold,
         paginationOffset,
+        ref,
       })
     );
     expect(result.current.pageSize).toBe(paginationThreshold);
@@ -36,6 +40,7 @@ describe("usePaginatedVirtualList", () => {
         rowCount: 1000,
         paginationThreshold: 5000,
         paginationOffset: 100,
+        ref,
       })
     );
     expect(result.current.pageSize).toBe(1000);
@@ -49,7 +54,11 @@ describe("usePaginatedVirtualList", () => {
           rowCount,
           paginationThreshold,
           paginationOffset,
-          virtuosoScrollToIndex: scrollToIndexMock,
+          ref: {
+            current: {
+              scrollToIndex: scrollToIndexMock,
+            },
+          },
         })
       );
 
@@ -73,7 +82,11 @@ describe("usePaginatedVirtualList", () => {
           rowCount,
           paginationThreshold,
           paginationOffset,
-          virtuosoScrollToIndex: scrollToIndexMock,
+          ref: {
+            current: {
+              scrollToIndex: scrollToIndexMock,
+            },
+          },
         })
       );
 
@@ -99,6 +112,7 @@ describe("usePaginatedVirtualList", () => {
           rowCount,
           paginationThreshold,
           paginationOffset,
+          ref,
         })
       );
       // Go to last page
@@ -124,7 +138,11 @@ describe("usePaginatedVirtualList", () => {
           rowCount: 1000,
           paginationThreshold: 5000,
           paginationOffset: 100,
-          virtuosoScrollToIndex: scrollToIndexMock,
+          ref: {
+            current: {
+              scrollToIndex: scrollToIndexMock,
+            },
+          },
         })
       );
 
@@ -144,7 +162,11 @@ describe("usePaginatedVirtualList", () => {
           rowCount,
           paginationThreshold,
           paginationOffset,
-          virtuosoScrollToIndex: scrollToIndexMock,
+          ref: {
+            current: {
+              scrollToIndex: scrollToIndexMock,
+            },
+          },
         })
       );
 
@@ -178,7 +200,11 @@ describe("usePaginatedVirtualList", () => {
           rowCount,
           paginationThreshold,
           paginationOffset,
-          virtuosoScrollToIndex: scrollToIndexMock,
+          ref: {
+            current: {
+              scrollToIndex: scrollToIndexMock,
+            },
+          },
         })
       );
       expect(result.current.currentPage).toBe(0);
@@ -198,6 +224,7 @@ describe("usePaginatedVirtualList", () => {
           rowCount,
           paginationThreshold,
           paginationOffset,
+          ref,
         })
       );
       act(() => {
@@ -213,6 +240,7 @@ describe("usePaginatedVirtualList", () => {
           rowCount,
           paginationThreshold,
           paginationOffset,
+          ref,
         })
       );
       act(() => {

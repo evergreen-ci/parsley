@@ -8,15 +8,14 @@ interface UsePaginatedVirtualListProps {
   rowCount: number;
   paginationThreshold: number;
   paginationOffset: number;
-  virtuosoScrollToIndex?: VirtuosoScrollToIndex;
+  ref: React.RefObject<Pick<VirtuosoHandle, "scrollToIndex">>;
 }
-type VirtuosoScrollToIndex = VirtuosoHandle["scrollToIndex"];
 
 const usePaginatedVirtualList = ({
   rowCount,
   paginationOffset,
   paginationThreshold,
-  virtuosoScrollToIndex = () => {},
+  ref,
 }: UsePaginatedVirtualListProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const prevPage = usePrevious(currentPage);
@@ -51,7 +50,7 @@ const usePaginatedVirtualList = ({
     }
     if (prevPage < currentPage) {
       // If we're scrolling to the next page, we want to scroll to the top of the next page
-      virtuosoScrollToIndex({
+      ref.current?.scrollToIndex({
         index: paginationOffset,
         align: "end",
       });
@@ -70,7 +69,7 @@ const usePaginatedVirtualList = ({
       // This setTimeout is necessary because the first scroll doesn't always work
       // I'm not sure why, but this seems to fix it ¯\_(ツ)_/¯
       setTimeout(() => {
-        virtuosoScrollToIndex({
+        ref.current?.scrollToIndex({
           index: pageSize - paginationOffset,
           align: "start",
         });
@@ -116,15 +115,13 @@ const usePaginatedVirtualList = ({
         },
         "process"
       );
-      setTimeout(() => {
-        virtuosoScrollToIndex({
-          index: indexToScrollTo,
-          align: "start",
-        });
-      }, 50);
+      ref.current?.scrollToIndex({
+        index: indexToScrollTo,
+        align: "start",
+      });
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [paginationThreshold, startingIndex, currentPage]
+    [paginationOffset, currentPage, startingIndex]
   );
 
   return {
