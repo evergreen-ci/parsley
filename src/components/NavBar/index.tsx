@@ -20,7 +20,7 @@ const { gray, white } = palette;
 const NavBar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const { hasLogs, clearLogs } = useLogContext();
-  const { isAuthenticated, logoutAndRedirect } = useAuthContext();
+  const { logoutAndRedirect } = useAuthContext();
 
   return (
     <Container>
@@ -51,7 +51,6 @@ const NavBar: React.FC = () => {
         </StyledButton>
         {isDevelopment() && (
           <Button
-            disabled={!isAuthenticated}
             onClick={logoutAndRedirect}
             size="small"
             variant="dangerOutline"
