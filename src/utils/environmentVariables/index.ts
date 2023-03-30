@@ -9,6 +9,7 @@ const spruceURL = process.env.REACT_APP_SPRUCE_URL;
 
 const bugsnagAPIKey = process.env.REACT_APP_BUGSNAG_API_KEY;
 
+const isDevelopment = () => process.env.NODE_ENV === "development";
 const isLocal = releaseStage === "local";
 const isProduction = releaseStage === "production";
 const isProductionBuild = process.env.NODE_ENV === "production";
@@ -17,6 +18,7 @@ const isStaging = releaseStage === "staging";
 export {
   appVersion,
   bugsnagAPIKey,
+  isDevelopment,
   isLocal,
   isProduction,
   isProductionBuild,
