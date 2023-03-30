@@ -39,7 +39,7 @@ const PaginatedVirtualList = forwardRef<
     scrollToNextPage,
     scrollToPrevPage,
     startingIndex,
-    scrollToIndex,
+    scrollToLine,
     pageSize,
   } = usePaginatedVirtualList({
     rowCount,
@@ -63,10 +63,10 @@ const PaginatedVirtualList = forwardRef<
     if (ref) {
       // eslint-disable-next-line no-param-reassign
       (ref as any).current = {
-        scrollToIndex,
+        scrollToIndex: scrollToLine,
       };
     }
-  }, [ref, scrollToIndex]);
+  }, [ref, scrollToLine]);
 
   return (
     <Virtuoso
