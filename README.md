@@ -44,7 +44,7 @@ develop against them you will need to run both of the servers locally.
    ```
 
    Note that all log output is piped to a file named `logkeeperapp.log`. You can
-   use `tail -f logkeeperapp.log` to view the log output
+   use `tail -f logkeeperapp.log` to view the log output.
 
 ### GraphQL Type Generation
 
