@@ -63,7 +63,7 @@ ln -s <path_to_evergreen_repo>/graphql/schema sdlschema
 [env-cmd](https://github.com/toddbluhm/env-cmd#readme) is used to configure
 build environments for production, staging and development. We use two files to
 represent these various environments: `.cmdrc-local.json` for local builds with
-non-sensitive information, and `.cmdrc.json` for builds deployed to S3. This
+non-sensitive information, and `.env-cmdrc.json` for builds deployed to S3. This
 file is git ignored because it contains API keys that we do not want to publish.
 It should be named `.env-cmdrc.json` and placed at the root of the project. This
 file is required to deploy Parsley to production and to staging. The credential
