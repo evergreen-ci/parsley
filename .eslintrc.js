@@ -211,7 +211,7 @@ module.exports = {
       rules: {
         "@graphql-eslint/alphabetize": [
           ERROR,
-          { selections: ["OperationDefinition"] },
+          { selections: ["OperationDefinition", "FragmentDefinition"] },
         ],
       },
     },
