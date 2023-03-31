@@ -14,10 +14,8 @@ Parsley is the UI for Evergreen's log viewer. It will eventually replace
 1. Clone this GitHub repository.
 2. Ensure you have Node.js 16.13+ and
    [Yarn](https://yarnpkg.com/getting-started/install) installed.
-3. Ask a colleague for their .cmdrc.json file and follow the instructions
-   [here](#environment-variables)
-4. Run `yarn`.
-5. Run `yarn run dev`. This will launch the app.
+3. Run `yarn`.
+4. Run `yarn run dev`. This will launch the app.
 
 ### Starting supporting services
 
