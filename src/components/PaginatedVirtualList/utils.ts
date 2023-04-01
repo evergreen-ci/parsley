@@ -24,4 +24,21 @@ const calculatePageSize = (options: calculatePageSizeOptions) => {
   return Math.min(maxPageSize, remainingItems);
 };
 
-export { calculatePageSize };
+type CalculateStartingIndexOptions = {
+  page: number;
+  paginationThreshold: number;
+  paginationOffset: number;
+};
+/**
+ * `calculateStartingIndex` is used to calculate the starting index of the items to render on the current page.
+ * @param options.page - The current page number
+ * @param options.paginationThreshold - The maximum number of items to render per page
+ * @param options.paginationOffset - The number of items to render beyond the paginationThreshold to ensure that the user can scroll to other pages without seeing a pagination event.
+ * @returns The starting index of the items to render on the current page
+ */
+const calculateStartingIndex = (options: CalculateStartingIndexOptions) => {
+  const { page, paginationThreshold, paginationOffset } = options;
+  return page * paginationThreshold - (page > 0 ? paginationOffset : 0);
+};
+
+export { calculatePageSize, calculateStartingIndex };
