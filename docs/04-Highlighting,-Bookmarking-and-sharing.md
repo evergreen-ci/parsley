@@ -1,3 +1,5 @@
+# Highlight and Share Logs
+
 Add Highlight can help call attention to log lines matching a specific regexp by highlighting matching terms. 
 
 You can add multiple highlights concurrently. If you want to remove highlights, you can do so through the side panel.  

@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.47",
+  "version": "1.0.49",
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
@@ -38,6 +38,7 @@
     "postversion": "git push upstream && git push upstream --tags && git push && git push --tags"
   },
   "dependencies": {
+    "@apollo/client": "3.7.10",
     "@bugsnag/js": "7.18.0",
     "@bugsnag/plugin-react": "7.18.0",
     "@emotion/react": "11.10.5",
