@@ -1,3 +1,5 @@
+# Upload and View Local Logs
+
 You can also upload local log files on Parsley.
 
 
