@@ -21,8 +21,9 @@ const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
   useEffect(() => {
     const initialScrollIndex = findLineIndex(processedLogLines, shareLine);
     if (initialScrollIndex > -1) {
-      leaveBreadcrumb("Scrolled to initialScrollIndex", {
+      leaveBreadcrumb("Triggered scroll to shareLine", {
         initialScrollIndex,
+        shareLine,
       });
       // This timeout is necessary to ensure that the list has been rendered
       // before we try to scroll to the line.
@@ -37,7 +38,7 @@ const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
     <PaginatedVirtualList
       ref={listRef}
       paginationOffset={50}
-      paginationThreshold={1000}
+      paginationThreshold={500000}
       rowCount={rowCount}
       rowRenderer={rowRenderer}
     />
