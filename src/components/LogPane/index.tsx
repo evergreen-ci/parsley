@@ -24,7 +24,11 @@ const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
       leaveBreadcrumb("Scrolled to initialScrollIndex", {
         initialScrollIndex,
       });
-      scrollToLine(initialScrollIndex);
+      // This timeout is necessary to ensure that the list has been rendered
+      // before we try to scroll to the line.
+      setTimeout(() => {
+        scrollToLine(initialScrollIndex);
+      }, 50);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -33,7 +37,7 @@ const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
     <PaginatedVirtualList
       ref={listRef}
       paginationOffset={50}
-      paginationThreshold={500000}
+      paginationThreshold={1000}
       rowCount={rowCount}
       rowRenderer={rowRenderer}
     />

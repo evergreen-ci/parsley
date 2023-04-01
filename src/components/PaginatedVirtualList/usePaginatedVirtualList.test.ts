@@ -260,5 +260,25 @@ describe("usePaginatedVirtualList", () => {
       });
       expect(result.current.currentPage).toBe(0);
     });
+
+    it("scrolling to a line on a different page should not trigger a double scroll", () => {
+      const scrollToIndexMock = jest.fn();
+      const { result } = renderHook(() =>
+        usePaginatedVirtualList({
+          rowCount,
+          paginationThreshold,
+          paginationOffset,
+          ref: {
+            current: {
+              scrollToIndex: scrollToIndexMock,
+            },
+          },
+        })
+      );
+      act(() => {
+        result.current.scrollToLine(6000);
+      });
+      expect(scrollToIndexMock).toHaveBeenCalledTimes(1);
+    });
   });
 });
