@@ -1,6 +1,5 @@
 import { forwardRef, useCallback, useEffect, useRef } from "react";
 import { ItemContent, Virtuoso, VirtuosoHandle } from "react-virtuoso";
-
 import { PaginatedVirtualListRef } from "./types";
 import usePaginatedVirtualList from "./usePaginatedVirtualList";
 
@@ -64,7 +63,7 @@ const PaginatedVirtualList = forwardRef<
       // eslint-disable-next-line no-param-reassign
       (ref as any).current = {
         scrollToIndex: scrollToLine,
-      };
+      } satisfies PaginatedVirtualListRef;
     }
   }, [ref, scrollToLine]);
 
