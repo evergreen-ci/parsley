@@ -3,8 +3,6 @@ describe("Highlighting", () => {
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
 
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -49,5 +47,29 @@ describe("Highlighting", () => {
     cy.dataCy("delete-highlight-button").should("be.visible");
     cy.dataCy("delete-highlight-button").click();
     cy.dataCy("highlight").should("not.exist");
+  });
+  it("applying multiple highlights should use different colors", () => {
+    cy.addHighlight("ShardedClusterFixture:job0:mongos0 ");
+    cy.addHighlight("ShardedClusterFixture:job0:shard0:node1");
+    cy.dataCy("highlight").should("exist");
+    cy.dataCy("highlight").should("have.length", 2);
+    cy.dataCy("highlight").each(($el) => {
+      cy.wrap($el)
+        .invoke("text")
+        .should(
+          "match",
+          /ShardedClusterFixture:job0:mongos0|ShardedClusterFixture:job0:shard0:node1/
+        );
+    });
+    const colors = new Set();
+    cy.dataCy("highlight")
+      .each(($el) => {
+        cy.wrap($el).then(($e) => {
+          colors.add($e.css("background-color"));
+        });
+      })
+      .then(() => {
+        expect(colors.size).to.eq(2);
+      });
   });
 });

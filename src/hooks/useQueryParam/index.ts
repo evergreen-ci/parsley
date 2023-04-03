@@ -1,10 +1,14 @@
 import { useCallback } from "react";
+import { ParseOptions } from "query-string";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { conditionalCastToArray } from "utils/array";
 import { parseQueryString, stringifyQuery } from "utils/query-string";
 
-/** `useQueryParams` returns all of the query params passed into the url */
-const useQueryParams = () => {
+/**
+ * `useQueryParams` returns all of the query params that exist in the url.
+ * @param parseOptions - options which define how to parse params from the url (optional)
+ */
+const useQueryParams = (parseOptions?: ParseOptions) => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
   const setQueryString = useCallback(
@@ -15,7 +19,10 @@ const useQueryParams = () => {
     [navigate]
   );
 
-  return [parseQueryString(searchParams.toString()), setQueryString] as const;
+  return [
+    parseQueryString(searchParams.toString(), parseOptions),
+    setQueryString,
+  ] as const;
 };
 
 /**

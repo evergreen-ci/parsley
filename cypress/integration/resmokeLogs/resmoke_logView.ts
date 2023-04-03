@@ -2,8 +2,6 @@ describe("Basic resmoke log view", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -49,8 +47,6 @@ describe("Resmoke syntax highlighting", () => {
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
 
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
   it("should not color non-resmoke log lines", () => {
@@ -88,8 +84,6 @@ describe("Bookmarking and selecting lines", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -112,7 +106,7 @@ describe("Bookmarking and selecting lines", () => {
 
   it("should be able to set and unset the share line", () => {
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,11079&selectedLine=5");
+    cy.location("search").should("equal", "?bookmarks=0,11079&shareLine=5");
     cy.dataCy("bookmark-list").should("contain", "0");
     cy.dataCy("bookmark-list").should("contain", "5");
     cy.dataCy("bookmark-list").should("contain", "11079");
@@ -133,9 +127,8 @@ describe("Bookmarking and selecting lines", () => {
       "|ShardedClusterFixture:job0:mongos1        |j0:s1   |20010|73217|";
     const logLine11079 = `[j0:s1] | 2022-09-21T12:50:28.489+00:00 I  NETWORK  22944   [conn60] "Connection ended","attr":{"remote":"127.0.0.1:47362","uuid":{"uuid":{"$uuid":"b28d7d9f-03b6-4f93-a7cd-5e1948135f69"}},"connectionId":60,"connectionCount":2}`;
 
-    cy.enableClipboard();
     cy.dataCy("details-button").click();
-    cy.dataCy("jira-button-wrapper").click();
+    cy.dataCy("jira-button").click();
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
         expect(text).to.eq(
@@ -155,10 +148,6 @@ describe("Bookmarking and selecting lines", () => {
 describe("Jump to line", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
-  beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
-  });
 
   it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
     cy.visit(`${logLink}?bookmarks=0,11079`);
@@ -184,8 +173,8 @@ describe("Jump to line", () => {
     cy.dataCy("log-row-30").should("be.visible");
   });
 
-  it("visiting a log with a selected line should jump to that line on page load", () => {
-    cy.visit(`${logLink}?bookmarks=0,11079&selectedLine=200`);
+  it("visiting a log with a share line should jump to that line on page load", () => {
+    cy.visit(`${logLink}?bookmarks=0,11079&shareLine=200`);
     cy.dataCy("log-row-200").should("be.visible");
   });
 });
@@ -194,8 +183,6 @@ describe("expanding collapsed rows", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab?bookmarks=0,11079&filters=100ShardedClusterFixture%253Ajob0";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -240,8 +227,6 @@ describe("pretty print", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.setCookie("pretty-print-bookmarks", "true");
     cy.visit(logLink);
   });

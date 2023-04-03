@@ -21,15 +21,15 @@ describe("row", () => {
       </Row>
     );
     await userEvent.click(screen.getByDataCy("log-link-54"));
-    expect(history.location.search).toBe("?selectedLine=54");
+    expect(history.location.search).toBe("?shareLine=54");
     expect(scrollToLine).toHaveBeenCalledWith(7);
   });
 
-  it("clicking on a selected log line link unselects it", async () => {
+  it("clicking on a share line's link icon updates the URL correctly", async () => {
     const { history } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>,
       {
-        route: "?selectedLine=0",
+        route: "?shareLine=0",
       }
     );
     await userEvent.click(screen.getByDataCy("log-link-0"));
@@ -55,13 +55,24 @@ describe("row", () => {
     expect(history.location.search).toBe("");
   });
 
-  it("a log line can be selected and bookmarked at the same time", async () => {
+  it("a log line can be shared and bookmarked at the same time", async () => {
     const { history } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>
     );
     await userEvent.click(screen.getByDataCy("log-link-0"));
     await userEvent.dblClick(screen.getByText(testLog));
-    expect(history.location.search).toBe("?bookmarks=0&selectedLine=0");
+    expect(history.location.search).toBe("?bookmarks=0&shareLine=0");
+  });
+
+  it("should not copy line numbers to clipboard", async () => {
+    const user = userEvent.setup({ writeToClipboard: true });
+
+    renderWithRouterMatch(<Row {...rowProps}>{testLog}</Row>);
+    expect(screen.getByText(/.+/).textContent).toBe("Test Log");
+    // select all of the text
+    await user.tripleClick(screen.getByText(/.+/));
+    const dataTransfer = await user.copy();
+    expect(dataTransfer?.getData("text")).toBe("Test Log");
   });
   describe("search", () => {
     it("a search term highlights the matching text", () => {
@@ -126,7 +137,7 @@ describe("row", () => {
     });
     it("should show both highlights and searches if they are on the same line", () => {
       const searchRegex = /Test/i;
-      const highlightRegex = /Log/i;
+      const highlightRegex = /(Log)/i;
       renderWithRouterMatch(
         <Row {...rowProps} highlights={highlightRegex} searchTerm={searchRegex}>
           {testLog}
@@ -139,43 +150,45 @@ describe("row", () => {
     });
   });
 
-  it("bookmarking a line when pretty print is enabled should call resetRowHeightAtIndex", async () => {
-    const resetRowHeightAtIndex = jest.fn();
-    const { history } = renderWithRouterMatch(
-      <Row
-        {...rowProps}
-        prettyPrint
-        resetRowHeightAtIndex={resetRowHeightAtIndex}
-      >
-        {testLog}
-      </Row>,
-      {
-        route: "?bookmarks=0",
-      }
-    );
-    await userEvent.dblClick(screen.getByText(testLog));
-    expect(history.location.search).toBe("");
-    expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(1);
-    expect(resetRowHeightAtIndex).toHaveBeenCalledWith(0);
-  });
+  describe("pretty print", () => {
+    it("bookmarking a line when pretty print is enabled should call resetRowHeightAtIndex", async () => {
+      const resetRowHeightAtIndex = jest.fn();
+      const { history } = renderWithRouterMatch(
+        <Row
+          {...rowProps}
+          prettyPrint
+          resetRowHeightAtIndex={resetRowHeightAtIndex}
+        >
+          {testLog}
+        </Row>,
+        {
+          route: "?bookmarks=0",
+        }
+      );
+      await userEvent.dblClick(screen.getByText(testLog));
+      expect(history.location.search).toBe("");
+      expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(1);
+      expect(resetRowHeightAtIndex).toHaveBeenCalledWith(0);
+    });
 
-  it("bookmarking a line when pretty print is not enabled should not call resetRowHeightAtIndex", async () => {
-    const resetRowHeightAtIndex = jest.fn();
-    const { history } = renderWithRouterMatch(
-      <Row
-        {...rowProps}
-        prettyPrint={false}
-        resetRowHeightAtIndex={resetRowHeightAtIndex}
-      >
-        {testLog}
-      </Row>,
-      {
-        route: "?bookmarks=0",
-      }
-    );
-    await userEvent.dblClick(screen.getByText(testLog));
-    expect(history.location.search).toBe("");
-    expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(0);
+    it("bookmarking a line when pretty print is not enabled should not call resetRowHeightAtIndex", async () => {
+      const resetRowHeightAtIndex = jest.fn();
+      const { history } = renderWithRouterMatch(
+        <Row
+          {...rowProps}
+          prettyPrint={false}
+          resetRowHeightAtIndex={resetRowHeightAtIndex}
+        >
+          {testLog}
+        </Row>,
+        {
+          route: "?bookmarks=0",
+        }
+      );
+      await userEvent.dblClick(screen.getByText(testLog));
+      expect(history.location.search).toBe("");
+      expect(resetRowHeightAtIndex).toHaveBeenCalledTimes(0);
+    });
   });
 });
 

@@ -2,8 +2,6 @@ describe("Searching", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -62,6 +60,17 @@ describe("Searching", () => {
     cy.dataCy("search-count").should("contain.text", "2/4");
     cy.dataCy("previous-button").click();
     cy.dataCy("search-count").should("contain.text", "1/4");
+  });
+
+  it("should not reset search index when a bookmark is applied", () => {
+    cy.addSearch("info");
+    cy.dataCy("search-count").should("be.visible");
+    cy.dataCy("search-count").should("contain.text", "1/4");
+    cy.dataCy("next-button").click();
+    cy.dataCy("search-count").should("contain.text", "2/4");
+    cy.dataCy("log-row-27").dblclick();
+    cy.location("search").should("equal", "?bookmarks=0,27,297");
+    cy.dataCy("search-count").should("contain.text", "2/4");
   });
 
   it("should be able to search on filtered content", () => {

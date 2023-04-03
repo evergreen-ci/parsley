@@ -157,7 +157,7 @@ const StyledToast = styled(Toast)`
 `;
 
 const Message = styled.span`
-  word-break: break-word;
+  overflow-wrap: anywhere;
 `;
 
 export { ToastProvider, useToastContext };

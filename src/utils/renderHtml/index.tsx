@@ -30,7 +30,7 @@ interface renderHtmlOptions extends HTMLReactParserOptions {
 const allowedTags = {
   a: ["href", "target", "rel", "class", "style"],
   span: ["style", "data-cy"],
-  mark: ["style", "data-cy"],
+  mark: ["style", "data-cy", "color"],
 };
 const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
   const escapedHtml = escapeTags(html, allowedTags);
@@ -46,6 +46,7 @@ const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
             options.preserveAttributes.includes(domNode.name)
               ? domNode.attribs
               : {};
+
           return (
             // @ts-expect-error
             <SwapComponent className={extraProps.class} {...extraProps}>

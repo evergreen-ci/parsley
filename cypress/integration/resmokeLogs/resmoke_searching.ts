@@ -3,8 +3,6 @@ describe("Searching", () => {
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
 
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -61,6 +59,17 @@ describe("Searching", () => {
       cy.dataCy("previous-button").click();
       cy.dataCy("search-count").should("contain.text", `${i + 1}/8`);
     }
+  });
+
+  it("should not reset search index when a bookmark is applied", () => {
+    cy.addSearch("conn49");
+    cy.dataCy("search-count").should("be.visible");
+    cy.dataCy("search-count").should("contain.text", "1/8");
+    cy.dataCy("next-button").click();
+    cy.dataCy("search-count").should("contain.text", "2/8");
+    cy.dataCy("log-row-112").dblclick();
+    cy.location("search").should("equal", "?bookmarks=0,112,11079");
+    cy.dataCy("search-count").should("contain.text", "2/8");
   });
 
   it("should be able to search on filtered content", () => {

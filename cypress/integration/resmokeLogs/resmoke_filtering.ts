@@ -5,19 +5,14 @@ describe("Filtering", () => {
   describe("Applying filters", () => {
     describe("Basic filtering", () => {
       beforeEach(() => {
-        cy.login();
-        cy.setCookie("has-opened-drawer", "true");
         cy.visit(logLink);
         cy.get(".ReactVirtualized__Grid").should("be.visible");
       });
 
-      it("should not collapse bookmarks and selected line", () => {
+      it("should not collapse bookmarks and share line", () => {
         cy.dataCy("log-link-5").click();
         cy.dataCy("log-row-6").dblclick();
-        cy.location("search").should(
-          "equal",
-          "?bookmarks=0,6,130&selectedLine=5"
-        );
+        cy.location("search").should("equal", "?bookmarks=0,6,130&shareLine=5");
         cy.addFilter("doesNotMatchAnything");
         cy.get("[data-cy^='log-row-']").each(($el) => {
           cy.wrap($el)
@@ -33,7 +28,7 @@ describe("Filtering", () => {
 
       describe("filtering mode is AND", () => {
         beforeEach(() => {
-          cy.login();
+          cy.resetDrawerState();
         });
 
         it("should be able to apply two default filters (case insensitive, exact match)", () => {
@@ -110,7 +105,7 @@ describe("Filtering", () => {
 
       describe("filtering mode is OR", () => {
         beforeEach(() => {
-          cy.login();
+          cy.resetDrawerState();
         });
 
         it("should be able to apply two default filters (case insensitive, exact match)", () => {
@@ -202,7 +197,7 @@ describe("Filtering", () => {
     const filter = "doesNotMatchAnything";
 
     beforeEach(() => {
-      cy.login();
+      cy.resetDrawerState();
       cy.visit(`${logLink}?filters=100${filter}`);
       cy.get("[data-cy^='collapsed-row-']").should("exist");
     });

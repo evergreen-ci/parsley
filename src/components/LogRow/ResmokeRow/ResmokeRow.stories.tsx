@@ -1,137 +1,103 @@
-import { useState } from "react";
+import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { RowRenderer, cache } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
-import { colorList } from "utils/resmoke";
 import ResmokeRow from ".";
 
 export default {
-  title: "Components/LogRow/ResmokeRow",
   component: ResmokeRow,
-} as ComponentMeta<ResmokeRowProps>;
+};
 
-type ResmokeRowProps = React.FC<
-  React.ComponentProps<typeof ResmokeRow>["data"]
->;
+type ResmokeRowProps = React.FC<React.ComponentProps<typeof ResmokeRow>>;
 
 // Single ResmokeRow.
-const SingleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => (
-  <ResmokeRow
-    key={logLines[0]}
-    data={{
-      expandLines: () => undefined,
-      getLine,
-      getResmokeLineColor: () => undefined,
-      resetRowHeightAtIndex: () => undefined,
-      scrollToLine: () => undefined,
-      prettyPrint: args.prettyPrint,
-      range: { lowerRange: 0 },
-      wrap: args.wrap,
-    }}
-    lineNumber={0}
-    listRowProps={{
-      index: 2,
-      style: {},
-      columnIndex: 0,
-      isScrolling: false,
-      isVisible: true,
-      key: getLine(2) || "",
-      parent: {} as any,
-    }}
-  />
-);
+const SingleLineStory = (args: any) => {
+  const {
+    getResmokeLineColor,
+    ingestLines,
+    resetRowHeightAtIndex,
+    scrollToLine,
+  } = useLogContext();
 
-export const SingleLine = SingleLineTemplate.bind({});
+  useEffect(() => {
+    ingestLines(logLines, LogTypes.RESMOKE_LOGS);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
-SingleLine.args = {
-  prettyPrint: false,
-  wrap: false,
+  return (
+    <ResmokeRow
+      key={logLines[8]}
+      getLine={() => logLines[8]}
+      getResmokeLineColor={getResmokeLineColor}
+      highlightRegex={undefined}
+      lineNumber={8}
+      listRowProps={{
+        index: 8,
+        style: {},
+        columnIndex: 0,
+        isScrolling: false,
+        isVisible: true,
+        key: logLines[8] || "",
+        parent: {} as any,
+      }}
+      prettyPrint={args.prettyPrint}
+      range={{ lowerRange: 0 }}
+      resetRowHeightAtIndex={resetRowHeightAtIndex}
+      scrollToLine={scrollToLine}
+      searchTerm={undefined}
+      wrap={args.wrap}
+    />
+  );
+};
+
+export const SingleLine: StoryObj<ResmokeRowProps> = {
+  render: (args) => <SingleLineStory {...args} />,
+  args: {
+    prettyPrint: true,
+    wrap: false,
+  },
 };
 
 // Multiple ResmokeRows.
-const MultipleLineTemplate: ComponentStory<ResmokeRowProps> = (args) => {
-  const [scrollIndex, setScrollIndex] = useState<number>(-1);
-  const { resetRowHeightAtIndex } = useLogContext();
+const MultipleLinesStory = (args: any) => {
+  const { ingestLines, processedLogLines, preferences } = useLogContext();
+  const { setWrap, setPrettyPrint } = preferences;
+
+  useEffect(() => {
+    ingestLines(logLines, LogTypes.RESMOKE_LOGS);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    setWrap(args.wrap);
+  }, [args.wrap, setWrap]);
+
+  useEffect(() => {
+    setPrettyPrint(args.prettyPrint);
+  }, [args.prettyPrint, setPrettyPrint]);
 
   return (
     <Container>
       <LogPane
         cache={cache}
-        initialScrollIndex={-1}
         logLines={processedLogLines}
         rowCount={processedLogLines.length}
         rowRenderer={RowRenderer({
-          data: {
-            expandLines: () => undefined,
-            getLine,
-            getResmokeLineColor: () => undefined,
-            resetRowHeightAtIndex,
-            scrollToLine: setScrollIndex,
-            highlightedLine: args.highlightedLine,
-            prettyPrint: args.prettyPrint,
-            range: { lowerRange: 0 },
-            searchTerm: /mongod/,
-            wrap: args.wrap,
-          },
           processedLogLines,
           logType: LogTypes.RESMOKE_LOGS,
         })}
-        scrollToIndex={scrollIndex}
-        wrap={args.wrap}
-      />
-    </Container>
-  );
-};
-export const MultipleLines = MultipleLineTemplate.bind({});
-
-MultipleLines.args = {
-  prettyPrint: true,
-  wrap: false,
-};
-
-const ResmokeHighlightingTemplate: ComponentStory<ResmokeRowProps> = (args) => {
-  const [scrollIndex, setScrollIndex] = useState<number>(-1);
-  const { resetRowHeightAtIndex } = useLogContext();
-
-  return (
-    <Container>
-      <LogPane
-        cache={cache}
-        initialScrollIndex={-1}
-        logLines={processedLogLines}
-        rowCount={processedLogLines.length}
-        rowRenderer={RowRenderer({
-          data: {
-            expandLines: () => undefined,
-            getLine,
-            getResmokeLineColor: (lineNumber: number) => colorList[lineNumber],
-            resetRowHeightAtIndex,
-            scrollToLine: setScrollIndex,
-            highlightedLine: args.highlightedLine,
-            prettyPrint: args.prettyPrint,
-            range: { lowerRange: 0 },
-            searchTerm: /mongod/,
-            wrap: args.wrap,
-          },
-          processedLogLines,
-          logType: LogTypes.RESMOKE_LOGS,
-        })}
-        scrollToIndex={scrollIndex}
-        wrap={args.wrap}
       />
     </Container>
   );
 };
 
-export const ResmokeHighlighting = ResmokeHighlightingTemplate.bind({});
-
-ResmokeHighlighting.args = {
-  prettyPrint: true,
-  highlightedLine: 1,
-  wrap: false,
+export const MultipleLines: StoryObj<ResmokeRowProps> = {
+  render: (args) => <MultipleLinesStory {...args} />,
+  args: {
+    prettyPrint: true,
+    wrap: false,
+  },
 };
 
 const logLines = [
@@ -148,10 +114,7 @@ const logLines = [
   `[j0:s0:n2] | 2022-09-21T12:50:19.925+00:00 D2 REPL_HB  4615670 [ReplCoord-9] "Sending heartbeat","attr":{"requestId":151,"target":"localhost:20004","heartbeatObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":1,"hbv":1,"from":"localhost:20005","fromId":2,"term":1,"primaryId":0}}`,
 ];
 
-const processedLogLines = logLines.map((_, index) => index);
-
 const Container = styled.div`
   height: 400px;
   width: 800px;
 `;
-const getLine = (index: number) => logLines[index];

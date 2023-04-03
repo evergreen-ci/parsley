@@ -25,8 +25,8 @@ const BookmarksBar: React.FC<BookmarksBarProps> = ({
 }) => {
   const { sendEvent } = useLogWindowAnalytics();
 
-  const [selectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
+  const [shareLine] = useQueryParam<number | undefined>(
+    QueryParams.ShareLine,
     undefined
   );
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
@@ -46,8 +46,8 @@ const BookmarksBar: React.FC<BookmarksBarProps> = ({
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const lineNumbers =
-    selectedLine !== undefined
-      ? Array.from(new Set([...bookmarks, selectedLine])).sort((a, b) => a - b)
+    shareLine !== undefined
+      ? Array.from(new Set([...bookmarks, shareLine])).sort((a, b) => a - b)
       : bookmarks;
 
   // Finds the corresponding index of a line number and scrolls to it.
@@ -87,7 +87,7 @@ const BookmarksBar: React.FC<BookmarksBarProps> = ({
             }}
           >
             <span>{l}</span>
-            {l === selectedLine && <StyledIcon glyph="Link" size="small" />}
+            {l === shareLine && <StyledIcon glyph="Link" size="small" />}
           </LogLineNumber>
         ))}
       </LogLineContainer>

@@ -16,12 +16,12 @@ describe("buttonRow", () => {
       renderWithRouterMatch(<ButtonRow />, {
         wrapper: wrapper(logLines),
       });
-      const jiraButton = screen.getByRole("button", {
-        name: "JIRA",
-      });
-      expect(jiraButton).toBeDisabled();
+      expect(screen.getByDataCy("jira-button")).toHaveAttribute(
+        "aria-disabled",
+        "true"
+      );
       // Tooltip should appear even if button is disabled.
-      await user.hover(screen.getByDataCy("jira-button-wrapper"));
+      await user.hover(screen.getByDataCy("jira-button"));
       await waitFor(() => {
         expect(screen.getByText("No bookmarks to copy.")).toBeInTheDocument();
       });
@@ -32,9 +32,7 @@ describe("buttonRow", () => {
         wrapper: wrapper(logLines),
         route: "?bookmarks=0,2",
       });
-      const jiraButton = screen.getByRole("button", {
-        name: "JIRA",
-      });
+      const jiraButton = screen.getByDataCy("jira-button");
       expect(jiraButton).toBeEnabled();
       // Tooltip text should appear on hover.
       await user.hover(jiraButton);
@@ -61,9 +59,7 @@ describe("buttonRow", () => {
         route: "?bookmarks=0,2,5",
       });
 
-      const jiraButton = screen.getByRole("button", {
-        name: "JIRA",
-      });
+      const jiraButton = screen.getByDataCy("jira-button");
       expect(jiraButton).toBeEnabled();
 
       await user.click(jiraButton);

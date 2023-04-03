@@ -99,6 +99,8 @@ const getResmokeLogURL = (
   return `${logkeeperURL}/build/${buildID}/all?${stringifyQuery(params)}`;
 };
 
+// Although this does not follow typical enum capitalization conventions, it is used to map the origin of the log to the type parameter in the Evergreen URL.
+// Any changes to these origins should be reflected in an ADR
 enum OriginToType {
   agent = "E",
   system = "S",

@@ -1,6 +1,8 @@
+import { useRef } from "react";
 import styled from "@emotion/styled";
 import { useLogWindowAnalytics } from "analytics";
 import SearchBar from "components/Search/SearchBar";
+import SearchBarGuideCue from "components/Search/SearchBarGuideCue";
 import SearchResults from "components/Search/SearchResults";
 import { CaseSensitivity, MatchType, SearchBarActions } from "constants/enums";
 import { size } from "constants/tokens";
@@ -10,18 +12,16 @@ import { useHighlightParam } from "hooks/useHighlightParam";
 import { validateRegexp } from "utils/validators";
 
 const Search: React.FC = () => {
+  const { sendEvent } = useLogWindowAnalytics();
+
+  const containerRef = useRef<HTMLDivElement>(null);
   const [filters, setFilters] = useFilterParam();
   const [highlights, setHighlights] = useHighlightParam();
-
-  const { sendEvent } = useLogWindowAnalytics();
   const { hasLogs, setSearch, searchState, paginate } = useLogContext();
   const { hasSearch } = searchState;
 
-  const handleSearch = (selected: string, value: string) => {
+  const handleOnSubmit = (selected: string, value: string) => {
     switch (selected) {
-      case SearchBarActions.Search:
-        setSearch(value);
-        break;
       case SearchBarActions.Filter:
         if (!filters.some((f) => f.name === value)) {
           setSearch("");
@@ -49,21 +49,23 @@ const Search: React.FC = () => {
     }
   };
 
-  const handleOnChange = (selected: string, value: string) => {
-    if (selected === SearchBarActions.Search) {
-      setSearch(value);
-      sendEvent({ name: "Applied Search", searchExpression: value });
-    }
+  const handleOnChange = (value: string) => {
+    setSearch(value);
+    sendEvent({ name: "Applied Search", searchExpression: value });
   };
 
   return (
-    <Container>
+    <Container ref={containerRef}>
+      {hasLogs && containerRef.current && (
+        <SearchBarGuideCue containerRef={containerRef.current} />
+      )}
       <StyledSearchBar
         disabled={!hasLogs}
         onChange={handleOnChange}
-        onSubmit={handleSearch}
+        onSubmit={handleOnSubmit}
+        paginate={paginate}
         validator={validateRegexp}
-        validatorMessage="Invalid Regular Expression"
+        validatorMessage="Invalid regular expression"
       />
       {hasSearch && (
         <SearchResults paginate={paginate} searchState={searchState} />

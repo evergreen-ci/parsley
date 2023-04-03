@@ -1,5 +1,5 @@
 import styled from "@emotion/styled";
-import { ComponentMeta, ComponentStory } from "@storybook/react";
+import { StoryObj } from "@storybook/react";
 import {
   CellMeasurer,
   CellMeasurerCache,
@@ -8,21 +8,8 @@ import {
 import LogPane from ".";
 
 export default {
-  title: "Components/LogPane",
   component: LogPane,
-} as ComponentMeta<typeof LogPane>;
-
-const Template: ComponentStory<typeof LogPane> = (args) => (
-  <Container>
-    <LogPane
-      {...args}
-      cache={cache}
-      rowCount={list.length}
-      rowRenderer={RowRenderer}
-      wrap={false}
-    />
-  </Container>
-);
+};
 
 const cache = new CellMeasurerCache({
   fixedWidth: true,
@@ -45,6 +32,17 @@ const Container = styled.div`
   width: 800px;
   border: 1px solid black;
 `;
-export const Default = Template.bind({});
 
-Default.args = {};
+export const Default: StoryObj<typeof LogPane> = {
+  render: (args) => (
+    <Container>
+      <LogPane
+        {...args}
+        cache={cache}
+        rowCount={list.length}
+        rowRenderer={RowRenderer}
+      />
+    </Container>
+  ),
+  args: {},
+};

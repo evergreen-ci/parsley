@@ -7,6 +7,7 @@ import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { size } from "constants/tokens";
 import { OverlineType } from "types/leafygreen";
+import { ExpandedLines } from "types/logs";
 import { BaseRowProps } from "../types";
 
 const { gray } = palette;
@@ -15,14 +16,14 @@ const SKIP_NUMBER = 5;
 
 interface CollapsedRowProps extends BaseRowProps {
   collapsedLines: number[];
+  expandLines: (expandedLines: ExpandedLines) => void;
 }
 
 const CollapsedRow = forwardRef<any, CollapsedRowProps>((props, ref) => {
   const { sendEvent } = useLogWindowAnalytics();
   const [, startTransition] = useTransition();
 
-  const { collapsedLines, data, listRowProps } = props;
-  const { expandLines } = data;
+  const { collapsedLines, expandLines, listRowProps } = props;
 
   const numCollapsed = collapsedLines.length;
   const start = collapsedLines[0];

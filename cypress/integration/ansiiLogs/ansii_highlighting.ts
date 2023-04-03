@@ -2,8 +2,6 @@ describe("Highlighting", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
   it("applying a highlight should highlight the matching words", () => {
@@ -37,5 +35,26 @@ describe("Highlighting", () => {
     cy.dataCy("delete-highlight-button").should("be.visible");
     cy.dataCy("delete-highlight-button").click();
     cy.dataCy("highlight").should("not.exist");
+  });
+  it("applying multiple highlights should use different colors", () => {
+    cy.addHighlight("@bugsnag/plugin-react@");
+    cy.addHighlight("info");
+    cy.dataCy("highlight").should("exist");
+    cy.dataCy("highlight").should("have.length", 5);
+    cy.dataCy("highlight").each(($el) => {
+      cy.wrap($el)
+        .invoke("text")
+        .should("match", /@bugsnag\/plugin-react@|info/);
+    });
+    const colors = new Set();
+    cy.dataCy("highlight")
+      .each(($el) => {
+        cy.wrap($el).then(($e) => {
+          colors.add($e.css("background-color"));
+        });
+      })
+      .then(() => {
+        expect(colors.size).to.eq(2);
+      });
   });
 });

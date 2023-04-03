@@ -27,6 +27,7 @@ module.exports = {
     "airbnb",
     "plugin:prettier/recommended", // Note: prettier must ALWAYS be the last extension.
   ],
+  ignorePatterns: ["!.storybook"],
   plugins: ["@typescript-eslint"],
   settings: {
     react: {

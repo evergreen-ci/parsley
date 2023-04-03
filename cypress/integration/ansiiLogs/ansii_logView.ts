@@ -4,8 +4,6 @@ describe("Basic evergreen log view", () => {
   const longLogLine = `[2022/03/02 17:02:18.500] warning Pattern ["@apollo/client@latest"] is trying to unpack in the same destination "/home/ubuntu/.cache/yarn/v6/npm-@apollo-client-3.3.7-f15bf961dc0c2bee37a47bf86b8881fdc6183810-integrity/node_modules/@apollo/client" as pattern ["@apollo/client@3.3.7"]. This could result in non-deterministic behavior, skipping.`;
 
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -46,8 +44,6 @@ describe("Bookmarking and selecting lines", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 
@@ -70,7 +66,7 @@ describe("Bookmarking and selecting lines", () => {
 
   it("should be able to set and unset the share line", () => {
     cy.dataCy("log-link-5").click();
-    cy.location("search").should("equal", "?bookmarks=0,297&selectedLine=5");
+    cy.location("search").should("equal", "?bookmarks=0,297&shareLine=5");
     cy.dataCy("bookmark-list").should("contain", "0");
     cy.dataCy("bookmark-list").should("contain", "5");
     cy.dataCy("bookmark-list").should("contain", "297");
@@ -92,9 +88,8 @@ describe("Bookmarking and selecting lines", () => {
     const logLine297 =
       "[2022/03/02 17:05:21.050] running setup group because we have a new independent task";
 
-    cy.enableClipboard();
     cy.dataCy("details-button").click();
-    cy.dataCy("jira-button-wrapper").click();
+    cy.dataCy("jira-button").click();
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
         expect(text).to.eq(
@@ -113,10 +108,6 @@ describe("Bookmarking and selecting lines", () => {
 describe("Jump to line", () => {
   const logLink =
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
-  beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
-  });
 
   it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
     cy.visit(`${logLink}?bookmarks=0,297`);
@@ -140,8 +131,8 @@ describe("Jump to line", () => {
     cy.dataCy("log-row-56").should("be.visible");
   });
 
-  it("visiting a log with a selected line should jump to that line on page load", () => {
-    cy.visit(`${logLink}?bookmarks=0,297&selectedLine=200`);
+  it("visiting a log with a share line should jump to that line on page load", () => {
+    cy.visit(`${logLink}?bookmarks=0,297&shareLine=200`);
     cy.dataCy("log-row-200").should("be.visible");
   });
 });
@@ -151,8 +142,6 @@ describe("expanding collapsed rows", () => {
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task?bookmarks=0,297&filters=100evg";
 
   beforeEach(() => {
-    cy.login();
-    cy.setCookie("has-opened-drawer", "true");
     cy.visit(logLink);
   });
 

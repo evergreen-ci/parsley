@@ -19,39 +19,48 @@ modules:
 #            Parsley Functions        #
 #######################################
 functions:
-  attach-cypress-results:
-    command: attach.xunit_results
-    params:
-      files:
-        - "./parsley/bin/cypress/*.xml"
-
-  attach-cypress-screenshots:
+  attach-codegen-diff:
     command: s3.put
     type: system
     params:
       aws_key: ${aws_key}
       aws_secret: ${aws_secret}
       local_files_include_filter:
-        ["parsley/cypress/screenshots/*"]
-      remote_file: parsley/${task_id}/
+        - "parsley/bin/codegen.diff"
+      remote_file: parsley/${task_id}/codegen/
       bucket: mciuploads
-      content_type: image/png
+      content_type: text/plain
       permissions: public-read
-      display_name: "screenshot:"
 
-  attach-cypress-videos:
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/cypress/videos/*"]
-      remote_file: parsley/${task_id}/
-      bucket: mciuploads
-      content_type: video/mp4
-      permissions: public-read
-      display_name: "video:"
+  attach-cypress:
+    - command: attach.xunit_results
+      params:
+        files:
+          - "./parsley/bin/cypress/*.xml"
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/cypress/screenshots/*"]
+        remote_file: parsley/${task_id}/
+        bucket: mciuploads
+        content_type: image/png
+        permissions: public-read
+        display_name: "screenshot:"
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/cypress/videos/*"]
+        remote_file: parsley/${task_id}/
+        bucket: mciuploads
+        content_type: video/mp4
+        permissions: public-read
+        display_name: "video:"
 
   attach-test-results:
     command: attach.xunit_results
@@ -60,63 +69,76 @@ functions:
         - "./parsley/bin/jest/*.xml"
 
   attach-storybook:
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/*"]
-      remote_file: parsley/${task_id}/storybook/
-      bucket: mciuploads
-      content_type: text/html
-      permissions: public-read
-      display_name: storybook_
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/*.html"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: text/html
+        permissions: public-read
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.js", "parsley/storybook-static/**/*.mjs"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: application/javascript
+        permissions: public-read
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.js.map"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: application/json
+        permissions: public-read
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.svg"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: image/svg+xml
+        permissions: public-read
+        preserve_path: true
+    - command: s3.put
+      type: system
+      params:
+        aws_key: ${aws_key}
+        aws_secret: ${aws_secret}
+        local_files_include_filter:
+          ["parsley/storybook-static/**/*.json"]
+        remote_file: parsley/${task_id}/storybook/
+        bucket: mciuploads
+        content_type: application/json
+        permissions: public-read
+        preserve_path: true
 
-  # Ideally we can get rid of this command upon the completion of EVG-17334.
-  attach-storybook-assets-js:
-    command: s3.put
-    type: system
+  link-to-storybook:
+    command: shell.exec
     params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/assets/*.js"]
-      remote_file: parsley/${task_id}/storybook/assets/
-      bucket: mciuploads
-      content_type: application/javascript
-      permissions: public-read
-      display_name: storybook_assets_js_
-
-  # Ideally we can get rid of this command upon the completion of EVG-17334.
-  attach-storybook-assets-map:
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/assets/*.js.map"]
-      remote_file: parsley/${task_id}/storybook/assets/
-      bucket: mciuploads
-      content_type: application/json
-      permissions: public-read
-      display_name: storybook_assets_map_
-  
-  # Ideally we can get rid of this command upon the completion of EVG-17334.
-  attach-storybook-assets-svg:
-    command: s3.put
-    type: system
-    params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
-      local_files_include_filter:
-        ["parsley/storybook-static/assets/*.svg"]
-      remote_file: parsley/${task_id}/storybook/assets/
-      bucket: mciuploads
-      content_type: image/svg+xml
-      permissions: public-read
-      display_name: storybook_assets_svg_
+      working_dir: parsley
+      shell: bash
+      script: |
+        echo "#############################################"
+        echo "Link to Storybook: https://mciuploads.s3.amazonaws.com/parsley/${task_id}/storybook/parsley/storybook-static/index.html"
+        echo "#############################################"
 
   attach-source-map:
     command: s3.put
@@ -135,26 +157,21 @@ functions:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         chmod +x ./scripts/app-version.sh
         . ./scripts/app-version.sh
         echo "Building Production version: $REACT_APP_VERSION"
         yarn build:prod
 
-  copy-cmdrc:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      script: |
-        cp .env-cmdrc.sample.json .env-cmdrc.json
-
   upload-to-prod-s3:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} BUCKET=${bucket} AWS_ACCESS_KEY_ID=${aws_key} AWS_SECRET_ACCESS_KEY=${aws_secret}  yarn deploy:do-not-use;
 
   get-project:
@@ -163,20 +180,11 @@ functions:
     params:
       directory: parsley
 
-  install-chrome:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      script: |
-        cd /tmp
-        curl -L -o "chrome.zip" "${chrome_download_url}"
-        unzip chrome.zip
-        cd -
-
   send-email:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
         export AUTHOR_EMAIL=${author_email}
         export DEPLOYS_EMAIL=${DEPLOYS_EMAIL}
@@ -187,6 +195,7 @@ functions:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
         echo "Generating .env-cmdrc.json"
         REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} NEW_RELIC_ACCOUNT_ID=${NEW_RELIC_ACCOUNT_ID} NEW_RELIC_AGENT_ID=${NEW_RELIC_AGENT_ID} NEW_RELIC_APPLICATION_ID=${NEW_RELIC_APPLICATION_ID} NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY} NEW_RELIC_TRUST_KEY=${NEW_RELIC_TRUST_KEY} DEPLOYS_EMAIL=${DEPLOYS_EMAIL} BUCKET=${bucket} node scripts/setup-credentials.js
@@ -201,12 +210,45 @@ functions:
 
         echo "Done populating"
 
+  setup-node:
+    - command: subprocess.exec
+      params:
+        binary: bash
+        args:
+          - parsley/scripts/prepare-shell.sh
+    - command: expansions.update
+      params:
+        file: expansion.yml
+    - command: shell.exec
+      params:
+        shell: bash
+        script: |
+          ${PREPARE_SHELL}
+          # Fetch NVM and install it into this task's .nvm directory
+          # Once downloaded, source nvm and install yarn
+          git clone https://github.com/nvm-sh/nvm.git "$NVM_DIR"
+          cd "$NVM_DIR"
+          git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" $(git rev-list --tags --max-count=1)`
+          [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
+          cd -
+          nvm install --no-progress --default ${node_version}
+          npm install -g yarn
+
+  sym-link:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      shell: bash
+      script: |
+        ln -s evergreen/graphql/schema sdlschema
+
   yarn-build:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn build:local
     
   yarn-build-memlab:
@@ -217,105 +259,117 @@ functions:
         export PATH=${node_path}
         yarn build:memlab
 
+  yarn-codegen:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      shell: bash
+      script: |
+        ${PREPARE_SHELL}
+        chmod +x ./scripts/check_codegen.sh
+        ./scripts/check_codegen.sh
+
   yarn-cypress:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
-        yarn cy:run --browser /tmp/chrome-linux/chrome --record --key ${cypress_record_key} --reporter junit
+        ${PREPARE_SHELL}
+        yarn cy:run --record --key ${cypress_record_key} --reporter junit
 
   yarn-eslint:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn eslint:strict
 
   yarn-install:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
-        yarn
+        ${PREPARE_SHELL}
+        yarn install
   
   yarn-memlab:
     command: shell.exec
     params:
       working_dir: parsley
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn memlab:e2e
+
 
   yarn-preview:
     command: shell.exec
     params:
       working_dir: parsley
       background: true
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn preview
 
   yarn-snapshot:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn test --ci --testPathPattern=storyshots.test.ts
 
   yarn-storybook:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn storybook:build
 
   yarn-test:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn test --ci --testPathIgnorePatterns=storyshots.test.ts
 
   yarn-tsc:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn check-types
 
   yarn-verify-backend:
     command: shell.exec
     params:
       working_dir: parsley
+      shell: bash
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn verify-backend
 
 #######################################
 #      Local Evergreen Functions      #
 #######################################
-  get-evergreen-project:
-    command: git.get_project
-    type: setup
-    params:
-      directory: parsley
-      revisions:
-        evergreen: ${evergreen_rev}
-
   setup-mongodb:
     - command: subprocess.exec
       type: setup
       params:
         env:
           gobin: ${goroot}/bin/go
-          MONGODB_URL: ${mongodb_url}
+          MONGODB_URL: ${mongodb_url_50}
           DECOMPRESS: ${decompress}
         working_dir: parsley/evergreen
         command: make get-mongodb
@@ -345,28 +399,23 @@ functions:
   wait-for-evergreen:
     command: shell.exec
     type: setup
+    exec_timeout_secs: 600
     params:
       working_dir: parsley
+      shell: bash
       script: ./scripts/wait-for-evergreen.sh
 
 
 #######################################
 #      Local Logkeeper Functions      #
 #######################################
-  get-logkeeper-project:
-    command: git.get_project
-    type: setup
-    params:
-      directory: parsley
-      revisions:
-        logkeeper: ${logkeeper_rev}
-
   run-logkeeper:
     command: shell.exec
     params:
       working_dir: parsley/logkeeper
       background: true
       script: go run main/logkeeper.go --localPath _bucketdata
+      shell: bash
       env:
         GOROOT: ${goroot}
         PATH: ${goroot}/bin:$PATH
@@ -401,7 +450,6 @@ functions:
 tasks:
   - name: compile
     commands:
-    - func: copy-cmdrc
     - func: yarn-build
     - func: attach-source-map
 
@@ -419,22 +467,18 @@ tasks:
 
   - name: e2e_test
     commands:
-    - func: get-evergreen-project
-    - func: get-logkeeper-project
     - func: setup-mongodb
     - func: run-make-background
       vars:
         target: local-evergreen
     - func: seed-logkeeper
     - func: run-logkeeper
-    - func: copy-cmdrc
     - func: yarn-install
-    - func: yarn-build
+    - func: yarn-build-memlab
     - func: yarn-preview
-    - func: install-chrome
     - func: wait-for-evergreen
     - func: yarn-verify-backend
-    - func: yarn-cypress
+    - func: yarn-memlab
 
   - name: memlab
     commands:
@@ -456,17 +500,19 @@ tasks:
 
   - name: storybook
     commands:
-    - func: copy-cmdrc
     - func: yarn-storybook
     - func: attach-storybook
-    - func: attach-storybook-assets-js
-    - func: attach-storybook-assets-svg
-    - func: attach-storybook-assets-map
+    - func: link-to-storybook
 
   - name: snapshots
     commands:
     - func: yarn-snapshot
-  
+
+  - name: check_codegen
+    commands:
+      - func: sym-link
+      - func: yarn-codegen
+
   - name: deploy-prod
     commands:
     - func: setup-credentials
@@ -475,40 +521,49 @@ tasks:
     - func: send-email
 
 buildvariants:
-  - name: ubuntu1604-small
-    display_name: Ubuntu 16.04 (small)
+  - name: ubuntu2004-small
+    display_name: Ubuntu 20.04 (small)
+    expansions:
+      mongodb_url_50: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-5.0.14.tgz
+      node_version: 16.17.0
     run_on:
-    - ubuntu1604-small
+      - ubuntu2004-small
+    modules:
+      - evergreen
     tasks:
-    - name: compile
-    - name: type_check
-    - name: lint
-    - name: test
-    - name: storybook
-    - name: snapshots
-    - name: deploy-prod
-      git_tag_only: true
-      patchable: false
-      priority: 100
+      - name: compile
+      - name: type_check
+      - name: lint
+      - name: test
+      - name: storybook
+      - name: snapshots
+      - name: check_codegen
+      - name: deploy-prod
+        git_tag_only: true
+        patchable: false
+        priority: 100
 
-  - name: ubuntu1604-large
-    display_name: Ubuntu 16.04 (large)
+  - name: ubuntu2004-large
+    display_name: Ubuntu 20.04 (large)
+    expansions:
+      mongodb_url_50: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-5.0.14.tgz
+      node_version: 16.17.0
     run_on:
-    - ubuntu1604-large
+      - ubuntu2004-large
     modules:
       - evergreen
       - logkeeper
     tasks:
-    - name: e2e_test
-    - name: memlab
+      - name: e2e_test
+      - name: memlab
 
 pre:
   - func: get-project
+  - func: setup-node
   - func: yarn-install
 
 post:
-  - func: attach-cypress-results
-  - func: attach-cypress-screenshots
-  - func: attach-cypress-videos
+  - func: attach-cypress
   - func: attach-logkeeper-logs
   - func: attach-test-results
+  - func: attach-codegen-diff

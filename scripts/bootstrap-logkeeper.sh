@@ -23,7 +23,7 @@ if [ ! -d "bin/_bucketdata" ]; then
         echo "Please make sure you have the aws cli installed and configured."
         echo "See https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html for more information."
         echo "Cleaning up _bucketdata directory..."
-        rm -rf _bucketdata
+        rm -rf bin/_bucketdata
         exit 1
     fi
     # Uncompress the files in the _bucketdata directory

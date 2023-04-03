@@ -6,17 +6,17 @@ type FilterLogsParams = {
   logLines: string[];
   matchingLines: Set<number> | undefined;
   bookmarks: number[];
-  selectedLine: number | undefined;
+  shareLine: number | undefined;
   expandedLines: ExpandedLines;
   expandableRows: boolean;
 };
 
 /**
- * `filterLogs` processes log lines according to what filters, bookmarks, selected line, and expanded lines are applied.
+ * `filterLogs` processes log lines according to what filters, bookmarks, share line, and expanded lines are applied.
  * @param {string[]} obj.logLines - list of strings representing the log lines
  * @param {Set<number>} obj.matchingLines - set of numbers representing which lines match the applied filters
  * @param {number[]} obj.bookmarks - list of line numbers representing bookmarks
- * @param {number | undefined} obj.selectedLine - a line number representing a selected line
+ * @param {number | undefined} obj.shareLine - a line number representing a share line
  * @param {ExpandedLines} obj.expandedLines - an array of intervals representing expanded ranges
  * @param {boolean} obj.expandableRows - specifies if expandable rows is enabled
  * @returns an array of numbers that indicates which log lines should be displayed, and which log lines
@@ -26,7 +26,7 @@ const filterLogs = ({
   logLines,
   matchingLines,
   bookmarks,
-  selectedLine,
+  shareLine,
   expandedLines,
   expandableRows,
 }: FilterLogsParams): (number | number[])[] => {
@@ -39,10 +39,10 @@ const filterLogs = ({
   const filteredLines: ProcessedLogLines = [];
 
   logLines.reduce((arr, _logLine, idx) => {
-    // Bookmarks, selected lines, and expanded lines should always remain uncollapsed.
+    // Bookmarks, expanded lines, and the share line should always remain uncollapsed.
     if (
       bookmarks.includes(idx) ||
-      selectedLine === idx ||
+      shareLine === idx ||
       isExpanded(idx, expandedLines)
     ) {
       arr.push(idx);

@@ -1,13 +1,14 @@
-import { forwardRef, memo, useMemo } from "react";
+import { forwardRef, memo, useCallback, useMemo } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { ListRowProps } from "react-virtualized";
 import { useLogWindowAnalytics } from "analytics";
-import Highlight from "components/Highlight";
+import Highlight, { highlightColorList } from "components/Highlight";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { highlighter } from "utils/highlighters";
 import { formatPrettyPrint } from "utils/prettyPrint";
 import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
@@ -22,7 +23,7 @@ interface BaseRowProps extends ListRowProps {
   // may differ due to collapsed rows.
   lineNumber: number;
   prettyPrint?: boolean;
-  highlightedLine?: number;
+  searchLine?: number;
   resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
   searchTerm?: RegExp;
@@ -33,52 +34,53 @@ interface BaseRowProps extends ListRowProps {
 
 /**
  * BaseRow is meant to be used as a wrapper for all rows in the log view.
- * It is responsible for handling the highlighting of the selected line
+ * It is responsible for handling the highlighting of the share line and bookmarks.
  */
 const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
   const {
     children,
     "data-cy": dataCyText,
     index,
-    highlightedLine,
+    highlights,
     lineNumber,
     prettyPrint = false,
+    searchLine,
     searchTerm,
     resmokeRowColor,
     wrap,
     resetRowHeightAtIndex,
-    highlights,
     scrollToLine,
     ...rest
   } = props;
 
-  const [selectedLine, setSelectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
+  const { sendEvent } = useLogWindowAnalytics();
+
+  const [shareLine, setShareLine] = useQueryParam<number | undefined>(
+    QueryParams.ShareLine,
     undefined
   );
-  const selected = selectedLine === lineNumber;
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
     []
   );
-  const { sendEvent } = useLogWindowAnalytics();
+
+  const shared = shareLine === lineNumber;
   const bookmarked = bookmarks.includes(lineNumber);
+  const highlighted = searchLine === index;
 
-  const highlighted = highlightedLine === index;
-
-  // Clicking a line should select or deselect the line.
-  const handleClick = () => {
-    if (selected) {
-      setSelectedLine(undefined);
+  // Clicking link icon should set or unset the share line.
+  const handleClick = useCallback(() => {
+    if (shared) {
+      setShareLine(undefined);
     } else {
-      setSelectedLine(lineNumber);
+      setShareLine(lineNumber);
       scrollToLine(index);
     }
-  };
+  }, [index, lineNumber, shared, scrollToLine, setShareLine]);
 
   // Double clicking a line should add or remove the line from bookmarks.
-  const handleDoubleClick = () => {
+  const handleDoubleClick = useCallback(() => {
     if (bookmarks.includes(lineNumber)) {
       const newBookmarks = bookmarks.filter((b) => b !== lineNumber);
       setBookmarks(newBookmarks);
@@ -92,7 +94,15 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     if (prettyPrint) {
       resetRowHeightAtIndex(index);
     }
-  };
+  }, [
+    bookmarks,
+    index,
+    lineNumber,
+    prettyPrint,
+    resetRowHeightAtIndex,
+    sendEvent,
+    setBookmarks,
+  ]);
 
   return (
     <RowContainer
@@ -102,18 +112,18 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       data-bookmarked={bookmarked}
       data-cy={`log-row-${lineNumber}`}
       data-highlighted={highlighted}
-      data-selected={selected}
+      data-shared={shared}
       highlighted={highlighted}
       onDoubleClick={handleDoubleClick}
-      selected={selected}
+      shared={shared}
     >
       <StyledIcon
         data-cy={`log-link-${lineNumber}`}
-        glyph={selected ? "ArrowWithCircle" : "Link"}
+        glyph={shared ? "ArrowWithCircle" : "Link"}
         onClick={handleClick}
         size="small"
       />
-      <Index>{lineNumber}</Index>
+      <Index lineNumber={lineNumber} />
       <StyledPre shouldWrap={wrap}>
         <ProcessedBaseRow
           color={resmokeRowColor}
@@ -142,8 +152,9 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
     let render = children;
     if (searchTerm) {
       // escape the matching string to prevent XSS
-      render = render.replace(
+      render = highlighter(
         new RegExp(searchTerm, searchTerm.ignoreCase ? "gi" : "g"),
+        render,
         (match) => `<mark>${match}</mark>`
       );
     }
@@ -153,13 +164,18 @@ const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
         shouldCheckForOverlappingRegex &&
         hasOverlappingRegex(searchTerm, highlights, children);
       if (!hasOverlappingRegexes) {
-        render = render.replace(
+        render = highlighter(
           new RegExp(highlights, highlights.ignoreCase ? "gi" : "g"),
-          (match) => `<mark>${match}</mark>`
+          render,
+          (match, index) =>
+            `<mark color="${
+              highlightColorList[index % highlightColorList.length]
+            }">${match}</mark>`
         );
       }
     }
     return renderHtml(render, {
+      preserveAttributes: ["mark"],
       transform: {
         // @ts-expect-error - This is expecting a react component but its an Emotion component which are virtually the same thing
         mark: Highlight,
@@ -178,7 +194,7 @@ ProcessedBaseRow.displayName = "ProcessedBaseRow";
 BaseRow.displayName = "BaseRow";
 
 const RowContainer = styled.div<{
-  selected: boolean;
+  shared: boolean;
   bookmarked: boolean;
   highlighted: boolean;
 }>`
@@ -190,7 +206,7 @@ const RowContainer = styled.div<{
   font-size: ${fontSize.m};
 
   ${({ color }) => color && `color: ${color};`}
-  ${({ selected }) => selected && `background-color: ${yellow.light3};`}
+  ${({ shared }) => shared && `background-color: ${yellow.light3};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
   ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
 
@@ -207,7 +223,7 @@ const StyledIcon = styled(Icon)`
   flex-shrink: 0;
 `;
 
-const Index = styled.pre`
+const Index = styled.pre<{ lineNumber: number }>`
   width: ${size.xl};
   margin-top: 0;
   margin-bottom: 0;
@@ -219,6 +235,10 @@ const Index = styled.pre`
   line-height: inherit;
   font-size: inherit;
   user-select: none;
+
+  ::before {
+    ${({ lineNumber }) => `content: "${lineNumber}";`}
+  }
 `;
 
 const StyledPre = styled.pre<{

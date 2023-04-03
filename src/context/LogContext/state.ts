@@ -162,15 +162,22 @@ const reducer = (state: LogState, action: Action): LogState => {
         },
       };
     }
-    case "SET_MATCH_COUNT":
+    case "SET_MATCH_COUNT": {
+      // If the search range has changed, reset the search index to 0
+      let { searchIndex } = state.searchState;
+      const { searchRange } = state.searchState;
+      if (searchRange !== action.matchCount) {
+        searchIndex = action.matchCount ? 0 : undefined;
+      }
       return {
         ...state,
         searchState: {
           ...state.searchState,
           searchRange: action.matchCount ? action.matchCount : undefined,
-          searchIndex: action.matchCount ? 0 : undefined,
+          searchIndex,
         },
       };
+    }
     case "PAGINATE":
       return {
         ...state,

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import Bugsnag from "@bugsnag/js";
+import Bugsnag, { Event } from "@bugsnag/js";
 import BugsnagPluginReact, {
   BugsnagErrorBoundary,
 } from "@bugsnag/plugin-react";
@@ -20,7 +20,8 @@ type DefaultErrorBoundaryProps = {
   children: React.ReactNode;
 };
 
-// This error boundary is used during local development
+// This error boundary is ONLY used during local development. Any changes to this component will not be
+// reflected in production.
 class DefaultErrorBoundary extends Component<
   DefaultErrorBoundaryProps,
   { hasError: boolean }
@@ -28,17 +29,14 @@ class DefaultErrorBoundary extends Component<
   constructor(props: DefaultErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };
-    console.log("DefaultErrorBoundary");
   }
 
   static getDerivedStateFromError() {
-    console.log("getDerivedStateFromError");
     // Update state so the next render will show the fallback UI.
     return { hasError: true };
   }
 
   componentDidCatch(error: Error, errorInfo: any) {
-    console.log("componentDidCatch");
     console.error({ error, errorInfo });
   }
 
@@ -67,7 +65,7 @@ const getBoundary = () => {
 };
 
 const initializeBugsnag = () => {
-  // Only need to Bugsnag.start once, will throw console warnings otherwise
+  // Only need to Bugsnag.start once, will throw console warnings otherwise.
   if (bugsnagStarted || !isProductionBuild || isLocal) {
     console.log("Bugsnag started");
     return;
@@ -82,7 +80,7 @@ const initializeBugsnag = () => {
     });
     bugsnagStarted = true;
   } catch (e) {
-    // If bugsnag fails we have no where to log it and we can't do anything about it
+    // If Bugsnag fails we have no where to log it and we can't do anything about it.
     console.error("Failed to initialize Bugsnag", e);
   }
 };
@@ -90,11 +88,18 @@ const initializeBugsnag = () => {
 const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  // In some cases we do not want to enable bugsnag (ex: testing environments).
-  // In these cases we will return a fallback element
+  // In some cases we do not want to enable Bugsnag (ex: testing environments).
+  // In these cases we will return a fallback element.
   const ErrorBoundaryComp = getBoundary();
+
+  const onError = (event: Event) => {
+    event.addMetadata("metadata", {
+      viewedErrorPage: true,
+    });
+  };
+
   return (
-    <ErrorBoundaryComp FallbackComponent={ErrorFallback}>
+    <ErrorBoundaryComp FallbackComponent={ErrorFallback} onError={onError}>
       {children}
     </ErrorBoundaryComp>
   );

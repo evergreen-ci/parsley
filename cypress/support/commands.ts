@@ -9,48 +9,41 @@ const toastDataCy = "toast";
 Cypress.Commands.add("addFilter", (filter: string) => {
   cy.dataCy("searchbar-select").click();
   cy.dataCy("filter-option").click();
-  cy.dataCy("searchbar-input").type(`${filter}{enter}`);
+  cy.dataCy("searchbar-input")
+    .type(`${filter}`)
+    .type("{ctrl}", { release: false })
+    .type("{enter}");
 });
 
 Cypress.Commands.add("addHighlight", (highlight: string) => {
   cy.dataCy("searchbar-select").click();
   cy.dataCy("highlight-option").click();
-  cy.dataCy("searchbar-input").type(`${highlight}{enter}`);
+  cy.dataCy("searchbar-input")
+    .type(`${highlight}`)
+    .type("{ctrl}", { release: false })
+    .type("{enter}");
 });
 
-Cypress.Commands.add(
-  "addSearch",
-  (search: string, shouldSubmit: boolean = false) => {
-    cy.dataCy("searchbar-select").click();
-    cy.dataCy("search-option").click();
-    if (shouldSubmit) {
-      cy.dataCy("searchbar-input").type(`${search}{enter}`);
-    } else {
-      cy.dataCy("searchbar-input").type(`${search}`);
-    }
-  }
-);
+Cypress.Commands.add("addSearch", (search: string) => {
+  cy.dataCy("searchbar-input").type(`${search}`);
+});
 
 Cypress.Commands.add("clearBounds", () => {
-  cy.dataCy("details-button").click();
-  cy.get(`[data-cy="details-menu"]`).should("be.visible");
+  cy.toggleDetailsPanel(true);
 
   cy.dataCy("range-lower-bound").clear();
   cy.dataCy("range-upper-bound").clear();
 
-  cy.dataCy("details-button").click();
-  cy.get(`[data-cy="details-menu"]`).should("not.exist");
+  cy.toggleDetailsPanel(false);
 });
 
 Cypress.Commands.add(
   "clickToggle",
   (toggleDataCy: string, enabled: boolean) => {
-    cy.dataCy("details-button").click();
-    cy.get(`[data-cy="details-menu"]`).should("be.visible");
+    cy.toggleDetailsPanel(true);
     cy.dataCy(toggleDataCy).click();
     cy.dataCy(toggleDataCy).should("have.attr", "aria-checked", `${enabled}`);
-    cy.dataCy("details-button").click();
-    cy.get(`[data-cy="details-menu"]`).should("not.exist");
+    cy.toggleDetailsPanel(false);
   }
 );
 
@@ -61,8 +54,7 @@ Cypress.Commands.add("dataCy", (value: string) => {
 Cypress.Commands.add(
   "editBounds",
   (bounds: { upper: string; lower: string }) => {
-    cy.dataCy("details-button").click();
-    cy.get(`[data-cy="details-menu"]`).should("be.visible");
+    cy.toggleDetailsPanel(true);
 
     if (bounds.upper !== undefined) {
       cy.dataCy("range-upper-bound").should("be.visible");
@@ -74,23 +66,9 @@ Cypress.Commands.add(
       cy.dataCy("range-lower-bound").type(bounds.lower);
     }
 
-    cy.dataCy("details-button").click();
-    cy.get(`[data-cy="details-menu"]`).should("not.exist");
+    cy.toggleDetailsPanel(false);
   }
 );
-
-// Source: https://stackoverflow.com/questions/60174546/how-grant-cypress-test-application-some-permissions
-Cypress.Commands.add("enableClipboard", () => {
-  cy.wrap(
-    Cypress.automation("remote:debugger:protocol", {
-      command: "Browser.grantPermissions",
-      params: {
-        permissions: ["clipboardReadWrite", "clipboardSanitizedWrite"],
-        origin: window.location.origin,
-      },
-    })
-  );
-});
 
 Cypress.Commands.add(
   "isContainedInViewport",
@@ -163,20 +141,25 @@ Cypress.Commands.add("login", () => {
   );
 });
 
-Cypress.Commands.add("toggleDrawer", () => {
-  cy.get(`[aria-label="Collapse navigation"]`).click();
+Cypress.Commands.add("resetDrawerState", () => {
+  cy.clearCookie("has-opened-drawer");
 });
 
 Cypress.Commands.add("toggleDetailsPanel", (open: boolean) => {
+  cy.dataCy("details-button").should("not.have.attr", "aria-disabled", "true");
   if (open) {
-    cy.get(`[data-cy="details-menu"]`).should("not.exist");
-    cy.get(`[data-cy="details-button"]`).click();
-    cy.get(`[data-cy="details-menu"]`).should("be.visible");
+    cy.dataCy("details-menu").should("not.exist");
+    cy.dataCy("details-button").click();
+    cy.dataCy("details-menu").should("be.visible");
   } else {
-    cy.get(`[data-cy="details-menu"]`).should("be.visible");
-    cy.get(`[data-cy="details-button"]`).click();
-    cy.get(`[data-cy="details-menu"]`).should("not.exist");
+    cy.dataCy("details-menu").should("be.visible");
+    cy.dataCy("details-button").click();
+    cy.dataCy("details-menu").should("not.exist");
   }
+});
+
+Cypress.Commands.add("toggleDrawer", () => {
+  cy.get(`[aria-label="Collapse navigation"]`).click();
 });
 
 Cypress.Commands.add(
