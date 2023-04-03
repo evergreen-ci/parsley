@@ -3338,10 +3338,28 @@
     "@types/mdx" "^2.0.0"
     "@types/react" ">=16"
 
-"@memlab/api@^1.0.11", "@memlab/api@^1.0.19":
+"@memlab/api@^1.0.11":
   version "1.0.19"
   resolved "https://registry.yarnpkg.com/@memlab/api/-/api-1.0.19.tgz#2b49ba66a2bedcb0524fe895c11ca380ff1c38aa"
   integrity sha512-YX4jn7hfNEOtcH0gxkgycbtg9PylNlhQz6RN4jaV2Z0ASCMGi0J/wCDyYNY5kXo7KiPzJD9G1AAdw15HSCWghw==
+  dependencies:
+    "@memlab/core" "^1.1.10"
+    "@memlab/e2e" "^1.0.9"
+    "@memlab/heap-analysis" "^1.0.7"
+    ansi "^0.3.1"
+    babar "^0.2.0"
+    chalk "^4.0.0"
+    fs-extra "^4.0.2"
+    minimist "^1.2.0"
+    puppeteer "^13.5.1"
+    string-width "^4.2.0"
+    util.promisify "^1.1.1"
+    xvfb "^0.4.0"
+
+"@memlab/api@^1.0.21":
+  version "1.0.21"
+  resolved "https://registry.yarnpkg.com/@memlab/api/-/api-1.0.21.tgz#c75ba2a3b389ea17a0b3ebe3b75e72c61f4a10f7"
+  integrity sha512-uGevd8paFyJkAWoywIayXyxbZRujotcZJzzXGqy0CUct2OSUUA01DXU7XbfAOr1QZNV3uQu1WSRrREWtkabx5Q==
   dependencies:
     "@memlab/core" "^1.1.10"
     "@memlab/e2e" "^1.0.9"
@@ -10719,10 +10737,10 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==
 
-memlab@^1.1.36:
-  version "1.1.36"
-  resolved "https://registry.yarnpkg.com/memlab/-/memlab-1.1.36.tgz#4dabea770f5e1c697903de31b13fd6f72d3d806b"
-  integrity sha512-xRMnnDI88gNmkEaD0LOtFaCsVrsnKr6Z2ejL10ZITfdv8mS7XYbNEiTM/A5Lk2pNhPFdO+NqnEKH89EHQNwwgA==
+memlab@^1.1.38:
+  version "1.1.38"
+  resolved "https://registry.yarnpkg.com/memlab/-/memlab-1.1.38.tgz#65ceb3adcf1b2659e978bf95b5326944903ff026"
+  integrity sha512-gwO11c5z/sjbq4ZLjGvFXDTY/2nHrrlVbXZHndkGlrFQKA5x4T4w0YGqQjpE25MeHzfwPb7oeWSxvBgaMtkVGQ==
   dependencies:
     "@memlab/api" "^1.0.11"
     "@memlab/cli" "^1.0.11"
