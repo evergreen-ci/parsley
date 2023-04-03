@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from "react";
 import {
   Analytics as A,
   Properties,
@@ -10,11 +11,11 @@ interface P extends Properties {}
 interface Analytics extends A<Action> {}
 
 export const useShortcutAnalytics = (): Analytics => {
-  const sendEvent: Analytics["sendEvent"] = (action) => {
+  const sendEvent: Analytics["sendEvent"] = useCallback((action) => {
     addPageAction<Action, P>(action, {
       object: "Shortcut",
     });
-  };
+  }, []);
 
-  return { sendEvent };
+  return useMemo(() => ({ sendEvent }), [sendEvent]);
 };
