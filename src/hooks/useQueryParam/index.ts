@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { ParseOptions } from "query-string";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { conditionalCastToArray } from "utils/array";
@@ -19,10 +19,11 @@ const useQueryParams = (parseOptions?: ParseOptions) => {
     [navigate]
   );
 
-  return [
-    parseQueryString(searchParams.toString(), parseOptions),
-    setQueryString,
-  ] as const;
+  const searchParamsObject = useMemo(
+    () => parseQueryString(searchParams.toString(), parseOptions),
+    [searchParams, parseOptions]
+  );
+  return [searchParamsObject, setQueryString] as const;
 };
 
 /**
