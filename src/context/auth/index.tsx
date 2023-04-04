@@ -18,7 +18,7 @@ type LoginCreds = { username: string; password: string };
 
 interface AuthState {
   isAuthenticated: boolean;
-  login: (creds: LoginCreds) => void;
+  devLogin: (creds: LoginCreds) => void;
   logoutAndRedirect: () => void;
 }
 
@@ -66,7 +66,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // This function is only used in local development.
-  const login = useCallback(async ({ username, password }: LoginCreds) => {
+  const devLogin = useCallback(async ({ username, password }: LoginCreds) => {
     await fetch(`${evergreenURL}/login`, {
       method: "POST",
       credentials: "include",
@@ -98,10 +98,10 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   const memoizedContext = useMemo(
     () => ({
       isAuthenticated,
-      login,
+      devLogin,
       logoutAndRedirect,
     }),
-    [isAuthenticated, login, logoutAndRedirect]
+    [isAuthenticated, devLogin, logoutAndRedirect]
   );
 
   return (

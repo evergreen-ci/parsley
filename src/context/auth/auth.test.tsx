@@ -93,7 +93,7 @@ describe("auth", () => {
     });
   });
 
-  describe("login", () => {
+  describe("devLogin", () => {
     it("should authenticate when the response is successful", async () => {
       const mockFetchPromise = jest.fn().mockResolvedValue({ ok: true });
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
@@ -102,7 +102,7 @@ describe("auth", () => {
       render(<Component />, { wrapper });
 
       act(() => {
-        hook.current.login({ username: "username", password: "password" });
+        hook.current.devLogin({ username: "username", password: "password" });
       });
       await waitFor(() => {
         expect(hook.current.isAuthenticated).toBe(true);
@@ -117,7 +117,7 @@ describe("auth", () => {
       render(<Component />, { wrapper });
 
       act(() => {
-        hook.current.login({ username: "username", password: "password" });
+        hook.current.devLogin({ username: "username", password: "password" });
       });
       await waitFor(() => {
         expect(hook.current.isAuthenticated).toBe(false);
