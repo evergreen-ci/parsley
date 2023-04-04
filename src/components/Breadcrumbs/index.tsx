@@ -66,11 +66,9 @@ const BreadcrumbFragment: React.FC<BreadcrumbFragmentProps> = ({
     );
   } else if (href) {
     trigger = (
-      <div>
-        <StyledLink data-cy={dataCy} href={href} onClick={onClick}>
-          {message}
-        </StyledLink>
-      </div>
+      <StyledLink data-cy={dataCy} href={href} onClick={onClick}>
+        {message}
+      </StyledLink>
     );
   } else {
     trigger = <div data-cy={dataCy}>{message}</div>;

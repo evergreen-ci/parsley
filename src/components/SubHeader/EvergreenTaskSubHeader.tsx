@@ -4,7 +4,6 @@ import { usePreferencesAnalytics } from "analytics";
 import Breadcrumbs from "components/Breadcrumbs";
 import Icon from "components/Icon";
 import TaskStatusBadge from "components/TaskStatusBadge";
-import { LogTypes } from "constants/enums";
 import { getEvergreenTaskURL } from "constants/externalURLTemplates";
 import { GetTaskQuery, GetTaskQueryVariables } from "gql/generated/types";
 import { GET_TASK } from "gql/queries";
@@ -12,14 +11,12 @@ import { shortenGithash } from "utils/string";
 
 interface Props {
   execution: number;
-  logType?: LogTypes;
   taskID: string;
   testID?: string;
 }
 
 export const EvergreenTaskSubHeader: React.FC<Props> = ({
   execution,
-  logType,
   taskID,
   testID,
 }) => {
@@ -37,8 +34,6 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
 
   const { isPatch, projectIdentifier, message, revision } =
     task.versionMetadata ?? {};
-
-  const isResmokeTest = testID && logType === LogTypes.RESMOKE_LOGS;
 
   const breadcrumbs = [
     {
@@ -62,13 +57,17 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     },
     {
       href: getEvergreenTaskURL(taskID, execution),
-      text: task.displayName,
+      text: (
+        <>
+          {task.displayName} <TaskStatusBadge status={task.status} />
+        </>
+      ),
       "data-cy": "task-link",
       onClick: () => {
         sendEvent({ name: "Opened Task Link" });
       },
     },
-    ...(isResmokeTest
+    ...(testID
       ? [
           {
             text: "Test",
@@ -81,7 +80,6 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     <>
       <Icon glyph="EvergreenLogo" size={24} />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      {!isResmokeTest && <TaskStatusBadge status={task.status} />}
     </>
   );
 };
