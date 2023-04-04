@@ -1,25 +1,27 @@
 import { useQuery } from "@apollo/client";
+import { InlineCode } from "@leafygreen-ui/typography";
 import { usePreferencesAnalytics } from "analytics";
 import Breadcrumbs from "components/Breadcrumbs";
 import Icon from "components/Icon";
 import TaskStatusBadge from "components/TaskStatusBadge";
-import {
-  getEvergreenTaskURL,
-  getEvergreenVersionURL,
-  getSpruceCommitQueueURL,
-} from "constants/externalURLTemplates";
+import { LogTypes } from "constants/enums";
+import { getEvergreenTaskURL } from "constants/externalURLTemplates";
 import { GetTaskQuery, GetTaskQueryVariables } from "gql/generated/types";
 import { GET_TASK } from "gql/queries";
 import { shortenGithash } from "utils/string";
 
 interface Props {
-  taskID: string;
   execution: number;
+  logType?: LogTypes;
+  taskID: string;
+  testID?: string;
 }
 
 export const EvergreenTaskSubHeader: React.FC<Props> = ({
-  taskID,
   execution,
+  logType,
+  taskID,
+  testID,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
   const { data, loading } = useQuery<GetTaskQuery, GetTaskQueryVariables>(
@@ -33,12 +35,13 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     return <Icon glyph="EvergreenLogo" size={24} />;
   }
 
-  const { id, isPatch, projectIdentifier, message, revision } =
+  const { isPatch, projectIdentifier, message, revision } =
     task.versionMetadata ?? {};
+
+  const isResmokeTest = testID && logType === LogTypes.RESMOKE_LOGS;
 
   const breadcrumbs = [
     {
-      href: getSpruceCommitQueueURL(projectIdentifier),
       text: projectIdentifier,
       "data-cy": "project-link",
       onClick: () => {
@@ -46,11 +49,13 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
       },
     },
     {
-      href: getEvergreenVersionURL(id),
-      text: `${
-        isPatch ? `Patch ${task.patchNumber}` : shortenGithash(revision)
-      } - ${message}`,
+      tooltipText: message,
       "data-cy": "version-link",
+      text: isPatch ? (
+        `Patch ${task.patchNumber}`
+      ) : (
+        <InlineCode>{shortenGithash(revision)}</InlineCode>
+      ),
       onClick: () => {
         sendEvent({ name: "Opened Task Link" });
       },
@@ -63,13 +68,20 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
         sendEvent({ name: "Opened Task Link" });
       },
     },
+    ...(isResmokeTest
+      ? [
+          {
+            text: "Test",
+          },
+        ]
+      : []),
   ];
 
   return (
     <>
       <Icon glyph="EvergreenLogo" size={24} />
       <Breadcrumbs breadcrumbs={breadcrumbs} />
-      <TaskStatusBadge status={task.status} />
+      {!isResmokeTest && <TaskStatusBadge status={task.status} />}
     </>
   );
 };

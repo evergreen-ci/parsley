@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, ReactNode } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import Tooltip from "@leafygreen-ui/tooltip";
@@ -10,16 +10,17 @@ import { trimStringFromMiddle } from "utils/string";
 const { gray } = palette;
 
 export interface Breadcrumb {
-  text: string;
-  to?: string;
+  "data-cy"?: string;
   href?: string;
   onClick?: () => void;
-  "data-cy"?: string;
+  text: ReactNode;
+  to?: string;
+  tooltipText?: ReactNode;
 }
 interface BreadcrumbsProps {
   breadcrumbs: Breadcrumb[];
 }
-const Breadcrumbs: React.VFC<BreadcrumbsProps> = ({ breadcrumbs }) => (
+const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ breadcrumbs }) => (
   <Container data-cy="breadcrumb-container">
     {breadcrumbs.map((bc, index) => (
       <Fragment key={`breadCrumb-${bc.text}`}>
@@ -40,12 +41,21 @@ const Breadcrumbs: React.VFC<BreadcrumbsProps> = ({ breadcrumbs }) => (
 interface BreadcrumbFragmentProps {
   breadcrumb: Breadcrumb;
 }
-const BreadcrumbFragment: React.VFC<BreadcrumbFragmentProps> = ({
+const BreadcrumbFragment: React.FC<BreadcrumbFragmentProps> = ({
   breadcrumb,
 }) => {
-  const { href, text = "", to, onClick, "data-cy": dataCy } = breadcrumb;
-  const shouldTrimMessage = text.length > 30;
-  const message = trimStringFromMiddle(text, 30);
+  const {
+    href,
+    text = "",
+    to,
+    tooltipText,
+    onClick,
+    "data-cy": dataCy,
+  } = breadcrumb;
+  const shouldTrimMessage =
+    typeof text === "string" ? text?.length > 30 : false;
+  const message =
+    typeof text === "string" ? trimStringFromMiddle(text, 30) : text;
 
   let trigger;
   if (to) {
@@ -69,11 +79,11 @@ const BreadcrumbFragment: React.VFC<BreadcrumbFragmentProps> = ({
   return (
     <Tooltip
       data-cy="breadcrumb-tooltip"
-      enabled={shouldTrimMessage}
+      enabled={shouldTrimMessage || !!tooltipText}
       trigger={trigger}
       triggerEvent="hover"
     >
-      {text}
+      {tooltipText || text}
     </Tooltip>
   );
 };
@@ -82,10 +92,6 @@ const Container = styled.nav`
   display: flex;
   align-items: center;
   gap: ${size.xxs};
-
-  a {
-    font-size: inherit;
-  }
 `;
 
 export default Breadcrumbs;

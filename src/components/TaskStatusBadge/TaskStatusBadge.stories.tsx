@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { StoryObj } from "@storybook/react";
+import { size } from "constants/tokens";
 import { TaskStatus } from "types/task";
 import TaskStatusBadge from ".";
 
@@ -32,6 +33,6 @@ export const AllBadges: StoryObj<typeof TaskStatusBadge> = {
 
 const Container = styled.div`
   display: flex;
-  gap: 8px;
+  gap: ${size.xs};
   flex-wrap: wrap;
 `;
