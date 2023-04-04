@@ -3,7 +3,6 @@ import styled from "@emotion/styled";
 import { actions } from "@storybook/addon-actions";
 import { StoryObj } from "@storybook/react";
 import { userEvent } from "@storybook/testing-library";
-
 import { useQueryParams } from "hooks/useQueryParam";
 import SidePanel from ".";
 
