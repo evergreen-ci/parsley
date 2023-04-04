@@ -206,7 +206,7 @@ module.exports = {
     },
     // For GraphQL files.
     {
-      files: ["src/**/*.graphql"],
+      files: ["src/gql/**/*.graphql"],
       extends: "plugin:@graphql-eslint/operations-recommended",
       rules: {
         "@graphql-eslint/alphabetize": [
