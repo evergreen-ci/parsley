@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useMemo } from "react";
 import { ParseOptions } from "query-string";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { conditionalCastToArray } from "utils/array";
@@ -13,16 +13,19 @@ const useQueryParams = (parseOptions?: ParseOptions) => {
   const navigate = useNavigate();
   const setQueryString = useCallback(
     (params: { [key: string]: any }) => {
-      const stringifiedQuery = stringifyQuery(params);
+      const stringifiedQuery = stringifyQuery(params, {
+        skipEmptyString: false,
+      });
       navigate(`?${stringifiedQuery}`, { replace: true });
     },
     [navigate]
   );
 
-  return [
-    parseQueryString(searchParams.toString(), parseOptions),
-    setQueryString,
-  ] as const;
+  const searchParamsObject = useMemo(
+    () => parseQueryString(searchParams.toString(), parseOptions),
+    [searchParams, parseOptions]
+  );
+  return [searchParamsObject, setQueryString] as const;
 };
 
 /**
