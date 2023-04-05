@@ -1,21 +1,18 @@
 import { KeyboardEvent, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
-import { palette } from "@leafygreen-ui/palette";
 import { Option, Select } from "@leafygreen-ui/select";
 import debounce from "lodash.debounce";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
-import IconWithTooltip from "components/IconWithTooltip";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
 import { CharKey, ModifierKey } from "constants/keys";
-import { zIndex } from "constants/tokens";
+import { textInputHeight, zIndex } from "constants/tokens";
 import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
 import { leaveBreadcrumb } from "utils/errorReporting";
 
-const { yellow } = palette;
 interface SearchBarProps {
   className?: string;
   disabled?: boolean;
@@ -143,6 +140,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
         aria-labelledby="searchbar-input"
         data-cy="searchbar-input"
         disabled={disabled}
+        errorMessage={validatorMessage}
         icon={
           isValid ? (
             <IconButton
@@ -153,20 +151,13 @@ const SearchBar: React.FC<SearchBarProps> = ({
             >
               <Icon glyph="Plus" />
             </IconButton>
-          ) : (
-            <IconWithTooltip
-              data-cy="searchbar-warning"
-              fill={yellow.base}
-              glyph="Warning"
-            >
-              {validatorMessage}
-            </IconWithTooltip>
-          )
+          ) : undefined
         }
         onChange={(e) => handleOnChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="optional, regexp to search"
         spellCheck={false}
+        state={isValid ? "none" : "error"}
         type="text"
         value={input}
       />
@@ -177,7 +168,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-start;
+  max-height: ${textInputHeight};
 `;
 
 // @ts-expect-error
@@ -197,6 +189,11 @@ const StyledInput = styled(TextInputWithGlyph)`
   div input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+  }
+
+  /* move error message closer to bottom of text input */
+  > div {
+    padding-top: 0;
   }
 `;
 
