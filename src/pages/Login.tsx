@@ -25,8 +25,8 @@ export const Login: React.FC = () => {
   return isAuthenticated ? (
     <Navigate to={getReferrer(location)} />
   ) : (
-    <LoginWrapper>
-      <Form>
+    <PageWrapper>
+      <LoginForm>
         <TextInput
           data-cy="login-username"
           label="Username"
@@ -49,12 +49,12 @@ export const Login: React.FC = () => {
         >
           Login
         </StyledButton>
-      </Form>
-    </LoginWrapper>
+      </LoginForm>
+    </PageWrapper>
   );
 };
 
-const LoginWrapper = styled.div`
+const PageWrapper = styled.div`
   width: 100vw;
   height: 100vh;
   display: flex;
@@ -62,7 +62,7 @@ const LoginWrapper = styled.div`
   justify-content: center;
 `;
 
-const Form = styled.div`
+const LoginForm = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
