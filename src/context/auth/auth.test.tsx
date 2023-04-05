@@ -27,7 +27,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe("auth", () => {
-  const authenticationFetchParams = {
+  const checkLoginFetchParams = {
     method: "POST",
     credentials: "include",
     headers: { "Content-Type": "application/json" },
@@ -62,7 +62,7 @@ describe("auth", () => {
     render(<Component />, { wrapper });
 
     expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(graphqlURL, authenticationFetchParams);
+    expect(fetch).toHaveBeenCalledWith(graphqlURL, checkLoginFetchParams);
   });
 
   it("should authenticate the user if the GraphQL query succeeds", async () => {
@@ -73,7 +73,7 @@ describe("auth", () => {
     render(<Component />, { wrapper });
 
     expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(graphqlURL, authenticationFetchParams);
+    expect(fetch).toHaveBeenCalledWith(graphqlURL, checkLoginFetchParams);
     await waitFor(() => {
       expect(hook.current.isAuthenticated).toBe(true);
     });
@@ -87,7 +87,7 @@ describe("auth", () => {
     render(<Component />, { wrapper });
 
     expect(fetch).toHaveBeenCalledTimes(1);
-    expect(fetch).toHaveBeenCalledWith(graphqlURL, authenticationFetchParams);
+    expect(fetch).toHaveBeenCalledWith(graphqlURL, checkLoginFetchParams);
     await waitFor(() => {
       expect(hook.current.isAuthenticated).toBe(false);
     });
@@ -126,7 +126,7 @@ describe("auth", () => {
   });
 
   describe("logoutAndRedirect", () => {
-    it("should redirect to the /login page locally", async () => {
+    it("should redirect to the Parsley /login page locally", async () => {
       mockEnv("NODE_ENV", "development");
       const mockFetchPromise = jest.fn().mockResolvedValue({});
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);

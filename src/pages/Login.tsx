@@ -55,7 +55,7 @@ export const Login: React.FC = () => {
 };
 
 const LoginWrapper = styled.div`
-  width: 100%;
+  width: 100vw;
   height: 100vh;
   display: flex;
   align-items: center;
@@ -71,7 +71,7 @@ const Form = styled.div`
   width: 400px;
   padding: ${size.l} ${size.m};
   background-color: ${green.light3};
-  border-radius: ${size.s};
+  border-radius: ${size.m};
 `;
 
 const StyledButton = styled(Button)`

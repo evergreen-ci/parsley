@@ -16,15 +16,15 @@ import { leaveBreadcrumb } from "utils/errorReporting";
 
 type LoginCreds = { username: string; password: string };
 
-interface AuthState {
+interface AuthContextState {
   isAuthenticated: boolean;
   devLogin: (creds: LoginCreds) => void;
   logoutAndRedirect: () => void;
 }
 
-const AuthContext = createContext<AuthState | null>(null);
+const AuthContext = createContext<AuthContextState | null>(null);
 
-const useAuthContext = (): AuthState => {
+const useAuthContext = (): AuthContextState => {
   const context = useContext(AuthContext);
   if (context === null || context === undefined) {
     throw new Error("useAuthContext must be used within an AuthProvider");
