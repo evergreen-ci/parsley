@@ -154,7 +154,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           ) : (
             <Tooltip
               justify="middle"
-              trigger={<IconPlaceholder />}
+              trigger={<IconPlaceholder data-cy="searchbar-error" />}
               triggerEvent="hover"
             >
               {validatorMessage}
