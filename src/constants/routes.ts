@@ -1,4 +1,5 @@
 const paths = {
+  login: "/login",
   home: "/",
   upload: "/upload",
   evergreenLogs: "/evergreen",
@@ -16,6 +17,7 @@ enum slugs {
 }
 
 const routes = {
+  login: paths.login,
   root: paths.home,
   upload: paths.upload,
   evergreenLogs: `${paths.evergreenLogs}/:${slugs.taskID}/:${slugs.execution}/:${slugs.origin}`,
