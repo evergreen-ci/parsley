@@ -100,6 +100,9 @@ describe("shortenGithash", () => {
     expect(shortenGithash("01234567")).toBe("0123456");
     expect(shortenGithash("012")).toBe("012");
   });
+  it("handles undefined input", () => {
+    expect(shortenGithash(undefined)).toBeUndefined();
+  });
 });
 
 describe("trimStringFromMiddle", () => {

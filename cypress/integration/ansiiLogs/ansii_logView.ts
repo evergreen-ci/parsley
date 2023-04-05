@@ -38,27 +38,29 @@ describe("Basic evergreen log view", () => {
     );
     cy.get(".ReactVirtualized__Grid").scrollTo("right");
   });
+
   it("log header should show the task breadcrumbs and status and link to Spruce", () => {
-    cy.dataCy("log-header").within(() => {
-      cy.dataCy("project-link")
-        .should("contain.text", "spruce")
-        .should("have.attr", "href", "http://localhost:3000/commits/spruce");
-      cy.dataCy("version-link")
-        .should("contain.text", "2c9056d - EVG-1… Issues (#1120)")
-        .should(
-          "have.attr",
-          "href",
-          "http://localhost:9090/version/spruce_2c9056df66d42fb1908d52eed096750a91f1f089?redirect_spruce_users=true"
-        );
-      cy.dataCy("task-link")
-        .should("contain.text", "test")
-        .should(
-          "have.attr",
-          "href",
-          "http://localhost:9090/task/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0?redirect_spruce_users=true"
-        );
-      cy.dataCy("task-status-badge").should("contain.text", "Succeeded");
-    });
+    cy.dataCy("project-breadcrumb").should("contain.text", "spruce");
+
+    cy.dataCy("version-breadcrumb").should("contain.text", "2c9056d");
+    cy.dataCy("version-breadcrumb").trigger("mouseover");
+    cy.dataCy("breadcrumb-tooltip")
+      .should("be.visible")
+      .should(
+        "contain.text",
+        "EVG-14749: Add loading state for JIRA Issues and Suspected Issues (#1120)"
+      );
+    cy.dataCy("version-breadcrumb").trigger("mouseout");
+
+    cy.dataCy("task-breadcrumb")
+      .should("contain.text", "test")
+      .should(
+        "have.attr",
+        "href",
+        "http://localhost:9090/task/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0?redirect_spruce_users=true"
+      );
+    cy.dataCy("task-status-badge").should("contain.text", "Succeeded");
+    cy.dataCy("test-breadcrumb").should("not.exist");
   });
 });
 

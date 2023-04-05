@@ -4,65 +4,84 @@ import { usePreferencesAnalytics } from "analytics";
 import Breadcrumbs from "components/Breadcrumbs";
 import Icon from "components/Icon";
 import TaskStatusBadge from "components/TaskStatusBadge";
+import { LogTypes } from "constants/enums";
 import { getEvergreenTaskURL } from "constants/externalURLTemplates";
-import { GetTaskQuery, GetTaskQueryVariables } from "gql/generated/types";
-import { GET_TASK } from "gql/queries";
+import {
+  LogkeeperTaskQuery,
+  LogkeeperTaskQueryVariables,
+  TaskQuery,
+  TaskQueryVariables,
+} from "gql/generated/types";
+import { GET_LOGKEEPER_TASK, GET_TASK } from "gql/queries";
 import { shortenGithash } from "utils/string";
 
 interface Props {
+  buildID: string;
   execution: number;
+  logType?: LogTypes;
   taskID: string;
   testID?: string;
 }
 
 export const EvergreenTaskSubHeader: React.FC<Props> = ({
+  buildID,
   execution,
+  logType,
   taskID,
   testID,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
-  const { data, loading } = useQuery<GetTaskQuery, GetTaskQueryVariables>(
-    GET_TASK,
-    { variables: { taskId: taskID, execution } }
-  );
+  const { data, loading } = useQuery<TaskQuery, TaskQueryVariables>(GET_TASK, {
+    variables: { taskId: taskID, execution },
+    skip: logType === LogTypes.RESMOKE_LOGS,
+  });
+  const { data: logkeeperData, loading: logkeeperLoading } = useQuery<
+    LogkeeperTaskQuery,
+    LogkeeperTaskQueryVariables
+  >(GET_LOGKEEPER_TASK, {
+    variables: { buildId: buildID },
+    skip: logType !== LogTypes.RESMOKE_LOGS || !buildID,
+  });
 
   const { task } = data ?? {};
+  const { logkeeperBuildMetadata } = logkeeperData ?? {};
 
-  if (loading || !task) {
+  if (loading || logkeeperLoading || (!task && !logkeeperBuildMetadata)) {
     return <Icon glyph="EvergreenLogo" size={24} />;
   }
 
+  // @ts-expect-error - We verify above that either task or logkeeperBuildMetadata exists, so logkeeperBuildMetadata will not be undefined as TypeScript suspects
+  const loadedTask = task ?? logkeeperBuildMetadata.task;
+  const { displayName, patchNumber, status } = loadedTask;
   const { isPatch, projectIdentifier, message, revision } =
-    task.versionMetadata ?? {};
+    loadedTask.versionMetadata ?? {};
+
+  const currentTest = logkeeperBuildMetadata?.tests?.find(
+    (test) => test.id === testID
+  );
 
   const breadcrumbs = [
     {
       text: projectIdentifier,
-      "data-cy": "project-link",
-      onClick: () => {
-        sendEvent({ name: "Opened Task Link" });
-      },
+      "data-cy": "project-breadcrumb",
     },
     {
       tooltipText: message,
-      "data-cy": "version-link",
+      "data-cy": "version-breadcrumb",
       text: isPatch ? (
-        `Patch ${task.patchNumber}`
+        `Patch ${patchNumber}`
       ) : (
         <InlineCode>{shortenGithash(revision)}</InlineCode>
       ),
-      onClick: () => {
-        sendEvent({ name: "Opened Task Link" });
-      },
     },
     {
       href: getEvergreenTaskURL(taskID, execution),
       text: (
         <>
-          {task.displayName} <TaskStatusBadge status={task.status} />
+          {displayName} <TaskStatusBadge status={status} />
         </>
       ),
-      "data-cy": "task-link",
+      "data-cy": "task-breadcrumb",
       onClick: () => {
         sendEvent({ name: "Opened Task Link" });
       },
@@ -70,6 +89,8 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     ...(testID
       ? [
           {
+            "data-cy": "test-breadcrumb",
+            tooltipText: currentTest?.name,
             text: "Test",
           },
         ]

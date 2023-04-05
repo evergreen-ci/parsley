@@ -34,8 +34,31 @@ describe("Basic resmoke log view", () => {
     );
     cy.get(".ReactVirtualized__Grid").scrollTo("right");
   });
+
   it("log header should not show breadcrumbs since the task is not found by Evergreen", () => {
-    cy.dataCy("breadcrumb-container").should("not.exist");
+    cy.dataCy("project-breadcrumb").should(
+      "contain.text",
+      "mongodb-mongo-master"
+    );
+
+    cy.dataCy("version-breadcrumb").should("contain.text", "Patch 973");
+    cy.dataCy("version-breadcrumb").trigger("mouseover");
+    cy.dataCy("breadcrumb-tooltip").should(
+      "contain.text",
+      "SERVER-45720 Create tests for Atlas Workflows"
+    );
+    cy.dataCy("version-breadcrumb").trigger("mouseout");
+
+    cy.dataCy("task-breadcrumb")
+      .should("contain.text", "merge-patch")
+      .should(
+        "have.attr",
+        "href",
+        "http://localhost:9090/task/mongodb_mongo_master_rhel80_debug_v4ubsan_all_feature_flags_experimental_concurrency_sharded_with_stepdowns_and_balancer_4_linux_enterprise_361789ed8a613a2dc0335a821ead0ab6205fbdaa_22_09_21_02_53_24/0?redirect_spruce_users=true"
+      );
+    cy.dataCy("task-status-badge").should("contain.text", "Succeeded");
+
+    cy.dataCy("test-breadcrumb").should("contain.text", "Test");
   });
 });
 

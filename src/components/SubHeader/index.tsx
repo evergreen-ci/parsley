@@ -13,7 +13,8 @@ interface SubHeaderProps {
 }
 const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
   const { logMetadata } = useLogContext();
-  const { execution, fileName, taskID, testID } = logMetadata || {};
+  const { buildID, execution, fileName, logType, taskID, testID } =
+    logMetadata || {};
 
   return (
     <Container data-cy="log-header">
@@ -24,11 +25,13 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
         </Header>
       ) : (
         <Header>
-          {taskID && execution && (
+          {taskID && (
             <EvergreenTaskSubHeader
+              buildID={buildID as string}
               execution={Number(execution)}
+              logType={logType}
               taskID={taskID}
-              testID={testID}
+              testID={testID as string}
             />
           )}
         </Header>
