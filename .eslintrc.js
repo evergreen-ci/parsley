@@ -204,5 +204,16 @@ module.exports = {
         project: "cypress/tsconfig.json",
       },
     },
+    // For GraphQL files.
+    {
+      files: ["src/gql/**/*.graphql"],
+      extends: "plugin:@graphql-eslint/operations-recommended",
+      rules: {
+        "@graphql-eslint/alphabetize": [
+          ERROR,
+          { selections: ["OperationDefinition", "FragmentDefinition"] },
+        ],
+      },
+    },
   ],
 };
