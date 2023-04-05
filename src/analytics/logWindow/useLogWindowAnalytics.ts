@@ -1,9 +1,4 @@
-import { useCallback, useMemo } from "react";
-import {
-  Analytics as A,
-  Properties,
-  addPageAction,
-} from "analytics/addPageAction";
+import { useAnalyticsRoot } from "analytics/useAnalyticsRoot";
 import { DIRECTION } from "context/LogContext/types";
 import { Filter } from "types/logs";
 
@@ -23,15 +18,5 @@ type Action =
   | { name: "Collapsed Lines" }
   | { name: "Paginated Through Search Results"; direction: DIRECTION };
 
-interface P extends Properties {}
-interface Analytics extends A<Action> {}
-
-export const useLogWindowAnalytics = (): Analytics => {
-  const sendEvent: Analytics["sendEvent"] = useCallback((action) => {
-    addPageAction<Action, P>(action, {
-      object: "LogWindow",
-    });
-  }, []);
-
-  return useMemo(() => ({ sendEvent }), [sendEvent]);
-};
+export const useLogWindowAnalytics = () =>
+  useAnalyticsRoot<Action>("LogWindow");
