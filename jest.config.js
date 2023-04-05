@@ -19,12 +19,20 @@ module.exports = {
   testMatch: ["<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"],
   testRunner: "<rootDir>/node_modules/jest-circus/runner.js",
   transform: {
-    "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "<rootDir>/node_modules/ts-jest",
+    "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "ts-jest",
     "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
     "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":
       "<rootDir>/config/jest/svgTransform.js",
   },
-  transformIgnorePatterns: ["<rootDir>/node_modules/"],
+  transformIgnorePatterns: [
+    `<rootDir>/node_modules/(?!${[
+      // Following modules are for query-string package.
+      "query-string",
+      "decode-uri-component",
+      "split-on-first",
+      "filter-obj",
+    ].join("|")})`,
+  ],
   watchPlugins: [
     "jest-watch-typeahead/filename",
     "jest-watch-typeahead/testname",
