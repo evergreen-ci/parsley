@@ -2,13 +2,14 @@ import { KeyboardEvent, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
 import { Option, Select } from "@leafygreen-ui/select";
+import Tooltip from "@leafygreen-ui/tooltip";
 import debounce from "lodash.debounce";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
 import { CharKey, ModifierKey } from "constants/keys";
-import { textInputHeight, zIndex } from "constants/tokens";
+import { zIndex } from "constants/tokens";
 import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
 import { leaveBreadcrumb } from "utils/errorReporting";
@@ -140,7 +141,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
         aria-labelledby="searchbar-input"
         data-cy="searchbar-input"
         disabled={disabled}
-        errorMessage={validatorMessage}
         icon={
           isValid ? (
             <IconButton
@@ -151,7 +151,15 @@ const SearchBar: React.FC<SearchBarProps> = ({
             >
               <Icon glyph="Plus" />
             </IconButton>
-          ) : undefined
+          ) : (
+            <Tooltip
+              justify="middle"
+              trigger={<IconPlaceholder />}
+              triggerEvent="hover"
+            >
+              {validatorMessage}
+            </Tooltip>
+          )
         }
         onChange={(e) => handleOnChange(e.target.value)}
         onKeyDown={handleKeyDown}
@@ -168,8 +176,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
 const Container = styled.div`
   display: flex;
   flex-direction: row;
-  align-items: flex-start;
-  max-height: ${textInputHeight};
+  align-items: center;
 `;
 
 // @ts-expect-error
@@ -190,11 +197,11 @@ const StyledInput = styled(TextInputWithGlyph)`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
+`;
 
-  /* move error message closer to bottom of text input */
-  > div {
-    padding-top: 0;
-  }
+const IconPlaceholder = styled.div`
+  height: 100%;
+  width: 32px;
 `;
 
 export default SearchBar;

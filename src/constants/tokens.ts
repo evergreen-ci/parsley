@@ -28,15 +28,6 @@ const fontSize = {
   l: "18px",
 } as const;
 
-const navbarHeight = "78px";
+const navbarHeight = size.xl;
 const subheaderHeight = "48px";
-const textInputHeight = "36px";
-
-export {
-  fontSize,
-  navbarHeight,
-  size,
-  subheaderHeight,
-  textInputHeight,
-  zIndex,
-};
+export { size, zIndex, fontSize, navbarHeight, subheaderHeight };
