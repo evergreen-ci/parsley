@@ -141,6 +141,12 @@ Cypress.Commands.add("login", () => {
   );
 });
 
+Cypress.Commands.add("logout", () => {
+  cy.origin("http://localhost:9090", () => {
+    cy.request({ url: "/logout", followRedirect: false });
+  });
+});
+
 Cypress.Commands.add("resetDrawerState", () => {
   cy.clearCookie("has-opened-drawer");
 });

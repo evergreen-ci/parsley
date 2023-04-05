@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.50",
+  "version": "1.0.52",
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
@@ -87,6 +87,7 @@
     "@graphql-codegen/cli": "3.2.2",
     "@graphql-codegen/typescript": "3.0.2",
     "@graphql-codegen/typescript-operations": "3.0.2",
+    "@graphql-eslint/eslint-plugin": "3.18.0",
     "@storybook/addon-actions": "7.0.0-beta.34",
     "@storybook/addon-essentials": "7.0.0-beta.34",
     "@storybook/addon-interactions": "7.0.0-beta.38",

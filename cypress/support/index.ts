@@ -54,10 +54,15 @@ declare global {
        */
       getInputByLabel(label: string): Chainable<Element>;
       /**
-       * Custom command to login to the application
+       * Custom command to log in to the application.
        * @example cy.login()
        */
       login(): void;
+      /**
+       * Custom command to log out of the application.
+       * @example cy.logout()
+       */
+      logout(): void;
       /**
        * Custom command to reset the drawer cookie.
        * @example cy.resetDrawerState()
