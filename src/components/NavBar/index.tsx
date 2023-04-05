@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
+import Button from "@leafygreen-ui/button";
 import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import DetailsMenu from "components/DetailsMenu";
@@ -9,7 +10,9 @@ import Search from "components/Search";
 import ShortcutModal from "components/ShortcutModal";
 import { StyledLink } from "components/styles";
 import { navbarHeight, size } from "constants/tokens";
+import { useAuthContext } from "context/auth";
 import { useLogContext } from "context/LogContext";
+import { isDevelopment } from "utils/environmentVariables";
 import UploadLink from "./UploadLink";
 
 const { gray, white } = palette;
@@ -17,6 +20,7 @@ const { gray, white } = palette;
 const NavBar: React.FC = () => {
   const [open, setOpen] = useState(false);
   const { hasLogs, clearLogs } = useLogContext();
+  const { logoutAndRedirect } = useAuthContext();
 
   return (
     <Container>
@@ -45,6 +49,15 @@ const NavBar: React.FC = () => {
         >
           <DetailsMenu data-cy="details-menu" />
         </StyledButton>
+        {isDevelopment() && (
+          <Button
+            onClick={logoutAndRedirect}
+            size="small"
+            variant="dangerOutline"
+          >
+            Log out
+          </Button>
+        )}
       </FlexContainer>
 
       <ShortcutModal open={open} setOpen={setOpen} />
