@@ -64,13 +64,13 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
           class="leafygreen-ui-lzja97"
         >
           <input
-            aria-invalid="false"
+            aria-invalid="true"
             aria-label="searchbar-input"
             aria-labelledby="searchbar-input"
             autocomplete="on"
-            class="leafygreen-ui-6i61vl"
+            class="leafygreen-ui-flga8a"
             data-cy="searchbar-input"
-            id="textinput-5"
+            id="textinput-3"
             placeholder="optional, regexp to search"
             required=""
             spellcheck="false"
@@ -79,34 +79,33 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
           />
           <div
             class="lg-ui-icon-selector-0000 leafygreen-ui-uy5fvv"
-          />
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="leafygreen-ui-tbogr5"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+            >
+              <path
+                clip-rule="evenodd"
+                d="M8.8639 2.51357C8.49039 1.82881 7.50961 1.82881 7.1361 2.51357L1.12218 13.5388C0.763263 14.1968 1.23814 15 1.98608 15H14.0139C14.7619 15 15.2367 14.1968 14.8778 13.5388L8.8639 2.51357ZM7 6C7 5.44772 7.44772 5 8 5C8.55228 5 9 5.44772 9 6V10C9 10.5523 8.55228 11 8 11C7.44772 11 7 10.5523 7 10V6ZM9 13C9 13.5523 8.55228 14 8 14C7.44772 14 7 13.5523 7 13C7 12.4477 7.44772 12 8 12C8.55228 12 9 12.4477 9 13Z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+          </div>
         </div>
       </div>
       <div
         class="css-1w7keqv"
       >
         <div
-          class="leafygreen-ui-cssveg css-1sg2lsz"
-          data-cy="searchbar-warning"
-        >
-          <svg
-            aria-label="Warning Icon"
-            class="leafygreen-ui-1o1t3sx"
-            fill="none"
-            height="16"
-            role="img"
-            viewBox="0 0 16 16"
-            width="16"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              clip-rule="evenodd"
-              d="M8.864 2.514a.983.983 0 00-1.728 0L1.122 13.539A.987.987 0 001.986 15h12.028a.987.987 0 00.864-1.461L8.864 2.514zM7 6a1 1 0 012 0v4a1 1 0 11-2 0V6zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
-              fill="currentColor"
-              fill-rule="evenodd"
-            />
-          </svg>
-        </div>
+          class="leafygreen-ui-cssveg css-1a9hvxo"
+          data-cy="searchbar-error"
+        />
       </div>
     </div>
   </div>

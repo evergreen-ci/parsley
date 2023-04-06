@@ -104,6 +104,7 @@ const LogLineContainer = styled.div`
   margin-top: ${size.xxs};
   align-self: start;
   cursor: pointer;
+  overflow-y: scroll;
 `;
 
 const LogLineNumber = styled.div`
