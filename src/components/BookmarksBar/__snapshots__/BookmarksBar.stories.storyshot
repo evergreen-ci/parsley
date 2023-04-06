@@ -1,0 +1,117 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/BookmarksBar Default 1`] = `
+<div>
+  <div
+    class="css-3ieiu4"
+  >
+    <div
+      class="css-1d04160"
+    >
+      <button
+        aria-disabled="false"
+        class="lg-ui-button-0000 css-ttttas leafygreen-ui-1vstlcd"
+        data-cy="clear-bookmarks"
+        type="button"
+      >
+        <div
+          class="leafygreen-ui-v038xi"
+        />
+        <div
+          class="leafygreen-ui-1hhc9ms"
+        >
+          Clear
+        </div>
+      </button>
+      <div
+        class="css-2kyfnj"
+        data-cy="bookmark-list"
+      >
+        <div
+          class="css-194lywn"
+          data-cy="bookmark-4"
+        >
+          <span>
+            4
+          </span>
+        </div>
+        <div
+          class="css-194lywn"
+          data-cy="bookmark-5"
+        >
+          <span>
+            5
+          </span>
+        </div>
+        <div
+          class="css-194lywn"
+          data-cy="bookmark-6"
+        >
+          <span>
+            6
+          </span>
+        </div>
+        <div
+          class="css-194lywn"
+          data-cy="bookmark-7"
+        >
+          <span>
+            7
+          </span>
+        </div>
+        <div
+          class="css-194lywn"
+          data-cy="bookmark-21"
+        >
+          <span>
+            21
+          </span>
+          <svg
+            aria-label="Link Icon"
+            class="css-lm3viu"
+            fill="none"
+            height="14"
+            role="img"
+            viewBox="0 0 16 16"
+            width="14"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6.039 9.953a3.596 3.596 0 01-.327-.38l1.45-1.445a1.553 1.553 0 002.496.423l2.885-2.87a1.57 1.57 0 00.01-2.213 1.553 1.553 0 00-2.203-.01l-.379.377A.995.995 0 018.56 3.83a1.005 1.005 0 01.006-1.418l.38-.377a3.542 3.542 0 015.024.023 3.58 3.58 0 01-.022 5.047l-2.884 2.871a3.542 3.542 0 01-5.025-.022z"
+              fill="currentColor"
+            />
+            <path
+              d="M9.961 6.047c.12.12.228.248.327.38l-1.45 1.445a1.553 1.553 0 00-2.496-.423l-2.885 2.87a1.57 1.57 0 00-.01 2.213 1.553 1.553 0 002.203.01l.379-.377a.995.995 0 011.411.006 1.005 1.005 0 01-.006 1.418l-.38.377a3.542 3.542 0 01-5.024-.023 3.58 3.58 0 01.022-5.047l2.884-2.871a3.542 3.542 0 015.025.022z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <div
+          class="css-194lywn"
+          data-cy="bookmark-24"
+        >
+          <span>
+            24
+          </span>
+        </div>
+        <div
+          class="css-194lywn"
+          data-cy="bookmark-30"
+        >
+          <span>
+            30
+          </span>
+        </div>
+        <div
+          class="css-194lywn"
+          data-cy="bookmark-85"
+        >
+          <span>
+            85
+          </span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+`;

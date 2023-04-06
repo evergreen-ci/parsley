@@ -4,7 +4,7 @@ export interface Analytics<Action> {
   sendEvent: (action: Action) => void;
 }
 
-type AnalyticsObject =
+export type AnalyticsObject =
   | "LogDrop"
   | "LogWindow"
   | "Preferences"
@@ -14,7 +14,7 @@ type AnalyticsObject =
 interface RequiredProperties {
   object: AnalyticsObject;
 }
-interface ActionType {
+export interface ActionType {
   name: string;
 }
 

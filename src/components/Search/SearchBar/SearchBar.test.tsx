@@ -71,7 +71,7 @@ describe("searchbar", () => {
     const input = screen.getByDataCy("searchbar-input");
     await user.type(input, "test");
     expect(input).toHaveValue("test");
-    expect(screen.queryByDataCy("searchbar-warning")).toBeVisible();
+    expect(screen.queryByDataCy("searchbar-error")).toBeVisible();
     expect(screen.queryByDataCy("searchbar-submit")).toBeNull();
     expect(onSubmit).not.toHaveBeenCalled();
   });
