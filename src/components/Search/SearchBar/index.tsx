@@ -1,21 +1,19 @@
 import { KeyboardEvent, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
-import { palette } from "@leafygreen-ui/palette";
 import { Option, Select } from "@leafygreen-ui/select";
+import Tooltip from "@leafygreen-ui/tooltip";
 import debounce from "lodash.debounce";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
-import IconWithTooltip from "components/IconWithTooltip";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
 import { CharKey, ModifierKey } from "constants/keys";
-import { zIndex } from "constants/tokens";
+import { size, zIndex } from "constants/tokens";
 import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
 import { leaveBreadcrumb } from "utils/errorReporting";
 
-const { yellow } = palette;
 interface SearchBarProps {
   className?: string;
   disabled?: boolean;
@@ -154,19 +152,20 @@ const SearchBar: React.FC<SearchBarProps> = ({
               <Icon glyph="Plus" />
             </IconButton>
           ) : (
-            <IconWithTooltip
-              data-cy="searchbar-warning"
-              fill={yellow.base}
-              glyph="Warning"
+            <Tooltip
+              justify="middle"
+              trigger={<IconPlaceholder data-cy="searchbar-error" />}
+              triggerEvent="hover"
             >
               {validatorMessage}
-            </IconWithTooltip>
+            </Tooltip>
           )
         }
         onChange={(e) => handleOnChange(e.target.value)}
         onKeyDown={handleKeyDown}
         placeholder="optional, regexp to search"
         spellCheck={false}
+        state={isValid ? "none" : "error"}
         type="text"
         value={input}
       />
@@ -198,6 +197,11 @@ const StyledInput = styled(TextInputWithGlyph)`
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
   }
+`;
+
+const IconPlaceholder = styled.div`
+  height: 100%;
+  width: ${size.l};
 `;
 
 export default SearchBar;
