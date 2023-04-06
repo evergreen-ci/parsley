@@ -26,7 +26,7 @@ module.exports = {
   },
   transformIgnorePatterns: [
     `<rootDir>/node_modules/(?!${[
-      // Following modules are for query-string package.
+      // The following modules are all related to the query-string package.
       "query-string",
       "decode-uri-component",
       "split-on-first",
