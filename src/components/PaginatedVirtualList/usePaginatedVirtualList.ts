@@ -103,15 +103,15 @@ const usePaginatedVirtualList = ({
 
   const scrollToLine = useCallback(
     (index: number) => {
-      const page = Math.floor(index / paginationThreshold);
-      if (page !== currentPage) {
-        setCurrentPage(page);
+      const nextPage = Math.floor(index / paginationThreshold);
+      if (nextPage !== currentPage) {
+        setCurrentPage(nextPage);
         isScrollerScroll.current = true;
       }
-      const indexToScrollTo =
+      const nextScrollIndex =
         index -
         calculateStartingIndex({
-          page,
+          page: nextPage,
           paginationThreshold,
           paginationOffset,
         });
@@ -121,8 +121,8 @@ const usePaginatedVirtualList = ({
         {
           message: "scrollToIndex",
           index,
-          indexToScrollTo,
-          newPage: page,
+          nextScrollIndex,
+          nextPage,
           currentPage,
           paginationThreshold,
           paginationOffset,
@@ -131,7 +131,7 @@ const usePaginatedVirtualList = ({
         "process"
       );
       ref.current?.scrollToIndex({
-        index: indexToScrollTo,
+        index: nextScrollIndex,
         align: "start",
       });
     },

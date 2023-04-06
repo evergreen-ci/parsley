@@ -21,72 +21,76 @@ interface PaginatedVirtualListProps {
 const PaginatedVirtualList = forwardRef<
   PaginatedVirtualListRef,
   PaginatedVirtualListProps
->((props, ref) => {
-  const {
-    rowCount,
-    rowRenderer,
-    paginationThreshold = 10000,
-    paginationOffset = 10,
-  } = props;
-  if (paginationOffset >= paginationThreshold) {
-    throw new Error("paginationOffset must be less than paginationThreshold");
-  }
-
-  const listRef = useRef<VirtuosoHandle>(null);
-
-  const {
-    scrollToNextPage,
-    scrollToPrevPage,
-    startingIndex,
-    scrollToLine,
-    pageSize,
-  } = usePaginatedVirtualList({
-    rowCount,
-    paginationThreshold,
-    paginationOffset,
-    ref: listRef,
-  });
-
-  // itemContent maps the paginated index to the actual index in the list
-  const itemContent = useCallback(
-    (index: number) => {
-      const lineIndex = index + startingIndex;
-
-      return rowRenderer(lineIndex, undefined, undefined);
+>(
+  (
+    {
+      rowCount,
+      rowRenderer,
+      paginationThreshold = 10000,
+      paginationOffset = 10,
     },
-    [rowRenderer, startingIndex]
-  );
-
-  // Expose scrollToIndex as a ref
-  useEffect(() => {
-    if (ref) {
-      // eslint-disable-next-line no-param-reassign
-      (ref as any).current = {
-        scrollToIndex: scrollToLine,
-      } satisfies PaginatedVirtualListRef;
+    ref
+  ) => {
+    if (paginationOffset >= paginationThreshold) {
+      throw new Error("paginationOffset must be less than paginationThreshold");
     }
-  }, [ref, scrollToLine]);
 
-  return (
-    <Virtuoso
-      ref={listRef}
-      atBottomStateChange={(val) => {
-        if (val) {
-          scrollToNextPage();
-        }
-      }}
-      atTopStateChange={(val) => {
-        if (val) {
-          scrollToPrevPage();
-        }
-      }}
-      data-cy="paginated-virtual-list"
-      itemContent={itemContent}
-      overscan={300}
-      totalCount={pageSize}
-    />
-  );
-});
+    const listRef = useRef<VirtuosoHandle>(null);
+
+    const {
+      scrollToNextPage,
+      scrollToPrevPage,
+      startingIndex,
+      scrollToLine,
+      pageSize,
+    } = usePaginatedVirtualList({
+      rowCount,
+      paginationThreshold,
+      paginationOffset,
+      ref: listRef,
+    });
+
+    // itemContent maps the paginated index to the actual index in the list
+    const itemContent = useCallback(
+      (index: number) => {
+        const lineIndex = index + startingIndex;
+
+        return rowRenderer(lineIndex, undefined, undefined);
+      },
+      [rowRenderer, startingIndex]
+    );
+
+    // Expose scrollToIndex as a ref
+    useEffect(() => {
+      if (ref) {
+        // eslint-disable-next-line no-param-reassign
+        (ref as any).current = {
+          scrollToIndex: scrollToLine,
+        } satisfies PaginatedVirtualListRef;
+      }
+    }, [ref, scrollToLine]);
+
+    return (
+      <Virtuoso
+        ref={listRef}
+        atBottomStateChange={(val) => {
+          if (val) {
+            scrollToNextPage();
+          }
+        }}
+        atTopStateChange={(val) => {
+          if (val) {
+            scrollToPrevPage();
+          }
+        }}
+        data-cy="paginated-virtual-list"
+        itemContent={itemContent}
+        overscan={300}
+        totalCount={pageSize}
+      />
+    );
+  }
+);
 
 PaginatedVirtualList.displayName = "PaginatedVirtualList";
 
