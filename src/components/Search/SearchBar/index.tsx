@@ -9,7 +9,7 @@ import Icon from "components/Icon";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
 import { CharKey, ModifierKey } from "constants/keys";
-import { zIndex } from "constants/tokens";
+import { size, zIndex } from "constants/tokens";
 import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
 import { leaveBreadcrumb } from "utils/errorReporting";
@@ -201,7 +201,7 @@ const StyledInput = styled(TextInputWithGlyph)`
 
 const IconPlaceholder = styled.div`
   height: 100%;
-  width: 32px;
+  width: ${size.l};
 `;
 
 export default SearchBar;
