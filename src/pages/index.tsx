@@ -15,7 +15,9 @@ const LogDrop = lazy(() => import("./LogDrop"));
 const Layout = () => (
   <>
     <NavBar />
-    <Outlet />
+    <PageLayout>
+      <Outlet />
+    </PageLayout>
   </>
 );
 
@@ -23,44 +25,42 @@ const Content: React.FC = () => {
   useAnalyticAttributes();
   const { isAuthenticated } = useAuthContext();
   return isAuthenticated ? (
-    <PageLayout>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route element={<Navigate to={routes.upload} />} path={routes.root} />
-          <Route
-            element={
-              <Suspense fallback={<FullPageLoad />}>
-                <LogDrop />
-              </Suspense>
-            }
-            path={routes.upload}
-          />
-          <Route
-            element={<LogView logType={LogTypes.EVERGREEN_TASK_LOGS} />}
-            path={routes.evergreenLogs}
-          />
-          <Route
-            element={<LogView logType={LogTypes.EVERGREEN_TEST_LOGS} />}
-            path={routes.testLogs}
-          >
-            <Route element={null} path=":groupId" />
-          </Route>
-          <Route
-            element={<LogView logType={LogTypes.EVERGREEN_TEST_LOGS} />}
-            path={routes.testLogs}
-          />
-          <Route
-            element={<LogView logType={LogTypes.RESMOKE_LOGS} />}
-            path={routes.resmokeLogs}
-          />
-          <Route
-            element={<LogView logType={LogTypes.RESMOKE_LOGS} />}
-            path={routes.resmokeLogsAll}
-          />
-          <Route element={<NotFound />} path="*" />
+    <Routes>
+      <Route element={<Layout />}>
+        <Route element={<Navigate to={routes.upload} />} path={routes.root} />
+        <Route
+          element={
+            <Suspense fallback={<FullPageLoad />}>
+              <LogDrop />
+            </Suspense>
+          }
+          path={routes.upload}
+        />
+        <Route
+          element={<LogView logType={LogTypes.EVERGREEN_TASK_LOGS} />}
+          path={routes.evergreenLogs}
+        />
+        <Route
+          element={<LogView logType={LogTypes.EVERGREEN_TEST_LOGS} />}
+          path={routes.testLogs}
+        >
+          <Route element={null} path=":groupId" />
         </Route>
-      </Routes>
-    </PageLayout>
+        <Route
+          element={<LogView logType={LogTypes.EVERGREEN_TEST_LOGS} />}
+          path={routes.testLogs}
+        />
+        <Route
+          element={<LogView logType={LogTypes.RESMOKE_LOGS} />}
+          path={routes.resmokeLogs}
+        />
+        <Route
+          element={<LogView logType={LogTypes.RESMOKE_LOGS} />}
+          path={routes.resmokeLogsAll}
+        />
+        <Route element={<NotFound />} path="*" />
+      </Route>
+    </Routes>
   ) : (
     <FullPageLoad />
   );
