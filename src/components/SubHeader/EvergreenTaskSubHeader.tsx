@@ -52,9 +52,9 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
 
   // @ts-expect-error - We verify above that either task or logkeeperBuildMetadata exists, so logkeeperBuildMetadata will not be undefined as TypeScript suspects
   const loadedTask = task ?? logkeeperBuildMetadata.task;
-  const { displayName, patchNumber, status } = loadedTask;
+  const { displayName, patchNumber, status, versionMetadata } = loadedTask;
   const { isPatch, projectIdentifier, message, revision } =
-    loadedTask.versionMetadata ?? {};
+    versionMetadata ?? {};
 
   const currentTest = logkeeperBuildMetadata?.tests?.find(
     (test) => test.id === testID

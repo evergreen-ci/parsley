@@ -35,7 +35,7 @@ describe("Basic resmoke log view", () => {
     cy.get(".ReactVirtualized__Grid").scrollTo("right");
   });
 
-  it("log header should not show breadcrumbs since the task is not found by Evergreen", () => {
+  it("log header should show breadcrumbs, including one for the test name", () => {
     cy.dataCy("project-breadcrumb").should(
       "contain.text",
       "mongodb-mongo-master"
