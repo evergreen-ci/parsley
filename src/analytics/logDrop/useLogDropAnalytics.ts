@@ -1,8 +1,4 @@
-import {
-  Analytics as A,
-  Properties,
-  addPageAction,
-} from "analytics/addPageAction";
+import { useAnalyticsRoot } from "analytics/useAnalyticsRoot";
 import { LogTypes } from "constants/enums";
 
 type Action =
@@ -11,15 +7,4 @@ type Action =
   | { name: "Uploaded Log File With Picker" }
   | { name: "Processed Log"; logType: LogTypes };
 
-interface P extends Properties {}
-interface Analytics extends A<Action> {}
-
-export const useLogDropAnalytics = (): Analytics => {
-  const sendEvent: Analytics["sendEvent"] = (action) => {
-    addPageAction<Action, P>(action, {
-      object: "LogDrop",
-    });
-  };
-
-  return { sendEvent };
-};
+export const useLogDropAnalytics = () => useAnalyticsRoot<Action>("LogDrop");
