@@ -25,6 +25,7 @@ import { useFetch } from "hooks/useFetch";
 import NotFound from "pages/404";
 import { LogkeeperMetadata } from "types/api";
 import { leaveBreadcrumb } from "utils/errorReporting";
+import { formatBytes } from "utils/file";
 import LoadingBar from "./LoadingBar";
 
 interface LoadingPageProps {
@@ -103,7 +104,10 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       break;
   }
 
-  const { data, error, isLoading } = useLogDownloader(rawLogURL, logType);
+  const { data, error, isLoading, fileSize } = useLogDownloader(
+    rawLogURL,
+    logType
+  );
 
   useEffect(() => {
     if (data) {
@@ -151,12 +155,15 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     <Container>
       {isLoading || !error ? (
         <LoadingBarContainer>
-          <LogoContainer>
-            <AnimationWrapper>
-              <Icon glyph="ParsleyLogo" size={40} useStroke />
-            </AnimationWrapper>
-            <StyledBody>Loading Parsley...</StyledBody>
-          </LogoContainer>
+          <FlexRow>
+            <LogoContainer>
+              <AnimationWrapper>
+                <Icon glyph="ParsleyLogo" size={40} useStroke />
+              </AnimationWrapper>
+              <StyledBody>Downloading log...</StyledBody>
+            </LogoContainer>
+            <DownloadSize>{formatBytes(fileSize)}</DownloadSize>
+          </FlexRow>
           <LoadingBar indeterminate />
         </LoadingBarContainer>
       ) : (
@@ -176,8 +183,20 @@ const LoadingBarContainer = styled.div`
 
 const LogoContainer = styled.div`
   display: flex;
-  align-items: flex-end;
   gap: ${size.s};
+  align-items: flex-end;
+`;
+
+const FlexRow = styled.div`
+  display: flex;
+  align-items: flex-end;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+`;
+
+const DownloadSize = styled.div`
+  font-family: "Source Code Pro", monospace;
 `;
 
 const AnimationWrapper = styled.div`
