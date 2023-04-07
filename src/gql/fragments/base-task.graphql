@@ -1,0 +1,14 @@
+fragment BaseTask on Task {
+  displayName
+  execution
+  id
+  patchNumber
+  status
+  versionMetadata {
+    id
+    isPatch
+    message
+    projectIdentifier
+    revision
+  }
+}
