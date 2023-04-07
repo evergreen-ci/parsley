@@ -96,8 +96,7 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
       ? [
           {
             "data-cy": "test-breadcrumb",
-            tooltipText: currentTest?.name,
-            text: "Test",
+            text: currentTest?.name ?? "Test",
           },
         ]
       : []),

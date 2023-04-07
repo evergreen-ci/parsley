@@ -58,7 +58,10 @@ describe("Basic resmoke log view", () => {
       );
     cy.dataCy("task-status-badge").should("contain.text", "Succeeded");
 
-    cy.dataCy("test-breadcrumb").should("contain.text", "Test");
+    cy.dataCy("test-breadcrumb").should(
+      "contain.text",
+      "internal_transa…ill_sessions.js"
+    );
   });
 });
 
