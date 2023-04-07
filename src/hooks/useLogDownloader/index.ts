@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLogDownloadAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
+import useStateRef from "hooks/useStateRef";
 import { formatBytes } from "pages/LogView/LoadingPage/utils";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
@@ -19,7 +20,7 @@ import { fetchLogFile } from "./utils";
 const useLogDownloader = (url: string, logType: LogTypes) => {
   const [data, setData] = useState<string[] | undefined>();
   const [error, setError] = useState<string | undefined>();
-  const [fileSize, setFileSize] = useState<number>(0);
+  const [fileSize, setFileSize, getFileSize] = useStateRef<number>(0);
   const [isLoading, setIsLoading] = useState(true);
   const { sendEvent } = useLogDownloadAnalytics();
   useEffect(() => {
@@ -31,7 +32,7 @@ const useLogDownloader = (url: string, logType: LogTypes) => {
       // Conditionally define signal because AbortController throws error in development's strict mode
       abortController: isProduction ? abortController : undefined,
       onProgress: (progress) => {
-        setFileSize((curr) => curr + progress);
+        setFileSize(getFileSize() + progress);
       },
     })
       .then((logs) => {
@@ -45,7 +46,7 @@ const useLogDownloader = (url: string, logType: LogTypes) => {
           name: "Log Download Failed",
           duration: Date.now() - timeStart,
           type: logType,
-          fileSize,
+          fileSize: getFileSize(),
         });
       })
       .finally(() => {
@@ -54,7 +55,7 @@ const useLogDownloader = (url: string, logType: LogTypes) => {
           {
             url,
             time: Date.now() - timeStart,
-            fileSize: formatBytes(fileSize),
+            fileSize: formatBytes(getFileSize()),
           },
           "request"
         );
@@ -62,7 +63,7 @@ const useLogDownloader = (url: string, logType: LogTypes) => {
           name: "Log Downloaded",
           duration: Date.now() - timeStart,
           type: logType,
-          fileSize,
+          fileSize: getFileSize(),
         });
         setIsLoading(false);
       });
