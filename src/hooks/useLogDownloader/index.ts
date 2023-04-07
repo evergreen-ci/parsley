@@ -4,7 +4,7 @@ import { LogTypes } from "constants/enums";
 import useStateRef from "hooks/useStateRef";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
-import { formatBytes } from "utils/file";
+import { formatBytes } from "utils/string";
 import { fetchLogFile } from "./utils";
 
 /**
