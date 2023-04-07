@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { useLogDownloadAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
 import useStateRef from "hooks/useStateRef";
-import { formatBytes } from "pages/LogView/LoadingPage/utils";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
+import { formatBytes } from "utils/file";
 import { fetchLogFile } from "./utils";
 
 /**
