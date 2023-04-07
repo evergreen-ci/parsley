@@ -1,9 +1,7 @@
 import { useEffect } from "react";
 import PaginatedVirtualList from "components/PaginatedVirtualList";
-import { CharKey } from "constants/keys";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
-import { useKeyboardShortcut } from "hooks";
 import { useQueryParam } from "hooks/useQueryParam";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import { findLineIndex } from "utils/findLineIndex";
@@ -13,21 +11,12 @@ interface LogPaneProps {
   rowCount: number;
 }
 const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
-  const { processedLogLines, scrollToLine, listRef, lineCount } =
-    useLogContext();
+  const { processedLogLines, scrollToLine, listRef } = useLogContext();
 
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
     undefined
   );
-
-  useKeyboardShortcut({ charKey: CharKey.PageEnd }, () => {
-    scrollToLine(lineCount - 1);
-  });
-
-  useKeyboardShortcut({ charKey: CharKey.PageHome }, () => {
-    scrollToLine(0);
-  });
 
   useEffect(() => {
     const initialScrollIndex = findLineIndex(processedLogLines, shareLine);
