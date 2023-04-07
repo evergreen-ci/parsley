@@ -17,6 +17,7 @@ const globalStyles = css`
   body {
     font-family: "Euclid Circular A", "Helvetica Neue", Helvetica, Arial,
       sans-serif;
+    font-size: 13px;
     margin: 0;
     /* Prevent scroll bounce behavior */
     overscroll-behavior-y: none;
