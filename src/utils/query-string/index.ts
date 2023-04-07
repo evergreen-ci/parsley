@@ -1,4 +1,4 @@
-import { ParseOptions, StringifyOptions, parse, stringify } from "query-string";
+import queryString, { ParseOptions, StringifyOptions } from "query-string";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { Filters } from "types/logs";
 
@@ -12,14 +12,14 @@ export const parseQueryString = (
     parseNumbers: true,
     ...options,
   };
-  return parse(search, parseOptions);
+  return queryString.parse(search, parseOptions);
 };
 
 export const stringifyQuery = (
   object: { [key: string]: any },
   options: StringifyOptions = {}
 ) =>
-  stringify(object, {
+  queryString.stringify(object, {
     arrayFormat: "comma",
     skipNull: true,
     skipEmptyString: true,

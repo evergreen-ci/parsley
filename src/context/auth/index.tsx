@@ -12,7 +12,7 @@ import {
   graphqlURL,
   isDevelopment,
 } from "utils/environmentVariables";
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { leaveBreadcrumb, reportError } from "utils/errorReporting";
 
 type LoginCreds = { username: string; password: string };
 
@@ -47,19 +47,24 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ query: `query { user { userId } }` }),
-      }).then((response) => {
-        if (response.ok) {
-          leaveBreadcrumb("Authenticated", {}, "user");
-          setIsAuthenticated(true);
-        } else {
-          leaveBreadcrumb(
-            "Not Authenticated",
-            { statusCode: response.status },
-            "user"
-          );
-          logoutAndRedirect();
-        }
-      });
+      })
+        .then((response) => {
+          if (response.ok) {
+            leaveBreadcrumb("Authenticated", {}, "user");
+            setIsAuthenticated(true);
+          } else {
+            leaveBreadcrumb(
+              "Not Authenticated",
+              { statusCode: response.status },
+              "user"
+            );
+            logoutAndRedirect();
+          }
+        })
+        .catch((err: Error) => {
+          leaveBreadcrumb("checkLogin", { err }, "error");
+          reportError(err).severe();
+        });
     };
 
     checkLogin();
