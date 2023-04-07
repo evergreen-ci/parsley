@@ -3,6 +3,7 @@ import { InlineCode } from "@leafygreen-ui/typography";
 import { usePreferencesAnalytics } from "analytics";
 import Breadcrumbs from "components/Breadcrumbs";
 import Icon from "components/Icon";
+import { StyledLink } from "components/styles";
 import TaskStatusBadge from "components/TaskStatusBadge";
 import { LogTypes } from "constants/enums";
 import { getEvergreenTaskURL } from "constants/externalURLTemplates";
@@ -50,7 +51,17 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   const loadedTask = task ?? logkeeperBuildMetadata?.task;
 
   if (loading || logkeeperLoading || !loadedTask) {
-    return <Icon glyph="EvergreenLogo" size={24} />;
+    return (
+      <>
+        <Icon glyph="EvergreenLogo" size={24} />
+        <StyledLink
+          href={getEvergreenTaskURL(taskID, execution)}
+          onClick={() => sendEvent({ name: "Opened Task Link" })}
+        >
+          Task Page
+        </StyledLink>
+      </>
+    );
   }
 
   const {
