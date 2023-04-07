@@ -4,7 +4,7 @@ import { LogTypes } from "constants/enums";
 import useStateRef from "hooks/useStateRef";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
-import { formatBytes } from "utils/file";
+import { formatBytes } from "utils/string";
 import { fetchLogFile } from "./utils";
 
 /**
@@ -36,6 +36,10 @@ const useLogDownloader = (url: string, logType: LogTypes) => {
       },
     })
       .then((logs) => {
+        // Remove the last log line if it is empty
+        if (logs[logs.length - 1] === "") {
+          logs.pop();
+        }
         setData(logs);
       })
       .catch((err: Error) => {
