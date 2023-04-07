@@ -128,6 +128,7 @@ describe("Jump to line", () => {
   it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
     cy.visit(`${logLink}?bookmarks=0,297`);
     cy.dataCy("log-row-4").dblclick({ force: true });
+    cy.dataCy("bookmark-4").should("be.visible");
 
     cy.dataCy("bookmark-297").click();
     cy.dataCy("log-row-297").should("be.visible");
@@ -139,6 +140,7 @@ describe("Jump to line", () => {
   it("should be able to use the bookmarks bar to jump to a line when there are collapsed rows", () => {
     cy.visit(`${logLink}?bookmarks=0,297&filters=100pass`);
     cy.dataCy("log-row-56").dblclick({ force: true });
+    cy.dataCy("bookmark-56").should("be.visible");
 
     cy.dataCy("bookmark-297").click();
     cy.dataCy("log-row-297").should("be.visible");
