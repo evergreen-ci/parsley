@@ -36,6 +36,10 @@ const useLogDownloader = (url: string, logType: LogTypes) => {
       },
     })
       .then((logs) => {
+        // Remove the last log line if it is empty
+        if (logs[logs.length - 1] === "") {
+          logs.pop();
+        }
         setData(logs);
       })
       .catch((err: Error) => {
