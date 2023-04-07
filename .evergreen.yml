@@ -442,6 +442,7 @@ tasks:
 
   - name: lint
     commands:
+    - func: sym-link
     - func: yarn-eslint
 
   - name: test
