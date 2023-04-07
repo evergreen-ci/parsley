@@ -137,7 +137,7 @@ describe("Bookmarking and selecting lines", () => {
   });
 });
 
-describe.skip("Jump to line", () => {
+describe("Jump to line", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
 

@@ -2,4 +2,8 @@ import { ItemContent } from "react-virtuoso";
 
 type RowRenderer = (index: number) => ItemContent<any, any>;
 
-export type { RowRenderer };
+interface PaginatedVirtualListRef {
+  scrollToIndex: (index: number) => void;
+}
+
+export type { RowRenderer, PaginatedVirtualListRef };

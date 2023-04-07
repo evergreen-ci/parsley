@@ -179,7 +179,6 @@ const RowContainer = styled.div<{
   line-height: 1.25;
   font-size: ${fontSize.m};
 
-  ${({ color }) => color && `color: ${color};`}
   ${({ shared }) => shared && `background-color: ${yellow.light3};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
   ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}

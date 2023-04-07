@@ -11,7 +11,7 @@ interface LogPaneProps {
   rowCount: number;
 }
 const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
-  const { processedLogLines, scrollToLine } = useLogContext();
+  const { processedLogLines, scrollToLine, listRef } = useLogContext();
 
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
@@ -21,16 +21,22 @@ const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
   useEffect(() => {
     const initialScrollIndex = findLineIndex(processedLogLines, shareLine);
     if (initialScrollIndex > -1) {
-      leaveBreadcrumb("Scrolled to initialScrollIndex", {
+      leaveBreadcrumb("Triggered scroll to shareLine", {
         initialScrollIndex,
+        shareLine,
       });
-      scrollToLine(initialScrollIndex);
+      // This timeout is necessary to ensure that the list has been rendered
+      // before we try to scroll to the line.
+      setTimeout(() => {
+        scrollToLine(initialScrollIndex);
+      }, 50);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
     <PaginatedVirtualList
+      ref={listRef}
       paginationOffset={50}
       paginationThreshold={500000}
       rowCount={rowCount}

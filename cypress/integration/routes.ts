@@ -47,7 +47,7 @@ describe("Parsley Routes", () => {
         "?bookmarks=0,297&filters=100this%2520is%2520a%2520filter&highlights=this%2520is%2520a%2520highlight&shareLine=7"
       );
     });
-    it.skip("should correctly jump to line when selectedLine is replaced by shareLine param", () => {
+    it("should correctly jump to line when selectedLine is replaced by shareLine param", () => {
       cy.visit(
         "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task?bookmarks=0,297&selectedLine=200"
       );

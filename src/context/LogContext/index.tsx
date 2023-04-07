@@ -4,9 +4,11 @@ import {
   useContext,
   useEffect,
   useMemo,
+  useRef,
   useState,
 } from "react";
 import Cookie from "js-cookie";
+import { PaginatedVirtualListRef } from "components/PaginatedVirtualList/types";
 import {
   CASE_SENSITIVE,
   EXPANDABLE_ROWS,
@@ -31,6 +33,7 @@ interface LogContextState {
   expandedLines: ExpandedLines;
   hasLogs: boolean;
   lineCount: number;
+  listRef: React.RefObject<PaginatedVirtualListRef>;
   logMetadata?: LogMetadata;
   matchingLines: Set<number> | undefined;
   preferences: Preferences;
@@ -109,6 +112,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
     []
   );
+  const listRef = useRef<PaginatedVirtualListRef>(null);
 
   const stringifiedFilters = JSON.stringify(filters);
   const stringifiedBookmarks = bookmarks.toString();
@@ -180,7 +184,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
 
   const scrollToLine = useCallback((lineNumber: number) => {
-    console.error("NOT IMPLEMENTED", { lineNumber });
+    listRef.current?.scrollToIndex(lineNumber);
   }, []);
 
   const searchResults = useMemo(() => {
@@ -241,6 +245,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       lineCount: state.logs.length,
       logMetadata: state.logMetadata,
       matchingLines,
+      listRef,
       preferences: {
         caseSensitive: state.searchState.caseSensitive,
         expandableRows,
