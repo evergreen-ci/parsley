@@ -2538,6 +2538,23 @@ export type WorkstationSetupCommandInput = {
   directory?: InputMaybe<Scalars["String"]>;
 };
 
+export type BaseTaskFragment = {
+  __typename?: "Task";
+  displayName: string;
+  execution: number;
+  id: string;
+  patchNumber?: number | null;
+  status: string;
+  versionMetadata: {
+    __typename?: "Version";
+    id: string;
+    isPatch: boolean;
+    message: string;
+    projectIdentifier: string;
+    revision: string;
+  };
+};
+
 export type LogkeeperTaskQueryVariables = Exact<{
   buildId: Scalars["String"];
 }>;
@@ -2550,6 +2567,7 @@ export type LogkeeperTaskQuery = {
     task: {
       __typename?: "Task";
       displayName: string;
+      execution: number;
       id: string;
       patchNumber?: number | null;
       status: string;
@@ -2576,6 +2594,7 @@ export type TaskQuery = {
   task?: {
     __typename?: "Task";
     displayName: string;
+    execution: number;
     id: string;
     patchNumber?: number | null;
     status: string;

@@ -31,10 +31,12 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   testID,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
+
   const { data, loading } = useQuery<TaskQuery, TaskQueryVariables>(GET_TASK, {
     variables: { taskId: taskID, execution },
     skip: logType === LogTypes.RESMOKE_LOGS,
   });
+
   const { data: logkeeperData, loading: logkeeperLoading } = useQuery<
     LogkeeperTaskQuery,
     LogkeeperTaskQueryVariables
@@ -45,16 +47,20 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
 
   const { task } = data ?? {};
   const { logkeeperBuildMetadata } = logkeeperData ?? {};
+  const loadedTask = task ?? logkeeperBuildMetadata?.task;
 
-  if (loading || logkeeperLoading || (!task && !logkeeperBuildMetadata)) {
+  if (loading || logkeeperLoading || !loadedTask) {
     return <Icon glyph="EvergreenLogo" size={24} />;
   }
 
-  // @ts-expect-error - We verify above that either task or logkeeperBuildMetadata exists, so logkeeperBuildMetadata will not be undefined as TypeScript suspects
-  const loadedTask = task ?? logkeeperBuildMetadata.task;
-  const { displayName, patchNumber, status, versionMetadata } = loadedTask;
-  const { isPatch, projectIdentifier, message, revision } =
-    versionMetadata ?? {};
+  const {
+    displayName,
+    execution: taskExecution,
+    patchNumber,
+    status,
+    versionMetadata,
+  } = loadedTask;
+  const { isPatch, projectIdentifier, message, revision } = versionMetadata;
 
   const currentTest = logkeeperBuildMetadata?.tests?.find(
     (test) => test.id === testID
@@ -75,7 +81,7 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
       ),
     },
     {
-      href: getEvergreenTaskURL(taskID, execution),
+      href: getEvergreenTaskURL(taskID, taskExecution),
       text: (
         <>
           {displayName} <TaskStatusBadge status={status} />

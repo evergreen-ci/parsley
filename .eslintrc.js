@@ -213,6 +213,8 @@ module.exports = {
           ERROR,
           { selections: ["OperationDefinition", "FragmentDefinition"] },
         ],
+        // Following rule can possibly be removed after ESLint updates.
+        "spaced-comment": OFF,
       },
     },
   ],

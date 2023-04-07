@@ -1,15 +1,7 @@
+#import "../fragments/base-task.graphql"
+
 query Task($taskId: String!, $execution: Int) {
   task(taskId: $taskId, execution: $execution) {
-    displayName
-    id
-    patchNumber
-    status
-    versionMetadata {
-      id
-      isPatch
-      message
-      projectIdentifier
-      revision
-    }
+    ...BaseTask
   }
 }

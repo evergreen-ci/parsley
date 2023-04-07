@@ -1,18 +1,10 @@
+#import "../fragments/base-task.graphql"
+
 query LogkeeperTask($buildId: String!) {
   logkeeperBuildMetadata(buildId: $buildId) {
     id
     task {
-      displayName
-      id
-      patchNumber
-      status
-      versionMetadata {
-        id
-        isPatch
-        message
-        projectIdentifier
-        revision
-      }
+      ...BaseTask
     }
     tests {
       id
