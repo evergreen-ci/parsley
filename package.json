@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.53",
+  "version": "1.0.54",
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
@@ -23,7 +23,7 @@
     "prod": "env-cmd -e devProduction -r .env-cmdrc.local.json vite",
     "eslint:fix": "yarn eslint:strict --fix",
     "eslint:staged": "STRICT=1 eslint",
-    "eslint:strict": "STRICT=1 eslint '*.{js,ts,tsx}' 'src/**/*.ts?(x)' 'cypress/**/*.ts'",
+    "eslint:strict": "STRICT=1 eslint '*.{js,ts,tsx}' 'src/**/*.ts?(x)' 'cypress/**/*.ts' 'src/gql/**/*.graphql'",
     "prepare": "husky install",
     "prettier": "prettier --write",
     "preview": "serve -s dist -p 4173",
@@ -113,6 +113,7 @@
     "@typescript-eslint/parser": "5.57.1",
     "@vitejs/plugin-react": "3.0.0",
     "babel-loader": "8.2.5",
+    "babel-plugin-import-graphql": "2.8.1",
     "cypress": "12.7.0",
     "env-cmd": "10.1.0",
     "eslint": "8.31.0",

@@ -877,8 +877,8 @@ export type MutationScheduleUndispatchedBaseTasksArgs = {
 };
 
 export type MutationSetAnnotationMetadataLinksArgs = {
-  apiMetadataLinks: Array<MetadataLinkInput>;
   execution: Scalars["Int"];
+  metadataLinks: Array<MetadataLinkInput>;
   taskId: Scalars["String"];
 };
 
@@ -2536,4 +2536,75 @@ export type WorkstationSetupCommand = {
 export type WorkstationSetupCommandInput = {
   command: Scalars["String"];
   directory?: InputMaybe<Scalars["String"]>;
+};
+
+export type BaseTaskFragment = {
+  __typename?: "Task";
+  displayName: string;
+  execution: number;
+  id: string;
+  patchNumber?: number | null;
+  status: string;
+  versionMetadata: {
+    __typename?: "Version";
+    id: string;
+    isPatch: boolean;
+    message: string;
+    projectIdentifier: string;
+    revision: string;
+  };
+};
+
+export type LogkeeperTaskQueryVariables = Exact<{
+  buildId: Scalars["String"];
+}>;
+
+export type LogkeeperTaskQuery = {
+  __typename?: "Query";
+  logkeeperBuildMetadata: {
+    __typename?: "LogkeeperBuild";
+    id: string;
+    task: {
+      __typename?: "Task";
+      displayName: string;
+      execution: number;
+      id: string;
+      patchNumber?: number | null;
+      status: string;
+      versionMetadata: {
+        __typename?: "Version";
+        id: string;
+        isPatch: boolean;
+        message: string;
+        projectIdentifier: string;
+        revision: string;
+      };
+    };
+    tests: Array<{ __typename?: "LogkeeperTest"; id: string; name: string }>;
+  };
+};
+
+export type TaskQueryVariables = Exact<{
+  taskId: Scalars["String"];
+  execution?: InputMaybe<Scalars["Int"]>;
+}>;
+
+export type TaskQuery = {
+  __typename?: "Query";
+  task?: {
+    __typename?: "Task";
+    displayName: string;
+    execution: number;
+    id: string;
+    patchNumber?: number | null;
+    status: string;
+    versionMetadata: {
+      __typename?: "Version";
+      id: string;
+      isPatch: boolean;
+      message: string;
+      projectIdentifier: string;
+      revision: string;
+    };
+  } | null;
 };
