@@ -25,7 +25,7 @@ import { useFetch } from "hooks/useFetch";
 import NotFound from "pages/404";
 import { LogkeeperMetadata } from "types/api";
 import { leaveBreadcrumb } from "utils/errorReporting";
-import { formatBytes } from "utils/file";
+import { formatBytes } from "utils/string";
 import LoadingBar from "./LoadingBar";
 
 interface LoadingPageProps {
