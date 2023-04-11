@@ -92,8 +92,9 @@ export const trimStringFromMiddle = (str: string, maxLength: number) => {
   );
 };
 
-export const formatBytes = (bytes: number, decimals = 2) => {
+export const getBytesAsString = (bytes: number, decimals = 2) => {
   if (bytes === 0) return "0 Bytes";
+  if (bytes === 1) return "1 Byte";
   const k = 1024;
   const dm = decimals < 0 ? 0 : decimals;
   const sizes = ["Bytes", "KB", "MB", "GB"];
