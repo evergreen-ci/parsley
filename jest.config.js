@@ -10,7 +10,7 @@ module.exports = {
     "^uuid$": "<rootDir>/node_modules/uuid/dist/index.js",
   },
   modulePaths: ["<rootDir>/src"],
-  setupFiles: ["whatwg-fetch"],
+  setupFiles: ["whatwg-fetch", "./jest.setup.ts"],
   preset: "ts-jest",
   resetMocks: true,
   setupFilesAfterEnv: ["<rootDir>/config/jest/setupTests.ts"],
