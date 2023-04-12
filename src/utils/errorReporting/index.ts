@@ -33,11 +33,13 @@ const reportError = (err: CustomBugsnagError): reportErrorResult => {
 };
 
 const sendError = (err: CustomBugsnagError, severity: Event["severity"]) => {
+  const userId = localStorage.getItem("userId") ?? undefined;
   const metadata = err.metadata || {};
   Bugsnag.notify(err, (event) => {
     // reassigning param is recommended usage in bugsnag docs
     // eslint-disable-next-line no-param-reassign
     event.severity = severity;
+    event.setUser(userId);
     if (metadata) {
       event.addMetadata("metadata", { ...metadata });
     }
