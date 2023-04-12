@@ -97,8 +97,8 @@ const fetchLogFile = async (url: string, options: StreamedFetchOptions) => {
     const chunk = decoder.decode(value, { stream: !done });
     const lines = chunk.split(/\r?\n/);
 
-    // If there was a partial line at the end of the previous chunk,
-    // prepend it to the first line of this chunk.
+    // If the chunk doesn't end with a newline, then the last line is incomplete.
+    // We need to append it to the first line of the next chunk.
     if (result.length > 0) {
       const lastIndex = result.length - 1;
       const lastLine = result[lastIndex];
