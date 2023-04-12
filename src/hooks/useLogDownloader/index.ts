@@ -4,8 +4,8 @@ import { LogTypes } from "constants/enums";
 import useStateRef from "hooks/useStateRef";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
+import { fetchLogFile } from "utils/fetchLogFile";
 import { getBytesAsString } from "utils/string";
-import { fetchLogFile } from "./utils";
 
 /**
  * `useLogDownloader` is a custom hook that downloads a log file from a given URL.
