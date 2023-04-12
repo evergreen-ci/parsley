@@ -158,7 +158,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
           <FlexRow>
             <LogoContainer>
               <AnimationWrapper>
-                <Icon glyph="ParsleyLogo" size={40} useStroke />
+                <Icon glyph="ParsleyLogo" size={36} useStroke />
               </AnimationWrapper>
               <StyledBody>Downloading log...</StyledBody>
             </LogoContainer>
