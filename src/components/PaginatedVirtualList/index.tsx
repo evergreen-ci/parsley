@@ -1,5 +1,7 @@
 import { forwardRef, useCallback, useEffect, useRef } from "react";
 import { ItemContent, Virtuoso, VirtuosoHandle } from "react-virtuoso";
+import { CharKey } from "constants/keys";
+import { useKeyboardShortcut } from "hooks";
 import { PaginatedVirtualListRef } from "./types";
 import usePaginatedVirtualList from "./usePaginatedVirtualList";
 
@@ -48,6 +50,14 @@ const PaginatedVirtualList = forwardRef<
       paginationThreshold,
       paginationOffset,
       ref: listRef,
+    });
+
+    useKeyboardShortcut({ charKey: CharKey.PageEnd }, () => {
+      scrollToLine(rowCount - 1);
+    });
+
+    useKeyboardShortcut({ charKey: CharKey.PageHome }, () => {
+      scrollToLine(0);
     });
 
     // itemContent maps the paginated index to the actual index in the list
