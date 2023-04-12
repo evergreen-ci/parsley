@@ -97,12 +97,14 @@ const fetchLogFile = async (url: string, options: StreamedFetchOptions) => {
     const chunk = decoder.decode(value, { stream: !done });
     const lines = chunk.split(/\r?\n/);
 
-    // If the chunk doesn't end with a newline, then the last line is incomplete.
-    // We need to append it to the first line of the next chunk.
     if (result.length > 0) {
+      // Find the last line we've received so far
       const lastIndex = result.length - 1;
       const lastLine = result[lastIndex];
+      // Concatenate the last line with the first line of the "lines" array
       result[lastIndex] = lastLine + lines[0];
+      // Remove the first line from the "lines" array
+
       lines.shift();
     }
 

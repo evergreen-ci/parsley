@@ -1,5 +1,6 @@
 import { ReadableStream } from "web-streams-polyfill/ponyfill";
 import { TextDecoder, TextEncoder } from "util";
+import "whatwg-fetch";
 
 // Polyfill ReadableStream for Jest tests
 // @ts-expect-error -- ReadableStream is not defined in the global scope
