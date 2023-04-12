@@ -7,6 +7,7 @@ import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
 import routes from "constants/routes";
 import { useAuthContext } from "context/auth";
+import { useUser } from "hooks";
 import NotFound from "./404";
 import LogView from "./LogView";
 
@@ -22,6 +23,9 @@ const Layout = () => (
 );
 
 const Content: React.FC = () => {
+  const { user } = useUser();
+  localStorage.setItem("userId", user?.userId ?? "");
+
   useAnalyticAttributes();
   const { isAuthenticated } = useAuthContext();
   return isAuthenticated ? (

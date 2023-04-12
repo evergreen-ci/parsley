@@ -1,5 +1,6 @@
 import {
   copyToClipboard,
+  getBytesAsString,
   getJiraFormat,
   processLogString,
   shortenGithash,
@@ -112,5 +113,36 @@ describe("trimStringFromMiddle", () => {
   });
   it("doesn't trim middle text if original text is smaller than maxLength specified", () => {
     expect(trimStringFromMiddle("task_name", 10)).toBe("task_name");
+  });
+});
+
+describe("getBytesAsString", () => {
+  const kb = 1024;
+  const mb = kb * 1024;
+  const gb = mb * 1024;
+  it("should return 0 Bytes for 0 bytes", () => {
+    expect(getBytesAsString(0)).toBe("0 Bytes");
+  });
+  it("should format file size in the correct unit", () => {
+    expect(getBytesAsString(1 * kb)).toBe("1 KB");
+    expect(getBytesAsString(1 * mb)).toBe("1 MB");
+    expect(getBytesAsString(1 * gb)).toBe("1 GB");
+  });
+  describe("should format file size in the correct unit with the correct level of precision", () => {
+    it("kilobytes", () => {
+      expect(getBytesAsString(kb + kb / 2, 0)).toBe("2 KB");
+      expect(getBytesAsString(kb + kb / 2, 1)).toBe("1.5 KB");
+      expect(getBytesAsString(kb + kb / 3, 2)).toBe("1.33 KB");
+    });
+    it("megabytes", () => {
+      expect(getBytesAsString(mb + mb / 2, 0)).toBe("2 MB");
+      expect(getBytesAsString(mb + mb / 2, 1)).toBe("1.5 MB");
+      expect(getBytesAsString(mb + mb / 3, 2)).toBe("1.33 MB");
+    });
+    it("gigabytes", () => {
+      expect(getBytesAsString(gb + gb / 2, 0)).toBe("2 GB");
+      expect(getBytesAsString(gb + gb / 2, 1)).toBe("1.5 GB");
+      expect(getBytesAsString(gb + gb / 3, 2)).toBe("1.33 GB");
+    });
   });
 });
