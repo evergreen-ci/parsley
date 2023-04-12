@@ -71,16 +71,36 @@ describe("fetchLogFile", () => {
   });
 
   it("should ensure partial lines in chunks are not split and are returned as a single line", async () => {
-    const readableStream = createReadableStream(["Hello W", "orld"]);
-    const response = new Response(readableStream, { status: 200 });
+    let readableStream = createReadableStream(["Hello W", "orld"]);
+    let response = new Response(readableStream, { status: 200 });
     // @ts-expect-error
     response.body = readableStream;
 
     mockFetch.mockResolvedValue(response);
 
-    const result = await fetchLogFile(url, options);
+    let result = await fetchLogFile(url, options);
 
     expect(result).toStrictEqual(["Hello World"]);
+
+    readableStream = createReadableStream([
+      "Hello W",
+      "orld!\n",
+      "This is a test",
+      "\nof the emergency broadcast system",
+    ]);
+    response = new Response(readableStream, { status: 200 });
+    // @ts-expect-error
+    response.body = readableStream;
+
+    mockFetch.mockResolvedValue(response);
+
+    result = await fetchLogFile(url, options);
+
+    expect(result).toStrictEqual([
+      "Hello World!",
+      "This is a test",
+      "of the emergency broadcast system",
+    ]);
   });
 
   it("should call onIncompleteDownload if the log file is not fully downloaded", async () => {
