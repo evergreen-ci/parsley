@@ -25,7 +25,7 @@ import { useFetch } from "hooks/useFetch";
 import NotFound from "pages/404";
 import { LogkeeperMetadata } from "types/api";
 import { leaveBreadcrumb } from "utils/errorReporting";
-import { formatBytes } from "utils/string";
+import { getBytesAsString } from "utils/string";
 import LoadingBar from "./LoadingBar";
 
 interface LoadingPageProps {
@@ -162,7 +162,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
               </AnimationWrapper>
               <StyledBody>Downloading log...</StyledBody>
             </LogoContainer>
-            <DownloadSize>{formatBytes(fileSize)}</DownloadSize>
+            <DownloadSize>{getBytesAsString(fileSize)}</DownloadSize>
           </FlexRow>
           <LoadingBar indeterminate />
         </LoadingBarContainer>

@@ -4,8 +4,8 @@ import { LogTypes } from "constants/enums";
 import useStateRef from "hooks/useStateRef";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
-import { formatBytes } from "utils/string";
-import { fetchLogFile } from "./utils";
+import { fetchLogFile } from "utils/fetchLogFile";
+import { getBytesAsString } from "utils/string";
 
 /**
  * `useLogDownloader` is a custom hook that downloads a log file from a given URL.
@@ -59,7 +59,7 @@ const useLogDownloader = (url: string, logType: LogTypes) => {
           {
             url,
             time: Date.now() - timeStart,
-            fileSize: formatBytes(getFileSize()),
+            fileSize: getBytesAsString(getFileSize()),
           },
           "request"
         );

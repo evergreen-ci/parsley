@@ -2608,3 +2608,10 @@ export type TaskQuery = {
     };
   } | null;
 };
+
+export type UserQueryVariables = Exact<{ [key: string]: never }>;
+
+export type UserQuery = {
+  __typename?: "Query";
+  user: { __typename?: "User"; userId: string };
+};

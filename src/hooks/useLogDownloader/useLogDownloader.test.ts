@@ -7,14 +7,25 @@ const API_URL = "/some/endpoint";
 const textMessage =
   "Fetched a multiline log file\nSome more lines\nAnd some more";
 
-// Fetch is not supported in jest so we need to mock it out
 describe("useLogDownloader", () => {
-  it("gets a good response from the api and updates its state", async () => {
-    const mockFetchPromise = jest.fn().mockResolvedValue({
-      ok: true,
-      text: () => Promise.resolve(textMessage),
-    });
-    jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
+  const mockFetch = jest.fn();
+
+  beforeEach(() => {
+    global.fetch = mockFetch;
+  });
+
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  it("gets a good response from the log source and returns the array of log lines", async () => {
+    const readableStream = createReadableStream([textMessage]);
+
+    const response = new Response(readableStream, { status: 200 });
+    // @ts-expect-error
+    response.body = readableStream;
+
+    mockFetch.mockResolvedValue(response);
 
     const { result, waitForNextUpdate } = renderHook(() =>
       useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
@@ -42,4 +53,51 @@ describe("useLogDownloader", () => {
     expect(result.current.isLoading).toBe(false);
     expect(result.current.error).toBe("Something went wrong");
   });
+  it("should update the progress bar as the log is downloaded", async () => {
+    const readableStream = createReadableStream(["chunk1", "chunk2"]);
+
+    const response = new Response(readableStream, { status: 200 });
+    // @ts-expect-error
+    response.body = readableStream;
+
+    mockFetch.mockResolvedValue(response);
+
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+    );
+    expect(result.current.isLoading).toBe(true);
+    expect(result.current.fileSize).toBe(0);
+    await waitForNextUpdate();
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.fileSize).toBe(12);
+  });
+  it("should remove the last log line if it is empty", async () => {
+    const readableStream = createReadableStream(["chunk1\n", "chunk2\n", ""]);
+
+    const response = new Response(readableStream, { status: 200 });
+    // @ts-expect-error
+    response.body = readableStream;
+
+    mockFetch.mockResolvedValue(response);
+
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+    );
+    expect(result.current.isLoading).toBe(true);
+    await waitForNextUpdate();
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.data).toStrictEqual(["chunk1", "chunk2"]);
+  });
 });
+
+const createReadableStream = (chunks: string[]) => {
+  const encoder = new TextEncoder();
+  const encodedChunks = chunks.map((chunk) => encoder.encode(chunk));
+  const readableStream = new ReadableStream({
+    start(controller) {
+      encodedChunks.forEach((chunk) => controller.enqueue(chunk));
+      controller.close();
+    },
+  });
+  return readableStream;
+};
