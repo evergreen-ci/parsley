@@ -14,7 +14,7 @@ import {
   TaskQueryVariables,
 } from "gql/generated/types";
 import { GET_LOGKEEPER_TASK, GET_TASK } from "gql/queries";
-import { shortenGithash } from "utils/string";
+import { shortenGithash, trimStringFromMiddle } from "utils/string";
 
 interface Props {
   buildID: string;
@@ -95,10 +95,12 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
       href: getEvergreenTaskURL(taskID, taskExecution),
       text: (
         <>
-          {displayName} <TaskStatusBadge status={status} />
+          {trimStringFromMiddle(displayName, 30)}{" "}
+          <TaskStatusBadge status={status} />
         </>
       ),
       "data-cy": "task-breadcrumb",
+      tooltipText: displayName.length > 30 && displayName,
       onClick: () => {
         sendEvent({ name: "Opened Task Link" });
       },
