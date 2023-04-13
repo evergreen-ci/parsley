@@ -9,6 +9,7 @@ import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useHighlightParam } from "hooks/useHighlightParam";
+import { leaveBreadcrumb } from "utils/errorReporting";
 import { validateRegexp } from "utils/validators";
 
 const Search: React.FC = () => {
@@ -35,6 +36,7 @@ const Search: React.FC = () => {
             },
           ]);
           sendEvent({ name: "Added Filter", filterExpression: value });
+          leaveBreadcrumb("Added Filter", { filterExpression: value });
         }
         break;
       case SearchBarActions.Highlight:
@@ -42,6 +44,7 @@ const Search: React.FC = () => {
           setSearch("");
           setHighlights([...highlights, value]);
           sendEvent({ name: "Added Highlight", highlightExpression: value });
+          leaveBreadcrumb("Added Highlight", { highlightExpression: value });
         }
         break;
       default:
@@ -52,6 +55,7 @@ const Search: React.FC = () => {
   const handleOnChange = (value: string) => {
     setSearch(value);
     sendEvent({ name: "Applied Search", searchExpression: value });
+    leaveBreadcrumb("Applied Search", { searchExpression: value });
   };
 
   return (
