@@ -88,6 +88,25 @@ describe("useLogDownloader", () => {
     expect(result.current.isLoading).toBe(false);
     expect(result.current.data).toStrictEqual(["chunk1", "chunk2"]);
   });
+
+  it("should throw a FILE_TOO_LARGE error if the file is too large and only download the file partially", async () => {
+    const readableStream = createReadableStream(["chunk1\n", "chunk2\n"]);
+
+    const response = new Response(readableStream, { status: 200 });
+    // @ts-expect-error
+    response.body = readableStream;
+
+    mockFetch.mockResolvedValue(response);
+
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS, 5)
+    );
+    expect(result.current.isLoading).toBe(true);
+    await waitForNextUpdate();
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.error).toBe("FILE_TOO_LARGE");
+    expect(result.current.data).toStrictEqual(["chunk1"]);
+  });
 });
 
 const createReadableStream = (chunks: string[]) => {

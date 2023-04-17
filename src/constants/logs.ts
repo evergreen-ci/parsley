@@ -1,0 +1,3 @@
+const LOG_FILE_SIZE_LIMIT = 1024 * 1024 * 1024 * 2.5; // 2.5 GB
+
+export { LOG_FILE_SIZE_LIMIT };

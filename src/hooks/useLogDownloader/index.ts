@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLogDownloadAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
+import { LOG_FILE_SIZE_LIMIT } from "constants/logs";
 import useStateRef from "hooks/useStateRef";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
@@ -17,7 +18,11 @@ import { getBytesAsString } from "utils/string";
  * - error: an error message if the download fails
  * - fileSize: the size of the log file in bytes
  */
-const useLogDownloader = (url: string, logType: LogTypes) => {
+const useLogDownloader = (
+  url: string,
+  logType: LogTypes,
+  downloadSizeLimit: number = LOG_FILE_SIZE_LIMIT
+) => {
   const [data, setData] = useState<string[] | undefined>();
   const [error, setError] = useState<string | undefined>();
   const [fileSize, setFileSize, getFileSize] = useStateRef<number>(0);
@@ -33,6 +38,15 @@ const useLogDownloader = (url: string, logType: LogTypes) => {
       abortController: isProduction ? abortController : undefined,
       onProgress: (progress) => {
         setFileSize(getFileSize() + progress);
+      },
+      downloadSizeLimit,
+      onIncompleteDownload: (reason, incompleteDownloadError) => {
+        leaveBreadcrumb(
+          "useLogDownloader",
+          { incompleteDownloadError, reason },
+          "error"
+        );
+        setError(reason);
       },
     })
       .then((logs) => {
