@@ -16,13 +16,22 @@ const CLIInstructions = () => {
 
 const getCLICommand = (logMetadata: LogMetadata) => {
   const { taskID, execution, testID, logType, origin, buildID } = logMetadata;
-  if (!taskID || !execution || !testID || !logType || !origin) return "";
   switch (logType) {
     case LogTypes.EVERGREEN_TASK_LOGS:
+      if (!taskID || !execution || !origin) {
+        return "";
+      }
       return `evergreen buildlogger fetch --task_id ${taskID} --execution ${execution} --tags ${origin}_log`;
+
     case LogTypes.EVERGREEN_TEST_LOGS:
+      if (!taskID || !execution || !testID) {
+        return "";
+      }
       return `evergreen buildlogger fetch --task_id ${taskID} --execution ${execution} --test_name ${testID}`;
     case LogTypes.RESMOKE_LOGS:
+      if (!buildID) {
+        return "";
+      }
       return `curl ${getResmokeLogURL(buildID || "", { testID, raw: true })}`;
     default:
       return "";
