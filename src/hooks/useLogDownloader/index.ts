@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useLogDownloadAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
 import { LOG_FILE_SIZE_LIMIT } from "constants/logs";
+import { useToastContext } from "context/toast";
 import useStateRef from "hooks/useStateRef";
 import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
@@ -28,6 +29,8 @@ const useLogDownloader = (
   const [fileSize, setFileSize, getFileSize] = useStateRef<number>(0);
   const [isLoading, setIsLoading] = useState(true);
   const { sendEvent } = useLogDownloadAnalytics();
+  const dispatchToast = useToastContext();
+
   useEffect(() => {
     leaveBreadcrumb("useLogDownloader", { url }, "request");
     const abortController = new AbortController();
@@ -46,7 +49,13 @@ const useLogDownloader = (
           { incompleteDownloadError, reason },
           "error"
         );
-        setError(reason);
+        dispatchToast.warning(
+          "We were only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log on to your machine.",
+          true,
+          {
+            title: "Log not fully downloaded",
+          }
+        );
       },
     })
       .then((logs) => {
