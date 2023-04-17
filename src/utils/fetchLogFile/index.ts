@@ -2,8 +2,6 @@ type IncompleteDownloadReason = "SERVER_ERROR" | "FILE_TOO_LARGE";
 export type StreamedFetchOptions = {
   abortController?: AbortController;
   onProgress?: (progress: number) => void;
-  // Refactor onIncompleteDownload to require an error object if reason is SERVER_ERROR
-
   onIncompleteDownload?: (
     reason: IncompleteDownloadReason,
     error?: Error
