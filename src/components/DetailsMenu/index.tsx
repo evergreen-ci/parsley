@@ -1,6 +1,7 @@
 import styled from "@emotion/styled";
 import { size } from "constants/tokens";
 import ButtonRow from "./ButtonRow";
+import CLIInstructions from "./CLIInstructions";
 import SearchRangeInput from "./SearchRangeInput";
 import {
   CaseSensitiveToggle,
@@ -29,6 +30,11 @@ const DetailsMenu: React.FC<DetailsMenuProps> = ({ "data-cy": dataCy }) => (
       </Column>
     </Row>
     <ButtonRow />
+    <Row>
+      <div>
+        <CLIInstructions />
+      </div>
+    </Row>
   </DetailsMenuCard>
 );
 
