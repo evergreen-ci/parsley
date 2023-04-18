@@ -1,6 +1,6 @@
 enum IncompleteDownloadReason {
-  SERVER_ERROR = "SERVER_ERROR",
-  FILE_TOO_LARGE = "FILE_TOO_LARGE",
+  ServerError = "SERVER_ERROR",
+  FileTooLarge = "FILE_TOO_LARGE",
 }
 
 export type StreamedFetchOptions = {
@@ -53,7 +53,7 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
             // If we've hit the file size limit, stop streaming and close the stream
             if (bytesFetched > options.downloadSizeLimit) {
               options?.onIncompleteDownload?.(
-                IncompleteDownloadReason.FILE_TOO_LARGE
+                IncompleteDownloadReason.FileTooLarge
               );
               controller.close();
               break;
@@ -76,7 +76,7 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
         // we hit the timeout, we should instead return the bytes we've fetched so far.
         if (bytesFetched > 0) {
           options?.onIncompleteDownload?.(
-            IncompleteDownloadReason.SERVER_ERROR,
+            IncompleteDownloadReason.ServerError,
             error as Error
           );
           controller.close();
