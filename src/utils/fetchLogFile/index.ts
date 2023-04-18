@@ -1,6 +1,6 @@
 enum IncompleteDownloadReason {
-  SERVER_ERROR = "SERVER_ERROR",
-  FILE_TOO_LARGE = "FILE_TOO_LARGE",
+  ServerError = "SERVER_ERROR",
+  FileTooLarge = "FILE_TOO_LARGE",
 }
 
 export type StreamedFetchOptions = {
