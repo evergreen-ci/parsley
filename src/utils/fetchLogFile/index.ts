@@ -1,7 +1,15 @@
+enum IncompleteDownloadReason {
+  ServerError = "SERVER_ERROR",
+  FileTooLarge = "FILE_TOO_LARGE",
+}
+
 export type StreamedFetchOptions = {
   abortController?: AbortController;
   onProgress?: (progress: number) => void;
-  onIncompleteDownload?: () => void;
+  onIncompleteDownload?: (
+    reason: IncompleteDownloadReason,
+    error?: Error
+  ) => void;
   downloadSizeLimit?: number;
 };
 /**
@@ -44,7 +52,9 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
           if (options?.downloadSizeLimit) {
             // If we've hit the file size limit, stop streaming and close the stream
             if (bytesFetched > options.downloadSizeLimit) {
-              options?.onIncompleteDownload?.();
+              options?.onIncompleteDownload?.(
+                IncompleteDownloadReason.FileTooLarge
+              );
               controller.close();
               break;
             }
@@ -61,7 +71,18 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
           controller.enqueue(value);
         }
       } catch (error) {
-        controller.error(error);
+        // If we hit an error, but we've already fetched some bytes, then we can assume that
+        // the download was incomplete. This is because the controller will close the connection with an error if
+        // we hit the timeout, we should instead return the bytes we've fetched so far.
+        if (bytesFetched > 0) {
+          options?.onIncompleteDownload?.(
+            IncompleteDownloadReason.ServerError,
+            error as Error
+          );
+          controller.close();
+        } else {
+          controller.error(error);
+        }
       } finally {
         reader.releaseLock();
       }
@@ -112,6 +133,4 @@ const fetchLogFile = async (url: string, options: StreamedFetchOptions) => {
   }
 };
 
-export { fetchLogFile };
-
-export { streamedFetch };
+export { streamedFetch, fetchLogFile };

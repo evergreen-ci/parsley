@@ -117,7 +117,7 @@ describe("fetchLogFile", () => {
       downloadSizeLimit: 4,
     });
 
-    expect(mockOnIncompleteDownload).toHaveBeenCalledWith();
+    expect(mockOnIncompleteDownload).toHaveBeenCalledWith("FILE_TOO_LARGE");
     expect(result).toStrictEqual(["Hello"]);
   });
 });
