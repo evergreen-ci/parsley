@@ -25,7 +25,7 @@ describe("cliInstructions", () => {
     render(<Component />, { wrapper });
     expect(screen.queryByDataCy("cli-instructions")).not.toBeInTheDocument();
   });
-  it("should render the task log download command if the log is a task log", () => {
+  it("should render the task log download command with the appropriate tags if the log is a task log", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
       <CLIInstructions />
@@ -39,8 +39,30 @@ describe("cliInstructions", () => {
         logType: LogTypes.EVERGREEN_TASK_LOGS,
       });
     });
-    const taskDownloadCommand =
+    let taskDownloadCommand =
       "evergreen buildlogger fetch --task_id taskId --execution 0 --tags task_log";
+    expect(screen.getByText(taskDownloadCommand)).toBeInTheDocument();
+    act(() => {
+      hook.current.setLogMetadata({
+        taskID: "taskId",
+        execution: "0",
+        origin: "agent",
+        logType: LogTypes.EVERGREEN_TASK_LOGS,
+      });
+    });
+    taskDownloadCommand =
+      "evergreen buildlogger fetch --task_id taskId --execution 0 --tags agent_log";
+    expect(screen.getByText(taskDownloadCommand)).toBeInTheDocument();
+    act(() => {
+      hook.current.setLogMetadata({
+        taskID: "taskId",
+        execution: "0",
+        origin: "all",
+        logType: LogTypes.EVERGREEN_TASK_LOGS,
+      });
+    });
+    taskDownloadCommand =
+      "evergreen buildlogger fetch --task_id taskId --execution 0";
     expect(screen.getByText(taskDownloadCommand)).toBeInTheDocument();
   });
   it("should render the test log download command if the log is a test log", () => {

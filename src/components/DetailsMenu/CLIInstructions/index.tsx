@@ -17,12 +17,13 @@ const CLIInstructions = () => {
 const getCLICommand = (logMetadata: LogMetadata) => {
   const { taskID, execution, testID, logType, origin, buildID } = logMetadata;
   switch (logType) {
-    case LogTypes.EVERGREEN_TASK_LOGS:
+    case LogTypes.EVERGREEN_TASK_LOGS: {
       if (!taskID || !execution || !origin) {
         return "";
       }
-      return `evergreen buildlogger fetch --task_id ${taskID} --execution ${execution} --tags ${origin}_log`;
-
+      const tags = origin === "all" ? "" : `--tags ${origin}_log`;
+      return `evergreen buildlogger fetch --task_id ${taskID} --execution ${execution} ${tags}`;
+    }
     case LogTypes.EVERGREEN_TEST_LOGS:
       if (!taskID || !execution || !testID) {
         return "";
