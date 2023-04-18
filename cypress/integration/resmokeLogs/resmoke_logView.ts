@@ -171,7 +171,7 @@ describe("Jump to line", () => {
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
 
   it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
-    cy.visit(`${logLink}?bookmarks=0,11079`);
+    cy.visit(logLink);
     cy.dataCy("log-row-4").should("be.visible").dblclick({ force: true });
     cy.dataCy("bookmark-4").should("be.visible");
 

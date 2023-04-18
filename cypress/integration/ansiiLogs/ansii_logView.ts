@@ -126,7 +126,7 @@ describe("Jump to line", () => {
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
 
   it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
-    cy.visit(`${logLink}?bookmarks=0,297`);
+    cy.visit(logLink);
     cy.dataCy("log-row-4").should("be.visible").dblclick({ force: true });
     cy.dataCy("bookmark-4").should("be.visible");
 
