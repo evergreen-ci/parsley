@@ -50,7 +50,7 @@ const useLogDownloader = (
           "error"
         );
         dispatchToast.warning(
-          "We were only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log on to your machine.",
+          "Parsley was only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log onto your machine.",
           true,
           {
             title: "Log not fully downloaded",
