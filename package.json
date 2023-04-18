@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.56",
+  "version": "1.0.58",
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
@@ -138,7 +138,7 @@
     "rollup-plugin-visualizer": "5.9.0",
     "serve": "14.1.2",
     "storybook": "7.0.0-beta.34",
-    "ts-jest": "29.0.3",
+    "ts-jest": "29.1.0",
     "typescript": "5.0.3",
     "vite": "4.0.1",
     "vite-plugin-checker": "0.5.2",
