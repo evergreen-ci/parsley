@@ -1,4 +1,8 @@
-type IncompleteDownloadReason = "SERVER_ERROR" | "FILE_TOO_LARGE";
+enum IncompleteDownloadReason {
+  SERVER_ERROR = "SERVER_ERROR",
+  FILE_TOO_LARGE = "FILE_TOO_LARGE",
+}
+
 export type StreamedFetchOptions = {
   abortController?: AbortController;
   onProgress?: (progress: number) => void;
@@ -48,7 +52,9 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
           if (options?.downloadSizeLimit) {
             // If we've hit the file size limit, stop streaming and close the stream
             if (bytesFetched > options.downloadSizeLimit) {
-              options?.onIncompleteDownload?.("FILE_TOO_LARGE");
+              options?.onIncompleteDownload?.(
+                IncompleteDownloadReason.FILE_TOO_LARGE
+              );
               controller.close();
               break;
             }
@@ -66,10 +72,13 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
         }
       } catch (error) {
         // If we hit an error, but we've already fetched some bytes, then we can assume that
-        // the download was incomplete. This is because the load balancer will close the connection if
-        // we hit the timeout, but we won't get an error until we try to read the next chunk.
+        // the download was incomplete. This is because the controller will close the connection with an error if
+        // we hit the timeout, we should instead return the bytes we've fetched so far.
         if (bytesFetched > 0) {
-          options?.onIncompleteDownload?.("SERVER_ERROR", error as Error);
+          options?.onIncompleteDownload?.(
+            IncompleteDownloadReason.SERVER_ERROR,
+            error as Error
+          );
           controller.close();
         } else {
           controller.error(error);
