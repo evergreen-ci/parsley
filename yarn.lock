@@ -2986,7 +2986,7 @@
     "@leafygreen-ui/tokens" "^2.0.0"
     "@leafygreen-ui/typography" "^16.0.0"
 
-"@leafygreen-ui/copyable@^8.0.6":
+"@leafygreen-ui/copyable@8.0.6":
   version "8.0.6"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/copyable/-/copyable-8.0.6.tgz#04960df431ea383e0fa9b7b18740e324f535bf2c"
   integrity sha512-evgHOuQMl5SB2XfCosuWoCDkkJh9IcYgo5YY/Bz0lP+yaAFYWoMHT6WLmKqoHOSn4900xbMSUlt0BLLP9CGdaA==
