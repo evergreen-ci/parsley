@@ -55,7 +55,7 @@ describe("auth", () => {
     );
   });
 
-  it("should execute a query against GraphQL upon mount to check if user is authenticated", async () => {
+  it("should execute a query against GraphQL upon mount to check if user is authenticated", () => {
     const mockFetchPromise = jest.fn().mockResolvedValue({});
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 

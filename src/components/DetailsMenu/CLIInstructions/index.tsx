@@ -33,7 +33,7 @@ const getCLICommand = (logMetadata: LogMetadata) => {
       if (!buildID) {
         return "";
       }
-      return `curl ${getResmokeLogURL(buildID, { testID, raw: true })}`;
+      return `curl "${getResmokeLogURL(buildID, { testID, raw: true })}"`;
     default:
       return "";
   }

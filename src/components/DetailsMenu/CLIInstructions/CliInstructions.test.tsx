@@ -4,19 +4,13 @@ import { getResmokeLogURL } from "constants/logURLTemplates";
 import { LogContextProvider, useLogContext } from "context/LogContext";
 import { renderWithRouterMatch as render, screen } from "test_utils";
 import { renderComponentWithHook } from "test_utils/TestHooks";
-import { mockEnvironmentVariables } from "test_utils/utils";
 import CLIInstructions from ".";
-
-const { mockEnv, cleanup } = mockEnvironmentVariables();
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
 );
 
 describe("cliInstructions", () => {
-  afterEach(() => {
-    cleanup();
-  });
   it("should not exist if no task id or build id is provided", () => {
     const { Component } = renderComponentWithHook(
       useLogContext,
@@ -84,7 +78,6 @@ describe("cliInstructions", () => {
     expect(screen.getByText(testDownloadCommand)).toBeInTheDocument();
   });
   it("should render the logkeeper download command if the log is a resmoke log", () => {
-    mockEnv("REACT_APP_LOGKEEPER_URL", "https://logkeeper-test.org");
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
       <CLIInstructions />
@@ -99,10 +92,10 @@ describe("cliInstructions", () => {
         logType: LogTypes.RESMOKE_LOGS,
       });
     });
-    const logkeeperDownloadCommand = `curl ${getResmokeLogURL("buildId", {
+    const logkeeperDownloadCommand = `curl "${getResmokeLogURL("buildId", {
       testID: "testId",
       raw: true,
-    })}`;
+    })}"`;
     expect(screen.getByText(logkeeperDownloadCommand)).toBeInTheDocument();
   });
 });
