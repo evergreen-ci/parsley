@@ -10,4 +10,4 @@ Pressing `Shift` and `?` brings up the shortcut menu for Parsley:
 
 `]` switches between displaying and hiding the side panel. 
 
-`N` and `P` paginate forward and backward for search results. 
+`N` or `Enter` and `P` or `Shift` + `Enter` paginate forward and backward for search results. 
