@@ -30,11 +30,7 @@ const DetailsMenu: React.FC<DetailsMenuProps> = ({ "data-cy": dataCy }) => (
       </Column>
     </Row>
     <ButtonRow />
-    <Row>
-      <div>
-        <CLIInstructions />
-      </div>
-    </Row>
+    <CLIInstructions />
   </DetailsMenuCard>
 );
 

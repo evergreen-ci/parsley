@@ -529,11 +529,6 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
           </div>
         </button>
       </div>
-      <div
-        class="css-f24dyb"
-      >
-        <div />
-      </div>
     </div>
   </div>
 </div>
@@ -1068,30 +1063,24 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
           </div>
         </button>
       </div>
-      <div
-        class="css-f24dyb"
+      <label
+        class="leafygreen-ui-1d8p4jj"
+        for="code-1"
       >
-        <div>
-          <label
-            class="leafygreen-ui-1d8p4jj"
-            for="code-1"
-          >
-            Fetch the log via CLI
-          </label>
-          <div
-            class="css-1ago99h leafygreen-ui-s93xmp"
-          >
-            <code
-              class="leafygreen-ui-4f6y2t"
-              id="code-1"
-            >
-              evergreen buildlogger fetch --task_id mci_ubuntu1604_test_model_task_5f4d3b4f562343215f7f5f3d_20_08_25_15_50_10 --execution 0 --test_name TestModelGetArtifacts
-            </code>
-            <span
-              class="leafygreen-ui-11qmwnb"
-            />
-          </div>
-        </div>
+        Fetch the log via CLI
+      </label>
+      <div
+        class="css-1ago99h leafygreen-ui-s93xmp"
+      >
+        <code
+          class="leafygreen-ui-4f6y2t"
+          id="code-1"
+        >
+          evergreen buildlogger fetch --task_id mci_ubuntu1604_test_model_task_5f4d3b4f562343215f7f5f3d_20_08_25_15_50_10 --execution 0 --test_name TestModelGetArtifacts
+        </code>
+        <span
+          class="leafygreen-ui-11qmwnb"
+        />
       </div>
     </div>
   </div>
