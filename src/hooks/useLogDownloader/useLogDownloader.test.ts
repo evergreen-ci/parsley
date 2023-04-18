@@ -1,5 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { LogTypes } from "constants/enums";
+import { RenderFakeToastContext } from "context/toast/__mocks__";
 import { useLogDownloader } from ".";
 
 const API_URL = "/some/endpoint";
@@ -27,6 +28,8 @@ describe("useLogDownloader", () => {
 
     mockFetch.mockResolvedValue(response);
 
+    // RenderFakeToastContext is a mock of the ToastContext
+    RenderFakeToastContext();
     const { result, waitForNextUpdate } = renderHook(() =>
       useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
     );
@@ -45,6 +48,8 @@ describe("useLogDownloader", () => {
       .mockRejectedValue(new Error("Something went wrong"));
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
+    // RenderFakeToastContext is a mock of the ToastContext
+    RenderFakeToastContext();
     const { result, waitForNextUpdate } = renderHook(() =>
       useLogDownloader(API_URL, LogTypes.EVERGREEN_TASK_LOGS)
     );
@@ -62,6 +67,8 @@ describe("useLogDownloader", () => {
 
     mockFetch.mockResolvedValue(response);
 
+    // RenderFakeToastContext is a mock of the ToastContext
+    RenderFakeToastContext();
     const { result, waitForNextUpdate } = renderHook(() =>
       useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
     );
@@ -80,6 +87,8 @@ describe("useLogDownloader", () => {
 
     mockFetch.mockResolvedValue(response);
 
+    // RenderFakeToastContext is a mock of the ToastContext
+    RenderFakeToastContext();
     const { result, waitForNextUpdate } = renderHook(() =>
       useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
     );
@@ -87,6 +96,31 @@ describe("useLogDownloader", () => {
     await waitForNextUpdate();
     expect(result.current.isLoading).toBe(false);
     expect(result.current.data).toStrictEqual(["chunk1", "chunk2"]);
+  });
+
+  it("should throw a FILE_TOO_LARGE error if the file is too large and only download the file partially", async () => {
+    const readableStream = createReadableStream(["chunk1\n", "chunk2\n"]);
+
+    const response = new Response(readableStream, { status: 200 });
+    // @ts-expect-error
+    response.body = readableStream;
+
+    mockFetch.mockResolvedValue(response);
+
+    // RenderFakeToastContext is a mock of the ToastContext
+    const { dispatchToast } = RenderFakeToastContext();
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS, 5)
+    );
+    expect(result.current.isLoading).toBe(true);
+    await waitForNextUpdate();
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.data).toStrictEqual(["chunk1"]);
+    expect(dispatchToast.warning).toHaveBeenCalledWith(
+      "Parsley was only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log onto your machine.",
+      true,
+      { title: "Log not fully downloaded" }
+    );
   });
 });
 
