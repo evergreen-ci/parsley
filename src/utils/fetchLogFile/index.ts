@@ -66,8 +66,8 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
         }
       } catch (error) {
         // If we hit an error, but we've already fetched some bytes, then we can assume that
-        // the download was incomplete. This is because the load balancer will close the connection if
-        // we hit the timeout, but we won't get an error until we try to read the next chunk.
+        // the download was incomplete. This is because the controller will close the connection with an error if
+        // we hit the timeout, we should instead return the bytes we've fetched so far.
         if (bytesFetched > 0) {
           options?.onIncompleteDownload?.("SERVER_ERROR", error as Error);
           controller.close();
