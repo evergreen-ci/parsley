@@ -21,7 +21,7 @@ const usePaginatedVirtualList = ({
   const prevPage = usePrevious(currentPage);
   const totalPageCount = Math.ceil(rowCount / paginationThreshold);
 
-  // isAutoScroll is used to prevent the list from automatically adjusting the scroll position
+  // isScrollerScroll is used to prevent the list from automatically adjusting the scroll position
   // when jumpToLine is called. This is necessary because the list will automatically scroll to the
   // top of the page when the user scrolls to the next or previous page. We don't want to scroll to
   // the top of the page when jumpToLine is called, so we use this flag to prevent that from happening.
@@ -130,10 +130,13 @@ const usePaginatedVirtualList = ({
         },
         "process"
       );
-      ref.current?.scrollToIndex({
-        index: nextScrollIndex,
-        align: "start",
-      });
+      // This setTimeout is necessary to avoid a race condition where the list hasn't finished rendering the next page
+      setTimeout(() => {
+        ref.current?.scrollToIndex({
+          index: nextScrollIndex,
+          align: "start",
+        });
+      }, 0);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [paginationOffset, currentPage, startingIndex]
