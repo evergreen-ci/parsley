@@ -41,7 +41,7 @@ const ButtonRow: React.FC = () => {
               sendEvent({ name: "Clicked Copy To Jira" });
             }}
           >
-            JIRA
+            Copy bookmarks
           </Button>
         }
         triggerEvent="hover"

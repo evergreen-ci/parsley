@@ -1,29 +1,29 @@
-import { act } from "@testing-library/react-hooks";
-import { renderWithRouterMatch as render, waitFor } from "test_utils";
+import { renderHook } from "@testing-library/react-hooks";
+import { createMemoryHistory } from "history";
+import {
+  // Refer to https://reactrouter.com/docs/en/v6/routers/history-router to understand
+  // why this import is marked as unstable.
+  unstable_HistoryRouter as HistoryRouter,
+  Route,
+  Routes,
+} from "react-router-dom";
+import { waitFor } from "test_utils";
 import { mockEnvironmentVariables } from "test_utils/utils";
 import { evergreenURL, graphqlURL } from "utils/environmentVariables";
 import { AuthProvider, useAuthContext } from ".";
 
+const history = createMemoryHistory({ initialEntries: ["/"] });
 const { mockEnv, cleanup } = mockEnvironmentVariables();
 
-const renderComponentWithHook = () => {
-  const hook: { current: ReturnType<typeof useAuthContext> } = {
-    current: {} as ReturnType<typeof useAuthContext>,
-  };
-  const Component: React.FC = () => {
-    hook.current = useAuthContext();
-    return null;
-  };
-  return {
-    Component,
-    hook,
-  };
-};
-
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <AuthProvider>
-    <div>{children}</div>
-  </AuthProvider>
+  <HistoryRouter history={history}>
+    <AuthProvider>
+      <Routes>
+        <Route element={null} path="/login" />
+        <Route element={children} path="/" />
+      </Routes>
+    </AuthProvider>
+  </HistoryRouter>
 );
 
 describe("auth", () => {
@@ -48,8 +48,9 @@ describe("auth", () => {
   });
 
   it("should error when rendered outside of AuthProvider", () => {
-    const { Component } = renderComponentWithHook();
-    expect(() => render(<Component />)).toThrow(
+    const { result } = renderHook(() => useAuthContext());
+
+    expect(result.error?.message).toBe(
       "useAuthContext must be used within an AuthProvider"
     );
   });
@@ -58,8 +59,7 @@ describe("auth", () => {
     const mockFetchPromise = jest.fn().mockResolvedValue({});
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-    const { Component } = renderComponentWithHook();
-    render(<Component />, { wrapper });
+    renderHook(() => useAuthContext(), { wrapper });
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith(graphqlURL, checkLoginFetchParams);
@@ -69,28 +69,27 @@ describe("auth", () => {
     const mockFetchPromise = jest.fn().mockResolvedValue({ ok: true });
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-    const { Component, hook } = renderComponentWithHook();
-    render(<Component />, { wrapper });
+    const { waitForNextUpdate, result } = renderHook(() => useAuthContext(), {
+      wrapper,
+    });
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith(graphqlURL, checkLoginFetchParams);
-    await waitFor(() => {
-      expect(hook.current.isAuthenticated).toBe(true);
-    });
+    await waitForNextUpdate();
+    expect(result.current.isAuthenticated).toBe(true);
   });
 
   it("should not authenticate the user if the GraphQL query fails", async () => {
     const mockFetchPromise = jest.fn().mockResolvedValue({ ok: false });
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-    const { Component, hook } = renderComponentWithHook();
-    render(<Component />, { wrapper });
+    const { result } = renderHook(() => useAuthContext(), {
+      wrapper,
+    });
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith(graphqlURL, checkLoginFetchParams);
-    await waitFor(() => {
-      expect(hook.current.isAuthenticated).toBe(false);
-    });
+    expect(result.current.isAuthenticated).toBe(false);
   });
 
   describe("devLogin", () => {
@@ -98,30 +97,25 @@ describe("auth", () => {
       const mockFetchPromise = jest.fn().mockResolvedValue({ ok: true });
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-      const { Component, hook } = renderComponentWithHook();
-      render(<Component />, { wrapper });
+      const { waitForNextUpdate, result } = renderHook(() => useAuthContext(), {
+        wrapper,
+      });
 
-      act(() => {
-        hook.current.devLogin({ username: "username", password: "password" });
-      });
-      await waitFor(() => {
-        expect(hook.current.isAuthenticated).toBe(true);
-      });
+      result.current.devLogin({ username: "username", password: "password" });
+      await waitForNextUpdate();
+      expect(result.current.isAuthenticated).toBe(true);
     });
 
     it("should not authenticate when the response is unsuccessful", async () => {
       const mockFetchPromise = jest.fn().mockResolvedValue({ ok: false });
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-      const { Component, hook } = renderComponentWithHook();
-      render(<Component />, { wrapper });
+      const { result } = renderHook(() => useAuthContext(), {
+        wrapper,
+      });
 
-      act(() => {
-        hook.current.devLogin({ username: "username", password: "password" });
-      });
-      await waitFor(() => {
-        expect(hook.current.isAuthenticated).toBe(false);
-      });
+      result.current.devLogin({ username: "username", password: "password" });
+      expect(result.current.isAuthenticated).toBe(false);
     });
   });
 
@@ -131,16 +125,15 @@ describe("auth", () => {
       const mockFetchPromise = jest.fn().mockResolvedValue({});
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-      const { Component, hook } = renderComponentWithHook();
-      const { history } = render(<Component />, { wrapper });
+      const { result } = renderHook(() => useAuthContext(), {
+        wrapper,
+      });
 
-      act(() => {
-        hook.current.logoutAndRedirect();
-      });
+      result.current.logoutAndRedirect();
+      expect(result.current.isAuthenticated).toBe(false);
       await waitFor(() => {
-        expect(hook.current.isAuthenticated).toBe(false);
+        expect(history.location.pathname).toBe("/login");
       });
-      expect(history.location.pathname).toBe("/login");
     });
 
     it("should redirect to the Evergreen /login page otherwise", async () => {
@@ -148,16 +141,13 @@ describe("auth", () => {
       const mockFetchPromise = jest.fn().mockResolvedValue({});
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-      const { Component, hook } = renderComponentWithHook();
-      render(<Component />, { wrapper });
+      renderHook(() => useAuthContext(), {
+        wrapper,
+      });
 
-      act(() => {
-        hook.current.logoutAndRedirect();
-      });
       await waitFor(() => {
-        expect(hook.current.isAuthenticated).toBe(false);
+        expect(window.location.href).toBe(`${evergreenURL}/login`);
       });
-      expect(window.location.href).toBe(`${evergreenURL}/login`);
     });
   });
 });
