@@ -3,24 +3,11 @@ import Cookie from "js-cookie";
 import { LogTypes } from "constants/enums";
 import { LogContextProvider, useLogContext } from "context/LogContext";
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
+import { renderComponentWithHook } from "test_utils/TestHooks";
 import PrettyPrintToggle from ".";
 
 jest.mock("js-cookie");
 const mockedGet = Cookie.get as unknown as jest.Mock<string>;
-
-const renderComponentWithHook = () => {
-  const hook: { current: ReturnType<typeof useLogContext> } = {
-    current: {} as ReturnType<typeof useLogContext>,
-  };
-  const Component: React.FC = () => {
-    hook.current = useLogContext();
-    return <PrettyPrintToggle />;
-  };
-  return {
-    Component,
-    hook,
-  };
-};
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
@@ -45,7 +32,10 @@ describe("pretty print toggle", () => {
   });
 
   it("should disable the toggle if the logType is not resmoke", () => {
-    const { Component, hook } = renderComponentWithHook();
+    const { Component, hook } = renderComponentWithHook(
+      useLogContext,
+      <PrettyPrintToggle />
+    );
     render(<Component />, { wrapper });
     act(() => {
       hook.current.setLogMetadata({ logType: LogTypes.EVERGREEN_TASK_LOGS });
@@ -56,7 +46,10 @@ describe("pretty print toggle", () => {
   });
 
   it("should not disable the toggle if the logType is resmoke", () => {
-    const { Component, hook } = renderComponentWithHook();
+    const { Component, hook } = renderComponentWithHook(
+      useLogContext,
+      <PrettyPrintToggle />
+    );
     render(<Component />, { wrapper });
     act(() => {
       hook.current.setLogMetadata({ logType: LogTypes.RESMOKE_LOGS });
@@ -67,7 +60,10 @@ describe("pretty print toggle", () => {
   });
 
   it("should not update the URL", async () => {
-    const { Component, hook } = renderComponentWithHook();
+    const { Component, hook } = renderComponentWithHook(
+      useLogContext,
+      <PrettyPrintToggle />
+    );
     const { history } = render(<Component />, { wrapper });
     act(() => {
       hook.current.setLogMetadata({ logType: LogTypes.RESMOKE_LOGS });
