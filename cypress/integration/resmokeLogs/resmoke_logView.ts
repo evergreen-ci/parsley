@@ -184,7 +184,7 @@ describe("Jump to line", () => {
   });
 
   it("should be able to use the bookmarks bar to jump to a line when there are collapsed rows", () => {
-    cy.visit(`${logLink}?bookmarks=0,11079&filters=100repl_hb`);
+    cy.visit(`${logLink}?filters=100repl_hb`);
     cy.dataCy("log-row-30").should("be.visible").dblclick({ force: true });
     cy.url().should("include", "bookmarks=0,30,11079");
     cy.dataCy("bookmark-30").should("be.visible");
@@ -197,7 +197,7 @@ describe("Jump to line", () => {
   });
 
   it("visiting a log with a share line should jump to that line on page load", () => {
-    cy.visit(`${logLink}?bookmarks=0,11079&shareLine=200`);
+    cy.visit(`${logLink}?shareLine=200`);
     cy.dataCy("log-row-200").should("be.visible");
   });
 });
