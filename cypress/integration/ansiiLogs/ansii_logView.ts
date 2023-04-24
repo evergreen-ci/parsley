@@ -14,12 +14,8 @@ describe("Basic evergreen log view", () => {
     cy.dataCy("log-row-22").should("be.visible");
     cy.dataCy("log-row-22").should("contain.text", longLogLine);
     cy.dataCy("log-row-22").isNotContainedInViewport();
-    cy.get(".ReactVirtualized__Grid__innerScrollContainer").should(
-      "have.css",
-      "overflow-x",
-      "visible"
-    );
-    cy.get(".ReactVirtualized__Grid").scrollTo(500, 0, {
+
+    cy.dataCy("paginated-virtual-list").scrollTo(500, 0, {
       ensureScrollable: true,
     });
   });
@@ -31,12 +27,8 @@ describe("Basic evergreen log view", () => {
   });
   it("should still allow horizontal scrolling when there are few logs on screen", () => {
     cy.addFilter("Putting spruce/");
-    cy.get(".ReactVirtualized__Grid").should(
-      "have.css",
-      "overflow-x",
-      "scroll"
-    );
-    cy.get(".ReactVirtualized__Grid").scrollTo("right");
+
+    cy.dataCy("paginated-virtual-list").scrollTo("right");
   });
 
   it("log header should show the task breadcrumbs and status and link to Spruce", () => {
@@ -134,8 +126,9 @@ describe("Jump to line", () => {
     "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
 
   it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
-    cy.visit(`${logLink}?bookmarks=0,297`);
-    cy.dataCy("log-row-4").dblclick({ force: true });
+    cy.visit(logLink);
+    cy.dataCy("log-row-4").should("be.visible").dblclick({ force: true });
+    cy.dataCy("bookmark-4").should("be.visible");
 
     cy.dataCy("bookmark-297").click();
     cy.dataCy("log-row-297").should("be.visible");
@@ -147,6 +140,7 @@ describe("Jump to line", () => {
   it("should be able to use the bookmarks bar to jump to a line when there are collapsed rows", () => {
     cy.visit(`${logLink}?bookmarks=0,297&filters=100pass`);
     cy.dataCy("log-row-56").dblclick({ force: true });
+    cy.dataCy("bookmark-56").should("be.visible");
 
     cy.dataCy("bookmark-297").click();
     cy.dataCy("log-row-297").should("be.visible");

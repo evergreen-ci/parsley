@@ -1,9 +1,9 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/LogPane Default 1`] = `
+exports[`storyshots Storyshots components/PaginatedVirtualList Default 1`] = `
 <div>
   <div
-    class="css-oic1sx"
+    class="css-1m90bdh"
   >
     <div
       data-cy="paginated-virtual-list"
