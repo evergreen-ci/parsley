@@ -261,9 +261,9 @@ describe("usePaginatedVirtualList", () => {
       expect(result.current.currentPage).toBe(0);
     });
 
-    it("scrolling to a line on a different page should not trigger a double scroll", () => {
+    it("scrolling to a line on a different page should not trigger a double scroll", async () => {
       const scrollToIndexMock = jest.fn();
-      const { result } = renderHook(() =>
+      const { result, waitFor } = renderHook(() =>
         usePaginatedVirtualList({
           rowCount,
           paginationThreshold,
@@ -278,7 +278,9 @@ describe("usePaginatedVirtualList", () => {
       act(() => {
         result.current.scrollToLine(6000);
       });
-      expect(scrollToIndexMock).toHaveBeenCalledTimes(1);
+      await waitFor(() => {
+        expect(scrollToIndexMock).toHaveBeenCalledTimes(1);
+      });
     });
   });
 });
