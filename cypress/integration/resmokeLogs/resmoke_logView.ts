@@ -186,7 +186,8 @@ describe("Jump to line", () => {
   it("should be able to use the bookmarks bar to jump to a line when there are collapsed rows", () => {
     cy.visit(`${logLink}?bookmarks=0,11079&filters=100repl_hb`);
     cy.dataCy("log-row-30").should("be.visible").dblclick({ force: true });
-
+    cy.url().should("include", "bookmarks=0,30,11079");
+    cy.dataCy("bookmark-30").should("be.visible");
     cy.dataCy("bookmark-11079").click();
     cy.dataCy("log-row-11079").should("be.visible");
     cy.dataCy("log-row-30").should("not.exist");
