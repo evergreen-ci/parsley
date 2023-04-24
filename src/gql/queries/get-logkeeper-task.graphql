@@ -6,9 +6,5 @@ query LogkeeperTask($buildId: String!) {
     task {
       ...BaseTask
     }
-    tests {
-      id
-      name
-    }
   }
 }

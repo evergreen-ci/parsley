@@ -3,8 +3,8 @@ import { InlineCode } from "@leafygreen-ui/typography";
 import { usePreferencesAnalytics } from "analytics";
 import Breadcrumbs from "components/Breadcrumbs";
 import Icon from "components/Icon";
+import { TaskStatusBadge, TestStatusBadge } from "components/StatusBadge";
 import { StyledLink } from "components/styles";
-import TaskStatusBadge from "components/TaskStatusBadge";
 import { LogTypes } from "constants/enums";
 import { getEvergreenTaskURL } from "constants/externalURLTemplates";
 import {
@@ -70,11 +70,12 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     patchNumber,
     status,
     versionMetadata,
+    tests,
   } = loadedTask;
   const { isPatch, projectIdentifier, message, revision } = versionMetadata;
 
-  const currentTest = logkeeperBuildMetadata?.tests?.find(
-    (test) => test.id === testID
+  const currentTest = tests?.testResults?.find((test) =>
+    test?.logs?.urlRaw?.match(new RegExp(`${testID}`))
   );
 
   const breadcrumbs = [
@@ -109,7 +110,12 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
       ? [
           {
             "data-cy": "test-breadcrumb",
-            text: currentTest?.name ?? "Test",
+            text: (
+              <>
+                {currentTest?.testFile ?? "Test"}{" "}
+                <TestStatusBadge status={currentTest?.status} />
+              </>
+            ),
           },
         ]
       : []),
