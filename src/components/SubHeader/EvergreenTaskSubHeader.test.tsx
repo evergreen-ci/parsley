@@ -32,11 +32,9 @@ describe("evergreen task subheader", () => {
     expect(screen.getByDataCy("task-status-badge").textContent).toContain(
       "Failed"
     );
-    // JustAFakeTestInALonelyWorld test should be failing
-    expect(screen.getByText("JustAFakeTestInALonelyWorld")).toBeInTheDocument();
-    expect(screen.getByDataCy("test-status-badge").textContent).toContain(
-      "Fail"
-    );
+    // JustAFakeTestInALonelyWorld test should not be in the document
+    expect(screen.queryByText("JustAFakeTestInALonelyWorld")).toBeNull();
+    expect(screen.queryByText("test-status-badge")).toBeNull();
   });
 
   it("should render task and test statuses for resmoke test log", async () => {

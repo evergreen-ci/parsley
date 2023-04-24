@@ -32,10 +32,11 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   testID,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
+  const isResmoke = logType === LogTypes.RESMOKE_LOGS;
 
   const { data, loading } = useQuery<TaskQuery, TaskQueryVariables>(GET_TASK, {
     variables: { taskId: taskID, execution },
-    skip: logType === LogTypes.RESMOKE_LOGS,
+    skip: isResmoke,
   });
 
   const { data: logkeeperData, loading: logkeeperLoading } = useQuery<
@@ -43,7 +44,7 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     LogkeeperTaskQueryVariables
   >(GET_LOGKEEPER_TASK, {
     variables: { buildId: buildID },
-    skip: logType !== LogTypes.RESMOKE_LOGS || !buildID,
+    skip: !isResmoke || !buildID,
   });
 
   const { task } = data ?? {};
@@ -74,9 +75,11 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   } = loadedTask;
   const { isPatch, projectIdentifier, message, revision } = versionMetadata;
 
-  const currentTest = tests?.testResults?.find((test) =>
-    test?.logs?.urlRaw?.match(new RegExp(`${testID}`))
-  );
+  const currentTest = isResmoke
+    ? tests?.testResults?.find((test) =>
+        test?.logs?.urlRaw?.match(new RegExp(`${testID}`))
+      )
+    : null;
 
   const breadcrumbs = [
     {
