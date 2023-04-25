@@ -1,15 +1,17 @@
-import { ListRowProps } from "react-virtualized";
-
-interface BaseRowProps {
-  listRowProps: ListRowProps;
+/**
+ * RootRowProps are the props that are passed to the root LogRow component.
+ * These props are used to render any type of LogRow and should always be passed to the root LogRow component.
+ */
+interface RootRowProps {
+  lineIndex: number;
 }
 
-interface LogRowProps extends BaseRowProps {
+interface LogRowProps extends RootRowProps {
   getLine: (index: number) => string | undefined;
-  resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
 
   highlightRegex?: RegExp;
+  lineNumber: number;
   range: {
     lowerRange: number;
     upperRange?: number;
@@ -19,4 +21,4 @@ interface LogRowProps extends BaseRowProps {
   wrap: boolean;
 }
 
-export type { BaseRowProps, LogRowProps };
+export type { RootRowProps, LogRowProps };

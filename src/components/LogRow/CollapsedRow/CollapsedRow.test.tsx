@@ -17,7 +17,7 @@ describe("collapsedRow", () => {
       <CollapsedRow
         {...collapsedProps}
         collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        listRowProps={listRowProps}
+        lineIndex={0}
       />,
       {
         wrapper: wrapper(logLines),
@@ -33,7 +33,7 @@ describe("collapsedRow", () => {
         {...collapsedProps}
         collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         expandLines={expandLines}
-        listRowProps={listRowProps}
+        lineIndex={0}
       />,
       {
         wrapper: wrapper(logLines),
@@ -58,7 +58,7 @@ describe("collapsedRow", () => {
         {...collapsedProps}
         collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         expandLines={expandLines}
-        listRowProps={listRowProps}
+        lineIndex={0}
       />,
       {
         wrapper: wrapper(logLines),
@@ -77,7 +77,7 @@ describe("collapsedRow", () => {
       <CollapsedRow
         {...collapsedProps}
         collapsedLines={[0, 1, 2]}
-        listRowProps={listRowProps}
+        lineIndex={0}
       />,
       {
         wrapper: wrapper(logLines),
@@ -103,16 +103,6 @@ const logLines = [
   "[j0:sec1] Starting mongod on port 20002...",
   "filler",
 ];
-
-const listRowProps = {
-  key: "collapsed-row",
-  columnIndex: 0,
-  index: 0,
-  isScrolling: false,
-  isVisible: true,
-  parent: {} as any,
-  style: {},
-};
 
 const collapsedProps = {
   expandLines: jest.fn(),
