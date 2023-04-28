@@ -12,7 +12,7 @@ import { ApolloMock } from "types/gql";
 import { EvergreenTaskSubHeader } from "./EvergreenTaskSubHeader";
 
 describe("evergreen task subheader", () => {
-  it("should render task and test statuses for evergreen test log", async () => {
+  it("should only render task status for evergreen test log", async () => {
     render(
       <MockedProvider mocks={[evergreenTaskMock]}>
         <EvergreenTaskSubHeader
@@ -83,22 +83,6 @@ const evergreenTaskMock: ApolloMock<TaskQuery, TaskQueryVariables> = {
         id: "spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35",
         patchNumber: 1236,
         status: "failed",
-        tests: {
-          __typename: "TaskTestResult",
-          testResults: [
-            {
-              __typename: "TestResult",
-              id: "JustAFakeTestInALonelyWorld",
-              logs: {
-                __typename: "TestLog",
-                urlRaw:
-                  "http://localhost:9090/test_log/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?test_name=JustAFakeTestInALonelyWorld&group_id=&text=true",
-              },
-              status: "fail",
-              testFile: "JustAFakeTestInALonelyWorld",
-            },
-          ],
-        },
         versionMetadata: {
           __typename: "Version",
           id: "spruce_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f",

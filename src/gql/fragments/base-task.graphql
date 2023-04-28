@@ -4,16 +4,6 @@ fragment BaseTask on Task {
   id
   patchNumber
   status
-  tests(opts: null) {
-    testResults {
-      id
-      logs {
-        urlRaw
-      }
-      status
-      testFile
-    }
-  }
   versionMetadata {
     id
     isPatch

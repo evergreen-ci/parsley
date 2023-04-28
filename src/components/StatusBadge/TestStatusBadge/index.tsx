@@ -16,7 +16,7 @@ const statusCopy = {
 };
 
 interface TestStatusBadgeProps {
-  status?: string;
+  status?: string | null;
 }
 
 const TestStatusBadge: React.FC<TestStatusBadgeProps> = ({ status }) => {

@@ -71,12 +71,11 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     patchNumber,
     status,
     versionMetadata,
-    tests,
   } = loadedTask;
   const { isPatch, projectIdentifier, message, revision } = versionMetadata;
 
   const currentTest = isResmoke
-    ? tests?.testResults?.find((test) =>
+    ? logkeeperBuildMetadata?.task?.tests?.testResults?.find((test) =>
         test?.logs?.urlRaw?.match(new RegExp(`${testID}`))
       )
     : null;
@@ -115,7 +114,7 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
             "data-cy": "test-breadcrumb",
             text: (
               <>
-                {currentTest?.testFile ?? "Test"}{" "}
+                {trimStringFromMiddle(currentTest?.testFile ?? "Test", 80)}{" "}
                 <TestStatusBadge status={currentTest?.status} />
               </>
             ),
