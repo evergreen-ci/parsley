@@ -118,6 +118,10 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
                 <TestStatusBadge status={currentTest?.status} />
               </>
             ),
+            tooltipText:
+              currentTest &&
+              currentTest.testFile.length > 80 &&
+              currentTest.testFile,
           },
         ]
       : []),
