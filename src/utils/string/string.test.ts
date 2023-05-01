@@ -2,7 +2,6 @@ import {
   copyToClipboard,
   getBytesAsString,
   getJiraFormat,
-  processLogString,
   shortenGithash,
   stringIntersection,
   trimStringFromMiddle,
@@ -54,31 +53,6 @@ describe("getJiraFormat", () => {
     expect(getJiraFormat(bookmarks, getLine)).toBe(
       `{noformat}\n${logLines[0]}\n...\n${logLines[2]}\n...\n${logLines[4]}\n${logLines[5]}\n{noformat}`
     );
-  });
-});
-
-describe("processLogString", () => {
-  it("should split by the new line character", () => {
-    expect(processLogString("process\nlog\nstring")).toStrictEqual([
-      "process",
-      "log",
-      "string",
-    ]);
-  });
-  it("should trim any trailing whitespace", () => {
-    expect(processLogString("process\nlog\nstring\n          ")).toStrictEqual([
-      "process",
-      "log",
-      "string",
-    ]);
-  });
-  it("does not trim any whitespace that exists between log lines", () => {
-    expect(processLogString("process\n\nlog\nstring")).toStrictEqual([
-      "process",
-      "",
-      "log",
-      "string",
-    ]);
   });
 });
 
