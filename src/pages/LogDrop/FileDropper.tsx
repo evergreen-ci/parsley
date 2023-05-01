@@ -7,8 +7,8 @@ import { LogTypes } from "constants/enums";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
-import { leaveBreadcrumb } from "utils/errorReporting";
-import { processLogString } from "utils/string";
+import { leaveBreadcrumb, reportError } from "utils/errorReporting";
+import { arrayBufferToStringArray } from "utils/file";
 import FileSelector from "./FileSelector";
 import ParseLogSelect from "./ParseLogSelect";
 
@@ -23,7 +23,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
   const { ingestLines, setFileName, logMetadata } = useLogContext();
   const { fileName } = logMetadata ?? {};
 
-  const lineStream = useRef<FileReader["result"]>(null);
+  const lineStream = useRef<string[]>(null);
   const [hasDroppedLog, setHasDroppedLog] = useState(false);
 
   const onDrop = useCallback(
@@ -32,15 +32,33 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
       sendEvent({ name: "Dropped file" });
       acceptedFiles.forEach((file) => {
         const reader = new FileReader();
-
         reader.onabort = () => dispatchToast.error("File reading was aborted.");
-        reader.onerror = () => dispatchToast.error("File reading failed.");
-        reader.onload = () => {
-          setHasDroppedLog(true);
-          setFileName(file.name);
-          lineStream.current = reader.result;
+        reader.onerror = () => {
+          const error = new Error(
+            `File reading failed. Error: ${reader.error}`
+          );
+          reportError(error).severe();
+          dispatchToast.error(`File reading failed. Error: ${reader.error}`);
         };
-        reader.readAsText(file);
+        reader.onload = () => {
+          if (reader.result) {
+            setHasDroppedLog(true);
+            setFileName(file.name);
+            if (reader.result instanceof ArrayBuffer) {
+              // @ts-expect-error
+              lineStream.current = arrayBufferToStringArray(reader.result);
+            } else {
+              setHasDroppedLog(false);
+              dispatchToast.error(
+                "A problem occurred while reading the file. Please report this in #evergreen-users."
+              );
+              reportError(
+                new Error("File reader result was not an ArrayBuffer")
+              ).severe();
+            }
+          }
+        };
+        reader.readAsArrayBuffer(file);
       });
     },
     [setFileName, dispatchToast, sendEvent]
@@ -52,8 +70,8 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
         onChangeLogType(logType);
         leaveBreadcrumb("Parsing file", { logType }, "process");
         sendEvent({ name: "Processed Log", logType });
-        if (typeof lineStream.current === "string") {
-          ingestLines(processLogString(lineStream.current), logType);
+        if (Array.isArray(lineStream.current)) {
+          ingestLines(lineStream.current, logType);
         }
       }
     },
@@ -74,6 +92,7 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
         <Dropzone {...getRootProps()} data-cy="upload-zone">
           {hasDroppedLog ? (
             <ParseLogSelect
+              disabled={!hasDroppedLog}
               fileName={fileName}
               onParse={onParse}
               setHasDroppedLog={setHasDroppedLog}

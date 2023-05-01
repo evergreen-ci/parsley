@@ -12,12 +12,14 @@ interface ParseLogSelectProps {
   fileName: string | undefined;
   onParse: (logType: LogTypes | undefined) => void;
   setHasDroppedLog: (value: boolean) => void;
+  disabled: boolean;
 }
 
 const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
   fileName,
   onParse,
   setHasDroppedLog,
+  disabled,
 }) => {
   const [logType, setLogType] = useState<LogTypes | undefined>(
     (Cookie.get(LAST_SELECTED_LOG_TYPE) as LogTypes) ?? undefined
@@ -46,7 +48,7 @@ const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
         <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
         <Button
           data-cy="process-log-button"
-          disabled={!logType}
+          disabled={!logType || disabled}
           onClick={() => onParse(logType)}
           variant="primary"
         >

@@ -11,6 +11,7 @@ describe("parse log select", () => {
     mockedGet.mockImplementation(() => "");
     render(
       <ParseLogSelect
+        disabled={false}
         fileName="filename.txt"
         onParse={jest.fn()}
         setHasDroppedLog={jest.fn()}
@@ -27,6 +28,7 @@ describe("parse log select", () => {
     mockedGet.mockImplementation(() => LogTypes.EVERGREEN_TASK_LOGS);
     render(
       <ParseLogSelect
+        disabled={false}
         fileName="filename.txt"
         onParse={jest.fn()}
         setHasDroppedLog={jest.fn()}
@@ -40,6 +42,7 @@ describe("parse log select", () => {
     mockedGet.mockImplementation(() => LogTypes.RESMOKE_LOGS);
     render(
       <ParseLogSelect
+        disabled={false}
         fileName="filename.txt"
         onParse={jest.fn()}
         setHasDroppedLog={jest.fn()}
@@ -54,6 +57,7 @@ describe("parse log select", () => {
     const onParse = jest.fn();
     render(
       <ParseLogSelect
+        disabled={false}
         fileName="filename.txt"
         onParse={onParse}
         setHasDroppedLog={jest.fn()}
@@ -68,6 +72,7 @@ describe("parse log select", () => {
     const setHasDroppedLog = jest.fn();
     render(
       <ParseLogSelect
+        disabled={false}
         fileName="filename.txt"
         onParse={jest.fn()}
         setHasDroppedLog={setHasDroppedLog}
