@@ -52,8 +52,9 @@ describe("Basic resmoke log view", () => {
 
     cy.dataCy("test-breadcrumb").should(
       "contain.text",
-      "internal_transa…ill_sessions.js"
+      "internal_transactions_kill_sessions.js"
     );
+    cy.dataCy("test-status-badge").should("contain.text", "Pass");
   });
 });
 

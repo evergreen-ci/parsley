@@ -19,6 +19,7 @@ module.exports = {
   testMatch: ["<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"],
   testRunner: "<rootDir>/node_modules/jest-circus/runner.js",
   transform: {
+    "^.+\\.graphql$": "@graphql-tools/jest-transform",
     "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "ts-jest",
     "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
     "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":

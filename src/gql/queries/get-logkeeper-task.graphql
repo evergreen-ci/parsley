@@ -5,10 +5,16 @@ query LogkeeperTask($buildId: String!) {
     id
     task {
       ...BaseTask
-    }
-    tests {
-      id
-      name
+      tests(opts: null) {
+        testResults {
+          id
+          logs {
+            urlRaw
+          }
+          status
+          testFile
+        }
+      }
     }
   }
 }
