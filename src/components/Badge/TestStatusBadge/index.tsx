@@ -8,7 +8,7 @@ const statusToBadgeColor = {
   [TestStatus.Skip]: Variant.Yellow,
 };
 
-const statusCopy = {
+const statusToCopy = {
   [TestStatus.Pass]: "Pass",
   [TestStatus.Fail]: "Fail",
   [TestStatus.Skip]: "Skip",
@@ -30,7 +30,7 @@ const TestStatusBadge: React.FC<TestStatusBadgeProps> = ({ status }) => {
       data-cy="test-status-badge"
       variant={statusToBadgeColor[testStatus] || Variant.LightGray}
     >
-      {statusCopy[testStatus] || status}
+      {statusToCopy[testStatus] || status}
     </Badge>
   );
 };

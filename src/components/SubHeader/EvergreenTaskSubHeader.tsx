@@ -1,9 +1,9 @@
 import { useQuery } from "@apollo/client";
 import { InlineCode } from "@leafygreen-ui/typography";
 import { usePreferencesAnalytics } from "analytics";
+import { TaskStatusBadge, TestStatusBadge } from "components/Badge";
 import Breadcrumbs from "components/Breadcrumbs";
 import Icon from "components/Icon";
-import { TaskStatusBadge, TestStatusBadge } from "components/StatusBadge";
 import { StyledLink } from "components/styles";
 import { LogTypes } from "constants/enums";
 import { getEvergreenTaskURL } from "constants/externalURLTemplates";
