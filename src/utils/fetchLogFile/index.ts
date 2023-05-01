@@ -1,3 +1,5 @@
+import { decodeStream } from "utils/streams";
+
 enum IncompleteDownloadReason {
   ServerError = "SERVER_ERROR",
   FileTooLarge = "FILE_TOO_LARGE",
@@ -103,34 +105,7 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
  */
 const fetchLogFile = async (url: string, options: StreamedFetchOptions) => {
   const stream = await streamedFetch(url, options);
-  const decoder = new TextDecoder();
-  const reader = stream.getReader();
-  const result: string[] = [];
-
-  // eslint-disable-next-line no-constant-condition -- while(true) is the only way to stream
-  while (true) {
-    // eslint-disable-next-line no-await-in-loop
-    const { done, value } = await reader.read();
-    if (done) {
-      return result;
-    }
-
-    const chunk = decoder.decode(value, { stream: !done });
-    const lines = chunk.split(/\r?\n/);
-
-    if (result.length > 0) {
-      // Find the last line we've received so far
-      const lastIndex = result.length - 1;
-      const lastLine = result[lastIndex];
-      // Concatenate the last line with the first line of the "lines" array
-      result[lastIndex] = lastLine + lines[0];
-      // Remove the first line from the "lines" array
-
-      lines.shift();
-    }
-
-    result.push(...lines);
-  }
+  return decodeStream(stream);
 };
 
 export { streamedFetch, fetchLogFile };
