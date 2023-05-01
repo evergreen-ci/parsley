@@ -1,6 +1,6 @@
 # 2023-02-22 Migrating Parsley Virtualization to react-virtuoso
 
-* status: proposed
+* status: accepted
 * date: 2023-02-22
 * authors: Mohamed Khelif
 
