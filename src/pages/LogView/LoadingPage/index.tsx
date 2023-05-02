@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import { Body } from "@leafygreen-ui/typography";
 import { useParams } from "react-router-dom";
 import Icon from "components/Icon";
+import LoadingBar from "components/LoadingBar";
 import { LogTypes } from "constants/enums";
 import {
   getJobLogsURL,
@@ -26,7 +27,6 @@ import NotFound from "pages/404";
 import { LogkeeperMetadata } from "types/api";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import { getBytesAsString } from "utils/string";
-import LoadingBar from "./LoadingBar";
 
 interface LoadingPageProps {
   logType: LogTypes;
