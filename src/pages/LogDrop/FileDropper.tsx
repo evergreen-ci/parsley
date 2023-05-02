@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useRef, useState, useTransition } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { useDropzone } from "react-dropzone";
@@ -12,6 +12,7 @@ import { leaveBreadcrumb, reportError } from "utils/errorReporting";
 import { fileToStream } from "utils/file";
 import { decodeStream } from "utils/streams";
 import FileSelector from "./FileSelector";
+import LoadingAnimation from "./LoadingAnimation";
 import ParseLogSelect from "./ParseLogSelect";
 
 const { green } = palette;
@@ -23,6 +24,8 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
   const dispatchToast = useToastContext();
   const { sendEvent } = useLogDropAnalytics();
   const { ingestLines, setFileName, logMetadata } = useLogContext();
+  const [, startTransition] = useTransition();
+  const [showLoader, setShowLoader] = useState(false);
   const { fileName } = logMetadata ?? {};
 
   const lineStream = useRef<string[]>(null);
@@ -32,21 +35,24 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
     (acceptedFiles: File[]) => {
       leaveBreadcrumb("Dropped file", {}, "user");
       sendEvent({ name: "Dropped file" });
+      setShowLoader(true);
       try {
-        (async () => {
-          const stream = await fileToStream(acceptedFiles[0], {
-            fileSizeLimit: LOG_FILE_SIZE_LIMIT,
-          });
-          // @ts-expect-error
-          lineStream.current = await decodeStream(stream);
-          leaveBreadcrumb(
-            "Decoded file",
-            { fileSize: lineStream.current.length },
-            "process"
-          );
-          setHasDroppedLog(true);
-          setFileName(acceptedFiles[0].name);
-        })();
+        startTransition(() => {
+          (async () => {
+            const stream = await fileToStream(acceptedFiles[0], {
+              fileSizeLimit: LOG_FILE_SIZE_LIMIT,
+            });
+            // @ts-expect-error
+            lineStream.current = await decodeStream(stream);
+            leaveBreadcrumb(
+              "Decoded file",
+              { fileSize: lineStream.current.length },
+              "process"
+            );
+            setHasDroppedLog(true);
+            setFileName(acceptedFiles[0].name);
+          })();
+        });
       } catch (e) {
         reportError(new Error(`Failed to parse file: ${e}`)).severe();
         dispatchToast.error("Failed to parse file");
@@ -93,7 +99,13 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
               setHasDroppedLog={setHasDroppedLog}
             />
           ) : (
-            <FileSelector getInputProps={getInputProps} open={open} />
+            <DropzoneInnerWrapper>
+              {!showLoader ? (
+                <FileSelector getInputProps={getInputProps} open={open} />
+              ) : (
+                <LoadingAnimation />
+              )}
+            </DropzoneInnerWrapper>
           )}
         </Dropzone>
       </BorderBox>
@@ -124,6 +136,10 @@ const Dropzone = styled.div`
   padding: ${size.xl};
   width: 50vw;
   height: 30vh;
+`;
+
+const DropzoneInnerWrapper = styled.div`
+  width: 100%;
 `;
 
 export default FileDropper;
