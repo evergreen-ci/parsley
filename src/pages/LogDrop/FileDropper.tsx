@@ -4,6 +4,7 @@ import { palette } from "@leafygreen-ui/palette";
 import { useDropzone } from "react-dropzone";
 import { useLogDropAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
+import { LOG_FILE_SIZE_LIMIT } from "constants/logs";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
@@ -33,7 +34,9 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
       sendEvent({ name: "Dropped file" });
       try {
         (async () => {
-          const stream = await fileToStream(acceptedFiles[0]);
+          const stream = await fileToStream(acceptedFiles[0], {
+            fileSizeLimit: LOG_FILE_SIZE_LIMIT,
+          });
           // @ts-expect-error
           lineStream.current = await decodeStream(stream);
           leaveBreadcrumb(
