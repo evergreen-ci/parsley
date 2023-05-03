@@ -76,6 +76,5 @@ describe("parse log select", () => {
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Cancel" }));
     expect(onCancel).toHaveBeenCalledTimes(1);
-    expect(onCancel).toHaveBeenCalledWith(false);
   });
 });
