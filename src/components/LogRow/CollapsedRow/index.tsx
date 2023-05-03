@@ -85,7 +85,7 @@ CollapsedRow.displayName = "CollapsedRow";
 const CollapsedLineWrapper = styled.div`
   display: flex;
   align-items: center;
-  background-color: #f4f5f5;
+  background-color: #f4f5f5; // Custom gray background color.
   padding: 2px 0;
   padding-left: ${size.l};
 `;
