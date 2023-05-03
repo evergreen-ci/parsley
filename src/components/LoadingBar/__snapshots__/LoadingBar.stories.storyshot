@@ -1,12 +1,12 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots pages/LogView/LoadingPage/LoadingBar Default 1`] = `
+exports[`storyshots Storyshots components/LoadingBar Default 1`] = `
 <div>
   <div
     class="css-k7jz0p"
   >
     <div
-      class="css-a6y9km"
+      class="css-ygia9r"
     />
   </div>
 </div>
