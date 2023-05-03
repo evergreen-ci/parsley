@@ -1,16 +1,12 @@
 import { useTransition } from "react";
 import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
-import { palette } from "@leafygreen-ui/palette";
-import { Overline } from "@leafygreen-ui/typography";
+import { Body } from "@leafygreen-ui/typography";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { size } from "constants/tokens";
-import { OverlineType } from "types/leafygreen";
 import { ExpandedLines } from "types/logs";
 import { RootRowProps } from "../types";
-
-const { gray } = palette;
 
 const SKIP_NUMBER = 5;
 
@@ -32,7 +28,7 @@ const CollapsedRow: React.FC<CollapsedRowProps> = ({
 
   const canExpandFive = SKIP_NUMBER * 2 < numCollapsed;
   const lineText =
-    numCollapsed !== 1 ? `${numCollapsed} lines skipped` : "1 line skipped";
+    numCollapsed !== 1 ? `${numCollapsed} Lines Skipped` : "1 Line Skipped";
 
   const expandFive = () => {
     if (canExpandFive) {
@@ -63,21 +59,23 @@ const CollapsedRow: React.FC<CollapsedRowProps> = ({
 
   return (
     <CollapsedLineWrapper data-cy={`collapsed-row-${start}-${end}`}>
-      <StyledOverline>{lineText}</StyledOverline>
-      <StyledButton
-        leftGlyph={<Icon glyph="Expand" />}
-        onClick={expandAll}
-        size="xsmall"
-      >
-        All
-      </StyledButton>
-      <StyledButton
-        leftGlyph={<Icon glyph="Expand" />}
-        onClick={expandFive}
-        size="xsmall"
-      >
-        {SKIP_NUMBER} Above and Below
-      </StyledButton>
+      <StyledBody>{lineText}</StyledBody>
+      <ButtonContainer>
+        <Button
+          leftGlyph={<Icon glyph="UpDownCarets" />}
+          onClick={expandAll}
+          size="xsmall"
+        >
+          All
+        </Button>
+        <Button
+          leftGlyph={<Icon glyph="UpDownCarets" />}
+          onClick={expandFive}
+          size="xsmall"
+        >
+          {SKIP_NUMBER} Above & Below
+        </Button>
+      </ButtonContainer>
     </CollapsedLineWrapper>
   );
 };
@@ -87,19 +85,18 @@ CollapsedRow.displayName = "CollapsedRow";
 const CollapsedLineWrapper = styled.div`
   display: flex;
   align-items: center;
-  background-color: ${gray.light2}8C;
+  background-color: #f4f5f5;
+  padding: 2px 0;
   padding-left: ${size.l};
 `;
 
-const StyledOverline = styled<OverlineType>(Overline)`
+const StyledBody = styled(Body)`
   width: 150px;
 `;
 
-const StyledButton = styled(Button)`
-  margin-left: ${size.xs};
-  max-height: ${size.s};
-  border-radius: ${size.xxs};
-  font-size: 12px;
+const ButtonContainer = styled.div`
+  display: flex;
+  gap: ${size.xs};
 `;
 
 export default CollapsedRow;

@@ -23,7 +23,7 @@ describe("collapsedRow", () => {
         wrapper: wrapper(logLines),
       }
     );
-    expect(screen.getByText("11 lines skipped")).toBeInTheDocument();
+    expect(screen.getByText("11 Lines Skipped")).toBeInTheDocument();
   });
 
   it("should call expandLines function with the correct arguments when expanding 5 lines", async () => {
@@ -40,7 +40,7 @@ describe("collapsedRow", () => {
       }
     );
     const expandFiveButton = screen.getByRole("button", {
-      name: "Expand Icon 5 Above and Below",
+      name: "5 Above & Below",
     });
     expect(expandFiveButton).toBeEnabled();
     await user.click(expandFiveButton);
@@ -65,7 +65,7 @@ describe("collapsedRow", () => {
       }
     );
     const expandFiveButton = screen.getByRole("button", {
-      name: "Expand Icon All",
+      name: "All",
     });
     await user.click(expandFiveButton);
     expect(expandLines).toHaveBeenCalledTimes(1);
@@ -84,7 +84,7 @@ describe("collapsedRow", () => {
       }
     );
     const expandFiveButton = screen.getByRole("button", {
-      name: "Expand Icon 5 Above and Below",
+      name: "5 Above & Below",
     });
     expect(expandFiveButton).not.toHaveAttribute("aria-disabled", "true");
   });
