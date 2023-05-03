@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState, useTransition } from "react";
+import { useCallback, useTransition } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { useDropzone } from "react-dropzone";
@@ -14,69 +14,72 @@ import { decodeStream } from "utils/streams";
 import FileSelector from "./FileSelector";
 import LoadingAnimation from "./LoadingAnimation";
 import ParseLogSelect from "./ParseLogSelect";
+import useLogDropState from "./state";
 
 const { green } = palette;
-interface FileDropperProps {
-  onChangeLogType: (logType: LogTypes) => void;
-}
 
-const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
+const FileDropper: React.FC = () => {
   const dispatchToast = useToastContext();
   const { sendEvent } = useLogDropAnalytics();
-  const { ingestLines, setFileName, logMetadata } = useLogContext();
+  const { ingestLines, setFileName, setLogMetadata } = useLogContext();
   const [, startTransition] = useTransition();
-  const [showLoader, setShowLoader] = useState(false);
-  const { fileName } = logMetadata ?? {};
-
-  const lineStream = useRef<string[]>(null);
-  const [hasDroppedLog, setHasDroppedLog] = useState(false);
+  const { state, dispatch } = useLogDropState();
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
       leaveBreadcrumb("Dropped file", {}, "user");
       sendEvent({ name: "Dropped file" });
-      setShowLoader(true);
-      try {
-        startTransition(() => {
-          (async () => {
-            const stream = await fileToStream(acceptedFiles[0], {
-              fileSizeLimit: LOG_FILE_SIZE_LIMIT,
-            });
-            // @ts-expect-error
-            lineStream.current = await decodeStream(stream);
-            leaveBreadcrumb(
-              "Decoded file",
-              { fileSize: lineStream.current.length },
-              "process"
-            );
-            setHasDroppedLog(true);
-            setFileName(acceptedFiles[0].name);
-          })();
-        });
-      } catch (e) {
-        reportError(new Error(`Failed to parse file: ${e}`)).severe();
-        dispatchToast.error("Failed to parse file");
-      }
+      dispatch({ type: "DROPPED_FILE", file: acceptedFiles[0] });
     },
-    [setFileName, dispatchToast, sendEvent]
+    [dispatch, sendEvent]
   );
 
   const onParse = useCallback(
     (logType: LogTypes | undefined) => {
       if (logType) {
-        onChangeLogType(logType);
+        setLogMetadata({ logType });
         leaveBreadcrumb("Parsing file", { logType }, "process");
-        sendEvent({
-          name: "Processed Log",
-          logType,
-          fileSize: lineStream.current?.length,
+        dispatch({
+          type: "PARSE_FILE",
         });
-        if (Array.isArray(lineStream.current)) {
-          ingestLines(lineStream.current, logType);
-        }
+        startTransition(() => {
+          (async () => {
+            if (state.file) {
+              try {
+                const stream = await fileToStream(state.file, {
+                  fileSizeLimit: LOG_FILE_SIZE_LIMIT,
+                });
+                const logLines = await decodeStream(stream);
+                leaveBreadcrumb(
+                  "Decoded file",
+                  { fileSize: logLines.length },
+                  "process"
+                );
+                sendEvent({
+                  name: "Processed Log",
+                  logType,
+                  fileSize: logLines?.length,
+                });
+                setFileName(state.file.name);
+                ingestLines(logLines, logType);
+              } catch (e: any) {
+                dispatchToast.error("An error occurred while parsing the log.");
+                reportError(e).severe();
+              }
+            }
+          })();
+        });
       }
     },
-    [ingestLines, sendEvent, onChangeLogType]
+    [
+      setLogMetadata,
+      dispatch,
+      state.file,
+      sendEvent,
+      setFileName,
+      ingestLines,
+      dispatchToast,
+    ]
   );
 
   const { getRootProps, getInputProps, open } = useDropzone({
@@ -87,26 +90,38 @@ const FileDropper: React.FC<FileDropperProps> = ({ onChangeLogType }) => {
     noKeyboard: true,
   });
 
+  let visibleUI = null;
+
+  switch (state.currentState) {
+    case "WAITING_FOR_FILE":
+      visibleUI = <FileSelector getInputProps={getInputProps} open={open} />;
+      break;
+    case "PROMPT_FOR_PARSING_METHOD":
+      visibleUI = (
+        <ParseLogSelect
+          fileName={state.fileName || ""}
+          onCancel={() => dispatch({ type: "CANCEL" })}
+          onParse={onParse}
+        />
+      );
+      break;
+    case "LOADING_FILE":
+      visibleUI = (
+        <DropzoneInnerWrapper>
+          <LoadingAnimation />
+        </DropzoneInnerWrapper>
+      );
+      break;
+    default:
+      visibleUI = null;
+      break;
+  }
+
   return (
     <Container>
       <BorderBox>
         <Dropzone {...getRootProps()} data-cy="upload-zone">
-          {hasDroppedLog ? (
-            <ParseLogSelect
-              disabled={!hasDroppedLog}
-              fileName={fileName}
-              onParse={onParse}
-              setHasDroppedLog={setHasDroppedLog}
-            />
-          ) : (
-            <DropzoneInnerWrapper>
-              {!showLoader ? (
-                <FileSelector getInputProps={getInputProps} open={open} />
-              ) : (
-                <LoadingAnimation />
-              )}
-            </DropzoneInnerWrapper>
-          )}
+          {visibleUI}
         </Dropzone>
       </BorderBox>
     </Container>

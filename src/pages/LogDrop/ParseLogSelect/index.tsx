@@ -11,15 +11,13 @@ import { size } from "constants/tokens";
 interface ParseLogSelectProps {
   fileName: string | undefined;
   onParse: (logType: LogTypes | undefined) => void;
-  setHasDroppedLog: (value: boolean) => void;
-  disabled: boolean;
+  onCancel: () => void;
 }
 
 const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
   fileName,
   onParse,
-  setHasDroppedLog,
-  disabled,
+  onCancel,
 }) => {
   const [logType, setLogType] = useState<LogTypes | undefined>(
     (Cookie.get(LAST_SELECTED_LOG_TYPE) as LogTypes) ?? undefined
@@ -45,10 +43,10 @@ const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
         <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
       </Select>
       <ButtonContainer>
-        <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
+        <Button onClick={onCancel}>Cancel</Button>
         <Button
           data-cy="process-log-button"
-          disabled={!logType || disabled}
+          disabled={!logType}
           onClick={() => onParse(logType)}
           variant="primary"
         >

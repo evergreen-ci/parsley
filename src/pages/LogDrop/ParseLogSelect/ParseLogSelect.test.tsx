@@ -11,10 +11,9 @@ describe("parse log select", () => {
     mockedGet.mockImplementation(() => "");
     render(
       <ParseLogSelect
-        disabled={false}
         fileName="filename.txt"
+        onCancel={jest.fn()}
         onParse={jest.fn()}
-        setHasDroppedLog={jest.fn()}
       />
     );
     expect(screen.getByText("Select...")).toBeInTheDocument();
@@ -28,10 +27,9 @@ describe("parse log select", () => {
     mockedGet.mockImplementation(() => LogTypes.EVERGREEN_TASK_LOGS);
     render(
       <ParseLogSelect
-        disabled={false}
         fileName="filename.txt"
+        onCancel={jest.fn()}
         onParse={jest.fn()}
-        setHasDroppedLog={jest.fn()}
       />
     );
     expect(screen.getByText("Raw")).toBeInTheDocument();
@@ -42,10 +40,9 @@ describe("parse log select", () => {
     mockedGet.mockImplementation(() => LogTypes.RESMOKE_LOGS);
     render(
       <ParseLogSelect
-        disabled={false}
         fileName="filename.txt"
+        onCancel={jest.fn()}
         onParse={jest.fn()}
-        setHasDroppedLog={jest.fn()}
       />
     );
     expect(screen.getByText("Resmoke")).toBeInTheDocument();
@@ -57,10 +54,9 @@ describe("parse log select", () => {
     const onParse = jest.fn();
     render(
       <ParseLogSelect
-        disabled={false}
         fileName="filename.txt"
+        onCancel={jest.fn()}
         onParse={onParse}
-        setHasDroppedLog={jest.fn()}
       />
     );
     const user = userEvent.setup();
@@ -68,19 +64,18 @@ describe("parse log select", () => {
     expect(onParse).toHaveBeenCalledTimes(1);
   });
 
-  it("clicking the 'Cancel' button calls the setHasDroppedLog function", async () => {
-    const setHasDroppedLog = jest.fn();
+  it("clicking the 'Cancel' button calls the onCancel function", async () => {
+    const onCancel = jest.fn();
     render(
       <ParseLogSelect
-        disabled={false}
         fileName="filename.txt"
+        onCancel={onCancel}
         onParse={jest.fn()}
-        setHasDroppedLog={setHasDroppedLog}
       />
     );
     const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Cancel" }));
-    expect(setHasDroppedLog).toHaveBeenCalledTimes(1);
-    expect(setHasDroppedLog).toHaveBeenCalledWith(false);
+    expect(onCancel).toHaveBeenCalledTimes(1);
+    expect(onCancel).toHaveBeenCalledWith(false);
   });
 });
