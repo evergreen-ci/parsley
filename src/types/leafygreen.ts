@@ -1,10 +1,5 @@
-import Banner from "@leafygreen-ui/banner";
 import Card from "@leafygreen-ui/card";
 import { H1, H2, H3, Overline, Subtitle } from "@leafygreen-ui/typography";
-
-export type BannerType = React.ComponentType<
-  Omit<React.ComponentProps<typeof Banner>, "as">
->;
 
 export type CardType = React.ComponentType<
   Omit<React.ComponentProps<typeof Card>, "as">
