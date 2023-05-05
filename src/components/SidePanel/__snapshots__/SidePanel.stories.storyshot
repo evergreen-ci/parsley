@@ -6,7 +6,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
     class="css-3ieiu4"
   >
     <div
-      class="lg-ui-side-nav-0000 css-9jz470 leafygreen-ui-1us1h4n"
+      class="lg-ui-side-nav-0000 css-9jz470 leafygreen-ui-11vns4e"
       data-testid="side-nav-container"
     >
       <div
@@ -14,11 +14,11 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
       >
         <nav
           aria-label="Side panel"
-          class="leafygreen-ui-n13rbw"
+          class="leafygreen-ui-1ybihln"
           id="side-nav-1"
         >
           <div
-            class="leafygreen-ui-1nmawjt"
+            class="leafygreen-ui-aoszy5"
           >
             <ul
               class="leafygreen-ui-13ths9k"
@@ -199,7 +199,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           class="leafygreen-ui-1gmp0zo css-jw6p18"
                         >
                           <div
-                            class="leafygreen-ui-1dhyvkg"
+                            class="leafygreen-ui-ucoteg leafygreen-ui-114muox"
                           >
                             Case
                           </div>
@@ -279,7 +279,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           class="leafygreen-ui-1gmp0zo css-jw6p18"
                         >
                           <div
-                            class="leafygreen-ui-1dhyvkg"
+                            class="leafygreen-ui-ucoteg leafygreen-ui-114muox"
                           >
                             Match
                           </div>
@@ -609,7 +609,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
             </ul>
           </div>
           <div
-            class="leafygreen-ui-1jpr46n"
+            class="leafygreen-ui-1s7m71x"
           >
             <ul
               aria-hidden="true"
@@ -694,11 +694,11 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
           aria-controls="side-nav-1"
           aria-expanded="true"
           aria-label="Collapse navigation"
-          class="leafygreen-ui-v87gj9"
+          class="leafygreen-ui-cssveg leafygreen-ui-za3dje"
           data-testid="side-nav-collapse-toggle"
         >
           <div
-            class="lg-ui-collapse-menu-0000 leafygreen-ui-16i6mio"
+            class="lg-ui-collapse-menu-0000 leafygreen-ui-17suy5p"
           >
             <svg
               alt=""

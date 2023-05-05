@@ -111,7 +111,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-13p6dfv leafygreen-ui-15dt34k"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -164,7 +164,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-13p6dfv leafygreen-ui-15dt34k"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -221,7 +221,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-13p6dfv leafygreen-ui-15dt34k"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -274,7 +274,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-13p6dfv leafygreen-ui-15dt34k"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -328,7 +328,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-13p6dfv leafygreen-ui-15dt34k"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -357,7 +357,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
       >
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-10mo38b"
+          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
           data-cy="jira-button"
           type="button"
         >
@@ -390,7 +390,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-10mo38b"
+          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
           data-cy="job-logs-button"
           target="_blank"
           type="button"
@@ -426,7 +426,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-10mo38b"
+          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
           data-cy="raw-log-button"
           target="_blank"
           type="button"
@@ -462,7 +462,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-10mo38b"
+          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
           data-cy="html-log-button"
           target="_blank"
           type="button"
@@ -498,7 +498,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
         </button>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 leafygreen-ui-10g1wb5"
+          class="lg-ui-button-0000 leafygreen-ui-dmcoak"
           data-cy="secondary-links-button"
           type="button"
         >
@@ -645,7 +645,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-13p6dfv leafygreen-ui-15dt34k"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -698,7 +698,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-13p6dfv leafygreen-ui-15dt34k"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -755,7 +755,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-13p6dfv leafygreen-ui-15dt34k"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -808,7 +808,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-13p6dfv leafygreen-ui-15dt34k"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -862,7 +862,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-13p6dfv leafygreen-ui-15dt34k"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -891,7 +891,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
       >
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-10mo38b"
+          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
           data-cy="jira-button"
           type="button"
         >
@@ -924,7 +924,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-10mo38b"
+          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
           data-cy="job-logs-button"
           target="_blank"
           type="button"
@@ -960,7 +960,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-10mo38b"
+          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
           data-cy="raw-log-button"
           target="_blank"
           type="button"
@@ -996,7 +996,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-10mo38b"
+          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
           data-cy="html-log-button"
           target="_blank"
           type="button"
@@ -1032,7 +1032,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 leafygreen-ui-10g1wb5"
+          class="lg-ui-button-0000 leafygreen-ui-dmcoak"
           data-cy="secondary-links-button"
           type="button"
         >
