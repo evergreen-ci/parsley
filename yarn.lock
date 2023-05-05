@@ -2940,19 +2940,6 @@
     "@leafygreen-ui/palette" "^3.4.4"
     "@leafygreen-ui/tokens" "^1.4.0"
 
-"@leafygreen-ui/banner@7.0.1":
-  version "7.0.1"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/banner/-/banner-7.0.1.tgz#1635d2f8e95d7b9b5a65ebd46c88fc58592b269f"
-  integrity sha512-i1p9Drh6/tnw8VciiyNpIggtIMcOguzy/wrJCLhwmb/WXvcdY0fxCUBRnNn7RaMzDOmvQuow/ER2orKUTT5cEQ==
-  dependencies:
-    "@leafygreen-ui/emotion" "^4.0.3"
-    "@leafygreen-ui/icon" "^11.12.1"
-    "@leafygreen-ui/icon-button" "^15.0.1"
-    "@leafygreen-ui/lib" "^10.0.0"
-    "@leafygreen-ui/palette" "^3.4.4"
-    "@leafygreen-ui/tokens" "^1.4.0"
-    "@leafygreen-ui/typography" "^15.1.0"
-
 "@leafygreen-ui/box@^3.1.1":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/box/-/box-3.1.1.tgz#3d2cc09ac5105e19d2a49da2f2065b45cc8e4722"
