@@ -23,7 +23,7 @@ interface BreadcrumbsProps {
 const Breadcrumbs: React.FC<BreadcrumbsProps> = ({ breadcrumbs }) => (
   <Container data-cy="breadcrumb-container">
     {breadcrumbs.map((bc, index) => (
-      <Fragment key={`breadCrumb-${bc.text}`}>
+      <Fragment key={`breadcrumb-${bc["data-cy"]}`}>
         <BreadcrumbFragment breadcrumb={bc} />
         {breadcrumbs.length - 1 !== index && (
           <Icon

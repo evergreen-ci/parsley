@@ -2018,6 +2018,7 @@ export type TaskEventLogData = {
   hostId?: Maybe<Scalars["String"]>;
   jiraIssue?: Maybe<Scalars["String"]>;
   jiraLink?: Maybe<Scalars["String"]>;
+  podId?: Maybe<Scalars["String"]>;
   priority?: Maybe<Scalars["Int"]>;
   status?: Maybe<Scalars["String"]>;
   timestamp?: Maybe<Scalars["Time"]>;
@@ -2609,6 +2610,16 @@ export type LogkeeperTaskQuery = {
       id: string;
       patchNumber?: number | null;
       status: string;
+      tests: {
+        __typename?: "TaskTestResult";
+        testResults: Array<{
+          __typename?: "TestResult";
+          id: string;
+          status: string;
+          testFile: string;
+          logs: { __typename?: "TestLog"; urlRaw?: string | null };
+        }>;
+      };
       versionMetadata: {
         __typename?: "Version";
         id: string;
@@ -2618,7 +2629,6 @@ export type LogkeeperTaskQuery = {
         revision: string;
       };
     };
-    tests: Array<{ __typename?: "LogkeeperTest"; id: string; name: string }>;
   };
 };
 

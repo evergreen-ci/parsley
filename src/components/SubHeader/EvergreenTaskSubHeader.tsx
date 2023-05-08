@@ -1,10 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { InlineCode } from "@leafygreen-ui/typography";
 import { usePreferencesAnalytics } from "analytics";
+import { TaskStatusBadge, TestStatusBadge } from "components/Badge";
 import Breadcrumbs from "components/Breadcrumbs";
 import Icon from "components/Icon";
 import { StyledLink } from "components/styles";
-import TaskStatusBadge from "components/TaskStatusBadge";
 import { LogTypes } from "constants/enums";
 import { getEvergreenTaskURL } from "constants/externalURLTemplates";
 import {
@@ -32,10 +32,11 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   testID,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
+  const isResmoke = logType === LogTypes.RESMOKE_LOGS;
 
   const { data, loading } = useQuery<TaskQuery, TaskQueryVariables>(GET_TASK, {
     variables: { taskId: taskID, execution },
-    skip: logType === LogTypes.RESMOKE_LOGS,
+    skip: isResmoke,
   });
 
   const { data: logkeeperData, loading: logkeeperLoading } = useQuery<
@@ -43,7 +44,7 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     LogkeeperTaskQueryVariables
   >(GET_LOGKEEPER_TASK, {
     variables: { buildId: buildID },
-    skip: logType !== LogTypes.RESMOKE_LOGS || !buildID,
+    skip: !isResmoke || !buildID,
   });
 
   const { task } = data ?? {};
@@ -73,9 +74,11 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   } = loadedTask;
   const { isPatch, projectIdentifier, message, revision } = versionMetadata;
 
-  const currentTest = logkeeperBuildMetadata?.tests?.find(
-    (test) => test.id === testID
-  );
+  const currentTest = isResmoke
+    ? logkeeperBuildMetadata?.task?.tests?.testResults?.find((test) =>
+        test?.logs?.urlRaw?.match(new RegExp(`${testID}`))
+      )
+    : null;
 
   const breadcrumbs = [
     {
@@ -109,7 +112,16 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
       ? [
           {
             "data-cy": "test-breadcrumb",
-            text: currentTest?.name ?? "Test",
+            text: (
+              <>
+                {trimStringFromMiddle(currentTest?.testFile ?? "Test", 80)}{" "}
+                <TestStatusBadge status={currentTest?.status} />
+              </>
+            ),
+            tooltipText:
+              currentTest &&
+              currentTest.testFile.length > 80 &&
+              currentTest.testFile,
           },
         ]
       : []),
