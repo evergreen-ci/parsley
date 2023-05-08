@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots pages/LogDrop/LoadingAnimation Default 1`] = `
+<div>
+  <div
+    class="css-10b6qd6"
+  >
+    <p
+      class="css-ahy7pu leafygreen-ui-1yli3c0"
+    >
+      Loading log...
+    </p>
+    <div
+      class="css-k7jz0p"
+    >
+      <div
+        class="css-1i15wrg"
+      />
+    </div>
+  </div>
+</div>
+`;

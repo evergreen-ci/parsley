@@ -39,9 +39,7 @@ const FileDropper: React.FC = () => {
       if (logType) {
         setLogMetadata({ logType });
         leaveBreadcrumb("Parsing file", { logType }, "process");
-        dispatch({
-          type: "PARSE_FILE",
-        });
+        dispatch({ type: "PARSE_FILE" });
         startTransition(() => {
           (async () => {
             if (state.file) {
@@ -106,11 +104,7 @@ const FileDropper: React.FC = () => {
       );
       break;
     case "LOADING_FILE":
-      visibleUI = (
-        <DropzoneInnerWrapper>
-          <LoadingAnimation />
-        </DropzoneInnerWrapper>
-      );
+      visibleUI = <LoadingAnimation />;
       break;
     default:
       visibleUI = null;
@@ -151,10 +145,6 @@ const Dropzone = styled.div`
   padding: ${size.xl};
   width: 50vw;
   height: 30vh;
-`;
-
-const DropzoneInnerWrapper = styled.div`
-  width: 100%;
 `;
 
 export default FileDropper;

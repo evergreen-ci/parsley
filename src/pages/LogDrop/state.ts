@@ -33,7 +33,6 @@ const reducer = (state: State, action: Action): State => {
         ...state,
         currentState: "PROMPT_FOR_PARSING_METHOD",
         file: action.file,
-        fileName: action.file.name,
       };
     case "PARSE_FILE":
       return {
