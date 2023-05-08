@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import styled, { StyledComponent } from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, BodyProps } from "@leafygreen-ui/typography";
 import { size } from "constants/tokens";
 
 const { red, black } = palette;
@@ -25,6 +25,6 @@ const SearchCount: React.FC<SearchCountProps> = ({
 const StyledBody = styled(Body)<{ "has-matches": string }>`
   color: ${({ "has-matches": hasMatches }) => (hasMatches ? black : red.dark2)};
   margin-left: ${size.xs};
-`;
+` as StyledComponent<BodyProps>;
 
 export default SearchCount;

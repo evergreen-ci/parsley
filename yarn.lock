@@ -3109,6 +3109,14 @@
     "@leafygreen-ui/emotion" "^4.0.3"
     lodash "^4.17.21"
 
+"@leafygreen-ui/icon@^11.13.1":
+  version "11.13.1"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/icon/-/icon-11.13.1.tgz#c6d028367feaf02ec907314a01dbdc780a674f2a"
+  integrity sha512-yxxSMzq99W8TYjH2PEKcqa6KuMyIk8tKm1CwZdEexIYC44m81f/HjZrSIPq5CEogHFEFns1wHp6dOPHIYsC23Q==
+  dependencies:
+    "@leafygreen-ui/emotion" "^4.0.4"
+    lodash "^4.17.21"
+
 "@leafygreen-ui/leafygreen-provider@3.1.0":
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/leafygreen-provider/-/leafygreen-provider-3.1.0.tgz#5f36e5e6e6203e9cf64ba7bad342ed1fa433a32c"
@@ -3181,6 +3189,11 @@
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/polymorphic/-/polymorphic-1.3.0.tgz#d4ec0f44be9d1b190f514e8d963810443c666baa"
   integrity sha512-XTKbrevrOQHUp1gMP3/sqh92vYYGJ8cz5c7EiGCTJZIegrejwuxQe2lGxW2UEUJk2PpkZDvgPwkKmuqvEayu2Q==
+
+"@leafygreen-ui/polymorphic@^1.3.1":
+  version "1.3.1"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/polymorphic/-/polymorphic-1.3.1.tgz#c1e6adb284078263ee1b4fc594c786ace0dc88bc"
+  integrity sha512-guybioSUs6Xa4kMs65iQwTlUgZ08N9ZvzvjOxUqK5lROVLauAUKt/Sn6tVTgzRpepDHrOUBkt5LQi0o/i4JQcQ==
 
 "@leafygreen-ui/popover@^11.0.1", "@leafygreen-ui/popover@^11.0.4":
   version "11.0.4"
@@ -3372,7 +3385,19 @@
     lodash "^4.17.21"
     polished "^4.2.2"
 
-"@leafygreen-ui/typography@15.1.0", "@leafygreen-ui/typography@^15.1.0":
+"@leafygreen-ui/typography@16.3.0":
+  version "16.3.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/typography/-/typography-16.3.0.tgz#b11ec3727089901626f79491127ffed256d785e7"
+  integrity sha512-ddCK3TsRFmTv0533zyCsT7fEaJ1FJb0wErQzKMpAnA1Q9/ZUUf72pJLJLxmk8jKlUdPfWKp2NE5mNRBf31skew==
+  dependencies:
+    "@leafygreen-ui/emotion" "^4.0.4"
+    "@leafygreen-ui/icon" "^11.13.1"
+    "@leafygreen-ui/lib" "^10.3.3"
+    "@leafygreen-ui/palette" "^4.0.4"
+    "@leafygreen-ui/polymorphic" "^1.3.1"
+    "@leafygreen-ui/tokens" "^2.0.3"
+
+"@leafygreen-ui/typography@^15.1.0":
   version "15.1.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/typography/-/typography-15.1.0.tgz#e0d99598de2141d938ddbe10a8bfb7328aae1ffd"
   integrity sha512-ajvxMdjZjlPpBIdM2eIjFGzFdH8Av42Y/dY7EsO0Cfbq+xxAcmzP5jhtGHwkgECIgkxuJW2B9tPUxu98AbN4Ow==

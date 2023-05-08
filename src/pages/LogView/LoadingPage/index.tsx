@@ -1,6 +1,6 @@
 import { useEffect } from "react";
-import styled from "@emotion/styled";
-import { Body } from "@leafygreen-ui/typography";
+import styled, { StyledComponent } from "@emotion/styled";
+import { Body, BodyProps } from "@leafygreen-ui/typography";
 import { useParams } from "react-router-dom";
 import Icon from "components/Icon";
 import { LogTypes } from "constants/enums";
@@ -223,7 +223,7 @@ const AnimationWrapper = styled.div`
 
 const StyledBody = styled(Body)`
   font-size: ${fontSize.l};
-`;
+` as StyledComponent<BodyProps>;
 
 const Container = styled.div`
   align-items: center;

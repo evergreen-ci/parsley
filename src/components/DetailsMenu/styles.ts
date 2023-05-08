@@ -1,7 +1,6 @@
 import styled from "@emotion/styled";
 import { Subtitle } from "@leafygreen-ui/typography";
 import { size } from "constants/tokens";
-import { SubtitleType } from "types/leafygreen";
 
 const DetailRow = styled.div`
   display: flex;
@@ -10,7 +9,7 @@ const DetailRow = styled.div`
   margin-bottom: ${size.m};
 `;
 
-const DetailName = styled<SubtitleType>(Subtitle)`
+const DetailName = styled(Subtitle)`
   font-size: ${size.s};
 `;
 

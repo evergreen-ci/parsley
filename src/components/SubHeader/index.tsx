@@ -1,6 +1,6 @@
-import styled from "@emotion/styled";
+import styled, { StyledComponent } from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, BodyProps } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { fontSize, size, subheaderHeight } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
@@ -48,7 +48,7 @@ const Header = styled.div`
 
 const StyledBody = styled(Body)`
   font-size: ${fontSize.m};
-`;
+` as StyledComponent<BodyProps>;
 
 const Container = styled.div`
   display: flex;

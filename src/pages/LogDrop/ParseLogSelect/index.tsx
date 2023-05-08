@@ -1,8 +1,8 @@
 import { useState } from "react";
-import styled from "@emotion/styled";
+import styled, {StyledComponent} from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { Option, Select } from "@leafygreen-ui/select";
-import { InlineCode, Label } from "@leafygreen-ui/typography";
+import { InlineCode, InlineCodeProps, Label } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
 import { LAST_SELECTED_LOG_TYPE } from "constants/cookies";
 import { LogTypes } from "constants/enums";
@@ -73,6 +73,6 @@ const ButtonContainer = styled.div`
 
 const StyledInlineCode = styled(InlineCode)`
   overflow-wrap: anywhere;
-`;
+` as StyledComponent<InlineCodeProps>;
 
 export default ParseLogSelect;

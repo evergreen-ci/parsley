@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled from "@emotion/styled";
+import styled, { StyledComponent } from "@emotion/styled";
 import Badge from "@leafygreen-ui/badge";
 import Button, { Variant } from "@leafygreen-ui/button";
 import IconButton from "@leafygreen-ui/icon-button";
@@ -9,7 +9,7 @@ import {
   SegmentedControl,
 } from "@leafygreen-ui/segmented-control";
 import TextInput from "@leafygreen-ui/text-input";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, BodyProps } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
@@ -198,7 +198,7 @@ const FilterName = styled(Body)`
 
   font-size: 13px;
   word-break: break-all;
-`;
+` as StyledComponent<BodyProps>;
 
 const StyledSegmentedControl = styled(SegmentedControl)`
   margin-bottom: ${size.xs};
