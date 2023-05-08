@@ -1,31 +1,17 @@
-import { arrayBufferToStringArray } from ".";
+import { fileToStream } from ".";
 
-describe("arrayBufferToStringArray", () => {
-  it("converts a single line array buffer to a string array", () => {
-    const string = "Hello World";
-    const buffer = stringToArrayBuffer(string);
-    expect(arrayBufferToStringArray(buffer)).toStrictEqual(["Hello World"]);
+describe("fileToStream", () => {
+  it("should return a stream", async () => {
+    const file = new File(["Hello World"], "hello.txt", { type: "text/plain" });
+    const stream = await fileToStream(file);
+    expect(stream).toBeDefined();
   });
-  it("converts a multi line array buffer to a string array", () => {
-    const string = "Hello World\nThis is a test";
-    const buffer = stringToArrayBuffer(string);
-    expect(arrayBufferToStringArray(buffer)).toStrictEqual([
-      "Hello World",
-      "This is a test",
-    ]);
-  });
-  it("converts a single line array buffer with a trailing newline to a string array", () => {
-    const string = "Hello World\n";
-    const buffer = stringToArrayBuffer(string);
-    expect(arrayBufferToStringArray(buffer)).toStrictEqual(["Hello World"]);
-  });
-  it("converts a multi line array buffer with a trailing newline to a string array", () => {
-    const string = "Hello World\nThis is a test\n";
-    const buffer = stringToArrayBuffer(string);
-    expect(arrayBufferToStringArray(buffer)).toStrictEqual([
-      "Hello World",
-      "This is a test",
-    ]);
+  it("should return a stream with the correct content", async () => {
+    const file = new File(["Hello World"], "hello.txt", { type: "text/plain" });
+    const stream = await fileToStream(file);
+    const reader = stream.getReader();
+    const result = await reader.read();
+    expect(result.value).toStrictEqual(stringToArrayBuffer("Hello World"));
   });
 });
 
