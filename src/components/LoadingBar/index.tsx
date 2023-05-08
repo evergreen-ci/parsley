@@ -47,7 +47,6 @@ const Bar = styled.div<{ progress: number; indeterminate: boolean }>`
       : `  width: ${progress}%;
 `}
   box-shadow: 0 0 ${size.xs} ${green.light2};
-  will-change: transform;
 `;
 
 const indeterminateAnimation = css`
