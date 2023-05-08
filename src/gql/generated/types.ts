@@ -320,6 +320,18 @@ export type FileDiff = {
   fileName: Scalars["String"];
 };
 
+export type GeneralSubscription = {
+  __typename?: "GeneralSubscription";
+  id: Scalars["String"];
+  ownerType: Scalars["String"];
+  regexSelectors: Array<Selector>;
+  resourceType: Scalars["String"];
+  selectors: Array<Selector>;
+  subscriber?: Maybe<SubscriberWrapper>;
+  trigger: Scalars["String"];
+  triggerData?: Maybe<Scalars["StringMap"]>;
+};
+
 export type GithubCheckSubscriber = {
   __typename?: "GithubCheckSubscriber";
   owner: Scalars["String"];
@@ -1283,6 +1295,8 @@ export type ProjectEventSettings = {
   aliases?: Maybe<Array<ProjectAlias>>;
   githubWebhooksEnabled: Scalars["Boolean"];
   projectRef?: Maybe<Project>;
+  /** @deprecated Use subscriptions instead */
+  projectSubscriptions?: Maybe<Array<ProjectSubscription>>;
   subscriptions?: Maybe<Array<ProjectSubscription>>;
   vars?: Maybe<ProjectVars>;
 };
@@ -1349,6 +1363,8 @@ export type ProjectSettings = {
   aliases?: Maybe<Array<ProjectAlias>>;
   githubWebhooksEnabled: Scalars["Boolean"];
   projectRef?: Maybe<Project>;
+  /** @deprecated Use subscriptions instead */
+  projectSubscriptions?: Maybe<Array<ProjectSubscription>>;
   subscriptions?: Maybe<Array<ProjectSubscription>>;
   vars?: Maybe<ProjectVars>;
 };
@@ -1385,16 +1401,6 @@ export enum ProjectSettingsSection {
   Workstation = "WORKSTATION",
 }
 
-/**
- * ProjectSubscriber defines the subscriptions for a given Project. For example, a project could have Slack notifications
- * enabled that trigger whenever any version finishes.
- */
-export type ProjectSubscriber = {
-  __typename?: "ProjectSubscriber";
-  subscriber: Subscriber;
-  type: Scalars["String"];
-};
-
 export type ProjectSubscription = {
   __typename?: "ProjectSubscription";
   id: Scalars["String"];
@@ -1402,7 +1408,7 @@ export type ProjectSubscription = {
   regexSelectors: Array<Selector>;
   resourceType: Scalars["String"];
   selectors: Array<Selector>;
-  subscriber?: Maybe<ProjectSubscriber>;
+  subscriber?: Maybe<SubscriberWrapper>;
   trigger: Scalars["String"];
   triggerData?: Maybe<Scalars["StringMap"]>;
 };
@@ -1717,6 +1723,8 @@ export type RepoSettings = {
   aliases?: Maybe<Array<ProjectAlias>>;
   githubWebhooksEnabled: Scalars["Boolean"];
   projectRef?: Maybe<RepoRef>;
+  /** @deprecated Use subscriptions instead */
+  projectSubscriptions?: Maybe<Array<ProjectSubscription>>;
   subscriptions?: Maybe<Array<ProjectSubscription>>;
   vars?: Maybe<ProjectVars>;
 };
@@ -1881,6 +1889,12 @@ export type SubscriberInput = {
   target: Scalars["String"];
   type: Scalars["String"];
   webhookSubscriber?: InputMaybe<WebhookSubscriberInput>;
+};
+
+export type SubscriberWrapper = {
+  __typename?: "SubscriberWrapper";
+  subscriber: Subscriber;
+  type: Scalars["String"];
 };
 
 /**
@@ -2339,6 +2353,7 @@ export type User = {
   emailAddress: Scalars["String"];
   patches: Patches;
   permissions: Permissions;
+  subscriptions?: Maybe<Array<GeneralSubscription>>;
   userId: Scalars["String"];
 };
 
