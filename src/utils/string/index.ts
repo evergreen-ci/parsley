@@ -44,14 +44,6 @@ export const getJiraFormat = (
 };
 
 /**
- * `processLogString` is used to turn a single string into an array of of log lines.
- * @param logString - a single string representing the entire log file
- * @returns an array of log lines
- */
-export const processLogString = (logString: string) =>
-  logString.trimEnd().split("\n");
-
-/**
  * `stringIntersection` returns a boolean indicating if two strings have a full overlap
  * @param string1
  * @param string2
