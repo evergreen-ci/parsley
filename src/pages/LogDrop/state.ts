@@ -9,9 +9,6 @@ type CurrentState =
 type State = {
   currentState: CurrentState;
   file: File | null;
-  parsingMethod: string | null;
-  error: Error | null;
-  fileName: string | null;
 };
 type Action =
   | { type: "DROPPED_FILE"; file: File }
@@ -21,9 +18,6 @@ type Action =
 const initialState = (): State => ({
   currentState: "WAITING_FOR_FILE",
   file: null,
-  parsingMethod: null,
-  error: null,
-  fileName: null,
 });
 
 const reducer = (state: State, action: Action): State => {

@@ -97,7 +97,7 @@ const FileDropper: React.FC = () => {
     case "PROMPT_FOR_PARSING_METHOD":
       visibleUI = (
         <ParseLogSelect
-          fileName={state.fileName || ""}
+          fileName={state.file?.name || ""}
           onCancel={() => dispatch({ type: "CANCEL" })}
           onParse={onParse}
         />
