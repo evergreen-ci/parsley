@@ -44,11 +44,15 @@ const useLogDownloader = (
       },
       downloadSizeLimit,
       onIncompleteDownload: (reason, incompleteDownloadError) => {
-        leaveBreadcrumb(
-          "useLogDownloader",
-          { incompleteDownloadError, reason },
-          "error"
-        );
+        reportError({
+          message: reason,
+          name: "Log download incomplete",
+          metadata: {
+            incompleteDownloadError,
+            url,
+          },
+        }).warning();
+
         dispatchToast.warning(
           "Parsley was only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log onto your machine.",
           true,
@@ -56,6 +60,12 @@ const useLogDownloader = (
             title: "Log not fully downloaded",
           }
         );
+        sendEvent({
+          name: "Log Download Incomplete",
+          duration: Date.now() - timeStart,
+          reason,
+          downloaded: getFileSize(),
+        });
       },
     })
       .then((logs) => {
