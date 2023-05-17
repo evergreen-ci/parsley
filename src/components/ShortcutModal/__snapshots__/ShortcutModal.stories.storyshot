@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/ShortcutModal Default 1`] = `
+<div>
+  <button
+    type="button"
+  >
+    Open Modal
+  </button>
+</div>
+`;
