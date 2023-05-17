@@ -20,7 +20,7 @@ const shortcuts = [
       ["CTRL", "S"],
       ["⌘", "S"],
     ],
-    description: "Toggle between search, filter, and highlight",
+    description: "Toggle between filter and highlight",
   },
   {
     keys: [
