@@ -27,7 +27,7 @@ const shortcuts = [
       ["CTRL", "ENTER"],
       ["⌘", "ENTER"],
     ],
-    description: "Apply the filter, or highlight",
+    description: "Apply the filter or highlight",
   },
   { keys: [["]"]], description: "Toggle the side panel" },
   {
