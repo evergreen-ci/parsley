@@ -22,6 +22,13 @@ const shortcuts = [
     ],
     description: "Toggle between search, filter, and highlight",
   },
+  {
+    keys: [
+      ["CTRL", "ENTER"],
+      ["⌘", "ENTER"],
+    ],
+    description: "Apply the filter, or highlight",
+  },
   { keys: [["]"]], description: "Toggle the side panel" },
   {
     keys: [["N"], ["ENTER"]],
@@ -106,7 +113,7 @@ const ModalRow = styled.div`
 const ShortcutKeys = styled.div`
   display: flex;
   margin-right: ${size.xs};
-  width: 200px;
+  width: 225px;
 `;
 
 const Divider = styled.span`
