@@ -41,8 +41,21 @@ const useQueryParam = <T>(
 
   const setQueryParam = useCallback(
     (value: T) => {
-      setSearchParams({
+      const newParams = {
         ...searchParams,
+      };
+      Object.entries(newParams).forEach(([paramKey, paramValue]) => {
+        if (paramValue === undefined) {
+          delete newParams[paramKey];
+        }
+        if (Array.isArray(paramValue)) {
+          newParams[paramKey] = paramValue.map((v) =>
+            v ? encodeURIComponent(v) : null
+          );
+        }
+      });
+      setSearchParams({
+        ...newParams,
         [param]: value,
       });
     },

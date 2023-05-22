@@ -1,5 +1,11 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { MemoryRouter } from "react-router-dom";
+import { createMemoryHistory } from "history";
+import {
+  // This is okay as long as there is only one version of history
+  // https://reactrouter.com/docs/en/v6/routers/history-router
+  unstable_HistoryRouter as HistoryRouter,
+  MemoryRouter,
+} from "react-router-dom";
 import { useQueryParam, useQueryParams } from ".";
 
 describe("useQueryParams", () => {
@@ -202,6 +208,37 @@ describe("useQueryParam", () => {
         result.current.setQueryParam([3, 4]);
       });
       expect(result.current.queryParam).toStrictEqual([3, 4]);
+    });
+  });
+  describe("uri encoding", () => {
+    it("should preserve encoded uri's", () => {
+      const history = createMemoryHistory({
+        initialEntries: [
+          "/?search=test%20test&filters=100drop%2522%252C%2522attr%2522",
+        ],
+      });
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => <HistoryRouter history={history}>{children}</HistoryRouter>;
+
+      const { result } = renderHook(
+        () => useQueryJointHook("search", "test test"),
+        {
+          wrapper,
+        }
+      );
+      expect(result.current.allQueryParams).toMatchObject({
+        filters: "100drop%22%2C%22attr%22",
+        search: "test test",
+      });
+      expect(result.current.queryParam).toBe("test test");
+      act(() => {
+        result.current.setQueryParam("test2 test2");
+      });
+      expect(result.current.queryParam).toBe("test2 test2");
+      expect(history.location.search).toBe(
+        "?filters=100drop%2522%252C%2522attr%2522&search=test2%20test2"
+      );
     });
   });
 });
