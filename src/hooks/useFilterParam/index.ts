@@ -1,4 +1,5 @@
 import { useCallback } from "react";
+import { QueryParams } from "constants/queryParams";
 import { useQueryParams } from "hooks/useQueryParam";
 import { Filters } from "types/logs";
 import { conditionalCastToArray } from "utils/array";
@@ -21,7 +22,7 @@ const useFilterParam = () => {
     (filters: Filters) => {
       setSearchParams({
         ...searchParams,
-        filters: stringifyFilters(filters),
+        [QueryParams.Filters]: stringifyFilters(filters),
       });
     },
     [setSearchParams, searchParams]
