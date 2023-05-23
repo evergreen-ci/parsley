@@ -211,7 +211,7 @@ describe("useQueryParam", () => {
     });
   });
   describe("uri encoding", () => {
-    it("should preserve encoded uri's", () => {
+    it("should preserve encoded uri's with single values", () => {
       const history = createMemoryHistory({
         initialEntries: [
           "/?search=test%20test&filters=100drop%2522%252C%2522attr%2522",
@@ -235,9 +235,46 @@ describe("useQueryParam", () => {
       act(() => {
         result.current.setQueryParam("test2 test2");
       });
+      expect(result.current.allQueryParams).toMatchObject({
+        filters: "100drop%22%2C%22attr%22",
+        search: "test2 test2",
+      });
       expect(result.current.queryParam).toBe("test2 test2");
       expect(history.location.search).toBe(
         "?filters=100drop%2522%252C%2522attr%2522&search=test2%20test2"
+      );
+    });
+    it("should preserve encoded uri's with array values", () => {
+      const history = createMemoryHistory({
+        initialEntries: [
+          "/?search=test%20test&filters=100drop%2522%252C%2522attr%2522,001drop%2522%252C%2522attr%2522",
+        ],
+      });
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => <HistoryRouter history={history}>{children}</HistoryRouter>;
+
+      const { result } = renderHook(
+        () => useQueryJointHook("search", "test test"),
+        {
+          wrapper,
+        }
+      );
+      expect(result.current.allQueryParams).toMatchObject({
+        filters: ['100drop","attr"', '001drop","attr"'],
+        search: "test test",
+      });
+      expect(result.current.queryParam).toBe("test test");
+      act(() => {
+        result.current.setQueryParam("test2 test2");
+      });
+      expect(result.current.queryParam).toBe("test2 test2");
+      expect(result.current.allQueryParams).toMatchObject({
+        filters: ['100drop","attr"', '001drop","attr"'],
+        search: "test2 test2",
+      });
+      expect(history.location.search).toBe(
+        "?filters=100drop%2522%252C%2522attr%2522,001drop%2522%252C%2522attr%2522&search=test2%20test2"
       );
     });
   });
