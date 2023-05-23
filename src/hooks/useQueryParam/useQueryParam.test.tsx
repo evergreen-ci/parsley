@@ -277,5 +277,38 @@ describe("useQueryParam", () => {
         "?filters=100drop%2522%252C%2522attr%2522,001drop%2522%252C%2522attr%2522&search=test2%20test2"
       );
     });
+    it("should preserve falsy values in the url", () => {
+      const history = createMemoryHistory({
+        initialEntries: ["/?search=test%20test&bookmarks=0&something=false"],
+      });
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => <HistoryRouter history={history}>{children}</HistoryRouter>;
+
+      const { result } = renderHook(
+        () => useQueryJointHook("search", "test test"),
+        {
+          wrapper,
+        }
+      );
+      expect(result.current.allQueryParams).toMatchObject({
+        bookmarks: 0,
+        search: "test test",
+        something: false,
+      });
+      expect(result.current.queryParam).toBe("test test");
+      act(() => {
+        result.current.setQueryParam("test2 test2");
+      });
+      expect(result.current.queryParam).toBe("test2 test2");
+      expect(result.current.allQueryParams).toMatchObject({
+        bookmarks: 0,
+        search: "test2 test2",
+        something: false,
+      });
+      expect(history.location.search).toBe(
+        "?bookmarks=0&search=test2%20test2&something=false"
+      );
+    });
   });
 });

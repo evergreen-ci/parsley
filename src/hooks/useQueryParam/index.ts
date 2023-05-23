@@ -50,7 +50,7 @@ const useQueryParam = <T>(
         }
         if (Array.isArray(paramValue)) {
           newParams[paramKey] = paramValue.map((v) =>
-            v ? encodeURIComponent(v) : null
+            v != null ? encodeURIComponent(v) : null
           );
         }
       });
