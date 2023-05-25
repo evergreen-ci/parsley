@@ -88,4 +88,17 @@ describe("useHighlightParam", () => {
     const { result } = renderHook(() => useHighlightJointHook(), { wrapper });
     expect(result.current.highlights).toStrictEqual(["1234567890123456789"]);
   });
+  it("should encode special values when there are multiple highlights", () => {
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+      <MemoryRouter initialEntries={[""]}>{children}</MemoryRouter>
+    );
+    const { result } = renderHook(() => useHighlightJointHook(), { wrapper });
+    expect(result.current.highlights).toStrictEqual([]);
+    act(() => {
+      result.current.setHighlights(["something,else", "failed"]);
+    });
+    expect(result.current.allQueryParams).toMatchObject({
+      highlights: ["something,else", "failed"],
+    });
+  });
 });

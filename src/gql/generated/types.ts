@@ -687,6 +687,7 @@ export type Mutation = {
   createPublicKey: Array<PublicKey>;
   deactivateStepbackTask: Scalars["Boolean"];
   defaultSectionToRepo?: Maybe<Scalars["String"]>;
+  deleteProject: Scalars["Boolean"];
   detachProjectFromRepo: Project;
   detachVolumeFromHost: Scalars["Boolean"];
   editAnnotationNote: Scalars["Boolean"];
@@ -715,6 +716,8 @@ export type Mutation = {
   scheduleUndispatchedBaseTasks?: Maybe<Array<Task>>;
   setAnnotationMetadataLinks: Scalars["Boolean"];
   setPatchPriority?: Maybe<Scalars["String"]>;
+  /** setPatchVisibility takes a list of patch ids and a boolean to set the visibility on the my patches queries */
+  setPatchVisibility: Array<Patch>;
   setTaskPriority: Task;
   spawnHost: Host;
   spawnVolume: Scalars["Boolean"];
@@ -782,6 +785,10 @@ export type MutationDeactivateStepbackTaskArgs = {
 export type MutationDefaultSectionToRepoArgs = {
   projectId: Scalars["String"];
   section: ProjectSettingsSection;
+};
+
+export type MutationDeleteProjectArgs = {
+  projectId: Scalars["String"];
 };
 
 export type MutationDetachProjectFromRepoArgs = {
@@ -918,6 +925,11 @@ export type MutationSetPatchPriorityArgs = {
   priority: Scalars["Int"];
 };
 
+export type MutationSetPatchVisibilityArgs = {
+  hidden: Scalars["Boolean"];
+  patchIds: Array<Scalars["String"]>;
+};
+
 export type MutationSetTaskPriorityArgs = {
   priority: Scalars["Int"];
   taskId: Scalars["String"];
@@ -973,11 +985,17 @@ export type Note = {
 export type Notifications = {
   __typename?: "Notifications";
   buildBreak?: Maybe<Scalars["String"]>;
+  buildBreakId?: Maybe<Scalars["String"]>;
   commitQueue?: Maybe<Scalars["String"]>;
+  commitQueueId?: Maybe<Scalars["String"]>;
   patchFinish?: Maybe<Scalars["String"]>;
+  patchFinishId?: Maybe<Scalars["String"]>;
   patchFirstFailure?: Maybe<Scalars["String"]>;
+  patchFirstFailureId?: Maybe<Scalars["String"]>;
   spawnHostExpiration?: Maybe<Scalars["String"]>;
+  spawnHostExpirationId?: Maybe<Scalars["String"]>;
   spawnHostOutcome?: Maybe<Scalars["String"]>;
+  spawnHostOutcomeId?: Maybe<Scalars["String"]>;
 };
 
 export type NotificationsInput = {
@@ -1006,6 +1024,19 @@ export type ParameterInput = {
   value: Scalars["String"];
 };
 
+export type ParsleyFilter = {
+  __typename?: "ParsleyFilter";
+  caseSensitive: Scalars["Boolean"];
+  exactMatch: Scalars["Boolean"];
+  expression: Scalars["String"];
+};
+
+export type ParsleyFilterInput = {
+  caseSensitive: Scalars["Boolean"];
+  exactMatch: Scalars["Boolean"];
+  expression: Scalars["String"];
+};
+
 /** Patch is a manually initiated version submitted to test local code changes. */
 export type Patch = {
   __typename?: "Patch";
@@ -1023,6 +1054,7 @@ export type Patch = {
   description: Scalars["String"];
   duration?: Maybe<PatchDuration>;
   githash: Scalars["String"];
+  hidden: Scalars["Boolean"];
   id: Scalars["ID"];
   moduleCodeChanges: Array<ModuleCodeChange>;
   parameters: Array<Parameter>;
@@ -1214,6 +1246,7 @@ export type Project = {
   manualPrTestingEnabled?: Maybe<Scalars["Boolean"]>;
   notifyOnBuildFailure?: Maybe<Scalars["Boolean"]>;
   owner: Scalars["String"];
+  parsleyFilters?: Maybe<Array<ParsleyFilter>>;
   patchTriggerAliases?: Maybe<Array<PatchTriggerAlias>>;
   patches: Patches;
   patchingDisabled?: Maybe<Scalars["Boolean"]>;
@@ -1221,6 +1254,7 @@ export type Project = {
   periodicBuilds?: Maybe<Array<PeriodicBuild>>;
   prTestingEnabled?: Maybe<Scalars["Boolean"]>;
   private?: Maybe<Scalars["Boolean"]>;
+  projectHealthView: ProjectHealthView;
   remotePath: Scalars["String"];
   repo: Scalars["String"];
   repoRefId: Scalars["String"];
@@ -1295,8 +1329,6 @@ export type ProjectEventSettings = {
   aliases?: Maybe<Array<ProjectAlias>>;
   githubWebhooksEnabled: Scalars["Boolean"];
   projectRef?: Maybe<Project>;
-  /** @deprecated Use subscriptions instead */
-  projectSubscriptions?: Maybe<Array<ProjectSubscription>>;
   subscriptions?: Maybe<Array<GeneralSubscription>>;
   vars?: Maybe<ProjectVars>;
 };
@@ -1312,6 +1344,11 @@ export type ProjectEvents = {
   count: Scalars["Int"];
   eventLogEntries: Array<ProjectEventLogEntry>;
 };
+
+export enum ProjectHealthView {
+  ProjectHealthViewAll = "PROJECT_HEALTH_VIEW_ALL",
+  ProjectHealthViewFailed = "PROJECT_HEALTH_VIEW_FAILED",
+}
 
 export type ProjectInput = {
   admins?: InputMaybe<Array<Scalars["String"]>>;
@@ -1337,12 +1374,14 @@ export type ProjectInput = {
   manualPrTestingEnabled?: InputMaybe<Scalars["Boolean"]>;
   notifyOnBuildFailure?: InputMaybe<Scalars["Boolean"]>;
   owner?: InputMaybe<Scalars["String"]>;
+  parsleyFilters?: InputMaybe<Array<ParsleyFilterInput>>;
   patchTriggerAliases?: InputMaybe<Array<PatchTriggerAliasInput>>;
   patchingDisabled?: InputMaybe<Scalars["Boolean"]>;
   perfEnabled?: InputMaybe<Scalars["Boolean"]>;
   periodicBuilds?: InputMaybe<Array<PeriodicBuildInput>>;
   prTestingEnabled?: InputMaybe<Scalars["Boolean"]>;
   private?: InputMaybe<Scalars["Boolean"]>;
+  projectHealthView?: InputMaybe<ProjectHealthView>;
   remotePath?: InputMaybe<Scalars["String"]>;
   repo?: InputMaybe<Scalars["String"]>;
   repotrackerDisabled?: InputMaybe<Scalars["Boolean"]>;
@@ -1363,8 +1402,6 @@ export type ProjectSettings = {
   aliases?: Maybe<Array<ProjectAlias>>;
   githubWebhooksEnabled: Scalars["Boolean"];
   projectRef?: Maybe<Project>;
-  /** @deprecated Use subscriptions instead */
-  projectSubscriptions?: Maybe<Array<ProjectSubscription>>;
   subscriptions?: Maybe<Array<GeneralSubscription>>;
   vars?: Maybe<ProjectVars>;
 };
@@ -1398,20 +1435,9 @@ export enum ProjectSettingsSection {
   Plugins = "PLUGINS",
   Triggers = "TRIGGERS",
   Variables = "VARIABLES",
+  ViewsAndFilters = "VIEWS_AND_FILTERS",
   Workstation = "WORKSTATION",
 }
-
-export type ProjectSubscription = {
-  __typename?: "ProjectSubscription";
-  id: Scalars["String"];
-  ownerType: Scalars["String"];
-  regexSelectors: Array<Selector>;
-  resourceType: Scalars["String"];
-  selectors: Array<Selector>;
-  subscriber?: Maybe<SubscriberWrapper>;
-  trigger: Scalars["String"];
-  triggerData?: Maybe<Scalars["StringMap"]>;
-};
 
 export type ProjectVars = {
   __typename?: "ProjectVars";
@@ -1475,7 +1501,6 @@ export type Query = {
   taskNamesForBuildVariant?: Maybe<Array<Scalars["String"]>>;
   taskQueueDistros: Array<TaskQueueDistro>;
   taskTestSample?: Maybe<Array<TaskTestResultSample>>;
-  taskTests: TaskTestResult;
   user: User;
   userConfig?: Maybe<UserConfig>;
   userSettings?: Maybe<UserSettings>;
@@ -1600,18 +1625,6 @@ export type QueryTaskTestSampleArgs = {
   tasks: Array<Scalars["String"]>;
 };
 
-export type QueryTaskTestsArgs = {
-  execution?: InputMaybe<Scalars["Int"]>;
-  groupId?: InputMaybe<Scalars["String"]>;
-  limit?: InputMaybe<Scalars["Int"]>;
-  page?: InputMaybe<Scalars["Int"]>;
-  sortCategory?: InputMaybe<TestSortCategory>;
-  sortDirection?: InputMaybe<SortDirection>;
-  statuses?: Array<Scalars["String"]>;
-  taskId: Scalars["String"];
-  testName?: InputMaybe<Scalars["String"]>;
-};
-
 export type QueryUserArgs = {
   userId?: InputMaybe<Scalars["String"]>;
 };
@@ -1723,8 +1736,6 @@ export type RepoSettings = {
   aliases?: Maybe<Array<ProjectAlias>>;
   githubWebhooksEnabled: Scalars["Boolean"];
   projectRef?: Maybe<RepoRef>;
-  /** @deprecated Use subscriptions instead */
-  projectSubscriptions?: Maybe<Array<ProjectSubscription>>;
   subscriptions?: Maybe<Array<GeneralSubscription>>;
   vars?: Maybe<ProjectVars>;
 };
@@ -2178,7 +2189,7 @@ export type TaskSyncOptionsInput = {
 };
 
 /**
- * TaskTestResult is the return value for the taskTests query.
+ * TaskTestResult is the return value for the task.Tests resolver.
  * It contains the test results for a task. For example, if there is a task to run all unit tests, then the test results
  * could be the result of each individual unit test.
  */
