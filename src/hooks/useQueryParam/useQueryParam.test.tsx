@@ -6,6 +6,7 @@ import {
   unstable_HistoryRouter as HistoryRouter,
   MemoryRouter,
 } from "react-router-dom";
+import { QueryParams } from "constants/queryParams";
 import { useQueryParam, useQueryParams } from ".";
 
 describe("useQueryParams", () => {
@@ -34,7 +35,7 @@ describe("useQueryParams", () => {
 });
 
 const useQueryJointHook = (param: string, def: any) => {
-  const [queryParam, setQueryParam] = useQueryParam(param, def);
+  const [queryParam, setQueryParam] = useQueryParam(param as QueryParams, def);
   const [allQueryParams] = useQueryParams();
   return { queryParam, setQueryParam, allQueryParams };
 };
