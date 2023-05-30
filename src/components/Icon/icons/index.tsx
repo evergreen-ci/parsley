@@ -4,7 +4,7 @@ import { palette } from "@leafygreen-ui/palette";
 const { black, green } = palette;
 
 interface LeafygreenIconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | typeof Size[keyof typeof Size];
+  size?: number | (typeof Size)[keyof typeof Size];
   role?: "presentation" | "img";
   ["data-cy"]?: string;
 }
