@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { Body } from "@leafygreen-ui/typography";
+import styled, { StyledComponent } from "@emotion/styled";
+import { Body, BodyProps } from "@leafygreen-ui/typography";
 import LoadingBar from "components/LoadingBar";
 import { fontSize, size } from "constants/tokens";
 
@@ -14,7 +14,7 @@ const LoadingAnimation: React.FC<LoadingAnimationProps> = () => (
 const StyledBody = styled(Body)`
   font-size: ${fontSize.l};
   margin-bottom: ${size.xs};
-`;
+` as StyledComponent<BodyProps>;
 
 const AnimateIn = styled.div`
   animation: fadein 0.5s;

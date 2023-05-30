@@ -1,5 +1,5 @@
-import styled from "@emotion/styled";
-import { Subtitle } from "@leafygreen-ui/typography";
+import styled, { StyledComponent } from "@emotion/styled";
+import { Subtitle, SubtitleProps } from "@leafygreen-ui/typography";
 import { size } from "constants/tokens";
 
 const DetailRow = styled.div`
@@ -11,6 +11,6 @@ const DetailRow = styled.div`
 
 const DetailName = styled(Subtitle)`
   font-size: ${size.s};
-`;
+` as StyledComponent<SubtitleProps>;
 
 export { DetailRow, DetailName };

@@ -1,7 +1,7 @@
 import { useTransition } from "react";
-import styled from "@emotion/styled";
+import styled, { StyledComponent } from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, BodyProps } from "@leafygreen-ui/typography";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { size } from "constants/tokens";
@@ -92,7 +92,7 @@ const CollapsedLineWrapper = styled.div`
 
 const StyledBody = styled(Body)`
   width: 150px;
-`;
+` as StyledComponent<BodyProps>;
 
 const ButtonContainer = styled.div`
   display: flex;
