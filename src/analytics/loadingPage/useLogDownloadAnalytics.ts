@@ -13,6 +13,12 @@ type Action =
       duration: number;
       type: LogTypes;
       fileSize: number;
+    }
+  | {
+      name: "Log Download Incomplete";
+      duration: number;
+      reason: string;
+      downloaded: number;
     };
 
 export const useLogDownloadAnalytics = () =>

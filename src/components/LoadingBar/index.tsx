@@ -56,14 +56,21 @@ const indeterminateAnimation = css`
   width: 50%;
 
   /* Move the bar infinitely */
-  animation: indeterminate-progress-bar 2s infinite;
+  animation: none;
+  transform: translateX(-50%);
+  animation-name: indeterminate-progress-bar;
+  animation-duration: 2s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+
   @keyframes indeterminate-progress-bar {
     0% {
-      left: -50%;
+      transform: translateX(-150%);
     }
     100% {
-      left: 100%;
+      transform: translateX(200%);
     }
   }
 `;
+
 export default LoadingBar;

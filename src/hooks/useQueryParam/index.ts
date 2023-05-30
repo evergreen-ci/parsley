@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { ParseOptions } from "query-string";
 import { useNavigate, useSearchParams } from "react-router-dom";
+import { QueryParams } from "constants/queryParams";
 import { conditionalCastToArray } from "utils/array";
 import { parseQueryString, stringifyQuery } from "utils/query-string";
 
@@ -34,15 +35,28 @@ const useQueryParams = (parseOptions?: ParseOptions) => {
  *  `useQueryParam` will default to the second argument if the query param is not present in the url.
  */
 const useQueryParam = <T>(
-  param: string,
+  param: QueryParams,
   defaultParam: T
 ): readonly [T, (set: T) => void] => {
   const [searchParams, setSearchParams] = useQueryParams();
 
   const setQueryParam = useCallback(
     (value: T) => {
-      setSearchParams({
+      const newParams = {
         ...searchParams,
+      };
+      Object.entries(newParams).forEach(([paramKey, paramValue]) => {
+        if (paramValue === undefined) {
+          delete newParams[paramKey];
+        }
+        if (Array.isArray(paramValue)) {
+          newParams[paramKey] = paramValue.map((v) =>
+            v != null ? encodeURIComponent(v) : null
+          );
+        }
+      });
+      setSearchParams({
+        ...newParams,
         [param]: value,
       });
     },
