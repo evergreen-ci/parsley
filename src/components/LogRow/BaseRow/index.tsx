@@ -194,6 +194,7 @@ const StyledIcon = styled(Icon)`
   cursor: pointer;
   user-select: none;
   flex-shrink: 0;
+  align-self: center;
 `;
 
 const Index = styled.pre<{ lineNumber: number }>`

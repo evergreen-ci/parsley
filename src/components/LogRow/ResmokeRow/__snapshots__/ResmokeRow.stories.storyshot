@@ -37,7 +37,7 @@ exports[`storyshots Storyshots components/LogRow/ResmokeRow Single Line 1`] = `
   >
     <svg
       aria-label="Link Icon"
-      class="css-e6tumk"
+      class="css-1w92y2k"
       data-cy="log-link-8"
       fill="none"
       height="14"

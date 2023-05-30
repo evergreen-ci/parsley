@@ -37,7 +37,7 @@ exports[`storyshots Storyshots components/LogRow/AnsiiRow Single Line 1`] = `
   >
     <svg
       aria-label="Link Icon"
-      class="css-e6tumk"
+      class="css-1w92y2k"
       data-cy="log-link-0"
       fill="none"
       height="14"
