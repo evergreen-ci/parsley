@@ -178,11 +178,11 @@ const RowContainer = styled.div<{
   font-family: "Source Code Pro", monospace;
   line-height: 1.25;
   font-size: ${fontSize.m};
+  padding-left: 1px;
 
   ${({ shared }) => shared && `background-color: ${yellow.light3};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
   ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
-
   width: fit-content;
   // Hover should be an overlay shadow so that the user can see the color underneath.
   :hover {
@@ -194,6 +194,7 @@ const StyledIcon = styled(Icon)`
   cursor: pointer;
   user-select: none;
   flex-shrink: 0;
+  align-self: center;
 `;
 
 const Index = styled.pre<{ lineNumber: number }>`
