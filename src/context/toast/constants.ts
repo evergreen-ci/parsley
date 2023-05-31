@@ -1,23 +1,30 @@
 import { Variant } from "@leafygreen-ui/toast";
-import { ToastVariants } from "./types";
+import { ToastVariant } from "./types";
 
-export const mapVariantToTitle = {
-  [Variant.Success]: "Success!",
-  [Variant.Important]: "Warning!",
-  [Variant.Warning]: "Error!",
-  [Variant.Note]: "Something Happened!",
-  [Variant.Progress]: "Loading...",
+type VariantMapping<P> = {
+  [K in typeof Variant[keyof typeof Variant]]: P;
+};
+const mapLeafyGreenVariantToToast: VariantMapping<ToastVariant> = {
+  [Variant.Important]: "warning",
+  [Variant.Note]: "info",
+  [Variant.Progress]: "progress",
+  [Variant.Success]: "success",
+  [Variant.Warning]: "error",
 };
 
-export const mapToastToLeafyGreenVariant: {
-  [key in keyof ToastVariants]: Variant;
-} = {
-  success: Variant.Success,
-  warning: Variant.Important,
-  error: Variant.Warning,
-  info: Variant.Note,
-  progress: Variant.Progress,
+const mapLeafyGreenVariantToTitle: VariantMapping<string> = {
+  [Variant.Important]: "Warning!",
+  [Variant.Note]: "Something Happened!",
+  [Variant.Progress]: "Loading...",
+  [Variant.Success]: "Success!",
+  [Variant.Warning]: "Error!",
 };
 
 const SECOND = 1000;
-export const TOAST_TIMEOUT = 30 * SECOND;
+const TOAST_TIMEOUT = 30 * SECOND;
+
+export {
+  mapLeafyGreenVariantToToast,
+  mapLeafyGreenVariantToTitle,
+  TOAST_TIMEOUT,
+};

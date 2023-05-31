@@ -1,24 +1,24 @@
 import {
+  ReactNode,
   createContext,
   useCallback,
   useContext,
-  useEffect,
   useMemo,
-  useState,
 } from "react";
-import styled from "@emotion/styled";
-import Toast, { Variant } from "@leafygreen-ui/toast";
+import { css } from "@leafygreen-ui/emotion";
+import {
+  ToastProvider as LGToastProvider,
+  Variant,
+  useToast,
+} from "@leafygreen-ui/toast";
+import { WordBreak } from "components/styles";
 import { zIndex } from "constants/tokens";
 import {
   TOAST_TIMEOUT,
-  mapToastToLeafyGreenVariant,
-  mapVariantToTitle,
+  mapLeafyGreenVariantToTitle,
+  mapLeafyGreenVariantToToast,
 } from "./constants";
-import {
-  DispatchToast,
-  DispatchToastWithProgress,
-  VisibleToast,
-} from "./types";
+import { DispatchToast, DispatchToastWithProgress, ToastParams } from "./types";
 
 interface ToastContextState {
   success: DispatchToast;
@@ -26,7 +26,6 @@ interface ToastContextState {
   error: DispatchToast;
   info: DispatchToast;
   progress: DispatchToastWithProgress;
-  hide: () => void;
 }
 
 export const ToastContext = createContext<ToastContextState | null>(null);
@@ -39,43 +38,34 @@ const useToastContext = (): ToastContextState => {
   return context;
 };
 
-const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
-  children,
-}) => {
-  const [toastOpen, setToastOpen] = useState(false);
-  const [visibleToast, setVisibleToast] = useState<VisibleToast>({
-    variant: Variant.Note,
-    title: "",
-    message: "",
-    closable: true,
-    onClose: () => {},
-    shouldTimeout: true,
-    progress: undefined,
-  });
-
-  useEffect(() => {
-    if (!visibleToast.shouldTimeout) {
-      return;
-    }
-    const timeout = setTimeout(() => {
-      hideToast();
-    }, TOAST_TIMEOUT);
-    return () => clearTimeout(timeout);
-  });
-
+const ToastProviderCore: React.FC<{ children: ReactNode }> = ({ children }) => {
+  const { pushToast } = useToast();
   const dispatchToast = useCallback(
-    (toast: VisibleToast) => {
-      setVisibleToast(toast);
-      setToastOpen(true);
-    },
-    [setVisibleToast, setToastOpen]
+    ({
+      closable,
+      message,
+      onClose,
+      progress,
+      shouldTimeout,
+      title,
+      variant,
+    }: ToastParams) =>
+      pushToast({
+        description: <WordBreak>{message}</WordBreak>,
+        dismissible: closable,
+        onClose: closable ? onClose : undefined,
+        progress,
+        timeout: shouldTimeout ? TOAST_TIMEOUT : null,
+        title: title || mapLeafyGreenVariantToTitle[variant],
+        variant,
+        // @ts-ignore
+        "data-variant": mapLeafyGreenVariantToToast[variant],
+        "data-cy": "toast",
+      }),
+    [pushToast]
   );
 
-  const hideToast = useCallback(() => {
-    setToastOpen(false);
-  }, [setToastOpen]);
-
-  const memoizedContext = useMemo(() => {
+  const toastContext = useMemo(() => {
     const defaultOptions = {
       onClose: () => {},
       shouldTimeout: true,
@@ -85,7 +75,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
     return {
       success: (message = "", closable = true, options = {}) =>
         dispatchToast({
-          variant: mapToastToLeafyGreenVariant.success,
+          variant: Variant.Success,
           message,
           closable,
           ...defaultOptions,
@@ -93,7 +83,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
         }),
       warning: (message = "", closable = true, options = {}) =>
         dispatchToast({
-          variant: mapToastToLeafyGreenVariant.warning,
+          variant: Variant.Important,
           message,
           closable,
           ...defaultOptions,
@@ -101,7 +91,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
         }),
       error: (message = "", closable = true, options = {}) =>
         dispatchToast({
-          variant: mapToastToLeafyGreenVariant.error,
+          variant: Variant.Warning,
           message,
           closable,
           ...defaultOptions,
@@ -109,7 +99,7 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
         }),
       info: (message = "", closable = true, options = {}) =>
         dispatchToast({
-          variant: mapToastToLeafyGreenVariant.info,
+          variant: Variant.Note,
           message,
           closable,
           ...defaultOptions,
@@ -117,47 +107,31 @@ const ToastProvider: React.FC<{ children: React.ReactNode }> = ({
         }),
       progress: (message = "", progress = 0.5, closable = true, options = {}) =>
         dispatchToast({
-          variant: mapToastToLeafyGreenVariant.progress,
+          variant: Variant.Progress,
           message,
           progress,
           closable,
           ...defaultOptions,
           ...options,
         }),
-      hide: hideToast,
     };
-  }, [dispatchToast, hideToast]);
+  }, [dispatchToast]);
 
   return (
-    <ToastContext.Provider value={memoizedContext}>
+    <ToastContext.Provider value={toastContext}>
       {children}
-      <StyledToast
-        body={<Message>{visibleToast.message}</Message>}
-        close={
-          visibleToast.closable
-            ? () => {
-                visibleToast.onClose();
-                setToastOpen(false);
-              }
-            : undefined
-        }
-        data-cy="toast"
-        data-variant={visibleToast.variant}
-        open={toastOpen}
-        progress={visibleToast.progress}
-        title={visibleToast.title || mapVariantToTitle[visibleToast.variant]}
-        variant={visibleToast.variant}
-      />
     </ToastContext.Provider>
   );
 };
 
-const StyledToast = styled(Toast)`
-  z-index: ${zIndex.toast};
-`;
-
-const Message = styled.span`
-  overflow-wrap: anywhere;
-`;
+const ToastProvider: React.FC<{ children?: ReactNode }> = ({ children }) => (
+  <LGToastProvider
+    portalClassName={css`
+      z-index: ${zIndex.toast};
+    `}
+  >
+    <ToastProviderCore>{children}</ToastProviderCore>
+  </LGToastProvider>
+);
 
 export { ToastProvider, useToastContext };
