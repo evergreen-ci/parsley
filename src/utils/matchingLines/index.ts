@@ -1,6 +1,6 @@
 import { CaseSensitivity, FilterLogic, MatchType } from "constants/enums";
 import { Filters } from "types/logs";
-
+import { reportError } from "utils/errorReporting";
 /**
  * `constructRegexToMatch` constructs an array of regex expressions that represents the current filters
  * being applied.
@@ -18,10 +18,20 @@ export const constructRegexToMatch = (visibleFilters: Filters) => {
         isMatch,
       });
     } else {
-      regexToMatch.push({
-        regex: new RegExp(f.name, "i"),
-        isMatch,
-      });
+      try {
+        const regex = new RegExp(f.name, "i");
+        regexToMatch.push({
+          regex,
+          isMatch,
+        });
+      } catch (e) {
+        // If the regex is invalid, we don't want to crash the app, so we just ignore it.
+        reportError({
+          name: "Invalid Regex",
+          message: `The regex "${f.name}" is invalid`,
+          metadata: e,
+        }).severe();
+      }
     }
   });
 
