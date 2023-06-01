@@ -51,7 +51,6 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
   const resetEditState = () => {
     setIsEditing(false);
     setNewFilterName(name);
-    // setIsValid(true);
   };
 
   const handleSubmit = () => {
