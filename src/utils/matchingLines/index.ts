@@ -25,7 +25,7 @@ export const constructRegexToMatch = (visibleFilters: Filters) => {
           isMatch,
         });
       } catch (e) {
-        // If the regex is invalid, we don't want to crash the app, so we just ignore it.
+        // If we get an error here, it means the regex is invalid and got past the validation step. We should report this error.
         reportError({
           name: "Invalid Regex",
           message: `The regex "${f.name}" is invalid`,
