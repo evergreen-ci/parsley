@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import Badge from "@leafygreen-ui/badge";
 import Button, { Variant } from "@leafygreen-ui/button";
@@ -11,12 +11,13 @@ import {
 import TextInput from "@leafygreen-ui/text-input";
 import { Body } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
+import IconWithTooltip from "components/IconWithTooltip";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
 import { Filter } from "types/logs";
 import { validateRegexp } from "utils/validators";
 
-const { gray } = palette;
+const { gray, red } = palette;
 
 interface FilterGroupProps {
   ["data-cy"]?: string;
@@ -40,11 +41,27 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
   const [newFilterName, setNewFilterName] = useState(name);
   const [isEditing, setIsEditing] = useState(false);
   const [isValid, setIsValid] = useState(true);
+  const [regexpError, setRegexpError] = useState("");
+
+  useEffect(() => {
+    if (name) {
+      try {
+        RegExp(name);
+        setIsValid(true);
+        setRegexpError("");
+      } catch (e) {
+        console.log("ERROR");
+        console.log(e);
+        setIsValid(false);
+        setRegexpError((e as Error).message);
+      }
+    }
+  }, [name]);
 
   const resetEditState = () => {
     setIsEditing(false);
     setNewFilterName(name);
-    setIsValid(true);
+    // setIsValid(true);
   };
 
   const handleSubmit = () => {
@@ -62,7 +79,16 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
   return (
     <FilterContainer data-cy={dataCy}>
       <FilterHeader>
-        <Badge>FILTER</Badge>
+        <BadgeWrapper>
+          <Badge>FILTER</Badge>
+          {!isValid && (
+            <IconWithTooltip color={red.base} glyph="ImportantWithCircle">
+              Invalid filter expression, please update it!
+              {/* Replace this with the `<Error />` component once EVG-18922 is completed */}
+              <Body>{regexpError}</Body>
+            </IconWithTooltip>
+          )}
+        </BadgeWrapper>
         <IconButtonContainer>
           <IconButton
             aria-label="Edit filter"
@@ -74,12 +100,13 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
 
           <IconButton
             aria-label={visible ? "Hide filter" : "Show filter"}
+            disabled={!isValid}
             onClick={() => editFilter("visible", !visible, filter)}
             title={visible ? "Hide filter" : "Show filter"}
           >
             <Icon
               fill={gray.base}
-              glyph={visible ? "Visibility" : "ClosedEye"}
+              glyph={isValid && visible ? "Visibility" : "ClosedEye"}
             />
           </IconButton>
 
@@ -142,8 +169,12 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
         }
         size="small"
       >
-        <Option value={CaseSensitivity.Insensitive}>Insensitive</Option>
-        <Option value={CaseSensitivity.Sensitive}>Sensitive</Option>
+        <Option disabled={!isValid} value={CaseSensitivity.Insensitive}>
+          Insensitive
+        </Option>
+        <Option disabled={!isValid} value={CaseSensitivity.Sensitive}>
+          Sensitive
+        </Option>
       </StyledSegmentedControl>
 
       <StyledSegmentedControl
@@ -155,8 +186,12 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
         }
         size="small"
       >
-        <Option value={MatchType.Exact}>Exact</Option>
-        <Option value={MatchType.Inverse}>Inverse</Option>
+        <Option disabled={!isValid} value={MatchType.Exact}>
+          Exact
+        </Option>
+        <Option disabled={!isValid} value={MatchType.Inverse}>
+          Inverse
+        </Option>
       </StyledSegmentedControl>
     </FilterContainer>
   );
@@ -183,6 +218,13 @@ const StyledTextInput = styled(TextInput)`
   width: 100%;
 `;
 
+const BadgeWrapper = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: ${size.xxs};
+`;
+
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -195,7 +237,6 @@ const FilterName = styled(Body)`
   margin-top: ${size.xxs};
   margin-bottom: ${size.xs};
   padding-left: ${size.xxs};
-
   font-size: 13px;
   word-break: break-all;
 `;

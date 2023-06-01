@@ -184,4 +184,60 @@ describe("filters", () => {
       defaultFilter
     );
   });
+
+  it("should display an error message when the provided filter regular expression is invalid", async () => {
+    const editFilter = jest.fn();
+    render(
+      <FilterGroup
+        deleteFilter={jest.fn()}
+        editFilter={editFilter}
+        filter={{ ...defaultFilter, name: "invalid (regex" }}
+      />
+    );
+    expect(
+      screen.getByLabelText("Important With Circle Icon")
+    ).toBeInTheDocument();
+    await userEvent.hover(screen.getByLabelText("Important With Circle Icon"));
+    await expect(
+      screen.findByText("Invalid filter expression, please update it!")
+    ).resolves.toBeInTheDocument();
+    await expect(
+      screen.findByText(
+        "Invalid regular expression: /invalid (regex/: Unterminated group"
+      )
+    ).resolves.toBeInTheDocument();
+  });
+  it("should disable all inputs except editing or deleting for an invalid filter regular expression", async () => {
+    const editFilter = jest.fn();
+    render(
+      <FilterGroup
+        deleteFilter={jest.fn()}
+        editFilter={editFilter}
+        filter={{ ...defaultFilter, name: "invalid (regex" }}
+      />
+    );
+    expect(screen.getByLabelText("Hide filter")).toHaveAttribute(
+      "aria-disabled",
+      "true"
+    );
+  });
+  it("should allow reenabling a invalid filter after it has been fixed", async () => {
+    const editFilter = jest.fn();
+    render(
+      <FilterGroup
+        deleteFilter={jest.fn()}
+        editFilter={editFilter}
+        filter={{ ...defaultFilter, name: "invalid (regex" }}
+      />
+    );
+    await user.click(screen.getByLabelText("Edit filter"));
+
+    const confirmButton = screen.getByRole("button", {
+      name: "Apply",
+    });
+    expect(confirmButton).toHaveAttribute("aria-disabled", "true");
+    await user.clear(screen.getByDataCy("edit-filter-name"));
+    await user.type(screen.getByDataCy("edit-filter-name"), "newFilter");
+    expect(confirmButton).toHaveAttribute("aria-disabled", "false");
+  });
 });

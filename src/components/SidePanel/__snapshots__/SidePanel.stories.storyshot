@@ -96,9 +96,13 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           class="css-1knbux5"
                         >
                           <div
-                            class="leafygreen-ui-1q59p9a"
+                            class="css-ts29it"
                           >
-                            FILTER
+                            <div
+                              class="leafygreen-ui-1q59p9a"
+                            >
+                              FILTER
+                            </div>
                           </div>
                           <div
                             class="css-1sg2lsz"
@@ -191,7 +195,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           </div>
                         </div>
                         <p
-                          class="css-1qcpvpc leafygreen-ui-1yli3c0"
+                          class="css-1piadxy leafygreen-ui-1yli3c0"
                         >
                           newFilter
                         </p>
@@ -199,7 +203,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           class="leafygreen-ui-1gmp0zo css-jw6p18"
                         >
                           <div
-                            class="leafygreen-ui-ucoteg leafygreen-ui-114muox"
+                            class="leafygreen-ui-1dhyvkg"
                           >
                             Case
                           </div>
@@ -279,7 +283,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           class="leafygreen-ui-1gmp0zo css-jw6p18"
                         >
                           <div
-                            class="leafygreen-ui-ucoteg leafygreen-ui-114muox"
+                            class="leafygreen-ui-1dhyvkg"
                           >
                             Match
                           </div>
