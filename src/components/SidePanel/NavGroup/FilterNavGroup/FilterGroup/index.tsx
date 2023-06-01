@@ -15,7 +15,7 @@ import IconWithTooltip from "components/IconWithTooltip";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
 import { Filter } from "types/logs";
-import { validateRegexp } from "utils/validators";
+import { getRegexpError, validateRegexp } from "utils/validators";
 
 const { gray, red } = palette;
 
@@ -41,20 +41,10 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
   const [newFilterName, setNewFilterName] = useState(name);
   const [isEditing, setIsEditing] = useState(false);
   const [isValid, setIsValid] = useState(true);
-  const [regexpError, setRegexpError] = useState("");
 
   useEffect(() => {
     if (name) {
-      try {
-        RegExp(name);
-        setIsValid(true);
-        setRegexpError("");
-      } catch (e) {
-        console.log("ERROR");
-        console.log(e);
-        setIsValid(false);
-        setRegexpError((e as Error).message);
-      }
+      setIsValid(validateRegexp(name));
     }
   }, [name]);
 
@@ -74,18 +64,17 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
   const validationMessage =
     newFilterName === ""
       ? "Filter cannot be empty"
-      : "Invalid regular expression";
+      : getRegexpError(newFilterName);
 
   return (
     <FilterContainer data-cy={dataCy}>
       <FilterHeader>
         <BadgeWrapper>
           <Badge>FILTER</Badge>
-          {!isValid && (
+          {!isValid && !isEditing && (
             <IconWithTooltip color={red.base} glyph="ImportantWithCircle">
               Invalid filter expression, please update it!
-              {/* Replace this with the `<Error />` component once EVG-18922 is completed */}
-              <Body>{regexpError}</Body>
+              <Body>{validationMessage}</Body>
             </IconWithTooltip>
           )}
         </BadgeWrapper>
