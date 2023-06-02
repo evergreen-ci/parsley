@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.70",
+  "version": "1.0.72",
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
@@ -87,7 +87,7 @@
     "@graphql-codegen/typescript": "3.0.2",
     "@graphql-codegen/typescript-operations": "3.0.2",
     "@graphql-eslint/eslint-plugin": "3.18.0",
-    "@graphql-tools/jest-transform": "1.2.3",
+    "@graphql-tools/jest-transform": "2.0.0",
     "@storybook/addon-actions": "7.0.0-beta.34",
     "@storybook/addon-essentials": "7.0.0-beta.34",
     "@storybook/addon-interactions": "7.0.0-beta.38",
@@ -103,7 +103,7 @@
     "@types/jest": "29.4.0",
     "@types/js-cookie": "3.0.3",
     "@types/lodash.debounce": "4.0.7",
-    "@types/new-relic-browser": "0.1212.1",
+    "@types/new-relic-browser": "0.1212.2",
     "@types/node": "16.11.47",
     "@types/react": "18.0.15",
     "@types/react-dom": "18.2.1",

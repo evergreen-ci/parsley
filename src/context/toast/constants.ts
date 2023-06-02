@@ -2,7 +2,7 @@ import { Variant } from "@leafygreen-ui/toast";
 import { ToastVariant } from "./types";
 
 type VariantMapping<P> = {
-  [K in typeof Variant[keyof typeof Variant]]: P;
+  [K in (typeof Variant)[keyof typeof Variant]]: P;
 };
 const mapLeafyGreenVariantToToast: VariantMapping<ToastVariant> = {
   [Variant.Important]: "warning",
