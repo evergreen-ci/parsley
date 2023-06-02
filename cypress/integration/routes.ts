@@ -8,6 +8,11 @@ describe("Parsley Routes", () => {
     cy.dataCy("resmoke-row").should("not.exist");
     cy.contains("Task logger initialized");
   });
+  it("should show error toast when visiting a task log page of an invalid task", () => {
+    const logLink = "/evergreen/invalid-task-id/0/task";
+    cy.visit(logLink);
+    cy.validateToast("error", "Network response was not ok (404)", true);
+  });
   it("should load test results when visiting a test result page", () => {
     const logLink =
       "/test/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0/JustAFakeTestInALonelyWorld";

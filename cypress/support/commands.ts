@@ -180,6 +180,7 @@ Cypress.Commands.add(
       cy.dataCy(toastDataCy).within(() => {
         cy.get("button[aria-label='Close Message']").click();
       });
+      cy.dataCy(toastDataCy).should("not.exist");
     }
   }
 );

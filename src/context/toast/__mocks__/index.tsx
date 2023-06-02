@@ -17,7 +17,6 @@ import { useToastContext } from "..";
  * @returns {Function} response.dispatchToast.info - A jest.fn() method which can be used to assert that the info toast context was called
  * @returns {Function} response.dispatchToast.warning - A jest.fn() method which can be used to assert that the warning toast context was called
  * @returns {Function} response.dispatchToast.progress - A jest.fn() method which can be used to assert that the progress toast context was called
- * @returns {Function} response.dispatchToast.hide - A jest.fn() method which can be used to assert that the hide toast context was called
  * @returns {React.FC} response.HookWrapper - A React Component which wraps a hook and has the useToastContext mocked out but utilizes the same methods
  * @returns {Function} response.useToastContext - A jest.fn() method which can be used to assert that the useToastContext hook was called
  */
@@ -28,7 +27,6 @@ const RenderFakeToastContext = (Component: React.ReactElement = <div />) => {
     info: jest.fn(),
     warning: jest.fn(),
     progress: jest.fn(),
-    hide: jest.fn(),
   };
 
   const useToastContextSpied = jest
