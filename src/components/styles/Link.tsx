@@ -4,12 +4,17 @@ import {
   LinkProps as RouterLinkProps,
 } from "react-router-dom";
 
-// @ts-expect-error
-const StyledLink = (props: LinkProps) => <Link hideExternalIcon {...props} />;
+const StyledLink = (props: LinkProps<"a">) => (
+  <Link hideExternalIcon {...props} />
+);
 
-const StyledRouterLink = (props: LinkProps & RouterLinkProps) => (
-  /* @ts-expect-error */
-  <Link as={RouterLink} hideExternalIcon {...props} />
+const StyledRouterLink = (props: LinkProps<"span"> & RouterLinkProps) => (
+  <Link
+    /* @ts-expect-error */
+    as={RouterLink}
+    hideExternalIcon
+    {...props}
+  />
 );
 
 export { StyledLink, StyledRouterLink };
