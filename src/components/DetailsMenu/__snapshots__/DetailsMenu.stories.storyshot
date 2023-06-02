@@ -19,7 +19,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="css-qzhvvy"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Range
             </h6>
@@ -84,7 +84,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="css-91jh6a"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Wrap
             </h6>
@@ -92,7 +92,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
               class="css-1sg2lsz"
             >
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 OFF
               </small>
@@ -127,7 +127,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                 </div>
               </button>
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 ON
               </small>
@@ -137,7 +137,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="css-91jh6a"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Case Sensitive
             </h6>
@@ -145,7 +145,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
               class="css-1sg2lsz"
             >
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 OFF
               </small>
@@ -180,7 +180,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                 </div>
               </button>
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 ON
               </small>
@@ -194,7 +194,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="css-91jh6a"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Filter Logic
             </h6>
@@ -202,7 +202,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
               class="css-1sg2lsz"
             >
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 AND
               </small>
@@ -237,7 +237,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                 </div>
               </button>
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 OR
               </small>
@@ -247,7 +247,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="css-91jh6a"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Expandable Rows
             </h6>
@@ -255,7 +255,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
               class="css-1sg2lsz"
             >
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 OFF
               </small>
@@ -290,7 +290,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                 </div>
               </button>
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 ON
               </small>
@@ -300,7 +300,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="css-91jh6a"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Pretty Print Bookmarks
             </h6>
@@ -308,7 +308,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
               class="css-1sg2lsz"
             >
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 OFF
               </small>
@@ -344,7 +344,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                 </div>
               </button>
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 ON
               </small>
@@ -553,7 +553,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="css-qzhvvy"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Range
             </h6>
@@ -618,7 +618,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="css-91jh6a"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Wrap
             </h6>
@@ -626,7 +626,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
               class="css-1sg2lsz"
             >
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 OFF
               </small>
@@ -661,7 +661,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                 </div>
               </button>
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 ON
               </small>
@@ -671,7 +671,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="css-91jh6a"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Case Sensitive
             </h6>
@@ -679,7 +679,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
               class="css-1sg2lsz"
             >
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 OFF
               </small>
@@ -714,7 +714,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                 </div>
               </button>
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 ON
               </small>
@@ -728,7 +728,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="css-91jh6a"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Filter Logic
             </h6>
@@ -736,7 +736,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
               class="css-1sg2lsz"
             >
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 AND
               </small>
@@ -771,7 +771,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                 </div>
               </button>
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 OR
               </small>
@@ -781,7 +781,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="css-91jh6a"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Expandable Rows
             </h6>
@@ -789,7 +789,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
               class="css-1sg2lsz"
             >
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 OFF
               </small>
@@ -824,7 +824,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                 </div>
               </button>
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 ON
               </small>
@@ -834,7 +834,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="css-91jh6a"
           >
             <h6
-              class="css-teqmh5 leafygreen-ui-41zalo"
+              class="css-teqmh5 leafygreen-ui-19p3n10"
             >
               Pretty Print Bookmarks
             </h6>
@@ -842,7 +842,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
               class="css-1sg2lsz"
             >
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 OFF
               </small>
@@ -878,7 +878,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                 </div>
               </button>
               <small
-                class="css-155nmlp leafygreen-ui-ppjyot"
+                class="css-155nmlp leafygreen-ui-6flbwy"
               >
                 ON
               </small>
