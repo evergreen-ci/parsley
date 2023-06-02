@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled, { StyledComponent } from "@emotion/styled";
+import styled from "@emotion/styled";
 import Badge from "@leafygreen-ui/badge";
 import Button, { Variant } from "@leafygreen-ui/button";
 import IconButton from "@leafygreen-ui/icon-button";
@@ -191,14 +191,14 @@ const ButtonWrapper = styled.div`
   gap: ${size.xxs};
 `;
 
-const FilterName = styled(Body)`
+const FilterName = styled(Body)<BodyProps>`
   margin-top: ${size.xxs};
   margin-bottom: ${size.xs};
   padding-left: ${size.xxs};
 
   font-size: 13px;
   word-break: break-all;
-` as StyledComponent<BodyProps>;
+`;
 
 const StyledSegmentedControl = styled(SegmentedControl)`
   margin-bottom: ${size.xs};

@@ -1,4 +1,4 @@
-import styled, { StyledComponent } from "@emotion/styled";
+import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { H1, H1Props, H2, H2Props } from "@leafygreen-ui/typography";
 import { size } from "constants/tokens";
@@ -22,13 +22,13 @@ const ErrorFallback = () => (
 
 export default ErrorFallback;
 
-const StyledHeader = styled(H1)`
+const StyledHeader = styled(H1)<H1Props>`
   color: ${white};
-` as StyledComponent<H1Props>;
+`;
 
-const StyledSubtitle = styled(H2)`
+const StyledSubtitle = styled(H2)<H2Props>`
   color: ${white};
-` as StyledComponent<H2Props>;
+`;
 
 const StyledLink = styled.a`
   padding-top: ${size.xl};

@@ -1,5 +1,5 @@
 import { useState } from "react";
-import styled, {StyledComponent} from "@emotion/styled";
+import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { Option, Select } from "@leafygreen-ui/select";
 import { InlineCode, InlineCodeProps, Label } from "@leafygreen-ui/typography";
@@ -71,8 +71,8 @@ const ButtonContainer = styled.div`
   gap: ${size.xs};
 `;
 
-const StyledInlineCode = styled(InlineCode)`
+const StyledInlineCode = styled(InlineCode)<InlineCodeProps>`
   overflow-wrap: anywhere;
-` as StyledComponent<InlineCodeProps>;
+`;
 
 export default ParseLogSelect;
