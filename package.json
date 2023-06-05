@@ -58,7 +58,7 @@
     "@leafygreen-ui/segmented-control": "7.0.0",
     "@leafygreen-ui/select": "10.1.0",
     "@leafygreen-ui/side-nav": "13.0.2",
-    "@leafygreen-ui/text-input": "12.1.0",
+    "@leafygreen-ui/text-input": "12.1.12",
     "@leafygreen-ui/toast": "6.1.5",
     "@leafygreen-ui/toggle": "10.0.4",
     "@leafygreen-ui/tooltip": "9.1.3",
