@@ -9,7 +9,7 @@ import {
   SegmentedControl,
 } from "@leafygreen-ui/segmented-control";
 import TextInput from "@leafygreen-ui/text-input";
-import { Body, BodyProps } from "@leafygreen-ui/typography";
+import { Body, BodyProps, Error } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import IconWithTooltip from "components/IconWithTooltip";
 import { CaseSensitivity, MatchType } from "constants/enums";
@@ -73,7 +73,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
           {!isValid && !isEditing && (
             <IconWithTooltip color={red.base} glyph="ImportantWithCircle">
               Invalid filter expression, please update it!
-              <Body>{validationMessage}</Body>
+              <Error>{validationMessage}</Error>
             </IconWithTooltip>
           )}
         </BadgeWrapper>
