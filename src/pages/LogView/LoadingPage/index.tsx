@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, BodyProps } from "@leafygreen-ui/typography";
 import { useParams } from "react-router-dom";
 import Icon from "components/Icon";
 import LoadingBar from "components/LoadingBar";
@@ -221,7 +221,7 @@ const AnimationWrapper = styled.div`
   }
 `;
 
-const StyledBody = styled(Body)`
+const StyledBody = styled(Body)<BodyProps>`
   font-size: ${fontSize.l};
 `;
 

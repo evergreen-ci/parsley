@@ -101,7 +101,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                             <div
                               class="leafygreen-ui-1q59p9a"
                             >
-                              FILTER
+                              Filter
                             </div>
                           </div>
                           <div
@@ -195,7 +195,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           </div>
                         </div>
                         <p
-                          class="css-1piadxy leafygreen-ui-1yli3c0"
+                          class="css-1piadxy leafygreen-ui-1tb6tuo"
                         >
                           newFilter
                         </p>
@@ -460,7 +460,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         </div>
                       </button>
                       <div
-                        class="leafygreen-ui-114muox"
+                        class="leafygreen-ui-1t92n4"
                       >
                         Row 
                         1

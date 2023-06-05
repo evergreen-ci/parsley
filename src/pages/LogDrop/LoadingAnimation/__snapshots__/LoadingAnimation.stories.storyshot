@@ -6,7 +6,7 @@ exports[`storyshots Storyshots pages/LogDrop/LoadingAnimation Default 1`] = `
     class="css-10b6qd6"
   >
     <p
-      class="css-ahy7pu leafygreen-ui-1yli3c0"
+      class="css-ahy7pu leafygreen-ui-1tb6tuo"
     >
       Loading log...
     </p>
