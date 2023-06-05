@@ -202,7 +202,7 @@ describe("filters", () => {
       screen.findByText("Invalid filter expression, please update it!")
     ).resolves.toBeInTheDocument();
     await expect(
-      screen.findByText("Unterminated group")
+      screen.findByText("Invalid Regular Expression: Unterminated group")
     ).resolves.toBeInTheDocument();
   });
   it("should disable all inputs except editing or deleting for an invalid filter regular expression", async () => {
@@ -229,14 +229,18 @@ describe("filters", () => {
       />
     );
     await user.click(screen.getByLabelText("Edit filter"));
-    expect(screen.getByText("Unterminated group")).toBeInTheDocument();
+    expect(
+      screen.getByText("Invalid Regular Expression: Unterminated group")
+    ).toBeInTheDocument();
     const confirmButton = screen.getByRole("button", {
       name: "Apply",
     });
     expect(confirmButton).toHaveAttribute("aria-disabled", "true");
     await user.clear(screen.getByDataCy("edit-filter-name"));
     await user.type(screen.getByDataCy("edit-filter-name"), "newFilter");
-    expect(screen.queryByText("Unterminated group")).not.toBeInTheDocument();
+    expect(
+      screen.queryByText("Invalid Regular Expression: Unterminated group")
+    ).not.toBeInTheDocument();
     expect(confirmButton).toHaveAttribute("aria-disabled", "false");
   });
 });
