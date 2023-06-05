@@ -63,13 +63,13 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
   const validationMessage =
     newFilterName === ""
       ? "Filter cannot be empty"
-      : getRegexpError(newFilterName);
+      : `Invalid Regular Expression: ${getRegexpError(newFilterName)}`;
 
   return (
     <FilterContainer data-cy={dataCy}>
       <FilterHeader>
         <BadgeWrapper>
-          <Badge>FILTER</Badge>
+          <Badge>Filter</Badge>
           {!isValid && !isEditing && (
             <IconWithTooltip color={red.base} glyph="ImportantWithCircle">
               Invalid filter expression, please update it!

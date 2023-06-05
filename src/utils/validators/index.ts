@@ -22,10 +22,10 @@ const getRegexpError = (regexp: string): string => {
     // eslint-disable-next-line no-new
     new RegExp(regexp);
     return "";
-  } catch (e: any) {
-    console.log(e.message);
-    const message = e.message.replace(
-      /Invalid regular expression: \/.*\/: /gm,
+  } catch (e) {
+    // Removes the "Invalid regular expression: /.*: " prefix from the error message
+    const message = (e as unknown as Error).message.replace(
+      /Invalid regular expression: (\/.*\/: )?/gm,
       ""
     );
     return message;
