@@ -10,13 +10,13 @@ import { escapeTags } from "./escapeTags";
  * included in the transform object passed in through options. If you would like
  * to keep any classes applied to an item you want to swap you can pass it in as as part
  * of the preserveAttributes array
- * @param {String} html
- * @param {Object} options
- *  @param {Object} options.transform
- *    @property {String} options.transform.key Element to Swap
- *    @property {React.ReactNode} options.transform.value Component to replace the element with
- *    @property {Boolean} options.externalAnchorsNewTab If true, anchor tags with class="reference external" will be set to open in a new browser tab
- *  @property {Array} preserveAttributes Which components should keep their classes
+ * @param {string} html
+ * @param {object} options
+ *  @param {object} options.transform
+ *    options.transform.key Element to Swap
+ *    options.transform.value Component to replace the element with
+ *    options.externalAnchorsNewTab If true, anchor tags with class="reference external" will be set to open in a new browser tab
+ *  preserveAttributes Which components should keep their classes
  * @returns {React.ReactNode}
  */
 

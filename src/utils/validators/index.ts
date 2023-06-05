@@ -1,6 +1,7 @@
 /**
  * validateRegexp tests if a provided string is a valid regular expression
  * @param regexp - the regexp to test
+ * @returns true if the regexp is valid, false otherwise
  */
 const validateRegexp = (regexp: string): boolean => {
   try {
@@ -15,7 +16,7 @@ const validateRegexp = (regexp: string): boolean => {
 /**
  * `getRegexpError` returns the error message for a given regexp
  * @param regexp - the regexp to test
- * @returns
+ * @returns the error message for the regexp
  */
 const getRegexpError = (regexp: string): string => {
   try {

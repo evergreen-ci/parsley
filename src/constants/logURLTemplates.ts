@@ -28,10 +28,10 @@ const getLobsterTestURL = (
   taskID: string,
   execution: string | number,
   testID: string,
-  groupId?: string
+  groupID?: string
 ) =>
   `${lobsterURL}/evergreen/test/${taskID}/${execution}/${testID}${
-    groupId ? `/${groupId}` : ""
+    groupID ? `/${groupID}` : ""
   }`;
 
 /**
@@ -51,6 +51,7 @@ const getLobsterResmokeURL = (buildID: string, testID?: string) => {
  * @param taskID - the task ID
  * @param execution - the execution number of the task
  * @param testID - the test ID of the test
+ * @param options - the options for the test log
  * @param options.text - returns the raw test log
  * @param options.groupID - the group ID
  * @returns an Evergreen URL of the format `/test_log/${taskID}/${execution}?test_name=${testID}&group_id=${groupID}text=true`
@@ -75,6 +76,7 @@ const getEvergreenTestLogURL = (
 /**
  *
  * @param buildID - the build ID of the resmoke job
+ * @param options - the options for the resmoke log
  * @param options.testID - the testID of the resmoke log omitting this returns the full log
  * @param options.raw - returns the raw task log
  * @param options.html - returns the html viewer for the log
@@ -113,6 +115,7 @@ enum OriginToType {
  * @param taskID - the task ID
  * @param execution - the execution number of the task
  * @param origin - the origin of the log
+ * @param options - the options for the task log
  * @param options.text - returns the raw log associated with the task
  * @returns an Evergreen URL of the format `/task/${taskID}/${execution}?type=${OriginToType[origin]}&text=true`
  */

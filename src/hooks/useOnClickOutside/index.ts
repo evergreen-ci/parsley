@@ -5,7 +5,11 @@ const useOnClickOutside = (
   cb: () => void
 ): void => {
   useEffect(() => {
-    function handleClickOutside(event: any): void {
+    /**
+     * Alert if clicked on outside of element
+     * @param event - the event that is being listened to
+     */
+    function handleClickOutside(event: MouseEvent): void {
       const isNotFocused = refs.every(
         (ref) => ref.current && !ref.current.contains(event.target as Node)
       );

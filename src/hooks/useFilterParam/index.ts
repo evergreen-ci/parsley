@@ -8,6 +8,7 @@ import { parseFilters, stringifyFilters } from "utils/query-string";
 /**
  * `useFilterParam` is a specialized form of useQueryParam. It needs to do special processing when converting
  * filters to and from URLs.
+ * @returns a tuple containing the parsed filters and a function to set the filters
  */
 const useFilterParam = () => {
   const [searchParams, setSearchParams] = useQueryParams({

@@ -4,6 +4,8 @@ type StreamedFileOptions = {
 /**
  * `fileToStream` is a utility function that converts a File object into a ReadableStream
  * @param file - File to convert to a stream
+ * @param options - an object containing options for the stream
+ * @param options.fileSizeLimit - the maximum number of bytes to stream
  * @returns a ReadableStream
  */
 const fileToStream = async (

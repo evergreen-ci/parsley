@@ -5,7 +5,7 @@ type replaceFunction = (match: string, matchIndex: number) => string;
  * @param regexp - the regular expression to match
  * @param text - the text to match the regular expression against
  * @param replaceFunction - the function to apply to the matching elements
- * @returns
+ * @returns a string with the matching elements replaced by the function
  */
 const highlighter = (
   regexp: RegExp,

@@ -45,8 +45,8 @@ export const getJiraFormat = (
 
 /**
  * `stringIntersection` returns a boolean indicating if two strings have a full overlap
- * @param string1
- * @param string2
+ * @param string1 - First string to compare
+ * @param string2 - Second string to compare
  * @returns - Boolean indicating if string1 or string2 fit into the other.
  */
 export const stringIntersection = (string1: string, string2: string) =>
@@ -54,16 +54,16 @@ export const stringIntersection = (string1: string, string2: string) =>
 
 /**
  * @param str - A string that represents a githash
- * @return {string} A shortenend version of the input string.
+ * @returns A shortenend version of the input string.
  */
 export const shortenGithash = (str?: string) => str?.substring(0, 7);
 
 /**
  * Function that trims the middle portion of a string. ex: "EvergreenUI" -> "Ev...UI"
  * The resulting length, if trimmed, is maxLength + 1 (due to ellipsis length).
- * @param {string} str - Text to trim
- * @param {number} maxLength - Max length before trimming text
- * @return {string} The original or trimmed text.
+ * @param str - Text to trim
+ * @param maxLength - Max length before trimming text
+ * @returns The original or trimmed text.
  */
 export const trimStringFromMiddle = (str: string, maxLength: number) => {
   const ellipsis = "…";
