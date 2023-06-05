@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, BodyProps } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { fontSize, size, subheaderHeight } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
@@ -46,7 +46,7 @@ const Header = styled.div`
   gap: ${size.s};
 `;
 
-const StyledBody = styled(Body)`
+const StyledBody = styled(Body)<BodyProps>`
   font-size: ${fontSize.m};
 `;
 

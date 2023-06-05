@@ -1,23 +1,19 @@
-import { Link } from "@leafygreen-ui/typography";
-import { Link as RouterLink } from "react-router-dom";
+import { Link, LinkProps } from "@leafygreen-ui/typography";
+import {
+  Link as RouterLink,
+  LinkProps as RouterLinkProps,
+} from "react-router-dom";
 
-// Component could have one of 2 props type - to or href
-type LinkProps = Omit<React.ComponentProps<typeof Link>, "as">;
-
-const StyledLink: React.FC<LinkProps> = ({ href, children, ...rest }) => (
-  <Link hideExternalIcon href={href} {...rest}>
-    {children}
-  </Link>
+const StyledLink = (props: LinkProps<"a">) => (
+  <Link hideExternalIcon {...props} />
 );
 
-const StyledRouterLink: React.FC<LinkProps & { to: string }> = ({
-  to,
-  children,
-  ...rest
-}) => (
-  <Link hideExternalIcon to={to} {...rest} as={RouterLink}>
-    {children}
-  </Link>
+const StyledRouterLink = (props: LinkProps<"span"> & RouterLinkProps) => (
+  <Link
+    /* @ts-expect-error */
+    as={RouterLink}
+    {...props}
+  />
 );
 
 export { StyledLink, StyledRouterLink };

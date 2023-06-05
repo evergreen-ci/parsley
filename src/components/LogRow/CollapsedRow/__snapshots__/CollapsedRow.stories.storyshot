@@ -62,7 +62,7 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Row Sing
       data-cy="collapsed-row-0-99"
     >
       <p
-        class="css-end8kr leafygreen-ui-1yli3c0"
+        class="css-end8kr leafygreen-ui-1tb6tuo"
       >
         100 Lines Skipped
       </p>

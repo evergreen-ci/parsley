@@ -9,7 +9,7 @@ import {
   SegmentedControl,
 } from "@leafygreen-ui/segmented-control";
 import TextInput from "@leafygreen-ui/text-input";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, BodyProps } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
@@ -191,7 +191,7 @@ const ButtonWrapper = styled.div`
   gap: ${size.xxs};
 `;
 
-const FilterName = styled(Body)`
+const FilterName = styled(Body)<BodyProps>`
   margin-top: ${size.xxs};
   margin-bottom: ${size.xs};
   padding-left: ${size.xxs};
