@@ -28,7 +28,7 @@ module.exports = {
     "plugin:prettier/recommended", // Note: prettier must ALWAYS be the last extension.
   ],
   ignorePatterns: ["!.storybook"],
-  plugins: ["@typescript-eslint"],
+  plugins: ["@typescript-eslint", "jsdoc"],
   settings: {
     react: {
       version: "detect",
@@ -135,7 +135,10 @@ module.exports = {
     // For React Typescript files in src.
     {
       files: ["src/**/*.ts", "src/**/*.tsx"],
-      extends: ["plugin:react/recommended"],
+      extends: [
+        "plugin:react/recommended",
+        "plugin:jsdoc/recommended-typescript-error",
+      ],
       plugins: ["jsx-a11y", "react", "react-hooks", "@emotion"],
       rules: {
         // Rules for emotion.
