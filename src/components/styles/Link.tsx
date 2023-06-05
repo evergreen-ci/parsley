@@ -12,7 +12,6 @@ const StyledRouterLink = (props: LinkProps<"span"> & RouterLinkProps) => (
   <Link
     /* @ts-expect-error */
     as={RouterLink}
-    hideExternalIcon
     {...props}
   />
 );
