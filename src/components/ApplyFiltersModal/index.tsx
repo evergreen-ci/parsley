@@ -3,12 +3,12 @@ import { css } from "@emotion/react";
 import ConfirmationModal from "@leafygreen-ui/confirmation-modal";
 import { Body } from "@leafygreen-ui/typography";
 import { zIndex } from "constants/tokens";
-import { useLogContext } from "context/LogContext";
 import {
   DefaultFiltersForProjectQuery,
   DefaultFiltersForProjectQueryVariables,
 } from "gql/generated/types";
 import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
+import { useCachedTask } from "hooks/useCachedTask";
 import { useFilterParam } from "hooks/useFilterParam";
 import DefaultFilter from "./DefaultFilter";
 
@@ -21,10 +21,11 @@ const ApplyFiltersModal: React.FC<ApplyFiltersModalProps> = ({
   open,
   setOpen,
 }) => {
-  const { taskMetadata } = useLogContext();
-  const { projectIdentifier = "" } = taskMetadata || {};
-
   const [filters] = useFilterParam();
+
+  const task = useCachedTask();
+  const { versionMetadata } = task ?? {};
+  const { projectIdentifier = "" } = versionMetadata ?? {};
 
   const { data } = useQuery<
     DefaultFiltersForProjectQuery,

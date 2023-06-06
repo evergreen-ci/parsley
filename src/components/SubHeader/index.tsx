@@ -12,7 +12,7 @@ interface SubHeaderProps {
   isUploadedLog: boolean;
 }
 const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
-  const { logMetadata, setTaskMetadata } = useLogContext();
+  const { logMetadata } = useLogContext();
   const { buildID, execution, fileName, logType, taskID, testID } =
     logMetadata || {};
 
@@ -30,7 +30,6 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
               buildID={buildID as string}
               execution={Number(execution)}
               logType={logType}
-              setTaskMetadata={setTaskMetadata}
               taskID={taskID}
               testID={testID as string}
             />

@@ -26,13 +26,7 @@ import { getMatchingLines } from "utils/matchingLines";
 import { getColorMapping } from "utils/resmoke";
 import searchLogs from "utils/searchLogs";
 import useLogState from "./state";
-import {
-  DIRECTION,
-  LogMetadata,
-  Preferences,
-  SearchState,
-  TaskMetadata,
-} from "./types";
+import { DIRECTION, LogMetadata, Preferences, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
@@ -50,7 +44,6 @@ interface LogContextState {
   };
   searchLine?: number;
   searchState: SearchState;
-  taskMetadata?: TaskMetadata;
 
   clearExpandedLines: () => void;
   clearLogs: () => void;
@@ -64,7 +57,6 @@ interface LogContextState {
   setFileName: (fileName: string) => void;
   setLogMetadata: (logMetadata: LogMetadata) => void;
   setSearch: (search: string) => void;
-  setTaskMetadata: (taskMetadata: TaskMetadata) => void;
 }
 
 const LogContext = createContext<LogContextState | null>(null);
@@ -288,7 +280,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
       searchLine,
       searchState: state.searchState,
-      taskMetadata: state.taskMetadata,
 
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
@@ -314,9 +305,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       setSearch: (searchTerm: string) => {
         dispatch({ type: "SET_SEARCH_TERM", searchTerm });
       },
-      setTaskMetadata: (taskMetadata: TaskMetadata) => {
-        dispatch({ type: "SET_TASK_METADATA", taskMetadata });
-      },
     }),
     [
       expandableRows,
@@ -331,7 +319,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       state.logMetadata,
       state.logs.length,
       state.searchState,
-      state.taskMetadata,
       upperRange,
       wrap,
       dispatch,
