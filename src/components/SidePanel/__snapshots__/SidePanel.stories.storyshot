@@ -64,7 +64,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         class="leafygreen-ui-1tm4spc"
                       >
                         <div
-                          class="css-1vptl7o"
+                          class="css-1sg2lsz"
                           data-cy="filters-nav-group-header"
                         >
                           <div
@@ -411,7 +411,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         class="leafygreen-ui-1tm4spc"
                       >
                         <div
-                          class="css-1vptl7o"
+                          class="css-1sg2lsz"
                           data-cy="expanded-lines-nav-group-header"
                         >
                           <div
@@ -511,7 +511,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         class="leafygreen-ui-1tm4spc"
                       >
                         <div
-                          class="css-1vptl7o"
+                          class="css-1sg2lsz"
                           data-cy="highlight-nav-group-header"
                         >
                           <div
