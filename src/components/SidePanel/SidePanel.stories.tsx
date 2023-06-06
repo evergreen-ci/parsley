@@ -5,13 +5,8 @@ import { actions } from "@storybook/addon-actions";
 import { StoryObj } from "@storybook/react";
 import { userEvent } from "@storybook/testing-library";
 import { useLogContext } from "context/LogContext";
-import {
-  DefaultFiltersForProjectQuery,
-  DefaultFiltersForProjectQueryVariables,
-} from "gql/generated/types";
-import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
 import { useQueryParams } from "hooks/useQueryParam";
-import { ApolloMock } from "types/gql";
+import { defaultFiltersMock } from "test_data/defaultFilters";
 import SidePanel from ".";
 
 export default {
@@ -61,44 +56,3 @@ const Container = styled.div`
   flex-direction: row;
   height: 600px;
 `;
-
-const defaultFiltersMock: ApolloMock<
-  DefaultFiltersForProjectQuery,
-  DefaultFiltersForProjectQueryVariables
-> = {
-  request: {
-    query: DEFAULT_FILTERS_FOR_PROJECT,
-    variables: {
-      projectIdentifier: "evergreen",
-    },
-  },
-  result: {
-    data: {
-      project: {
-        __typename: "Project",
-        id: "evergreen",
-        parsleyFilters: [
-          {
-            __typename: "ParsleyFilter",
-            caseSensitive: true,
-            exactMatch: true,
-            expression:
-              "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-          },
-          {
-            __typename: "ParsleyFilter",
-            caseSensitive: true,
-            exactMatch: false,
-            expression: "active filter",
-          },
-          {
-            __typename: "ParsleyFilter",
-            caseSensitive: false,
-            exactMatch: false,
-            expression: "my filter",
-          },
-        ],
-      },
-    },
-  },
-};

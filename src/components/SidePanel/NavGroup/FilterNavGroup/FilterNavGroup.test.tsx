@@ -1,17 +1,12 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { LogContextProvider } from "context/LogContext";
-import {
-  DefaultFiltersForProjectQuery,
-  DefaultFiltersForProjectQueryVariables,
-} from "gql/generated/types";
-import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
+import { noFiltersMock } from "test_data/defaultFilters";
 import {
   renderWithRouterMatch as render,
   screen,
   userEvent,
   within,
 } from "test_utils";
-import { ApolloMock } from "types/gql";
 import FilterNavGroup from ".";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
@@ -133,25 +128,4 @@ describe("filters", () => {
 
 const props = {
   clearExpandedLines: jest.fn(),
-};
-
-const noFiltersMock: ApolloMock<
-  DefaultFiltersForProjectQuery,
-  DefaultFiltersForProjectQueryVariables
-> = {
-  request: {
-    query: DEFAULT_FILTERS_FOR_PROJECT,
-    variables: {
-      projectIdentifier: "evergreen",
-    },
-  },
-  result: {
-    data: {
-      project: {
-        __typename: "Project",
-        id: "evergreen",
-        parsleyFilters: null,
-      },
-    },
-  },
 };
