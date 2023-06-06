@@ -59,7 +59,6 @@ const StyledSideNavGroup = styled(SideNavGroup)`
 const NavGroupHeader = styled.div`
   display: flex;
   align-items: center;
-  width: 100%;
 `;
 
 const NavGroupTitle = styled.div`
