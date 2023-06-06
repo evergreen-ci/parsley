@@ -101,9 +101,13 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           class="css-1knbux5"
                         >
                           <div
-                            class="leafygreen-ui-1q59p9a"
+                            class="css-ts29it"
                           >
-                            FILTER
+                            <div
+                              class="leafygreen-ui-1q59p9a"
+                            >
+                              Filter
+                            </div>
                           </div>
                           <div
                             class="css-1sg2lsz"
@@ -196,7 +200,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           </div>
                         </div>
                         <p
-                          class="css-1qcpvpc leafygreen-ui-1tb6tuo"
+                          class="css-1piadxy leafygreen-ui-1tb6tuo"
                         >
                           active filter
                         </p>

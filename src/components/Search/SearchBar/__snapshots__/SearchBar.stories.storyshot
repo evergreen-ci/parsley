@@ -58,7 +58,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
       class="css-1xm32e0"
     >
       <div
-        class="css-1u3fi1 leafygreen-ui-xtefr5"
+        class="css-1u3fi1 leafygreen-ui-90q1a7"
       >
         <div
           class="leafygreen-ui-lzja97"
@@ -68,9 +68,9 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
             aria-label="searchbar-input"
             aria-labelledby="searchbar-input"
             autocomplete="on"
-            class="leafygreen-ui-flga8a"
+            class="leafygreen-ui-18wtnk9"
             data-cy="searchbar-input"
-            id="textinput-7"
+            id="textinput-5"
             placeholder="optional, regexp to search"
             required=""
             spellcheck="false"
@@ -78,12 +78,12 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
             value=""
           />
           <div
-            class="lg-ui-icon-selector-0001 leafygreen-ui-uy5fvv"
+            class="lg-ui-icon-selector-0001 leafygreen-ui-11c7q5r"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-13p6dfv leafygreen-ui-1xsx4zj"
+              class="leafygreen-ui-tbogr5"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"

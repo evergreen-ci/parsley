@@ -30,6 +30,10 @@ const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
       setTimeout(() => {
         scrollToLine(initialScrollIndex);
       }, 50);
+    } else {
+      leaveBreadcrumb("shareLine not provided or found in processedLogLines", {
+        shareLine,
+      });
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
