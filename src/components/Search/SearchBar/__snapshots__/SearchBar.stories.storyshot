@@ -15,7 +15,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
         aria-expanded="false"
         aria-invalid="false"
         aria-labelledby="searchbar-select"
-        class="lg-ui-button-0001 leafygreen-ui-4ldxru"
+        class="lg-ui-button-0002 leafygreen-ui-4ldxru"
         data-cy="searchbar-select"
         data-testid="leafygreen-ui-select-menubutton"
         id="select-2"
@@ -78,7 +78,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
             value=""
           />
           <div
-            class="lg-ui-icon-selector-0000 leafygreen-ui-uy5fvv"
+            class="lg-ui-icon-selector-0001 leafygreen-ui-uy5fvv"
           >
             <svg
               alt=""

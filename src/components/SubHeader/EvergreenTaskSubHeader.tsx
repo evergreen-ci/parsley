@@ -7,6 +7,7 @@ import Icon from "components/Icon";
 import { StyledLink } from "components/styles";
 import { LogTypes } from "constants/enums";
 import { getEvergreenTaskURL } from "constants/externalURLTemplates";
+import { TaskMetadata } from "context/LogContext/types";
 import {
   LogkeeperTaskQuery,
   LogkeeperTaskQueryVariables,
@@ -22,6 +23,7 @@ interface Props {
   logType?: LogTypes;
   taskID: string;
   testID?: string;
+  setTaskMetadata: (taskMetadata: TaskMetadata) => void;
 }
 
 export const EvergreenTaskSubHeader: React.FC<Props> = ({
@@ -30,13 +32,25 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   logType,
   taskID,
   testID,
+  setTaskMetadata,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
   const isResmoke = logType === LogTypes.RESMOKE_LOGS;
 
+  const onQueryCompleted = (task: TaskQuery["task"]) => {
+    setTaskMetadata({
+      displayName: task?.displayName,
+      versionId: task?.versionMetadata?.id,
+      projectIdentifier: task?.versionMetadata?.projectIdentifier,
+    });
+  };
+
   const { data, loading } = useQuery<TaskQuery, TaskQueryVariables>(GET_TASK, {
     variables: { taskId: taskID, execution },
     skip: isResmoke,
+    onCompleted: ({ task }) => {
+      onQueryCompleted(task);
+    },
   });
 
   const { data: logkeeperData, loading: logkeeperLoading } = useQuery<
@@ -45,6 +59,9 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   >(GET_LOGKEEPER_TASK, {
     variables: { buildId: buildID },
     skip: !isResmoke || !buildID,
+    onCompleted: ({ logkeeperBuildMetadata: { task } }) => {
+      onQueryCompleted(task);
+    },
   });
 
   const { task } = data ?? {};

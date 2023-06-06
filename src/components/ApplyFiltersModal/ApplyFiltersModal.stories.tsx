@@ -1,9 +1,6 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { MockedProvider } from "@apollo/client/testing";
-import styled from "@emotion/styled";
-import { actions } from "@storybook/addon-actions";
 import { StoryObj } from "@storybook/react";
-import { userEvent } from "@storybook/testing-library";
 import { useLogContext } from "context/LogContext";
 import {
   DefaultFiltersForProjectQuery,
@@ -12,10 +9,35 @@ import {
 import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
 import { useQueryParams } from "hooks/useQueryParam";
 import { ApolloMock } from "types/gql";
-import SidePanel from ".";
+import ApplyFiltersModal from ".";
 
 export default {
-  component: SidePanel,
+  component: ApplyFiltersModal,
+};
+
+const Component = ({ ...args }) => {
+  const { setTaskMetadata } = useLogContext();
+  const [, setSearchParams] = useQueryParams();
+  const [open, setOpen] = useState(false);
+
+  useEffect(() => {
+    setTaskMetadata({ projectIdentifier: "evergreen" });
+    setSearchParams({ filters: ["100active%20filter"] });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <>
+      <button onClick={() => setOpen(true)} type="button">
+        Open modal
+      </button>
+      <ApplyFiltersModal {...args} open={open} setOpen={setOpen} />
+    </>
+  );
+};
+
+export const Default: StoryObj<typeof ApplyFiltersModal> = {
+  render: (args) => <Component {...args} />,
   decorators: [
     (Story: () => JSX.Element) => (
       <MockedProvider mocks={[defaultFiltersMock]}>
@@ -24,43 +46,17 @@ export default {
     ),
   ],
 };
-const Story = ({ ...args }) => {
-  const { setTaskMetadata } = useLogContext();
-  const [, setSearchParams] = useQueryParams();
 
-  useEffect(() => {
-    setTaskMetadata({ projectIdentifier: "evergreen" });
-    setSearchParams({
-      highlights: ["highlight", "highlight2"],
-      filters: ["100active%20filter"],
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-  const clearExpandedLines = () => actions("clearExpandedLines");
-  const collapseLines = () => actions("collapseLines");
-  return (
-    <Container>
-      <SidePanel
-        {...args}
-        clearExpandedLines={clearExpandedLines}
-        collapseLines={collapseLines}
-        expandedLines={[[1, 10]]}
-      />
-    </Container>
-  );
+export const Empty: StoryObj<typeof ApplyFiltersModal> = {
+  render: (args) => <Component {...args} />,
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <MockedProvider mocks={[noFiltersMock]}>
+        <Story />
+      </MockedProvider>
+    ),
+  ],
 };
-export const Default: StoryObj<typeof SidePanel> = {
-  render: (args) => <Story {...args} />,
-  play: () => {
-    userEvent.keyboard("[[");
-  },
-};
-
-const Container = styled.div`
-  display: flex;
-  flex-direction: row;
-  height: 600px;
-`;
 
 const defaultFiltersMock: ApolloMock<
   DefaultFiltersForProjectQuery,
@@ -95,9 +91,30 @@ const defaultFiltersMock: ApolloMock<
             __typename: "ParsleyFilter",
             caseSensitive: false,
             exactMatch: false,
-            expression: "my filter",
+            expression: ":D",
           },
         ],
+      },
+    },
+  },
+};
+
+const noFiltersMock: ApolloMock<
+  DefaultFiltersForProjectQuery,
+  DefaultFiltersForProjectQueryVariables
+> = {
+  request: {
+    query: DEFAULT_FILTERS_FOR_PROJECT,
+    variables: {
+      projectIdentifier: "evergreen",
+    },
+  },
+  result: {
+    data: {
+      project: {
+        __typename: "Project",
+        id: "evergreen",
+        parsleyFilters: null,
       },
     },
   },

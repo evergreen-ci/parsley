@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/ApplyFiltersModal Default 1`] = `
+<div>
+  <button
+    type="button"
+  >
+    Open modal
+  </button>
+</div>
+`;
+
+exports[`storyshots Storyshots components/ApplyFiltersModal Empty 1`] = `
+<div>
+  <button
+    type="button"
+  >
+    Open modal
+  </button>
+</div>
+`;

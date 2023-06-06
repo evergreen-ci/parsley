@@ -23,6 +23,12 @@ interface LogMetadata {
   lobsterURL?: string;
 }
 
+interface TaskMetadata {
+  displayName?: string;
+  versionId?: string;
+  projectIdentifier?: string;
+}
+
 interface Preferences {
   caseSensitive: boolean;
   expandableRows: boolean;
@@ -42,4 +48,4 @@ enum DIRECTION {
 }
 
 export { DIRECTION };
-export type { LogMetadata, Preferences, SearchState };
+export type { LogMetadata, Preferences, SearchState, TaskMetadata };

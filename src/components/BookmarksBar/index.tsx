@@ -131,7 +131,6 @@ const Container = styled.div`
   background-color: ${gray.light3};
   box-shadow: 0 ${size.xxs} ${size.xxs} rgba(0, 0, 0, 0.25);
   padding-top: ${size.s};
-  z-index: 0;
 `;
 
 export default BookmarksBar;

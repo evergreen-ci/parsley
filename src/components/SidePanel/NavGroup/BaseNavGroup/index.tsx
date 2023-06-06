@@ -16,6 +16,7 @@ interface BaseNavGroupProps<T> {
   items: T[];
   navGroupTitle: string;
   defaultMessage: string;
+  additionalHeaderText?: ReactNode;
 }
 
 const BaseNavGroup = <T extends {}>({
@@ -25,6 +26,7 @@ const BaseNavGroup = <T extends {}>({
   items,
   navGroupTitle,
   defaultMessage,
+  additionalHeaderText,
 }: PropsWithChildren<BaseNavGroupProps<T>>) => (
   <StyledSideNavGroup
     glyph={<Icon fill={green.dark2} glyph={glyph} />}
@@ -33,6 +35,7 @@ const BaseNavGroup = <T extends {}>({
       <NavGroupHeader data-cy={`${dataCy}-nav-group-header`}>
         <NavGroupTitle>{navGroupTitle}</NavGroupTitle>
         <Badge variant={Variant.Green}>{items.length}</Badge>
+        {additionalHeaderText}
       </NavGroupHeader>
     }
   >
@@ -56,6 +59,7 @@ const StyledSideNavGroup = styled(SideNavGroup)`
 const NavGroupHeader = styled.div`
   display: flex;
   align-items: center;
+  width: 100%;
 `;
 
 const NavGroupTitle = styled.div`

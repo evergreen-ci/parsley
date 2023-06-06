@@ -5,12 +5,13 @@ import { LogTypes } from "constants/enums";
 import { ExpandedLines } from "types/logs";
 import { mergeIntervals } from "utils/expandedLines";
 import { getColorMapping, processResmokeLine } from "utils/resmoke";
-import { LogMetadata, SearchState } from "./types";
+import { LogMetadata, SearchState, TaskMetadata } from "./types";
 
 interface LogState {
   logs: string[];
   colorMapping?: Record<string, string>;
   logMetadata?: LogMetadata;
+  taskMetadata?: TaskMetadata;
   expandedLines: ExpandedLines;
   lineNumber?: number;
   searchState: SearchState;
@@ -22,6 +23,7 @@ type Action =
   | { type: "SET_FILE_NAME"; fileName: string }
   | { type: "SET_LOG_METADATA"; logMetadata: LogMetadata }
   | { type: "SET_SEARCH_TERM"; searchTerm: string }
+  | { type: "SET_TASK_METADATA"; taskMetadata: TaskMetadata }
   | { type: "SET_CASE_SENSITIVE"; caseSensitive: boolean }
   | { type: "SET_MATCH_COUNT"; matchCount: number }
   | { type: "EXPAND_LINES"; expandedLines: ExpandedLines }
@@ -136,6 +138,11 @@ const reducer = (state: LogState, action: Action): LogState => {
         },
       };
     }
+    case "SET_TASK_METADATA":
+      return {
+        ...state,
+        taskMetadata: action.taskMetadata,
+      };
     case "SET_CASE_SENSITIVE": {
       const { searchTerm } = state.searchState;
       if (!searchTerm) {
