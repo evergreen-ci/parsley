@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { InMemoryCache } from "@apollo/client";
 import { MockedProvider } from "@apollo/client/testing";
 import styled from "@emotion/styled";
 import { actions } from "@storybook/addon-actions";
@@ -7,22 +8,24 @@ import { userEvent } from "@storybook/testing-library";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { TaskQuery, TaskQueryVariables } from "gql/generated/types";
-import { cache } from "gql/GQLProvider";
 import { GET_TASK } from "gql/queries";
 import { useQueryParams } from "hooks/useQueryParam";
 import { defaultFiltersMock } from "test_data/defaultFilters";
 import SidePanel from ".";
 
+const cache = new InMemoryCache({});
+
 export default {
   component: SidePanel,
   decorators: [
     (Story: () => JSX.Element) => (
-      <MockedProvider mocks={[defaultFiltersMock]}>
+      <MockedProvider cache={cache} mocks={[defaultFiltersMock]}>
         <Story />
       </MockedProvider>
     ),
   ],
 };
+
 const Story = ({ ...args }) => {
   const [, setSearchParams] = useQueryParams();
   const { setLogMetadata } = useLogContext();

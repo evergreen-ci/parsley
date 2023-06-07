@@ -1,3 +1,5 @@
+import { InMemoryCache } from "@apollo/client";
+import { MockedProvider } from "@apollo/client/testing";
 import { act, renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter } from "react-router-dom";
 import { LogTypes } from "constants/enums";
@@ -9,14 +11,17 @@ import {
   TaskQuery,
   TaskQueryVariables,
 } from "gql/generated/types";
-import { cache } from "gql/GQLProvider";
 import { GET_LOGKEEPER_TASK, GET_TASK } from "gql/queries";
 import { useCachedTask } from ".";
 
+const cache = new InMemoryCache({});
+
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <MemoryRouter initialEntries={["/"]}>
-    <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
-  </MemoryRouter>
+  <MockedProvider cache={cache}>
+    <MemoryRouter initialEntries={["/"]}>
+      <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
+    </MemoryRouter>
+  </MockedProvider>
 );
 
 const useJointHook = () => {

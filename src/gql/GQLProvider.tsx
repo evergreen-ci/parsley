@@ -44,9 +44,8 @@ interface ClientLinkParams {
   gqlURL?: string;
 }
 
-const cache = new InMemoryCache();
-
 const getGQLClient = ({ credentials, gqlURL }: ClientLinkParams) => {
+  const cache = new InMemoryCache();
   const link = new HttpLink({
     credentials,
     uri: gqlURL,
@@ -69,5 +68,4 @@ const GQLProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => (
   </ApolloProvider>
 );
 
-export { cache };
 export default GQLProvider;

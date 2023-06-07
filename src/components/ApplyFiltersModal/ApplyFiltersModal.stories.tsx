@@ -1,14 +1,16 @@
 import { useEffect, useState } from "react";
+import { InMemoryCache } from "@apollo/client";
 import { MockedProvider } from "@apollo/client/testing";
 import { StoryObj } from "@storybook/react";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { TaskQuery, TaskQueryVariables } from "gql/generated/types";
-import { cache } from "gql/GQLProvider";
 import { GET_TASK } from "gql/queries";
 import { useQueryParams } from "hooks/useQueryParam";
 import { defaultFiltersMock, noFiltersMock } from "test_data/defaultFilters";
 import ApplyFiltersModal from ".";
+
+const cache = new InMemoryCache({});
 
 export default {
   component: ApplyFiltersModal,
@@ -20,6 +22,7 @@ const Component = ({ ...args }) => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
+    cache.reset();
     cache.writeQuery<TaskQuery, TaskQueryVariables>({
       query: GET_TASK,
       variables: {
@@ -53,7 +56,7 @@ export const Default: StoryObj<typeof ApplyFiltersModal> = {
   render: (args) => <Component {...args} />,
   decorators: [
     (Story: () => JSX.Element) => (
-      <MockedProvider mocks={[defaultFiltersMock]}>
+      <MockedProvider cache={cache} mocks={[defaultFiltersMock]}>
         <Story />
       </MockedProvider>
     ),
@@ -64,7 +67,7 @@ export const Empty: StoryObj<typeof ApplyFiltersModal> = {
   render: (args) => <Component {...args} />,
   decorators: [
     (Story: () => JSX.Element) => (
-      <MockedProvider mocks={[noFiltersMock]}>
+      <MockedProvider cache={cache} mocks={[noFiltersMock]}>
         <Story />
       </MockedProvider>
     ),
