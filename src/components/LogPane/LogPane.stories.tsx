@@ -1,5 +1,6 @@
 import styled from "@emotion/styled";
 import { StoryObj } from "@storybook/react";
+import { VirtuosoMockContext } from "react-virtuoso";
 import LogPane from ".";
 
 export default {
@@ -18,9 +19,13 @@ const Container = styled.div`
 
 export const Default: StoryObj<typeof LogPane> = {
   render: (args) => (
-    <Container>
-      <LogPane {...args} rowCount={list.length} rowRenderer={RowRenderer} />
-    </Container>
+    <VirtuosoMockContext.Provider
+      value={{ viewportHeight: 500, itemHeight: 18 }}
+    >
+      <Container>
+        <LogPane {...args} rowCount={list.length} rowRenderer={RowRenderer} />
+      </Container>
+    </VirtuosoMockContext.Provider>
   ),
   args: {},
 };
