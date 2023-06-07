@@ -6,7 +6,7 @@ const useOnClickOutside = (
 ): void => {
   useEffect(() => {
     /**
-     * Alert if clicked on outside of element
+     * `handleClickOutside` executes the callback if a mouse click is detected outside of the target elements.
      * @param event - the event that is being listened to
      */
     function handleClickOutside(event: MouseEvent): void {

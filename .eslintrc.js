@@ -28,7 +28,7 @@ module.exports = {
     "plugin:prettier/recommended", // Note: prettier must ALWAYS be the last extension.
   ],
   ignorePatterns: ["!.storybook"],
-  plugins: ["@typescript-eslint", "jsdoc"],
+  plugins: ["@typescript-eslint"],
   settings: {
     react: {
       version: "detect",
@@ -38,6 +38,10 @@ module.exports = {
         paths: ["src"],
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       },
+    },
+    jsdoc: {
+      mode: "typescript",
+      exemptDestructuredRootsFromChecks: true,
     },
   },
   rules: {

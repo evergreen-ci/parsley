@@ -18,7 +18,6 @@ const useStateRef = <T extends any>(
   const ref = useRef<T>(state);
 
   /**
-   *
    * @param newVal - the new value to set the state to
    */
   function setState(newVal: T): void {

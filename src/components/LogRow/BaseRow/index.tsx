@@ -22,20 +22,20 @@ interface BaseRowProps extends Omit<LogRowProps, "getLine"> {
 }
 
 /**
- * BaseRow is meant to be used as a wrapper for all rows in the log view.
- * It is responsible for handling the highlighting of the share line and bookmarks.
- * @param root0 - props passed to the component
- * @param root0.children - the text to be rendered
- * @param root0."data-cy" - data-cy attribute to be added to the row
- * @param root0.lineIndex - the index of the line in the log
- * @param root0.highlightRegex - the regex to be highlighted
- * @param root0.lineNumber - the line number of the line in the log
- * @param root0.searchLine - the line number of the line that was searched for
- * @param root0.searchTerm - the term that was searched for
- * @param root0.color - the color of the highlight
- * @param root0.wrap - whether or not the text should wrap
- * @param root0.scrollToLine - function to scroll to a line
- * @param root0.range - the range of lines to be displayed
+ * `BaseRow` is meant to be used as a wrapper for all rows in the log view.
+ * It is responsible for handling any highlights for the row, as well as rendering line counts and bookmarks.
+ * @param BaseRowProps - props to be passed to the BaseRow component
+ * @param BaseRowProps.children - the text to be rendered
+ * @param BaseRowProps."data-cy" - data-cy attribute to be added to the row
+ * @param BaseRowProps.lineIndex - the index of the line in the log
+ * @param BaseRowProps.highlightRegex - the regex to be highlighted
+ * @param BaseRowProps.lineNumber - the line number of the line in the log
+ * @param BaseRowProps.searchLine - the line number of the line that was searched for
+ * @param BaseRowProps.searchTerm - the term that was searched for
+ * @param BaseRowProps.color - the color of the highlight
+ * @param BaseRowProps.wrap - whether or not the text should wrap
+ * @param BaseRowProps.scrollToLine - function to scroll to a line
+ * @param BaseRowProps.range - the range of lines to be displayed
  * @returns the base row component
  */
 const BaseRow: React.FC<BaseRowProps> = ({
