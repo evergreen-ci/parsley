@@ -6,7 +6,6 @@ import { ToastProvider } from "./toast";
 
 /**
  * GlobalProviders wrap our application with our global contexts
- * children - React children
  * @param props - React props
  * @param props.children - Children to be wrapped
  * @returns the application wrapped with our global contexts
