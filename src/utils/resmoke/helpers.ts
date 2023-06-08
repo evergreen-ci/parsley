@@ -1,5 +1,5 @@
 /**
- * s|h|d|b|c following by a 5 digit number
+ * s|h|d|b|c followed by a 5 digit number
  * @example s12345
  * @example d54321
  */
