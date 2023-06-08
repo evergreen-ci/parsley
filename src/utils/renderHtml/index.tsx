@@ -24,10 +24,10 @@ const allowedTags = {
  * included in the transform object passed in through options. If you would like
  * to keep any classes applied to an item you want to swap you can pass it in as as part
  * of the preserveAttributes array
- * @param  html - The html string to parse
- * @param  options - Options to pass to html-react-parser
- * @param  options.transform - Map of elements to swap out
- * @param  options.preserveAttributes - Array of elements to preserve attributes for
+ * @param html - The html string to parse
+ * @param options - Options to pass to html-react-parser
+ * @param options.transform - Map of elements to swap out
+ * @param options.preserveAttributes - Array of elements to preserve attributes for
  * @returns - html string converted to an array of domnodes
  */
 const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
