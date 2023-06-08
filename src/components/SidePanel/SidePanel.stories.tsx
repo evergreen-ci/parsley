@@ -1,5 +1,4 @@
 import { useEffect } from "react";
-import { InMemoryCache } from "@apollo/client";
 import { MockedProvider } from "@apollo/client/testing";
 import styled from "@emotion/styled";
 import { actions } from "@storybook/addon-actions";
@@ -7,19 +6,16 @@ import { StoryObj } from "@storybook/react";
 import { userEvent } from "@storybook/testing-library";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
-import { TaskQuery, TaskQueryVariables } from "gql/generated/types";
-import { GET_TASK } from "gql/queries";
 import { useQueryParams } from "hooks/useQueryParam";
 import { defaultFiltersMock } from "test_data/defaultFilters";
+import { evergreenTaskMock } from "test_data/task";
 import SidePanel from ".";
-
-const cache = new InMemoryCache({});
 
 export default {
   component: SidePanel,
   decorators: [
     (Story: () => JSX.Element) => (
-      <MockedProvider cache={cache} mocks={[defaultFiltersMock]}>
+      <MockedProvider mocks={[defaultFiltersMock, evergreenTaskMock]}>
         <Story />
       </MockedProvider>
     ),
@@ -31,22 +27,13 @@ const Story = ({ ...args }) => {
   const { setLogMetadata } = useLogContext();
 
   useEffect(() => {
-    cache.writeQuery<TaskQuery, TaskQueryVariables>({
-      query: GET_TASK,
-      variables: {
-        taskId: "evergreen_task",
-        execution: 0,
-      },
-      data: {
-        ...taskQuery,
-      },
-    });
     setSearchParams({
       highlights: ["highlight", "highlight2"],
       filters: ["100active%20filter"],
     });
     setLogMetadata({
-      taskID: "evergreen_task",
+      taskID:
+        "spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35",
       execution: "0",
       logType: LogTypes.EVERGREEN_TASK_LOGS,
     });
@@ -77,22 +64,3 @@ const Container = styled.div`
   flex-direction: row;
   height: 600px;
 `;
-
-const taskQuery: TaskQuery = {
-  task: {
-    __typename: "Task",
-    displayName: "test",
-    execution: 0,
-    id: "evergreen_task",
-    patchNumber: 1239,
-    status: "success",
-    versionMetadata: {
-      __typename: "Version",
-      id: "evergreen_1234",
-      isPatch: false,
-      message: "EVG-1234: Add loading state",
-      projectIdentifier: "evergreen",
-      revision: "1234",
-    },
-  },
-};

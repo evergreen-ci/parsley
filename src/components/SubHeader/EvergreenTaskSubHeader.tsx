@@ -1,4 +1,3 @@
-import { useQuery } from "@apollo/client";
 import { InlineCode } from "@leafygreen-ui/typography";
 import { usePreferencesAnalytics } from "analytics";
 import { TaskStatusBadge, TestStatusBadge } from "components/Badge";
@@ -7,13 +6,7 @@ import Icon from "components/Icon";
 import { StyledLink } from "components/styles";
 import { LogTypes } from "constants/enums";
 import { getEvergreenTaskURL } from "constants/externalURLTemplates";
-import {
-  LogkeeperTaskQuery,
-  LogkeeperTaskQueryVariables,
-  TaskQuery,
-  TaskQueryVariables,
-} from "gql/generated/types";
-import { GET_LOGKEEPER_TASK, GET_TASK } from "gql/queries";
+import { useTaskQuery } from "hooks/useTaskQuery";
 import { shortenGithash, trimStringFromMiddle } from "utils/string";
 
 interface Props {
@@ -32,26 +25,14 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   testID,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
-  const isResmoke = logType === LogTypes.RESMOKE_LOGS;
-
-  const { data, loading } = useQuery<TaskQuery, TaskQueryVariables>(GET_TASK, {
-    variables: { taskId: taskID, execution },
-    skip: isResmoke,
+  const { task, loading } = useTaskQuery({
+    logType,
+    taskID,
+    execution,
+    buildID,
   });
 
-  const { data: logkeeperData, loading: logkeeperLoading } = useQuery<
-    LogkeeperTaskQuery,
-    LogkeeperTaskQueryVariables
-  >(GET_LOGKEEPER_TASK, {
-    variables: { buildId: buildID },
-    skip: !isResmoke || !buildID,
-  });
-
-  const { task } = data ?? {};
-  const { logkeeperBuildMetadata } = logkeeperData ?? {};
-  const loadedTask = task ?? logkeeperBuildMetadata?.task;
-
-  if (loading || logkeeperLoading || !loadedTask) {
+  if (loading || !task) {
     return (
       <>
         <Icon glyph="EvergreenLogo" size={24} />
@@ -71,14 +52,13 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     patchNumber,
     status,
     versionMetadata,
-  } = loadedTask;
+  } = task;
   const { isPatch, projectIdentifier, message, revision } = versionMetadata;
 
-  const currentTest = isResmoke
-    ? logkeeperBuildMetadata?.task?.tests?.testResults?.find((test) =>
-        test?.logs?.urlRaw?.match(new RegExp(`${testID}`))
-      )
-    : null;
+  const currentTest =
+    task?.tests?.testResults?.find((test) =>
+      test?.logs?.urlRaw?.match(new RegExp(`${testID}`))
+    ) ?? null;
 
   const breadcrumbs = [
     {

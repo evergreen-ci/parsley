@@ -1,15 +1,17 @@
 import { useQuery } from "@apollo/client";
 import { css } from "@emotion/react";
+import styled from "@emotion/styled";
 import ConfirmationModal from "@leafygreen-ui/confirmation-modal";
 import { Body } from "@leafygreen-ui/typography";
 import { zIndex } from "constants/tokens";
+import { useLogContext } from "context/LogContext";
 import {
   DefaultFiltersForProjectQuery,
   DefaultFiltersForProjectQueryVariables,
 } from "gql/generated/types";
 import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
-import { useCachedTask } from "hooks/useCachedTask";
 import { useFilterParam } from "hooks/useFilterParam";
+import { useTaskQuery } from "hooks/useTaskQuery";
 import DefaultFilter from "./DefaultFilter";
 
 interface ApplyFiltersModalProps {
@@ -23,7 +25,10 @@ const ApplyFiltersModal: React.FC<ApplyFiltersModalProps> = ({
 }) => {
   const [filters] = useFilterParam();
 
-  const task = useCachedTask();
+  const { logMetadata } = useLogContext();
+  const { logType, taskID, execution, buildID } = logMetadata ?? {};
+
+  const { task } = useTaskQuery({ logType, taskID, execution, buildID });
   const { versionMetadata } = task ?? {};
   const { projectIdentifier = "" } = versionMetadata ?? {};
 
@@ -49,15 +54,25 @@ const ApplyFiltersModal: React.FC<ApplyFiltersModalProps> = ({
       setOpen={setOpen}
       title="Default Filters"
     >
-      {parsleyFilters?.map((f) => (
-        <DefaultFilter key={f.expression} filter={f} urlFilters={filters} />
-      )) ?? (
-        <Body data-cy="no-filters">
-          No filters have been defined for this project.
-        </Body>
-      )}
+      <Scrollable>
+        {parsleyFilters?.map((f) => (
+          <DefaultFilter
+            key={f.expression}
+            activeFilters={filters}
+            filter={f}
+          />
+        )) ?? (
+          <Body data-cy="no-filters">
+            No filters have been defined for this project.
+          </Body>
+        )}
+      </Scrollable>
     </ConfirmationModal>
   );
 };
 
+const Scrollable = styled.div`
+  max-height: 600px;
+  overflow-y: scroll;
+`;
 export default ApplyFiltersModal;

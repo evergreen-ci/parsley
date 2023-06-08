@@ -8,15 +8,17 @@ import { ParsleyFilter } from "gql/generated/types";
 import { Filter } from "types/logs";
 
 interface DefaultFilterProps {
+  activeFilters: Filter[];
   filter: ParsleyFilter;
-  urlFilters: Filter[];
 }
 
 const DefaultFilter: React.FC<DefaultFilterProps> = ({
+  activeFilters,
   filter,
-  urlFilters,
 }) => {
-  const alreadyActive = !!urlFilters.find((f) => f.name === filter.expression);
+  const alreadyActive = !!activeFilters.find(
+    (f) => f.name === filter.expression
+  );
 
   return (
     <DefaultFilterContainer data-cy="default-filter">

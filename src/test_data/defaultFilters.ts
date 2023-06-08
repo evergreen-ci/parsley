@@ -12,14 +12,14 @@ export const defaultFiltersMock: ApolloMock<
   request: {
     query: DEFAULT_FILTERS_FOR_PROJECT,
     variables: {
-      projectIdentifier: "evergreen",
+      projectIdentifier: "spruce",
     },
   },
   result: {
     data: {
       project: {
         __typename: "Project",
-        id: "evergreen",
+        id: "spruce",
         parsleyFilters: [
           {
             __typename: "ParsleyFilter",
@@ -53,14 +53,14 @@ export const noFiltersMock: ApolloMock<
   request: {
     query: DEFAULT_FILTERS_FOR_PROJECT,
     variables: {
-      projectIdentifier: "evergreen",
+      projectIdentifier: "spruce",
     },
   },
   result: {
     data: {
       project: {
         __typename: "Project",
-        id: "evergreen",
+        id: "spruce",
         parsleyFilters: null,
       },
     },
