@@ -39,10 +39,6 @@ module.exports = {
         extensions: [".js", ".jsx", ".ts", ".tsx"],
       },
     },
-    jsdoc: {
-      mode: "typescript",
-      exemptDestructuredRootsFromChecks: true,
-    },
   },
   rules: {
     // Rules for ESLint.
