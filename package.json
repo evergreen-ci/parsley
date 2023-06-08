@@ -35,7 +35,7 @@
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch --verbose",
     "upload-source-maps": "node ./scripts/upload-source-maps.js",
-    "postversion": "git push upstream && git push upstream --tags && git push && git push --tags"
+    "postversion": "scripts/push-version.sh"
   },
   "dependencies": {
     "@apollo/client": "3.7.12",
