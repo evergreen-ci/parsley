@@ -8,6 +8,7 @@ import { parseQueryString, stringifyQuery } from "utils/query-string";
 /**
  * `useQueryParams` returns all of the query params that exist in the url.
  * @param parseOptions - options which define how to parse params from the url (optional)
+ * @returns a tuple containing the parsed query params and a function to set the query params
  */
 const useQueryParams = (parseOptions?: ParseOptions) => {
   const [searchParams] = useSearchParams();
@@ -33,6 +34,9 @@ const useQueryParams = (parseOptions?: ParseOptions) => {
  * `useQueryParam` allows you to interact with a query param in the same way you would use a useState hook.
  *  The first argument is the name of the query param. The second argument is the initial value of the query param.
  *  `useQueryParam` will default to the second argument if the query param is not present in the url.
+ * @param param - the name of the query param
+ * @param defaultParam - the default value of the query param
+ * @returns a tuple containing the parsed query param and a function to set the query param
  */
 const useQueryParam = <T>(
   param: QueryParams,

@@ -3,6 +3,12 @@ import { constructRegexToMatch, getMatchingLines, matchesFilters } from ".";
 
 /**
  * Helper function for constructing a Filter object.
+ * @param filter - the filter object to construct
+ * @param filter.name - the name of the filter
+ * @param filter.caseSensitive - whether or not the filter is case sensitive
+ * @param filter.matchType - the match type of the filter (exact, inverse)
+ * @param filter.visible - whether or not the filter is visible
+ * @returns a Filter object
  */
 const makeFilter = (filter: {
   name: string;

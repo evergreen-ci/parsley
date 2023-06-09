@@ -13,7 +13,10 @@ import { getBytesAsString } from "utils/string";
  * `useLogDownloader` is a custom hook that downloads a log file from a given URL.
  * It uses a fetch stream to download the log file and splits the log file into an array of strings.
  * Each string is split based on the newline character.
- * It returns an object with the following properties:
+ * @param url - the url to fetch
+ * @param logType - the type of log file to download
+ * @param downloadSizeLimit - the maximum size of the log file to download
+ * @returns an object with the following properties:
  * - isLoading: a boolean that is true while the log is being downloaded
  * - data: the log file as an array of strings
  * - error: an error message if the download fails

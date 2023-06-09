@@ -5,6 +5,8 @@ import { conditionalCastToArray } from "utils/array";
 
 /**
  * `useHighlightParam` is a specialized form of useQueryParam. It needs to encode and decode the highlights
+ * to and from URLs.
+ * @returns a tuple containing the parsed highlights and a function to set the highlights
  */
 const useHighlightParam = () => {
   const [searchParams, setSearchParams] = useQueryParams({
