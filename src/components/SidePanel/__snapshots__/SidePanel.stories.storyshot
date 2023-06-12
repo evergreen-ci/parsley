@@ -77,11 +77,13 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           >
                             1
                           </div>
-                          <p
-                            class="css-28nnfh leafygreen-ui-1tb6tuo"
+                          <div
+                            class="css-hggi9n"
+                            role="button"
+                            tabindex="0"
                           >
                             View default filters
-                          </p>
+                          </div>
                         </div>
                       </div>
                     </div>
