@@ -34,7 +34,7 @@ export const useTaskQuery = ({
     TaskQueryVariables
   >(GET_TASK, {
     variables: { taskId: String(taskID), execution: Number(execution) },
-    skip: isResmoke,
+    skip: isResmoke || !taskID,
   });
 
   const { data: logkeeperData, loading: logkeeperLoading } = useQuery<

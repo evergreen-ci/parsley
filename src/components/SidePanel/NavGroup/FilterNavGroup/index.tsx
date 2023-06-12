@@ -1,7 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import { Body, BodyProps } from "@leafygreen-ui/typography";
 import { useLogWindowAnalytics } from "analytics";
 import ApplyFiltersModal from "components/ApplyFiltersModal";
 import { CaseSensitivity, MatchType } from "constants/enums";
@@ -71,7 +70,11 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
         additionalHeaderText={
           // TODO: Unhide in EVG-19897.
           isProduction ? null : (
-            <ModalTrigger onClick={() => setOpen(true)}>
+            <ModalTrigger
+              onClick={() => setOpen(true)}
+              role="button"
+              tabIndex={0}
+            >
               View default filters
             </ModalTrigger>
           )
@@ -96,10 +99,11 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
   );
 };
 
-const ModalTrigger = styled(Body)<BodyProps>`
+const ModalTrigger = styled.div`
   text-decoration: underline;
   text-transform: none;
   letter-spacing: 0;
+  font-weight: normal;
   color: ${green.dark2};
   position: absolute;
   right: 0;
