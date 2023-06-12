@@ -1,9 +1,17 @@
+import { MockedProvider } from "@apollo/client/testing";
 import Cookie from "js-cookie";
+import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import SidePanel from ".";
 
 jest.mock("js-cookie");
 const mockedGet = Cookie.get as unknown as jest.Mock<string>;
+
+const wrapper = ({ children }: { children: React.ReactNode }) => (
+  <MockedProvider>
+    <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
+  </MockedProvider>
+);
 
 describe("sidePanel", () => {
   const user = userEvent.setup();
@@ -15,22 +23,20 @@ describe("sidePanel", () => {
   });
 
   it("should be uncollapsed if the user has never seen the filters drawer before", () => {
-    render(<SidePanel {...props} />);
+    render(<SidePanel {...props} />, { wrapper });
     const collapseButton = screen.getByLabelText("Collapse navigation");
     expect(collapseButton).toHaveAttribute("aria-expanded", "true");
   });
 
   it("should be collapsed if the user has seen the filters drawer before", () => {
     mockedGet.mockImplementation(() => "true");
-
-    render(<SidePanel {...props} />);
+    render(<SidePanel {...props} />, { wrapper });
     const collapseButton = screen.getByLabelText("Collapse navigation");
     expect(collapseButton).toHaveAttribute("aria-expanded", "false");
   });
 
   it("should be possible to toggle the drawer open and closed", async () => {
-    render(<SidePanel {...props} />);
-
+    render(<SidePanel {...props} />, { wrapper });
     const collapseButton = screen.getByLabelText("Collapse navigation");
     expect(collapseButton).toHaveAttribute("aria-expanded", "true");
     await user.click(collapseButton);

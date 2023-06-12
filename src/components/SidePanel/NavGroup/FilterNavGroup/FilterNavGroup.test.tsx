@@ -1,3 +1,5 @@
+import { MockedProvider } from "@apollo/client/testing";
+import { LogContextProvider } from "context/LogContext";
 import {
   renderWithRouterMatch as render,
   screen,
@@ -6,16 +8,23 @@ import {
 } from "test_utils";
 import FilterNavGroup from ".";
 
+const wrapper = ({ children }: { children: React.ReactNode }) => (
+  <MockedProvider>
+    <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
+  </MockedProvider>
+);
+
 describe("filters", () => {
   const user = userEvent.setup();
 
   it("shows a message when no filters have been applied", () => {
-    render(<FilterNavGroup {...props} />);
+    render(<FilterNavGroup {...props} />, { wrapper });
     expect(screen.getByDataCy("filters-default-message")).toBeInTheDocument();
   });
 
   it("filters should properly display based on the URL", () => {
     render(<FilterNavGroup {...props} />, {
+      wrapper,
       route: "?filters=100filter1,100filter2",
     });
     expect(screen.getByText("filter1")).toBeInTheDocument();
@@ -24,6 +33,7 @@ describe("filters", () => {
 
   it("shows the number of filters in the header", () => {
     render(<FilterNavGroup {...props} />, {
+      wrapper,
       route: "?filters=100one,100two,100three,100four",
     });
     const navGroupHeader = screen.getByDataCy("filters-nav-group-header");
@@ -32,6 +42,7 @@ describe("filters", () => {
 
   it("editing filters should modify the URL correctly", async () => {
     const { history } = render(<FilterNavGroup {...props} />, {
+      wrapper,
       route: "?filters=100filter1,100filter2",
     });
     // Edit the first filter.
@@ -51,6 +62,7 @@ describe("filters", () => {
 
   it("trying to edit a filter to a filter that already exists should do nothing", async () => {
     const { history } = render(<FilterNavGroup {...props} />, {
+      wrapper,
       route: "?filters=100filter1,100filter2",
     });
     // Edit the first filter.
@@ -69,6 +81,7 @@ describe("filters", () => {
 
   it("pressing the cancel button after editing a filter should do nothing", async () => {
     const { history } = render(<FilterNavGroup {...props} />, {
+      wrapper,
       route: "?filters=100filter1,100filter2",
     });
     // Edit the first filter.
@@ -87,6 +100,7 @@ describe("filters", () => {
 
   it("deleting filters should modify the URL correctly", async () => {
     const { history } = render(<FilterNavGroup {...props} />, {
+      wrapper,
       route: "?filters=100filter1,100filter2",
     });
     // Delete the first filter.
@@ -101,6 +115,7 @@ describe("filters", () => {
     const { history } = render(
       <FilterNavGroup {...props} clearExpandedLines={clearExpandedLines} />,
       {
+        wrapper,
         route: "?filters=100filter1",
       }
     );

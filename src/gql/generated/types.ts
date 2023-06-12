@@ -2627,6 +2627,24 @@ export type BaseTaskFragment = {
   };
 };
 
+export type DefaultFiltersForProjectQueryVariables = Exact<{
+  projectIdentifier: Scalars["String"];
+}>;
+
+export type DefaultFiltersForProjectQuery = {
+  __typename?: "Query";
+  project: {
+    __typename?: "Project";
+    id: string;
+    parsleyFilters?: Array<{
+      __typename?: "ParsleyFilter";
+      caseSensitive: boolean;
+      exactMatch: boolean;
+      expression: string;
+    }> | null;
+  };
+};
+
 export type LogkeeperTaskQueryVariables = Exact<{
   buildId: Scalars["String"];
 }>;

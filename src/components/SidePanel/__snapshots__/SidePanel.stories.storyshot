@@ -6,7 +6,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
     class="css-3ieiu4"
   >
     <div
-      class="lg-ui-side-nav-0000 css-9jz470 leafygreen-ui-11vns4e"
+      class="lg-ui-side-nav-0000 css-18wdk2z leafygreen-ui-11vns4e"
       data-testid="side-nav-container"
     >
       <div
@@ -77,6 +77,13 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                           >
                             1
                           </div>
+                          <div
+                            class="css-hggi9n"
+                            role="button"
+                            tabindex="0"
+                          >
+                            View default filters
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -87,7 +94,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   >
                     <div
                       class="css-1mnkoet"
-                      data-cy="filter-newFilter"
+                      data-cy="filter-active filter"
                     >
                       <div
                         class="css-1iyoj2o"
@@ -197,7 +204,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         <p
                           class="css-1piadxy leafygreen-ui-1tb6tuo"
                         >
-                          newFilter
+                          active filter
                         </p>
                         <div
                           class="leafygreen-ui-1gmp0zo css-jw6p18"
