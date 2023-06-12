@@ -72,7 +72,8 @@ const ApplyFiltersModal: React.FC<ApplyFiltersModalProps> = ({
 };
 
 const Scrollable = styled.div`
-  max-height: 600px;
+  max-height: 60vh;
   overflow-y: scroll;
 `;
+
 export default ApplyFiltersModal;

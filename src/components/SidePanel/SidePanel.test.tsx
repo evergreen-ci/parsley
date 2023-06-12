@@ -1,7 +1,6 @@
 import { MockedProvider } from "@apollo/client/testing";
 import Cookie from "js-cookie";
 import { LogContextProvider } from "context/LogContext";
-import { noFiltersMock } from "test_data/defaultFilters";
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import SidePanel from ".";
 
@@ -9,7 +8,7 @@ jest.mock("js-cookie");
 const mockedGet = Cookie.get as unknown as jest.Mock<string>;
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <MockedProvider mocks={[noFiltersMock]}>
+  <MockedProvider>
     <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
   </MockedProvider>
 );

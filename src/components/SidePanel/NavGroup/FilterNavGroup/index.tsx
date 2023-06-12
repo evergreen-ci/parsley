@@ -21,9 +21,10 @@ interface FilterNavGroupProps {
 const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
   clearExpandedLines,
 }) => {
+  const { sendEvent } = useLogWindowAnalytics();
+
   const [filters, setFilters] = useFilterParam();
   const [open, setOpen] = useState(false);
-  const { sendEvent } = useLogWindowAnalytics();
 
   const deleteFilter = (filterName: string) => {
     const newFilters = filters.filter((f) => f.name !== filterName);

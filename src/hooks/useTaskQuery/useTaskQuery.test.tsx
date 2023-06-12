@@ -16,7 +16,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe("useTaskQuery", () => {
-  it("should be able to fetch task corresponding to task logs", async () => {
+  it("should be able to fetch task corresponding to evergreen task logs", async () => {
     const { result, waitForNextUpdate } = renderHook(
       () =>
         useTaskQuery({

@@ -1,6 +1,5 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { LogContextProvider } from "context/LogContext";
-import { noFiltersMock } from "test_data/defaultFilters";
 import {
   renderWithRouterMatch as render,
   screen,
@@ -10,7 +9,7 @@ import {
 import FilterNavGroup from ".";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <MockedProvider mocks={[noFiltersMock]}>
+  <MockedProvider>
     <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
   </MockedProvider>
 );
