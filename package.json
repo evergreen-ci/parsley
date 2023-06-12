@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.73",
+  "version": "1.0.76",
   "type": "commonjs",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
@@ -35,7 +35,7 @@
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch --verbose",
     "upload-source-maps": "node ./scripts/upload-source-maps.js",
-    "postversion": "git push upstream && git push upstream --tags && git push && git push --tags"
+    "postversion": "scripts/push-version.sh"
   },
   "dependencies": {
     "@apollo/client": "3.7.12",
@@ -121,6 +121,7 @@
     "eslint-plugin-cypress": "2.12.1",
     "eslint-plugin-import": "2.27.5",
     "eslint-plugin-jest": "27.2.0",
+    "eslint-plugin-jsdoc": "^46.2.4",
     "eslint-plugin-jsx-a11y": "6.6.1",
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-react": "7.32.2",

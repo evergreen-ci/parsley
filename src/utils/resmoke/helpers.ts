@@ -1,28 +1,42 @@
-/** sdbc following by a 5 digit number
+/**
+ * s|h|d|b|c followed by a 5 digit number
  * @example s12345
  * @example d54321
  */
 const portRegex = / ([shdbc]+\d{1,5})\|/;
 
-/** `getPort` returns the port associated with a resmoke line */
+/**
+ * `getPort` returns the port associated with a resmoke line
+ * @param line - the resmoke line
+ * @returns the port associated with a resmoke line
+ */
 const getPort = (line: string) => {
   const port = line.match(portRegex)?.[1];
   return port;
 };
 
-/** The resmoke function
+/**
+ * The resmoke function
  * @example [js:test]
  * @example [js:setup]
  */
 const resmokeFunctionRegex = /\[.*\]/g;
 
-/** `getResmokeFunction` returns the resmoke function that ran a resmoke line */
+/**
+ * `getResmokeFunction` returns the resmoke function that ran a resmoke line
+ * @param line - the resmoke line
+ * @returns the resmoke function that ran a resmoke line
+ */
 const getResmokeFunction = (line: string) => {
   const resmokeFunction = line.match(resmokeFunctionRegex)?.[0];
   return resmokeFunction;
 };
 
-/** `getJSONString` returns the json object in a resmoke line */
+/**
+ * `getJSONString` returns the json object in a resmoke line
+ * @param line - the resmoke line
+ * @returns the json object in a resmoke line
+ */
 const getJSONString = (line: string) => {
   // Find the first occurrence of `{` and the last occurrence of `}`
   const openBracketIndex = line.indexOf("{");
@@ -54,14 +68,16 @@ const getJSONString = (line: string) => {
   return json;
 };
 
-/** The timestamp
+/**
+ * The timestamp
  * @example "t":{"$date":"2021-03-03T20:54:54.000Z"}
  * @example "t":{"$date":"2021-03-03T20:54:54.000Z"}
  */
 const timeStampRegex =
   /\{"t":\{"\$date":"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z)"\}/;
 
-/** The timestamp with offset
+/**
+ * The timestamp with offset
  * @example "t":{"$date":"2021-03-03T20:54:54.000-0400"}
  * @example "t":{"$date":"2021-03-03T20:54:54.000+0400"}
  */
@@ -69,7 +85,11 @@ const timeStampRegex =
 const timestampWithOffsetRegex =
   /{"t":{"\$date":"(\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}[+-]\d{2}:\d{2})"}/;
 
-/** `getTimeStamp` returns the timestamp ran by a resmoke function this is found in the resmoke json  */
+/**
+ * `getTimeStamp` returns the timestamp ran by a resmoke function this is found in the resmoke json
+ * @param line - the resmoke line
+ * @returns the timestamp ran by a resmoke function this is found in the resmoke line
+ */
 const getTimeStamp = (line: string) => {
   const timeStamp =
     line.match(timeStampRegex)?.[1] ||
@@ -77,45 +97,61 @@ const getTimeStamp = (line: string) => {
   return timeStamp;
 };
 
-/** The shell prefix
+/**
+ * The shell prefix
  * @example "s":"I"
  * @example "s":"W"
  */
 const shellPrefixRegex = /"s":"([A-Z0-9]+)"/;
 
-/** `getShellPrefix` returns the shell prefix ran by a resmoke function this is found in the resmoke json */
+/**
+ * `getShellPrefix` returns the shell prefix ran by a resmoke function this is found in the resmoke json
+ * @param line - the resmoke line
+ * @returns the shell prefix ran by a resmoke function this is found in the resmoke line
+ */
 const getShellPrefix = (line: string) => {
   const shellPrefix = line.match(shellPrefixRegex)?.[1];
   return shellPrefix;
 };
 
-/** The config server
+/**
+ * The config server
  * @example "c":"NETWORK"
  * @example "c":"STORAGE"
  * @example "c":"COMMAND"
  * @example "c":"REPL"
  */
 const configSrvRegex = /"c":"([a-zA-Z-_]+)"/;
-/** `getConfigServer` returns the config server associated with a resmoke function this is found in the resmoke json  */
+/**
+ * `getConfigServer` returns the config server associated with a resmoke function this is found in the resmoke json
+ * @param line - the resmoke line
+ * @returns the config server associated with a resmoke function this is found in the resmoke line
+ */
 const getConfigServer = (line: string) => {
   const configSrv = line.match(configSrvRegex)?.[1];
   return configSrv;
 };
 
-/** The id
+/**
+ * The id
  * @example "id":22900
  * @example "id":22901
  * @example "id":22902
  */
 const idRegex = /"id":([0-9]*)/;
 
-/** `getPid` returns the process id associated with a mongod instance this is found in the resmoke json  */
+/**
+ * `getPid` returns the process id associated with a mongod instance this is found in the resmoke json
+ * @param line - the resmoke line
+ * @returns the process id associated with a mongod instance this is found in the resmoke line
+ */
 const getPid = (line: string) => {
   const id = line.match(idRegex)?.[1];
   return id;
 };
 
-/** The context
+/**
+ * The context
  * @example "ctx":"conn1"
  * @example "ctx":"conn2"
  * @example "ctx":"conn3"
@@ -123,30 +159,44 @@ const getPid = (line: string) => {
  */
 const ctxRegex = /"ctx":"([a-zA-Z0-9-:]+)"/;
 
-/** `getContext` returns the ctx associated with a resmoke line this is found in the resmoke json */
+/**
+ * `getContext` returns the ctx associated with a resmoke line this is found in the resmoke json
+ * @param line - the resmoke line
+ * @returns the ctx associated with a resmoke line this is found in the resmoke line
+ */
 const getContext = (line: string) => {
   const ctx = line.match(ctxRegex)?.[1];
   return ctx;
 };
 
-/** The message
+/**
+ * The message
  * @example "msg":"client metadata"
  * @example "msg":"{ someParam: \"someValue\" }"
  */
 const msgRegex = /"msg":"([^"\\]*(\\.[^"\\]*)*)"/;
 
-/** `getMessage` returns the message outputted by resmoke for a given line this is found in the resmoke json */
+/**
+ * `getMessage` returns the message outputted by resmoke for a given line this is found in the resmoke json
+ * @param line - the resmoke line
+ * @returns the message outputted by resmoke for a given line this is found in the resmoke json
+ */
 const getMessage = (line: string) => {
   const msg = line.match(msgRegex)?.[1];
   return msg;
 };
 
-/** The attributes
+/**
+ * The attributes
  * @example "attr":{"remote":"
  */
 const attrRegex = /("attr":.*)}/;
 
-/** `getAttributes` returns the additional json attributes found in a resmoke line json */
+/**
+ * `getAttributes` returns the additional json attributes found in a resmoke line json
+ * @param line - the resmoke line
+ * @returns the additional json attributes found in a resmoke line json
+ */
 const getAttributes = (line: string) => {
   const attr = line.match(attrRegex)?.[1];
   return attr;
@@ -155,7 +205,11 @@ const getAttributes = (line: string) => {
 const stateRegex =
   /(:s(hard)?\d*|:c(onfigsvr)?)?:(initsync|prim(ary)?|(mongo)?s|sec(ondary)?\d*|n(ode)?\d*)]/;
 
-/** `getState` returns the state of a mongod instance */
+/**
+ * `getState` returns the state of a mongod instance
+ * @param line - the resmoke line
+ * @returns the state of a mongod instance
+ */
 const getState = (line: string) => {
   const state = line.match(stateRegex)?.[0];
   return state;
