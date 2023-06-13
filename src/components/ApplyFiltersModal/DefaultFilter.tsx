@@ -3,32 +3,53 @@ import Badge from "@leafygreen-ui/badge";
 import Checkbox from "@leafygreen-ui/checkbox";
 import Tooltip from "@leafygreen-ui/tooltip";
 import Icon from "components/Icon";
+import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
 import { ParsleyFilter } from "gql/generated/types";
 import { Filter } from "types/logs";
 
 interface DefaultFilterProps {
+  addFilter: (filterToAdd: Filter) => void;
+  removeFilter: (filterToRemove: string) => void;
   activeFilters: Filter[];
+  selectedFilters: Filter[];
   filter: ParsleyFilter;
 }
 
 const DefaultFilter: React.FC<DefaultFilterProps> = ({
+  addFilter,
+  removeFilter,
   activeFilters,
+  selectedFilters,
   filter,
 }) => {
-  const alreadyActive = !!activeFilters.find(
-    (f) => f.name === filter.expression
-  );
+  const active = !!activeFilters.find((f) => f.name === filter.expression);
+  const selected = !!selectedFilters.find((f) => f.name === filter.expression);
+
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      addFilter({
+        name: filter.expression,
+        visible: true,
+        caseSensitive: filter.caseSensitive
+          ? CaseSensitivity.Sensitive
+          : CaseSensitivity.Insensitive,
+        matchType: filter.exactMatch ? MatchType.Exact : MatchType.Inverse,
+      });
+    } else {
+      removeFilter(filter.expression);
+    }
+  };
 
   return (
     <DefaultFilterContainer data-cy="default-filter">
       <Checkbox
-        checked={alreadyActive}
-        disabled={alreadyActive}
+        checked={active || selected}
+        disabled={active}
         label={
           <>
             {filter.expression}
-            {alreadyActive && (
+            {active && (
               <Tooltip
                 data-cy="default-filter-tooltip"
                 trigger={
@@ -44,6 +65,7 @@ const DefaultFilter: React.FC<DefaultFilterProps> = ({
           </>
         }
         name={filter.expression}
+        onChange={onChange}
       />
       <BadgeContainer>
         <Badge variant="darkgray">
