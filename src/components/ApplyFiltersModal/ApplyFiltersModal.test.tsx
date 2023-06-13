@@ -116,7 +116,7 @@ describe("applyFiltersModal", () => {
     await user.click(screen.getByText("my_filter_3"));
     await user.click(screen.getByRole("button", { name: "Apply filters" }));
     expect(history.location.search).toBe(
-      "?filters=111my_filter_2,101my_filter_3,100original"
+      "?filters=100original,111my_filter_2,101my_filter_3"
     );
   });
 });
