@@ -7,7 +7,7 @@ import {
   DefaultFiltersForProjectQueryVariables,
 } from "gql/generated/types";
 import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
-import { noFiltersMock } from "test_data/defaultFilters";
+import { noFiltersMock } from "test_data/projectFilters";
 import { evergreenTaskMock } from "test_data/task";
 import {
   renderWithRouterMatch as render,
@@ -46,7 +46,7 @@ describe("applyFiltersModal", () => {
       useLogContext,
       <ApplyFiltersModal open setOpen={jest.fn()} />
     );
-    render(<Component />, { wrapper: wrapper([defaultFiltersMock]) });
+    render(<Component />, { wrapper: wrapper([projectFiltersMock]) });
     act(() => {
       hook.current.setLogMetadata(logMetadata);
     });
@@ -63,7 +63,7 @@ describe("applyFiltersModal", () => {
       <ApplyFiltersModal open setOpen={jest.fn()} />
     );
     render(<Component />, {
-      wrapper: wrapper([defaultFiltersMock]),
+      wrapper: wrapper([projectFiltersMock]),
       route: "?filters=100my_filter_1",
     });
     act(() => {
@@ -74,7 +74,7 @@ describe("applyFiltersModal", () => {
     const user = userEvent.setup();
     await user.hover(screen.getByLabelText("Info With Circle Icon"));
     await waitFor(() => {
-      expect(screen.queryByDataCy("default-filter-tooltip")).toBeVisible();
+      expect(screen.queryByDataCy("project-filter-tooltip")).toBeVisible();
     });
     const checkbox = screen.getAllByRole("checkbox")[0];
     expect(checkbox).toBeChecked();
@@ -86,7 +86,7 @@ describe("applyFiltersModal", () => {
       useLogContext,
       <ApplyFiltersModal open setOpen={jest.fn()} />
     );
-    render(<Component />, { wrapper: wrapper([defaultFiltersMock]) });
+    render(<Component />, { wrapper: wrapper([projectFiltersMock]) });
     act(() => {
       hook.current.setLogMetadata(logMetadata);
     });
@@ -103,7 +103,7 @@ describe("applyFiltersModal", () => {
       <ApplyFiltersModal open setOpen={jest.fn()} />
     );
     const { history } = render(<Component />, {
-      wrapper: wrapper([defaultFiltersMock]),
+      wrapper: wrapper([projectFiltersMock]),
       route: "?filters=100original",
     });
     act(() => {
@@ -126,7 +126,7 @@ const waitForModalLoad = async () => {
     expect(screen.queryByDataCy("apply-filters-modal")).toBeVisible()
   );
   await waitFor(() =>
-    expect(screen.queryAllByDataCy("default-filter")).toHaveLength(3)
+    expect(screen.queryAllByDataCy("project-filter")).toHaveLength(3)
   );
 };
 
@@ -137,7 +137,7 @@ const logMetadata = {
   logType: LogTypes.EVERGREEN_TASK_LOGS,
 };
 
-const defaultFiltersMock: ApolloMock<
+const projectFiltersMock: ApolloMock<
   DefaultFiltersForProjectQuery,
   DefaultFiltersForProjectQueryVariables
 > = {

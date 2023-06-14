@@ -4,7 +4,7 @@ import { StoryObj } from "@storybook/react";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { useQueryParams } from "hooks/useQueryParam";
-import { defaultFiltersMock, noFiltersMock } from "test_data/defaultFilters";
+import { noFiltersMock, projectFiltersMock } from "test_data/projectFilters";
 import { evergreenTaskMock } from "test_data/task";
 import ApplyFiltersModal from ".";
 
@@ -42,7 +42,7 @@ export const Default: StoryObj<typeof ApplyFiltersModal> = {
   render: (args) => <Component {...args} />,
   decorators: [
     (Story: () => JSX.Element) => (
-      <MockedProvider mocks={[defaultFiltersMock, evergreenTaskMock]}>
+      <MockedProvider mocks={[projectFiltersMock, evergreenTaskMock]}>
         <Story />
       </MockedProvider>
     ),

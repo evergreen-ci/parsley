@@ -8,24 +8,21 @@ import { size } from "constants/tokens";
 import { ParsleyFilter } from "gql/generated/types";
 import { Filter } from "types/logs";
 
-interface DefaultFilterProps {
+interface ProjectFilterProps {
   addFilter: (filterToAdd: Filter) => void;
   removeFilter: (filterToRemove: string) => void;
-  activeFilters: Filter[];
-  selectedFilters: Filter[];
+  active: boolean;
+  selected: boolean;
   filter: ParsleyFilter;
 }
 
-const DefaultFilter: React.FC<DefaultFilterProps> = ({
+const ProjectFilter: React.FC<ProjectFilterProps> = ({
   addFilter,
   removeFilter,
-  activeFilters,
-  selectedFilters,
+  active,
+  selected,
   filter,
 }) => {
-  const active = !!activeFilters.find((f) => f.name === filter.expression);
-  const selected = !!selectedFilters.find((f) => f.name === filter.expression);
-
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       addFilter({
@@ -42,7 +39,7 @@ const DefaultFilter: React.FC<DefaultFilterProps> = ({
   };
 
   return (
-    <DefaultFilterContainer data-cy="default-filter">
+    <DefaultFilterContainer data-cy="project-filter">
       <Checkbox
         checked={active || selected}
         disabled={active}
@@ -51,7 +48,7 @@ const DefaultFilter: React.FC<DefaultFilterProps> = ({
             {filter.expression}
             {active && (
               <Tooltip
-                data-cy="default-filter-tooltip"
+                data-cy="project-filter-tooltip"
                 trigger={
                   <IconContainer>
                     <Icon glyph="InfoWithCircle" />
@@ -97,4 +94,4 @@ const BadgeContainer = styled.div`
   margin-left: ${size.m};
 `;
 
-export default DefaultFilter;
+export default ProjectFilter;

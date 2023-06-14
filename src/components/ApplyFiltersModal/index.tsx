@@ -13,9 +13,8 @@ import {
 import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useTaskQuery } from "hooks/useTaskQuery";
-import { Filter } from "types/logs";
 import { leaveBreadcrumb } from "utils/errorReporting";
-import DefaultFilter from "./DefaultFilter";
+import ProjectFilter from "./ProjectFilter";
 import useSelectedFiltersState from "./state";
 
 interface ApplyFiltersModalProps {
@@ -55,12 +54,12 @@ const ApplyFiltersModal: React.FC<ApplyFiltersModalProps> = ({
 
     // Send relevant tracking events.
     leaveBreadcrumb(
-      "applied-default-filters",
+      "applied-project-filters",
       { filters: state.selectedFilters },
       "user"
     );
     sendEvent({
-      name: "Applied Default Filters",
+      name: "Applied Project Filters",
       filters: state.selectedFilters,
     });
     setOpen(false);
@@ -84,21 +83,23 @@ const ApplyFiltersModal: React.FC<ApplyFiltersModalProps> = ({
       open={open}
       setOpen={setOpen}
       submitDisabled={state.selectedFilters.length === 0}
-      title="Default Filters"
+      title="Project Filters"
     >
       <Scrollable>
-        {parsleyFilters?.map((f) => (
-          <DefaultFilter
-            key={f.expression}
-            activeFilters={filters}
-            addFilter={(filterToAdd: Filter) =>
+        {parsleyFilters?.map((filter) => (
+          <ProjectFilter
+            key={filter.expression}
+            active={!!filters.find((f) => f.name === filter.expression)}
+            addFilter={(filterToAdd) =>
               dispatch({ type: "ADD_FILTER", filterToAdd })
             }
-            filter={f}
-            removeFilter={(filterToRemove: string) => {
+            filter={filter}
+            removeFilter={(filterToRemove) => {
               dispatch({ type: "REMOVE_FILTER", filterToRemove });
             }}
-            selectedFilters={state.selectedFilters}
+            selected={
+              !!state.selectedFilters.find((f) => f.name === filter.expression)
+            }
           />
         )) ?? (
           <Body data-cy="no-filters-message">

@@ -76,7 +76,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
               role="button"
               tabIndex={0}
             >
-              View default filters
+              View project filters
             </ModalTrigger>
           )
         }

@@ -10,9 +10,9 @@ type State = {
   selectedFilters: Filter[];
 };
 
-const initialState = (): State => ({
+const initialState: State = {
   selectedFilters: [],
-});
+};
 
 const reducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -29,14 +29,14 @@ const reducer = (state: State, action: Action): State => {
         ),
       };
     case "RESET":
-      return initialState();
+      return initialState;
     default:
       throw new Error(`Unknown reducer action ${action}`);
   }
 };
 
 const useSelectedFiltersState = () => {
-  const [state, dispatch] = useReducer(reducer, initialState());
+  const [state, dispatch] = useReducer(reducer, initialState);
   return {
     state,
     dispatch,

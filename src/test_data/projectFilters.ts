@@ -5,7 +5,7 @@ import {
 import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
 import { ApolloMock } from "types/gql";
 
-export const defaultFiltersMock: ApolloMock<
+export const projectFiltersMock: ApolloMock<
   DefaultFiltersForProjectQuery,
   DefaultFiltersForProjectQueryVariables
 > = {
