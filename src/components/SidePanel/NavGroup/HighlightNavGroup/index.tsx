@@ -24,7 +24,7 @@ const HighlightNavGroup: React.FC = () => {
     <BaseNavGroup
       data-cy="highlight"
       defaultMessage="No terms have been highlighted."
-      glyph="Minus"
+      glyph="Highlight"
       items={highlights}
       navGroupTitle="Highlighted Terms"
     >
