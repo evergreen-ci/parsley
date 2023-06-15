@@ -20,12 +20,12 @@ describe("project filters", () => {
     cy.contains("View project filters").click();
     cy.getInputByLabel("D\\d").check({ force: true });
     cy.contains("button", "Apply filters").click();
-    cy.location("search").should("contain", "101D%255Cd");
+    cy.location("search").should("contain", "111D%255Cd");
     cy.get("[data-cy^='collapsed-row-']").should("exist");
   });
 
   it("should disable checkbox if filter is already applied", () => {
-    cy.visit(`${resmokeLogLink}?filters=101D%255Cd`);
+    cy.visit(`${resmokeLogLink}?filters=100D%255Cd`);
     cy.contains("View project filters").click();
     cy.getInputByLabel("D\\d").should("be.disabled");
   });
