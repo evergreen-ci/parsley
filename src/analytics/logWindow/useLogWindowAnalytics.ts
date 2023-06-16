@@ -5,7 +5,7 @@ import { Filter } from "types/logs";
 type Action =
   | { name: "Added Filter"; filterExpression: string }
   | { name: "Deleted Filter"; filterExpression: string }
-  | { name: "Toggled Filter"; visible: boolean }
+  | { name: "Toggled Filter"; open: boolean }
   | { name: "Added Bookmark" }
   | { name: "Navigated With Bookmark" }
   | { name: "Removed Bookmark" }

@@ -12,3 +12,9 @@ export const wordBreakCss = css`
 export const WordBreak = styled.span`
   ${wordBreakCss};
 `;
+
+export const TextEllipsis = styled.div`
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
