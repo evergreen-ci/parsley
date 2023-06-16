@@ -104,7 +104,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         >
                           <svg
                             aria-label="Chevron Right Icon"
-                            class="css-1lhul1p"
+                            class="leafygreen-ui-jc2z8v css-1lhul1p"
                             fill="none"
                             height="14"
                             open=""

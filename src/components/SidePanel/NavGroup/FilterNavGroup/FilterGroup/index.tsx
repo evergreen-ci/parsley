@@ -64,18 +64,11 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
     }
   };
 
+  const showTooltip = !isValid && !isEditing;
   const validationMessage =
     newFilterName === ""
       ? "Filter cannot be empty"
       : `Invalid Regular Expression: ${getRegexpError(newFilterName)}`;
-
-  const iconTooltip =
-    !isValid && !isEditing ? (
-      <IconWithTooltip color={red.base} glyph="ImportantWithCircle">
-        Invalid filter expression, please update it!
-        <Error>{validationMessage}</Error>
-      </IconWithTooltip>
-    ) : null;
 
   return (
     <Accordion
@@ -86,7 +79,12 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
       title={
         <>
           <Badge>Filter</Badge>
-          {iconTooltip}
+          {showTooltip && (
+            <IconWithTooltip color={red.base} glyph="ImportantWithCircle">
+              Invalid filter expression, please update it!
+              <Error>{validationMessage}</Error>
+            </IconWithTooltip>
+          )}
           <TextEllipsis>{name}</TextEllipsis>
         </>
       }
@@ -94,7 +92,12 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
       toggledTitle={
         <>
           <Badge>Filter</Badge>
-          {iconTooltip}
+          {showTooltip && (
+            <IconWithTooltip color={red.base} glyph="ImportantWithCircle">
+              Invalid filter expression, please update it!
+              <Error>{validationMessage}</Error>
+            </IconWithTooltip>
+          )}
           <IconButtonContainer>
             <IconButton
               aria-label="Edit filter"

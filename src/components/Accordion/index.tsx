@@ -1,7 +1,10 @@
 import { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import Icon from "@leafygreen-ui/icon";
+import { palette } from "@leafygreen-ui/palette";
 import { size } from "constants/tokens";
+
+const { gray } = palette;
 
 interface AccordionProps {
   "data-cy"?: string;
@@ -26,9 +29,9 @@ const Accordion: React.FC<AccordionProps> = ({
   titleTag,
   toggledTitle,
 }) => {
-  const [isAccordionDisplayed, setIsAccordionDisplayed] = useState(defaultOpen);
+  const [accordionOpen, setAccordionOpen] = useState(defaultOpen);
 
-  const showToggledTitle = isAccordionDisplayed ? toggledTitle : title;
+  const showToggledTitle = accordionOpen ? toggledTitle : title;
   const TitleTag = titleTag ?? "span";
   const titleComp = (
     <TitleTag>{toggledTitle ? showToggledTitle : title}</TitleTag>
@@ -44,8 +47,8 @@ const Accordion: React.FC<AccordionProps> = ({
   }, [children, childrenRef]);
 
   const toggleAccordionHandler = () => {
-    setIsAccordionDisplayed(!isAccordionDisplayed);
-    onToggle({ isVisible: !isAccordionDisplayed });
+    setAccordionOpen(!accordionOpen);
+    onToggle({ isVisible: !accordionOpen });
   };
 
   return (
@@ -56,18 +59,19 @@ const Accordion: React.FC<AccordionProps> = ({
         role="button"
       >
         <AccordionIcon
+          fill={gray.dark1}
           glyph="ChevronRight"
-          open={isAccordionDisplayed}
+          open={accordionOpen}
           size="small"
         />
         {titleComp}
       </AccordionToggle>
       {subtitle && <SubtitleContainer>{subtitle}</SubtitleContainer>}
       <AnimatedAccordion
-        aria-expanded={isAccordionDisplayed}
+        aria-expanded={accordionOpen}
         data-cy="accordion-collapse-container"
         height={childrenHeight}
-        hide={!isAccordionDisplayed}
+        hide={!accordionOpen}
       >
         <ContentsContainer ref={childrenRef}>{children}</ContentsContainer>
       </AnimatedAccordion>

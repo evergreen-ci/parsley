@@ -10,7 +10,7 @@ exports[`storyshots Storyshots components/Accordion Default 1`] = `
     >
       <svg
         aria-label="Chevron Right Icon"
-        class="css-tgrklh"
+        class="leafygreen-ui-jc2z8v css-tgrklh"
         fill="none"
         height="14"
         role="img"
