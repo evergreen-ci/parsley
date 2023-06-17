@@ -7,7 +7,7 @@ import { userEvent } from "@storybook/testing-library";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { useQueryParams } from "hooks/useQueryParam";
-import { defaultFiltersMock } from "test_data/defaultFilters";
+import { projectFiltersMock } from "test_data/projectFilters";
 import { evergreenTaskMock } from "test_data/task";
 import SidePanel from ".";
 
@@ -15,7 +15,7 @@ export default {
   component: SidePanel,
   decorators: [
     (Story: () => JSX.Element) => (
-      <MockedProvider mocks={[defaultFiltersMock, evergreenTaskMock]}>
+      <MockedProvider mocks={[projectFiltersMock, evergreenTaskMock]}>
         <Story />
       </MockedProvider>
     ),

@@ -1,16 +1,16 @@
 import {
-  DefaultFiltersForProjectQuery,
-  DefaultFiltersForProjectQueryVariables,
+  ProjectFiltersQuery,
+  ProjectFiltersQueryVariables,
 } from "gql/generated/types";
-import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
+import { PROJECT_FILTERS } from "gql/queries";
 import { ApolloMock } from "types/gql";
 
-export const defaultFiltersMock: ApolloMock<
-  DefaultFiltersForProjectQuery,
-  DefaultFiltersForProjectQueryVariables
+export const projectFiltersMock: ApolloMock<
+  ProjectFiltersQuery,
+  ProjectFiltersQueryVariables
 > = {
   request: {
-    query: DEFAULT_FILTERS_FOR_PROJECT,
+    query: PROJECT_FILTERS,
     variables: {
       projectIdentifier: "spruce",
     },
@@ -47,11 +47,11 @@ export const defaultFiltersMock: ApolloMock<
 };
 
 export const noFiltersMock: ApolloMock<
-  DefaultFiltersForProjectQuery,
-  DefaultFiltersForProjectQueryVariables
+  ProjectFiltersQuery,
+  ProjectFiltersQueryVariables
 > = {
   request: {
-    query: DEFAULT_FILTERS_FOR_PROJECT,
+    query: PROJECT_FILTERS,
     variables: {
       projectIdentifier: "spruce",
     },

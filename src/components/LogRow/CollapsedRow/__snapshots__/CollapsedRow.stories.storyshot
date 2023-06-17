@@ -71,7 +71,7 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Row Sing
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0001 leafygreen-ui-qicxot"
+          class="lg-ui-button-0000 leafygreen-ui-qicxot"
           type="button"
         >
           <div
@@ -101,7 +101,7 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Row Sing
         </button>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0001 leafygreen-ui-qicxot"
+          class="lg-ui-button-0000 leafygreen-ui-qicxot"
           type="button"
         >
           <div
