@@ -17,12 +17,12 @@ import { leaveBreadcrumb } from "utils/errorReporting";
 import ProjectFilter from "./ProjectFilter";
 import useSelectedFiltersState from "./state";
 
-interface ApplyFiltersModalProps {
+interface ProjectFiltersModalProps {
   open: boolean;
   setOpen: (open: boolean) => void;
 }
 
-const ApplyFiltersModal: React.FC<ApplyFiltersModalProps> = ({
+const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
   open,
   setOpen,
 }) => {
@@ -116,4 +116,4 @@ const Scrollable = styled.div`
   overflow-y: scroll;
 `;
 
-export default ApplyFiltersModal;
+export default ProjectFiltersModal;
