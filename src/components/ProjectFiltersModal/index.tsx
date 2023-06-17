@@ -77,7 +77,7 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
       css={css`
         z-index: ${zIndex.modal};
       `}
-      data-cy="apply-filters-modal"
+      data-cy="project-filters-modal"
       onCancel={onCancel}
       onConfirm={onConfirm}
       open={open}

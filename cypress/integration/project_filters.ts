@@ -11,7 +11,7 @@ describe("project filters", () => {
   it("should show a message if there are no filters", () => {
     cy.visit(spruceLogLink);
     cy.contains("View project filters").click();
-    cy.dataCy("apply-filters-modal").should("be.visible");
+    cy.dataCy("project-filters-modal").should("be.visible");
     cy.dataCy("project-filter").should("not.exist");
     cy.dataCy("no-filters-message").should("be.visible");
   });
@@ -19,7 +19,7 @@ describe("project filters", () => {
   it("should be able to apply a filter", () => {
     cy.visit(resmokeLogLink);
     cy.contains("View project filters").click();
-    cy.dataCy("apply-filters-modal").should("be.visible");
+    cy.dataCy("project-filters-modal").should("be.visible");
     cy.getInputByLabel("(NETWORK|ASIO|EXECUTOR|CONNPOOL|REPL_HB)").check({
       force: true,
     });
@@ -34,7 +34,7 @@ describe("project filters", () => {
   it("should disable checkbox if filter is already applied", () => {
     cy.visit(`${resmokeLogLink}?filters=100D%255Cd`);
     cy.contains("View project filters").click();
-    cy.dataCy("apply-filters-modal").should("be.visible");
+    cy.dataCy("project-filters-modal").should("be.visible");
     cy.getInputByLabel("D\\d").should("be.disabled");
   });
 });

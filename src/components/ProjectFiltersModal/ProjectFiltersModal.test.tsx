@@ -17,24 +17,26 @@ import {
 } from "test_utils";
 import { renderComponentWithHook } from "test_utils/TestHooks";
 import { ApolloMock } from "types/gql";
-import ApplyFiltersModal from ".";
+import ProjectFiltersModal from ".";
 
 const wrapper = (mocks: MockedProviderProps["mocks"]) => {
   const provider = ({ children }: { children: React.ReactNode }) => (
-    <MockedProvider mocks={mocks?.concat(evergreenTaskMock)}>
+    <MockedProvider mocks={mocks}>
       <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
     </MockedProvider>
   );
   return provider;
 };
 
-describe("applyFiltersModal", () => {
-  it("shows message when no filters are defined in project", async () => {
+describe("projectFiltersModal", () => {
+  it("shows message when no filters are defined in project", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <ApplyFiltersModal open setOpen={jest.fn()} />
+      <ProjectFiltersModal open setOpen={jest.fn()} />
     );
-    render(<Component />, { wrapper: wrapper([noFiltersMock]) });
+    render(<Component />, {
+      wrapper: wrapper([noFiltersMock, evergreenTaskMock]),
+    });
     act(() => {
       hook.current.setLogMetadata(logMetadata);
     });
@@ -44,32 +46,32 @@ describe("applyFiltersModal", () => {
   it("lists all of a project's filters", async () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <ApplyFiltersModal open setOpen={jest.fn()} />
+      <ProjectFiltersModal open setOpen={jest.fn()} />
     );
-    render(<Component />, { wrapper: wrapper([projectFiltersMock]) });
+    render(<Component />, {
+      wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
+    });
     act(() => {
       hook.current.setLogMetadata(logMetadata);
     });
-
     await waitForModalLoad();
     expect(screen.queryByText("my_filter_1")).toBeVisible();
     expect(screen.queryByText("my_filter_2")).toBeVisible();
     expect(screen.queryByText("my_filter_3")).toBeVisible();
   });
 
-  it("filters already included in the URL will have the checkbox checked & disabled", async () => {
+  it("if a filter is already included in the URL, its checkbox will be checked & disabled", async () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <ApplyFiltersModal open setOpen={jest.fn()} />
+      <ProjectFiltersModal open setOpen={jest.fn()} />
     );
     render(<Component />, {
-      wrapper: wrapper([projectFiltersMock]),
+      wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
       route: "?filters=100my_filter_1",
     });
     act(() => {
       hook.current.setLogMetadata(logMetadata);
     });
-
     await waitForModalLoad();
     const user = userEvent.setup();
     await user.hover(screen.getByLabelText("Info With Circle Icon"));
@@ -84,13 +86,14 @@ describe("applyFiltersModal", () => {
   it("disables submit button when no filters have been selected", async () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <ApplyFiltersModal open setOpen={jest.fn()} />
+      <ProjectFiltersModal open setOpen={jest.fn()} />
     );
-    render(<Component />, { wrapper: wrapper([projectFiltersMock]) });
+    render(<Component />, {
+      wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
+    });
     act(() => {
       hook.current.setLogMetadata(logMetadata);
     });
-
     await waitForModalLoad();
     expect(
       screen.queryByRole("button", { name: "Apply filters" })
@@ -100,20 +103,23 @@ describe("applyFiltersModal", () => {
   it("properly applies filters to the URL", async () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <ApplyFiltersModal open setOpen={jest.fn()} />
+      <ProjectFiltersModal open setOpen={jest.fn()} />
     );
     const { history } = render(<Component />, {
-      wrapper: wrapper([projectFiltersMock]),
+      wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
       route: "?filters=100original",
     });
     act(() => {
       hook.current.setLogMetadata(logMetadata);
     });
-
     await waitForModalLoad();
     const user = userEvent.setup();
+    // LeafyGreen checkbox has pointer-events: none so we click on the labels as a workaround.
     await user.click(screen.getByText("my_filter_2"));
     await user.click(screen.getByText("my_filter_3"));
+    expect(
+      screen.queryByRole("button", { name: "Apply filters" })
+    ).toHaveAttribute("aria-disabled", "false");
     await user.click(screen.getByRole("button", { name: "Apply filters" }));
     expect(history.location.search).toBe(
       "?filters=100original,111my_filter_2,101my_filter_3"
@@ -123,7 +129,7 @@ describe("applyFiltersModal", () => {
 
 const waitForModalLoad = async () => {
   await waitFor(() =>
-    expect(screen.queryByDataCy("apply-filters-modal")).toBeVisible()
+    expect(screen.queryByDataCy("project-filters-modal")).toBeVisible()
   );
   await waitFor(() =>
     expect(screen.queryAllByDataCy("project-filter")).toHaveLength(3)

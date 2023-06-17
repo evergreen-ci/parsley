@@ -39,7 +39,7 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
   };
 
   return (
-    <DefaultFilterContainer data-cy="project-filter">
+    <ProjectFilterContainer data-cy="project-filter">
       <Checkbox
         checked={active || selected}
         disabled={active}
@@ -72,11 +72,11 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
           {filter.exactMatch ? "Exact" : "Inverse"}
         </Badge>
       </BadgeContainer>
-    </DefaultFilterContainer>
+    </ProjectFilterContainer>
   );
 };
 
-const DefaultFilterContainer = styled.div`
+const ProjectFilterContainer = styled.div`
   margin-top: ${size.s};
 `;
 

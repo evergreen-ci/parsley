@@ -6,10 +6,10 @@ import { useLogContext } from "context/LogContext";
 import { useQueryParams } from "hooks/useQueryParam";
 import { noFiltersMock, projectFiltersMock } from "test_data/projectFilters";
 import { evergreenTaskMock } from "test_data/task";
-import ApplyFiltersModal from ".";
+import ProjectFiltersModal from ".";
 
 export default {
-  component: ApplyFiltersModal,
+  component: ProjectFiltersModal,
 };
 
 const Component = ({ ...args }) => {
@@ -33,12 +33,12 @@ const Component = ({ ...args }) => {
       <button onClick={() => setOpen(true)} type="button">
         Open modal
       </button>
-      <ApplyFiltersModal {...args} open={open} setOpen={setOpen} />
+      <ProjectFiltersModal {...args} open={open} setOpen={setOpen} />
     </>
   );
 };
 
-export const Default: StoryObj<typeof ApplyFiltersModal> = {
+export const Default: StoryObj<typeof ProjectFiltersModal> = {
   render: (args) => <Component {...args} />,
   decorators: [
     (Story: () => JSX.Element) => (
@@ -49,7 +49,7 @@ export const Default: StoryObj<typeof ApplyFiltersModal> = {
   ],
 };
 
-export const Empty: StoryObj<typeof ApplyFiltersModal> = {
+export const Empty: StoryObj<typeof ProjectFiltersModal> = {
   render: (args) => <Component {...args} />,
   decorators: [
     (Story: () => JSX.Element) => (
