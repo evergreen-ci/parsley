@@ -7,10 +7,10 @@ import { useLogWindowAnalytics } from "analytics";
 import { zIndex } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import {
-  DefaultFiltersForProjectQuery,
-  DefaultFiltersForProjectQueryVariables,
+  ProjectFiltersQuery,
+  ProjectFiltersQueryVariables,
 } from "gql/generated/types";
-import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
+import { PROJECT_FILTERS } from "gql/queries";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useTaskQuery } from "hooks/useTaskQuery";
 import { leaveBreadcrumb } from "utils/errorReporting";
@@ -37,13 +37,13 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
   const { versionMetadata } = task ?? {};
   const { projectIdentifier = "" } = versionMetadata ?? {};
 
-  const { data } = useQuery<
-    DefaultFiltersForProjectQuery,
-    DefaultFiltersForProjectQueryVariables
-  >(DEFAULT_FILTERS_FOR_PROJECT, {
-    variables: { projectIdentifier },
-    skip: !projectIdentifier,
-  });
+  const { data } = useQuery<ProjectFiltersQuery, ProjectFiltersQueryVariables>(
+    PROJECT_FILTERS,
+    {
+      variables: { projectIdentifier },
+      skip: !projectIdentifier,
+    }
+  );
   const { project } = data || {};
   const { parsleyFilters } = project || {};
 

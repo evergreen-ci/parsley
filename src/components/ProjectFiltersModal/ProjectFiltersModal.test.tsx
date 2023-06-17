@@ -3,10 +3,10 @@ import { act } from "@testing-library/react-hooks";
 import { LogTypes } from "constants/enums";
 import { LogContextProvider, useLogContext } from "context/LogContext";
 import {
-  DefaultFiltersForProjectQuery,
-  DefaultFiltersForProjectQueryVariables,
+  ProjectFiltersQuery,
+  ProjectFiltersQueryVariables,
 } from "gql/generated/types";
-import { DEFAULT_FILTERS_FOR_PROJECT } from "gql/queries";
+import { PROJECT_FILTERS } from "gql/queries";
 import { noFiltersMock } from "test_data/projectFilters";
 import { evergreenTaskMock } from "test_data/task";
 import {
@@ -144,11 +144,11 @@ const logMetadata = {
 };
 
 const projectFiltersMock: ApolloMock<
-  DefaultFiltersForProjectQuery,
-  DefaultFiltersForProjectQueryVariables
+  ProjectFiltersQuery,
+  ProjectFiltersQueryVariables
 > = {
   request: {
-    query: DEFAULT_FILTERS_FOR_PROJECT,
+    query: PROJECT_FILTERS,
     variables: {
       projectIdentifier: "spruce",
     },

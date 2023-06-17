@@ -1,4 +1,4 @@
-query DefaultFiltersForProject($projectIdentifier: String!) {
+query ProjectFilters($projectIdentifier: String!) {
   project(projectIdentifier: $projectIdentifier) {
     id
     parsleyFilters {
