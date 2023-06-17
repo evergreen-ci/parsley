@@ -82,7 +82,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                             role="button"
                             tabindex="0"
                           >
-                            View default filters
+                            View project filters
                           </div>
                         </div>
                       </div>

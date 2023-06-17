@@ -6,6 +6,7 @@ type Action =
   | { name: "Added Filter"; filterExpression: string }
   | { name: "Deleted Filter"; filterExpression: string }
   | { name: "Toggled Filter"; open: boolean }
+  | { name: "Applied Project Filters"; filters: Filter[] }
   | { name: "Added Bookmark" }
   | { name: "Navigated With Bookmark" }
   | { name: "Removed Bookmark" }
