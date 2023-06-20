@@ -31,24 +31,22 @@ const Accordion: React.FC<AccordionProps> = ({
 }) => {
   const [accordionOpen, setAccordionOpen] = useState(defaultOpen);
 
-  const showToggledTitle = accordionOpen ? toggledTitle : title;
   const TitleTag = titleTag ?? "span";
-  const titleComp = (
-    <TitleTag>{toggledTitle ? showToggledTitle : title}</TitleTag>
-  );
+  const titleToShow = toggledTitle && accordionOpen ? toggledTitle : title;
+  const titleComp = <TitleTag>{titleToShow}</TitleTag>;
 
   const childrenRef = useRef<HTMLDivElement>(null);
   const [childrenHeight, setChildrenHeight] = useState(0);
 
   useEffect(() => {
     if (childrenRef && childrenRef.current) {
-      setChildrenHeight(childrenRef.current.scrollHeight);
+      setChildrenHeight(childrenRef.current.offsetHeight);
     }
   }, [children, childrenRef]);
 
   const toggleAccordionHandler = () => {
-    setAccordionOpen(!accordionOpen);
     onToggle({ isVisible: !accordionOpen });
+    setAccordionOpen(!accordionOpen);
   };
 
   return (

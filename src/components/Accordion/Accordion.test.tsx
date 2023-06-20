@@ -5,31 +5,27 @@ describe("accordion", () => {
   it("properly expands and collapses", async () => {
     const user = userEvent.setup();
     render(
-      <Accordion title="apple" toggledTitle="orange">
+      <Accordion title="collapsed" toggledTitle="expanded">
         accordion content
       </Accordion>
     );
-    expect(screen.getByDataCy("accordion-collapse-container")).toHaveAttribute(
-      "aria-expanded",
-      "false"
-    );
-    await user.click(screen.getByText("apple"));
-    expect(screen.getByText("orange")).toBeInTheDocument();
+    await user.click(screen.getByDataCy("accordion-toggle"));
+    expect(screen.getByText("expanded")).toBeInTheDocument();
     expect(screen.getByDataCy("accordion-collapse-container")).toHaveAttribute(
       "aria-expanded",
       "true"
     );
-    await user.click(screen.getByText("orange"));
-    expect(screen.getByText("apple")).toBeInTheDocument();
+    await user.click(screen.getByDataCy("accordion-toggle"));
+    expect(screen.getByText("collapsed")).toBeInTheDocument();
     expect(screen.getByDataCy("accordion-collapse-container")).toHaveAttribute(
       "aria-expanded",
       "false"
     );
   });
 
-  it("should be open if defaultOpen is true", () => {
+  it("should be expanded if defaultOpen is true", () => {
     render(
-      <Accordion defaultOpen title="apple" toggledTitle="orange">
+      <Accordion defaultOpen title="accordion title">
         accordion content
       </Accordion>
     );
@@ -43,17 +39,17 @@ describe("accordion", () => {
     const user = userEvent.setup();
     const onToggle = jest.fn();
     render(
-      <Accordion onToggle={onToggle} title="toggle">
+      <Accordion onToggle={onToggle} title="accordion title">
         accordion content
       </Accordion>
     );
-    await user.click(screen.getByText("toggle"));
+    await user.click(screen.getByDataCy("accordion-toggle"));
     expect(screen.getByDataCy("accordion-collapse-container")).toHaveAttribute(
       "aria-expanded",
       "true"
     );
     expect(onToggle).toHaveBeenCalledTimes(1);
-    await user.click(screen.getByText("toggle"));
+    await user.click(screen.getByDataCy("accordion-toggle"));
     expect(screen.getByDataCy("accordion-collapse-container")).toHaveAttribute(
       "aria-expanded",
       "false"
@@ -64,7 +60,7 @@ describe("accordion", () => {
   it("uses titleTag if provided", () => {
     const titleTag = () => <span data-cy="my-custom-tag" />;
     render(
-      <Accordion title="toggle" titleTag={titleTag}>
+      <Accordion title="accordion title" titleTag={titleTag}>
         accordion content
       </Accordion>
     );

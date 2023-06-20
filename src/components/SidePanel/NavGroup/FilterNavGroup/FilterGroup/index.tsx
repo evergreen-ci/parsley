@@ -224,7 +224,6 @@ const AccordionTitle = styled.div`
 `;
 
 const IconButtonContainer = styled.div`
-  display: flex;
   position: absolute;
   right: 0;
 `;
@@ -232,8 +231,8 @@ const IconButtonContainer = styled.div`
 const FilterWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  padding-left: ${size.xxs};
   padding-top: ${size.xs};
+  padding-right: ${size.xxs};
 `;
 
 const StyledTextInput = styled(TextInput)`
