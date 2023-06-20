@@ -13,7 +13,7 @@ export const WordBreak = styled.span`
   ${wordBreakCss};
 `;
 
-export const TextEllipsis = styled.div`
+export const TextEllipsis = styled.span`
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
