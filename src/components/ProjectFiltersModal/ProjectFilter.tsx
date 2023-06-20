@@ -3,34 +3,52 @@ import Badge from "@leafygreen-ui/badge";
 import Checkbox from "@leafygreen-ui/checkbox";
 import Tooltip from "@leafygreen-ui/tooltip";
 import Icon from "components/Icon";
+import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
 import { ParsleyFilter } from "gql/generated/types";
 import { Filter } from "types/logs";
 
-interface DefaultFilterProps {
-  activeFilters: Filter[];
+interface ProjectFilterProps {
+  addFilter: (filterToAdd: Filter) => void;
+  removeFilter: (filterToRemove: string) => void;
+  active: boolean;
+  selected: boolean;
   filter: ParsleyFilter;
 }
 
-const DefaultFilter: React.FC<DefaultFilterProps> = ({
-  activeFilters,
+const ProjectFilter: React.FC<ProjectFilterProps> = ({
+  addFilter,
+  removeFilter,
+  active,
+  selected,
   filter,
 }) => {
-  const alreadyActive = !!activeFilters.find(
-    (f) => f.name === filter.expression
-  );
+  const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.checked) {
+      addFilter({
+        name: filter.expression,
+        visible: true,
+        caseSensitive: filter.caseSensitive
+          ? CaseSensitivity.Sensitive
+          : CaseSensitivity.Insensitive,
+        matchType: filter.exactMatch ? MatchType.Exact : MatchType.Inverse,
+      });
+    } else {
+      removeFilter(filter.expression);
+    }
+  };
 
   return (
-    <DefaultFilterContainer data-cy="default-filter">
+    <ProjectFilterContainer data-cy="project-filter">
       <Checkbox
-        checked={alreadyActive}
-        disabled={alreadyActive}
+        checked={active || selected}
+        disabled={active}
         label={
           <>
             {filter.expression}
-            {alreadyActive && (
+            {active && (
               <Tooltip
-                data-cy="default-filter-tooltip"
+                data-cy="project-filter-tooltip"
                 trigger={
                   <IconContainer>
                     <Icon glyph="InfoWithCircle" />
@@ -44,6 +62,7 @@ const DefaultFilter: React.FC<DefaultFilterProps> = ({
           </>
         }
         name={filter.expression}
+        onChange={onChange}
       />
       <BadgeContainer>
         <Badge variant="darkgray">
@@ -53,11 +72,11 @@ const DefaultFilter: React.FC<DefaultFilterProps> = ({
           {filter.exactMatch ? "Exact" : "Inverse"}
         </Badge>
       </BadgeContainer>
-    </DefaultFilterContainer>
+    </ProjectFilterContainer>
   );
 };
 
-const DefaultFilterContainer = styled.div`
+const ProjectFilterContainer = styled.div`
   margin-top: ${size.s};
 `;
 
@@ -75,4 +94,4 @@ const BadgeContainer = styled.div`
   margin-left: ${size.m};
 `;
 
-export default DefaultFilter;
+export default ProjectFilter;

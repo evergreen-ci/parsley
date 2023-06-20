@@ -2627,24 +2627,6 @@ export type BaseTaskFragment = {
   };
 };
 
-export type DefaultFiltersForProjectQueryVariables = Exact<{
-  projectIdentifier: Scalars["String"];
-}>;
-
-export type DefaultFiltersForProjectQuery = {
-  __typename?: "Query";
-  project: {
-    __typename?: "Project";
-    id: string;
-    parsleyFilters?: Array<{
-      __typename?: "ParsleyFilter";
-      caseSensitive: boolean;
-      exactMatch: boolean;
-      expression: string;
-    }> | null;
-  };
-};
-
 export type LogkeeperTaskQueryVariables = Exact<{
   buildId: Scalars["String"];
 }>;
@@ -2713,4 +2695,22 @@ export type UserQueryVariables = Exact<{ [key: string]: never }>;
 export type UserQuery = {
   __typename?: "Query";
   user: { __typename?: "User"; userId: string };
+};
+
+export type ProjectFiltersQueryVariables = Exact<{
+  projectIdentifier: Scalars["String"];
+}>;
+
+export type ProjectFiltersQuery = {
+  __typename?: "Query";
+  project: {
+    __typename?: "Project";
+    id: string;
+    parsleyFilters?: Array<{
+      __typename?: "ParsleyFilter";
+      caseSensitive: boolean;
+      exactMatch: boolean;
+      expression: string;
+    }> | null;
+  };
 };

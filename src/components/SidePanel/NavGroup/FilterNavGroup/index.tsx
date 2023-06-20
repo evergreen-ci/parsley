@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { useLogWindowAnalytics } from "analytics";
-import ApplyFiltersModal from "components/ApplyFiltersModal";
+import ProjectFiltersModal from "components/ProjectFiltersModal";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
 import { useFilterParam } from "hooks/useFilterParam";
@@ -66,7 +66,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
 
   return (
     <>
-      <ApplyFiltersModal open={open} setOpen={setOpen} />
+      <ProjectFiltersModal open={open} setOpen={setOpen} />
       <BaseNavGroup
         additionalHeaderText={
           // TODO: Unhide in EVG-19897.
@@ -76,7 +76,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
               role="button"
               tabIndex={0}
             >
-              View default filters
+              View project filters
             </ModalTrigger>
           )
         }
