@@ -5,8 +5,8 @@ import { Option, Select } from "@leafygreen-ui/select";
 import Tooltip from "@leafygreen-ui/tooltip";
 import debounce from "lodash.debounce";
 import { useLogWindowAnalytics } from "analytics";
+import Autocomplete from "components/Autocomplete";
 import Icon from "components/Icon";
-import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
 import { CharKey, ModifierKey } from "constants/keys";
 import { size, zIndex } from "constants/tokens";
@@ -15,6 +15,7 @@ import { useKeyboardShortcut } from "hooks";
 import { leaveBreadcrumb } from "utils/errorReporting";
 
 interface SearchBarProps {
+  autocompleteSuggestions?: string[];
   className?: string;
   disabled?: boolean;
   onChange?: (value: string) => void;
@@ -25,6 +26,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
+  autocompleteSuggestions = [],
   className,
   disabled = false,
   onChange = () => {},
@@ -137,8 +139,8 @@ const SearchBar: React.FC<SearchBarProps> = ({
       </StyledSelect>
       <StyledInput
         ref={inputRef}
-        aria-label="searchbar-input"
         aria-labelledby="searchbar-input"
+        autocompleteSuggestions={autocompleteSuggestions}
         data-cy="searchbar-input"
         disabled={disabled}
         icon={
@@ -191,7 +193,7 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-const StyledInput = styled(TextInputWithGlyph)`
+const StyledInput = styled(Autocomplete)`
   /* overwrite lg borders https://jira.mongodb.org/browse/PD-1995 */
   div input {
     border-top-left-radius: 0;

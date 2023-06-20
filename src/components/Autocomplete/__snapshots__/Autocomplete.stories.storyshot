@@ -1,0 +1,80 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/Autocomplete Default 1`] = `
+<div>
+  <div
+    class="css-1xm32e0"
+  >
+    <div
+      class="css-chr1eq"
+    >
+      <div
+        class="css-u8osf7 leafygreen-ui-90q1a7"
+      >
+        <div
+          class="leafygreen-ui-lzja97"
+        >
+          <input
+            aria-invalid="false"
+            aria-labelledby="autocomplete-suggestion"
+            autocomplete="on"
+            class="leafygreen-ui-1kmfbzh"
+            data-cy="autocomplete-suggestion"
+            id="textinput-1"
+            placeholder=""
+            required=""
+            type="text"
+            value=""
+          />
+          <div
+            class="lg-ui-icon-selector-0000 leafygreen-ui-11c7q5r"
+          />
+        </div>
+      </div>
+      <div
+        class="css-1b44o7b leafygreen-ui-90q1a7"
+      >
+        <div
+          class="leafygreen-ui-lzja97"
+        >
+          <input
+            aria-invalid="false"
+            aria-labelledby="Autocomplete"
+            autocomplete="on"
+            class="leafygreen-ui-1kmfbzh"
+            id="textinput-2"
+            placeholder="Start typing to search"
+            required=""
+            type="text"
+            value=""
+          />
+          <div
+            class="lg-ui-icon-selector-0000 leafygreen-ui-11c7q5r"
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      class="css-1w7keqv"
+    >
+      <svg
+        aria-label="Magnifying Glass Icon"
+        class=""
+        fill="none"
+        height="16"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M2.323 9.819a5.302 5.302 0 006.463.805l4.144 4.144a1.3 1.3 0 101.838-1.838l-4.144-4.144a5.302 5.302 0 00-8.3-6.463 5.3 5.3 0 000 7.496zM7.98 4.162A2.7 2.7 0 114.162 7.98 2.7 2.7 0 017.98 4.162z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+    </div>
+  </div>
+</div>
+`;
