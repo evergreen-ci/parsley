@@ -55,6 +55,56 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
       </button>
     </div>
     <div
+      class="css-11a3suq"
+    >
+      <button
+        aria-disabled="false"
+        aria-labelledby="View search suggestions"
+        class="leafygreen-ui-6obv0c"
+        data-cy="search-suggestion-button"
+        tabindex="0"
+      >
+        <div
+          class="leafygreen-ui-xhlipt"
+        >
+          <svg
+            aria-label="Bulb Icon"
+            class="leafygreen-ui-a4wnk0"
+            fill="none"
+            height="16"
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M12.331 8.5a5 5 0 10-8.612.086L5.408 11.5a1 1 0 00.866.499H6.5V6a1.5 1.5 0 113 0v6h.224a1 1 0 00.863-.496L12.34 8.5h-.009z"
+              fill="currentColor"
+            />
+            <path
+              d="M7.5 6v6h1V6a.5.5 0 00-1 0zM10 14v-1H6v1a1 1 0 001 1h2a1 1 0 001-1z"
+              fill="currentColor"
+            />
+          </svg>
+          <svg
+            aria-label="Caret Down Icon"
+            class="leafygreen-ui-a4wnk0"
+            fill="none"
+            height="16"
+            role="img"
+            viewBox="0 0 16 16"
+            width="16"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+      </button>
+    </div>
+    <div
       class="css-1xm32e0"
     >
       <div
