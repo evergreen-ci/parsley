@@ -6,7 +6,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
     class="css-3ieiu4"
   >
     <div
-      class="lg-ui-side-nav-0000 css-18wdk2z leafygreen-ui-11vns4e"
+      class="lg-ui-side-nav-0000 css-18wdk2z leafygreen-ui-dnxju7"
       data-testid="side-nav-container"
     >
       <div
@@ -14,14 +14,14 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
       >
         <nav
           aria-label="Side panel"
-          class="leafygreen-ui-1ybihln"
+          class="leafygreen-ui-1ch59fo"
           id="side-nav-1"
         >
           <div
             class="leafygreen-ui-aoszy5"
           >
             <ul
-              class="leafygreen-ui-13ths9k"
+              class="leafygreen-ui-19jz4bq"
             >
               <div
                 class="css-6eonsj"
@@ -93,277 +93,310 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     class="leafygreen-ui-bdnco"
                   >
                     <div
-                      class="css-1mnkoet"
+                      class="css-1c7ipt7"
                       data-cy="filter-active filter"
                     >
-                      <div
-                        class="css-1iyoj2o"
-                      >
+                      <div>
                         <div
-                          class="css-1knbux5"
+                          class="css-8km4up"
+                          data-cy="accordion-toggle"
+                          role="button"
                         >
+                          <svg
+                            aria-label="Chevron Right Icon"
+                            class="leafygreen-ui-jc2z8v css-1lhul1p"
+                            fill="none"
+                            height="14"
+                            open=""
+                            role="img"
+                            viewBox="0 0 16 16"
+                            width="14"
+                            xmlns="http://www.w3.org/2000/svg"
+                          >
+                            <path
+                              clip-rule="evenodd"
+                              d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+                              fill="currentColor"
+                              fill-rule="evenodd"
+                            />
+                          </svg>
                           <div
-                            class="css-ts29it"
+                            class="css-fmhxew"
                           >
                             <div
                               class="leafygreen-ui-1q59p9a"
                             >
                               Filter
                             </div>
-                          </div>
-                          <div
-                            class="css-1sg2lsz"
-                          >
-                            <button
-                              aria-disabled="false"
-                              aria-label="Edit filter"
-                              class="leafygreen-ui-6obv0c"
-                              tabindex="0"
-                              title="Edit filter"
-                            >
-                              <div
-                                class="leafygreen-ui-xhlipt"
-                              >
-                                <svg
-                                  aria-label="Edit Icon"
-                                  class="leafygreen-ui-a4wnk0"
-                                  fill="none"
-                                  height="16"
-                                  role="img"
-                                  viewBox="0 0 16 16"
-                                  width="16"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    d="M10.922.681a.963.963 0 011.362 0l1.363 1.363a.963.963 0 010 1.362L12.284 4.77 9.56 2.044 8.538 3.066l2.724 2.725-7.153 7.153-3.747 1.022 1.022-3.747L10.922.68z"
-                                    fill="currentColor"
-                                  />
-                                </svg>
-                              </div>
-                            </button>
-                            <button
-                              aria-disabled="false"
-                              aria-label="Hide filter"
-                              class="leafygreen-ui-6obv0c"
-                              tabindex="0"
-                              title="Hide filter"
-                            >
-                              <div
-                                class="leafygreen-ui-xhlipt"
-                              >
-                                <svg
-                                  aria-label="Visibility Icon"
-                                  class="leafygreen-ui-a4wnk0"
-                                  fill="none"
-                                  height="16"
-                                  role="img"
-                                  viewBox="0 0 16 16"
-                                  width="16"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    clip-rule="evenodd"
-                                    d="M8 2.008c3.934 0 6.473 3.129 7.455 4.583l.043.064C15.713 6.97 16 7.391 16 8s-.287 1.03-.502 1.345l-.043.064c-.982 1.454-3.521 4.583-7.455 4.583S1.527 10.863.545 9.41l-.043-.064C.287 9.03 0 8.609 0 8s.287-1.03.502-1.345l.043-.064C1.527 5.137 4.066 2.008 8 2.008zM9.13 4.13A5.147 5.147 0 008 4.005C5.75 4.005 3.927 5.794 3.927 8c0 2.206 1.824 3.995 4.073 3.995 2.25 0 4.073-1.789 4.073-3.995 0-2.206-1.824-3.995-4.073-3.995.378 0 .756.045 1.13.126zM8 10.996c1.687 0 3.055-1.341 3.055-2.996S9.687 5.004 8 5.004 4.945 6.345 4.945 8 6.313 10.996 8 10.996z"
-                                    fill="currentColor"
-                                    fill-rule="evenodd"
-                                  />
-                                </svg>
-                              </div>
-                            </button>
-                            <button
-                              aria-disabled="false"
-                              aria-label="Delete filter"
-                              class="leafygreen-ui-6obv0c"
-                              tabindex="0"
-                              title="Delete filter"
-                            >
-                              <div
-                                class="leafygreen-ui-xhlipt"
-                              >
-                                <svg
-                                  aria-label="X Icon"
-                                  class="leafygreen-ui-a4wnk0"
-                                  fill="none"
-                                  height="16"
-                                  role="img"
-                                  viewBox="0 0 16 16"
-                                  width="16"
-                                  xmlns="http://www.w3.org/2000/svg"
-                                >
-                                  <path
-                                    clip-rule="evenodd"
-                                    d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
-                                    fill="currentColor"
-                                    fill-rule="evenodd"
-                                  />
-                                </svg>
-                              </div>
-                            </button>
-                          </div>
-                        </div>
-                        <p
-                          class="css-1piadxy leafygreen-ui-1tb6tuo"
-                        >
-                          active filter
-                        </p>
-                        <div
-                          class="leafygreen-ui-1gmp0zo css-jw6p18"
-                        >
-                          <div
-                            class="leafygreen-ui-1dhyvkg"
-                          >
-                            Case
-                          </div>
-                          <div
-                            aria-label="Case"
-                            aria-owns="Case-0 Case-1"
-                            class="leafygreen-ui-18en4yf"
-                            role="tablist"
-                          >
                             <div
-                              class="leafygreen-ui-z1eqrh"
-                              data-lg-checked="true"
+                              class="css-g5sccu"
                             >
-                              <div
-                                class="leafygreen-ui-177u11x"
-                                tabindex="-1"
+                              <button
+                                aria-disabled="false"
+                                aria-label="Edit filter"
+                                class="leafygreen-ui-6obv0c"
+                                tabindex="0"
+                                title="Edit filter"
                               >
-                                <button
-                                  aria-controls="Toggle case sensitivity"
-                                  aria-selected="true"
-                                  class="leafygreen-ui-13aff07"
-                                  id="Case-0"
-                                  role="tab"
-                                  tabindex="0"
-                                  type="button"
+                                <div
+                                  class="leafygreen-ui-xhlipt"
                                 >
-                                  <div
-                                    class="leafygreen-ui-dj6i8q"
+                                  <svg
+                                    aria-label="Edit Icon"
+                                    class="leafygreen-ui-a4wnk0"
+                                    fill="none"
+                                    height="16"
+                                    role="img"
+                                    viewBox="0 0 16 16"
+                                    width="16"
+                                    xmlns="http://www.w3.org/2000/svg"
                                   >
-                                    <span
-                                      class="leafygreen-ui-plwatf"
-                                    >
-                                      Insensitive
-                                    </span>
-                                  </div>
-                                </button>
-                              </div>
-                            </div>
-                            <div
-                              class="leafygreen-ui-z1eqrh"
-                              data-lg-checked="false"
-                            >
-                              <div
-                                class="leafygreen-ui-177u11x"
-                                tabindex="-1"
+                                    <path
+                                      d="M10.922.681a.963.963 0 011.362 0l1.363 1.363a.963.963 0 010 1.362L12.284 4.77 9.56 2.044 8.538 3.066l2.724 2.725-7.153 7.153-3.747 1.022 1.022-3.747L10.922.68z"
+                                      fill="currentColor"
+                                    />
+                                  </svg>
+                                </div>
+                              </button>
+                              <button
+                                aria-disabled="false"
+                                aria-label="Hide filter"
+                                class="leafygreen-ui-6obv0c"
+                                tabindex="0"
+                                title="Hide filter"
                               >
-                                <button
-                                  aria-controls="Toggle case sensitivity"
-                                  aria-selected="false"
-                                  class="leafygreen-ui-13aff07"
-                                  id="Case-1"
-                                  role="tab"
-                                  tabindex="-1"
-                                  type="button"
+                                <div
+                                  class="leafygreen-ui-xhlipt"
                                 >
-                                  <div
-                                    class="leafygreen-ui-dj6i8q"
+                                  <svg
+                                    aria-label="Visibility Icon"
+                                    class="leafygreen-ui-a4wnk0"
+                                    fill="none"
+                                    height="16"
+                                    role="img"
+                                    viewBox="0 0 16 16"
+                                    width="16"
+                                    xmlns="http://www.w3.org/2000/svg"
                                   >
-                                    <span
-                                      class="leafygreen-ui-plwatf"
-                                    >
-                                      Sensitive
-                                    </span>
-                                  </div>
-                                </button>
-                              </div>
+                                    <path
+                                      clip-rule="evenodd"
+                                      d="M8 2.008c3.934 0 6.473 3.129 7.455 4.583l.043.064C15.713 6.97 16 7.391 16 8s-.287 1.03-.502 1.345l-.043.064c-.982 1.454-3.521 4.583-7.455 4.583S1.527 10.863.545 9.41l-.043-.064C.287 9.03 0 8.609 0 8s.287-1.03.502-1.345l.043-.064C1.527 5.137 4.066 2.008 8 2.008zM9.13 4.13A5.147 5.147 0 008 4.005C5.75 4.005 3.927 5.794 3.927 8c0 2.206 1.824 3.995 4.073 3.995 2.25 0 4.073-1.789 4.073-3.995 0-2.206-1.824-3.995-4.073-3.995.378 0 .756.045 1.13.126zM8 10.996c1.687 0 3.055-1.341 3.055-2.996S9.687 5.004 8 5.004 4.945 6.345 4.945 8 6.313 10.996 8 10.996z"
+                                      fill="currentColor"
+                                      fill-rule="evenodd"
+                                    />
+                                  </svg>
+                                </div>
+                              </button>
+                              <button
+                                aria-disabled="false"
+                                aria-label="Delete filter"
+                                class="leafygreen-ui-6obv0c"
+                                tabindex="0"
+                                title="Delete filter"
+                              >
+                                <div
+                                  class="leafygreen-ui-xhlipt"
+                                >
+                                  <svg
+                                    aria-label="X Icon"
+                                    class="leafygreen-ui-a4wnk0"
+                                    fill="none"
+                                    height="16"
+                                    role="img"
+                                    viewBox="0 0 16 16"
+                                    width="16"
+                                    xmlns="http://www.w3.org/2000/svg"
+                                  >
+                                    <path
+                                      clip-rule="evenodd"
+                                      d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+                                      fill="currentColor"
+                                      fill-rule="evenodd"
+                                    />
+                                  </svg>
+                                </div>
+                              </button>
                             </div>
-                            <div
-                              class="leafygreen-ui-1yekw9r"
-                            />
-                            <div
-                              class="leafygreen-ui-5ppege"
-                            />
                           </div>
                         </div>
                         <div
-                          class="leafygreen-ui-1gmp0zo css-jw6p18"
+                          aria-expanded="true"
+                          class="css-hvdwbs"
+                          data-cy="accordion-collapse-container"
+                          height="0"
                         >
                           <div
-                            class="leafygreen-ui-1dhyvkg"
-                          >
-                            Match
-                          </div>
-                          <div
-                            aria-label="Match"
-                            aria-owns="Match-0 Match-1"
-                            class="leafygreen-ui-18en4yf"
-                            role="tablist"
+                            class="css-ci461p"
                           >
                             <div
-                              class="leafygreen-ui-z1eqrh"
-                              data-lg-checked="true"
+                              class="css-ma2i7n"
                             >
-                              <div
-                                class="leafygreen-ui-177u11x"
-                                tabindex="-1"
+                              <p
+                                class="css-28y54x leafygreen-ui-1tb6tuo"
                               >
-                                <button
-                                  aria-controls="Toggle match type"
-                                  aria-selected="true"
-                                  class="leafygreen-ui-13aff07"
-                                  id="Match-0"
-                                  role="tab"
-                                  tabindex="0"
-                                  type="button"
+                                active filter
+                              </p>
+                              <div
+                                class="leafygreen-ui-1gmp0zo css-79ds1c"
+                              >
+                                <div
+                                  class="leafygreen-ui-1dhyvkg"
+                                >
+                                  Case
+                                </div>
+                                <div
+                                  aria-label="Case"
+                                  aria-owns="Case-0 Case-1"
+                                  class="leafygreen-ui-18en4yf"
+                                  role="tablist"
                                 >
                                   <div
-                                    class="leafygreen-ui-dj6i8q"
+                                    class="leafygreen-ui-z1eqrh"
+                                    data-lg-checked="true"
                                   >
-                                    <span
-                                      class="leafygreen-ui-plwatf"
+                                    <div
+                                      class="leafygreen-ui-177u11x"
+                                      tabindex="-1"
                                     >
-                                      Exact
-                                    </span>
+                                      <button
+                                        aria-controls="Toggle case sensitivity"
+                                        aria-selected="true"
+                                        class="leafygreen-ui-13aff07"
+                                        id="Case-0"
+                                        role="tab"
+                                        tabindex="0"
+                                        type="button"
+                                      >
+                                        <div
+                                          class="leafygreen-ui-dj6i8q"
+                                        >
+                                          <span
+                                            class="leafygreen-ui-plwatf"
+                                          >
+                                            Insensitive
+                                          </span>
+                                        </div>
+                                      </button>
+                                    </div>
                                   </div>
-                                </button>
+                                  <div
+                                    class="leafygreen-ui-z1eqrh"
+                                    data-lg-checked="false"
+                                  >
+                                    <div
+                                      class="leafygreen-ui-177u11x"
+                                      tabindex="-1"
+                                    >
+                                      <button
+                                        aria-controls="Toggle case sensitivity"
+                                        aria-selected="false"
+                                        class="leafygreen-ui-13aff07"
+                                        id="Case-1"
+                                        role="tab"
+                                        tabindex="-1"
+                                        type="button"
+                                      >
+                                        <div
+                                          class="leafygreen-ui-dj6i8q"
+                                        >
+                                          <span
+                                            class="leafygreen-ui-plwatf"
+                                          >
+                                            Sensitive
+                                          </span>
+                                        </div>
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div
+                                    class="leafygreen-ui-1yekw9r"
+                                  />
+                                  <div
+                                    class="leafygreen-ui-5ppege"
+                                  />
+                                </div>
                               </div>
-                            </div>
-                            <div
-                              class="leafygreen-ui-z1eqrh"
-                              data-lg-checked="false"
-                            >
                               <div
-                                class="leafygreen-ui-177u11x"
-                                tabindex="-1"
+                                class="leafygreen-ui-1gmp0zo css-79ds1c"
                               >
-                                <button
-                                  aria-controls="Toggle match type"
-                                  aria-selected="false"
-                                  class="leafygreen-ui-13aff07"
-                                  id="Match-1"
-                                  role="tab"
-                                  tabindex="-1"
-                                  type="button"
+                                <div
+                                  class="leafygreen-ui-1dhyvkg"
+                                >
+                                  Match
+                                </div>
+                                <div
+                                  aria-label="Match"
+                                  aria-owns="Match-0 Match-1"
+                                  class="leafygreen-ui-18en4yf"
+                                  role="tablist"
                                 >
                                   <div
-                                    class="leafygreen-ui-dj6i8q"
+                                    class="leafygreen-ui-z1eqrh"
+                                    data-lg-checked="true"
                                   >
-                                    <span
-                                      class="leafygreen-ui-plwatf"
+                                    <div
+                                      class="leafygreen-ui-177u11x"
+                                      tabindex="-1"
                                     >
-                                      Inverse
-                                    </span>
+                                      <button
+                                        aria-controls="Toggle match type"
+                                        aria-selected="true"
+                                        class="leafygreen-ui-13aff07"
+                                        id="Match-0"
+                                        role="tab"
+                                        tabindex="0"
+                                        type="button"
+                                      >
+                                        <div
+                                          class="leafygreen-ui-dj6i8q"
+                                        >
+                                          <span
+                                            class="leafygreen-ui-plwatf"
+                                          >
+                                            Exact
+                                          </span>
+                                        </div>
+                                      </button>
+                                    </div>
                                   </div>
-                                </button>
+                                  <div
+                                    class="leafygreen-ui-z1eqrh"
+                                    data-lg-checked="false"
+                                  >
+                                    <div
+                                      class="leafygreen-ui-177u11x"
+                                      tabindex="-1"
+                                    >
+                                      <button
+                                        aria-controls="Toggle match type"
+                                        aria-selected="false"
+                                        class="leafygreen-ui-13aff07"
+                                        id="Match-1"
+                                        role="tab"
+                                        tabindex="-1"
+                                        type="button"
+                                      >
+                                        <div
+                                          class="leafygreen-ui-dj6i8q"
+                                        >
+                                          <span
+                                            class="leafygreen-ui-plwatf"
+                                          >
+                                            Inverse
+                                          </span>
+                                        </div>
+                                      </button>
+                                    </div>
+                                  </div>
+                                  <div
+                                    class="leafygreen-ui-1yekw9r"
+                                  />
+                                  <div
+                                    class="leafygreen-ui-5ppege"
+                                  />
+                                </div>
                               </div>
                             </div>
-                            <div
-                              class="leafygreen-ui-1yekw9r"
-                            />
-                            <div
-                              class="leafygreen-ui-5ppege"
-                            />
                           </div>
                         </div>
                       </div>
