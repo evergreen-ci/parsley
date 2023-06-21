@@ -1,21 +1,25 @@
 import { KeyboardEvent, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
+import { palette } from "@leafygreen-ui/palette";
 import { Option, Select } from "@leafygreen-ui/select";
 import Tooltip from "@leafygreen-ui/tooltip";
 import debounce from "lodash.debounce";
 import { useLogWindowAnalytics } from "analytics";
-import Autocomplete from "components/Autocomplete";
 import Icon from "components/Icon";
+import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
 import { CharKey, ModifierKey } from "constants/keys";
 import { size, zIndex } from "constants/tokens";
 import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
 import { leaveBreadcrumb } from "utils/errorReporting";
+import SearchPopover from "./SearchPopover";
+
+const { gray } = palette;
 
 interface SearchBarProps {
-  autocompleteSuggestions?: string[];
+  searchSuggestions?: string[];
   className?: string;
   disabled?: boolean;
   onChange?: (value: string) => void;
@@ -26,7 +30,7 @@ interface SearchBarProps {
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
-  autocompleteSuggestions = [],
+  searchSuggestions = [],
   className,
   disabled = false,
   onChange = () => {},
@@ -137,10 +141,25 @@ const SearchBar: React.FC<SearchBarProps> = ({
           Highlight
         </Option>
       </StyledSelect>
+      {searchSuggestions.length > 0 ? (
+        <SearchPopoverBox>
+          <SearchPopover
+            onClick={(suggestion) => {
+              handleOnChange(suggestion);
+              sendEvent({ name: "Applied Search Suggestion", suggestion });
+              leaveBreadcrumb(
+                "applied-search-suggestion",
+                { suggestion },
+                "user"
+              );
+            }}
+            suggestions={searchSuggestions}
+          />
+        </SearchPopoverBox>
+      ) : null}
       <StyledInput
         ref={inputRef}
         aria-labelledby="searchbar-input"
-        autocompleteSuggestions={autocompleteSuggestions}
         data-cy="searchbar-input"
         disabled={disabled}
         icon={
@@ -181,23 +200,34 @@ const Container = styled.div`
   align-items: center;
 `;
 
+const SearchPopoverBox = styled.div`
+  display: flex;
+  align-items: center;
+  height: 36px;
+  border: 1px solid ${gray.base};
+  border-right: 0;
+  border-left: 0;
+  padding: 0 ${size.xxs};
+`;
+
 // @ts-expect-error
 const StyledSelect = styled(Select)`
-  width: 120px;
+  width: 140px;
   /* overwrite lg borders https://jira.mongodb.org/browse/PD-1995 */
   button {
     margin-top: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    border-right: 0;
   }
 `;
 
-const StyledInput = styled(Autocomplete)`
+const StyledInput = styled(TextInputWithGlyph)`
   /* overwrite lg borders https://jira.mongodb.org/browse/PD-1995 */
   div input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    border-left: 0;
+    padding-left: ${size.xs};
   }
 `;
 

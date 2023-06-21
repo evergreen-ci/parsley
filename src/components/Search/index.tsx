@@ -87,11 +87,11 @@ const Search: React.FC = () => {
         <SearchBarGuideCue containerRef={containerRef.current} />
       )}
       <StyledSearchBar
-        autocompleteSuggestions={parsleyFilters?.map((p) => p.expression)}
         disabled={!hasLogs}
         onChange={handleOnChange}
         onSubmit={handleOnSubmit}
         paginate={paginate}
+        searchSuggestions={parsleyFilters?.map((p) => p.expression)}
         validator={validateRegexp}
         validatorMessage="Invalid regular expression"
       />

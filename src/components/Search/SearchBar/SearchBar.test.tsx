@@ -1,5 +1,5 @@
 import { DIRECTION } from "context/LogContext/types";
-import { render, screen, userEvent } from "test_utils";
+import { render, screen, userEvent, waitFor } from "test_utils";
 import SearchBar from ".";
 
 describe("searchbar", () => {
@@ -177,5 +177,23 @@ describe("searchbar", () => {
     expect(input).toHaveFocus();
     expect(input.selectionStart).toBe(0);
     expect(input.selectionEnd).toBe(inputText.length);
+  });
+  it("should be possible to select and apply a search suggestion", async () => {
+    const user = userEvent.setup();
+    const onChange = jest.fn();
+    render(
+      <SearchBar onChange={onChange} searchSuggestions={["apple", "banana"]} />
+    );
+    const input = screen.getByDataCy("searchbar-input") as HTMLInputElement;
+    await user.click(screen.getByDataCy("search-suggestion-button"));
+    await waitFor(() => {
+      expect(screen.getByDataCy("search-suggestion-popover")).toBeVisible();
+    });
+    await user.click(screen.getByText("apple"));
+    expect(input).toHaveValue("apple");
+    await waitFor(() => {
+      expect(onChange).toHaveBeenCalledTimes(1);
+    });
+    expect(onChange).toHaveBeenCalledWith("apple");
   });
 });
