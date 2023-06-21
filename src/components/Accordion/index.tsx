@@ -80,6 +80,7 @@ const Accordion: React.FC<AccordionProps> = ({
 const AccordionToggle = styled.div`
   display: flex;
   align-items: center;
+  gap: 2px;
   :hover {
     cursor: pointer;
   }
@@ -100,8 +101,8 @@ const AnimatedAccordion = styled.div<{
       transitions require a fixed height for their end height */
   max-height: ${({ hide, height }): string =>
     hide ? "0px" : `${height || 9999}px`};
-  overflow: hidden;
   transition: max-height 200ms ease-in-out;
+  overflow: hidden;
 `;
 
 const ContentsContainer = styled.div`

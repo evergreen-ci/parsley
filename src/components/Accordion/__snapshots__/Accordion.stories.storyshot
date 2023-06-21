@@ -4,7 +4,7 @@ exports[`storyshots Storyshots components/Accordion Default 1`] = `
 <div>
   <div>
     <div
-      class="css-q6eyrx"
+      class="css-8km4up"
       data-cy="accordion-toggle"
       role="button"
     >
@@ -36,7 +36,7 @@ exports[`storyshots Storyshots components/Accordion Default 1`] = `
     </div>
     <div
       aria-expanded="false"
-      class="css-9v60k4"
+      class="css-jyczqg"
       data-cy="accordion-collapse-container"
       height="0"
     >

@@ -9,12 +9,12 @@ import {
   SegmentedControl,
 } from "@leafygreen-ui/segmented-control";
 import TextInput from "@leafygreen-ui/text-input";
-import { Error } from "@leafygreen-ui/typography";
+import { Body, BodyProps, Error } from "@leafygreen-ui/typography";
 import { useLogWindowAnalytics } from "analytics";
 import Accordion from "components/Accordion";
 import Icon from "components/Icon";
 import IconWithTooltip from "components/IconWithTooltip";
-import { TextEllipsis, WordBreak } from "components/styles";
+import { TextEllipsis } from "components/styles";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
 import { Filter } from "types/logs";
@@ -175,7 +175,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
             </ButtonWrapper>
           </>
         ) : (
-          <WordBreak>{name}</WordBreak>
+          <StyledBody>{name}</StyledBody>
         )}
 
         <StyledSegmentedControl
@@ -240,19 +240,22 @@ const StyledTextInput = styled(TextInput)`
   width: 100%;
 `;
 
+const StyledBody = styled(Body)<BodyProps>`
+  word-break: break-all;
+`;
+
 const ButtonWrapper = styled.div`
   display: flex;
   justify-content: flex-end;
-  margin-top: ${size.xxs};
-  margin-bottom: ${size.xs};
   gap: ${size.xxs};
+  margin-top: ${size.xs};
 `;
 
 const StyledSegmentedControl = styled(SegmentedControl)`
   margin-top: ${size.xs};
   // Set the labels to have the same width so that the controls are aligned.
   > div:first-of-type {
-    width: 46px;
+    width: 44px;
   }
 `;
 

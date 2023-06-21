@@ -98,7 +98,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     >
                       <div>
                         <div
-                          class="css-q6eyrx"
+                          class="css-8km4up"
                           data-cy="accordion-toggle"
                           role="button"
                         >
@@ -129,7 +129,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                               Filter
                             </div>
                             <div
-                              class="css-16teq5y"
+                              class="css-g5sccu"
                             >
                               <button
                                 aria-disabled="false"
@@ -221,7 +221,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                         </div>
                         <div
                           aria-expanded="true"
-                          class="css-nrq97i"
+                          class="css-hvdwbs"
                           data-cy="accordion-collapse-container"
                           height="0"
                         >
@@ -229,15 +229,15 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                             class="css-ci461p"
                           >
                             <div
-                              class="css-2u21r4"
+                              class="css-ma2i7n"
                             >
-                              <span
-                                class="css-v8qrj2"
+                              <p
+                                class="css-28y54x leafygreen-ui-1tb6tuo"
                               >
                                 active filter
-                              </span>
+                              </p>
                               <div
-                                class="leafygreen-ui-1gmp0zo css-1eym7pb"
+                                class="leafygreen-ui-1gmp0zo css-79ds1c"
                               >
                                 <div
                                   class="leafygreen-ui-1dhyvkg"
@@ -317,7 +317,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                 </div>
                               </div>
                               <div
-                                class="leafygreen-ui-1gmp0zo css-1eym7pb"
+                                class="leafygreen-ui-1gmp0zo css-79ds1c"
                               >
                                 <div
                                   class="leafygreen-ui-1dhyvkg"
