@@ -23,7 +23,6 @@ import { getRegexpError, validateRegexp } from "utils/validators";
 const { gray, red } = palette;
 
 interface FilterGroupProps {
-  ["data-cy"]?: string;
   filter: Filter;
   deleteFilter: (filter: string) => void;
   editFilter: (
@@ -34,7 +33,6 @@ interface FilterGroupProps {
 }
 
 const FilterGroup: React.FC<FilterGroupProps> = ({
-  "data-cy": dataCy,
   filter,
   deleteFilter,
   editFilter,
@@ -137,7 +135,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
         </>
       }
     >
-      <FilterWrapper data-cy={dataCy}>
+      <AccordionContent>
         {isEditing ? (
           <>
             <StyledTextInput
@@ -211,7 +209,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
             Inverse
           </Option>
         </StyledSegmentedControl>
-      </FilterWrapper>
+      </AccordionContent>
     </Accordion>
   );
 };
@@ -223,16 +221,16 @@ const AccordionTitle = styled.div`
   overflow: hidden;
 `;
 
-const IconButtonContainer = styled.div`
-  position: absolute;
-  right: 0;
-`;
-
-const FilterWrapper = styled.div`
+const AccordionContent = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: ${size.xs};
   padding-right: ${size.xxs};
+`;
+
+const IconButtonContainer = styled.div`
+  position: absolute;
+  right: 0;
 `;
 
 const StyledTextInput = styled(TextInput)`
