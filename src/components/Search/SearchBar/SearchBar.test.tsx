@@ -191,6 +191,7 @@ describe("searchbar", () => {
     });
     await user.click(screen.getByText("apple"));
     expect(input).toHaveValue("apple");
+    expect(input).toHaveFocus();
     await waitFor(() => {
       expect(onChange).toHaveBeenCalledTimes(1);
     });

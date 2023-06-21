@@ -1,7 +1,6 @@
 import { KeyboardEvent, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
-import { palette } from "@leafygreen-ui/palette";
 import { Option, Select } from "@leafygreen-ui/select";
 import Tooltip from "@leafygreen-ui/tooltip";
 import debounce from "lodash.debounce";
@@ -15,8 +14,6 @@ import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import SearchPopover from "./SearchPopover";
-
-const { gray } = palette;
 
 interface SearchBarProps {
   searchSuggestions?: string[];
@@ -141,22 +138,16 @@ const SearchBar: React.FC<SearchBarProps> = ({
           Highlight
         </Option>
       </StyledSelect>
-      {searchSuggestions.length > 0 ? (
-        <SearchPopoverBox>
-          <SearchPopover
-            onClick={(suggestion) => {
-              handleOnChange(suggestion);
-              sendEvent({ name: "Applied Search Suggestion", suggestion });
-              leaveBreadcrumb(
-                "applied-search-suggestion",
-                { suggestion },
-                "user"
-              );
-            }}
-            suggestions={searchSuggestions}
-          />
-        </SearchPopoverBox>
-      ) : null}
+      <SearchPopover
+        disabled={disabled}
+        onClick={(suggestion) => {
+          handleOnChange(suggestion);
+          inputRef.current?.focus();
+          sendEvent({ name: "Applied Search Suggestion", suggestion });
+          leaveBreadcrumb("applied-search-suggestion", { suggestion }, "user");
+        }}
+        suggestions={searchSuggestions}
+      />
       <StyledInput
         ref={inputRef}
         aria-labelledby="searchbar-input"
@@ -198,16 +189,6 @@ const Container = styled.div`
   display: flex;
   flex-direction: row;
   align-items: center;
-`;
-
-const SearchPopoverBox = styled.div`
-  display: flex;
-  align-items: center;
-  height: 36px;
-  border: 1px solid ${gray.base};
-  border-right: 0;
-  border-left: 0;
-  padding: 0 ${size.xxs};
 `;
 
 // @ts-expect-error
