@@ -115,7 +115,7 @@ const ModalTrigger = styled.div`
 
 const FilterWrapper = styled.div`
   margin-top: ${size.s};
-  margin-bottom: ${size.xxs};
+  margin-bottom: ${size.xs};
 `;
 
 export default FilterNavGroup;

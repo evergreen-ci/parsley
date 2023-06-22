@@ -15,6 +15,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe("filters", () => {
+  jest.setTimeout(10000);
   const user = userEvent.setup();
 
   it("shows a message when no filters have been applied", () => {

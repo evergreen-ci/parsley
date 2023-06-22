@@ -1,0 +1,51 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/Accordion Default 1`] = `
+<div>
+  <div>
+    <div
+      class="css-8km4up"
+      data-cy="accordion-toggle"
+      role="button"
+    >
+      <svg
+        aria-label="Chevron Right Icon"
+        class="leafygreen-ui-jc2z8v css-tgrklh"
+        fill="none"
+        height="14"
+        role="img"
+        viewBox="0 0 16 16"
+        width="14"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Accordion
+      </span>
+    </div>
+    <div
+      class="css-ci461p"
+    >
+      Subtitle
+    </div>
+    <div
+      aria-expanded="false"
+      class="css-jyczqg"
+      data-cy="accordion-collapse-container"
+      height="0"
+    >
+      <div
+        class="css-ci461p"
+      >
+        Accordion content
+      </div>
+    </div>
+  </div>
+</div>
+`;

@@ -37,7 +37,7 @@ const SidePanel: React.FC<SidePanelProps> = ({
         setCollapsed(collapse);
         Cookie.set(HAS_OPENED_DRAWER, "true", { expires: 365 });
       }}
-      widthOverride={270}
+      widthOverride={290}
     >
       <PaddedContainer>
         <FilterNavGroup clearExpandedLines={clearExpandedLines} />
