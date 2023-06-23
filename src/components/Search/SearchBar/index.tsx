@@ -9,9 +9,10 @@ import Icon from "components/Icon";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
 import { CharKey, ModifierKey } from "constants/keys";
-import { size, zIndex } from "constants/tokens";
+import { size, textInputHeight, zIndex } from "constants/tokens";
 import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
+import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import SearchPopover from "./SearchPopover";
 
@@ -138,49 +139,62 @@ const SearchBar: React.FC<SearchBarProps> = ({
           Highlight
         </Option>
       </StyledSelect>
-      <SearchPopover
-        disabled={disabled}
-        onClick={(suggestion) => {
-          handleOnChange(suggestion);
-          inputRef.current?.focus();
-          sendEvent({ name: "Applied Search Suggestion", suggestion });
-          leaveBreadcrumb("applied-search-suggestion", { suggestion }, "user");
-        }}
-        suggestions={searchSuggestions}
-      />
-      <StyledInput
-        ref={inputRef}
-        aria-labelledby="searchbar-input"
-        data-cy="searchbar-input"
-        disabled={disabled}
-        icon={
-          isValid ? (
-            <IconButton
-              aria-label="Select plus"
-              data-cy="searchbar-submit"
-              disabled={disabled || input.length === 0}
-              onClick={handleOnSubmit}
-            >
-              <Icon glyph="Plus" />
-            </IconButton>
-          ) : (
-            <Tooltip
-              justify="middle"
-              trigger={<IconPlaceholder data-cy="searchbar-error" />}
-              triggerEvent="hover"
-            >
-              {validatorMessage}
-            </Tooltip>
-          )
-        }
-        onChange={(e) => handleOnChange(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="optional, regexp to search"
-        spellCheck={false}
-        state={isValid ? "none" : "error"}
-        type="text"
-        value={input}
-      />
+
+      <InputWrapper>
+        {/* TODO: Unhide in EVG-19897. */}
+        {isProduction ? null : (
+          <IconButtonWrapper>
+            <SearchPopover
+              disabled={disabled}
+              onClick={(suggestion) => {
+                handleOnChange(suggestion);
+                inputRef.current?.focus();
+                sendEvent({ name: "Applied Search Suggestion", suggestion });
+                leaveBreadcrumb(
+                  "applied-search-suggestion",
+                  { suggestion },
+                  "user"
+                );
+              }}
+              suggestions={searchSuggestions}
+            />
+          </IconButtonWrapper>
+        )}
+        <StyledInput
+          ref={inputRef}
+          aria-labelledby="searchbar-input"
+          data-cy="searchbar-input"
+          disabled={disabled}
+          icon={
+            isValid ? (
+              <IconButton
+                aria-label="Select plus"
+                data-cy="searchbar-submit"
+                disabled={disabled || input.length === 0}
+                onClick={handleOnSubmit}
+              >
+                <Icon glyph="Plus" />
+              </IconButton>
+            ) : (
+              <Tooltip
+                justify="middle"
+                trigger={<IconPlaceholder data-cy="searchbar-error" />}
+                triggerEvent="hover"
+              >
+                {validatorMessage}
+              </Tooltip>
+            )
+          }
+          onChange={(e) => handleOnChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          padding={isProduction ? 8 : 42} // Remove in EVG-19897.
+          placeholder="optional, regexp to search"
+          spellCheck={false}
+          state={isValid ? "none" : "error"}
+          type="text"
+          value={input}
+        />
+      </InputWrapper>
     </Container>
   );
 };
@@ -202,14 +216,32 @@ const StyledSelect = styled(Select)`
   }
 `;
 
-const StyledInput = styled(TextInputWithGlyph)`
+const InputWrapper = styled.div`
+  position: relative;
+  width: 100%;
+`;
+
+const StyledInput = styled(TextInputWithGlyph)<{ padding: number }>`
   /* overwrite lg borders https://jira.mongodb.org/browse/PD-1995 */
   div input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left: 0;
-    padding-left: ${size.xs};
+    padding-left: ${({ padding }) => `${padding}px`};
   }
+`;
+
+const IconButtonWrapper = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: center;
+
+  z-index: 1;
+  position: absolute;
+  bottom: 0;
+  left: ${size.xxs};
+  width: ${size.l};
+  height: ${textInputHeight};
 `;
 
 const IconPlaceholder = styled.div`

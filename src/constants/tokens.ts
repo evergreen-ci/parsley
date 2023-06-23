@@ -31,6 +31,16 @@ const fontSize = {
   l: "18px",
 } as const;
 
+/** Height of LG text-input (default size) */
+const textInputHeight = "36px";
+
 const navbarHeight = size.xl;
 const subheaderHeight = "48px";
-export { size, zIndex, fontSize, navbarHeight, subheaderHeight };
+export {
+  size,
+  zIndex,
+  fontSize,
+  navbarHeight,
+  subheaderHeight,
+  textInputHeight,
+};

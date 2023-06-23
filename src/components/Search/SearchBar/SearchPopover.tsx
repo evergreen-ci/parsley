@@ -4,12 +4,18 @@ import Card from "@leafygreen-ui/card";
 import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import Popover from "@leafygreen-ui/popover";
-import { Body, BodyProps } from "@leafygreen-ui/typography";
+import {
+  Body,
+  BodyProps,
+  Overline,
+  OverlineProps,
+} from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
-import { size } from "constants/tokens";
+import { CharKey } from "constants/keys";
+import { size, zIndex } from "constants/tokens";
 import { useOnClickOutside } from "hooks";
 
-const { white, blue, gray } = palette;
+const { blue, gray } = palette;
 
 interface SearchPopoverProps {
   disabled: boolean;
@@ -35,84 +41,106 @@ const SearchPopover: React.FC<SearchPopoverProps> = ({
     onClick?.(suggestion);
   };
 
+  const handleKeyDown = (
+    e: React.KeyboardEvent<HTMLButtonElement>,
+    suggestion: string
+  ) => {
+    if (e.key === CharKey.Enter || e.key === CharKey.SpaceBar) {
+      handleClick(suggestion);
+    }
+  };
+
   return (
-    <SearchPopoverBox disabled={disabled}>
-      <IconButton
-        ref={buttonRef}
-        aria-labelledby="View search suggestions"
-        data-cy="search-suggestion-button"
-        disabled={disabled}
-        onClick={() => setIsOpen(!isOpen)}
+    <IconButton
+      ref={buttonRef}
+      aria-labelledby="View search suggestions"
+      data-cy="search-suggestion-button"
+      disabled={disabled}
+      onClick={() => setIsOpen(!isOpen)}
+      title="View search suggestions"
+    >
+      <>
+        <Icon fill={gray.base} glyph="Bulb" />
+        <Icon fill={gray.base} glyph="CaretDown" />
+      </>
+      <Popover
+        active={isOpen}
+        data-cy="search-suggestion-popover"
+        popoverZIndex={zIndex.popover}
+        usePortal={false}
       >
-        <>
-          <Icon fill={gray.base} glyph="Bulb" />
-          <Icon fill={gray.base} glyph="CaretDown" />
-        </>
-        <Popover active={isOpen} data-cy="search-suggestion-popover">
-          <div ref={popoverRef}>
-            <StyledCard>
+        <div ref={popoverRef}>
+          <StyledCard>
+            <Title>Search suggestions</Title>
+            <Divider />
+            <Scrollable>
               {suggestions.length > 0 ? (
                 suggestions.map((s) => (
                   <SearchSuggestion
                     key={s}
                     onClick={() => handleClick(s)}
-                    role="button"
+                    onKeyDown={(e) => handleKeyDown(e, s)}
                   >
                     {s}
                   </SearchSuggestion>
                 ))
               ) : (
                 <StyledBody>
-                  There are no search suggestions available for this project.
+                  No suggestions available for this project.
                 </StyledBody>
               )}
-            </StyledCard>
-          </div>
-        </Popover>
-      </IconButton>
-    </SearchPopoverBox>
+            </Scrollable>
+          </StyledCard>
+        </div>
+      </Popover>
+    </IconButton>
   );
 };
 
-const SearchPopoverBox = styled.div<{ disabled: boolean }>`
-  display: flex;
-  align-items: center;
-  height: 36px;
-  padding-left: ${size.xs};
-  padding-right: ${size.xxs};
-
-  // Styling for when the component should be disabled.
-  cursor: ${({ disabled }) => (disabled ? "not-allowed" : "auto")};
-  background-color: ${({ disabled }) => (disabled ? gray.light2 : white)};
-  border: 1px solid ${({ disabled }) => (disabled ? gray.light1 : gray.base)};
-  border-right: 0;
-  border-left: 0;
+const StyledCard = styled(Card)`
+  text-align: left;
+  border-radius: ${size.s};
+  padding: 0;
 `;
 
-const StyledCard = styled(Card)`
+const Scrollable = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  padding: ${size.xs};
-  border-radius: ${size.s};
-
+  min-height: ${size.l};
+  max-height: 400px;
   width: 400px;
-  min-height: 48px;
-  max-height: 600px;
-  overflow: scroll;
+  overflow-y: scroll;
+`;
+
+const Title = styled(Overline)<OverlineProps>`
+  padding-left: ${size.s};
+  padding-top: ${size.xs};
 `;
 
 const StyledBody = styled(Body)<BodyProps>`
-  text-align: center;
+  padding-left: ${size.s};
 `;
 
-const SearchSuggestion = styled.div`
-  padding: ${size.xs};
-  border-radius: ${size.xs};
+const Divider = styled.hr`
+  border: 0;
+  border-bottom: 1px solid ${gray.light2};
+  margin: ${size.xxs} 0;
+`;
+
+const SearchSuggestion = styled.button`
+  // Remove native button styles.
+  border: 0;
+  background: none;
+  text-align: inherit;
+  font: inherit;
+
+  padding: ${size.xs} ${size.s};
   word-break: break-all;
-  :hover {
+  :hover,
+  :focus {
     cursor: pointer;
-    background-color: ${blue.light3};
+    outline: none;
+    background: ${blue.light3};
   }
 `;
 
