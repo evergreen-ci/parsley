@@ -1,4 +1,5 @@
 import { useRef } from "react";
+import { useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import { useLogWindowAnalytics } from "analytics";
 import SearchBar from "components/Search/SearchBar";
@@ -7,8 +8,14 @@ import SearchResults from "components/Search/SearchResults";
 import { CaseSensitivity, MatchType, SearchBarActions } from "constants/enums";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
+import {
+  ProjectFiltersQuery,
+  ProjectFiltersQueryVariables,
+} from "gql/generated/types";
+import { PROJECT_FILTERS } from "gql/queries";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useHighlightParam } from "hooks/useHighlightParam";
+import { useTaskQuery } from "hooks/useTaskQuery";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import { validateRegexp } from "utils/validators";
 
@@ -18,8 +25,24 @@ const Search: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [filters, setFilters] = useFilterParam();
   const [highlights, setHighlights] = useHighlightParam();
-  const { hasLogs, setSearch, searchState, paginate } = useLogContext();
+  const { hasLogs, logMetadata, searchState, paginate, setSearch } =
+    useLogContext();
+  const { logType, taskID, execution, buildID } = logMetadata ?? {};
   const { hasSearch } = searchState;
+
+  const { task } = useTaskQuery({ logType, taskID, execution, buildID });
+  const { versionMetadata } = task ?? {};
+  const { projectIdentifier = "" } = versionMetadata ?? {};
+
+  const { data } = useQuery<ProjectFiltersQuery, ProjectFiltersQueryVariables>(
+    PROJECT_FILTERS,
+    {
+      variables: { projectIdentifier },
+      skip: !projectIdentifier,
+    }
+  );
+  const { project } = data || {};
+  const { parsleyFilters } = project || {};
 
   const handleOnSubmit = (selected: string, value: string) => {
     switch (selected) {
@@ -68,6 +91,7 @@ const Search: React.FC = () => {
         onChange={handleOnChange}
         onSubmit={handleOnSubmit}
         paginate={paginate}
+        searchSuggestions={parsleyFilters?.map((p) => p.expression)}
         validator={validateRegexp}
         validatorMessage="Invalid regular expression"
       />

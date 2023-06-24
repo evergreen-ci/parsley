@@ -1,5 +1,5 @@
 import { DIRECTION } from "context/LogContext/types";
-import { render, screen, userEvent } from "test_utils";
+import { render, screen, userEvent, waitFor } from "test_utils";
 import SearchBar from ".";
 
 describe("searchbar", () => {
@@ -7,7 +7,7 @@ describe("searchbar", () => {
     jest.useRealTimers();
   });
 
-  it("disables properly", async () => {
+  it("disables properly", () => {
     render(<SearchBar disabled />);
     expect(screen.getByDataCy("searchbar-select")).toBeDisabled();
     expect(screen.getByDataCy("searchbar-input")).toBeDisabled();
@@ -177,5 +177,26 @@ describe("searchbar", () => {
     expect(input).toHaveFocus();
     expect(input.selectionStart).toBe(0);
     expect(input.selectionEnd).toBe(inputText.length);
+  });
+  it("should populate input and call onChange when applying a search suggestion", async () => {
+    jest.useFakeTimers();
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
+    const onChange = jest.fn();
+    render(
+      <SearchBar onChange={onChange} searchSuggestions={["apple", "banana"]} />
+    );
+
+    await user.click(screen.getByDataCy("search-suggestion-button"));
+    await waitFor(() => {
+      expect(screen.getByDataCy("search-suggestion-popover")).toBeVisible();
+    });
+    await user.click(screen.getByText("apple"));
+
+    const input = screen.getByDataCy("searchbar-input") as HTMLInputElement;
+    expect(input).toHaveValue("apple");
+    expect(input).toHaveFocus();
+    jest.advanceTimersByTime(1000);
+    expect(onChange).toHaveBeenCalledTimes(1);
+    expect(onChange).toHaveBeenCalledWith("apple");
   });
 });

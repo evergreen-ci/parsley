@@ -46,6 +46,7 @@ enum CharKey {
   Semicolon = ";",
   QuestionMark = "?",
   ExclamationMark = "!",
+  SpaceBar = "SpaceBar",
 }
 
 export { ModifierKey, CharKey };

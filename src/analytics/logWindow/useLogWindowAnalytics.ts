@@ -15,6 +15,7 @@ type Action =
   | { name: "Added Highlight"; highlightExpression: string }
   | { name: "Removed Highlight"; highlightExpression: string }
   | { name: "Applied Search"; searchExpression: string }
+  | { name: "Applied Search Suggestion"; suggestion: string }
   | { name: "Expanded Lines"; option: "All" | "Five"; lineCount: number }
   | { name: "Collapsed Lines" }
   | { name: "Paginated Through Search Results"; direction: DIRECTION };

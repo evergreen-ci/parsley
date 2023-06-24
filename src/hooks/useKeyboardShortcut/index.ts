@@ -15,7 +15,7 @@ type UseKeyboardShortcutOptions = {
 };
 
 // Used to prevent shortcuts from being activated when input elements have focus.
-const INPUT_ELEMENTS = ["INPUT", "TEXTAREA", "SELECT"];
+const INPUT_ELEMENTS = ["INPUT", "TEXTAREA", "SELECT", "BUTTON"];
 
 const useKeyboardShortcut = (
   keys: ShortcutKeys,
