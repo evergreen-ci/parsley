@@ -11,20 +11,19 @@ import {
   OverlineProps,
 } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
-import { CharKey } from "constants/keys";
 import { size, zIndex } from "constants/tokens";
 import { useOnClickOutside } from "hooks";
 
 const { blue, gray } = palette;
 
 interface SearchPopoverProps {
-  disabled: boolean;
+  disabled?: boolean;
   searchSuggestions: string[];
   onClick?: (suggestion: string) => void;
 }
 
 const SearchPopover: React.FC<SearchPopoverProps> = ({
-  disabled,
+  disabled = false,
   searchSuggestions,
   onClick,
 }) => {
@@ -37,17 +36,8 @@ const SearchPopover: React.FC<SearchPopoverProps> = ({
   });
 
   const handleClick = (suggestion: string) => {
-    setIsOpen(!isOpen);
+    setIsOpen(false);
     onClick?.(suggestion);
-  };
-
-  const handleKeyDown = (
-    e: React.KeyboardEvent<HTMLButtonElement>,
-    suggestion: string
-  ) => {
-    if (e.key === CharKey.Enter || e.key === CharKey.SpaceBar) {
-      handleClick(suggestion);
-    }
   };
 
   return (
@@ -78,11 +68,7 @@ const SearchPopover: React.FC<SearchPopoverProps> = ({
             <Scrollable>
               {searchSuggestions.length > 0 ? (
                 searchSuggestions.map((s) => (
-                  <SearchSuggestion
-                    key={s}
-                    onClick={() => handleClick(s)}
-                    onKeyDown={(e) => handleKeyDown(e, s)}
-                  >
+                  <SearchSuggestion key={s} onClick={() => handleClick(s)}>
                     {s}
                   </SearchSuggestion>
                 ))
