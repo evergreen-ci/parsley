@@ -58,7 +58,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
       class="css-1xm32e0"
     >
       <div
-        class="css-h37zqo"
+        class="css-xvgrqg"
       >
         <button
           aria-disabled="false"
@@ -225,7 +225,7 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
       class="css-1xm32e0"
     >
       <div
-        class="css-h37zqo"
+        class="css-xvgrqg"
       >
         <button
           aria-disabled="false"

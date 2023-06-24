@@ -82,4 +82,15 @@ describe("search popover", () => {
     });
     expect(screen.getByText(/No suggestions/)).toBeVisible();
   });
+
+  it("should close when user clicks outside of popover", async () => {
+    const user = userEvent.setup();
+    render(<SearchPopover searchSuggestions={[]} />);
+    await user.click(screen.getByDataCy("search-suggestion-button"));
+    await waitFor(() => {
+      expect(screen.getByDataCy("search-suggestion-popover")).toBeVisible();
+    });
+    await user.click(document.body as HTMLElement);
+    expect(screen.getByDataCy("search-suggestion-popover")).not.toBeVisible();
+  });
 });

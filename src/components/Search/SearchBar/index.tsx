@@ -231,14 +231,15 @@ const StyledInput = styled(TextInputWithGlyph)<{ padded: number }>`
 `;
 
 const IconButtonWrapper = styled.div`
-  align-items: center;
   display: flex;
   justify-content: center;
+  align-items: center;
 
-  z-index: 1;
   position: absolute;
   bottom: 0;
   left: ${size.xxs};
+
+  z-index: 1;
   width: ${size.l};
   height: ${textInputHeight};
 `;

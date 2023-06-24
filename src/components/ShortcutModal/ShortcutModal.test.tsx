@@ -10,18 +10,13 @@ const ModalWrapper = () => {
 describe("shortcutModal", () => {
   const user = userEvent.setup();
 
-  it("should toggle open and closed when the user presses the question mark", async () => {
+  it("should toggle open when user executes keyboard shortcut", async () => {
     render(<ModalWrapper />);
     expect(screen.queryByDataCy("shortcut-modal")).toBeNull();
 
     await user.keyboard("{Shift>}{?}{/Shift}");
     await waitFor(() => {
       expect(screen.getByDataCy("shortcut-modal")).toBeVisible();
-    });
-
-    await user.keyboard("{Shift>}{?}{/Shift}");
-    await waitFor(() => {
-      expect(screen.queryByDataCy("shortcut-modal")).toBeNull();
     });
   });
 

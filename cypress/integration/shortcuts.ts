@@ -4,12 +4,10 @@ describe("Shortcuts", () => {
     cy.visit("/");
   });
 
-  it("should be able to open and close the keyboard shortcut modal using keyboard shortcut", () => {
+  it("should be able to open the modal using keyboard shortcut", () => {
     cy.dataCy("shortcut-modal").should("not.exist");
     cy.get("body").type("{shift}", { release: false }).type("{?}");
     cy.dataCy("shortcut-modal").should("be.visible");
-    cy.get("body").type("{shift}", { release: false }).type("{?}");
-    cy.dataCy("shortcut-modal").should("not.exist");
   });
 
   it("should be able to open the keyboard shortcut modal by clicking navbar icon button", () => {

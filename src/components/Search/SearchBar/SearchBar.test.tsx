@@ -9,6 +9,7 @@ describe("searchbar", () => {
 
   it("disables properly", () => {
     render(<SearchBar disabled />);
+    expect(screen.getByDataCy("searchbar-select")).toBeDisabled();
     expect(screen.getByDataCy("searchbar-input")).toBeDisabled();
   });
   it("should be able to paginate forwards by pressing Enter and keep focus", async () => {
@@ -177,7 +178,7 @@ describe("searchbar", () => {
     expect(input.selectionStart).toBe(0);
     expect(input.selectionEnd).toBe(inputText.length);
   });
-  it("should be possible to select and apply a search suggestion", async () => {
+  it("should populate input and call onChange when applying a search suggestion", async () => {
     jest.useFakeTimers();
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     const onChange = jest.fn();
