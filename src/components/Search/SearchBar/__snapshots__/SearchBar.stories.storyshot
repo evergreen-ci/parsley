@@ -6,7 +6,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
     class="css-14zx4vh"
   >
     <div
-      class="leafygreen-ui-1nkq8lt css-1h7i87a"
+      class="leafygreen-ui-1nkq8lt css-6lshyd"
     >
       <button
         aria-controls="select-1-menu"
@@ -124,7 +124,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
               class="leafygreen-ui-18wtnk9"
               data-cy="searchbar-input"
               id="textinput-5"
-              padding="42"
+              padded="1"
               placeholder="optional, regexp to search"
               required=""
               spellcheck="false"
@@ -173,7 +173,7 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
     class="css-14zx4vh"
   >
     <div
-      class="leafygreen-ui-1nkq8lt css-1h7i87a"
+      class="leafygreen-ui-1nkq8lt css-6lshyd"
     >
       <button
         aria-controls="select-9-menu"
@@ -291,7 +291,7 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
               class="leafygreen-ui-1kmfbzh"
               data-cy="searchbar-input"
               id="textinput-6"
-              padding="42"
+              padded="1"
               placeholder="optional, regexp to search"
               required=""
               spellcheck="false"

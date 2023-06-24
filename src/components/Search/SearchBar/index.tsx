@@ -17,23 +17,23 @@ import { leaveBreadcrumb } from "utils/errorReporting";
 import SearchPopover from "./SearchPopover";
 
 interface SearchBarProps {
-  searchSuggestions?: string[];
   className?: string;
   disabled?: boolean;
   onChange?: (value: string) => void;
   onSubmit?: (selected: string, value: string) => void;
   paginate?: (dir: DIRECTION) => void;
+  searchSuggestions?: string[];
   validator?: (value: string) => boolean;
   validatorMessage?: string;
 }
 
 const SearchBar: React.FC<SearchBarProps> = ({
-  searchSuggestions = [],
   className,
   disabled = false,
   onChange = () => {},
   onSubmit = () => {},
   paginate = () => {},
+  searchSuggestions = [],
   validator = () => true,
   validatorMessage = "Invalid input",
 }) => {
@@ -139,7 +139,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
           Highlight
         </Option>
       </StyledSelect>
-
       <InputWrapper>
         {/* TODO: Unhide in EVG-19897. */}
         {isProduction ? null : (
@@ -156,7 +155,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
                   "user"
                 );
               }}
-              suggestions={searchSuggestions}
+              searchSuggestions={searchSuggestions}
             />
           </IconButtonWrapper>
         )}
@@ -187,7 +186,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
           }
           onChange={(e) => handleOnChange(e.target.value)}
           onKeyDown={handleKeyDown}
-          padding={isProduction ? 8 : 42} // Remove in EVG-19897.
+          padded={isProduction ? 0 : 1} // TODO: Remove in EVG-19897.
           placeholder="optional, regexp to search"
           spellCheck={false}
           state={isValid ? "none" : "error"}
@@ -207,7 +206,7 @@ const Container = styled.div`
 
 // @ts-expect-error
 const StyledSelect = styled(Select)`
-  width: 140px;
+  width: 120px;
   /* overwrite lg borders https://jira.mongodb.org/browse/PD-1995 */
   button {
     margin-top: 0;
@@ -221,13 +220,13 @@ const InputWrapper = styled.div`
   width: 100%;
 `;
 
-const StyledInput = styled(TextInputWithGlyph)<{ padding: number }>`
+const StyledInput = styled(TextInputWithGlyph)<{ padded: number }>`
   /* overwrite lg borders https://jira.mongodb.org/browse/PD-1995 */
   div input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left: 0;
-    padding-left: ${({ padding }) => `${padding}px`};
+    ${({ padded }) => padded && `padding-left: 42px`};
   }
 `;
 

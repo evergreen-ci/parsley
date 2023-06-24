@@ -19,13 +19,13 @@ const { blue, gray } = palette;
 
 interface SearchPopoverProps {
   disabled: boolean;
-  suggestions: string[];
+  searchSuggestions: string[];
   onClick?: (suggestion: string) => void;
 }
 
 const SearchPopover: React.FC<SearchPopoverProps> = ({
   disabled,
-  suggestions,
+  searchSuggestions,
   onClick,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -51,18 +51,20 @@ const SearchPopover: React.FC<SearchPopoverProps> = ({
   };
 
   return (
-    <IconButton
-      ref={buttonRef}
-      aria-labelledby="View search suggestions"
-      data-cy="search-suggestion-button"
-      disabled={disabled}
-      onClick={() => setIsOpen(!isOpen)}
-      title="View search suggestions"
-    >
-      <>
-        <Icon fill={gray.base} glyph="Bulb" />
-        <Icon fill={gray.base} glyph="CaretDown" />
-      </>
+    <>
+      <IconButton
+        ref={buttonRef}
+        aria-labelledby="View search suggestions"
+        data-cy="search-suggestion-button"
+        disabled={disabled}
+        onClick={() => setIsOpen(!isOpen)}
+        title="View search suggestions"
+      >
+        <>
+          <Icon fill={gray.base} glyph="Bulb" />
+          <Icon fill={gray.base} glyph="CaretDown" />
+        </>
+      </IconButton>
       <Popover
         active={isOpen}
         data-cy="search-suggestion-popover"
@@ -74,8 +76,8 @@ const SearchPopover: React.FC<SearchPopoverProps> = ({
             <Title>Search suggestions</Title>
             <Divider />
             <Scrollable>
-              {suggestions.length > 0 ? (
-                suggestions.map((s) => (
+              {searchSuggestions.length > 0 ? (
+                searchSuggestions.map((s) => (
                   <SearchSuggestion
                     key={s}
                     onClick={() => handleClick(s)}
@@ -93,12 +95,13 @@ const SearchPopover: React.FC<SearchPopoverProps> = ({
           </StyledCard>
         </div>
       </Popover>
-    </IconButton>
+    </>
   );
 };
 
 const StyledCard = styled(Card)`
   text-align: left;
+  overflow: hidden;
   border-radius: ${size.s};
   padding: 0;
 `;
@@ -106,15 +109,14 @@ const StyledCard = styled(Card)`
 const Scrollable = styled.div`
   display: flex;
   flex-direction: column;
-  min-height: ${size.l};
-  max-height: 400px;
   width: 400px;
+  max-height: 400px;
   overflow-y: scroll;
 `;
 
 const Title = styled(Overline)<OverlineProps>`
-  padding-left: ${size.s};
   padding-top: ${size.xs};
+  padding-left: ${size.s};
 `;
 
 const StyledBody = styled(Body)<BodyProps>`
@@ -140,7 +142,7 @@ const SearchSuggestion = styled.button`
   :focus {
     cursor: pointer;
     outline: none;
-    background: ${blue.light3};
+    background-color: ${blue.light3};
   }
 `;
 

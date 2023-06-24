@@ -179,22 +179,24 @@ describe("searchbar", () => {
     expect(input.selectionEnd).toBe(inputText.length);
   });
   it("should be possible to select and apply a search suggestion", async () => {
-    const user = userEvent.setup();
+    jest.useFakeTimers();
+    const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     const onChange = jest.fn();
     render(
       <SearchBar onChange={onChange} searchSuggestions={["apple", "banana"]} />
     );
-    const input = screen.getByDataCy("searchbar-input") as HTMLInputElement;
+
     await user.click(screen.getByDataCy("search-suggestion-button"));
     await waitFor(() => {
       expect(screen.getByDataCy("search-suggestion-popover")).toBeVisible();
     });
     await user.click(screen.getByText("apple"));
+
+    const input = screen.getByDataCy("searchbar-input") as HTMLInputElement;
     expect(input).toHaveValue("apple");
     expect(input).toHaveFocus();
-    await waitFor(() => {
-      expect(onChange).toHaveBeenCalledTimes(1);
-    });
+    jest.advanceTimersByTime(1000);
+    expect(onChange).toHaveBeenCalledTimes(1);
     expect(onChange).toHaveBeenCalledWith("apple");
   });
 });
