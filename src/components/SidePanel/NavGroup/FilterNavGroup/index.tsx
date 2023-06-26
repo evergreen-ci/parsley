@@ -7,7 +7,6 @@ import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
 import { useFilterParam } from "hooks/useFilterParam";
 import { Filter } from "types/logs";
-import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import FilterGroup from "./FilterGroup";
 import BaseNavGroup from "../BaseNavGroup";
@@ -69,16 +68,13 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
       <ProjectFiltersModal open={open} setOpen={setOpen} />
       <BaseNavGroup
         additionalHeaderText={
-          // TODO: Unhide in EVG-19897.
-          isProduction ? null : (
-            <ModalTrigger
-              onClick={() => setOpen(true)}
-              role="button"
-              tabIndex={0}
-            >
-              View project filters
-            </ModalTrigger>
-          )
+          <ModalTrigger
+            onClick={() => setOpen(true)}
+            role="button"
+            tabIndex={0}
+          >
+            View project filters
+          </ModalTrigger>
         }
         data-cy="filters"
         defaultMessage="No filters have been applied."
