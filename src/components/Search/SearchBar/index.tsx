@@ -12,7 +12,6 @@ import { CharKey, ModifierKey } from "constants/keys";
 import { size, textInputHeight, zIndex } from "constants/tokens";
 import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
-import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb } from "utils/errorReporting";
 import SearchPopover from "./SearchPopover";
 
@@ -140,25 +139,22 @@ const SearchBar: React.FC<SearchBarProps> = ({
         </Option>
       </StyledSelect>
       <InputWrapper>
-        {/* TODO: Unhide in EVG-19897. */}
-        {isProduction ? null : (
-          <IconButtonWrapper>
-            <SearchPopover
-              disabled={disabled}
-              onClick={(suggestion) => {
-                handleOnChange(suggestion);
-                inputRef.current?.focus();
-                sendEvent({ name: "Applied Search Suggestion", suggestion });
-                leaveBreadcrumb(
-                  "applied-search-suggestion",
-                  { suggestion },
-                  "user"
-                );
-              }}
-              searchSuggestions={searchSuggestions}
-            />
-          </IconButtonWrapper>
-        )}
+        <IconButtonWrapper>
+          <SearchPopover
+            disabled={disabled}
+            onClick={(suggestion) => {
+              handleOnChange(suggestion);
+              inputRef.current?.focus();
+              sendEvent({ name: "Applied Search Suggestion", suggestion });
+              leaveBreadcrumb(
+                "applied-search-suggestion",
+                { suggestion },
+                "user"
+              );
+            }}
+            searchSuggestions={searchSuggestions}
+          />
+        </IconButtonWrapper>
         <StyledInput
           ref={inputRef}
           aria-labelledby="searchbar-input"
@@ -186,7 +182,6 @@ const SearchBar: React.FC<SearchBarProps> = ({
           }
           onChange={(e) => handleOnChange(e.target.value)}
           onKeyDown={handleKeyDown}
-          padded={isProduction ? 0 : 1} // TODO: Remove in EVG-19897.
           placeholder="optional, regexp to search"
           spellCheck={false}
           state={isValid ? "none" : "error"}
@@ -220,13 +215,13 @@ const InputWrapper = styled.div`
   width: 100%;
 `;
 
-const StyledInput = styled(TextInputWithGlyph)<{ padded: number }>`
+const StyledInput = styled(TextInputWithGlyph)`
   /* overwrite lg borders https://jira.mongodb.org/browse/PD-1995 */
   div input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
     border-left: 0;
-    ${({ padded }) => padded && `padding-left: 42px`};
+    padding-left: 42px;
   }
 `;
 
