@@ -86,22 +86,26 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
       title="Project Filters"
     >
       <Scrollable>
-        {parsleyFilters?.map((filter) => (
-          <ProjectFilter
-            key={filter.expression}
-            active={!!filters.find((f) => f.name === filter.expression)}
-            addFilter={(filterToAdd) =>
-              dispatch({ type: "ADD_FILTER", filterToAdd })
-            }
-            filter={filter}
-            removeFilter={(filterToRemove) => {
-              dispatch({ type: "REMOVE_FILTER", filterToRemove });
-            }}
-            selected={
-              !!state.selectedFilters.find((f) => f.name === filter.expression)
-            }
-          />
-        )) ?? (
+        {parsleyFilters && parsleyFilters.length > 0 ? (
+          parsleyFilters.map((filter) => (
+            <ProjectFilter
+              key={filter.expression}
+              active={!!filters.find((f) => f.name === filter.expression)}
+              addFilter={(filterToAdd) =>
+                dispatch({ type: "ADD_FILTER", filterToAdd })
+              }
+              filter={filter}
+              removeFilter={(filterToRemove) => {
+                dispatch({ type: "REMOVE_FILTER", filterToRemove });
+              }}
+              selected={
+                !!state.selectedFilters.find(
+                  (f) => f.name === filter.expression
+                )
+              }
+            />
+          ))
+        ) : (
           <Body data-cy="no-filters-message">
             No filters have been defined for this project.
           </Body>
