@@ -53,6 +53,7 @@ fi
 # Fetch previous release tag and get the commits since that tag
 CURRENT_COMMIT_HASH=$(git rev-parse --short HEAD)
 PREVIOUS_DEPLOYED_COMMIT=''
+PREVIOUS_TAG=''
 BASE_COMMIT=''
 
 
@@ -63,8 +64,11 @@ then
   echo "Found previous_deploy.txt"
   PREVIOUS_DEPLOYED_COMMIT=$(cat bin/previous_deploy.txt)
   echo "Previous deployed commit: $PREVIOUS_DEPLOYED_COMMIT"
+  PREVIOUS_TAG=$(git describe --abbrev=0 $PREVIOUS_DEPLOYED_COMMIT\^)
 else
   echo "Could not find previous_deploy.txt"
+  echo "Falling back to previous tag from git"
+  PREVIOUS_TAG=$(git describe --abbrev=0 $CURRENT_COMMIT_HASH\^)
 fi
 
 # If this is a revert, then only include the currently deployed commit
@@ -74,14 +78,11 @@ then
 else
   if [ "$PREVIOUS_DEPLOYED_COMMIT" == '' ]
   then
-    echo "Could not fetch previous deployed commit from $BASE_URL"
-    echo "Falling back to previous tag from git"
-    PREVIOUS_TAG=$(git describe --abbrev=0 $CURRENT_COMMIT_HASH\^)
+    echo "Using previous tag from git"
     BASE_COMMIT=$PREVIOUS_TAG
   else
     echo "Using previous deployed commit from $BASE_URL"
     BASE_COMMIT=$PREVIOUS_DEPLOYED_COMMIT
-    PREVIOUS_TAG=$(git describe --abbrev=0 $BASE_COMMIT\^)
   fi
   echo "Getting commits between $BASE_COMMIT and $CURRENT_COMMIT_HASH"
   # get all commits since the base commit
