@@ -1,5 +1,14 @@
 # This script runs the aws cli command to deploy the app to s3
 # It also uploads source maps to bugsnag
+BASE_URL='https://parsley-beta.corp.mongodb.com'
+# First download the currently deployed commit hash from s3
+# If the curl fails, then use the previous tag from git
+# If the curl succeeds, then use the githash from the curl
+PREVIOUS_DEPLOYED_COMMIT=$(curl -s $BASE_URL/commit.txt)
+
+# Save the current commit hash to a file
+echo "Saving current commit hash to file"
+echo $PREVIOUS_DEPLOYED_COMMIT > bin/previous_deploy.txt
 
 # Create a file in dist/ that contains the current commit hash
 CURRENT_COMMIT_HASH=$(git rev-parse HEAD)
