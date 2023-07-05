@@ -1,5 +1,6 @@
 #!/bin/bash
 
+BASE_URL=$REACT_APP_PARSLEY_URL
 # If running locally (i.e. not on CI), fetch the email from the users git config
 if [ "$CI" != 'true' ]
 then
@@ -51,15 +52,40 @@ fi
 
 # Fetch previous release tag and get the commits since that tag
 CURRENT_COMMIT_HASH=$(git rev-parse --short HEAD)
-PREVIOUS_TAG=$(git describe --abbrev=0 $CURRENT_COMMIT_HASH\^)
+PREVIOUS_DEPLOYED_COMMIT=''
+BASE_COMMIT=''
+
+
+# Get the previous deployed commit hash from bin/previous_deploy.txt
+# If the file does not exist, then use the previous tag from git
+if [ -f bin/previous_deploy.txt ]
+then
+  echo "Found previous_deploy.txt"
+  PREVIOUS_DEPLOYED_COMMIT=$(cat bin/previous_deploy.txt)
+  echo "Previous deployed commit: $PREVIOUS_DEPLOYED_COMMIT"
+else
+  echo "Could not find previous_deploy.txt"
+fi
 
 # If this is a revert, then only include the currently deployed commit
 if [ "$IS_REVERT" == 'true' ]
 then
   echo "parsley-$(git rev-parse HEAD)" > body.txt
 else
-# get all commits since the previous tag
-  git log --no-merges $PREVIOUS_TAG..$CURRENT_COMMIT_HASH --pretty="%h %s" > body.txt
+  if [ "$PREVIOUS_DEPLOYED_COMMIT" == '' ]
+  then
+    echo "Could not fetch previous deployed commit from $BASE_URL"
+    echo "Falling back to previous tag from git"
+    PREVIOUS_TAG=$(git describe --abbrev=0 $CURRENT_COMMIT_HASH\^)
+    BASE_COMMIT=$PREVIOUS_TAG
+  else
+    echo "Using previous deployed commit from $BASE_URL"
+    BASE_COMMIT=$PREVIOUS_DEPLOYED_COMMIT
+    PREVIOUS_TAG=$(git describe --abbrev=0 $BASE_COMMIT\^)
+  fi
+  echo "Getting commits between $BASE_COMMIT and $CURRENT_COMMIT_HASH"
+  # get all commits since the base commit
+  git log --no-merges $BASE_COMMIT..$CURRENT_COMMIT_HASH --pretty="%h %s" > body.txt
 fi
 
 

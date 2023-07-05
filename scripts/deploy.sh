@@ -1,6 +1,6 @@
 # This script runs the aws cli command to deploy the app to s3
 # It also uploads source maps to bugsnag
-BASE_URL='https://parsley-beta.corp.mongodb.com'
+BASE_URL=$REACT_APP_PARSLEY_URL
 # First download the currently deployed commit hash from s3
 # If the curl fails, then use the previous tag from git
 # If the curl succeeds, then use the githash from the curl
