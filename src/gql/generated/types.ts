@@ -263,6 +263,13 @@ export type DistroInfo = {
   workDir?: Maybe<Scalars["String"]>;
 };
 
+export enum DistroSettingsAccess {
+  Admin = "ADMIN",
+  Create = "CREATE",
+  Edit = "EDIT",
+  View = "VIEW",
+}
+
 export type EcsConfig = {
   __typename?: "ECSConfig";
   maxCPU: Scalars["Int"];
@@ -330,6 +337,12 @@ export type GeneralSubscription = {
   subscriber?: Maybe<SubscriberWrapper>;
   trigger: Scalars["String"];
   triggerData?: Maybe<Scalars["StringMap"]>;
+};
+
+export type GitTag = {
+  __typename?: "GitTag";
+  pusher: Scalars["String"];
+  tag: Scalars["String"];
 };
 
 export type GithubCheckSubscriber = {
@@ -2042,6 +2055,7 @@ export type TaskEndDetail = {
   status: Scalars["String"];
   timedOut?: Maybe<Scalars["Boolean"]>;
   timeoutType?: Maybe<Scalars["String"]>;
+  traceID?: Maybe<Scalars["String"]>;
   type: Scalars["String"];
 };
 
@@ -2454,6 +2468,7 @@ export type Version = {
   errors: Array<Scalars["String"]>;
   externalLinksForMetadata: Array<ExternalLinkForMetadata>;
   finishTime?: Maybe<Scalars["Time"]>;
+  gitTags?: Maybe<Array<GitTag>>;
   id: Scalars["String"];
   isPatch: Scalars["Boolean"];
   manifest?: Maybe<Manifest>;
