@@ -31,12 +31,12 @@ describe("highlights", () => {
   });
 
   it("deleting highlighted terms should modify the URL correctly", async () => {
-    const { history } = render(<HighlightNavGroup />, {
+    const { router } = render(<HighlightNavGroup />, {
       route: "?highlights=one,two",
     });
     // Delete the first highlight.
     await user.click(screen.getAllByLabelText("Delete highlight")[0]);
-    expect(history.location.search).toBe("?highlights=two");
+    expect(router.state.location.search).toBe("?highlights=two");
     expect(screen.queryByText("one")).not.toBeInTheDocument();
     expect(screen.getByText("two")).toBeInTheDocument();
   });

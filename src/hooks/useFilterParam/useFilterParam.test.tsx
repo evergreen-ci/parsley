@@ -1,11 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { createMemoryHistory } from "history";
-import {
-  // This is okay as long as there is only one version of history
-  // https://reactrouter.com/docs/en/v6/routers/history-router
-  unstable_HistoryRouter as HistoryRouter,
-  MemoryRouter,
-} from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router-dom";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { useQueryParams } from "hooks/useQueryParam";
 import { useFilterParam } from ".";
@@ -74,11 +68,16 @@ describe("useFilterParam", () => {
   });
 
   it("should properly encode filters in URL", () => {
-    const history = createMemoryHistory({ initialEntries: ["/"] });
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-      <HistoryRouter history={history}>{children}</HistoryRouter>
+      <MemoryRouter initialEntries={["/"]}>{children}</MemoryRouter>
     );
-    const { result } = renderHook(() => useFilterJointHook(), { wrapper });
+    const { result } = renderHook(
+      () => ({
+        ...useFilterJointHook(),
+        location: useLocation(),
+      }),
+      { wrapper }
+    );
     act(() => {
       result.current.setFilters([
         {
@@ -98,7 +97,7 @@ describe("useFilterParam", () => {
     expect(result.current.allQueryParams).toMatchObject({
       filters: ["100something,else", "100failed"],
     });
-    expect(history.location.search).toBe(
+    expect(result.current.location.search).toBe(
       "?filters=100something%252Celse,100failed"
     );
   });

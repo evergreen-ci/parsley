@@ -50,7 +50,7 @@ describe("uploadLink", () => {
 
   it("confirming the modal clears logs and navigates to /upload", async () => {
     const clearLogs = jest.fn();
-    const { history } = render(<UploadLink clearLogs={clearLogs} hasLogs />, {
+    const { router } = render(<UploadLink clearLogs={clearLogs} hasLogs />, {
       route: "/upload",
       path: "/upload",
     });
@@ -65,7 +65,7 @@ describe("uploadLink", () => {
     await waitFor(() => {
       expect(screen.queryByDataCy("confirmation-modal")).toBeNull();
     });
-    expect(history.location.pathname).toBe("/upload");
+    expect(router.state.location.pathname).toBe("/upload");
     expect(clearLogs).toHaveBeenCalledTimes(1);
   });
 });
