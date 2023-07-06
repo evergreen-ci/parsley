@@ -7,17 +7,16 @@ then
     echo "CI deploy not detected. Using local variables instead"
     # Fetch the variables from the git config.
     AUTHOR_EMAIL=$(git config user.email)
-    DEPLOYS_EMAIL=$DEPLOYS_EMAIL
 fi
 
 # Validate necessary variables are set
-if [ '$DEPLOYS_EMAIL' == '' ]
+if [ "$DEPLOYS_EMAIL" == '' ]
 then
     echo "DEPLOYS_EMAIL is not set"
     exit 1
 fi
 
-if [ '$AUTHOR_EMAIL' == '' ]
+if [ "$AUTHOR_EMAIL" == '' ]
 then
     echo "AUTHOR_EMAIL is not set"
     exit 1
@@ -64,11 +63,11 @@ then
   echo "Found previous_deploy.txt"
   PREVIOUS_DEPLOYED_COMMIT=$(cat bin/previous_deploy.txt)
   echo "Previous deployed commit: $PREVIOUS_DEPLOYED_COMMIT"
-  PREVIOUS_TAG=$(git describe --abbrev=0 $PREVIOUS_DEPLOYED_COMMIT\^)
+  PREVIOUS_TAG=$(git describe --abbrev=0 "$PREVIOUS_DEPLOYED_COMMIT"^)
 else
   echo "Could not find previous_deploy.txt"
   echo "Falling back to previous tag from git"
-  PREVIOUS_TAG=$(git describe --abbrev=0 $CURRENT_COMMIT_HASH\^)
+  PREVIOUS_TAG=$(git describe --abbrev=0 "$CURRENT_COMMIT_HASH"^)
 fi
 
 # If this is a revert, then only include the currently deployed commit
@@ -86,7 +85,7 @@ else
   fi
   echo "Getting commits between $BASE_COMMIT and $CURRENT_COMMIT_HASH"
   # get all commits since the base commit
-  git log --no-merges $BASE_COMMIT..$CURRENT_COMMIT_HASH --pretty="%h %s" > body.txt
+  git log --no-merges "$BASE_COMMIT".."$CURRENT_COMMIT_HASH" --pretty="%h %s" > body.txt
 fi
 
 
@@ -113,7 +112,7 @@ echo "Commits Deployed:"
 cat body.txt
 
 TITLE="Parsley Deploy to $CURRENT_COMMIT_HASH"
-BODY_HTML=$(cat body.txt)$(echo "<br /> <br /><b> To revert to previous version rerun task from previous release tag ($PREVIOUS_TAG)</b>")
+BODY_HTML=$(cat body.txt)"<br /> <br /><b> To revert to previous version rerun task from previous release tag ($PREVIOUS_TAG)</b>"
 DATE=$(date +'%Y-%m-%d')
 
 COMMAND="$EVERGREEN $CREDENTIALS notify email -f $AUTHOR_EMAIL -r $DEPLOYS_EMAIL -s "
@@ -126,5 +125,5 @@ COMMAND+=" '"
 COMMAND+="$BODY_HTML"
 COMMAND+="'"
 
-echo $COMMAND
-eval $COMMAND
+echo "$COMMAND"
+eval "$COMMAND"
