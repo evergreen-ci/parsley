@@ -68,7 +68,7 @@
     "ansi_up": "5.1.0",
     "graphql": "16.6.0",
     "html-react-parser": "3.0.6",
-    "js-cookie": "3.0.1",
+    "js-cookie": "3.0.5",
     "linkify-html": "4.1.0",
     "linkifyjs": "4.1.0",
     "lossless-json": "2.0.1",
