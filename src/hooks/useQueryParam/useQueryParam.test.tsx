@@ -1,11 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { createMemoryHistory } from "history";
-import {
-  // This is okay as long as there is only one version of history
-  // https://reactrouter.com/docs/en/v6/routers/history-router
-  unstable_HistoryRouter as HistoryRouter,
-  MemoryRouter,
-} from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router-dom";
 import { QueryParams } from "constants/queryParams";
 import { useQueryParam, useQueryParams } from ".";
 
@@ -213,17 +207,23 @@ describe("useQueryParam", () => {
   });
   describe("uri encoding", () => {
     it("should preserve encoded uri's with single values", () => {
-      const history = createMemoryHistory({
-        initialEntries: [
-          "/?search=test%20test&filters=100drop%2522%252C%2522attr%2522",
-        ],
-      });
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
-      }) => <HistoryRouter history={history}>{children}</HistoryRouter>;
+      }) => (
+        <MemoryRouter
+          initialEntries={[
+            "/?search=test%20test&filters=100drop%2522%252C%2522attr%2522",
+          ]}
+        >
+          {children}
+        </MemoryRouter>
+      );
 
       const { result } = renderHook(
-        () => useQueryJointHook("search", "test test"),
+        () => ({
+          ...useQueryJointHook("search", "test test"),
+          location: useLocation(),
+        }),
         {
           wrapper,
         }
@@ -241,22 +241,28 @@ describe("useQueryParam", () => {
         search: "test2 test2",
       });
       expect(result.current.queryParam).toBe("test2 test2");
-      expect(history.location.search).toBe(
+      expect(result.current.location.search).toBe(
         "?filters=100drop%2522%252C%2522attr%2522&search=test2%20test2"
       );
     });
     it("should preserve encoded uri's with array values", () => {
-      const history = createMemoryHistory({
-        initialEntries: [
-          "/?search=test%20test&filters=100drop%2522%252C%2522attr%2522,001drop%2522%252C%2522attr%2522",
-        ],
-      });
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
-      }) => <HistoryRouter history={history}>{children}</HistoryRouter>;
+      }) => (
+        <MemoryRouter
+          initialEntries={[
+            "/?search=test%20test&filters=100drop%2522%252C%2522attr%2522,001drop%2522%252C%2522attr%2522",
+          ]}
+        >
+          {children}
+        </MemoryRouter>
+      );
 
       const { result } = renderHook(
-        () => useQueryJointHook("search", "test test"),
+        () => ({
+          ...useQueryJointHook("search", "test test"),
+          location: useLocation(),
+        }),
         {
           wrapper,
         }
@@ -274,20 +280,26 @@ describe("useQueryParam", () => {
         filters: ['100drop","attr"', '001drop","attr"'],
         search: "test2 test2",
       });
-      expect(history.location.search).toBe(
+      expect(result.current.location.search).toBe(
         "?filters=100drop%2522%252C%2522attr%2522,001drop%2522%252C%2522attr%2522&search=test2%20test2"
       );
     });
     it("should preserve falsy values in the url", () => {
-      const history = createMemoryHistory({
-        initialEntries: ["/?search=test%20test&bookmarks=0&something=false"],
-      });
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
-      }) => <HistoryRouter history={history}>{children}</HistoryRouter>;
+      }) => (
+        <MemoryRouter
+          initialEntries={["/?search=test%20test&bookmarks=0&something=false"]}
+        >
+          {children}
+        </MemoryRouter>
+      );
 
       const { result } = renderHook(
-        () => useQueryJointHook("search", "test test"),
+        () => ({
+          ...useQueryJointHook("search", "test test"),
+          location: useLocation(),
+        }),
         {
           wrapper,
         }
@@ -307,7 +319,7 @@ describe("useQueryParam", () => {
         search: "test2 test2",
         something: false,
       });
-      expect(history.location.search).toBe(
+      expect(result.current.location.search).toBe(
         "?bookmarks=0&search=test2%20test2&something=false"
       );
     });

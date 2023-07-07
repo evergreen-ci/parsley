@@ -3,7 +3,7 @@ import BookmarksBar from ".";
 
 describe("bookmarks bar", () => {
   it("should not add bookmarks if there are no log lines", async () => {
-    const { history } = renderWithRouterMatch(
+    const { router } = renderWithRouterMatch(
       <BookmarksBar
         lineCount={0}
         processedLogLines={[]}
@@ -11,12 +11,12 @@ describe("bookmarks bar", () => {
       />
     );
     await waitFor(() => {
-      expect(history.location.search).toBe("");
+      expect(router.state.location.search).toBe("");
     });
   });
 
   it("should add a single bookmark of 0 if there is only a single log line", async () => {
-    const { history } = renderWithRouterMatch(
+    const { router } = renderWithRouterMatch(
       <BookmarksBar
         lineCount={1}
         processedLogLines={[1]}
@@ -24,12 +24,12 @@ describe("bookmarks bar", () => {
       />
     );
     await waitFor(() => {
-      expect(history.location.search).toBe("?bookmarks=0");
+      expect(router.state.location.search).toBe("?bookmarks=0");
     });
   });
 
   it("should set 0 and last log line as the initial bookmarks", async () => {
-    const { history } = renderWithRouterMatch(
+    const { router } = renderWithRouterMatch(
       <BookmarksBar
         lineCount={11}
         processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
@@ -37,7 +37,7 @@ describe("bookmarks bar", () => {
       />
     );
     await waitFor(() => {
-      expect(history.location.search).toBe("?bookmarks=0,10");
+      expect(router.state.location.search).toBe("?bookmarks=0,10");
     });
   });
 
@@ -63,7 +63,7 @@ describe("bookmarks bar", () => {
   });
 
   it("should be able to clear all bookmarks without removing share line", async () => {
-    const { history } = renderWithRouterMatch(
+    const { router } = renderWithRouterMatch(
       <BookmarksBar
         lineCount={11}
         processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
@@ -74,7 +74,7 @@ describe("bookmarks bar", () => {
       }
     );
     await userEvent.click(screen.getByDataCy("clear-bookmarks"));
-    expect(history.location.search).toBe("?shareLine=5");
+    expect(router.state.location.search).toBe("?shareLine=5");
   });
 
   it("should call scrollToLine when clicking on a log line (with no collapsed lines)", async () => {

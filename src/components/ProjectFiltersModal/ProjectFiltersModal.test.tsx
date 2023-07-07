@@ -105,7 +105,7 @@ describe("projectFiltersModal", () => {
       useLogContext,
       <ProjectFiltersModal open setOpen={jest.fn()} />
     );
-    const { history } = render(<Component />, {
+    const { router } = render(<Component />, {
       wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
       route: "?filters=100original",
     });
@@ -121,7 +121,7 @@ describe("projectFiltersModal", () => {
       screen.queryByRole("button", { name: "Apply filters" })
     ).toHaveAttribute("aria-disabled", "false");
     await user.click(screen.getByRole("button", { name: "Apply filters" }));
-    expect(history.location.search).toBe(
+    expect(router.state.location.search).toBe(
       "?filters=100original,111my_filter_2,101my_filter_3"
     );
   });

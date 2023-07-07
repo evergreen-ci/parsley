@@ -1,11 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { createMemoryHistory } from "history";
-import {
-  // This is okay as long as there is only one version of history
-  // https://reactrouter.com/docs/en/v6/routers/history-router
-  unstable_HistoryRouter as HistoryRouter,
-  MemoryRouter,
-} from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router-dom";
 import { useQueryParams } from "hooks/useQueryParam";
 import { useHighlightParam } from ".";
 
@@ -52,18 +46,23 @@ describe("useHighlightParam", () => {
     expect(result.current.highlights).toStrictEqual(["failed", "passed"]);
   });
   it("should properly encode highlights in URL", () => {
-    const history = createMemoryHistory({ initialEntries: ["/"] });
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-      <HistoryRouter history={history}>{children}</HistoryRouter>
+      <MemoryRouter initialEntries={["/"]}>{children}</MemoryRouter>
     );
-    const { result } = renderHook(() => useHighlightJointHook(), { wrapper });
+    const { result } = renderHook(
+      () => ({
+        ...useHighlightJointHook(),
+        location: useLocation(),
+      }),
+      { wrapper }
+    );
     act(() => {
       result.current.setHighlights(["something,else", "failed"]);
     });
     expect(result.current.allQueryParams).toMatchObject({
       highlights: ["something,else", "failed"],
     });
-    expect(history.location.search).toBe(
+    expect(result.current.location.search).toBe(
       "?highlights=something%252Celse,failed"
     );
   });

@@ -1,29 +1,22 @@
-import { renderHook } from "@testing-library/react-hooks";
-import { createMemoryHistory } from "history";
-import {
-  // Refer to https://reactrouter.com/docs/en/v6/routers/history-router to understand
-  // why this import is marked as unstable.
-  unstable_HistoryRouter as HistoryRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { act, renderHook } from "@testing-library/react-hooks";
+import * as router from "react-router";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { waitFor } from "test_utils";
 import { mockEnvironmentVariables } from "test_utils/utils";
 import { evergreenURL, graphqlURL } from "utils/environmentVariables";
 import { AuthProvider, useAuthContext } from ".";
 
-const history = createMemoryHistory({ initialEntries: ["/"] });
 const { mockEnv, cleanup } = mockEnvironmentVariables();
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <HistoryRouter history={history}>
+  <MemoryRouter initialEntries={["/"]}>
     <AuthProvider>
       <Routes>
         <Route element={null} path="/login" />
         <Route element={children} path="/" />
       </Routes>
     </AuthProvider>
-  </HistoryRouter>
+  </MemoryRouter>
 );
 
 describe("auth", () => {
@@ -33,15 +26,6 @@ describe("auth", () => {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query: `query { user { userId } }` }),
   };
-
-  beforeEach(() => {
-    Object.defineProperty(window, "location", {
-      value: {
-        href: "http://just-a-placeholder.com",
-      },
-      writable: true,
-    });
-  });
 
   afterEach(() => {
     cleanup();
@@ -124,19 +108,26 @@ describe("auth", () => {
       mockEnv("NODE_ENV", "development");
       const mockFetchPromise = jest.fn().mockResolvedValue({});
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
+      const mockNavigate = jest.fn();
+      jest.spyOn(router, "useNavigate").mockImplementation(() => mockNavigate);
 
-      const { result } = renderHook(() => useAuthContext(), {
-        wrapper,
+      const { result } = renderHook(() => useAuthContext(), { wrapper });
+
+      await act(async () => {
+        result.current.logoutAndRedirect();
       });
-
-      result.current.logoutAndRedirect();
       expect(result.current.isAuthenticated).toBe(false);
-      await waitFor(() => {
-        expect(history.location.pathname).toBe("/login");
-      });
+      expect(mockNavigate).toHaveBeenCalledWith("/login");
     });
 
     it("should redirect to the Evergreen /login page otherwise", async () => {
+      Object.defineProperty(window, "location", {
+        value: {
+          href: "http://just-a-placeholder.com",
+        },
+        writable: true,
+      });
+
       mockEnv("NODE_ENV", "production");
       const mockFetchPromise = jest.fn().mockResolvedValue({});
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);

@@ -8,14 +8,7 @@ import {
 } from "@testing-library/react";
 import type { RenderOptions, RenderResult } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { createMemoryHistory } from "history";
-import {
-  // Refer to https://reactrouter.com/docs/en/v6/routers/history-router to understand
-  // why this import is marked as unstable.
-  unstable_HistoryRouter as HistoryRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import * as customQueries from "./queries";
 
 type QueriesType = typeof queries;
@@ -61,34 +54,40 @@ const renderWithRouterMatch = (
   ui: React.ReactElement,
   options: RenderWithRouterMatchOptions = {}
 ) => {
-  const {
-    route = "/",
-    history = createMemoryHistory({ initialEntries: [route] }),
-    path = "/",
-    wrapper: TestWrapper,
-    ...rest
-  } = options;
-  const wrapper = ({ children }: { children: any }) => (
-    <HistoryRouter history={history}>
-      <Routes>
-        <Route
-          element={
-            TestWrapper ? <TestWrapper>{children}</TestWrapper> : children
-          }
-          path={path}
-        />
-      </Routes>
-    </HistoryRouter>
+  const { route = "/", path = "/", wrapper: TestWrapper, ...rest } = options;
+
+  const getMemoryRouter = (element: React.ReactElement) => {
+    const routes = [
+      {
+        path,
+        element: TestWrapper ? <TestWrapper>{element}</TestWrapper> : element,
+        errorElement: <div>Failed to render component.</div>,
+      },
+      {
+        path: "*",
+        element: <div>Not found</div>,
+      },
+    ];
+    return createMemoryRouter(routes, {
+      initialEntries: [route],
+    });
+  };
+
+  const memoryRouter = getMemoryRouter(ui);
+
+  const { rerender, ...renderRest } = customRender(
+    <RouterProvider router={memoryRouter} />,
+    {
+      ...rest,
+    }
   );
 
-  const { rerender, ...renderRest } = customRender(ui, { ...rest, wrapper });
-
   const customRerender = (element: React.ReactElement) => {
-    rerender(element);
+    rerender(<RouterProvider router={getMemoryRouter(element)} />);
   };
 
   return {
-    history,
+    router: memoryRouter,
     rerender: customRerender,
     ...renderRest,
   };

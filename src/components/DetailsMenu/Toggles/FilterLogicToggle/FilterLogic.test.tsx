@@ -29,7 +29,7 @@ describe("filter logic toggle", () => {
   });
 
   it("should update the URL correctly", async () => {
-    const { history } = render(<FilterLogicToggle />, { wrapper });
+    const { router } = render(<FilterLogicToggle />, { wrapper });
 
     const filterLogicToggle = screen.getByDataCy("filter-logic-toggle");
     expect(filterLogicToggle).toHaveAttribute("aria-checked", "true");
@@ -37,11 +37,11 @@ describe("filter logic toggle", () => {
     const user = userEvent.setup();
     await user.click(filterLogicToggle);
     expect(filterLogicToggle).toHaveAttribute("aria-checked", "false");
-    expect(history.location.search).toBe("?filterLogic=and");
+    expect(router.state.location.search).toBe("?filterLogic=and");
 
     await user.click(filterLogicToggle);
     expect(filterLogicToggle).toHaveAttribute("aria-checked", "true");
-    expect(history.location.search).toBe("?filterLogic=or");
+    expect(router.state.location.search).toBe("?filterLogic=or");
   });
 
   it("url params should take precedence over cookie value", () => {

@@ -42,7 +42,7 @@ describe("filters", () => {
   });
 
   it("editing filters should modify the URL correctly", async () => {
-    const { history } = render(<FilterNavGroup {...props} />, {
+    const { router } = render(<FilterNavGroup {...props} />, {
       wrapper,
       route: "?filters=100filter1,100filter2",
     });
@@ -55,14 +55,16 @@ describe("filters", () => {
     });
     await user.click(confirmButton);
 
-    expect(history.location.search).toBe("?filters=100newFilter,100filter2");
+    expect(router.state.location.search).toBe(
+      "?filters=100newFilter,100filter2"
+    );
     expect(screen.queryByText("filter1")).not.toBeInTheDocument();
     expect(screen.getByText("newFilter")).toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 
   it("trying to edit a filter to a filter that already exists should do nothing", async () => {
-    const { history } = render(<FilterNavGroup {...props} />, {
+    const { router } = render(<FilterNavGroup {...props} />, {
       wrapper,
       route: "?filters=100filter1,100filter2",
     });
@@ -75,13 +77,13 @@ describe("filters", () => {
     });
     await user.click(confirmButton);
 
-    expect(history.location.search).toBe("?filters=100filter1,100filter2");
+    expect(router.state.location.search).toBe("?filters=100filter1,100filter2");
     expect(screen.getByText("filter1")).toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 
   it("pressing the cancel button after editing a filter should do nothing", async () => {
-    const { history } = render(<FilterNavGroup {...props} />, {
+    const { router } = render(<FilterNavGroup {...props} />, {
       wrapper,
       route: "?filters=100filter1,100filter2",
     });
@@ -94,26 +96,26 @@ describe("filters", () => {
     });
     await user.click(cancelButton);
 
-    expect(history.location.search).toBe("?filters=100filter1,100filter2");
+    expect(router.state.location.search).toBe("?filters=100filter1,100filter2");
     expect(screen.getByText("filter1")).toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 
   it("deleting filters should modify the URL correctly", async () => {
-    const { history } = render(<FilterNavGroup {...props} />, {
+    const { router } = render(<FilterNavGroup {...props} />, {
       wrapper,
       route: "?filters=100filter1,100filter2",
     });
     // Delete the first filter.
     await user.click(screen.getAllByLabelText("Delete filter")[0]);
-    expect(history.location.search).toBe("?filters=100filter2");
+    expect(router.state.location.search).toBe("?filters=100filter2");
     expect(screen.queryByText("filter1")).not.toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
   });
 
   it("deleting a filter should call clearExpandedLines if there are no longer any filters applied", async () => {
     const clearExpandedLines = jest.fn();
-    const { history } = render(
+    const { router } = render(
       <FilterNavGroup {...props} clearExpandedLines={clearExpandedLines} />,
       {
         wrapper,
@@ -121,7 +123,7 @@ describe("filters", () => {
       }
     );
     await user.click(screen.getAllByLabelText("Delete filter")[0]);
-    expect(history.location.search).toBe("");
+    expect(router.state.location.search).toBe("");
     expect(clearExpandedLines).toHaveBeenCalledTimes(1);
   });
 });
