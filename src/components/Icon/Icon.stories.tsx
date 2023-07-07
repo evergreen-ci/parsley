@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import { StoryObj } from "@storybook/react";
 import { size } from "constants/tokens";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import Icon, { Size, glyphs } from ".";
 
 const { green } = palette;
@@ -15,9 +15,9 @@ const Sizes = {
 
 export default {
   component: Icon,
-};
+} satisfies CustomMeta<typeof Icon>;
 
-export const Default: StoryObj<typeof Icon> = {
+export const Default: CustomStoryObj<typeof Icon> = {
   render: (args) => (
     <Container>
       {Object.keys(glyphs).map((name) => (

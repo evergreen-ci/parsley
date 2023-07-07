@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
-import { StoryObj } from "@storybook/react";
 import { VirtuosoMockContext } from "react-virtuoso";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import LogPane from ".";
 
 export default {
   component: LogPane,
-};
+} satisfies CustomMeta<typeof LogPane>;
 
 const list = Array.from({ length: 10000 }, (_, i) => `${i}`);
 
@@ -17,7 +17,7 @@ const Container = styled.div`
   border: 1px solid black;
 `;
 
-export const Default: StoryObj<typeof LogPane> = {
+export const Default: CustomStoryObj<typeof LogPane> = {
   render: (args) => (
     <VirtuosoMockContext.Provider
       value={{ viewportHeight: 500, itemHeight: 18 }}

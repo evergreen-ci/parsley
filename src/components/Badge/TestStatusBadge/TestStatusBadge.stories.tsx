@@ -1,14 +1,14 @@
 import styled from "@emotion/styled";
-import { StoryObj } from "@storybook/react";
 import { size } from "constants/tokens";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import { TestStatus } from "types/test";
 import TestStatusBadge from ".";
 
 export default {
   component: TestStatusBadge,
-};
+} satisfies CustomMeta<typeof TestStatusBadge>;
 
-export const Default: StoryObj<typeof TestStatusBadge> = {
+export const Default: CustomStoryObj<typeof TestStatusBadge> = {
   render: (args) => <TestStatusBadge {...args} />,
   args: {
     status: TestStatus.Pass,
@@ -21,7 +21,7 @@ export const Default: StoryObj<typeof TestStatusBadge> = {
   },
 };
 
-export const AllBadges: StoryObj<typeof TestStatusBadge> = {
+export const AllBadges: CustomStoryObj<typeof TestStatusBadge> = {
   render: () => (
     <Container>
       {Object.values(TestStatus).map((status) => (

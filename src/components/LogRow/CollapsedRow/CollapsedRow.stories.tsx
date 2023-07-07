@@ -1,16 +1,16 @@
 import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
-import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { ParsleyRow } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import { ExpandedLine, ExpandedLines } from "types/logs";
 import CollapsedRow from ".";
 
 export default {
   component: CollapsedRow,
-};
+} satisfies CustomMeta<typeof CollapsedRow>;
 
 const CollapsedRowStory = (args: React.ComponentProps<typeof CollapsedRow>) => {
   const [rows, setRows] = useState(args.collapsedLines);
@@ -37,7 +37,7 @@ const CollapsedRowStory = (args: React.ComponentProps<typeof CollapsedRow>) => {
   );
 };
 
-export const CollapsedRowSingle: StoryObj<typeof CollapsedRow> = {
+export const CollapsedRowSingle: CustomStoryObj<typeof CollapsedRow> = {
   render: (args) => <CollapsedRowStory {...args} />,
   args: {
     // Initialize an array with 100 collapsed lines.
@@ -78,7 +78,7 @@ const CollapsedAnsiiRowStory = (
   );
 };
 
-export const CollapsedAnsiiRow: StoryObj<
+export const CollapsedAnsiiRow: CustomStoryObj<
   React.ComponentProps<typeof CollapsedRow> & {
     wrap: boolean;
   }
@@ -119,7 +119,7 @@ const CollapsedResmokeRowStory = (
   );
 };
 
-export const CollapsedResmokeRow: StoryObj<
+export const CollapsedResmokeRow: CustomStoryObj<
   React.ComponentProps<typeof CollapsedRow> & {
     wrap: boolean;
   }

@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { MockedProvider } from "@apollo/client/testing";
 import styled from "@emotion/styled";
 import { actions } from "@storybook/addon-actions";
-import { StoryObj } from "@storybook/react";
 import { userEvent } from "@storybook/testing-library";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { useQueryParams } from "hooks/useQueryParam";
 import { projectFiltersMock } from "test_data/projectFilters";
 import { evergreenTaskMock } from "test_data/task";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import SidePanel from ".";
 
 export default {
@@ -20,7 +20,7 @@ export default {
       </MockedProvider>
     ),
   ],
-};
+} satisfies CustomMeta<typeof SidePanel>;
 
 const Story = ({ ...args }) => {
   const [, setSearchParams] = useQueryParams();
@@ -52,7 +52,7 @@ const Story = ({ ...args }) => {
     </Container>
   );
 };
-export const Default: StoryObj<typeof SidePanel> = {
+export const Default: CustomStoryObj<typeof SidePanel> = {
   render: (args) => <Story {...args} />,
   play: () => {
     userEvent.keyboard("[[");
