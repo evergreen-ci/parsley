@@ -106,7 +106,7 @@ exports[`storyshots Storyshots components/Highlight All Colors 1`] = `
 </div>
 `;
 
-exports[`storyshots Storyshots components/Highlight Default 1`] = `
+exports[`storyshots Storyshots components/Highlight Default Highlight 1`] = `
 <div>
   <span>
     Should be 

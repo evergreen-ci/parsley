@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { MockedProvider } from "@apollo/client/testing";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { useQueryParams } from "hooks/useQueryParam";
@@ -40,22 +39,18 @@ const Component = ({ ...args }) => {
 
 export const Default: CustomStoryObj<typeof ProjectFiltersModal> = {
   render: (args) => <Component {...args} />,
-  decorators: [
-    (Story: () => JSX.Element) => (
-      <MockedProvider mocks={[projectFiltersMock, evergreenTaskMock]}>
-        <Story />
-      </MockedProvider>
-    ),
-  ],
+  parameters: {
+    apolloClient: {
+      mocks: [projectFiltersMock, evergreenTaskMock],
+    },
+  },
 };
 
 export const Empty: CustomStoryObj<typeof ProjectFiltersModal> = {
   render: (args) => <Component {...args} />,
-  decorators: [
-    (Story: () => JSX.Element) => (
-      <MockedProvider mocks={[noFiltersMock, evergreenTaskMock]}>
-        <Story />
-      </MockedProvider>
-    ),
-  ],
+  parameters: {
+    apolloClient: {
+      mocks: [noFiltersMock, evergreenTaskMock],
+    },
+  },
 };
