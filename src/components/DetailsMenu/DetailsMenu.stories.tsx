@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import Card from "@leafygreen-ui/card";
-import { StoryObj } from "@storybook/react";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import DetailsMenu from ".";
 
 export default {
   component: DetailsMenu,
-};
+} satisfies CustomMeta<typeof DetailsMenu>;
 
-export const Default: StoryObj<typeof DetailsMenu> = {
+export const Default: CustomStoryObj<typeof DetailsMenu> = {
   render: (args) => (
     <Card style={{ maxWidth: 750 }}>
       <DetailsMenu {...args} />
@@ -36,6 +36,6 @@ const DetailsMenuWithDownloadedLog = (args: any) => {
   );
 };
 
-export const WithDownloadedLog: StoryObj<typeof DetailsMenu> = {
+export const WithDownloadedLog: CustomStoryObj<typeof DetailsMenu> = {
   render: DetailsMenuWithDownloadedLog,
 };

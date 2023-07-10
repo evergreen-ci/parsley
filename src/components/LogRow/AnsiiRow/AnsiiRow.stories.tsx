@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import AnsiiRow from ".";
 import { ParsleyRow } from "../RowRenderer";
 
 export default {
   component: AnsiiRow,
-};
+} satisfies CustomMeta<typeof AnsiiRow>;
 
 type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>>;
 
@@ -36,7 +36,7 @@ const SingleLineStory = (args: any) => {
   );
 };
 
-export const SingleLine: StoryObj<AnsiiRowProps> = {
+export const SingleLine: CustomStoryObj<AnsiiRowProps> = {
   render: (args) => <SingleLineStory {...args} />,
   args: {
     wrap: false,
@@ -69,7 +69,7 @@ const MultiLineStory = (args: any) => {
   );
 };
 
-export const MultiLines: StoryObj<AnsiiRowProps> = {
+export const MultiLines: CustomStoryObj<AnsiiRowProps> = {
   render: (args) => <MultiLineStory {...args} />,
   args: {
     wrap: false,

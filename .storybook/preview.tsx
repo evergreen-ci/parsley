@@ -1,11 +1,17 @@
 import React from "react";
+import { MockedProvider } from "@apollo/client/testing";
 import { Decorator, Parameters } from "@storybook/react";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
+// This is required for storyshots https://github.com/lifeiscontent/storybook-addon-apollo-client/issues/16
+import { WithApolloClient } from "storybook-addon-apollo-client/dist/decorators";
 import { GlobalStyles } from "../src/components/styles";
 import { LogContextProvider } from "../src/context/LogContext";
 
 export const parameters: Parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
+  apolloClient: {
+    MockedProvider,
+  },
   controls: {
     matchers: {
       color: /(background|color)$/i,
@@ -39,4 +45,5 @@ export const decorators: Decorator[] = [
     });
     return <RouterProvider router={memoryRouter} />;
   },
+  WithApolloClient as any,
 ];
