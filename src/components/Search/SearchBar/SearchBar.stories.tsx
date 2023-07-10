@@ -1,12 +1,12 @@
-import { StoryObj } from "@storybook/react";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 
 import SearchBar from ".";
 
 export default {
   component: SearchBar,
-};
+} satisfies CustomMeta<typeof SearchBar>;
 
-export const Default: StoryObj<typeof SearchBar> = {
+export const Default: CustomStoryObj<typeof SearchBar> = {
   args: {
     disabled: false,
     validator(value) {
@@ -24,7 +24,7 @@ export const Default: StoryObj<typeof SearchBar> = {
   },
 };
 
-export const WithSearchSuggestions: StoryObj<typeof SearchBar> = {
+export const WithSearchSuggestions: CustomStoryObj<typeof SearchBar> = {
   args: {
     disabled: false,
     validator(value) {

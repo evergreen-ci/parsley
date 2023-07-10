@@ -1,12 +1,12 @@
 import { useState } from "react";
-import { StoryObj } from "@storybook/react";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import ShortcutModal from ".";
 
 export default {
   component: ShortcutModal,
-};
+} satisfies CustomMeta<typeof ShortcutModal>;
 
-export const Default: StoryObj<typeof ShortcutModal> = {
+export const Default: CustomStoryObj<typeof ShortcutModal> = {
   render: (args) => <Component {...args} />,
   args: {},
 };

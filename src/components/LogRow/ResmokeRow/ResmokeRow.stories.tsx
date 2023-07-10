@@ -1,15 +1,15 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { ParsleyRow } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import ResmokeRow from ".";
 
 export default {
   component: ResmokeRow,
-};
+} satisfies CustomMeta<typeof ResmokeRow>;
 
 type ResmokeRowProps = React.FC<React.ComponentProps<typeof ResmokeRow>>;
 
@@ -38,7 +38,7 @@ const SingleLineStory = (args: any) => {
   );
 };
 
-export const SingleLine: StoryObj<ResmokeRowProps> = {
+export const SingleLine: CustomStoryObj<ResmokeRowProps> = {
   render: (args) => <SingleLineStory {...args} />,
   args: {
     prettyPrint: true,
@@ -76,7 +76,7 @@ const MultipleLinesStory = (args: any) => {
   );
 };
 
-export const MultipleLines: StoryObj<ResmokeRowProps> = {
+export const MultipleLines: CustomStoryObj<ResmokeRowProps> = {
   render: (args) => <MultipleLinesStory {...args} />,
   args: {
     prettyPrint: true,

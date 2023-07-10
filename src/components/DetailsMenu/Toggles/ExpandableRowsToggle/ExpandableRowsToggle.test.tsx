@@ -29,7 +29,7 @@ describe("expandable rows toggle", () => {
   });
 
   it("should update the URL correctly", async () => {
-    const { history } = render(<ExpandableRowsToggle />, { wrapper });
+    const { router } = render(<ExpandableRowsToggle />, { wrapper });
 
     const expandableRowsToggle = screen.getByDataCy("expandable-rows-toggle");
     expect(expandableRowsToggle).toHaveAttribute("aria-checked", "true");
@@ -37,7 +37,7 @@ describe("expandable rows toggle", () => {
     const user = userEvent.setup();
     await user.click(expandableRowsToggle);
     expect(expandableRowsToggle).toHaveAttribute("aria-checked", "false");
-    expect(history.location.search).toBe("?expandable=false");
+    expect(router.state.location.search).toBe("?expandable=false");
   });
 
   it("url params should take precedence over cookie value", () => {

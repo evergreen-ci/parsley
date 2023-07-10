@@ -1,12 +1,5 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { createMemoryHistory } from "history";
-import {
-  // Refer to https://reactrouter.com/docs/en/v6/routers/history-router to understand
-  // why this import is marked as unstable.
-  unstable_HistoryRouter as HistoryRouter,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { LogTypes } from "constants/enums";
 import { isCollapsedRow } from "utils/collapsedRow";
 import { LogContextProvider, useLogContext } from ".";
@@ -19,11 +12,11 @@ const Router = ({
   children: React.ReactNode;
   route?: string;
 }) => (
-  <HistoryRouter history={createMemoryHistory({ initialEntries: [route] })}>
+  <MemoryRouter initialEntries={[route]}>
     <Routes>
       <Route element={children} path="/" />
     </Routes>
-  </HistoryRouter>
+  </MemoryRouter>
 );
 
 describe("useLogContext", () => {

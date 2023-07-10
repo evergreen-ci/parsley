@@ -64,7 +64,7 @@ describe("pretty print toggle", () => {
       useLogContext,
       <PrettyPrintToggle />
     );
-    const { history } = render(<Component />, { wrapper });
+    const { router } = render(<Component />, { wrapper });
     act(() => {
       hook.current.setLogMetadata({ logType: LogTypes.RESMOKE_LOGS });
     });
@@ -73,6 +73,6 @@ describe("pretty print toggle", () => {
     const user = userEvent.setup();
     await user.click(prettyPrintToggle);
     expect(prettyPrintToggle).toHaveAttribute("aria-checked", "false");
-    expect(history.location.search).toBe("");
+    expect(router.state.location.search).toBe("");
   });
 });

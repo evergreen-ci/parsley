@@ -1,16 +1,15 @@
 import { useEffect, useState } from "react";
-import { MockedProvider } from "@apollo/client/testing";
-import { StoryObj } from "@storybook/react";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { useQueryParams } from "hooks/useQueryParam";
 import { noFiltersMock, projectFiltersMock } from "test_data/projectFilters";
 import { evergreenTaskMock } from "test_data/task";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import ProjectFiltersModal from ".";
 
 export default {
   component: ProjectFiltersModal,
-};
+} satisfies CustomMeta<typeof ProjectFiltersModal>;
 
 const Component = ({ ...args }) => {
   const [, setSearchParams] = useQueryParams();
@@ -38,24 +37,20 @@ const Component = ({ ...args }) => {
   );
 };
 
-export const Default: StoryObj<typeof ProjectFiltersModal> = {
+export const Default: CustomStoryObj<typeof ProjectFiltersModal> = {
   render: (args) => <Component {...args} />,
-  decorators: [
-    (Story: () => JSX.Element) => (
-      <MockedProvider mocks={[projectFiltersMock, evergreenTaskMock]}>
-        <Story />
-      </MockedProvider>
-    ),
-  ],
+  parameters: {
+    apolloClient: {
+      mocks: [projectFiltersMock, evergreenTaskMock],
+    },
+  },
 };
 
-export const Empty: StoryObj<typeof ProjectFiltersModal> = {
+export const Empty: CustomStoryObj<typeof ProjectFiltersModal> = {
   render: (args) => <Component {...args} />,
-  decorators: [
-    (Story: () => JSX.Element) => (
-      <MockedProvider mocks={[noFiltersMock, evergreenTaskMock]}>
-        <Story />
-      </MockedProvider>
-    ),
-  ],
+  parameters: {
+    apolloClient: {
+      mocks: [noFiltersMock, evergreenTaskMock],
+    },
+  },
 };

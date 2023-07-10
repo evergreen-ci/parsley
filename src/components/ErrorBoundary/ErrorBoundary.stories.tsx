@@ -1,18 +1,18 @@
 import { useState } from "react";
-import { StoryObj } from "@storybook/react";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import { ErrorBoundary } from ".";
 import ErrorFallback from "./ErrorFallback";
 
 export default {
   component: ErrorFallback,
-};
+} satisfies CustomMeta<typeof ErrorFallback>;
 
-export const Template: StoryObj<typeof ErrorFallback> = {
+export const Template: CustomStoryObj<typeof ErrorFallback> = {
   render: () => <ErrorFallback />,
   name: "Error Fallback",
 };
 
-export const ErrorBoundaryTemplate: StoryObj<typeof ErrorBoundary> = {
+export const ErrorBoundaryTemplate: CustomStoryObj<typeof ErrorBoundary> = {
   render: () => (
     <ErrorBoundary>
       <div>Test</div>

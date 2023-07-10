@@ -1,14 +1,14 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { StoryObj } from "@storybook/react";
 import { QueryParams } from "constants/queryParams";
 import { useQueryParams } from "hooks/useQueryParam";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import { ProcessedLogLines } from "types/logs";
 import BookmarksBar from ".";
 
 export default {
   component: BookmarksBar,
-};
+} satisfies CustomMeta<typeof BookmarksBar>;
 const processedLogLines: ProcessedLogLines = Array.from(
   { length: 100 },
   (_, i) => i
@@ -31,7 +31,7 @@ const Story = ({ ...args }: React.ComponentProps<typeof BookmarksBar>) => {
     </Container>
   );
 };
-export const Default: StoryObj<typeof BookmarksBar> = {
+export const Default: CustomStoryObj<typeof BookmarksBar> = {
   render: (args) => <Story {...args} />,
   args: {
     lineCount: 100,
