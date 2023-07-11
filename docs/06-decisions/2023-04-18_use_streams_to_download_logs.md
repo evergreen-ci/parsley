@@ -1,4 +1,4 @@
-# {2023-04-18} Use Streams to Download Logs
+# 2023-04-18 Use Streams to Download Logs
 
 * status: accepted
 * date: 2023-04-18
