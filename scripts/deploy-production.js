@@ -96,7 +96,7 @@ const getCommitMessages = (currentlyDeployedCommit) =>
 
 const getCurrentlyDeployedCommit = () =>
   new Promise((resolve, reject) => {
-    exec("sh scripts/get-current-deployed-commit.sh", (err, stdout) => {
+    exec("bash scripts/get-current-deployed-commit.sh", (err, stdout) => {
       if (err) {
         console.log(err);
         reject(err);
