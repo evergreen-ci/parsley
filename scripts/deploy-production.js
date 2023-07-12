@@ -98,10 +98,28 @@ const getCurrentlyDeployedCommit = () =>
   new Promise((resolve, reject) => {
     exec("sh scripts/get-current-deployed-commit.sh", (err, stdout) => {
       if (err) {
+        console.log(err);
         reject(err);
         return;
       }
-      resolve(stdout.trim());
+      console.log(stdout);
+      // Regex for githash
+      const githashRegex = /[a-z0-9]{40}/gm;
+      // Regex for git tag
+      const gitTagRegex = /v[0-9]+\.[0-9]+\.[0-9]+/gm;
+      const githash = stdout.match(githashRegex);
+      const gitTag = stdout.match(gitTagRegex);
+      if (githash) {
+        resolve(githash[0]);
+      } else if (gitTag) {
+        resolve(gitTag[0]);
+      } else {
+        reject(
+          new Error(
+            "Could not find a githash or git tag in the output of get-current-deployed-commit.sh"
+          )
+        );
+      }
     });
   });
 
