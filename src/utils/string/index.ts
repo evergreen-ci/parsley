@@ -1,3 +1,5 @@
+import { LOG_LINE_SIZE_LIMIT } from "constants/logs";
+
 /**
  * `copyToClipboard` copies text to a user's clipboard.
  * @param textToCopy - text to be copied
@@ -92,4 +94,17 @@ export const getBytesAsString = (bytes: number, decimals = 2) => {
   const sizes = ["Bytes", "KB", "MB", "GB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return `${parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`;
+};
+
+/**
+ * `trimLineToMaxSize` trims a line to the max size limit
+ * @param line - the line to trim
+ * @returns the trimmed line
+ * @example
+ */
+export const trimLineToMaxSize = (line: string) => {
+  if (line.length > LOG_LINE_SIZE_LIMIT) {
+    return `${line.substring(0, LOG_LINE_SIZE_LIMIT)}...`;
+  }
+  return line;
 };

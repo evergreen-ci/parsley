@@ -5,6 +5,7 @@ import { LogTypes } from "constants/enums";
 import { ExpandedLines } from "types/logs";
 import { mergeIntervals } from "utils/expandedLines";
 import { getColorMapping, processResmokeLine } from "utils/resmoke";
+import { trimLineToMaxSize } from "utils/string";
 import { LogMetadata, SearchState } from "./types";
 
 interface LogState {
@@ -49,7 +50,9 @@ const reducer = (state: LogState, action: Action): LogState => {
         case LogTypes.RESMOKE_LOGS: {
           const transformedLogs = action.logs.reduce(
             (acc, logLine) => {
-              const processedLogLine = processResmokeLine(logLine);
+              const processedLogLine = processResmokeLine(
+                trimLineToMaxSize(logLine)
+              );
               const colorMapping = getColorMapping(
                 processedLogLine,
                 acc.colorMap
@@ -70,7 +73,10 @@ const reducer = (state: LogState, action: Action): LogState => {
           break;
         }
         default:
-          processedLogs = action.logs;
+          processedLogs = action.logs.reduce((acc, logLine) => {
+            acc.push(trimLineToMaxSize(logLine));
+            return acc;
+          }, [] as string[]);
           break;
       }
       return {

@@ -1,6 +1,7 @@
 import { act, renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { LogTypes } from "constants/enums";
+import { LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
 import { LogContextProvider, useLogContext } from ".";
 import { DIRECTION } from "./types";
@@ -51,7 +52,23 @@ describe("useLogContext", () => {
       expect(result.current.getLine(line as number)).toStrictEqual(lines[i]);
     }
   });
-
+  it("ingesting a large log line should trim it", () => {
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+      <Router>
+        <LogContextProvider>{children}</LogContextProvider>
+      </Router>
+    );
+    const { result } = renderHook(() => useLogContext(), { wrapper });
+    const lines = ["a".repeat(LOG_LINE_SIZE_LIMIT + 20)];
+    act(() => {
+      result.current.ingestLines(lines, LogTypes.EVERGREEN_TASK_LOGS);
+    });
+    expect(result.current.processedLogLines).toStrictEqual([0]);
+    expect(result.current.lineCount).toBe(lines.length);
+    expect(result.current.getLine(0)).toBe(
+      `${lines[0].slice(0, LOG_LINE_SIZE_LIMIT)}...`
+    );
+  });
   it("saving a filename should save it to the context", () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
       <Router>
