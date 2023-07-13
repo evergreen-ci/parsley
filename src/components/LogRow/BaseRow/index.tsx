@@ -215,7 +215,7 @@ const Index = styled.pre<{ lineNumber: number }>`
   width: ${size.xl};
   margin-top: 0;
   margin-bottom: 0;
-  margin-left: ${size.s};
+  margin-left: ${size.xs};
   margin-right: ${size.s};
   flex-shrink: 0;
 
