@@ -104,7 +104,7 @@ const BaseRow: React.FC<BaseRowProps> = ({
       onDoubleClick={handleDoubleClick}
       shared={shared}
     >
-      <StyledIcon
+      <ShareIcon
         data-cy={`log-link-${lineNumber}`}
         glyph={shared ? "ArrowWithCircle" : "Link"}
         onClick={handleClick}
@@ -203,18 +203,19 @@ const RowContainer = styled.div<{
   }
 `;
 
-const StyledIcon = styled(Icon)`
+const ShareIcon = styled(Icon)`
   cursor: pointer;
   user-select: none;
   flex-shrink: 0;
-  align-self: center;
+  margin-left: ${size.xxs};
+  margin-top: 2px;
 `;
 
 const Index = styled.pre<{ lineNumber: number }>`
   width: ${size.xl};
   margin-top: 0;
   margin-bottom: 0;
-  margin-left: ${size.s};
+  margin-left: ${size.xs};
   margin-right: ${size.s};
   flex-shrink: 0;
 
