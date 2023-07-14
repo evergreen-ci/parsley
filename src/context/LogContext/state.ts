@@ -2,6 +2,7 @@ import { useReducer } from "react";
 import Cookie from "js-cookie";
 import { CASE_SENSITIVE } from "constants/cookies";
 import { LogTypes } from "constants/enums";
+import { LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { ExpandedLines } from "types/logs";
 import { mergeIntervals } from "utils/expandedLines";
 import { getColorMapping, processResmokeLine } from "utils/resmoke";
@@ -11,6 +12,7 @@ import { LogMetadata, SearchState } from "./types";
 interface LogState {
   logs: string[];
   colorMapping?: Record<string, string>;
+  parsingError?: string;
   logMetadata?: LogMetadata;
   expandedLines: ExpandedLines;
   lineNumber?: number;
@@ -46,10 +48,15 @@ const reducer = (state: LogState, action: Action): LogState => {
     case "INGEST_LOGS": {
       let processedLogs;
       let colorMap;
+      let longLines = [] as number[];
+      let parsingError;
       switch (action.logType) {
         case LogTypes.RESMOKE_LOGS: {
           const transformedLogs = action.logs.reduce(
-            (acc, logLine) => {
+            (acc, logLine, index) => {
+              if (logLine.length > LOG_LINE_SIZE_LIMIT) {
+                acc.longLines.push(index);
+              }
               const processedLogLine = processResmokeLine(
                 trimLineToMaxSize(logLine)
               );
@@ -66,22 +73,42 @@ const reducer = (state: LogState, action: Action): LogState => {
             {
               colorMap: {} as Record<string, string>,
               processedLogs: [] as string[],
+              longLines: [] as number[],
             }
           );
+
           processedLogs = transformedLogs.processedLogs;
           colorMap = transformedLogs.colorMap;
+          longLines = transformedLogs.longLines;
           break;
         }
-        default:
-          processedLogs = action.logs.reduce((acc, logLine) => {
-            acc.push(trimLineToMaxSize(logLine));
-            return acc;
-          }, [] as string[]);
+        default: {
+          const transformedLogs = action.logs.reduce(
+            (acc, logLine, index) => {
+              if (logLine) {
+                if (logLine.length > LOG_LINE_SIZE_LIMIT) {
+                  acc.longLines.push(index);
+                }
+                acc.processedLogs.push(trimLineToMaxSize(logLine));
+              }
+              return acc;
+            },
+            { processedLogs: [] as string[], longLines: [] as number[] }
+          );
+          longLines = transformedLogs.longLines;
+          processedLogs = transformedLogs.processedLogs;
           break;
+        }
+      }
+      if (longLines.length > 0) {
+        parsingError = `The following lines were too long and have been truncated to ${LOG_LINE_SIZE_LIMIT} characters: ${longLines.join(
+          ", "
+        )}`;
       }
       return {
         ...state,
         logs: processedLogs,
+        parsingError,
         colorMapping: colorMap,
         logMetadata: {
           ...state.logMetadata,

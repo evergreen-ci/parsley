@@ -18,6 +18,7 @@ import {
 } from "constants/cookies";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
+import { useToastContext } from "context/toast";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useQueryParam, useQueryParams } from "hooks/useQueryParam";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
@@ -94,8 +95,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     QueryParams.UpperRange,
     undefined
   );
-
-  const [wrap, setWrap] = useState(Cookie.get(WRAP) === "true");
   const [filterLogic, setFilterLogic] = useQueryParam(
     QueryParams.FilterLogic,
     (Cookie.get(FILTER_LOGIC) as FilterLogic) ?? FilterLogic.And
@@ -112,7 +111,10 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
     []
   );
+  const [wrap, setWrap] = useState(Cookie.get(WRAP) === "true");
+
   const listRef = useRef<PaginatedVirtualListRef>(null);
+  const dispatchToast = useToastContext();
 
   const stringifiedFilters = JSON.stringify(filters);
   const stringifiedBookmarks = bookmarks.toString();
@@ -128,6 +130,12 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       filterLogic,
     ]
   );
+
+  useEffect(() => {
+    if (state.parsingError) {
+      dispatchToast.warning(state.parsingError);
+    }
+  }, [state.parsingError, dispatchToast]);
 
   useEffect(
     () => {
