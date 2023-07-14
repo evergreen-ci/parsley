@@ -154,6 +154,25 @@ describe("usePaginatedVirtualList", () => {
     });
   });
 
+  it("should reset the page to 0 if the row count is less than the page size", () => {
+    const { rerender, result } = renderHook(
+      ({ overrideRowCount }) =>
+        usePaginatedVirtualList({
+          rowCount: overrideRowCount,
+          paginationThreshold,
+          paginationOffset,
+          ref,
+        }),
+      { initialProps: { overrideRowCount: rowCount } }
+    );
+    act(() => {
+      result.current.scrollToNextPage();
+    });
+    expect(result.current.currentPage).toBe(1);
+    rerender({ overrideRowCount: 1000 });
+    expect(result.current.currentPage).toBe(0);
+  });
+
   describe("scrolling to the previous page", () => {
     it("should reflect offset when not on the first page and should scroll to compensate for offset", () => {
       const scrollToIndexMock = jest.fn();

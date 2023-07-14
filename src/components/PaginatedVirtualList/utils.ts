@@ -20,6 +20,11 @@ const calculatePageSize = (options: calculatePageSizeOptions) => {
     return Math.min(maxPageSize, totalItemCount);
   }
 
+  // If we have fewer items than fit on one page, the remainder is equal to the total count.
+  if (totalItemCount <= maxPageSize) {
+    return totalItemCount;
+  }
+
   const remainingItems = totalItemCount - maxPageSize * currentPage;
 
   return Math.min(maxPageSize, remainingItems);

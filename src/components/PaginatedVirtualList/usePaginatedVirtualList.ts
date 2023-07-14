@@ -49,6 +49,13 @@ const usePaginatedVirtualList = ({
     }
   }, [currentPage]);
 
+  // Reset the page to 0 if the row count is less than a page length, but we're not on the first page (e.g. if a filter is applied that significantly shortens the row count).
+  useEffect(() => {
+    if (rowCount < paginationThreshold && currentPage !== 0) {
+      setCurrentPage(0);
+    }
+  }, [currentPage, paginationThreshold, rowCount]);
+
   // The following useEffect is necessary to scroll to the correct position when the user
   // scrolls to the next or previous page.
   useEffect(() => {
