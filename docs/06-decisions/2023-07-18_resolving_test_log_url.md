@@ -13,5 +13,5 @@ way to resolve test log URLs in Parsley that requires fewer manual updates.
 
 ## Decision Outcome
 
-The full test log URLs and rendering options are generated from Evergreen and available to Parsley from the Task.tests GraphQL query so
-Parsley doesn't have to rely on maintaining URL templates
+The full test log URLs and rendering options are generated from Evergreen and available via the Task.tests GraphQL query, so
+Parsley does not have to maintain URL templates.
