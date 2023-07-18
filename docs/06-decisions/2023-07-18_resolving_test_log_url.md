@@ -9,7 +9,7 @@
 Parsley makes an HTTP request with a test log URL in order to render test logs in the application. Historically, test logs URLs are
 resolved in Parsley by passing information available in the Parsley application URL into a string template. This mechanism could lead
 to breaking changes when the test log URL structure is updated before the string template in Parsley. There should be a more reliable
-way to resolve test log URLs in Parsley that require less updates to Parsley.
+way to resolve test log URLs in Parsley that requires fewer manual updates.
 
 ## Decision Outcome
 
