@@ -32,11 +32,11 @@ const decodeStream = async (stream: ReadableStream, lineSizeLimit?: number) => {
       lines.shift();
     }
     if (lineSizeLimit) {
-      if (lines[lines.length - 1].length > lineSizeLimit) {
+      if (lines[lines.length - 1]?.length > lineSizeLimit) {
         trimmedLines.push(lines.length - 1);
         lines[lines.length - 1] = `${lines[lines.length - 1].substring(
           0,
-          lineSizeLimit
+          lineSizeLimit - 3
         )}...`;
       }
     }

@@ -78,10 +78,28 @@ const useLogDownloader = (
         }
         setData(logs);
         if (trimmedLines) {
+          sendEvent({
+            name: "Log Download Incomplete",
+            duration: Date.now() - timeStart,
+            reason: "Log line size limit exceeded",
+            downloaded: getFileSize(),
+          });
+          reportError({
+            message: "Log line size limit exceeded",
+            name: "Log download incomplete",
+            metadata: {
+              trimmedLines,
+              url,
+            },
+          }).warning();
           dispatchToast.warning(
-            `Parsley was unable to process the following lines due to performance reasons from the log file due to them exceeding the line size limit of ${LOG_LINE_SIZE_LIMIT}: ${trimmedLines.join(
-              ", "
-            )}`
+            `Parsley was unable to process the following lines due to performance reasons since they exceed the line size limit of ${getBytesAsString(
+              LOG_LINE_SIZE_LIMIT
+            )}: ${trimmedLines.join(", ")}`,
+            true,
+            {
+              title: "Log not fully downloaded",
+            }
           );
         }
       })
