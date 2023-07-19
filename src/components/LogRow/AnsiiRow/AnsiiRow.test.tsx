@@ -1,4 +1,5 @@
 import { LogContextProvider } from "context/LogContext";
+import { mockUseToastContext } from "context/toast/__mocks__";
 import { renderWithRouterMatch, screen } from "test_utils";
 import AnsiiRow from ".";
 
@@ -10,6 +11,12 @@ const wrapper = (logs: string[]) => {
 };
 
 describe("ansiiRow", () => {
+  beforeEach(() => {
+    mockUseToastContext();
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   it("does not render an ansii row if getLine returns undefined", () => {
     renderWithRouterMatch(
       <AnsiiRow {...ansiiProps} lineIndex={99} lineNumber={99} />,

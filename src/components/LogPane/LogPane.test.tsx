@@ -1,9 +1,16 @@
 import { VirtuosoMockContext } from "react-virtuoso";
 import { LogContextProvider } from "context/LogContext";
+import { mockUseToastContext } from "context/toast/__mocks__";
 import { renderWithRouterMatch as render, screen } from "test_utils";
 import LogPane from ".";
 
 describe("logPane", () => {
+  beforeEach(() => {
+    mockUseToastContext();
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   it("should render the virtualized list with the passed in row type", () => {
     const list = Array.from({ length: 10000 }, (_, i) => `${i}`);
 

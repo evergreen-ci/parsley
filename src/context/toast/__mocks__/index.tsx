@@ -10,19 +10,8 @@ import { useToastContext } from "..";
  * @returns an object with the Component, the mocked useToastContext, and the dispatchToast methods
  */
 const RenderFakeToastContext = (Component: React.ReactElement = <div />) => {
-  const dispatchToast: ReturnType<typeof useToastContext> = {
-    success: jest.fn(),
-    error: jest.fn(),
-    info: jest.fn(),
-    warning: jest.fn(),
-    progress: jest.fn(),
-  };
-
-  const useToastContextSpied = jest
-    .spyOn(toast, "useToastContext")
-    .mockImplementation(() => ({
-      ...dispatchToast,
-    }));
+  const { useToastContext: useToastContextSpied, dispatchToast } =
+    mockUseToastContext();
 
   return {
     Component: () => Component,
@@ -31,4 +20,27 @@ const RenderFakeToastContext = (Component: React.ReactElement = <div />) => {
   };
 };
 
-export { RenderFakeToastContext };
+/**
+ * `mockUseToastContext` is a utility that mocks the useToastContext hook and returns the mocked hook and the dispatchToast methods.
+ * @returns an object with the mocked useToastContext and the dispatchToast methods
+ */
+const mockUseToastContext = () => {
+  const dispatchToast: ReturnType<typeof useToastContext> = {
+    success: jest.fn(),
+    error: jest.fn(),
+    info: jest.fn(),
+    warning: jest.fn(),
+    progress: jest.fn(),
+  };
+  const useToastContextSpied = jest
+    .spyOn(toast, "useToastContext")
+    .mockImplementation(() => ({
+      ...dispatchToast,
+    }));
+  return {
+    useToastContext: useToastContextSpied,
+    dispatchToast,
+  };
+};
+
+export { RenderFakeToastContext, mockUseToastContext };

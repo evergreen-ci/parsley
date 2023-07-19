@@ -2,6 +2,7 @@ import { act } from "@testing-library/react-hooks";
 import Cookie from "js-cookie";
 import { LogTypes } from "constants/enums";
 import { LogContextProvider, useLogContext } from "context/LogContext";
+import { mockUseToastContext } from "context/toast/__mocks__";
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import { renderComponentWithHook } from "test_utils/TestHooks";
 import PrettyPrintToggle from ".";
@@ -16,6 +17,10 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 describe("pretty print toggle", () => {
   beforeEach(() => {
     mockedGet.mockImplementation(() => "true");
+    mockUseToastContext();
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
   });
 
   it("defaults to 'false' if cookie is unset", () => {

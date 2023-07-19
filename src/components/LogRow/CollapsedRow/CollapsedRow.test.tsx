@@ -1,4 +1,5 @@
 import { LogContextProvider } from "context/LogContext";
+import { mockUseToastContext } from "context/toast/__mocks__";
 import { renderWithRouterMatch, screen, userEvent } from "test_utils";
 import CollapsedRow from ".";
 
@@ -11,6 +12,12 @@ const wrapper = (logs: string[]) => {
 
 describe("collapsedRow", () => {
   const user = userEvent.setup();
+  beforeEach(() => {
+    mockUseToastContext();
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it("renders a collapsed log line", () => {
     renderWithRouterMatch(

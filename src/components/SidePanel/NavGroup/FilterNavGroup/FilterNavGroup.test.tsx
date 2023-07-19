@@ -1,5 +1,6 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { LogContextProvider } from "context/LogContext";
+import { mockUseToastContext } from "context/toast/__mocks__";
 import {
   renderWithRouterMatch as render,
   screen,
@@ -16,6 +17,12 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 
 describe("filters", () => {
   jest.setTimeout(10000);
+  beforeEach(() => {
+    mockUseToastContext();
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   const user = userEvent.setup();
 
   it("shows a message when no filters have been applied", () => {

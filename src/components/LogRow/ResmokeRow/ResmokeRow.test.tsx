@@ -1,4 +1,5 @@
 import { LogContextProvider } from "context/LogContext";
+import { mockUseToastContext } from "context/toast/__mocks__";
 import { renderWithRouterMatch, screen } from "test_utils";
 import ResmokeRow from ".";
 
@@ -10,6 +11,12 @@ const wrapper = (logs: string[]) => {
 };
 
 describe("resmokeRow", () => {
+  beforeEach(() => {
+    mockUseToastContext();
+  });
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
   it("does not render a resmoke row if getLine returns undefined", () => {
     renderWithRouterMatch(
       <ResmokeRow {...resmokeProps} lineIndex={99} lineNumber={99} />,

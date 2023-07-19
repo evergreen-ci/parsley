@@ -112,7 +112,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     []
   );
   const [wrap, setWrap] = useState(Cookie.get(WRAP) === "true");
-
   const listRef = useRef<PaginatedVirtualListRef>(null);
   const dispatchToast = useToastContext();
 
