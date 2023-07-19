@@ -1,5 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { LogTypes } from "constants/enums";
+import { LOG_LINE_TOO_LARGE_ERROR } from "constants/errors";
 import { LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { RenderFakeToastContext } from "context/toast/__mocks__";
 import { useLogDownloader } from ".";
@@ -146,7 +147,7 @@ describe("useLogDownloader", () => {
       `${"a".repeat(LOG_LINE_SIZE_LIMIT - 3)}...`,
     ]);
     expect(dispatchToast.warning).toHaveBeenCalledWith(
-      `Parsley was unable to process the following lines due to performance reasons since they exceed the line size limit of ${LOG_LINE_SIZE_LIMIT}: 0`,
+      LOG_LINE_TOO_LARGE_ERROR,
       true,
       { title: "Log not fully downloaded" }
     );

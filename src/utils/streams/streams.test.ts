@@ -24,7 +24,7 @@ describe("decodeStream", () => {
   it("should trim a line if it is longer than the line limit", async () => {
     const readableStream = createReadableStream(["Hello World!"]);
     const { result, trimmedLines } = await decodeStream(readableStream, 5);
-    expect(trimmedLines).toStrictEqual([0]);
+    expect(trimmedLines).toBe(true);
     expect(result).toStrictEqual(["He..."]);
   });
 });
