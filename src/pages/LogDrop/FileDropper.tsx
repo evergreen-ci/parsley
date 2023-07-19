@@ -48,7 +48,8 @@ const FileDropper: React.FC = () => {
                   fileSizeLimit: LOG_FILE_SIZE_LIMIT,
                 });
                 const { result: logLines, trimmedLines } = await decodeStream(
-                  stream
+                  stream,
+                  LOG_LINE_SIZE_LIMIT
                 );
                 leaveBreadcrumb(
                   "Decoded file",
@@ -64,9 +65,13 @@ const FileDropper: React.FC = () => {
                 ingestLines(logLines, logType);
                 if (trimmedLines) {
                   dispatchToast.warning(
-                    `Parsley was unable to process the following lines due to performance reasons from the log file due to them exceeding the line size limit of ${LOG_LINE_SIZE_LIMIT}: ${trimmedLines.join(
+                    `Parsley was unable to process the following lines due to performance reasons since they exceed the line size limit of ${LOG_LINE_SIZE_LIMIT}: ${trimmedLines.join(
                       ", "
-                    )}`
+                    )}`,
+                    true,
+                    {
+                      title: "Log not fully loaded",
+                    }
                   );
                 }
               } catch (e: any) {
