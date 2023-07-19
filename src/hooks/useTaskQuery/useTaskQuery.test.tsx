@@ -3,7 +3,6 @@ import { renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter } from "react-router-dom";
 import { LogTypes } from "constants/enums";
 import { LogContextProvider } from "context/LogContext";
-import { mockUseToastContext } from "context/toast/__mocks__";
 import { Task } from "gql/generated/types";
 import { evergreenTaskMock, logkeeperMetadataMock } from "test_data/task";
 import { useTaskQuery } from ".";
@@ -17,12 +16,6 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe("useTaskQuery", () => {
-  beforeEach(() => {
-    mockUseToastContext();
-  });
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
   it("should be able to fetch task corresponding to evergreen task logs", async () => {
     const { result, waitForNextUpdate } = renderHook(
       () =>

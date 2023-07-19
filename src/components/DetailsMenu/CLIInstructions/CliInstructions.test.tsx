@@ -2,7 +2,6 @@ import { act } from "@testing-library/react";
 import { LogTypes } from "constants/enums";
 import { getResmokeLogURL } from "constants/logURLTemplates";
 import { LogContextProvider, useLogContext } from "context/LogContext";
-import { mockUseToastContext } from "context/toast/__mocks__";
 import { renderWithRouterMatch as render, screen } from "test_utils";
 import { renderComponentWithHook } from "test_utils/TestHooks";
 import CLIInstructions from ".";
@@ -12,12 +11,6 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe("cliInstructions", () => {
-  beforeEach(() => {
-    mockUseToastContext();
-  });
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
   it("should not exist if no task id or build id is provided", () => {
     const { Component } = renderComponentWithHook(
       useLogContext,

@@ -2,7 +2,6 @@ import { act, renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { LogTypes } from "constants/enums";
 import { LOG_LINE_SIZE_LIMIT } from "constants/logs";
-import { mockUseToastContext } from "context/toast/__mocks__";
 import { isCollapsedRow } from "utils/collapsedRow";
 import { LogContextProvider, useLogContext } from ".";
 import { DIRECTION } from "./types";
@@ -22,12 +21,6 @@ const Router = ({
 );
 
 describe("useLogContext", () => {
-  beforeEach(() => {
-    mockUseToastContext();
-  });
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
   it("should initialized with an empty list of logs", () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
       <Router>

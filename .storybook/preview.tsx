@@ -6,7 +6,6 @@ import { RouterProvider, createMemoryRouter } from "react-router-dom";
 import { WithApolloClient } from "storybook-addon-apollo-client/dist/decorators";
 import { GlobalStyles } from "../src/components/styles";
 import { LogContextProvider } from "../src/context/LogContext";
-import { ToastProvider } from "../src/context/toast";
 
 export const parameters: Parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
@@ -32,11 +31,6 @@ export const decorators: Decorator[] = [
     <LogContextProvider>
       <Story />
     </LogContextProvider>
-  ),
-  (Story: () => JSX.Element) => (
-    <ToastProvider>
-      <Story />
-    </ToastProvider>
   ),
   (Story: () => JSX.Element) => {
     const routes = [

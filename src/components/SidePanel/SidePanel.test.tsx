@@ -1,7 +1,6 @@
 import { MockedProvider } from "@apollo/client/testing";
 import Cookie from "js-cookie";
 import { LogContextProvider } from "context/LogContext";
-import { mockUseToastContext } from "context/toast/__mocks__";
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import SidePanel from ".";
 
@@ -21,10 +20,6 @@ describe("sidePanel", () => {
     // Setting the cookie to false means the drawer will be open by default, which means we
     // won't have to toggle it to test its contents.
     mockedGet.mockImplementation(() => "false");
-    mockUseToastContext();
-  });
-  afterEach(() => {
-    jest.clearAllMocks();
   });
 
   it("should be uncollapsed if the user has never seen the filters drawer before", () => {

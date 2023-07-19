@@ -1,5 +1,4 @@
 import { LogContextProvider } from "context/LogContext";
-import { mockUseToastContext } from "context/toast/__mocks__";
 import { renderWithRouterMatch, screen, userEvent, waitFor } from "test_utils";
 import ButtonRow from ".";
 
@@ -11,12 +10,6 @@ const wrapper = (logs: string[]) => {
 };
 
 describe("buttonRow", () => {
-  beforeEach(() => {
-    mockUseToastContext();
-  });
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
   const user = userEvent.setup();
   describe("jira button", () => {
     it("should be disabled when there are no bookmarks", async () => {

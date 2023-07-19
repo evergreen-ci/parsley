@@ -1,6 +1,5 @@
 import Cookie from "js-cookie";
 import { LogContextProvider } from "context/LogContext";
-import { mockUseToastContext } from "context/toast/__mocks__";
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import FilterLogicToggle from ".";
 
@@ -14,10 +13,6 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 describe("filter logic toggle", () => {
   beforeEach(() => {
     mockedGet.mockImplementation(() => "or");
-    mockUseToastContext();
-  });
-  afterEach(() => {
-    jest.clearAllMocks();
   });
 
   it("defaults to 'and' if cookie is unset", () => {

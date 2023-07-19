@@ -2,7 +2,6 @@ import { MockedProvider, MockedProviderProps } from "@apollo/client/testing";
 import { act } from "@testing-library/react-hooks";
 import { LogTypes } from "constants/enums";
 import { LogContextProvider, useLogContext } from "context/LogContext";
-import { mockUseToastContext } from "context/toast/__mocks__";
 import {
   ProjectFiltersQuery,
   ProjectFiltersQueryVariables,
@@ -30,12 +29,6 @@ const wrapper = (mocks: MockedProviderProps["mocks"]) => {
 };
 
 describe("projectFiltersModal", () => {
-  beforeEach(() => {
-    mockUseToastContext();
-  });
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
   it("shows message when no filters are defined in project", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,

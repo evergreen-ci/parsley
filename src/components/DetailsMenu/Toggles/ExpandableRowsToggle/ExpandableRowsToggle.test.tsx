@@ -1,6 +1,5 @@
 import Cookie from "js-cookie";
 import { LogContextProvider } from "context/LogContext";
-import { mockUseToastContext } from "context/toast/__mocks__";
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import ExpandableRowsToggle from ".";
 
@@ -14,10 +13,6 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 describe("expandable rows toggle", () => {
   beforeEach(() => {
     mockedGet.mockImplementation(() => "true");
-    mockUseToastContext();
-  });
-  afterEach(() => {
-    jest.clearAllMocks();
   });
 
   it("defaults to 'true' if cookie is unset", () => {
