@@ -8,7 +8,7 @@ const decodeStream = async (stream: ReadableStream, lineSizeLimit?: number) => {
   const decoder = new TextDecoder();
   const reader = stream.getReader();
   const result: string[] = [];
-  const trimmedLines: number[] = [];
+  let trimmedLines = false;
 
   // eslint-disable-next-line no-constant-condition -- while(true) is the only way to stream
   while (true) {
@@ -31,17 +31,18 @@ const decodeStream = async (stream: ReadableStream, lineSizeLimit?: number) => {
 
       lines.shift();
     }
+
+    result.push(...lines);
+
     if (lineSizeLimit) {
-      if (lines[lines.length - 1]?.length > lineSizeLimit) {
-        trimmedLines.push(lines.length - 1);
-        lines[lines.length - 1] = `${lines[lines.length - 1].substring(
+      if (result[result.length - 1].length > lineSizeLimit) {
+        result[result.length - 1] = `${result[result.length - 1].slice(
           0,
           lineSizeLimit - 3
         )}...`;
+        trimmedLines = true;
       }
     }
-
-    result.push(...lines);
   }
 };
 

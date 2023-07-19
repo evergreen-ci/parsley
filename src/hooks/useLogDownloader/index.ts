@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import { useLogDownloadAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
-import { LOG_FILE_SIZE_LIMIT, LOG_LINE_SIZE_LIMIT } from "constants/logs";
+import { LOG_LINE_TOO_LARGE_ERROR } from "constants/errors";
+import { LOG_FILE_SIZE_LIMIT } from "constants/logs";
 import { useToastContext } from "context/toast";
 import useStateRef from "hooks/useStateRef";
 import { isProduction } from "utils/environmentVariables";
@@ -92,15 +93,9 @@ const useLogDownloader = (
               url,
             },
           }).warning();
-          dispatchToast.warning(
-            `Parsley was unable to process the following lines due to performance reasons since they exceed the line size limit of ${getBytesAsString(
-              LOG_LINE_SIZE_LIMIT
-            )}: ${trimmedLines.join(", ")}`,
-            true,
-            {
-              title: "Log not fully downloaded",
-            }
-          );
+          dispatchToast.warning(LOG_LINE_TOO_LARGE_ERROR, true, {
+            title: "Log not fully downloaded",
+          });
         }
       })
       .catch((err: Error) => {
