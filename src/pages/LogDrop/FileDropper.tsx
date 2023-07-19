@@ -4,7 +4,7 @@ import { palette } from "@leafygreen-ui/palette";
 import { useDropzone } from "react-dropzone";
 import { useLogDropAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
-import { LOG_FILE_SIZE_LIMIT } from "constants/logs";
+import { LOG_FILE_SIZE_LIMIT, LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
@@ -47,7 +47,9 @@ const FileDropper: React.FC = () => {
                 const stream = await fileToStream(state.file, {
                   fileSizeLimit: LOG_FILE_SIZE_LIMIT,
                 });
-                const logLines = await decodeStream(stream);
+                const { result: logLines, trimmedLines } = await decodeStream(
+                  stream
+                );
                 leaveBreadcrumb(
                   "Decoded file",
                   { fileSize: logLines.length },
@@ -60,6 +62,13 @@ const FileDropper: React.FC = () => {
                 });
                 setFileName(state.file.name);
                 ingestLines(logLines, logType);
+                if (trimmedLines) {
+                  dispatchToast.warning(
+                    `Parsley was unable to process the following lines due to performance reasons from the log file due to them exceeding the line size limit of ${LOG_LINE_SIZE_LIMIT}: ${trimmedLines.join(
+                      ", "
+                    )}`
+                  );
+                }
               } catch (e: any) {
                 dispatchToast.error("An error occurred while parsing the log.");
                 reportError(e).severe();
