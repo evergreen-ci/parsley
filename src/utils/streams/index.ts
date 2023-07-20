@@ -1,3 +1,5 @@
+import { trimLogLineToMaxSize } from "utils/string";
+
 /**
  * `decodeStream` is a helper function that takes a ReadableStream and returns a Promise that resolves to an array of strings.
  * @param stream - ReadableStream to decode
@@ -36,10 +38,10 @@ const decodeStream = async (stream: ReadableStream, lineSizeLimit?: number) => {
 
     if (lineSizeLimit) {
       if (result[result.length - 1].length > lineSizeLimit) {
-        result[result.length - 1] = `${result[result.length - 1].slice(
-          0,
-          lineSizeLimit - 3
-        )}...`;
+        result[result.length - 1] = trimLogLineToMaxSize(
+          result[result.length - 1],
+          lineSizeLimit
+        );
         trimmedLines = true;
       }
     }

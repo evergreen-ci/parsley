@@ -25,7 +25,7 @@ describe("decodeStream", () => {
     const readableStream = createReadableStream(["Hello World!"]);
     const { result, trimmedLines } = await decodeStream(readableStream, 5);
     expect(trimmedLines).toBe(true);
-    expect(result).toStrictEqual(["He..."]);
+    expect(result).toStrictEqual(["Hello…"]);
   });
 });
 
