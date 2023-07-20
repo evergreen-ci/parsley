@@ -11,14 +11,14 @@ interface LogWindowProps {
   logType: LogTypes;
   isUploadedLog: boolean;
 }
-const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
+const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
   const {
     clearExpandedLines,
     collapseLines,
-    scrollToLine,
     expandedLines,
     lineCount,
     processedLogLines,
+    scrollToLine,
   } = useLogContext();
 
   return (

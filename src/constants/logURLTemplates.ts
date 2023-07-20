@@ -62,7 +62,7 @@ const getEvergreenTestLogURL = (
   testID: string,
   options: { text?: boolean; groupID?: string }
 ) => {
-  const { text, groupID } = options;
+  const { groupID, text } = options;
   const params = {
     test_name: testID,
     group_id: groupID,
@@ -87,7 +87,7 @@ const getResmokeLogURL = (
   buildID: string,
   options: { testID?: string; raw?: boolean; html?: boolean; metadata?: true }
 ) => {
-  const { raw, html, testID, metadata } = options;
+  const { html, metadata, raw, testID } = options;
   const params = {
     raw,
     html,

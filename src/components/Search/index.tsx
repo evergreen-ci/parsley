@@ -25,9 +25,9 @@ const Search: React.FC = () => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [filters, setFilters] = useFilterParam();
   const [highlights, setHighlights] = useHighlightParam();
-  const { hasLogs, logMetadata, searchState, paginate, setSearch } =
+  const { hasLogs, logMetadata, paginate, searchState, setSearch } =
     useLogContext();
-  const { logType, taskID, execution, buildID } = logMetadata ?? {};
+  const { buildID, execution, logType, taskID } = logMetadata ?? {};
   const { hasSearch } = searchState;
 
   const { task } = useTaskQuery({ logType, taskID, execution, buildID });

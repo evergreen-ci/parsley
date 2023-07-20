@@ -71,7 +71,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // This function is only used in local development.
-  const devLogin = useCallback(async ({ username, password }: LoginCreds) => {
+  const devLogin = useCallback(async ({ password, username }: LoginCreds) => {
     await fetch(`${evergreenURL}/login`, {
       method: "POST",
       credentials: "include",

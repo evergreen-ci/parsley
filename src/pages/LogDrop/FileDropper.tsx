@@ -23,7 +23,7 @@ const FileDropper: React.FC = () => {
   const { sendEvent } = useLogDropAnalytics();
   const { ingestLines, setFileName, setLogMetadata } = useLogContext();
   const [, startTransition] = useTransition();
-  const { state, dispatch } = useLogDropState();
+  const { dispatch, state } = useLogDropState();
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -80,7 +80,7 @@ const FileDropper: React.FC = () => {
     ]
   );
 
-  const { getRootProps, getInputProps, open } = useDropzone({
+  const { getInputProps, getRootProps, open } = useDropzone({
     onDrop,
     maxFiles: 1,
     multiple: false,

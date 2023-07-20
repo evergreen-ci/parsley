@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 
-const { red, green, blue, yellow, purple } = palette;
+const { blue, green, purple, red, yellow } = palette;
 
 const Highlight = styled.mark<{ "data-cy"?: string; color?: string }>`
   background-color: ${({ color }) => color};

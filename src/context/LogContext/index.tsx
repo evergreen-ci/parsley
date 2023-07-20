@@ -108,7 +108,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     Cookie.get(PRETTY_PRINT_BOOKMARKS) === "true"
   );
 
-  const { state, dispatch } = useLogState(initialLogLines);
+  const { dispatch, state } = useLogState(initialLogLines);
   const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
     []
   );

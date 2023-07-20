@@ -45,7 +45,7 @@ export const SingleLine: CustomStoryObj<AnsiiRowProps> = {
 
 // Multiple AnsiiRows.
 const MultiLineStory = (args: any) => {
-  const { ingestLines, processedLogLines, preferences } = useLogContext();
+  const { ingestLines, preferences, processedLogLines } = useLogContext();
   const { setWrap } = preferences;
 
   useEffect(() => {

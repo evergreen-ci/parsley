@@ -15,7 +15,7 @@ const CLIInstructions = () => {
 };
 
 const getCLICommand = (logMetadata: LogMetadata) => {
-  const { taskID, execution, testID, logType, origin, buildID } = logMetadata;
+  const { buildID, execution, logType, origin, taskID, testID } = logMetadata;
   switch (logType) {
     case LogTypes.EVERGREEN_TASK_LOGS: {
       if (!taskID || !execution || !origin) {

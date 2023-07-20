@@ -18,7 +18,7 @@ const ButtonRow: React.FC = () => {
   const [hasCopied, setHasCopied] = useState(false);
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
 
-  const { htmlLogURL, rawLogURL, jobLogsURL, legacyJobLogsURL, lobsterURL } =
+  const { htmlLogURL, jobLogsURL, legacyJobLogsURL, lobsterURL, rawLogURL } =
     logMetadata || {};
   const tooltipText = bookmarks.length
     ? "Copy Bookmarked Lines In Jira Format"

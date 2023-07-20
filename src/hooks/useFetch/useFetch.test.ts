@@ -50,7 +50,7 @@ describe("useFetch", () => {
 
     let skip = true;
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
-    const { result, rerender, waitForNextUpdate } = renderHook(() =>
+    const { rerender, result, waitForNextUpdate } = renderHook(() =>
       useFetch(API_URL, { skip })
     );
     expect(mockFetchPromise).not.toHaveBeenCalled();

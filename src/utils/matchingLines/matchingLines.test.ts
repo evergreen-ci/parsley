@@ -17,9 +17,9 @@ const makeFilter = (filter: {
   visible?: boolean;
 }) => {
   const {
-    name,
     caseSensitive = CaseSensitivity.Insensitive,
     matchType = MatchType.Exact,
+    name,
     visible = true,
   } = filter;
 

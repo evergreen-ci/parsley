@@ -25,7 +25,7 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   testID,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
-  const { task, loading } = useTaskQuery({
+  const { loading, task } = useTaskQuery({
     logType,
     taskID,
     execution,
@@ -53,7 +53,7 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     status,
     versionMetadata,
   } = task;
-  const { isPatch, projectIdentifier, message, revision } = versionMetadata;
+  const { isPatch, message, projectIdentifier, revision } = versionMetadata;
 
   const currentTest =
     task?.tests?.testResults?.find((test) =>

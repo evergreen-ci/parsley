@@ -104,7 +104,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       break;
   }
 
-  const { data, error, isLoading, fileSize } = useLogDownloader(
+  const { data, error, fileSize, isLoading } = useLogDownloader(
     rawLogURL,
     logType
   );

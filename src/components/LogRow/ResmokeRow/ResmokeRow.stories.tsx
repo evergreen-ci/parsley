@@ -48,8 +48,8 @@ export const SingleLine: CustomStoryObj<ResmokeRowProps> = {
 
 // Multiple ResmokeRows.
 const MultipleLinesStory = (args: any) => {
-  const { ingestLines, processedLogLines, preferences } = useLogContext();
-  const { setWrap, setPrettyPrint } = preferences;
+  const { ingestLines, preferences, processedLogLines } = useLogContext();
+  const { setPrettyPrint, setWrap } = preferences;
 
   useEffect(() => {
     ingestLines(logLines, LogTypes.RESMOKE_LOGS);

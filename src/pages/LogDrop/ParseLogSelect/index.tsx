@@ -16,8 +16,8 @@ interface ParseLogSelectProps {
 
 const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
   fileName,
-  onParse,
   onCancel,
+  onParse,
 }) => {
   const [logType, setLogType] = useState<LogTypes | undefined>(
     (Cookie.get(LAST_SELECTED_LOG_TYPE) as LogTypes) ?? undefined

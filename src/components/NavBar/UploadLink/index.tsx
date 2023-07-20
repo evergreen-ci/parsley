@@ -12,7 +12,7 @@ interface UploadLinkProps {
   hasLogs: boolean;
   clearLogs: () => void;
 }
-const UploadLink: React.FC<UploadLinkProps> = ({ hasLogs, clearLogs }) => {
+const UploadLink: React.FC<UploadLinkProps> = ({ clearLogs, hasLogs }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { sendEvent } = useLogDropAnalytics();

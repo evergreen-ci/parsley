@@ -12,10 +12,10 @@ interface UsePaginatedVirtualListProps {
 }
 
 const usePaginatedVirtualList = ({
-  rowCount,
   paginationOffset,
   paginationThreshold,
   ref,
+  rowCount,
 }: UsePaginatedVirtualListProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const prevPage = usePrevious(currentPage);

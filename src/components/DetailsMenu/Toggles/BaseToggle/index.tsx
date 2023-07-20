@@ -20,11 +20,11 @@ interface BaseToggleProps {
 const BaseToggle: React.FC<BaseToggleProps> = ({
   "data-cy": dataCy,
   disabled = false,
-  rightLabel = "ON",
-  leftLabel = "OFF",
   label,
-  value,
+  leftLabel = "OFF",
   onChange,
+  rightLabel = "ON",
+  value,
 }) => (
   <DetailRow>
     <DetailName>{label}</DetailName>

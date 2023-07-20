@@ -22,10 +22,10 @@ type UseTaskQueryReturnType = {
 };
 
 export const useTaskQuery = ({
+  buildID,
+  execution,
   logType,
   taskID,
-  execution,
-  buildID,
 }: UseTaskQueryProps): UseTaskQueryReturnType => {
   const isResmoke = logType === LogTypes.RESMOKE_LOGS;
 

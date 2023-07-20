@@ -51,11 +51,11 @@ export const matchesFilters = (
   filterLogic: FilterLogic
 ) => {
   if (filterLogic === FilterLogic.And) {
-    return regexToMatch.every(({ regex, isMatch }) =>
+    return regexToMatch.every(({ isMatch, regex }) =>
       isMatch ? regex.test(line) : !regex.test(line)
     );
   }
-  return regexToMatch.some(({ regex, isMatch }) =>
+  return regexToMatch.some(({ isMatch, regex }) =>
     isMatch ? regex.test(line) : !regex.test(line)
   );
 };

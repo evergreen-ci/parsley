@@ -66,7 +66,7 @@ const ShortcutModal: React.FC<ShortcutModalProps> = ({ open, setOpen }) => {
           <H3>Parsley Keyboard Shortcuts</H3>
         </ModalTitle>
 
-        {shortcuts.map(({ keys, description }) => (
+        {shortcuts.map(({ description, keys }) => (
           <ModalRow key={description}>
             <ShortcutKeys>
               {keys.map((k, idx) => (

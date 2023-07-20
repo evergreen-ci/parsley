@@ -3,7 +3,7 @@ import { palette } from "@leafygreen-ui/palette";
 import { Body, BodyProps } from "@leafygreen-ui/typography";
 import { size } from "constants/tokens";
 
-const { red, black } = palette;
+const { black, red } = palette;
 interface SearchCountProps {
   matchingSearchCount: number;
   currentSearchIndex?: number;

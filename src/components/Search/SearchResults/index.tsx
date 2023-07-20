@@ -12,8 +12,8 @@ interface SearchResultsProps {
 }
 
 const SearchResults: React.FC<SearchResultsProps> = ({
-  searchState,
   paginate,
+  searchState,
 }) => {
   // Register keyboard shortcuts for paginating backwards.
   useKeyboardShortcut({ charKey: CharKey.P }, () =>

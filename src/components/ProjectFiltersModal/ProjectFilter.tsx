@@ -17,11 +17,11 @@ interface ProjectFilterProps {
 }
 
 const ProjectFilter: React.FC<ProjectFilterProps> = ({
-  addFilter,
-  removeFilter,
   active,
-  selected,
+  addFilter,
   filter,
+  removeFilter,
+  selected,
 }) => {
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {

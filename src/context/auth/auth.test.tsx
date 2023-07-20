@@ -6,7 +6,7 @@ import { mockEnvironmentVariables } from "test_utils/utils";
 import { evergreenURL, graphqlURL } from "utils/environmentVariables";
 import { AuthProvider, useAuthContext } from ".";
 
-const { mockEnv, cleanup } = mockEnvironmentVariables();
+const { cleanup, mockEnv } = mockEnvironmentVariables();
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <MemoryRouter initialEntries={["/"]}>
@@ -53,7 +53,7 @@ describe("auth", () => {
     const mockFetchPromise = jest.fn().mockResolvedValue({ ok: true });
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-    const { waitForNextUpdate, result } = renderHook(() => useAuthContext(), {
+    const { result, waitForNextUpdate } = renderHook(() => useAuthContext(), {
       wrapper,
     });
 
@@ -81,7 +81,7 @@ describe("auth", () => {
       const mockFetchPromise = jest.fn().mockResolvedValue({ ok: true });
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-      const { waitForNextUpdate, result } = renderHook(() => useAuthContext(), {
+      const { result, waitForNextUpdate } = renderHook(() => useAuthContext(), {
         wrapper,
       });
 

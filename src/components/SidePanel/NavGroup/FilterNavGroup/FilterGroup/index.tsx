@@ -33,12 +33,12 @@ interface FilterGroupProps {
 }
 
 const FilterGroup: React.FC<FilterGroupProps> = ({
-  filter,
   deleteFilter,
   editFilter,
+  filter,
 }) => {
   const { sendEvent } = useLogWindowAnalytics();
-  const { name, visible, caseSensitive, matchType } = filter;
+  const { caseSensitive, matchType, name, visible } = filter;
 
   const [newFilterName, setNewFilterName] = useState(name);
   const [isEditing, setIsEditing] = useState(false);

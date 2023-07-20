@@ -13,7 +13,7 @@ import {
   getTimeStamp,
 } from "./helpers";
 
-const { green, yellow, red, blue, purple } = palette;
+const { blue, green, purple, red, yellow } = palette;
 /**
  * `processResmokeLine` takes a raw log line and transforms it to a readable resmoke line if it is a resmoke line otherwise it returns the original line
  * @param line log line from resmoke
