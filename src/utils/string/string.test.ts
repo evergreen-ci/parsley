@@ -4,6 +4,7 @@ import {
   getJiraFormat,
   shortenGithash,
   stringIntersection,
+  trimLogLineToMaxSize,
   trimStringFromMiddle,
 } from ".";
 
@@ -118,5 +119,14 @@ describe("getBytesAsString", () => {
       expect(getBytesAsString(gb + gb / 2, 1)).toBe("1.5 GB");
       expect(getBytesAsString(gb + gb / 3, 2)).toBe("1.33 GB");
     });
+  });
+});
+
+describe("trimLogLineToMaxSize", () => {
+  it("should not trim a log if it is smaller than the max size", () => {
+    expect(trimLogLineToMaxSize("123", 4)).toBe("123");
+  });
+  it("should trim a log and add an ellipsis if it is longer than the max size", () => {
+    expect(trimLogLineToMaxSize("1234", 3)).toBe("123…");
   });
 });
