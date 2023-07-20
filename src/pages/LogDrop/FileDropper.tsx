@@ -4,7 +4,7 @@ import { palette } from "@leafygreen-ui/palette";
 import { useDropzone } from "react-dropzone";
 import { useLogDropAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
-import { LOG_LINE_TOO_LARGE_ERROR } from "constants/errors";
+import { LOG_LINE_TOO_LARGE_WARNING } from "constants/errors";
 import { LOG_FILE_SIZE_LIMIT, LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
@@ -65,7 +65,7 @@ const FileDropper: React.FC = () => {
                 setFileName(state.file.name);
                 ingestLines(logLines, logType);
                 if (trimmedLines) {
-                  dispatchToast.warning(LOG_LINE_TOO_LARGE_ERROR, true, {
+                  dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
                     title: "Log not fully loaded",
                   });
                 }

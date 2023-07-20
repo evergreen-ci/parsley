@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useLogDownloadAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
-import { LOG_LINE_TOO_LARGE_ERROR } from "constants/errors";
+import { LOG_LINE_TOO_LARGE_WARNING } from "constants/errors";
 import { LOG_FILE_SIZE_LIMIT } from "constants/logs";
 import { useToastContext } from "context/toast";
 import useStateRef from "hooks/useStateRef";
@@ -93,7 +93,7 @@ const useLogDownloader = (
               url,
             },
           }).warning();
-          dispatchToast.warning(LOG_LINE_TOO_LARGE_ERROR, true, {
+          dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
             title: "Log not fully downloaded",
           });
         }

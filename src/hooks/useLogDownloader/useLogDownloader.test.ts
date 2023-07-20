@@ -1,6 +1,6 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { LogTypes } from "constants/enums";
-import { LOG_LINE_TOO_LARGE_ERROR } from "constants/errors";
+import { LOG_LINE_TOO_LARGE_WARNING } from "constants/errors";
 import { LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { RenderFakeToastContext } from "context/toast/__mocks__";
 import { useLogDownloader } from ".";
@@ -147,7 +147,7 @@ describe("useLogDownloader", () => {
       `${"a".repeat(LOG_LINE_SIZE_LIMIT - 3)}...`,
     ]);
     expect(dispatchToast.warning).toHaveBeenCalledWith(
-      LOG_LINE_TOO_LARGE_ERROR,
+      LOG_LINE_TOO_LARGE_WARNING,
       true,
       { title: "Log not fully downloaded" }
     );
