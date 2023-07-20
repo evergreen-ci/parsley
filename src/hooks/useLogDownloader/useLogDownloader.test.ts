@@ -144,7 +144,7 @@ describe("useLogDownloader", () => {
     await waitForNextUpdate();
     expect(result.current.isLoading).toBe(false);
     expect(result.current.data).toStrictEqual([
-      `${"a".repeat(LOG_LINE_SIZE_LIMIT - 3)}...`,
+      `${"a".repeat(LOG_LINE_SIZE_LIMIT)}…`,
     ]);
     expect(dispatchToast.warning).toHaveBeenCalledWith(
       LOG_LINE_TOO_LARGE_WARNING,
