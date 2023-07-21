@@ -35,83 +35,85 @@ const useLogDownloader = (
   const dispatchToast = useToastContext();
 
   useEffect(() => {
-    leaveBreadcrumb("useLogDownloader", { url }, "request");
-    const abortController = new AbortController();
-    const timeStart = Date.now();
+    if (url) {
+      leaveBreadcrumb("useLogDownloader", { url }, "request");
+      const abortController = new AbortController();
+      const timeStart = Date.now();
 
-    fetchLogFile(url, {
-      // Conditionally define signal because AbortController throws error in development's strict mode
-      abortController: isProduction ? abortController : undefined,
-      onProgress: (progress) => {
-        setFileSize(getFileSize() + progress);
-      },
-      downloadSizeLimit,
-      onIncompleteDownload: (reason, incompleteDownloadError) => {
-        reportError({
-          message: reason,
-          name: "Log download incomplete",
-          metadata: {
-            incompleteDownloadError,
-            url,
-          },
-        }).warning();
+      fetchLogFile(url, {
+        // Conditionally define signal because AbortController throws error in development's strict mode
+        abortController: isProduction ? abortController : undefined,
+        onProgress: (progress) => {
+          setFileSize(getFileSize() + progress);
+        },
+        downloadSizeLimit,
+        onIncompleteDownload: (reason, incompleteDownloadError) => {
+          reportError({
+            message: reason,
+            name: "Log download incomplete",
+            metadata: {
+              incompleteDownloadError,
+              url,
+            },
+          }).warning();
 
-        dispatchToast.warning(
-          "Parsley was only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log onto your machine.",
-          true,
-          {
-            title: "Log not fully downloaded",
+          dispatchToast.warning(
+            "Parsley was only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log onto your machine.",
+            true,
+            {
+              title: "Log not fully downloaded",
+            }
+          );
+          sendEvent({
+            name: "Log Download Incomplete",
+            duration: Date.now() - timeStart,
+            reason,
+            downloaded: getFileSize(),
+          });
+        },
+      })
+        .then((logs) => {
+          // Remove the last log line if it is empty
+          if (logs[logs.length - 1] === "") {
+            logs.pop();
           }
-        );
-        sendEvent({
-          name: "Log Download Incomplete",
-          duration: Date.now() - timeStart,
-          reason,
-          downloaded: getFileSize(),
+          setData(logs);
+        })
+        .catch((err: Error) => {
+          leaveBreadcrumb("useLogDownloader", { url, err }, "error");
+          reportError(err).severe();
+          setError(err.message);
+          sendEvent({
+            name: "Log Download Failed",
+            duration: Date.now() - timeStart,
+            type: logType,
+            fileSize: getFileSize(),
+          });
+        })
+        .finally(() => {
+          leaveBreadcrumb(
+            "useLogDownloader",
+            {
+              url,
+              time: Date.now() - timeStart,
+              fileSize: getBytesAsString(getFileSize()),
+            },
+            "request"
+          );
+          sendEvent({
+            name: "Log Downloaded",
+            duration: Date.now() - timeStart,
+            type: logType,
+            fileSize: getFileSize(),
+          });
+          setIsLoading(false);
         });
-      },
-    })
-      .then((logs) => {
-        // Remove the last log line if it is empty
-        if (logs[logs.length - 1] === "") {
-          logs.pop();
-        }
-        setData(logs);
-      })
-      .catch((err: Error) => {
-        leaveBreadcrumb("useLogDownloader", { url, err }, "error");
-        reportError(err).severe();
-        setError(err.message);
-        sendEvent({
-          name: "Log Download Failed",
-          duration: Date.now() - timeStart,
-          type: logType,
-          fileSize: getFileSize(),
-        });
-      })
-      .finally(() => {
-        leaveBreadcrumb(
-          "useLogDownloader",
-          {
-            url,
-            time: Date.now() - timeStart,
-            fileSize: getBytesAsString(getFileSize()),
-          },
-          "request"
-        );
-        sendEvent({
-          name: "Log Downloaded",
-          duration: Date.now() - timeStart,
-          type: logType,
-          fileSize: getFileSize(),
-        });
-        setIsLoading(false);
-      });
 
-    return () => {
-      // Cancel the request if the component unmounts
-      abortController.abort();
-    };
+      return () => {
+        // Cancel the request if the component unmounts
+        abortController.abort();
+      };
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
   return { data, error, isLoading, fileSize };

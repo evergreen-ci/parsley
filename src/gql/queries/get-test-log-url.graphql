@@ -1,0 +1,15 @@
+query TestLogURL($taskID: String!, $testName: String!, $execution: Int!) {
+  task(taskId: $taskID, execution: $execution) {
+    id
+    tests(opts: { testName: $testName }) {
+      testResults {
+        id
+        logs {
+          url
+          urlLobster #eslint-disable-line @graphql-eslint/no-deprecated
+          urlRaw
+        }
+      }
+    }
+  }
+}
