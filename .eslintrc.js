@@ -28,7 +28,7 @@ module.exports = {
     "plugin:prettier/recommended", // Note: prettier must ALWAYS be the last extension.
   ],
   ignorePatterns: ["!.storybook"],
-  plugins: ["@typescript-eslint", "sort-destructure-keys"],
+  plugins: ["@typescript-eslint"],
   settings: {
     react: {
       version: "detect",
@@ -130,7 +130,6 @@ module.exports = {
 
     // Rules for prettier.
     "prettier/prettier": errorIfStrict, // Makes Prettier issues warnings rather than errors.
-    "sort-destructure-keys/sort-destructure-keys": errorIfStrict,
   },
   overrides: [
     // For React Typescript files in src.
