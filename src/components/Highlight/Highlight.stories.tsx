@@ -2,13 +2,13 @@ import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import Highlight, { highlightColorList } from ".";
 
 export default {
-  component: Highlight,
   argTypes: {
     color: {
       control: "select",
       options: highlightColorList,
     },
   },
+  component: Highlight,
 } satisfies CustomMeta<typeof Highlight>;
 
 export const DefaultHighlight: CustomStoryObj<typeof Highlight> = {

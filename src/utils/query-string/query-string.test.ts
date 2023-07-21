@@ -131,11 +131,11 @@ describe("query-string", () => {
     });
     it("should preserve empty strings if skipEmptyString is passed in", () => {
       let result = stringifyQuery(
-        { foo: "", bar: null },
+        { bar: null, foo: "" },
         { skipEmptyString: false }
       );
       expect(result).toBe("foo=");
-      result = stringifyQuery({ foo: "", bar: 21 }, { skipEmptyString: false });
+      result = stringifyQuery({ bar: 21, foo: "" }, { skipEmptyString: false });
       expect(result).toBe("bar=21&foo=");
     });
     it("can handle empty input", () => {

@@ -10,20 +10,20 @@ module.exports = {
     "^uuid$": "<rootDir>/node_modules/uuid/dist/index.js",
   },
   modulePaths: ["<rootDir>/src"],
-  setupFiles: ["./jest.setup.ts"],
   preset: "ts-jest",
   resetMocks: true,
+  setupFiles: ["./jest.setup.ts"],
   setupFilesAfterEnv: ["<rootDir>/config/jest/setupTests.ts"],
   snapshotSerializers: ["@emotion/jest/serializer"],
   testEnvironment: "jsdom",
   testMatch: ["<rootDir>/src/**/*.{spec,test}.{js,jsx,ts,tsx}"],
   testRunner: "<rootDir>/node_modules/jest-circus/runner.js",
   transform: {
-    "^.+\\.graphql$": "@graphql-tools/jest-transform",
-    "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "ts-jest",
-    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
     "^(?!.*\\.(js|jsx|mjs|cjs|ts|tsx|css|json)$)":
       "<rootDir>/config/jest/svgTransform.js",
+    "^.+\\.(js|jsx|mjs|cjs|ts|tsx)$": "ts-jest",
+    "^.+\\.css$": "<rootDir>/config/jest/cssTransform.js",
+    "^.+\\.graphql$": "@graphql-tools/jest-transform",
   },
   transformIgnorePatterns: [
     `<rootDir>/node_modules/(?!${[

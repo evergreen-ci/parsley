@@ -15,12 +15,12 @@ describe("filterLogs", () => {
   it("should return the log lines as is if matching lines is undefined", () => {
     expect(
       filterLogs({
+        bookmarks: [],
+        expandableRows: true,
+        expandedLines: [],
         logLines,
         matchingLines: undefined,
-        bookmarks: [],
         shareLine: undefined,
-        expandedLines: [],
-        expandableRows: true,
       })
     ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
   });
@@ -28,12 +28,12 @@ describe("filterLogs", () => {
   it("should hide collapsed rows if expandableRows is turned off", () => {
     expect(
       filterLogs({
+        bookmarks: [],
+        expandableRows: false,
+        expandedLines: [],
         logLines,
         matchingLines: new Set([1, 2, 3]),
-        bookmarks: [],
         shareLine: undefined,
-        expandedLines: [],
-        expandableRows: false,
       })
     ).toStrictEqual([1, 2, 3]);
   });
@@ -41,12 +41,12 @@ describe("filterLogs", () => {
   it("should collapse all of the log lines if there are no matching lines", () => {
     expect(
       filterLogs({
+        bookmarks: [],
+        expandableRows: true,
+        expandedLines: [],
         logLines,
         matchingLines: new Set([]),
-        bookmarks: [],
         shareLine: undefined,
-        expandedLines: [],
-        expandableRows: true,
       })
     ).toStrictEqual([[0, 1, 2, 3, 4, 5, 6, 7]]);
   });
@@ -55,12 +55,12 @@ describe("filterLogs", () => {
     it("should not collapse bookmarks", () => {
       expect(
         filterLogs({
+          bookmarks: [7],
+          expandableRows: true,
+          expandedLines: [],
           logLines,
           matchingLines: new Set([1]),
-          bookmarks: [7],
           shareLine: undefined,
-          expandedLines: [],
-          expandableRows: true,
         })
       ).toStrictEqual([[0], 1, [2, 3, 4, 5, 6], 7]);
     });
@@ -68,12 +68,12 @@ describe("filterLogs", () => {
     it("should not collapse the share line", () => {
       expect(
         filterLogs({
+          bookmarks: [],
+          expandableRows: true,
+          expandedLines: [],
           logLines,
           matchingLines: new Set([1]),
-          bookmarks: [],
           shareLine: 7,
-          expandedLines: [],
-          expandableRows: true,
         })
       ).toStrictEqual([[0], 1, [2, 3, 4, 5, 6], 7]);
     });
@@ -81,12 +81,12 @@ describe("filterLogs", () => {
     it("should not collapse expanded lines", () => {
       expect(
         filterLogs({
+          bookmarks: [],
+          expandableRows: true,
+          expandedLines: [[4, 6]],
           logLines,
           matchingLines: new Set([1]),
-          bookmarks: [],
           shareLine: undefined,
-          expandedLines: [[4, 6]],
-          expandableRows: true,
         })
       ).toStrictEqual([[0], 1, [2, 3], 4, 5, 6, [7]]);
     });

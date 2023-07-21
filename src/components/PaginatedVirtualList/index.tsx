@@ -46,10 +46,10 @@ const PaginatedVirtualList = forwardRef<
       scrollToPrevPage,
       startingIndex,
     } = usePaginatedVirtualList({
-      rowCount,
-      paginationThreshold,
       paginationOffset,
+      paginationThreshold,
       ref: listRef,
+      rowCount,
     });
 
     useKeyboardShortcut({ charKey: CharKey.PageEnd }, () => {
