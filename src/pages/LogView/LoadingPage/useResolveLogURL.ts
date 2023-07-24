@@ -86,7 +86,6 @@ export const useResolveLogURL = ({
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
-      console.log(taskID, execution, testID, isLoadingTest);
       if (!taskID || !execution || !testID || isLoadingTest) {
         break;
       }
