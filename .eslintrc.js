@@ -31,7 +31,13 @@ module.exports = {
       parserOptions: {
         project: ["./tsconfig.json"],
       },
-      plugins: ["jsx-a11y", "react", "react-hooks", "@emotion"],
+      plugins: [
+        "jsx-a11y",
+        "react",
+        "react-hooks",
+        "@emotion",
+        "sort-keys-plus",
+      ],
       rules: {
         // Rules for emotion.
         "@emotion/import-from-emotion": ERROR,
@@ -67,6 +73,12 @@ module.exports = {
         "react/prop-types": OFF, // (airbnb rule)
         "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+ (airbnb rule)
         "react/require-default-props": OFF, // Allow not setting defaults for props (airbnb rule)
+
+        "sort-keys-plus/sort-keys": [
+          errorIfStrict,
+          "asc",
+          { allowLineSeparatedGroups: true, natural: true },
+        ],
       },
     },
     // For Jest files.
@@ -119,7 +131,7 @@ module.exports = {
     ecmaVersion: "latest",
     sourceType: "module",
   },
-  plugins: ["@typescript-eslint", "sort-keys-plus"],
+  plugins: ["@typescript-eslint"],
   rules: {
     // Rules for ESLint.
     "arrow-body-style": [
@@ -210,12 +222,6 @@ module.exports = {
 
     // Rules for prettier.
     "prettier/prettier": errorIfStrict, // Makes Prettier issues warnings rather than errors.
-
-    "sort-keys-plus/sort-keys": [
-      errorIfStrict,
-      "asc",
-      { allowLineSeparatedGroups: true, natural: true },
-    ],
   },
   settings: {
     "import/resolver": {

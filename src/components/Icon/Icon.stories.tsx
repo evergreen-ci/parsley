@@ -31,7 +31,7 @@ export const Default: CustomStoryObj<typeof Icon> = {
 
   argTypes: {
     color: { control: "color" },
-    size: { control: { type: "select", options: Sizes } },
+    size: { control: { options: Sizes, type: "select" } },
   },
 
   args: {

@@ -21,11 +21,11 @@ const DetailsMenuWithDownloadedLog = (args: any) => {
   const { setLogMetadata } = useLogContext();
   useEffect(() => {
     setLogMetadata({
+      execution: "0",
+      logType: LogTypes.EVERGREEN_TEST_LOGS,
       taskID:
         "mci_ubuntu1604_test_model_task_5f4d3b4f562343215f7f5f3d_20_08_25_15_50_10",
-      execution: "0",
       testID: "TestModelGetArtifacts",
-      logType: LogTypes.EVERGREEN_TEST_LOGS,
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -21,10 +21,10 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 
 describe("auth", () => {
   const checkLoginFetchParams = {
-    method: "POST",
+    body: JSON.stringify({ query: `query { user { userId } }` }),
     credentials: "include",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query: `query { user { userId } }` }),
+    method: "POST",
   };
 
   afterEach(() => {
@@ -85,7 +85,7 @@ describe("auth", () => {
         wrapper,
       });
 
-      result.current.devLogin({ username: "username", password: "password" });
+      result.current.devLogin({ password: "password", username: "username" });
       await waitForNextUpdate();
       expect(result.current.isAuthenticated).toBe(true);
     });
@@ -98,7 +98,7 @@ describe("auth", () => {
         wrapper,
       });
 
-      result.current.devLogin({ username: "username", password: "password" });
+      result.current.devLogin({ password: "password", username: "username" });
       expect(result.current.isAuthenticated).toBe(false);
     });
   });

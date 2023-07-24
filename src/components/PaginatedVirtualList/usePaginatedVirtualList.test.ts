@@ -12,10 +12,10 @@ describe("usePaginatedVirtualList", () => {
   it("should return correct startingIndex and page size on the first page", () => {
     const { result } = renderHook(() =>
       usePaginatedVirtualList({
-        rowCount,
-        paginationThreshold,
         paginationOffset,
+        paginationThreshold,
         ref,
+        rowCount,
       })
     );
     expect(result.current.startingIndex).toBe(0);
@@ -25,10 +25,10 @@ describe("usePaginatedVirtualList", () => {
   it("should not perform offset compensation on the first page", () => {
     const { result } = renderHook(() =>
       usePaginatedVirtualList({
-        rowCount,
-        paginationThreshold,
         paginationOffset,
+        paginationThreshold,
         ref,
+        rowCount,
       })
     );
     expect(result.current.pageSize).toBe(paginationThreshold);
@@ -37,10 +37,10 @@ describe("usePaginatedVirtualList", () => {
   it("page size should not exceed row count", () => {
     const { result } = renderHook(() =>
       usePaginatedVirtualList({
-        rowCount: 1000,
-        paginationThreshold: 5000,
         paginationOffset: 100,
+        paginationThreshold: 5000,
         ref,
+        rowCount: 1000,
       })
     );
     expect(result.current.pageSize).toBe(1000);
@@ -51,14 +51,14 @@ describe("usePaginatedVirtualList", () => {
       const scrollToIndexMock = jest.fn();
       const { result } = renderHook(() =>
         usePaginatedVirtualList({
-          rowCount,
-          paginationThreshold,
           paginationOffset,
+          paginationThreshold,
           ref: {
             current: {
               scrollToIndex: scrollToIndexMock,
             },
           },
+          rowCount,
         })
       );
 
@@ -68,8 +68,8 @@ describe("usePaginatedVirtualList", () => {
       expect(result.current.currentPage).toBe(1);
       expect(result.current.startingIndex).toBe(4900);
       expect(scrollToIndexMock).toHaveBeenCalledWith({
-        index: paginationOffset,
         align: "end",
+        index: paginationOffset,
       });
       expect(result.current.pageSize).toBe(
         paginationThreshold + paginationOffset
@@ -79,14 +79,14 @@ describe("usePaginatedVirtualList", () => {
       const scrollToIndexMock = jest.fn();
       const { result } = renderHook(() =>
         usePaginatedVirtualList({
-          rowCount,
-          paginationThreshold,
           paginationOffset,
+          paginationThreshold,
           ref: {
             current: {
               scrollToIndex: scrollToIndexMock,
             },
           },
+          rowCount,
         })
       );
 
@@ -109,10 +109,10 @@ describe("usePaginatedVirtualList", () => {
     it("last page should have the remaining rows", () => {
       const { result } = renderHook(() =>
         usePaginatedVirtualList({
-          rowCount,
-          paginationThreshold,
           paginationOffset,
+          paginationThreshold,
           ref,
+          rowCount,
         })
       );
       // Go to last page
@@ -135,14 +135,14 @@ describe("usePaginatedVirtualList", () => {
       const scrollToIndexMock = jest.fn();
       const { result } = renderHook(() =>
         usePaginatedVirtualList({
-          rowCount: 1000,
-          paginationThreshold: 5000,
           paginationOffset: 100,
+          paginationThreshold: 5000,
           ref: {
             current: {
               scrollToIndex: scrollToIndexMock,
             },
           },
+          rowCount: 1000,
         })
       );
 
@@ -158,10 +158,10 @@ describe("usePaginatedVirtualList", () => {
     const { rerender, result } = renderHook(
       ({ overrideRowCount }) =>
         usePaginatedVirtualList({
-          rowCount: overrideRowCount,
-          paginationThreshold,
           paginationOffset,
+          paginationThreshold,
           ref,
+          rowCount: overrideRowCount,
         }),
       { initialProps: { overrideRowCount: rowCount } }
     );
@@ -178,14 +178,14 @@ describe("usePaginatedVirtualList", () => {
       const scrollToIndexMock = jest.fn();
       const { result } = renderHook(() =>
         usePaginatedVirtualList({
-          rowCount,
-          paginationThreshold,
           paginationOffset,
+          paginationThreshold,
           ref: {
             current: {
               scrollToIndex: scrollToIndexMock,
             },
           },
+          rowCount,
         })
       );
 
@@ -195,8 +195,8 @@ describe("usePaginatedVirtualList", () => {
       });
       expect(result.current.startingIndex).toBe(4900);
       expect(scrollToIndexMock).toHaveBeenCalledWith({
-        index: paginationOffset,
         align: "end",
+        index: paginationOffset,
       });
       expect(result.current.pageSize).toBe(
         paginationThreshold + paginationOffset
@@ -208,22 +208,22 @@ describe("usePaginatedVirtualList", () => {
       });
       expect(result.current.startingIndex).toBe(0);
       expect(scrollToIndexMock).toHaveBeenCalledWith({
-        index: paginationOffset,
         align: "end",
+        index: paginationOffset,
       });
     });
     it("should not scroll to previous page if on first page", () => {
       const scrollToIndexMock = jest.fn();
       const { result } = renderHook(() =>
         usePaginatedVirtualList({
-          rowCount,
-          paginationThreshold,
           paginationOffset,
+          paginationThreshold,
           ref: {
             current: {
               scrollToIndex: scrollToIndexMock,
             },
           },
+          rowCount,
         })
       );
       expect(result.current.currentPage).toBe(0);
@@ -240,10 +240,10 @@ describe("usePaginatedVirtualList", () => {
     it("scrolling to a line on the current page should not change the page", () => {
       const { result } = renderHook(() =>
         usePaginatedVirtualList({
-          rowCount,
-          paginationThreshold,
           paginationOffset,
+          paginationThreshold,
           ref,
+          rowCount,
         })
       );
       act(() => {
@@ -256,10 +256,10 @@ describe("usePaginatedVirtualList", () => {
     it("scrolling to a line on a different page should change the page", () => {
       const { result } = renderHook(() =>
         usePaginatedVirtualList({
-          rowCount,
-          paginationThreshold,
           paginationOffset,
+          paginationThreshold,
           ref,
+          rowCount,
         })
       );
       act(() => {
@@ -284,14 +284,14 @@ describe("usePaginatedVirtualList", () => {
       const scrollToIndexMock = jest.fn();
       const { result, waitFor } = renderHook(() =>
         usePaginatedVirtualList({
-          rowCount,
-          paginationThreshold,
           paginationOffset,
+          paginationThreshold,
           ref: {
             current: {
               scrollToIndex: scrollToIndexMock,
             },
           },
+          rowCount,
         })
       );
       act(() => {

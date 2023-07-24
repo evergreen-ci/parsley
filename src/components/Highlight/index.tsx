@@ -9,8 +9,8 @@ const Highlight = styled.mark<{ "data-cy"?: string; color?: string }>`
 `;
 
 Highlight.defaultProps = {
-  "data-cy": "highlight",
   color: red.light2,
+  "data-cy": "highlight",
 };
 
 const highlightColorList = [
