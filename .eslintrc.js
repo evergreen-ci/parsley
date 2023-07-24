@@ -37,6 +37,7 @@ module.exports = {
         "react-hooks",
         "@emotion",
         "sort-keys-plus",
+        "sort-destructure-keys",
       ],
       rules: {
         // Rules for emotion.
@@ -74,6 +75,10 @@ module.exports = {
         "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+ (airbnb rule)
         "react/require-default-props": OFF, // Allow not setting defaults for props (airbnb rule)
 
+        "sort-destructure-keys/sort-destructure-keys": [
+          errorIfStrict,
+          { caseSensitive: true },
+        ],
         "sort-keys-plus/sort-keys": [
           errorIfStrict,
           "asc",
