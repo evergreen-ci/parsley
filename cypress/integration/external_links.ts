@@ -54,7 +54,7 @@ describe("External Links", () => {
       cy.dataCy("lobster-button").should(
         "have.attr",
         "href",
-        "http://localhost:9090/lobster/evergreen/test/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0/JustAFakeTestInALonelyWorld"
+        "http://localhost:9090/lobster/evergreen/test/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0/JustAFakeTestInALonelyWorld/#shareLine=0"
       );
       cy.dataCy("legacy-job-logs-button").should("not.exist");
     });
