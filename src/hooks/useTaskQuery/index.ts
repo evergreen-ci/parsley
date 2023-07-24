@@ -33,21 +33,21 @@ export const useTaskQuery = ({
     TaskQuery,
     TaskQueryVariables
   >(GET_TASK, {
+    variables: { taskId: String(taskID), execution: Number(execution) },
     skip: isResmoke || !taskID,
-    variables: { execution: Number(execution), taskId: String(taskID) },
   });
 
   const { data: logkeeperData, loading: logkeeperLoading } = useQuery<
     LogkeeperTaskQuery,
     LogkeeperTaskQueryVariables
   >(GET_LOGKEEPER_TASK, {
-    skip: !isResmoke || !buildID,
     variables: { buildId: String(buildID) },
+    skip: !isResmoke || !buildID,
   });
 
   const { task } = taskData ?? {};
   const { logkeeperBuildMetadata } = logkeeperData ?? {};
   const loadedTask = logkeeperBuildMetadata?.task ?? task;
 
-  return { loading: taskLoading || logkeeperLoading, task: loadedTask };
+  return { task: loadedTask, loading: taskLoading || logkeeperLoading };
 };

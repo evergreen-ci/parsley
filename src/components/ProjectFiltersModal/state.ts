@@ -38,8 +38,8 @@ const reducer = (state: State, action: Action): State => {
 const useSelectedFiltersState = () => {
   const [state, dispatch] = useReducer(reducer, initialState());
   return {
-    dispatch,
     state,
+    dispatch,
   };
 };
 

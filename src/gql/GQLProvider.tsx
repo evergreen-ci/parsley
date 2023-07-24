@@ -15,27 +15,27 @@ const logErrorsLink = onError(({ graphQLErrors, operation }) => {
     graphQLErrors.forEach((gqlErr) => {
       reportError({
         message: "GraphQL Error",
+        name: gqlErr.message,
         metadata: {
           gqlErr,
           operationName: operation.operationName,
           variables: operation.variables,
         },
-        name: gqlErr.message,
       }).warning();
     });
   }
 });
 
 const retryLink = new RetryLink({
+  delay: {
+    initial: 300,
+    max: 3000,
+    jitter: true,
+  },
   attempts: {
     max: 5,
     retryIf: (error): boolean =>
       error && error.response && error.response.status >= 500,
-  },
-  delay: {
-    initial: 300,
-    jitter: true,
-    max: 3000,
   },
 });
 

@@ -39,8 +39,8 @@ const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
           <LogPane
             rowCount={processedLogLines.length}
             rowRenderer={ParsleyRow({
-              logType,
               processedLogLines,
+              logType,
             })}
           />
         </LogPaneContainer>

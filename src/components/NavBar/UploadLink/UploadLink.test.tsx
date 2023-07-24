@@ -51,8 +51,8 @@ describe("uploadLink", () => {
   it("confirming the modal clears logs and navigates to /upload", async () => {
     const clearLogs = jest.fn();
     const { router } = render(<UploadLink clearLogs={clearLogs} hasLogs />, {
-      path: "/upload",
       route: "/upload",
+      path: "/upload",
     });
     await user.click(screen.getByText("Upload"));
     await waitFor(() => {

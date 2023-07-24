@@ -26,12 +26,12 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (e.target.checked) {
       addFilter({
+        name: filter.expression,
+        visible: true,
         caseSensitive: filter.caseSensitive
           ? CaseSensitivity.Sensitive
           : CaseSensitivity.Insensitive,
         matchType: filter.exactMatch ? MatchType.Exact : MatchType.Inverse,
-        name: filter.expression,
-        visible: true,
       });
     } else {
       removeFilter(filter.expression);

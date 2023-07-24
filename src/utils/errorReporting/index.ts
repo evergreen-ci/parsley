@@ -53,7 +53,7 @@ const leaveBreadcrumb = (
 ) => {
   const breadcrumbType = type || "manual";
   if (!isProductionBuild || isLocal) {
-    console.debug({ breadcrumbType, message, metadata });
+    console.debug({ message, metadata, breadcrumbType });
   } else {
     Bugsnag.leaveBreadcrumb(message, metadata, breadcrumbType);
   }

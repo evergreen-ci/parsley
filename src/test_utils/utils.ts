@@ -18,7 +18,7 @@ const mockEnvironmentVariables = () => {
     });
   };
 
-  return { cleanup, mockEnv };
+  return { mockEnv, cleanup };
 };
 
 export { mockEnvironmentVariables };

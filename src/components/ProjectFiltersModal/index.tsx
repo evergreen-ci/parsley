@@ -33,15 +33,15 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
   const { logMetadata } = useLogContext();
   const { buildID, execution, logType, taskID } = logMetadata ?? {};
 
-  const { task } = useTaskQuery({ buildID, execution, logType, taskID });
+  const { task } = useTaskQuery({ logType, taskID, execution, buildID });
   const { versionMetadata } = task ?? {};
   const { projectIdentifier = "" } = versionMetadata ?? {};
 
   const { data } = useQuery<ProjectFiltersQuery, ProjectFiltersQueryVariables>(
     PROJECT_FILTERS,
     {
-      skip: !projectIdentifier,
       variables: { projectIdentifier },
+      skip: !projectIdentifier,
     }
   );
   const { project } = data || {};
@@ -59,8 +59,8 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
       "user"
     );
     sendEvent({
-      filters: state.selectedFilters,
       name: "Applied Project Filters",
+      filters: state.selectedFilters,
     });
     setOpen(false);
     dispatch({ type: "RESET" });
@@ -92,11 +92,11 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
               key={filter.expression}
               active={!!filters.find((f) => f.name === filter.expression)}
               addFilter={(filterToAdd) =>
-                dispatch({ filterToAdd, type: "ADD_FILTER" })
+                dispatch({ type: "ADD_FILTER", filterToAdd })
               }
               filter={filter}
               removeFilter={(filterToRemove) => {
-                dispatch({ filterToRemove, type: "REMOVE_FILTER" });
+                dispatch({ type: "REMOVE_FILTER", filterToRemove });
               }}
               selected={
                 !!state.selectedFilters.find(

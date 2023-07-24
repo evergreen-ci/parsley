@@ -51,23 +51,16 @@ const ToastProviderCore: React.FC<{ children: ReactNode }> = ({ children }) => {
       variant,
     }: ToastParams) =>
       pushToast({
+        description: <WordBreak>{message}</WordBreak>,
+        dismissible: closable,
+        onClose: closable ? onClose : undefined,
+        progress,
+        timeout: shouldTimeout ? TOAST_TIMEOUT : null,
+        title: title || mapLeafyGreenVariantToTitle[variant],
+        variant,
         // @ts-ignore
         "data-variant": mapLeafyGreenVariantToToast[variant],
-
-        description: <WordBreak>{message}</WordBreak>,
-
-        dismissible: closable,
-
-        onClose: closable ? onClose : undefined,
-
-        progress,
-
-        timeout: shouldTimeout ? TOAST_TIMEOUT : null,
-
-        title: title || mapLeafyGreenVariantToTitle[variant],
-
         "data-cy": "toast",
-        variant,
       }),
     [pushToast]
   );
@@ -80,44 +73,44 @@ const ToastProviderCore: React.FC<{ children: ReactNode }> = ({ children }) => {
     };
 
     return {
-      error: (message = "", closable = true, options = {}) =>
-        dispatchToast({
-          closable,
-          message,
-          variant: Variant.Warning,
-          ...defaultOptions,
-          ...options,
-        }),
-      info: (message = "", closable = true, options = {}) =>
-        dispatchToast({
-          closable,
-          message,
-          variant: Variant.Note,
-          ...defaultOptions,
-          ...options,
-        }),
-      progress: (message = "", progress = 0.5, closable = true, options = {}) =>
-        dispatchToast({
-          closable,
-          message,
-          progress,
-          variant: Variant.Progress,
-          ...defaultOptions,
-          ...options,
-        }),
       success: (message = "", closable = true, options = {}) =>
         dispatchToast({
-          closable,
-          message,
           variant: Variant.Success,
+          message,
+          closable,
           ...defaultOptions,
           ...options,
         }),
       warning: (message = "", closable = true, options = {}) =>
         dispatchToast({
-          closable,
-          message,
           variant: Variant.Important,
+          message,
+          closable,
+          ...defaultOptions,
+          ...options,
+        }),
+      error: (message = "", closable = true, options = {}) =>
+        dispatchToast({
+          variant: Variant.Warning,
+          message,
+          closable,
+          ...defaultOptions,
+          ...options,
+        }),
+      info: (message = "", closable = true, options = {}) =>
+        dispatchToast({
+          variant: Variant.Note,
+          message,
+          closable,
+          ...defaultOptions,
+          ...options,
+        }),
+      progress: (message = "", progress = 0.5, closable = true, options = {}) =>
+        dispatchToast({
+          variant: Variant.Progress,
+          message,
+          progress,
+          closable,
           ...defaultOptions,
           ...options,
         }),

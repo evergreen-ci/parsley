@@ -45,7 +45,7 @@ describe("sidePanel", () => {
 });
 
 const props = {
-  clearExpandedLines: jest.fn(),
-  collapseLines: jest.fn(),
   expandedLines: [],
+  collapseLines: jest.fn(),
+  clearExpandedLines: jest.fn(),
 };

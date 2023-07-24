@@ -64,8 +64,8 @@ const getEvergreenTestLogURL = (
 ) => {
   const { groupID, text } = options;
   const params = {
-    group_id: groupID,
     test_name: testID,
+    group_id: groupID,
     text,
   };
   return `${evergreenURL}/test_log/${taskID}/${execution}?${stringifyQuery(
@@ -89,9 +89,9 @@ const getResmokeLogURL = (
 ) => {
   const { html, metadata, raw, testID } = options;
   const params = {
+    raw,
     html,
     metadata,
-    raw,
   };
   if (testID) {
     return `${logkeeperURL}/build/${buildID}/test/${testID}?${stringifyQuery(

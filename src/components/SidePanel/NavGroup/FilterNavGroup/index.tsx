@@ -32,7 +32,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
       clearExpandedLines();
     }
     leaveBreadcrumb("delete-filter", { filterName }, "user");
-    sendEvent({ filterExpression: filterName, name: "Deleted Filter" });
+    sendEvent({ name: "Deleted Filter", filterExpression: filterName });
   };
 
   const editFilter = (
@@ -53,13 +53,13 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
     setFilters(newFilters);
     leaveBreadcrumb(
       "edit-filter",
-      { fieldName, fieldValue, filterName: filter.name },
+      { filterName: filter.name, fieldName, fieldValue },
       "user"
     );
     sendEvent({
-      after: newFilters[idxToReplace],
-      before: filter,
       name: "Edited Filter",
+      before: filter,
+      after: newFilters[idxToReplace],
     });
   };
 

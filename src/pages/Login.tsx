@@ -42,7 +42,7 @@ export const Login: React.FC = () => {
         />
         <StyledButton
           data-cy="login-submit"
-          onClick={() => devLogin({ password, username })}
+          onClick={() => devLogin({ username, password })}
           type="submit"
           variant="baseGreen"
         >

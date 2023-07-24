@@ -18,14 +18,14 @@ const Container = styled.div`
 `;
 
 export const Default: CustomStoryObj<typeof LogPane> = {
-  args: {},
   render: (args) => (
     <VirtuosoMockContext.Provider
-      value={{ itemHeight: 18, viewportHeight: 500 }}
+      value={{ viewportHeight: 500, itemHeight: 18 }}
     >
       <Container>
         <LogPane {...args} rowCount={list.length} rowRenderer={RowRenderer} />
       </Container>
     </VirtuosoMockContext.Provider>
   ),
+  args: {},
 };

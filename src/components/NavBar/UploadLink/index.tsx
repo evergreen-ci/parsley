@@ -18,11 +18,11 @@ const UploadLink: React.FC<UploadLinkProps> = ({ clearLogs, hasLogs }) => {
   const { sendEvent } = useLogDropAnalytics();
   const handleClick = useCallback(() => {
     if (hasLogs) {
-      sendEvent({ hasLogs: true, name: "Clicked Upload Link" });
+      sendEvent({ name: "Clicked Upload Link", hasLogs: true });
       setOpen(true);
     } else {
       leaveBreadcrumb("upload-link", { hasLogs }, "navigation");
-      sendEvent({ hasLogs: false, name: "Clicked Upload Link" });
+      sendEvent({ name: "Clicked Upload Link", hasLogs: false });
       navigate(routes.upload);
     }
   }, [hasLogs, sendEvent, navigate]);

@@ -8,8 +8,8 @@ export default {
 } satisfies CustomMeta<typeof ErrorFallback>;
 
 export const Template: CustomStoryObj<typeof ErrorFallback> = {
-  name: "Error Fallback",
   render: () => <ErrorFallback />,
+  name: "Error Fallback",
 };
 
 export const ErrorBoundaryTemplate: CustomStoryObj<typeof ErrorBoundary> = {

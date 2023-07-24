@@ -14,22 +14,22 @@ export const constructRegexToMatch = (visibleFilters: Filters) => {
     const isMatch = f.matchType === MatchType.Exact;
     if (f.caseSensitive === CaseSensitivity.Sensitive) {
       regexToMatch.push({
-        isMatch,
         regex: new RegExp(f.name),
+        isMatch,
       });
     } else {
       try {
         const regex = new RegExp(f.name, "i");
         regexToMatch.push({
-          isMatch,
           regex,
+          isMatch,
         });
       } catch (e) {
         // If we get an error here, it means the regex is invalid and got past the validation step. We should report this error.
         reportError({
+          name: "Invalid Regex",
           message: `The regex "${f.name}" is invalid`,
           metadata: e,
-          name: "Invalid Regex",
         }).severe();
       }
     }

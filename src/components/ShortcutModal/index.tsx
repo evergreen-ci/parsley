@@ -7,36 +7,36 @@ import { size, zIndex } from "constants/tokens";
 import { useKeyboardShortcut, useOnClickOutside } from "hooks";
 
 const shortcuts = [
-  { description: "Open or close the shortcut modal", keys: [["SHIFT", "?"]] },
+  { keys: [["SHIFT", "?"]], description: "Open or close the shortcut modal" },
   {
-    description: "Focus on the search input",
     keys: [
       ["CTRL", "F"],
       ["⌘", "F"],
     ],
+    description: "Focus on the search input",
   },
   {
-    description: "Toggle between filter and highlight",
     keys: [
       ["CTRL", "S"],
       ["⌘", "S"],
     ],
+    description: "Toggle between filter and highlight",
   },
   {
-    description: "Apply the filter or highlight",
     keys: [
       ["CTRL", "ENTER"],
       ["⌘", "ENTER"],
     ],
+    description: "Apply the filter or highlight",
   },
-  { description: "Toggle the side panel", keys: [["]"]] },
+  { keys: [["]"]], description: "Toggle the side panel" },
   {
-    description: "Paginate forward to the next search result",
     keys: [["N"], ["ENTER"]],
+    description: "Paginate forward to the next search result",
   },
   {
-    description: "Paginate backwards to the previous search result",
     keys: [["P"], ["SHIFT", "ENTER"]],
+    description: "Paginate backwards to the previous search result",
   },
 ];
 

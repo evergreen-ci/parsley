@@ -82,7 +82,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     debounceSearch.cancel(); // Cancel the debounce request to prevent delayed search.
     inputRef.current?.blur();
     setInput("");
-    leaveBreadcrumb("search-bar-submit", { input, selected }, "user");
+    leaveBreadcrumb("search-bar-submit", { selected, input }, "user");
     onSubmit(selected, input);
   };
 
@@ -100,14 +100,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
     } else if (e.key === "Enter" && e.shiftKey) {
       paginate(DIRECTION.PREVIOUS);
       sendEvent({
-        direction: DIRECTION.PREVIOUS,
         name: "Paginated Through Search Results",
+        direction: DIRECTION.PREVIOUS,
       });
     } else if (e.key === "Enter") {
       paginate(DIRECTION.NEXT);
       sendEvent({
-        direction: DIRECTION.NEXT,
         name: "Paginated Through Search Results",
+        direction: DIRECTION.NEXT,
       });
     }
   };

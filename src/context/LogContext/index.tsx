@@ -133,12 +133,12 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     () => {
       setProcessedLogLines(
         filterLogs({
-          bookmarks,
-          expandableRows,
-          expandedLines: state.expandedLines,
           logLines: state.logs,
           matchingLines,
+          bookmarks,
           shareLine,
+          expandedLines: state.expandedLines,
+          expandableRows,
         })
       );
     },
@@ -159,8 +159,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     if (selectedLine) {
       setSearchParams({
         ...searchParams,
-        selectedLine: undefined,
         shareLine: selectedLine,
+        selectedLine: undefined,
       });
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -190,16 +190,16 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const searchResults = useMemo(() => {
     const results = state.searchState.searchTerm
       ? searchLogs({
-          getLine,
-          lowerBound: lowerRange,
-          processedLogLines,
           searchRegex: state.searchState.searchTerm,
+          processedLogLines,
           upperBound: upperRange,
+          lowerBound: lowerRange,
+          getLine,
         })
       : [];
     dispatch({
-      matchCount: results.length,
       type: "SET_MATCH_COUNT",
+      matchCount: results.length,
     });
 
     return results;
@@ -227,14 +227,14 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const ingestLines = useCallback(
     (lines: string[], logType: LogTypes) => {
-      dispatch({ logType, logs: lines, type: "INGEST_LOGS" });
+      dispatch({ type: "INGEST_LOGS", logs: lines, logType });
     },
     [dispatch]
   );
 
   const setLogMetadata = useCallback(
     (logMetadata: LogMetadata) => {
-      dispatch({ logMetadata, type: "SET_LOG_METADATA" });
+      dispatch({ type: "SET_LOG_METADATA", logMetadata });
     },
     [dispatch]
   );
@@ -243,16 +243,17 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       expandedLines: state.expandedLines,
       hasLogs: !!processedLogLines.length,
       lineCount: state.logs.length,
-      listRef,
       logMetadata: state.logMetadata,
       matchingLines,
+      listRef,
       preferences: {
         caseSensitive: state.searchState.caseSensitive,
         expandableRows,
         filterLogic,
         prettyPrint,
+        wrap,
         setCaseSensitive: (v: boolean) => {
-          dispatch({ caseSensitive: v, type: "SET_CASE_SENSITIVE" });
+          dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive: v });
           Cookie.set(CASE_SENSITIVE, v.toString(), { expires: 365 });
         },
         setExpandableRows: (v: boolean) => {
@@ -271,7 +272,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           setWrap(v);
           Cookie.set(WRAP, v.toString(), { expires: 365 });
         },
-        wrap,
       },
       processedLogLines,
       range: {
@@ -283,9 +283,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
-      collapseLines: (idx: number) => dispatch({ idx, type: "COLLAPSE_LINES" }),
+      collapseLines: (idx: number) => dispatch({ type: "COLLAPSE_LINES", idx }),
       expandLines: (expandedLines: ExpandedLines) =>
-        dispatch({ expandedLines, type: "EXPAND_LINES" }),
+        dispatch({ type: "EXPAND_LINES", expandedLines }),
       getLine,
       getResmokeLineColor,
       ingestLines,
@@ -293,17 +293,17 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         const { searchIndex, searchRange } = state.searchState;
         if (searchIndex !== undefined && searchRange !== undefined) {
           const nextPage = getNextPage(searchIndex, searchRange, direction);
-          dispatch({ nextPage, type: "PAGINATE" });
+          dispatch({ type: "PAGINATE", nextPage });
           scrollToLine(searchResults[nextPage]);
         }
       },
       scrollToLine,
       setFileName: (fileName: string) => {
-        dispatch({ fileName, type: "SET_FILE_NAME" });
+        dispatch({ type: "SET_FILE_NAME", fileName });
       },
       setLogMetadata,
       setSearch: (searchTerm: string) => {
-        dispatch({ searchTerm, type: "SET_SEARCH_TERM" });
+        dispatch({ type: "SET_SEARCH_TERM", searchTerm });
       },
     }),
     [

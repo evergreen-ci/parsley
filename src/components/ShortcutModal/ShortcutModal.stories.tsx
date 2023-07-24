@@ -7,8 +7,8 @@ export default {
 } satisfies CustomMeta<typeof ShortcutModal>;
 
 export const Default: CustomStoryObj<typeof ShortcutModal> = {
-  args: {},
   render: (args) => <Component {...args} />,
+  args: {},
 };
 
 const Component = (args: any) => {

@@ -3,15 +3,15 @@ import { useFetch } from ".";
 
 const API_URL = "/some/endpoint";
 const jsonMessage = {
-  anotherKey: "anotherValue",
   key: "value",
+  anotherKey: "anotherValue",
   someNumber: 123,
 };
 describe("useFetch", () => {
   it("gets a good response from the api and updates its state", async () => {
     const mockFetchPromise = jest.fn().mockResolvedValue({
-      json: () => Promise.resolve(jsonMessage),
       ok: true,
+      json: () => Promise.resolve(jsonMessage),
     });
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
@@ -44,8 +44,8 @@ describe("useFetch", () => {
   });
   it("makes a request if skip is changed from true to false", async () => {
     const mockFetchPromise = jest.fn().mockResolvedValue({
-      json: () => Promise.resolve(jsonMessage),
       ok: true,
+      json: () => Promise.resolve(jsonMessage),
     });
 
     let skip = true;

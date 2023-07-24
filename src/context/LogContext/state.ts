@@ -30,14 +30,14 @@ type Action =
   | { type: "PAGINATE"; nextPage: number };
 
 const initialState = (initialLogLines?: string[]): LogState => ({
-  expandedLines: [],
   logs: initialLogLines || [],
   searchState: {
-    caseSensitive: Cookie.get(CASE_SENSITIVE) === "true",
-    hasSearch: false,
     searchIndex: 0,
     searchRange: 0,
+    hasSearch: false,
+    caseSensitive: Cookie.get(CASE_SENSITIVE) === "true",
   },
+  expandedLines: [],
 });
 
 const reducer = (state: LogState, action: Action): LogState => {
@@ -75,12 +75,12 @@ const reducer = (state: LogState, action: Action): LogState => {
       }
       return {
         ...state,
+        logs: processedLogs,
         colorMapping: colorMap,
         logMetadata: {
           ...state.logMetadata,
           logType: action.logType,
         },
-        logs: processedLogs,
       };
     }
     case "CLEAR_LOGS":
@@ -129,10 +129,10 @@ const reducer = (state: LogState, action: Action): LogState => {
         ...state,
         searchState: {
           ...state.searchState,
-          hasSearch,
+          searchTerm: hasSearch ? searchTerm : undefined,
           searchIndex: undefined,
           searchRange: undefined,
-          searchTerm: hasSearch ? searchTerm : undefined,
+          hasSearch,
         },
       };
     }
@@ -154,11 +154,11 @@ const reducer = (state: LogState, action: Action): LogState => {
       return {
         ...state,
         searchState: {
-          caseSensitive: action.caseSensitive,
-          hasSearch: true,
+          searchTerm: newSearchTerm,
           searchIndex: undefined,
           searchRange: undefined,
-          searchTerm: newSearchTerm,
+          hasSearch: true,
+          caseSensitive: action.caseSensitive,
         },
       };
     }
@@ -173,8 +173,8 @@ const reducer = (state: LogState, action: Action): LogState => {
         ...state,
         searchState: {
           ...state.searchState,
-          searchIndex,
           searchRange: action.matchCount ? action.matchCount : undefined,
+          searchIndex,
         },
       };
     }
@@ -194,8 +194,8 @@ const reducer = (state: LogState, action: Action): LogState => {
 const useLogState = (initialLogLines?: string[]) => {
   const [state, dispatch] = useReducer(reducer, initialState(initialLogLines));
   return {
-    dispatch,
     state,
+    dispatch,
   };
 };
 

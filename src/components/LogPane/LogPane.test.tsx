@@ -13,7 +13,7 @@ describe("logPane", () => {
 
     render(
       <VirtuosoMockContext.Provider
-        value={{ itemHeight: 10, viewportHeight: 500 }}
+        value={{ viewportHeight: 500, itemHeight: 10 }}
       >
         <LogContextProvider initialLogLines={list}>
           <LogPane rowCount={list.length} rowRenderer={RowRenderer} />

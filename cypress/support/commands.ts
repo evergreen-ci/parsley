@@ -1,8 +1,8 @@
 import { fail } from "assert";
 
 const user = {
-  password: "password",
   username: "admin",
+  password: "password",
 };
 const toastDataCy = "toast";
 
@@ -135,7 +135,7 @@ Cypress.Commands.add("login", () => {
     args,
     () => {
       cy.origin("http://localhost:9090", { args }, ({ password, username }) => {
-        cy.request("POST", "/login", { password, username });
+        cy.request("POST", "/login", { username, password });
       });
     }
   );
@@ -143,7 +143,7 @@ Cypress.Commands.add("login", () => {
 
 Cypress.Commands.add("logout", () => {
   cy.origin("http://localhost:9090", () => {
-    cy.request({ followRedirect: false, url: "/logout" });
+    cy.request({ url: "/logout", followRedirect: false });
   });
 });
 

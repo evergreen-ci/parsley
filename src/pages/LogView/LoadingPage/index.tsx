@@ -50,7 +50,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   let legacyJobLogsURL = "";
   let lobsterURL = "";
   const { data: logkeeperMetadata } = useFetch<LogkeeperMetadata>(
-    getResmokeLogURL(buildID || "", { metadata: true, testID }),
+    getResmokeLogURL(buildID || "", { testID, metadata: true }),
     {
       skip: buildID === undefined,
     }
@@ -58,8 +58,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
-        rawLogURL = getResmokeLogURL(buildID, { raw: true, testID });
-        htmlLogURL = getResmokeLogURL(buildID, { html: true, testID });
+        rawLogURL = getResmokeLogURL(buildID, { testID, raw: true });
+        htmlLogURL = getResmokeLogURL(buildID, { testID, html: true });
         lobsterURL = getLobsterResmokeURL(buildID, testID);
       } else if (buildID) {
         rawLogURL = getResmokeLogURL(buildID, { raw: true });
@@ -90,12 +90,12 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         break;
       }
       rawLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
-        groupID,
         text: true,
+        groupID,
       });
       htmlLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
-        groupID,
         text: false,
+        groupID,
       });
       lobsterURL = getLobsterTestURL(taskID, execution, testID, groupID);
       break;
@@ -113,17 +113,17 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     if (data) {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
       setLogMetadata({
-        buildID,
+        logType,
+        taskID: taskID || logkeeperMetadata?.task_id,
         execution: execution || String(logkeeperMetadata?.execution || 0),
+        testID,
+        origin,
+        buildID,
+        rawLogURL,
         htmlLogURL,
         jobLogsURL,
         legacyJobLogsURL,
         lobsterURL,
-        logType,
-        origin,
-        rawLogURL,
-        taskID: taskID || logkeeperMetadata?.task_id,
-        testID,
       });
       ingestLines(data, logType);
     }

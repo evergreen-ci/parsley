@@ -30,15 +30,15 @@ const Search: React.FC = () => {
   const { buildID, execution, logType, taskID } = logMetadata ?? {};
   const { hasSearch } = searchState;
 
-  const { task } = useTaskQuery({ buildID, execution, logType, taskID });
+  const { task } = useTaskQuery({ logType, taskID, execution, buildID });
   const { versionMetadata } = task ?? {};
   const { projectIdentifier = "" } = versionMetadata ?? {};
 
   const { data } = useQuery<ProjectFiltersQuery, ProjectFiltersQueryVariables>(
     PROJECT_FILTERS,
     {
-      skip: !projectIdentifier,
       variables: { projectIdentifier },
+      skip: !projectIdentifier,
     }
   );
   const { project } = data || {};
@@ -52,13 +52,13 @@ const Search: React.FC = () => {
           setFilters([
             ...filters,
             {
+              name: value,
               caseSensitive: CaseSensitivity.Insensitive,
               matchType: MatchType.Exact,
-              name: value,
               visible: true,
             },
           ]);
-          sendEvent({ filterExpression: value, name: "Added Filter" });
+          sendEvent({ name: "Added Filter", filterExpression: value });
           leaveBreadcrumb("Added Filter", { filterExpression: value });
         }
         break;
@@ -66,7 +66,7 @@ const Search: React.FC = () => {
         if (!highlights.includes(value)) {
           setSearch("");
           setHighlights([...highlights, value]);
-          sendEvent({ highlightExpression: value, name: "Added Highlight" });
+          sendEvent({ name: "Added Highlight", highlightExpression: value });
           leaveBreadcrumb("Added Highlight", { highlightExpression: value });
         }
         break;

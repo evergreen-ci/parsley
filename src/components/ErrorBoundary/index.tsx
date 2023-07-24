@@ -74,8 +74,8 @@ const initializeBugsnag = () => {
   try {
     Bugsnag.start({
       apiKey: bugsnagAPIKey || "",
-      appVersion,
       plugins: [new BugsnagPluginReact()],
+      appVersion,
       releaseStage,
     });
     bugsnagStarted = true;

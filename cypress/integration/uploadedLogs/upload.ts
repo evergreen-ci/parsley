@@ -7,8 +7,8 @@ describe("Upload page", () => {
     it("should be able to drag and drop a file", () => {
       cy.dataCy("upload-zone").should("be.visible");
       cy.dataCy("upload-zone").selectFile("sample_logs/resmoke.log", {
-        action: "drag-drop",
         force: true,
+        action: "drag-drop",
       });
       cy.dataCy("parse-log-select").should("be.visible");
     });

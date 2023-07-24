@@ -13,5 +13,5 @@ export const useUser = (options?: Options) => {
     },
   });
   const { user } = data || {};
-  return { loading, user };
+  return { user, loading };
 };

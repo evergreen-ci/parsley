@@ -64,6 +64,6 @@ describe("expanded lines", () => {
 });
 
 const props = {
-  collapseLines: jest.fn(),
   expandedLines: [],
+  collapseLines: jest.fn(),
 };

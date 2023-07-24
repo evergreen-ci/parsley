@@ -26,10 +26,10 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
   const { loading, task } = useTaskQuery({
-    buildID,
-    execution,
     logType,
     taskID,
+    execution,
+    buildID,
   });
 
   if (loading || !task) {
@@ -62,31 +62,31 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
 
   const breadcrumbs = [
     {
-      "data-cy": "project-breadcrumb",
       text: projectIdentifier,
+      "data-cy": "project-breadcrumb",
     },
     {
+      tooltipText: message,
       "data-cy": "version-breadcrumb",
       text: isPatch ? (
         `Patch ${patchNumber}`
       ) : (
         <InlineCode>{shortenGithash(revision)}</InlineCode>
       ),
-      tooltipText: message,
     },
     {
-      "data-cy": "task-breadcrumb",
       href: getEvergreenTaskURL(taskID, taskExecution),
-      onClick: () => {
-        sendEvent({ name: "Opened Task Link" });
-      },
       text: (
         <>
           {trimStringFromMiddle(displayName, 30)}{" "}
           <TaskStatusBadge status={status} />
         </>
       ),
+      "data-cy": "task-breadcrumb",
       tooltipText: displayName.length > 30 && displayName,
+      onClick: () => {
+        sendEvent({ name: "Opened Task Link" });
+      },
     },
     ...(testID
       ? [

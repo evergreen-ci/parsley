@@ -43,10 +43,10 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const checkLogin = async () => {
       await fetch(`${graphqlURL}`, {
-        body: JSON.stringify({ query: `query { user { userId } }` }),
+        method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        method: "POST",
+        body: JSON.stringify({ query: `query { user { userId } }` }),
       })
         .then((response) => {
           if (response.ok) {
@@ -73,9 +73,9 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   // This function is only used in local development.
   const devLogin = useCallback(async ({ password, username }: LoginCreds) => {
     await fetch(`${evergreenURL}/login`, {
-      body: JSON.stringify({ password, username }),
-      credentials: "include",
       method: "POST",
+      credentials: "include",
+      body: JSON.stringify({ username, password }),
     }).then((response) => {
       if (response.ok) {
         setIsAuthenticated(true);
@@ -87,8 +87,8 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const logoutAndRedirect = useCallback(async () => {
     await fetch(`${evergreenURL}/logout`, {
-      credentials: "include",
       method: "GET",
+      credentials: "include",
       redirect: "manual",
     }).then(() => {
       setIsAuthenticated(false);
@@ -102,8 +102,8 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const memoizedContext = useMemo(
     () => ({
-      devLogin,
       isAuthenticated,
+      devLogin,
       logoutAndRedirect,
     }),
     [isAuthenticated, devLogin, logoutAndRedirect]

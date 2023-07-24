@@ -4,10 +4,10 @@ describe("searchLogs", () => {
   it("should return an empty array if there are no matching lines", () => {
     const lines = ["line 1", "line 2", "line 3"];
     const options = {
-      getLine: (index: number) => lines[index],
-      lowerBound: 0,
-      processedLogLines: [0, 1, 2],
       searchRegex: /test/,
+      lowerBound: 0,
+      getLine: (index: number) => lines[index],
+      processedLogLines: [0, 1, 2],
     };
     const matchingIndices = searchLogs(options);
     expect(matchingIndices).toStrictEqual([]);
@@ -15,10 +15,10 @@ describe("searchLogs", () => {
   it("should return an array of matching line numbers", () => {
     const lines = ["line 1", "line 2", "line 3"];
     const options = {
-      getLine: (index: number) => lines[index],
-      lowerBound: 0,
-      processedLogLines: [0, 1, 2],
       searchRegex: /line/,
+      lowerBound: 0,
+      getLine: (index: number) => lines[index],
+      processedLogLines: [0, 1, 2],
     };
     const matchingIndices = searchLogs(options);
     expect(matchingIndices).toStrictEqual([0, 1, 2]);
@@ -27,10 +27,10 @@ describe("searchLogs", () => {
     const lines = ["line 1", "line 2", "line 3"];
     const getLine = jest.fn((index: number) => lines[index]);
     const options = {
-      getLine,
-      lowerBound: 1,
-      processedLogLines: [0, 1, 2],
       searchRegex: /line/,
+      lowerBound: 1,
+      getLine,
+      processedLogLines: [0, 1, 2],
     };
     const matchingIndices = searchLogs(options);
     expect(matchingIndices).toStrictEqual([1, 2]);
@@ -42,11 +42,11 @@ describe("searchLogs", () => {
     const lines = ["line 1", "line 2", "line 3"];
     const getLine = jest.fn((index: number) => lines[index]);
     const options = {
-      getLine,
-      lowerBound: 0,
-      processedLogLines: [0, 1, 2],
       searchRegex: /line/,
+      lowerBound: 0,
       upperBound: 1,
+      getLine,
+      processedLogLines: [0, 1, 2],
     };
     const matchingIndices = searchLogs(options);
     expect(matchingIndices).toStrictEqual([0, 1]);
@@ -58,10 +58,10 @@ describe("searchLogs", () => {
     const lines = ["line 1", "line 2", "line 3", "line 4"];
     const getLine = jest.fn((index: number) => lines[index]);
     const options = {
-      getLine,
-      lowerBound: 0,
-      processedLogLines: [0, [1, 2], 3],
       searchRegex: /line/,
+      lowerBound: 0,
+      getLine,
+      processedLogLines: [0, [1, 2], 3],
     };
     const matchingIndices = searchLogs(options);
     expect(matchingIndices).toStrictEqual([0, 2]);
@@ -73,11 +73,11 @@ describe("searchLogs", () => {
     const lines = ["line 1", "line 2", "line 3", "line 4"];
     const getLine = jest.fn((index: number) => lines[index]);
     const options = {
-      getLine,
-      lowerBound: 0,
-      processedLogLines: [0, [1, 2], 3],
       searchRegex: /line/,
+      lowerBound: 0,
       upperBound: 1,
+      getLine,
+      processedLogLines: [0, [1, 2], 3],
     };
     const matchingIndices = searchLogs(options);
     expect(matchingIndices).toStrictEqual([0]);

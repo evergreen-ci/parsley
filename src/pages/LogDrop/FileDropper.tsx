@@ -29,7 +29,7 @@ const FileDropper: React.FC = () => {
     (acceptedFiles: File[]) => {
       leaveBreadcrumb("Dropped file", {}, "user");
       sendEvent({ name: "Dropped file" });
-      dispatch({ file: acceptedFiles[0], type: "DROPPED_FILE" });
+      dispatch({ type: "DROPPED_FILE", file: acceptedFiles[0] });
     },
     [dispatch, sendEvent]
   );
@@ -54,9 +54,9 @@ const FileDropper: React.FC = () => {
                   "process"
                 );
                 sendEvent({
-                  fileSize: logLines?.length,
-                  logType,
                   name: "Processed Log",
+                  logType,
+                  fileSize: logLines?.length,
                 });
                 setFileName(state.file.name);
                 ingestLines(logLines, logType);
@@ -81,11 +81,11 @@ const FileDropper: React.FC = () => {
   );
 
   const { getInputProps, getRootProps, open } = useDropzone({
+    onDrop,
     maxFiles: 1,
     multiple: false,
     noClick: true,
     noKeyboard: true,
-    onDrop,
   });
 
   let visibleUI = null;

@@ -9,16 +9,16 @@ export default {
 } satisfies CustomMeta<typeof TaskStatusBadge>;
 
 export const Default: CustomStoryObj<typeof TaskStatusBadge> = {
-  argTypes: {
-    status: {
-      control: "select",
-      options: TaskStatus,
-    },
-  },
+  render: (args) => <TaskStatusBadge {...args} />,
   args: {
     status: TaskStatus.Succeeded,
   },
-  render: (args) => <TaskStatusBadge {...args} />,
+  argTypes: {
+    status: {
+      options: TaskStatus,
+      control: "select",
+    },
+  },
 };
 
 export const AllBadges: CustomStoryObj<typeof TaskStatusBadge> = {

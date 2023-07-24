@@ -46,8 +46,8 @@ describe("filter logic toggle", () => {
 
   it("url params should take precedence over cookie value", () => {
     render(<FilterLogicToggle />, {
-      route: "?filterLogic=and",
       wrapper,
+      route: "?filterLogic=and",
     });
     const filterLogicToggle = screen.getByDataCy("filter-logic-toggle");
     expect(filterLogicToggle).toHaveAttribute("aria-checked", "false");

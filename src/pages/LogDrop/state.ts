@@ -43,8 +43,8 @@ const reducer = (state: State, action: Action): State => {
 const useLogDropState = () => {
   const [state, dispatch] = useReducer(reducer, initialState());
   return {
-    dispatch,
     state,
+    dispatch,
   };
 };
 

@@ -4,8 +4,8 @@ import { render } from "@testing-library/react";
 describe("storyshots", () => {
   // eslint-disable-next-line jest/require-hook
   initStoryshots({
-    asyncJest: true,
     renderer: render,
+    asyncJest: true,
     test: ({ context, done, stories2snapsConverter, story }) => {
       const snapshotFileName =
         stories2snapsConverter.getSnapshotFileName(context);
