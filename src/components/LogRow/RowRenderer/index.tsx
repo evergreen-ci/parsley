@@ -31,8 +31,18 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
   // to highlight each match.
   const highlightRegex =
     highlights.length > 0
-      ? new RegExp(`${highlights.map((h) => `(${h})`).join("|")}`, "gi")
+      ? new RegExp(
+          `${highlights.map((h) => `(${h})(?![^<]*>)`).join("|")}`,
+          "gi"
+        )
       : undefined;
+
+  const searchTermRegex = searchTerm
+    ? new RegExp(
+        `(${searchTerm.source})(?![^<]*>)`,
+        searchTerm.ignoreCase ? "gi" : "g"
+      )
+    : undefined;
 
   const result = (index: number) => {
     const processedLogLine = processedLogLines[index];
@@ -57,7 +67,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
         range={range}
         scrollToLine={scrollToLine}
         searchLine={searchLine}
-        searchTerm={searchTerm}
+        searchTerm={searchTermRegex}
         wrap={wrap}
       />
     );

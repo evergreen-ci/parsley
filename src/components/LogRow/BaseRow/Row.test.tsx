@@ -151,7 +151,7 @@ describe("row", () => {
     });
 
     it("should highlight every matching term on a line", () => {
-      const regexp = /Test|Log/i;
+      const regexp = /Test|Log/gi;
       renderWithRouterMatch(
         <Row {...rowProps} highlightRegex={regexp}>
           {testLog}
