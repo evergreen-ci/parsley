@@ -72,7 +72,7 @@ const useLogDownloader = (
         setFileSize(getFileSize() + progress);
       },
     })
-      .then(({ trimmedLines, result: logs }) => {
+      .then(({ result: logs, trimmedLines }) => {
         // Remove the last log line if it is empty
         if (logs[logs.length - 1] === "") {
           logs.pop();
@@ -80,18 +80,18 @@ const useLogDownloader = (
         setData(logs);
         if (trimmedLines) {
           sendEvent({
-            name: "Log Download Incomplete",
-            duration: Date.now() - timeStart,
-            reason: "Log line size limit exceeded",
             downloaded: getFileSize(),
+            duration: Date.now() - timeStart,
+            name: "Log Download Incomplete",
+            reason: "Log line size limit exceeded",
           });
           reportError({
             message: "Log line size limit exceeded",
-            name: "Log download incomplete",
             metadata: {
               trimmedLines,
               url,
             },
+            name: "Log download incomplete",
           }).warning();
           dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
             title: "Log not fully downloaded",
