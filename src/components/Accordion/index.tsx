@@ -19,10 +19,10 @@ interface AccordionProps {
 }
 
 const Accordion: React.FC<AccordionProps> = ({
-  "data-cy": dataCy,
-  defaultOpen = false,
   children,
   className,
+  "data-cy": dataCy,
+  defaultOpen = false,
   onToggle = () => {},
   subtitle,
   title,
@@ -99,7 +99,7 @@ const AnimatedAccordion = styled.div<{
 }>`
   /* This is used to calculate a fixed height for the Accordion since height
       transitions require a fixed height for their end height */
-  max-height: ${({ hide, height }): string =>
+  max-height: ${({ height, hide }): string =>
     hide ? "0px" : `${height || 9999}px`};
   transition: max-height 200ms ease-in-out;
   overflow: hidden;

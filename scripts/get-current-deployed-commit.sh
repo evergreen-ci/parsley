@@ -25,6 +25,12 @@ then
     exit 1
 fi
 
+# Check if bin directory exists
+if [ ! -d "bin" ]
+then
+    mkdir bin
+fi
+
 # Save the current commit hash to a file
 echo "$PREVIOUS_DEPLOYED_COMMIT"
 echo "$PREVIOUS_DEPLOYED_COMMIT" > bin/previous_deploy.txt

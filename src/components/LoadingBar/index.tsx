@@ -9,8 +9,8 @@ interface LoadingBarProps {
   indeterminate: boolean;
 }
 const LoadingBar: React.FC<LoadingBarProps> = ({
-  progress = 100,
   indeterminate = false,
+  progress = 100,
 }) => (
   <Container>
     <Bar

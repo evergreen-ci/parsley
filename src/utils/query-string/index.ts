@@ -21,8 +21,8 @@ export const stringifyQuery = (
 ) =>
   queryString.stringify(object, {
     arrayFormat: "comma",
-    skipNull: true,
     skipEmptyString: true,
+    skipNull: true,
     ...options,
   });
 
@@ -41,10 +41,10 @@ export const parseFilters = (filters: string[]): Filters => {
     const name = filter.substring(3);
     const decodedFilterName = decodeURIComponent(name);
     return {
-      visible,
       caseSensitive,
       matchType,
       name: decodedFilterName,
+      visible,
     };
   });
   return parsedFilters;

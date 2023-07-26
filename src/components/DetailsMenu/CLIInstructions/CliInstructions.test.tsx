@@ -27,10 +27,10 @@ describe("cliInstructions", () => {
     render(<Component />, { wrapper });
     act(() => {
       hook.current.setLogMetadata({
-        taskID: "taskId",
         execution: "0",
-        origin: "task",
         logType: LogTypes.EVERGREEN_TASK_LOGS,
+        origin: "task",
+        taskID: "taskId",
       });
     });
     let taskDownloadCommand =
@@ -38,10 +38,10 @@ describe("cliInstructions", () => {
     expect(screen.getByText(taskDownloadCommand)).toBeInTheDocument();
     act(() => {
       hook.current.setLogMetadata({
-        taskID: "taskId",
         execution: "0",
-        origin: "agent",
         logType: LogTypes.EVERGREEN_TASK_LOGS,
+        origin: "agent",
+        taskID: "taskId",
       });
     });
     taskDownloadCommand =
@@ -49,10 +49,10 @@ describe("cliInstructions", () => {
     expect(screen.getByText(taskDownloadCommand)).toBeInTheDocument();
     act(() => {
       hook.current.setLogMetadata({
-        taskID: "taskId",
         execution: "0",
-        origin: "all",
         logType: LogTypes.EVERGREEN_TASK_LOGS,
+        origin: "all",
+        taskID: "taskId",
       });
     });
     taskDownloadCommand =
@@ -67,10 +67,10 @@ describe("cliInstructions", () => {
     render(<Component />, { wrapper });
     act(() => {
       hook.current.setLogMetadata({
-        taskID: "taskId",
         execution: "0",
-        testID: "testId",
         logType: LogTypes.EVERGREEN_TEST_LOGS,
+        taskID: "taskId",
+        testID: "testId",
       });
     });
     const testDownloadCommand =
@@ -85,16 +85,16 @@ describe("cliInstructions", () => {
     render(<Component />, { wrapper });
     act(() => {
       hook.current.setLogMetadata({
-        taskID: "taskId",
-        execution: "0",
-        testID: "testId",
         buildID: "buildId",
+        execution: "0",
         logType: LogTypes.RESMOKE_LOGS,
+        taskID: "taskId",
+        testID: "testId",
       });
     });
     const logkeeperDownloadCommand = `curl "${getResmokeLogURL("buildId", {
-      testID: "testId",
       raw: true,
+      testID: "testId",
     })}"`;
     expect(screen.getByText(logkeeperDownloadCommand)).toBeInTheDocument();
   });

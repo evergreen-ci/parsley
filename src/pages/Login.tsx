@@ -16,7 +16,7 @@ const getReferrer = (location: Location): string => {
 
 export const Login: React.FC = () => {
   const location = useLocation();
-  const { isAuthenticated, devLogin } = useAuthContext();
+  const { devLogin, isAuthenticated } = useAuthContext();
 
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -42,7 +42,7 @@ export const Login: React.FC = () => {
         />
         <StyledButton
           data-cy="login-submit"
-          onClick={() => devLogin({ username, password })}
+          onClick={() => devLogin({ password, username })}
           type="submit"
           variant="baseGreen"
         >

@@ -1,10 +1,10 @@
 const paths = {
-  login: "/login",
-  home: "/",
-  upload: "/upload",
   evergreenLogs: "/evergreen",
-  testLogs: "/test",
+  home: "/",
+  login: "/login",
   resmokeLogs: "/resmoke",
+  testLogs: "/test",
+  upload: "/upload",
 };
 
 enum slugs {
@@ -17,13 +17,13 @@ enum slugs {
 }
 
 const routes = {
-  login: paths.login,
-  root: paths.home,
-  upload: paths.upload,
   evergreenLogs: `${paths.evergreenLogs}/:${slugs.taskID}/:${slugs.execution}/:${slugs.origin}`,
-  testLogs: `${paths.testLogs}/:${slugs.taskID}/:${slugs.execution}/:${slugs.testID}`,
+  login: paths.login,
   resmokeLogs: `${paths.resmokeLogs}/:${slugs.buildID}/test/:${slugs.testID}`,
   resmokeLogsAll: `${paths.resmokeLogs}/:${slugs.buildID}/all`,
+  root: paths.home,
+  testLogs: `${paths.testLogs}/:${slugs.taskID}/:${slugs.execution}/:${slugs.testID}`,
+  upload: paths.upload,
 };
 
 export { slugs };

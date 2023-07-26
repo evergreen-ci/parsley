@@ -25,8 +25,8 @@ describe("filters", () => {
 
   it("filters should properly display based on the URL", () => {
     render(<FilterNavGroup {...props} />, {
-      wrapper,
       route: "?filters=100filter1,100filter2",
+      wrapper,
     });
     expect(screen.getByText("filter1")).toBeInTheDocument();
     expect(screen.getByText("filter2")).toBeInTheDocument();
@@ -34,8 +34,8 @@ describe("filters", () => {
 
   it("shows the number of filters in the header", () => {
     render(<FilterNavGroup {...props} />, {
-      wrapper,
       route: "?filters=100one,100two,100three,100four",
+      wrapper,
     });
     const navGroupHeader = screen.getByDataCy("filters-nav-group-header");
     expect(within(navGroupHeader).getByText("4")).toBeInTheDocument();
@@ -43,8 +43,8 @@ describe("filters", () => {
 
   it("editing filters should modify the URL correctly", async () => {
     const { router } = render(<FilterNavGroup {...props} />, {
-      wrapper,
       route: "?filters=100filter1,100filter2",
+      wrapper,
     });
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter")[0]);
@@ -65,8 +65,8 @@ describe("filters", () => {
 
   it("trying to edit a filter to a filter that already exists should do nothing", async () => {
     const { router } = render(<FilterNavGroup {...props} />, {
-      wrapper,
       route: "?filters=100filter1,100filter2",
+      wrapper,
     });
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter")[0]);
@@ -84,8 +84,8 @@ describe("filters", () => {
 
   it("pressing the cancel button after editing a filter should do nothing", async () => {
     const { router } = render(<FilterNavGroup {...props} />, {
-      wrapper,
       route: "?filters=100filter1,100filter2",
+      wrapper,
     });
     // Edit the first filter.
     await user.click(screen.getAllByLabelText("Edit filter")[0]);
@@ -103,8 +103,8 @@ describe("filters", () => {
 
   it("deleting filters should modify the URL correctly", async () => {
     const { router } = render(<FilterNavGroup {...props} />, {
-      wrapper,
       route: "?filters=100filter1,100filter2",
+      wrapper,
     });
     // Delete the first filter.
     await user.click(screen.getAllByLabelText("Delete filter")[0]);
@@ -118,8 +118,8 @@ describe("filters", () => {
     const { router } = render(
       <FilterNavGroup {...props} clearExpandedLines={clearExpandedLines} />,
       {
-        wrapper,
         route: "?filters=100filter1",
+        wrapper,
       }
     );
     await user.click(screen.getAllByLabelText("Delete filter")[0]);
