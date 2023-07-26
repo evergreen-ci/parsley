@@ -23,6 +23,15 @@ const decodeStream = async (stream: ReadableStream, lineSizeLimit?: number) => {
     const chunk = decoder.decode(value, { stream: !done });
     const lines = chunk.split(/\r?\n/);
 
+    if (lineSizeLimit !== undefined) {
+      for (let i = 0; i < lines.length; i++) {
+        if (lines[i].length > lineSizeLimit) {
+          trimmedLines = true;
+          lines[i] = trimLogLineToMaxSize(lines[i], lineSizeLimit);
+        }
+      }
+    }
+
     if (result.length > 0) {
       // Find the last line we've received so far
       const lastIndex = result.length - 1;
@@ -30,21 +39,10 @@ const decodeStream = async (stream: ReadableStream, lineSizeLimit?: number) => {
       // Concatenate the last line with the first line of the "lines" array
       result[lastIndex] = lastLine + lines[0];
       // Remove the first line from the "lines" array
-
       lines.shift();
     }
 
     result.push(...lines);
-
-    if (lineSizeLimit) {
-      if (result[result.length - 1].length > lineSizeLimit) {
-        result[result.length - 1] = trimLogLineToMaxSize(
-          result[result.length - 1],
-          lineSizeLimit
-        );
-        trimmedLines = true;
-      }
-    }
   }
 };
 
