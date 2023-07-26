@@ -42,8 +42,8 @@ describe("expandable rows toggle", () => {
 
   it("url params should take precedence over cookie value", () => {
     render(<ExpandableRowsToggle />, {
-      wrapper,
       route: "?expandable=false",
+      wrapper,
     });
     const expandableRowsToggle = screen.getByDataCy("expandable-rows-toggle");
     expect(expandableRowsToggle).toHaveAttribute("aria-checked", "false");

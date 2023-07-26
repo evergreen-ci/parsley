@@ -24,8 +24,8 @@ interface SearchPopoverProps {
 
 const SearchPopover: React.FC<SearchPopoverProps> = ({
   disabled = false,
-  searchSuggestions,
   onClick,
+  searchSuggestions,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
   const buttonRef = useRef<HTMLButtonElement>(null);

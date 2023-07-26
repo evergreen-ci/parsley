@@ -113,8 +113,8 @@ describe("fetchLogFile", () => {
     const mockOnIncompleteDownload = jest.fn();
     const result = await fetchLogFile(url, {
       ...options,
-      onIncompleteDownload: mockOnIncompleteDownload,
       downloadSizeLimit: 4,
+      onIncompleteDownload: mockOnIncompleteDownload,
     });
 
     expect(mockOnIncompleteDownload).toHaveBeenCalledWith("FILE_TOO_LARGE");

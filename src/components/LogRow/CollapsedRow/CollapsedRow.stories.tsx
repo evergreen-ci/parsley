@@ -38,14 +38,14 @@ const CollapsedRowStory = (args: React.ComponentProps<typeof CollapsedRow>) => {
 };
 
 export const CollapsedRowSingle: CustomStoryObj<typeof CollapsedRow> = {
-  render: (args) => <CollapsedRowStory {...args} />,
+  argTypes: {
+    expandLines: { action: "expandLines" },
+  },
   args: {
     // Initialize an array with 100 collapsed lines.
     collapsedLines: Array.from({ length: 100 }, (_, i) => i),
   },
-  argTypes: {
-    expandLines: { action: "expandLines" },
-  },
+  render: (args) => <CollapsedRowStory {...args} />,
 };
 
 // CollapsedRow with AnsiiRows.
@@ -70,8 +70,8 @@ const CollapsedAnsiiRowStory = (
       <LogPane
         rowCount={processedLogLines.length}
         rowRenderer={ParsleyRow({
-          processedLogLines: collapsedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
+          processedLogLines: collapsedLogLines,
         })}
       />
     </Container>
@@ -83,10 +83,10 @@ export const CollapsedAnsiiRow: CustomStoryObj<
     wrap: boolean;
   }
 > = {
-  render: (args) => <CollapsedAnsiiRowStory {...args} />,
   args: {
     wrap: false,
   },
+  render: (args) => <CollapsedAnsiiRowStory {...args} />,
 };
 
 // CollapsedRow withs ResmokeRows.
@@ -111,8 +111,8 @@ const CollapsedResmokeRowStory = (
       <LogPane
         rowCount={processedLogLines.length}
         rowRenderer={ParsleyRow({
-          processedLogLines: collapsedLogLines,
           logType: LogTypes.RESMOKE_LOGS,
+          processedLogLines: collapsedLogLines,
         })}
       />
     </Container>
@@ -124,10 +124,10 @@ export const CollapsedResmokeRow: CustomStoryObj<
     wrap: boolean;
   }
 > = {
-  render: (args) => <CollapsedResmokeRowStory {...args} />,
   args: {
     wrap: false,
   },
+  render: (args) => <CollapsedResmokeRowStory {...args} />,
 };
 
 const ansiiLogLines = [

@@ -12,10 +12,10 @@ interface UsePaginatedVirtualListProps {
 }
 
 const usePaginatedVirtualList = ({
-  rowCount,
   paginationOffset,
   paginationThreshold,
   ref,
+  rowCount,
 }: UsePaginatedVirtualListProps) => {
   const [currentPage, setCurrentPage] = useState(0);
   const prevPage = usePrevious(currentPage);
@@ -30,9 +30,9 @@ const usePaginatedVirtualList = ({
   const offsetCompensation = currentPage > 0 ? paginationOffset : 0;
 
   const pageSize = calculatePageSize({
+    currentPage,
     maxPageSize: paginationThreshold,
     totalItemCount: rowCount,
-    currentPage,
   });
 
   const scrollToNextPage = useCallback(() => {
@@ -66,16 +66,16 @@ const usePaginatedVirtualList = ({
     if (prevPage < currentPage) {
       // If we're scrolling to the next page, we want to scroll to the top of the next page
       ref.current?.scrollToIndex({
-        index: paginationOffset,
         align: "end",
+        index: paginationOffset,
       });
       leaveBreadcrumb(
         "PaginatedVirtualList",
         {
+          currentPage,
           message: "scrollToNextPage",
           paginationOffset,
           paginationThreshold,
-          currentPage,
           totalPageCount,
         },
         "process"
@@ -85,18 +85,18 @@ const usePaginatedVirtualList = ({
       // I'm not sure why, but this seems to fix it ¯\_(ツ)_/¯
       setTimeout(() => {
         ref.current?.scrollToIndex({
-          index: pageSize - paginationOffset,
           align: "start",
+          index: pageSize - paginationOffset,
         });
       });
       leaveBreadcrumb(
         "PaginatedVirtualList",
         {
+          currentPage,
           message: "scrollToPrevPage",
           offsetCompensation,
           paginationOffset,
           paginationThreshold,
-          currentPage,
           totalPageCount,
         },
         "process"
@@ -119,20 +119,20 @@ const usePaginatedVirtualList = ({
         index -
         calculateStartingIndex({
           page: nextPage,
-          paginationThreshold,
           paginationOffset,
+          paginationThreshold,
         });
 
       leaveBreadcrumb(
         "PaginatedVirtualList",
         {
-          message: "scrollToIndex",
-          index,
-          nextScrollIndex,
-          nextPage,
           currentPage,
-          paginationThreshold,
+          index,
+          message: "scrollToIndex",
+          nextPage,
+          nextScrollIndex,
           paginationOffset,
+          paginationThreshold,
           startingIndex,
         },
         "process"
@@ -140,8 +140,8 @@ const usePaginatedVirtualList = ({
       // This setTimeout is necessary to avoid a race condition where the list hasn't finished rendering the next page
       setTimeout(() => {
         ref.current?.scrollToIndex({
-          index: nextScrollIndex,
           align: "start",
+          index: nextScrollIndex,
         });
       }, 0);
     },
@@ -150,12 +150,12 @@ const usePaginatedVirtualList = ({
   );
 
   return {
+    currentPage,
+    pageSize: pageSize + offsetCompensation,
+    scrollToLine,
     scrollToNextPage,
     scrollToPrevPage,
     startingIndex,
-    pageSize: pageSize + offsetCompensation,
-    scrollToLine,
-    currentPage,
   };
 };
 

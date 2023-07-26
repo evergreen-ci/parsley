@@ -42,7 +42,7 @@ class DefaultErrorBoundary extends Component<
 
   render() {
     const { hasError } = this.state;
-    const { children, FallbackComponent } = this.props;
+    const { FallbackComponent, children } = this.props;
     if (hasError) {
       return <FallbackComponent />;
     }
@@ -74,8 +74,8 @@ const initializeBugsnag = () => {
   try {
     Bugsnag.start({
       apiKey: bugsnagAPIKey || "",
-      plugins: [new BugsnagPluginReact()],
       appVersion,
+      plugins: [new BugsnagPluginReact()],
       releaseStage,
     });
     bugsnagStarted = true;

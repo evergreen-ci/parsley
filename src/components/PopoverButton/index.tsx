@@ -11,9 +11,9 @@ interface PopoverButtonProps extends Omit<ButtonProps, "children"> {
   buttonText: React.ReactNode | string;
 }
 const PopoverButton: React.FC<PopoverButtonProps> = ({
+  buttonText,
   children,
   onClick,
-  buttonText,
   ...rest
 }) => {
   const [isOpen, setIsOpen] = useState(false);

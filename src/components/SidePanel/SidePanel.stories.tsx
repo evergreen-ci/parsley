@@ -28,14 +28,14 @@ const Story = ({ ...args }) => {
 
   useEffect(() => {
     setSearchParams({
-      highlights: ["highlight", "highlight2"],
       filters: ["100active%20filter"],
+      highlights: ["highlight", "highlight2"],
     });
     setLogMetadata({
-      taskID:
-        "spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35",
       execution: "0",
       logType: LogTypes.EVERGREEN_TASK_LOGS,
+      taskID:
+        "spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35",
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -53,10 +53,10 @@ const Story = ({ ...args }) => {
   );
 };
 export const Default: CustomStoryObj<typeof SidePanel> = {
-  render: (args) => <Story {...args} />,
   play: () => {
     userEvent.keyboard("[[");
   },
+  render: (args) => <Story {...args} />,
 };
 
 const Container = styled.div`

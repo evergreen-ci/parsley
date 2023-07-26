@@ -195,16 +195,16 @@ describe("row", () => {
 const testLog = "Test Log";
 
 const rowProps = {
-  key: testLog,
   columnIndex: 0,
+  key: testLog,
   lineIndex: 0,
 
-  scrollToLine: jest.fn(),
   lineNumber: 0,
   prettyPrint: false,
-  wrap: false,
   range: {
     lowerRange: 0,
     upperRange: undefined,
   },
+  scrollToLine: jest.fn(),
+  wrap: false,
 };

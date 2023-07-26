@@ -14,8 +14,8 @@ interface renderHtmlOptions extends HTMLReactParserOptions {
 
 const allowedTags = {
   a: ["href", "target", "rel", "class", "style"],
-  span: ["style", "data-cy"],
   mark: ["style", "data-cy", "color"],
+  span: ["style", "data-cy"],
 };
 
 /**

@@ -11,14 +11,14 @@ interface LogWindowProps {
   logType: LogTypes;
   isUploadedLog: boolean;
 }
-const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
+const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
   const {
     clearExpandedLines,
     collapseLines,
-    scrollToLine,
     expandedLines,
     lineCount,
     processedLogLines,
+    scrollToLine,
   } = useLogContext();
 
   return (
@@ -39,8 +39,8 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
           <LogPane
             rowCount={processedLogLines.length}
             rowRenderer={ParsleyRow({
-              processedLogLines,
               logType,
+              processedLogLines,
             })}
           />
         </LogPaneContainer>

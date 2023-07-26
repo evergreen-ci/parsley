@@ -42,18 +42,15 @@ const useLogDownloader = (
     fetchLogFile(url, {
       // Conditionally define signal because AbortController throws error in development's strict mode
       abortController: isProduction ? abortController : undefined,
-      onProgress: (progress) => {
-        setFileSize(getFileSize() + progress);
-      },
       downloadSizeLimit,
       onIncompleteDownload: (reason, incompleteDownloadError) => {
         reportError({
           message: reason,
-          name: "Log download incomplete",
           metadata: {
             incompleteDownloadError,
             url,
           },
+          name: "Log download incomplete",
         }).warning();
 
         dispatchToast.warning(
@@ -64,11 +61,14 @@ const useLogDownloader = (
           }
         );
         sendEvent({
-          name: "Log Download Incomplete",
-          duration: Date.now() - timeStart,
-          reason,
           downloaded: getFileSize(),
+          duration: Date.now() - timeStart,
+          name: "Log Download Incomplete",
+          reason,
         });
+      },
+      onProgress: (progress) => {
+        setFileSize(getFileSize() + progress);
       },
     })
       .then((logs) => {
@@ -79,31 +79,31 @@ const useLogDownloader = (
         setData(logs);
       })
       .catch((err: Error) => {
-        leaveBreadcrumb("useLogDownloader", { url, err }, "error");
+        leaveBreadcrumb("useLogDownloader", { err, url }, "error");
         reportError(err).severe();
         setError(err.message);
         sendEvent({
-          name: "Log Download Failed",
           duration: Date.now() - timeStart,
-          type: logType,
           fileSize: getFileSize(),
+          name: "Log Download Failed",
+          type: logType,
         });
       })
       .finally(() => {
         leaveBreadcrumb(
           "useLogDownloader",
           {
-            url,
-            time: Date.now() - timeStart,
             fileSize: getBytesAsString(getFileSize()),
+            time: Date.now() - timeStart,
+            url,
           },
           "request"
         );
         sendEvent({
-          name: "Log Downloaded",
           duration: Date.now() - timeStart,
-          type: logType,
           fileSize: getFileSize(),
+          name: "Log Downloaded",
+          type: logType,
         });
         setIsLoading(false);
       });
@@ -114,7 +114,7 @@ const useLogDownloader = (
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [url]);
-  return { data, error, isLoading, fileSize };
+  return { data, error, fileSize, isLoading };
 };
 
 export { useLogDownloader };

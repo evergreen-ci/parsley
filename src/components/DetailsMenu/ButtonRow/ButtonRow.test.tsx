@@ -29,8 +29,8 @@ describe("buttonRow", () => {
 
     it("should indicate when the user has successfully copied to clipboard", async () => {
       renderWithRouterMatch(<ButtonRow />, {
-        wrapper: wrapper(logLines),
         route: "?bookmarks=0,2",
+        wrapper: wrapper(logLines),
       });
       const jiraButton = screen.getByDataCy("jira-button");
       expect(jiraButton).toBeEnabled();
@@ -55,8 +55,8 @@ describe("buttonRow", () => {
         },
       });
       renderWithRouterMatch(<ButtonRow />, {
-        wrapper: wrapper(logLines),
         route: "?bookmarks=0,2,5",
+        wrapper: wrapper(logLines),
       });
 
       const jiraButton = screen.getByDataCy("jira-button");

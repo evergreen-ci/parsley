@@ -39,17 +39,17 @@ const SingleLineStory = (args: any) => {
 };
 
 export const SingleLine: CustomStoryObj<ResmokeRowProps> = {
-  render: (args) => <SingleLineStory {...args} />,
   args: {
     prettyPrint: true,
     wrap: false,
   },
+  render: (args) => <SingleLineStory {...args} />,
 };
 
 // Multiple ResmokeRows.
 const MultipleLinesStory = (args: any) => {
-  const { ingestLines, processedLogLines, preferences } = useLogContext();
-  const { setWrap, setPrettyPrint } = preferences;
+  const { ingestLines, preferences, processedLogLines } = useLogContext();
+  const { setPrettyPrint, setWrap } = preferences;
 
   useEffect(() => {
     ingestLines(logLines, LogTypes.RESMOKE_LOGS);
@@ -68,8 +68,8 @@ const MultipleLinesStory = (args: any) => {
       <LogPane
         rowCount={processedLogLines.length}
         rowRenderer={ParsleyRow({
-          processedLogLines,
           logType: LogTypes.RESMOKE_LOGS,
+          processedLogLines,
         })}
       />
     </Container>
@@ -77,11 +77,11 @@ const MultipleLinesStory = (args: any) => {
 };
 
 export const MultipleLines: CustomStoryObj<ResmokeRowProps> = {
-  render: (args) => <MultipleLinesStory {...args} />,
   args: {
     prettyPrint: true,
     wrap: false,
   },
+  render: (args) => <MultipleLinesStory {...args} />,
 };
 
 const logLines = [

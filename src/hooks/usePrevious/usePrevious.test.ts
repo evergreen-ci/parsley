@@ -7,7 +7,7 @@ describe("usePrevious", () => {
     expect(result.current).toBeUndefined();
   });
   it("should maintain the previous value of the state", () => {
-    const { result, rerender } = renderHook(({ value }) => usePrevious(value), {
+    const { rerender, result } = renderHook(({ value }) => usePrevious(value), {
       initialProps: { value: 0 },
     });
 

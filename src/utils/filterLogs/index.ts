@@ -25,12 +25,12 @@ type FilterLogsParams = {
  */
 const filterLogs = (options: FilterLogsParams): (number | number[])[] => {
   const {
+    bookmarks,
+    expandableRows,
+    expandedLines,
     logLines,
     matchingLines,
-    bookmarks,
     shareLine,
-    expandedLines,
-    expandableRows,
   } = options;
   // If there are no filters or expandable rows is not enabled, then we don't have to do any
   // processing.

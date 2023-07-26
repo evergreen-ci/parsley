@@ -45,12 +45,12 @@ const BreadcrumbFragment: React.FC<BreadcrumbFragmentProps> = ({
   breadcrumb,
 }) => {
   const {
+    "data-cy": dataCy,
     href,
+    onClick,
     text = "",
     to,
     tooltipText,
-    onClick,
-    "data-cy": dataCy,
   } = breadcrumb;
   const shouldTrimMessage =
     typeof text === "string" ? text?.length > 30 : false;
