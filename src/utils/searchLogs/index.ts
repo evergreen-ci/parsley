@@ -10,7 +10,7 @@ interface searchOptions {
 }
 
 const searchLogs = (options: searchOptions): number[] => {
-  const { searchRegex, upperBound, lowerBound, getLine, processedLogLines } =
+  const { getLine, lowerBound, processedLogLines, searchRegex, upperBound } =
     options;
   const matchingIndices: number[] = [];
   for (let i = 0; i < processedLogLines.length; i++) {

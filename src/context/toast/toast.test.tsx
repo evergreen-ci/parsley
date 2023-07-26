@@ -219,8 +219,8 @@ describe("mocked toast", () => {
 
     const {
       Component,
-      useToastContext: useToastContextSpied,
       dispatchToast,
+      useToastContext: useToastContextSpied,
     } = RenderFakeToastContext(<ToastComponent />);
 
     render(<Component />);
@@ -235,7 +235,7 @@ describe("mocked toast", () => {
       dispatchToast.success("test");
     };
 
-    const { useToastContext: useToastContextSpied, dispatchToast } =
+    const { dispatchToast, useToastContext: useToastContextSpied } =
       RenderFakeToastContext();
     renderHook(() => useUpdateToastTest());
     expect(useToastContextSpied).toHaveBeenCalledTimes(1);

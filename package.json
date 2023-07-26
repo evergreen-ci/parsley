@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.87",
+  "version": "1.0.88",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
     "build": "tsc && . ./scripts/app-version.sh && GIT_SHA=`git rev-parse HEAD` vite build",
@@ -127,6 +127,8 @@
     "eslint-plugin-prettier": "4.2.1",
     "eslint-plugin-react": "7.32.2",
     "eslint-plugin-react-hooks": "4.6.0",
+    "eslint-plugin-sort-destructure-keys": "^1.5.0",
+    "eslint-plugin-sort-keys-plus": "^1.3.1",
     "eslint-plugin-storybook": "0.6.12",
     "eslint-plugin-testing-library": "5.9.1",
     "husky": "8.0.2",

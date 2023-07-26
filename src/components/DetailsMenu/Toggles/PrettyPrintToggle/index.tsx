@@ -5,7 +5,7 @@ import BaseToggle from "../BaseToggle";
 
 const PrettyPrintToggle: React.FC = () => {
   const { sendEvent } = usePreferencesAnalytics();
-  const { preferences, logMetadata } = useLogContext();
+  const { logMetadata, preferences } = useLogContext();
 
   const { prettyPrint, setPrettyPrint } = preferences;
   const { logType } = logMetadata || {};

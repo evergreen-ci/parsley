@@ -42,8 +42,8 @@ const CollapsedRow: React.FC<CollapsedRowProps> = ({
       startTransition(() => expandLines([[start, end]]));
     }
     sendEvent({
-      name: "Expanded Lines",
       lineCount: canExpandFive ? SKIP_NUMBER * 2 : numCollapsed,
+      name: "Expanded Lines",
       option: "Five",
     });
   };
@@ -51,8 +51,8 @@ const CollapsedRow: React.FC<CollapsedRowProps> = ({
   const expandAll = () => {
     startTransition(() => expandLines([[start, end]]));
     sendEvent({
-      name: "Expanded Lines",
       lineCount: numCollapsed,
+      name: "Expanded Lines",
       option: "All",
     });
   };

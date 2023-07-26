@@ -7,7 +7,7 @@ import { useFilterParam } from ".";
 const useFilterJointHook = () => {
   const [filters, setFilters] = useFilterParam();
   const [allQueryParams] = useQueryParams();
-  return { filters, setFilters, allQueryParams };
+  return { allQueryParams, filters, setFilters };
 };
 
 describe("useFilterParam", () => {

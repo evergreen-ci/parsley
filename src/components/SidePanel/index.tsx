@@ -19,10 +19,10 @@ interface SidePanelProps {
 }
 
 const SidePanel: React.FC<SidePanelProps> = ({
+  clearExpandedLines,
+  collapseLines,
   "data-cy": dataCy,
   expandedLines,
-  collapseLines,
-  clearExpandedLines,
 }) => {
   const [collapsed, setCollapsed] = useState(
     Cookie.get(HAS_OPENED_DRAWER) === "true"

@@ -27,21 +27,21 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
   setOpen,
 }) => {
   const { sendEvent } = useLogWindowAnalytics();
-  const { state, dispatch } = useSelectedFiltersState();
+  const { dispatch, state } = useSelectedFiltersState();
   const [filters, setFilters] = useFilterParam();
 
   const { logMetadata } = useLogContext();
-  const { logType, taskID, execution, buildID } = logMetadata ?? {};
+  const { buildID, execution, logType, taskID } = logMetadata ?? {};
 
-  const { task } = useTaskQuery({ logType, taskID, execution, buildID });
+  const { task } = useTaskQuery({ buildID, execution, logType, taskID });
   const { versionMetadata } = task ?? {};
   const { projectIdentifier = "" } = versionMetadata ?? {};
 
   const { data } = useQuery<ProjectFiltersQuery, ProjectFiltersQueryVariables>(
     PROJECT_FILTERS,
     {
-      variables: { projectIdentifier },
       skip: !projectIdentifier,
+      variables: { projectIdentifier },
     }
   );
   const { project } = data || {};
@@ -59,8 +59,8 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
       "user"
     );
     sendEvent({
-      name: "Applied Project Filters",
       filters: state.selectedFilters,
+      name: "Applied Project Filters",
     });
     setOpen(false);
     dispatch({ type: "RESET" });
@@ -92,11 +92,11 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
               key={filter.expression}
               active={!!filters.find((f) => f.name === filter.expression)}
               addFilter={(filterToAdd) =>
-                dispatch({ type: "ADD_FILTER", filterToAdd })
+                dispatch({ filterToAdd, type: "ADD_FILTER" })
               }
               filter={filter}
               removeFilter={(filterToRemove) => {
-                dispatch({ type: "REMOVE_FILTER", filterToRemove });
+                dispatch({ filterToRemove, type: "REMOVE_FILTER" });
               }}
               selected={
                 !!state.selectedFilters.find(

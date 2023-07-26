@@ -15,31 +15,31 @@ describe("useResolveLogURL", () => {
     const { result, waitForNextUpdate } = renderHook(
       () =>
         useResolveLogURL({
+          execution: "0",
           logType: "EVERGREEN_TEST_LOGS",
           taskID: "a-task-id",
           testID: "a-test-name",
-          execution: "0",
         }),
       {
         wrapper,
       }
     );
     expect(result.current).toMatchObject({
-      rawLogURL: "",
       htmlLogURL: "",
       jobLogsURL: "",
       legacyJobLogsURL: "",
-      lobsterURL: "",
       loading: true,
+      lobsterURL: "",
+      rawLogURL: "",
     });
     await waitForNextUpdate();
     expect(result.current).toMatchObject({
-      rawLogURL: "rawURL",
       htmlLogURL: "htmlURL",
       jobLogsURL: "",
       legacyJobLogsURL: "",
-      lobsterURL: "lobsterURL",
       loading: false,
+      lobsterURL: "lobsterURL",
+      rawLogURL: "rawURL",
     });
   });
 
@@ -52,10 +52,10 @@ describe("useResolveLogURL", () => {
     const { result, waitForNextUpdate } = renderHook(
       () =>
         useResolveLogURL({
+          execution: "0",
           logType: "EVERGREEN_TEST_LOGS",
           taskID: "a-task-id",
           testID: "a-test-name-that-doesnt-exist",
-          execution: "0",
         }),
       {
         wrapper,
@@ -63,15 +63,15 @@ describe("useResolveLogURL", () => {
     );
     await waitForNextUpdate();
     expect(result.current).toMatchObject({
-      rawLogURL:
-        "test-evergreen.com/test_log/a-task-id/0?test_name=a-test-name-that-doesnt-exist&text=true",
       htmlLogURL:
         "test-evergreen.com/test_log/a-task-id/0?test_name=a-test-name-that-doesnt-exist&text=false",
       jobLogsURL: "",
       legacyJobLogsURL: "",
+      loading: false,
       lobsterURL:
         "undefined/evergreen/test/a-task-id/0/a-test-name-that-doesnt-exist",
-      loading: false,
+      rawLogURL:
+        "test-evergreen.com/test_log/a-task-id/0?test_name=a-test-name-that-doesnt-exist&text=true",
     });
   });
 });
@@ -84,8 +84,8 @@ const getExistingTestLogURLMock: ApolloMock<
     query: GET_TEST_LOG_URL,
     variables: {
       execution: 0,
-      testName: "^a-test-name$",
       taskID: "a-task-id",
+      testName: "^a-test-name$",
     },
   },
   result: {
@@ -98,8 +98,8 @@ const getExistingTestLogURLMock: ApolloMock<
               id: "testID",
               logs: {
                 url: "htmlURL",
-                urlRaw: "rawURL",
                 urlLobster: "lobsterURL",
+                urlRaw: "rawURL",
               },
             },
           ],
@@ -117,8 +117,8 @@ const getEmptyTestLogURLMock: ApolloMock<
     query: GET_TEST_LOG_URL,
     variables: {
       execution: 0,
-      testName: "^a-test-name$",
       taskID: "a-task-id",
+      testName: "^a-test-name$",
     },
   },
   result: {

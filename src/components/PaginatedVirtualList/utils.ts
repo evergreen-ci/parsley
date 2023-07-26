@@ -14,7 +14,7 @@ type calculatePageSizeOptions = {
  * @returns The number of items to render on the current page
  */
 const calculatePageSize = (options: calculatePageSizeOptions) => {
-  const { maxPageSize, totalItemCount, currentPage } = options;
+  const { currentPage, maxPageSize, totalItemCount } = options;
   // The first page always has the maxPageSize or totalItemCount, whichever is smaller
   if (currentPage === 0) {
     return Math.min(maxPageSize, totalItemCount);
@@ -44,7 +44,7 @@ type CalculateStartingIndexOptions = {
  * @returns The starting index of the items to render on the current page
  */
 const calculateStartingIndex = (options: CalculateStartingIndexOptions) => {
-  const { page, paginationThreshold, paginationOffset } = options;
+  const { page, paginationOffset, paginationThreshold } = options;
   return page * paginationThreshold - (page > 0 ? paginationOffset : 0);
 };
 

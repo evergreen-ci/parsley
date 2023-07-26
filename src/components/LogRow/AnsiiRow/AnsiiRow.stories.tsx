@@ -37,15 +37,15 @@ const SingleLineStory = (args: any) => {
 };
 
 export const SingleLine: CustomStoryObj<AnsiiRowProps> = {
-  render: (args) => <SingleLineStory {...args} />,
   args: {
     wrap: false,
   },
+  render: (args) => <SingleLineStory {...args} />,
 };
 
 // Multiple AnsiiRows.
 const MultiLineStory = (args: any) => {
-  const { ingestLines, processedLogLines, preferences } = useLogContext();
+  const { ingestLines, preferences, processedLogLines } = useLogContext();
   const { setWrap } = preferences;
 
   useEffect(() => {
@@ -61,8 +61,8 @@ const MultiLineStory = (args: any) => {
       <LogPane
         rowCount={processedLogLines.length}
         rowRenderer={ParsleyRow({
-          processedLogLines,
           logType: LogTypes.EVERGREEN_TASK_LOGS,
+          processedLogLines,
         })}
       />
     </Container>
@@ -70,10 +70,10 @@ const MultiLineStory = (args: any) => {
 };
 
 export const MultiLines: CustomStoryObj<AnsiiRowProps> = {
-  render: (args) => <MultiLineStory {...args} />,
   args: {
     wrap: false,
   },
+  render: (args) => <MultiLineStory {...args} />,
 };
 
 const logLines = [

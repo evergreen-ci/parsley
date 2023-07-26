@@ -20,7 +20,7 @@ const { gray, white } = palette;
 
 const NavBar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const { hasLogs, clearLogs } = useLogContext();
+  const { clearLogs, hasLogs } = useLogContext();
   const { logoutAndRedirect } = useAuthContext();
 
   return (

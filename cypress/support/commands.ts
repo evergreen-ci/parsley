@@ -134,7 +134,7 @@ Cypress.Commands.add("login", () => {
     // Username & password can be used as the cache key too
     args,
     () => {
-      cy.origin("http://localhost:9090", { args }, ({ username, password }) => {
+      cy.origin("http://localhost:9090", { args }, ({ password, username }) => {
         cy.request("POST", "/login", { username, password });
       });
     }

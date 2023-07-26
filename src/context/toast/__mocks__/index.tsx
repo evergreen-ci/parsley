@@ -11,11 +11,11 @@ import { useToastContext } from "..";
  */
 const RenderFakeToastContext = (Component: React.ReactElement = <div />) => {
   const dispatchToast: ReturnType<typeof useToastContext> = {
-    success: jest.fn(),
     error: jest.fn(),
     info: jest.fn(),
-    warning: jest.fn(),
     progress: jest.fn(),
+    success: jest.fn(),
+    warning: jest.fn(),
   };
 
   const useToastContextSpied = jest
@@ -26,8 +26,8 @@ const RenderFakeToastContext = (Component: React.ReactElement = <div />) => {
 
   return {
     Component: () => Component,
-    useToastContext: useToastContextSpied,
     dispatchToast,
+    useToastContext: useToastContextSpied,
   };
 };
 

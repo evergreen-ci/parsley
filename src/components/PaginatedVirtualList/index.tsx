@@ -26,10 +26,10 @@ const PaginatedVirtualList = forwardRef<
 >(
   (
     {
+      paginationOffset = 10,
+      paginationThreshold = 10000,
       rowCount,
       rowRenderer,
-      paginationThreshold = 10000,
-      paginationOffset = 10,
     },
     ref
   ) => {
@@ -40,16 +40,16 @@ const PaginatedVirtualList = forwardRef<
     const listRef = useRef<VirtuosoHandle>(null);
 
     const {
+      pageSize,
+      scrollToLine,
       scrollToNextPage,
       scrollToPrevPage,
       startingIndex,
-      scrollToLine,
-      pageSize,
     } = usePaginatedVirtualList({
-      rowCount,
-      paginationThreshold,
       paginationOffset,
+      paginationThreshold,
       ref: listRef,
+      rowCount,
     });
 
     useKeyboardShortcut({ charKey: CharKey.PageEnd }, () => {

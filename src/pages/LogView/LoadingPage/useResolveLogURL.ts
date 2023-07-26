@@ -38,17 +38,17 @@ export const useResolveLogURL = ({
     TestLogUrlQuery,
     TestLogUrlQueryVariables
   >(GET_TEST_LOG_URL, {
-    variables: {
-      testName: `^${testID}$`,
-      taskID: taskID as string,
-      execution: parseInt(execution as string, 10),
-    },
     skip: !(
       logType === LogTypes.EVERGREEN_TEST_LOGS &&
       taskID &&
       execution &&
       testID
     ),
+    variables: {
+      execution: parseInt(execution as string, 10),
+      taskID: taskID as string,
+      testName: `^${testID}$`,
+    },
   });
 
   let rawLogURL = "";
@@ -59,8 +59,8 @@ export const useResolveLogURL = ({
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
-        rawLogURL = getResmokeLogURL(buildID, { testID, raw: true });
-        htmlLogURL = getResmokeLogURL(buildID, { testID, html: true });
+        rawLogURL = getResmokeLogURL(buildID, { raw: true, testID });
+        htmlLogURL = getResmokeLogURL(buildID, { html: true, testID });
         lobsterURL = getLobsterResmokeURL(buildID, testID);
       } else if (buildID) {
         rawLogURL = getResmokeLogURL(buildID, { raw: true });
@@ -95,14 +95,14 @@ export const useResolveLogURL = ({
       rawLogURL =
         urlRaw ??
         getEvergreenTestLogURL(taskID, execution, testID, {
-          text: true,
           groupID,
+          text: true,
         });
       htmlLogURL =
         url ??
         getEvergreenTestLogURL(taskID, execution, testID, {
-          text: false,
           groupID,
+          text: false,
         });
       lobsterURL =
         urlLobster ?? getLobsterTestURL(taskID, execution, testID, groupID);
@@ -112,11 +112,11 @@ export const useResolveLogURL = ({
       break;
   }
   return {
-    rawLogURL,
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,
-    lobsterURL,
     loading: isLoadingTest,
+    lobsterURL,
+    rawLogURL,
   };
 };

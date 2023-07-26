@@ -14,22 +14,22 @@ export const constructRegexToMatch = (visibleFilters: Filters) => {
     const isMatch = f.matchType === MatchType.Exact;
     if (f.caseSensitive === CaseSensitivity.Sensitive) {
       regexToMatch.push({
-        regex: new RegExp(f.name),
         isMatch,
+        regex: new RegExp(f.name),
       });
     } else {
       try {
         const regex = new RegExp(f.name, "i");
         regexToMatch.push({
-          regex,
           isMatch,
+          regex,
         });
       } catch (e) {
         // If we get an error here, it means the regex is invalid and got past the validation step. We should report this error.
         reportError({
-          name: "Invalid Regex",
           message: `The regex "${f.name}" is invalid`,
           metadata: e,
+          name: "Invalid Regex",
         }).severe();
       }
     }
@@ -51,11 +51,11 @@ export const matchesFilters = (
   filterLogic: FilterLogic
 ) => {
   if (filterLogic === FilterLogic.And) {
-    return regexToMatch.every(({ regex, isMatch }) =>
+    return regexToMatch.every(({ isMatch, regex }) =>
       isMatch ? regex.test(line) : !regex.test(line)
     );
   }
-  return regexToMatch.some(({ regex, isMatch }) =>
+  return regexToMatch.some(({ isMatch, regex }) =>
     isMatch ? regex.test(line) : !regex.test(line)
   );
 };

@@ -43,10 +43,10 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   useEffect(() => {
     const checkLogin = async () => {
       await fetch(`${graphqlURL}`, {
-        method: "POST",
+        body: JSON.stringify({ query: `query { user { userId } }` }),
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ query: `query { user { userId } }` }),
+        method: "POST",
       })
         .then((response) => {
           if (response.ok) {
@@ -71,11 +71,11 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   // This function is only used in local development.
-  const devLogin = useCallback(async ({ username, password }: LoginCreds) => {
+  const devLogin = useCallback(async ({ password, username }: LoginCreds) => {
     await fetch(`${evergreenURL}/login`, {
-      method: "POST",
+      body: JSON.stringify({ password, username }),
       credentials: "include",
-      body: JSON.stringify({ username, password }),
+      method: "POST",
     }).then((response) => {
       if (response.ok) {
         setIsAuthenticated(true);
@@ -87,8 +87,8 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const logoutAndRedirect = useCallback(async () => {
     await fetch(`${evergreenURL}/logout`, {
-      method: "GET",
       credentials: "include",
+      method: "GET",
       redirect: "manual",
     }).then(() => {
       setIsAuthenticated(false);
@@ -102,8 +102,8 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
 
   const memoizedContext = useMemo(
     () => ({
-      isAuthenticated,
       devLogin,
+      isAuthenticated,
       logoutAndRedirect,
     }),
     [isAuthenticated, devLogin, logoutAndRedirect]

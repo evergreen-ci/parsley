@@ -6,7 +6,7 @@ import { mockEnvironmentVariables } from "test_utils/utils";
 import { evergreenURL, graphqlURL } from "utils/environmentVariables";
 import { AuthProvider, useAuthContext } from ".";
 
-const { mockEnv, cleanup } = mockEnvironmentVariables();
+const { cleanup, mockEnv } = mockEnvironmentVariables();
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <MemoryRouter initialEntries={["/"]}>
@@ -21,10 +21,10 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 
 describe("auth", () => {
   const checkLoginFetchParams = {
-    method: "POST",
+    body: JSON.stringify({ query: `query { user { userId } }` }),
     credentials: "include",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ query: `query { user { userId } }` }),
+    method: "POST",
   };
 
   afterEach(() => {
@@ -53,7 +53,7 @@ describe("auth", () => {
     const mockFetchPromise = jest.fn().mockResolvedValue({ ok: true });
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-    const { waitForNextUpdate, result } = renderHook(() => useAuthContext(), {
+    const { result, waitForNextUpdate } = renderHook(() => useAuthContext(), {
       wrapper,
     });
 
@@ -81,11 +81,11 @@ describe("auth", () => {
       const mockFetchPromise = jest.fn().mockResolvedValue({ ok: true });
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-      const { waitForNextUpdate, result } = renderHook(() => useAuthContext(), {
+      const { result, waitForNextUpdate } = renderHook(() => useAuthContext(), {
         wrapper,
       });
 
-      result.current.devLogin({ username: "username", password: "password" });
+      result.current.devLogin({ password: "password", username: "username" });
       await waitForNextUpdate();
       expect(result.current.isAuthenticated).toBe(true);
     });
@@ -98,7 +98,7 @@ describe("auth", () => {
         wrapper,
       });
 
-      result.current.devLogin({ username: "username", password: "password" });
+      result.current.devLogin({ password: "password", username: "username" });
       expect(result.current.isAuthenticated).toBe(false);
     });
   });

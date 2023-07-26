@@ -5,7 +5,7 @@ import BaseToggle from "../BaseToggle";
 const WrapToggle: React.FC = () => {
   const { sendEvent } = usePreferencesAnalytics();
   const { preferences } = useLogContext();
-  const { wrap, setWrap } = preferences;
+  const { setWrap, wrap } = preferences;
   return (
     <BaseToggle
       data-cy="wrap-toggle"

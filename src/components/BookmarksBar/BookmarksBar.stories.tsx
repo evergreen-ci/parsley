@@ -32,14 +32,14 @@ const Story = ({ ...args }: React.ComponentProps<typeof BookmarksBar>) => {
   );
 };
 export const Default: CustomStoryObj<typeof BookmarksBar> = {
-  render: (args) => <Story {...args} />,
+  argTypes: {
+    scrollToLine: { action: "scrollToLine" },
+  },
   args: {
     lineCount: 100,
     processedLogLines,
   },
-  argTypes: {
-    scrollToLine: { action: "scrollToLine" },
-  },
+  render: (args) => <Story {...args} />,
 };
 
 const Container = styled.div`

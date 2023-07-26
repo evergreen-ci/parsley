@@ -34,12 +34,12 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const dispatchToast = useToastContext();
   const { ingestLines, setLogMetadata } = useLogContext();
   const {
-    rawLogURL,
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,
-    lobsterURL,
     loading: isLoadingTest,
+    lobsterURL,
+    rawLogURL,
   } = useResolveLogURL({
     buildID,
     execution,
@@ -50,7 +50,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     testID,
   });
   const { data: logkeeperMetadata } = useFetch<LogkeeperMetadata>(
-    getResmokeLogURL(buildID || "", { testID, metadata: true }),
+    getResmokeLogURL(buildID || "", { metadata: true, testID }),
     {
       skip: buildID === undefined,
     }
@@ -59,25 +59,25 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const {
     data,
     error,
-    isLoading: isLoadingLog,
     fileSize,
+    isLoading: isLoadingLog,
   } = useLogDownloader(rawLogURL, logType);
 
   useEffect(() => {
     if (data) {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
       setLogMetadata({
-        logType,
-        taskID: taskID || logkeeperMetadata?.task_id,
-        execution: execution || String(logkeeperMetadata?.execution || 0),
-        testID,
-        origin,
         buildID,
-        rawLogURL,
+        execution: execution || String(logkeeperMetadata?.execution || 0),
         htmlLogURL,
         jobLogsURL,
         legacyJobLogsURL,
         lobsterURL,
+        logType,
+        origin,
+        rawLogURL,
+        taskID: taskID || logkeeperMetadata?.task_id,
+        testID,
       });
       ingestLines(data, logType);
     }
