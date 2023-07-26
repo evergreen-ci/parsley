@@ -50,6 +50,7 @@ export const useResolveLogURL = ({
       testID
     ),
   });
+
   let rawLogURL = "";
   let htmlLogURL = "";
   let jobLogsURL = "";
