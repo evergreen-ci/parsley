@@ -94,6 +94,7 @@ const useLogDownloader = (
             name: "Log download incomplete",
           }).warning();
           dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
+            shouldTimeout: false,
             title: "Log not fully downloaded",
           });
         }
