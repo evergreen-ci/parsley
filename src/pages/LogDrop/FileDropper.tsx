@@ -66,6 +66,7 @@ const FileDropper: React.FC = () => {
                 ingestLines(logLines, logType);
                 if (trimmedLines) {
                   dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
+                    shouldTimeout: false,
                     title: "Log not fully loaded",
                   });
                 }
