@@ -6,7 +6,7 @@ import { useHighlightParam } from ".";
 const useHighlightJointHook = () => {
   const [highlights, setHighlights] = useHighlightParam();
   const [allQueryParams] = useQueryParams();
-  return { highlights, setHighlights, allQueryParams };
+  return { allQueryParams, highlights, setHighlights };
 };
 
 describe("useHighlightParam", () => {

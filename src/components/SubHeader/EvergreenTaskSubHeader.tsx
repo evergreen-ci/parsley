@@ -25,11 +25,11 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   testID,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
-  const { task, loading } = useTaskQuery({
+  const { loading, task } = useTaskQuery({
+    buildID,
+    execution,
     logType,
     taskID,
-    execution,
-    buildID,
   });
 
   if (loading || !task) {
@@ -53,7 +53,7 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
     status,
     versionMetadata,
   } = task;
-  const { isPatch, projectIdentifier, message, revision } = versionMetadata;
+  const { isPatch, message, projectIdentifier, revision } = versionMetadata;
 
   const currentTest =
     task?.tests?.testResults?.find((test) =>
@@ -62,31 +62,31 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
 
   const breadcrumbs = [
     {
-      text: projectIdentifier,
       "data-cy": "project-breadcrumb",
+      text: projectIdentifier,
     },
     {
-      tooltipText: message,
       "data-cy": "version-breadcrumb",
       text: isPatch ? (
         `Patch ${patchNumber}`
       ) : (
         <InlineCode>{shortenGithash(revision)}</InlineCode>
       ),
+      tooltipText: message,
     },
     {
+      "data-cy": "task-breadcrumb",
       href: getEvergreenTaskURL(taskID, taskExecution),
+      onClick: () => {
+        sendEvent({ name: "Opened Task Link" });
+      },
       text: (
         <>
           {trimStringFromMiddle(displayName, 30)}{" "}
           <TaskStatusBadge status={status} />
         </>
       ),
-      "data-cy": "task-breadcrumb",
       tooltipText: displayName.length > 30 && displayName,
-      onClick: () => {
-        sendEvent({ name: "Opened Task Link" });
-      },
     },
     ...(testID
       ? [

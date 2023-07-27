@@ -17,9 +17,9 @@ const makeFilter = (filter: {
   visible?: boolean;
 }) => {
   const {
-    name,
     caseSensitive = CaseSensitivity.Insensitive,
     matchType = MatchType.Exact,
+    name,
     visible = true,
   } = filter;
 
@@ -45,25 +45,25 @@ const logLines = [
 describe("constructRegexToMatch", () => {
   it("properly constructs case sensitive filters", () => {
     const filter1 = makeFilter({
-      name: "filter1",
       caseSensitive: CaseSensitivity.Sensitive,
+      name: "filter1",
     });
     const filter2 = makeFilter({ name: "filter2" });
     expect(constructRegexToMatch([filter1, filter2])).toStrictEqual([
-      { regex: /filter1/, isMatch: true },
-      { regex: /filter2/i, isMatch: true },
+      { isMatch: true, regex: /filter1/ },
+      { isMatch: true, regex: /filter2/i },
     ]);
   });
 
   it("properly constructs inverse match filters", () => {
     const filter1 = makeFilter({
-      name: "filter1",
       matchType: MatchType.Inverse,
+      name: "filter1",
     });
     const filter2 = makeFilter({ name: "filter2" });
     expect(constructRegexToMatch([filter1, filter2])).toStrictEqual([
-      { regex: /filter1/i, isMatch: false },
-      { regex: /filter2/i, isMatch: true },
+      { isMatch: false, regex: /filter1/i },
+      { isMatch: true, regex: /filter2/i },
     ]);
   });
 });
@@ -78,7 +78,7 @@ describe("matchesFilters", () => {
         expect(
           matchesFilters(
             logLine,
-            [{ regex: /fix/i, isMatch: true }],
+            [{ isMatch: true, regex: /fix/i }],
             FilterLogic.And
           )
         ).toBe(true);
@@ -87,7 +87,7 @@ describe("matchesFilters", () => {
         expect(
           matchesFilters(
             logLine,
-            [{ regex: /fix/, isMatch: true }],
+            [{ isMatch: true, regex: /fix/ }],
             FilterLogic.And
           )
         ).toBe(false);
@@ -99,7 +99,7 @@ describe("matchesFilters", () => {
         expect(
           matchesFilters(
             logLine,
-            [{ regex: /test/, isMatch: true }],
+            [{ isMatch: true, regex: /test/ }],
             FilterLogic.And
           )
         ).toBe(true);
@@ -108,7 +108,7 @@ describe("matchesFilters", () => {
         expect(
           matchesFilters(
             logLine,
-            [{ regex: /test/, isMatch: false }],
+            [{ isMatch: false, regex: /test/ }],
             FilterLogic.And
           )
         ).toBe(false);
@@ -123,8 +123,8 @@ describe("matchesFilters", () => {
           matchesFilters(
             logLine,
             [
-              { regex: /rerender/, isMatch: true },
-              { regex: /test/, isMatch: true },
+              { isMatch: true, regex: /rerender/ },
+              { isMatch: true, regex: /test/ },
             ],
             FilterLogic.And
           )
@@ -135,8 +135,8 @@ describe("matchesFilters", () => {
           matchesFilters(
             logLine,
             [
-              { regex: /rerender/, isMatch: true },
-              { regex: /test/, isMatch: false },
+              { isMatch: true, regex: /rerender/ },
+              { isMatch: false, regex: /test/ },
             ],
             FilterLogic.And
           )
@@ -147,8 +147,8 @@ describe("matchesFilters", () => {
           matchesFilters(
             logLine,
             [
-              { regex: /rerender/, isMatch: false },
-              { regex: /test/, isMatch: false },
+              { isMatch: false, regex: /rerender/ },
+              { isMatch: false, regex: /test/ },
             ],
             FilterLogic.And
           )
@@ -162,8 +162,8 @@ describe("matchesFilters", () => {
           matchesFilters(
             logLine,
             [
-              { regex: /rerender/, isMatch: true },
-              { regex: /test/, isMatch: true },
+              { isMatch: true, regex: /rerender/ },
+              { isMatch: true, regex: /test/ },
             ],
             FilterLogic.Or
           )
@@ -174,8 +174,8 @@ describe("matchesFilters", () => {
           matchesFilters(
             logLine,
             [
-              { regex: /rerender/, isMatch: true },
-              { regex: /test/, isMatch: false },
+              { isMatch: true, regex: /rerender/ },
+              { isMatch: false, regex: /test/ },
             ],
             FilterLogic.Or
           )
@@ -186,8 +186,8 @@ describe("matchesFilters", () => {
           matchesFilters(
             logLine,
             [
-              { regex: /rerender/, isMatch: false },
-              { regex: /test/, isMatch: false },
+              { isMatch: false, regex: /rerender/ },
+              { isMatch: false, regex: /test/ },
             ],
             FilterLogic.Or
           )
@@ -212,8 +212,8 @@ describe("getMatchingLines", () => {
 
   it("returns an empty set if there are no lines that satisfy the filter", () => {
     const filter1 = makeFilter({
-      name: "starting",
       caseSensitive: CaseSensitivity.Sensitive,
+      name: "starting",
     });
     const filter2 = makeFilter({ name: "mongod" });
     expect(

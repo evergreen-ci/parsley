@@ -146,9 +146,9 @@ interface ParsleyLogoProps extends LeafygreenIconProps {
 
 export const ParsleyLogo: React.ComponentType<ParsleyLogoProps> = ({
   className,
-  size = 16,
   leftFill = green.light1,
   rightFill = green.base,
+  size = 16,
   stroke = green.dark2,
   useStroke = false,
 }) => (

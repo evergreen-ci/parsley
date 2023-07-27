@@ -10,7 +10,7 @@ import Highlighter from "./Highlighter";
 import { LogRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
-const { yellow, red } = palette;
+const { red, yellow } = palette;
 
 interface BaseRowProps extends Omit<LogRowProps, "getLine"> {
   children: string;
@@ -37,16 +37,16 @@ interface BaseRowProps extends Omit<LogRowProps, "getLine"> {
  */
 const BaseRow: React.FC<BaseRowProps> = ({
   children,
+  color,
   "data-cy": dataCyText,
-  lineIndex,
   highlightRegex,
+  lineIndex,
   lineNumber,
+  range,
+  scrollToLine,
   searchLine,
   searchTerm,
-  color,
   wrap,
-  scrollToLine,
-  range,
   ...rest
 }) => {
   const { sendEvent } = useLogWindowAnalytics();

@@ -50,7 +50,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   let legacyJobLogsURL = "";
   let lobsterURL = "";
   const { data: logkeeperMetadata } = useFetch<LogkeeperMetadata>(
-    getResmokeLogURL(buildID || "", { testID, metadata: true }),
+    getResmokeLogURL(buildID || "", { metadata: true, testID }),
     {
       skip: buildID === undefined,
     }
@@ -58,8 +58,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
-        rawLogURL = getResmokeLogURL(buildID, { testID, raw: true });
-        htmlLogURL = getResmokeLogURL(buildID, { testID, html: true });
+        rawLogURL = getResmokeLogURL(buildID, { raw: true, testID });
+        htmlLogURL = getResmokeLogURL(buildID, { html: true, testID });
         lobsterURL = getLobsterResmokeURL(buildID, testID);
       } else if (buildID) {
         rawLogURL = getResmokeLogURL(buildID, { raw: true });
@@ -90,12 +90,12 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         break;
       }
       rawLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
-        text: true,
         groupID,
+        text: true,
       });
       htmlLogURL = getEvergreenTestLogURL(taskID, execution, testID, {
-        text: false,
         groupID,
+        text: false,
       });
       lobsterURL = getLobsterTestURL(taskID, execution, testID, groupID);
       break;
@@ -104,7 +104,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       break;
   }
 
-  const { data, error, isLoading, fileSize } = useLogDownloader(
+  const { data, error, fileSize, isLoading } = useLogDownloader(
     rawLogURL,
     logType
   );
@@ -113,17 +113,17 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     if (data) {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
       setLogMetadata({
-        logType,
-        taskID: taskID || logkeeperMetadata?.task_id,
-        execution: execution || String(logkeeperMetadata?.execution || 0),
-        testID,
-        origin,
         buildID,
-        rawLogURL,
+        execution: execution || String(logkeeperMetadata?.execution || 0),
         htmlLogURL,
         jobLogsURL,
         legacyJobLogsURL,
         lobsterURL,
+        logType,
+        origin,
+        rawLogURL,
+        taskID: taskID || logkeeperMetadata?.task_id,
+        testID,
       });
       ingestLines(data, logType);
     }

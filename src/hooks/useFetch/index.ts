@@ -46,7 +46,7 @@ const useFetch = <T extends object>(
           setData(json);
         })
         .catch((err: Error) => {
-          leaveBreadcrumb("useFetch", { url, err }, "error");
+          leaveBreadcrumb("useFetch", { err, url }, "error");
           reportError(err).severe();
           setError(err.message);
         })

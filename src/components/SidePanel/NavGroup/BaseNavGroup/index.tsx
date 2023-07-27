@@ -20,13 +20,13 @@ interface BaseNavGroupProps<T> {
 }
 
 const BaseNavGroup = <T extends {}>({
-  "data-cy": dataCy,
+  additionalHeaderText,
   children,
+  "data-cy": dataCy,
+  defaultMessage,
   glyph,
   items,
   navGroupTitle,
-  defaultMessage,
-  additionalHeaderText,
 }: PropsWithChildren<BaseNavGroupProps<T>>) => (
   <StyledSideNavGroup
     glyph={<Icon fill={green.dark2} glyph={glyph} />}

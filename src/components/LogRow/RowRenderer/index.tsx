@@ -17,14 +17,14 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
     expandLines,
     getLine,
     getResmokeLineColor,
-    scrollToLine,
     preferences,
     range,
+    scrollToLine,
     searchLine,
     searchState,
   } = useLogContext();
   const { searchTerm } = searchState;
-  const { wrap, prettyPrint } = preferences;
+  const { prettyPrint, wrap } = preferences;
 
   const [highlights] = useHighlightParam();
   // Join the highlights into a single regex to match against. Use capture groups

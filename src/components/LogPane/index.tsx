@@ -10,8 +10,8 @@ interface LogPaneProps {
   rowRenderer: (index: number) => React.ReactNode;
   rowCount: number;
 }
-const LogPane: React.FC<LogPaneProps> = ({ rowRenderer, rowCount }) => {
-  const { processedLogLines, scrollToLine, listRef } = useLogContext();
+const LogPane: React.FC<LogPaneProps> = ({ rowCount, rowRenderer }) => {
+  const { listRef, processedLogLines, scrollToLine } = useLogContext();
 
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,

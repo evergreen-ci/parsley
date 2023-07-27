@@ -66,8 +66,8 @@ describe("projectFiltersModal", () => {
       <ProjectFiltersModal open setOpen={jest.fn()} />
     );
     render(<Component />, {
-      wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
       route: "?filters=100my_filter_1",
+      wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
     });
     act(() => {
       hook.current.setLogMetadata(logMetadata);
@@ -106,8 +106,8 @@ describe("projectFiltersModal", () => {
       <ProjectFiltersModal open setOpen={jest.fn()} />
     );
     const { router } = render(<Component />, {
-      wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
       route: "?filters=100original",
+      wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
     });
     act(() => {
       hook.current.setLogMetadata(logMetadata);
@@ -137,10 +137,10 @@ const waitForModalLoad = async () => {
 };
 
 const logMetadata = {
-  taskID:
-    "spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35",
   execution: "0",
   logType: LogTypes.EVERGREEN_TASK_LOGS,
+  taskID:
+    "spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35",
 };
 
 const projectFiltersMock: ApolloMock<
