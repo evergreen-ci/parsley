@@ -14,9 +14,9 @@ interface HighlighterProps {
 
 const Highlighter: React.FC<HighlighterProps> = memo((props) => {
   const {
-    "data-cy": dataCy,
     children: text,
     color,
+    "data-cy": dataCy,
     highlights,
     searchTerm,
   } = props;
