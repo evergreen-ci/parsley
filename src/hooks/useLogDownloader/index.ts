@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useLogDownloadAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
-import { LOG_LINE_TOO_LARGE_WARNING } from "constants/errors";
+import {
+  LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING,
+  LOG_LINE_TOO_LARGE_WARNING,
+} from "constants/errors";
 import { LOG_FILE_SIZE_LIMIT } from "constants/logs";
 import { useToastContext } from "context/toast";
 import useStateRef from "hooks/useStateRef";
@@ -55,13 +58,9 @@ const useLogDownloader = (
             name: "Log download incomplete",
           }).warning();
 
-          dispatchToast.warning(
-            "Parsley was only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log onto your machine.",
-            true,
-            {
-              title: "Log not fully downloaded",
-            }
-          );
+          dispatchToast.warning(LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING, true, {
+            title: "Log not fully downloaded",
+          });
           sendEvent({
             downloaded: getFileSize(),
             duration: Date.now() - timeStart,

@@ -1,6 +1,9 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { LogTypes } from "constants/enums";
-import { LOG_LINE_TOO_LARGE_WARNING } from "constants/errors";
+import {
+  LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING,
+  LOG_LINE_TOO_LARGE_WARNING,
+} from "constants/errors";
 import { LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { RenderFakeToastContext } from "context/toast/__mocks__";
 import { useLogDownloader } from ".";
@@ -119,7 +122,7 @@ describe("useLogDownloader", () => {
     expect(result.current.isLoading).toBe(false);
     expect(result.current.data).toStrictEqual(["chunk1"]);
     expect(dispatchToast.warning).toHaveBeenCalledWith(
-      "Parsley was only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log onto your machine.",
+      LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING,
       true,
       { title: "Log not fully downloaded" }
     );
