@@ -23,4 +23,28 @@ const hasOverlappingRegex = (
   return false;
 };
 
-export { hasOverlappingRegex };
+/**
+ * Regex expression to exclude highlighting anything that exists in HTML tags (`<>`).
+ * Note that if it's not a valid HTML tag, the text will have already been escaped to `&gt;` and `&lt;`.
+ */
+const excludeTags = "(?![^<]*>)";
+
+// Join the highlights into a single regex to match against. Use capture groups
+// to highlight each match.
+const getHighlightRegex = (highlights: string[]) =>
+  highlights.length > 0
+    ? new RegExp(
+        `${highlights.map((h) => `(${h})${excludeTags}`).join("|")}`,
+        "gi"
+      )
+    : undefined;
+
+const getSearchRegex = (searchTerm: RegExp | undefined) =>
+  searchTerm
+    ? new RegExp(
+        `(${searchTerm.source})${excludeTags}`,
+        searchTerm.ignoreCase ? "gi" : "g"
+      )
+    : undefined;
+
+export { hasOverlappingRegex, getHighlightRegex, getSearchRegex };

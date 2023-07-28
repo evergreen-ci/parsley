@@ -3,7 +3,7 @@ import parse, {
   HTMLReactParserOptions,
   domToReact,
 } from "html-react-parser";
-import { escapeTags } from "./escapeTags";
+import { allowedTags, escapeTags } from "./escapeTags";
 
 interface renderHtmlOptions extends HTMLReactParserOptions {
   preserveAttributes?: string[];
@@ -11,12 +11,6 @@ interface renderHtmlOptions extends HTMLReactParserOptions {
     [key: string]: React.ReactNode;
   };
 }
-
-const allowedTags = {
-  a: ["href", "target", "rel", "class", "style"],
-  mark: ["style", "data-cy", "color"],
-  span: ["style", "data-cy"],
-};
 
 /**
  * `renderHtml` takes a string and converts it into an array of domnodes and
@@ -30,10 +24,8 @@ const allowedTags = {
  * @param options.preserveAttributes - Array of elements to preserve attributes for
  * @returns - html string converted to an array of domnodes
  */
-const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
-  const escapedHtml = escapeTags(html, allowedTags);
-
-  return parse(escapedHtml, {
+const renderHtml = (html: string = "", options: renderHtmlOptions = {}) =>
+  parse(html, {
     replace: (domNode) => {
       if (domNode instanceof Element) {
         if (options.transform && options.transform[domNode.name]) {
@@ -56,6 +48,6 @@ const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
       }
     },
   });
-};
 
 export default renderHtml;
+export { escapeTags, allowedTags };

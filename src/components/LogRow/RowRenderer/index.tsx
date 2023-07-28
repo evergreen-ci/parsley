@@ -3,6 +3,7 @@ import { useLogContext } from "context/LogContext";
 import { useHighlightParam } from "hooks/useHighlightParam";
 import { ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
+import { getHighlightRegex, getSearchRegex } from "utils/regex";
 import AnsiiRow from "../AnsiiRow";
 import CollapsedRow from "../CollapsedRow";
 import ResmokeRow from "../ResmokeRow";
@@ -23,26 +24,13 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
     searchLine,
     searchState,
   } = useLogContext();
-  const { searchTerm } = searchState;
   const { prettyPrint, wrap } = preferences;
 
-  const [highlights] = useHighlightParam();
-  // Join the highlights into a single regex to match against. Use capture groups
-  // to highlight each match.
-  const highlightRegex =
-    highlights.length > 0
-      ? new RegExp(
-          `${highlights.map((h) => `(${h})(?![^<]*>)`).join("|")}`,
-          "gi"
-        )
-      : undefined;
+  const { searchTerm } = searchState;
+  const searchTermRegex = getSearchRegex(searchTerm);
 
-  const searchTermRegex = searchTerm
-    ? new RegExp(
-        `(${searchTerm.source})(?![^<]*>)`,
-        searchTerm.ignoreCase ? "gi" : "g"
-      )
-    : undefined;
+  const [highlights] = useHighlightParam();
+  const highlightRegex = getHighlightRegex(highlights);
 
   const result = (index: number) => {
     const processedLogLine = processedLogLines[index];

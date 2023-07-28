@@ -2,7 +2,7 @@ import { memo, useMemo } from "react";
 import Highlight, { highlightColorList } from "components/Highlight";
 import { highlighter } from "utils/highlighters";
 import { hasOverlappingRegex } from "utils/regex";
-import renderHtml from "utils/renderHtml";
+import renderHtml, { allowedTags, escapeTags } from "utils/renderHtml";
 
 interface HighlighterProps {
   ["data-cy"]?: string;
@@ -22,7 +22,7 @@ const Highlighter: React.FC<HighlighterProps> = memo((props) => {
   } = props;
 
   const htmlToRender = useMemo(() => {
-    let render = text;
+    let render = escapeTags(text, allowedTags);
 
     if (searchTerm) {
       render = highlighter(
