@@ -40,94 +40,96 @@ const useLogDownloader = (
     const abortController = new AbortController();
     const timeStart = Date.now();
 
-    fetchLogFile(url, {
-      // Conditionally define signal because AbortController throws error in development's strict mode
-      abortController: isProduction ? abortController : undefined,
-      downloadSizeLimit,
-      onIncompleteDownload: (reason, incompleteDownloadError) => {
-        reportError({
-          message: reason,
-          metadata: {
-            incompleteDownloadError,
-            url,
-          },
-          name: "Log download incomplete",
-        }).warning();
-
-        dispatchToast.warning(
-          "Parsley was only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log onto your machine.",
-          true,
-          {
-            title: "Log not fully downloaded",
-          }
-        );
-        sendEvent({
-          downloaded: getFileSize(),
-          duration: Date.now() - timeStart,
-          name: "Log Download Incomplete",
-          reason,
-        });
-      },
-      onProgress: (progress) => {
-        setFileSize(getFileSize() + progress);
-      },
-    })
-      .then(({ result: logs, trimmedLines }) => {
-        // Remove the last log line if it is empty
-        if (logs[logs.length - 1] === "") {
-          logs.pop();
-        }
-        setData(logs);
-        if (trimmedLines) {
-          sendEvent({
-            downloaded: getFileSize(),
-            duration: Date.now() - timeStart,
-            name: "Log Download Incomplete",
-            reason: "Log line size limit exceeded",
-          });
+    if (url) {
+      fetchLogFile(url, {
+        // Conditionally define signal because AbortController throws error in development's strict mode
+        abortController: isProduction ? abortController : undefined,
+        downloadSizeLimit,
+        onIncompleteDownload: (reason, incompleteDownloadError) => {
           reportError({
-            message: "Log line size limit exceeded",
+            message: reason,
             metadata: {
-              trimmedLines,
+              incompleteDownloadError,
               url,
             },
             name: "Log download incomplete",
           }).warning();
-          dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
-            shouldTimeout: false,
-            title: "Log not fully downloaded",
+
+          dispatchToast.warning(
+            "Parsley was only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log onto your machine.",
+            true,
+            {
+              title: "Log not fully downloaded",
+            }
+          );
+          sendEvent({
+            downloaded: getFileSize(),
+            duration: Date.now() - timeStart,
+            name: "Log Download Incomplete",
+            reason,
           });
-        }
+        },
+        onProgress: (progress) => {
+          setFileSize(getFileSize() + progress);
+        },
       })
-      .catch((err: Error) => {
-        leaveBreadcrumb("useLogDownloader", { err, url }, "error");
-        reportError(err).severe();
-        setError(err.message);
-        sendEvent({
-          duration: Date.now() - timeStart,
-          fileSize: getFileSize(),
-          name: "Log Download Failed",
-          type: logType,
+        .then(({ result: logs, trimmedLines }) => {
+          // Remove the last log line if it is empty
+          if (logs[logs.length - 1] === "") {
+            logs.pop();
+          }
+          setData(logs);
+          if (trimmedLines) {
+            sendEvent({
+              downloaded: getFileSize(),
+              duration: Date.now() - timeStart,
+              name: "Log Download Incomplete",
+              reason: "Log line size limit exceeded",
+            });
+            reportError({
+              message: "Log line size limit exceeded",
+              metadata: {
+                trimmedLines,
+                url,
+              },
+              name: "Log download incomplete",
+            }).warning();
+            dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
+              shouldTimeout: false,
+              title: "Log not fully downloaded",
+            });
+          }
+        })
+        .catch((err: Error) => {
+          leaveBreadcrumb("useLogDownloader", { err, url }, "error");
+          reportError(err).severe();
+          setError(err.message);
+          sendEvent({
+            duration: Date.now() - timeStart,
+            fileSize: getFileSize(),
+            name: "Log Download Failed",
+            type: logType,
+          });
+        })
+        .finally(() => {
+          leaveBreadcrumb(
+            "useLogDownloader",
+            {
+              fileSize: getBytesAsString(getFileSize()),
+              time: Date.now() - timeStart,
+              url,
+            },
+            "request"
+          );
+          sendEvent({
+            duration: Date.now() - timeStart,
+            fileSize: getFileSize(),
+            name: "Log Downloaded",
+            type: logType,
+          });
+          setIsLoading(false);
         });
-      })
-      .finally(() => {
-        leaveBreadcrumb(
-          "useLogDownloader",
-          {
-            fileSize: getBytesAsString(getFileSize()),
-            time: Date.now() - timeStart,
-            url,
-          },
-          "request"
-        );
-        sendEvent({
-          duration: Date.now() - timeStart,
-          fileSize: getFileSize(),
-          name: "Log Downloaded",
-          type: logType,
-        });
-        setIsLoading(false);
-      });
+    }
 
     return () => {
       // Cancel the request if the component unmounts

@@ -54,7 +54,7 @@ describe("External Links", () => {
       cy.dataCy("lobster-button").should(
         "have.attr",
         "href",
-        "http://localhost:9090/lobster/evergreen/test/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0/JustAFakeTestInALonelyWorld"
+        "http://localhost:9090/lobster/evergreen/test/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0/JustAFakeTestInALonelyWorld/#shareLine=0"
       );
       cy.dataCy("legacy-job-logs-button").should("not.exist");
     });
@@ -64,14 +64,14 @@ describe("External Links", () => {
       cy.dataCy("raw-log-button").should(
         "have.attr",
         "href",
-        "http://localhost:9090/test_log/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?test_name=JustAFakeTestInALonelyWorld&text=true"
+        "http://localhost:9090/test_log/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?test_name=JustAFakeTestInALonelyWorld&group_id=&text=true"
       );
       cy.dataCy("html-log-button").should("be.visible");
       cy.dataCy("html-log-button").should("not.be.disabled");
       cy.dataCy("html-log-button").should(
         "have.attr",
         "href",
-        "http://localhost:9090/test_log/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?test_name=JustAFakeTestInALonelyWorld&text=false"
+        "http://localhost:9090/test_log/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?test_name=JustAFakeTestInALonelyWorld&group_id=#L0"
       );
     });
   });

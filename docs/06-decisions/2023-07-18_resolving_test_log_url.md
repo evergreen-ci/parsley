@@ -1,4 +1,4 @@
-# {2023-07-18} Use GraphQL to Resolve Test Log URLs
+# 2023-07-18 Use GraphQL to Resolve Test Log URLs
 
 - status: accepted
 - date: 2023-07-18
