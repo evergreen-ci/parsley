@@ -3031,6 +3031,33 @@ export type TaskQuery = {
   } | null;
 };
 
+export type TestLogUrlQueryVariables = Exact<{
+  taskID: Scalars["String"];
+  testName: Scalars["String"];
+  execution: Scalars["Int"];
+}>;
+
+export type TestLogUrlQuery = {
+  __typename?: "Query";
+  task?: {
+    __typename?: "Task";
+    id: string;
+    tests: {
+      __typename?: "TaskTestResult";
+      testResults: Array<{
+        __typename?: "TestResult";
+        id: string;
+        logs: {
+          __typename?: "TestLog";
+          url?: string | null;
+          urlLobster?: string | null;
+          urlRaw?: string | null;
+        };
+      }>;
+    };
+  } | null;
+};
+
 export type UserQueryVariables = Exact<{ [key: string]: never }>;
 
 export type UserQuery = {
