@@ -149,7 +149,7 @@ describe("useLogDownloader", () => {
     expect(dispatchToast.warning).toHaveBeenCalledWith(
       LOG_LINE_TOO_LARGE_WARNING,
       true,
-      { title: "Log not fully downloaded" }
+      { shouldTimeout: false, title: "Log not fully downloaded" }
     );
   });
 });
