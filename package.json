@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.88",
+  "version": "1.0.89",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
     "build": "tsc && . ./scripts/app-version.sh && GIT_SHA=`git rev-parse HEAD` vite build",
