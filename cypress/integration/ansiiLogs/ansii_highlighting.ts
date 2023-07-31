@@ -57,4 +57,16 @@ describe("Highlighting", () => {
         expect(colors.size).to.eq(2);
       });
   });
+  it("highlights should not corrupt links", () => {
+    cy.visit(`${logLink}?shareLine=200`);
+    cy.addHighlight("github");
+    cy.addHighlight("storybook");
+    cy.dataCy("log-row-219").within(() => {
+      cy.get("a").should(
+        "have.attr",
+        "href", // href value should not contain any <mark> tags
+        "https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecated-storyfn"
+      );
+    });
+  });
 });

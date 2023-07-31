@@ -1,5 +1,5 @@
 import { render, screen } from "test_utils";
-import renderHtml from ".";
+import renderHtml, { parseWithReplace } from ".";
 import { escapeTags } from "./escapeTags";
 
 describe("renderHtml", () => {
@@ -32,14 +32,16 @@ describe("renderHtml", () => {
       "test <mongo::<std:lib >>"
     );
   });
+});
 
+describe("parseWithReplace", () => {
   it("replaces a element with a react component if specified", () => {
     const Component = ({ children }: { children: React.ReactElement }) => (
       <div data-cy="component">✨{children}✨</div>
     );
     render(
       <>
-        {renderHtml("test <span data-cy='element'>string</span>", {
+        {parseWithReplace("test <span data-cy='element'>string</span>", {
           // @ts-expect-error - This is expecting a react component but its an Emotion component which are virtually the same thing
           transform: { span: Component },
         })}

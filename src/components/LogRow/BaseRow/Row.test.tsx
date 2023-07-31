@@ -79,6 +79,7 @@ describe("row", () => {
     const dataTransfer = await user.copy();
     expect(dataTransfer?.getData("text")).toBe("Test Log");
   });
+
   describe("search", () => {
     it("a search term highlights the matching text", () => {
       const regexp = /Test/i;
@@ -89,7 +90,6 @@ describe("row", () => {
       );
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
     });
-
     it("should preserve case sensitivity when applying a search", () => {
       let regexp = /test/i;
       const { rerender } = renderWithRouterMatch(
@@ -138,7 +138,32 @@ describe("row", () => {
       );
       expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
     });
+    it("should not highlight the content in hrefs", () => {
+      const logLine = `highlight me <a href="https://donthighlightme.com">highlight me</a> highlight me`;
+      const regexp = /highlight/gi;
+      renderWithRouterMatch(
+        <Row {...rowProps} searchTerm={regexp}>
+          {logLine}
+        </Row>
+      );
+      expect(screen.queryAllByDataCy("highlight")).toHaveLength(3);
+      expect(
+        screen.getByRole("link", { name: "highlight me" })
+      ).toHaveAttribute("href", "https://donthighlightme.com");
+    });
+    it("will highlight content in <> tags if not HTML tag", () => {
+      const logLine = "<Downloading package...>";
+      const regexp = /<Downloading/i;
+      renderWithRouterMatch(
+        <Row {...rowProps} searchTerm={regexp}>
+          {logLine}
+        </Row>
+      );
+      expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
+      expect(screen.getByDataCy("highlight")).toHaveTextContent("<Downloading");
+    });
   });
+
   describe("highlights", () => {
     it("highlighted terms should highlight the matching text", () => {
       const regexp = /Test/i;
@@ -149,9 +174,8 @@ describe("row", () => {
       );
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
     });
-
     it("should highlight every matching term on a line", () => {
-      const regexp = /Test|Log/i;
+      const regexp = /Test|Log/gi;
       renderWithRouterMatch(
         <Row {...rowProps} highlightRegex={regexp}>
           {testLog}
@@ -188,6 +212,30 @@ describe("row", () => {
       screen.getAllByDataCy("highlight").forEach((highlight) => {
         expect(highlight).toHaveTextContent(/Test|Log/i);
       });
+    });
+    it("should not highlight the content in hrefs", () => {
+      const logLine = `highlight me <a href="https://donthighlightme.com">highlight me</a> highlight me`;
+      const highlightRegex = /(highlight)/gi;
+      renderWithRouterMatch(
+        <Row {...rowProps} highlightRegex={highlightRegex}>
+          {logLine}
+        </Row>
+      );
+      expect(screen.queryAllByDataCy("highlight")).toHaveLength(3);
+      expect(
+        screen.getByRole("link", { name: "highlight me" })
+      ).toHaveAttribute("href", "https://donthighlightme.com");
+    });
+    it("will highlight content in <> tags if not HTML tag", () => {
+      const logLine = "<Downloading package...>";
+      const highlightRegex = /(<Downloading)/i;
+      renderWithRouterMatch(
+        <Row {...rowProps} highlightRegex={highlightRegex}>
+          {logLine}
+        </Row>
+      );
+      expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
+      expect(screen.getByDataCy("highlight")).toHaveTextContent("<Downloading");
     });
   });
 });
