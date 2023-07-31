@@ -88,20 +88,20 @@ export const parseWithReplace = (
   const escapedHtml = escapeTags(html, allowedTags);
 
   return parse(escapedHtml, {
-    replace: (d) => {
-      if (d instanceof Element) {
-        if (options.transform && options.transform[d.name]) {
-          const SwapComponent = options.transform[d.name];
+    replace: (domNode) => {
+      if (domNode instanceof Element) {
+        if (options.transform && options.transform[domNode.name]) {
+          const SwapComponent = options.transform[domNode.name];
           // SwapComponent is just what ever component we want to return from the transform object
           const extraProps =
             options.preserveAttributes &&
-            options.preserveAttributes.includes(d.name)
-              ? d.attribs
+            options.preserveAttributes.includes(domNode.name)
+              ? domNode.attribs
               : {};
           return (
             // @ts-expect-error
             <SwapComponent className={extraProps.class} {...extraProps}>
-              {domToReact(d.children)}
+              {domToReact(domNode.children)}
             </SwapComponent>
           );
         }
