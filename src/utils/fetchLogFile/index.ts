@@ -1,3 +1,4 @@
+import { LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { decodeStream } from "utils/streams";
 
 enum IncompleteDownloadReason {
@@ -105,7 +106,7 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
  */
 const fetchLogFile = async (url: string, options: StreamedFetchOptions) => {
   const stream = await streamedFetch(url, options);
-  return decodeStream(stream);
+  return decodeStream(stream, LOG_LINE_SIZE_LIMIT);
 };
 
 export { streamedFetch, fetchLogFile };

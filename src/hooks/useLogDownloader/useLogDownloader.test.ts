@@ -1,5 +1,10 @@
 import { renderHook } from "@testing-library/react-hooks";
 import { LogTypes } from "constants/enums";
+import {
+  LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING,
+  LOG_LINE_TOO_LARGE_WARNING,
+} from "constants/errors";
+import { LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { RenderFakeToastContext } from "context/toast/__mocks__";
 import { useLogDownloader } from ".";
 
@@ -117,9 +122,37 @@ describe("useLogDownloader", () => {
     expect(result.current.isLoading).toBe(false);
     expect(result.current.data).toStrictEqual(["chunk1"]);
     expect(dispatchToast.warning).toHaveBeenCalledWith(
-      "Parsley was only able to partially download this log. Use the Evergreen CLI command in the details menu to download the log onto your machine.",
+      LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING,
       true,
       { title: "Log not fully downloaded" }
+    );
+  });
+  it("should throw a LINE_TOO_LARGE error if a line in the file is too large and needed to be trimmed", async () => {
+    const readableStream = createReadableStream([
+      `${"a".repeat(LOG_LINE_SIZE_LIMIT * 2)}`,
+    ]);
+
+    const response = new Response(readableStream, { status: 200 });
+    // @ts-expect-error
+    response.body = readableStream;
+
+    mockFetch.mockResolvedValue(response);
+
+    // RenderFakeToastContext is a mock of the ToastContext
+    const { dispatchToast } = RenderFakeToastContext();
+    const { result, waitForNextUpdate } = renderHook(() =>
+      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+    );
+    expect(result.current.isLoading).toBe(true);
+    await waitForNextUpdate();
+    expect(result.current.isLoading).toBe(false);
+    expect(result.current.data).toStrictEqual([
+      `${"a".repeat(LOG_LINE_SIZE_LIMIT)}…`,
+    ]);
+    expect(dispatchToast.warning).toHaveBeenCalledWith(
+      LOG_LINE_TOO_LARGE_WARNING,
+      true,
+      { shouldTimeout: false, title: "Log not fully downloaded" }
     );
   });
 });

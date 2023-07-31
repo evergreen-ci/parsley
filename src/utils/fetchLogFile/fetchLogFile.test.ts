@@ -26,7 +26,7 @@ describe("fetchLogFile", () => {
 
     mockFetch.mockResolvedValue(response);
 
-    const result = await fetchLogFile(url, options);
+    const { result } = await fetchLogFile(url, options);
 
     expect(mockFetch).toHaveBeenCalledWith(url, {
       credentials: "include",
@@ -78,9 +78,9 @@ describe("fetchLogFile", () => {
 
     mockFetch.mockResolvedValue(response);
 
-    let result = await fetchLogFile(url, options);
+    let fetchLogFileResult = await fetchLogFile(url, options);
 
-    expect(result).toStrictEqual(["Hello World"]);
+    expect(fetchLogFileResult.result).toStrictEqual(["Hello World"]);
 
     readableStream = createReadableStream([
       "Hello W",
@@ -94,9 +94,9 @@ describe("fetchLogFile", () => {
 
     mockFetch.mockResolvedValue(response);
 
-    result = await fetchLogFile(url, options);
+    fetchLogFileResult = await fetchLogFile(url, options);
 
-    expect(result).toStrictEqual([
+    expect(fetchLogFileResult.result).toStrictEqual([
       "Hello World!",
       "This is a test",
       "of the emergency broadcast system",
@@ -111,14 +111,14 @@ describe("fetchLogFile", () => {
 
     mockFetch.mockResolvedValue(response);
     const mockOnIncompleteDownload = jest.fn();
-    const result = await fetchLogFile(url, {
+    const fetchLogFileResult = await fetchLogFile(url, {
       ...options,
       downloadSizeLimit: 4,
       onIncompleteDownload: mockOnIncompleteDownload,
     });
 
     expect(mockOnIncompleteDownload).toHaveBeenCalledWith("FILE_TOO_LARGE");
-    expect(result).toStrictEqual(["Hello"]);
+    expect(fetchLogFileResult.result).toStrictEqual(["Hello"]);
   });
 });
 

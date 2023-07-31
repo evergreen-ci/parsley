@@ -84,6 +84,15 @@ export const trimStringFromMiddle = (str: string, maxLength: number) => {
   );
 };
 
+/**
+ * `getBytesAsString` returns a string representation of the bytes
+ * @param bytes - the number of bytes
+ * @param decimals - the number of decimals to round to
+ * @returns - a string representation of the bytes
+ * @example getBytesAsString(1024) // "1 KB"
+ * @example getBytesAsString(1024*1024, 0) // "1 MB"
+ * @example getBytesAsString(1024*1024*1024, 0) // "1 GB"
+ */
 export const getBytesAsString = (bytes: number, decimals = 2) => {
   if (bytes === 0) return "0 Bytes";
   if (bytes === 1) return "1 Byte";
@@ -92,4 +101,17 @@ export const getBytesAsString = (bytes: number, decimals = 2) => {
   const sizes = ["Bytes", "KB", "MB", "GB"];
   const i = Math.floor(Math.log(bytes) / Math.log(k));
   return `${parseFloat((bytes / k ** i).toFixed(dm))} ${sizes[i]}`;
+};
+
+/**
+ * `trimLogLineToMaxSize` trims a line to the max size limit
+ * @param line - the line to trim
+ * @param maxSize - the max line size limit
+ * @returns the trimmed line
+ */
+export const trimLogLineToMaxSize = (line: string, maxSize: number) => {
+  if (line.length > maxSize) {
+    return `${line.substring(0, maxSize)}…`;
+  }
+  return line;
 };

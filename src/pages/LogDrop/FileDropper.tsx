@@ -4,7 +4,8 @@ import { palette } from "@leafygreen-ui/palette";
 import { useDropzone } from "react-dropzone";
 import { useLogDropAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
-import { LOG_FILE_SIZE_LIMIT } from "constants/logs";
+import { LOG_LINE_TOO_LARGE_WARNING } from "constants/errors";
+import { LOG_FILE_SIZE_LIMIT, LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
@@ -47,7 +48,10 @@ const FileDropper: React.FC = () => {
                 const stream = await fileToStream(state.file, {
                   fileSizeLimit: LOG_FILE_SIZE_LIMIT,
                 });
-                const logLines = await decodeStream(stream);
+                const { result: logLines, trimmedLines } = await decodeStream(
+                  stream,
+                  LOG_LINE_SIZE_LIMIT
+                );
                 leaveBreadcrumb(
                   "Decoded file",
                   { fileSize: logLines.length },
@@ -60,6 +64,12 @@ const FileDropper: React.FC = () => {
                 });
                 setFileName(state.file.name);
                 ingestLines(logLines, logType);
+                if (trimmedLines) {
+                  dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
+                    shouldTimeout: false,
+                    title: "Log not fully loaded",
+                  });
+                }
               } catch (e: any) {
                 dispatchToast.error("An error occurred while parsing the log.");
                 reportError(e).severe();
