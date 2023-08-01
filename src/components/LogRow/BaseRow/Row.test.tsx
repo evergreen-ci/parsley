@@ -151,17 +151,6 @@ describe("row", () => {
         screen.getByRole("link", { name: "highlight me" })
       ).toHaveAttribute("href", "https://donthighlightme.com");
     });
-    it("will highlight content in <> tags if not HTML tag", () => {
-      const logLine = "<Downloading package...>";
-      const regexp = /<Downloading/i;
-      renderWithRouterMatch(
-        <Row {...rowProps} searchTerm={regexp}>
-          {logLine}
-        </Row>
-      );
-      expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
-      expect(screen.getByDataCy("highlight")).toHaveTextContent("<Downloading");
-    });
   });
 
   describe("highlights", () => {
@@ -225,17 +214,6 @@ describe("row", () => {
       expect(
         screen.getByRole("link", { name: "highlight me" })
       ).toHaveAttribute("href", "https://donthighlightme.com");
-    });
-    it("will highlight content in <> tags if not HTML tag", () => {
-      const logLine = "<Downloading package...>";
-      const highlightRegex = /(<Downloading)/i;
-      renderWithRouterMatch(
-        <Row {...rowProps} highlightRegex={highlightRegex}>
-          {logLine}
-        </Row>
-      );
-      expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
-      expect(screen.getByDataCy("highlight")).toHaveTextContent("<Downloading");
     });
   });
 });

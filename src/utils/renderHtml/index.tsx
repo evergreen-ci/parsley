@@ -55,8 +55,8 @@ const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
             </SwapComponent>
           );
         }
+        return domNode;
       }
-      return domNode;
     },
   });
 };

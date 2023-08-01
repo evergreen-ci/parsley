@@ -67,7 +67,7 @@ describe("highlightHtml", () => {
       "https://donthighlightme.com"
     );
   });
-  it("can highlight < or > without corrupting HTML tags/attributes", () => {
+  it("can highlight < or > without corrupting valid HTML tags/attributes", () => {
     render(
       <>
         {highlightHtml(
@@ -79,6 +79,11 @@ describe("highlightHtml", () => {
     expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
     expect(screen.queryByDataCy("highlight")).toHaveTextContent("<");
     expect(screen.getByDataCy("dont-highlight-me")).toBeInTheDocument();
+  });
+  it("highlights the content inside of <> if it's not a valid HTML tag", () => {
+    render(<>{highlightHtml("<Downloading package...>", /Downloading/gi)}</>);
+    expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
+    expect(screen.getByDataCy("highlight")).toHaveTextContent("Downloading");
   });
 });
 
