@@ -47,6 +47,7 @@ const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
             options.preserveAttributes.includes(domNode.name)
               ? domNode.attribs
               : {};
+
           return (
             // @ts-expect-error
             <SwapComponent className={extraProps.class} {...extraProps}>
@@ -55,16 +56,17 @@ const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
           );
         }
       }
+      return domNode;
     },
   });
 };
 
 /**
- * `highlightHtml` adds highlights in the form of <mark> tags to a text string.
+ * `highlightHtml` adds highlights in the form of <mark> tags.
  * @param html - The html string to parse
  * @param searchTerm - The active search term as a regex expression
  * @param highlights - The active highlights as a regex expression
- * @returns - html string converted to an array of domnodes
+ * @returns - html string converted to an array of domnodes with highlighted text
  */
 export const highlightHtml = (
   html: string = "",
