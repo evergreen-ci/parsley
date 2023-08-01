@@ -151,7 +151,7 @@
     "vite-plugin-env-compatible": "1.1.1",
     "vite-tsconfig-paths": "4.0.3",
     "web-streams-polyfill": "^3.2.1",
-    "whatwg-fetch": "3.6.2"
+    "whatwg-fetch": "3.6.17"
   },
   "resolutions": {
     "@types/react": "18.0.0",
