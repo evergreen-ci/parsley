@@ -1,5 +1,5 @@
 import { memo, useMemo } from "react";
-import renderHtml from "utils/renderHtml";
+import { highlightHtml } from "utils/renderHtml";
 
 interface HighlighterProps {
   ["data-cy"]?: string;
@@ -19,7 +19,7 @@ const Highlighter: React.FC<HighlighterProps> = memo((props) => {
   } = props;
 
   const htmlToRender = useMemo(
-    () => renderHtml(text, searchTerm, highlights),
+    () => highlightHtml(text, searchTerm, highlights),
     [text, searchTerm, highlights]
   );
 

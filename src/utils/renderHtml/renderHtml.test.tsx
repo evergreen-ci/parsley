@@ -1,5 +1,5 @@
 import { render, screen } from "test_utils";
-import renderHtml, { parseWithReplace } from ".";
+import renderHtml, { highlightHtml } from ".";
 import { escapeTags } from "./escapeTags";
 
 describe("renderHtml", () => {
@@ -32,16 +32,13 @@ describe("renderHtml", () => {
       "test <mongo::<std:lib >>"
     );
   });
-});
-
-describe("parseWithReplace", () => {
   it("replaces a element with a react component if specified", () => {
     const Component = ({ children }: { children: React.ReactElement }) => (
       <div data-cy="component">✨{children}✨</div>
     );
     render(
       <>
-        {parseWithReplace("test <span data-cy='element'>string</span>", {
+        {renderHtml("test <span data-cy='element'>string</span>", {
           // @ts-expect-error - This is expecting a react component but its an Emotion component which are virtually the same thing
           transform: { span: Component },
         })}
@@ -50,6 +47,38 @@ describe("parseWithReplace", () => {
     expect(screen.queryByDataCy("element")).not.toBeInTheDocument();
     expect(screen.getByDataCy("component")).toBeInTheDocument();
     expect(screen.queryByDataCy("component")).toHaveTextContent("✨string✨");
+  });
+});
+
+describe("highlightHtml", () => {
+  it("does not corrupt the content within valid HTML tags/attributes", () => {
+    render(
+      <>
+        {highlightHtml(
+          "<a href='https://donthighlightme.com'>highlight me</a> highlight me <span data-cy='dont-highlight-me'>highlight me</span>",
+          /highlight/gi
+        )}
+      </>
+    );
+    expect(screen.queryAllByDataCy("highlight")).toHaveLength(3);
+    expect(screen.getByDataCy("dont-highlight-me")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "highlight me" })).toHaveAttribute(
+      "href",
+      "https://donthighlightme.com"
+    );
+  });
+  it("can highlight < or > without corrupting HTML tags/attributes", () => {
+    render(
+      <>
+        {highlightHtml(
+          "<blah blah> <span data-cy='dont-highlight-me'>blah blah</span>",
+          /</gi
+        )}
+      </>
+    );
+    expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
+    expect(screen.queryByDataCy("highlight")).toHaveTextContent("<");
+    expect(screen.getByDataCy("dont-highlight-me")).toBeInTheDocument();
   });
 });
 
