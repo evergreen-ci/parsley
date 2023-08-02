@@ -1,5 +1,5 @@
 import { memo, useMemo } from "react";
-import { highlightHtml } from "utils/renderHtml";
+import highlightHtml from "utils/highlightHtml";
 
 interface HighlighterProps {
   ["data-cy"]?: string;

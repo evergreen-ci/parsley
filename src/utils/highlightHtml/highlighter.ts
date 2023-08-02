@@ -1,13 +1,14 @@
 type replaceFunction = (match: string, matchIndex: number) => string;
 
 /**
- * `highlighter` is a function that takes a regular expression, a string, and a function that returns a string with the function applied to the matching elements.
+ * `highlighter` is a function that takes a regular expression, a string, and a function that
+ * returns a string with the function applied to the matching elements.
  * @param regexp - the regular expression to match
  * @param text - the text to match the regular expression against
  * @param replaceFunction - the function to apply to the matching elements
  * @returns a string with the matching elements replaced by the function
  */
-const highlighter = (
+export const highlighter = (
   regexp: RegExp,
   text: string,
   replaceFunction: replaceFunction
@@ -20,5 +21,3 @@ const highlighter = (
     }
     return match;
   });
-
-export { highlighter };

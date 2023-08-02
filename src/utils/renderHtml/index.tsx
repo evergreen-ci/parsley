@@ -1,13 +1,9 @@
 import parse, {
   Element,
   HTMLReactParserOptions,
-  Text,
   domToReact,
 } from "html-react-parser";
-import Highlight, { highlightColorList } from "components/Highlight";
-import { highlighter } from "utils/highlighters";
-import { hasOverlappingRegex } from "utils/regex";
-import { escapeTags } from "./escapeTags";
+import { escapeTags } from "utils/escapeTags";
 
 interface renderHtmlOptions extends HTMLReactParserOptions {
   preserveAttributes?: string[];
@@ -15,12 +11,6 @@ interface renderHtmlOptions extends HTMLReactParserOptions {
     [key: string]: React.ReactNode;
   };
 }
-
-const allowedTags = {
-  a: ["href", "target", "rel", "class", "style"],
-  mark: ["style", "data-cy", "color"],
-  span: ["style", "data-cy"],
-};
 
 /**
  * `renderHtml` takes a string and converts it into an array of domnodes for parsing.
@@ -34,7 +24,7 @@ const allowedTags = {
  * @returns - html string converted to an array of domnodes
  */
 const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
-  const escapedHtml = escapeTags(html, allowedTags);
+  const escapedHtml = escapeTags(html);
 
   return parse(escapedHtml, {
     replace: (domNode) => {
@@ -61,59 +51,5 @@ const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
   });
 };
 
-/**
- * `highlightHtml` adds highlights in the form of <mark> tags.
- * @param html - The html string to parse
- * @param searchTerm - The active search term as a regex expression
- * @param highlights - The active highlights as a regex expression
- * @returns - html string converted to an array of domnodes with highlighted text
- */
-export const highlightHtml = (
-  html: string = "",
-  searchTerm: RegExp | undefined = undefined,
-  highlights: RegExp | undefined = undefined
-) => {
-  const escapedHtml = escapeTags(html, allowedTags);
-
-  return parse(escapedHtml, {
-    replace: (domNode) => {
-      if (domNode instanceof Text) {
-        let highlightedText = domNode.data;
-
-        if (searchTerm) {
-          highlightedText = highlighter(
-            searchTerm,
-            highlightedText,
-            (match) => `<mark>${match}</mark>`
-          );
-        }
-
-        if (
-          highlights &&
-          !hasOverlappingRegex(searchTerm, highlights, domNode.data)
-        ) {
-          highlightedText = highlighter(
-            highlights,
-            highlightedText,
-            (match, index) =>
-              `<mark color="${
-                highlightColorList[index % highlightColorList.length]
-              }">${match}</mark>`
-          );
-        }
-
-        const highlightedHtml = renderHtml(highlightedText, {
-          preserveAttributes: ["mark"],
-          transform: {
-            mark: Highlight as unknown as React.ReactNode,
-          },
-        });
-
-        // eslint-disable-next-line react/jsx-no-useless-fragment
-        return <>{highlightedHtml}</>;
-      }
-    },
-  });
-};
-
 export default renderHtml;
+export { escapeTags };

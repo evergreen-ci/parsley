@@ -1,6 +1,5 @@
 import { render, screen } from "test_utils";
-import renderHtml, { highlightHtml } from ".";
-import { escapeTags } from "./escapeTags";
+import renderHtml from ".";
 
 describe("renderHtml", () => {
   it("renders a plain string with no html", () => {
@@ -47,80 +46,5 @@ describe("renderHtml", () => {
     expect(screen.queryByDataCy("element")).not.toBeInTheDocument();
     expect(screen.getByDataCy("component")).toBeInTheDocument();
     expect(screen.queryByDataCy("component")).toHaveTextContent("✨string✨");
-  });
-});
-
-describe("highlightHtml", () => {
-  it("does not corrupt the content within valid HTML tags/attributes", () => {
-    render(
-      <>
-        {highlightHtml(
-          "<a href='https://donthighlightme.com'>highlight me</a> highlight me <span data-cy='dont-highlight-me'>highlight me</span>",
-          /highlight/gi
-        )}
-      </>
-    );
-    expect(screen.queryAllByDataCy("highlight")).toHaveLength(3);
-    expect(screen.getByDataCy("dont-highlight-me")).toBeInTheDocument();
-    expect(screen.getByRole("link", { name: "highlight me" })).toHaveAttribute(
-      "href",
-      "https://donthighlightme.com"
-    );
-  });
-  it("can highlight < or > without corrupting valid HTML tags/attributes", () => {
-    render(
-      <>
-        {highlightHtml(
-          "<blah blah> <span data-cy='dont-highlight-me'>blah blah</span>",
-          /</gi
-        )}
-      </>
-    );
-    expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
-    expect(screen.queryByDataCy("highlight")).toHaveTextContent("<");
-    expect(screen.getByDataCy("dont-highlight-me")).toBeInTheDocument();
-  });
-  it("highlights the content inside of <> if it's not a valid HTML tag", () => {
-    render(<>{highlightHtml("<Downloading package...>", /Downloading/gi)}</>);
-    expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
-    expect(screen.getByDataCy("highlight")).toHaveTextContent("Downloading");
-  });
-});
-
-describe("escapeTags", () => {
-  it("escapes html tags", () => {
-    expect(escapeTags("<div withProps='test'>some text</div>", {})).toBe(
-      "&lt;div withProps='test'&gt;some text&lt;/div&gt;"
-    );
-    expect(escapeTags("<script>alert('some alert')</script>")).toBe(
-      "&lt;script&gt;alert('some alert')&lt;/script&gt;"
-    );
-  });
-  it("does not escape allowed html tags", () => {
-    expect(
-      escapeTags("<span>some text</span>", {
-        span: [],
-      })
-    ).toBe("<span>some text</span>");
-    expect(
-      escapeTags("<span target='test'>some text</span>", {
-        span: ["target"],
-      })
-    ).toBe('<span target="test">some text</span>');
-  });
-  it("escapes non html tags", () => {
-    expect(escapeTags("<nil>", {})).toBe("&lt;nil&gt;");
-    expect(
-      escapeTags(
-        ` /opt/mongodbtoolchain/revisions/549e9c72ce95de436fb83815796d54a47893c049/stow/gcc-v3.SIC/include/c++/8.5.0/thread:196:13: std::thread::_State_impl<std::thread::_Invoker<std::tuple<mongo::stdx::thread::thread<mongo::ThreadPool::Impl::_startWorkerThread_inlock()::'lambda2'(), 0>(mongo::ThreadPool::Impl::_startWorkerThread_inlock()::'lambda2'())::'lambda'()> > >::_M_run()`
-      )
-    ).toBe(
-      ` /opt/mongodbtoolchain/revisions/549e9c72ce95de436fb83815796d54a47893c049/stow/gcc-v3.SIC/include/c++/8.5.0/thread:196:13: std::thread::_State_impl&lt;std::thread::_Invoker&lt;std::tuple&lt;mongo::stdx::thread::thread&lt;mongo::ThreadPool::Impl::_startWorkerThread_inlock()::'lambda2'(), 0&gt;(mongo::ThreadPool::Impl::_startWorkerThread_inlock()::'lambda2'())::'lambda'()&gt; &gt; &gt;::_M_run()`
-    );
-  });
-  it("escapes deeply nested non html tags", () => {
-    expect(escapeTags("<some::<nested::tag>>")).toBe(
-      "&lt;some::&lt;nested::tag&gt;&gt;"
-    );
   });
 });
