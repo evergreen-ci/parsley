@@ -153,27 +153,6 @@ functions:
       permissions: public-read
       display_name: source_map
 
-  build-prod:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      shell: bash
-      script: |
-        ${PREPARE_SHELL}
-        chmod +x ./scripts/app-version.sh
-        . ./scripts/app-version.sh
-        echo "Building Production version: $REACT_APP_VERSION"
-        yarn build:prod
-
-  upload-to-prod-s3:
-    command: shell.exec
-    params:
-      working_dir: parsley
-      shell: bash
-      script: |
-        ${PREPARE_SHELL}
-        REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} BUCKET=${bucket} AWS_ACCESS_KEY_ID=${aws_key} AWS_SECRET_ACCESS_KEY=${aws_secret}  yarn deploy:do-not-use;
-
   get-project:
     command: git.get_project
     type: setup
@@ -343,6 +322,22 @@ functions:
         ${PREPARE_SHELL}
         yarn verify-backend
 
+  prod-deploy:
+    command: shell.exec
+    params:
+      working_dir: parsley
+      shell: bash
+      script: |
+        ${PREPARE_SHELL}
+        REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} \
+        BUCKET=${bucket} \
+        AWS_ACCESS_KEY_ID=${aws_key} \
+        AWS_SECRET_ACCESS_KEY=${aws_secret} \
+        EXECUTION=${execution} \
+        DEPLOYS_EMAIL=${DEPLOYS_EMAIL} \
+        AUTHOR_EMAIL=${author_email} \
+        yarn deploy:prod
+
 #######################################
 #      Local Evergreen Functions      #
 #######################################
@@ -490,10 +485,9 @@ tasks:
 
   - name: deploy-prod
     commands:
-    - func: setup-credentials
-    - func: build-prod
-    - func: upload-to-prod-s3
-    - func: send-email
+      - func: setup-credentials
+      - func: sym-link
+      - func: prod-deploy
 
 buildvariants:
   - name: ubuntu2204-small
