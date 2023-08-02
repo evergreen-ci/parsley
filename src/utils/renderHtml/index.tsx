@@ -52,4 +52,3 @@ const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
 };
 
 export default renderHtml;
-export { escapeTags };

@@ -36,13 +36,13 @@ describe("highlighter", () => {
 
   describe("highlights", () => {
     it("highlighted terms highlight the matching text", () => {
-      const regexp = /(Test)/gi;
+      const regexp = /(Test)|(blah)/gi;
       renderWithRouterMatch(
         <Highlighter highlights={regexp}>Test blah test blah</Highlighter>
       );
-      expect(screen.queryAllByDataCy("highlight")).toHaveLength(2);
+      expect(screen.queryAllByDataCy("highlight")).toHaveLength(4);
       screen.getAllByDataCy("highlight").forEach((highlight) => {
-        expect(highlight).toHaveTextContent(/test/i);
+        expect(highlight).toHaveTextContent(/test|blah/i);
       });
     });
   });
