@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 import BookmarksBar from "components/BookmarksBar";
 import LogPane from "components/LogPane";
-import { RowRenderer, cache } from "components/LogRow/RowRenderer";
+import { ParsleyRow } from "components/LogRow/RowRenderer";
 import SidePanel from "components/SidePanel";
 import SubHeader from "components/SubHeader";
 import { LogTypes } from "constants/enums";
@@ -11,14 +11,14 @@ interface LogWindowProps {
   logType: LogTypes;
   isUploadedLog: boolean;
 }
-const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
+const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
   const {
     clearExpandedLines,
     collapseLines,
-    scrollToLine,
     expandedLines,
     lineCount,
     processedLogLines,
+    scrollToLine,
   } = useLogContext();
 
   return (
@@ -37,11 +37,10 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType, isUploadedLog }) => {
         <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>
           <LogPane
-            cache={cache}
             rowCount={processedLogLines.length}
-            rowRenderer={RowRenderer({
-              processedLogLines,
+            rowRenderer={ParsleyRow({
               logType,
+              processedLogLines,
             })}
           />
         </LogPaneContainer>

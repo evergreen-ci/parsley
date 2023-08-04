@@ -369,10 +369,19 @@ functions:
       params:
         env:
           gobin: ${goroot}/bin/go
-          MONGODB_URL: ${mongodb_url_50}
-          DECOMPRESS: ${decompress}
+          MONGODB_URL: ${mongodb_url_60}
+          MONGODB_DECOMPRESS: ${decompress}
         working_dir: parsley/evergreen
         command: make get-mongodb
+    - command: subprocess.exec
+      type: setup
+      params:
+        env:
+          gobin: ${goroot}/bin/go
+          MONGOSH_URL: ${mongosh_url}
+          MONGOSH_DECOMPRESS: ${decompress}
+        working_dir: parsley/evergreen
+        command: make get-mongosh
     - command: subprocess.exec
       type: setup
       params:
@@ -459,6 +468,7 @@ tasks:
 
   - name: lint
     commands:
+    - func: sym-link
     - func: yarn-eslint
 
   - name: test
@@ -521,13 +531,14 @@ tasks:
     - func: send-email
 
 buildvariants:
-  - name: ubuntu2004-small
-    display_name: Ubuntu 20.04 (small)
+  - name: ubuntu2204-small
+    display_name: Ubuntu 22.04 (small)
     expansions:
-      mongodb_url_50: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-5.0.14.tgz
+      mongodb_url_60: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.6.tgz
+      mongosh_url: https://downloads.mongodb.com/compass/mongosh-1.9.0-linux-x64.tgz
       node_version: 16.17.0
     run_on:
-      - ubuntu2004-small
+      - ubuntu2204-small
     modules:
       - evergreen
     tasks:
@@ -543,13 +554,14 @@ buildvariants:
         patchable: false
         priority: 100
 
-  - name: ubuntu2004-large
-    display_name: Ubuntu 20.04 (large)
+  - name: ubuntu2204-large
+    display_name: Ubuntu 22.04 (large)
     expansions:
-      mongodb_url_50: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2004-5.0.14.tgz
+      mongodb_url_60: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.6.tgz
+      mongosh_url: https://downloads.mongodb.com/compass/mongosh-1.9.0-linux-x64.tgz
       node_version: 16.17.0
     run_on:
-      - ubuntu2004-large
+      - ubuntu2204-large
     modules:
       - evergreen
       - logkeeper

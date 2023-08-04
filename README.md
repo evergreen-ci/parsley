@@ -67,6 +67,14 @@ It should be named `.env-cmdrc.json` and placed at the root of the project. This
 file is required to deploy Parsley to production and to staging. The credential
 file is located in the R&D Dev Prod 1password vault.
 
+### Common errors
+
+- Sometimes you may run into an error where a dependency is out of date or in a
+  broken state. If you run into this issue try running `yarn install` to
+  reinstall all dependencies. If that does not work try deleting your
+  `node_modules` folder and running `yarn install` again. You can use the
+  `yarn clean` command to do this for you.
+
 ## Deployment
 
 ### Requirements

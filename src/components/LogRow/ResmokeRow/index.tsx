@@ -1,53 +1,37 @@
-import { forwardRef } from "react";
 import BaseRow from "components/LogRow/BaseRow";
+import { QueryParams } from "constants/queryParams";
+import { useQueryParam } from "hooks/useQueryParam";
+import { formatPrettyPrint } from "utils/prettyPrint";
 import { LogRowProps } from "../types";
-import { isLineInRange } from "../utils";
 
 interface ResmokeRowProps extends LogRowProps {
-  lineNumber: number;
   prettyPrint: boolean;
   getResmokeLineColor: (lineNumber: number) => string | undefined;
 }
 
-const ResmokeRow = forwardRef<any, ResmokeRowProps>((rowProps, ref) => {
-  const {
-    getLine,
-    resetRowHeightAtIndex,
-    scrollToLine,
-    getResmokeLineColor,
-    highlightRegex,
-    lineNumber,
-    listRowProps,
-    searchLine,
-    searchTerm,
-    wrap,
-    prettyPrint,
-    range,
-  } = rowProps;
-
+const ResmokeRow: React.FC<ResmokeRowProps> = ({
+  getLine,
+  getResmokeLineColor,
+  lineNumber,
+  prettyPrint = false,
+  ...rest
+}) => {
   const lineContent = getLine(lineNumber);
   const lineColor = getResmokeLineColor(lineNumber);
-  const inRange = isLineInRange(range, lineNumber);
+  const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
+  const bookmarked = bookmarks.includes(lineNumber);
 
   return lineContent !== undefined ? (
     <BaseRow
-      {...listRowProps}
-      ref={ref}
+      color={lineColor}
       data-cy="resmoke-row"
-      highlights={highlightRegex}
       lineNumber={lineNumber}
-      prettyPrint={prettyPrint}
-      resetRowHeightAtIndex={resetRowHeightAtIndex}
-      resmokeRowColor={lineColor}
-      scrollToLine={scrollToLine}
-      searchLine={searchLine}
-      searchTerm={inRange ? searchTerm : undefined}
-      wrap={wrap}
+      {...rest}
     >
-      {lineContent}
+      {bookmarked && prettyPrint ? formatPrettyPrint(lineContent) : lineContent}
     </BaseRow>
   ) : null;
-});
+};
 
 ResmokeRow.displayName = "ResmokeRow";
 

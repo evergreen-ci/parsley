@@ -1,27 +1,27 @@
 import { KeyboardEvent, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
-import { palette } from "@leafygreen-ui/palette";
 import { Option, Select } from "@leafygreen-ui/select";
+import Tooltip from "@leafygreen-ui/tooltip";
 import debounce from "lodash.debounce";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
-import IconWithTooltip from "components/IconWithTooltip";
 import TextInputWithGlyph from "components/TextInputWithGlyph";
 import { SearchBarActions } from "constants/enums";
 import { CharKey, ModifierKey } from "constants/keys";
-import { zIndex } from "constants/tokens";
+import { size, textInputHeight, zIndex } from "constants/tokens";
 import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
 import { leaveBreadcrumb } from "utils/errorReporting";
+import SearchPopover from "./SearchPopover";
 
-const { yellow } = palette;
 interface SearchBarProps {
   className?: string;
   disabled?: boolean;
   onChange?: (value: string) => void;
   onSubmit?: (selected: string, value: string) => void;
   paginate?: (dir: DIRECTION) => void;
+  searchSuggestions?: string[];
   validator?: (value: string) => boolean;
   validatorMessage?: string;
 }
@@ -32,6 +32,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   onChange = () => {},
   onSubmit = () => {},
   paginate = () => {},
+  searchSuggestions = [],
   validator = () => true,
   validatorMessage = "Invalid input",
 }) => {
@@ -81,7 +82,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     debounceSearch.cancel(); // Cancel the debounce request to prevent delayed search.
     inputRef.current?.blur();
     setInput("");
-    leaveBreadcrumb("search-bar-submit", { selected, input }, "user");
+    leaveBreadcrumb("search-bar-submit", { input, selected }, "user");
     onSubmit(selected, input);
   };
 
@@ -99,14 +100,14 @@ const SearchBar: React.FC<SearchBarProps> = ({
     } else if (e.key === "Enter" && e.shiftKey) {
       paginate(DIRECTION.PREVIOUS);
       sendEvent({
-        name: "Paginated Through Search Results",
         direction: DIRECTION.PREVIOUS,
+        name: "Paginated Through Search Results",
       });
     } else if (e.key === "Enter") {
       paginate(DIRECTION.NEXT);
       sendEvent({
-        name: "Paginated Through Search Results",
         direction: DIRECTION.NEXT,
+        name: "Paginated Through Search Results",
       });
     }
   };
@@ -137,39 +138,57 @@ const SearchBar: React.FC<SearchBarProps> = ({
           Highlight
         </Option>
       </StyledSelect>
-      <StyledInput
-        ref={inputRef}
-        aria-label="searchbar-input"
-        aria-labelledby="searchbar-input"
-        data-cy="searchbar-input"
-        disabled={disabled}
-        icon={
-          isValid ? (
-            <IconButton
-              aria-label="Select plus"
-              data-cy="searchbar-submit"
-              disabled={disabled || input.length === 0}
-              onClick={handleOnSubmit}
-            >
-              <Icon glyph="Plus" />
-            </IconButton>
-          ) : (
-            <IconWithTooltip
-              data-cy="searchbar-warning"
-              fill={yellow.base}
-              glyph="Warning"
-            >
-              {validatorMessage}
-            </IconWithTooltip>
-          )
-        }
-        onChange={(e) => handleOnChange(e.target.value)}
-        onKeyDown={handleKeyDown}
-        placeholder="optional, regexp to search"
-        spellCheck={false}
-        type="text"
-        value={input}
-      />
+      <InputWrapper>
+        <IconButtonWrapper>
+          <SearchPopover
+            disabled={disabled}
+            onClick={(suggestion) => {
+              handleOnChange(suggestion);
+              inputRef.current?.focus();
+              sendEvent({ name: "Applied Search Suggestion", suggestion });
+              leaveBreadcrumb(
+                "applied-search-suggestion",
+                { suggestion },
+                "user"
+              );
+            }}
+            searchSuggestions={searchSuggestions}
+          />
+        </IconButtonWrapper>
+        <StyledInput
+          ref={inputRef}
+          aria-labelledby="searchbar-input"
+          data-cy="searchbar-input"
+          disabled={disabled}
+          icon={
+            isValid ? (
+              <IconButton
+                aria-label="Select plus"
+                data-cy="searchbar-submit"
+                disabled={disabled || input.length === 0}
+                onClick={handleOnSubmit}
+              >
+                <Icon glyph="Plus" />
+              </IconButton>
+            ) : (
+              <Tooltip
+                justify="middle"
+                trigger={<IconPlaceholder data-cy="searchbar-error" />}
+                triggerEvent="hover"
+              >
+                {validatorMessage}
+              </Tooltip>
+            )
+          }
+          onChange={(e) => handleOnChange(e.target.value)}
+          onKeyDown={handleKeyDown}
+          placeholder="optional, regexp to search"
+          spellCheck={false}
+          state={isValid ? "none" : "error"}
+          type="text"
+          value={input}
+        />
+      </InputWrapper>
     </Container>
   );
 };
@@ -188,8 +207,12 @@ const StyledSelect = styled(Select)`
     margin-top: 0;
     border-top-right-radius: 0;
     border-bottom-right-radius: 0;
-    border-right: 0;
   }
+`;
+
+const InputWrapper = styled.div`
+  position: relative;
+  width: 100%;
 `;
 
 const StyledInput = styled(TextInputWithGlyph)`
@@ -197,7 +220,28 @@ const StyledInput = styled(TextInputWithGlyph)`
   div input {
     border-top-left-radius: 0;
     border-bottom-left-radius: 0;
+    border-left: 0;
+    padding-left: 42px;
   }
+`;
+
+const IconButtonWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: absolute;
+  bottom: 0;
+  left: ${size.xxs};
+
+  z-index: 1;
+  width: ${size.l};
+  height: ${textInputHeight};
+`;
+
+const IconPlaceholder = styled.div`
+  height: 100%;
+  width: ${size.l};
 `;
 
 export default SearchBar;

@@ -14,8 +14,12 @@ const main = async () => {
     return;
   }
 
+  const currentlyDeployedCommit = await getCurrentlyDeployedCommit();
+  console.log(`Currently Deployed Commit: ${currentlyDeployedCommit}`);
+
   // Print all commits between the last tag and the current commit
-  const commitMessages = await getCommitMessages();
+  const commitMessages = await getCommitMessages(currentlyDeployedCommit);
+
   let shouldDeployLocal = false;
   if (commitMessages.length === 0) {
     // If there are no commit messages, ask the user if they want to deploy anyway
@@ -30,7 +34,7 @@ const main = async () => {
       return;
     }
   } else {
-    console.log("Commit messages:");
+    console.log("Changes to deploy:");
     console.log(commitMessages);
   }
 
@@ -76,10 +80,10 @@ const createNewTag = () =>
     });
   });
 
-const getCommitMessages = () =>
+const getCommitMessages = (currentlyDeployedCommit) =>
   new Promise((resolve, reject) => {
     exec(
-      "git log $(git describe --tags --abbrev=0)..HEAD --oneline",
+      `git log ${currentlyDeployedCommit}..HEAD --oneline`,
       (err, stdout) => {
         if (err) {
           reject(err);
@@ -88,6 +92,35 @@ const getCommitMessages = () =>
         resolve(stdout);
       }
     );
+  });
+
+const getCurrentlyDeployedCommit = () =>
+  new Promise((resolve, reject) => {
+    exec("bash scripts/get-current-deployed-commit.sh", (err, stdout) => {
+      if (err) {
+        console.log(err);
+        reject(err);
+        return;
+      }
+      console.log(stdout);
+      // Regex for githash
+      const githashRegex = /[a-z0-9]{40}/gm;
+      // Regex for git tag
+      const gitTagRegex = /v[0-9]+\.[0-9]+\.[0-9]+/gm;
+      const githash = stdout.match(githashRegex);
+      const gitTag = stdout.match(gitTagRegex);
+      if (githash) {
+        resolve(githash[0]);
+      } else if (gitTag) {
+        resolve(gitTag[0]);
+      } else {
+        reject(
+          new Error(
+            "Could not find a githash or git tag in the output of get-current-deployed-commit.sh"
+          )
+        );
+      }
+    });
   });
 
 const runLocalDeploy = () =>

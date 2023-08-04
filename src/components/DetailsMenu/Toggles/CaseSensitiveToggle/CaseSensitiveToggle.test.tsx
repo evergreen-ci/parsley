@@ -29,12 +29,12 @@ describe("case sensitivity toggle", () => {
   });
 
   it("should not update the URL", async () => {
-    const { history } = render(<CaseSensitiveToggle />, { wrapper });
+    const { router } = render(<CaseSensitiveToggle />, { wrapper });
     const caseSensitiveToggle = screen.getByDataCy("case-sensitive-toggle");
 
     const user = userEvent.setup();
     await user.click(caseSensitiveToggle);
     expect(caseSensitiveToggle).toHaveAttribute("aria-checked", "false");
-    expect(history.location.search).toBe("");
+    expect(router.state.location.search).toBe("");
   });
 });

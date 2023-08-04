@@ -1,7 +1,6 @@
-import { forwardRef, memo, useCallback, useMemo } from "react";
+import { memo, useCallback, useMemo } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import { ListRowProps } from "react-virtualized";
 import { useLogWindowAnalytics } from "analytics";
 import Highlight, { highlightColorList } from "components/Highlight";
 import Icon from "components/Icon";
@@ -9,50 +8,50 @@ import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import { highlighter } from "utils/highlighters";
-import { formatPrettyPrint } from "utils/prettyPrint";
 import { hasOverlappingRegex } from "utils/regex";
 import renderHtml from "utils/renderHtml";
+import { LogRowProps } from "../types";
+import { isLineInRange } from "../utils";
 
-const { yellow, red } = palette;
+const { red, yellow } = palette;
 
-interface BaseRowProps extends ListRowProps {
+interface BaseRowProps extends Omit<LogRowProps, "getLine"> {
   children: string;
   "data-cy"?: string;
-  index: number;
-  // The line number associated with a log line and its index within the context of the virtualized list
-  // may differ due to collapsed rows.
-  lineNumber: number;
-  prettyPrint?: boolean;
-  searchLine?: number;
-  resetRowHeightAtIndex: (index: number) => void;
-  scrollToLine: (lineNumber: number) => void;
-  searchTerm?: RegExp;
-  highlights?: RegExp;
-  resmokeRowColor?: string;
-  wrap: boolean;
+  color?: string;
 }
 
 /**
- * BaseRow is meant to be used as a wrapper for all rows in the log view.
- * It is responsible for handling the highlighting of the share line and bookmarks.
+ * `BaseRow` is meant to be used as a wrapper for all rows in the log view.
+ * It is responsible for handling any highlights for the row, as well as rendering line counts and bookmarks.
+ * @param BaseRowProps - props to be passed to the BaseRow component
+ * @param BaseRowProps.children - the text to be rendered
+ * @param BaseRowProps."data-cy" - data-cy attribute to be added to the row
+ * @param BaseRowProps.lineIndex - the index of the line in the log
+ * @param BaseRowProps.highlightRegex - the regex to be highlighted
+ * @param BaseRowProps.lineNumber - the line number of the line in the log
+ * @param BaseRowProps.searchLine - the line number of the line that was searched for
+ * @param BaseRowProps.searchTerm - the term that was searched for
+ * @param BaseRowProps.color - the color of the highlight
+ * @param BaseRowProps.wrap - whether or not the text should wrap
+ * @param BaseRowProps.scrollToLine - function to scroll to a line
+ * @param BaseRowProps.range - the range of lines to be displayed
+ * @returns the base row component
  */
-const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
-  const {
-    children,
-    "data-cy": dataCyText,
-    index,
-    highlights,
-    lineNumber,
-    prettyPrint = false,
-    searchLine,
-    searchTerm,
-    resmokeRowColor,
-    wrap,
-    resetRowHeightAtIndex,
-    scrollToLine,
-    ...rest
-  } = props;
-
+const BaseRow: React.FC<BaseRowProps> = ({
+  children,
+  color,
+  "data-cy": dataCyText,
+  highlightRegex,
+  lineIndex,
+  lineNumber,
+  range,
+  scrollToLine,
+  searchLine,
+  searchTerm,
+  wrap,
+  ...rest
+}) => {
   const { sendEvent } = useLogWindowAnalytics();
 
   const [shareLine, setShareLine] = useQueryParam<number | undefined>(
@@ -64,10 +63,11 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
     QueryParams.Bookmarks,
     []
   );
+  const inRange = isLineInRange(range, lineNumber);
 
   const shared = shareLine === lineNumber;
   const bookmarked = bookmarks.includes(lineNumber);
-  const highlighted = searchLine === index;
+  const highlighted = searchLine === lineIndex;
 
   // Clicking link icon should set or unset the share line.
   const handleClick = useCallback(() => {
@@ -75,9 +75,9 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       setShareLine(undefined);
     } else {
       setShareLine(lineNumber);
-      scrollToLine(index);
+      scrollToLine(lineIndex);
     }
-  }, [index, lineNumber, shared, scrollToLine, setShareLine]);
+  }, [lineIndex, lineNumber, shared, scrollToLine, setShareLine]);
 
   // Double clicking a line should add or remove the line from bookmarks.
   const handleDoubleClick = useCallback(() => {
@@ -90,23 +90,10 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       setBookmarks(newBookmarks);
       sendEvent({ name: "Added Bookmark" });
     }
-
-    if (prettyPrint) {
-      resetRowHeightAtIndex(index);
-    }
-  }, [
-    bookmarks,
-    index,
-    lineNumber,
-    prettyPrint,
-    resetRowHeightAtIndex,
-    sendEvent,
-    setBookmarks,
-  ]);
+  }, [bookmarks, lineNumber, sendEvent, setBookmarks]);
 
   return (
     <RowContainer
-      ref={ref}
       {...rest}
       bookmarked={bookmarked}
       data-bookmarked={bookmarked}
@@ -117,7 +104,7 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       onDoubleClick={handleDoubleClick}
       shared={shared}
     >
-      <StyledIcon
+      <ShareIcon
         data-cy={`log-link-${lineNumber}`}
         glyph={shared ? "ArrowWithCircle" : "Link"}
         onClick={handleClick}
@@ -126,17 +113,17 @@ const BaseRow = forwardRef<any, BaseRowProps>((props, ref) => {
       <Index lineNumber={lineNumber} />
       <StyledPre shouldWrap={wrap}>
         <ProcessedBaseRow
-          color={resmokeRowColor}
+          color={color}
           data-cy={dataCyText}
-          highlights={highlights}
-          searchTerm={searchTerm}
+          highlights={highlightRegex}
+          searchTerm={inRange ? searchTerm : undefined}
         >
-          {bookmarked && prettyPrint ? formatPrettyPrint(children) : children}
+          {children}
         </ProcessedBaseRow>
       </StyledPre>
     </RowContainer>
   );
-});
+};
 
 interface ProcessedBaseRowProps {
   children: string;
@@ -147,7 +134,7 @@ interface ProcessedBaseRowProps {
 }
 
 const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
-  const { children, searchTerm, color, "data-cy": dataCy, highlights } = props;
+  const { children, color, "data-cy": dataCy, highlights, searchTerm } = props;
   const memoizedLogLine = useMemo(() => {
     let render = children;
     if (searchTerm) {
@@ -204,30 +191,31 @@ const RowContainer = styled.div<{
   font-family: "Source Code Pro", monospace;
   line-height: 1.25;
   font-size: ${fontSize.m};
+  padding-left: 1px;
 
-  ${({ color }) => color && `color: ${color};`}
   ${({ shared }) => shared && `background-color: ${yellow.light3};`}
   ${({ bookmarked }) => bookmarked && `background-color: ${yellow.light3};`}
   ${({ highlighted }) => highlighted && `background-color: ${red.light3};`}
-
-  width: unset !important;
+  width: fit-content;
   // Hover should be an overlay shadow so that the user can see the color underneath.
   :hover {
     box-shadow: inset 0 0 0 999px rgba(0, 0, 0, 0.1);
   }
 `;
 
-const StyledIcon = styled(Icon)`
+const ShareIcon = styled(Icon)`
   cursor: pointer;
   user-select: none;
   flex-shrink: 0;
+  margin-left: ${size.xxs};
+  margin-top: 2px;
 `;
 
 const Index = styled.pre<{ lineNumber: number }>`
   width: ${size.xl};
   margin-top: 0;
   margin-bottom: 0;
-  margin-left: ${size.s};
+  margin-left: ${size.xs};
   margin-right: ${size.s};
   flex-shrink: 0;
 
@@ -248,7 +236,8 @@ const StyledPre = styled.pre<{
   margin-top: 0;
   margin-bottom: 0;
   margin-right: ${size.xs};
-
+  /* Remove overflow on pre */
+  overflow: visible;
   font-family: inherit;
   line-height: inherit;
   font-size: inherit;

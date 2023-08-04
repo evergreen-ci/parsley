@@ -6,30 +6,21 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Ansii Ro
     class="css-1mysoqc"
   >
     <div
-      style="overflow: visible; height: 0px; width: 0px;"
+      data-cy="paginated-virtual-list"
+      data-test-id="virtuoso-scroller"
+      data-virtuoso-scroller="true"
+      style="height: 100%; outline: none; overflow-y: auto; position: relative;"
+      tabindex="0"
     >
       <div
-        aria-label="grid"
-        aria-readonly="true"
-        class="ReactVirtualized__Grid ReactVirtualized__List"
-        role="grid"
-        style="box-sizing: border-box; direction: ltr; height: 0px; position: relative; width: 0px; will-change: transform; overflow-x: scroll; overflow-y: auto;"
-        tabindex="0"
-      />
-    </div>
-    <div
-      class="resize-triggers"
-    >
-      <div
-        class="expand-trigger"
+        data-viewport-type="element"
+        style="width: 100%; height: 100%; position: absolute; top: 0px;"
       >
         <div
-          style="width: 1px; height: 1px;"
+          data-test-id="virtuoso-item-list"
+          style="box-sizing: border-box; padding-top: 0px; padding-bottom: 0px; margin-top: 0px;"
         />
       </div>
-      <div
-        class="contract-trigger"
-      />
     </div>
   </div>
 </div>
@@ -41,30 +32,105 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Resmoke 
     class="css-1mysoqc"
   >
     <div
-      style="overflow: visible; height: 0px; width: 0px;"
+      data-cy="paginated-virtual-list"
+      data-test-id="virtuoso-scroller"
+      data-virtuoso-scroller="true"
+      style="height: 100%; outline: none; overflow-y: auto; position: relative;"
+      tabindex="0"
     >
       <div
-        aria-label="grid"
-        aria-readonly="true"
-        class="ReactVirtualized__Grid ReactVirtualized__List"
-        role="grid"
-        style="box-sizing: border-box; direction: ltr; height: 0px; position: relative; width: 0px; will-change: transform; overflow-x: scroll; overflow-y: auto;"
-        tabindex="0"
-      />
-    </div>
-    <div
-      class="resize-triggers"
-    >
-      <div
-        class="expand-trigger"
+        data-viewport-type="element"
+        style="width: 100%; height: 100%; position: absolute; top: 0px;"
       >
         <div
-          style="width: 1px; height: 1px;"
+          data-test-id="virtuoso-item-list"
+          style="box-sizing: border-box; padding-top: 0px; padding-bottom: 0px; margin-top: 0px;"
         />
       </div>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Row Single 1`] = `
+<div>
+  <div
+    class="css-1mysoqc"
+  >
+    <div
+      class="css-aapse8"
+      data-cy="collapsed-row-0-99"
+    >
+      <p
+        class="css-end8kr leafygreen-ui-1tb6tuo"
+      >
+        100 Lines Skipped
+      </p>
       <div
-        class="contract-trigger"
-      />
+        class="css-10oczdc"
+      >
+        <button
+          aria-disabled="false"
+          class="lg-ui-button-0000 leafygreen-ui-qicxot"
+          type="button"
+        >
+          <div
+            class="leafygreen-ui-v038xi"
+          />
+          <div
+            class="leafygreen-ui-1hhc9ms"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="leafygreen-ui-11cndel"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.527 1.21a.638.638 0 01.948 0l3.327 3.563c.422.452.123 1.227-.475 1.227H4.673c-.599 0-.898-.775-.476-1.227l3.33-3.562zm3.8 8.79c.598 0 .897.775.475 1.228l-3.327 3.56a.638.638 0 01-.948 0l-3.33-3.56C3.775 10.775 4.074 10 4.673 10h6.654z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            All
+          </div>
+        </button>
+        <button
+          aria-disabled="false"
+          class="lg-ui-button-0000 leafygreen-ui-qicxot"
+          type="button"
+        >
+          <div
+            class="leafygreen-ui-v038xi"
+          />
+          <div
+            class="leafygreen-ui-1hhc9ms"
+          >
+            <svg
+              alt=""
+              aria-hidden="true"
+              class="leafygreen-ui-11cndel"
+              height="16"
+              role="presentation"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7.527 1.21a.638.638 0 01.948 0l3.327 3.563c.422.452.123 1.227-.475 1.227H4.673c-.599 0-.898-.775-.476-1.227l3.33-3.562zm3.8 8.79c.598 0 .897.775.475 1.228l-3.327 3.56a.638.638 0 01-.948 0l-3.33-3.56C3.775 10.775 4.074 10 4.673 10h6.654z"
+                fill="currentColor"
+                fill-rule="evenodd"
+              />
+            </svg>
+            5
+             Above & Below
+          </div>
+        </button>
+      </div>
     </div>
   </div>
 </div>

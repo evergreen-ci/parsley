@@ -1,5 +1,8 @@
 /**
  * `arraySymmetricDifference` takes in two arrays and returns only the elements not in common between the two arrays.
+ * @param a - The first array
+ * @param b - The second array
+ * @returns The elements not in common between the two arrays
  * @example arraySymmetricDifference([1, 2, 3], [2, 3, 4]) // [1, 4]
  */
 const arraySymmetricDifference = <T>(a: T[], b: T[]) => {
@@ -18,7 +21,10 @@ const arraySymmetricDifference = <T>(a: T[], b: T[]) => {
 /**
  * `conditionalCastToArray` takes in a generic value and transforms it into an array if shouldBeArray is true.
  * The value remains unchanged if it is already an array, or if shouldBeArray is false.
- * */
+ * @param value - The value to be transformed
+ * @param shouldBeArray - A boolean indicating whether or not the value should be transformed into an array
+ * @returns The transformed value
+ */
 const conditionalCastToArray = <T>(
   value: T | T[],
   shouldBeArray: boolean

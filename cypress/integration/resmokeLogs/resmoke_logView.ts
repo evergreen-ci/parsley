@@ -11,12 +11,8 @@ describe("Basic resmoke log view", () => {
   it("by default should have wrapping turned off and should be able to scroll horizontally", () => {
     cy.dataCy("log-row-16").should("be.visible");
     cy.dataCy("log-row-16").isNotContainedInViewport();
-    cy.get(".ReactVirtualized__Grid").should(
-      "have.css",
-      "overflow-x",
-      "scroll"
-    );
-    cy.get(".ReactVirtualized__Grid").scrollTo(500, 0, {
+
+    cy.dataCy("paginated-virtual-list").scrollTo(500, 0, {
       ensureScrollable: true,
     });
   });
@@ -27,12 +23,38 @@ describe("Basic resmoke log view", () => {
   });
   it("should still allow horizontal scrolling when there are few logs on screen", () => {
     cy.addFilter("Putting spruce/");
-    cy.get(".ReactVirtualized__Grid").should(
-      "have.css",
-      "overflow-x",
-      "scroll"
+
+    cy.dataCy("paginated-virtual-list").scrollTo("right");
+  });
+
+  it("log header should show breadcrumbs, including one for the test name", () => {
+    cy.dataCy("project-breadcrumb").should(
+      "contain.text",
+      "mongodb-mongo-master"
     );
-    cy.get(".ReactVirtualized__Grid").scrollTo("right");
+
+    cy.dataCy("version-breadcrumb").should("contain.text", "Patch 973");
+    cy.dataCy("version-breadcrumb").trigger("mouseover");
+    cy.dataCy("breadcrumb-tooltip").should(
+      "contain.text",
+      "SERVER-45720 Create tests for Atlas Workflows"
+    );
+    cy.dataCy("version-breadcrumb").trigger("mouseout");
+
+    cy.dataCy("task-breadcrumb")
+      .should("contain.text", "merge-patch")
+      .should(
+        "have.attr",
+        "href",
+        "http://localhost:9090/task/mongodb_mongo_master_rhel80_debug_v4ubsan_all_feature_flags_experimental_concurrency_sharded_with_stepdowns_and_balancer_4_linux_enterprise_361789ed8a613a2dc0335a821ead0ab6205fbdaa_22_09_21_02_53_24/0?redirect_spruce_users=true"
+      );
+    cy.dataCy("task-status-badge").should("contain.text", "Succeeded");
+
+    cy.dataCy("test-breadcrumb").should(
+      "contain.text",
+      "internal_transactions_kill_sessions.js"
+    );
+    cy.dataCy("test-status-badge").should("contain.text", "Pass");
   });
 });
 
@@ -150,8 +172,9 @@ describe("Jump to line", () => {
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
 
   it("should be able to use the bookmarks bar to jump to a line when there are no collapsed rows", () => {
-    cy.visit(`${logLink}?bookmarks=0,11079`);
-    cy.dataCy("log-row-4").dblclick({ force: true });
+    cy.visit(logLink);
+    cy.dataCy("log-row-4").should("be.visible").dblclick({ force: true });
+    cy.dataCy("bookmark-4").should("be.visible");
 
     cy.dataCy("bookmark-11079").click();
     cy.dataCy("log-row-11079").should("be.visible");
@@ -162,9 +185,10 @@ describe("Jump to line", () => {
   });
 
   it("should be able to use the bookmarks bar to jump to a line when there are collapsed rows", () => {
-    cy.visit(`${logLink}?bookmarks=0,11079&filters=100repl_hb`);
-    cy.dataCy("log-row-30").dblclick({ force: true });
-
+    cy.visit(`${logLink}?filters=100repl_hb`);
+    cy.dataCy("log-row-30").should("be.visible").dblclick({ force: true });
+    cy.url().should("include", "bookmarks=0,30,11079");
+    cy.dataCy("bookmark-30").should("be.visible");
     cy.dataCy("bookmark-11079").click();
     cy.dataCy("log-row-11079").should("be.visible");
     cy.dataCy("log-row-30").should("not.exist");
@@ -174,7 +198,7 @@ describe("Jump to line", () => {
   });
 
   it("visiting a log with a share line should jump to that line on page load", () => {
-    cy.visit(`${logLink}?bookmarks=0,11079&shareLine=200`);
+    cy.visit(`${logLink}?shareLine=200`);
     cy.dataCy("log-row-200").should("be.visible");
   });
 });

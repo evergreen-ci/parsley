@@ -22,12 +22,12 @@ exports[`storyshots Storyshots components/ErrorBoundary Error Fallback 1`] = `
       class="css-1xl0rym"
     >
       <h1
-        class="css-1t9xarj leafygreen-ui-a01oan"
+        class="css-1t9xarj leafygreen-ui-yk169t"
       >
         Error
       </h1>
       <h2
-        class="css-1t9xarj leafygreen-ui-1wgcd7w"
+        class="css-1t9xarj leafygreen-ui-oaqrgz"
       >
         Ouch! That's gotta hurt,
         <br />

@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "@emotion/styled";
+import Button from "@leafygreen-ui/button";
 import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import DetailsMenu from "components/DetailsMenu";
@@ -8,24 +9,26 @@ import PopoverButton from "components/PopoverButton";
 import Search from "components/Search";
 import ShortcutModal from "components/ShortcutModal";
 import { StyledLink } from "components/styles";
+import { wikiURL } from "constants/externalLinks";
 import { navbarHeight, size } from "constants/tokens";
+import { useAuthContext } from "context/auth";
 import { useLogContext } from "context/LogContext";
+import { isDevelopment } from "utils/environmentVariables";
 import UploadLink from "./UploadLink";
 
 const { gray, white } = palette;
 
 const NavBar: React.FC = () => {
   const [open, setOpen] = useState(false);
-  const { hasLogs, clearLogs } = useLogContext();
+  const { clearLogs, hasLogs } = useLogContext();
+  const { logoutAndRedirect } = useAuthContext();
 
   return (
     <Container>
       <FlexContainer>
         <Logo glyph="ParsleyLogo" size={24} useStroke />
         <LinkContainer>
-          <StyledLink href="https://github.com/evergreen-ci/parsley/wiki">
-            Wiki
-          </StyledLink>
+          <StyledLink href={wikiURL}>Wiki</StyledLink>
           <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
         <Search />
@@ -45,6 +48,15 @@ const NavBar: React.FC = () => {
         >
           <DetailsMenu data-cy="details-menu" />
         </StyledButton>
+        {isDevelopment() && (
+          <Button
+            onClick={logoutAndRedirect}
+            size="small"
+            variant="dangerOutline"
+          >
+            Log out
+          </Button>
+        )}
       </FlexContainer>
 
       <ShortcutModal open={open} setOpen={setOpen} />

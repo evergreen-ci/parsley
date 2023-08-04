@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { Option, Select } from "@leafygreen-ui/select";
-import { InlineCode, Label } from "@leafygreen-ui/typography";
+import { InlineCode, InlineCodeProps, Label } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
 import { LAST_SELECTED_LOG_TYPE } from "constants/cookies";
 import { LogTypes } from "constants/enums";
@@ -11,13 +11,13 @@ import { size } from "constants/tokens";
 interface ParseLogSelectProps {
   fileName: string | undefined;
   onParse: (logType: LogTypes | undefined) => void;
-  setHasDroppedLog: (value: boolean) => void;
+  onCancel: () => void;
 }
 
 const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
   fileName,
+  onCancel,
   onParse,
-  setHasDroppedLog,
 }) => {
   const [logType, setLogType] = useState<LogTypes | undefined>(
     (Cookie.get(LAST_SELECTED_LOG_TYPE) as LogTypes) ?? undefined
@@ -43,7 +43,7 @@ const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
         <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
       </Select>
       <ButtonContainer>
-        <Button onClick={() => setHasDroppedLog(false)}>Cancel</Button>
+        <Button onClick={onCancel}>Cancel</Button>
         <Button
           data-cy="process-log-button"
           disabled={!logType}
@@ -71,7 +71,7 @@ const ButtonContainer = styled.div`
   gap: ${size.xs};
 `;
 
-const StyledInlineCode = styled(InlineCode)`
+const StyledInlineCode = styled(InlineCode)<InlineCodeProps>`
   overflow-wrap: anywhere;
 `;
 

@@ -15,7 +15,7 @@ type UseKeyboardShortcutOptions = {
 };
 
 // Used to prevent shortcuts from being activated when input elements have focus.
-const INPUT_ELEMENTS = ["INPUT", "TEXTAREA", "SELECT"];
+const INPUT_ELEMENTS = ["INPUT", "TEXTAREA", "SELECT", "BUTTON"];
 
 const useKeyboardShortcut = (
   keys: ShortcutKeys,
@@ -71,8 +71,8 @@ const useKeyboardShortcut = (
           }
           cbRef.current();
           sendEvent({
-            name: "Used Shortcut",
             keys: getPressedKeysAsString(keys),
+            name: "Used Shortcut",
           });
         }
       }
@@ -95,7 +95,7 @@ const useKeyboardShortcut = (
 };
 
 const getPressedKeysAsString = (keys: ShortcutKeys): string => {
-  const { modifierKeys, charKey } = keys;
+  const { charKey, modifierKeys } = keys;
   const modifierKeysString = modifierKeys?.join("+") ?? "";
   const charKeyString = charKey ?? "";
   return `${modifierKeysString}${charKeyString}`;

@@ -1,9 +1,12 @@
 import { useCallback, useMemo } from "react";
+import { QueryParams } from "constants/queryParams";
 import { useQueryParams } from "hooks/useQueryParam";
 import { conditionalCastToArray } from "utils/array";
 
 /**
  * `useHighlightParam` is a specialized form of useQueryParam. It needs to encode and decode the highlights
+ * to and from URLs.
+ * @returns a tuple containing the parsed highlights and a function to set the highlights
  */
 const useHighlightParam = () => {
   const [searchParams, setSearchParams] = useQueryParams({
@@ -22,7 +25,7 @@ const useHighlightParam = () => {
     (newHighlights: string[]) => {
       setSearchParams({
         ...searchParams,
-        highlights: newHighlights.map((highlight) =>
+        [QueryParams.Highlights]: newHighlights.map((highlight) =>
           // We need to encode the highlights twice because the URL will decode them once
           encodeURIComponent(highlight)
         ),

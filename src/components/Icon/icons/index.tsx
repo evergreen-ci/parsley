@@ -4,7 +4,7 @@ import { palette } from "@leafygreen-ui/palette";
 const { black, green } = palette;
 
 interface LeafygreenIconProps extends React.SVGProps<SVGSVGElement> {
-  size?: number | typeof Size[keyof typeof Size];
+  size?: number | (typeof Size)[keyof typeof Size];
   role?: "presentation" | "img";
   ["data-cy"]?: string;
 }
@@ -146,9 +146,9 @@ interface ParsleyLogoProps extends LeafygreenIconProps {
 
 export const ParsleyLogo: React.ComponentType<ParsleyLogoProps> = ({
   className,
-  size = 16,
   leftFill = green.light1,
   rightFill = green.base,
+  size = 16,
   stroke = green.dark2,
   useStroke = false,
 }) => (

@@ -19,10 +19,10 @@ interface SidePanelProps {
 }
 
 const SidePanel: React.FC<SidePanelProps> = ({
+  clearExpandedLines,
+  collapseLines,
   "data-cy": dataCy,
   expandedLines,
-  collapseLines,
-  clearExpandedLines,
 }) => {
   const [collapsed, setCollapsed] = useState(
     Cookie.get(HAS_OPENED_DRAWER) === "true"
@@ -37,7 +37,7 @@ const SidePanel: React.FC<SidePanelProps> = ({
         setCollapsed(collapse);
         Cookie.set(HAS_OPENED_DRAWER, "true", { expires: 365 });
       }}
-      widthOverride={270}
+      widthOverride={290}
     >
       <PaddedContainer>
         <FilterNavGroup clearExpandedLines={clearExpandedLines} />

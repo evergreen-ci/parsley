@@ -1,4 +1,4 @@
-import { ParseOptions, parse, stringify } from "query-string";
+import queryString, { ParseOptions, StringifyOptions } from "query-string";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { Filters } from "types/logs";
 
@@ -12,14 +12,18 @@ export const parseQueryString = (
     parseNumbers: true,
     ...options,
   };
-  return parse(search, parseOptions);
+  return queryString.parse(search, parseOptions);
 };
 
-export const stringifyQuery = (object: { [key: string]: any }) =>
-  stringify(object, {
+export const stringifyQuery = (
+  object: { [key: string]: any },
+  options: StringifyOptions = {}
+) =>
+  queryString.stringify(object, {
     arrayFormat: "comma",
-    skipNull: true,
     skipEmptyString: true,
+    skipNull: true,
+    ...options,
   });
 
 export const parseFilters = (filters: string[]): Filters => {
@@ -37,10 +41,10 @@ export const parseFilters = (filters: string[]): Filters => {
     const name = filter.substring(3);
     const decodedFilterName = decodeURIComponent(name);
     return {
-      visible,
       caseSensitive,
       matchType,
       name: decodedFilterName,
+      visible,
     };
   });
   return parsedFilters;

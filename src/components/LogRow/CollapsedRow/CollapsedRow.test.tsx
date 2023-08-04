@@ -17,13 +17,13 @@ describe("collapsedRow", () => {
       <CollapsedRow
         {...collapsedProps}
         collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
-        listRowProps={listRowProps}
+        lineIndex={0}
       />,
       {
         wrapper: wrapper(logLines),
       }
     );
-    expect(screen.getByText("11 lines skipped")).toBeInTheDocument();
+    expect(screen.getByText("11 Lines Skipped")).toBeInTheDocument();
   });
 
   it("should call expandLines function with the correct arguments when expanding 5 lines", async () => {
@@ -33,14 +33,14 @@ describe("collapsedRow", () => {
         {...collapsedProps}
         collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         expandLines={expandLines}
-        listRowProps={listRowProps}
+        lineIndex={0}
       />,
       {
         wrapper: wrapper(logLines),
       }
     );
     const expandFiveButton = screen.getByRole("button", {
-      name: "Expand Icon 5 Above and Below",
+      name: "5 Above & Below",
     });
     expect(expandFiveButton).toBeEnabled();
     await user.click(expandFiveButton);
@@ -58,14 +58,14 @@ describe("collapsedRow", () => {
         {...collapsedProps}
         collapsedLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         expandLines={expandLines}
-        listRowProps={listRowProps}
+        lineIndex={0}
       />,
       {
         wrapper: wrapper(logLines),
       }
     );
     const expandFiveButton = screen.getByRole("button", {
-      name: "Expand Icon All",
+      name: "All",
     });
     await user.click(expandFiveButton);
     expect(expandLines).toHaveBeenCalledTimes(1);
@@ -77,14 +77,14 @@ describe("collapsedRow", () => {
       <CollapsedRow
         {...collapsedProps}
         collapsedLines={[0, 1, 2]}
-        listRowProps={listRowProps}
+        lineIndex={0}
       />,
       {
         wrapper: wrapper(logLines),
       }
     );
     const expandFiveButton = screen.getByRole("button", {
-      name: "Expand Icon 5 Above and Below",
+      name: "5 Above & Below",
     });
     expect(expandFiveButton).not.toHaveAttribute("aria-disabled", "true");
   });
@@ -103,16 +103,6 @@ const logLines = [
   "[j0:sec1] Starting mongod on port 20002...",
   "filler",
 ];
-
-const listRowProps = {
-  key: "collapsed-row",
-  columnIndex: 0,
-  index: 0,
-  isScrolling: false,
-  isVisible: true,
-  parent: {} as any,
-  style: {},
-};
 
 const collapsedProps = {
   expandLines: jest.fn(),

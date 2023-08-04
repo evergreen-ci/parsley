@@ -4,9 +4,9 @@ import { render } from "@testing-library/react";
 describe("storyshots", () => {
   // eslint-disable-next-line jest/require-hook
   initStoryshots({
-    renderer: render,
     asyncJest: true,
-    test: ({ story, context, stories2snapsConverter, done }) => {
+    renderer: render,
+    test: ({ context, done, stories2snapsConverter, story }) => {
       const snapshotFileName =
         stories2snapsConverter.getSnapshotFileName(context);
       // eslint-disable-next-line testing-library/render-result-naming-convention

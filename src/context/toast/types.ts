@@ -1,14 +1,13 @@
 import { Variant } from "@leafygreen-ui/toast";
 
-export type ToastVariants = {
-  success: string;
-  warning: string;
-  error: string;
-  info: string;
-  progress: string;
-};
+export type ToastVariant =
+  | "success"
+  | "warning"
+  | "error"
+  | "info"
+  | "progress";
 
-export type VisibleToast = {
+export type ToastParams = {
   variant: Variant;
   closable: boolean;
   message: string;

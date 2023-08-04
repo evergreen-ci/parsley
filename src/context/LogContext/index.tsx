@@ -8,8 +8,7 @@ import {
   useState,
 } from "react";
 import Cookie from "js-cookie";
-import { List } from "react-virtualized";
-import { cache } from "components/LogRow/RowRenderer";
+import { PaginatedVirtualListRef } from "components/PaginatedVirtualList/types";
 import {
   CASE_SENSITIVE,
   EXPANDABLE_ROWS,
@@ -34,7 +33,7 @@ interface LogContextState {
   expandedLines: ExpandedLines;
   hasLogs: boolean;
   lineCount: number;
-  listRef: React.RefObject<List>;
+  listRef: React.RefObject<PaginatedVirtualListRef>;
   logMetadata?: LogMetadata;
   matchingLines: Set<number> | undefined;
   preferences: Preferences;
@@ -54,7 +53,6 @@ interface LogContextState {
   getResmokeLineColor: (lineNumber: number) => string | undefined;
   ingestLines: (logs: string[], logType: LogTypes) => void;
   paginate: (dir: DIRECTION) => void;
-  resetRowHeightAtIndex: (index: number) => void;
   scrollToLine: (lineNumber: number) => void;
   setFileName: (fileName: string) => void;
   setLogMetadata: (logMetadata: LogMetadata) => void;
@@ -110,12 +108,11 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     Cookie.get(PRETTY_PRINT_BOOKMARKS) === "true"
   );
 
-  const { state, dispatch } = useLogState(initialLogLines);
+  const { dispatch, state } = useLogState(initialLogLines);
   const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
     []
   );
-
-  const listRef = useRef<List>(null);
+  const listRef = useRef<PaginatedVirtualListRef>(null);
 
   const stringifiedFilters = JSON.stringify(filters);
   const stringifiedBookmarks = bookmarks.toString();
@@ -136,12 +133,12 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     () => {
       setProcessedLogLines(
         filterLogs({
+          bookmarks,
+          expandableRows,
+          expandedLines: state.expandedLines,
           logLines: state.logs,
           matchingLines,
-          bookmarks,
           shareLine,
-          expandedLines: state.expandedLines,
-          expandableRows,
         })
       );
     },
@@ -162,8 +159,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     if (selectedLine) {
       setSearchParams({
         ...searchParams,
-        shareLine: selectedLine,
         selectedLine: undefined,
+        shareLine: selectedLine,
       });
     }
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
@@ -187,27 +184,22 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
 
   const scrollToLine = useCallback((lineNumber: number) => {
-    // We need to call scrollToRow twice because of https://github.com/bvaughn/react-virtualized/issues/995.
-    // When we switch to a different virtual list library we should not do this.
-    listRef.current?.scrollToRow(lineNumber);
-    setTimeout(() => {
-      listRef.current?.scrollToRow(lineNumber);
-    }, 0);
+    listRef.current?.scrollToIndex(lineNumber);
   }, []);
 
   const searchResults = useMemo(() => {
     const results = state.searchState.searchTerm
       ? searchLogs({
-          searchRegex: state.searchState.searchTerm,
-          processedLogLines,
-          upperBound: upperRange,
-          lowerBound: lowerRange,
           getLine,
+          lowerBound: lowerRange,
+          processedLogLines,
+          searchRegex: state.searchState.searchTerm,
+          upperBound: upperRange,
         })
       : [];
     dispatch({
-      type: "SET_MATCH_COUNT",
       matchCount: results.length,
+      type: "SET_MATCH_COUNT",
     });
 
     return results;
@@ -235,14 +227,14 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
   const ingestLines = useCallback(
     (lines: string[], logType: LogTypes) => {
-      dispatch({ type: "INGEST_LOGS", logs: lines, logType });
+      dispatch({ logType, logs: lines, type: "INGEST_LOGS" });
     },
     [dispatch]
   );
 
   const setLogMetadata = useCallback(
     (logMetadata: LogMetadata) => {
-      dispatch({ type: "SET_LOG_METADATA", logMetadata });
+      dispatch({ logMetadata, type: "SET_LOG_METADATA" });
     },
     [dispatch]
   );
@@ -251,17 +243,16 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       expandedLines: state.expandedLines,
       hasLogs: !!processedLogLines.length,
       lineCount: state.logs.length,
-      logMetadata: state.logMetadata,
       listRef,
+      logMetadata: state.logMetadata,
       matchingLines,
       preferences: {
         caseSensitive: state.searchState.caseSensitive,
         expandableRows,
         filterLogic,
         prettyPrint,
-        wrap,
         setCaseSensitive: (v: boolean) => {
-          dispatch({ type: "SET_CASE_SENSITIVE", caseSensitive: v });
+          dispatch({ caseSensitive: v, type: "SET_CASE_SENSITIVE" });
           Cookie.set(CASE_SENSITIVE, v.toString(), { expires: 365 });
         },
         setExpandableRows: (v: boolean) => {
@@ -280,6 +271,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           setWrap(v);
           Cookie.set(WRAP, v.toString(), { expires: 365 });
         },
+        wrap,
       },
       processedLogLines,
       range: {
@@ -291,9 +283,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
 
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
-      collapseLines: (idx: number) => dispatch({ type: "COLLAPSE_LINES", idx }),
+      collapseLines: (idx: number) => dispatch({ idx, type: "COLLAPSE_LINES" }),
       expandLines: (expandedLines: ExpandedLines) =>
-        dispatch({ type: "EXPAND_LINES", expandedLines }),
+        dispatch({ expandedLines, type: "EXPAND_LINES" }),
       getLine,
       getResmokeLineColor,
       ingestLines,
@@ -301,21 +293,17 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
         const { searchIndex, searchRange } = state.searchState;
         if (searchIndex !== undefined && searchRange !== undefined) {
           const nextPage = getNextPage(searchIndex, searchRange, direction);
-          dispatch({ type: "PAGINATE", nextPage });
+          dispatch({ nextPage, type: "PAGINATE" });
           scrollToLine(searchResults[nextPage]);
         }
       },
-      resetRowHeightAtIndex: (index: number) => {
-        listRef.current?.recomputeRowHeights(index);
-        cache.clear(index, 0);
-      },
       scrollToLine,
       setFileName: (fileName: string) => {
-        dispatch({ type: "SET_FILE_NAME", fileName });
+        dispatch({ fileName, type: "SET_FILE_NAME" });
       },
       setLogMetadata,
       setSearch: (searchTerm: string) => {
-        dispatch({ type: "SET_SEARCH_TERM", searchTerm });
+        dispatch({ searchTerm, type: "SET_SEARCH_TERM" });
       },
     }),
     [

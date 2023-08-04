@@ -3,11 +3,9 @@ import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
 import envCompatible from "vite-plugin-env-compatible";
-import vitePluginImp from "vite-plugin-imp";
 import tsconfigPaths from "vite-tsconfig-paths";
 import path from "path";
 import injectVariablesInHTML from "./config/injectVariablesInHTML";
-import reactVirtualized from "./config/reactVirtualized";
 
 const isMemlab = process.env.memlab === "true";
 
@@ -45,11 +43,6 @@ export default defineConfig({
         __dirname,
         "./config/leafygreen-ui/emotion.ts"
       ),
-      // CellMeasurerCache doesn't follow the same directory structure as the rest of the react-virtualized packages
-      // so we need to alias it to the correct path.
-      "react-virtualized/dist/es/CellMeasurerCache": path.resolve(
-        "node_modules/react-virtualized/dist/es/CellMeasurer/CellMeasurerCache"
-      ),
     },
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],
   },
@@ -61,23 +54,12 @@ export default defineConfig({
         // @emotion/babel-plugin injects styled component names (e.g. "StyledSelect") into HTML for dev
         // environments only. It can be toggled for production environments by modifying the parameter
         // autoLabel. (https://emotion.sh/docs/@emotion/babel-plugin)
-        plugins: ["@emotion/babel-plugin"],
+        plugins: ["@emotion/babel-plugin", "import-graphql"],
       },
       exclude: /\.stories\.tsx?$/, // Exclude storybook stories from fast refresh.
       include: ["**/*.tsx", "**/*.ts"], // Only Typescript files should use fast refresh.
       fastRefresh: true,
     }),
-    vitePluginImp({
-      optimize: true,
-      libList: [
-        {
-          libName: "react-virtualized",
-          libDirectory: "dist/es",
-          camel2DashComponentName: false,
-        },
-      ],
-    }),
-    reactVirtualized(),
     envCompatible({
       prefix: "REACT_APP_",
     }),

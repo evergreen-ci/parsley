@@ -1,0 +1,10 @@
+query ProjectFilters($projectIdentifier: String!) {
+  project(projectIdentifier: $projectIdentifier) {
+    id
+    parsleyFilters {
+      caseSensitive
+      exactMatch
+      expression
+    }
+  }
+}

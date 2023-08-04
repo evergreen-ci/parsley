@@ -1,15 +1,12 @@
-import {
-  Analytics as A,
-  Properties,
-  addPageAction,
-} from "analytics/addPageAction";
+import { useAnalyticsRoot } from "analytics/useAnalyticsRoot";
 import { DIRECTION } from "context/LogContext/types";
 import { Filter } from "types/logs";
 
 type Action =
   | { name: "Added Filter"; filterExpression: string }
   | { name: "Deleted Filter"; filterExpression: string }
-  | { name: "Toggled Filter"; visible: boolean }
+  | { name: "Toggled Filter"; open: boolean }
+  | { name: "Applied Project Filters"; filters: Filter[] }
   | { name: "Added Bookmark" }
   | { name: "Navigated With Bookmark" }
   | { name: "Removed Bookmark" }
@@ -18,19 +15,10 @@ type Action =
   | { name: "Added Highlight"; highlightExpression: string }
   | { name: "Removed Highlight"; highlightExpression: string }
   | { name: "Applied Search"; searchExpression: string }
+  | { name: "Applied Search Suggestion"; suggestion: string }
   | { name: "Expanded Lines"; option: "All" | "Five"; lineCount: number }
   | { name: "Collapsed Lines" }
   | { name: "Paginated Through Search Results"; direction: DIRECTION };
 
-interface P extends Properties {}
-interface Analytics extends A<Action> {}
-
-export const useLogWindowAnalytics = (): Analytics => {
-  const sendEvent: Analytics["sendEvent"] = (action) => {
-    addPageAction<Action, P>(action, {
-      object: "LogWindow",
-    });
-  };
-
-  return { sendEvent };
-};
+export const useLogWindowAnalytics = () =>
+  useAnalyticsRoot<Action>("LogWindow");

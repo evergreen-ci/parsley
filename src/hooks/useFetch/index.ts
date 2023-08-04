@@ -3,11 +3,13 @@ import { isProduction } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
 /**
  * `useFetch` is a custom hook that downloads json from a given URL.
- * It returns an object with the following properties:
+ * @param url - the url to fetch
+ * @param options - optional parameters
+ * @param options.skip - if true, skip the fetch
+ * @returns an object with the following properties:
  * - isLoading: a boolean that is true while the log is being downloaded
  * - data: the log file as an array of strings
  * - error: an error message if the download fails
- *
  */
 const useFetch = <T extends object>(
   url: string,
@@ -44,7 +46,7 @@ const useFetch = <T extends object>(
           setData(json);
         })
         .catch((err: Error) => {
-          leaveBreadcrumb("useFetch", { url, err }, "error");
+          leaveBreadcrumb("useFetch", { err, url }, "error");
           reportError(err).severe();
           setError(err.message);
         })

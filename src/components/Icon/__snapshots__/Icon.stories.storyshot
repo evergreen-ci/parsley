@@ -443,6 +443,31 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       class="css-141et6l"
     >
       <svg
+        aria-label="Chart Filled Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M3 2.5a2 2 0 00-2 2v7a2 2 0 002 2h10a2 2 0 002-2v-7a2 2 0 00-2-2H3zm8.25 2a.75.75 0 00-.75.75v6.25H12V5.25a.75.75 0 00-.75-.75zM7.5 7.25a.75.75 0 011.5 0v4.25H7.5V7.25zM5.25 9a.75.75 0 00-.75.75v1.75H6V9.75A.75.75 0 005.25 9z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        ChartFilled
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
         aria-label="Charts Icon"
         class=""
         color="#023430"
@@ -861,6 +886,29 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       class="css-141et6l"
     >
       <svg
+        aria-label="Dashboard Icon"
+        class=""
+        color="#023430"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M0 0h16v16H0V0zm14 4V2H2v2h12zm0 10V5H2v9h12zM8 6v7H6V6h2zm5 0v4H9V6h4zM5 8v5H3V8h2zm8 3v2H9v-2h4z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Dashboard
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
         aria-label="Database Icon"
         class=""
         color="#023430"
@@ -1022,7 +1070,7 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M4 4a1 1 0 11-2 0 1 1 0 012 0zM8 4a1 1 0 11-2 0 1 1 0 012 0zM4 8a1 1 0 11-2 0 1 1 0 012 0zM4 12a1 1 0 11-2 0 1 1 0 012 0zM8 8a1 1 0 11-2 0 1 1 0 012 0zM8 12a1 1 0 11-2 0 1 1 0 012 0z"
+          d="M7 4a1 1 0 11-2 0 1 1 0 012 0zM11 4a1 1 0 11-2 0 1 1 0 012 0zM7 8a1 1 0 11-2 0 1 1 0 012 0zM7 12a1 1 0 11-2 0 1 1 0 012 0zM11 8a1 1 0 11-2 0 1 1 0 012 0zM11 12a1 1 0 11-2 0 1 1 0 012 0z"
           fill="currentColor"
         />
       </svg>
@@ -1277,6 +1325,29 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       class="css-141et6l"
     >
       <svg
+        aria-label="Gauge Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M1.041 10.251c-.044.412.296.749.71.749h2.494c.414 0 .74-.34.843-.742A3.006 3.006 0 018.791 8.1l2.99-2.991a7 7 0 00-10.74 5.142zM13.297 6.422l-2.842 2.842c.213.3.368.638.459.994.102.401.429.742.843.742h2.494c.414 0 .754-.337.71-.749a7.001 7.001 0 00-1.664-3.829z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Gauge
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
         aria-label="Globe Americas Icon"
         class=""
         color="#023430"
@@ -1324,6 +1395,29 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       </svg>
       <span>
         GovernmentBuilding
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Highlight Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M8.853 12.031A.1.1 0 018.926 12h5.824a.25.25 0 01.25.25v1.5a.25.25 0 01-.25.25H7.231a.1.1 0 01-.072-.168l1.694-1.8zM4.019 9.193l.375-.374L7.576 12l-.375.375a1 1 0 01-.779.29l-.574-.04a1 1 0 00-.778.29l-.141.14-1.591-1.59.141-.142a1 1 0 00.29-.778l-.04-.573a1 1 0 01.29-.779zM11.433 1.779a1 1 0 011.415 0l1.767 1.768a1 1 0 010 1.414L8.28 11.296 5.098 8.114l6.335-6.335zM2.632 12.167l1.593 1.593-.17.172a.25.25 0 01-.178.074H1.386a.25.25 0 01-.176-.428l1.422-1.41z"
+          fill="currentColor"
+        />
+      </svg>
+      <span>
+        Highlight
       </span>
     </div>
     <div
@@ -1561,6 +1655,68 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       </svg>
       <span>
         Lock
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Log In Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1 3a1 1 0 011-1h4.25a.75.75 0 01.75.75v.5a.75.75 0 01-.75.75H3v8h3.25a.75.75 0 01.75.75v.5a.75.75 0 01-.75.75H2a1 1 0 01-1-1V3z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+        <path
+          clip-rule="evenodd"
+          d="M9.495 4.116L6.293 7.318a1 1 0 000 1.414l3.202 3.202a.75.75 0 001.06 0l.354-.353a.75.75 0 000-1.061L9.389 9h4.861a.75.75 0 00.75-.75v-.5a.75.75 0 00-.75-.75H9.44l1.469-1.47a.75.75 0 000-1.06l-.354-.354a.75.75 0 00-1.06 0z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        LogIn
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Log Out Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M1.5 3c0-.552.446-1 .995-1h4.23c.412 0 .746.336.746.75v.5c0 .414-.334.75-.746.75H3.49v8h3.235c.412 0 .746.336.746.75v.5c0 .414-.334.75-.746.75h-4.23a.998.998 0 01-.995-1V3z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+        <path
+          clip-rule="evenodd"
+          d="M11.022 11.909l3.187-3.202a1.003 1.003 0 000-1.414L11.022 4.09a.744.744 0 00-1.056 0l-.352.354a.753.753 0 000 1.06l1.513 1.52H6.29a.748.748 0 00-.746.75v.5c0 .414.334.75.746.75h4.788l-1.463 1.47a.753.753 0 000 1.06l.352.354a.744.744 0 001.056 0z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        LogOut
       </span>
     </div>
     <div
@@ -2455,6 +2611,31 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       class="css-141et6l"
     >
       <svg
+        aria-label="Tag Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M9.707 14.293l4.586-4.586a1 1 0 000-1.414l-6-6A1 1 0 007.586 2H3a1 1 0 00-1 1v4.586a1 1 0 00.293.707l6 6a1 1 0 001.414 0zM5 6a1 1 0 100-2 1 1 0 000 2z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Tag
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
         aria-label="Time Series Icon"
         class=""
         color="#023430"
@@ -2739,6 +2920,56 @@ exports[`storyshots Storyshots components/Icon Default 1`] = `
       </svg>
       <span>
         Warning
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Wizard Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M13.327 3.277c.188-.38-.236-.8-.618-.613l-2.513 1.223a.461.461 0 01-.523-.095L7.603 1.74c-.314-.313-.829-.062-.75.365l.517 2.808a.421.421 0 01-.228.46L4.63 6.596c-.383.186-.277.761.154.839l2.832.513a.477.477 0 01.382.379l.517 2.808c.079.427.659.532.846.153l1.234-2.492a.427.427 0 01.464-.225l2.832.512c.43.078.683-.432.368-.744l-2.07-2.052a.452.452 0 01-.095-.519l1.233-2.491zM7 10.5c.353-.35.312-.958-.091-1.359-.404-.4-1.017-.44-1.37-.09L1.84 12.713c-.353.35-.312.958.092 1.358.403.4 1.017.44 1.37.09L7 10.5z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Wizard
+      </span>
+    </div>
+    <div
+      class="css-141et6l"
+    >
+      <svg
+        aria-label="Wrench Icon"
+        class=""
+        color="#023430"
+        fill="none"
+        height="24"
+        role="img"
+        viewBox="0 0 16 16"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M10.625 9.75a4.374 4.374 0 004.206-5.584c-.085-.295-.449-.36-.665-.145l-2.1 2.1a.44.44 0 01-.184.11c-.078.024-.157-.013-.215-.07L9.84 4.332c-.058-.058-.095-.137-.071-.215a.44.44 0 01.11-.184l2.1-2.1c.216-.216.147-.58-.145-.664a4.374 4.374 0 00-5.385 5.512.32.32 0 01-.077.32l-4.828 4.829a1.857 1.857 0 002.625 2.625l4.828-4.828a.32.32 0 01.323-.075c.412.129.851.197 1.305.197zM2.75 14.125a.875.875 0 100-1.75.875.875 0 000 1.75z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span>
+        Wrench
       </span>
     </div>
     <div

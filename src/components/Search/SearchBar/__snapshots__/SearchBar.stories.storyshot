@@ -6,7 +6,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
     class="css-14zx4vh"
   >
     <div
-      class="leafygreen-ui-1nkq8lt css-1svbhsp"
+      class="leafygreen-ui-1nkq8lt css-6lshyd"
     >
       <button
         aria-controls="select-1-menu"
@@ -15,7 +15,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
         aria-expanded="false"
         aria-invalid="false"
         aria-labelledby="searchbar-select"
-        class="lg-ui-button-0001 leafygreen-ui-sedrjd"
+        class="lg-ui-button-0002 leafygreen-ui-4ldxru"
         data-cy="searchbar-select"
         data-testid="leafygreen-ui-select-menubutton"
         id="select-2"
@@ -58,54 +58,281 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
       class="css-1xm32e0"
     >
       <div
-        class="css-1u3fi1 leafygreen-ui-xtefr5"
+        class="css-xvgrqg"
+      >
+        <button
+          aria-disabled="false"
+          aria-labelledby="View search suggestions"
+          class="leafygreen-ui-6obv0c"
+          data-cy="search-suggestion-button"
+          tabindex="0"
+          title="View search suggestions"
+        >
+          <div
+            class="leafygreen-ui-xhlipt"
+          >
+            <svg
+              aria-label="Bulb Icon"
+              class="leafygreen-ui-a4wnk0"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.331 8.5a5 5 0 10-8.612.086L5.408 11.5a1 1 0 00.866.499H6.5V6a1.5 1.5 0 113 0v6h.224a1 1 0 00.863-.496L12.34 8.5h-.009z"
+                fill="currentColor"
+              />
+              <path
+                d="M7.5 6v6h1V6a.5.5 0 00-1 0zM10 14v-1H6v1a1 1 0 001 1h2a1 1 0 001-1z"
+                fill="currentColor"
+              />
+            </svg>
+            <svg
+              aria-label="Caret Down Icon"
+              class="leafygreen-ui-a4wnk0"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </button>
+      </div>
+      <div
+        class="css-1xm32e0"
       >
         <div
-          class="leafygreen-ui-lzja97"
+          class="css-z4vplf leafygreen-ui-90q1a7"
         >
-          <input
-            aria-invalid="false"
-            aria-label="searchbar-input"
-            aria-labelledby="searchbar-input"
-            autocomplete="on"
-            class="leafygreen-ui-6i61vl"
-            data-cy="searchbar-input"
-            id="textinput-5"
-            placeholder="optional, regexp to search"
-            required=""
-            spellcheck="false"
-            type="text"
-            value=""
-          />
           <div
-            class="lg-ui-icon-selector-0000 leafygreen-ui-uy5fvv"
+            class="leafygreen-ui-lzja97"
+          >
+            <input
+              aria-invalid="true"
+              aria-labelledby="searchbar-input"
+              autocomplete="on"
+              class="leafygreen-ui-18wtnk9"
+              data-cy="searchbar-input"
+              id="textinput-5"
+              placeholder="optional, regexp to search"
+              required=""
+              spellcheck="false"
+              type="text"
+              value=""
+            />
+            <div
+              class="lg-ui-icon-selector-0000 leafygreen-ui-11c7q5r"
+            >
+              <svg
+                alt=""
+                aria-hidden="true"
+                class="leafygreen-ui-tbogr5"
+                height="16"
+                role="presentation"
+                viewBox="0 0 16 16"
+                width="16"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M8.8639 2.51357C8.49039 1.82881 7.50961 1.82881 7.1361 2.51357L1.12218 13.5388C0.763263 14.1968 1.23814 15 1.98608 15H14.0139C14.7619 15 15.2367 14.1968 14.8778 13.5388L8.8639 2.51357ZM7 6C7 5.44772 7.44772 5 8 5C8.55228 5 9 5.44772 9 6V10C9 10.5523 8.55228 11 8 11C7.44772 11 7 10.5523 7 10V6ZM9 13C9 13.5523 8.55228 14 8 14C7.44772 14 7 13.5523 7 13C7 12.4477 7.44772 12 8 12C8.55228 12 9 12.4477 9 13Z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </div>
+        </div>
+        <div
+          class="css-1kijwh"
+        >
+          <div
+            class="leafygreen-ui-cssveg css-1a9hvxo"
+            data-cy="searchbar-error"
           />
         </div>
       </div>
-      <div
-        class="css-1w7keqv"
+    </div>
+  </div>
+</div>
+`;
+
+exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestions 1`] = `
+<div>
+  <div
+    class="css-14zx4vh"
+  >
+    <div
+      class="leafygreen-ui-1nkq8lt css-6lshyd"
+    >
+      <button
+        aria-controls="select-9-menu"
+        aria-describedby="select-9-description"
+        aria-disabled="false"
+        aria-expanded="false"
+        aria-invalid="false"
+        aria-labelledby="searchbar-select"
+        class="lg-ui-button-0002 leafygreen-ui-4ldxru"
+        data-cy="searchbar-select"
+        data-testid="leafygreen-ui-select-menubutton"
+        id="select-10"
+        type="button"
+        value="filter"
       >
         <div
-          class="leafygreen-ui-cssveg css-1sg2lsz"
-          data-cy="searchbar-warning"
+          class="leafygreen-ui-v038xi"
+        />
+        <div
+          class="leafygreen-ui-1qmzz4y"
         >
+          <div
+            class="leafygreen-ui-obh8q1"
+          >
+            <div
+              class="leafygreen-ui-17aj16e"
+            >
+              Filter
+            </div>
+          </div>
           <svg
-            aria-label="Warning Icon"
-            class="leafygreen-ui-1o1t3sx"
-            fill="none"
+            alt=""
+            aria-hidden="true"
+            class="leafygreen-ui-866818"
             height="16"
-            role="img"
+            role="presentation"
             viewBox="0 0 16 16"
             width="16"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
-              clip-rule="evenodd"
-              d="M8.864 2.514a.983.983 0 00-1.728 0L1.122 13.539A.987.987 0 001.986 15h12.028a.987.987 0 00.864-1.461L8.864 2.514zM7 6a1 1 0 012 0v4a1 1 0 11-2 0V6zm2 7a1 1 0 11-2 0 1 1 0 012 0z"
+              d="M8.67903 10.7962C8.45271 11.0679 8.04729 11.0679 7.82097 10.7962L4.63962 6.97649C4.3213 6.59428 4.5824 6 5.06866 6L11.4313 6C11.9176 6 12.1787 6.59428 11.8604 6.97649L8.67903 10.7962Z"
               fill="currentColor"
-              fill-rule="evenodd"
             />
           </svg>
+        </div>
+      </button>
+    </div>
+    <div
+      class="css-1xm32e0"
+    >
+      <div
+        class="css-xvgrqg"
+      >
+        <button
+          aria-disabled="false"
+          aria-labelledby="View search suggestions"
+          class="leafygreen-ui-6obv0c"
+          data-cy="search-suggestion-button"
+          tabindex="0"
+          title="View search suggestions"
+        >
+          <div
+            class="leafygreen-ui-xhlipt"
+          >
+            <svg
+              aria-label="Bulb Icon"
+              class="leafygreen-ui-a4wnk0"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M12.331 8.5a5 5 0 10-8.612.086L5.408 11.5a1 1 0 00.866.499H6.5V6a1.5 1.5 0 113 0v6h.224a1 1 0 00.863-.496L12.34 8.5h-.009z"
+                fill="currentColor"
+              />
+              <path
+                d="M7.5 6v6h1V6a.5.5 0 00-1 0zM10 14v-1H6v1a1 1 0 001 1h2a1 1 0 001-1z"
+                fill="currentColor"
+              />
+            </svg>
+            <svg
+              aria-label="Caret Down Icon"
+              class="leafygreen-ui-a4wnk0"
+              fill="none"
+              height="16"
+              role="img"
+              viewBox="0 0 16 16"
+              width="16"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M8.679 10.796a.554.554 0 01-.858 0L4.64 6.976C4.32 6.594 4.582 6 5.069 6h6.362c.487 0 .748.594.43.976l-3.182 3.82z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </button>
+      </div>
+      <div
+        class="css-1xm32e0"
+      >
+        <div
+          class="css-z4vplf leafygreen-ui-90q1a7"
+        >
+          <div
+            class="leafygreen-ui-lzja97"
+          >
+            <input
+              aria-invalid="false"
+              aria-labelledby="searchbar-input"
+              autocomplete="on"
+              class="leafygreen-ui-1kmfbzh"
+              data-cy="searchbar-input"
+              id="textinput-6"
+              placeholder="optional, regexp to search"
+              required=""
+              spellcheck="false"
+              type="text"
+              value=""
+            />
+            <div
+              class="lg-ui-icon-selector-0000 leafygreen-ui-11c7q5r"
+            />
+          </div>
+        </div>
+        <div
+          class="css-1kijwh"
+        >
+          <button
+            aria-disabled="true"
+            aria-label="Select plus"
+            class="leafygreen-ui-4no57l"
+            data-cy="searchbar-submit"
+            tabindex="0"
+          >
+            <div
+              class="leafygreen-ui-xhlipt"
+            >
+              <svg
+                aria-label="Plus Icon"
+                class=""
+                fill="none"
+                height="16"
+                role="img"
+                viewBox="0 0 16 16"
+                width="16"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  clip-rule="evenodd"
+                  d="M7.5 2a1 1 0 00-1 1v3.5H3a1 1 0 00-1 1v1a1 1 0 001 1h3.5V13a1 1 0 001 1h1a1 1 0 001-1V9.5H13a1 1 0 001-1v-1a1 1 0 00-1-1H9.5V3a1 1 0 00-1-1h-1z"
+                  fill="currentColor"
+                  fill-rule="evenodd"
+                />
+              </svg>
+            </div>
+          </button>
         </div>
       </div>
     </div>

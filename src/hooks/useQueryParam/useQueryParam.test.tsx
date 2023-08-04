@@ -1,5 +1,6 @@
 import { act, renderHook } from "@testing-library/react-hooks";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router-dom";
+import { QueryParams } from "constants/queryParams";
 import { useQueryParam, useQueryParams } from ".";
 
 describe("useQueryParams", () => {
@@ -28,9 +29,9 @@ describe("useQueryParams", () => {
 });
 
 const useQueryJointHook = (param: string, def: any) => {
-  const [queryParam, setQueryParam] = useQueryParam(param, def);
+  const [queryParam, setQueryParam] = useQueryParam(param as QueryParams, def);
   const [allQueryParams] = useQueryParams();
-  return { queryParam, setQueryParam, allQueryParams };
+  return { allQueryParams, queryParam, setQueryParam };
 };
 
 describe("useQueryParam", () => {
@@ -202,6 +203,125 @@ describe("useQueryParam", () => {
         result.current.setQueryParam([3, 4]);
       });
       expect(result.current.queryParam).toStrictEqual([3, 4]);
+    });
+  });
+  describe("uri encoding", () => {
+    it("should preserve encoded uri's with single values", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <MemoryRouter
+          initialEntries={[
+            "/?search=test%20test&filters=100drop%2522%252C%2522attr%2522",
+          ]}
+        >
+          {children}
+        </MemoryRouter>
+      );
+
+      const { result } = renderHook(
+        () => ({
+          ...useQueryJointHook("search", "test test"),
+          location: useLocation(),
+        }),
+        {
+          wrapper,
+        }
+      );
+      expect(result.current.allQueryParams).toMatchObject({
+        filters: "100drop%22%2C%22attr%22",
+        search: "test test",
+      });
+      expect(result.current.queryParam).toBe("test test");
+      act(() => {
+        result.current.setQueryParam("test2 test2");
+      });
+      expect(result.current.allQueryParams).toMatchObject({
+        filters: "100drop%22%2C%22attr%22",
+        search: "test2 test2",
+      });
+      expect(result.current.queryParam).toBe("test2 test2");
+      expect(result.current.location.search).toBe(
+        "?filters=100drop%2522%252C%2522attr%2522&search=test2%20test2"
+      );
+    });
+    it("should preserve encoded uri's with array values", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <MemoryRouter
+          initialEntries={[
+            "/?search=test%20test&filters=100drop%2522%252C%2522attr%2522,001drop%2522%252C%2522attr%2522",
+          ]}
+        >
+          {children}
+        </MemoryRouter>
+      );
+
+      const { result } = renderHook(
+        () => ({
+          ...useQueryJointHook("search", "test test"),
+          location: useLocation(),
+        }),
+        {
+          wrapper,
+        }
+      );
+      expect(result.current.allQueryParams).toMatchObject({
+        filters: ['100drop","attr"', '001drop","attr"'],
+        search: "test test",
+      });
+      expect(result.current.queryParam).toBe("test test");
+      act(() => {
+        result.current.setQueryParam("test2 test2");
+      });
+      expect(result.current.queryParam).toBe("test2 test2");
+      expect(result.current.allQueryParams).toMatchObject({
+        filters: ['100drop","attr"', '001drop","attr"'],
+        search: "test2 test2",
+      });
+      expect(result.current.location.search).toBe(
+        "?filters=100drop%2522%252C%2522attr%2522,001drop%2522%252C%2522attr%2522&search=test2%20test2"
+      );
+    });
+    it("should preserve falsy values in the url", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <MemoryRouter
+          initialEntries={["/?search=test%20test&bookmarks=0&something=false"]}
+        >
+          {children}
+        </MemoryRouter>
+      );
+
+      const { result } = renderHook(
+        () => ({
+          ...useQueryJointHook("search", "test test"),
+          location: useLocation(),
+        }),
+        {
+          wrapper,
+        }
+      );
+      expect(result.current.allQueryParams).toMatchObject({
+        bookmarks: 0,
+        search: "test test",
+        something: false,
+      });
+      expect(result.current.queryParam).toBe("test test");
+      act(() => {
+        result.current.setQueryParam("test2 test2");
+      });
+      expect(result.current.queryParam).toBe("test2 test2");
+      expect(result.current.allQueryParams).toMatchObject({
+        bookmarks: 0,
+        search: "test2 test2",
+        something: false,
+      });
+      expect(result.current.location.search).toBe(
+        "?bookmarks=0&search=test2%20test2&something=false"
+      );
     });
   });
 });

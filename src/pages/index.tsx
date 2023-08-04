@@ -1,24 +1,40 @@
 import { Suspense, lazy } from "react";
-import { Navigate, Route, Routes } from "react-router-dom";
+import { Navigate, Outlet, Route, Routes } from "react-router-dom";
 import { useAnalyticAttributes } from "analytics";
-
+import { FullPageLoad } from "components/FullPageLoad";
+import NavBar from "components/NavBar";
 import { PageLayout } from "components/styles";
 import { LogTypes } from "constants/enums";
 import routes from "constants/routes";
+import { useAuthContext } from "context/auth";
+import { useUser } from "hooks";
 import NotFound from "./404";
 import LogView from "./LogView";
 
 const LogDrop = lazy(() => import("./LogDrop"));
 
-const Content: React.FC = () => {
-  useAnalyticAttributes();
-  return (
+const Layout = () => (
+  <>
+    <NavBar />
     <PageLayout>
-      <Routes>
+      <Outlet />
+    </PageLayout>
+  </>
+);
+
+const Content: React.FC = () => {
+  const { user } = useUser();
+  localStorage.setItem("userId", user?.userId ?? "");
+
+  useAnalyticAttributes();
+  const { isAuthenticated } = useAuthContext();
+  return isAuthenticated ? (
+    <Routes>
+      <Route element={<Layout />}>
         <Route element={<Navigate to={routes.upload} />} path={routes.root} />
         <Route
           element={
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<FullPageLoad />}>
               <LogDrop />
             </Suspense>
           }
@@ -47,8 +63,10 @@ const Content: React.FC = () => {
           path={routes.resmokeLogsAll}
         />
         <Route element={<NotFound />} path="*" />
-      </Routes>
-    </PageLayout>
+      </Route>
+    </Routes>
+  ) : (
+    <FullPageLoad />
   );
 };
 

@@ -7,29 +7,36 @@ import { size, zIndex } from "constants/tokens";
 import { useKeyboardShortcut, useOnClickOutside } from "hooks";
 
 const shortcuts = [
-  { keys: [["SHIFT", "?"]], description: "Open or close the shortcut modal" },
+  { description: "Open or close the shortcut modal", keys: [["SHIFT", "?"]] },
   {
+    description: "Focus on the search input",
     keys: [
       ["CTRL", "F"],
       ["⌘", "F"],
     ],
-    description: "Focus on the search input",
   },
   {
+    description: "Toggle between filter and highlight",
     keys: [
       ["CTRL", "S"],
       ["⌘", "S"],
     ],
-    description: "Toggle between search, filter, and highlight",
   },
-  { keys: [["]"]], description: "Toggle the side panel" },
   {
-    keys: [["N"], ["ENTER"]],
+    description: "Apply the filter or highlight",
+    keys: [
+      ["CTRL", "ENTER"],
+      ["⌘", "ENTER"],
+    ],
+  },
+  { description: "Toggle the side panel", keys: [["]"]] },
+  {
     description: "Paginate forward to the next search result",
+    keys: [["N"], ["ENTER"]],
   },
   {
-    keys: [["P"], ["SHIFT", "ENTER"]],
     description: "Paginate backwards to the previous search result",
+    keys: [["P"], ["SHIFT", "ENTER"]],
   },
 ];
 
@@ -59,7 +66,7 @@ const ShortcutModal: React.FC<ShortcutModalProps> = ({ open, setOpen }) => {
           <H3>Parsley Keyboard Shortcuts</H3>
         </ModalTitle>
 
-        {shortcuts.map(({ keys, description }) => (
+        {shortcuts.map(({ description, keys }) => (
           <ModalRow key={description}>
             <ShortcutKeys>
               {keys.map((k, idx) => (
@@ -106,7 +113,7 @@ const ModalRow = styled.div`
 const ShortcutKeys = styled.div`
   display: flex;
   margin-right: ${size.xs};
-  width: 200px;
+  width: 225px;
 `;
 
 const Divider = styled.span`

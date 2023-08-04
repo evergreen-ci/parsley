@@ -134,11 +134,17 @@ Cypress.Commands.add("login", () => {
     // Username & password can be used as the cache key too
     args,
     () => {
-      cy.origin("http://localhost:9090", { args }, ({ username, password }) => {
+      cy.origin("http://localhost:9090", { args }, ({ password, username }) => {
         cy.request("POST", "/login", { username, password });
       });
     }
   );
+});
+
+Cypress.Commands.add("logout", () => {
+  cy.origin("http://localhost:9090", () => {
+    cy.request({ url: "/logout", followRedirect: false });
+  });
 });
 
 Cypress.Commands.add("resetDrawerState", () => {
@@ -174,6 +180,7 @@ Cypress.Commands.add(
       cy.dataCy(toastDataCy).within(() => {
         cy.get("button[aria-label='Close Message']").click();
       });
+      cy.dataCy(toastDataCy).should("not.exist");
     }
   }
 );

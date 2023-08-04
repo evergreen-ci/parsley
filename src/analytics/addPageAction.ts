@@ -4,7 +4,7 @@ export interface Analytics<Action> {
   sendEvent: (action: Action) => void;
 }
 
-type AnalyticsObject =
+export type AnalyticsObject =
   | "LogDrop"
   | "LogWindow"
   | "Preferences"
@@ -14,7 +14,7 @@ type AnalyticsObject =
 interface RequiredProperties {
   object: AnalyticsObject;
 }
-interface ActionType {
+export interface ActionType {
   name: string;
 }
 
@@ -36,7 +36,7 @@ export const addPageAction = <A extends ActionType, P extends Properties>(
 
   if (typeof newrelic !== "object") {
     // These will only print when new relic is not available such as during local development
-    console.log("ANALYTICS EVENT ", { name, attributesToSend });
+    console.log("ANALYTICS EVENT ", { attributesToSend, name });
     return;
   }
 

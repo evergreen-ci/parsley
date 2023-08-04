@@ -2,9 +2,9 @@ import { stringIntersection } from "utils/string";
 
 /**
  * `hasOverlappingRegex` - Checks if 2 regexes overlap each other
- * @param regex1
- * @param regex2
- * @param text
+ * @param regex1 - the first regex
+ * @param regex2 - the second regex
+ * @param text - the text to match the regexes against
  * @returns true if regexes overlap, false otherwise
  */
 const hasOverlappingRegex = (regex1: RegExp, regex2: RegExp, text: string) => {

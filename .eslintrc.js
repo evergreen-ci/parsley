@@ -8,16 +8,8 @@ module.exports = {
   env: {
     browser: true,
     es6: true,
-    node: true,
     jest: true,
-  },
-  parser: "@typescript-eslint/parser",
-  parserOptions: {
-    ecmaFeatures: {
-      jsx: true,
-    },
-    ecmaVersion: "latest",
-    sourceType: "module",
+    node: true,
   },
   extends: [
     "eslint:recommended",
@@ -28,18 +20,123 @@ module.exports = {
     "plugin:prettier/recommended", // Note: prettier must ALWAYS be the last extension.
   ],
   ignorePatterns: ["!.storybook"],
-  plugins: ["@typescript-eslint"],
-  settings: {
-    react: {
-      version: "detect",
-    },
-    "import/resolver": {
-      node: {
-        paths: ["src"],
-        extensions: [".js", ".jsx", ".ts", ".tsx"],
+  overrides: [
+    // For React Typescript files in src.
+    {
+      extends: [
+        "plugin:react/recommended",
+        "plugin:jsdoc/recommended-typescript-error",
+      ],
+      files: ["src/**/*.ts", "src/**/*.tsx"],
+      parserOptions: {
+        project: ["./tsconfig.json"],
+      },
+      plugins: [
+        "jsx-a11y",
+        "react",
+        "react-hooks",
+        "@emotion",
+        "sort-keys-plus",
+        "sort-destructure-keys",
+      ],
+      rules: {
+        // Rules for emotion.
+        "@emotion/import-from-emotion": ERROR,
+        "@emotion/no-vanilla": errorIfStrict,
+        "@emotion/pkg-renaming": ERROR,
+        "@emotion/syntax-preference": [errorIfStrict, "string"],
+
+        // Rules for accessibility.
+        "jsx-a11y/anchor-is-valid": errorIfStrict,
+        "jsx-a11y/aria-props": errorIfStrict,
+        "jsx-a11y/aria-role": [errorIfStrict, { ignoreNonDom: false }],
+        "jsx-a11y/label-has-associated-control": [
+          errorIfStrict,
+          { some: ["nesting", "id"] },
+        ],
+
+        // Check rules of Hooks
+        "react-hooks/exhaustive-deps": WARN,
+        // Rules for React Hooks.
+        "react-hooks/rules-of-hooks": ERROR, // Warn useMemo, useEffect dependencies
+
+        // Rules for React.
+        "react/destructuring-assignment": OFF, // Allow use of dot notation, for example user.id (airbnb rule)
+        "react/function-component-definition": [
+          errorIfStrict,
+          {
+            namedComponents: "arrow-function", // Allow named components with arrow functions (airbnb rule)
+          },
+        ],
+        "react/jsx-filename-extension": [1, { extensions: [".tsx"] }], // Allow JSX in TSX file (airbnb rule)
+        "react/jsx-props-no-spreading": OFF, // Allow spreading props like {...props} (airbnb rule)
+        "react/jsx-sort-props": WARN, // Sort props alphabetically
+        "react/prop-types": OFF, // (airbnb rule)
+        "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+ (airbnb rule)
+        "react/require-default-props": OFF, // Allow not setting defaults for props (airbnb rule)
+
+        "sort-destructure-keys/sort-destructure-keys": [
+          errorIfStrict,
+          { caseSensitive: true },
+        ],
+        "sort-keys-plus/sort-keys": [
+          errorIfStrict,
+          "asc",
+          { allowLineSeparatedGroups: true, natural: true },
+        ],
       },
     },
+    // For Jest files.
+    {
+      extends: ["plugin:testing-library/react", "plugin:jest/all"],
+      files: ["src/**/*.test.ts", "src/**/*.test.tsx"],
+      rules: {
+        "@typescript-eslint/unbound-method": OFF,
+        "jest/no-hooks": OFF,
+        "jest/no-mocks-import": OFF,
+        "jest/prefer-expect-assertions": OFF,
+        "jest/unbound-method": OFF,
+      },
+    },
+    // For Storybook files.
+    {
+      extends: ["plugin:storybook/recommended"],
+      files: ["src/**/*.stories.ts", "src/**/*.stories.tsx"],
+      rules: {
+        "storybook/no-stories-of": ERROR,
+      },
+    },
+    // For Cypress files.
+    {
+      extends: ["plugin:cypress/recommended"],
+      files: ["cypress/**/*.ts"],
+      parserOptions: {
+        project: "cypress/tsconfig.json",
+      },
+    },
+    // For GraphQL files.
+    {
+      extends: "plugin:@graphql-eslint/operations-recommended",
+      files: ["src/gql/**/*.graphql"],
+      rules: {
+        "@graphql-eslint/alphabetize": [
+          ERROR,
+          { selections: ["OperationDefinition", "FragmentDefinition"] },
+        ],
+        // Following rule can possibly be removed after ESLint updates.
+        "spaced-comment": OFF,
+      },
+    },
+  ],
+  parser: "@typescript-eslint/parser",
+  parserOptions: {
+    ecmaFeatures: {
+      jsx: true,
+    },
+    ecmaVersion: "latest",
+    sourceType: "module",
   },
+  plugins: ["@typescript-eslint"],
   rules: {
     // Rules for ESLint.
     "arrow-body-style": [
@@ -73,9 +170,9 @@ module.exports = {
     "@typescript-eslint/no-unused-vars": [
       errorIfStrict,
       {
-        vars: "all",
         args: "after-used",
         ignoreRestSiblings: true,
+        vars: "all",
       },
     ],
     "@typescript-eslint/no-use-before-define": [
@@ -100,30 +197,30 @@ module.exports = {
     "import/order": [
       ERROR,
       {
+        alphabetize: {
+          caseInsensitive: true,
+          order: "asc",
+        },
         groups: ["external", "builtin", "internal"],
         pathGroups: [
           {
+            group: "external",
             pattern: "react",
-            group: "external",
             position: "before",
           },
           {
+            group: "external",
             pattern: "@**",
-            group: "external",
             position: "before",
           },
           {
+            group: "internal",
             pattern:
               "(analytics|components|constants|context|gql|hoc|hooks|pages|types|utils)/**",
-            group: "internal",
             position: "before",
           },
         ],
         pathGroupsExcludedImportTypes: ["react"],
-        alphabetize: {
-          order: "asc",
-          caseInsensitive: true,
-        },
       },
     ],
     "import/prefer-default-export": OFF,
@@ -131,78 +228,15 @@ module.exports = {
     // Rules for prettier.
     "prettier/prettier": errorIfStrict, // Makes Prettier issues warnings rather than errors.
   },
-  overrides: [
-    // For React Typescript files in src.
-    {
-      files: ["src/**/*.ts", "src/**/*.tsx"],
-      extends: ["plugin:react/recommended"],
-      plugins: ["jsx-a11y", "react", "react-hooks", "@emotion"],
-      rules: {
-        // Rules for emotion.
-        "@emotion/import-from-emotion": ERROR,
-        "@emotion/no-vanilla": errorIfStrict,
-        "@emotion/pkg-renaming": ERROR,
-        "@emotion/syntax-preference": [errorIfStrict, "string"],
-
-        // Rules for accessibility.
-        "jsx-a11y/anchor-is-valid": errorIfStrict,
-        "jsx-a11y/aria-props": errorIfStrict,
-        "jsx-a11y/aria-role": [errorIfStrict, { ignoreNonDom: false }],
-        "jsx-a11y/label-has-associated-control": [
-          errorIfStrict,
-          { some: ["nesting", "id"] },
-        ],
-
-        // Rules for React Hooks.
-        "react-hooks/rules-of-hooks": ERROR, // Check rules of Hooks
-        "react-hooks/exhaustive-deps": WARN, // Warn useMemo, useEffect dependencies
-
-        // Rules for React.
-        "react/destructuring-assignment": OFF, // Allow use of dot notation, for example user.id (airbnb rule)
-        "react/function-component-definition": [
-          errorIfStrict,
-          {
-            namedComponents: "arrow-function", // Allow named components with arrow functions (airbnb rule)
-          },
-        ],
-        "react/jsx-filename-extension": [1, { extensions: [".tsx"] }], // Allow JSX in TSX file (airbnb rule)
-        "react/jsx-props-no-spreading": OFF, // Allow spreading props like {...props} (airbnb rule)
-        "react/jsx-sort-props": WARN, // Sort props alphabetically
-        "react/prop-types": OFF, // (airbnb rule)
-        "react/react-in-jsx-scope": OFF, // Disable because there is no need to import React in React 17+ (airbnb rule)
-        "react/require-default-props": OFF, // Allow not setting defaults for props (airbnb rule)
-      },
-      parserOptions: {
-        project: ["./tsconfig.json"],
+  settings: {
+    "import/resolver": {
+      node: {
+        extensions: [".js", ".jsx", ".ts", ".tsx"],
+        paths: ["src"],
       },
     },
-    // For Jest files.
-    {
-      files: ["src/**/*.test.ts", "src/**/*.test.tsx"],
-      extends: ["plugin:testing-library/react", "plugin:jest/all"],
-      rules: {
-        "jest/no-hooks": OFF,
-        "jest/no-mocks-import": OFF,
-        "jest/prefer-expect-assertions": OFF,
-        "@typescript-eslint/unbound-method": OFF,
-        "jest/unbound-method": OFF,
-      },
+    react: {
+      version: "detect",
     },
-    // For Storybook files.
-    {
-      files: ["src/**/*.stories.ts", "src/**/*.stories.tsx"],
-      extends: ["plugin:storybook/recommended"],
-      rules: {
-        "storybook/no-stories-of": ERROR,
-      },
-    },
-    // For Cypress files.
-    {
-      files: ["cypress/**/*.ts"],
-      extends: ["plugin:cypress/recommended"],
-      parserOptions: {
-        project: "cypress/tsconfig.json",
-      },
-    },
-  ],
+  },
 };

@@ -6,7 +6,7 @@ import Tooltip from "@leafygreen-ui/tooltip";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
-import { size } from "constants/tokens";
+import { size, zIndex } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
 import { findLineIndex } from "utils/findLineIndex";
 
@@ -61,6 +61,7 @@ const BookmarksBar: React.FC<BookmarksBarProps> = ({
   return (
     <Container>
       <Tooltip
+        popoverZIndex={zIndex.tooltip}
         trigger={
           <StyledButton
             data-cy="clear-bookmarks"
@@ -104,6 +105,7 @@ const LogLineContainer = styled.div`
   margin-top: ${size.xxs};
   align-self: start;
   cursor: pointer;
+  overflow-y: scroll;
 `;
 
 const LogLineNumber = styled.div`
@@ -130,7 +132,6 @@ const Container = styled.div`
   background-color: ${gray.light3};
   box-shadow: 0 ${size.xxs} ${size.xxs} rgba(0, 0, 0, 0.25);
   padding-top: ${size.s};
-  z-index: 0;
 `;
 
 export default BookmarksBar;

@@ -15,8 +15,8 @@ const HighlightNavGroup: React.FC = () => {
     const newHighlights = highlights.filter((h) => h !== highlightName);
     setHighlights(newHighlights);
     sendEvent({
-      name: "Removed Highlight",
       highlightExpression: highlightName,
+      name: "Removed Highlight",
     });
   };
 
@@ -24,7 +24,7 @@ const HighlightNavGroup: React.FC = () => {
     <BaseNavGroup
       data-cy="highlight"
       defaultMessage="No terms have been highlighted."
-      glyph="Minus"
+      glyph="Highlight"
       items={highlights}
       navGroupTitle="Highlighted Terms"
     >

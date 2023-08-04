@@ -1,6 +1,6 @@
 # 2023-02-22 Migrating Parsley Virtualization to react-virtuoso
 
-* status: proposed
+* status: accepted
 * date: 2023-02-22
 * authors: Mohamed Khelif
 
@@ -29,4 +29,6 @@ Here is a POC of what this would potentially look like: https://07sw2q.csb.app/
 
 ## Decision Outcome
 
-This section will be updated following the completion of this change. 
+After careful consideration and testing, we have decided to migrate Parsley Virtualization to react-virtuoso. The hybrid paginated virtualized view approach that we considered proved successful and provided a seamless log viewing experience.
+
+React Virtuoso has shown to be a more modern and actively maintained virtualization library that does not depend on a cache to save log sizes, solving the problems observed with the previous library. We are confident that this change will improve the user experience and address the pain points previously reported.

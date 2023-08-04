@@ -12,17 +12,17 @@ interface UploadLinkProps {
   hasLogs: boolean;
   clearLogs: () => void;
 }
-const UploadLink: React.FC<UploadLinkProps> = ({ hasLogs, clearLogs }) => {
+const UploadLink: React.FC<UploadLinkProps> = ({ clearLogs, hasLogs }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
   const { sendEvent } = useLogDropAnalytics();
   const handleClick = useCallback(() => {
     if (hasLogs) {
-      sendEvent({ name: "Clicked Upload Link", hasLogs: true });
+      sendEvent({ hasLogs: true, name: "Clicked Upload Link" });
       setOpen(true);
     } else {
       leaveBreadcrumb("upload-link", { hasLogs }, "navigation");
-      sendEvent({ name: "Clicked Upload Link", hasLogs: false });
+      sendEvent({ hasLogs: false, name: "Clicked Upload Link" });
       navigate(routes.upload);
     }
   }, [hasLogs, sendEvent, navigate]);

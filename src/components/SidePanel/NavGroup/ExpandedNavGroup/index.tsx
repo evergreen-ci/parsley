@@ -13,8 +13,8 @@ interface ExpandedNavGroupProps {
 }
 
 const ExpandedNavGroup: React.FC<ExpandedNavGroupProps> = ({
-  expandedLines,
   collapseLines,
+  expandedLines,
 }) => {
   const { sendEvent } = useLogWindowAnalytics();
 

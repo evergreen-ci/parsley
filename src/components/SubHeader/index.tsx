@@ -1,12 +1,10 @@
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import { Body } from "@leafygreen-ui/typography";
-import { usePreferencesAnalytics } from "analytics";
+import { Body, BodyProps } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
-import { StyledLink } from "components/styles";
-import { getEvergreenTaskURL } from "constants/externalURLTemplates";
 import { fontSize, size, subheaderHeight } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
+import { EvergreenTaskSubHeader } from "./EvergreenTaskSubHeader";
 
 const { gray } = palette;
 
@@ -15,35 +13,27 @@ interface SubHeaderProps {
 }
 const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
   const { logMetadata } = useLogContext();
-  const { fileName, taskID, execution } = logMetadata || {};
-  const taskLink =
-    taskID !== undefined && execution !== undefined
-      ? getEvergreenTaskURL(taskID, execution)
-      : "";
-
-  const { sendEvent } = usePreferencesAnalytics();
+  const { buildID, execution, fileName, logType, taskID, testID } =
+    logMetadata || {};
 
   return (
-    <Container>
+    <Container data-cy="log-header">
       {isUploadedLog ? (
         <Header>
-          <IconWrapper>
-            <Icon glyph="File" size="large" />
-          </IconWrapper>
+          <Icon glyph="File" size="large" />
           <StyledBody>{fileName}</StyledBody>
         </Header>
       ) : (
         <Header>
-          <IconWrapper>
-            <Icon glyph="EvergreenLogo" size={24} />
-          </IconWrapper>
-          <StyledLink
-            href={taskLink}
-            onClick={() => sendEvent({ name: "Opened Task Link" })}
-            target="_blank"
-          >
-            Task Page
-          </StyledLink>
+          {taskID && (
+            <EvergreenTaskSubHeader
+              buildID={buildID as string}
+              execution={Number(execution)}
+              logType={logType}
+              taskID={taskID}
+              testID={testID as string}
+            />
+          )}
         </Header>
       )}
     </Container>
@@ -53,13 +43,10 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
 const Header = styled.div`
   display: flex;
   align-items: center;
+  gap: ${size.s};
 `;
 
-const IconWrapper = styled.div`
-  padding-right: ${size.s};
-`;
-
-const StyledBody = styled(Body)`
+const StyledBody = styled(Body)<BodyProps>`
   font-size: ${fontSize.m};
 `;
 

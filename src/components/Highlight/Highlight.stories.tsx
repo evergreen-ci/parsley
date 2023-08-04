@@ -1,7 +1,17 @@
-import { Meta, StoryObj } from "@storybook/react";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import Highlight, { highlightColorList } from ".";
 
-export const Default: StoryObj<typeof Highlight> = {
+export default {
+  argTypes: {
+    color: {
+      control: "select",
+      options: highlightColorList,
+    },
+  },
+  component: Highlight,
+} satisfies CustomMeta<typeof Highlight>;
+
+export const DefaultHighlight: CustomStoryObj<typeof Highlight> = {
   render: (args) => (
     <span>
       Should be <Highlight {...args}>highlighted</Highlight>
@@ -9,7 +19,7 @@ export const Default: StoryObj<typeof Highlight> = {
   ),
 };
 
-export const AllColors: StoryObj<typeof Highlight> = {
+export const AllColors: CustomStoryObj<typeof Highlight> = {
   render: (args) => (
     <div>
       {highlightColorList.map((color) => (
@@ -23,14 +33,3 @@ export const AllColors: StoryObj<typeof Highlight> = {
     </div>
   ),
 };
-const meta: Meta<typeof Highlight> = {
-  component: Highlight,
-  argTypes: {
-    color: {
-      control: "select",
-      options: highlightColorList,
-    },
-  },
-};
-
-export default meta;

@@ -129,6 +129,15 @@ describe("query-string", () => {
     it("ignores emptyStrings", () => {
       expect(stringifyQuery({ a: "hello", b: "" })).toBe("a=hello");
     });
+    it("should preserve empty strings if skipEmptyString is passed in", () => {
+      let result = stringifyQuery(
+        { bar: null, foo: "" },
+        { skipEmptyString: false }
+      );
+      expect(result).toBe("foo=");
+      result = stringifyQuery({ bar: 21, foo: "" }, { skipEmptyString: false });
+      expect(result).toBe("bar=21&foo=");
+    });
     it("can handle empty input", () => {
       expect(stringifyQuery({})).toBe("");
     });

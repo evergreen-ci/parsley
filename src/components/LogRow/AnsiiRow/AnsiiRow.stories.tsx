@@ -1,21 +1,21 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
-import { StoryObj } from "@storybook/react";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
+import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import AnsiiRow from ".";
-import { RowRenderer, cache } from "../RowRenderer";
+import { ParsleyRow } from "../RowRenderer";
 
 export default {
   component: AnsiiRow,
-};
+} satisfies CustomMeta<typeof AnsiiRow>;
 
 type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>>;
 
 // Single AnsiiRow.
 const SingleLineStory = (args: any) => {
-  const { ingestLines, resetRowHeightAtIndex, scrollToLine } = useLogContext();
+  const { ingestLines, scrollToLine } = useLogContext();
 
   useEffect(() => {
     ingestLines(logLines, LogTypes.EVERGREEN_TASK_LOGS);
@@ -26,18 +26,9 @@ const SingleLineStory = (args: any) => {
       key={logLines[0]}
       getLine={() => logLines[0]}
       highlightRegex={undefined}
+      lineIndex={0}
       lineNumber={0}
-      listRowProps={{
-        index: 0,
-        style: {},
-        columnIndex: 0,
-        isScrolling: false,
-        isVisible: true,
-        key: logLines[0] || "",
-        parent: {} as any,
-      }}
       range={{ lowerRange: 0 }}
-      resetRowHeightAtIndex={resetRowHeightAtIndex}
       scrollToLine={scrollToLine}
       searchTerm={undefined}
       wrap={args.wrap}
@@ -45,16 +36,16 @@ const SingleLineStory = (args: any) => {
   );
 };
 
-export const SingleLine: StoryObj<AnsiiRowProps> = {
-  render: (args) => <SingleLineStory {...args} />,
+export const SingleLine: CustomStoryObj<AnsiiRowProps> = {
   args: {
     wrap: false,
   },
+  render: (args) => <SingleLineStory {...args} />,
 };
 
 // Multiple AnsiiRows.
 const MultiLineStory = (args: any) => {
-  const { ingestLines, processedLogLines, preferences } = useLogContext();
+  const { ingestLines, preferences, processedLogLines } = useLogContext();
   const { setWrap } = preferences;
 
   useEffect(() => {
@@ -68,23 +59,21 @@ const MultiLineStory = (args: any) => {
   return (
     <Container>
       <LogPane
-        cache={cache}
-        logLines={processedLogLines}
         rowCount={processedLogLines.length}
-        rowRenderer={RowRenderer({
-          processedLogLines,
+        rowRenderer={ParsleyRow({
           logType: LogTypes.EVERGREEN_TASK_LOGS,
+          processedLogLines,
         })}
       />
     </Container>
   );
 };
 
-export const MultiLines: StoryObj<AnsiiRowProps> = {
-  render: (args) => <MultiLineStory {...args} />,
+export const MultiLines: CustomStoryObj<AnsiiRowProps> = {
   args: {
     wrap: false,
   },
+  render: (args) => <MultiLineStory {...args} />,
 };
 
 const logLines = [
