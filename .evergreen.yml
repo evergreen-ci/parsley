@@ -492,15 +492,12 @@ tasks:
 
   - name: memlab
     commands:
-    - func: get-evergreen-project
-    - func: get-logkeeper-project
     - func: setup-mongodb
     - func: run-make-background
       vars:
         target: local-evergreen
     - func: seed-logkeeper
     - func: run-logkeeper
-    - func: copy-cmdrc
     - func: yarn-install
     - func: yarn-build-memlab
     - func: yarn-preview
