@@ -256,7 +256,7 @@ functions:
     params:
       working_dir: parsley
       script: |
-        export PATH=${node_path}
+        ${PREPARE_SHELL}
         yarn build:memlab
 
   yarn-codegen:
