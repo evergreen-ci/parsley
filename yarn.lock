@@ -4152,10 +4152,10 @@
     util.promisify "^1.1.1"
     xvfb "^0.4.0"
 
-"@memlab/api@^1.0.21":
-  version "1.0.21"
-  resolved "https://registry.yarnpkg.com/@memlab/api/-/api-1.0.21.tgz#c75ba2a3b389ea17a0b3ebe3b75e72c61f4a10f7"
-  integrity sha512-uGevd8paFyJkAWoywIayXyxbZRujotcZJzzXGqy0CUct2OSUUA01DXU7XbfAOr1QZNV3uQu1WSRrREWtkabx5Q==
+"@memlab/api@^1.0.23":
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/@memlab/api/-/api-1.0.23.tgz#30a334acc64abed7e95ea0fc676d0d5120339de6"
+  integrity sha512-d048BeIMfxVC3LJ2A/5SVfSlsDghPztzwKtF1N+1+rjzRDPHHqBJfNLeOawcQuB4bT4+DVXPplY+49N7tIpzEA==
   dependencies:
     "@memlab/core" "^1.1.10"
     "@memlab/e2e" "^1.0.9"
@@ -11310,10 +11310,10 @@ media-typer@0.3.0:
   resolved "https://registry.yarnpkg.com/media-typer/-/media-typer-0.3.0.tgz#8710d7af0aa626f8fffa1ce00168545263255748"
   integrity sha512-dq+qelQ9akHpcOl/gUVRTxVIOkAJ1wR3QAvb4RsVjS8oVoFjDGTc679wJYmUmknUF5HwMLOgb5O+a3KxfWapPQ==
 
-memlab@^1.1.38:
-  version "1.1.38"
-  resolved "https://registry.yarnpkg.com/memlab/-/memlab-1.1.38.tgz#65ceb3adcf1b2659e978bf95b5326944903ff026"
-  integrity sha512-gwO11c5z/sjbq4ZLjGvFXDTY/2nHrrlVbXZHndkGlrFQKA5x4T4w0YGqQjpE25MeHzfwPb7oeWSxvBgaMtkVGQ==
+memlab@^1.1.40:
+  version "1.1.40"
+  resolved "https://registry.yarnpkg.com/memlab/-/memlab-1.1.40.tgz#fad693f6eb2240d96d67fc660ca16de328bad5e9"
+  integrity sha512-9oqZzZnJSM1EaEK6tqyMtdYZTt4f2RkTPcMMBkOCXpl0KKHTTxCVLhNKLDHhoGlx81WewNrM89jd9phT6/4/dA==
   dependencies:
     "@memlab/api" "^1.0.11"
     "@memlab/cli" "^1.0.11"
