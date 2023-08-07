@@ -5782,7 +5782,7 @@
     semver "^7.3.7"
     tsutils "^3.21.0"
 
-"@typescript-eslint/utils@5.57.1", "@typescript-eslint/utils@^5.10.0", "@typescript-eslint/utils@^5.13.0", "@typescript-eslint/utils@^5.45.0":
+"@typescript-eslint/utils@5.57.1":
   version "5.57.1"
   resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.57.1.tgz#0f97b0bbd88c2d5e2036869f26466be5f4c69475"
   integrity sha512-kN6vzzf9NkEtawECqze6v99LtmDiUJCVpvieTFA1uL7/jDghiJGubGZ5csicYHU1Xoqb3oH/R5cN5df6W41Nfg==
@@ -5793,6 +5793,20 @@
     "@typescript-eslint/scope-manager" "5.57.1"
     "@typescript-eslint/types" "5.57.1"
     "@typescript-eslint/typescript-estree" "5.57.1"
+    eslint-scope "^5.1.1"
+    semver "^7.3.7"
+
+"@typescript-eslint/utils@^5.10.0", "@typescript-eslint/utils@^5.45.0", "@typescript-eslint/utils@^5.58.0":
+  version "5.62.0"
+  resolved "https://registry.yarnpkg.com/@typescript-eslint/utils/-/utils-5.62.0.tgz#141e809c71636e4a75daa39faed2fb5f4b10df86"
+  integrity sha512-n8oxjeb5aIbPFEtmQxQYOLI0i9n5ySBEY/ZEHHZqKQSFnxio1rv6dthascc9dLuwrL0RC5mPCxB7vnAVGAYWAQ==
+  dependencies:
+    "@eslint-community/eslint-utils" "^4.2.0"
+    "@types/json-schema" "^7.0.9"
+    "@types/semver" "^7.3.12"
+    "@typescript-eslint/scope-manager" "5.62.0"
+    "@typescript-eslint/types" "5.62.0"
+    "@typescript-eslint/typescript-estree" "5.62.0"
     eslint-scope "^5.1.1"
     semver "^7.3.7"
 
@@ -8172,12 +8186,12 @@ eslint-plugin-storybook@0.6.12:
     requireindex "^1.1.0"
     ts-dedent "^2.2.0"
 
-eslint-plugin-testing-library@5.9.1:
-  version "5.9.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-5.9.1.tgz#12e4bd34c48683ee98af4df2e3318ec9f51dcf8a"
-  integrity sha512-6BQp3tmb79jLLasPHJmy8DnxREe+2Pgf7L+7o09TSWPfdqqtQfRZmZNetr5mOs3yqZk/MRNxpN3RUpJe0wB4LQ==
+eslint-plugin-testing-library@5.11.1:
+  version "5.11.1"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-testing-library/-/eslint-plugin-testing-library-5.11.1.tgz#5b46cdae96d4a78918711c0b4792f90088e62d20"
+  integrity sha512-5eX9e1Kc2PqVRed3taaLnAAqPZGEX75C+M/rXzUAI3wIg/ZxzUm1OVAwfe/O+vE+6YXOLetSe9g5GKD2ecXipw==
   dependencies:
-    "@typescript-eslint/utils" "^5.13.0"
+    "@typescript-eslint/utils" "^5.58.0"
 
 eslint-scope@^5.1.1:
   version "5.1.1"
