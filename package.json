@@ -88,7 +88,7 @@
     "@graphql-codegen/cli": "3.2.2",
     "@graphql-codegen/typescript": "3.0.2",
     "@graphql-codegen/typescript-operations": "3.0.2",
-    "@graphql-eslint/eslint-plugin": "3.18.0",
+    "@graphql-eslint/eslint-plugin": "3.20.1",
     "@graphql-tools/jest-transform": "2.0.0",
     "@storybook/addon-actions": "7.0.22",
     "@storybook/addon-essentials": "7.0.22",
