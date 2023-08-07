@@ -1,15 +1,12 @@
-import { memo, useCallback, useMemo } from "react";
+import { useCallback } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { useLogWindowAnalytics } from "analytics";
-import Highlight, { highlightColorList } from "components/Highlight";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
-import { highlighter } from "utils/highlighters";
-import { hasOverlappingRegex } from "utils/regex";
-import renderHtml from "utils/renderHtml";
+import Highlighter from "./Highlighter";
 import { LogRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
@@ -112,72 +109,19 @@ const BaseRow: React.FC<BaseRowProps> = ({
       />
       <Index lineNumber={lineNumber} />
       <StyledPre shouldWrap={wrap}>
-        <ProcessedBaseRow
+        <Highlighter
           color={color}
           data-cy={dataCyText}
           highlights={highlightRegex}
           searchTerm={inRange ? searchTerm : undefined}
         >
           {children}
-        </ProcessedBaseRow>
+        </Highlighter>
       </StyledPre>
     </RowContainer>
   );
 };
 
-interface ProcessedBaseRowProps {
-  children: string;
-  searchTerm?: RegExp;
-  color?: string;
-  highlights?: RegExp;
-  ["data-cy"]?: string;
-}
-
-const ProcessedBaseRow: React.FC<ProcessedBaseRowProps> = memo((props) => {
-  const { children, color, "data-cy": dataCy, highlights, searchTerm } = props;
-  const memoizedLogLine = useMemo(() => {
-    let render = children;
-    if (searchTerm) {
-      // escape the matching string to prevent XSS
-      render = highlighter(
-        new RegExp(searchTerm, searchTerm.ignoreCase ? "gi" : "g"),
-        render,
-        (match) => `<mark>${match}</mark>`
-      );
-    }
-    if (highlights) {
-      const shouldCheckForOverlappingRegex = searchTerm !== undefined;
-      const hasOverlappingRegexes =
-        shouldCheckForOverlappingRegex &&
-        hasOverlappingRegex(searchTerm, highlights, children);
-      if (!hasOverlappingRegexes) {
-        render = highlighter(
-          new RegExp(highlights, highlights.ignoreCase ? "gi" : "g"),
-          render,
-          (match, index) =>
-            `<mark color="${
-              highlightColorList[index % highlightColorList.length]
-            }">${match}</mark>`
-        );
-      }
-    }
-    return renderHtml(render, {
-      preserveAttributes: ["mark"],
-      transform: {
-        // @ts-expect-error - This is expecting a react component but its an Emotion component which are virtually the same thing
-        mark: Highlight,
-      },
-    });
-  }, [children, searchTerm, highlights]);
-
-  return (
-    <span data-cy={dataCy} style={{ color }}>
-      {memoizedLogLine}
-    </span>
-  );
-});
-
-ProcessedBaseRow.displayName = "ProcessedBaseRow";
 BaseRow.displayName = "BaseRow";
 
 const RowContainer = styled.div<{

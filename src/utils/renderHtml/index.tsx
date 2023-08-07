@@ -3,7 +3,7 @@ import parse, {
   HTMLReactParserOptions,
   domToReact,
 } from "html-react-parser";
-import { escapeTags } from "./escapeTags";
+import { escapeTags } from "utils/escapeTags";
 
 interface renderHtmlOptions extends HTMLReactParserOptions {
   preserveAttributes?: string[];
@@ -12,18 +12,11 @@ interface renderHtmlOptions extends HTMLReactParserOptions {
   };
 }
 
-const allowedTags = {
-  a: ["href", "target", "rel", "class", "style"],
-  mark: ["style", "data-cy", "color"],
-  span: ["style", "data-cy"],
-};
-
 /**
- * `renderHtml` takes a string and converts it into an array of domnodes and
- * parses through them and swaps elements with other elements based on if they are
- * included in the transform object passed in through options. If you would like
- * to keep any classes applied to an item you want to swap you can pass it in as part
- * of the preserveAttributes array
+ * `renderHtml` takes a string and converts it into an array of domnodes for parsing.
+ * Elements are swapped with other elements based on if they are included in the options.transform
+ * object. If you would like to keep any attributes (classnames, styles, etc), you can pass it in
+ * as part of the options.preserveAttributes array.
  * @param html - The html string to parse
  * @param options - Options to pass to html-react-parser
  * @param options.transform - Map of elements to swap out
@@ -31,7 +24,7 @@ const allowedTags = {
  * @returns - html string converted to an array of domnodes
  */
 const renderHtml = (html: string = "", options: renderHtmlOptions = {}) => {
-  const escapedHtml = escapeTags(html, allowedTags);
+  const escapedHtml = escapeTags(html);
 
   return parse(escapedHtml, {
     replace: (domNode) => {

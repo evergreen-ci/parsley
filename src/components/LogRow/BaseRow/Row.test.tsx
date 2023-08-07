@@ -3,8 +3,13 @@ import Row from ".";
 
 describe("row", () => {
   it("renders a log line", () => {
-    renderWithRouterMatch(<Row {...rowProps}>{testLog}</Row>);
+    renderWithRouterMatch(
+      <Row {...rowProps} data-cy="test">
+        {testLog}
+      </Row>
+    );
     expect(screen.getByText(testLog)).toBeVisible();
+    expect(screen.getByDataCy("test")).toBeVisible();
   });
 
   it("properly escapes a log line with tags and renders its contents", () => {
@@ -79,34 +84,9 @@ describe("row", () => {
     const dataTransfer = await user.copy();
     expect(dataTransfer?.getData("text")).toBe("Test Log");
   });
-  describe("search", () => {
-    it("a search term highlights the matching text", () => {
-      const regexp = /Test/i;
-      renderWithRouterMatch(
-        <Row {...rowProps} searchTerm={regexp}>
-          {testLog}
-        </Row>
-      );
-      expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
-    });
 
-    it("should preserve case sensitivity when applying a search", () => {
-      let regexp = /test/i;
-      const { rerender } = renderWithRouterMatch(
-        <Row {...rowProps} searchTerm={regexp}>
-          {testLog}
-        </Row>
-      );
-      expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
-      regexp = /test/;
-      rerender(
-        <Row {...rowProps} searchTerm={regexp}>
-          {testLog}
-        </Row>
-      );
-      expect(screen.queryByDataCy("highlight")).toBeNull();
-    });
-    it("should highlight matching text if it is within range", () => {
+  describe("search / highlights", () => {
+    it("should highlight matching search text if it is within range", () => {
       const regexp = /Test/i;
       renderWithRouterMatch(
         <Row
@@ -122,7 +102,7 @@ describe("row", () => {
       );
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
     });
-    it("should not highlight matching text if it is outside of range", () => {
+    it("should not highlight matching search text if it is outside of range", () => {
       const regexp = /Test/i;
       renderWithRouterMatch(
         <Row
@@ -138,8 +118,6 @@ describe("row", () => {
       );
       expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
     });
-  });
-  describe("highlights", () => {
     it("highlighted terms should highlight the matching text", () => {
       const regexp = /Test/i;
       renderWithRouterMatch(
@@ -148,46 +126,6 @@ describe("row", () => {
         </Row>
       );
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
-    });
-
-    it("should highlight every matching term on a line", () => {
-      const regexp = /Test|Log/i;
-      renderWithRouterMatch(
-        <Row {...rowProps} highlightRegex={regexp}>
-          {testLog}
-        </Row>
-      );
-      expect(screen.queryAllByDataCy("highlight")).toHaveLength(2);
-      screen.getAllByDataCy("highlight").forEach((highlight) => {
-        expect(highlight).toHaveTextContent(/Test|Log/i);
-      });
-    });
-    it("should deduplicate highlights and searches on the same string", () => {
-      const regexp = /Test/i;
-      renderWithRouterMatch(
-        <Row {...rowProps} highlightRegex={regexp} searchTerm={regexp}>
-          {testLog}
-        </Row>
-      );
-      expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
-      expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
-    });
-    it("should show both highlights and searches if they are on the same line", () => {
-      const searchRegex = /Test/i;
-      const highlightRegex = /(Log)/i;
-      renderWithRouterMatch(
-        <Row
-          {...rowProps}
-          highlightRegex={highlightRegex}
-          searchTerm={searchRegex}
-        >
-          {testLog}
-        </Row>
-      );
-      expect(screen.queryAllByDataCy("highlight")).toHaveLength(2);
-      screen.getAllByDataCy("highlight").forEach((highlight) => {
-        expect(highlight).toHaveTextContent(/Test|Log/i);
-      });
     });
   });
 });
