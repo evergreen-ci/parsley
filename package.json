@@ -142,7 +142,7 @@
     "replace-in-file": "6.3.5",
     "rollup-plugin-visualizer": "5.9.0",
     "serve": "14.1.2",
-    "storybook": "7.0.22",
+    "storybook": "7.2.1",
     "storybook-addon-apollo-client": "4.1.4",
     "ts-jest": "29.1.0",
     "typescript": "5.1.3",
