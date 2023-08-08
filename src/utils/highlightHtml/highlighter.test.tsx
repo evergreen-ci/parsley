@@ -1,4 +1,4 @@
-import { highlighter } from ".";
+import { highlighter } from "./highlighter";
 
 describe("highlighter", () => {
   it("should return the text with the matches replaced by the function", () => {

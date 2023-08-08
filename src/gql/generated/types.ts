@@ -1590,6 +1590,7 @@ export type ProjectAlias = {
   description?: Maybe<Scalars["String"]>;
   gitTag: Scalars["String"];
   id: Scalars["String"];
+  parameters: Array<Parameter>;
   remotePath: Scalars["String"];
   task: Scalars["String"];
   taskTags: Array<Scalars["String"]>;
@@ -1602,6 +1603,7 @@ export type ProjectAliasInput = {
   description?: InputMaybe<Scalars["String"]>;
   gitTag: Scalars["String"];
   id: Scalars["String"];
+  parameters?: InputMaybe<Array<ParameterInput>>;
   remotePath: Scalars["String"];
   task: Scalars["String"];
   taskTags: Array<Scalars["String"]>;
