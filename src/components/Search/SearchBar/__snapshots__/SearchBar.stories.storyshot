@@ -9,8 +9,8 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
       class="leafygreen-ui-1nkq8lt css-6lshyd"
     >
       <button
-        aria-controls="select-1-menu"
-        aria-describedby="select-1-description"
+        aria-controls="select-143-menu"
+        aria-describedby="select-143-description"
         aria-disabled="false"
         aria-expanded="false"
         aria-invalid="false"
@@ -18,7 +18,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
         class="lg-ui-button-0002 leafygreen-ui-4ldxru"
         data-cy="searchbar-select"
         data-testid="leafygreen-ui-select-menubutton"
-        id="select-2"
+        id="select-144"
         type="button"
         value="filter"
       >
@@ -175,8 +175,8 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
       class="leafygreen-ui-1nkq8lt css-6lshyd"
     >
       <button
-        aria-controls="select-9-menu"
-        aria-describedby="select-9-description"
+        aria-controls="select-146-menu"
+        aria-describedby="select-146-description"
         aria-disabled="false"
         aria-expanded="false"
         aria-invalid="false"
@@ -184,7 +184,7 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
         class="lg-ui-button-0002 leafygreen-ui-4ldxru"
         data-cy="searchbar-select"
         data-testid="leafygreen-ui-select-menubutton"
-        id="select-10"
+        id="select-147"
         type="button"
         value="filter"
       >
