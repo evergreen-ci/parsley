@@ -53,7 +53,7 @@ const isOnMainBranch = () => {
   });
   const isOnMain = result.toString().trim() === "main";
   if (!isOnMain) {
-    console.log("Currently on branch:", result.toString().trim());
+    console.log("Currently on branch: ", result.toString().trim());
   }
   return isOnMain;
 };

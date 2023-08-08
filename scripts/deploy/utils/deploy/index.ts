@@ -1,7 +1,7 @@
 import { execSync } from "child_process";
 import { yellow } from "../../../utils/colors";
-import { getCurrentCommit, getCurrentlyDeployedCommit } from "../git";
 import { isDryRun } from "../environment";
+import { getCurrentCommit, getCurrentlyDeployedCommit } from "../git";
 
 /**
  * `runDeploy` is a helper function that actually performs the deploy.
@@ -14,9 +14,9 @@ const runDeploy = () => {
   console.log("Building");
   execSync("yarn build:prod", { stdio: "inherit" });
   console.log("Build complete");
-  console.log("Saving current commit in build/commit.txt");
+  console.log("Saving current commit in dist/commit.txt");
   const currentCommit = getCurrentCommit();
-  execSync(`echo ${currentCommit} > build/commit.txt`, {
+  execSync(`echo ${currentCommit} > dist/commit.txt`, {
     stdio: "inherit",
   });
   console.log("Deploying to production");

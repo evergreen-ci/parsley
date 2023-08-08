@@ -73,7 +73,7 @@ fi
 # If this is a revert, then only include the currently deployed commit
 if [ "$IS_REVERT" == 'true' ]
 then
-  echo "spruce-$(git rev-parse HEAD)" > body.txt
+  echo "parsley-$(git rev-parse HEAD)" > body.txt
 else
   if [ "$PREVIOUS_DEPLOYED_COMMIT" == '' ]
   then
