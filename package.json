@@ -139,7 +139,7 @@
     "lint-staged": "13.2.2",
     "prettier": "2.8.8",
     "prompts": "2.4.2",
-    "replace-in-file": "6.3.5",
+    "replace-in-file": "7.0.1",
     "rollup-plugin-visualizer": "5.9.0",
     "serve": "14.1.2",
     "storybook": "7.2.1",
