@@ -34,7 +34,7 @@
     "storybook:build": "./scripts/deploy/app-version.sh && env-cmd -e local -r .env-cmdrc.local.json storybook build",
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch --verbose",
-    "upload-source-maps": "node ./scripts/deploy/upload-bugsnag-sourcemaps.js",
+    "upload-source-maps": "env-cmd -e production node ./scripts/deploy/upload-bugsnag-sourcemaps",
     "postversion": "scripts/push-version.sh"
   },
   "dependencies": {
