@@ -1,11 +1,7 @@
 #!/bin/bash
 
-BASE_URL=$REACT_APP_PARSLEY_URL
-if [ "$BASE_URL" == "" ]
-then
-    echo "BASE_URL not set"
-    exit 1
-fi
+BASE_URL=https://parsley.mongodb.com
+
 
 # First download the currently deployed commit hash from s3
 # If the curl succeeds, and is exactly 40 characters, then use that commit hash
@@ -25,12 +21,11 @@ then
     exit 1
 fi
 
-# Check if bin directory exists
+# Validate if bin directory exists
 if [ ! -d "bin" ]
 then
     mkdir bin
 fi
-
 # Save the current commit hash to a file
 echo "$PREVIOUS_DEPLOYED_COMMIT"
 echo "$PREVIOUS_DEPLOYED_COMMIT" > bin/previous_deploy.txt
