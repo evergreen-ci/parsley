@@ -52,21 +52,14 @@ const ToastProviderCore: React.FC<{ children: ReactNode }> = ({ children }) => {
     }: ToastParams) =>
       pushToast({
         // @ts-ignore
-        "data-variant": mapLeafyGreenVariantToToast[variant],
-
-        description: <WordBreak>{message}</WordBreak>,
-
-        dismissible: closable,
-
-        onClose: closable ? onClose : undefined,
-
-        progress,
-
-        timeout: shouldTimeout ? TOAST_TIMEOUT : null,
-
-        title: title || mapLeafyGreenVariantToTitle[variant],
-
         "data-cy": "toast",
+        "data-variant": mapLeafyGreenVariantToToast[variant],
+        description: <WordBreak>{message}</WordBreak>,
+        dismissible: closable,
+        onClose: closable ? onClose : undefined,
+        progress,
+        timeout: shouldTimeout ? TOAST_TIMEOUT : null,
+        title: title || mapLeafyGreenVariantToTitle[variant],
         variant,
       }),
     [pushToast]
