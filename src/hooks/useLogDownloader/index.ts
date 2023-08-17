@@ -59,6 +59,7 @@ const useLogDownloader = (
           }).warning();
 
           dispatchToast.warning(LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING, true, {
+            shouldTimeout: false,
             title: "Log not fully downloaded",
           });
           sendEvent({
