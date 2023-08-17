@@ -31,6 +31,7 @@ import { getNextPage } from "./utils";
 
 interface LogContextState {
   expandedLines: ExpandedLines;
+  hasIngestedLogs: boolean;
   hasLogs: boolean;
   lineCount: number;
   listRef: React.RefObject<PaginatedVirtualListRef>;
@@ -241,6 +242,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const memoizedContext = useMemo(
     () => ({
       expandedLines: state.expandedLines,
+      hasIngestedLogs: state.hasIngestedLogs,
       hasLogs: !!processedLogLines.length,
       lineCount: state.logs.length,
       listRef,
@@ -316,6 +318,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       searchLine,
       searchResults,
       state.expandedLines,
+      state.hasIngestedLogs,
       state.logMetadata,
       state.logs.length,
       state.searchState,

@@ -10,6 +10,7 @@ import { LogMetadata, SearchState } from "./types";
 interface LogState {
   logs: string[];
   colorMapping?: Record<string, string>;
+  hasIngestedLogs: boolean;
   logMetadata?: LogMetadata;
   expandedLines: ExpandedLines;
   lineNumber?: number;
@@ -31,6 +32,7 @@ type Action =
 
 const initialState = (initialLogLines?: string[]): LogState => ({
   expandedLines: [],
+  hasIngestedLogs: false,
   logs: initialLogLines || [],
   searchState: {
     caseSensitive: Cookie.get(CASE_SENSITIVE) === "true",
@@ -76,6 +78,7 @@ const reducer = (state: LogState, action: Action): LogState => {
       return {
         ...state,
         colorMapping: colorMap,
+        hasIngestedLogs: true,
         logMetadata: {
           ...state.logMetadata,
           logType: action.logType,
