@@ -179,6 +179,11 @@ export type ClientConfig = {
   latestRevision?: Maybe<Scalars["String"]>;
 };
 
+export enum CloneMethod {
+  LegacySsh = "LEGACY_SSH",
+  Oauth = "OAUTH",
+}
+
 export type CloudProviderConfig = {
   __typename?: "CloudProviderConfig";
   aws?: Maybe<AwsConfig>;
@@ -312,7 +317,7 @@ export type Distro = {
   arch: Scalars["String"];
   authorizedKeysFile: Scalars["String"];
   bootstrapSettings: BootstrapSettings;
-  cloneMethod: Scalars["String"];
+  cloneMethod: CloneMethod;
   containerPool: Scalars["String"];
   disableShallowClone: Scalars["Boolean"];
   disabled: Scalars["Boolean"];
@@ -339,6 +344,28 @@ export type Distro = {
   workDir: Scalars["String"];
 };
 
+export type DistroEvent = {
+  __typename?: "DistroEvent";
+  after?: Maybe<Scalars["Map"]>;
+  before?: Maybe<Scalars["Map"]>;
+  data?: Maybe<Scalars["Map"]>;
+  timestamp: Scalars["Time"];
+  user: Scalars["String"];
+};
+
+/** DistroEventsInput is the input to the distroEvents query. */
+export type DistroEventsInput = {
+  before?: InputMaybe<Scalars["Time"]>;
+  distroId: Scalars["String"];
+  limit?: InputMaybe<Scalars["Int"]>;
+};
+
+export type DistroEventsPayload = {
+  __typename?: "DistroEventsPayload";
+  count: Scalars["Int"];
+  eventLogEntries: Array<DistroEvent>;
+};
+
 export type DistroInfo = {
   __typename?: "DistroInfo";
   bootstrapMethod?: Maybe<Scalars["String"]>;
@@ -354,7 +381,7 @@ export type DistroInput = {
   arch: Scalars["String"];
   authorizedKeysFile: Scalars["String"];
   bootstrapSettings: BootstrapSettingsInput;
-  cloneMethod: Scalars["String"];
+  cloneMethod: CloneMethod;
   containerPool: Scalars["String"];
   disableShallowClone: Scalars["Boolean"];
   disabled: Scalars["Boolean"];
@@ -1783,6 +1810,7 @@ export type Query = {
   clientConfig?: Maybe<ClientConfig>;
   commitQueue: CommitQueue;
   distro?: Maybe<Distro>;
+  distroEvents: DistroEventsPayload;
   distroTaskQueue: Array<TaskQueueItem>;
   distros: Array<Maybe<Distro>>;
   githubProjectConflicts: GithubProjectConflicts;
@@ -1838,6 +1866,10 @@ export type QueryCommitQueueArgs = {
 
 export type QueryDistroArgs = {
   distroId: Scalars["String"];
+};
+
+export type QueryDistroEventsArgs = {
+  opts: DistroEventsInput;
 };
 
 export type QueryDistroTaskQueueArgs = {
@@ -2101,6 +2133,7 @@ export type ResourceLimitsInput = {
   virtualMemoryKb: Scalars["Int"];
 };
 
+/** SaveDistroInput is the input to the saveDistro mutation. */
 export type SaveDistroInput = {
   distro: DistroInput;
   onSave: DistroOnSaveOperation;
