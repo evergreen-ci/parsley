@@ -124,7 +124,7 @@ describe("useLogDownloader", () => {
     expect(dispatchToast.warning).toHaveBeenCalledWith(
       LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING,
       true,
-      { title: "Log not fully downloaded" }
+      { shouldTimeout: false, title: "Log not fully downloaded" }
     );
   });
   it("should throw a LINE_TOO_LARGE error if a line in the file is too large and needed to be trimmed", async () => {
