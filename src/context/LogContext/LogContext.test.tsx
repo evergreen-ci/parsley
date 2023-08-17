@@ -33,8 +33,7 @@ describe("useLogContext", () => {
 
   describe("ingesting logs", () => {
     const lines = ["foo", "bar", "baz"];
-
-    it("ingesting logs should add them to the list of logs and set hasIngestedLogs to true", () => {
+    it("should add ingested logs to the list of logs", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => (
@@ -58,7 +57,7 @@ describe("useLogContext", () => {
       }
     });
 
-    it("ingesting should set hasIngestedLogs to true", () => {
+    it("should set hasIngestedLogs to true", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => (
