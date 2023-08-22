@@ -1,4 +1,5 @@
 import styled from "@emotion/styled";
+import { BasicEmptyState } from "@leafygreen-ui/empty-state";
 import BookmarksBar from "components/BookmarksBar";
 import LogPane from "components/LogPane";
 import { ParsleyRow } from "components/LogRow/RowRenderer";
@@ -17,9 +18,24 @@ const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
     collapseLines,
     expandedLines,
     lineCount,
+    logsAreEmpty,
     processedLogLines,
     scrollToLine,
   } = useLogContext();
+  const render = logsAreEmpty ? (
+    <BasicEmptyState
+      description="No logs were found for this resource"
+      title="No Logs Found"
+    />
+  ) : (
+    <LogPane
+      rowCount={processedLogLines.length}
+      rowRenderer={ParsleyRow({
+        logType,
+        processedLogLines,
+      })}
+    />
+  );
 
   return (
     <Container data-cy="log-window">
@@ -35,15 +51,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
       />
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
-        <LogPaneContainer>
-          <LogPane
-            rowCount={processedLogLines.length}
-            rowRenderer={ParsleyRow({
-              logType,
-              processedLogLines,
-            })}
-          />
-        </LogPaneContainer>
+        <LogPaneContainer>{render}</LogPaneContainer>
       </ColumnContainer>
     </Container>
   );
