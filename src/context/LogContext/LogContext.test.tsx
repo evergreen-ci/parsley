@@ -68,7 +68,7 @@ describe("useLogContext", () => {
       const { result } = renderHook(() => useLogContext(), { wrapper });
       expect(result.current.logsAreEmpty).toBe(false);
       act(() => {
-        result.current.ingestLines(lines, LogTypes.EVERGREEN_TASK_LOGS);
+        result.current.ingestLines([], LogTypes.EVERGREEN_TASK_LOGS);
       });
       expect(result.current.logsAreEmpty).toBe(true);
     });
