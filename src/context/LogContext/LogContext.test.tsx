@@ -32,7 +32,6 @@ describe("useLogContext", () => {
   });
 
   describe("ingesting logs", () => {
-    const lines = ["foo", "bar", "baz"];
     it("should add ingested logs to the list of logs", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
@@ -42,6 +41,7 @@ describe("useLogContext", () => {
         </Router>
       );
       const { result } = renderHook(() => useLogContext(), { wrapper });
+      const lines = ["foo", "bar", "baz"];
       act(() => {
         result.current.ingestLines(lines, LogTypes.EVERGREEN_TASK_LOGS);
       });
