@@ -18,7 +18,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
     collapseLines,
     expandedLines,
     lineCount,
-    logsAreEmpty,
     processedLogLines,
     scrollToLine,
   } = useLogContext();
@@ -38,18 +37,18 @@ const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>
-          {logsAreEmpty ? (
-            <BasicEmptyState
-              description="No logs were found for this resource"
-              title="No Logs Found"
-            />
-          ) : (
+          {lineCount ? (
             <LogPane
               rowCount={processedLogLines.length}
               rowRenderer={ParsleyRow({
                 logType,
                 processedLogLines,
               })}
+            />
+          ) : (
+            <BasicEmptyState
+              description="No logs were found for this resource"
+              title="No Logs Found"
             />
           )}
         </LogPaneContainer>
