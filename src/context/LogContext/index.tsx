@@ -31,6 +31,7 @@ import { getNextPage } from "./utils";
 
 interface LogContextState {
   expandedLines: ExpandedLines;
+  loading: boolean;
   logsAreEmpty: boolean;
   hasLogs: boolean;
   lineCount: number;
@@ -245,6 +246,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       hasLogs: !!processedLogLines.length,
       lineCount: state.logs.length,
       listRef,
+      loading: state.loading,
       logMetadata: state.logMetadata,
       logsAreEmpty: state.logsAreEmpty,
       matchingLines,
@@ -320,6 +322,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       state.expandedLines,
       state.logMetadata,
       state.logs.length,
+      state.loading,
       state.logsAreEmpty,
       state.searchState,
       upperRange,

@@ -9,6 +9,7 @@ import { LogMetadata, SearchState } from "./types";
 
 interface LogState {
   logs: string[];
+  loading: boolean;
   colorMapping?: Record<string, string>;
   logsAreEmpty: boolean;
   logMetadata?: LogMetadata;
@@ -32,6 +33,7 @@ type Action =
 
 const initialState = (initialLogLines?: string[]): LogState => ({
   expandedLines: [],
+  loading: true,
   logs: initialLogLines || [],
   logsAreEmpty: false,
   searchState: {
@@ -78,6 +80,7 @@ const reducer = (state: LogState, action: Action): LogState => {
       return {
         ...state,
         colorMapping: colorMap,
+        loading: false,
         logMetadata: {
           ...state.logMetadata,
           logType: action.logType,
