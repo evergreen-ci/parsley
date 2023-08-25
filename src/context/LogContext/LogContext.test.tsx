@@ -30,26 +30,48 @@ describe("useLogContext", () => {
     expect(result.current.processedLogLines).toStrictEqual([]);
     expect(result.current.lineCount).toBe(0);
   });
-  it("ingesting logs should add them to the list of logs", () => {
-    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-      <Router>
-        <LogContextProvider>{children}</LogContextProvider>
-      </Router>
-    );
-    const { result } = renderHook(() => useLogContext(), { wrapper });
-    const lines = ["foo", "bar", "baz"];
-    act(() => {
-      result.current.ingestLines(lines, LogTypes.EVERGREEN_TASK_LOGS);
+
+  describe("ingesting logs", () => {
+    it("should add ingested logs to the list of logs", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider>{children}</LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      const lines = ["foo", "bar", "baz"];
+      act(() => {
+        result.current.ingestLines(lines, LogTypes.EVERGREEN_TASK_LOGS);
+      });
+      expect(result.current.processedLogLines).toStrictEqual([0, 1, 2]);
+      expect(result.current.lineCount).toBe(lines.length);
+      expect(result.current.loading).toBe(false);
+      for (let i = 0; i < lines.length; i++) {
+        const line = result.current.processedLogLines[i];
+        // Expect the line not to be an array
+        expect(isCollapsedRow(line)).toBe(false);
+        // line is not an array we confirmed it above
+        expect(result.current.getLine(line as number)).toStrictEqual(lines[i]);
+      }
     });
-    expect(result.current.processedLogLines).toStrictEqual([0, 1, 2]);
-    expect(result.current.lineCount).toBe(lines.length);
-    for (let i = 0; i < lines.length; i++) {
-      const line = result.current.processedLogLines[i];
-      // Expect the line not to be an array
-      expect(isCollapsedRow(line)).toBe(false);
-      // line is not an array we confirmed it above
-      expect(result.current.getLine(line as number)).toStrictEqual(lines[i]);
-    }
+
+    it("should set loading to false after ingesting logs", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider>{children}</LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.loading).toBe(true);
+      act(() => {
+        result.current.ingestLines([], LogTypes.EVERGREEN_TASK_LOGS);
+      });
+      expect(result.current.loading).toBe(false);
+    });
   });
 
   it("saving a filename should save it to the context", () => {

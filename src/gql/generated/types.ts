@@ -298,12 +298,17 @@ export type Dependency = {
 
 export type DispatcherSettings = {
   __typename?: "DispatcherSettings";
-  version: Scalars["String"];
+  version: DispatcherVersion;
 };
 
 export type DispatcherSettingsInput = {
-  version: Scalars["String"];
+  version: DispatcherVersion;
 };
+
+export enum DispatcherVersion {
+  Revised = "REVISED",
+  RevisedWithDependencies = "REVISED_WITH_DEPENDENCIES",
+}
 
 export type DisplayTask = {
   ExecTasks: Array<Scalars["String"]>;
@@ -332,7 +337,7 @@ export type Distro = {
   name: Scalars["String"];
   note: Scalars["String"];
   plannerSettings: PlannerSettings;
-  provider: Scalars["String"];
+  provider: Provider;
   providerSettingsList: Array<Scalars["Map"]>;
   setup: Scalars["String"];
   setupAsSudo: Scalars["Boolean"];
@@ -396,7 +401,7 @@ export type DistroInput = {
   name: Scalars["String"];
   note: Scalars["String"];
   plannerSettings: PlannerSettingsInput;
-  provider: Scalars["String"];
+  provider: Provider;
   providerSettingsList: Array<Scalars["Map"]>;
   setup: Scalars["String"];
   setupAsSudo: Scalars["Boolean"];
@@ -516,12 +521,19 @@ export type FileDiff = {
 
 export type FinderSettings = {
   __typename?: "FinderSettings";
-  version: Scalars["String"];
+  version: FinderVersion;
 };
 
 export type FinderSettingsInput = {
-  version: Scalars["String"];
+  version: FinderVersion;
 };
+
+export enum FinderVersion {
+  Alternate = "ALTERNATE",
+  Legacy = "LEGACY",
+  Parallel = "PARALLEL",
+  Pipeline = "PIPELINE",
+}
 
 export type GeneralSubscription = {
   __typename?: "GeneralSubscription";
@@ -1477,7 +1489,7 @@ export type PlannerSettings = {
   patchFactor: Scalars["Int"];
   patchTimeInQueueFactor: Scalars["Int"];
   targetTime: Scalars["Duration"];
-  version: Scalars["String"];
+  version: PlannerVersion;
 };
 
 export type PlannerSettingsInput = {
@@ -1489,8 +1501,13 @@ export type PlannerSettingsInput = {
   patchFactor: Scalars["Int"];
   patchTimeInQueueFactor: Scalars["Int"];
   targetTime: Scalars["Int"];
-  version: Scalars["String"];
+  version: PlannerVersion;
 };
+
+export enum PlannerVersion {
+  Legacy = "LEGACY",
+  Tunable = "TUNABLE",
+}
 
 export type Pod = {
   __typename?: "Pod";
@@ -1787,6 +1804,13 @@ export type ProjectVarsInput = {
   privateVarsList?: InputMaybe<Array<InputMaybe<Scalars["String"]>>>;
   vars?: InputMaybe<Scalars["StringMap"]>;
 };
+
+export enum Provider {
+  Docker = "DOCKER",
+  Ec2Fleet = "EC2_FLEET",
+  Ec2OnDemand = "EC2_ON_DEMAND",
+  Static = "STATIC",
+}
 
 /** PublicKey models a public key. Users can save/modify/delete their public keys. */
 export type PublicKey = {
