@@ -9,9 +9,8 @@ import { LogMetadata, SearchState } from "./types";
 
 interface LogState {
   logs: string[];
-  loading: boolean;
   colorMapping?: Record<string, string>;
-  logsAreEmpty: boolean;
+  loading: boolean;
   logMetadata?: LogMetadata;
   expandedLines: ExpandedLines;
   lineNumber?: number;
@@ -35,7 +34,6 @@ const initialState = (initialLogLines?: string[]): LogState => ({
   expandedLines: [],
   loading: true,
   logs: initialLogLines || [],
-  logsAreEmpty: false,
   searchState: {
     caseSensitive: Cookie.get(CASE_SENSITIVE) === "true",
     hasSearch: false,
@@ -86,7 +84,6 @@ const reducer = (state: LogState, action: Action): LogState => {
           logType: action.logType,
         },
         logs: processedLogs,
-        logsAreEmpty: processedLogs.length === 0,
       };
     }
     case "CLEAR_LOGS":

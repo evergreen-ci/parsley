@@ -17,6 +17,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
     clearExpandedLines,
     collapseLines,
     expandedLines,
+    hasLogs,
     lineCount,
     processedLogLines,
     scrollToLine,
@@ -37,7 +38,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>
-          {lineCount ? (
+          {hasLogs ? (
             <LogPane
               rowCount={processedLogLines.length}
               rowRenderer={ParsleyRow({

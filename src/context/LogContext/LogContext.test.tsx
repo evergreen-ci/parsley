@@ -47,7 +47,7 @@ describe("useLogContext", () => {
       });
       expect(result.current.processedLogLines).toStrictEqual([0, 1, 2]);
       expect(result.current.lineCount).toBe(lines.length);
-      expect(result.current.logsAreEmpty).toBe(false);
+      expect(result.current.loading).toBe(false);
       for (let i = 0; i < lines.length; i++) {
         const line = result.current.processedLogLines[i];
         // Expect the line not to be an array
@@ -57,7 +57,7 @@ describe("useLogContext", () => {
       }
     });
 
-    it("should set logsAreEmpty to true when ingesting empty logs", () => {
+    it("should set loading to false after ingesting logs", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => (
@@ -66,11 +66,11 @@ describe("useLogContext", () => {
         </Router>
       );
       const { result } = renderHook(() => useLogContext(), { wrapper });
-      expect(result.current.logsAreEmpty).toBe(false);
+      expect(result.current.loading).toBe(true);
       act(() => {
         result.current.ingestLines([], LogTypes.EVERGREEN_TASK_LOGS);
       });
-      expect(result.current.logsAreEmpty).toBe(true);
+      expect(result.current.loading).toBe(false);
     });
   });
 
