@@ -8,9 +8,9 @@ interface LogViewProps {
 }
 
 const LogView: React.FC<LogViewProps> = ({ logType }) => {
-  const { loading } = useLogContext();
+  const { hasLogs } = useLogContext();
 
-  return loading ? (
+  return hasLogs === null ? (
     <LoadingPage logType={logType} />
   ) : (
     <LogWindow isUploadedLog={false} logType={logType} />

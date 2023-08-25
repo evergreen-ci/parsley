@@ -8,12 +8,12 @@ import { getColorMapping, processResmokeLine } from "utils/resmoke";
 import { LogMetadata, SearchState } from "./types";
 
 interface LogState {
-  logs: string[];
   colorMapping?: Record<string, string>;
-  loading: boolean;
-  logMetadata?: LogMetadata;
   expandedLines: ExpandedLines;
+  hasLogs: boolean | null;
   lineNumber?: number;
+  logMetadata?: LogMetadata;
+  logs: string[];
   searchState: SearchState;
 }
 
@@ -32,7 +32,7 @@ type Action =
 
 const initialState = (initialLogLines?: string[]): LogState => ({
   expandedLines: [],
-  loading: true,
+  hasLogs: null,
   logs: initialLogLines || [],
   searchState: {
     caseSensitive: Cookie.get(CASE_SENSITIVE) === "true",
@@ -78,7 +78,7 @@ const reducer = (state: LogState, action: Action): LogState => {
       return {
         ...state,
         colorMapping: colorMap,
-        loading: false,
+        hasLogs: !!processedLogs.length,
         logMetadata: {
           ...state.logMetadata,
           logType: action.logType,

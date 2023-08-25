@@ -32,6 +32,7 @@ describe("useLogContext", () => {
   });
 
   describe("ingesting logs", () => {
+    const lines = ["foo", "bar", "baz"];
     it("should add ingested logs to the list of logs", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
@@ -41,13 +42,11 @@ describe("useLogContext", () => {
         </Router>
       );
       const { result } = renderHook(() => useLogContext(), { wrapper });
-      const lines = ["foo", "bar", "baz"];
       act(() => {
         result.current.ingestLines(lines, LogTypes.EVERGREEN_TASK_LOGS);
       });
       expect(result.current.processedLogLines).toStrictEqual([0, 1, 2]);
       expect(result.current.lineCount).toBe(lines.length);
-      expect(result.current.loading).toBe(false);
       for (let i = 0; i < lines.length; i++) {
         const line = result.current.processedLogLines[i];
         // Expect the line not to be an array
@@ -57,7 +56,7 @@ describe("useLogContext", () => {
       }
     });
 
-    it("should set loading to false after ingesting logs", () => {
+    it("should set hasLogs to true if logs exist and false otherwise.", () => {
       const wrapper: React.FC<{ children: React.ReactNode }> = ({
         children,
       }) => (
@@ -66,11 +65,15 @@ describe("useLogContext", () => {
         </Router>
       );
       const { result } = renderHook(() => useLogContext(), { wrapper });
-      expect(result.current.loading).toBe(true);
+      expect(result.current.hasLogs).toBeNull();
+      act(() => {
+        result.current.ingestLines(lines, LogTypes.EVERGREEN_TASK_LOGS);
+      });
+      expect(result.current.hasLogs).toBe(true);
       act(() => {
         result.current.ingestLines([], LogTypes.EVERGREEN_TASK_LOGS);
       });
-      expect(result.current.loading).toBe(false);
+      expect(result.current.hasLogs).toBe(false);
     });
   });
 

@@ -38,7 +38,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
       <ColumnContainer>
         <SubHeader isUploadedLog={isUploadedLog} />
         <LogPaneContainer>
-          {hasLogs ? (
+          {hasLogs && processedLogLines && (
             <LogPane
               rowCount={processedLogLines.length}
               rowRenderer={ParsleyRow({
@@ -46,7 +46,8 @@ const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
                 processedLogLines,
               })}
             />
-          ) : (
+          )}
+          {hasLogs === false && (
             <BasicEmptyState
               description="No logs were found for this resource"
               title="No Logs Found"
