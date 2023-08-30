@@ -78,7 +78,7 @@ const reducer = (state: LogState, action: Action): LogState => {
       return {
         ...state,
         colorMapping: colorMap,
-        hasLogs: !!processedLogs.length,
+        hasLogs: processedLogs.length !== 0,
         logMetadata: {
           ...state.logMetadata,
           logType: action.logType,
