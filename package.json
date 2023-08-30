@@ -50,6 +50,7 @@
     "@leafygreen-ui/confirmation-modal": "4.0.3",
     "@leafygreen-ui/copyable": "8.0.6",
     "@leafygreen-ui/emotion": "4.0.3",
+    "@leafygreen-ui/empty-state": "1.0.10",
     "@leafygreen-ui/guide-cue": "4.0.0",
     "@leafygreen-ui/icon": "11.16.1",
     "@leafygreen-ui/icon-button": "15.0.1",

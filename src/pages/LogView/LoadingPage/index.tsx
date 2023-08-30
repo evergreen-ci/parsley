@@ -105,9 +105,9 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     logkeeperMetadata?.execution,
   ]);
 
-  return (
-    <Container>
-      {isLoadingLog || isLoadingTest || !error ? (
+  if (isLoadingLog || isLoadingTest) {
+    return (
+      <Container>
         <LoadingBarContainer>
           <FlexRow>
             <LogoContainer>
@@ -120,11 +120,17 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
           </FlexRow>
           <LoadingBar indeterminate />
         </LoadingBarContainer>
-      ) : (
+      </Container>
+    );
+  }
+  if (error) {
+    return (
+      <Container>
         <NotFound />
-      )}
-    </Container>
-  );
+      </Container>
+    );
+  }
+  return null;
 };
 
 const LoadingBarContainer = styled.div`
