@@ -3967,20 +3967,15 @@
     prop-types "^15.8.1"
     react-transition-group "^4.4.1"
 
-"@leafygreen-ui/palette@4.0.4", "@leafygreen-ui/palette@^4.0.0", "@leafygreen-ui/palette@^4.0.1", "@leafygreen-ui/palette@^4.0.3", "@leafygreen-ui/palette@^4.0.4":
-  version "4.0.4"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/palette/-/palette-4.0.4.tgz#c4c326d47e6f459f795e928327b1c5d77adf6ba7"
-  integrity sha512-nuZy2RtKHAGpIKrDduqC8P8PvajJRT1hQURoisYMiB32NmEEHGEhtHw4MlS+Kv92HFA0jxgMdZUHKTXq83BhjA==
+"@leafygreen-ui/palette@4.0.7", "@leafygreen-ui/palette@^4.0.0", "@leafygreen-ui/palette@^4.0.1", "@leafygreen-ui/palette@^4.0.3", "@leafygreen-ui/palette@^4.0.4", "@leafygreen-ui/palette@^4.0.7":
+  version "4.0.7"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/palette/-/palette-4.0.7.tgz#1739d29411b8ba02a2be756e198f10c242428bb0"
+  integrity sha512-rBeAk4Tk3t9pYqXYKqVZfma/MH1SBtt02BxAL6TpJb8wQ+i5zap6o1Gnb3nF9LAG7sA0+OHfr1B5uSvr63GGqw==
 
 "@leafygreen-ui/palette@^3.4.4", "@leafygreen-ui/palette@^3.4.7":
   version "3.4.7"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/palette/-/palette-3.4.7.tgz#7c4a619ca0cb7a9785326dcb67e012369b3d92d6"
   integrity sha512-AsvPlbvF7CERiZbAQR8hy3lAJ2/rieXI3cO0jsOwV8ztDqYNotKAdLujyr/NviudrRUenYiXrLizIKVlSPUMuA==
-
-"@leafygreen-ui/palette@^4.0.7":
-  version "4.0.7"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/palette/-/palette-4.0.7.tgz#1739d29411b8ba02a2be756e198f10c242428bb0"
-  integrity sha512-rBeAk4Tk3t9pYqXYKqVZfma/MH1SBtt02BxAL6TpJb8wQ+i5zap6o1Gnb3nF9LAG7sA0+OHfr1B5uSvr63GGqw==
 
 "@leafygreen-ui/polymorphic@^1.1.0":
   version "1.1.0"
