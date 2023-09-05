@@ -9,7 +9,7 @@ import { zIndex } from "constants/tokens";
 import { leaveBreadcrumb } from "utils/errorReporting";
 
 interface UploadLinkProps {
-  hasLogs: boolean;
+  hasLogs: boolean | null;
   clearLogs: () => void;
 }
 const UploadLink: React.FC<UploadLinkProps> = ({ clearLogs, hasLogs }) => {

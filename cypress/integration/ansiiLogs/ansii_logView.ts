@@ -6,7 +6,6 @@ describe("Basic evergreen log view", () => {
   beforeEach(() => {
     cy.visit(logLink);
   });
-
   it("should render ansii lines", () => {
     cy.dataCy("ansii-row").should("be.visible");
   });

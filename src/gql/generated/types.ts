@@ -69,6 +69,16 @@ export type Annotation = {
   webhookConfigured: Scalars["Boolean"]["output"];
 };
 
+export enum Arch {
+  Linux_64Bit = "LINUX_64_BIT",
+  LinuxArm_64Bit = "LINUX_ARM_64_BIT",
+  LinuxPpc_64Bit = "LINUX_PPC_64_BIT",
+  LinuxZseries = "LINUX_ZSERIES",
+  Osx_64Bit = "OSX_64_BIT",
+  OsxArm_64Bit = "OSX_ARM_64_BIT",
+  Windows_64Bit = "WINDOWS_64_BIT",
+}
+
 export enum BannerTheme {
   Announcement = "ANNOUNCEMENT",
   Important = "IMPORTANT",
@@ -76,14 +86,20 @@ export enum BannerTheme {
   Warning = "WARNING",
 }
 
+export enum BootstrapMethod {
+  LegacySsh = "LEGACY_SSH",
+  Ssh = "SSH",
+  UserData = "USER_DATA",
+}
+
 export type BootstrapSettings = {
   __typename?: "BootstrapSettings";
   clientDir: Scalars["String"]["output"];
-  communication: Scalars["String"]["output"];
+  communication: CommunicationMethod;
   env: Array<EnvVar>;
   jasperBinaryDir: Scalars["String"]["output"];
   jasperCredentialsPath: Scalars["String"]["output"];
-  method: Scalars["String"]["output"];
+  method: BootstrapMethod;
   preconditionScripts: Array<PreconditionScript>;
   resourceLimits: ResourceLimits;
   rootDir: Scalars["String"]["output"];
@@ -93,11 +109,11 @@ export type BootstrapSettings = {
 
 export type BootstrapSettingsInput = {
   clientDir: Scalars["String"]["input"];
-  communication: Scalars["String"]["input"];
+  communication: CommunicationMethod;
   env: Array<EnvVarInput>;
   jasperBinaryDir: Scalars["String"]["input"];
   jasperCredentialsPath: Scalars["String"]["input"];
-  method: Scalars["String"]["input"];
+  method: BootstrapMethod;
   preconditionScripts: Array<PreconditionScriptInput>;
   resourceLimits: ResourceLimitsInput;
   rootDir: Scalars["String"]["input"];
@@ -236,6 +252,12 @@ export type CommitQueueParamsInput = {
   message?: InputMaybe<Scalars["String"]["input"]>;
 };
 
+export enum CommunicationMethod {
+  LegacySsh = "LEGACY_SSH",
+  Rpc = "RPC",
+  Ssh = "SSH",
+}
+
 export type ContainerResources = {
   __typename?: "ContainerResources";
   cpu: Scalars["Int"]["output"];
@@ -328,7 +350,7 @@ export type DisplayTask = {
 export type Distro = {
   __typename?: "Distro";
   aliases: Array<Scalars["String"]["output"]>;
-  arch: Scalars["String"]["output"];
+  arch: Arch;
   authorizedKeysFile: Scalars["String"]["output"];
   bootstrapSettings: BootstrapSettings;
   cloneMethod: CloneMethod;
@@ -392,7 +414,7 @@ export type DistroInfo = {
 
 export type DistroInput = {
   aliases: Array<Scalars["String"]["input"]>;
-  arch: Scalars["String"]["input"];
+  arch: Arch;
   authorizedKeysFile: Scalars["String"]["input"];
   bootstrapSettings: BootstrapSettingsInput;
   cloneMethod: CloneMethod;
@@ -511,6 +533,12 @@ export type ExternalLinkInput = {
   requesters: Array<Scalars["String"]["input"]>;
   urlTemplate: Scalars["String"]["input"];
 };
+
+export enum FeedbackRule {
+  Default = "DEFAULT",
+  NoFeedback = "NO_FEEDBACK",
+  WaitsOverThresh = "WAITS_OVER_THRESH",
+}
 
 export type File = {
   __typename?: "File";
@@ -670,25 +698,29 @@ export type Host = {
 export type HostAllocatorSettings = {
   __typename?: "HostAllocatorSettings";
   acceptableHostIdleTime: Scalars["Duration"]["output"];
-  feedbackRule: Scalars["String"]["output"];
+  feedbackRule: FeedbackRule;
   futureHostFraction: Scalars["Float"]["output"];
-  hostsOverallocatedRule: Scalars["String"]["output"];
+  hostsOverallocatedRule: OverallocatedRule;
   maximumHosts: Scalars["Int"]["output"];
   minimumHosts: Scalars["Int"]["output"];
-  roundingRule: Scalars["String"]["output"];
-  version: Scalars["String"]["output"];
+  roundingRule: RoundingRule;
+  version: HostAllocatorVersion;
 };
 
 export type HostAllocatorSettingsInput = {
   acceptableHostIdleTime: Scalars["Int"]["input"];
-  feedbackRule: Scalars["String"]["input"];
+  feedbackRule: FeedbackRule;
   futureHostFraction: Scalars["Float"]["input"];
-  hostsOverallocatedRule: Scalars["String"]["input"];
+  hostsOverallocatedRule: OverallocatedRule;
   maximumHosts: Scalars["Int"]["input"];
   minimumHosts: Scalars["Int"]["input"];
-  roundingRule: Scalars["String"]["input"];
-  version: Scalars["String"]["input"];
+  roundingRule: RoundingRule;
+  version: HostAllocatorVersion;
 };
+
+export enum HostAllocatorVersion {
+  Utilization = "UTILIZATION",
+}
 
 export type HostEventLogData = {
   __typename?: "HostEventLogData";
@@ -1321,6 +1353,12 @@ export type OomTrackerInfo = {
   detected: Scalars["Boolean"]["output"];
   pids?: Maybe<Array<Maybe<Scalars["Int"]["output"]>>>;
 };
+
+export enum OverallocatedRule {
+  Default = "DEFAULT",
+  Ignore = "IGNORE",
+  Terminate = "TERMINATE",
+}
 
 export type Parameter = {
   __typename?: "Parameter";
@@ -2168,6 +2206,12 @@ export type ResourceLimitsInput = {
   virtualMemoryKb: Scalars["Int"]["input"];
 };
 
+export enum RoundingRule {
+  Default = "DEFAULT",
+  Down = "DOWN",
+  Up = "UP",
+}
+
 /** SaveDistroInput is the input to the saveDistro mutation. */
 export type SaveDistroInput = {
   distro: DistroInput;
@@ -2375,6 +2419,7 @@ export type Task = {
   executionTasksFull?: Maybe<Array<Task>>;
   expectedDuration?: Maybe<Scalars["Duration"]["output"]>;
   failedTestCount: Scalars["Int"]["output"];
+  files: TaskFiles;
   finishTime?: Maybe<Scalars["Time"]["output"]>;
   generateTask?: Maybe<Scalars["Boolean"]["output"]>;
   generatedBy?: Maybe<Scalars["String"]["output"]>;
@@ -2401,6 +2446,7 @@ export type Task = {
   spawnHostLink?: Maybe<Scalars["String"]["output"]>;
   startTime?: Maybe<Scalars["Time"]["output"]>;
   status: Scalars["String"]["output"];
+  /** @deprecated Use files instead */
   taskFiles: TaskFiles;
   taskGroup?: Maybe<Scalars["String"]["output"]>;
   taskGroupMaxHosts?: Maybe<Scalars["Int"]["output"]>;
@@ -2711,6 +2757,7 @@ export type TriggerAlias = {
   project: Scalars["String"]["output"];
   status: Scalars["String"]["output"];
   taskRegex: Scalars["String"]["output"];
+  unscheduleDownstreamVersions?: Maybe<Scalars["Boolean"]["output"]>;
 };
 
 export type TriggerAliasInput = {
@@ -2722,6 +2769,7 @@ export type TriggerAliasInput = {
   project: Scalars["String"]["input"];
   status: Scalars["String"]["input"];
   taskRegex: Scalars["String"]["input"];
+  unscheduleDownstreamVersions?: InputMaybe<Scalars["Boolean"]["input"]>;
 };
 
 export type UiConfig = {
