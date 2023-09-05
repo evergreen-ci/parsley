@@ -63,6 +63,7 @@ describe("bookmarks bar", () => {
   });
 
   it("should be able to clear all bookmarks without removing share line", async () => {
+    const user = userEvent.setup();
     const { router } = renderWithRouterMatch(
       <BookmarksBar
         lineCount={11}
@@ -73,11 +74,12 @@ describe("bookmarks bar", () => {
         route: "?bookmarks=1,3&shareLine=5",
       }
     );
-    await userEvent.click(screen.getByDataCy("clear-bookmarks"));
+    await user.click(screen.getByDataCy("clear-bookmarks"));
     expect(router.state.location.search).toBe("?shareLine=5");
   });
 
   it("should call scrollToLine when clicking on a log line (with no collapsed lines)", async () => {
+    const user = userEvent.setup();
     const scrollToLine = jest.fn();
     renderWithRouterMatch(
       <BookmarksBar
@@ -89,12 +91,13 @@ describe("bookmarks bar", () => {
         route: "?bookmarks=1,3",
       }
     );
-    await userEvent.click(screen.getByDataCy("bookmark-3"));
+    await user.click(screen.getByDataCy("bookmark-3"));
     expect(scrollToLine).toHaveBeenCalledTimes(1);
     expect(scrollToLine).toHaveBeenCalledWith(3);
   });
 
   it("should call scrollToLine when clicking on a log line (with collapsed lines)", async () => {
+    const user = userEvent.setup();
     const scrollToLine = jest.fn();
     renderWithRouterMatch(
       <BookmarksBar
@@ -106,7 +109,7 @@ describe("bookmarks bar", () => {
         route: "?bookmarks=1,3",
       }
     );
-    await userEvent.click(screen.getByDataCy("bookmark-3"));
+    await user.click(screen.getByDataCy("bookmark-3"));
     expect(scrollToLine).toHaveBeenCalledTimes(1);
     expect(scrollToLine).toHaveBeenCalledWith(1);
   });

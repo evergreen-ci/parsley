@@ -8,9 +8,8 @@ const ModalWrapper = () => {
 };
 
 describe("shortcutModal", () => {
-  const user = userEvent.setup();
-
   it("should toggle open when user executes keyboard shortcut", async () => {
+    const user = userEvent.setup();
     render(<ModalWrapper />);
     expect(screen.queryByDataCy("shortcut-modal")).toBeNull();
 
@@ -21,6 +20,7 @@ describe("shortcutModal", () => {
   });
 
   it("should close when the user clicks outside of the modal", async () => {
+    const user = userEvent.setup();
     render(<ModalWrapper />);
     expect(screen.queryByDataCy("shortcut-modal")).toBeNull();
 

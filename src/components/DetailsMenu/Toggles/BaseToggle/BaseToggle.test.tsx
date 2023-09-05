@@ -19,6 +19,7 @@ describe("base toggle", () => {
   });
 
   it("calls the onChange function with the correct parameters", async () => {
+    const user = userEvent.setup();
     const toggleFunc = jest.fn();
     render(
       <BaseToggle
@@ -29,7 +30,7 @@ describe("base toggle", () => {
       />
     );
     const toggle = screen.getByDataCy("toggle");
-    await userEvent.click(toggle);
+    await user.click(toggle);
 
     expect(toggleFunc).toHaveBeenCalledTimes(1);
     // The second parameter is a mouseEvent that can be ignored.

@@ -19,6 +19,7 @@ describe("row", () => {
   });
 
   it("clicking log line link updates the url and and scrolls to the line", async () => {
+    const user = userEvent.setup();
     const scrollToLine = jest.fn();
     const { router } = renderWithRouterMatch(
       <Row
@@ -30,47 +31,51 @@ describe("row", () => {
         {testLog}
       </Row>
     );
-    await userEvent.click(screen.getByDataCy("log-link-54"));
+    await user.click(screen.getByDataCy("log-link-54"));
     expect(router.state.location.search).toBe("?shareLine=54");
     expect(scrollToLine).toHaveBeenCalledWith(7);
   });
 
   it("clicking on a share line's link icon updates the URL correctly", async () => {
+    const user = userEvent.setup();
     const { router } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>,
       {
         route: "?shareLine=0",
       }
     );
-    await userEvent.click(screen.getByDataCy("log-link-0"));
+    await user.click(screen.getByDataCy("log-link-0"));
     expect(router.state.location.search).toBe("");
   });
 
   it("double clicking a log line adds it to the bookmarks", async () => {
+    const user = userEvent.setup();
     const { router } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>
     );
-    await userEvent.dblClick(screen.getByText(testLog));
+    await user.dblClick(screen.getByText(testLog));
     expect(router.state.location.search).toBe("?bookmarks=0");
   });
 
   it("double clicking a bookmarked log line removes it from the bookmarks", async () => {
+    const user = userEvent.setup();
     const { router } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>,
       {
         route: "?bookmarks=0",
       }
     );
-    await userEvent.dblClick(screen.getByText(testLog));
+    await user.dblClick(screen.getByText(testLog));
     expect(router.state.location.search).toBe("");
   });
 
   it("a log line can be shared and bookmarked at the same time", async () => {
+    const user = userEvent.setup();
     const { router } = renderWithRouterMatch(
       <Row {...rowProps}>{testLog}</Row>
     );
-    await userEvent.click(screen.getByDataCy("log-link-0"));
-    await userEvent.dblClick(screen.getByText(testLog));
+    await user.click(screen.getByDataCy("log-link-0"));
+    await user.dblClick(screen.getByText(testLog));
     expect(router.state.location.search).toBe("?bookmarks=0&shareLine=0");
   });
 

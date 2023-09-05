@@ -29,12 +29,12 @@ describe("filter logic toggle", () => {
   });
 
   it("should update the URL correctly", async () => {
+    const user = userEvent.setup();
     const { router } = render(<FilterLogicToggle />, { wrapper });
 
     const filterLogicToggle = screen.getByDataCy("filter-logic-toggle");
     expect(filterLogicToggle).toHaveAttribute("aria-checked", "true");
 
-    const user = userEvent.setup();
     await user.click(filterLogicToggle);
     expect(filterLogicToggle).toHaveAttribute("aria-checked", "false");
     expect(router.state.location.search).toBe("?filterLogic=and");

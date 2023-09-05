@@ -10,9 +10,9 @@ const wrapper = (logs: string[]) => {
 };
 
 describe("buttonRow", () => {
-  const user = userEvent.setup();
   describe("jira button", () => {
     it("should be disabled when there are no bookmarks", async () => {
+      const user = userEvent.setup();
       renderWithRouterMatch(<ButtonRow />, {
         wrapper: wrapper(logLines),
       });
@@ -28,6 +28,7 @@ describe("buttonRow", () => {
     });
 
     it("should indicate when the user has successfully copied to clipboard", async () => {
+      const user = userEvent.setup();
       renderWithRouterMatch(<ButtonRow />, {
         route: "?bookmarks=0,2",
         wrapper: wrapper(logLines),
@@ -49,11 +50,7 @@ describe("buttonRow", () => {
     });
 
     it("should copy the correct text when clicked", async () => {
-      Object.defineProperty(navigator, "clipboard", {
-        value: {
-          writeText: jest.fn(),
-        },
-      });
+      const user = userEvent.setup({ writeToClipboard: true });
       renderWithRouterMatch(<ButtonRow />, {
         route: "?bookmarks=0,2,5",
         wrapper: wrapper(logLines),
@@ -63,8 +60,8 @@ describe("buttonRow", () => {
       expect(jiraButton).toBeEnabled();
 
       await user.click(jiraButton);
-      expect(navigator.clipboard.writeText).toHaveBeenCalledTimes(1);
-      expect(navigator.clipboard.writeText).toHaveBeenCalledWith(
+      const clipboardText = await navigator.clipboard.readText();
+      expect(clipboardText).toBe(
         `{noformat}\n${logLines[0]}\n...\n${logLines[2]}\n...\n${logLines[5]}\n{noformat}`
       );
     });

@@ -14,8 +14,6 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 );
 
 describe("sidePanel", () => {
-  const user = userEvent.setup();
-
   beforeEach(() => {
     // Setting the cookie to false means the drawer will be open by default, which means we
     // won't have to toggle it to test its contents.
@@ -36,6 +34,7 @@ describe("sidePanel", () => {
   });
 
   it("should be possible to toggle the drawer open and closed", async () => {
+    const user = userEvent.setup();
     render(<SidePanel {...props} />, { wrapper });
     const collapseButton = screen.getByLabelText("Collapse navigation");
     expect(collapseButton).toHaveAttribute("aria-expanded", "true");

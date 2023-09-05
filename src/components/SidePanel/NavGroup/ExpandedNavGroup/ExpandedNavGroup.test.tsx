@@ -7,8 +7,6 @@ import {
 import ExpandedNavGroup from ".";
 
 describe("expanded lines", () => {
-  const user = userEvent.setup();
-
   it("shows a message when no lines have been expanded", () => {
     render(<ExpandedNavGroup {...props} />);
     expect(
@@ -49,6 +47,7 @@ describe("expanded lines", () => {
   });
 
   it("deleting an expanded line should call collapseLines", async () => {
+    const user = userEvent.setup();
     const collapseLines = jest.fn();
     render(
       <ExpandedNavGroup

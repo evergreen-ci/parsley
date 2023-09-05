@@ -29,10 +29,10 @@ describe("wrap toggle", () => {
   });
 
   it("should not update the URL", async () => {
+    const user = userEvent.setup();
     const { router } = render(<WrapToggle />, { wrapper });
     const wrapToggle = screen.getByDataCy("wrap-toggle");
 
-    const user = userEvent.setup();
     await user.click(wrapToggle);
     expect(wrapToggle).toHaveAttribute("aria-checked", "false");
     expect(router.state.location.search).toBe("");

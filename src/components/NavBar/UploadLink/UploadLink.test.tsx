@@ -7,8 +7,6 @@ import {
 import UploadLink from ".";
 
 describe("uploadLink", () => {
-  const user = userEvent.setup();
-
   it("links to /upload page when there are no logs", () => {
     const clearLogs = jest.fn();
     render(<UploadLink clearLogs={clearLogs} hasLogs={false} />);
@@ -20,6 +18,7 @@ describe("uploadLink", () => {
   });
 
   it("opens a confirmation modal when there are logs", async () => {
+    const user = userEvent.setup();
     const clearLogs = jest.fn();
     render(<UploadLink clearLogs={clearLogs} hasLogs />);
     expect(screen.getByText("Upload")).toBeInTheDocument();
@@ -31,6 +30,7 @@ describe("uploadLink", () => {
   });
 
   it("closing the modal does not clear logs", async () => {
+    const user = userEvent.setup();
     const clearLogs = jest.fn();
     render(<UploadLink clearLogs={clearLogs} hasLogs />);
     await user.click(screen.getByText("Upload"));
@@ -49,6 +49,7 @@ describe("uploadLink", () => {
   });
 
   it("confirming the modal clears logs and navigates to /upload", async () => {
+    const user = userEvent.setup();
     const clearLogs = jest.fn();
     const { router } = render(<UploadLink clearLogs={clearLogs} hasLogs />, {
       path: "/upload",

@@ -60,6 +60,7 @@ describe("pretty print toggle", () => {
   });
 
   it("should not update the URL", async () => {
+    const user = userEvent.setup();
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
       <PrettyPrintToggle />
@@ -70,7 +71,6 @@ describe("pretty print toggle", () => {
     });
     const prettyPrintToggle = screen.getByDataCy("pretty-print-toggle");
 
-    const user = userEvent.setup();
     await user.click(prettyPrintToggle);
     expect(prettyPrintToggle).toHaveAttribute("aria-checked", "false");
     expect(router.state.location.search).toBe("");
