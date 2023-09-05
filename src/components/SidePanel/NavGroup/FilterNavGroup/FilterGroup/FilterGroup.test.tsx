@@ -10,8 +10,6 @@ const defaultFilter = {
 };
 
 describe("filters", () => {
-  const user = userEvent.setup();
-
   it("should display the name of the filter", () => {
     render(
       <FilterGroup
@@ -24,6 +22,7 @@ describe("filters", () => {
   });
 
   it("should be able to toggle editing", async () => {
+    const user = userEvent.setup();
     render(
       <FilterGroup
         deleteFilter={jest.fn()}
@@ -46,6 +45,7 @@ describe("filters", () => {
   });
 
   it("should call editFilter with the correct parameters", async () => {
+    const user = userEvent.setup();
     const editFilter = jest.fn();
     render(
       <FilterGroup
@@ -69,6 +69,7 @@ describe("filters", () => {
   });
 
   it("should prevent the user from submitting an invalid filter", async () => {
+    const user = userEvent.setup();
     const editFilter = jest.fn();
     render(
       <FilterGroup
@@ -93,6 +94,7 @@ describe("filters", () => {
   });
 
   it("should toggle between visibility icons when they are clicked", async () => {
+    const user = userEvent.setup();
     const editFilter = jest.fn();
     render(
       <FilterGroup
@@ -108,6 +110,7 @@ describe("filters", () => {
   });
 
   it("should call deleteFilter with the correct parameters", async () => {
+    const user = userEvent.setup();
     const deleteFilter = jest.fn();
     render(
       <FilterGroup
@@ -122,6 +125,7 @@ describe("filters", () => {
   });
 
   it("should be able to interact with Case Sensitivity segmented control", async () => {
+    const user = userEvent.setup();
     const editFilter = jest.fn();
     render(
       <FilterGroup
@@ -154,6 +158,7 @@ describe("filters", () => {
   });
 
   it("should be able to interact with Match Type segmented control", async () => {
+    const user = userEvent.setup();
     const editFilter = jest.fn();
     render(
       <FilterGroup
@@ -186,6 +191,7 @@ describe("filters", () => {
   });
 
   it("should display an error message when the provided filter regular expression is invalid", async () => {
+    const user = userEvent.setup();
     const editFilter = jest.fn();
     render(
       <FilterGroup
@@ -197,7 +203,7 @@ describe("filters", () => {
     expect(
       screen.getByLabelText("Important With Circle Icon")
     ).toBeInTheDocument();
-    await userEvent.hover(screen.getByLabelText("Important With Circle Icon"));
+    await user.hover(screen.getByLabelText("Important With Circle Icon"));
     await expect(
       screen.findByText("Invalid filter expression, please update it!")
     ).resolves.toBeInTheDocument();
@@ -219,7 +225,9 @@ describe("filters", () => {
       "true"
     );
   });
+
   it("should allow reenabling a invalid filter after it has been fixed", async () => {
+    const user = userEvent.setup();
     const editFilter = jest.fn();
     render(
       <FilterGroup

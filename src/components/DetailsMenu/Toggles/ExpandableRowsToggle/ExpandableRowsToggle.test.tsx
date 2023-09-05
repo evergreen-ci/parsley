@@ -29,12 +29,12 @@ describe("expandable rows toggle", () => {
   });
 
   it("should update the URL correctly", async () => {
+    const user = userEvent.setup();
     const { router } = render(<ExpandableRowsToggle />, { wrapper });
 
     const expandableRowsToggle = screen.getByDataCy("expandable-rows-toggle");
     expect(expandableRowsToggle).toHaveAttribute("aria-checked", "true");
 
-    const user = userEvent.setup();
     await user.click(expandableRowsToggle);
     expect(expandableRowsToggle).toHaveAttribute("aria-checked", "false");
     expect(router.state.location.search).toBe("?expandable=false");

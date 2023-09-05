@@ -50,6 +50,7 @@ describe("parse log select", () => {
   });
 
   it("clicking the 'Process Log' button calls the onParse function", async () => {
+    const user = userEvent.setup();
     mockedGet.mockImplementation(() => LogTypes.RESMOKE_LOGS);
     const onParse = jest.fn();
     render(
@@ -59,12 +60,12 @@ describe("parse log select", () => {
         onParse={onParse}
       />
     );
-    const user = userEvent.setup();
     await user.click(screen.getByDataCy("process-log-button"));
     expect(onParse).toHaveBeenCalledTimes(1);
   });
 
   it("clicking the 'Cancel' button calls the onCancel function", async () => {
+    const user = userEvent.setup();
     const onCancel = jest.fn();
     render(
       <ParseLogSelect
@@ -73,7 +74,6 @@ describe("parse log select", () => {
         onParse={jest.fn()}
       />
     );
-    const user = userEvent.setup();
     await user.click(screen.getByRole("button", { name: "Cancel" }));
     expect(onCancel).toHaveBeenCalledTimes(1);
   });

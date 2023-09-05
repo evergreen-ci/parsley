@@ -7,8 +7,6 @@ import {
 import HighlightNavGroup from ".";
 
 describe("highlights", () => {
-  const user = userEvent.setup();
-
   it("shows a message when there are no highlighted terms", () => {
     render(<HighlightNavGroup />);
     expect(screen.getByDataCy("highlight-default-message")).toBeInTheDocument();
@@ -31,6 +29,7 @@ describe("highlights", () => {
   });
 
   it("deleting highlighted terms should modify the URL correctly", async () => {
+    const user = userEvent.setup();
     const { router } = render(<HighlightNavGroup />, {
       route: "?highlights=one,two",
     });

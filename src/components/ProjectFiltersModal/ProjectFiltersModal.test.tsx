@@ -61,6 +61,7 @@ describe("projectFiltersModal", () => {
   });
 
   it("if a filter is already included in the URL, its checkbox will be checked & disabled", async () => {
+    const user = userEvent.setup();
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
       <ProjectFiltersModal open setOpen={jest.fn()} />
@@ -73,7 +74,6 @@ describe("projectFiltersModal", () => {
       hook.current.setLogMetadata(logMetadata);
     });
     await waitForModalLoad();
-    const user = userEvent.setup();
     await user.hover(screen.getByLabelText("Info With Circle Icon"));
     await waitFor(() => {
       expect(screen.queryByDataCy("project-filter-tooltip")).toBeVisible();
@@ -101,6 +101,7 @@ describe("projectFiltersModal", () => {
   });
 
   it("properly applies filters to the URL", async () => {
+    const user = userEvent.setup();
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
       <ProjectFiltersModal open setOpen={jest.fn()} />
@@ -113,7 +114,6 @@ describe("projectFiltersModal", () => {
       hook.current.setLogMetadata(logMetadata);
     });
     await waitForModalLoad();
-    const user = userEvent.setup();
     // LeafyGreen checkbox has pointer-events: none so we click on the labels as a workaround.
     await user.click(screen.getByText("my_filter_2"));
     await user.click(screen.getByText("my_filter_3"));

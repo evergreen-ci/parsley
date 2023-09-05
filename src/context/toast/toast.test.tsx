@@ -180,7 +180,6 @@ describe("toast", () => {
 
     it("should close on its own after a timeout has completed", async () => {
       jest.useFakeTimers();
-      userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
 
       const { Component, hook } = renderComponentWithHook();
       render(<Component />, {

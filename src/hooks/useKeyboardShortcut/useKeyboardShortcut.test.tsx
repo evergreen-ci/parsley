@@ -4,10 +4,9 @@ import { render, screen, userEvent } from "test_utils";
 import useKeyboardShortcut from ".";
 
 describe("useKeyboardShortcut", () => {
-  const user = userEvent.setup();
-
   describe("multiple keys", () => {
     it("should call the callback only when the exact shortcut keys are pressed", async () => {
+      const user = userEvent.setup();
       const callback = jest.fn();
       renderHook(() =>
         useKeyboardShortcut(
@@ -26,6 +25,7 @@ describe("useKeyboardShortcut", () => {
     });
 
     it("should not call the callback if an input element has focus", async () => {
+      const user = userEvent.setup();
       const callback = jest.fn();
       renderHook(() =>
         useKeyboardShortcut(
@@ -45,6 +45,7 @@ describe("useKeyboardShortcut", () => {
 
   describe("single key", () => {
     it("should call the callback only when the exact shortcut key is pressed", async () => {
+      const user = userEvent.setup();
       const callback = jest.fn();
       renderHook(() => useKeyboardShortcut({ charKey: CharKey.A }, callback));
       await user.keyboard("{Control>}{A}{/Control}");
@@ -56,6 +57,7 @@ describe("useKeyboardShortcut", () => {
     });
 
     it("should not call the callback if an input element has focus", async () => {
+      const user = userEvent.setup();
       const callback = jest.fn();
       renderHook(() => useKeyboardShortcut({ charKey: CharKey.A }, callback));
       render(<input data-cy="test-input" />);
@@ -69,6 +71,7 @@ describe("useKeyboardShortcut", () => {
   });
 
   it("should call the callback if an input element has focus and ignoreFocus is enabled", async () => {
+    const user = userEvent.setup();
     const callback = jest.fn();
     renderHook(() =>
       useKeyboardShortcut(
@@ -87,6 +90,7 @@ describe("useKeyboardShortcut", () => {
   });
 
   it("should not call the callback if the component is disabled", async () => {
+    const user = userEvent.setup();
     const callback = jest.fn();
     renderHook(() =>
       useKeyboardShortcut(
