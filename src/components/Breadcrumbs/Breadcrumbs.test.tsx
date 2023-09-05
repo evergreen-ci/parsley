@@ -74,7 +74,7 @@ describe("breadcrumbs", () => {
     render(<Breadcrumbs breadcrumbs={breadcrumbs} />);
     expect(screen.getByText("My Breadcrumb")).toBeInTheDocument();
     expect(screen.queryByText("My Tooltip Text")).not.toBeInTheDocument();
-    await await user.hover(screen.getByText("My Breadcrumb"));
+    await user.hover(screen.getByText("My Breadcrumb"));
     await waitFor(() => {
       expect(screen.getByText("My Tooltip Text")).toBeVisible();
     });
