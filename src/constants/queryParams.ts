@@ -4,7 +4,6 @@ enum QueryParams {
   Bookmarks = "bookmarks",
   Filters = "filters",
   ShareLine = "shareLine",
-  SelectedLine = "selectedLine", // Delete this as part of EVG-18748.
   Wrap = "wrap",
   Expandable = "expandable",
   FilterLogic = "filterLogic",

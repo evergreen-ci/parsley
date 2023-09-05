@@ -19,7 +19,7 @@ import {
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useFilterParam } from "hooks/useFilterParam";
-import { useQueryParam, useQueryParams } from "hooks/useQueryParam";
+import { useQueryParam } from "hooks/useQueryParam";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
 import filterLogs from "utils/filterLogs";
 import { getMatchingLines } from "utils/matchingLines";
@@ -78,15 +78,10 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   children,
   initialLogLines,
 }) => {
-  const [searchParams, setSearchParams] = useQueryParams();
   const [filters] = useFilterParam();
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
-    undefined
-  );
-  const [selectedLine] = useQueryParam<number | undefined>(
-    QueryParams.SelectedLine,
     undefined
   );
   const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
@@ -152,18 +147,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       expandableRows,
     ]
   );
-
-  // If selectedLine is in the URL, replace it with shareLine.
-  // This block of code can be deleted in EVG-18748.
-  useEffect(() => {
-    if (selectedLine) {
-      setSearchParams({
-        ...searchParams,
-        selectedLine: undefined,
-        shareLine: selectedLine,
-      });
-    }
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const getLine = useCallback(
     (lineNumber: number) => state.logs[lineNumber],
