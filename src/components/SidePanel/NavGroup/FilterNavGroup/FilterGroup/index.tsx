@@ -183,7 +183,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
           onChange={(value) =>
             editFilter("caseSensitive", value as CaseSensitivity, filter)
           }
-          size="small"
+          size="xsmall"
         >
           <Option disabled={!isValid} value={CaseSensitivity.Insensitive}>
             Insensitive
@@ -200,7 +200,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
           onChange={(value) =>
             editFilter("matchType", value as MatchType, filter)
           }
-          size="small"
+          size="xsmall"
         >
           <Option disabled={!isValid} value={MatchType.Exact}>
             Exact
