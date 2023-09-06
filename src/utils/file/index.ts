@@ -1,6 +1,9 @@
+import { leaveBreadcrumb } from "utils/errorReporting";
+
 type StreamedFileOptions = {
   fileSizeLimit?: number;
 };
+
 /**
  * `fileToStream` is a utility function that converts a File object into a ReadableStream
  * @param file - File to convert to a stream
@@ -31,7 +34,11 @@ const fileToStream = async (
             byteOffset += CHUNK_SIZE;
             bytesRead += CHUNK_SIZE;
             if (options.fileSizeLimit && bytesRead > options.fileSizeLimit) {
-              controller.close();
+              leaveBreadcrumb(
+                "File size limit exceeded",
+                { bytesRead },
+                "process"
+              );
               break;
             }
           }
