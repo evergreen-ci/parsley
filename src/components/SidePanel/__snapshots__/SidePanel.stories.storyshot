@@ -237,16 +237,16 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                 active filter
                               </p>
                               <div
-                                class="leafygreen-ui-1gmp0zo css-79ds1c"
+                                class="leafygreen-ui-ozfao7 css-79ds1c"
                               >
                                 <div
-                                  class="leafygreen-ui-1dhyvkg"
+                                  class="leafygreen-ui-jmb2kp"
                                 >
                                   Case
                                 </div>
                                 <div
-                                  aria-label="Case"
-                                  aria-owns="Case-0 Case-1"
+                                  aria-label="segmented-control-1"
+                                  aria-owns="segmented-control-1-0 segmented-control-1-1"
                                   class="leafygreen-ui-18en4yf"
                                   role="tablist"
                                 >
@@ -261,8 +261,8 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                       <button
                                         aria-controls="Toggle case sensitivity"
                                         aria-selected="true"
-                                        class="leafygreen-ui-13aff07"
-                                        id="Case-0"
+                                        class="leafygreen-ui-ypz97o"
+                                        id="segmented-control-1-0"
                                         role="tab"
                                         tabindex="0"
                                         type="button"
@@ -290,8 +290,8 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                       <button
                                         aria-controls="Toggle case sensitivity"
                                         aria-selected="false"
-                                        class="leafygreen-ui-13aff07"
-                                        id="Case-1"
+                                        class="leafygreen-ui-ypz97o"
+                                        id="segmented-control-1-1"
                                         role="tab"
                                         tabindex="-1"
                                         type="button"
@@ -317,16 +317,16 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                 </div>
                               </div>
                               <div
-                                class="leafygreen-ui-1gmp0zo css-79ds1c"
+                                class="leafygreen-ui-ozfao7 css-79ds1c"
                               >
                                 <div
-                                  class="leafygreen-ui-1dhyvkg"
+                                  class="leafygreen-ui-jmb2kp"
                                 >
                                   Match
                                 </div>
                                 <div
-                                  aria-label="Match"
-                                  aria-owns="Match-0 Match-1"
+                                  aria-label="segmented-control-2"
+                                  aria-owns="segmented-control-2-0 segmented-control-2-1"
                                   class="leafygreen-ui-18en4yf"
                                   role="tablist"
                                 >
@@ -341,8 +341,8 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                       <button
                                         aria-controls="Toggle match type"
                                         aria-selected="true"
-                                        class="leafygreen-ui-13aff07"
-                                        id="Match-0"
+                                        class="leafygreen-ui-ypz97o"
+                                        id="segmented-control-2-0"
                                         role="tab"
                                         tabindex="0"
                                         type="button"
@@ -370,8 +370,8 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                       <button
                                         aria-controls="Toggle match type"
                                         aria-selected="false"
-                                        class="leafygreen-ui-13aff07"
-                                        id="Match-1"
+                                        class="leafygreen-ui-ypz97o"
+                                        id="segmented-control-2-1"
                                         role="tab"
                                         tabindex="-1"
                                         type="button"
