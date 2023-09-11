@@ -6,80 +6,80 @@ exports[`storyshots Storyshots components/Badge/TaskStatusBadge All Badges 1`] =
     class="css-134efv6"
   >
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1q59p9a"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Inactive
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1q59p9a"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Unstarted
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1q59p9a"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Undispatched
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1wu11f"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-12dzbu4"
       data-cy="task-status-badge"
     >
       Will Run
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1q59p9a"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Unscheduled
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1yuwcm3"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ixbeze"
       data-cy="task-status-badge"
     >
       Running
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1yuwcm3"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ixbeze"
       data-cy="task-status-badge"
     >
       Dispatched
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1q59p9a"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Pending
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1w3euls"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-n4itms"
       data-cy="task-status-badge"
     >
       Succeeded
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-701c3t"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ud6teo"
       data-cy="task-status-badge"
     >
       Failed
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-701c3t"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ud6teo"
       data-cy="task-status-badge"
     >
       Test Timed Out
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-701c3t"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ud6teo"
       data-cy="task-status-badge"
     >
       Task Timed Out
     </div>
     <div
       border="#B45AF2"
-      class="css-1rx5gd6 leafygreen-ui-1q59p9a"
+      class="css-1rx5gd6 leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
       fill="#F1D4FD"
       text="#5E0C9E"
@@ -88,7 +88,7 @@ exports[`storyshots Storyshots components/Badge/TaskStatusBadge All Badges 1`] =
     </div>
     <div
       border="#2D0B59"
-      class="css-kmvtea leafygreen-ui-1q59p9a"
+      class="css-kmvtea leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
       fill="#5E0C9E"
       text="#F9EBFF"
@@ -97,7 +97,7 @@ exports[`storyshots Storyshots components/Badge/TaskStatusBadge All Badges 1`] =
     </div>
     <div
       border="#2D0B59"
-      class="css-kmvtea leafygreen-ui-1q59p9a"
+      class="css-kmvtea leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
       fill="#5E0C9E"
       text="#F9EBFF"
@@ -106,7 +106,7 @@ exports[`storyshots Storyshots components/Badge/TaskStatusBadge All Badges 1`] =
     </div>
     <div
       border="#2D0B59"
-      class="css-kmvtea leafygreen-ui-1q59p9a"
+      class="css-kmvtea leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
       fill="#5E0C9E"
       text="#F9EBFF"
@@ -114,49 +114,49 @@ exports[`storyshots Storyshots components/Badge/TaskStatusBadge All Badges 1`] =
       System Unresponsive
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1q59p9a"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Blocked
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1q59p9a"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Aborted
     </div>
     <div
-      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-701c3t"
+      class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ud6teo"
       data-cy="task-status-badge"
     >
       Known Issue
     </div>
     <div
-      class="css-2hlbd4 leafygreen-ui-1q59p9a"
+      class="css-2hlbd4 leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Failed
     </div>
     <div
-      class="css-2hlbd4 leafygreen-ui-1q59p9a"
+      class="css-2hlbd4 leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       System Failed
     </div>
     <div
-      class="css-2hlbd4 leafygreen-ui-1q59p9a"
+      class="css-2hlbd4 leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Running
     </div>
     <div
-      class="css-2hlbd4 leafygreen-ui-1q59p9a"
+      class="css-2hlbd4 leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Undispatched
     </div>
     <div
-      class="css-2hlbd4 leafygreen-ui-1q59p9a"
+      class="css-2hlbd4 leafygreen-ui-ohl2hc"
       data-cy="task-status-badge"
     >
       Scheduled
@@ -168,7 +168,7 @@ exports[`storyshots Storyshots components/Badge/TaskStatusBadge All Badges 1`] =
 exports[`storyshots Storyshots components/Badge/TaskStatusBadge Default 1`] = `
 <div>
   <div
-    class="css-1grgn2x-TaskStatusBadge leafygreen-ui-1w3euls"
+    class="css-1grgn2x-TaskStatusBadge leafygreen-ui-n4itms"
     data-cy="task-status-badge"
   >
     Succeeded
