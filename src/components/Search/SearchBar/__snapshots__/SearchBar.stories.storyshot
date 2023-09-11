@@ -9,8 +9,8 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
       class="leafygreen-ui-1nkq8lt css-6lshyd"
     >
       <button
-        aria-controls="select-1-menu"
-        aria-describedby="select-1-description"
+        aria-controls="select-143-menu"
+        aria-describedby="select-143-description"
         aria-disabled="false"
         aria-expanded="false"
         aria-invalid="false"
@@ -18,7 +18,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
         class="lg-ui-button-0002 leafygreen-ui-4ldxru"
         data-cy="searchbar-select"
         data-testid="leafygreen-ui-select-menubutton"
-        id="select-2"
+        id="select-144"
         type="button"
         value="filter"
       >
@@ -40,7 +40,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
           <svg
             alt=""
             aria-hidden="true"
-            class="leafygreen-ui-866818"
+            class="leafygreen-ui-4dp7tf"
             height="16"
             role="presentation"
             viewBox="0 0 16 16"
@@ -136,7 +136,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
               <svg
                 alt=""
                 aria-hidden="true"
-                class="leafygreen-ui-tbogr5"
+                class="leafygreen-ui-1lzd8bx"
                 height="16"
                 role="presentation"
                 viewBox="0 0 16 16"
@@ -144,7 +144,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
               >
                 <path
                   clip-rule="evenodd"
-                  d="M8.8639 2.51357C8.49039 1.82881 7.50961 1.82881 7.1361 2.51357L1.12218 13.5388C0.763263 14.1968 1.23814 15 1.98608 15H14.0139C14.7619 15 15.2367 14.1968 14.8778 13.5388L8.8639 2.51357ZM7 6C7 5.44772 7.44772 5 8 5C8.55228 5 9 5.44772 9 6V10C9 10.5523 8.55228 11 8 11C7.44772 11 7 10.5523 7 10V6ZM9 13C9 13.5523 8.55228 14 8 14C7.44772 14 7 13.5523 7 13C7 12.4477 7.44772 12 8 12C8.55228 12 9 12.4477 9 13Z"
+                  d="M8.8639 1.51357C8.49039 0.828811 7.50961 0.828811 7.1361 1.51357L1.12218 12.5388C0.763263 13.1968 1.23814 14 1.98608 14H14.0139C14.7619 14 15.2367 13.1968 14.8778 12.5388L8.8639 1.51357ZM7 5C7 4.44772 7.44772 4 8 4C8.55228 4 9 4.44772 9 5V9C9 9.55228 8.55228 10 8 10C7.44772 10 7 9.55228 7 9V5ZM9 12C9 12.5523 8.55228 13 8 13C7.44772 13 7 12.5523 7 12C7 11.4477 7.44772 11 8 11C8.55228 11 9 11.4477 9 12Z"
                   fill="currentColor"
                   fill-rule="evenodd"
                 />
@@ -175,8 +175,8 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
       class="leafygreen-ui-1nkq8lt css-6lshyd"
     >
       <button
-        aria-controls="select-9-menu"
-        aria-describedby="select-9-description"
+        aria-controls="select-146-menu"
+        aria-describedby="select-146-description"
         aria-disabled="false"
         aria-expanded="false"
         aria-invalid="false"
@@ -184,7 +184,7 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
         class="lg-ui-button-0002 leafygreen-ui-4ldxru"
         data-cy="searchbar-select"
         data-testid="leafygreen-ui-select-menubutton"
-        id="select-10"
+        id="select-147"
         type="button"
         value="filter"
       >
@@ -206,7 +206,7 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
           <svg
             alt=""
             aria-hidden="true"
-            class="leafygreen-ui-866818"
+            class="leafygreen-ui-4dp7tf"
             height="16"
             role="presentation"
             viewBox="0 0 16 16"

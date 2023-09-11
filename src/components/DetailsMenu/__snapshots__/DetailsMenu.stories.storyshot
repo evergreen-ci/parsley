@@ -111,7 +111,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-1m8vtmm"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -164,7 +164,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-1m8vtmm"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -221,7 +221,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-1m8vtmm"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -274,7 +274,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-1m8vtmm"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -328,7 +328,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-1m8vtmm"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -645,7 +645,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-1m8vtmm"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -698,7 +698,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-1m8vtmm"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -755,7 +755,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-1m8vtmm"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -808,7 +808,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-1m8vtmm"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -862,7 +862,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
                   <svg
                     aria-hidden="true"
                     aria-label="Checkmark Icon"
-                    class="leafygreen-ui-e8xweu"
+                    class="leafygreen-ui-1m8vtmm"
                     height="14"
                     role="img"
                     viewBox="0 0 16 16"
@@ -1064,8 +1064,8 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
       </div>
       <label
-        class="leafygreen-ui-1d8p4jj"
-        for="code-1"
+        class="leafygreen-ui-gd3h51"
+        for="code-10"
       >
         Fetch the log via CLI
       </label>
@@ -1074,7 +1074,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
       >
         <code
           class="leafygreen-ui-4f6y2t"
-          id="code-1"
+          id="code-10"
         >
           evergreen buildlogger fetch --task_id mci_ubuntu1604_test_model_task_5f4d3b4f562343215f7f5f3d_20_08_25_15_50_10 --execution 0 --test_name TestModelGetArtifacts
         </code>
