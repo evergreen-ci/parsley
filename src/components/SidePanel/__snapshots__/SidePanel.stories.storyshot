@@ -73,7 +73,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                             Filters
                           </div>
                           <div
-                            class="leafygreen-ui-1w3euls"
+                            class="leafygreen-ui-n4itms"
                           >
                             1
                           </div>
@@ -124,7 +124,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                             class="css-fmhxew"
                           >
                             <div
-                              class="leafygreen-ui-1q59p9a"
+                              class="leafygreen-ui-ohl2hc"
                             >
                               Filter
                             </div>
@@ -455,7 +455,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                             Expanded Lines
                           </div>
                           <div
-                            class="leafygreen-ui-1w3euls"
+                            class="leafygreen-ui-n4itms"
                           >
                             1
                           </div>
@@ -555,7 +555,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                             Highlighted Terms
                           </div>
                           <div
-                            class="leafygreen-ui-1w3euls"
+                            class="leafygreen-ui-n4itms"
                           >
                             2
                           </div>

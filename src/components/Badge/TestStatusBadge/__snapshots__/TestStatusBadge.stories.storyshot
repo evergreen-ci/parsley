@@ -6,25 +6,25 @@ exports[`storyshots Storyshots components/Badge/TestStatusBadge All Badges 1`] =
     class="css-134efv6"
   >
     <div
-      class="leafygreen-ui-701c3t"
+      class="leafygreen-ui-ud6teo"
       data-cy="test-status-badge"
     >
       Fail
     </div>
     <div
-      class="leafygreen-ui-1yuwcm3"
+      class="leafygreen-ui-ixbeze"
       data-cy="test-status-badge"
     >
       Skip
     </div>
     <div
-      class="leafygreen-ui-z8wldb"
+      class="leafygreen-ui-1qtf7xy"
       data-cy="test-status-badge"
     >
       Silent Fail
     </div>
     <div
-      class="leafygreen-ui-1w3euls"
+      class="leafygreen-ui-n4itms"
       data-cy="test-status-badge"
     >
       Pass
@@ -36,7 +36,7 @@ exports[`storyshots Storyshots components/Badge/TestStatusBadge All Badges 1`] =
 exports[`storyshots Storyshots components/Badge/TestStatusBadge Default 1`] = `
 <div>
   <div
-    class="leafygreen-ui-1w3euls"
+    class="leafygreen-ui-n4itms"
     data-cy="test-status-badge"
   >
     Pass
