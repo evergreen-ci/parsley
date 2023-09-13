@@ -738,7 +738,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
           aria-controls="side-nav-1"
           aria-expanded="true"
           aria-label="Collapse navigation"
-          class="leafygreen-ui-cssveg leafygreen-ui-za3dje"
+          class="leafygreen-ui-v87gj9"
           data-testid="side-nav-collapse-toggle"
         >
           <div
