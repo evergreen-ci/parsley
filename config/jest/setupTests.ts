@@ -21,3 +21,11 @@ if (process.env.CI) {
     consoleLog(message);
   };
 }
+
+// Mock focus-trap-react to prevent errors in tests that use modals. focus-trap-react is a package used
+// by LeafyGreen and is not a direct dependency of Parsley.
+jest.mock("focus-trap-react", () => {
+  const focusTrap = jest.requireActual("focus-trap-react");
+  focusTrap.prototype.setupFocusTrap = () => null;
+  return focusTrap;
+});
