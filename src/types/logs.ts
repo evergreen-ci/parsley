@@ -7,7 +7,7 @@ type ProcessedLogLine = number | number[];
 type ProcessedLogLines = ProcessedLogLine[];
 
 type Filter = {
-  name: string;
+  expression: string;
   visible: boolean;
   caseSensitive: CaseSensitivity;
   matchType: MatchType;

@@ -25,14 +25,14 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
   const [filters, setFilters] = useFilterParam();
   const [open, setOpen] = useState(false);
 
-  const deleteFilter = (filterName: string) => {
-    const newFilters = filters.filter((f) => f.name !== filterName);
+  const deleteFilter = (filterExpression: string) => {
+    const newFilters = filters.filter((f) => f.expression !== filterExpression);
     setFilters(newFilters);
     if (newFilters.length === 0) {
       clearExpandedLines();
     }
-    leaveBreadcrumb("delete-filter", { filterName }, "user");
-    sendEvent({ filterExpression: filterName, name: "Deleted Filter" });
+    leaveBreadcrumb("delete-filter", { filterExpression }, "user");
+    sendEvent({ filterExpression, name: "Deleted Filter" });
   };
 
   const editFilter = (
@@ -41,11 +41,16 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
     filter: Filter
   ) => {
     // Duplicate filters are not allowed.
-    if (fieldName === "name" && filters.some((f) => f.name === fieldValue)) {
+    if (
+      fieldName === "expression" &&
+      filters.some((f) => f.expression === fieldValue)
+    ) {
       return;
     }
     const newFilters = [...filters];
-    const idxToReplace = newFilters.findIndex((f) => f.name === filter.name);
+    const idxToReplace = newFilters.findIndex(
+      (f) => f.expression === filter.expression
+    );
     newFilters[idxToReplace] = {
       ...filter,
       [fieldName]: fieldValue,
@@ -53,7 +58,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
     setFilters(newFilters);
     leaveBreadcrumb(
       "edit-filter",
-      { fieldName, fieldValue, filterName: filter.name },
+      { fieldName, fieldValue, filterExpression: filter.expression },
       "user"
     );
     sendEvent({
@@ -83,7 +88,10 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
         navGroupTitle="Filters"
       >
         {filters.map((filter) => (
-          <FilterWrapper key={filter.name} data-cy={`filter-${filter.name}`}>
+          <FilterWrapper
+            key={filter.expression}
+            data-cy={`filter-${filter.expression}`}
+          >
             <FilterGroup
               deleteFilter={deleteFilter}
               editFilter={editFilter}

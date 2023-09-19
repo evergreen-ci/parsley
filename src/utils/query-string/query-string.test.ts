@@ -16,8 +16,8 @@ describe("filters", () => {
         stringifyFilters([
           {
             caseSensitive: CaseSensitivity.Insensitive,
+            expression: "hello-i-am-a-filter",
             matchType: MatchType.Exact,
-            name: "hello-i-am-a-filter",
             visible: true,
           },
         ])
@@ -28,20 +28,20 @@ describe("filters", () => {
         stringifyFilters([
           {
             caseSensitive: CaseSensitivity.Sensitive,
+            expression: "passed",
             matchType: MatchType.Inverse,
-            name: "passed",
             visible: false,
           },
           {
             caseSensitive: CaseSensitivity.Insensitive,
+            expression: "failed",
             matchType: MatchType.Inverse,
-            name: "failed",
             visible: true,
           },
           {
             caseSensitive: CaseSensitivity.Sensitive,
+            expression: "running",
             matchType: MatchType.Exact,
-            name: "running",
             visible: false,
           },
         ])
@@ -52,8 +52,8 @@ describe("filters", () => {
         stringifyFilters([
           {
             caseSensitive: CaseSensitivity.Insensitive,
+            expression: "ran in d{3,}",
             matchType: MatchType.Exact,
-            name: "ran in d{3,}",
             visible: true,
           },
         ])
@@ -68,8 +68,8 @@ describe("filters", () => {
       expect(parseFilters(["100hello-i-am-a-filter"])).toStrictEqual([
         {
           caseSensitive: CaseSensitivity.Insensitive,
+          expression: "hello-i-am-a-filter",
           matchType: MatchType.Exact,
-          name: "hello-i-am-a-filter",
           visible: true,
         },
       ]);
@@ -78,8 +78,8 @@ describe("filters", () => {
       expect(parseFilters(["10012345"])).toStrictEqual([
         {
           caseSensitive: CaseSensitivity.Insensitive,
+          expression: "12345",
           matchType: MatchType.Exact,
-          name: "12345",
           visible: true,
         },
       ]);
@@ -88,8 +88,8 @@ describe("filters", () => {
       expect(parseFilters(["100ran%20in%20d%7B3%2C%7D"])).toStrictEqual([
         {
           caseSensitive: CaseSensitivity.Insensitive,
+          expression: "ran in d{3,}",
           matchType: MatchType.Exact,
-          name: "ran in d{3,}",
           visible: true,
         },
       ]);
@@ -100,20 +100,20 @@ describe("filters", () => {
       ).toStrictEqual([
         {
           caseSensitive: CaseSensitivity.Sensitive,
+          expression: "passed",
           matchType: MatchType.Inverse,
-          name: "passed",
           visible: false,
         },
         {
           caseSensitive: CaseSensitivity.Insensitive,
+          expression: "failed",
           matchType: MatchType.Inverse,
-          name: "failed",
           visible: true,
         },
         {
           caseSensitive: CaseSensitivity.Sensitive,
+          expression: "running",
           matchType: MatchType.Exact,
-          name: "running",
           visible: false,
         },
       ]);

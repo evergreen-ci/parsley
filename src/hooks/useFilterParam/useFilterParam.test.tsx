@@ -21,8 +21,8 @@ describe("useFilterParam", () => {
     const newFilter = [
       {
         caseSensitive: CaseSensitivity.Insensitive,
+        expression: "newfilter",
         matchType: MatchType.Exact,
-        name: "newfilter",
         visible: true,
       },
     ];
@@ -54,14 +54,14 @@ describe("useFilterParam", () => {
     expect(result.current.filters).toStrictEqual([
       {
         caseSensitive: CaseSensitivity.Insensitive,
+        expression: "failed",
         matchType: MatchType.Exact,
-        name: "failed",
         visible: true,
       },
       {
         caseSensitive: CaseSensitivity.Sensitive,
+        expression: "passed",
         matchType: MatchType.Exact,
-        name: "passed",
         visible: true,
       },
     ]);
@@ -82,14 +82,14 @@ describe("useFilterParam", () => {
       result.current.setFilters([
         {
           caseSensitive: CaseSensitivity.Insensitive,
+          expression: "something,else",
           matchType: MatchType.Exact,
-          name: "something,else",
           visible: true,
         },
         {
           caseSensitive: CaseSensitivity.Insensitive,
+          expression: "failed",
           matchType: MatchType.Exact,
-          name: "failed",
           visible: true,
         },
       ]);
@@ -114,14 +114,14 @@ describe("useFilterParam", () => {
     expect(result.current.filters).toStrictEqual([
       {
         caseSensitive: CaseSensitivity.Insensitive,
+        expression: "something,else",
         matchType: MatchType.Exact,
-        name: "something,else",
         visible: true,
       },
       {
         caseSensitive: CaseSensitivity.Insensitive,
+        expression: "failed",
         matchType: MatchType.Exact,
-        name: "failed",
         visible: true,
       },
     ]);
@@ -137,8 +137,8 @@ describe("useFilterParam", () => {
     expect(result.current.filters).toStrictEqual([
       {
         caseSensitive: CaseSensitivity.Insensitive,
+        expression: "1234567890123456789",
         matchType: MatchType.Exact,
-        name: "1234567890123456789",
         visible: true,
       },
     ]);

@@ -47,14 +47,14 @@ const Search: React.FC = () => {
   const handleOnSubmit = (selected: string, value: string) => {
     switch (selected) {
       case SearchBarActions.Filter:
-        if (!filters.some((f) => f.name === value)) {
+        if (!filters.some((f) => f.expression === value)) {
           setSearch("");
           setFilters([
             ...filters,
             {
               caseSensitive: CaseSensitivity.Insensitive,
+              expression: value,
               matchType: MatchType.Exact,
-              name: value,
               visible: true,
             },
           ]);
