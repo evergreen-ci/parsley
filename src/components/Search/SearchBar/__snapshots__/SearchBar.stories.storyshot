@@ -9,8 +9,8 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
       class="leafygreen-ui-1nkq8lt css-6lshyd"
     >
       <button
-        aria-controls="select-6-menu"
-        aria-describedby="select-6-description"
+        aria-controls="select-1-menu"
+        aria-describedby="select-1-description"
         aria-disabled="false"
         aria-expanded="false"
         aria-invalid="false"
@@ -18,7 +18,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
         class="lg-ui-button-0001 leafygreen-ui-3qrx9g"
         data-cy="searchbar-select"
         data-testid="leafygreen-ui-select-menubutton"
-        id="select-7"
+        id="select-2"
         type="button"
         value="filter"
       >
@@ -63,7 +63,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
         <button
           aria-disabled="false"
           aria-labelledby="View search suggestions"
-          class="leafygreen-ui-6obv0c"
+          class="leafygreen-ui-1xt2asn"
           data-cy="search-suggestion-button"
           tabindex="0"
           title="View search suggestions"
@@ -123,7 +123,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
               autocomplete="on"
               class="leafygreen-ui-18wtnk9"
               data-cy="searchbar-input"
-              id="textinput-8"
+              id="textinput-5"
               placeholder="optional, regexp to search"
               required=""
               spellcheck="false"
@@ -175,8 +175,8 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
       class="leafygreen-ui-1nkq8lt css-6lshyd"
     >
       <button
-        aria-controls="select-9-menu"
-        aria-describedby="select-9-description"
+        aria-controls="select-3-menu"
+        aria-describedby="select-3-description"
         aria-disabled="false"
         aria-expanded="false"
         aria-invalid="false"
@@ -184,7 +184,7 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
         class="lg-ui-button-0001 leafygreen-ui-3qrx9g"
         data-cy="searchbar-select"
         data-testid="leafygreen-ui-select-menubutton"
-        id="select-10"
+        id="select-4"
         type="button"
         value="filter"
       >
@@ -229,7 +229,7 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
         <button
           aria-disabled="false"
           aria-labelledby="View search suggestions"
-          class="leafygreen-ui-6obv0c"
+          class="leafygreen-ui-1xt2asn"
           data-cy="search-suggestion-button"
           tabindex="0"
           title="View search suggestions"
@@ -289,7 +289,7 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
               autocomplete="on"
               class="leafygreen-ui-1kmfbzh"
               data-cy="searchbar-input"
-              id="textinput-11"
+              id="textinput-6"
               placeholder="optional, regexp to search"
               required=""
               spellcheck="false"
@@ -307,7 +307,7 @@ exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestio
           <button
             aria-disabled="true"
             aria-label="Select plus"
-            class="leafygreen-ui-4no57l"
+            class="leafygreen-ui-beb9er"
             data-cy="searchbar-submit"
             tabindex="0"
           >
