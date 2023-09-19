@@ -37,7 +37,7 @@ const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
           setLogType(value as LogTypes);
         }}
         placeholder="Select..."
-        value={logType}
+        value={logType ?? ""}
       >
         <Option value={LogTypes.RESMOKE_LOGS}>Resmoke</Option>
         <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
