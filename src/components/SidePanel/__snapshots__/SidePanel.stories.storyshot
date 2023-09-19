@@ -15,7 +15,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
         <nav
           aria-label="Side panel"
           class="leafygreen-ui-1ch59fo"
-          id="side-nav-6"
+          id="side-nav-16"
         >
           <div
             class="leafygreen-ui-aoszy5"
@@ -32,7 +32,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   <div
                     class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-2"
+                    id="menu-group-label-id-12"
                   >
                     <div
                       class="leafygreen-ui-1rnl6t5"
@@ -89,7 +89,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-2"
+                    aria-labelledby="menu-group-label-id-12"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -409,7 +409,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   <div
                     class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-3"
+                    id="menu-group-label-id-13"
                   >
                     <div
                       class="leafygreen-ui-1rnl6t5"
@@ -464,7 +464,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-3"
+                    aria-labelledby="menu-group-label-id-13"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -516,7 +516,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   <div
                     class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-4"
+                    id="menu-group-label-id-14"
                   >
                     <div
                       class="leafygreen-ui-1rnl6t5"
@@ -564,7 +564,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-4"
+                    aria-labelledby="menu-group-label-id-14"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -735,7 +735,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
           </div>
         </nav>
         <button
-          aria-controls="side-nav-6"
+          aria-controls="side-nav-16"
           aria-expanded="true"
           aria-label="Collapse navigation"
           class="leafygreen-ui-v87gj9"
