@@ -65,7 +65,11 @@ describe("filters", () => {
     await user.click(confirmButton);
 
     expect(editFilter).toHaveBeenCalledTimes(1);
-    expect(editFilter).toHaveBeenCalledWith("name", "newFilter", defaultFilter);
+    expect(editFilter).toHaveBeenCalledWith(
+      "expression",
+      "newFilter",
+      defaultFilter
+    );
   });
 
   it("should prevent the user from submitting an invalid filter", async () => {
