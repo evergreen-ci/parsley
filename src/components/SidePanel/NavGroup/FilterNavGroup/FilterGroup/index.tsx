@@ -38,35 +38,35 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
   filter,
 }) => {
   const { sendEvent } = useLogWindowAnalytics();
-  const { caseSensitive, matchType, name, visible } = filter;
+  const { caseSensitive, expression, matchType, visible } = filter;
 
-  const [newFilterName, setNewFilterName] = useState(name);
+  const [newFilterExpression, setNewFilterExpression] = useState(expression);
   const [isEditing, setIsEditing] = useState(false);
   const [isValid, setIsValid] = useState(true);
 
   useEffect(() => {
-    if (name) {
-      setIsValid(validateRegexp(name));
+    if (expression) {
+      setIsValid(validateRegexp(expression));
     }
-  }, [name]);
+  }, [expression]);
 
   const resetEditState = () => {
     setIsEditing(false);
-    setNewFilterName(name);
+    setNewFilterExpression(expression);
   };
 
   const handleSubmit = () => {
     if (isValid) {
-      editFilter("name", newFilterName, filter);
+      editFilter("expression", newFilterExpression, filter);
       resetEditState();
     }
   };
 
   const showTooltip = !isValid && !isEditing;
   const validationMessage =
-    newFilterName === ""
+    newFilterExpression === ""
       ? "Filter cannot be empty"
-      : `Invalid Regular Expression: ${getRegexpError(newFilterName)}`;
+      : `Invalid Regular Expression: ${getRegexpError(newFilterExpression)}`;
 
   return (
     <Accordion
@@ -83,7 +83,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
               <Error>{validationMessage}</Error>
             </IconWithTooltip>
           )}
-          <TextEllipsis>{name}</TextEllipsis>
+          <TextEllipsis>{expression}</TextEllipsis>
         </>
       }
       titleTag={AccordionTitle}
@@ -125,7 +125,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
               aria-label="Delete filter"
               onClick={(e) => {
                 e.stopPropagation();
-                deleteFilter(name);
+                deleteFilter(expression);
               }}
               title="Delete filter"
             >
@@ -145,7 +145,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
               data-cy="edit-filter-name"
               errorMessage={isValid ? "" : validationMessage}
               onChange={(e) => {
-                setNewFilterName(e.target.value);
+                setNewFilterExpression(e.target.value);
                 setIsValid(
                   validateRegexp(e.target.value) && e.target.value !== ""
                 );
@@ -156,7 +156,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
               spellCheck={false}
               state={isValid ? "none" : "error"}
               type="text"
-              value={newFilterName}
+              value={newFilterExpression}
             />
             <ButtonWrapper>
               <Button onClick={() => resetEditState()} size="xsmall">
@@ -173,7 +173,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
             </ButtonWrapper>
           </>
         ) : (
-          <StyledBody>{name}</StyledBody>
+          <StyledBody>{expression}</StyledBody>
         )}
 
         <StyledSegmentedControl

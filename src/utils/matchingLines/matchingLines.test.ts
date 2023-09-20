@@ -4,29 +4,29 @@ import { constructRegexToMatch, getMatchingLines, matchesFilters } from ".";
 /**
  * Helper function for constructing a Filter object.
  * @param filter - the filter object to construct
- * @param filter.name - the name of the filter
+ * @param filter.expression - the regular expression of the filter
  * @param filter.caseSensitive - whether or not the filter is case sensitive
  * @param filter.matchType - the match type of the filter (exact, inverse)
  * @param filter.visible - whether or not the filter is visible
  * @returns a Filter object
  */
 const makeFilter = (filter: {
-  name: string;
+  expression: string;
   caseSensitive?: CaseSensitivity;
   matchType?: MatchType;
   visible?: boolean;
 }) => {
   const {
     caseSensitive = CaseSensitivity.Insensitive,
+    expression,
     matchType = MatchType.Exact,
-    name,
     visible = true,
   } = filter;
 
   return {
     caseSensitive,
+    expression,
     matchType,
-    name,
     visible,
   };
 };
@@ -46,9 +46,9 @@ describe("constructRegexToMatch", () => {
   it("properly constructs case sensitive filters", () => {
     const filter1 = makeFilter({
       caseSensitive: CaseSensitivity.Sensitive,
-      name: "filter1",
+      expression: "filter1",
     });
-    const filter2 = makeFilter({ name: "filter2" });
+    const filter2 = makeFilter({ expression: "filter2" });
     expect(constructRegexToMatch([filter1, filter2])).toStrictEqual([
       { isMatch: true, regex: /filter1/ },
       { isMatch: true, regex: /filter2/i },
@@ -57,10 +57,10 @@ describe("constructRegexToMatch", () => {
 
   it("properly constructs inverse match filters", () => {
     const filter1 = makeFilter({
+      expression: "filter1",
       matchType: MatchType.Inverse,
-      name: "filter1",
     });
-    const filter2 = makeFilter({ name: "filter2" });
+    const filter2 = makeFilter({ expression: "filter2" });
     expect(constructRegexToMatch([filter1, filter2])).toStrictEqual([
       { isMatch: false, regex: /filter1/i },
       { isMatch: true, regex: /filter2/i },
@@ -203,8 +203,8 @@ describe("getMatchingLines", () => {
   });
 
   it("returns undefined if there are no visible filters", () => {
-    const filter1 = makeFilter({ name: "starting", visible: false });
-    const filter2 = makeFilter({ name: "mongod", visible: false });
+    const filter1 = makeFilter({ expression: "starting", visible: false });
+    const filter2 = makeFilter({ expression: "mongod", visible: false });
     expect(
       getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
     ).toBeUndefined();
@@ -213,9 +213,9 @@ describe("getMatchingLines", () => {
   it("returns an empty set if there are no lines that satisfy the filter", () => {
     const filter1 = makeFilter({
       caseSensitive: CaseSensitivity.Sensitive,
-      name: "starting",
+      expression: "starting",
     });
-    const filter2 = makeFilter({ name: "mongod" });
+    const filter2 = makeFilter({ expression: "mongod" });
     expect(
       getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
     ).toStrictEqual(new Set([]));
@@ -223,9 +223,9 @@ describe("getMatchingLines", () => {
 
   it("returns correct set of numbers given applied filters", () => {
     const filter1 = makeFilter({
-      name: "starting",
+      expression: "starting",
     });
-    const filter2 = makeFilter({ name: "mongod" });
+    const filter2 = makeFilter({ expression: "mongod" });
     expect(
       getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
     ).toStrictEqual(new Set([1, 4, 7]));
@@ -233,9 +233,9 @@ describe("getMatchingLines", () => {
 
   it("only uses visible filters when looking for matches", () => {
     const filter1 = makeFilter({
-      name: "starting",
+      expression: "starting",
     });
-    const filter2 = makeFilter({ name: "mongod", visible: false });
+    const filter2 = makeFilter({ expression: "mongod", visible: false });
     expect(
       getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
     ).toStrictEqual(new Set([0, 1, 4, 7]));

@@ -29,8 +29,8 @@ const ProjectFilter: React.FC<ProjectFilterProps> = ({
         caseSensitive: filter.caseSensitive
           ? CaseSensitivity.Sensitive
           : CaseSensitivity.Insensitive,
+        expression: filter.expression,
         matchType: filter.exactMatch ? MatchType.Exact : MatchType.Inverse,
-        name: filter.expression,
         visible: true,
       });
     } else {

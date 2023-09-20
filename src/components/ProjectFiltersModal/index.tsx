@@ -90,7 +90,7 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
           parsleyFilters.map((filter) => (
             <ProjectFilter
               key={filter.expression}
-              active={!!filters.find((f) => f.name === filter.expression)}
+              active={!!filters.find((f) => f.expression === filter.expression)}
               addFilter={(filterToAdd) =>
                 dispatch({ filterToAdd, type: "ADD_FILTER" })
               }
@@ -100,7 +100,7 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
               }}
               selected={
                 !!state.selectedFilters.find(
-                  (f) => f.name === filter.expression
+                  (f) => f.expression === filter.expression
                 )
               }
             />
