@@ -1,3 +1,4 @@
+import { sentryVitePlugin } from "@sentry/vite-plugin";
 import react from "@vitejs/plugin-react";
 import { visualizer } from "rollup-plugin-visualizer";
 import { defineConfig } from "vite";
@@ -62,6 +63,17 @@ export default defineConfig({
     visualizer({
       filename: "build/source_map.html",
       template: "treemap",
+    }),
+    sentryVitePlugin({
+      org: "mongodb-org",
+      project: "parsley",
+      authToken: process.env.REACT_APP_SENTRY_AUTH_TOKEN,
+      release: {
+        name: process.env.npm_package_version,
+      },
+      sourcemaps: {
+        assets: "dist/assets/*",
+      },
     }),
   ],
   // Setting jsxImportSource to @emotion/react raises a warning in the console. This line silences
