@@ -38,12 +38,12 @@ export const parseFilters = (filters: string[]): Filters => {
         : CaseSensitivity.Insensitive;
     const matchType =
       filter.charAt(2) === "1" ? MatchType.Inverse : MatchType.Exact;
-    const name = filter.substring(3);
-    const decodedFilterName = decodeURIComponent(name);
+    const expression = filter.substring(3);
+    const decodedFilterExpression = decodeURIComponent(expression);
     return {
       caseSensitive,
+      expression: decodedFilterExpression,
       matchType,
-      name: decodedFilterName,
       visible,
     };
   });
@@ -55,6 +55,6 @@ export const stringifyFilters = (filters: Filters): string[] =>
     const visible = f.visible ? 1 : 0;
     const caseSensitive = f.caseSensitive === CaseSensitivity.Sensitive ? 1 : 0;
     const matchType = f.matchType === MatchType.Inverse ? 1 : 0;
-    const encodedFilterName = encodeURIComponent(f.name);
+    const encodedFilterName = encodeURIComponent(f.expression);
     return `${visible}${caseSensitive}${matchType}${encodedFilterName}`;
   });

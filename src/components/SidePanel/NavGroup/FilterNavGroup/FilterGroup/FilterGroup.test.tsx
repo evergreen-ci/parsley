@@ -4,8 +4,8 @@ import FilterGroup from ".";
 
 const defaultFilter = {
   caseSensitive: CaseSensitivity.Insensitive,
+  expression: "myFilter",
   matchType: MatchType.Exact,
-  name: "myFilter",
   visible: true,
 };
 
@@ -18,7 +18,7 @@ describe("filters", () => {
         filter={defaultFilter}
       />
     );
-    expect(screen.getByText(defaultFilter.name)).toBeInTheDocument();
+    expect(screen.getByText(defaultFilter.expression)).toBeInTheDocument();
   });
 
   it("should be able to toggle editing", async () => {
@@ -31,10 +31,10 @@ describe("filters", () => {
       />
     );
     await user.click(screen.getByLabelText("Edit filter"));
-    expect(screen.queryByText(defaultFilter.name)).toBeNull();
+    expect(screen.queryByText(defaultFilter.expression)).toBeNull();
     expect(screen.getByDataCy("edit-filter-name")).toBeInTheDocument();
     expect(screen.getByDataCy("edit-filter-name")).toHaveValue(
-      defaultFilter.name
+      defaultFilter.expression
     );
 
     expect(screen.getByDataCy("edit-filter-name")).toHaveFocus();
@@ -65,7 +65,11 @@ describe("filters", () => {
     await user.click(confirmButton);
 
     expect(editFilter).toHaveBeenCalledTimes(1);
-    expect(editFilter).toHaveBeenCalledWith("name", "newFilter", defaultFilter);
+    expect(editFilter).toHaveBeenCalledWith(
+      "expression",
+      "newFilter",
+      defaultFilter
+    );
   });
 
   it("should prevent the user from submitting an invalid filter", async () => {
@@ -197,7 +201,7 @@ describe("filters", () => {
       <FilterGroup
         deleteFilter={jest.fn()}
         editFilter={editFilter}
-        filter={{ ...defaultFilter, name: "invalid (regex" }}
+        filter={{ ...defaultFilter, expression: "invalid (regex" }}
       />
     );
     expect(
@@ -217,7 +221,7 @@ describe("filters", () => {
       <FilterGroup
         deleteFilter={jest.fn()}
         editFilter={editFilter}
-        filter={{ ...defaultFilter, name: "invalid (regex" }}
+        filter={{ ...defaultFilter, expression: "invalid (regex" }}
       />
     );
     expect(screen.getByLabelText("Hide filter")).toHaveAttribute(
@@ -233,7 +237,7 @@ describe("filters", () => {
       <FilterGroup
         deleteFilter={jest.fn()}
         editFilter={editFilter}
-        filter={{ ...defaultFilter, name: "invalid (regex" }}
+        filter={{ ...defaultFilter, expression: "invalid (regex" }}
       />
     );
     await user.click(screen.getByLabelText("Edit filter"));

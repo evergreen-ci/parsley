@@ -15,11 +15,11 @@ export const constructRegexToMatch = (visibleFilters: Filters) => {
     if (f.caseSensitive === CaseSensitivity.Sensitive) {
       regexToMatch.push({
         isMatch,
-        regex: new RegExp(f.name),
+        regex: new RegExp(f.expression),
       });
     } else {
       try {
-        const regex = new RegExp(f.name, "i");
+        const regex = new RegExp(f.expression, "i");
         regexToMatch.push({
           isMatch,
           regex,
@@ -27,7 +27,7 @@ export const constructRegexToMatch = (visibleFilters: Filters) => {
       } catch (e) {
         // If we get an error here, it means the regex is invalid and got past the validation step. We should report this error.
         reportError(new Error("Invalid regex for filter"), {
-          message: `The regex "${f.name}" is invalid`,
+          message: `The regex "${f.expression}" is invalid`,
           metadata: e,
           name: "Invalid Regex",
         }).severe();
