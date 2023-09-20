@@ -47,3 +47,51 @@ exports[`storyshots Storyshots components/ErrorBoundary Error Fallback 1`] = `
   </div>
 </div>
 `;
+
+exports[`storyshots Storyshots components/ErrorHandling/ErrorBoundary Error Boundary 1`] = `
+<div>
+  <div>
+    Test
+  </div>
+  <div>
+    <button
+      type="button"
+    >
+      Click me!
+    </button>
+  </div>
+</div>
+`;
+
+exports[`storyshots Storyshots components/ErrorHandling/ErrorBoundary Error Fallback 1`] = `
+<div>
+  <div>
+    <div
+      class="css-1xl0rym"
+    >
+      <h1
+        class="css-1t9xarj leafygreen-ui-yk169t"
+      >
+        Error
+      </h1>
+      <h2
+        class="css-1t9xarj leafygreen-ui-oaqrgz"
+      >
+        Ouch! That's gotta hurt,
+        <br />
+         sorry about that!
+      </h2>
+      <a
+        class="css-fp08na"
+        href="/"
+      >
+        Back To Home
+      </a>
+    </div>
+    <img
+      alt="Error Background"
+      src="errorPage.svg"
+    />
+  </div>
+</div>
+`;

@@ -33,7 +33,7 @@ const useFetch = <T extends object>(
       fetch(req, {
         credentials: "include",
         // Conditionally define signal because AbortController throws error in development's strict mode
-        signal: isProduction ? abortController.signal : undefined,
+        signal: isProduction() ? abortController.signal : undefined,
       })
         .then((response) => {
           if (!response.ok) {

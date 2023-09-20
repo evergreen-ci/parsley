@@ -10,7 +10,7 @@ import { useNavigate } from "react-router-dom";
 import {
   evergreenURL,
   graphqlURL,
-  isDevelopment,
+  isDevelopmentBuild,
 } from "utils/environmentVariables";
 import { leaveBreadcrumb, reportError } from "utils/errorReporting";
 
@@ -92,7 +92,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       redirect: "manual",
     }).then(() => {
       setIsAuthenticated(false);
-      if (isDevelopment()) {
+      if (isDevelopmentBuild()) {
         navigate("/login");
       } else {
         window.location.href = `${evergreenURL}/login`;
