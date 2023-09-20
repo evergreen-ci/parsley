@@ -3,6 +3,7 @@ const paths = {
   home: "/",
   login: "/login",
   resmokeLogs: "/resmoke",
+  taskFile: "/taskFile",
   testLogs: "/test",
   upload: "/upload",
 };
@@ -12,6 +13,7 @@ enum slugs {
   execution = "execution",
   origin = "origin",
   testID = "testId",
+  fileName = "fileName",
   buildID = "buildId",
   groupID = "groupId",
 }
@@ -22,6 +24,7 @@ const routes = {
   resmokeLogs: `${paths.resmokeLogs}/:${slugs.buildID}/test/:${slugs.testID}`,
   resmokeLogsAll: `${paths.resmokeLogs}/:${slugs.buildID}/all`,
   root: paths.home,
+  taskFiles: `${paths.taskFile}/:${slugs.taskID}/:${slugs.execution}/:${slugs.fileName}`,
   testLogs: `${paths.testLogs}/:${slugs.taskID}/:${slugs.execution}/:${slugs.testID}`,
   upload: paths.upload,
 };

@@ -5,6 +5,7 @@ import {
   getLegacyJobLogsURL,
 } from "constants/externalURLTemplates";
 import {
+  getEvergreenTaskFileURL,
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
   getLobsterResmokeURL,
@@ -18,6 +19,7 @@ import { GET_TEST_LOG_URL } from "gql/queries";
 interface Props {
   buildID?: string;
   execution?: string;
+  fileName?: string;
   groupID?: string;
   logType: string;
   origin?: string;
@@ -28,6 +30,7 @@ interface Props {
 export const useResolveLogURL = ({
   buildID,
   execution,
+  fileName,
   groupID,
   logType,
   origin,
@@ -70,6 +73,12 @@ export const useResolveLogURL = ({
       if (buildID) {
         jobLogsURL = getJobLogsURL(buildID);
         legacyJobLogsURL = getLegacyJobLogsURL(buildID);
+      }
+      break;
+    }
+    case LogTypes.EVERGREEN_TASK_FILE: {
+      if (taskID && execution && fileName) {
+        rawLogURL = getEvergreenTaskFileURL(taskID, execution, fileName);
       }
       break;
     }

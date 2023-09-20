@@ -135,10 +135,24 @@ const getEvergreenTaskLogURL = (
   )}`;
 };
 
+/**
+ *
+ * @param taskID - the task ID
+ * @param execution - the execution number of the task
+ * @param fileName - the name of the file in Evergreen
+ * @returns an Evergreen URL of the format `/task/${taskID}/${execution}?type=${OriginToType[origin]}&text=true`
+ */
+const getEvergreenTaskFileURL = (
+  taskID: string,
+  execution: string | number,
+  fileName: string
+) => `${evergreenURL}/task_file_raw/${taskID}/${execution}/${fileName}`;
+
 export {
   getLobsterTaskURL,
   getLobsterTestURL,
   getLobsterResmokeURL,
+  getEvergreenTaskFileURL,
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
   getResmokeLogURL,
