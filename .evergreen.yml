@@ -516,11 +516,9 @@ buildvariants:
     modules:
       - evergreen
     tasks:
-      - name: compile
       - name: type_check
       - name: lint
       - name: test
-      - name: storybook
       - name: snapshots
       - name: check_codegen
       - name: deploy-prod
@@ -541,6 +539,8 @@ buildvariants:
       - logkeeper
     tasks:
       - name: e2e_test
+      - name: compile
+      - name: storybook
 
 pre:
   - func: get-project
