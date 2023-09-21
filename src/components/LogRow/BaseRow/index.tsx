@@ -5,8 +5,10 @@ import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
+import { useMultiLineSelectContext } from "context/MultiLineSelectContext";
 import { useQueryParam } from "hooks/useQueryParam";
 import Highlighter from "./Highlighter";
+import LineNumber from "./LineNumber";
 import { LogRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
@@ -50,7 +52,7 @@ const BaseRow: React.FC<BaseRowProps> = ({
   ...rest
 }) => {
   const { sendEvent } = useLogWindowAnalytics();
-
+  const { selectedLines } = useMultiLineSelectContext();
   const [shareLine, setShareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
     undefined
@@ -89,6 +91,13 @@ const BaseRow: React.FC<BaseRowProps> = ({
     }
   }, [bookmarks, lineNumber, sendEvent, setBookmarks]);
 
+  const isLineBetweenSelectedLines =
+    (selectedLines.startingLine !== null &&
+      selectedLines.endingLine !== null &&
+      lineNumber >= selectedLines.startingLine &&
+      lineNumber <= selectedLines.endingLine) ||
+    selectedLines.startingLine === lineNumber;
+
   return (
     <RowContainer
       {...rest}
@@ -97,7 +106,7 @@ const BaseRow: React.FC<BaseRowProps> = ({
       data-cy={`log-row-${lineNumber}`}
       data-highlighted={highlighted}
       data-shared={shared}
-      highlighted={highlighted}
+      highlighted={highlighted || isLineBetweenSelectedLines}
       onDoubleClick={handleDoubleClick}
       shared={shared}
     >
@@ -107,7 +116,7 @@ const BaseRow: React.FC<BaseRowProps> = ({
         onClick={handleClick}
         size="small"
       />
-      <Index lineNumber={lineNumber} />
+      <LineNumber lineNumber={lineNumber} />
       <StyledPre shouldWrap={wrap}>
         <Highlighter
           color={color}
@@ -153,24 +162,6 @@ const ShareIcon = styled(Icon)`
   flex-shrink: 0;
   margin-left: ${size.xxs};
   margin-top: 2px;
-`;
-
-const Index = styled.pre<{ lineNumber: number }>`
-  width: ${size.xl};
-  margin-top: 0;
-  margin-bottom: 0;
-  margin-left: ${size.xs};
-  margin-right: ${size.s};
-  flex-shrink: 0;
-
-  font-family: inherit;
-  line-height: inherit;
-  font-size: inherit;
-  user-select: none;
-
-  ::before {
-    ${({ lineNumber }) => `content: "${lineNumber}";`}
-  }
 `;
 
 const StyledPre = styled.pre<{
