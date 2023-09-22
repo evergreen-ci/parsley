@@ -41,6 +41,10 @@ const Content: React.FC = () => {
           path={routes.upload}
         />
         <Route
+          element={<LogView logType={LogTypes.EVERGREEN_TASK_FILE} />}
+          path={routes.taskFiles}
+        />
+        <Route
           element={<LogView logType={LogTypes.EVERGREEN_TASK_LOGS} />}
           path={routes.evergreenLogs}
         />

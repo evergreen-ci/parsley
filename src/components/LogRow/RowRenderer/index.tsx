@@ -72,6 +72,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
 };
 
 const rowRendererMap = {
+  [LogTypes.EVERGREEN_TASK_FILE]: AnsiiRow,
   [LogTypes.EVERGREEN_TASK_LOGS]: AnsiiRow,
   [LogTypes.EVERGREEN_TEST_LOGS]: AnsiiRow,
   [LogTypes.RESMOKE_LOGS]: ResmokeRow,
