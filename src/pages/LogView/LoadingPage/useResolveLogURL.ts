@@ -78,6 +78,7 @@ export const useResolveLogURL = ({
     }
     case LogTypes.EVERGREEN_TASK_FILE: {
       if (taskID && execution && fileName) {
+        // TODO: resolve this value using GQL https://jira.mongodb.org/browse/EVG-20809
         rawLogURL = getEvergreenTaskFileURL(taskID, execution, fileName);
       }
       break;
