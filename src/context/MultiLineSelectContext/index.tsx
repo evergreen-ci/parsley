@@ -80,7 +80,6 @@ const MultiLineSelectContextProvider: React.FC<{
       clearSelection,
       handleCloseMenu: () => {
         setOpenMenu(false);
-        clearSelection();
       },
       handleSelectLine,
       menuPosition,
