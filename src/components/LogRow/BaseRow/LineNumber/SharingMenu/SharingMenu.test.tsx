@@ -45,7 +45,9 @@ describe("sharingMenu", () => {
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     renderWithRouterMatch(<Component />, { wrapper });
     expect(screen.getByText("Copy selected lines")).toBeInTheDocument();
-    expect(screen.getByText("Share selected link")).toBeInTheDocument();
+    expect(
+      screen.getByText("Share link to selected lines")
+    ).toBeInTheDocument();
     expect(screen.getByText("Only search on range")).toBeInTheDocument();
   });
   it("clicking copy selected lines should copy the line range to the clipboard", async () => {
@@ -70,6 +72,28 @@ describe("sharingMenu", () => {
       "{noformat}\nline 2\nline 3\nline 4\n{noformat}"
     );
     //
+  });
+  it("clicking share link to selected lines should copy the link to the clipboard", async () => {
+    const user = userEvent.setup({ writeToClipboard: true });
+
+    const { Component: MenuComponent, hook } = renderComponentWithHook(
+      useMultiLineSelectContext,
+      <SharingMenuComponent open />
+    );
+    const { Component } = RenderFakeToastContext(<MenuComponent />);
+    renderWithRouterMatch(<Component />, { wrapper });
+    act(() => {
+      hook.current.handleSelectLine(1, false);
+    });
+    act(() => {
+      hook.current.handleSelectLine(3, true);
+    });
+    expect(
+      screen.getByText("Share link to selected lines")
+    ).toBeInTheDocument();
+    await user.click(screen.getByText("Share link to selected lines"));
+    const clipboardText = await navigator.clipboard.readText();
+    expect(clipboardText).toBe("http://localhost/");
   });
   it("clicking only search on range should update the url with the range", async () => {
     const { Component: MenuComponent, hook } = renderComponentWithHook(

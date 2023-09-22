@@ -38,10 +38,19 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
     });
   };
 
+  const handleShareLinkToSelectedLines = async () => {
+    const { endingLine, startingLine } = selectedLines;
+    if (startingLine === null || endingLine === null) return;
+    await copyToClipboard(`${window.location.href}`);
+    dispatchToast.success(`Copied link to clipboard`);
+  };
+
   return (
     <Menu open={open} refEl={refEl} setOpen={handleCloseMenu}>
       <MenuItem onClick={handleCopySelectedLines}>Copy selected lines</MenuItem>
-      <MenuItem>Share selected link</MenuItem>
+      <MenuItem onClick={handleShareLinkToSelectedLines}>
+        Share link to selected lines
+      </MenuItem>
       <MenuItem onClick={handleOnlySearchOnRange}>
         Only search on range
       </MenuItem>
