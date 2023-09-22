@@ -96,7 +96,6 @@ const MultiLineSelectContextProvider: React.FC<{
       selectedLines,
     ]
   );
-  console.log("MultiLineSelectContextProvider", memoizedContext);
   return (
     <MultiLineSelectContext.Provider value={memoizedContext}>
       {children}
