@@ -46,7 +46,7 @@ describe("Parsley Routes", () => {
       "/taskFile/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/sample%20file";
     cy.visit(logLink);
     cy.get("[data-cy^='log-row-']").should("be.visible");
-    cy.dataCy("ansii-row").should("exist");
+    cy.dataCy("ansii-row").should("be.visible");
   });
   it("should show 404 when visiting a nonexistent page", () => {
     cy.visit("/this/is/not/a/real/page");
