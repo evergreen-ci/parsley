@@ -3,7 +3,7 @@ import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useMultiLineSelectContext } from "context/MultiLineSelectContext";
 import { useToastContext } from "context/toast";
-import { useQueryParam } from "hooks/useQueryParam";
+import { useQueryParams } from "hooks/useQueryParam";
 import { copyToClipboard, getJiraFormat } from "utils/string";
 
 interface SharingMenuProps {
@@ -13,11 +13,7 @@ interface SharingMenuProps {
 const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
   const { handleCloseMenu, selectedLines } = useMultiLineSelectContext();
   const { getLine } = useLogContext();
-  const [, setLowerRange] = useQueryParam(QueryParams.LowerRange, 0);
-  const [, setUpperRange] = useQueryParam<undefined | number>(
-    QueryParams.UpperRange,
-    undefined
-  );
+  const [params, setParams] = useQueryParams();
   const dispatchToast = useToastContext();
 
   const handleCopySelectedLines = async () => {
@@ -35,8 +31,11 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
   const handleOnlySearchOnRange = () => {
     const { endingLine, startingLine } = selectedLines;
     if (startingLine === null || endingLine === null) return;
-    setLowerRange(startingLine);
-    setUpperRange(endingLine);
+    setParams({
+      ...params,
+      [QueryParams.LowerRange]: startingLine,
+      [QueryParams.UpperRange]: endingLine,
+    });
   };
 
   return (
