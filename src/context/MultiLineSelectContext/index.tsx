@@ -5,16 +5,17 @@ import {
   useMemo,
   useState,
 } from "react";
+import useLineRangeSelection from "hooks/useLineRangeSelection";
 
 type MultiLineSelectContextState = {
   handleSelectLine: (selectedLine: number, shiftClick: boolean) => void;
   clearSelection: () => void;
   handleCloseMenu: () => void;
-  menuPosition: number | null;
+  menuPosition: number | undefined;
   openMenu: boolean;
   selectedLines: {
-    startingLine: number | null;
-    endingLine: number | null;
+    startingLine?: number;
+    endingLine?: number;
   };
 };
 
@@ -34,12 +35,11 @@ const useMultiLineSelectContext = () => {
 const MultiLineSelectContextProvider: React.FC<{
   children: React.ReactNode;
 }> = ({ children }) => {
-  const [selectedLines, setSelectedLines] = useState<{
-    startingLine: number | null;
-    endingLine: number | null;
-  }>({ endingLine: null, startingLine: null });
+  const [selectedLines, setSelectedLines] = useLineRangeSelection();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
-  const [menuPosition, setMenuPosition] = useState<number | null>(null);
+  const [menuPosition, setMenuPosition] = useState<number | undefined>(
+    undefined
+  );
 
   const handleSelectLine = useCallback(
     (selectedLine: number, shiftClick: boolean) => {
@@ -59,7 +59,7 @@ const MultiLineSelectContextProvider: React.FC<{
           });
         }
       } else {
-        setSelectedLines({ endingLine: null, startingLine: selectedLine });
+        setSelectedLines({ endingLine: undefined, startingLine: selectedLine });
       }
       setOpenMenu(true);
       setMenuPosition(selectedLine);
@@ -67,12 +67,13 @@ const MultiLineSelectContextProvider: React.FC<{
     [selectedLines]
   );
   const clearSelection = useCallback(() => {
-    setSelectedLines({ endingLine: null, startingLine: null });
+    setSelectedLines({ endingLine: undefined, startingLine: undefined });
   }, []);
 
   const bothLinesSelected = useMemo(
     () =>
-      selectedLines.startingLine !== null && selectedLines.endingLine !== null,
+      selectedLines.startingLine !== undefined &&
+      selectedLines.endingLine !== undefined,
     [selectedLines]
   );
   const memoizedContext = useMemo(

@@ -92,8 +92,8 @@ const BaseRow: React.FC<BaseRowProps> = ({
   }, [bookmarks, lineNumber, sendEvent, setBookmarks]);
 
   const isLineBetweenSelectedLines =
-    (selectedLines.startingLine !== null &&
-      selectedLines.endingLine !== null &&
+    (selectedLines.startingLine !== undefined &&
+      selectedLines.endingLine !== undefined &&
       lineNumber >= selectedLines.startingLine &&
       lineNumber <= selectedLines.endingLine) ||
     selectedLines.startingLine === lineNumber;

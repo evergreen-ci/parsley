@@ -18,7 +18,7 @@ const useLineRangeSelection = () => {
   };
   const { endingLine, startingLine } = selectedLineRange
     ? parseSelectedLineRange(selectedLineRange)
-    : { endingLine: null, startingLine: null };
+    : { endingLine: undefined, startingLine: undefined };
 
   return [
     {

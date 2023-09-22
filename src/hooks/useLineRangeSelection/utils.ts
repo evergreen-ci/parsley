@@ -8,9 +8,9 @@ const parseSelectedLineRange = (selectedLineRange: string) => {
   const [start, end] = selectedLineRange.split("-");
   // start and end start with L, so we need to remove it
   const startLine = start.slice(1);
-  const endLine = end ? end.slice(1) : null;
+  const endLine = end ? end.slice(1) : undefined;
   return {
-    endingLine: endLine ? parseInt(endLine, 10) : null,
+    endingLine: endLine ? parseInt(endLine, 10) : undefined,
     startingLine: parseInt(startLine, 10),
   };
 };
@@ -29,7 +29,7 @@ const encodeSelectedLineRange = ({
   startingLine?: number;
   endingLine?: number;
 }) => {
-  if (startingLine === null) {
+  if (startingLine === undefined) {
     return undefined;
   }
   if (endingLine === undefined) {

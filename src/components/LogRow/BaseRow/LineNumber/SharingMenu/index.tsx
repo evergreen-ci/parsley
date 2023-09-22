@@ -18,7 +18,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
 
   const handleCopySelectedLines = async () => {
     const { endingLine, startingLine } = selectedLines;
-    if (startingLine === null || endingLine === null) return;
+    if (startingLine === undefined || endingLine === undefined) return;
     // Create an array of line numbers that represent the range in selectedLines
     const bookmarks = Array.from(
       { length: endingLine - startingLine + 1 },
@@ -30,7 +30,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
 
   const handleOnlySearchOnRange = () => {
     const { endingLine, startingLine } = selectedLines;
-    if (startingLine === null || endingLine === null) return;
+    if (startingLine === undefined || endingLine === undefined) return;
     setParams({
       ...params,
       [QueryParams.LowerRange]: startingLine,
