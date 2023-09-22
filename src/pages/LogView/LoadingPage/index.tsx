@@ -26,6 +26,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const {
     [slugs.buildID]: buildID,
     [slugs.execution]: execution,
+    [slugs.fileName]: fileName,
     [slugs.groupID]: groupID,
     [slugs.origin]: origin,
     [slugs.testID]: testID,
@@ -43,6 +44,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   } = useResolveLogURL({
     buildID,
     execution,
+    fileName,
     groupID,
     logType,
     origin,
@@ -69,6 +71,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       setLogMetadata({
         buildID,
         execution: execution || String(logkeeperMetadata?.execution || 0),
+        fileName,
         htmlLogURL,
         jobLogsURL,
         legacyJobLogsURL,
