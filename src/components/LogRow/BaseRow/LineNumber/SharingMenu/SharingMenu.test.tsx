@@ -1,4 +1,3 @@
-import { useRef } from "react";
 import { act } from "@testing-library/react-hooks";
 import { LogContextProvider } from "context/LogContext";
 import {
@@ -11,16 +10,8 @@ import { renderComponentWithHook } from "test_utils/TestHooks";
 import SharingMenu from ".";
 
 const SharingMenuComponent: React.FC<
-  Omit<React.ComponentProps<typeof SharingMenu>, "refEl">
-> = ({ ...props }) => {
-  const ref = useRef(null);
-  return (
-    <>
-      <div ref={ref} />
-      <SharingMenu {...props} refEl={ref} />
-    </>
-  );
-};
+  React.ComponentProps<typeof SharingMenu>
+> = ({ ...props }) => <SharingMenu {...props} />;
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <LogContextProvider initialLogLines={logs}>
     <MultiLineSelectContextProvider>{children}</MultiLineSelectContextProvider>
@@ -40,7 +31,7 @@ describe("sharingMenu", () => {
   it("should render an open menu", () => {
     const { Component: MenuComponent } = renderComponentWithHook(
       useMultiLineSelectContext,
-      <SharingMenuComponent open />
+      <SharingMenuComponent defaultOpen />
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     renderWithRouterMatch(<Component />, { wrapper });
@@ -55,7 +46,7 @@ describe("sharingMenu", () => {
 
     const { Component: MenuComponent, hook } = renderComponentWithHook(
       useMultiLineSelectContext,
-      <SharingMenuComponent open />
+      <SharingMenuComponent defaultOpen />
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     renderWithRouterMatch(<Component />, { wrapper });
@@ -78,7 +69,7 @@ describe("sharingMenu", () => {
 
     const { Component: MenuComponent, hook } = renderComponentWithHook(
       useMultiLineSelectContext,
-      <SharingMenuComponent open />
+      <SharingMenuComponent defaultOpen />
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     renderWithRouterMatch(<Component />, { wrapper });
@@ -93,12 +84,12 @@ describe("sharingMenu", () => {
     ).toBeInTheDocument();
     await user.click(screen.getByText("Share link to selected lines"));
     const clipboardText = await navigator.clipboard.readText();
-    expect(clipboardText).toBe("http://localhost/");
+    expect(clipboardText).toBe("http://localhost/?shareLine=1");
   });
   it("clicking only search on range should update the url with the range", async () => {
     const { Component: MenuComponent, hook } = renderComponentWithHook(
       useMultiLineSelectContext,
-      <SharingMenuComponent open />
+      <SharingMenuComponent defaultOpen />
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     const { router } = renderWithRouterMatch(<Component />, { wrapper });
@@ -110,6 +101,8 @@ describe("sharingMenu", () => {
     });
     expect(screen.getByText("Only search on range")).toBeInTheDocument();
     await userEvent.click(screen.getByText("Only search on range"));
-    expect(router.state.location.search).toBe("?lower=1&upper=3");
+    expect(router.state.location.search).toBe(
+      "?lower=1&selectedLineRange=L1-L3&upper=3"
+    );
   });
 });
