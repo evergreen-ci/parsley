@@ -1,29 +1,18 @@
-import { useRef } from "react";
 import styled from "@emotion/styled";
 import { size } from "constants/tokens";
 import { useMultiLineSelectContext } from "context/MultiLineSelectContext";
-import SharingMenu from "./SharingMenu";
 
 const LineNumber: React.FC<{ lineNumber: number }> = ({ lineNumber }) => {
-  const { handleSelectLine, menuPosition, openMenu } =
-    useMultiLineSelectContext();
-  const indexRef = useRef(null);
+  const { handleSelectLine } = useMultiLineSelectContext();
   const handleClick = (e: React.MouseEvent) => {
     handleSelectLine(lineNumber, e.shiftKey);
   };
   return (
-    <>
-      <SharingMenu
-        open={openMenu && menuPosition === lineNumber}
-        refEl={indexRef}
-      />
-      <Index
-        ref={indexRef}
-        lineNumber={lineNumber}
-        onClick={handleClick}
-        title="Use shift+click to select multiple lines"
-      />
-    </>
+    <Index
+      lineNumber={lineNumber}
+      onClick={handleClick}
+      title="Use shift+click to select multiple lines"
+    />
   );
 };
 const Index = styled.pre<{ lineNumber: number }>`

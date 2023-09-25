@@ -1,5 +1,6 @@
 import { useCallback } from "react";
 import styled from "@emotion/styled";
+import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
@@ -9,6 +10,7 @@ import { useMultiLineSelectContext } from "context/MultiLineSelectContext";
 import { useQueryParam } from "hooks/useQueryParam";
 import Highlighter from "./Highlighter";
 import LineNumber from "./LineNumber";
+import SharingMenu from "./LineNumber/SharingMenu";
 import { LogRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
@@ -98,6 +100,8 @@ const BaseRow: React.FC<BaseRowProps> = ({
       lineNumber <= selectedLines.endingLine) ||
     selectedLines.startingLine === lineNumber;
 
+  const { menuPosition, openMenu } = useMultiLineSelectContext();
+
   return (
     <RowContainer
       {...rest}
@@ -110,12 +114,18 @@ const BaseRow: React.FC<BaseRowProps> = ({
       onDoubleClick={handleDoubleClick}
       shared={shared}
     >
-      <ShareIcon
-        data-cy={`log-link-${lineNumber}`}
-        glyph={shared ? "ArrowWithCircle" : "Link"}
-        onClick={handleClick}
-        size="small"
-      />
+      {menuPosition === lineNumber ? (
+        <SharingMenu defaultOpen={openMenu} />
+      ) : (
+        <MenuIcon aria-label="Share link" onClick={handleClick}>
+          <ShareIcon
+            data-cy={`log-link-${lineNumber}`}
+            glyph={shared ? "ArrowWithCircle" : "Link"}
+            onClick={handleClick}
+            size="small"
+          />
+        </MenuIcon>
+      )}
       <LineNumber lineNumber={lineNumber} />
       <StyledPre shouldWrap={wrap}>
         <Highlighter
@@ -160,8 +170,8 @@ const ShareIcon = styled(Icon)`
   cursor: pointer;
   user-select: none;
   flex-shrink: 0;
-  margin-left: ${size.xxs};
-  margin-top: 2px;
+  /* margin-left: ${size.xxs}; */
+  /* margin-top: 2px; */
 `;
 
 const StyledPre = styled.pre<{
@@ -180,4 +190,10 @@ const StyledPre = styled.pre<{
     shouldWrap && ` /* wrap multiple lines */ white-space: break-spaces;`}
 `;
 
+const MenuIcon = styled(IconButton)`
+  height: 16px;
+  width: 16px;
+  margin-left: ${size.xxs};
+  /* margin-top: 2px; */
+`;
 export default BaseRow;

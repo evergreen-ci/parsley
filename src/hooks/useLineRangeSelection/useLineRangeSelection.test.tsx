@@ -24,7 +24,7 @@ describe("useLineRangeSelection", () => {
       result.current.setRange({ startingLine: 1 });
     });
     expect(result.current.range).toStrictEqual({
-      endingLine: null,
+      endingLine: undefined,
       startingLine: 1,
     });
     expect(result.current.allQueryParams).toMatchObject({

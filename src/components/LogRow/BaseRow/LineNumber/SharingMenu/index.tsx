@@ -1,5 +1,10 @@
+import { useState } from "react";
+import styled from "@emotion/styled";
+import IconButton from "@leafygreen-ui/icon-button";
 import { Menu, MenuItem } from "@leafygreen-ui/menu";
+import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
+import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useMultiLineSelectContext } from "context/MultiLineSelectContext";
 import { useToastContext } from "context/toast";
@@ -7,14 +12,19 @@ import { useQueryParams } from "hooks/useQueryParam";
 import { copyToClipboard, getJiraFormat } from "utils/string";
 
 interface SharingMenuProps {
-  open: boolean;
-  refEl: React.RefObject<HTMLElement>;
+  defaultOpen: boolean;
 }
-const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
-  const { handleCloseMenu, selectedLines } = useMultiLineSelectContext();
+const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
+  const { selectedLines } = useMultiLineSelectContext();
   const { getLine } = useLogContext();
   const [params, setParams] = useQueryParams();
   const dispatchToast = useToastContext();
+  const [open, setOpen] = useState(defaultOpen);
+
+  const handleToggleMenu = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    setOpen((o) => !o);
+  };
 
   const handleCopySelectedLines = async () => {
     const { endingLine, startingLine } = selectedLines;
@@ -25,6 +35,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
       (_, i) => i + startingLine
     );
     await copyToClipboard(getJiraFormat(bookmarks, getLine));
+    setOpen(false);
     dispatchToast.success(`Copied ${bookmarks.length} lines to clipboard`);
   };
 
@@ -36,6 +47,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
       [QueryParams.LowerRange]: startingLine,
       [QueryParams.UpperRange]: endingLine,
     });
+    setOpen(false);
   };
 
   const handleShareLinkToSelectedLines = async () => {
@@ -46,11 +58,20 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
     url.searchParams.set(QueryParams.ShareLine, startingLine.toString());
 
     await copyToClipboard(url.toString());
+    setOpen(false);
+
     dispatchToast.success(`Copied link to clipboard`);
   };
 
   return (
-    <Menu open={open} refEl={refEl} setOpen={handleCloseMenu}>
+    <Menu
+      open={open}
+      trigger={
+        <MenuIcon aria-label="Expand share menu" onClick={handleToggleMenu}>
+          <Icon glyph="Ellipsis" />
+        </MenuIcon>
+      }
+    >
       <MenuItem
         onClick={handleCopySelectedLines}
         title="Copy the selected lines to your clipboard with Jira formatting."
@@ -72,5 +93,11 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
     </Menu>
   );
 };
+
+const MenuIcon = styled(IconButton)`
+  height: 16px;
+  width: 16px;
+  margin-left: ${size.xxs};
+`;
 
 export default SharingMenu;

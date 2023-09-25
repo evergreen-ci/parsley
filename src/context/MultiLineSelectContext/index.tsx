@@ -38,7 +38,7 @@ const MultiLineSelectContextProvider: React.FC<{
   const [selectedLines, setSelectedLines] = useLineRangeSelection();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [menuPosition, setMenuPosition] = useState<number | undefined>(
-    undefined
+    selectedLines.startingLine ?? undefined
   );
 
   const handleSelectLine = useCallback(
@@ -64,7 +64,11 @@ const MultiLineSelectContextProvider: React.FC<{
         setSelectedLines({ endingLine: undefined, startingLine: selectedLine });
       }
       setOpenMenu(true);
-      setMenuPosition(selectedLine);
+      if (selectedLines.startingLine === selectedLine) {
+        setMenuPosition(undefined);
+      } else {
+        setMenuPosition(selectedLine);
+      }
     },
     [selectedLines]
   );
