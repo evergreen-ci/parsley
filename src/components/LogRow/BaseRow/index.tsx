@@ -70,11 +70,13 @@ const BaseRow: React.FC<BaseRowProps> = ({
   const handleClick = useCallback(() => {
     if (shared) {
       setShareLine(undefined);
+      sendEvent({ name: "Removed Share line" });
     } else {
       setShareLine(lineNumber);
       scrollToLine(lineIndex);
+      sendEvent({ name: "Added Share line" });
     }
-  }, [lineIndex, lineNumber, shared, scrollToLine, setShareLine]);
+  }, [lineIndex, lineNumber, shared, scrollToLine, sendEvent, setShareLine]);
 
   // Double clicking a line should add or remove the line from bookmarks.
   const handleDoubleClick = useCallback(() => {
