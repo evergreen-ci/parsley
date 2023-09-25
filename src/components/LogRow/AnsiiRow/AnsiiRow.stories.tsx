@@ -3,12 +3,22 @@ import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
+import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
+import WithToastContext from "test_utils/toast-decorator";
 import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import AnsiiRow from ".";
 import { ParsleyRow } from "../RowRenderer";
 
 export default {
   component: AnsiiRow,
+  decorators: [
+    (Story) => (
+      <MultiLineSelectContextProvider>
+        <Story />
+      </MultiLineSelectContextProvider>
+    ),
+    WithToastContext,
+  ],
 } satisfies CustomMeta<typeof AnsiiRow>;
 
 type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>>;
