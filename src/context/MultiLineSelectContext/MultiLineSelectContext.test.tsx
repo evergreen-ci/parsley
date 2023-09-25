@@ -121,4 +121,21 @@ describe("multiLineSelectContext", () => {
     });
     expect(result.current.openMenu).toBe(true);
   });
+  it("clicking on a selected line should clear the selection", () => {
+    const { result } = renderHook(useMultiLineSelectContext, { wrapper });
+    act(() => {
+      result.current.handleSelectLine(2, false);
+    });
+    expect(result.current.selectedLines).toStrictEqual({
+      endingLine: undefined,
+      startingLine: 2,
+    });
+    act(() => {
+      result.current.handleSelectLine(2, false);
+    });
+    expect(result.current.selectedLines).toStrictEqual({
+      endingLine: undefined,
+      startingLine: undefined,
+    });
+  });
 });

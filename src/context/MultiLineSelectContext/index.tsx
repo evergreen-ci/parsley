@@ -58,6 +58,8 @@ const MultiLineSelectContextProvider: React.FC<{
             startingLine: selectedLines.startingLine,
           });
         }
+      } else if (selectedLines.startingLine === selectedLine) {
+        setSelectedLines({ endingLine: undefined, startingLine: undefined });
       } else {
         setSelectedLines({ endingLine: undefined, startingLine: selectedLine });
       }
