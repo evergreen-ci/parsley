@@ -1,16 +1,24 @@
 import { act, renderHook } from "@testing-library/react-hooks";
+import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { MultiLineSelectContextProvider, useMultiLineSelectContext } from ".";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <MultiLineSelectContextProvider>{children}</MultiLineSelectContextProvider>
+  <MemoryRouter initialEntries={["/"]}>
+    <MultiLineSelectContextProvider>
+      <Routes>
+        <Route element={undefined} path="/login" />
+        <Route element={children} path="/" />
+      </Routes>
+    </MultiLineSelectContextProvider>
+  </MemoryRouter>
 );
 
 describe("multiLineSelectContext", () => {
   it("should not have any lines selected by default", () => {
     const { result } = renderHook(useMultiLineSelectContext, { wrapper });
     expect(result.current.selectedLines).toStrictEqual({
-      endingLine: null,
-      startingLine: null,
+      endingLine: undefined,
+      startingLine: undefined,
     });
   });
   it("selecting a line should set the starting line", () => {
@@ -19,7 +27,7 @@ describe("multiLineSelectContext", () => {
       result.current.handleSelectLine(1, false);
     });
     expect(result.current.selectedLines).toStrictEqual({
-      endingLine: null,
+      endingLine: undefined,
       startingLine: 1,
     });
   });
@@ -29,14 +37,14 @@ describe("multiLineSelectContext", () => {
       result.current.handleSelectLine(1, false);
     });
     expect(result.current.selectedLines).toStrictEqual({
-      endingLine: null,
+      endingLine: undefined,
       startingLine: 1,
     });
     act(() => {
       result.current.handleSelectLine(2, false);
     });
     expect(result.current.selectedLines).toStrictEqual({
-      endingLine: null,
+      endingLine: undefined,
       startingLine: 2,
     });
   });
@@ -46,7 +54,7 @@ describe("multiLineSelectContext", () => {
       result.current.handleSelectLine(1, false);
     });
     expect(result.current.selectedLines).toStrictEqual({
-      endingLine: null,
+      endingLine: undefined,
       startingLine: 1,
     });
     act(() => {
@@ -63,7 +71,7 @@ describe("multiLineSelectContext", () => {
       result.current.handleSelectLine(2, false);
     });
     expect(result.current.selectedLines).toStrictEqual({
-      endingLine: null,
+      endingLine: undefined,
       startingLine: 2,
     });
     act(() => {
@@ -91,15 +99,15 @@ describe("multiLineSelectContext", () => {
       result.current.handleSelectLine(2, false);
     });
     expect(result.current.selectedLines).toStrictEqual({
-      endingLine: null,
+      endingLine: undefined,
       startingLine: 2,
     });
     act(() => {
       result.current.clearSelection();
     });
     expect(result.current.selectedLines).toStrictEqual({
-      endingLine: null,
-      startingLine: null,
+      endingLine: undefined,
+      startingLine: undefined,
     });
   });
   it("should auto open the menu when both lines are selected", () => {
