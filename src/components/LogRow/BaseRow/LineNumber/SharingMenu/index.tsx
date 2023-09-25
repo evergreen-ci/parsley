@@ -39,19 +39,34 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ open, refEl }) => {
   };
 
   const handleShareLinkToSelectedLines = async () => {
-    const { endingLine, startingLine } = selectedLines;
-    if (startingLine === null || endingLine === null) return;
-    await copyToClipboard(`${window.location.href}`);
+    const { startingLine } = selectedLines;
+    if (startingLine === undefined) return;
+    // Take the current URL and add the shareLine query param
+    const url = new URL(window.location.href);
+    url.searchParams.set(QueryParams.ShareLine, startingLine.toString());
+
+    await copyToClipboard(url.toString());
     dispatchToast.success(`Copied link to clipboard`);
   };
 
   return (
     <Menu open={open} refEl={refEl} setOpen={handleCloseMenu}>
-      <MenuItem onClick={handleCopySelectedLines}>Copy selected lines</MenuItem>
-      <MenuItem onClick={handleShareLinkToSelectedLines}>
+      <MenuItem
+        onClick={handleCopySelectedLines}
+        title="Copy the selected lines to your clipboard with Jira formatting."
+      >
+        Copy selected lines
+      </MenuItem>
+      <MenuItem
+        onClick={handleShareLinkToSelectedLines}
+        title="Copy a link to these lines."
+      >
         Share link to selected lines
       </MenuItem>
-      <MenuItem onClick={handleOnlySearchOnRange}>
+      <MenuItem
+        onClick={handleOnlySearchOnRange}
+        title="Limit the range Parsley will search to only these lines."
+      >
         Only search on range
       </MenuItem>
     </Menu>
