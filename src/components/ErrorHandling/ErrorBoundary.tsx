@@ -31,30 +31,27 @@ export class DefaultErrorBoundary extends Component<
   render() {
     const { hasError } = this.state;
     const { children } = this.props;
-    if (hasError) {
-      return <ErrorFallback />;
-    }
-    return children;
+    return hasError ? <ErrorFallback /> : children;
   }
 }
 
 export const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
-  const useBugsnag = Bugsnag.isStarted();
-  const useSentry = isInitialized();
+  const bugsnagEnabled = Bugsnag.isStarted();
+  const sentryEnabled = isInitialized();
 
-  if (!useBugsnag && !useSentry) {
+  if (!bugsnagEnabled && !sentryEnabled) {
     return <DefaultErrorBoundary>{children}</DefaultErrorBoundary>;
   }
 
   let errorBoundary = children;
 
-  if (useSentry) {
+  if (sentryEnabled) {
     errorBoundary = <SentryErrorBoundary>{errorBoundary}</SentryErrorBoundary>;
   }
 
-  if (useBugsnag) {
+  if (bugsnagEnabled) {
     errorBoundary = (
       <BugsnagErrorBoundary>{errorBoundary}</BugsnagErrorBoundary>
     );

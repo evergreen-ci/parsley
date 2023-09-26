@@ -22,8 +22,6 @@ const initializeBugsnag = () => {
   }
 };
 
-const fallback = () => <ErrorFallback />;
-
 const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
@@ -43,7 +41,7 @@ const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({
   };
 
   return (
-    <Boundary FallbackComponent={fallback} onError={onError}>
+    <Boundary FallbackComponent={ErrorFallback} onError={onError}>
       {children}
     </Boundary>
   );
