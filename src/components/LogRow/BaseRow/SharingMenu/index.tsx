@@ -31,13 +31,13 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
     const { endingLine, startingLine } = selectedLines;
     if (startingLine === undefined || endingLine === undefined) return;
     // Create an array of line numbers that represent the range in selectedLines
-    const bookmarks = Array.from(
+    const lineNumbers = Array.from(
       { length: endingLine - startingLine + 1 },
       (_, i) => i + startingLine
     );
-    await copyToClipboard(getJiraFormat(bookmarks, getLine));
+    await copyToClipboard(getJiraFormat(lineNumbers, getLine));
     setOpen(false);
-    dispatchToast.success(`Copied ${bookmarks.length} lines to clipboard`);
+    dispatchToast.success(`Copied ${lineNumbers.length} lines to clipboard`);
   };
 
   const handleOnlySearchOnRange = () => {
