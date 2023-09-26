@@ -12,7 +12,20 @@ const useLineRangeSelection = (): readonly [
   >(QueryParams.SelectedLineRange, undefined);
 
   const setLineRange = ({ endingLine, startingLine }: SelectedLineRange) => {
-    setSelectedLineRange(encodeSelectedLineRange({ endingLine, startingLine }));
+    let tempEndingLine = endingLine;
+    let tempStartingLine = startingLine;
+    if (tempEndingLine !== undefined && tempStartingLine !== undefined) {
+      if (tempStartingLine > tempEndingLine) {
+        tempStartingLine = endingLine;
+        tempEndingLine = startingLine;
+      }
+    }
+    setSelectedLineRange(
+      encodeSelectedLineRange({
+        endingLine: tempEndingLine,
+        startingLine: tempStartingLine,
+      })
+    );
   };
   const { endingLine, startingLine } = selectedLineRange
     ? parseSelectedLineRange(selectedLineRange)

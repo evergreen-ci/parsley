@@ -51,4 +51,23 @@ describe("useLineRangeSelection", () => {
       search: "test",
     });
   });
+  it("startingLine should always be less than endingLine", () => {
+    const { result } = renderHook(() => useLineRangeSelectionJointHook(), {
+      wrapper,
+    });
+
+    expect(result.current.allQueryParams).toMatchObject({ search: "test" });
+
+    act(() => {
+      result.current.setRange({ endingLine: 1, startingLine: 10 });
+    });
+    expect(result.current.range).toStrictEqual({
+      endingLine: 10,
+      startingLine: 1,
+    });
+    expect(result.current.allQueryParams).toMatchObject({
+      [QueryParams.SelectedLineRange]: "L1-L10",
+      search: "test",
+    });
+  });
 });

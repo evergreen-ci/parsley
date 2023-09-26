@@ -2,8 +2,14 @@ import { act, renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { MultiLineSelectContextProvider, useMultiLineSelectContext } from ".";
 
-const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <MemoryRouter initialEntries={["/"]}>
+const wrapper = ({
+  children,
+  initialEntries = ["/"],
+}: {
+  children: React.ReactNode;
+  initialEntries: string[];
+}) => (
+  <MemoryRouter initialEntries={initialEntries}>
     <MultiLineSelectContextProvider>
       <Routes>
         <Route element={undefined} path="/login" />
@@ -82,16 +88,43 @@ describe("multiLineSelectContext", () => {
       startingLine: 1,
     });
   });
-  it("menuPosition should be the last selected line", () => {
-    const { result } = renderHook(useMultiLineSelectContext, { wrapper });
-    act(() => {
-      result.current.handleSelectLine(2, false);
+  describe("menuPosition", () => {
+    it("menuPosition should be the last selected line", () => {
+      const { result } = renderHook(useMultiLineSelectContext, { wrapper });
+      act(() => {
+        result.current.handleSelectLine(2, false);
+      });
+      expect(result.current.menuPosition).toBe(2);
+      act(() => {
+        result.current.handleSelectLine(1, true);
+      });
+      expect(result.current.menuPosition).toBe(1);
     });
-    expect(result.current.menuPosition).toBe(2);
-    act(() => {
-      result.current.handleSelectLine(1, true);
+    it("initial menuPosition should not be set if there is not a selected line range", () => {
+      const { result } = renderHook(useMultiLineSelectContext, { wrapper });
+      expect(result.current.menuPosition).toBeUndefined();
     });
-    expect(result.current.menuPosition).toBe(1);
+    it("initial menuPosition should be the first line if there is not a shared line", () => {
+      const { result } = renderHook(useMultiLineSelectContext, {
+        wrapper: (props: any) =>
+          wrapper({
+            ...props,
+            initialEntries: ["/?selectedLineRange=L1-L3"],
+          }),
+      });
+      expect(result.current.menuPosition).toBe(1);
+    });
+
+    it("initial menuPosition should not conflict with the shared line", () => {
+      const { result } = renderHook(useMultiLineSelectContext, {
+        wrapper: (props: any) =>
+          wrapper({
+            ...props,
+            initialEntries: ["/?shareLine=1&selectedLineRange=L1-L3"],
+          }),
+      });
+      expect(result.current.menuPosition).toBe(3);
+    });
   });
   it("should be able to clear the selection", () => {
     const { result } = renderHook(useMultiLineSelectContext, { wrapper });
@@ -113,11 +146,11 @@ describe("multiLineSelectContext", () => {
   it("should auto open the menu when both lines are selected", () => {
     const { result } = renderHook(useMultiLineSelectContext, { wrapper });
     act(() => {
-      result.current.handleSelectLine(2, false);
+      result.current.handleSelectLine(1, false);
     });
     expect(result.current.openMenu).toBe(false);
     act(() => {
-      result.current.handleSelectLine(1, true);
+      result.current.handleSelectLine(3, true);
     });
     expect(result.current.openMenu).toBe(true);
   });

@@ -5,7 +5,9 @@ import {
   useMemo,
   useState,
 } from "react";
+import { QueryParams } from "constants/queryParams";
 import useLineRangeSelection from "hooks/useLineRangeSelection";
+import { useQueryParam } from "hooks/useQueryParam";
 
 type MultiLineSelectContextState = {
   handleSelectLine: (selectedLine: number, shiftClick: boolean) => void;
@@ -37,44 +39,47 @@ const MultiLineSelectContextProvider: React.FC<{
 }> = ({ children }) => {
   const [selectedLines, setSelectedLines] = useLineRangeSelection();
   const [openMenu, setOpenMenu] = useState<boolean>(false);
+  const [shareLine] = useQueryParam<number | undefined>(
+    QueryParams.ShareLine,
+    undefined
+  );
+
+  const hasShareLine = shareLine !== undefined;
+  const hasEndingLine = selectedLines.endingLine !== undefined;
+
+  const initialMenuPosition =
+    hasShareLine && hasEndingLine
+      ? selectedLines.endingLine
+      : selectedLines.startingLine;
+
   const [menuPosition, setMenuPosition] = useState<number | undefined>(
-    selectedLines.startingLine ?? undefined
+    initialMenuPosition ?? undefined
   );
 
   const handleSelectLine = useCallback(
     (selectedLine: number, shiftClick: boolean) => {
       if (shiftClick) {
-        if (
-          selectedLines.startingLine &&
-          selectedLines.startingLine > selectedLine
-        ) {
-          setSelectedLines({
-            endingLine: selectedLines.startingLine,
-            startingLine: selectedLine,
-          });
-        } else {
-          setSelectedLines({
-            endingLine: selectedLine,
-            startingLine: selectedLines.startingLine,
-          });
-        }
-      } else if (selectedLines.startingLine === selectedLine) {
-        setSelectedLines({ endingLine: undefined, startingLine: undefined });
+        setSelectedLines({
+          endingLine: selectedLine,
+          startingLine: selectedLines.startingLine,
+        });
+        setOpenMenu(true);
       } else {
         setSelectedLines({ endingLine: undefined, startingLine: selectedLine });
       }
-      setOpenMenu(true);
+
       if (selectedLines.startingLine === selectedLine) {
+        setSelectedLines({ endingLine: undefined, startingLine: undefined });
         setMenuPosition(undefined);
       } else {
         setMenuPosition(selectedLine);
       }
     },
-    [selectedLines]
+    [selectedLines, setSelectedLines]
   );
   const clearSelection = useCallback(() => {
     setSelectedLines({ endingLine: undefined, startingLine: undefined });
-  }, []);
+  }, [setSelectedLines]);
 
   const bothLinesSelected = useMemo(
     () =>
