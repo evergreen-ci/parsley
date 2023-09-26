@@ -2,6 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
 import { Menu, MenuItem } from "@leafygreen-ui/menu";
+import pluralize from "pluralize";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
@@ -63,6 +64,12 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
     dispatchToast.success(`Copied link to clipboard`);
   };
 
+  const lineCount =
+    selectedLines.endingLine === undefined ||
+    selectedLines.startingLine === undefined
+      ? 1
+      : selectedLines.endingLine - selectedLines.startingLine + 1;
+
   return (
     <Menu
       open={open}
@@ -74,17 +81,24 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
     >
       <MenuItem
         onClick={handleCopySelectedLines}
-        title="Copy the selected lines to your clipboard with Jira formatting."
+        title={`Copy the selected ${pluralize(
+          "line",
+          lineCount
+        )} to your clipboard with Jira formatting.`}
       >
-        Copy selected lines
+        Copy selected {pluralize("line", lineCount)}
       </MenuItem>
       <MenuItem
         onClick={handleShareLinkToSelectedLines}
-        title="Copy a link to these lines."
+        title={`Copy a link to ${pluralize("this", lineCount)} ${pluralize(
+          "line",
+          lineCount
+        )}.`}
       >
-        Share link to selected lines
+        Share link to selected {pluralize("line", lineCount)}
       </MenuItem>
       <MenuItem
+        disabled={lineCount === 1}
         onClick={handleOnlySearchOnRange}
         title="Limit the range Parsley will search to only these lines."
       >
