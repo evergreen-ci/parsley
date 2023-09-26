@@ -8,6 +8,7 @@ import {
 import { QueryParams } from "constants/queryParams";
 import useLineRangeSelection from "hooks/useLineRangeSelection";
 import { useQueryParam } from "hooks/useQueryParam";
+import { leaveBreadcrumb } from "utils/errorReporting";
 
 type MultiLineSelectContextState = {
   handleSelectLine: (selectedLine: number, shiftClick: boolean) => void;
@@ -56,6 +57,12 @@ const MultiLineSelectContextProvider: React.FC<{
     initialMenuPosition ?? undefined
   );
 
+  const clearSelection = useCallback(() => {
+    setSelectedLines({ endingLine: undefined, startingLine: undefined });
+    setMenuPosition(undefined);
+    leaveBreadcrumb("Clear line range");
+  }, [setSelectedLines]);
+
   const handleSelectLine = useCallback(
     (selectedLine: number, shiftClick: boolean) => {
       if (shiftClick) {
@@ -64,22 +71,20 @@ const MultiLineSelectContextProvider: React.FC<{
           startingLine: selectedLines.startingLine,
         });
         setOpenMenu(true);
+        leaveBreadcrumb("Shift click on line range");
       } else {
         setSelectedLines({ endingLine: undefined, startingLine: selectedLine });
+        leaveBreadcrumb("Set initial line range");
       }
 
       if (selectedLines.startingLine === selectedLine) {
-        setSelectedLines({ endingLine: undefined, startingLine: undefined });
-        setMenuPosition(undefined);
+        clearSelection();
       } else {
         setMenuPosition(selectedLine);
       }
     },
-    [selectedLines, setSelectedLines]
+    [selectedLines, setSelectedLines, clearSelection]
   );
-  const clearSelection = useCallback(() => {
-    setSelectedLines({ endingLine: undefined, startingLine: undefined });
-  }, [setSelectedLines]);
 
   const bothLinesSelected = useMemo(
     () =>
