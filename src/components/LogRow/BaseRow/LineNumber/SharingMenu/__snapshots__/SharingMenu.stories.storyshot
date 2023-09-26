@@ -1,0 +1,39 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/LogRow/BaseRow/LineNumber/SharingMenu Default 1`] = `
+<div>
+  <button
+    aria-disabled="false"
+    aria-expanded="true"
+    aria-haspopup="true"
+    aria-label="Expand share menu"
+    class="css-xrue4o leafygreen-ui-1xt2asn"
+    tabindex="0"
+  >
+    <div
+      class="leafygreen-ui-xhlipt"
+    >
+      <svg
+        aria-label="Ellipsis Icon"
+        class=""
+        fill="none"
+        height="16"
+        role="img"
+        viewBox="0 0 16 16"
+        width="16"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          clip-rule="evenodd"
+          d="M2.75 6a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm5 0a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm6.75 1.75a1.75 1.75 0 10-3.5 0 1.75 1.75 0 003.5 0z"
+          fill="currentColor"
+          fill-rule="evenodd"
+        />
+      </svg>
+      <span
+        class="leafygreen-ui-wn831c"
+      />
+    </div>
+  </button>
+</div>
+`;
