@@ -11,13 +11,15 @@ import { useMultiLineSelectContext } from "context/MultiLineSelectContext";
 import { useToastContext } from "context/toast";
 import { useQueryParams } from "hooks/useQueryParam";
 import { copyToClipboard, getJiraFormat } from "utils/string";
+import { getLinesInProcessedLogLinesFromSelectedLines } from "./utils";
 
 interface SharingMenuProps {
   defaultOpen: boolean;
 }
+
 const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
   const { selectedLines } = useMultiLineSelectContext();
-  const { getLine } = useLogContext();
+  const { getLine, processedLogLines } = useLogContext();
   const [params, setParams] = useQueryParams();
   const dispatchToast = useToastContext();
   const [open, setOpen] = useState(defaultOpen);
@@ -31,10 +33,11 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
     const { endingLine, startingLine } = selectedLines;
     if (startingLine === undefined || endingLine === undefined) return;
     // Create an array of line numbers that represent the range in selectedLines
-    const lineNumbers = Array.from(
-      { length: endingLine - startingLine + 1 },
-      (_, i) => i + startingLine
+    const lineNumbers = getLinesInProcessedLogLinesFromSelectedLines(
+      processedLogLines,
+      selectedLines
     );
+
     await copyToClipboard(getJiraFormat(lineNumbers, getLine));
     setOpen(false);
     dispatchToast.success(`Copied ${lineNumbers.length} lines to clipboard`);
