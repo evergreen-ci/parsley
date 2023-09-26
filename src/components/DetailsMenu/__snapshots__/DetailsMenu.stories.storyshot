@@ -357,7 +357,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
       >
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-9cdis2"
           data-cy="jira-button"
           type="button"
         >
@@ -390,7 +390,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-9cdis2"
           data-cy="job-logs-button"
           target="_blank"
           type="button"
@@ -426,7 +426,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-9cdis2"
           data-cy="raw-log-button"
           target="_blank"
           type="button"
@@ -462,7 +462,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-9cdis2"
           data-cy="html-log-button"
           target="_blank"
           type="button"
@@ -893,7 +893,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
       >
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-9cdis2"
           data-cy="jira-button"
           type="button"
         >
@@ -926,7 +926,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-9cdis2"
           data-cy="job-logs-button"
           target="_blank"
           type="button"
@@ -962,7 +962,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-9cdis2"
           data-cy="raw-log-button"
           target="_blank"
           type="button"
@@ -998,7 +998,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-9cdis2"
           data-cy="html-log-button"
           target="_blank"
           type="button"
