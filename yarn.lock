@@ -3797,17 +3797,17 @@
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/box/-/box-3.1.8.tgz#33e6dedbe3ee510ce88ffade0a3a9e68a96103a9"
   integrity sha512-qfjwhrie+mUrS2H+Qp98iQKBPoZtNpFmlGBYgg59sVOzotFvyvqwxlf/JcaNGo+v7nyOhC2XAHui0ywf9cScKw==
 
-"@leafygreen-ui/button@20.0.5", "@leafygreen-ui/button@^20.0.2":
-  version "20.0.5"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/button/-/button-20.0.5.tgz#2df1d2b81e3e08e5f6cb9920cef01b481c77c2b0"
-  integrity sha512-JjrLfYNDRd+2iQXcUXlUju9bW+jAb90B3GPAImR/bFySkr1TILm0tn8qBBt7hQ/ZwuHGVcG85Ee3dTqbI+SXyA==
+"@leafygreen-ui/button@21.0.6":
+  version "21.0.6"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/button/-/button-21.0.6.tgz#0dd3efc192fa959568c291b21d64d381eb228b56"
+  integrity sha512-J9QmC29fNQG2GkQdxqR4IXyCBf3Z0A56CDRHQoPkIgrpPkAOLWH6jVbh2pMpcq/mB9LO4P9B4IH1WwdJ1XUn3w==
   dependencies:
-    "@leafygreen-ui/box" "^3.1.3"
-    "@leafygreen-ui/emotion" "^4.0.4"
-    "@leafygreen-ui/lib" "^10.3.3"
-    "@leafygreen-ui/palette" "^4.0.4"
-    "@leafygreen-ui/ripple" "^1.1.9"
-    "@leafygreen-ui/tokens" "^2.0.3"
+    "@leafygreen-ui/box" "^3.1.8"
+    "@leafygreen-ui/emotion" "^4.0.7"
+    "@leafygreen-ui/lib" "^12.0.0"
+    "@leafygreen-ui/palette" "^4.0.7"
+    "@leafygreen-ui/ripple" "^1.1.12"
+    "@leafygreen-ui/tokens" "^2.1.4"
     polished "^4.2.2"
 
 "@leafygreen-ui/button@^19.0.4":
@@ -3821,6 +3821,19 @@
     "@leafygreen-ui/palette" "^3.4.7"
     "@leafygreen-ui/ripple" "^1.1.8"
     "@leafygreen-ui/tokens" "^2.0.0"
+    polished "^4.2.2"
+
+"@leafygreen-ui/button@^20.0.2":
+  version "20.0.5"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/button/-/button-20.0.5.tgz#2df1d2b81e3e08e5f6cb9920cef01b481c77c2b0"
+  integrity sha512-JjrLfYNDRd+2iQXcUXlUju9bW+jAb90B3GPAImR/bFySkr1TILm0tn8qBBt7hQ/ZwuHGVcG85Ee3dTqbI+SXyA==
+  dependencies:
+    "@leafygreen-ui/box" "^3.1.3"
+    "@leafygreen-ui/emotion" "^4.0.4"
+    "@leafygreen-ui/lib" "^10.3.3"
+    "@leafygreen-ui/palette" "^4.0.4"
+    "@leafygreen-ui/ripple" "^1.1.9"
+    "@leafygreen-ui/tokens" "^2.0.3"
     polished "^4.2.2"
 
 "@leafygreen-ui/button@^21.0.3", "@leafygreen-ui/button@^21.0.5":
