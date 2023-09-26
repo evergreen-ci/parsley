@@ -10,7 +10,7 @@ import { useMultiLineSelectContext } from "context/MultiLineSelectContext";
 import { useQueryParam } from "hooks/useQueryParam";
 import Highlighter from "./Highlighter";
 import LineNumber from "./LineNumber";
-import SharingMenu from "./LineNumber/SharingMenu";
+import SharingMenu from "./SharingMenu";
 import { LogRowProps } from "../types";
 import { isLineInRange } from "../utils";
 
