@@ -6,7 +6,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
     class="css-3ieiu4"
   >
     <div
-      class="lg-ui-side-nav-0000 css-18wdk2z leafygreen-ui-dnxju7"
+      class="lg-ui-side-nav-0000 css-18wdk2z leafygreen-ui-83xhmz"
       data-testid="side-nav-container"
     >
       <div
@@ -14,11 +14,11 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
       >
         <nav
           aria-label="Side panel"
-          class="leafygreen-ui-1ch59fo"
+          class="leafygreen-ui-1ejkhps"
           id="side-nav-5"
         >
           <div
-            class="leafygreen-ui-aoszy5"
+            class="leafygreen-ui-1nmawjt"
           >
             <ul
               class="leafygreen-ui-19jz4bq"
@@ -653,7 +653,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
             </ul>
           </div>
           <div
-            class="leafygreen-ui-1s7m71x"
+            class="leafygreen-ui-1jpr46n"
           >
             <ul
               aria-hidden="true"
@@ -742,7 +742,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
           data-testid="side-nav-collapse-toggle"
         >
           <div
-            class="lg-ui-collapse-menu-0000 leafygreen-ui-17suy5p"
+            class="lg-ui-collapse-menu-0000 leafygreen-ui-16i6mio"
           >
             <svg
               alt=""
