@@ -3,6 +3,7 @@ import styled from "@emotion/styled";
 import IconButton from "@leafygreen-ui/icon-button";
 import { Menu, MenuItem } from "@leafygreen-ui/menu";
 import pluralize from "pluralize";
+import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
@@ -23,9 +24,15 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
   const [params, setParams] = useQueryParams();
   const dispatchToast = useToastContext();
   const [open, setOpen] = useState(defaultOpen);
+  const { sendEvent } = useLogWindowAnalytics();
 
   const handleToggleMenu = (e: React.MouseEvent) => {
     e.stopPropagation();
+    if (open) {
+      sendEvent({ name: "Closed Share Menu" });
+    } else {
+      sendEvent({ name: "Opened Share Menu" });
+    }
     setOpen((o) => !o);
   };
 
@@ -40,6 +47,9 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
 
     await copyToClipboard(getJiraFormat(lineNumbers, getLine));
     setOpen(false);
+    sendEvent({
+      name: "Copied Share Lines To Clipboard",
+    });
     dispatchToast.success(`Copied ${lineNumbers.length} lines to clipboard`);
   };
 
@@ -52,6 +62,9 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
       [QueryParams.UpperRange]: endingLine,
     });
     setOpen(false);
+    sendEvent({
+      name: "Applied Range Limit",
+    });
   };
 
   const handleShareLinkToSelectedLines = async () => {
@@ -63,7 +76,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
 
     await copyToClipboard(url.toString());
     setOpen(false);
-
+    sendEvent({ name: "Copied Share Link" });
     dispatchToast.success(`Copied link to clipboard`);
   };
 
