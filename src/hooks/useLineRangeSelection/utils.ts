@@ -1,10 +1,14 @@
+import { SelectedLineRange } from "types/logs";
+
 /**
  * `parseSelectedLineRange` parses the selected line range into an object
  * with the start and end line numbers.
  * @param selectedLineRange - the selected line range
  * @returns an object with the start and end line numbers
  */
-const parseSelectedLineRange = (selectedLineRange: string) => {
+const parseSelectedLineRange = (
+  selectedLineRange: string
+): SelectedLineRange => {
   const [start, end] = selectedLineRange.split("-");
   // start and end start with L, so we need to remove it
   const startLine = start.slice(1);
@@ -25,10 +29,7 @@ const parseSelectedLineRange = (selectedLineRange: string) => {
 const encodeSelectedLineRange = ({
   endingLine,
   startingLine,
-}: {
-  startingLine?: number;
-  endingLine?: number;
-}) => {
+}: SelectedLineRange) => {
   if (startingLine === undefined) {
     return undefined;
   }
