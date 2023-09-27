@@ -3849,16 +3849,16 @@
     "@leafygreen-ui/tokens" "^2.1.4"
     polished "^4.2.2"
 
-"@leafygreen-ui/card@9.0.2":
-  version "9.0.2"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/card/-/card-9.0.2.tgz#21c77f3ebc0991bdc1dc9928955f606b3d3ba823"
-  integrity sha512-Iw0MEIqX2i0MZCPb30HRRJKWmBhHk9pAt+fKnp9qWCOO5g1KLUG97dE8Y41NweBdRTOT6LnDQaUdaIAcHcsh/w==
+"@leafygreen-ui/card@10.0.5":
+  version "10.0.5"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/card/-/card-10.0.5.tgz#890b0b9e9c8d099b2e0200a725738c730752489a"
+  integrity sha512-RunKpbTg2agE+YXjP0YFtIbUWWLLA3owf5PmyPU7jU+uhOXxSatmcM/ma2zGa82K3oLZSGI7LkKJJL9NMRU8Ig==
   dependencies:
-    "@leafygreen-ui/box" "^3.1.1"
-    "@leafygreen-ui/emotion" "^4.0.3"
-    "@leafygreen-ui/lib" "^10.0.0"
-    "@leafygreen-ui/palette" "^3.4.4"
-    "@leafygreen-ui/tokens" "^1.4.0"
+    "@leafygreen-ui/box" "^3.1.8"
+    "@leafygreen-ui/emotion" "^4.0.7"
+    "@leafygreen-ui/lib" "^12.0.0"
+    "@leafygreen-ui/palette" "^4.0.7"
+    "@leafygreen-ui/tokens" "^2.1.4"
     polished "^4.2.2"
 
 "@leafygreen-ui/checkbox@12.0.11":
@@ -4066,7 +4066,7 @@
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/palette/-/palette-4.0.7.tgz#1739d29411b8ba02a2be756e198f10c242428bb0"
   integrity sha512-rBeAk4Tk3t9pYqXYKqVZfma/MH1SBtt02BxAL6TpJb8wQ+i5zap6o1Gnb3nF9LAG7sA0+OHfr1B5uSvr63GGqw==
 
-"@leafygreen-ui/palette@^3.4.4", "@leafygreen-ui/palette@^3.4.7":
+"@leafygreen-ui/palette@^3.4.7":
   version "3.4.7"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/palette/-/palette-3.4.7.tgz#7c4a619ca0cb7a9785326dcb67e012369b3d92d6"
   integrity sha512-AsvPlbvF7CERiZbAQR8hy3lAJ2/rieXI3cO0jsOwV8ztDqYNotKAdLujyr/NviudrRUenYiXrLizIKVlSPUMuA==
@@ -4237,13 +4237,6 @@
     "@leafygreen-ui/lib" "^10.0.0"
     "@leafygreen-ui/palette" "^3.4.7"
     "@leafygreen-ui/tokens" "^2.0.0"
-
-"@leafygreen-ui/tokens@^1.4.0":
-  version "1.4.0"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/tokens/-/tokens-1.4.0.tgz#1bdb9f1fa3bfb8c5a585b740019bd4d4e159f0a5"
-  integrity sha512-A8xjTVUsc2OG3A6lmvJ8xw/+v0snKkqVPUHX8Q6dqDfWm4YW/wjWFoww/gUyeH4HX7lvOrBHltjwbVKGC7RcGQ==
-  dependencies:
-    "@leafygreen-ui/palette" "^3.4.4"
 
 "@leafygreen-ui/tokens@^2.0.0", "@leafygreen-ui/tokens@^2.0.1", "@leafygreen-ui/tokens@^2.0.2", "@leafygreen-ui/tokens@^2.0.3", "@leafygreen-ui/tokens@^2.1.0", "@leafygreen-ui/tokens@^2.1.4", "@leafygreen-ui/tokens@^2.2.0":
   version "2.2.0"
