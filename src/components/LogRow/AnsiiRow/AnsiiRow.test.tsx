@@ -1,56 +1,45 @@
 import { LogContextProvider } from "context/LogContext";
-import { renderWithRouterMatch, screen } from "test_utils";
+import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
+import {
+  RenderWithRouterMatchOptions,
+  renderWithRouterMatch,
+  screen,
+} from "test_utils";
 import AnsiiRow from ".";
 
-const wrapper = (logs: string[]) => {
-  const provider = ({ children }: { children: React.ReactNode }) => (
-    <LogContextProvider initialLogLines={logs}>{children}</LogContextProvider>
-  );
-  return provider;
-};
+const renderRow = (
+  props: React.ComponentProps<typeof AnsiiRow>,
+  options: RenderWithRouterMatchOptions
+) =>
+  renderWithRouterMatch(<AnsiiRow {...props} />, {
+    ...options,
+    wrapper: ({ children }: { children: React.ReactElement }) => (
+      <LogContextProvider initialLogLines={logLines}>
+        <MultiLineSelectContextProvider>
+          {children}
+        </MultiLineSelectContextProvider>
+      </LogContextProvider>
+    ),
+  });
 
 describe("ansiiRow", () => {
   it("does not render an ansii row if getLine returns undefined", () => {
-    renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineIndex={99} lineNumber={99} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
+    renderRow({ ...ansiiProps, lineIndex: 99, lineNumber: 99 }, {});
     expect(screen.queryByDataCy("ansii-row")).toBeNull();
   });
   it("renders an ansii row if getLine returns an empty string", () => {
-    renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineIndex={10} lineNumber={10} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
+    renderRow({ ...ansiiProps, lineIndex: 10, lineNumber: 10 }, {});
     expect(screen.getByDataCy("ansii-row")).toBeInTheDocument();
   });
   it("displays a log line and its text for a given index", () => {
-    renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineIndex={0} lineNumber={0} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
+    renderRow({ ...ansiiProps, lineIndex: 0, lineNumber: 0 }, {});
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
-    renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineIndex={1} lineNumber={1} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
+    renderRow({ ...ansiiProps, lineIndex: 1, lineNumber: 1 }, {});
     expect(screen.getByText(logLines[1])).toBeInTheDocument();
   });
   it("lines should be linkified if they have a url", () => {
-    renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineIndex={8} lineNumber={8} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
+    renderRow({ ...ansiiProps, lineIndex: 8, lineNumber: 8 }, {});
+
     expect(screen.getByText("https://www.google.com")).toBeInTheDocument();
     expect(screen.getByText("https://www.google.com")).toHaveAttribute(
       "href",
@@ -58,30 +47,26 @@ describe("ansiiRow", () => {
     );
   });
   it("should highlight text that match a search term", () => {
-    renderWithRouterMatch(
-      <AnsiiRow
-        {...ansiiProps}
-        lineIndex={9}
-        lineNumber={9}
-        searchTerm={/highlight me/}
-      />,
+    renderRow(
       {
-        wrapper: wrapper(logLines),
-      }
+        ...ansiiProps,
+        lineIndex: 9,
+        lineNumber: 9,
+        searchTerm: /highlight me/,
+      },
+      {}
     );
     expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
   });
   it("should highlight text that have matching highlights", () => {
-    renderWithRouterMatch(
-      <AnsiiRow
-        {...ansiiProps}
-        highlightRegex={/highlight me/}
-        lineIndex={9}
-        lineNumber={9}
-      />,
+    renderRow(
       {
-        wrapper: wrapper(logLines),
-      }
+        ...ansiiProps,
+        highlightRegex: /highlight me/,
+        lineIndex: 9,
+        lineNumber: 9,
+      },
+      {}
     );
     expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
   });

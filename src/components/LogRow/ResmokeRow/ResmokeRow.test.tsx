@@ -1,91 +1,74 @@
 import { LogContextProvider } from "context/LogContext";
-import { renderWithRouterMatch, screen } from "test_utils";
+import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
+import {
+  RenderWithRouterMatchOptions,
+  renderWithRouterMatch,
+  screen,
+} from "test_utils";
 import ResmokeRow from ".";
 
-const wrapper = (logs: string[]) => {
-  const provider = ({ children }: { children: React.ReactNode }) => (
-    <LogContextProvider initialLogLines={logs}>{children}</LogContextProvider>
-  );
-  return provider;
-};
+const renderRow = (
+  props: React.ComponentProps<typeof ResmokeRow>,
+  options: RenderWithRouterMatchOptions
+) =>
+  renderWithRouterMatch(<ResmokeRow {...props} />, {
+    ...options,
+    wrapper: ({ children }: { children: React.ReactElement }) => (
+      <LogContextProvider initialLogLines={logLines}>
+        <MultiLineSelectContextProvider>
+          {children}
+        </MultiLineSelectContextProvider>
+      </LogContextProvider>
+    ),
+  });
 
 describe("resmokeRow", () => {
   it("does not render a resmoke row if getLine returns undefined", () => {
-    renderWithRouterMatch(
-      <ResmokeRow {...resmokeProps} lineIndex={99} lineNumber={99} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
+    renderRow({ ...resmokeProps, lineIndex: 99, lineNumber: 99 }, {});
     expect(screen.queryByDataCy("resmoke-row")).toBeNull();
   });
   it("renders a resmoke row if getLine returns an empty string", () => {
-    renderWithRouterMatch(
-      <ResmokeRow {...resmokeProps} lineIndex={9} lineNumber={9} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
+    renderRow({ ...resmokeProps, lineIndex: 9, lineNumber: 9 }, {});
+
     expect(screen.getByDataCy("resmoke-row")).toBeInTheDocument();
   });
   it("displays a log line and its text for a given index", () => {
-    renderWithRouterMatch(
-      <ResmokeRow {...resmokeProps} lineIndex={0} lineNumber={0} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
+    renderRow({ ...resmokeProps, lineIndex: 0, lineNumber: 0 }, {});
+
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
-    renderWithRouterMatch(
-      <ResmokeRow {...resmokeProps} lineIndex={1} lineNumber={1} />,
-      {
-        wrapper: wrapper(logLines),
-      }
-    );
+    renderRow({ ...resmokeProps, lineIndex: 1, lineNumber: 1 }, {});
+
     expect(screen.getByText(logLines[1])).toBeInTheDocument();
   });
   it("should apply syntax highlighting to resmoke lines if they have a color", () => {
     const getResmokeLineColor = jest.fn().mockReturnValue("#ff0000");
-    renderWithRouterMatch(
-      <ResmokeRow
-        {...resmokeProps}
-        getResmokeLineColor={getResmokeLineColor}
-        lineIndex={7}
-        lineNumber={7}
-      />,
-      {
-        wrapper: wrapper(logLines),
-      }
+    renderRow(
+      { ...resmokeProps, getResmokeLineColor, lineIndex: 7, lineNumber: 7 },
+      {}
     );
+
     expect(getResmokeLineColor).toHaveBeenCalledWith(7);
     expect(screen.getByDataCy("resmoke-row")).toHaveStyle("color: #ff0000");
   });
   it("should highlight text that match a search term", () => {
-    renderWithRouterMatch(
-      <ResmokeRow
-        {...resmokeProps}
-        lineIndex={7}
-        lineNumber={7}
-        searchTerm={/mongod/}
-      />,
-      {
-        wrapper: wrapper(logLines),
-      }
+    renderRow(
+      { ...resmokeProps, lineIndex: 7, lineNumber: 7, searchTerm: /mongod/ },
+      {}
     );
+
     expect(screen.queryByDataCy("highlight")).toHaveTextContent("mongod");
   });
   it("should highlight text that have a matching highlight term", () => {
-    renderWithRouterMatch(
-      <ResmokeRow
-        {...resmokeProps}
-        highlightRegex={/mongod/}
-        lineIndex={7}
-        lineNumber={7}
-      />,
+    renderRow(
       {
-        wrapper: wrapper(logLines),
-      }
+        ...resmokeProps,
+        highlightRegex: /mongod/,
+        lineIndex: 7,
+        lineNumber: 7,
+      },
+      {}
     );
+
     expect(screen.queryByDataCy("highlight")).toHaveTextContent("mongod");
   });
 });

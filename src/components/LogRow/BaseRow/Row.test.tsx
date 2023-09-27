@@ -1,35 +1,50 @@
-import { renderWithRouterMatch, screen, userEvent } from "test_utils";
+import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
+import {
+  RenderWithRouterMatchOptions,
+  renderWithRouterMatch,
+  screen,
+  userEvent,
+} from "test_utils";
 import Row from ".";
+
+const renderRow = (
+  props: React.ComponentProps<typeof Row>,
+  options: RenderWithRouterMatchOptions
+) =>
+  renderWithRouterMatch(<Row {...props} />, {
+    ...options,
+    wrapper: ({ children }: { children: React.ReactElement }) => (
+      <MultiLineSelectContextProvider>
+        {children}
+      </MultiLineSelectContextProvider>
+    ),
+  });
 
 describe("row", () => {
   it("renders a log line", () => {
-    renderWithRouterMatch(
-      <Row {...rowProps} data-cy="test">
-        {testLog}
-      </Row>
-    );
+    renderRow({ ...rowProps, children: testLog, "data-cy": "test" }, {});
     expect(screen.getByText(testLog)).toBeVisible();
     expect(screen.getByDataCy("test")).toBeVisible();
   });
 
   it("properly escapes a log line with tags and renders its contents", () => {
     const lineContent = "Test line with a <nil> value";
-    renderWithRouterMatch(<Row {...rowProps}>{lineContent}</Row>);
+    renderRow({ ...rowProps, children: lineContent }, {});
     expect(screen.getByText(lineContent)).toBeVisible();
   });
 
   it("clicking log line link updates the url and and scrolls to the line", async () => {
     const user = userEvent.setup();
     const scrollToLine = jest.fn();
-    const { router } = renderWithRouterMatch(
-      <Row
-        {...rowProps}
-        lineIndex={7}
-        lineNumber={54}
-        scrollToLine={scrollToLine}
-      >
-        {testLog}
-      </Row>
+    const { router } = renderRow(
+      {
+        ...rowProps,
+        children: testLog,
+        lineIndex: 7,
+        lineNumber: 54,
+        scrollToLine,
+      },
+      {}
     );
     await user.click(screen.getByDataCy("log-link-54"));
     expect(router.state.location.search).toBe("?shareLine=54");
@@ -38,42 +53,37 @@ describe("row", () => {
 
   it("clicking on a share line's link icon updates the URL correctly", async () => {
     const user = userEvent.setup();
-    const { router } = renderWithRouterMatch(
-      <Row {...rowProps}>{testLog}</Row>,
-      {
-        route: "?shareLine=0",
-      }
+    const { router } = renderRow(
+      { ...rowProps, children: testLog },
+      { route: "?shareLine=0" }
     );
+
     await user.click(screen.getByDataCy("log-link-0"));
     expect(router.state.location.search).toBe("");
   });
 
   it("double clicking a log line adds it to the bookmarks", async () => {
     const user = userEvent.setup();
-    const { router } = renderWithRouterMatch(
-      <Row {...rowProps}>{testLog}</Row>
-    );
+    const { router } = renderRow({ ...rowProps, children: testLog }, {});
     await user.dblClick(screen.getByText(testLog));
     expect(router.state.location.search).toBe("?bookmarks=0");
   });
 
   it("double clicking a bookmarked log line removes it from the bookmarks", async () => {
     const user = userEvent.setup();
-    const { router } = renderWithRouterMatch(
-      <Row {...rowProps}>{testLog}</Row>,
-      {
-        route: "?bookmarks=0",
-      }
+    const { router } = renderRow(
+      { ...rowProps, children: testLog },
+      { route: "?bookmarks=0" }
     );
+
     await user.dblClick(screen.getByText(testLog));
     expect(router.state.location.search).toBe("");
   });
 
   it("a log line can be shared and bookmarked at the same time", async () => {
     const user = userEvent.setup();
-    const { router } = renderWithRouterMatch(
-      <Row {...rowProps}>{testLog}</Row>
-    );
+    const { router } = renderRow({ ...rowProps, children: testLog }, {});
+
     await user.click(screen.getByDataCy("log-link-0"));
     await user.dblClick(screen.getByText(testLog));
     expect(router.state.location.search).toBe("?bookmarks=0&shareLine=0");
@@ -81,8 +91,8 @@ describe("row", () => {
 
   it("should not copy line numbers to clipboard", async () => {
     const user = userEvent.setup({ writeToClipboard: true });
+    renderRow({ ...rowProps, children: testLog }, {});
 
-    renderWithRouterMatch(<Row {...rowProps}>{testLog}</Row>);
     expect(screen.getByText(/.+/).textContent).toBe("Test Log");
     // select all of the text
     await user.tripleClick(screen.getByText(/.+/));
@@ -93,43 +103,49 @@ describe("row", () => {
   describe("search / highlights", () => {
     it("should highlight matching search text if it is within range", () => {
       const regexp = /Test/i;
-      renderWithRouterMatch(
-        <Row
-          {...rowProps}
-          range={{
+      renderRow(
+        {
+          ...rowProps,
+          children: testLog,
+          range: {
             lowerRange: 0,
             upperRange: 10,
-          }}
-          searchTerm={regexp}
-        >
-          {testLog}
-        </Row>
+          },
+          searchTerm: regexp,
+        },
+        {}
       );
+
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
     });
     it("should not highlight matching search text if it is outside of range", () => {
       const regexp = /Test/i;
-      renderWithRouterMatch(
-        <Row
-          {...rowProps}
-          range={{
+      renderRow(
+        {
+          ...rowProps,
+          children: testLog,
+          range: {
             lowerRange: 1,
             upperRange: 2,
-          }}
-          searchTerm={regexp}
-        >
-          {testLog}
-        </Row>
+          },
+          searchTerm: regexp,
+        },
+        {}
       );
+
       expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
     });
     it("highlighted terms should highlight the matching text", () => {
       const regexp = /Test/i;
-      renderWithRouterMatch(
-        <Row {...rowProps} highlightRegex={regexp}>
-          {testLog}
-        </Row>
+      renderRow(
+        {
+          ...rowProps,
+          children: testLog,
+          highlightRegex: regexp,
+        },
+        {}
       );
+
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
     });
   });
