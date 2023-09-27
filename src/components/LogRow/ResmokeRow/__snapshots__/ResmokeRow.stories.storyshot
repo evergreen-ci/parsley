@@ -68,6 +68,7 @@ exports[`storyshots Storyshots components/LogRow/ResmokeRow Single Line 1`] = `
     </button>
     <pre
       class="css-12z0cqi"
+      data-cy="line-index-8"
       title="Use shift+click to select multiple lines"
     />
     <pre

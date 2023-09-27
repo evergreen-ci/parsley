@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/LogRow/BaseRow/LineNumber/SharingMenu Default 1`] = `
+exports[`storyshots Storyshots components/LogRow/BaseRow/SharingMenu Default 1`] = `
 <div>
   <button
     aria-disabled="false"
@@ -8,6 +8,7 @@ exports[`storyshots Storyshots components/LogRow/BaseRow/LineNumber/SharingMenu 
     aria-haspopup="true"
     aria-label="Expand share menu"
     class="css-xrue4o leafygreen-ui-1xt2asn"
+    data-cy="sharing-menu-button"
     tabindex="0"
   >
     <div

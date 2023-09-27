@@ -68,6 +68,7 @@ exports[`storyshots Storyshots components/LogRow/AnsiiRow Single Line 1`] = `
     </button>
     <pre
       class="css-d6bqxu"
+      data-cy="line-index-0"
       title="Use shift+click to select multiple lines"
     />
     <pre
