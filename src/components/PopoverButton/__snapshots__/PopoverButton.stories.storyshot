@@ -4,20 +4,20 @@ exports[`storyshots Storyshots components/PopoverButton Default 1`] = `
 <div>
   <button
     aria-disabled="false"
-    class="lg-ui-button-0000 leafygreen-ui-vv6u3s"
+    class="lg-ui-button-0000 leafygreen-ui-2jj1me"
     type="button"
   >
     <div
       class="leafygreen-ui-v038xi"
     />
     <div
-      class="leafygreen-ui-1qmzz4y"
+      class="leafygreen-ui-v95oty"
     >
       Popover Button
       <svg
         alt=""
         aria-hidden="true"
-        class="leafygreen-ui-1t9qnhm"
+        class="leafygreen-ui-15rby6h"
         fill="none"
         height="16"
         role="presentation"
