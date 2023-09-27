@@ -71,19 +71,19 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Row Sing
       >
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 leafygreen-ui-qicxot"
+          class="lg-ui-button-0000 leafygreen-ui-1dcyxci"
           type="button"
         >
           <div
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1hhc9ms"
+            class="leafygreen-ui-1tpstb3"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-11cndel"
+              class="leafygreen-ui-xpf1b6"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
@@ -101,19 +101,19 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Row Sing
         </button>
         <button
           aria-disabled="false"
-          class="lg-ui-button-0000 leafygreen-ui-qicxot"
+          class="lg-ui-button-0000 leafygreen-ui-1dcyxci"
           type="button"
         >
           <div
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1hhc9ms"
+            class="leafygreen-ui-1tpstb3"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-11cndel"
+              class="leafygreen-ui-xpf1b6"
               height="16"
               role="presentation"
               viewBox="0 0 16 16"
