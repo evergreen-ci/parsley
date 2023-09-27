@@ -88,9 +88,14 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
 
   return (
     <Menu
+      data-cy="sharing-menu"
       open={open}
       trigger={
-        <MenuIcon aria-label="Expand share menu" onClick={handleToggleMenu}>
+        <MenuIcon
+          aria-label="Expand share menu"
+          data-cy="sharing-menu-button"
+          onClick={handleToggleMenu}
+        >
           <Icon glyph="Ellipsis" />
         </MenuIcon>
       }

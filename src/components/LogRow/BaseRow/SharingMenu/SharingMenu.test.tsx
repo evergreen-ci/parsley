@@ -35,10 +35,8 @@ describe("sharingMenu", () => {
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     renderWithRouterMatch(<Component />, { wrapper });
-    expect(screen.getByText("Copy selected lines")).toBeInTheDocument();
-    expect(
-      screen.getByText("Share link to selected lines")
-    ).toBeInTheDocument();
+    expect(screen.getByText("Copy selected line")).toBeInTheDocument();
+    expect(screen.getByText("Share link to selected line")).toBeInTheDocument();
     expect(screen.getByText("Only search on range")).toBeInTheDocument();
   });
   it("clicking copy selected lines should copy the line range to the clipboard", async () => {

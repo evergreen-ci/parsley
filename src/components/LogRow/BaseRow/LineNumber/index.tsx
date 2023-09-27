@@ -9,6 +9,7 @@ const LineNumber: React.FC<{ lineNumber: number }> = ({ lineNumber }) => {
   };
   return (
     <Index
+      data-cy={`line-index-${lineNumber}`}
       lineNumber={lineNumber}
       onClick={handleClick}
       title="Use shift+click to select multiple lines"
