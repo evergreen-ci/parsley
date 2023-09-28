@@ -67,7 +67,7 @@
     "@leafygreen-ui/tooltip": "10.0.10",
     "@leafygreen-ui/typography": "16.5.0",
     "ansi_up": "5.1.0",
-    "graphql": "16.8.1",
+    "graphql": "16.6.0",
     "html-react-parser": "3.0.6",
     "js-cookie": "3.0.5",
     "linkify-html": "4.1.0",
