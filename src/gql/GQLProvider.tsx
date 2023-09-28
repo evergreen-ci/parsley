@@ -13,14 +13,10 @@ import { reportError } from "utils/errorReporting";
 const logErrorsLink = onError(({ graphQLErrors, operation }) => {
   if (Array.isArray(graphQLErrors)) {
     graphQLErrors.forEach((gqlErr) => {
-      reportError({
-        message: "GraphQL Error",
-        metadata: {
-          gqlErr,
-          operationName: operation.operationName,
-          variables: operation.variables,
-        },
-        name: gqlErr.message,
+      reportError(new Error(gqlErr.message), {
+        gqlErr,
+        operationName: operation.operationName,
+        variables: operation.variables,
       }).warning();
     });
   }

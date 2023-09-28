@@ -46,10 +46,10 @@ const useLogDownloader = (
     if (url) {
       fetchLogFile(url, {
         // Conditionally define signal because AbortController throws error in development's strict mode
-        abortController: isProduction ? abortController : undefined,
+        abortController: isProduction() ? abortController : undefined,
         downloadSizeLimit,
         onIncompleteDownload: (reason, incompleteDownloadError) => {
-          reportError({
+          reportError(new Error("Incomplete download"), {
             message: reason,
             metadata: {
               incompleteDownloadError,
@@ -86,7 +86,7 @@ const useLogDownloader = (
               name: "Log Download Incomplete",
               reason: "Log line size limit exceeded",
             });
-            reportError({
+            reportError(new Error("Incomplete download"), {
               message: "Log line size limit exceeded",
               metadata: {
                 trimmedLines,
