@@ -127,6 +127,7 @@ const getEvergreenTaskLogURL = (
 ) => {
   const { text } = options;
   const params = {
+    priority: true,
     text,
     type: OriginToType[origin] || undefined,
   };
