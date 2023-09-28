@@ -3,7 +3,7 @@
 exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
 <div>
   <div
-    class="leafygreen-ui-1v4ednr"
+    class="leafygreen-ui-1ecxdul"
     style="max-width: 750px;"
   >
     <div
@@ -357,7 +357,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
       >
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-1qjl8rb"
           data-cy="jira-button"
           type="button"
         >
@@ -365,12 +365,12 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1qmzz4y"
+            class="leafygreen-ui-v95oty"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-169mpis"
+              class="leafygreen-ui-5xj6yo"
               fill="none"
               height="16"
               role="presentation"
@@ -390,7 +390,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-1qjl8rb"
           data-cy="job-logs-button"
           target="_blank"
           type="button"
@@ -399,12 +399,12 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1qmzz4y"
+            class="leafygreen-ui-v95oty"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-169mpis"
+              class="leafygreen-ui-5xj6yo"
               fill="none"
               height="16"
               role="presentation"
@@ -426,7 +426,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-1qjl8rb"
           data-cy="raw-log-button"
           target="_blank"
           type="button"
@@ -435,12 +435,12 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1qmzz4y"
+            class="leafygreen-ui-v95oty"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-169mpis"
+              class="leafygreen-ui-5xj6yo"
               fill="none"
               height="16"
               role="presentation"
@@ -462,7 +462,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-1qjl8rb"
           data-cy="html-log-button"
           target="_blank"
           type="button"
@@ -471,12 +471,12 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1qmzz4y"
+            class="leafygreen-ui-v95oty"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-169mpis"
+              class="leafygreen-ui-5xj6yo"
               fill="none"
               height="16"
               role="presentation"
@@ -500,7 +500,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
           aria-disabled="false"
           aria-expanded="false"
           aria-haspopup="true"
-          class="lg-ui-button-0000 leafygreen-ui-dmcoak"
+          class="lg-ui-button-0000 leafygreen-ui-xcwxw8"
           data-cy="secondary-links-button"
           type="button"
         >
@@ -508,12 +508,12 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1qmzz4y"
+            class="leafygreen-ui-v95oty"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-6juzfh"
+              class="leafygreen-ui-18si895"
               fill="none"
               height="16"
               role="presentation"
@@ -539,7 +539,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
 exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = `
 <div>
   <div
-    class="leafygreen-ui-1v4ednr"
+    class="leafygreen-ui-1ecxdul"
     style="max-width: 750px;"
   >
     <div
@@ -893,7 +893,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
       >
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-1qjl8rb"
           data-cy="jira-button"
           type="button"
         >
@@ -901,12 +901,12 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1qmzz4y"
+            class="leafygreen-ui-v95oty"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-169mpis"
+              class="leafygreen-ui-5xj6yo"
               fill="none"
               height="16"
               role="presentation"
@@ -926,7 +926,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-1qjl8rb"
           data-cy="job-logs-button"
           target="_blank"
           type="button"
@@ -935,12 +935,12 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1qmzz4y"
+            class="leafygreen-ui-v95oty"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-169mpis"
+              class="leafygreen-ui-5xj6yo"
               fill="none"
               height="16"
               role="presentation"
@@ -962,7 +962,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-1qjl8rb"
           data-cy="raw-log-button"
           target="_blank"
           type="button"
@@ -971,12 +971,12 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1qmzz4y"
+            class="leafygreen-ui-v95oty"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-169mpis"
+              class="leafygreen-ui-5xj6yo"
               fill="none"
               height="16"
               role="presentation"
@@ -998,7 +998,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
         </button>
         <button
           aria-disabled="true"
-          class="lg-ui-button-0000 leafygreen-ui-9drppk leafygreen-ui-cssveg"
+          class="lg-ui-button-0000 leafygreen-ui-1qjl8rb"
           data-cy="html-log-button"
           target="_blank"
           type="button"
@@ -1007,12 +1007,12 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1qmzz4y"
+            class="leafygreen-ui-v95oty"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-169mpis"
+              class="leafygreen-ui-5xj6yo"
               fill="none"
               height="16"
               role="presentation"
@@ -1036,7 +1036,7 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
           aria-disabled="false"
           aria-expanded="false"
           aria-haspopup="true"
-          class="lg-ui-button-0000 leafygreen-ui-dmcoak"
+          class="lg-ui-button-0000 leafygreen-ui-xcwxw8"
           data-cy="secondary-links-button"
           type="button"
         >
@@ -1044,12 +1044,12 @@ exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = 
             class="leafygreen-ui-v038xi"
           />
           <div
-            class="leafygreen-ui-1qmzz4y"
+            class="leafygreen-ui-v95oty"
           >
             <svg
               alt=""
               aria-hidden="true"
-              class="leafygreen-ui-6juzfh"
+              class="leafygreen-ui-18si895"
               fill="none"
               height="16"
               role="presentation"

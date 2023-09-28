@@ -10,7 +10,7 @@ exports[`storyshots Storyshots components/BookmarksBar Default 1`] = `
     >
       <button
         aria-disabled="false"
-        class="lg-ui-button-0000 leafygreen-ui-qicxot leafygreen-ui-cssveg css-ttttas"
+        class="lg-ui-button-0000 css-ttttas leafygreen-ui-1w7cfzt"
         data-cy="clear-bookmarks"
         type="button"
       >
@@ -18,7 +18,7 @@ exports[`storyshots Storyshots components/BookmarksBar Default 1`] = `
           class="leafygreen-ui-v038xi"
         />
         <div
-          class="leafygreen-ui-1hhc9ms"
+          class="leafygreen-ui-1tpstb3"
         >
           Clear
         </div>

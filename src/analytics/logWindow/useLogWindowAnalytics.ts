@@ -8,6 +8,8 @@ type Action =
   | { name: "Toggled Filter"; open: boolean }
   | { name: "Applied Project Filters"; filters: Filter[] }
   | { name: "Added Bookmark" }
+  | { name: "Added Share line" }
+  | { name: "Removed Share line" }
   | { name: "Navigated With Bookmark" }
   | { name: "Removed Bookmark" }
   | { name: "Cleared All Bookmarks" }
