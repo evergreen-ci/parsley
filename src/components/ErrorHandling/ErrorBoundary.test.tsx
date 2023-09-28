@@ -24,7 +24,6 @@ describe("default error boundary", () => {
   });
   it("should display the fallback when an error occurs", () => {
     const err = new Error("Test error");
-
     const TestComponent = () => {
       throw err;
     };
