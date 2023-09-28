@@ -47,14 +47,16 @@ export const ErrorBoundary: React.FC<{ children: React.ReactNode }> = ({
 
   let errorBoundary = children;
 
-  if (sentryEnabled) {
-    errorBoundary = <SentryErrorBoundary>{errorBoundary}</SentryErrorBoundary>;
-  }
-
-  if (bugsnagEnabled) {
+  if (sentryEnabled && bugsnagEnabled) {
     errorBoundary = (
-      <BugsnagErrorBoundary>{errorBoundary}</BugsnagErrorBoundary>
+      <BugsnagErrorBoundary>
+        <SentryErrorBoundary>{children}</SentryErrorBoundary>
+      </BugsnagErrorBoundary>
     );
+  } else if (sentryEnabled) {
+    errorBoundary = <SentryErrorBoundary>{children}</SentryErrorBoundary>;
+  } else if (bugsnagEnabled) {
+    errorBoundary = <BugsnagErrorBoundary>{children}</BugsnagErrorBoundary>;
   }
 
   return <>{errorBoundary}</>; // eslint-disable-line react/jsx-no-useless-fragment
