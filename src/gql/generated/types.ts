@@ -3235,9 +3235,10 @@ export type TaskFilesQuery = {
     id: string;
     files: {
       __typename?: "TaskFiles";
-      fileCount: number;
       groupedFiles: Array<{
         __typename?: "GroupedFiles";
+        execution: number;
+        taskId: string;
         taskName?: string | null;
         files?: Array<{
           __typename?: "File";

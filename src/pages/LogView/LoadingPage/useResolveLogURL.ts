@@ -13,8 +13,13 @@ import {
   getLobsterTestURL,
   getResmokeLogURL,
 } from "constants/logURLTemplates";
-import { TestLogUrlQuery, TestLogUrlQueryVariables } from "gql/generated/types";
-import { GET_TEST_LOG_URL } from "gql/queries";
+import {
+  TaskFilesQuery,
+  TaskFilesQueryVariables,
+  TestLogUrlQuery,
+  TestLogUrlQueryVariables,
+} from "gql/generated/types";
+import { GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
 
 interface Props {
   buildID?: string;
@@ -54,6 +59,18 @@ export const useResolveLogURL = ({
     },
   });
 
+  const { data: taskFileData } = useQuery<
+    TaskFilesQuery,
+    TaskFilesQueryVariables
+  >(TASK_FILES, {
+    skip: !(logType === LogTypes.EVERGREEN_TASK_FILE && taskID && execution),
+    variables: {
+      execution: parseInt(execution as string, 10),
+      taskId: taskID as string,
+    },
+  });
+
+  let downloadURL = "";
   let rawLogURL = "";
   let htmlLogURL = "";
   let jobLogsURL = "";
@@ -74,12 +91,21 @@ export const useResolveLogURL = ({
         jobLogsURL = getJobLogsURL(buildID);
         legacyJobLogsURL = getLegacyJobLogsURL(buildID);
       }
+      downloadURL = rawLogURL;
       break;
     }
     case LogTypes.EVERGREEN_TASK_FILE: {
       if (taskID && execution && fileName) {
-        // TODO: resolve this value using GQL https://jira.mongodb.org/browse/EVG-20809
-        rawLogURL = getEvergreenTaskFileURL(taskID, execution, fileName);
+        downloadURL = getEvergreenTaskFileURL(
+          taskID,
+          execution,
+          encodeURIComponent(fileName)
+        );
+        const allFiles = taskFileData?.task?.files.groupedFiles.flatMap(
+          (group) => group.files
+        );
+        rawLogURL =
+          allFiles?.find((file) => file?.name === fileName)?.link || "";
       }
       break;
     }
@@ -116,12 +142,14 @@ export const useResolveLogURL = ({
         });
       lobsterURL =
         urlLobster ?? getLobsterTestURL(taskID, execution, testID, groupID);
+      downloadURL = rawLogURL;
       break;
     }
     default:
       break;
   }
   return {
+    downloadURL,
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,

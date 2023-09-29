@@ -35,6 +35,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const dispatchToast = useToastContext();
   const { ingestLines, setLogMetadata } = useLogContext();
   const {
+    downloadURL,
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,
@@ -63,7 +64,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     error,
     fileSize,
     isLoading: isLoadingLog,
-  } = useLogDownloader(rawLogURL, logType);
+  } = useLogDownloader(downloadURL, logType);
 
   useEffect(() => {
     if (data) {
