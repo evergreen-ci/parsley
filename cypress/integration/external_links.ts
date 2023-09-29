@@ -127,4 +127,19 @@ describe("External Links", () => {
       );
     });
   });
+  describe("should render links to external pages when viewing an evergreen task uploaded file", () => {
+    beforeEach(() => {
+      cy.visit(
+        "/taskFile/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/sample%20file"
+      );
+      cy.toggleDetailsPanel(true);
+    });
+    it("should link to the raw file", () => {
+      cy.dataCy("raw-log-button").should("be.visible");
+      cy.dataCy("raw-log-button").should("not.be.disabled");
+      cy.dataCy("raw-log-button")
+        .should("have.attr", "href")
+        .and("match", /s3.amazonaws.com/);
+    });
+  });
 });
