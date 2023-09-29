@@ -112,6 +112,34 @@ describe("useResolveLogURL", () => {
       rawLogURL: "a-file-url",
     });
   });
+  it("generates task file urls that are properly encoded", async () => {
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+      <MockedProvider mocks={[getTaskFileURLMock]}>{children}</MockedProvider>
+    );
+    const { result, waitForNextUpdate } = renderHook(
+      () =>
+        useResolveLogURL({
+          execution: "0",
+          fileName: "a file name.some/crazy/path",
+          logType: LogTypes.EVERGREEN_TASK_FILE,
+          taskID: "a-task-id",
+        }),
+      {
+        wrapper,
+      }
+    );
+    await waitForNextUpdate();
+    expect(result.current).toMatchObject({
+      downloadURL:
+        "test-evergreen.com/task_file_raw/a-task-id/0/a%20file%20name.some%2Fcrazy%2Fpath",
+      htmlLogURL: "",
+      jobLogsURL: "",
+      legacyJobLogsURL: "",
+      loading: false,
+      lobsterURL: "",
+      rawLogURL: "a-file-url-with-crazy-path",
+    });
+  });
 });
 
 const getExistingTestLogURLMock: ApolloMock<
@@ -192,6 +220,10 @@ const getTaskFileURLMock: ApolloMock<TaskFilesQuery, TaskFilesQueryVariables> =
                   {
                     link: "a-file-url",
                     name: "a-file-name",
+                  },
+                  {
+                    link: "a-file-url-with-crazy-path",
+                    name: "a file name.some/crazy/path",
                   },
                 ],
                 taskId: "a-task-id",
