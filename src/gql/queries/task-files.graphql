@@ -1,0 +1,16 @@
+query TaskFiles($taskId: String!, $execution: Int) {
+  task(taskId: $taskId, execution: $execution) {
+    execution
+    files {
+      fileCount
+      groupedFiles {
+        files {
+          link
+          name
+        }
+        taskName
+      }
+    }
+    id
+  }
+}
