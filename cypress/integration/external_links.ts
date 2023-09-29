@@ -139,7 +139,7 @@ describe("External Links", () => {
       cy.dataCy("raw-log-button").should("not.be.disabled");
       cy.dataCy("raw-log-button")
         .should("have.attr", "href")
-        .and("match", /s3.amazonaws.com/);
+        .and("match", /s3\.amazonaws\.com/);
     });
   });
 });
