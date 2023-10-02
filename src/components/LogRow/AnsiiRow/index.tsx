@@ -1,4 +1,4 @@
-import { AnsiUp } from "ansi_up";
+import AnsiUp from "ansi_up";
 import linkifyHtml from "linkify-html";
 import BaseRow from "components/LogRow/BaseRow";
 import { LogRowProps } from "../types";
