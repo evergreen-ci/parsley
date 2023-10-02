@@ -13,7 +13,7 @@ import { wikiURL } from "constants/externalLinks";
 import { navbarHeight, size } from "constants/tokens";
 import { useAuthContext } from "context/auth";
 import { useLogContext } from "context/LogContext";
-import { isDevelopment } from "utils/environmentVariables";
+import { isDevelopmentBuild } from "utils/environmentVariables";
 import UploadLink from "./UploadLink";
 
 const { gray, white } = palette;
@@ -48,7 +48,7 @@ const NavBar: React.FC = () => {
         >
           <DetailsMenu data-cy="details-menu" />
         </StyledButton>
-        {isDevelopment() && (
+        {isDevelopmentBuild() && (
           <Button
             onClick={logoutAndRedirect}
             size="small"

@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import { ErrorBoundary } from "components/ErrorBoundary";
+import { ErrorBoundary } from "components/ErrorHandling";
 import { GlobalStyles } from "components/styles";
 import routes from "constants/routes";
 import { GlobalProviders } from "context";

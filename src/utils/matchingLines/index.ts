@@ -26,7 +26,7 @@ export const constructRegexToMatch = (visibleFilters: Filters) => {
         });
       } catch (e) {
         // If we get an error here, it means the regex is invalid and got past the validation step. We should report this error.
-        reportError({
+        reportError(new Error("Invalid regex for filter"), {
           message: `The regex "${f.expression}" is invalid`,
           metadata: e,
           name: "Invalid Regex",
