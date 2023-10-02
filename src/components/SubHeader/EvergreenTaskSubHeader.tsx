@@ -15,11 +15,13 @@ interface Props {
   logType?: LogTypes;
   taskID: string;
   testID?: string;
+  fileName?: string;
 }
 
 export const EvergreenTaskSubHeader: React.FC<Props> = ({
   buildID,
   execution,
+  fileName,
   logType,
   taskID,
   testID,
@@ -102,6 +104,14 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
               currentTest &&
               currentTest.testFile.length > 80 &&
               currentTest.testFile,
+          },
+        ]
+      : []),
+    ...(fileName
+      ? [
+          {
+            "data-cy": "file-breadcrumb",
+            text: fileName,
           },
         ]
       : []),

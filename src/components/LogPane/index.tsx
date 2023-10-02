@@ -21,19 +21,27 @@ const LogPane: React.FC<LogPaneProps> = ({ rowCount, rowRenderer }) => {
   useEffect(() => {
     const initialScrollIndex = findLineIndex(processedLogLines, shareLine);
     if (initialScrollIndex > -1) {
-      leaveBreadcrumb("Triggered scroll to shareLine", {
-        initialScrollIndex,
-        shareLine,
-      });
+      leaveBreadcrumb(
+        "Triggered scroll to shareLine",
+        {
+          initialScrollIndex,
+          shareLine,
+        },
+        "user"
+      );
       // This timeout is necessary to ensure that the list has been rendered
       // before we try to scroll to the line.
       setTimeout(() => {
         scrollToLine(initialScrollIndex);
       }, 50);
     } else {
-      leaveBreadcrumb("shareLine not provided or found in processedLogLines", {
-        shareLine,
-      });
+      leaveBreadcrumb(
+        "shareLine not provided or found in processedLogLines",
+        {
+          shareLine,
+        },
+        "process"
+      );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

@@ -10,15 +10,18 @@ enum Environment {
   Production = "production",
 }
 
-const appVersion = process.env.REACT_APP_VERSION;
-const releaseStage = process.env.REACT_APP_RELEASE_STAGE;
+const getAppVersion = () => process.env.REACT_APP_VERSION || "";
+const getReleaseStage = () => process.env.REACT_APP_RELEASE_STAGE || "";
+const getBugsnagApiKey = () => process.env.REACT_APP_BUGSNAG_API_KEY || "";
+const getSentryDSN = () => process.env.REACT_APP_SENTRY_DSN || "";
 
-const isLocal = releaseStage === ReleaseStage.Local;
-const isStaging = releaseStage === ReleaseStage.Staging;
-const isProduction = releaseStage === ReleaseStage.Production;
-const isProductionBuild = process.env.NODE_ENV === Environment.Production;
-const isDevelopment = () =>
-  isLocal || process.env.NODE_ENV === Environment.Development;
+const isLocal = () => getReleaseStage() === ReleaseStage.Local;
+const isStaging = () => getReleaseStage() === ReleaseStage.Staging;
+const isProduction = () => getReleaseStage() === ReleaseStage.Production;
+
+const isProductionBuild = () => process.env.NODE_ENV === Environment.Production;
+const isDevelopmentBuild = () =>
+  isLocal() || process.env.NODE_ENV === Environment.Development;
 
 const evergreenURL = process.env.REACT_APP_EVERGREEN_URL;
 const graphqlURL = process.env.REACT_APP_GRAPHQL_URL;
@@ -26,20 +29,19 @@ const lobsterURL = process.env.REACT_APP_LOBSTER_URL;
 const logkeeperURL = process.env.REACT_APP_LOGKEEPER_URL;
 const spruceURL = process.env.REACT_APP_SPRUCE_URL;
 
-const bugsnagAPIKey = process.env.REACT_APP_BUGSNAG_API_KEY;
-
 export {
-  appVersion,
-  releaseStage,
   isLocal,
   isStaging,
   isProduction,
   isProductionBuild,
-  isDevelopment,
+  isDevelopmentBuild,
   evergreenURL,
   graphqlURL,
   lobsterURL,
   logkeeperURL,
   spruceURL,
-  bugsnagAPIKey,
+  getAppVersion,
+  getReleaseStage,
+  getBugsnagApiKey,
+  getSentryDSN,
 };

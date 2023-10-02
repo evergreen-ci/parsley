@@ -1,0 +1,188 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`storyshots Storyshots components/SubHeader Task File Log 1`] = `
+<div>
+  <div
+    class="css-rbu5o8"
+    data-cy="log-header"
+  >
+    <div
+      class="css-1xawlld"
+    >
+      <svg
+        aria-label="Evergreen Icon"
+        fill="none"
+        height="24"
+        viewBox="0 0 258 258"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M144.206 213.445H114.693C110.693 213.445 107.449 216.688 107.449 220.689V250.201C107.449 254.202 110.693 257.445 114.693 257.445H144.206C148.206 257.445 151.449 254.202 151.449 250.201V220.689C151.449 216.688 148.206 213.445 144.206 213.445Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M237.92 218.638L188.116 155.363H71.0083L20.5234 218.649C16.5211 224.712 20.8722 232.791 28.1364 232.791H230.312C237.582 232.791 241.933 224.701 237.92 218.638Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M208.375 146.21L167.82 89.1536H90.4297L49.6287 146.227C45.6264 152.289 49.9774 160.369 57.2417 160.369H200.767C208.037 160.369 212.388 152.278 208.375 146.216V146.21Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M184.463 79.9953L132.867 2.05749C131.048 -0.689405 127.019 -0.684039 125.2 2.06286L73.7767 80.006C69.7744 86.0685 74.1254 94.1482 81.3897 94.1482H176.85C184.119 94.1482 188.47 86.0577 184.457 79.9953H184.463Z"
+          fill="#00A35C"
+        />
+      </svg>
+      <a
+        class="lg-ui-0001 leafygreen-ui-1320234"
+        href="test-evergreen.com/task/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?redirect_spruce_users=true"
+        target="_self"
+      >
+        <span
+          class="leafygreen-ui-1ewnca3"
+        >
+          Task Page
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`storyshots Storyshots components/SubHeader Task Log 1`] = `
+<div>
+  <div
+    class="css-rbu5o8"
+    data-cy="log-header"
+  >
+    <div
+      class="css-1xawlld"
+    >
+      <svg
+        aria-label="Evergreen Icon"
+        fill="none"
+        height="24"
+        viewBox="0 0 258 258"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M144.206 213.445H114.693C110.693 213.445 107.449 216.688 107.449 220.689V250.201C107.449 254.202 110.693 257.445 114.693 257.445H144.206C148.206 257.445 151.449 254.202 151.449 250.201V220.689C151.449 216.688 148.206 213.445 144.206 213.445Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M237.92 218.638L188.116 155.363H71.0083L20.5234 218.649C16.5211 224.712 20.8722 232.791 28.1364 232.791H230.312C237.582 232.791 241.933 224.701 237.92 218.638Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M208.375 146.21L167.82 89.1536H90.4297L49.6287 146.227C45.6264 152.289 49.9774 160.369 57.2417 160.369H200.767C208.037 160.369 212.388 152.278 208.375 146.216V146.21Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M184.463 79.9953L132.867 2.05749C131.048 -0.689405 127.019 -0.684039 125.2 2.06286L73.7767 80.006C69.7744 86.0685 74.1254 94.1482 81.3897 94.1482H176.85C184.119 94.1482 188.47 86.0577 184.457 79.9953H184.463Z"
+          fill="#00A35C"
+        />
+      </svg>
+      <a
+        class="lg-ui-0001 leafygreen-ui-1320234"
+        href="test-evergreen.com/task/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?redirect_spruce_users=true"
+        target="_self"
+      >
+        <span
+          class="leafygreen-ui-1ewnca3"
+        >
+          Task Page
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`storyshots Storyshots components/SubHeader Test Log 1`] = `
+<div>
+  <div
+    class="css-rbu5o8"
+    data-cy="log-header"
+  >
+    <div
+      class="css-1xawlld"
+    >
+      <svg
+        aria-label="Evergreen Icon"
+        fill="none"
+        height="24"
+        viewBox="0 0 258 258"
+        width="24"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M144.206 213.445H114.693C110.693 213.445 107.449 216.688 107.449 220.689V250.201C107.449 254.202 110.693 257.445 114.693 257.445H144.206C148.206 257.445 151.449 254.202 151.449 250.201V220.689C151.449 216.688 148.206 213.445 144.206 213.445Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M237.92 218.638L188.116 155.363H71.0083L20.5234 218.649C16.5211 224.712 20.8722 232.791 28.1364 232.791H230.312C237.582 232.791 241.933 224.701 237.92 218.638Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M208.375 146.21L167.82 89.1536H90.4297L49.6287 146.227C45.6264 152.289 49.9774 160.369 57.2417 160.369H200.767C208.037 160.369 212.388 152.278 208.375 146.216V146.21Z"
+          fill="#00A35C"
+        />
+        <path
+          d="M184.463 79.9953L132.867 2.05749C131.048 -0.689405 127.019 -0.684039 125.2 2.06286L73.7767 80.006C69.7744 86.0685 74.1254 94.1482 81.3897 94.1482H176.85C184.119 94.1482 188.47 86.0577 184.457 79.9953H184.463Z"
+          fill="#00A35C"
+        />
+      </svg>
+      <a
+        class="lg-ui-0001 leafygreen-ui-1320234"
+        href="test-evergreen.com/task/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?redirect_spruce_users=true"
+        target="_self"
+      >
+        <span
+          class="leafygreen-ui-1ewnca3"
+        >
+          Task Page
+        </span>
+      </a>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`storyshots Storyshots components/SubHeader Uploaded Log 1`] = `
+<div>
+  <div
+    class="css-rbu5o8"
+    data-cy="log-header"
+  >
+    <div
+      class="css-1xawlld"
+    >
+      <svg
+        aria-label="File Icon"
+        class=""
+        fill="none"
+        height="20"
+        role="img"
+        viewBox="0 0 16 16"
+        width="20"
+      >
+        <path
+          d="M3 13V7h4.5A1.5 1.5 0 009 5.5V1h2a2 2 0 012 2v10a2 2 0 01-2 2H5a2 2 0 01-2-2z"
+          fill="currentColor"
+        />
+        <path
+          d="M7.833 1h-.919a1 1 0 00-.707.293L3.293 4.207A1 1 0 003 4.914v.92h3.833a1 1 0 001-1V1z"
+          fill="currentColor"
+        />
+      </svg>
+      <p
+        class="css-mr3j8u leafygreen-ui-1tb6tuo"
+      >
+        some-file-name.log
+      </p>
+    </div>
+  </div>
+</div>
+`;
