@@ -1,9 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import { initializeBugsnag } from "components/ErrorBoundary";
+import { initializeErrorHandling } from "components/ErrorHandling";
 import App from "./App";
 
-initializeBugsnag();
+initializeErrorHandling();
+
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
     <App />

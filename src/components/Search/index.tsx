@@ -59,7 +59,7 @@ const Search: React.FC = () => {
             },
           ]);
           sendEvent({ filterExpression: value, name: "Added Filter" });
-          leaveBreadcrumb("Added Filter", { filterExpression: value });
+          leaveBreadcrumb("Added Filter", { filterExpression: value }, "user");
         }
         break;
       case SearchBarActions.Highlight:
@@ -67,7 +67,11 @@ const Search: React.FC = () => {
           setSearch("");
           setHighlights([...highlights, value]);
           sendEvent({ highlightExpression: value, name: "Added Highlight" });
-          leaveBreadcrumb("Added Highlight", { highlightExpression: value });
+          leaveBreadcrumb(
+            "Added Highlight",
+            { highlightExpression: value },
+            "user"
+          );
         }
         break;
       default:
@@ -78,7 +82,7 @@ const Search: React.FC = () => {
   const handleOnChange = (value: string) => {
     setSearch(value);
     sendEvent({ name: "Applied Search", searchExpression: value });
-    leaveBreadcrumb("Applied Search", { searchExpression: value });
+    leaveBreadcrumb("Applied Search", { searchExpression: value }, "user");
   };
 
   return (

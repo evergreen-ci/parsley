@@ -6,7 +6,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
     class="css-3ieiu4"
   >
     <div
-      class="lg-ui-side-nav-0000 css-18wdk2z leafygreen-ui-dnxju7"
+      class="lg-ui-side-nav-0000 css-18wdk2z leafygreen-ui-83xhmz"
       data-testid="side-nav-container"
     >
       <div
@@ -14,11 +14,11 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
       >
         <nav
           aria-label="Side panel"
-          class="leafygreen-ui-1ch59fo"
-          id="side-nav-5"
+          class="leafygreen-ui-1ejkhps"
+          id="side-nav-151"
         >
           <div
-            class="leafygreen-ui-aoszy5"
+            class="leafygreen-ui-1nmawjt"
           >
             <ul
               class="leafygreen-ui-19jz4bq"
@@ -32,7 +32,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   <div
                     class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-1"
+                    id="menu-group-label-id-147"
                   >
                     <div
                       class="leafygreen-ui-1rnl6t5"
@@ -89,7 +89,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-1"
+                    aria-labelledby="menu-group-label-id-147"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -245,8 +245,8 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                   Case
                                 </div>
                                 <div
-                                  aria-label="segmented-control-147"
-                                  aria-owns="segmented-control-147-0 segmented-control-147-1"
+                                  aria-label="segmented-control-152"
+                                  aria-owns="segmented-control-152-0 segmented-control-152-1"
                                   class="leafygreen-ui-18en4yf"
                                   role="tablist"
                                 >
@@ -262,7 +262,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                         aria-controls="Toggle case sensitivity"
                                         aria-selected="true"
                                         class="leafygreen-ui-ypz97o"
-                                        id="segmented-control-147-0"
+                                        id="segmented-control-152-0"
                                         role="tab"
                                         tabindex="0"
                                         type="button"
@@ -291,7 +291,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                         aria-controls="Toggle case sensitivity"
                                         aria-selected="false"
                                         class="leafygreen-ui-ypz97o"
-                                        id="segmented-control-147-1"
+                                        id="segmented-control-152-1"
                                         role="tab"
                                         tabindex="-1"
                                         type="button"
@@ -325,8 +325,8 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                   Match
                                 </div>
                                 <div
-                                  aria-label="segmented-control-148"
-                                  aria-owns="segmented-control-148-0 segmented-control-148-1"
+                                  aria-label="segmented-control-153"
+                                  aria-owns="segmented-control-153-0 segmented-control-153-1"
                                   class="leafygreen-ui-18en4yf"
                                   role="tablist"
                                 >
@@ -342,7 +342,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                         aria-controls="Toggle match type"
                                         aria-selected="true"
                                         class="leafygreen-ui-ypz97o"
-                                        id="segmented-control-148-0"
+                                        id="segmented-control-153-0"
                                         role="tab"
                                         tabindex="0"
                                         type="button"
@@ -371,7 +371,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                                         aria-controls="Toggle match type"
                                         aria-selected="false"
                                         class="leafygreen-ui-ypz97o"
-                                        id="segmented-control-148-1"
+                                        id="segmented-control-153-1"
                                         role="tab"
                                         tabindex="-1"
                                         type="button"
@@ -409,7 +409,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   <div
                     class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-2"
+                    id="menu-group-label-id-148"
                   >
                     <div
                       class="leafygreen-ui-1rnl6t5"
@@ -464,7 +464,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-2"
+                    aria-labelledby="menu-group-label-id-148"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -516,7 +516,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                   <div
                     class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-3"
+                    id="menu-group-label-id-149"
                   >
                     <div
                       class="leafygreen-ui-1rnl6t5"
@@ -564,7 +564,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-3"
+                    aria-labelledby="menu-group-label-id-149"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -653,7 +653,7 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
             </ul>
           </div>
           <div
-            class="leafygreen-ui-1s7m71x"
+            class="leafygreen-ui-1jpr46n"
           >
             <ul
               aria-hidden="true"
@@ -735,14 +735,14 @@ exports[`storyshots Storyshots components/SidePanel Default 1`] = `
           </div>
         </nav>
         <button
-          aria-controls="side-nav-5"
+          aria-controls="side-nav-151"
           aria-expanded="true"
           aria-label="Collapse navigation"
           class="leafygreen-ui-v87gj9"
           data-testid="side-nav-collapse-toggle"
         >
           <div
-            class="lg-ui-collapse-menu-0000 leafygreen-ui-17suy5p"
+            class="lg-ui-collapse-menu-0000 leafygreen-ui-16i6mio"
           >
             <svg
               alt=""
