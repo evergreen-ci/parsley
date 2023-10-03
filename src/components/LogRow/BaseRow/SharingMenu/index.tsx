@@ -90,6 +90,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
     <Menu
       data-cy="sharing-menu"
       open={open}
+      setOpen={setOpen}
       trigger={
         <MenuIcon
           aria-label="Expand share menu"
