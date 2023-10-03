@@ -87,7 +87,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
       : selectedLines.endingLine - selectedLines.startingLine + 1;
 
   return (
-    <Menu
+    <StyledMenu
       align="right"
       data-cy="sharing-menu"
       open={open}
@@ -103,15 +103,17 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
       }
     >
       <MenuItem
+        glyph={<Icon glyph="Copy" />}
         onClick={handleCopySelectedLines}
         title={`Copy the selected ${pluralize(
           "line",
           lineCount
-        )} to your clipboard with Jira formatting.`}
+        )} to your clipboard with JIRA formatting.`}
       >
         Copy selected {pluralize("line", lineCount)}
       </MenuItem>
       <MenuItem
+        glyph={<Icon glyph="Export" />}
         onClick={handleShareLinkToSelectedLines}
         title={`Copy a link to ${pluralize("this", lineCount)} ${pluralize(
           "line",
@@ -122,12 +124,13 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
       </MenuItem>
       <MenuItem
         disabled={lineCount === 1}
+        glyph={<Icon glyph="MagnifyingGlass" />}
         onClick={handleOnlySearchOnRange}
         title="Limit the range Parsley will search to only these lines."
       >
         Only search on range
       </MenuItem>
-    </Menu>
+    </StyledMenu>
   );
 };
 
@@ -137,4 +140,7 @@ const MenuIcon = styled(IconButton)`
   margin-left: ${size.xxs};
 `;
 
+const StyledMenu = styled(Menu)`
+  width: fit-content;
+`;
 export default SharingMenu;
