@@ -26,14 +26,13 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
   const [open, setOpen] = useState(defaultOpen);
   const { sendEvent } = useLogWindowAnalytics();
 
-  const handleToggleMenu = (e: React.MouseEvent) => {
-    e.stopPropagation();
+  const setMenuOpen = () => {
     if (open) {
       sendEvent({ name: "Closed Share Menu" });
     } else {
       sendEvent({ name: "Opened Share Menu" });
     }
-    setOpen((o) => !o);
+    setOpen(!open);
   };
 
   const handleCopySelectedLines = async () => {
@@ -91,12 +90,12 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
       align="right"
       data-cy="sharing-menu"
       open={open}
-      setOpen={setOpen}
+      setOpen={setMenuOpen}
       trigger={
         <MenuIcon
           aria-label="Expand share menu"
           data-cy="sharing-menu-button"
-          onClick={handleToggleMenu}
+          onClick={setMenuOpen}
         >
           <Icon glyph="Ellipsis" />
         </MenuIcon>
