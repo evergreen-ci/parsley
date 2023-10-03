@@ -172,8 +172,6 @@ const ShareIcon = styled(Icon)`
   cursor: pointer;
   user-select: none;
   flex-shrink: 0;
-  /* margin-left: ${size.xxs}; */
-  /* margin-top: 2px; */
 `;
 
 const StyledPre = styled.pre<{
@@ -196,6 +194,5 @@ const MenuIcon = styled(IconButton)`
   height: 16px;
   width: 16px;
   margin-left: ${size.xxs};
-  /* margin-top: 2px; */
 `;
 export default BaseRow;
