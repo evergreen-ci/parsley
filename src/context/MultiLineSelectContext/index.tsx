@@ -60,7 +60,7 @@ const MultiLineSelectContextProvider: React.FC<{
   const clearSelection = useCallback(() => {
     setSelectedLines({ endingLine: undefined, startingLine: undefined });
     setMenuPosition(undefined);
-    leaveBreadcrumb("Clear line range");
+    leaveBreadcrumb("Clear line range", {}, "process");
   }, [setSelectedLines]);
 
   const handleSelectLine = useCallback(
@@ -71,10 +71,21 @@ const MultiLineSelectContextProvider: React.FC<{
           startingLine: selectedLines.startingLine,
         });
         setOpenMenu(true);
-        leaveBreadcrumb("Shift click on line range");
+        leaveBreadcrumb(
+          "Shift click on line range",
+          {
+            endingLine: selectedLine,
+            startingLine: selectedLines.startingLine,
+          },
+          "process"
+        );
       } else {
         setSelectedLines({ endingLine: undefined, startingLine: selectedLine });
-        leaveBreadcrumb("Set initial line range");
+        leaveBreadcrumb(
+          "Set initial line range",
+          { endingLine: undefined, startingLine: selectedLine },
+          "process"
+        );
       }
 
       if (selectedLines.startingLine === selectedLine) {
