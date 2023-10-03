@@ -4,13 +4,9 @@ import BaseRow from "components/LogRow/BaseRow";
 import { getSeverityMapping, mapLogLevelToColor } from "./utils";
 import { LogRowProps } from "../types";
 
-interface AnsiiRowProps extends LogRowProps {}
+interface AnsiRowProps extends LogRowProps {}
 
-const AnsiiRow: React.FC<AnsiiRowProps> = ({
-  getLine,
-  lineNumber,
-  ...rest
-}) => {
+const AnsiRow: React.FC<AnsiRowProps> = ({ getLine, lineNumber, ...rest }) => {
   const ansiUp = new AnsiUp();
 
   let lineContent = getLine(lineNumber);
@@ -37,7 +33,7 @@ const AnsiiRow: React.FC<AnsiiRowProps> = ({
   return (
     <BaseRow
       color={severity ? mapLogLevelToColor[severity] : undefined}
-      data-cy="ansii-row"
+      data-cy="ansi-row"
       lineNumber={lineNumber}
       {...rest}
     >
@@ -46,6 +42,6 @@ const AnsiiRow: React.FC<AnsiiRowProps> = ({
   );
 };
 
-AnsiiRow.displayName = "AnsiiRow";
+AnsiRow.displayName = "AnsiRow";
 
-export default AnsiiRow;
+export default AnsiRow;

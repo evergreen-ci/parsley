@@ -3,7 +3,7 @@ import { useLogContext } from "context/LogContext";
 import { useHighlightParam } from "hooks/useHighlightParam";
 import { ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
-import AnsiiRow from "../AnsiiRow";
+import AnsiRow from "../AnsiRow";
 import CollapsedRow from "../CollapsedRow";
 import ResmokeRow from "../ResmokeRow";
 
@@ -72,9 +72,9 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
 };
 
 const rowRendererMap = {
-  [LogTypes.EVERGREEN_TASK_FILE]: AnsiiRow,
-  [LogTypes.EVERGREEN_TASK_LOGS]: AnsiiRow,
-  [LogTypes.EVERGREEN_TEST_LOGS]: AnsiiRow,
+  [LogTypes.EVERGREEN_TASK_FILE]: AnsiRow,
+  [LogTypes.EVERGREEN_TASK_LOGS]: AnsiRow,
+  [LogTypes.EVERGREEN_TEST_LOGS]: AnsiRow,
   [LogTypes.RESMOKE_LOGS]: ResmokeRow,
 };
 
