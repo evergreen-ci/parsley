@@ -12,7 +12,6 @@ import { leaveBreadcrumb } from "utils/errorReporting";
 
 type MultiLineSelectContextState = {
   handleSelectLine: (selectedLine: number, shiftClick: boolean) => void;
-  clearSelection: () => void;
   handleCloseMenu: () => void;
   menuPosition: number | undefined;
   openMenu: boolean;
@@ -105,7 +104,6 @@ const MultiLineSelectContextProvider: React.FC<{
   );
   const memoizedContext = useMemo(
     () => ({
-      clearSelection,
       handleCloseMenu: () => {
         setOpenMenu(false);
       },
@@ -114,14 +112,7 @@ const MultiLineSelectContextProvider: React.FC<{
       openMenu: openMenu && bothLinesSelected,
       selectedLines,
     }),
-    [
-      clearSelection,
-      handleSelectLine,
-      menuPosition,
-      openMenu,
-      bothLinesSelected,
-      selectedLines,
-    ]
+    [handleSelectLine, menuPosition, openMenu, bothLinesSelected, selectedLines]
   );
   return (
     <MultiLineSelectContext.Provider value={memoizedContext}>
