@@ -59,7 +59,7 @@ export const useResolveLogURL = ({
     },
   });
 
-  const { data: taskFileData } = useQuery<
+  const { data: taskFileData, loading: isLoadingTaskFileData } = useQuery<
     TaskFilesQuery,
     TaskFilesQueryVariables
   >(TASK_FILES, {
@@ -95,6 +95,9 @@ export const useResolveLogURL = ({
       break;
     }
     case LogTypes.EVERGREEN_TASK_FILE: {
+      if (!taskID || !execution || isLoadingTaskFileData) {
+        break;
+      }
       if (taskID && execution && fileName) {
         downloadURL = getEvergreenTaskFileURL(
           taskID,
