@@ -54,6 +54,7 @@ export const useResolveLogURL = ({
     },
   });
 
+  let downloadURL = "";
   let rawLogURL = "";
   let htmlLogURL = "";
   let jobLogsURL = "";
@@ -74,12 +75,14 @@ export const useResolveLogURL = ({
         jobLogsURL = getJobLogsURL(buildID);
         legacyJobLogsURL = getLegacyJobLogsURL(buildID);
       }
+      downloadURL = rawLogURL;
       break;
     }
     case LogTypes.EVERGREEN_TASK_FILE: {
       if (taskID && execution && fileName) {
         // TODO: resolve this value using GQL https://jira.mongodb.org/browse/EVG-20809
         rawLogURL = getEvergreenTaskFileURL(taskID, execution, fileName);
+        downloadURL = rawLogURL;
       }
       break;
     }
@@ -87,6 +90,10 @@ export const useResolveLogURL = ({
       if (!taskID || !execution || !origin) {
         break;
       }
+      downloadURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+        priority: true,
+        text: true,
+      });
       rawLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
         text: true,
       });
@@ -116,12 +123,14 @@ export const useResolveLogURL = ({
         });
       lobsterURL =
         urlLobster ?? getLobsterTestURL(taskID, execution, testID, groupID);
+      downloadURL = rawLogURL;
       break;
     }
     default:
       break;
   }
   return {
+    downloadURL,
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,

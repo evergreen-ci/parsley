@@ -25,6 +25,7 @@ describe("useResolveLogURL", () => {
       }
     );
     expect(result.current).toMatchObject({
+      downloadURL: "",
       htmlLogURL: "",
       jobLogsURL: "",
       legacyJobLogsURL: "",
@@ -34,6 +35,7 @@ describe("useResolveLogURL", () => {
     });
     await waitForNextUpdate();
     expect(result.current).toMatchObject({
+      downloadURL: "rawURL",
       htmlLogURL: "htmlURL",
       jobLogsURL: "",
       legacyJobLogsURL: "",
@@ -63,6 +65,8 @@ describe("useResolveLogURL", () => {
     );
     await waitForNextUpdate();
     expect(result.current).toMatchObject({
+      downloadURL:
+        "test-evergreen.com/test_log/a-task-id/0?test_name=a-test-name-that-doesnt-exist&text=true",
       htmlLogURL:
         "test-evergreen.com/test_log/a-task-id/0?test_name=a-test-name-that-doesnt-exist&text=false",
       jobLogsURL: "",

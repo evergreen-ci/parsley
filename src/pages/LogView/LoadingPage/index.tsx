@@ -15,7 +15,6 @@ import { useFetch } from "hooks/useFetch";
 import NotFound from "pages/404";
 import { LogkeeperMetadata } from "types/api";
 import { leaveBreadcrumb } from "utils/errorReporting";
-import { stringifyQuery } from "utils/query-string";
 import { getBytesAsString } from "utils/string";
 import { useResolveLogURL } from "./useResolveLogURL";
 
@@ -36,6 +35,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   const dispatchToast = useToastContext();
   const { ingestLines, setLogMetadata } = useLogContext();
   const {
+    downloadURL,
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,
@@ -59,16 +59,12 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     }
   );
 
-  const rawLogWithPriorityURL = `${rawLogURL}&${stringifyQuery({
-    priority: true,
-  })}`;
-
   const {
     data,
     error,
     fileSize,
     isLoading: isLoadingLog,
-  } = useLogDownloader(rawLogWithPriorityURL, logType);
+  } = useLogDownloader(downloadURL, logType);
 
   useEffect(() => {
     if (data) {
