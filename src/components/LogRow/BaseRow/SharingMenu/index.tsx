@@ -88,6 +88,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
 
   return (
     <Menu
+      align="right"
       data-cy="sharing-menu"
       open={open}
       setOpen={setOpen}
