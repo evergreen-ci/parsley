@@ -29,6 +29,7 @@ const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
             <EvergreenTaskSubHeader
               buildID={buildID as string}
               execution={Number(execution)}
+              fileName={fileName}
               logType={logType}
               taskID={taskID}
               testID={testID as string}
