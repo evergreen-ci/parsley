@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.111",
+  "version": "1.0.114",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
     "build": "tsc && . ./scripts/deploy/app-version.sh && GIT_SHA=`git rev-parse HEAD` vite build",
@@ -106,7 +106,7 @@
     "@testing-library/react": "13.4.0",
     "@testing-library/react-hooks": "8.0.1",
     "@testing-library/user-event": "14.4.3",
-    "@types/jest": "29.4.0",
+    "@types/jest": "29.5.5",
     "@types/js-cookie": "3.0.4",
     "@types/lodash.debounce": "4.0.7",
     "@types/new-relic-browser": "0.1212.2",
@@ -138,7 +138,7 @@
     "eslint-plugin-storybook": "0.6.12",
     "eslint-plugin-testing-library": "6.0.1",
     "husky": "8.0.2",
-    "jest": "29.4.1",
+    "jest": "29.7.0",
     "jest-environment-jsdom": "29.6.4",
     "jest-junit": "15.0.0",
     "jest-watch-typeahead": "2.2.1",

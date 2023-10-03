@@ -521,10 +521,6 @@ buildvariants:
       - name: test
       - name: snapshots
       - name: check_codegen
-      - name: deploy-prod
-        git_tag_only: true
-        patchable: false
-        priority: 100
 
   - name: ubuntu2204-large
     display_name: Ubuntu 22.04 (large)
@@ -541,6 +537,10 @@ buildvariants:
       - name: e2e_test
       - name: compile
       - name: storybook
+      - name: deploy-prod
+        git_tag_only: true
+        patchable: false
+        priority: 100
 
 pre:
   - func: get-project
