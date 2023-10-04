@@ -7,10 +7,7 @@ const LogDrop = () => {
   const { hasLogs, logMetadata } = useLogContext();
 
   return hasLogs ? (
-    <LogWindow
-      isUploadedLog
-      logType={logMetadata?.logType || LogTypes.RESMOKE_LOGS}
-    />
+    <LogWindow logType={logMetadata?.logType || LogTypes.RESMOKE_LOGS} />
   ) : (
     <FileDropper />
   );

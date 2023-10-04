@@ -10,9 +10,8 @@ import { useLogContext } from "context/LogContext";
 
 interface LogWindowProps {
   logType: LogTypes;
-  isUploadedLog: boolean;
 }
-const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
+const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
   const {
     clearExpandedLines,
     collapseLines,
@@ -36,7 +35,7 @@ const LogWindow: React.FC<LogWindowProps> = ({ isUploadedLog, logType }) => {
         scrollToLine={scrollToLine}
       />
       <ColumnContainer>
-        <SubHeader isUploadedLog={isUploadedLog} />
+        <SubHeader />
         <LogPaneContainer>
           {hasLogs && processedLogLines.length && (
             <LogPane

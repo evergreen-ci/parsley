@@ -21,6 +21,7 @@ interface LogMetadata {
   jobLogsURL?: string;
   legacyJobLogsURL?: string;
   lobsterURL?: string;
+  isUploadedLog?: boolean;
 }
 
 interface Preferences {
