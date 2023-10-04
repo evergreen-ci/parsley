@@ -123,6 +123,7 @@ export const useResolveLogURL = ({
         text: false,
       });
       lobsterURL = getLobsterTaskURL(taskID, execution, origin);
+      downloadURL = rawLogURL;
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
