@@ -21,7 +21,7 @@ import {
 } from "gql/generated/types";
 import { GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
 
-interface Props {
+interface UseResolveLogURLProps {
   buildID?: string;
   execution?: string;
   fileName?: string;
@@ -31,7 +31,36 @@ interface Props {
   taskID?: string;
   testID?: string;
 }
+type LogURLs = {
+  /** The URL of the file parsley should download */
+  downloadURL: string;
+  /** The URL of the log file in the html log viewer */
+  htmlLogURL: string;
+  /** The URL of the RESMOKE logs job logs page in Spruce */
+  jobLogsURL: string;
+  /** The URL of the RESMOKE logs job logs page in logkeeper */
+  legacyJobLogsURL: string;
+  /** The URL to open the log in Lobster */
+  lobsterURL: string;
+  /** The URL of the log file without any processing */
+  rawLogURL: string;
+  /** Whether the hook is actively making an network request or not  */
+  loading: boolean;
+};
 
+/**
+ * `useResolveLogURL` is a custom hook that resolves the log URL based on the log type and other parameters.
+ * @param UseResolveLogURLProps - The props for the hook
+ * @param UseResolveLogURLProps.buildID - The build ID of the log
+ * @param UseResolveLogURLProps.execution - The execution number of the log
+ * @param UseResolveLogURLProps.fileName - The name of the file being viewed
+ * @param UseResolveLogURLProps.groupID - The group ID of the test
+ * @param UseResolveLogURLProps.logType - The type of log being viewed
+ * @param UseResolveLogURLProps.origin - The origin of the log
+ * @param UseResolveLogURLProps.taskID - The task ID of the log
+ * @param UseResolveLogURLProps.testID - The test ID of the log
+ * @returns LogURLs
+ */
 export const useResolveLogURL = ({
   buildID,
   execution,
@@ -41,7 +70,7 @@ export const useResolveLogURL = ({
   origin,
   taskID,
   testID,
-}: Props) => {
+}: UseResolveLogURLProps): LogURLs => {
   const { data: testData, loading: isLoadingTest } = useQuery<
     TestLogUrlQuery,
     TestLogUrlQueryVariables
