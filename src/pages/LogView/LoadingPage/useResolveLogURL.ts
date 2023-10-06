@@ -145,6 +145,10 @@ export const useResolveLogURL = ({
       if (!taskID || !execution || !origin) {
         break;
       }
+      downloadURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+        priority: true,
+        text: true,
+      });
       rawLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
         text: true,
       });
@@ -152,7 +156,6 @@ export const useResolveLogURL = ({
         text: false,
       });
       lobsterURL = getLobsterTaskURL(taskID, execution, origin);
-      downloadURL = rawLogURL;
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
