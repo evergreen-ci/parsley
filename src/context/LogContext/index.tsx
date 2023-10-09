@@ -90,7 +90,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     undefined
   );
 
-  const [wrap, setWrap] = useState(Cookie.get(WRAP) === "true");
+  const [wrap, setWrap] = useState(false);
   const [filterLogic, setFilterLogic] = useQueryParam(
     QueryParams.FilterLogic,
     (Cookie.get(FILTER_LOGIC) as FilterLogic) ?? FilterLogic.And
