@@ -1,4 +1,5 @@
 import { createRef } from "react";
+import Cookie from "js-cookie";
 import { VirtuosoMockContext } from "react-virtuoso";
 import { LogContextProvider } from "context/LogContext";
 import * as logContext from "context/LogContext";
@@ -17,7 +18,14 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
   </VirtuosoMockContext.Provider>
 );
 
+jest.mock("js-cookie");
+const mockedGet = Cookie.get as unknown as jest.Mock<string>;
+
 describe("logPane", () => {
+  beforeEach(() => {
+    mockedGet.mockImplementation(() => "true");
+  });
+
   afterEach(() => {
     jest.restoreAllMocks();
     jest.useRealTimers();

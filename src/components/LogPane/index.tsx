@@ -44,7 +44,9 @@ const LogPane: React.FC<LogPaneProps> = ({ rowCount, rowRenderer }) => {
         }
 
         // Wrap can be enabled after the log pane has initially loaded.
-        setWrap(Cookies.get(WRAP) === "true");
+        if (Cookies.get(WRAP) === "true") {
+          setWrap(true);
+        }
       }, 50);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
