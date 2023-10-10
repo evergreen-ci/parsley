@@ -90,6 +90,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     undefined
   );
 
+  // Wrap settings are evaluated after the logs have initially rendered - see LogPane component.
   const [wrap, setWrap] = useState(false);
   const [filterLogic, setFilterLogic] = useQueryParam(
     QueryParams.FilterLogic,
