@@ -4,16 +4,16 @@ import LogPane from "components/LogPane";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { CustomMeta, CustomStoryObj } from "test_utils/types";
-import AnsiiRow from ".";
+import AnsiRow from ".";
 import { ParsleyRow } from "../RowRenderer";
 
 export default {
-  component: AnsiiRow,
-} satisfies CustomMeta<typeof AnsiiRow>;
+  component: AnsiRow,
+} satisfies CustomMeta<typeof AnsiRow>;
 
-type AnsiiRowProps = React.FC<React.ComponentProps<typeof AnsiiRow>>;
+type AnsiRowProps = React.FC<React.ComponentProps<typeof AnsiRow>>;
 
-// Single AnsiiRow.
+// Single AnsiRow.
 const SingleLineStory = (args: any) => {
   const { ingestLines, scrollToLine } = useLogContext();
 
@@ -22,7 +22,7 @@ const SingleLineStory = (args: any) => {
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <AnsiiRow
+    <AnsiRow
       key={logLines[0]}
       getLine={() => logLines[0]}
       highlightRegex={undefined}
@@ -36,14 +36,14 @@ const SingleLineStory = (args: any) => {
   );
 };
 
-export const SingleLine: CustomStoryObj<AnsiiRowProps> = {
+export const SingleLine: CustomStoryObj<AnsiRowProps> = {
   args: {
     wrap: false,
   },
   render: (args) => <SingleLineStory {...args} />,
 };
 
-// Multiple AnsiiRows.
+// Multiple AnsiRows.
 const MultiLineStory = (args: any) => {
   const { ingestLines, preferences, processedLogLines } = useLogContext();
   const { setWrap } = preferences;
@@ -69,7 +69,7 @@ const MultiLineStory = (args: any) => {
   );
 };
 
-export const MultiLines: CustomStoryObj<AnsiiRowProps> = {
+export const MultiLines: CustomStoryObj<AnsiRowProps> = {
   args: {
     wrap: false,
   },

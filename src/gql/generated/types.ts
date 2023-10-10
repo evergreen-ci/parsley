@@ -3223,3 +3223,31 @@ export type ProjectFiltersQuery = {
     }> | null;
   };
 };
+
+export type TaskFilesQueryVariables = Exact<{
+  taskId: Scalars["String"]["input"];
+  execution?: InputMaybe<Scalars["Int"]["input"]>;
+}>;
+
+export type TaskFilesQuery = {
+  __typename?: "Query";
+  task?: {
+    __typename?: "Task";
+    execution: number;
+    id: string;
+    files: {
+      __typename?: "TaskFiles";
+      groupedFiles: Array<{
+        __typename?: "GroupedFiles";
+        execution: number;
+        taskId: string;
+        taskName?: string | null;
+        files?: Array<{
+          __typename?: "File";
+          link: string;
+          name: string;
+        }> | null;
+      }>;
+    };
+  } | null;
+};

@@ -1,6 +1,6 @@
 import { LogContextProvider } from "context/LogContext";
 import { renderWithRouterMatch, screen } from "test_utils";
-import AnsiiRow from ".";
+import AnsiRow from ".";
 
 const wrapper = (logs: string[]) => {
   const provider = ({ children }: { children: React.ReactNode }) => (
@@ -9,35 +9,35 @@ const wrapper = (logs: string[]) => {
   return provider;
 };
 
-describe("ansiiRow", () => {
-  it("does not render an ansii row if getLine returns undefined", () => {
+describe("ansiRow", () => {
+  it("does not render an ansi row if getLine returns undefined", () => {
     renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineIndex={99} lineNumber={99} />,
+      <AnsiRow {...ansiProps} lineIndex={99} lineNumber={99} />,
       {
         wrapper: wrapper(logLines),
       }
     );
-    expect(screen.queryByDataCy("ansii-row")).toBeNull();
+    expect(screen.queryByDataCy("ansi-row")).toBeNull();
   });
-  it("renders an ansii row if getLine returns an empty string", () => {
+  it("renders an ansi row if getLine returns an empty string", () => {
     renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineIndex={10} lineNumber={10} />,
+      <AnsiRow {...ansiProps} lineIndex={10} lineNumber={10} />,
       {
         wrapper: wrapper(logLines),
       }
     );
-    expect(screen.getByDataCy("ansii-row")).toBeInTheDocument();
+    expect(screen.getByDataCy("ansi-row")).toBeInTheDocument();
   });
   it("displays a log line and its text for a given index", () => {
     renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineIndex={0} lineNumber={0} />,
+      <AnsiRow {...ansiProps} lineIndex={0} lineNumber={0} />,
       {
         wrapper: wrapper(logLines),
       }
     );
     expect(screen.getByText(logLines[0])).toBeInTheDocument();
     renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineIndex={1} lineNumber={1} />,
+      <AnsiRow {...ansiProps} lineIndex={1} lineNumber={1} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -46,7 +46,7 @@ describe("ansiiRow", () => {
   });
   it("lines should be linkified if they have a url", () => {
     renderWithRouterMatch(
-      <AnsiiRow {...ansiiProps} lineIndex={8} lineNumber={8} />,
+      <AnsiRow {...ansiProps} lineIndex={8} lineNumber={8} />,
       {
         wrapper: wrapper(logLines),
       }
@@ -59,8 +59,8 @@ describe("ansiiRow", () => {
   });
   it("should highlight text that match a search term", () => {
     renderWithRouterMatch(
-      <AnsiiRow
-        {...ansiiProps}
+      <AnsiRow
+        {...ansiProps}
         lineIndex={9}
         lineNumber={9}
         searchTerm={/highlight me/}
@@ -73,8 +73,8 @@ describe("ansiiRow", () => {
   });
   it("should highlight text that have matching highlights", () => {
     renderWithRouterMatch(
-      <AnsiiRow
-        {...ansiiProps}
+      <AnsiRow
+        {...ansiProps}
         highlightRegex={/highlight me/}
         lineIndex={9}
         lineNumber={9}
@@ -84,6 +84,38 @@ describe("ansiiRow", () => {
       }
     );
     expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
+  });
+
+  describe("when rendering lines with priority", () => {
+    it("renders a low-priority line in black", () => {
+      const rgbBlack = "rgb(51, 51, 51)";
+
+      renderWithRouterMatch(
+        <AnsiRow {...priorityProps} lineIndex={0} lineNumber={0} />,
+        {
+          wrapper: wrapper(priorityLogLines),
+        }
+      );
+      expect(
+        screen.getByText(priorityLogLines[0].substring(8))
+      ).toBeInTheDocument();
+      expect(screen.getByDataCy("ansi-row")).toHaveStyle(`color: ${rgbBlack}`);
+    });
+
+    it("renders a high-priority line in red", () => {
+      const rgbRed = "rgb(255, 0, 0)";
+
+      renderWithRouterMatch(
+        <AnsiRow {...priorityProps} lineIndex={3} lineNumber={3} />,
+        {
+          wrapper: wrapper(priorityLogLines),
+        }
+      );
+      expect(
+        screen.getByText(priorityLogLines[3].substring(8))
+      ).toBeInTheDocument();
+      expect(screen.getByDataCy("ansi-row")).toHaveStyle(`color: ${rgbRed}`);
+    });
   });
 });
 
@@ -101,11 +133,24 @@ const logLines = [
   "",
 ];
 
-const ansiiProps = {
+const priorityLogLines = [
+  `[P: 40] [2022/12/05 20:03:30.136] Running pre-task commands.`,
+  `[P: 40] [2022/12/05 20:03:30.136] Running setup task for task group ''.`,
+  `[P: 40] [2022/12/05 20:03:30.136] Running command 'shell.exec' in "install AL2 packages and Chrome" (step 1.1 of 4).`,
+  `[P: 70] [2022/12/05 20:03:30.138] + '[' amazon2-cloud-small = amazon2-cloud-large ']'`,
+  `[P: 70] [2022/12/05 20:03:30.138] + '[' amazon2-cloud-small = amazon2-cloud-small ']'"`,
+];
+
+const ansiProps = {
   getLine: (index: number) => logLines[index],
   scrollToLine: jest.fn(),
 
   prettyPrint: false,
   range: { lowerRange: 0 },
   wrap: false,
+};
+
+const priorityProps = {
+  ...ansiProps,
+  getLine: (index: number) => priorityLogLines[index],
 };
