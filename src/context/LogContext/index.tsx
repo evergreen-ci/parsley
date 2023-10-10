@@ -90,7 +90,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     undefined
   );
 
-  const [wrap, setWrap] = useState(Cookie.get(WRAP) === "true");
+  // Wrap settings are evaluated after the logs have initially rendered - see LogPane component.
+  const [wrap, setWrap] = useState(false);
   const [filterLogic, setFilterLogic] = useQueryParam(
     QueryParams.FilterLogic,
     (Cookie.get(FILTER_LOGIC) as FilterLogic) ?? FilterLogic.And

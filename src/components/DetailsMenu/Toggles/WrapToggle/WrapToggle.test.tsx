@@ -4,37 +4,27 @@ import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import WrapToggle from ".";
 
 jest.mock("js-cookie");
-const mockedGet = Cookie.get as unknown as jest.Mock<string>;
+const mockedSet = Cookie.set as unknown as jest.Mock<string>;
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <LogContextProvider initialLogLines={[]}>{children}</LogContextProvider>
 );
 
 describe("wrap toggle", () => {
-  beforeEach(() => {
-    mockedGet.mockImplementation(() => "true");
-  });
-
-  it("defaults to 'false' if cookie is unset", () => {
-    mockedGet.mockImplementation(() => "");
+  it("defaults to 'false'", () => {
     render(<WrapToggle />, { wrapper });
     const wrapToggle = screen.getByDataCy("wrap-toggle");
     expect(wrapToggle).toHaveAttribute("aria-checked", "false");
   });
 
-  it("should read from the cookie properly", () => {
-    render(<WrapToggle />, { wrapper });
-    const wrapToggle = screen.getByDataCy("wrap-toggle");
-    expect(wrapToggle).toHaveAttribute("aria-checked", "true");
-  });
-
-  it("should not update the URL", async () => {
+  it("should update the cookie but not the URL", async () => {
     const user = userEvent.setup();
     const { router } = render(<WrapToggle />, { wrapper });
     const wrapToggle = screen.getByDataCy("wrap-toggle");
 
     await user.click(wrapToggle);
-    expect(wrapToggle).toHaveAttribute("aria-checked", "false");
+    expect(wrapToggle).toHaveAttribute("aria-checked", "true");
+    expect(mockedSet).toHaveBeenCalledTimes(1);
     expect(router.state.location.search).toBe("");
   });
 });
