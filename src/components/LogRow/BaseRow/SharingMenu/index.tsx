@@ -20,12 +20,12 @@ interface SharingMenuProps {
 
 const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
   const { selectedLines } = useMultiLineSelectContext();
-  const { getLine, processedLogLines } = useLogContext();
+  const { getLine, logMetadata, processedLogLines } = useLogContext();
   const [params, setParams] = useQueryParams();
   const dispatchToast = useToastContext();
   const [open, setOpen] = useState(defaultOpen);
   const { sendEvent } = useLogWindowAnalytics();
-
+  const { isUploadedLog } = logMetadata || {};
   const setMenuOpen = () => {
     if (open) {
       sendEvent({ name: "Closed Share Menu" });
@@ -111,16 +111,18 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
       >
         Copy selected {pluralize("line", lineCount)}
       </MenuItem>
-      <MenuItem
-        glyph={<Icon glyph="Export" />}
-        onClick={handleShareLinkToSelectedLines}
-        title={`Copy a link to ${pluralize("this", lineCount)} ${pluralize(
-          "line",
-          lineCount
-        )}.`}
-      >
-        Share link to selected {pluralize("line", lineCount)}
-      </MenuItem>
+      {!isUploadedLog && (
+        <MenuItem
+          glyph={<Icon glyph="Export" />}
+          onClick={handleShareLinkToSelectedLines}
+          title={`Copy a link to ${pluralize("this", lineCount)} ${pluralize(
+            "line",
+            lineCount
+          )}.`}
+        >
+          Share link to selected {pluralize("line", lineCount)}
+        </MenuItem>
+      )}
       <MenuItem
         disabled={lineCount === 1}
         glyph={<Icon glyph="MagnifyingGlass" />}

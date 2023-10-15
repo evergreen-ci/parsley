@@ -1,5 +1,5 @@
 import { act } from "@testing-library/react-hooks";
-import { LogContextProvider } from "context/LogContext";
+import { LogContextProvider, useLogContext } from "context/LogContext";
 import {
   MultiLineSelectContextProvider,
   useMultiLineSelectContext,
@@ -102,5 +102,31 @@ describe("sharingMenu", () => {
     expect(router.state.location.search).toBe(
       "?lower=1&selectedLineRange=L1-L3&upper=3"
     );
+  });
+  it("should not show a share link button if this is a locally uploaded log", () => {
+    const useSpecialHook = () => {
+      const useLogContextHook = useLogContext();
+      const useMultiLineSelectContextHook = useMultiLineSelectContext();
+      console.log("useLogContextHook", useLogContextHook);
+      return {
+        useLogContextHook,
+        useMultiLineSelectContextHook,
+      };
+    };
+    const { Component: MenuComponent, hook } = renderComponentWithHook(
+      useSpecialHook,
+      <SharingMenuComponent defaultOpen />
+    );
+    const { Component } = RenderFakeToastContext(<MenuComponent />);
+    renderWithRouterMatch(<Component />, {
+      route: "?selectedLineRange=L1-L3",
+      wrapper,
+    });
+    act(() => {
+      hook.current.useLogContextHook.setLogMetadata({
+        isUploadedLog: true,
+      });
+    });
+    expect(screen.queryByText("Share link to selected lines")).toBeNull();
   });
 });
