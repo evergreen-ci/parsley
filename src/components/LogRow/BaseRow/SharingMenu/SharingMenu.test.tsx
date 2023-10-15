@@ -107,7 +107,6 @@ describe("sharingMenu", () => {
     const useSpecialHook = () => {
       const useLogContextHook = useLogContext();
       const useMultiLineSelectContextHook = useMultiLineSelectContext();
-      console.log("useLogContextHook", useLogContextHook);
       return {
         useLogContextHook,
         useMultiLineSelectContextHook,
