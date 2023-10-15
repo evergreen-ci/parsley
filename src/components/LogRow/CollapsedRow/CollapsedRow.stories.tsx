@@ -48,8 +48,8 @@ export const CollapsedRowSingle: CustomStoryObj<typeof CollapsedRow> = {
   render: (args) => <CollapsedRowStory {...args} />,
 };
 
-// CollapsedRow with AnsiiRows.
-const CollapsedAnsiiRowStory = (
+// CollapsedRow with AnsiRows.
+const CollapsedAnsiRowStory = (
   args: React.ComponentProps<typeof CollapsedRow> & {
     wrap: boolean;
   }
@@ -58,7 +58,7 @@ const CollapsedAnsiiRowStory = (
   const { setWrap } = preferences;
 
   useEffect(() => {
-    ingestLines(ansiiLogLines, LogTypes.EVERGREEN_TASK_LOGS);
+    ingestLines(ansiLogLines, LogTypes.EVERGREEN_TASK_LOGS);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -78,7 +78,7 @@ const CollapsedAnsiiRowStory = (
   );
 };
 
-export const CollapsedAnsiiRow: CustomStoryObj<
+export const CollapsedAnsiRow: CustomStoryObj<
   React.ComponentProps<typeof CollapsedRow> & {
     wrap: boolean;
   }
@@ -86,7 +86,7 @@ export const CollapsedAnsiiRow: CustomStoryObj<
   args: {
     wrap: false,
   },
-  render: (args) => <CollapsedAnsiiRowStory {...args} />,
+  render: (args) => <CollapsedAnsiRowStory {...args} />,
 };
 
 // CollapsedRow withs ResmokeRows.
@@ -130,7 +130,7 @@ export const CollapsedResmokeRow: CustomStoryObj<
   render: (args) => <CollapsedResmokeRowStory {...args} />,
 };
 
-const ansiiLogLines = [
+const ansiLogLines = [
   "[2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=info]: [hash='536cdcab21b907c87cd14751ad523ad1d8f23d07' message='successfully created version' project='mci' runner='repotracker' version='_536cdcab21b907c87cd14751ad523ad1d8f23d07']",
   "Some line with a url https://www.google.com",
   "┌\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m─\u001b[39m\u001b[90m┐\u001b[39m",

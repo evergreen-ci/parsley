@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.115",
+  "version": "1.0.118",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
     "build": "tsc && . ./scripts/deploy/app-version.sh && GIT_SHA=`git rev-parse HEAD` vite build",
@@ -80,7 +80,7 @@
     "react-dom": "18.2.0",
     "react-dropzone": "14.2.3",
     "react-router-dom": "6.11.2",
-    "react-virtuoso": "4.5.0",
+    "react-virtuoso": "4.6.0",
     "xss": "1.0.14"
   },
   "devDependencies": {

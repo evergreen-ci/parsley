@@ -13,10 +13,15 @@ import {
   getLobsterTestURL,
   getResmokeLogURL,
 } from "constants/logURLTemplates";
-import { TestLogUrlQuery, TestLogUrlQueryVariables } from "gql/generated/types";
-import { GET_TEST_LOG_URL } from "gql/queries";
+import {
+  TaskFilesQuery,
+  TaskFilesQueryVariables,
+  TestLogUrlQuery,
+  TestLogUrlQueryVariables,
+} from "gql/generated/types";
+import { GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
 
-interface Props {
+interface UseResolveLogURLProps {
   buildID?: string;
   execution?: string;
   fileName?: string;
@@ -26,7 +31,36 @@ interface Props {
   taskID?: string;
   testID?: string;
 }
+type LogURLs = {
+  /** The URL of the file parsley should download */
+  downloadURL: string;
+  /** The URL of the log file in the html log viewer */
+  htmlLogURL: string;
+  /** The URL of the RESMOKE logs job logs page in Spruce */
+  jobLogsURL: string;
+  /** The URL of the RESMOKE logs job logs page in logkeeper */
+  legacyJobLogsURL: string;
+  /** The URL to open the log in Lobster */
+  lobsterURL: string;
+  /** The URL of the log file without any processing */
+  rawLogURL: string;
+  /** Whether the hook is actively making an network request or not  */
+  loading: boolean;
+};
 
+/**
+ * `useResolveLogURL` is a custom hook that resolves the log URL based on the log type and other parameters.
+ * @param UseResolveLogURLProps - The props for the hook
+ * @param UseResolveLogURLProps.buildID - The build ID of the log
+ * @param UseResolveLogURLProps.execution - The execution number of the log
+ * @param UseResolveLogURLProps.fileName - The name of the file being viewed
+ * @param UseResolveLogURLProps.groupID - The group ID of the test
+ * @param UseResolveLogURLProps.logType - The type of log being viewed
+ * @param UseResolveLogURLProps.origin - The origin of the log
+ * @param UseResolveLogURLProps.taskID - The task ID of the log
+ * @param UseResolveLogURLProps.testID - The test ID of the log
+ * @returns LogURLs
+ */
 export const useResolveLogURL = ({
   buildID,
   execution,
@@ -36,7 +70,7 @@ export const useResolveLogURL = ({
   origin,
   taskID,
   testID,
-}: Props) => {
+}: UseResolveLogURLProps): LogURLs => {
   const { data: testData, loading: isLoadingTest } = useQuery<
     TestLogUrlQuery,
     TestLogUrlQueryVariables
@@ -54,6 +88,18 @@ export const useResolveLogURL = ({
     },
   });
 
+  const { data: taskFileData, loading: isLoadingTaskFileData } = useQuery<
+    TaskFilesQuery,
+    TaskFilesQueryVariables
+  >(TASK_FILES, {
+    skip: !(logType === LogTypes.EVERGREEN_TASK_FILE && taskID && execution),
+    variables: {
+      execution: parseInt(execution as string, 10),
+      taskId: taskID as string,
+    },
+  });
+
+  let downloadURL = "";
   let rawLogURL = "";
   let htmlLogURL = "";
   let jobLogsURL = "";
@@ -74,12 +120,24 @@ export const useResolveLogURL = ({
         jobLogsURL = getJobLogsURL(buildID);
         legacyJobLogsURL = getLegacyJobLogsURL(buildID);
       }
+      downloadURL = rawLogURL;
       break;
     }
     case LogTypes.EVERGREEN_TASK_FILE: {
+      if (!taskID || !execution || isLoadingTaskFileData) {
+        break;
+      }
       if (taskID && execution && fileName) {
-        // TODO: resolve this value using GQL https://jira.mongodb.org/browse/EVG-20809
-        rawLogURL = getEvergreenTaskFileURL(taskID, execution, fileName);
+        downloadURL = getEvergreenTaskFileURL(
+          taskID,
+          execution,
+          encodeURIComponent(fileName)
+        );
+        const allFiles = taskFileData?.task?.files.groupedFiles.flatMap(
+          (group) => group.files
+        );
+        rawLogURL =
+          allFiles?.find((file) => file?.name === fileName)?.link || "";
       }
       break;
     }
@@ -87,6 +145,10 @@ export const useResolveLogURL = ({
       if (!taskID || !execution || !origin) {
         break;
       }
+      downloadURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+        priority: true,
+        text: true,
+      });
       rawLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
         text: true,
       });
@@ -116,12 +178,14 @@ export const useResolveLogURL = ({
         });
       lobsterURL =
         urlLobster ?? getLobsterTestURL(taskID, execution, testID, groupID);
+      downloadURL = rawLogURL;
       break;
     }
     default:
       break;
   }
   return {
+    downloadURL,
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,

@@ -10,7 +10,7 @@ describe("Parsley Routes", () => {
       "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
     cy.visit(logLink);
     cy.get("[data-cy^='log-row-']").should("be.visible");
-    cy.dataCy("ansii-row").should("be.visible");
+    cy.dataCy("ansi-row").should("be.visible");
     cy.dataCy("resmoke-row").should("not.exist");
     cy.contains("Task logger initialized");
   });
@@ -26,7 +26,7 @@ describe("Parsley Routes", () => {
       "AssertionError: Timed out retrying after 4000ms: Too many elements found. Found '1', expected '0'";
     cy.visit(logLink);
     cy.get("[data-cy^='log-row-']").should("be.visible");
-    cy.dataCy("ansii-row").should("be.visible");
+    cy.dataCy("ansi-row").should("be.visible");
     cy.dataCy("resmoke-row").should("not.exist");
     cy.contains(testLogLine);
   });
@@ -37,7 +37,7 @@ describe("Parsley Routes", () => {
       "fsm_workload_test:internal_transactions_kill_sessions";
     cy.visit(logLink);
     cy.get("[data-cy^='log-row-']").should("be.visible");
-    cy.dataCy("ansii-row").should("not.exist");
+    cy.dataCy("ansi-row").should("not.exist");
     cy.dataCy("resmoke-row").should("be.visible");
     cy.contains(resmokeLogLine);
   });
@@ -46,7 +46,7 @@ describe("Parsley Routes", () => {
       "/taskFile/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/sample%20file";
     cy.visit(logLink);
     cy.get("[data-cy^='log-row-']").should("be.visible");
-    cy.dataCy("ansii-row").should("be.visible");
+    cy.dataCy("ansi-row").should("be.visible");
   });
   it("should show 404 when visiting a nonexistent page", () => {
     cy.visit("/this/is/not/a/real/page");

@@ -1,7 +1,13 @@
 import { MockedProvider } from "@apollo/client/testing";
 import { renderHook } from "@testing-library/react-hooks";
-import { TestLogUrlQuery, TestLogUrlQueryVariables } from "gql/generated/types";
-import { GET_TEST_LOG_URL } from "gql/queries";
+import { LogTypes } from "constants/enums";
+import {
+  TaskFilesQuery,
+  TaskFilesQueryVariables,
+  TestLogUrlQuery,
+  TestLogUrlQueryVariables,
+} from "gql/generated/types";
+import { GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
 import { ApolloMock } from "types/gql";
 import { useResolveLogURL } from "./useResolveLogURL";
 
@@ -25,6 +31,7 @@ describe("useResolveLogURL", () => {
       }
     );
     expect(result.current).toMatchObject({
+      downloadURL: "",
       htmlLogURL: "",
       jobLogsURL: "",
       legacyJobLogsURL: "",
@@ -34,6 +41,7 @@ describe("useResolveLogURL", () => {
     });
     await waitForNextUpdate();
     expect(result.current).toMatchObject({
+      downloadURL: "rawURL",
       htmlLogURL: "htmlURL",
       jobLogsURL: "",
       legacyJobLogsURL: "",
@@ -63,6 +71,8 @@ describe("useResolveLogURL", () => {
     );
     await waitForNextUpdate();
     expect(result.current).toMatchObject({
+      downloadURL:
+        "test-evergreen.com/test_log/a-task-id/0?test_name=a-test-name-that-doesnt-exist&text=true",
       htmlLogURL:
         "test-evergreen.com/test_log/a-task-id/0?test_name=a-test-name-that-doesnt-exist&text=false",
       jobLogsURL: "",
@@ -72,6 +82,62 @@ describe("useResolveLogURL", () => {
         "undefined/evergreen/test/a-task-id/0/a-test-name-that-doesnt-exist",
       rawLogURL:
         "test-evergreen.com/test_log/a-task-id/0?test_name=a-test-name-that-doesnt-exist&text=true",
+    });
+  });
+
+  it("generates task file urls", async () => {
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+      <MockedProvider mocks={[getTaskFileURLMock]}>{children}</MockedProvider>
+    );
+    const { result, waitForNextUpdate } = renderHook(
+      () =>
+        useResolveLogURL({
+          execution: "0",
+          fileName: "a-file-name",
+          logType: LogTypes.EVERGREEN_TASK_FILE,
+          taskID: "a-task-id",
+        }),
+      {
+        wrapper,
+      }
+    );
+    await waitForNextUpdate();
+    expect(result.current).toMatchObject({
+      downloadURL: "test-evergreen.com/task_file_raw/a-task-id/0/a-file-name",
+      htmlLogURL: "",
+      jobLogsURL: "",
+      legacyJobLogsURL: "",
+      loading: false,
+      lobsterURL: "",
+      rawLogURL: "a-file-url",
+    });
+  });
+  it("generates task file urls that are properly encoded", async () => {
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+      <MockedProvider mocks={[getTaskFileURLMock]}>{children}</MockedProvider>
+    );
+    const { result, waitForNextUpdate } = renderHook(
+      () =>
+        useResolveLogURL({
+          execution: "0",
+          fileName: "a file name.some/crazy/path",
+          logType: LogTypes.EVERGREEN_TASK_FILE,
+          taskID: "a-task-id",
+        }),
+      {
+        wrapper,
+      }
+    );
+    await waitForNextUpdate();
+    expect(result.current).toMatchObject({
+      downloadURL:
+        "test-evergreen.com/task_file_raw/a-task-id/0/a%20file%20name.some%2Fcrazy%2Fpath",
+      htmlLogURL: "",
+      jobLogsURL: "",
+      legacyJobLogsURL: "",
+      loading: false,
+      lobsterURL: "",
+      rawLogURL: "a-file-url-with-crazy-path",
     });
   });
 });
@@ -132,3 +198,41 @@ const getEmptyTestLogURLMock: ApolloMock<
     },
   },
 };
+
+const getTaskFileURLMock: ApolloMock<TaskFilesQuery, TaskFilesQueryVariables> =
+  {
+    request: {
+      query: TASK_FILES,
+      variables: {
+        execution: 0,
+        taskId: "a-task-id",
+      },
+    },
+    result: {
+      data: {
+        task: {
+          execution: 0,
+          files: {
+            groupedFiles: [
+              {
+                execution: 0,
+                files: [
+                  {
+                    link: "a-file-url",
+                    name: "a-file-name",
+                  },
+                  {
+                    link: "a-file-url-with-crazy-path",
+                    name: "a file name.some/crazy/path",
+                  },
+                ],
+                taskId: "a-task-id",
+                taskName: "a-task-name",
+              },
+            ],
+          },
+          id: "taskID",
+        },
+      },
+    },
+  };

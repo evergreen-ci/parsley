@@ -6,8 +6,8 @@ describe("Basic evergreen log view", () => {
   beforeEach(() => {
     cy.visit(logLink);
   });
-  it("should render ansii lines", () => {
-    cy.dataCy("ansii-row").should("be.visible");
+  it("should render ansi lines", () => {
+    cy.dataCy("ansi-row").should("be.visible");
   });
   it("by default should have wrapping turned off and should be able to scroll horizontally", () => {
     cy.dataCy("log-row-22").should("be.visible");

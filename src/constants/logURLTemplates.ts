@@ -116,6 +116,7 @@ enum OriginToType {
  * @param execution - the execution number of the task
  * @param origin - the origin of the log
  * @param options - the options for the task log
+ * @param options.priority - returned log includes a priority prefix on each line
  * @param options.text - returns the raw log associated with the task
  * @returns an Evergreen URL of the format `/task/${taskID}/${execution}?type=${OriginToType[origin]}&text=true`
  */
@@ -123,10 +124,11 @@ const getEvergreenTaskLogURL = (
   taskID: string,
   execution: string | number,
   origin: keyof typeof OriginToType,
-  options: { text?: boolean }
+  options: { priority?: boolean; text?: boolean }
 ) => {
-  const { text } = options;
+  const { priority, text } = options;
   const params = {
+    priority,
     text,
     type: OriginToType[origin] || undefined,
   };

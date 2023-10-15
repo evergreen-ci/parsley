@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/LogRow/AnsiiRow Multi Lines 1`] = `
+exports[`storyshots Storyshots components/LogRow/AnsiRow Multi Lines 1`] = `
 <div>
   <div
     class="css-1mysoqc"
@@ -26,7 +26,7 @@ exports[`storyshots Storyshots components/LogRow/AnsiiRow Multi Lines 1`] = `
 </div>
 `;
 
-exports[`storyshots Storyshots components/LogRow/AnsiiRow Single Line 1`] = `
+exports[`storyshots Storyshots components/LogRow/AnsiRow Single Line 1`] = `
 <div>
   <div
     class="css-1dojz0v"
@@ -75,7 +75,7 @@ exports[`storyshots Storyshots components/LogRow/AnsiiRow Single Line 1`] = `
       class="css-5l1bqm"
     >
       <span
-        data-cy="ansii-row"
+        data-cy="ansi-row"
       >
         [2022/08/30 14:53:58.774] [grip] 2022/08/30 14:53:17 [p=debug]: [commit='536cdcab21b907c87cd14751ad523ad1d8f23d07' operation='github api query' query='536cdcab21b907c87cd14751ad523ad1d8f23d07' repo='evergreen-ci/evergreen' size='-1' status='200 OK']
       </span>
