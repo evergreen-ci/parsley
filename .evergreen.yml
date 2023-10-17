@@ -432,7 +432,7 @@ functions:
       local_file: parsley/logkeeper/logkeeperapp.log
       remote_file: parsley/${task_id}/${execution}/logkeeperapp.log
       bucket: mciuploads
-      content_type: text/html
+      content_type: text/plain
       permissions: public-read
 
   seed-logkeeper:
