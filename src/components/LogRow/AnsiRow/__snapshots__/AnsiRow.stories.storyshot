@@ -38,7 +38,7 @@ exports[`storyshots Storyshots components/LogRow/AnsiRow Single Line 1`] = `
     <button
       aria-disabled="false"
       aria-label="Share link"
-      class="css-1k1j6mo leafygreen-ui-1xt2asn"
+      class="css-xrue4o leafygreen-ui-1xt2asn"
       tabindex="0"
     >
       <div
@@ -46,7 +46,7 @@ exports[`storyshots Storyshots components/LogRow/AnsiRow Single Line 1`] = `
       >
         <svg
           aria-label="Link Icon"
-          class="css-19zq3q6"
+          class="css-e6tumk"
           data-cy="log-link-0"
           fill="none"
           height="14"
