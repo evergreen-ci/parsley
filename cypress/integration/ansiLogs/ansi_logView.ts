@@ -226,15 +226,15 @@ describe("Sharing lines", () => {
     cy.dataCy("sharing-menu-button").scrollIntoView();
     cy.dataCy("sharing-menu-button").click();
     cy.dataCy("sharing-menu").should("exist");
-    // cy.contains("Copy selected lines").as("copySelectedLines");
-    // cy.get("@copySelectedLines").should("be.visible");
-    // cy.validateToast("success", "Copied 2 lines to clipboard", true);
-    // cy.window().then((win) => {
-    //   win.navigator.clipboard.readText().then((text) => {
-    //     expect(text).to.eq(
-    //       `{noformat}\n[2022/03/02 17:01:58.587] Task logger initialized (agent version 2022-02-14 from 00a4c8f3e8e4559cc23e04a019b6d1725c40c3e5).\n...\n[2022/03/02 17:02:01.610] e391612 EVG-16049 Update spruce project page for admin only variables (#1114)\n[2022/03/02 17:02:01.610] 04a52b2 EVG-15959 Fix rerender method in test utils (#1118)\n...\n[2022/03/02 17:05:21.050] running setup group because we have a new independent task\n{noformat}`
-    //     );
-    //   });
-    // });
+    cy.contains("Copy selected lines").as("copySelectedLines");
+    cy.get("@copySelectedLines").should("be.visible");
+    cy.validateToast("success", "Copied 2 lines to clipboard", true);
+    cy.window().then((win) => {
+      win.navigator.clipboard.readText().then((text) => {
+        expect(text).to.eq(
+          `{noformat}\n[2022/03/02 17:01:58.587] Task logger initialized (agent version 2022-02-14 from 00a4c8f3e8e4559cc23e04a019b6d1725c40c3e5).\n...\n[2022/03/02 17:02:01.610] e391612 EVG-16049 Update spruce project page for admin only variables (#1114)\n[2022/03/02 17:02:01.610] 04a52b2 EVG-15959 Fix rerender method in test utils (#1118)\n...\n[2022/03/02 17:05:21.050] running setup group because we have a new independent task\n{noformat}`
+        );
+      });
+    });
   });
 });

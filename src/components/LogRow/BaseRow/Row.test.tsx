@@ -9,10 +9,10 @@ import Row from ".";
 
 const renderRow = (
   props: React.ComponentProps<typeof Row>,
-  options: RenderWithRouterMatchOptions
+  routerOptions: RenderWithRouterMatchOptions
 ) =>
   renderWithRouterMatch(<Row {...props} />, {
-    ...options,
+    ...routerOptions,
     wrapper: ({ children }: { children: React.ReactElement }) => (
       <MultiLineSelectContextProvider>
         {children}
