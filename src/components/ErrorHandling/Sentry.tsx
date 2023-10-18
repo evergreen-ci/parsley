@@ -1,4 +1,5 @@
 import {
+  Replay,
   ErrorBoundary as SentryErrorBoundary,
   captureException,
   getCurrentHub,
@@ -14,12 +15,22 @@ import {
 import ErrorFallback from "./ErrorFallback";
 
 const initializeSentry = () => {
+  const productionEnv = isProduction();
   try {
     init({
-      debug: !isProduction(),
+      debug: !productionEnv,
       dsn: getSentryDSN(),
       environment: getReleaseStage() || "development",
+      integrations: [
+        new Replay({
+          blockAllMedia: productionEnv,
+          maskAllInputs: productionEnv,
+          maskAllText: productionEnv,
+        }),
+      ],
       normalizeDepth: 5,
+      replaysOnErrorSampleRate: productionEnv ? 0.6 : 1.0,
+      replaysSessionSampleRate: 0,
     });
   } catch (e) {
     console.error("Failed to initialize Sentry", e);
