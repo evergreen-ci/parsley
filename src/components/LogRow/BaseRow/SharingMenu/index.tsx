@@ -76,7 +76,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
     await copyToClipboard(url.toString());
     setOpen(false);
     sendEvent({ name: "Copied Share Link" });
-    dispatchToast.success(`Copied link to clipboard`);
+    dispatchToast.success("Copied link to clipboard");
   };
 
   const lineCount =
