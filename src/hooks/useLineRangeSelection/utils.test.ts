@@ -11,7 +11,7 @@ describe("parseSelectedLineRange", () => {
   it("should parse a selected line range with a single line", () => {
     const selectedLineRange = "L1";
     expect(parseSelectedLineRange(selectedLineRange)).toStrictEqual({
-      endingLine: null,
+      endingLine: undefined,
       startingLine: 1,
     });
   });
