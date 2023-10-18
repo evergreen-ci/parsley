@@ -9,9 +9,6 @@ import { renderWithRouterMatch, screen, userEvent } from "test_utils";
 import { renderComponentWithHook } from "test_utils/TestHooks";
 import SharingMenu from ".";
 
-const SharingMenuComponent: React.FC<
-  React.ComponentProps<typeof SharingMenu>
-> = ({ ...props }) => <SharingMenu {...props} />;
 const wrapper = ({ children }: { children: React.ReactNode }) => (
   <LogContextProvider initialLogLines={logs}>
     <MultiLineSelectContextProvider>{children}</MultiLineSelectContextProvider>
@@ -31,7 +28,7 @@ describe("sharingMenu", () => {
   it("should render an open menu", () => {
     const { Component: MenuComponent } = renderComponentWithHook(
       useMultiLineSelectContext,
-      <SharingMenuComponent defaultOpen />
+      <SharingMenu defaultOpen />
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     renderWithRouterMatch(<Component />, { wrapper });
@@ -44,7 +41,7 @@ describe("sharingMenu", () => {
 
     const { Component: MenuComponent, hook } = renderComponentWithHook(
       useMultiLineSelectContext,
-      <SharingMenuComponent defaultOpen />
+      <SharingMenu defaultOpen />
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     renderWithRouterMatch(<Component />, { wrapper });
@@ -67,7 +64,7 @@ describe("sharingMenu", () => {
 
     const { Component: MenuComponent, hook } = renderComponentWithHook(
       useMultiLineSelectContext,
-      <SharingMenuComponent defaultOpen />
+      <SharingMenu defaultOpen />
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     renderWithRouterMatch(<Component />, { wrapper });
@@ -87,7 +84,7 @@ describe("sharingMenu", () => {
   it("clicking only search on range should update the url with the range", async () => {
     const { Component: MenuComponent, hook } = renderComponentWithHook(
       useMultiLineSelectContext,
-      <SharingMenuComponent defaultOpen />
+      <SharingMenu defaultOpen />
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     const { router } = renderWithRouterMatch(<Component />, { wrapper });
@@ -114,7 +111,7 @@ describe("sharingMenu", () => {
     };
     const { Component: MenuComponent, hook } = renderComponentWithHook(
       useSpecialHook,
-      <SharingMenuComponent defaultOpen />
+      <SharingMenu defaultOpen />
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     renderWithRouterMatch(<Component />, {
