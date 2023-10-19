@@ -250,4 +250,14 @@ describe("Sharing lines", () => {
       });
     });
   });
+  it("should be able to limit the search range to the selected lines", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("line-index-2").click({ shiftKey: true });
+    cy.dataCy("sharing-menu").should("be.visible");
+    cy.contains("Only search on range").should("be.visible");
+    cy.contains("Only search on range").click();
+    cy.toggleDetailsPanel(true);
+    cy.dataCy("range-lower-bound").should("have.value", "1");
+    cy.dataCy("range-upper-bound").should("have.value", "2");
+  });
 });
