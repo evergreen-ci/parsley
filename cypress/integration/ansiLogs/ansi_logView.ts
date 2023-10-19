@@ -223,16 +223,29 @@ describe("Sharing lines", () => {
   it("should be able to copy the selected lines as JIRA format", () => {
     cy.dataCy("line-index-1").click();
     cy.dataCy("line-index-2").click({ shiftKey: true });
-    cy.dataCy("sharing-menu-button").scrollIntoView();
-    cy.dataCy("sharing-menu-button").click();
-    cy.dataCy("sharing-menu").should("exist");
-    cy.contains("Copy selected lines").as("copySelectedLines");
-    cy.get("@copySelectedLines").should("be.visible");
+    cy.dataCy("sharing-menu").should("be.visible");
+    cy.contains("Copy selected lines").should("be.visible");
+    cy.contains("Copy selected lines").click();
     cy.validateToast("success", "Copied 2 lines to clipboard", true);
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
         expect(text).to.eq(
           `{noformat}\n[2022/03/02 17:01:58.587] Task logger initialized (agent version 2022-02-14 from 00a4c8f3e8e4559cc23e04a019b6d1725c40c3e5).\n...\n[2022/03/02 17:02:01.610] e391612 EVG-16049 Update spruce project page for admin only variables (#1114)\n[2022/03/02 17:02:01.610] 04a52b2 EVG-15959 Fix rerender method in test utils (#1118)\n...\n[2022/03/02 17:05:21.050] running setup group because we have a new independent task\n{noformat}`
+        );
+      });
+    });
+  });
+  it("should be able to copy a link to the selected lines", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("line-index-2").click({ shiftKey: true });
+    cy.dataCy("sharing-menu").should("be.visible");
+    cy.contains("Share link to selected lines").should("be.visible");
+    cy.contains("Share link to selected lines").click();
+    cy.validateToast("success", "Copied link to clipboard", true);
+    cy.window().then((win) => {
+      win.navigator.clipboard.readText().then((text) => {
+        expect(text).to.eq(
+          "http://localhost:4173/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task?bookmarks=0%2C297&selectedLineRange=L1-L2&shareLine=1"
         );
       });
     });
