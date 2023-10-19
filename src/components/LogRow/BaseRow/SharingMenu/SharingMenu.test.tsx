@@ -24,14 +24,27 @@ const logs = [
   "line 6",
   "line 7",
 ];
+
+/**
+ * `renderSharingMenu` renders the sharing menu with the default open prop
+ * @returns - hook and utils
+ */
+const renderSharingMenu = () => {
+  const { Component: MenuComponent, hook } = renderComponentWithHook(
+    useMultiLineSelectContext,
+    <SharingMenu defaultOpen />
+  );
+  const { Component } = RenderFakeToastContext(<MenuComponent />);
+  const utils = renderWithRouterMatch(<Component />, { wrapper });
+  return {
+    hook,
+    utils,
+  };
+};
+
 describe("sharingMenu", () => {
   it("should render an open menu", () => {
-    const { Component: MenuComponent } = renderComponentWithHook(
-      useMultiLineSelectContext,
-      <SharingMenu defaultOpen />
-    );
-    const { Component } = RenderFakeToastContext(<MenuComponent />);
-    renderWithRouterMatch(<Component />, { wrapper });
+    renderSharingMenu();
     expect(screen.getByText("Copy selected line")).toBeInTheDocument();
     expect(screen.getByText("Share link to selected line")).toBeInTheDocument();
     expect(screen.getByText("Only search on range")).toBeInTheDocument();
@@ -39,12 +52,7 @@ describe("sharingMenu", () => {
   it("clicking copy selected lines should copy the line range to the clipboard", async () => {
     const user = userEvent.setup({ writeToClipboard: true });
 
-    const { Component: MenuComponent, hook } = renderComponentWithHook(
-      useMultiLineSelectContext,
-      <SharingMenu defaultOpen />
-    );
-    const { Component } = RenderFakeToastContext(<MenuComponent />);
-    renderWithRouterMatch(<Component />, { wrapper });
+    const { hook } = renderSharingMenu();
     act(() => {
       hook.current.handleSelectLine(1, false);
     });
@@ -62,12 +70,7 @@ describe("sharingMenu", () => {
   it("clicking share link to selected lines should copy the link to the clipboard", async () => {
     const user = userEvent.setup({ writeToClipboard: true });
 
-    const { Component: MenuComponent, hook } = renderComponentWithHook(
-      useMultiLineSelectContext,
-      <SharingMenu defaultOpen />
-    );
-    const { Component } = RenderFakeToastContext(<MenuComponent />);
-    renderWithRouterMatch(<Component />, { wrapper });
+    const { hook } = renderSharingMenu();
     act(() => {
       hook.current.handleSelectLine(1, false);
     });
@@ -82,12 +85,8 @@ describe("sharingMenu", () => {
     expect(clipboardText).toBe("http://localhost/?shareLine=1");
   });
   it("clicking only search on range should update the url with the range", async () => {
-    const { Component: MenuComponent, hook } = renderComponentWithHook(
-      useMultiLineSelectContext,
-      <SharingMenu defaultOpen />
-    );
-    const { Component } = RenderFakeToastContext(<MenuComponent />);
-    const { router } = renderWithRouterMatch(<Component />, { wrapper });
+    const { hook, utils } = renderSharingMenu();
+    const { router } = utils;
     act(() => {
       hook.current.handleSelectLine(1, false);
     });
