@@ -3805,14 +3805,14 @@
   resolved "https://registry.yarnpkg.com/@juggle/resize-observer/-/resize-observer-3.4.0.tgz#08d6c5e20cf7e4cc02fd181c4b0c225cd31dbb60"
   integrity sha512-dfLbk+PwWvFzSxwk3n5ySL0hfBog779o8h68wK/7/APo/7cgyWp5jcXockbxdk5kFRkbeXWm4Fbi9FrdN381sA==
 
-"@leafygreen-ui/a11y@^1.3.4", "@leafygreen-ui/a11y@^1.4.10", "@leafygreen-ui/a11y@^1.4.4", "@leafygreen-ui/a11y@^1.4.9":
-  version "1.4.10"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/a11y/-/a11y-1.4.10.tgz#f4fd8526282f3e232d687cc7c105403154c66218"
-  integrity sha512-Mp3ttmutq1yDr27DXGQaqsBe4AuGyIBuBH9yQWIluIF/raTF7GLFceqa0Fa9k228FfoBis+ApASHvmS+57Gctw==
+"@leafygreen-ui/a11y@^1.3.4", "@leafygreen-ui/a11y@^1.4.10", "@leafygreen-ui/a11y@^1.4.11", "@leafygreen-ui/a11y@^1.4.9":
+  version "1.4.11"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/a11y/-/a11y-1.4.11.tgz#5ebaa4a4a1bf99e2c3d6d9cb08f6b4983f2b2d59"
+  integrity sha512-mzNMR4ci3ExdCY3Ec1kr7xH4nV02uamoohbWxcI9qSd41TFskaDAZSXO9PL9S8JosQXjpRkt0f470XvVE0kEXQ==
   dependencies:
     "@leafygreen-ui/emotion" "^4.0.7"
     "@leafygreen-ui/hooks" "^8.0.0"
-    "@leafygreen-ui/lib" "^12.0.0"
+    "@leafygreen-ui/lib" "^13.0.0"
 
 "@leafygreen-ui/badge@8.0.2":
   version "8.0.2"
@@ -3893,19 +3893,19 @@
     "@leafygreen-ui/tokens" "^2.1.4"
     polished "^4.2.2"
 
-"@leafygreen-ui/checkbox@12.0.11":
-  version "12.0.11"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/checkbox/-/checkbox-12.0.11.tgz#1e70f0085b24db5594a77965089e80f040d5a9eb"
-  integrity sha512-G84cyGUL+u7uT75+fPKCGOkBoCxpd0XN+SY91V5abEPpFv7CcdEcnLyNfmXrAWlTbY5pZOgF5Ge6pa9Q9PlErg==
+"@leafygreen-ui/checkbox@12.0.20":
+  version "12.0.20"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/checkbox/-/checkbox-12.0.20.tgz#8969b106f27ab30d3e5ff742682130a21c471409"
+  integrity sha512-H811SnLrrW2jwwno92AtpdqCNcmvHJCu0X+TjnPcYAUjvXPtGUBw+aJLpwQ+S4qtss6TavnsXQ75xJWnyM2w8A==
   dependencies:
-    "@leafygreen-ui/a11y" "^1.4.4"
-    "@leafygreen-ui/emotion" "^4.0.4"
-    "@leafygreen-ui/hooks" "^7.7.4"
-    "@leafygreen-ui/lib" "^10.3.4"
-    "@leafygreen-ui/palette" "^4.0.3"
-    "@leafygreen-ui/tokens" "^2.1.0"
-    "@leafygreen-ui/typography" "^16.5.0"
-    react-transition-group "^4.4.1"
+    "@leafygreen-ui/a11y" "^1.4.11"
+    "@leafygreen-ui/emotion" "^4.0.7"
+    "@leafygreen-ui/hooks" "^8.0.0"
+    "@leafygreen-ui/lib" "^13.0.0"
+    "@leafygreen-ui/palette" "^4.0.7"
+    "@leafygreen-ui/tokens" "^2.2.0"
+    "@leafygreen-ui/typography" "^18.0.0"
+    react-transition-group "^4.4.5"
 
 "@leafygreen-ui/confirmation-modal@5.0.6":
   version "5.0.6"
@@ -3979,7 +3979,7 @@
     focus-trap-react "9.0.2"
     polished "^4.2.2"
 
-"@leafygreen-ui/hooks@^7.3.3", "@leafygreen-ui/hooks@^7.5.0", "@leafygreen-ui/hooks@^7.7.3", "@leafygreen-ui/hooks@^7.7.4":
+"@leafygreen-ui/hooks@^7.3.3", "@leafygreen-ui/hooks@^7.5.0", "@leafygreen-ui/hooks@^7.7.3":
   version "7.7.4"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/hooks/-/hooks-7.7.4.tgz#92d13d074b6465770ba57ba40924eeb23fbaf479"
   integrity sha512-qH+W3JWQTtHV3lZO/yvhOv2K4Oh3ZshW4T/lZBxYvs4EMbobB9Ks2tPKaSyiPXL4JoqK7XcL7OkgzARwLax7XQ==
@@ -4057,6 +4057,15 @@
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
+"@leafygreen-ui/lib@^13.0.0":
+  version "13.0.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/lib/-/lib-13.0.0.tgz#b2147e6781bbe658954c2dc97c39d1900f252a4d"
+  integrity sha512-EWVj4mavtVLaRcpQq9ruPM2yLqovgiVyxX9Y5K8XJ07BlZIhkBRsdB15C4ym++uitbaUIPPHNuGrPLT3Ysi9Tw==
+  dependencies:
+    "@storybook/csf" "^0.1.0"
+    lodash "^4.17.21"
+    prop-types "^15.7.2"
+
 "@leafygreen-ui/menu@22.0.8":
   version "22.0.8"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/menu/-/menu-22.0.8.tgz#608ba1e46d96622bf02d515d9dfcc4e521016d0e"
@@ -4093,7 +4102,7 @@
     prop-types "^15.8.1"
     react-transition-group "^4.4.5"
 
-"@leafygreen-ui/palette@4.0.7", "@leafygreen-ui/palette@^4.0.0", "@leafygreen-ui/palette@^4.0.3", "@leafygreen-ui/palette@^4.0.4", "@leafygreen-ui/palette@^4.0.7":
+"@leafygreen-ui/palette@4.0.7", "@leafygreen-ui/palette@^4.0.0", "@leafygreen-ui/palette@^4.0.4", "@leafygreen-ui/palette@^4.0.7":
   version "4.0.7"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/palette/-/palette-4.0.7.tgz#1739d29411b8ba02a2be756e198f10c242428bb0"
   integrity sha512-rBeAk4Tk3t9pYqXYKqVZfma/MH1SBtt02BxAL6TpJb8wQ+i5zap6o1Gnb3nF9LAG7sA0+OHfr1B5uSvr63GGqw==
@@ -4319,7 +4328,7 @@
     "@leafygreen-ui/polymorphic" "^1.3.2"
     "@leafygreen-ui/tokens" "^2.1.0"
 
-"@leafygreen-ui/typography@^16.0.0", "@leafygreen-ui/typography@^16.1.0", "@leafygreen-ui/typography@^16.4.0", "@leafygreen-ui/typography@^16.5.0", "@leafygreen-ui/typography@^16.5.4":
+"@leafygreen-ui/typography@^16.0.0", "@leafygreen-ui/typography@^16.1.0", "@leafygreen-ui/typography@^16.4.0", "@leafygreen-ui/typography@^16.5.4":
   version "16.5.4"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/typography/-/typography-16.5.4.tgz#209839039b97be7c9eabddec85729eb8685abfc9"
   integrity sha512-E9U8HD3AfeMMr0ZLkrSz8FUagxGSAqPb+DqASmJAdax4h82EXLJGBDmePQr4C+AVCx1pb5UZrckr67eBHCalnA==
@@ -4339,6 +4348,18 @@
     "@leafygreen-ui/emotion" "^4.0.7"
     "@leafygreen-ui/icon" "^11.22.2"
     "@leafygreen-ui/lib" "^12.0.0"
+    "@leafygreen-ui/palette" "^4.0.7"
+    "@leafygreen-ui/polymorphic" "^1.3.6"
+    "@leafygreen-ui/tokens" "^2.1.4"
+
+"@leafygreen-ui/typography@^18.0.0":
+  version "18.0.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/typography/-/typography-18.0.0.tgz#8a6587ecb554c9ecf6e4db6a4a08d953df74222f"
+  integrity sha512-PzChUF5nhW+peFgt95B3FQqCphxcCoRbuIUlmmYtXBli+J/JF9Tl22XHP6Qewog0Mpc5FXy8uv4mmG3yQ6ZcjA==
+  dependencies:
+    "@leafygreen-ui/emotion" "^4.0.7"
+    "@leafygreen-ui/icon" "^11.22.2"
+    "@leafygreen-ui/lib" "^13.0.0"
     "@leafygreen-ui/palette" "^4.0.7"
     "@leafygreen-ui/polymorphic" "^1.3.6"
     "@leafygreen-ui/tokens" "^2.1.4"
@@ -13128,7 +13149,7 @@ react-shallow-renderer@^16.15.0:
     react-shallow-renderer "^16.15.0"
     scheduler "^0.23.0"
 
-react-transition-group@^4.4.1, react-transition-group@^4.4.5:
+react-transition-group@^4.4.5:
   version "4.4.5"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-4.4.5.tgz#e53d4e3f3344da8521489fbef8f2581d42becdd1"
   integrity sha512-pZcd1MCJoiKiBR2NRxeCRg13uCXbydPnmB4EOeRrY7480qNWO8IIgQG6zlDkm6uRMsURXPuKq0GWtiM59a5Q6g==
