@@ -109,7 +109,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
           lineCount
         )} to your clipboard with JIRA formatting.`}
       >
-        Copy selected {pluralize("line", lineCount)}
+        Copy selected contents
       </MenuItem>
       {!isUploadedLog && (
         <MenuItem
@@ -120,7 +120,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
             lineCount
           )}.`}
         >
-          Share link to selected {pluralize("line", lineCount)}
+          Copy share link to selected {pluralize("line", lineCount)}
         </MenuItem>
       )}
       <MenuItem
