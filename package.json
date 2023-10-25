@@ -145,7 +145,7 @@
     "prompts": "2.4.2",
     "replace-in-file": "7.0.1",
     "rollup-plugin-visualizer": "5.9.0",
-    "serve": "14.1.2",
+    "serve": "14.2.1",
     "storybook": "7.2.1",
     "storybook-addon-apollo-client": "4.1.4",
     "ts-jest": "29.1.1",
