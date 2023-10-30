@@ -146,7 +146,7 @@
     "replace-in-file": "7.0.1",
     "rollup-plugin-visualizer": "5.9.0",
     "serve": "14.2.1",
-    "storybook": "7.2.1",
+    "storybook": "7.5.1",
     "storybook-addon-apollo-client": "4.1.4",
     "ts-jest": "29.1.1",
     "ts-node": "10.9.1",
