@@ -19,7 +19,7 @@ interface SharingMenuProps {
 }
 
 const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
-  const { selectedLines } = useMultiLineSelectContext();
+  const { clearSelection, selectedLines } = useMultiLineSelectContext();
   const { getLine, logMetadata, processedLogLines } = useLogContext();
   const [params, setParams] = useQueryParams();
   const dispatchToast = useToastContext();
@@ -130,6 +130,13 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
         title="Limit the range Parsley will search to only these lines."
       >
         Only search on range
+      </MenuItem>
+      <MenuItem
+        glyph={<Icon glyph="Trash" />}
+        onClick={clearSelection}
+        title="Clear the selected lines."
+      >
+        Clear selection
       </MenuItem>
     </StyledMenu>
   );

@@ -51,7 +51,7 @@ describe("sharingMenu", () => {
     ).toBeInTheDocument();
     expect(screen.getByText("Only search on range")).toBeInTheDocument();
   });
-  it("clicking copy selected lines should copy the line range to the clipboard", async () => {
+  it("clicking `copy selected contents` should copy the line range to the clipboard", async () => {
     const user = userEvent.setup({ writeToClipboard: true });
 
     const { hook } = renderSharingMenu();
@@ -69,7 +69,7 @@ describe("sharingMenu", () => {
     );
     //
   });
-  it("clicking share link to selected lines should copy the link to the clipboard", async () => {
+  it("clicking `share link to selected lines` should copy the link to the clipboard", async () => {
     const user = userEvent.setup({ writeToClipboard: true });
 
     const { hook } = renderSharingMenu();
@@ -86,7 +86,7 @@ describe("sharingMenu", () => {
     const clipboardText = await navigator.clipboard.readText();
     expect(clipboardText).toBe("http://localhost/?shareLine=1");
   });
-  it("clicking only search on range should update the url with the range", async () => {
+  it("clicking `only search on range` should update the url with the range", async () => {
     const { hook, utils } = renderSharingMenu();
     const { router } = utils;
     act(() => {
@@ -100,6 +100,23 @@ describe("sharingMenu", () => {
     expect(router.state.location.search).toBe(
       "?lower=1&selectedLineRange=L1-L3&upper=3"
     );
+  });
+  it("clicking `clear selection` should clear the selected line range", () => {
+    const { hook } = renderSharingMenu();
+    act(() => {
+      hook.current.handleSelectLine(1, false);
+    });
+    act(() => {
+      hook.current.handleSelectLine(3, true);
+    });
+    expect(screen.getByText("Clear selection")).toBeInTheDocument();
+    act(() => {
+      hook.current.clearSelection();
+    });
+    expect(hook.current.selectedLines).toStrictEqual({
+      endingLine: undefined,
+      startingLine: undefined,
+    });
   });
   it("should not show a share link button if this is a locally uploaded log", () => {
     const useSpecialHook = () => {
