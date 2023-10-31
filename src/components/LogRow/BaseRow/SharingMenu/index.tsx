@@ -124,7 +124,6 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
         </MenuItem>
       )}
       <MenuItem
-        disabled={lineCount === 1}
         glyph={<Icon glyph="MagnifyingGlass" />}
         onClick={handleOnlySearchOnRange}
         title="Limit the range Parsley will search to only these lines."
