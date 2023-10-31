@@ -1,8 +1,12 @@
 import { useEffect, useState } from "react";
+import styled from "@emotion/styled";
+import { palette } from "@leafygreen-ui/palette";
 import PopoverButton from "components/PopoverButton";
 import { QueryParams } from "constants/queryParams";
 import { useQueryParam } from "hooks/useQueryParam";
 import DetailsMenuCard from "./DetailsMenuCard";
+
+const { green } = palette;
 
 interface DetailsMenuProps {
   disabled?: boolean;
@@ -24,15 +28,31 @@ const DetailsMenu: React.FC<DetailsMenuProps> = ({ disabled, ...rest }) => {
   }, [lowerRange, upperRange]);
 
   return (
-    <PopoverButton
+    <AnimatedPopoverButton
       buttonText="Details"
       disabled={disabled}
       variant={changeVisible ? "primary" : "default"}
       {...rest}
     >
       <DetailsMenuCard data-cy="details-menu" />
-    </PopoverButton>
+    </AnimatedPopoverButton>
   );
 };
 
+const AnimatedPopoverButton = styled(PopoverButton)`
+  /* Glow animation */
+  ${({ variant }) =>
+    variant === "primary" &&
+    `
+    animation: glow 1s ease-in-out infinite alternate;
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 0px ${green.base};
+      }
+      to {
+        box-shadow: 0 0 20px ${green.base};
+      }
+    }
+  `}
+`;
 export default DetailsMenu;
