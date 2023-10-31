@@ -36,8 +36,8 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
   };
 
   const handleCopySelectedLines = async () => {
-    const { endingLine, startingLine } = selectedLines;
-    if (startingLine === undefined || endingLine === undefined) return;
+    const { startingLine } = selectedLines;
+    if (startingLine === undefined) return;
     // Create an array of line numbers that represent the range in selectedLines
     const lineNumbers = getLinesInProcessedLogLinesFromSelectedLines(
       processedLogLines,

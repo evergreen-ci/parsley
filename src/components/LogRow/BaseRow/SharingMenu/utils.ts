@@ -6,14 +6,15 @@ const getLinesInProcessedLogLinesFromSelectedLines = (
   processedLogLines: ProcessedLogLines,
   selectedLines: SelectedLineRange
 ) => {
+  let { endingLine } = selectedLines;
+  if (endingLine === undefined) {
+    endingLine = selectedLines.startingLine;
+  }
   const startingIndex = findLineIndex(
     processedLogLines,
     selectedLines.startingLine
   );
-  const endingIndex = findLineIndex(
-    processedLogLines,
-    selectedLines.endingLine
-  );
+  const endingIndex = findLineIndex(processedLogLines, endingLine);
 
   if (startingIndex === -1 || endingIndex === -1) return [];
   const lines: number[] = [];

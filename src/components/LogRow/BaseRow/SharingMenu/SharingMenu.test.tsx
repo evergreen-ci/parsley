@@ -67,7 +67,19 @@ describe("sharingMenu", () => {
     expect(clipboardText).toBe(
       "{noformat}\nline 2\nline 3\nline 4\n{noformat}"
     );
-    //
+  });
+  it("clicking `copy selected contents` should copy a single selected line to the clipboard", async () => {
+    const user = userEvent.setup({ writeToClipboard: true });
+
+    const { hook } = renderSharingMenu();
+    act(() => {
+      hook.current.handleSelectLine(1, false);
+    });
+
+    expect(screen.getByText("Copy selected contents")).toBeInTheDocument();
+    await user.click(screen.getByText("Copy selected contents"));
+    const clipboardText = await navigator.clipboard.readText();
+    expect(clipboardText).toBe("{noformat}\nline 2\n{noformat}");
   });
   it("clicking `share link to selected lines` should copy the link to the clipboard", async () => {
     const user = userEvent.setup({ writeToClipboard: true });
