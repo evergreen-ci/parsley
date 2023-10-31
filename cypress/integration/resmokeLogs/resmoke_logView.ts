@@ -303,8 +303,8 @@ describe("Sharing lines", () => {
     cy.dataCy("line-index-1").click();
     cy.dataCy("line-index-2").click({ shiftKey: true });
     cy.dataCy("sharing-menu").should("be.visible");
-    cy.contains("Share link to selected lines").should("be.visible");
-    cy.contains("Share link to selected lines").click();
+    cy.contains("Copy share link to selected lines").should("be.visible");
+    cy.contains("Copy share link to selected lines").click();
     cy.validateToast("success", "Copied link to clipboard", true);
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
