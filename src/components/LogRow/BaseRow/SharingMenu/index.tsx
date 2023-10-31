@@ -49,7 +49,9 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
     sendEvent({
       name: "Copied Share Lines To Clipboard",
     });
-    dispatchToast.success(`Copied ${lineNumbers.length} lines to clipboard`);
+    dispatchToast.success(
+      `Copied ${pluralize("line", lineNumbers.length, true)} to clipboard`
+    );
   };
 
   const handleOnlySearchOnRange = () => {
