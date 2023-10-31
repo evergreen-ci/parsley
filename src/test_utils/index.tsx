@@ -102,3 +102,5 @@ export {
   userEvent,
   fireEvent,
 };
+
+export type { RenderWithRouterMatchOptions };

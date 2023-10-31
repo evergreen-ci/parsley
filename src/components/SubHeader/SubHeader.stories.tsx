@@ -66,7 +66,9 @@ export const TaskFileLog: CustomStoryObj<typeof SubheaderWrapper> = {
 };
 interface SubheaderWrapperProps
   extends LogMetadata,
-    React.ComponentProps<typeof Subheader> {}
+    React.ComponentProps<typeof Subheader> {
+  isUploadedLog: boolean;
+}
 
 const SubheaderWrapper: React.FC<SubheaderWrapperProps> = ({
   isUploadedLog,
@@ -75,8 +77,8 @@ const SubheaderWrapper: React.FC<SubheaderWrapperProps> = ({
   const { setLogMetadata } = useLogContext();
 
   useEffect(() => {
-    setLogMetadata(metaData);
+    setLogMetadata({ ...metaData, isUploadedLog });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  return <Subheader isUploadedLog={isUploadedLog} />;
+  return <Subheader />;
 };

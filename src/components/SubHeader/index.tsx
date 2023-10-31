@@ -8,13 +8,18 @@ import { EvergreenTaskSubHeader } from "./EvergreenTaskSubHeader";
 
 const { gray } = palette;
 
-interface SubHeaderProps {
-  isUploadedLog: boolean;
-}
-const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
+interface SubHeaderProps {}
+const SubHeader: React.FC<SubHeaderProps> = () => {
   const { logMetadata } = useLogContext();
-  const { buildID, execution, fileName, logType, taskID, testID } =
-    logMetadata || {};
+  const {
+    buildID,
+    execution,
+    fileName,
+    isUploadedLog,
+    logType,
+    taskID,
+    testID,
+  } = logMetadata || {};
 
   return (
     <Container data-cy="log-header">

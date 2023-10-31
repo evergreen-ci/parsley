@@ -13,6 +13,11 @@ type Action =
   | { name: "Navigated With Bookmark" }
   | { name: "Removed Bookmark" }
   | { name: "Cleared All Bookmarks" }
+  | { name: "Opened Share Menu" }
+  | { name: "Closed Share Menu" }
+  | { name: "Copied Share Link" }
+  | { name: "Copied Share Lines To Clipboard" }
+  | { name: "Applied Range Limit" }
   | { name: "Edited Filter"; before: Filter; after: Filter }
   | { name: "Added Highlight"; highlightExpression: string }
   | { name: "Removed Highlight"; highlightExpression: string }
