@@ -1,53 +1,13 @@
-import styled from "@emotion/styled";
-import { size } from "constants/tokens";
-import ButtonRow from "./ButtonRow";
-import CLIInstructions from "./CLIInstructions";
-import SearchRangeInput from "./SearchRangeInput";
-import {
-  CaseSensitiveToggle,
-  ExpandableRowsToggle,
-  FilterLogicToggle,
-  PrettyPrintToggle,
-  WrapToggle,
-} from "./Toggles";
+import PopoverButton from "components/PopoverButton";
+import DetailsMenuCard from "./DetailsMenuCard";
 
 interface DetailsMenuProps {
-  ["data-cy"]?: string;
+  disabled?: boolean;
 }
-
-const DetailsMenu: React.FC<DetailsMenuProps> = ({ "data-cy": dataCy }) => (
-  <DetailsMenuCard data-cy={dataCy}>
-    <Row>
-      <Column>
-        <SearchRangeInput />
-        <WrapToggle />
-        <CaseSensitiveToggle />
-      </Column>
-      <Column>
-        <FilterLogicToggle />
-        <ExpandableRowsToggle />
-        <PrettyPrintToggle />
-      </Column>
-    </Row>
-    <ButtonRow />
-    <CLIInstructions />
-  </DetailsMenuCard>
+const DetailsMenu: React.FC<DetailsMenuProps> = ({ disabled, ...rest }) => (
+  <PopoverButton buttonText="Details" disabled={disabled} {...rest}>
+    <DetailsMenuCard data-cy="details-menu" />
+  </PopoverButton>
 );
-
-const DetailsMenuCard = styled.div`
-  width: 700px;
-  padding: ${size.xs};
-  display: flex;
-  flex-direction: column;
-`;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-const Column = styled.div`
-  width: 300px;
-`;
 
 export default DetailsMenu;
