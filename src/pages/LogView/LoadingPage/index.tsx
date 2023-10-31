@@ -74,6 +74,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         execution: execution || String(logkeeperMetadata?.execution || 0),
         fileName,
         htmlLogURL,
+        isUploadedLog: false,
         jobLogsURL,
         legacyJobLogsURL,
         lobsterURL,
@@ -107,6 +108,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     lobsterURL,
     logkeeperMetadata?.task_id,
     logkeeperMetadata?.execution,
+    fileName,
   ]);
 
   if (isLoadingLog || isLoadingTest) {

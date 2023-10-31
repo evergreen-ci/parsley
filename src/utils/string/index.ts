@@ -7,35 +7,35 @@ export const copyToClipboard = async (textToCopy: string) => {
 };
 
 /**
- * `getJiraFormat` uses the applied bookmarks to construct a JIRA formatted string.
- * @param bookmarks  - array of numbers representing the applied bookmarks
+ * `getJiraFormat` constructs a JIRA formatted string with the lines provided.
+ * @param indices  - array of numbers representing the line indices you want to copy
  * @param getLine - function that retrieves the log text associated with a log line number
  * @returns formatted string that can be pasted into JIRA
  */
 export const getJiraFormat = (
-  bookmarks: number[],
+  indices: number[],
   getLine: (lineNumber: number) => string | undefined
 ) => {
-  if (bookmarks.length === 0) {
+  if (indices.length === 0) {
     return "";
   }
 
   let jiraString = "{noformat}\n";
 
-  for (let i = 0; i < bookmarks.length; i++) {
-    const bookmarkLine = bookmarks[i];
-    const logText = getLine(bookmarkLine);
+  for (let i = 0; i < indices.length; i++) {
+    const indexLine = indices[i];
+    const logText = getLine(indexLine);
 
-    // If bookmarks is out of bounds, stop processing.
+    // If indices are out of bounds, stop processing.
     if (logText === undefined) {
       break;
     }
 
     jiraString += `${logText}\n`;
 
-    // If the current and next bookmark are not adjacent to each other, insert an
+    // If the current and next indices are not adjacent to each other, insert an
     // ellipsis in between them.
-    if (i + 1 !== bookmarks.length && bookmarkLine + 1 !== bookmarks[i + 1]) {
+    if (i + 1 !== indices.length && indexLine + 1 !== indices[i + 1]) {
       jiraString += "...\n";
     }
   }
