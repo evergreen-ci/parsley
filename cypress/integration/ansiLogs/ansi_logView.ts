@@ -207,6 +207,7 @@ describe("Sharing lines", () => {
 
   beforeEach(() => {
     cy.visit(logLink);
+    cy.dataCy("line-index-1").should("be.visible");
   });
 
   it("should present a share button with a menu when a line is selected", () => {
