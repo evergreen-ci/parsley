@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
+exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMenu Default 1`] = `
 <div>
   <div
     class="leafygreen-ui-1ecxdul"
@@ -536,7 +536,7 @@ exports[`storyshots Storyshots components/DetailsMenu Default 1`] = `
 </div>
 `;
 
-exports[`storyshots Storyshots components/DetailsMenu With Downloaded Log 1`] = `
+exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMenu With Downloaded Log 1`] = `
 <div>
   <div
     class="leafygreen-ui-1ecxdul"
