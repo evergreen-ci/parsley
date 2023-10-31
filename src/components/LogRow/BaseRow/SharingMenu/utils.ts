@@ -6,10 +6,7 @@ const getLinesInProcessedLogLinesFromSelectedLines = (
   processedLogLines: ProcessedLogLines,
   selectedLines: SelectedLineRange
 ) => {
-  let { endingLine } = selectedLines;
-  if (endingLine === undefined) {
-    endingLine = selectedLines.startingLine;
-  }
+  const endingLine = selectedLines.endingLine ?? selectedLines.startingLine;
   const startingIndex = findLineIndex(
     processedLogLines,
     selectedLines.startingLine

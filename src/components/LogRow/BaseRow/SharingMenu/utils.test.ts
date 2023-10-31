@@ -28,4 +28,13 @@ describe("getLinesInProcessedLogLinesFromSelectedLines", () => {
     );
     expect(result).toStrictEqual([2, 4]);
   });
+  it("should return the starting line if no ending line is provided", () => {
+    const processedLogLines = [1, 2, 3, 4, 5];
+    const selectedLines = { endingLine: undefined, startingLine: 2 };
+    const result = getLinesInProcessedLogLinesFromSelectedLines(
+      processedLogLines,
+      selectedLines
+    );
+    expect(result).toStrictEqual([2]);
+  });
 });
