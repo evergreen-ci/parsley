@@ -14,7 +14,7 @@ import { useLogDownloader } from "hooks";
 import { useFetch } from "hooks/useFetch";
 import NotFound from "pages/404";
 import { LogkeeperMetadata } from "types/api";
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 import { getBytesAsString } from "utils/string";
 import { useResolveLogURL } from "./useResolveLogURL";
 
@@ -68,7 +68,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
 
   useEffect(() => {
     if (data) {
-      leaveBreadcrumb("ingest-log-lines", { logType }, "process");
+      leaveBreadcrumb("ingest-log-lines", { logType }, SentryBreadcrumb.UI);
       setLogMetadata({
         buildID,
         execution: execution || String(logkeeperMetadata?.execution || 0),
@@ -90,6 +90,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     }
   }, [
     data,
+    fileName,
     ingestLines,
     error,
     logType,

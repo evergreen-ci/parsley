@@ -10,9 +10,7 @@ enum Environment {
   Production = "production",
 }
 
-const getAppVersion = () => process.env.REACT_APP_VERSION || "";
 const getReleaseStage = () => process.env.REACT_APP_RELEASE_STAGE || "";
-const getBugsnagApiKey = () => process.env.REACT_APP_BUGSNAG_API_KEY || "";
 const getSentryDSN = () => process.env.REACT_APP_SENTRY_DSN || "";
 
 const isLocal = () => getReleaseStage() === ReleaseStage.Local;
@@ -40,8 +38,6 @@ export {
   lobsterURL,
   logkeeperURL,
   spruceURL,
-  getAppVersion,
   getReleaseStage,
-  getBugsnagApiKey,
   getSentryDSN,
 };

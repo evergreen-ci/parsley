@@ -4,7 +4,7 @@
   "version": "1.0.121",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
-    "build": "tsc && . ./scripts/deploy/app-version.sh && GIT_SHA=`git rev-parse HEAD` vite build",
+    "build": "tsc && GIT_SHA=`git rev-parse HEAD` APP_VERSION=$npm_package_version vite build",
     "build:local": "env-cmd -e local -r .env-cmdrc.local.json yarn build",
     "build:beta": "env-cmd -e beta yarn build",
     "build:staging": "env-cmd -e staging yarn build",
@@ -31,16 +31,13 @@
     "start": "vite",
     "verify-backend": "./scripts/verify-backend.sh",
     "storybook": "storybook dev -p 6006",
-    "storybook:build": "./scripts/deploy/app-version.sh && env-cmd -e local -r .env-cmdrc.local.json storybook build",
+    "storybook:build": "env-cmd -e local -r .env-cmdrc.local.json storybook build",
     "test": "jest --watchAll=false",
     "test:watch": "jest --watch --verbose",
-    "upload-source-maps": "env-cmd -e production node ./scripts/deploy/upload-bugsnag-sourcemaps",
     "postversion": "scripts/push-version.sh"
   },
   "dependencies": {
     "@apollo/client": "3.7.12",
-    "@bugsnag/js": "7.20.2",
-    "@bugsnag/plugin-react": "7.19.0",
     "@emotion/react": "11.11.0",
     "@emotion/styled": "11.11.0",
     "@leafygreen-ui/badge": "8.0.2",
@@ -83,7 +80,6 @@
     "xss": "1.0.14"
   },
   "devDependencies": {
-    "@bugsnag/source-maps": "2.3.1",
     "@emotion/babel-plugin": "11.11.0",
     "@emotion/eslint-plugin": "11.11.0",
     "@emotion/jest": "11.11.0",

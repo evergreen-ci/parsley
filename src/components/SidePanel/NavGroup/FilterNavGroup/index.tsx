@@ -7,7 +7,7 @@ import { CaseSensitivity, MatchType } from "constants/enums";
 import { size } from "constants/tokens";
 import { useFilterParam } from "hooks/useFilterParam";
 import { Filter } from "types/logs";
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 import FilterGroup from "./FilterGroup";
 import BaseNavGroup from "../BaseNavGroup";
 
@@ -31,7 +31,11 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
     if (newFilters.length === 0) {
       clearExpandedLines();
     }
-    leaveBreadcrumb("delete-filter", { filterExpression }, "user");
+    leaveBreadcrumb(
+      "delete-filter",
+      { filterExpression },
+      SentryBreadcrumb.User
+    );
     sendEvent({ filterExpression, name: "Deleted Filter" });
   };
 
@@ -59,7 +63,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
     leaveBreadcrumb(
       "edit-filter",
       { fieldName, fieldValue, filterExpression: filter.expression },
-      "user"
+      SentryBreadcrumb.User
     );
     sendEvent({
       after: newFilters[idxToReplace],

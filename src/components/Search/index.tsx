@@ -16,7 +16,7 @@ import { PROJECT_FILTERS } from "gql/queries";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useHighlightParam } from "hooks/useHighlightParam";
 import { useTaskQuery } from "hooks/useTaskQuery";
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 import { validateRegexp } from "utils/validators";
 
 const Search: React.FC = () => {
@@ -59,7 +59,11 @@ const Search: React.FC = () => {
             },
           ]);
           sendEvent({ filterExpression: value, name: "Added Filter" });
-          leaveBreadcrumb("Added Filter", { filterExpression: value }, "user");
+          leaveBreadcrumb(
+            "Added Filter",
+            { filterExpression: value },
+            SentryBreadcrumb.User
+          );
         }
         break;
       case SearchBarActions.Highlight:
@@ -70,7 +74,7 @@ const Search: React.FC = () => {
           leaveBreadcrumb(
             "Added Highlight",
             { highlightExpression: value },
-            "user"
+            SentryBreadcrumb.User
           );
         }
         break;
@@ -82,7 +86,11 @@ const Search: React.FC = () => {
   const handleOnChange = (value: string) => {
     setSearch(value);
     sendEvent({ name: "Applied Search", searchExpression: value });
-    leaveBreadcrumb("Applied Search", { searchExpression: value }, "user");
+    leaveBreadcrumb(
+      "Applied Search",
+      { searchExpression: value },
+      SentryBreadcrumb.User
+    );
   };
 
   return (
