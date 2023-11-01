@@ -32,6 +32,7 @@ const SubHeader: React.FC<SubHeaderProps> = () => {
                 ? [
                     {
                       text: fileName,
+                      trimLength: 50,
                     },
                   ]
                 : []
