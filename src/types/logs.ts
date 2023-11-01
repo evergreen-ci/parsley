@@ -14,6 +14,11 @@ type Filter = {
 };
 type Filters = Filter[];
 
+type SelectedLineRange = {
+  startingLine?: number;
+  endingLine?: number;
+};
+
 export type {
   ExpandedLine,
   ExpandedLines,
@@ -21,4 +26,5 @@ export type {
   Filters,
   ProcessedLogLine,
   ProcessedLogLines,
+  SelectedLineRange,
 };

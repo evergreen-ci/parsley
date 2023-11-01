@@ -42,7 +42,7 @@ const FileDropper: React.FC = () => {
   const onParse = useCallback(
     (logType: LogTypes | undefined) => {
       if (logType) {
-        setLogMetadata({ logType });
+        setLogMetadata({ isUploadedLog: true, logType });
         leaveBreadcrumb("Parsing file", { logType }, SentryBreadcrumb.UI);
         dispatch({ type: "PARSE_FILE" });
         startTransition(() => {

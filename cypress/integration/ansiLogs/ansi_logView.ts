@@ -200,3 +200,65 @@ describe("expanding collapsed rows", () => {
     cy.dataCy("collapsed-row-1-4").should("exist");
   });
 });
+
+describe("Sharing lines", () => {
+  const logLink =
+    "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
+
+  beforeEach(() => {
+    cy.visit(logLink);
+    cy.dataCy("line-index-1").should("be.visible");
+  });
+
+  it("should present a share button with a menu when a line is selected", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("sharing-menu-button").should("be.visible");
+    cy.dataCy("sharing-menu-button").click();
+    cy.dataCy("sharing-menu").should("be.visible");
+  });
+  it("shift+click selecting a range of lines should automatically open the sharing menu", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("line-index-10").click({ shiftKey: true });
+    cy.dataCy("sharing-menu").should("be.visible");
+  });
+  it("should be able to copy the selected lines as JIRA format", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("line-index-2").click({ shiftKey: true });
+    cy.dataCy("sharing-menu").should("be.visible");
+    cy.contains("Copy selected contents").should("be.visible");
+    cy.contains("Copy selected contents").click();
+    cy.validateToast("success", "Copied 2 lines to clipboard", true);
+    cy.window().then((win) => {
+      win.navigator.clipboard.readText().then((text) => {
+        expect(text).to.eq(
+          `{noformat}\n[2022/03/02 17:01:58.587] Task logger initialized (agent version 2022-02-14 from 00a4c8f3e8e4559cc23e04a019b6d1725c40c3e5).\n...\n[2022/03/02 17:02:01.610] e391612 EVG-16049 Update spruce project page for admin only variables (#1114)\n[2022/03/02 17:02:01.610] 04a52b2 EVG-15959 Fix rerender method in test utils (#1118)\n...\n[2022/03/02 17:05:21.050] running setup group because we have a new independent task\n{noformat}`
+        );
+      });
+    });
+  });
+  it("should be able to copy a link to the selected lines", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("line-index-2").click({ shiftKey: true });
+    cy.dataCy("sharing-menu").should("be.visible");
+    cy.contains("Copy share link to selected lines").should("be.visible");
+    cy.contains("Copy share link to selected lines").click();
+    cy.validateToast("success", "Copied link to clipboard", true);
+    cy.window().then((win) => {
+      win.navigator.clipboard.readText().then((text) => {
+        expect(text).to.eq(
+          "http://localhost:4173/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task?bookmarks=0%2C297&selectedLineRange=L1-L2&shareLine=1"
+        );
+      });
+    });
+  });
+  it("should be able to limit the search range to the selected lines", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("line-index-2").click({ shiftKey: true });
+    cy.dataCy("sharing-menu").should("be.visible");
+    cy.contains("Only search on range").should("be.visible");
+    cy.contains("Only search on range").click();
+    cy.toggleDetailsPanel(true);
+    cy.dataCy("range-lower-bound").should("have.value", "1");
+    cy.dataCy("range-upper-bound").should("have.value", "2");
+  });
+});

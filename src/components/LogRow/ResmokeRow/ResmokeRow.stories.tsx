@@ -4,11 +4,21 @@ import LogPane from "components/LogPane";
 import { ParsleyRow } from "components/LogRow/RowRenderer";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
+import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
+import WithToastContext from "test_utils/toast-decorator";
 import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import ResmokeRow from ".";
 
 export default {
   component: ResmokeRow,
+  decorators: [
+    (Story) => (
+      <MultiLineSelectContextProvider>
+        <Story />
+      </MultiLineSelectContextProvider>
+    ),
+    WithToastContext,
+  ],
 } satisfies CustomMeta<typeof ResmokeRow>;
 
 type ResmokeRowProps = React.FC<React.ComponentProps<typeof ResmokeRow>>;

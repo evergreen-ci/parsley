@@ -264,3 +264,65 @@ describe("pretty print", () => {
       .should("be.greaterThan", defaultRowHeight);
   });
 });
+
+describe("Sharing lines", () => {
+  const logLink =
+    "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
+
+  beforeEach(() => {
+    cy.visit(logLink);
+  });
+
+  it("should present a share button with a menu when a line is selected", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("sharing-menu-button").should("be.visible");
+    cy.dataCy("sharing-menu-button").click();
+    cy.dataCy("sharing-menu").should("be.visible");
+  });
+  it("shift+click selecting a range of lines should automatically open the sharing menu", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("line-index-10").click({ shiftKey: true });
+    cy.dataCy("sharing-menu").should("be.visible");
+  });
+  it("should be able to copy the selected lines as JIRA format", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("line-index-2").click({ shiftKey: true });
+    cy.dataCy("sharing-menu").should("be.visible");
+    cy.contains("Copy selected contents").should("be.visible");
+    cy.contains("Copy selected contents").click();
+    cy.validateToast("success", "Copied 2 lines to clipboard", true);
+    cy.window().then((win) => {
+      win.navigator.clipboard.readText().then((text) => {
+        expect(text).to.eq(
+          `{noformat}\n+------------------------------------------+--------+-----+-----+\n|full_name                                 |name    |port |pid  |\n{noformat}`
+        );
+      });
+    });
+  });
+  it("should be able to copy a link to the selected lines", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("line-index-2").click({ shiftKey: true });
+    cy.dataCy("sharing-menu").should("be.visible");
+    cy.contains("Copy share link to selected lines").should("be.visible");
+    cy.contains("Copy share link to selected lines").click();
+    cy.validateToast("success", "Copied link to clipboard", true);
+    cy.window().then((win) => {
+      win.navigator.clipboard.readText().then((text) => {
+        cy.log("text", text);
+        expect(text).to.eq(
+          "http://localhost:4173/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab?bookmarks=0%2C11079&selectedLineRange=L1-L2&shareLine=1"
+        );
+      });
+    });
+  });
+  it("should be able to limit the search range to the selected lines", () => {
+    cy.dataCy("line-index-1").click();
+    cy.dataCy("line-index-2").click({ shiftKey: true });
+    cy.dataCy("sharing-menu").should("be.visible");
+    cy.contains("Only search on range").should("be.visible");
+    cy.contains("Only search on range").click();
+    cy.toggleDetailsPanel(true);
+    cy.dataCy("range-lower-bound").should("have.value", "1");
+    cy.dataCy("range-upper-bound").should("have.value", "2");
+  });
+});
