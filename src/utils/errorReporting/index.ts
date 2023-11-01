@@ -50,7 +50,7 @@ enum SentryBreadcrumb {
 const leaveBreadcrumb = (
   message: string,
   metadata: Breadcrumb["data"],
-  type: SentryBreadcrumb | "process"
+  type: SentryBreadcrumb
 ) => {
   if (!isProductionBuild()) {
     console.debug({ message, metadata, type });
@@ -75,7 +75,7 @@ const leaveBreadcrumb = (
  */
 const validateMetadata = (
   metadata: Breadcrumb["data"],
-  breadcrumbType: SentryBreadcrumb | "process"
+  breadcrumbType: SentryBreadcrumb
 ): Breadcrumb["data"] => {
   if (breadcrumbType === SentryBreadcrumb.Navigation) {
     if (!metadata?.from) {
