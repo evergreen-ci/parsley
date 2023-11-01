@@ -22,7 +22,7 @@ describe("breadcrumbs", () => {
     expect(screen.queryAllByDataCy("breadcrumb-chevron")).toHaveLength(1);
   });
 
-  it("breadcrumbs with long text should be collapsed and viewable with a tooltip", async () => {
+  it("breadcrumbs with long text should be collapsed to 30 characters by default and viewable with a tooltip", async () => {
     const user = userEvent.setup();
     const longMessage = "some really long string that could be a patch title";
     const breadcrumbs = [{ text: longMessage }];
@@ -33,6 +33,23 @@ describe("breadcrumbs", () => {
       screen.getByText(trimStringFromMiddle(longMessage, 30))
     ).toBeInTheDocument();
     await user.hover(screen.getByText(trimStringFromMiddle(longMessage, 30)));
+    await waitFor(() => {
+      expect(screen.getByDataCy("breadcrumb-tooltip")).toBeInTheDocument();
+    });
+    expect(screen.getByText(longMessage)).toBeInTheDocument();
+  });
+
+  it("should be able to specify a custom trimLength", async () => {
+    const user = userEvent.setup();
+    const longMessage = "some really long string that could be a patch title";
+    const breadcrumbs = [{ text: longMessage, trimLength: 25 }];
+    render(<Breadcrumbs breadcrumbs={breadcrumbs} />);
+    expect(screen.queryByText(longMessage)).not.toBeInTheDocument();
+
+    expect(
+      screen.getByText(trimStringFromMiddle(longMessage, 25))
+    ).toBeInTheDocument();
+    await user.hover(screen.getByText(trimStringFromMiddle(longMessage, 25)));
     await waitFor(() => {
       expect(screen.getByDataCy("breadcrumb-tooltip")).toBeInTheDocument();
     });
