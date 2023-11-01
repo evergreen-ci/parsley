@@ -16,6 +16,7 @@ export interface Breadcrumb {
   text: ReactNode;
   to?: string;
   tooltipText?: ReactNode;
+  trimLength?: number;
 }
 interface BreadcrumbsProps {
   breadcrumbs: Breadcrumb[];
@@ -51,11 +52,12 @@ const BreadcrumbFragment: React.FC<BreadcrumbFragmentProps> = ({
     text = "",
     to,
     tooltipText,
+    trimLength = 30,
   } = breadcrumb;
   const shouldTrimMessage =
-    typeof text === "string" ? text?.length > 30 : false;
+    typeof text === "string" ? text?.length > trimLength : false;
   const message =
-    typeof text === "string" ? trimStringFromMiddle(text, 30) : text;
+    typeof text === "string" ? trimStringFromMiddle(text, trimLength) : text;
 
   let trigger;
   if (to) {
