@@ -14,6 +14,7 @@ const PopoverButton: React.FC<PopoverButtonProps> = ({
   buttonText,
   children,
   onClick,
+  variant,
   ...rest
 }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,9 +32,11 @@ const PopoverButton: React.FC<PopoverButtonProps> = ({
   return (
     <Button
       ref={buttonRef}
+      data-variant={variant}
       onClick={handleClick}
       rightGlyph={<Icon glyph="CaretDown" />}
       size="small"
+      variant={variant}
       {...rest}
     >
       {buttonText}
