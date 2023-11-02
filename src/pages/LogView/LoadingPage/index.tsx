@@ -91,7 +91,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     }
   }, [
     data,
-    fileName,
     ingestLines,
     error,
     logType,

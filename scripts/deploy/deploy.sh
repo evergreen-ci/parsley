@@ -1,6 +1,6 @@
 #!/bin/sh
 
-# This script runs the aws cli command to deploy the app to s3
+# This script runs the AWS CLI command to deploy the app to S3.
 
 # Try this step and throw an error if it fails
 echo "Deploying to S3"

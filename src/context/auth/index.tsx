@@ -59,7 +59,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
           } else {
             leaveBreadcrumb(
               "Not Authenticated",
-              { statusCode: response.status },
+              { status_code: response.status },
               SentryBreadcrumb.User
             );
             logoutAndRedirect();
