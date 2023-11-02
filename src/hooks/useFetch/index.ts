@@ -1,6 +1,10 @@
 import { useEffect, useState } from "react";
 import { isProduction } from "utils/environmentVariables";
-import { leaveBreadcrumb, reportError } from "utils/errorReporting";
+import {
+  SentryBreadcrumb,
+  leaveBreadcrumb,
+  reportError,
+} from "utils/errorReporting";
 /**
  * `useFetch` is a custom hook that downloads json from a given URL.
  * @param url - the url to fetch
@@ -24,7 +28,7 @@ const useFetch = <T extends object>(
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    leaveBreadcrumb("useFetch", { url }, "request");
+    leaveBreadcrumb("useFetch", { url }, SentryBreadcrumb.HTTP);
     const req = new Request(url, { method: "GET" });
     const abortController = new AbortController();
 
@@ -46,7 +50,7 @@ const useFetch = <T extends object>(
           setData(json);
         })
         .catch((err: Error) => {
-          leaveBreadcrumb("useFetch", { err, url }, "error");
+          leaveBreadcrumb("useFetch", { err, url }, SentryBreadcrumb.Error);
           reportError(err).severe();
           setError(err.message);
         })

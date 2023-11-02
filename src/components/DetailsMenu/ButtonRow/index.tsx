@@ -7,7 +7,7 @@ import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 import { copyToClipboard, getJiraFormat } from "utils/string";
 import { DetailRow } from "../styles";
 
@@ -35,7 +35,11 @@ const ButtonRow: React.FC = () => {
             disabled={!bookmarks.length}
             leftGlyph={<Icon glyph="Copy" />}
             onClick={async () => {
-              leaveBreadcrumb("copy-jira", { bookmarks }, "user");
+              leaveBreadcrumb(
+                "copy-jira",
+                { bookmarks },
+                SentryBreadcrumb.User
+              );
               await copyToClipboard(getJiraFormat(bookmarks, getLine));
               setHasCopied(!hasCopied);
               sendEvent({ name: "Clicked Copy To Jira" });

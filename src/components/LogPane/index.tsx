@@ -5,7 +5,7 @@ import { WRAP } from "constants/cookies";
 import { QueryParams } from "constants/queryParams";
 import { useLogContext } from "context/LogContext";
 import { useQueryParam } from "hooks/useQueryParam";
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 import { findLineIndex } from "utils/findLineIndex";
 
 interface LogPaneProps {
@@ -32,14 +32,14 @@ const LogPane: React.FC<LogPaneProps> = ({ rowCount, rowRenderer }) => {
           leaveBreadcrumb(
             "Triggered scroll to shareLine",
             { initialScrollIndex, shareLine },
-            "user"
+            SentryBreadcrumb.User
           );
           scrollToLine(initialScrollIndex);
         } else {
           leaveBreadcrumb(
             "shareLine not provided or found in processedLogLines",
             { shareLine },
-            "process"
+            SentryBreadcrumb.UI
           );
         }
 
