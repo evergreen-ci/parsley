@@ -52,12 +52,13 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     taskID,
     testID,
   });
-  const { data: logkeeperMetadata, isLoading } = useFetch<LogkeeperMetadata>(
-    getResmokeLogURL(buildID || "", { metadata: true, testID }),
-    {
-      skip: buildID === undefined,
-    }
-  );
+  const { data: logkeeperMetadata, isLoading: isLoadingLogkeeperMetadata } =
+    useFetch<LogkeeperMetadata>(
+      getResmokeLogURL(buildID || "", { metadata: true, testID }),
+      {
+        skip: buildID === undefined,
+      }
+    );
 
   const {
     data,
@@ -67,7 +68,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   } = useLogDownloader(downloadURL, logType);
 
   useEffect(() => {
-    if (data && !isLoading) {
+    if (data && !isLoadingLogkeeperMetadata) {
       leaveBreadcrumb("ingest-log-lines", { logType }, "process");
       setLogMetadata({
         buildID,
@@ -93,7 +94,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     ingestLines,
     error,
     logType,
-    isLoading,
+    isLoadingLogkeeperMetadata,
     dispatchToast,
     setLogMetadata,
     taskID,
