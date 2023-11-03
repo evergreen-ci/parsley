@@ -12,7 +12,7 @@ import { CharKey, ModifierKey } from "constants/keys";
 import { size, textInputHeight, zIndex } from "constants/tokens";
 import { DIRECTION } from "context/LogContext/types";
 import { useKeyboardShortcut } from "hooks";
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 import SearchPopover from "./SearchPopover";
 
 interface SearchBarProps {
@@ -75,14 +75,18 @@ const SearchBar: React.FC<SearchBarProps> = ({
 
   const handleChangeSelect = (value: string) => {
     setSelected(value as SearchBarActions);
-    leaveBreadcrumb("search-bar-select", { value }, "user");
+    leaveBreadcrumb("search-bar-select", { value }, SentryBreadcrumb.User);
   };
 
   const handleOnSubmit = () => {
     debounceSearch.cancel(); // Cancel the debounce request to prevent delayed search.
     inputRef.current?.blur();
     setInput("");
-    leaveBreadcrumb("search-bar-submit", { input, selected }, "user");
+    leaveBreadcrumb(
+      "search-bar-submit",
+      { input, selected },
+      SentryBreadcrumb.User
+    );
     onSubmit(selected, input);
   };
 
@@ -149,7 +153,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               leaveBreadcrumb(
                 "applied-search-suggestion",
                 { suggestion },
-                "user"
+                SentryBreadcrumb.User
               );
             }}
             searchSuggestions={searchSuggestions}

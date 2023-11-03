@@ -12,7 +12,11 @@ import {
   graphqlURL,
   isDevelopmentBuild,
 } from "utils/environmentVariables";
-import { leaveBreadcrumb, reportError } from "utils/errorReporting";
+import {
+  SentryBreadcrumb,
+  leaveBreadcrumb,
+  reportError,
+} from "utils/errorReporting";
 
 type LoginCreds = { username: string; password: string };
 
@@ -50,19 +54,19 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       })
         .then((response) => {
           if (response.ok) {
-            leaveBreadcrumb("Authenticated", {}, "user");
+            leaveBreadcrumb("Authenticated", {}, SentryBreadcrumb.User);
             setIsAuthenticated(true);
           } else {
             leaveBreadcrumb(
               "Not Authenticated",
-              { statusCode: response.status },
-              "user"
+              { status_code: response.status },
+              SentryBreadcrumb.User
             );
             logoutAndRedirect();
           }
         })
         .catch((err: Error) => {
-          leaveBreadcrumb("checkLogin", { err }, "error");
+          leaveBreadcrumb("checkLogin", { err }, SentryBreadcrumb.Error);
           reportError(err).severe();
         });
     };

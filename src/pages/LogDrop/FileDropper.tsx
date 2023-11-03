@@ -9,7 +9,11 @@ import { LOG_FILE_SIZE_LIMIT, LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
-import { leaveBreadcrumb, reportError } from "utils/errorReporting";
+import {
+  SentryBreadcrumb,
+  leaveBreadcrumb,
+  reportError,
+} from "utils/errorReporting";
 import { fileToStream } from "utils/file";
 import { decodeStream } from "utils/streams";
 import FileSelector from "./FileSelector";
@@ -28,7 +32,7 @@ const FileDropper: React.FC = () => {
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
-      leaveBreadcrumb("Dropped file", {}, "user");
+      leaveBreadcrumb("Dropped file", {}, SentryBreadcrumb.User);
       sendEvent({ name: "Dropped file" });
       dispatch({ file: acceptedFiles[0], type: "DROPPED_FILE" });
     },
@@ -38,8 +42,8 @@ const FileDropper: React.FC = () => {
   const onParse = useCallback(
     (logType: LogTypes | undefined) => {
       if (logType) {
-        setLogMetadata({ logType });
-        leaveBreadcrumb("Parsing file", { logType }, "process");
+        setLogMetadata({ isUploadedLog: true, logType });
+        leaveBreadcrumb("Parsing file", { logType }, SentryBreadcrumb.UI);
         dispatch({ type: "PARSE_FILE" });
         startTransition(() => {
           (async () => {
@@ -55,7 +59,7 @@ const FileDropper: React.FC = () => {
                 leaveBreadcrumb(
                   "Decoded file",
                   { fileSize: logLines.length },
-                  "process"
+                  SentryBreadcrumb.UI
                 );
                 sendEvent({
                   fileSize: logLines?.length,

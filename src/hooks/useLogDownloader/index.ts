@@ -9,7 +9,11 @@ import { LOG_FILE_SIZE_LIMIT } from "constants/logs";
 import { useToastContext } from "context/toast";
 import useStateRef from "hooks/useStateRef";
 import { isProduction } from "utils/environmentVariables";
-import { leaveBreadcrumb, reportError } from "utils/errorReporting";
+import {
+  SentryBreadcrumb,
+  leaveBreadcrumb,
+  reportError,
+} from "utils/errorReporting";
 import { fetchLogFile } from "utils/fetchLogFile";
 import { getBytesAsString } from "utils/string";
 
@@ -39,7 +43,7 @@ const useLogDownloader = (
   const dispatchToast = useToastContext();
 
   useEffect(() => {
-    leaveBreadcrumb("useLogDownloader", { url }, "request");
+    leaveBreadcrumb("useLogDownloader", { url }, SentryBreadcrumb.HTTP);
     const abortController = new AbortController();
     const timeStart = Date.now();
 
@@ -101,7 +105,11 @@ const useLogDownloader = (
           }
         })
         .catch((err: Error) => {
-          leaveBreadcrumb("useLogDownloader", { err, url }, "error");
+          leaveBreadcrumb(
+            "useLogDownloader",
+            { err, url },
+            SentryBreadcrumb.Error
+          );
           reportError(err).severe();
           setError(err.message);
           sendEvent({
@@ -119,7 +127,7 @@ const useLogDownloader = (
               time: Date.now() - timeStart,
               url,
             },
-            "request"
+            SentryBreadcrumb.HTTP
           );
           sendEvent({
             duration: Date.now() - timeStart,

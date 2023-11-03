@@ -1,27 +1,43 @@
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
-import { Body, BodyProps } from "@leafygreen-ui/typography";
+import Breadcrumbs from "components/Breadcrumbs";
 import Icon from "components/Icon";
-import { fontSize, size, subheaderHeight } from "constants/tokens";
+import { size, subheaderHeight } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { EvergreenTaskSubHeader } from "./EvergreenTaskSubHeader";
 
 const { gray } = palette;
 
-interface SubHeaderProps {
-  isUploadedLog: boolean;
-}
-const SubHeader: React.FC<SubHeaderProps> = ({ isUploadedLog }) => {
+interface SubHeaderProps {}
+const SubHeader: React.FC<SubHeaderProps> = () => {
   const { logMetadata } = useLogContext();
-  const { buildID, execution, fileName, logType, taskID, testID } =
-    logMetadata || {};
+  const {
+    buildID,
+    execution,
+    fileName,
+    isUploadedLog,
+    logType,
+    taskID,
+    testID,
+  } = logMetadata || {};
 
   return (
     <Container data-cy="log-header">
       {isUploadedLog ? (
         <Header>
           <Icon glyph="File" size="large" />
-          <StyledBody>{fileName}</StyledBody>
+          <Breadcrumbs
+            breadcrumbs={
+              fileName
+                ? [
+                    {
+                      text: fileName,
+                      trimLength: 50,
+                    },
+                  ]
+                : []
+            }
+          />
         </Header>
       ) : (
         <Header>
@@ -45,10 +61,6 @@ const Header = styled.div`
   display: flex;
   align-items: center;
   gap: ${size.s};
-`;
-
-const StyledBody = styled(Body)<BodyProps>`
-  font-size: ${fontSize.m};
 `;
 
 const Container = styled.div`

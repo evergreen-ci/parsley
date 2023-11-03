@@ -13,7 +13,7 @@ import {
 import { PROJECT_FILTERS } from "gql/queries";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useTaskQuery } from "hooks/useTaskQuery";
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 import ProjectFilter from "./ProjectFilter";
 import useSelectedFiltersState from "./state";
 
@@ -56,7 +56,7 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
     leaveBreadcrumb(
       "applied-project-filters",
       { filters: state.selectedFilters },
-      "user"
+      SentryBreadcrumb.User
     );
     sendEvent({
       filters: state.selectedFilters,

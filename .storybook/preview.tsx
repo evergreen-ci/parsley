@@ -2,15 +2,14 @@ import React from "react";
 import { MockedProvider } from "@apollo/client/testing";
 import { Decorator, Parameters } from "@storybook/react";
 import { RouterProvider, createMemoryRouter } from "react-router-dom";
-// This is required for storyshots https://github.com/lifeiscontent/storybook-addon-apollo-client/issues/16
-import { WithApolloClient } from "storybook-addon-apollo-client/dist/decorators";
 import { GlobalStyles } from "../src/components/styles";
 import { LogContextProvider } from "../src/context/LogContext";
 
 export const parameters: Parameters = {
   actions: { argTypesRegex: "^on[A-Z].*" },
   apolloClient: {
-    MockedProvider,
+    // This workaround is required for storyshots (https://github.com/lifeiscontent/storybook-addon-apollo-client/issues/16).
+    MockedProvider: ({ children }: { children: React.ReactNode }) => children,
   },
   controls: {
     matchers: {
@@ -32,6 +31,11 @@ export const decorators: Decorator[] = [
       <Story />
     </LogContextProvider>
   ),
+  (Story, { parameters: { apolloClient: { MockedProvider: _, ...rest } } }) => (
+    <MockedProvider {...rest}>
+      <Story/>
+    </MockedProvider>
+  ),
   (Story: () => JSX.Element) => {
     const routes = [
       {
@@ -45,5 +49,4 @@ export const decorators: Decorator[] = [
     });
     return <RouterProvider router={memoryRouter} />;
   },
-  WithApolloClient as any,
 ];

@@ -1,12 +1,12 @@
 import { useCallback, useState } from "react";
 import { css } from "@emotion/react";
 import ConfirmationModal from "@leafygreen-ui/confirmation-modal";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useLogDropAnalytics } from "analytics";
 import { StyledRouterLink } from "components/styles";
 import routes from "constants/routes";
 import { zIndex } from "constants/tokens";
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 
 interface UploadLinkProps {
   hasLogs: boolean | null;
@@ -15,17 +15,22 @@ interface UploadLinkProps {
 const UploadLink: React.FC<UploadLinkProps> = ({ clearLogs, hasLogs }) => {
   const [open, setOpen] = useState(false);
   const navigate = useNavigate();
+  const { pathname } = useLocation();
   const { sendEvent } = useLogDropAnalytics();
   const handleClick = useCallback(() => {
     if (hasLogs) {
       sendEvent({ hasLogs: true, name: "Clicked Upload Link" });
       setOpen(true);
     } else {
-      leaveBreadcrumb("upload-link", { hasLogs }, "navigation");
+      leaveBreadcrumb(
+        "upload-link",
+        { from: pathname, hasLogs: false, to: "/upload" },
+        SentryBreadcrumb.Navigation
+      );
       sendEvent({ hasLogs: false, name: "Clicked Upload Link" });
       navigate(routes.upload);
     }
-  }, [hasLogs, sendEvent, navigate]);
+  }, [hasLogs, pathname, sendEvent, navigate]);
   return (
     <>
       <StyledRouterLink

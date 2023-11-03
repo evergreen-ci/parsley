@@ -2,6 +2,7 @@ import LeafyGreenProvider from "@leafygreen-ui/leafygreen-provider";
 import GQLProvider from "gql/GQLProvider";
 import { AuthProvider } from "./auth";
 import { LogContextProvider } from "./LogContext";
+import { MultiLineSelectContextProvider } from "./MultiLineSelectContext";
 import { ToastProvider } from "./toast";
 
 /**
@@ -17,7 +18,11 @@ const GlobalProviders: React.FC<{ children: React.ReactElement }> = ({
     <LeafyGreenProvider>
       <ToastProvider>
         <GQLProvider>
-          <LogContextProvider>{children}</LogContextProvider>
+          <LogContextProvider>
+            <MultiLineSelectContextProvider>
+              {children}
+            </MultiLineSelectContextProvider>
+          </LogContextProvider>
         </GQLProvider>
       </ToastProvider>
     </LeafyGreenProvider>

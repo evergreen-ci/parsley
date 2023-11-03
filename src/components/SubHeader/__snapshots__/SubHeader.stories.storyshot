@@ -177,11 +177,16 @@ exports[`storyshots Storyshots components/SubHeader Uploaded Log 1`] = `
           fill="currentColor"
         />
       </svg>
-      <p
-        class="css-mr3j8u leafygreen-ui-1tb6tuo"
+      <nav
+        class="css-44gx6g"
+        data-cy="breadcrumb-container"
       >
-        some-file-name.log
-      </p>
+        <div
+          class="leafygreen-ui-cssveg"
+        >
+          some-file-name.log
+        </div>
+      </nav>
     </div>
   </div>
 </div>

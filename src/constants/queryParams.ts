@@ -9,6 +9,7 @@ enum QueryParams {
   FilterLogic = "filterLogic",
   LowerRange = "lower",
   UpperRange = "upper",
+  SelectedLineRange = "selectedLineRange",
 }
 
 export { QueryParams };
