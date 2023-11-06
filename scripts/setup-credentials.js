@@ -11,7 +11,6 @@ const production = {
   REACT_APP_PARSLEY_URL: "https://parsley.mongodb.com",
   REACT_APP_RELEASE_STAGE: "production",
   BUCKET: process.env.BUCKET,
-  REACT_APP_BUGSNAG_API_KEY: process.env.REACT_APP_BUGSNAG_API_KEY,
   NEW_RELIC_ACCOUNT_ID: process.env.NEW_RELIC_ACCOUNT_ID,
   NEW_RELIC_TRUST_KEY: process.env.NEW_RELIC_TRUST_KEY,
   NEW_RELIC_AGENT_ID: process.env.NEW_RELIC_AGENT_ID,

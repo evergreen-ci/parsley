@@ -1,4 +1,4 @@
-import { leaveBreadcrumb } from "utils/errorReporting";
+import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 
 type StreamedFileOptions = {
   fileSizeLimit?: number;
@@ -37,7 +37,7 @@ const fileToStream = async (
               leaveBreadcrumb(
                 "File size limit exceeded",
                 { bytesRead },
-                "process"
+                SentryBreadcrumb.UI
               );
               break;
             }

@@ -177,7 +177,6 @@ functions:
       shell: bash
       script: |
         echo "Generating .env-cmdrc.json"
-        REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} \
         REACT_APP_SENTRY_AUTH_TOKEN=${REACT_APP_SENTRY_AUTH_TOKEN} \
         REACT_APP_SENTRY_DSN=${REACT_APP_SENTRY_DSN} \
         NEW_RELIC_ACCOUNT_ID=${NEW_RELIC_ACCOUNT_ID} \
@@ -344,7 +343,6 @@ functions:
       shell: bash
       script: |
         ${PREPARE_SHELL}
-        REACT_APP_BUGSNAG_API_KEY=${REACT_APP_BUGSNAG_API_KEY} \
         BUCKET=${bucket} \
         AWS_ACCESS_KEY_ID=${aws_key} \
         AWS_SECRET_ACCESS_KEY=${aws_secret} \
@@ -362,7 +360,7 @@ functions:
       params:
         env:
           gobin: ${goroot}/bin/go
-          MONGODB_URL: ${mongodb_url_60}
+          MONGODB_URL: ${mongodb_url_70}
           MONGODB_DECOMPRESS: ${decompress}
         working_dir: parsley/evergreen
         command: make get-mongodb
@@ -508,8 +506,8 @@ buildvariants:
   - name: ubuntu2204-small
     display_name: Ubuntu 22.04 (small)
     expansions:
-      mongodb_url_60: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.6.tgz
-      mongosh_url: https://downloads.mongodb.com/compass/mongosh-1.9.0-linux-x64.tgz
+      mongodb_url_70: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-7.0.2.tgz
+      mongosh_url: https://downloads.mongodb.com/compass/mongosh-2.0.2-linux-x64.tgz
       node_version: 16.17.0
     run_on:
       - ubuntu2204-small
@@ -525,8 +523,8 @@ buildvariants:
   - name: ubuntu2204-large
     display_name: Ubuntu 22.04 (large)
     expansions:
-      mongodb_url_60: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-6.0.6.tgz
-      mongosh_url: https://downloads.mongodb.com/compass/mongosh-1.9.0-linux-x64.tgz
+      mongodb_url_70: https://fastdl.mongodb.org/linux/mongodb-linux-x86_64-ubuntu2204-7.0.2.tgz
+      mongosh_url: https://downloads.mongodb.com/compass/mongosh-2.0.2-linux-x64.tgz
       node_version: 16.17.0
     run_on:
       - ubuntu2204-large
