@@ -89,7 +89,7 @@
     "@graphql-codegen/typescript-operations": "4.0.1",
     "@graphql-eslint/eslint-plugin": "3.20.1",
     "@graphql-tools/jest-transform": "2.0.0",
-    "@sentry/vite-plugin": "2.7.1",
+    "@sentry/vite-plugin": "2.9.0",
     "@storybook/addon-actions": "7.5.2",
     "@storybook/addon-essentials": "7.5.2",
     "@storybook/addon-interactions": "7.5.2",
