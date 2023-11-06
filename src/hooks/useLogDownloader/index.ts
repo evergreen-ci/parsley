@@ -107,10 +107,15 @@ const useLogDownloader = (
         .catch((err: Error) => {
           leaveBreadcrumb(
             "useLogDownloader",
-            { err, url },
+            {
+              duration: Date.now() - timeStart,
+              err,
+              fileSize: getFileSize(),
+              url,
+            },
             SentryBreadcrumb.Error
           );
-          reportError(err).severe();
+          reportError(err).warning();
           setError(err.message);
           sendEvent({
             duration: Date.now() - timeStart,
