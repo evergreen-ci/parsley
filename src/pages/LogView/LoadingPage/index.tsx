@@ -52,12 +52,13 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     taskID,
     testID,
   });
-  const { data: logkeeperMetadata } = useFetch<LogkeeperMetadata>(
-    getResmokeLogURL(buildID || "", { metadata: true, testID }),
-    {
-      skip: buildID === undefined,
-    }
-  );
+  const { data: logkeeperMetadata, isLoading: isLoadingLogkeeperMetadata } =
+    useFetch<LogkeeperMetadata>(
+      getResmokeLogURL(buildID || "", { metadata: true, testID }),
+      {
+        skip: buildID === undefined,
+      }
+    );
 
   const {
     data,
@@ -67,7 +68,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
   } = useLogDownloader(downloadURL, logType);
 
   useEffect(() => {
-    if (data) {
+    if (data && !isLoadingLogkeeperMetadata) {
       leaveBreadcrumb("ingest-log-lines", { logType }, SentryBreadcrumb.UI);
       setLogMetadata({
         buildID,
@@ -94,6 +95,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     ingestLines,
     error,
     logType,
+    isLoadingLogkeeperMetadata,
     dispatchToast,
     setLogMetadata,
     taskID,
@@ -106,9 +108,9 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     jobLogsURL,
     legacyJobLogsURL,
     lobsterURL,
+    fileName,
     logkeeperMetadata?.task_id,
     logkeeperMetadata?.execution,
-    fileName,
   ]);
 
   if (isLoadingLog || isLoadingTest) {
