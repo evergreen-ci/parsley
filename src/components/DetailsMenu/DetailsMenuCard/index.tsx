@@ -1,3 +1,4 @@
+import { forwardRef } from "react";
 import styled from "@emotion/styled";
 import { size } from "constants/tokens";
 import ButtonRow from "./ButtonRow";
@@ -15,24 +16,27 @@ interface DetailsMenuProps {
   ["data-cy"]?: string;
 }
 
-const DetailsMenuCard: React.FC<DetailsMenuProps> = ({ "data-cy": dataCy }) => (
-  <Container data-cy={dataCy}>
-    <Row>
-      <Column>
-        <SearchRangeInput />
-        <WrapToggle />
-        <CaseSensitiveToggle />
-      </Column>
-      <Column>
-        <FilterLogicToggle />
-        <ExpandableRowsToggle />
-        <PrettyPrintToggle />
-      </Column>
-    </Row>
-    <ButtonRow />
-    <CLIInstructions />
-  </Container>
+const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
+  ({ "data-cy": dataCy }, ref) => (
+    <Container ref={ref} data-cy={dataCy}>
+      <Row>
+        <Column>
+          <SearchRangeInput />
+          <WrapToggle />
+          <CaseSensitiveToggle />
+        </Column>
+        <Column>
+          <FilterLogicToggle />
+          <ExpandableRowsToggle />
+          <PrettyPrintToggle />
+        </Column>
+      </Row>
+      <ButtonRow />
+      <CLIInstructions />
+    </Container>
+  )
 );
+DetailsMenuCard.displayName = "DetailsMenuCard";
 
 const Container = styled.div`
   width: 700px;

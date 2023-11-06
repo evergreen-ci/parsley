@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import PopoverButton from "components/PopoverButton";
@@ -18,8 +18,11 @@ const DetailsMenu: React.FC<DetailsMenuProps> = ({ disabled, ...rest }) => {
     undefined
   );
   const [changeVisible, setChangeVisible] = useState(false);
+  const detailsMenuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    // If the DetailsMenu is already visible, don't show the change animation
+    if (detailsMenuRef.current !== null) return;
     setChangeVisible(true);
     const timer = setTimeout(() => {
       setChangeVisible(false);
@@ -34,7 +37,7 @@ const DetailsMenu: React.FC<DetailsMenuProps> = ({ disabled, ...rest }) => {
       variant={changeVisible ? "primary" : "default"}
       {...rest}
     >
-      <DetailsMenuCard data-cy="details-menu" />
+      <DetailsMenuCard ref={detailsMenuRef} data-cy="details-menu" />
     </AnimatedPopoverButton>
   );
 };
