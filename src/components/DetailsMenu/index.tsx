@@ -19,8 +19,14 @@ const DetailsMenu: React.FC<DetailsMenuProps> = ({ disabled, ...rest }) => {
   );
   const [changeVisible, setChangeVisible] = useState(false);
   const detailsMenuRef = useRef<HTMLDivElement>(null);
+  const firstUpdate = useRef(true);
 
   useEffect(() => {
+    // Don't show the change animation on the first render
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
     // If the DetailsMenu is already visible, don't show the change animation
     if (detailsMenuRef.current !== null) return;
     setChangeVisible(true);
