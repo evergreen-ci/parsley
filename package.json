@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.125",
+  "version": "1.0.127",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
     "build": "tsc && GIT_SHA=`git rev-parse HEAD` APP_VERSION=$npm_package_version vite build",
@@ -89,7 +89,7 @@
     "@graphql-codegen/typescript-operations": "4.0.1",
     "@graphql-eslint/eslint-plugin": "3.20.1",
     "@graphql-tools/jest-transform": "2.0.0",
-    "@sentry/vite-plugin": "2.7.1",
+    "@sentry/vite-plugin": "2.9.0",
     "@storybook/addon-actions": "7.5.2",
     "@storybook/addon-essentials": "7.5.2",
     "@storybook/addon-interactions": "7.5.2",
@@ -152,7 +152,7 @@
     "vite": "4.0.5",
     "vite-plugin-checker": "0.6.2",
     "vite-plugin-env-compatible": "1.1.1",
-    "vite-tsconfig-paths": "4.0.3",
+    "vite-tsconfig-paths": "4.2.1",
     "web-streams-polyfill": "^3.2.1",
     "whatwg-fetch": "3.6.17"
   },
