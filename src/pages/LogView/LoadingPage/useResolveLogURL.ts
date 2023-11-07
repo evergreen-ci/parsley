@@ -20,6 +20,7 @@ import {
   TestLogUrlQueryVariables,
 } from "gql/generated/types";
 import { GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
+import { useTaskQuery } from "hooks/useTaskQuery";
 
 interface UseResolveLogURLProps {
   buildID?: string;
@@ -71,6 +72,13 @@ export const useResolveLogURL = ({
   taskID,
   testID,
 }: UseResolveLogURLProps): LogURLs => {
+  const { loading: taskLoading, task } = useTaskQuery({
+    buildID,
+    execution,
+    logType: logType as LogTypes,
+    taskID,
+  });
+
   const { data: testData, loading: isLoadingTest } = useQuery<
     TestLogUrlQuery,
     TestLogUrlQueryVariables
@@ -142,17 +150,17 @@ export const useResolveLogURL = ({
       break;
     }
     case LogTypes.EVERGREEN_TASK_LOGS: {
-      if (!taskID || !execution || !origin) {
+      if (!taskID || !origin || !execution || !task?.logs || taskLoading) {
         break;
       }
-      downloadURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+      downloadURL = getEvergreenTaskLogURL(task.logs, origin, {
         priority: true,
         text: true,
       });
-      rawLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+      rawLogURL = getEvergreenTaskLogURL(task.logs, origin, {
         text: true,
       });
-      htmlLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
+      htmlLogURL = getEvergreenTaskLogURL(task.logs, origin, {
         text: false,
       });
       lobsterURL = getLobsterTaskURL(taskID, execution, origin);

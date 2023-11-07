@@ -5,6 +5,13 @@ query LogkeeperTask($buildId: String!) {
     id
     task {
       ...BaseTask
+      logs {
+        agentLogLink
+        allLogLink
+        eventLogLink
+        systemLogLink
+        taskLogLink
+      }
       tests(opts: null) {
         testResults {
           id
