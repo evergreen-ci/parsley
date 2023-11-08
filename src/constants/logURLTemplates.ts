@@ -1,3 +1,4 @@
+import queryString from "query-string";
 import { Task as TaskType } from "gql/generated/types";
 import {
   evergreenURL,
@@ -114,15 +115,16 @@ const getEvergreenTaskLogURL = (
   logLinks: TaskType["logs"],
   origin: string,
   params: { [key: string]: any } = {}
-) =>
-  `${
+) => {
+  const url =
     {
       [Origin.Agent]: logLinks.agentLogLink,
       [Origin.System]: logLinks.systemLogLink,
       [Origin.Task]: logLinks.taskLogLink,
       [Origin.All]: logLinks.allLogLink,
-    }[origin] ?? ""
-  }/${stringifyQuery(params)}`;
+    }[origin] ?? "";
+  return queryString.stringifyUrl({ query: params, url });
+};
 
 /**
  *

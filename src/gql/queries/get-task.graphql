@@ -6,7 +6,6 @@ query Task($taskId: String!, $execution: Int) {
     logs {
       agentLogLink
       allLogLink
-      eventLogLink
       systemLogLink
       taskLogLink
     }

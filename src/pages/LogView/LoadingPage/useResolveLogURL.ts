@@ -197,7 +197,7 @@ export const useResolveLogURL = ({
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,
-    loading: isLoadingTest,
+    loading: isLoadingTest || taskLoading,
     lobsterURL,
     rawLogURL,
   };
