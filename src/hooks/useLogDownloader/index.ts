@@ -24,6 +24,7 @@ import { getBytesAsString } from "utils/string";
  * @param url - the url to fetch
  * @param logType - the type of log file to download
  * @param downloadSizeLimit - the maximum size of the log file to download
+ * @param isLoadingEvergreen - whether a GraphQL query is in process to fetch the task or test.
  * @returns an object with the following properties:
  * - isLoading: a boolean that is true while the log is being downloaded
  * - data: the log file as an array of strings
@@ -33,7 +34,8 @@ import { getBytesAsString } from "utils/string";
 const useLogDownloader = (
   url: string,
   logType: LogTypes,
-  downloadSizeLimit: number = LOG_FILE_SIZE_LIMIT
+  downloadSizeLimit: number = LOG_FILE_SIZE_LIMIT,
+  isLoadingEvergreen: boolean = false
 ) => {
   const [data, setData] = useState<string[] | undefined>();
   const [error, setError] = useState<string | undefined>();
@@ -142,6 +144,11 @@ const useLogDownloader = (
           });
           setIsLoading(false);
         });
+    } else if (!url && !isLoadingEvergreen) {
+      dispatchToast.error("Log URL not specified, unable to download.", true, {
+        shouldTimeout: false,
+      });
+      setIsLoading(false);
     }
 
     return () => {
@@ -149,7 +156,7 @@ const useLogDownloader = (
       abortController.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [url]);
+  }, [isLoadingEvergreen, url]);
   return { data, error, fileSize, isLoading };
 };
 
