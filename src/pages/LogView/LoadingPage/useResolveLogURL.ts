@@ -72,7 +72,7 @@ export const useResolveLogURL = ({
   taskID,
   testID,
 }: UseResolveLogURLProps): LogURLs => {
-  const { loading: taskLoading, task } = useTaskQuery({
+  const { loading: isLoadingTask, task } = useTaskQuery({
     buildID,
     execution,
     logType: logType as LogTypes,
@@ -150,7 +150,7 @@ export const useResolveLogURL = ({
       break;
     }
     case LogTypes.EVERGREEN_TASK_LOGS: {
-      if (!taskID || !origin || !execution || !task?.logs || taskLoading) {
+      if (!taskID || !origin || !execution || !task?.logs || isLoadingTask) {
         break;
       }
       downloadURL = getEvergreenTaskLogURL(task.logs, origin, {
@@ -197,7 +197,7 @@ export const useResolveLogURL = ({
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,
-    loading: isLoadingTest || taskLoading,
+    loading: isLoadingTest || isLoadingTask || isLoadingTaskFileData,
     lobsterURL,
     rawLogURL,
   };

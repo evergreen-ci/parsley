@@ -3103,6 +3103,13 @@ export type BaseTaskFragment = {
   id: string;
   patchNumber?: number | null;
   status: string;
+  logs: {
+    __typename?: "TaskLogLinks";
+    agentLogLink?: string | null;
+    allLogLink?: string | null;
+    systemLogLink?: string | null;
+    taskLogLink?: string | null;
+  };
   versionMetadata: {
     __typename?: "Version";
     id: string;
@@ -3129,13 +3136,6 @@ export type LogkeeperTaskQuery = {
       id: string;
       patchNumber?: number | null;
       status: string;
-      logs: {
-        __typename?: "TaskLogLinks";
-        agentLogLink?: string | null;
-        allLogLink?: string | null;
-        systemLogLink?: string | null;
-        taskLogLink?: string | null;
-      };
       tests: {
         __typename?: "TaskTestResult";
         testResults: Array<{
@@ -3145,6 +3145,13 @@ export type LogkeeperTaskQuery = {
           testFile: string;
           logs: { __typename?: "TestLog"; urlRaw?: string | null };
         }>;
+      };
+      logs: {
+        __typename?: "TaskLogLinks";
+        agentLogLink?: string | null;
+        allLogLink?: string | null;
+        systemLogLink?: string | null;
+        taskLogLink?: string | null;
       };
       versionMetadata: {
         __typename?: "Version";

@@ -65,7 +65,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     error,
     fileSize,
     isLoading: isLoadingLog,
-  } = useLogDownloader(downloadURL, logType, undefined, isLoadingEvergreen);
+  } = useLogDownloader({ isLoadingEvergreen, logType, url: downloadURL });
 
   useEffect(() => {
     if (data && !isLoadingLogkeeperMetadata) {

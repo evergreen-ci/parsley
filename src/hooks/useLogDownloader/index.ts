@@ -17,26 +17,35 @@ import {
 import { fetchLogFile } from "utils/fetchLogFile";
 import { getBytesAsString } from "utils/string";
 
+type UseLogDownloader = {
+  downloadSizeLimit?: number;
+  isLoadingEvergreen?: boolean;
+  logType: LogTypes;
+  url: string;
+};
+
 /**
  * `useLogDownloader` is a custom hook that downloads a log file from a given URL.
  * It uses a fetch stream to download the log file and splits the log file into an array of strings.
  * Each string is split based on the newline character.
- * @param url - the url to fetch
- * @param logType - the type of log file to download
- * @param downloadSizeLimit - the maximum size of the log file to download
- * @param isLoadingEvergreen - whether a GraphQL query is in process to fetch the task or test.
+ * @param props - hook params object
+ * @param props.url - the url to fetch
+ * @param props.logType - the type of log file to download
+ * @param props.downloadSizeLimit - the maximum size of the log file to download
+ * @param props.isLoadingEvergreen - whether a GraphQL query is i
+n process to fetch the task or test.
  * @returns an object with the following properties:
  * - isLoading: a boolean that is true while the log is being downloaded
  * - data: the log file as an array of strings
  * - error: an error message if the download fails
  * - fileSize: the size of the log file in bytes
  */
-const useLogDownloader = (
-  url: string,
-  logType: LogTypes,
-  downloadSizeLimit: number = LOG_FILE_SIZE_LIMIT,
-  isLoadingEvergreen: boolean = false
-) => {
+const useLogDownloader = ({
+  downloadSizeLimit = LOG_FILE_SIZE_LIMIT,
+  isLoadingEvergreen = false,
+  logType,
+  url,
+}: UseLogDownloader) => {
   const [data, setData] = useState<string[] | undefined>();
   const [error, setError] = useState<string | undefined>();
   const [fileSize, setFileSize, getFileSize] = useStateRef<number>(0);

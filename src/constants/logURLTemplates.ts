@@ -107,7 +107,6 @@ export enum Origin {
   Agent = "agent",
   System = "system",
   Task = "task",
-  Event = "event",
   All = "all",
 }
 
