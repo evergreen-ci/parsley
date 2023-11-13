@@ -70,6 +70,7 @@ describe("detailsMenu", () => {
       name: "Details",
     });
     expect(detailsButton).toBeEnabled();
+    expect(detailsButton).toHaveAttribute("data-variant", "default");
     act(() => {
       hook.current.useQueryParam[1](1);
     });

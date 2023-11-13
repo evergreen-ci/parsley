@@ -13,7 +13,7 @@ import {
 } from "./Toggles";
 
 interface DetailsMenuProps {
-  ["data-cy"]?: string;
+  "data-cy"?: string;
 }
 
 const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(

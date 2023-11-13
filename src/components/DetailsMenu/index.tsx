@@ -12,7 +12,10 @@ interface DetailsMenuProps {
   disabled?: boolean;
 }
 const DetailsMenu: React.FC<DetailsMenuProps> = ({ disabled, ...rest }) => {
-  const [lowerRange] = useQueryParam(QueryParams.LowerRange, 0);
+  const [lowerRange] = useQueryParam<undefined | number>(
+    QueryParams.LowerRange,
+    undefined
+  );
   const [upperRange] = useQueryParam<undefined | number>(
     QueryParams.UpperRange,
     undefined
