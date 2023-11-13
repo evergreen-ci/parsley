@@ -2936,6 +2936,7 @@ export type Version = {
   __typename?: "Version";
   activated?: Maybe<Scalars["Boolean"]["output"]>;
   author: Scalars["String"]["output"];
+  authorEmail: Scalars["String"]["output"];
   baseTaskStatuses: Array<Scalars["String"]["output"]>;
   baseVersion?: Maybe<Version>;
   branch: Scalars["String"]["output"];
