@@ -2,12 +2,6 @@ fragment BaseTask on Task {
   displayName
   execution
   id
-  logs {
-    agentLogLink
-    allLogLink
-    systemLogLink
-    taskLogLink
-  }
   patchNumber
   status
   versionMetadata {

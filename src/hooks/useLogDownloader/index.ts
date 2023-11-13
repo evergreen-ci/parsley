@@ -154,9 +154,7 @@ const useLogDownloader = ({
           setIsLoading(false);
         });
     } else if (!url && !isLoadingEvergreen) {
-      dispatchToast.error("Log URL not specified, unable to download.", true, {
-        shouldTimeout: false,
-      });
+      setError("Log URL not specified, unable to download.");
       setIsLoading(false);
     }
 
