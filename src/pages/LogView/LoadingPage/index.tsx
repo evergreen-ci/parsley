@@ -39,7 +39,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,
-    loading: isLoadingEvergreen,
+    loading: isLoadingTest,
     lobsterURL,
     rawLogURL,
   } = useResolveLogURL({
@@ -65,7 +65,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     error,
     fileSize,
     isLoading: isLoadingLog,
-  } = useLogDownloader({ isLoadingEvergreen, logType, url: downloadURL });
+  } = useLogDownloader(downloadURL, logType);
 
   useEffect(() => {
     if (data && !isLoadingLogkeeperMetadata) {
@@ -113,7 +113,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     logkeeperMetadata?.execution,
   ]);
 
-  if (isLoadingLog || isLoadingEvergreen) {
+  if (isLoadingLog || isLoadingTest) {
     return (
       <Container>
         <LoadingBarContainer>

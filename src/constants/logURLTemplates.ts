@@ -1,5 +1,3 @@
-import queryString from "query-string";
-import { Task as TaskType } from "gql/generated/types";
 import {
   evergreenURL,
   lobsterURL,
@@ -103,26 +101,40 @@ const getResmokeLogURL = (
   return `${logkeeperURL}/build/${buildID}/all?${stringifyQuery(params)}`;
 };
 
-export enum Origin {
-  Agent = "agent",
-  System = "system",
-  Task = "task",
-  All = "all",
+// Although this does not follow typical enum capitalization conventions, it is used to map the origin of the log to the type parameter in the Evergreen URL.
+// Any changes to these origins should be reflected in an ADR
+enum OriginToType {
+  agent = "E",
+  system = "S",
+  task = "T",
+  all = "ALL",
 }
 
+/**
+ *
+ * @param taskID - the task ID
+ * @param execution - the execution number of the task
+ * @param origin - the origin of the log
+ * @param options - the options for the task log
+ * @param options.priority - returned log includes a priority prefix on each line
+ * @param options.text - returns the raw log associated with the task
+ * @returns an Evergreen URL of the format `/task/${taskID}/${execution}?type=${OriginToType[origin]}&text=true`
+ */
 const getEvergreenTaskLogURL = (
-  logLinks: TaskType["logs"],
-  origin: string,
-  params: { [key: string]: any } = {}
+  taskID: string,
+  execution: string | number,
+  origin: keyof typeof OriginToType,
+  options: { priority?: boolean; text?: boolean }
 ) => {
-  const url =
-    {
-      [Origin.Agent]: logLinks.agentLogLink,
-      [Origin.System]: logLinks.systemLogLink,
-      [Origin.Task]: logLinks.taskLogLink,
-      [Origin.All]: logLinks.allLogLink,
-    }[origin] ?? "";
-  return queryString.stringifyUrl({ query: params, url });
+  const { priority, text } = options;
+  const params = {
+    priority,
+    text,
+    type: OriginToType[origin] || undefined,
+  };
+  return `${evergreenURL}/task_log_raw/${taskID}/${execution}?${stringifyQuery(
+    params
+  )}`;
 };
 
 /**
