@@ -1,53 +1,70 @@
+import { useEffect, useRef, useState } from "react";
 import styled from "@emotion/styled";
-import { size } from "constants/tokens";
-import ButtonRow from "./ButtonRow";
-import CLIInstructions from "./CLIInstructions";
-import SearchRangeInput from "./SearchRangeInput";
-import {
-  CaseSensitiveToggle,
-  ExpandableRowsToggle,
-  FilterLogicToggle,
-  PrettyPrintToggle,
-  WrapToggle,
-} from "./Toggles";
+import { palette } from "@leafygreen-ui/palette";
+import PopoverButton from "components/PopoverButton";
+import { QueryParams } from "constants/queryParams";
+import { useQueryParam } from "hooks/useQueryParam";
+import DetailsMenuCard from "./DetailsMenuCard";
+
+const { green } = palette;
 
 interface DetailsMenuProps {
-  ["data-cy"]?: string;
+  disabled?: boolean;
 }
+const DetailsMenu: React.FC<DetailsMenuProps> = ({ disabled, ...rest }) => {
+  const [lowerRange] = useQueryParam<undefined | number>(
+    QueryParams.LowerRange,
+    undefined
+  );
+  const [upperRange] = useQueryParam<undefined | number>(
+    QueryParams.UpperRange,
+    undefined
+  );
+  const [changeVisible, setChangeVisible] = useState(false);
+  const detailsMenuRef = useRef<HTMLDivElement>(null);
+  const firstUpdate = useRef(true);
 
-const DetailsMenu: React.FC<DetailsMenuProps> = ({ "data-cy": dataCy }) => (
-  <DetailsMenuCard data-cy={dataCy}>
-    <Row>
-      <Column>
-        <SearchRangeInput />
-        <WrapToggle />
-        <CaseSensitiveToggle />
-      </Column>
-      <Column>
-        <FilterLogicToggle />
-        <ExpandableRowsToggle />
-        <PrettyPrintToggle />
-      </Column>
-    </Row>
-    <ButtonRow />
-    <CLIInstructions />
-  </DetailsMenuCard>
-);
+  useEffect(() => {
+    // Don't show the change animation on the first render
+    if (firstUpdate.current) {
+      firstUpdate.current = false;
+      return;
+    }
+    // If the DetailsMenu is already visible, don't show the change animation
+    if (detailsMenuRef.current !== null) return;
+    setChangeVisible(true);
+    const timer = setTimeout(() => {
+      setChangeVisible(false);
+    }, 2000);
+    return () => clearTimeout(timer);
+  }, [lowerRange, upperRange]);
 
-const DetailsMenuCard = styled.div`
-  width: 700px;
-  padding: ${size.xs};
-  display: flex;
-  flex-direction: column;
+  return (
+    <AnimatedPopoverButton
+      buttonText="Details"
+      disabled={disabled}
+      variant={changeVisible ? "primary" : "default"}
+      {...rest}
+    >
+      <DetailsMenuCard ref={detailsMenuRef} data-cy="details-menu" />
+    </AnimatedPopoverButton>
+  );
+};
+
+const AnimatedPopoverButton = styled(PopoverButton)`
+  /* Glow animation */
+  ${({ variant }) =>
+    variant === "primary" &&
+    `
+    animation: glow 1s ease-in-out infinite alternate;
+    @keyframes glow {
+      from {
+        box-shadow: 0 0 0px ${green.base};
+      }
+      to {
+        box-shadow: 0 0 20px ${green.base};
+      }
+    }
+  `}
 `;
-
-const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-`;
-const Column = styled.div`
-  width: 300px;
-`;
-
 export default DetailsMenu;

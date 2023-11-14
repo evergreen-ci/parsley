@@ -5,7 +5,6 @@ import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import DetailsMenu from "components/DetailsMenu";
 import Icon from "components/Icon";
-import PopoverButton from "components/PopoverButton";
 import Search from "components/Search";
 import ShortcutModal from "components/ShortcutModal";
 import { StyledLink } from "components/styles";
@@ -41,13 +40,7 @@ const NavBar: React.FC = () => {
         >
           <Icon glyph="InfoWithCircle" />
         </IconButton>
-        <StyledButton
-          buttonText="Details"
-          data-cy="details-button"
-          disabled={!hasLogs}
-        >
-          <DetailsMenu data-cy="details-menu" />
-        </StyledButton>
+        <StyledDetailsMenu data-cy="details-button" disabled={!hasLogs} />
         {isDevelopmentBuild() && (
           <Button
             onClick={logoutAndRedirect}
@@ -91,7 +84,7 @@ const LinkContainer = styled.div`
   gap: ${size.l};
 `;
 
-const StyledButton = styled(PopoverButton)`
+const StyledDetailsMenu = styled(DetailsMenu)`
   margin: 0 ${size.xs};
 `;
 
