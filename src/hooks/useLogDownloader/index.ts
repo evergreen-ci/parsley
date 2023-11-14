@@ -163,7 +163,7 @@ const useLogDownloader = ({
       abortController.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoadingEvergreen, url]);
+  }, [url]);
   return { data, error, fileSize, isLoading };
 };
 
