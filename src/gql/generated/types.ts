@@ -1675,7 +1675,6 @@ export type Project = {
   repo: Scalars["String"]["output"];
   repoRefId: Scalars["String"]["output"];
   repotrackerDisabled?: Maybe<Scalars["Boolean"]["output"]>;
-  repotrackerError?: Maybe<RepotrackerError>;
   restricted?: Maybe<Scalars["Boolean"]["output"]>;
   spawnHostScriptPath: Scalars["String"]["output"];
   stepbackDisabled?: Maybe<Scalars["Boolean"]["output"]>;
@@ -2204,13 +2203,6 @@ export type RepoWorkstationConfig = {
   __typename?: "RepoWorkstationConfig";
   gitClone: Scalars["Boolean"]["output"];
   setupCommands?: Maybe<Array<WorkstationSetupCommand>>;
-};
-
-export type RepotrackerError = {
-  __typename?: "RepotrackerError";
-  exists: Scalars["Boolean"]["output"];
-  invalidRevision: Scalars["String"]["output"];
-  mergeBaseRevision: Scalars["String"]["output"];
 };
 
 export enum RequiredStatus {
@@ -2936,7 +2928,6 @@ export type Version = {
   __typename?: "Version";
   activated?: Maybe<Scalars["Boolean"]["output"]>;
   author: Scalars["String"]["output"];
-  authorEmail: Scalars["String"]["output"];
   baseTaskStatuses: Array<Scalars["String"]["output"]>;
   baseVersion?: Maybe<Version>;
   branch: Scalars["String"]["output"];
@@ -3174,13 +3165,6 @@ export type TaskQuery = {
     id: string;
     patchNumber?: number | null;
     status: string;
-    logs: {
-      __typename?: "TaskLogLinks";
-      agentLogLink?: string | null;
-      allLogLink?: string | null;
-      systemLogLink?: string | null;
-      taskLogLink?: string | null;
-    };
     versionMetadata: {
       __typename?: "Version";
       id: string;
