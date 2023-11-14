@@ -129,7 +129,6 @@ describe("useResolveLogURL", () => {
       }
     );
     await waitForNextUpdate();
-    await waitForNextUpdate();
     expect(result.current).toMatchObject({
       downloadURL:
         "test-evergreen.com/task_file_raw/a-task-id/0/a%20file%20name.some%2Fcrazy%2Fpath",
