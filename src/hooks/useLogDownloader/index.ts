@@ -19,9 +19,8 @@ import { getBytesAsString } from "utils/string";
 
 type UseLogDownloader = {
   downloadSizeLimit?: number;
-  isLoadingEvergreen?: boolean;
   logType: LogTypes;
-  url: string;
+  url: string | null;
 };
 
 /**
@@ -29,11 +28,9 @@ type UseLogDownloader = {
  * It uses a fetch stream to download the log file and splits the log file into an array of strings.
  * Each string is split based on the newline character.
  * @param props - hook params object
- * @param props.url - the url to fetch
+ * @param props.url - the url to fetch. If the task includes no link to a valid URL, url will be null.
  * @param props.logType - the type of log file to download
  * @param props.downloadSizeLimit - the maximum size of the log file to download
- * @param props.isLoadingEvergreen - whether a GraphQL query is i
-n process to fetch the task or test.
  * @returns an object with the following properties:
  * - isLoading: a boolean that is true while the log is being downloaded
  * - data: the log file as an array of strings
@@ -42,14 +39,13 @@ n process to fetch the task or test.
  */
 const useLogDownloader = ({
   downloadSizeLimit = LOG_FILE_SIZE_LIMIT,
-  isLoadingEvergreen = false,
   logType,
   url,
 }: UseLogDownloader) => {
   const [data, setData] = useState<string[] | undefined>();
   const [error, setError] = useState<string | undefined>();
   const [fileSize, setFileSize, getFileSize] = useStateRef<number>(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { sendEvent } = useLogDownloadAnalytics();
   const dispatchToast = useToastContext();
 
@@ -59,6 +55,7 @@ const useLogDownloader = ({
     const timeStart = Date.now();
 
     if (url) {
+      setIsLoading(true);
       fetchLogFile(url, {
         // Conditionally define signal because AbortController throws error in development's strict mode
         abortController: isProduction() ? abortController : undefined,
@@ -153,9 +150,8 @@ const useLogDownloader = ({
           });
           setIsLoading(false);
         });
-    } else if (!url && !isLoadingEvergreen) {
+    } else if (url === null) {
       setError("Log URL not specified, unable to download.");
-      setIsLoading(false);
     }
 
     return () => {
@@ -163,7 +159,7 @@ const useLogDownloader = ({
       abortController.abort();
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [isLoadingEvergreen, url]);
+  }, [url]);
   return { data, error, fileSize, isLoading };
 };
 
