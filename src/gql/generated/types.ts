@@ -3174,6 +3174,13 @@ export type TaskQuery = {
     id: string;
     patchNumber?: number | null;
     status: string;
+    logs: {
+      __typename?: "TaskLogLinks";
+      agentLogLink?: string | null;
+      allLogLink?: string | null;
+      systemLogLink?: string | null;
+      taskLogLink?: string | null;
+    };
     versionMetadata: {
       __typename?: "Version";
       id: string;

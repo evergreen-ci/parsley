@@ -4,17 +4,19 @@ import { LogTypes } from "constants/enums";
 import {
   TaskFilesQuery,
   TaskFilesQueryVariables,
+  TaskQuery,
+  TaskQueryVariables,
   TestLogUrlQuery,
   TestLogUrlQueryVariables,
 } from "gql/generated/types";
-import { GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
+import { GET_TASK, GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
 import { ApolloMock } from "types/gql";
 import { useResolveLogURL } from "./useResolveLogURL";
 
 describe("useResolveLogURL", () => {
   it("resolves test log URLs from GraphQL resolver when data is available", async () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-      <MockedProvider mocks={[getExistingTestLogURLMock]}>
+      <MockedProvider mocks={[evergreenTaskMock, getExistingTestLogURLMock]}>
         {children}
       </MockedProvider>
     );
@@ -51,9 +53,48 @@ describe("useResolveLogURL", () => {
     });
   });
 
+  it("resolves task log URLs from GraphQL resolver when data is available", async () => {
+    const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
+      <MockedProvider mocks={[evergreenTaskMock, getExistingTestLogURLMock]}>
+        {children}
+      </MockedProvider>
+    );
+    const { result, waitForNextUpdate } = renderHook(
+      () =>
+        useResolveLogURL({
+          execution: "0",
+          logType: "EVERGREEN_TASK_LOGS",
+          origin: "agent",
+          taskID: "a-task-id",
+        }),
+      {
+        wrapper,
+      }
+    );
+    expect(result.current).toMatchObject({
+      downloadURL: "",
+      htmlLogURL: "",
+      jobLogsURL: "",
+      legacyJobLogsURL: "",
+      loading: true,
+      lobsterURL: "",
+      rawLogURL: "",
+    });
+    await waitForNextUpdate();
+    expect(result.current).toMatchObject({
+      downloadURL: "agent-link.com?priority=true&text=true&type=E",
+      htmlLogURL: "agent-link.com?text=false&type=E",
+      jobLogsURL: "",
+      legacyJobLogsURL: "",
+      loading: false,
+      lobsterURL: "test-lobster.com/evergreen/task/a-task-id/0/agent",
+      rawLogURL: "agent-link.com?text=true&type=E",
+    });
+  });
+
   it("generates test log URLs without GraphQL data when GraphQL data is empty", async () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-      <MockedProvider mocks={[getEmptyTestLogURLMock]}>
+      <MockedProvider mocks={[evergreenTaskMock, getEmptyTestLogURLMock]}>
         {children}
       </MockedProvider>
     );
@@ -79,7 +120,7 @@ describe("useResolveLogURL", () => {
       legacyJobLogsURL: "",
       loading: false,
       lobsterURL:
-        "undefined/evergreen/test/a-task-id/0/a-test-name-that-doesnt-exist",
+        "test-lobster.com/evergreen/test/a-task-id/0/a-test-name-that-doesnt-exist",
       rawLogURL:
         "test-evergreen.com/test_log/a-task-id/0?test_name=a-test-name-that-doesnt-exist&text=true",
     });
@@ -87,7 +128,9 @@ describe("useResolveLogURL", () => {
 
   it("generates task file urls", async () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-      <MockedProvider mocks={[getTaskFileURLMock]}>{children}</MockedProvider>
+      <MockedProvider mocks={[evergreenTaskMock, getTaskFileURLMock]}>
+        {children}
+      </MockedProvider>
     );
     const { result, waitForNextUpdate } = renderHook(
       () =>
@@ -112,9 +155,12 @@ describe("useResolveLogURL", () => {
       rawLogURL: "a-file-url",
     });
   });
+
   it("generates task file urls that are properly encoded", async () => {
     const wrapper: React.FC<{ children: React.ReactNode }> = ({ children }) => (
-      <MockedProvider mocks={[getTaskFileURLMock]}>{children}</MockedProvider>
+      <MockedProvider mocks={[evergreenTaskMock, getTaskFileURLMock]}>
+        {children}
+      </MockedProvider>
     );
     const { result, waitForNextUpdate } = renderHook(
       () =>
@@ -128,6 +174,7 @@ describe("useResolveLogURL", () => {
         wrapper,
       }
     );
+    await waitForNextUpdate();
     await waitForNextUpdate();
     expect(result.current).toMatchObject({
       downloadURL:
@@ -236,3 +283,39 @@ const getTaskFileURLMock: ApolloMock<TaskFilesQuery, TaskFilesQueryVariables> =
       },
     },
   };
+
+const evergreenTaskMock: ApolloMock<TaskQuery, TaskQueryVariables> = {
+  request: {
+    query: GET_TASK,
+    variables: {
+      execution: 0,
+      taskId: "a-task-id",
+    },
+  },
+  result: {
+    data: {
+      task: {
+        __typename: "Task",
+        displayName: "check_codegen",
+        execution: 0,
+        id: "a-task-id",
+        logs: {
+          agentLogLink: "agent-link.com?type=E",
+          allLogLink: "all-log-link.com?type=ALL",
+          systemLogLink: "system-log-link.com?type=S",
+          taskLogLink: "task-log-link.com?type=T",
+        },
+        patchNumber: 1,
+        status: "failed",
+        versionMetadata: {
+          __typename: "Version",
+          id: "spruce_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f",
+          isPatch: false,
+          message: "v2.28.5",
+          projectIdentifier: "spruce",
+          revision: "d54e2c6ede60e004c48d3c4d996c59579c7bbd1f",
+        },
+      },
+    },
+  },
+};
