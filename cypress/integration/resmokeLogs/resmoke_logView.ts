@@ -150,7 +150,8 @@ describe("Bookmarking and selecting lines", () => {
     const logLine11079 = `[j0:s1] | 2022-09-21T12:50:28.489+00:00 I  NETWORK  22944   [conn60] "Connection ended","attr":{"remote":"127.0.0.1:47362","uuid":{"uuid":{"$uuid":"b28d7d9f-03b6-4f93-a7cd-5e1948135f69"}},"connectionId":60,"connectionCount":2}`;
 
     cy.dataCy("details-button").click();
-    cy.dataCy("jira-button").click();
+    // Need to fire a real click here because the copy to clipboard
+    cy.dataCy("jira-button").realClick();
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
         expect(text).to.eq(
@@ -289,7 +290,8 @@ describe("Sharing lines", () => {
     cy.dataCy("line-index-2").click({ shiftKey: true });
     cy.dataCy("sharing-menu").should("be.visible");
     cy.contains("Copy selected contents").should("be.visible");
-    cy.contains("Copy selected contents").click();
+    // Need to fire a real click here because the copy to clipboard
+    cy.contains("Copy selected contents").realClick();
     cy.validateToast("success", "Copied 2 lines to clipboard", true);
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
@@ -304,7 +306,8 @@ describe("Sharing lines", () => {
     cy.dataCy("line-index-2").click({ shiftKey: true });
     cy.dataCy("sharing-menu").should("be.visible");
     cy.contains("Copy share link to selected lines").should("be.visible");
-    cy.contains("Copy share link to selected lines").click();
+    // Need to fire a real click here because the copy to clipboard
+    cy.contains("Copy share link to selected lines").realClick();
     cy.validateToast("success", "Copied link to clipboard", true);
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {

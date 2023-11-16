@@ -104,7 +104,8 @@ describe("Bookmarking and selecting lines", () => {
       "[2022/03/02 17:05:21.050] running setup group because we have a new independent task";
 
     cy.dataCy("details-button").click();
-    cy.dataCy("jira-button").click();
+    // Need to fire a real click here because the copy to clipboard
+    cy.dataCy("jira-button").realClick();
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
         expect(text).to.eq(
@@ -207,7 +208,7 @@ describe("Sharing lines", () => {
 
   beforeEach(() => {
     cy.visit(logLink);
-    cy.dataCy("line-index-1").should("be.visible");
+    cy.dataCy("line-index-1").should("exist").should("be.visible");
   });
 
   it("should present a share button with a menu when a line is selected", () => {
@@ -226,7 +227,8 @@ describe("Sharing lines", () => {
     cy.dataCy("line-index-2").click({ shiftKey: true });
     cy.dataCy("sharing-menu").should("be.visible");
     cy.contains("Copy selected contents").should("be.visible");
-    cy.contains("Copy selected contents").click();
+    // Need to fire a real click here because the copy to clipboard
+    cy.contains("Copy selected contents").realClick();
     cy.validateToast("success", "Copied 2 lines to clipboard", true);
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
@@ -241,7 +243,8 @@ describe("Sharing lines", () => {
     cy.dataCy("line-index-2").click({ shiftKey: true });
     cy.dataCy("sharing-menu").should("be.visible");
     cy.contains("Copy share link to selected lines").should("be.visible");
-    cy.contains("Copy share link to selected lines").click();
+    // Need to fire a real click here because the copy to clipboard
+    cy.contains("Copy share link to selected lines").realClick();
     cy.validateToast("success", "Copied link to clipboard", true);
     cy.window().then((win) => {
       win.navigator.clipboard.readText().then((text) => {
