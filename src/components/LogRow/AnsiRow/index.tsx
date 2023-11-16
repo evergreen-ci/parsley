@@ -1,6 +1,7 @@
 import { AnsiUp } from "ansi_up";
 import linkifyHtml from "linkify-html";
 import BaseRow from "components/LogRow/BaseRow";
+import { trimSeverity } from "utils/string";
 import { getSeverityMapping, mapLogLevelToColor } from "./utils";
 import { LogRowProps } from "../types";
 
@@ -21,7 +22,7 @@ const AnsiRow: React.FC<AnsiRowProps> = ({ getLine, lineNumber, ...rest }) => {
 
   if (severity) {
     // Trim "[P: NN] " priority prefix
-    lineContent = lineContent.substring(8);
+    lineContent = trimSeverity(lineContent);
   }
 
   const linkifiedLine = linkifyHtml(ansiUp.ansi_to_html(lineContent ?? ""), {
