@@ -152,13 +152,9 @@ describe("Bookmarking and selecting lines", () => {
     cy.dataCy("details-button").click();
     // Need to fire a real click here because the copy to clipboard
     cy.dataCy("jira-button").realClick();
-    cy.window().then((win) => {
-      win.navigator.clipboard.readText().then((text) => {
-        expect(text).to.eq(
-          `{noformat}\n${logLine0}\n...\n${logLine10}\n${logLine11}\n...\n${logLine11079}\n{noformat}`
-        );
-      });
-    });
+    cy.assertValueCopiedToClipboard(
+      `{noformat}\n${logLine0}\n...\n${logLine10}\n${logLine11}\n...\n${logLine11079}\n{noformat}`
+    );
   });
 
   it("should be able to clear bookmarks", () => {
@@ -293,13 +289,9 @@ describe("Sharing lines", () => {
     // Need to fire a real click here because the copy to clipboard
     cy.contains("Copy selected contents").realClick();
     cy.validateToast("success", "Copied 2 lines to clipboard", true);
-    cy.window().then((win) => {
-      win.navigator.clipboard.readText().then((text) => {
-        expect(text).to.eq(
-          `{noformat}\n+------------------------------------------+--------+-----+-----+\n|full_name                                 |name    |port |pid  |\n{noformat}`
-        );
-      });
-    });
+    cy.assertValueCopiedToClipboard(
+      `{noformat}\n+------------------------------------------+--------+-----+-----+\n|full_name                                 |name    |port |pid  |\n{noformat}`
+    );
   });
   it("should be able to copy a link to the selected lines", () => {
     cy.dataCy("line-index-1").click();
@@ -309,14 +301,9 @@ describe("Sharing lines", () => {
     // Need to fire a real click here because the copy to clipboard
     cy.contains("Copy share link to selected lines").realClick();
     cy.validateToast("success", "Copied link to clipboard", true);
-    cy.window().then((win) => {
-      win.navigator.clipboard.readText().then((text) => {
-        cy.log("text", text);
-        expect(text).to.eq(
-          "http://localhost:4173/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab?bookmarks=0%2C11079&selectedLineRange=L1-L2&shareLine=1"
-        );
-      });
-    });
+    cy.assertValueCopiedToClipboard(
+      "http://localhost:4173/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab?bookmarks=0%2C11079&selectedLineRange=L1-L2&shareLine=1"
+    );
   });
   it("should be able to limit the search range to the selected lines", () => {
     cy.dataCy("line-index-1").click();
