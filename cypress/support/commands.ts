@@ -184,3 +184,14 @@ Cypress.Commands.add(
     }
   }
 );
+
+Cypress.Commands.add("assertValueCopiedToClipboard", (value: string) => {
+  cy.window().then((win) => {
+    win.navigator.clipboard.readText().then((text) => {
+      expect(text).to.eq(value);
+    });
+  });
+  // This wait is necessary to ensure the clipboard has time to be read
+  // eslint-disable-next-line cypress/no-unnecessary-waiting
+  cy.wait(50);
+});

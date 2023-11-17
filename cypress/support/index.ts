@@ -1,3 +1,4 @@
+import "cypress-real-events";
 import "./commands";
 
 declare global {
@@ -90,6 +91,11 @@ declare global {
         message?: string,
         shouldClose?: boolean
       ): void;
+      /**
+       * Custom command to validate that a value was copied to the clipboard.
+       * @example cy.assertValueCopiedToClipboard("This is some text")
+       */
+      assertValueCopiedToClipboard(text: string): void;
     }
   }
 }
