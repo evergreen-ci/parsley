@@ -96,7 +96,7 @@
     "@storybook/addon-links": "7.5.2",
     "@storybook/addon-storyshots": "7.5.2",
     "@storybook/react": "7.5.2",
-    "@storybook/react-vite": "7.5.2",
+    "@storybook/react-vite": "7.5.3",
     "@storybook/testing-library": "0.2.2",
     "@testing-library/jest-dom": "5.16.5",
     "@testing-library/react": "13.4.0",
