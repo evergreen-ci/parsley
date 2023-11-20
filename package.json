@@ -105,7 +105,7 @@
     "@types/jest": "29.5.5",
     "@types/js-cookie": "3.0.4",
     "@types/lodash.debounce": "4.0.7",
-    "@types/new-relic-browser": "0.1212.2",
+    "@types/new-relic-browser": "1.230.2",
     "@types/node": "16.11.47",
     "@types/pluralize": "0.0.31",
     "@types/prompts": "2.4.4",
