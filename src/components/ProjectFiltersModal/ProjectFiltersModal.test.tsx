@@ -1,5 +1,4 @@
 import { MockedProvider, MockedProviderProps } from "@apollo/client/testing";
-import { act } from "@testing-library/react-hooks";
 import { LogTypes } from "constants/enums";
 import { LogContextProvider, useLogContext } from "context/LogContext";
 import {
@@ -10,6 +9,7 @@ import { PROJECT_FILTERS } from "gql/queries";
 import { noFiltersMock } from "test_data/projectFilters";
 import { evergreenTaskMock } from "test_data/task";
 import {
+  act,
   renderWithRouterMatch as render,
   screen,
   userEvent,
