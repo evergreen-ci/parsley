@@ -20,6 +20,7 @@ import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useQueryParam } from "hooks/useQueryParam";
+import { useSections } from "hooks/useSections";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
 import filterLogs from "utils/filterLogs";
 import { getMatchingLines } from "utils/matchingLines";
@@ -149,6 +150,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     ]
   );
 
+  const v = useSections(state.logs);
+  console.log(v);
   const getLine = useCallback(
     (lineNumber: number) => state.logs[lineNumber],
     // eslint-disable-next-line react-hooks/exhaustive-deps
