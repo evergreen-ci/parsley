@@ -19,7 +19,7 @@ describe("Parsley Routes", () => {
     cy.visit(logLink);
     cy.validateToast(
       "error",
-      "Log URL not specified, unable to download.",
+      "Could not retrieve log URL from task, unable to download.",
       true
     );
   });

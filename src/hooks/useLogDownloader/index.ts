@@ -151,7 +151,7 @@ const useLogDownloader = ({
           setIsLoading(false);
         });
     } else if (url === null) {
-      setError("Log URL not specified, unable to download.");
+      setError("Could not retrieve log URL from task, unable to download.");
     }
 
     return () => {
