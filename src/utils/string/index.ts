@@ -31,7 +31,7 @@ export const getJiraFormat = (
       break;
     }
 
-    jiraString += `${logText}\n`;
+    jiraString += `${trimSeverity(logText)}\n`;
 
     // If the current and next indices are not adjacent to each other, insert an
     // ellipsis in between them.
@@ -112,6 +112,18 @@ export const getBytesAsString = (bytes: number, decimals = 2) => {
 export const trimLogLineToMaxSize = (line: string, maxSize: number) => {
   if (line.length > maxSize) {
     return `${line.substring(0, maxSize)}…`;
+  }
+  return line;
+};
+
+/**
+ * `trimSeverity` trims the severity prefix from a line
+ * @param line - the line to trim
+ * @returns - the line without the severity prefix
+ */
+export const trimSeverity = (line: string) => {
+  if (line.startsWith("[P: ")) {
+    return line.substring(8);
   }
   return line;
 };
