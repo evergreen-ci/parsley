@@ -95,6 +95,7 @@ const reducer = (state: LogState, action: Action): LogState => {
       };
     case "EXPAND_LINES": {
       const intervals = state.expandedLines.concat(action.expandedLines);
+      console.log(state.expandedLines, action.expandedLines);
       return {
         ...state,
         expandedLines: mergeIntervals(intervals),

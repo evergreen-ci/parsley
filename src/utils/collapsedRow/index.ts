@@ -6,7 +6,7 @@ import { ProcessedLogLine } from "types/logs";
  * @param logLine - the processed log line to check
  * @returns true if the row is a collapsed row
  */
-const isCollapsedRow = (logLine: ProcessedLogLine): logLine is number[] =>
-  Array.isArray(logLine);
+const isCollapsedRow = (logLine: ProcessedLogLine["line"]): Boolean =>
+  !!Array.isArray(logLine);
 
 export { isCollapsedRow };

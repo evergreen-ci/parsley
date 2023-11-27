@@ -1,9 +1,15 @@
 import { CaseSensitivity, MatchType } from "constants/enums";
+import { CommandEntry } from "hooks/useSections";
 
 type ExpandedLine = [number, number];
 type ExpandedLines = ExpandedLine[];
 
-type ProcessedLogLine = number | number[];
+type LineType = "section";
+interface ProcessedLogLine {
+  line: number | number[];
+  type?: LineType;
+  commands?: CommandEntry[];
+}
 type ProcessedLogLines = ProcessedLogLine[];
 
 type Filter = {

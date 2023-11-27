@@ -17,8 +17,8 @@ const getLinesInProcessedLogLinesFromSelectedLines = (
   const lines: number[] = [];
   for (let i = startingIndex; i <= endingIndex; i++) {
     const line = processedLogLines[i];
-    if (!isCollapsedRow(line)) {
-      lines.push(line);
+    if (!isCollapsedRow(line.line)) {
+      lines.push(line.line as number);
     }
   }
   return lines;

@@ -8,13 +8,14 @@ import Icon from "components/Icon";
 import { QueryParams } from "constants/queryParams";
 import { size, zIndex } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
+import { ProcessedLogLines } from "types/logs";
 import { findLineIndex } from "utils/findLineIndex";
 
 const { gray, green } = palette;
 
 interface BookmarksBarProps {
   lineCount: number;
-  processedLogLines: (number | number[])[];
+  processedLogLines: ProcessedLogLines;
   scrollToLine: (scrollIndex: number) => void;
 }
 

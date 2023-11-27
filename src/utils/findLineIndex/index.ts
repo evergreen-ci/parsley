@@ -22,13 +22,13 @@ export const findLineIndex = (
   }
 
   const midIdx = Math.floor((start + end) / 2);
-  const midItem = processedLines[midIdx];
+  const { line: midItem } = processedLines[midIdx];
 
   // If the item is a collapsed row, we'll shift our search depending on the first and last line numbers
   // in the collapsed row.
   if (isCollapsedRow(midItem)) {
-    const firstItem = midItem[0];
-    const lastItem = midItem[midItem.length - 1];
+    const firstItem = (midItem as number[])[0];
+    const lastItem = (midItem as number[])[(midItem as number[]).length - 1];
     if (firstItem <= lineNumber && lineNumber <= lastItem) {
       return midIdx;
     }
@@ -44,10 +44,10 @@ export const findLineIndex = (
     if (midItem === lineNumber) {
       return midIdx;
     }
-    if (lineNumber < midItem) {
+    if (lineNumber < (midItem as number)) {
       return findLineIndex(processedLines, lineNumber, start, midIdx - 1);
     }
-    if (lineNumber > midItem) {
+    if (lineNumber > (midItem as number)) {
       return findLineIndex(processedLines, lineNumber, midIdx + 1, end);
     }
   }

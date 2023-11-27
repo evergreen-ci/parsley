@@ -129,8 +129,8 @@ describe("useLogContext", () => {
       for (let i = 0; i < lines.length; i++) {
         const line = result.current.processedLogLines[i];
         // Expect the line not to be a collapsed row
-        expect(isCollapsedRow(line)).toBe(false);
-        expect(result.current.getLine(line as number)).toStrictEqual(
+        expect(isCollapsedRow(line.line)).toBe(false);
+        expect(result.current.getLine(line.line as number)).toStrictEqual(
           resmokeLines[i]
         );
       }

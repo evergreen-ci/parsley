@@ -20,7 +20,7 @@ import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useQueryParam } from "hooks/useQueryParam";
-import { useSections } from "hooks/useSections";
+import { SectionData, useSections } from "hooks/useSections";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
 import filterLogs from "utils/filterLogs";
 import { getMatchingLines } from "utils/matchingLines";
@@ -31,6 +31,7 @@ import { DIRECTION, LogMetadata, Preferences, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
 interface LogContextState {
+  sectionData: SectionData;
   expandedLines: ExpandedLines;
   hasLogs: boolean | null;
   lineCount: number;
@@ -126,6 +127,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     ]
   );
 
+  const { sectionData } = useSections(state.logs);
+
   useEffect(
     () => {
       setProcessedLogLines(
@@ -135,6 +138,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           expandedLines: state.expandedLines,
           logLines: state.logs,
           matchingLines,
+          sectionData,
           shareLine,
         })
       );
@@ -147,11 +151,10 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       shareLine,
       stringifiedExpandedLines,
       expandableRows,
+      sectionData,
     ]
   );
 
-  const v = useSections(state.logs);
-  console.log(v);
   const getLine = useCallback(
     (lineNumber: number) => state.logs[lineNumber],
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -267,6 +270,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
       searchLine,
       searchState: state.searchState,
+      sectionData,
 
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
@@ -317,6 +321,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       setExpandableRows,
       setFilterLogic,
       setLogMetadata,
+      sectionData,
     ]
   );
 

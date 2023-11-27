@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 
-interface CommandEntry {
-  status: "Running" | "Finished";
+export interface CommandEntry {
+  status?: "Running" | "Finished";
   step: number;
   totalSteps: number;
   lineStart: number;
@@ -9,8 +9,13 @@ interface CommandEntry {
   command: string;
   functionName: string;
 }
-export const useSections = (logs: string[]) => {
-  const [sectionData, setSectionData] = useState();
+export type SectionData = Omit<CommandEntry, "status">[][] | undefined;
+
+interface Result {
+  sectionData: SectionData;
+}
+export const useSections = (logs: string[]): Result => {
+  const [sectionData, setSectionData] = useState<Result["sectionData"]>();
 
   useEffect(() => {
     if (logs.length) {
@@ -29,16 +34,18 @@ export const useSections = (logs: string[]) => {
       }, [] as CommandEntry[]);
 
       const sectionMap = data.reduce((accum, v) => {
-        const { functionName } = v;
-        const copy = { ...accum };
-        if (copy[functionName]) {
-          copy[functionName].push(v);
+        const accumCopy = { ...accum };
+        const dataCopy = { ...v };
+        delete dataCopy.status;
+        const { functionName } = dataCopy;
+        if (accumCopy[functionName]) {
+          accumCopy[functionName].push(v);
         } else {
-          copy[functionName] = [v];
+          accumCopy[functionName] = [v];
         }
-        return copy;
+        return accumCopy;
       }, {} as any);
-      setSectionData(sectionMap);
+      setSectionData(Object.values(sectionMap));
     }
   }, [logs]);
   return { sectionData };
