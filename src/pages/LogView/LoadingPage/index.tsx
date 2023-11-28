@@ -67,8 +67,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     isLoading: isLoadingLog,
   } = useLogDownloader({
     logType,
-    // If the task has already been fetched but contains no log link, use null as url value.
-    url: !isLoadingEvergreen && downloadURL === "" ? null : downloadURL,
+    url: downloadURL,
   });
 
   useEffect(() => {

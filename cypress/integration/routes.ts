@@ -17,11 +17,7 @@ describe("Parsley Routes", () => {
   it("should show error toast when visiting a task log page of an invalid task", () => {
     const logLink = "/evergreen/invalid-task-id/0/task";
     cy.visit(logLink);
-    cy.validateToast(
-      "error",
-      "Could not retrieve log URL from task, unable to download.",
-      true
-    );
+    cy.validateToast("error", "Network response was not ok (404)", true);
   });
   it("should load test results when visiting a test result page", () => {
     const logLink =

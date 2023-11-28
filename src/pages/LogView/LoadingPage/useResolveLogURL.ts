@@ -5,6 +5,7 @@ import {
   getLegacyJobLogsURL,
 } from "constants/externalURLTemplates";
 import {
+  constructEvergreenTaskLogURL,
   getEvergreenTaskFileURL,
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
@@ -150,19 +151,32 @@ export const useResolveLogURL = ({
       break;
     }
     case LogTypes.EVERGREEN_TASK_LOGS: {
-      if (!taskID || !origin || !execution || !task?.logs || isLoadingTask) {
+      if (!taskID || !origin || !execution || isLoadingTask) {
         break;
       }
-      downloadURL = getEvergreenTaskLogURL(task.logs, origin, {
-        priority: true,
-        text: true,
-      });
-      rawLogURL = getEvergreenTaskLogURL(task.logs, origin, {
-        text: true,
-      });
-      htmlLogURL = getEvergreenTaskLogURL(task.logs, origin, {
-        text: false,
-      });
+      downloadURL = task?.logs
+        ? getEvergreenTaskLogURL(task.logs, origin, {
+            priority: true,
+            text: true,
+          })
+        : constructEvergreenTaskLogURL(taskID, execution, origin as any, {
+            priority: true,
+            text: true,
+          });
+      rawLogURL = task?.logs
+        ? getEvergreenTaskLogURL(task.logs, origin, {
+            text: true,
+          })
+        : constructEvergreenTaskLogURL(taskID, execution, origin as any, {
+            text: true,
+          });
+      htmlLogURL = task?.logs
+        ? getEvergreenTaskLogURL(task.logs, origin, {
+            text: false,
+          })
+        : constructEvergreenTaskLogURL(taskID, execution, origin as any, {
+            text: false,
+          });
       lobsterURL = getLobsterTaskURL(taskID, execution, origin);
       break;
     }

@@ -20,7 +20,7 @@ import { getBytesAsString } from "utils/string";
 type UseLogDownloader = {
   downloadSizeLimit?: number;
   logType: LogTypes;
-  url: string | null;
+  url: string;
 };
 
 /**
@@ -28,7 +28,7 @@ type UseLogDownloader = {
  * It uses a fetch stream to download the log file and splits the log file into an array of strings.
  * Each string is split based on the newline character.
  * @param props - hook params object
- * @param props.url - the url to fetch. If the task includes no link to a valid URL, url will be null.
+ * @param props.url - the url to fetch
  * @param props.logType - the type of log file to download
  * @param props.downloadSizeLimit - the maximum size of the log file to download
  * @returns an object with the following properties:
@@ -150,8 +150,6 @@ const useLogDownloader = ({
           });
           setIsLoading(false);
         });
-    } else if (url === null) {
-      setError("Could not retrieve log URL from task, unable to download.");
     }
 
     return () => {

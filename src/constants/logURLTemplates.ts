@@ -125,6 +125,40 @@ const getEvergreenTaskLogURL = (
   return queryString.stringifyUrl({ query: params, url });
 };
 
+const mapOriginToType = {
+  agent: "E",
+  all: "ALL",
+  system: "S",
+  task: "T",
+};
+
+/**
+ * constructEvergreenTaskLogURL constructs an Evergreen task link as a fallback using the task's parameters.
+ * @param taskID - the task ID
+ * @param execution - the execution number of the task
+ * @param origin - the origin of the log
+ * @param options - the options for the task log
+ * @param options.priority - returned log includes a priority prefix on each line
+ * @param options.text - returns the raw log associated with the task
+ * @returns an Evergreen URL of the format `/task/${taskID}/${execution}?type=${OriginToType[origin]}&text=true`
+ */
+const constructEvergreenTaskLogURL = (
+  taskID: string,
+  execution: string | number,
+  origin: keyof typeof mapOriginToType,
+  options: { priority?: boolean; text?: boolean }
+) => {
+  const { priority, text } = options;
+  const params = {
+    priority,
+    text,
+    type: mapOriginToType[origin] || undefined,
+  };
+  return `${evergreenURL}/task_log_raw/${taskID}/${execution}?${stringifyQuery(
+    params
+  )}`;
+};
+
 /**
  *
  * @param taskID - the task ID
@@ -139,6 +173,7 @@ const getEvergreenTaskFileURL = (
 ) => `${evergreenURL}/task_file_raw/${taskID}/${execution}/${fileName}`;
 
 export {
+  constructEvergreenTaskLogURL,
   getLobsterTaskURL,
   getLobsterTestURL,
   getLobsterResmokeURL,
