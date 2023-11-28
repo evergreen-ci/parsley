@@ -113,7 +113,7 @@ export enum Origin {
 const getEvergreenTaskLogURL = (
   logLinks: TaskType["logs"],
   origin: string,
-  params: { [key: string]: any } = {}
+  params: { priority?: boolean; text?: boolean } = {}
 ) => {
   const url =
     {
@@ -126,10 +126,10 @@ const getEvergreenTaskLogURL = (
 };
 
 const mapOriginToType = {
-  agent: "E",
-  all: "ALL",
-  system: "S",
-  task: "T",
+  [Origin.Agent]: "E",
+  [Origin.All]: "ALL",
+  [Origin.System]: "S",
+  [Origin.Task]: "T",
 };
 
 /**
@@ -145,14 +145,14 @@ const mapOriginToType = {
 const constructEvergreenTaskLogURL = (
   taskID: string,
   execution: string | number,
-  origin: keyof typeof mapOriginToType,
+  origin: string,
   options: { priority?: boolean; text?: boolean }
 ) => {
   const { priority, text } = options;
   const params = {
     priority,
     text,
-    type: mapOriginToType[origin] || undefined,
+    type: mapOriginToType[origin as Origin] || undefined,
   };
   return `${evergreenURL}/task_log_raw/${taskID}/${execution}?${stringifyQuery(
     params

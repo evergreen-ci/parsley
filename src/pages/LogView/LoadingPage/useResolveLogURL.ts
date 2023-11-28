@@ -159,7 +159,7 @@ export const useResolveLogURL = ({
             priority: true,
             text: true,
           })
-        : constructEvergreenTaskLogURL(taskID, execution, origin as any, {
+        : constructEvergreenTaskLogURL(taskID, execution, origin, {
             priority: true,
             text: true,
           });
@@ -167,14 +167,14 @@ export const useResolveLogURL = ({
         ? getEvergreenTaskLogURL(task.logs, origin, {
             text: true,
           })
-        : constructEvergreenTaskLogURL(taskID, execution, origin as any, {
+        : constructEvergreenTaskLogURL(taskID, execution, origin, {
             text: true,
           });
       htmlLogURL = task?.logs
         ? getEvergreenTaskLogURL(task.logs, origin, {
             text: false,
           })
-        : constructEvergreenTaskLogURL(taskID, execution, origin as any, {
+        : constructEvergreenTaskLogURL(taskID, execution, origin, {
             text: false,
           });
       lobsterURL = getLobsterTaskURL(taskID, execution, origin);
