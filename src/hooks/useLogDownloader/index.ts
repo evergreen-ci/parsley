@@ -17,28 +17,35 @@ import {
 import { fetchLogFile } from "utils/fetchLogFile";
 import { getBytesAsString } from "utils/string";
 
+type UseLogDownloader = {
+  downloadSizeLimit?: number;
+  logType: LogTypes;
+  url: string;
+};
+
 /**
  * `useLogDownloader` is a custom hook that downloads a log file from a given URL.
  * It uses a fetch stream to download the log file and splits the log file into an array of strings.
  * Each string is split based on the newline character.
- * @param url - the url to fetch
- * @param logType - the type of log file to download
- * @param downloadSizeLimit - the maximum size of the log file to download
+ * @param props - hook params object
+ * @param props.url - the url to fetch
+ * @param props.logType - the type of log file to download
+ * @param props.downloadSizeLimit - the maximum size of the log file to download
  * @returns an object with the following properties:
  * - isLoading: a boolean that is true while the log is being downloaded
  * - data: the log file as an array of strings
  * - error: an error message if the download fails
  * - fileSize: the size of the log file in bytes
  */
-const useLogDownloader = (
-  url: string,
-  logType: LogTypes,
-  downloadSizeLimit: number = LOG_FILE_SIZE_LIMIT
-) => {
+const useLogDownloader = ({
+  downloadSizeLimit = LOG_FILE_SIZE_LIMIT,
+  logType,
+  url,
+}: UseLogDownloader) => {
   const [data, setData] = useState<string[] | undefined>();
   const [error, setError] = useState<string | undefined>();
   const [fileSize, setFileSize, getFileSize] = useStateRef<number>(0);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { sendEvent } = useLogDownloadAnalytics();
   const dispatchToast = useToastContext();
 
@@ -48,6 +55,7 @@ const useLogDownloader = (
     const timeStart = Date.now();
 
     if (url) {
+      setIsLoading(true);
       fetchLogFile(url, {
         // Conditionally define signal because AbortController throws error in development's strict mode
         abortController: isProduction() ? abortController : undefined,

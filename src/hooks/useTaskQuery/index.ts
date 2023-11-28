@@ -1,8 +1,10 @@
 import { useQuery } from "@apollo/client";
 import { LogTypes } from "constants/enums";
 import {
+  BaseTaskFragment,
   LogkeeperTaskQuery,
   LogkeeperTaskQueryVariables,
+  TaskLogLinks,
   TaskQuery,
   TaskQueryVariables,
   TaskTestResult,
@@ -17,7 +19,15 @@ interface UseTaskQueryProps {
 }
 
 type UseTaskQueryReturnType = {
-  task: (TaskQuery["task"] & { tests?: TaskTestResult }) | undefined | null;
+  task:
+    | (BaseTaskFragment & {
+        logs?: TaskLogLinks;
+        tests?: {
+          testResults?: TaskTestResult["testResults"];
+        };
+      })
+    | undefined
+    | null;
   loading: boolean;
 };
 
