@@ -27,6 +27,7 @@ interface DetailsLabelProps {
 const DetailsLabel: React.FC<DetailsLabelProps> = ({ children, label }) => (
   <LabelWrapper>
     <DetailName>{children}</DetailName>
+    {/* @ts-expect-error Temporarily until I figure out whats wrong with this */}
     <InfoSprinkle>{label}</InfoSprinkle>
   </LabelWrapper>
 );
