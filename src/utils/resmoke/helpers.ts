@@ -3,16 +3,22 @@
  * @example s12345
  * @example d54321
  */
-const portRegex = / ([shdbc]+\d{1,5})\|/;
+const portRegex = / ([shdbc]+\d{1,5})\|/g;
 
 /**
- * `getPort` returns the port associated with a resmoke line
+ * `getPorts` returns the ports associated with a resmoke line
  * @param line - the resmoke line
- * @returns the port associated with a resmoke line
+ * @returns Ports associated with a resmoke line. There can be 1 or more ports.
  */
-const getPort = (line: string) => {
-  const port = line.match(portRegex)?.[1];
-  return port;
+const getPorts = (line: string) => {
+  const matches = [...line.matchAll(portRegex)];
+
+  if (matches.length === 0) {
+    return undefined;
+  }
+
+  const ports = matches.map((m) => m[1]);
+  return ports.join("| ");
 };
 
 /**
@@ -222,7 +228,7 @@ export {
   getJSONString,
   getMessage,
   getPid,
-  getPort,
+  getPorts,
   getResmokeFunction,
   getShellPrefix,
   getState,
