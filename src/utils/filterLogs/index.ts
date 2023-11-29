@@ -35,6 +35,7 @@ const filterLogs = (options: FilterLogsParams): ProcessedLogLines => {
     sectionData,
     shareLine,
   } = options;
+
   const lineStartMap:
     | { [key: number]: Omit<CommandEntry, "status">[] }
     | undefined = sectionData?.reduce((accum, value) => {
@@ -55,9 +56,9 @@ const filterLogs = (options: FilterLogsParams): ProcessedLogLines => {
             (_, k: number) => k + i
           );
           processedLines.push({
+            commands: section,
             line: arr,
             type: "section",
-            commands: section,
           });
           i += arr.length;
         } else {
@@ -71,23 +72,18 @@ const filterLogs = (options: FilterLogsParams): ProcessedLogLines => {
 
   const filteredLines: ProcessedLogLines = [];
   logLines.reduce((arr, _logLine, idx) => {
-    // Bookmarks, expanded lines, and the share line should always remain uncollapsed.
+    // Render Bookmarks, explicitly expanded lines (expandedLines intervals), and shareLine and any filter matches
     if (
       bookmarks.includes(idx) ||
       shareLine === idx ||
-      isExpanded(idx, expandedLines)
+      isExpanded(idx, expandedLines) ||
+      matchingLines.has(idx)
     ) {
       arr.push({ line: idx });
       return arr;
     }
 
-    // If the line matches the filters, it should remain uncollapsed.
-    if (matchingLines.has(idx)) {
-      arr.push({ line: idx });
-      return arr;
-    }
-
-    // Collapse or omit row
+    // Everything else is collapsed
     if (expandableRows) {
       const previousItem = arr[arr.length - 1];
       if (isCollapsedRow(previousItem.line)) {
