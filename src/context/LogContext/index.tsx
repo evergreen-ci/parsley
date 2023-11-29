@@ -46,7 +46,8 @@ interface LogContextState {
   };
   searchLine?: number;
   searchState: SearchState;
-
+  visibleSectionLines: Set<string>;
+  setVisibleSectionLines: React.Dispatch<React.SetStateAction<Set<string>>>;
   clearExpandedLines: () => void;
   clearLogs: () => void;
   collapseLines: (idx: number) => void;
@@ -105,8 +106,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const [prettyPrint, setPrettyPrint] = useState(
     Cookie.get(PRETTY_PRINT_BOOKMARKS) === "true"
   );
-  const [visibleSectionLines, setVisibleSectionLines] = useState<Set<number>>(
-    new Set<number>()
+  const [visibleSectionLines, setVisibleSectionLines] = useState<Set<string>>(
+    new Set<string>()
   );
   const { dispatch, state } = useLogState(initialLogLines);
   const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
@@ -142,6 +143,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           matchingLines,
           sectionData,
           shareLine,
+          visibleSectionLines,
         })
       );
     },
@@ -154,6 +156,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       stringifiedExpandedLines,
       expandableRows,
       sectionData,
+      visibleSectionLines,
     ]
   );
 

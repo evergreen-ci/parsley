@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
 import { Body, BodyProps } from "@leafygreen-ui/typography";
 import Icon from "components/Icon";
 import { size } from "constants/tokens";
+import { useLogContext } from "context/LogContext";
 import { CommandEntry } from "hooks/useSections";
 import { RootRowProps } from "../types";
 
@@ -13,7 +14,19 @@ interface SectionRowProps extends RootRowProps {
 }
 
 const SectionRow: React.FC<SectionRowProps> = ({ lines, metadata }) => {
-  const [isOpen, setIsOpen] = useState(false);
+  const { setVisibleSectionLines, visibleSectionLines } = useLogContext();
+  const { functionName } = metadata[0];
+  const onClick = () => {
+    const nextSet = new Set(visibleSectionLines);
+    if (nextSet.has(functionName)) {
+      nextSet.delete(metadata[0].functionName);
+    } else {
+      nextSet.add(functionName);
+    }
+    setVisibleSectionLines(nextSet);
+  };
+
+  const isOpen = visibleSectionLines.has(functionName);
   return (
     <CollapsedLineWrapper
       data-cy={`section-row-${lines[0]}-${lines[lines.length - 1]}`}
@@ -21,13 +34,11 @@ const SectionRow: React.FC<SectionRowProps> = ({ lines, metadata }) => {
       <StyledBody>{metadata[0].functionName}</StyledBody>
       <ButtonContainer>
         <Button
-          leftGlyph={<Icon glyph="UpDownCarets" />}
-          onClick={() => {
-            setIsOpen(!isOpen);
-          }}
+          leftGlyph={<Icon glyph={isOpen ? "CaretDown" : "CaretRight"} />}
+          onClick={onClick}
           size="xsmall"
         >
-          Toggle
+          {isOpen ? "Close" : "Open"}
         </Button>
       </ButtonContainer>
     </CollapsedLineWrapper>

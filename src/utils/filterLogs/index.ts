@@ -11,6 +11,7 @@ type FilterLogsParams = {
   expandedLines: ExpandedLines;
   expandableRows: boolean;
   sectionData: SectionData;
+  visibleSectionLines: Set<string>;
 };
 
 /**
@@ -34,6 +35,7 @@ const filterLogs = (options: FilterLogsParams): ProcessedLogLines => {
     matchingLines,
     sectionData,
     shareLine,
+    visibleSectionLines,
   } = options;
 
   const lineStartMap:
@@ -43,31 +45,46 @@ const filterLogs = (options: FilterLogsParams): ProcessedLogLines => {
     return { ...accum, [lineStart]: value };
   }, {});
 
+  console.log(visibleSectionLines);
   // If there are no filters or expandable rows is not enabled, then we don't have to do any
   // processing.
   if (matchingLines === undefined) {
     if (lineStartMap) {
       const processedLines = [] as ProcessedLogLines;
-      for (let i = 0; i < logLines.length; i++) {
-        const section = lineStartMap[i];
+      let sectionEnd;
+
+      for (let lineNumber = 0; lineNumber < logLines.length; lineNumber++) {
+        const section = lineStartMap[lineNumber];
         if (section) {
+          sectionEnd = section[section.length - 1];
+          if (sectionEnd.lineEnd === undefined) {
+            throw new Error(
+              "Section end line end is undefined.... debug this... lol"
+            );
+          }
           const arr = Array.from(
-            { length: (section[section.length - 1]?.lineEnd || i) - i },
-            (_, k: number) => k + i
+            { length: (sectionEnd?.lineEnd || lineNumber) - lineNumber },
+            (_, k: number) => k + lineNumber
           );
           processedLines.push({
             commands: section,
             line: arr,
             type: "section",
           });
-          i += arr.length;
-        } else {
-          processedLines.push({ line: i });
+        }
+        if (!sectionEnd) {
+          processedLines.push({ line: lineNumber });
+        } else if (
+          sectionEnd?.lineEnd &&
+          ((sectionEnd.lineEnd >= lineNumber &&
+            visibleSectionLines.has(sectionEnd.functionName)) ||
+            sectionEnd.lineEnd < lineNumber)
+        ) {
+          processedLines.push({ line: lineNumber });
         }
       }
       return processedLines;
     }
-    return [];
   }
 
   const filteredLines: ProcessedLogLines = [];
@@ -77,7 +94,7 @@ const filterLogs = (options: FilterLogsParams): ProcessedLogLines => {
       bookmarks.includes(idx) ||
       shareLine === idx ||
       isExpanded(idx, expandedLines) ||
-      matchingLines.has(idx)
+      matchingLines?.has(idx)
     ) {
       arr.push({ line: idx });
       return arr;
