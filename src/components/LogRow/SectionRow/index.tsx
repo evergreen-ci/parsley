@@ -7,37 +7,30 @@ import { size } from "constants/tokens";
 import { CommandEntry } from "hooks/useSections";
 import { RootRowProps } from "../types";
 
-interface SectionRowProps extends RootRowProps, React.PropsWithChildren {
+interface SectionRowProps extends RootRowProps {
   metadata: CommandEntry[];
   lines: number[];
 }
 
-const SectionRow: React.FC<SectionRowProps> = ({
-  children,
-  lines,
-  metadata,
-}) => {
+const SectionRow: React.FC<SectionRowProps> = ({ lines, metadata }) => {
   const [isOpen, setIsOpen] = useState(false);
   return (
-    <>
-      <CollapsedLineWrapper
-        data-cy={`section-row-${lines[0]}-${lines[lines.length - 1]}`}
-      >
-        <StyledBody>{metadata[0].functionName}</StyledBody>
-        <ButtonContainer>
-          <Button
-            leftGlyph={<Icon glyph="UpDownCarets" />}
-            onClick={() => {
-              setIsOpen(!isOpen);
-            }}
-            size="xsmall"
-          >
-            Toggle
-          </Button>
-        </ButtonContainer>
-      </CollapsedLineWrapper>
-      <span>{children}</span>
-    </>
+    <CollapsedLineWrapper
+      data-cy={`section-row-${lines[0]}-${lines[lines.length - 1]}`}
+    >
+      <StyledBody>{metadata[0].functionName}</StyledBody>
+      <ButtonContainer>
+        <Button
+          leftGlyph={<Icon glyph="UpDownCarets" />}
+          onClick={() => {
+            setIsOpen(!isOpen);
+          }}
+          size="xsmall"
+        >
+          Toggle
+        </Button>
+      </ButtonContainer>
+    </CollapsedLineWrapper>
   );
 };
 
