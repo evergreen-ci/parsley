@@ -105,7 +105,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const [prettyPrint, setPrettyPrint] = useState(
     Cookie.get(PRETTY_PRINT_BOOKMARKS) === "true"
   );
-
+  const [visibleSectionLines, setVisibleSectionLines] = useState<Set<number>>(
+    new Set<number>()
+  );
   const { dispatch, state } = useLogState(initialLogLines);
   const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
     []
@@ -271,6 +273,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       searchLine,
       searchState: state.searchState,
       sectionData,
+      setVisibleSectionLines,
+      visibleSectionLines,
 
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
@@ -298,6 +302,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
     }),
     [
+      visibleSectionLines,
+      setVisibleSectionLines,
       expandableRows,
       filterLogic,
       lowerRange,
