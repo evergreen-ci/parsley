@@ -1,5 +1,7 @@
-import { forwardRef } from "react";
+import { forwardRef, useState } from "react";
 import styled from "@emotion/styled";
+import { Tab, Tabs } from "@leafygreen-ui/tabs";
+import { H3 } from "@leafygreen-ui/typography";
 import { size } from "constants/tokens";
 import ButtonRow from "./ButtonRow";
 import CLIInstructions from "./CLIInstructions";
@@ -17,41 +19,56 @@ interface DetailsMenuProps {
 }
 
 const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
-  ({ "data-cy": dataCy }, ref) => (
-    <Container ref={ref} data-cy={dataCy}>
-      <Row>
-        <Column>
-          <SearchRangeInput />
-          <WrapToggle />
-          <CaseSensitiveToggle />
-        </Column>
-        <Column>
-          <FilterLogicToggle />
-          <ExpandableRowsToggle />
-          <PrettyPrintToggle />
-        </Column>
-      </Row>
-      <ButtonRow />
-      <CLIInstructions />
-    </Container>
-  )
+  ({ "data-cy": dataCy }, ref) => {
+    const [selectedTab, setSelectedTab] = useState(0);
+    return (
+      <Container ref={ref} data-cy={dataCy}>
+        <H3>Parsley Settings</H3>
+        <Tabs
+          aria-label="Details Card Tabs"
+          selected={selectedTab}
+          setSelected={setSelectedTab}
+        >
+          <Tab name="Log Structure">
+            <Row>
+              <Column>
+                <SearchRangeInput />
+                <WrapToggle />
+                <CaseSensitiveToggle />
+                <FilterLogicToggle />
+                <ExpandableRowsToggle />
+              </Column>
+            </Row>
+            <ButtonRow />
+            <CLIInstructions />
+          </Tab>
+          <Tab name="Log Viewing Preferences">
+            <Row>
+              <Column>
+                <WrapToggle />
+                <PrettyPrintToggle />
+              </Column>
+            </Row>
+          </Tab>
+        </Tabs>
+      </Container>
+    );
+  }
 );
 DetailsMenuCard.displayName = "DetailsMenuCard";
 
 const Container = styled.div`
-  width: 700px;
   padding: ${size.xs};
   display: flex;
   flex-direction: column;
+  width: 500px;
 `;
 
 const Row = styled.div`
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  padding-top: ${size.s};
 `;
 const Column = styled.div`
-  width: 300px;
+  width: 100%;
 `;
 
 export default DetailsMenuCard;
