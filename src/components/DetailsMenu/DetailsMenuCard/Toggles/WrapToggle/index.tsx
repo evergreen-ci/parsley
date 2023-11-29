@@ -14,6 +14,7 @@ const WrapToggle: React.FC = () => {
         setWrap(value);
         sendEvent({ name: "Toggled Wrap", on: value });
       }}
+      tooltip="Toggle line wrapping for overflowing lines"
       value={wrap}
     />
   );

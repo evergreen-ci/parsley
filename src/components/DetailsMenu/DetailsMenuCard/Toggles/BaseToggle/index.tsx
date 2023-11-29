@@ -3,7 +3,7 @@ import { palette } from "@leafygreen-ui/palette";
 import Toggle from "@leafygreen-ui/toggle";
 import { Disclaimer } from "@leafygreen-ui/typography";
 import { size } from "constants/tokens";
-import { DetailName, DetailRow } from "../../styles";
+import { DetailRow, DetailsLabel } from "../../styles";
 
 const { gray } = palette;
 
@@ -13,6 +13,7 @@ interface BaseToggleProps {
   leftLabel?: string;
   rightLabel?: string;
   label: string;
+  tooltip: string;
   value: boolean;
   onChange: (checked: boolean) => void;
 }
@@ -24,10 +25,11 @@ const BaseToggle: React.FC<BaseToggleProps> = ({
   leftLabel = "OFF",
   onChange,
   rightLabel = "ON",
+  tooltip,
   value,
 }) => (
   <DetailRow>
-    <DetailName>{label}</DetailName>
+    <DetailsLabel label={tooltip}>{label}</DetailsLabel>
     <ToggleWrapper>
       <ToggleLabel>{leftLabel}</ToggleLabel>
       <Toggle
