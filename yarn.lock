@@ -3596,6 +3596,13 @@
   dependencies:
     lodash "^4.17.21"
 
+"@leafygreen-ui/hooks@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/hooks/-/hooks-8.0.1.tgz#3f864f5be93e872c0884206643ee6b957972e17f"
+  integrity sha512-n++2Qdtv0UsJoSSCtrDU0Qlcq0JvSy+fzvvexDphqbchoC47DtgFqVfftq8UcmkvkkJOkTASrIZesV45rVJAiQ==
+  dependencies:
+    lodash "^4.17.21"
+
 "@leafygreen-ui/icon-button@15.0.18":
   version "15.0.18"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/icon-button/-/icon-button-15.0.18.tgz#e0acbece59ce9a20c3bdf0b0cdaea8e3d2ece9ee"
@@ -3634,6 +3641,14 @@
   version "11.23.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/icon/-/icon-11.23.0.tgz#d6fdae3386f79ee061a991d32e2ff807611af85c"
   integrity sha512-TaK9mlQO2K1Y4urL69FzLXMfW/hoSChlsA0WSj4IEFEyaC/bwVQTJFq9qStcRPTwf18G1rwsEQB1TlKDvlPIFA==
+  dependencies:
+    "@leafygreen-ui/emotion" "^4.0.7"
+    lodash "^4.17.21"
+
+"@leafygreen-ui/icon@^11.25.0":
+  version "11.25.1"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/icon/-/icon-11.25.1.tgz#65f143987d6e176f87e52e82b34befc48e472303"
+  integrity sha512-45m9INMLG2kKa8BTqP/ZGpc832w0CTO3KFK5kqwQdBouYyJogrKEQlI1Toss+JYKoBVHFYXBQc0ST8tIU4zr3w==
   dependencies:
     "@leafygreen-ui/emotion" "^4.0.7"
     lodash "^4.17.21"
@@ -3821,6 +3836,21 @@
     polished "^4.2.2"
     react-transition-group "^4.4.5"
 
+"@leafygreen-ui/tabs@^11.1.13":
+  version "11.1.13"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/tabs/-/tabs-11.1.13.tgz#d52eac041529533e74ae9fb6127ebcd4f40ee529"
+  integrity sha512-n771tkjfSMa/P3Y7QwqwTKIbiyaHZeRXg8jYDSLcC9DKphng0LyRBfItzMApqpU5HPpU75SIxCMixMh03eW9pw==
+  dependencies:
+    "@leafygreen-ui/a11y" "^1.4.11"
+    "@leafygreen-ui/box" "^3.1.8"
+    "@leafygreen-ui/emotion" "^4.0.7"
+    "@leafygreen-ui/hooks" "^8.0.1"
+    "@leafygreen-ui/lib" "^13.0.0"
+    "@leafygreen-ui/palette" "^4.0.7"
+    "@leafygreen-ui/portal" "^5.0.3"
+    "@leafygreen-ui/tokens" "^2.2.0"
+    "@leafygreen-ui/typography" "^18.0.1"
+
 "@leafygreen-ui/text-input@12.1.12":
   version "12.1.12"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/text-input/-/text-input-12.1.12.tgz#552beaae38625adb85ee45ed657a563969e7292b"
@@ -3975,6 +4005,18 @@
   dependencies:
     "@leafygreen-ui/emotion" "^4.0.7"
     "@leafygreen-ui/icon" "^11.22.2"
+    "@leafygreen-ui/lib" "^13.0.0"
+    "@leafygreen-ui/palette" "^4.0.7"
+    "@leafygreen-ui/polymorphic" "^1.3.6"
+    "@leafygreen-ui/tokens" "^2.1.4"
+
+"@leafygreen-ui/typography@^18.0.1":
+  version "18.0.1"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/typography/-/typography-18.0.1.tgz#ca1a05f1e0d2defc9b50838d7ebe64e42c1f2345"
+  integrity sha512-XPTya1YVmpiGInxrD//aF0uCvhpnGPKDTkkZKD0Mk+bPP3qXaXtP8YwdrGnMLEJsuRG3ipmOrA5/YXcNQDeQkQ==
+  dependencies:
+    "@leafygreen-ui/emotion" "^4.0.7"
+    "@leafygreen-ui/icon" "^11.25.0"
     "@leafygreen-ui/lib" "^13.0.0"
     "@leafygreen-ui/palette" "^4.0.7"
     "@leafygreen-ui/polymorphic" "^1.3.6"
