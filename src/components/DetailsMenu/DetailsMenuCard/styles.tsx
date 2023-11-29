@@ -31,4 +31,4 @@ const DetailsLabel: React.FC<DetailsLabelProps> = ({ children, label }) => (
     <InfoSprinkle>{label}</InfoSprinkle>
   </LabelWrapper>
 );
-export { DetailRow, DetailName, DetailsLabel };
+export { DetailRow, DetailsLabel };
