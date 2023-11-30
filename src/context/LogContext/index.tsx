@@ -20,7 +20,7 @@ import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useQueryParam } from "hooks/useQueryParam";
-import { SectionData, useSections } from "hooks/useSections";
+import { UseSectionsResult, useSections } from "hooks/useSections";
 import { ExpandedLines, ProcessedLogLines } from "types/logs";
 import filterLogs from "utils/filterLogs";
 import { getMatchingLines } from "utils/matchingLines";
@@ -30,8 +30,7 @@ import useLogState from "./state";
 import { DIRECTION, LogMetadata, Preferences, SearchState } from "./types";
 import { getNextPage } from "./utils";
 
-interface LogContextState {
-  sectionData: SectionData;
+interface LogContextState extends UseSectionsResult {
   expandedLines: ExpandedLines;
   hasLogs: boolean | null;
   lineCount: number;
@@ -46,8 +45,6 @@ interface LogContextState {
   };
   searchLine?: number;
   searchState: SearchState;
-  visibleSectionLines: Set<string>;
-  setVisibleSectionLines: React.Dispatch<React.SetStateAction<Set<string>>>;
   clearExpandedLines: () => void;
   clearLogs: () => void;
   collapseLines: (idx: number) => void;
@@ -106,9 +103,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   const [prettyPrint, setPrettyPrint] = useState(
     Cookie.get(PRETTY_PRINT_BOOKMARKS) === "true"
   );
-  const [visibleSectionLines, setVisibleSectionLines] = useState<Set<string>>(
-    new Set<string>()
-  );
   const { dispatch, state } = useLogState(initialLogLines);
   const [processedLogLines, setProcessedLogLines] = useState<ProcessedLogLines>(
     []
@@ -130,8 +124,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     ]
   );
 
-  const { sectionData } = useSections(state.logs);
-
+  const sections = useSections(state.logs);
   useEffect(
     () => {
       setProcessedLogLines(
@@ -141,9 +134,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           expandedLines: state.expandedLines,
           logLines: state.logs,
           matchingLines,
-          sectionData,
+          sectionData: sections.sectionData,
           shareLine,
-          visibleSectionLines,
+          visibleSectionLines: sections.visibleSectionLines,
         })
       );
     },
@@ -155,8 +148,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       shareLine,
       stringifiedExpandedLines,
       expandableRows,
-      sectionData,
-      visibleSectionLines,
+      sections.sectionData,
+      sections.visibleSectionLines,
     ]
   );
 
@@ -275,9 +268,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
       searchLine,
       searchState: state.searchState,
-      sectionData,
-      setVisibleSectionLines,
-      visibleSectionLines,
+      ...sections,
 
       clearExpandedLines: () => dispatch({ type: "CLEAR_EXPANDED_LINES" }),
       clearLogs: () => dispatch({ type: "CLEAR_LOGS" }),
@@ -305,8 +296,6 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       },
     }),
     [
-      visibleSectionLines,
-      setVisibleSectionLines,
       expandableRows,
       filterLogic,
       lowerRange,
@@ -330,7 +319,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       setExpandableRows,
       setFilterLogic,
       setLogMetadata,
-      sectionData,
+      sections,
     ]
   );
 

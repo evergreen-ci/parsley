@@ -11,11 +11,21 @@ export interface CommandEntry {
 }
 export type SectionData = Omit<CommandEntry, "status">[][] | undefined;
 
-interface Result {
+export interface UseSectionsResult {
   sectionData: SectionData;
+  visibleSectionLines: Set<string>;
+  setVisibleSectionLines: React.Dispatch<React.SetStateAction<Set<string>>>;
+  closeAllSections: () => void;
+  closeAllSectionsButOne: (sectionName: string) => void;
+  expandAllSections: () => void;
 }
-export const useSections = (logs: string[]): Result => {
-  const [sectionData, setSectionData] = useState<Result["sectionData"]>();
+export const useSections = (logs: string[]): UseSectionsResult => {
+  const [sectionData, setSectionData] =
+    useState<UseSectionsResult["sectionData"]>();
+
+  const [visibleSectionLines, setVisibleSectionLines] = useState<Set<string>>(
+    new Set<string>()
+  );
 
   useEffect(() => {
     if (logs.length) {
@@ -48,7 +58,25 @@ export const useSections = (logs: string[]): Result => {
       setSectionData(Object.values(sectionMap));
     }
   }, [logs]);
-  return { sectionData };
+
+  const expandAllSections = () => {
+    setVisibleSectionLines(new Set(sectionData?.map((v) => v[0].functionName)));
+  };
+  const closeAllSections = () => {
+    setVisibleSectionLines(new Set([]));
+  };
+  const closeAllSectionsButOne = (sectionName: string) => {
+    setVisibleSectionLines(new Set([sectionName]));
+  };
+
+  return {
+    closeAllSections,
+    closeAllSectionsButOne,
+    expandAllSections,
+    sectionData,
+    setVisibleSectionLines,
+    visibleSectionLines,
+  };
 };
 
 const processLine = (str: string, lineNum: number): CommandEntry | null => {

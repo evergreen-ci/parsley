@@ -10,11 +10,14 @@ import { RootRowProps } from "../types";
 
 interface SectionRowProps extends RootRowProps {
   metadata: CommandEntry[];
-  lines: number[];
 }
 
-const SectionRow: React.FC<SectionRowProps> = ({ lines, metadata }) => {
-  const { setVisibleSectionLines, visibleSectionLines } = useLogContext();
+const SectionRow: React.FC<SectionRowProps> = ({ metadata }) => {
+  const {
+    closeAllSectionsButOne,
+    setVisibleSectionLines,
+    visibleSectionLines,
+  } = useLogContext();
   const { functionName } = metadata[0];
   const onClick = () => {
     const nextSet = new Set(visibleSectionLines);
@@ -28,9 +31,7 @@ const SectionRow: React.FC<SectionRowProps> = ({ lines, metadata }) => {
 
   const isOpen = visibleSectionLines.has(functionName);
   return (
-    <CollapsedLineWrapper
-      data-cy={`section-row-${lines[0]}-${lines[lines.length - 1]}`}
-    >
+    <CollapsedLineWrapper data-cy={`${functionName}-section-row`}>
       <StyledBody>{metadata[0].functionName}</StyledBody>
       <ButtonContainer>
         <Button
@@ -39,6 +40,12 @@ const SectionRow: React.FC<SectionRowProps> = ({ lines, metadata }) => {
           size="xsmall"
         >
           {isOpen ? "Close" : "Open"}
+        </Button>
+        <Button
+          onClick={() => closeAllSectionsButOne(functionName)}
+          size="xsmall"
+        >
+          Focus
         </Button>
       </ButtonContainer>
     </CollapsedLineWrapper>

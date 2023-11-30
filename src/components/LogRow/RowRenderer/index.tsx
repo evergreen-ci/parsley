@@ -47,18 +47,8 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
       return (
         <SectionRow
           lineIndex={index}
-          lines={processedLogLine.line as number[]}
           metadata={processedLogLine.commands as CommandEntry[]}
-        >
-          {/* {(processedLogLine.line as number[]).map((lineNumber) => (
-            <SingleLine
-              key={lineNumber}
-              index={index}
-              lineNumber={lineNumber}
-              logType={logType}
-            />
-          ))} */}
-        </SectionRow>
+        />
       );
     }
     if (isCollapsedRow(processedLogLine.line)) {

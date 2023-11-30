@@ -45,7 +45,6 @@ const filterLogs = (options: FilterLogsParams): ProcessedLogLines => {
     return { ...accum, [lineStart]: value };
   }, {});
 
-  console.log(visibleSectionLines);
   // If there are no filters or expandable rows is not enabled, then we don't have to do any
   // processing.
   if (matchingLines === undefined) {
