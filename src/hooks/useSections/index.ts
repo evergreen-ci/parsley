@@ -18,11 +18,14 @@ export interface UseSectionsResult {
   closeAllSections: () => void;
   closeAllSectionsButOne: (sectionName: string) => void;
   expandAllSections: () => void;
+  sectionsEnabled: boolean;
+  setSectionsEnabled: React.Dispatch<React.SetStateAction<boolean>>;
 }
 export const useSections = (logs: string[]): UseSectionsResult => {
   const [sectionData, setSectionData] =
     useState<UseSectionsResult["sectionData"]>();
 
+  const [sectionsEnabled, setSectionsEnabled] = useState(true);
   const [visibleSectionLines, setVisibleSectionLines] = useState<Set<string>>(
     new Set<string>()
   );
@@ -57,7 +60,7 @@ export const useSections = (logs: string[]): UseSectionsResult => {
       }, {} as any);
       setSectionData(Object.values(sectionMap));
     }
-  }, [logs]);
+  }, [logs, sectionsEnabled]);
 
   const expandAllSections = () => {
     setVisibleSectionLines(new Set(sectionData?.map((v) => v[0].functionName)));
@@ -74,6 +77,8 @@ export const useSections = (logs: string[]): UseSectionsResult => {
     closeAllSectionsButOne,
     expandAllSections,
     sectionData,
+    sectionsEnabled,
+    setSectionsEnabled,
     setVisibleSectionLines,
     visibleSectionLines,
   };

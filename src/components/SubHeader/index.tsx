@@ -10,7 +10,7 @@ const { gray } = palette;
 
 interface SubHeaderProps {}
 const SubHeader: React.FC<SubHeaderProps> = () => {
-  const { logMetadata } = useLogContext();
+  const { closeAllSections, expandAllSections, logMetadata } = useLogContext();
   const {
     buildID,
     execution,
