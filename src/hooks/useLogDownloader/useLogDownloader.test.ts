@@ -36,7 +36,7 @@ describe("useLogDownloader", () => {
     // RenderFakeToastContext is a mock of the ToastContext
     RenderFakeToastContext();
     const { result } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+      useLogDownloader({ logType: LogTypes.RESMOKE_LOGS, url: API_URL })
     );
     expect(result.current.isLoading).toBe(true);
     await waitFor(() => {
@@ -57,7 +57,7 @@ describe("useLogDownloader", () => {
     // RenderFakeToastContext is a mock of the ToastContext
     RenderFakeToastContext();
     const { result } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.EVERGREEN_TASK_LOGS)
+      useLogDownloader({ logType: LogTypes.EVERGREEN_TASK_LOGS, url: API_URL })
     );
     expect(result.current.isLoading).toBe(true);
     await waitFor(() => {
@@ -77,7 +77,7 @@ describe("useLogDownloader", () => {
     // RenderFakeToastContext is a mock of the ToastContext
     RenderFakeToastContext();
     const { result } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+      useLogDownloader({ logType: LogTypes.RESMOKE_LOGS, url: API_URL })
     );
     expect(result.current.isLoading).toBe(true);
     expect(result.current.fileSize).toBe(0);
@@ -98,7 +98,7 @@ describe("useLogDownloader", () => {
     // RenderFakeToastContext is a mock of the ToastContext
     RenderFakeToastContext();
     const { result } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+      useLogDownloader({ logType: LogTypes.RESMOKE_LOGS, url: API_URL })
     );
     expect(result.current.isLoading).toBe(true);
     await waitFor(() => {
@@ -119,7 +119,11 @@ describe("useLogDownloader", () => {
     // RenderFakeToastContext is a mock of the ToastContext
     const { dispatchToast } = RenderFakeToastContext();
     const { result } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS, 5)
+      useLogDownloader({
+        downloadSizeLimit: 5,
+        logType: LogTypes.RESMOKE_LOGS,
+        url: API_URL,
+      })
     );
     expect(result.current.isLoading).toBe(true);
     await waitFor(() => {
@@ -146,7 +150,7 @@ describe("useLogDownloader", () => {
     // RenderFakeToastContext is a mock of the ToastContext
     const { dispatchToast } = RenderFakeToastContext();
     const { result } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+      useLogDownloader({ logType: LogTypes.RESMOKE_LOGS, url: API_URL })
     );
     expect(result.current.isLoading).toBe(true);
     await waitFor(() => {

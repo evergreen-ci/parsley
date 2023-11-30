@@ -3,5 +3,11 @@
 query Task($taskId: String!, $execution: Int) {
   task(taskId: $taskId, execution: $execution) {
     ...BaseTask
+    logs {
+      agentLogLink
+      allLogLink
+      systemLogLink
+      taskLogLink
+    }
   }
 }
