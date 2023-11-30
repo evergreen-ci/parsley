@@ -1,4 +1,4 @@
-import { renderHook } from "@testing-library/react-hooks";
+import { renderHook, waitFor } from "test_utils";
 import { useFetch } from ".";
 
 const API_URL = "/some/endpoint";
@@ -15,10 +15,11 @@ describe("useFetch", () => {
     });
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-    const { result, waitForNextUpdate } = renderHook(() => useFetch(API_URL));
+    const { result } = renderHook(() => useFetch(API_URL));
     expect(result.current.isLoading).toBe(true);
-    await waitForNextUpdate();
-    expect(result.current.isLoading).toBe(false);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
     expect(result.current.data).toStrictEqual(jsonMessage);
   });
   it("gets a bad response from the api and returns an error", async () => {
@@ -27,10 +28,11 @@ describe("useFetch", () => {
       .mockRejectedValue(new Error("Something went wrong"));
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-    const { result, waitForNextUpdate } = renderHook(() => useFetch(API_URL));
+    const { result } = renderHook(() => useFetch(API_URL));
     expect(result.current.isLoading).toBe(true);
-    await waitForNextUpdate();
-    expect(result.current.isLoading).toBe(false);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
     expect(result.current.error).toBe("Something went wrong");
   });
   it("skips the fetch if the skip option is supplied", async () => {
@@ -50,16 +52,15 @@ describe("useFetch", () => {
 
     let skip = true;
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
-    const { rerender, result, waitForNextUpdate } = renderHook(() =>
-      useFetch(API_URL, { skip })
-    );
+    const { rerender, result } = renderHook(() => useFetch(API_URL, { skip }));
     expect(mockFetchPromise).not.toHaveBeenCalled();
     expect(result.current.isLoading).toBe(false);
     expect(result.current.data).toBeNull();
     skip = false;
     rerender();
     expect(result.current.isLoading).toBe(true);
-    await waitForNextUpdate();
-    expect(mockFetchPromise).toHaveBeenCalledTimes(1);
+    await waitFor(() => {
+      expect(mockFetchPromise).toHaveBeenCalledTimes(1);
+    });
   });
 });

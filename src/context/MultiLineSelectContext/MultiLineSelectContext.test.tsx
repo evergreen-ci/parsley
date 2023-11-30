@@ -1,5 +1,5 @@
-import { act, renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
+import { act, renderHook } from "test_utils";
 import { MultiLineSelectContextProvider, useMultiLineSelectContext } from ".";
 
 const wrapper = ({
@@ -7,7 +7,7 @@ const wrapper = ({
   initialEntries = ["/"],
 }: {
   children: React.ReactNode;
-  initialEntries: string[];
+  initialEntries?: string[];
 }) => (
   <MemoryRouter initialEntries={initialEntries}>
     <MultiLineSelectContextProvider>

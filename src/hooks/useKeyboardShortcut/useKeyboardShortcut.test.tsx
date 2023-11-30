@@ -1,6 +1,5 @@
-import { renderHook } from "@testing-library/react-hooks";
 import { CharKey, ModifierKey } from "constants/keys";
-import { render, screen, userEvent } from "test_utils";
+import { render, renderHook, screen, userEvent } from "test_utils";
 import useKeyboardShortcut from ".";
 
 describe("useKeyboardShortcut", () => {
