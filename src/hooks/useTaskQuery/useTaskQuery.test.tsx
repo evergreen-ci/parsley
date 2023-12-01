@@ -1,10 +1,10 @@
 import { MockedProvider } from "@apollo/client/testing";
-import { renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter } from "react-router-dom";
 import { LogTypes } from "constants/enums";
 import { LogContextProvider } from "context/LogContext";
 import { Task } from "gql/generated/types";
 import { evergreenTaskMock, logkeeperMetadataMock } from "test_data/task";
+import { renderHook, waitFor } from "test_utils";
 import { useTaskQuery } from ".";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
@@ -17,7 +17,7 @@ const wrapper = ({ children }: { children: React.ReactNode }) => (
 
 describe("useTaskQuery", () => {
   it("should be able to fetch task corresponding to evergreen task logs", async () => {
-    const { result, waitForNextUpdate } = renderHook(
+    const { result } = renderHook(
       () =>
         useTaskQuery({
           execution: 0,
@@ -29,14 +29,15 @@ describe("useTaskQuery", () => {
         wrapper,
       }
     );
-    await waitForNextUpdate();
-    expect(result.current.task).toMatchObject(
-      evergreenTaskMock?.result?.data?.task as Task
-    );
+    await waitFor(() => {
+      expect(result.current.task).toMatchObject(
+        evergreenTaskMock?.result?.data?.task as Task
+      );
+    });
   });
 
   it("should be able to fetch task corresponding to resmoke logs", async () => {
-    const { result, waitForNextUpdate } = renderHook(
+    const { result } = renderHook(
       () =>
         useTaskQuery({
           buildID: "7e208050e166b1a9025c817b67eee48d",
@@ -46,9 +47,11 @@ describe("useTaskQuery", () => {
         wrapper,
       }
     );
-    await waitForNextUpdate();
-    expect(result.current.task).toMatchObject(
-      logkeeperMetadataMock?.result?.data?.logkeeperBuildMetadata?.task as Task
-    );
+    await waitFor(() => {
+      expect(result.current.task).toMatchObject(
+        logkeeperMetadataMock?.result?.data?.logkeeperBuildMetadata
+          ?.task as Task
+      );
+    });
   });
 });

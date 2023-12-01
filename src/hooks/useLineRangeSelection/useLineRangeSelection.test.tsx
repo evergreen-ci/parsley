@@ -1,7 +1,7 @@
-import { act, renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter } from "react-router-dom";
 import { QueryParams } from "constants/queryParams";
 import { useQueryParams } from "hooks/useQueryParam";
+import { act, renderHook } from "test_utils";
 import useLineRangeSelection from ".";
 
 const useLineRangeSelectionJointHook = () => {

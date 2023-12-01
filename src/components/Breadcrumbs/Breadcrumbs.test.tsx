@@ -9,13 +9,16 @@ import Breadcrumbs from ".";
 
 describe("breadcrumbs", () => {
   it("should render an individual breadcrumb", () => {
-    render(<Breadcrumbs breadcrumbs={[{ text: "test" }]} />);
+    render(<Breadcrumbs breadcrumbs={[{ "data-cy": "bc", text: "test" }]} />);
     expect(screen.getByText("test")).toBeInTheDocument();
     expect(screen.queryByDataCy("breadcrumb-chevron")).not.toBeInTheDocument();
   });
 
   it("should render many breadcrumbs separated by chevrons", () => {
-    const breadcrumbs = [{ text: "test 1" }, { text: "test 2" }];
+    const breadcrumbs = [
+      { "data-cy": "bc-1", text: "test 1" },
+      { "data-cy": "bc-2", text: "test 2" },
+    ];
     render(<Breadcrumbs breadcrumbs={breadcrumbs} />);
     expect(screen.getByText("test 1")).toBeInTheDocument();
     expect(screen.getByText("test 2")).toBeInTheDocument();
@@ -25,7 +28,7 @@ describe("breadcrumbs", () => {
   it("breadcrumbs with long text should be collapsed to 30 characters by default and viewable with a tooltip", async () => {
     const user = userEvent.setup();
     const longMessage = "some really long string that could be a patch title";
-    const breadcrumbs = [{ text: longMessage }];
+    const breadcrumbs = [{ "data-cy": "bc", text: longMessage }];
     render(<Breadcrumbs breadcrumbs={breadcrumbs} />);
     expect(screen.queryByText(longMessage)).not.toBeInTheDocument();
 
@@ -42,7 +45,9 @@ describe("breadcrumbs", () => {
   it("should be able to specify a custom trimLength", async () => {
     const user = userEvent.setup();
     const longMessage = "some really long string that could be a patch title";
-    const breadcrumbs = [{ text: longMessage, trimLength: 25 }];
+    const breadcrumbs = [
+      { "data-cy": "bc", text: longMessage, trimLength: 25 },
+    ];
     render(<Breadcrumbs breadcrumbs={breadcrumbs} />);
     expect(screen.queryByText(longMessage)).not.toBeInTheDocument();
 
@@ -59,7 +64,7 @@ describe("breadcrumbs", () => {
   it("should not display a tooltip if the text is short", async () => {
     const user = userEvent.setup();
     const shortMessage = "short";
-    const breadcrumbs = [{ text: shortMessage }];
+    const breadcrumbs = [{ "data-cy": "bc", text: shortMessage }];
     render(<Breadcrumbs breadcrumbs={breadcrumbs} />);
     expect(screen.getByText(shortMessage)).toBeInTheDocument();
     await user.hover(screen.getByText(shortMessage));
@@ -73,7 +78,7 @@ describe("breadcrumbs", () => {
   it("clicking on a tooltip with a link and event handler should call the event", async () => {
     const user = userEvent.setup();
     const onClick = jest.fn();
-    const breadcrumbs = [{ onClick, text: "test", to: "/" }];
+    const breadcrumbs = [{ "data-cy": "bc", onClick, text: "test", to: "/" }];
     render(<Breadcrumbs breadcrumbs={breadcrumbs} />);
     expect(screen.getByText("test")).toBeInTheDocument();
     expect(screen.getByRole("link")).toHaveAttribute("href", "/");
@@ -86,7 +91,11 @@ describe("breadcrumbs", () => {
   it("uses tooltip text if specified", async () => {
     const user = userEvent.setup();
     const breadcrumbs = [
-      { text: "My Breadcrumb", tooltipText: "My Tooltip Text" },
+      {
+        "data-cy": "bc",
+        text: "My Breadcrumb",
+        tooltipText: "My Tooltip Text",
+      },
     ];
     render(<Breadcrumbs breadcrumbs={breadcrumbs} />);
     expect(screen.getByText("My Breadcrumb")).toBeInTheDocument();

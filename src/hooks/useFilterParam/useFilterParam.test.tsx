@@ -1,7 +1,7 @@
-import { act, renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter, useLocation } from "react-router-dom";
 import { CaseSensitivity, MatchType } from "constants/enums";
 import { useQueryParams } from "hooks/useQueryParam";
+import { act, renderHook } from "test_utils";
 import { useFilterParam } from ".";
 
 const useFilterJointHook = () => {
