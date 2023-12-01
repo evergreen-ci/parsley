@@ -8,7 +8,7 @@ const portRegex = / ([shdbc]+\d{1,5})\|/g;
 /**
  * `getPorts` returns the ports associated with a resmoke line
  * @param line - the resmoke line
- * @returns Ports associated with a resmoke line. There can be 1 or more ports.
+ * @returns A string representing the ports associated with a resmoke line.
  */
 const getPorts = (line: string) => {
   const matches = [...line.matchAll(portRegex)];
