@@ -6,7 +6,6 @@ import { ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
 import AnsiRow from "../AnsiRow";
 import CollapsedRow from "../CollapsedRow";
-import { SingleLine } from "../CollapsedRow/SingleLine";
 import ResmokeRow from "../ResmokeRow";
 import SectionRow from "../SectionRow";
 
