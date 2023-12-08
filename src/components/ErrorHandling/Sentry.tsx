@@ -2,7 +2,7 @@ import {
   Replay,
   ErrorBoundary as SentryErrorBoundary,
   captureException,
-  getCurrentHub,
+  getClient,
   init,
   withScope,
 } from "@sentry/react";
@@ -37,7 +37,7 @@ const initializeSentry = () => {
   }
 };
 
-const isInitialized = () => !!getCurrentHub().getClient();
+const isInitialized = () => !!getClient();
 
 const sendError = (
   err: Error,
