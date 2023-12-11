@@ -8,7 +8,7 @@ import Icon from "components/Icon";
 import Search from "components/Search";
 import ShortcutModal from "components/ShortcutModal";
 import { StyledLink } from "components/styles";
-import { wikiURL } from "constants/externalLinks";
+import { docsURL } from "constants/externalLinks";
 import { navbarHeight, size } from "constants/tokens";
 import { useAuthContext } from "context/auth";
 import { useLogContext } from "context/LogContext";
@@ -27,7 +27,7 @@ const NavBar: React.FC = () => {
       <FlexContainer>
         <Logo glyph="ParsleyLogo" size={24} useStroke />
         <LinkContainer>
-          <StyledLink href={wikiURL}>Wiki</StyledLink>
+          <StyledLink href={docsURL}>Documentation</StyledLink>
           <UploadLink clearLogs={clearLogs} hasLogs={hasLogs} />
         </LinkContainer>
         <Search />
