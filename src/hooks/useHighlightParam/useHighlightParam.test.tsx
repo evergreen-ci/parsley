@@ -1,6 +1,6 @@
-import { act, renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter, useLocation } from "react-router-dom";
 import { useQueryParams } from "hooks/useQueryParam";
+import { act, renderHook } from "test_utils";
 import { useHighlightParam } from ".";
 
 const useHighlightJointHook = () => {

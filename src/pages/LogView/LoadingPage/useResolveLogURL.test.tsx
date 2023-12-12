@@ -1,5 +1,4 @@
 import { MockedProvider } from "@apollo/client/testing";
-import { renderHook } from "@testing-library/react-hooks";
 import { LogTypes } from "constants/enums";
 import {
   TaskFilesQuery,
@@ -10,7 +9,7 @@ import {
   TestLogUrlQueryVariables,
 } from "gql/generated/types";
 import { GET_TASK, GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
-import { waitFor } from "test_utils";
+import { renderHook, waitFor } from "test_utils";
 import { ApolloMock } from "types/gql";
 import { useResolveLogURL } from "./useResolveLogURL";
 

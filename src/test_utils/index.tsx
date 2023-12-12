@@ -1,7 +1,9 @@
 import {
+  act,
   fireEvent,
   queries,
   render,
+  renderHook,
   screen,
   waitFor,
   within,
@@ -94,13 +96,15 @@ const renderWithRouterMatch = (
 };
 
 export {
-  customScreen as screen,
-  customRender as render,
-  customWithin as within,
-  renderWithRouterMatch,
-  waitFor,
-  userEvent,
+  act,
   fireEvent,
+  customRender as render,
+  renderHook,
+  renderWithRouterMatch,
+  customScreen as screen,
+  userEvent,
+  waitFor,
+  customWithin as within,
 };
 
 export type { RenderWithRouterMatchOptions };

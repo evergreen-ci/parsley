@@ -1,3 +1,3 @@
-const wikiURL = "https://docs.devprod.prod.corp.mongodb.com/parsley/Home";
+const docsURL = "https://docs.devprod.prod.corp.mongodb.com/parsley/Home";
 
-export { wikiURL };
+export { docsURL };

@@ -1,6 +1,6 @@
-import { act, renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter, useLocation } from "react-router-dom";
 import { QueryParams } from "constants/queryParams";
+import { act, renderHook } from "test_utils";
 import { useQueryParam, useQueryParams } from ".";
 
 describe("useQueryParams", () => {

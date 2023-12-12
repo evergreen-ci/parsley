@@ -1,5 +1,4 @@
-import { act } from "@testing-library/react";
-import { renderHook } from "@testing-library/react-hooks";
+import { act, renderHook, waitFor } from "test_utils";
 import usePaginatedVirtualList from "./usePaginatedVirtualList";
 
 describe("usePaginatedVirtualList", () => {
@@ -282,7 +281,7 @@ describe("usePaginatedVirtualList", () => {
 
     it("scrolling to a line on a different page should not trigger a double scroll", async () => {
       const scrollToIndexMock = jest.fn();
-      const { result, waitFor } = renderHook(() =>
+      const { result } = renderHook(() =>
         usePaginatedVirtualList({
           paginationOffset,
           paginationThreshold,
