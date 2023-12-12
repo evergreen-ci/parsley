@@ -29,14 +29,12 @@ const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
           selected={selectedTab}
           setSelected={setSelectedTab}
         >
-          <Tab name="Log Structure">
+          <Tab name="Search & Filter Preferences">
             <Row>
               <Column>
                 <SearchRangeInput />
-                <WrapToggle />
                 <CaseSensitiveToggle />
                 <FilterLogicToggle />
-                <ExpandableRowsToggle />
               </Column>
             </Row>
             <ButtonRow />
@@ -47,6 +45,7 @@ const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
               <Column>
                 <WrapToggle />
                 <PrettyPrintToggle />
+                <ExpandableRowsToggle />
               </Column>
             </Row>
           </Tab>
