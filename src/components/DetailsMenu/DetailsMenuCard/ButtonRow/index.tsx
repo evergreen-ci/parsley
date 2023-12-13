@@ -21,7 +21,7 @@ const ButtonRow: React.FC = () => {
   const { htmlLogURL, jobLogsURL, legacyJobLogsURL, lobsterURL, rawLogURL } =
     logMetadata || {};
   const tooltipText = bookmarks.length
-    ? "Copy Bookmarked Lines In JIRA Format"
+    ? "Copy bookmarked lines in JIRA format"
     : "No bookmarks to copy.";
 
   return (
