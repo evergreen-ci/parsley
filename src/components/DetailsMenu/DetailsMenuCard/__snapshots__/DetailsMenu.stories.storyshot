@@ -28,32 +28,32 @@ exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMen
               aria-controls="tab-panel-1"
               aria-selected="true"
               class="leafygreen-ui-oq6if2"
-              data-text="Search & Filter Preferences"
+              data-text="Search & Filter"
               id="tab-2"
-              name="Search & Filter Preferences"
+              name="Search & Filter"
               role="tab"
               tabindex="0"
             >
               <div
                 class="leafygreen-ui-1nxuzmg"
               >
-                Search & Filter Preferences
+                Search & Filter
               </div>
             </button>
             <button
               aria-controls="tab-panel-3"
               aria-selected="false"
               class="leafygreen-ui-1vvp6ij"
-              data-text="Log Viewing Preferences"
+              data-text="Log Viewing"
               id="tab-4"
-              name="Log Viewing Preferences"
+              name="Log Viewing"
               role="tab"
               tabindex="-1"
             >
               <div
                 class="leafygreen-ui-1nxuzmg"
               >
-                Log Viewing Preferences
+                Log Viewing
               </div>
             </button>
           </div>
@@ -557,32 +557,32 @@ exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMen
               aria-controls="tab-panel-5"
               aria-selected="true"
               class="leafygreen-ui-oq6if2"
-              data-text="Search & Filter Preferences"
+              data-text="Search & Filter"
               id="tab-6"
-              name="Search & Filter Preferences"
+              name="Search & Filter"
               role="tab"
               tabindex="0"
             >
               <div
                 class="leafygreen-ui-1nxuzmg"
               >
-                Search & Filter Preferences
+                Search & Filter
               </div>
             </button>
             <button
               aria-controls="tab-panel-7"
               aria-selected="false"
               class="leafygreen-ui-1vvp6ij"
-              data-text="Log Viewing Preferences"
+              data-text="Log Viewing"
               id="tab-8"
-              name="Log Viewing Preferences"
+              name="Log Viewing"
               role="tab"
               tabindex="-1"
             >
               <div
                 class="leafygreen-ui-1nxuzmg"
               >
-                Log Viewing Preferences
+                Log Viewing
               </div>
             </button>
           </div>
