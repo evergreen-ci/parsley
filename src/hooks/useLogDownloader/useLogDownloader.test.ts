@@ -1,4 +1,3 @@
-import { renderHook } from "@testing-library/react-hooks";
 import { LogTypes } from "constants/enums";
 import {
   LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING,
@@ -6,6 +5,7 @@ import {
 } from "constants/errors";
 import { LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { RenderFakeToastContext } from "context/toast/__mocks__";
+import { renderHook, waitFor } from "test_utils";
 import { useLogDownloader } from ".";
 
 const API_URL = "/some/endpoint";
@@ -35,12 +35,13 @@ describe("useLogDownloader", () => {
 
     // RenderFakeToastContext is a mock of the ToastContext
     RenderFakeToastContext();
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+    const { result } = renderHook(() =>
+      useLogDownloader({ logType: LogTypes.RESMOKE_LOGS, url: API_URL })
     );
     expect(result.current.isLoading).toBe(true);
-    await waitForNextUpdate();
-    expect(result.current.isLoading).toBe(false);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
     expect(result.current.data).toStrictEqual([
       "Fetched a multiline log file",
       "Some more lines",
@@ -55,12 +56,13 @@ describe("useLogDownloader", () => {
 
     // RenderFakeToastContext is a mock of the ToastContext
     RenderFakeToastContext();
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.EVERGREEN_TASK_LOGS)
+    const { result } = renderHook(() =>
+      useLogDownloader({ logType: LogTypes.EVERGREEN_TASK_LOGS, url: API_URL })
     );
     expect(result.current.isLoading).toBe(true);
-    await waitForNextUpdate();
-    expect(result.current.isLoading).toBe(false);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
     expect(result.current.error).toBe("Something went wrong");
   });
   it("should update the progress bar as the log is downloaded", async () => {
@@ -74,13 +76,14 @@ describe("useLogDownloader", () => {
 
     // RenderFakeToastContext is a mock of the ToastContext
     RenderFakeToastContext();
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+    const { result } = renderHook(() =>
+      useLogDownloader({ logType: LogTypes.RESMOKE_LOGS, url: API_URL })
     );
     expect(result.current.isLoading).toBe(true);
     expect(result.current.fileSize).toBe(0);
-    await waitForNextUpdate();
-    expect(result.current.isLoading).toBe(false);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
     expect(result.current.fileSize).toBe(12);
   });
   it("should remove the last log line if it is empty", async () => {
@@ -94,12 +97,13 @@ describe("useLogDownloader", () => {
 
     // RenderFakeToastContext is a mock of the ToastContext
     RenderFakeToastContext();
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+    const { result } = renderHook(() =>
+      useLogDownloader({ logType: LogTypes.RESMOKE_LOGS, url: API_URL })
     );
     expect(result.current.isLoading).toBe(true);
-    await waitForNextUpdate();
-    expect(result.current.isLoading).toBe(false);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
     expect(result.current.data).toStrictEqual(["chunk1", "chunk2"]);
   });
 
@@ -114,12 +118,17 @@ describe("useLogDownloader", () => {
 
     // RenderFakeToastContext is a mock of the ToastContext
     const { dispatchToast } = RenderFakeToastContext();
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS, 5)
+    const { result } = renderHook(() =>
+      useLogDownloader({
+        downloadSizeLimit: 5,
+        logType: LogTypes.RESMOKE_LOGS,
+        url: API_URL,
+      })
     );
     expect(result.current.isLoading).toBe(true);
-    await waitForNextUpdate();
-    expect(result.current.isLoading).toBe(false);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
     expect(result.current.data).toStrictEqual(["chunk1"]);
     expect(dispatchToast.warning).toHaveBeenCalledWith(
       LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING,
@@ -140,12 +149,13 @@ describe("useLogDownloader", () => {
 
     // RenderFakeToastContext is a mock of the ToastContext
     const { dispatchToast } = RenderFakeToastContext();
-    const { result, waitForNextUpdate } = renderHook(() =>
-      useLogDownloader(API_URL, LogTypes.RESMOKE_LOGS)
+    const { result } = renderHook(() =>
+      useLogDownloader({ logType: LogTypes.RESMOKE_LOGS, url: API_URL })
     );
     expect(result.current.isLoading).toBe(true);
-    await waitForNextUpdate();
-    expect(result.current.isLoading).toBe(false);
+    await waitFor(() => {
+      expect(result.current.isLoading).toBe(false);
+    });
     expect(result.current.data).toStrictEqual([
       `${"a".repeat(LOG_LINE_SIZE_LIMIT)}…`,
     ]);

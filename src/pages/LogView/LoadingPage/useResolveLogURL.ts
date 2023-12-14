@@ -5,6 +5,7 @@ import {
   getLegacyJobLogsURL,
 } from "constants/externalURLTemplates";
 import {
+  constructEvergreenTaskLogURL,
   getEvergreenTaskFileURL,
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
@@ -20,6 +21,7 @@ import {
   TestLogUrlQueryVariables,
 } from "gql/generated/types";
 import { GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
+import { useTaskQuery } from "hooks/useTaskQuery";
 
 interface UseResolveLogURLProps {
   buildID?: string;
@@ -71,6 +73,13 @@ export const useResolveLogURL = ({
   taskID,
   testID,
 }: UseResolveLogURLProps): LogURLs => {
+  const { loading: isLoadingTask, task } = useTaskQuery({
+    buildID,
+    execution,
+    logType: logType as LogTypes,
+    taskID,
+  });
+
   const { data: testData, loading: isLoadingTest } = useQuery<
     TestLogUrlQuery,
     TestLogUrlQueryVariables
@@ -142,19 +151,32 @@ export const useResolveLogURL = ({
       break;
     }
     case LogTypes.EVERGREEN_TASK_LOGS: {
-      if (!taskID || !execution || !origin) {
+      if (!taskID || !origin || !execution || isLoadingTask) {
         break;
       }
-      downloadURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
-        priority: true,
-        text: true,
-      });
-      rawLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
-        text: true,
-      });
-      htmlLogURL = getEvergreenTaskLogURL(taskID, execution, origin as any, {
-        text: false,
-      });
+      downloadURL = task?.logs
+        ? getEvergreenTaskLogURL(task.logs, origin, {
+            priority: true,
+            text: true,
+          })
+        : constructEvergreenTaskLogURL(taskID, execution, origin, {
+            priority: true,
+            text: true,
+          });
+      rawLogURL = task?.logs
+        ? getEvergreenTaskLogURL(task.logs, origin, {
+            text: true,
+          })
+        : constructEvergreenTaskLogURL(taskID, execution, origin, {
+            text: true,
+          });
+      htmlLogURL = task?.logs
+        ? getEvergreenTaskLogURL(task.logs, origin, {
+            text: false,
+          })
+        : constructEvergreenTaskLogURL(taskID, execution, origin, {
+            text: false,
+          });
       lobsterURL = getLobsterTaskURL(taskID, execution, origin);
       break;
     }
@@ -189,7 +211,7 @@ export const useResolveLogURL = ({
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,
-    loading: isLoadingTest,
+    loading: isLoadingTest || isLoadingTask || isLoadingTaskFileData,
     lobsterURL,
     rawLogURL,
   };

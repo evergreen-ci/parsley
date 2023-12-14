@@ -1,5 +1,11 @@
-import { act, renderHook } from "@testing-library/react-hooks";
-import { render, screen, userEvent, waitFor } from "test_utils";
+import {
+  act,
+  render,
+  renderHook,
+  screen,
+  userEvent,
+  waitFor,
+} from "test_utils";
 import { ToastProvider, useToastContext } from ".";
 import { RenderFakeToastContext } from "./__mocks__";
 import { TOAST_TIMEOUT } from "./constants";

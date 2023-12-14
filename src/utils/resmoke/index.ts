@@ -6,7 +6,7 @@ import {
   getJSONString,
   getMessage,
   getPid,
-  getPort,
+  getPorts,
   getResmokeFunction,
   getShellPrefix,
   getState,
@@ -47,7 +47,7 @@ const processResmokeLine = (line: string) => {
     return line;
   }
 
-  const port = getPort(line) ?? "";
+  const ports = getPorts(line) ?? "";
   const timeStamp = getTimeStamp(json) ?? "";
   const shellPrefix = getShellPrefix(json)?.padEnd(2, " ") ?? "";
   const configSrv = getConfigServer(json)?.padEnd(8, " ") ?? "";
@@ -56,7 +56,7 @@ const processResmokeLine = (line: string) => {
   const msg = getMessage(json) ?? "";
   const attr = getAttributes(json) ?? "";
 
-  const output = `${resmokeFunction} ${port}| ${timeStamp} ${shellPrefix} ${configSrv} ${pid} [${ctx}] "${msg}"${
+  const output = `${resmokeFunction} ${ports}| ${timeStamp} ${shellPrefix} ${configSrv} ${pid} [${ctx}] "${msg}"${
     attr ? `,${attr}` : ""
   }`;
   return output;
@@ -75,7 +75,7 @@ const getColorMapping = (
   if (!logLine) {
     return;
   }
-  const portOrState = getPort(logLine) ?? getState(logLine);
+  const portOrState = getPorts(logLine) ?? getState(logLine);
   if (portOrState) {
     if (!portColors[portOrState]) {
       return {

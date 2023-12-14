@@ -1,6 +1,6 @@
-import { act, renderHook } from "@testing-library/react-hooks";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { LogTypes } from "constants/enums";
+import { act, renderHook } from "test_utils";
 import { isCollapsedRow } from "utils/collapsedRow";
 import { LogContextProvider, useLogContext } from ".";
 import { DIRECTION } from "./types";

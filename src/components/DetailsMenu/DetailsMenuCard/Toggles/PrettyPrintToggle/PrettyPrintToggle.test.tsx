@@ -1,8 +1,12 @@
-import { act } from "@testing-library/react-hooks";
 import Cookie from "js-cookie";
 import { LogTypes } from "constants/enums";
 import { LogContextProvider, useLogContext } from "context/LogContext";
-import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
+import {
+  act,
+  renderWithRouterMatch as render,
+  screen,
+  userEvent,
+} from "test_utils";
 import { renderComponentWithHook } from "test_utils/TestHooks";
 import PrettyPrintToggle from ".";
 

@@ -97,6 +97,29 @@ describe("getColorMapping", () => {
     expect(color1).not.toStrictEqual(color2);
     expect(color2).toStrictEqual({ color: "#5B0000", portOrState: ":s0:n1]" });
   });
+
+  it("should return different colors for different port combinations", () => {
+    let portColors: Record<string, string> = {};
+    const color1 = getColorMapping(
+      '[js_test:catalog_cache_refresh_counters] sh12345| d20041| 2022-11-29T12:42:28.889+00:00 I  NETWORK  6496702 [ConfigServerCatalogCacheLoader::getDatabase] "Acquired connection for remote operation and completed writing to wire","attr":{"durationMicros":73}',
+      portColors
+    );
+    portColors = { ...portColors, ...color1 };
+    const color2 = getColorMapping(
+      '[js_test:catalog_cache_refresh_counters] sh12345| d20042| 2022-11-29T12:42:28.889+00:00 I  NETWORK  6496702 [ConfigServerCatalogCacheLoader::getDatabase] "Acquired connection for remote operation and completed writing to wire","attr":{"durationMicros":73}',
+      portColors
+    );
+    portColors = { ...portColors, ...color2 };
+    expect(color1).not.toStrictEqual(color2);
+    expect(color1).toStrictEqual({
+      color: "#00A35C",
+      portOrState: "sh12345| d20041",
+    });
+    expect(color2).toStrictEqual({
+      color: "#5B0000",
+      portOrState: "sh12345| d20042",
+    });
+  });
 });
 
 const resmokeLogFiles = [

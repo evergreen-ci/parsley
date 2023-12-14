@@ -1,7 +1,6 @@
-import { act, renderHook } from "@testing-library/react-hooks";
 import * as router from "react-router";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
-import { waitFor } from "test_utils";
+import { act, renderHook, waitFor } from "test_utils";
 import { mockEnvironmentVariables } from "test_utils/utils";
 import { evergreenURL, graphqlURL } from "utils/environmentVariables";
 import { AuthProvider, useAuthContext } from ".";
@@ -27,16 +26,27 @@ describe("auth", () => {
     method: "POST",
   };
 
+  beforeEach(() => {
+    Object.defineProperty(window, "location", {
+      value: {
+        href: "http://just-a-placeholder.com",
+      },
+      writable: true,
+    });
+  });
+
   afterEach(() => {
+    jest.restoreAllMocks();
     cleanup();
   });
 
   it("should error when rendered outside of AuthProvider", () => {
-    const { result } = renderHook(() => useAuthContext());
-
-    expect(result.error?.message).toBe(
+    const errorObject = console.error;
+    jest.spyOn(console, "error").mockImplementation();
+    expect(() => renderHook(() => useAuthContext())).toThrow(
       "useAuthContext must be used within an AuthProvider"
     );
+    console.error = errorObject;
   });
 
   it("should execute a query against GraphQL upon mount to check if user is authenticated", () => {
@@ -53,14 +63,15 @@ describe("auth", () => {
     const mockFetchPromise = jest.fn().mockResolvedValue({ ok: true });
     jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-    const { result, waitForNextUpdate } = renderHook(() => useAuthContext(), {
+    const { result } = renderHook(() => useAuthContext(), {
       wrapper,
     });
 
     expect(fetch).toHaveBeenCalledTimes(1);
     expect(fetch).toHaveBeenCalledWith(graphqlURL, checkLoginFetchParams);
-    await waitForNextUpdate();
-    expect(result.current.isAuthenticated).toBe(true);
+    await waitFor(() => {
+      expect(result.current.isAuthenticated).toBe(true);
+    });
   });
 
   it("should not authenticate the user if the GraphQL query fails", async () => {
@@ -81,13 +92,14 @@ describe("auth", () => {
       const mockFetchPromise = jest.fn().mockResolvedValue({ ok: true });
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);
 
-      const { result, waitForNextUpdate } = renderHook(() => useAuthContext(), {
+      const { result } = renderHook(() => useAuthContext(), {
         wrapper,
       });
 
       result.current.devLogin({ password: "password", username: "username" });
-      await waitForNextUpdate();
-      expect(result.current.isAuthenticated).toBe(true);
+      await waitFor(() => {
+        expect(result.current.isAuthenticated).toBe(true);
+      });
     });
 
     it("should not authenticate when the response is unsuccessful", async () => {
@@ -121,13 +133,6 @@ describe("auth", () => {
     });
 
     it("should redirect to the Evergreen /login page otherwise", async () => {
-      Object.defineProperty(window, "location", {
-        value: {
-          href: "http://just-a-placeholder.com",
-        },
-        writable: true,
-      });
-
       mockEnv("NODE_ENV", "production");
       const mockFetchPromise = jest.fn().mockResolvedValue({});
       jest.spyOn(global, "fetch").mockImplementation(mockFetchPromise);

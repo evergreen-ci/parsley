@@ -1,11 +1,10 @@
-import { act } from "@testing-library/react-hooks";
 import { LogContextProvider, useLogContext } from "context/LogContext";
 import {
   MultiLineSelectContextProvider,
   useMultiLineSelectContext,
 } from "context/MultiLineSelectContext";
 import { RenderFakeToastContext } from "context/toast/__mocks__";
-import { renderWithRouterMatch, screen, userEvent } from "test_utils";
+import { act, renderWithRouterMatch, screen, userEvent } from "test_utils";
 import { renderComponentWithHook } from "test_utils/TestHooks";
 import SharingMenu from ".";
 
@@ -99,6 +98,7 @@ describe("sharingMenu", () => {
     expect(clipboardText).toBe("http://localhost/?shareLine=1");
   });
   it("clicking `only search on range` should update the url with the range", async () => {
+    const user = userEvent.setup();
     const { hook, utils } = renderSharingMenu();
     const { router } = utils;
     act(() => {
@@ -108,7 +108,7 @@ describe("sharingMenu", () => {
       hook.current.handleSelectLine(3, true);
     });
     expect(screen.getByText("Only search on range")).toBeInTheDocument();
-    await userEvent.click(screen.getByText("Only search on range"));
+    await user.click(screen.getByText("Only search on range"));
     expect(router.state.location.search).toBe(
       "?lower=1&selectedLineRange=L1-L3&upper=3"
     );
