@@ -28,6 +28,7 @@ exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMen
               aria-controls="tab-panel-1"
               aria-selected="true"
               class="leafygreen-ui-oq6if2"
+              data-cy="search-and-filter-tab"
               data-text="Search & Filter"
               id="tab-2"
               name="Search & Filter"
@@ -44,6 +45,7 @@ exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMen
               aria-controls="tab-panel-3"
               aria-selected="false"
               class="leafygreen-ui-1vvp6ij"
+              data-cy="log-viewing-tab"
               data-text="Log Viewing"
               id="tab-4"
               name="Log Viewing"
@@ -68,6 +70,7 @@ exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMen
         <div>
           <div
             aria-labelledby="tab-2"
+            data-cy="search-and-filter-tab"
             id="tab-panel-1"
             role="tabpanel"
           >
@@ -519,6 +522,7 @@ exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMen
           </div>
           <div
             aria-labelledby="tab-4"
+            data-cy="log-viewing-tab"
             id="tab-panel-3"
             role="tabpanel"
           />
@@ -557,6 +561,7 @@ exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMen
               aria-controls="tab-panel-5"
               aria-selected="true"
               class="leafygreen-ui-oq6if2"
+              data-cy="search-and-filter-tab"
               data-text="Search & Filter"
               id="tab-6"
               name="Search & Filter"
@@ -573,6 +578,7 @@ exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMen
               aria-controls="tab-panel-7"
               aria-selected="false"
               class="leafygreen-ui-1vvp6ij"
+              data-cy="log-viewing-tab"
               data-text="Log Viewing"
               id="tab-8"
               name="Log Viewing"
@@ -597,6 +603,7 @@ exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMen
         <div>
           <div
             aria-labelledby="tab-6"
+            data-cy="search-and-filter-tab"
             id="tab-panel-5"
             role="tabpanel"
           >
@@ -1067,6 +1074,7 @@ exports[`storyshots Storyshots components/DetailsMenu/DetailsMenuCard/DetailsMen
           </div>
           <div
             aria-labelledby="tab-8"
+            data-cy="log-viewing-tab"
             id="tab-panel-7"
             role="tabpanel"
           />
