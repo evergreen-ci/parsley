@@ -5,8 +5,12 @@ import { defineConfig } from "vite";
 import checker from "vite-plugin-checker";
 import envCompatible from "vite-plugin-env-compatible";
 import tsconfigPaths from "vite-tsconfig-paths";
+import dns from "dns";
 import path from "path";
 import injectVariablesInHTML from "./config/injectVariablesInHTML";
+
+// Remove when https://github.com/cypress-io/cypress/issues/25397 is resolved.
+dns.setDefaultResultOrder("ipv4first");
 
 // https://vitejs.dev/config/
 export default defineConfig({
