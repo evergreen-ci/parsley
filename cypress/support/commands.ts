@@ -42,11 +42,15 @@ Cypress.Commands.add(
   (toggleDataCy: string, enabled: boolean) => {
     cy.toggleDetailsPanel(true);
     // Check if the data-cy is visible before clicking if not visible, switch to the other tab
-    if (Cypress.$(`[data-cy='${toggleDataCy}']`).length === 0) {
-      cy.log("Element not visible, switching to log viewing tab");
-      cy.get("button[data-cy='log-viewing-tab']").click();
-      cy.dataCy(toggleDataCy).should("be.visible");
-    }
+    cy.dataCy(toggleDataCy).then(($els) => {
+      // @ts-expect-error
+      const doesNotExist = $els.length === 0;
+      if (doesNotExist) {
+        cy.log("Element not visible, switching to log viewing tab");
+        cy.get("button[data-cy='log-viewing-tab']").click();
+        cy.dataCy(toggleDataCy).should("be.visible");
+      }
+    });
 
     cy.dataCy(toggleDataCy).click();
     cy.dataCy(toggleDataCy).should("have.attr", "aria-checked", `${enabled}`);
