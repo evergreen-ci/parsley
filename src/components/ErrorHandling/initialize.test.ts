@@ -7,9 +7,6 @@ const { cleanup, mockEnv } = mockEnvironmentVariables();
 describe("should initialize error handlers according to release stage", () => {
   beforeEach(() => {
     jest.spyOn(Sentry, "init").mockImplementation(jest.fn());
-    jest
-      .spyOn(Sentry, "Replay")
-      .mockImplementation(() => ({} as Sentry.Replay));
   });
 
   afterEach(() => {
@@ -35,10 +32,7 @@ describe("should initialize error handlers according to release stage", () => {
       debug: false,
       dsn: "fake-sentry-key",
       environment: "production",
-      integrations: [{}],
       normalizeDepth: 5,
-      replaysOnErrorSampleRate: 0.6,
-      replaysSessionSampleRate: 0,
     });
   });
 
@@ -52,10 +46,7 @@ describe("should initialize error handlers according to release stage", () => {
       debug: true,
       dsn: "fake-sentry-key",
       environment: "beta",
-      integrations: [{}],
       normalizeDepth: 5,
-      replaysOnErrorSampleRate: 1,
-      replaysSessionSampleRate: 0,
     });
   });
 
@@ -69,10 +60,7 @@ describe("should initialize error handlers according to release stage", () => {
       debug: true,
       dsn: "fake-sentry-key",
       environment: "staging",
-      integrations: [{}],
       normalizeDepth: 5,
-      replaysOnErrorSampleRate: 1,
-      replaysSessionSampleRate: 0,
     });
   });
 });
