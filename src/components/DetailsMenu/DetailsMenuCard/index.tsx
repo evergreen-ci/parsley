@@ -29,7 +29,7 @@ const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
           selected={selectedTab}
           setSelected={setSelectedTab}
         >
-          <Tab name="Search & Filter">
+          <Tab data-cy="search-and-filter-tab" name="Search & Filter">
             <Row>
               <Column>
                 <SearchRangeInput />
@@ -40,7 +40,7 @@ const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
             <ButtonRow />
             <CLIInstructions />
           </Tab>
-          <Tab name="Log Viewing">
+          <Tab data-cy="log-viewing-tab" name="Log Viewing">
             <Row>
               <Column>
                 <WrapToggle />
