@@ -21,6 +21,9 @@ declare global {
       addSearch(search: string): void;
       /**
        * Custom command to click one of the toggles in the Details Menu panel.
+       * @param toggleDataCy The data-cy attribute of the toggle to click.
+       * @param enable Whether the toggle should be enabled or disabled.
+       * @param tab The tab to click before clicking the toggle. Defaults to "search-and-filter".
        * @example cy.clickToggle('wrap-toggle', true, 'log-viewing')
        */
       clickToggle(
