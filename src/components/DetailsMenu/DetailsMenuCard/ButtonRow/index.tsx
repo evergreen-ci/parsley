@@ -21,7 +21,7 @@ const ButtonRow: React.FC = () => {
   const { htmlLogURL, jobLogsURL, legacyJobLogsURL, lobsterURL, rawLogURL } =
     logMetadata || {};
   const tooltipText = bookmarks.length
-    ? "Copy Bookmarked Lines In Jira Format"
+    ? "Copy bookmarked lines in JIRA format"
     : "No bookmarks to copy.";
 
   return (
@@ -45,7 +45,7 @@ const ButtonRow: React.FC = () => {
               sendEvent({ name: "Clicked Copy To Jira" });
             }}
           >
-            Copy bookmarks
+            JIRA
           </Button>
         }
         triggerEvent="hover"

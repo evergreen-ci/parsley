@@ -4,7 +4,7 @@ import TextInput from "@leafygreen-ui/text-input";
 import { QueryParams } from "constants/queryParams";
 import { size } from "constants/tokens";
 import { useQueryParam } from "hooks/useQueryParam";
-import { DetailName, DetailRow } from "../styles";
+import { DetailRow, DetailsLabel } from "../styles";
 
 const { red } = palette;
 
@@ -41,7 +41,9 @@ const SearchRangeInput: React.FC = () => {
 
   return (
     <StyledDetailRow>
-      <DetailName>Range</DetailName>
+      <DetailsLabel label="Restrict search and filter functionality to a subsection of lines">
+        Range
+      </DetailsLabel>
 
       <RangeInputContainer>
         <RangeInputWrapper>

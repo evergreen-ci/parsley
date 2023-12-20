@@ -39,8 +39,15 @@ Cypress.Commands.add("clearBounds", () => {
 
 Cypress.Commands.add(
   "clickToggle",
-  (toggleDataCy: string, enabled: boolean) => {
+  (
+    toggleDataCy: string,
+    enabled: boolean,
+    tab: "search-and-filter" | "log-viewing" = "search-and-filter"
+  ) => {
     cy.toggleDetailsPanel(true);
+    if (tab === "log-viewing") {
+      cy.get("button[data-cy='log-viewing-tab']").click();
+    }
     cy.dataCy(toggleDataCy).click();
     cy.dataCy(toggleDataCy).should("have.attr", "aria-checked", `${enabled}`);
     cy.toggleDetailsPanel(false);

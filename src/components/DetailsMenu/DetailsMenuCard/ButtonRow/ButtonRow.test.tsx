@@ -39,7 +39,7 @@ describe("buttonRow", () => {
       await user.hover(jiraButton);
       await waitFor(() => {
         expect(
-          screen.getByText("Copy Bookmarked Lines In Jira Format")
+          screen.getByText("Copy bookmarked lines in JIRA format")
         ).toBeInTheDocument();
       });
       // Tooltip text should change after clicking on the button.

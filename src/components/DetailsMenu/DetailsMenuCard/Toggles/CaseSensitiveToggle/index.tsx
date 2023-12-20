@@ -14,6 +14,7 @@ const CaseSensitiveToggle: React.FC = () => {
         setCaseSensitive(value);
         sendEvent({ name: "Toggled Case Sensitivity", on: value });
       }}
+      tooltip="Make search terms case sensitive"
       value={caseSensitive}
     />
   );

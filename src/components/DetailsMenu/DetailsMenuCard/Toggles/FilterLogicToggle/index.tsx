@@ -25,6 +25,7 @@ const FilterLogicToggle: React.FC = () => {
       leftLabel="AND"
       onChange={onChange}
       rightLabel="OR"
+      tooltip="Toggle between AND and OR logic for filtering"
       value={isChecked}
     />
   );

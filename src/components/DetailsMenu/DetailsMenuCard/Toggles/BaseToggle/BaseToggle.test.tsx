@@ -10,6 +10,7 @@ describe("base toggle", () => {
         leftLabel="Left"
         onChange={jest.fn()}
         rightLabel="Right"
+        tooltip="test tooltip"
         value
       />
     );
@@ -26,6 +27,7 @@ describe("base toggle", () => {
         data-cy="toggle"
         label="test"
         onChange={toggleFunc}
+        tooltip="test tooltip"
         value={false}
       />
     );
@@ -46,6 +48,7 @@ describe("base toggle", () => {
         leftLabel="Left"
         onChange={jest.fn()}
         rightLabel="Right"
+        tooltip="test tooltip"
         value
       />
     );
