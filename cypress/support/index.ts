@@ -21,9 +21,13 @@ declare global {
       addSearch(search: string): void;
       /**
        * Custom command to click one of the toggles in the Details Menu panel.
-       * @example cy.clickToggle('wrap-toggle', true)
+       * @example cy.clickToggle('wrap-toggle', true, 'log-viewing')
        */
-      clickToggle(toggleDataCy: string, enable: boolean): void;
+      clickToggle(
+        toggleDataCy: string,
+        enable: boolean,
+        tab?: "search-and-filter" | "log-viewing"
+      ): void;
       /**
        * Custom command to clear the search range bounds in the Details Menu panel.
        */

@@ -39,19 +39,15 @@ Cypress.Commands.add("clearBounds", () => {
 
 Cypress.Commands.add(
   "clickToggle",
-  (toggleDataCy: string, enabled: boolean) => {
+  (
+    toggleDataCy: string,
+    enabled: boolean,
+    tab: "search-and-filter" | "log-viewing" = "search-and-filter"
+  ) => {
     cy.toggleDetailsPanel(true);
-    // Check if the data-cy is visible before clicking if not visible, switch to the other tab
-    cy.dataCy(toggleDataCy).then(($els) => {
-      // @ts-expect-error
-      const doesNotExist = $els.length === 0;
-      if (doesNotExist) {
-        cy.log("Element not visible, switching to log viewing tab");
-        cy.get("button[data-cy='log-viewing-tab']").click();
-        cy.dataCy(toggleDataCy).should("be.visible");
-      }
-    });
-
+    if (tab === "log-viewing") {
+      cy.get("button[data-cy='log-viewing-tab']").click();
+    }
     cy.dataCy(toggleDataCy).click();
     cy.dataCy(toggleDataCy).should("have.attr", "aria-checked", `${enabled}`);
     cy.toggleDetailsPanel(false);

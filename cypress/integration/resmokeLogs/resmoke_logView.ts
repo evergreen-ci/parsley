@@ -17,7 +17,7 @@ describe("Basic resmoke log view", () => {
     });
   });
   it("long lines with wrapping turned on should fit on screen", () => {
-    cy.clickToggle("wrap-toggle", true);
+    cy.clickToggle("wrap-toggle", true, "log-viewing");
     cy.dataCy("log-row-16").should("be.visible");
     cy.dataCy("log-row-16").isContainedInViewport();
   });
