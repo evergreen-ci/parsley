@@ -30,11 +30,13 @@ interface Preferences {
   filterLogic: FilterLogic;
   prettyPrint: boolean;
   wrap: boolean;
+  zebraStriping: boolean;
   setCaseSensitive: (caseSensitive: boolean) => void;
   setExpandableRows: (expandableRows: boolean) => void;
   setFilterLogic: (filterLogic: FilterLogic) => void;
   setWrap: (wrap: boolean) => void;
   setPrettyPrint: (prettyPrint: boolean) => void;
+  setZebraStriping: (zebraStriping: boolean) => void;
 }
 
 enum DIRECTION {

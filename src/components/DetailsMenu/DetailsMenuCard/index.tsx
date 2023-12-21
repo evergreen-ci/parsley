@@ -13,6 +13,7 @@ import {
   PrettyPrintToggle,
   WrapToggle,
 } from "./Toggles";
+import ZebraStripingToggle from "./Toggles/ZebraStripingToggle";
 
 interface DetailsMenuProps {
   "data-cy"?: string;
@@ -46,6 +47,7 @@ const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
                 <WrapToggle />
                 <PrettyPrintToggle />
                 <ExpandableRowsToggle />
+                <ZebraStripingToggle />
               </Column>
             </Row>
           </Tab>
