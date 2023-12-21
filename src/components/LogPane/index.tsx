@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { css } from "@leafygreen-ui/emotion";
 import Cookies from "js-cookie";
 import PaginatedVirtualList from "components/PaginatedVirtualList";
 import { WRAP } from "constants/cookies";
@@ -15,7 +16,7 @@ interface LogPaneProps {
 const LogPane: React.FC<LogPaneProps> = ({ rowCount, rowRenderer }) => {
   const { listRef, preferences, processedLogLines, scrollToLine } =
     useLogContext();
-  const { setWrap } = preferences;
+  const { setWrap, zebraStriping } = preferences;
 
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
@@ -55,6 +56,7 @@ const LogPane: React.FC<LogPaneProps> = ({ rowCount, rowRenderer }) => {
   return (
     <PaginatedVirtualList
       ref={listRef}
+      className={zebraStriping ? zebraStripingStyles : undefined}
       paginationOffset={200}
       paginationThreshold={500000}
       rowCount={rowCount}
@@ -62,6 +64,12 @@ const LogPane: React.FC<LogPaneProps> = ({ rowCount, rowRenderer }) => {
     />
   );
 };
+
+const zebraStripingStyles = css`
+  div[data-index]:nth-child(2n) {
+    background-color: rgba(0, 0, 0, 0.07);
+  }
+`;
 
 LogPane.displayName = "VirtuosoLogPane";
 
