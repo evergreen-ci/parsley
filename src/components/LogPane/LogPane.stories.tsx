@@ -1,5 +1,7 @@
+import { useEffect } from "react";
 import styled from "@emotion/styled";
 import { VirtuosoMockContext } from "react-virtuoso";
+import { useLogContext } from "context/LogContext";
 import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import LogPane from ".";
 
@@ -25,6 +27,33 @@ export const Default: CustomStoryObj<typeof LogPane> = {
     >
       <Container>
         <LogPane {...args} rowCount={list.length} rowRenderer={RowRenderer} />
+      </Container>
+    </VirtuosoMockContext.Provider>
+  ),
+};
+
+const LogPaneWithZebraStriping = (args: any) => {
+  const { preferences } = useLogContext();
+  const { setZebraStriping } = preferences;
+  useEffect(() => {
+    setZebraStriping(true);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+  return <LogPane {...args} rowCount={list.length} rowRenderer={RowRenderer} />;
+};
+
+export const ZebraStriping: CustomStoryObj<typeof LogPane> = {
+  args: {},
+  render: (args) => (
+    <VirtuosoMockContext.Provider
+      value={{ itemHeight: 18, viewportHeight: 500 }}
+    >
+      <Container>
+        <LogPaneWithZebraStriping
+          {...args}
+          rowCount={list.length}
+          rowRenderer={RowRenderer}
+        />
       </Container>
     </VirtuosoMockContext.Provider>
   ),

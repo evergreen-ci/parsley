@@ -6,6 +6,7 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Ansi Row
     class="css-1mysoqc"
   >
     <div
+      class="leafygreen-ui-s50gz5"
       data-cy="paginated-virtual-list"
       data-test-id="virtuoso-scroller"
       data-virtuoso-scroller="true"
@@ -32,6 +33,7 @@ exports[`storyshots Storyshots components/LogRow/CollapsedRow Collapsed Resmoke 
     class="css-1mysoqc"
   >
     <div
+      class="leafygreen-ui-s50gz5"
       data-cy="paginated-virtual-list"
       data-test-id="virtuoso-scroller"
       data-virtuoso-scroller="true"
