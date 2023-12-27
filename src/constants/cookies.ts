@@ -4,6 +4,7 @@ export const WRAP = "wrap";
 export const CASE_SENSITIVE = "case-sensitive";
 export const FILTER_LOGIC = "filter-logic";
 export const EXPANDABLE_ROWS = "expandable-rows";
+export const ZEBRA_STRIPING = "zebra-striping";
 
 export const HAS_OPENED_DRAWER = "has-opened-drawer";
 export const HAS_SEEN_SEARCHBAR_GUIDE_CUE = "has-seen-searchbar-guide-cue";

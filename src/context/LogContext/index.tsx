@@ -15,6 +15,7 @@ import {
   FILTER_LOGIC,
   PRETTY_PRINT_BOOKMARKS,
   WRAP,
+  ZEBRA_STRIPING,
 } from "constants/cookies";
 import { FilterLogic, LogTypes } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
@@ -102,6 +103,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
   const [prettyPrint, setPrettyPrint] = useState(
     Cookie.get(PRETTY_PRINT_BOOKMARKS) === "true"
+  );
+  const [zebraStriping, setZebraStriping] = useState(
+    Cookie.get(ZEBRA_STRIPING) === "true"
   );
 
   const { dispatch, state } = useLogState(initialLogLines);
@@ -255,7 +259,12 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           setWrap(v);
           Cookie.set(WRAP, v.toString(), { expires: 365 });
         },
+        setZebraStriping: (v: boolean) => {
+          setZebraStriping(v);
+          Cookie.set(ZEBRA_STRIPING, v.toString(), { expires: 365 });
+        },
         wrap,
+        zebraStriping,
       },
       processedLogLines,
       range: {
@@ -299,6 +308,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       processedLogLines,
       searchLine,
       searchResults,
+      zebraStriping,
       state.expandedLines,
       state.hasLogs,
       state.logMetadata,

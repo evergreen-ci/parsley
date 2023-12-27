@@ -6,6 +6,7 @@ exports[`storyshots Storyshots components/LogRow/ResmokeRow Multiple Lines 1`] =
     class="css-1mysoqc"
   >
     <div
+      class="leafygreen-ui-s50gz5"
       data-cy="paginated-virtual-list"
       data-test-id="virtuoso-scroller"
       data-virtuoso-scroller="true"

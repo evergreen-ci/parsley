@@ -18,6 +18,7 @@ interface PaginatedVirtualListProps {
    * This value must be less than paginationThreshold.
    */
   paginationOffset?: number;
+  className?: string;
 }
 
 const PaginatedVirtualList = forwardRef<
@@ -26,6 +27,7 @@ const PaginatedVirtualList = forwardRef<
 >(
   (
     {
+      className,
       paginationOffset = 10,
       paginationThreshold = 10000,
       rowCount,
@@ -93,6 +95,7 @@ const PaginatedVirtualList = forwardRef<
             scrollToPrevPage();
           }
         }}
+        className={className}
         data-cy="paginated-virtual-list"
         itemContent={itemContent}
         overscan={300}
