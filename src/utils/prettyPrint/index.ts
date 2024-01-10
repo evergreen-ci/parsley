@@ -75,7 +75,7 @@ export const formatPrettyPrint = (logLine: string) => {
 
     // Add prettified JSON, and use regex to remove quotes around fields.
     formatted += parseJson(
-      logLine.substring(jsonIndices[i][0], jsonIndices[i][1] + 1)
+      logLine.substring(jsonIndices[i][0], jsonIndices[i][1] + 1),
     ).replace(/"([^"]+)"\s*:/g, "$1:");
     formatted += "\n";
 

@@ -17,7 +17,7 @@ const renderRow = (
   options: RenderRowOptions = {
     logLines,
     routerOptions: {},
-  }
+  },
 ) =>
   renderWithRouterMatch(<AnsiRow {...props} />, {
     ...options.routerOptions,
@@ -51,7 +51,7 @@ describe("ansiRow", () => {
     expect(screen.getByText("https://www.google.com")).toBeInTheDocument();
     expect(screen.getByText("https://www.google.com")).toHaveAttribute(
       "href",
-      "https://www.google.com"
+      "https://www.google.com",
     );
   });
   it("should highlight text that match a search term", () => {
@@ -62,7 +62,7 @@ describe("ansiRow", () => {
         lineNumber: 9,
         searchTerm: /highlight me/,
       },
-      {}
+      {},
     );
     expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
   });
@@ -74,7 +74,7 @@ describe("ansiRow", () => {
         lineIndex: 9,
         lineNumber: 9,
       },
-      {}
+      {},
     );
     expect(screen.getByDataCy("highlight")).toHaveTextContent("highlight me");
   });
@@ -87,10 +87,10 @@ describe("ansiRow", () => {
         { ...priorityProps, lineIndex: 0, lineNumber: 0 },
         {
           logLines: priorityLogLines,
-        }
+        },
       );
       expect(
-        screen.getByText(priorityLogLines[0].substring(8))
+        screen.getByText(priorityLogLines[0].substring(8)),
       ).toBeInTheDocument();
       expect(screen.getByDataCy("ansi-row")).toHaveStyle(`color: ${rgbBlack}`);
     });
@@ -102,10 +102,10 @@ describe("ansiRow", () => {
         { ...priorityProps, lineIndex: 3, lineNumber: 3 },
         {
           logLines: priorityLogLines,
-        }
+        },
       );
       expect(
-        screen.getByText(priorityLogLines[3].substring(8))
+        screen.getByText(priorityLogLines[3].substring(8)),
       ).toBeInTheDocument();
       expect(screen.getByDataCy("ansi-row")).toHaveStyle(`color: ${rgbRed}`);
     });

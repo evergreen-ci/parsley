@@ -45,7 +45,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
   const debounceSearch = useRef(
     debounce((value: string) => {
       onChange(value);
-    }, 500)
+    }, 500),
   ).current;
 
   useKeyboardShortcut(
@@ -54,7 +54,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       inputRef.current?.focus();
       inputRef.current?.select();
     },
-    { disabled, ignoreFocus: true }
+    { disabled, ignoreFocus: true },
   );
 
   useKeyboardShortcut(
@@ -70,7 +70,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
       ] as keyof typeof SearchBarActions;
       setSelected(SearchBarActions[nextKey]);
     },
-    { disabled, ignoreFocus: true }
+    { disabled, ignoreFocus: true },
   );
 
   const handleChangeSelect = (value: string) => {
@@ -85,7 +85,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
     leaveBreadcrumb(
       "search-bar-submit",
       { input, selected },
-      SentryBreadcrumb.User
+      SentryBreadcrumb.User,
     );
     onSubmit(selected, input);
   };
@@ -153,7 +153,7 @@ const SearchBar: React.FC<SearchBarProps> = ({
               leaveBreadcrumb(
                 "applied-search-suggestion",
                 { suggestion },
-                SentryBreadcrumb.User
+                SentryBreadcrumb.User,
               );
             }}
             searchSuggestions={searchSuggestions}

@@ -19,7 +19,7 @@ describe("collapsedRow", () => {
       />,
       {
         wrapper: wrapper(logLines),
-      }
+      },
     );
     expect(screen.getByText("11 Lines Skipped")).toBeInTheDocument();
   });
@@ -36,7 +36,7 @@ describe("collapsedRow", () => {
       />,
       {
         wrapper: wrapper(logLines),
-      }
+      },
     );
     const expandFiveButton = screen.getByRole("button", {
       name: "5 Above & Below",
@@ -62,7 +62,7 @@ describe("collapsedRow", () => {
       />,
       {
         wrapper: wrapper(logLines),
-      }
+      },
     );
     const expandFiveButton = screen.getByRole("button", {
       name: "All",
@@ -81,7 +81,7 @@ describe("collapsedRow", () => {
       />,
       {
         wrapper: wrapper(logLines),
-      }
+      },
     );
     const expandFiveButton = screen.getByRole("button", {
       name: "5 Above & Below",

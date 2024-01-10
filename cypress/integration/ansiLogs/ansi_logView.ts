@@ -39,7 +39,7 @@ describe("Basic evergreen log view", () => {
       .should("be.visible")
       .should(
         "contain.text",
-        "EVG-14749: Add loading state for JIRA Issues and Suspected Issues (#1120)"
+        "EVG-14749: Add loading state for JIRA Issues and Suspected Issues (#1120)",
       );
     cy.dataCy("version-breadcrumb").trigger("mouseout");
 
@@ -48,7 +48,7 @@ describe("Basic evergreen log view", () => {
       .should(
         "have.attr",
         "href",
-        "http://localhost:9090/task/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0?redirect_spruce_users=true"
+        "http://localhost:9090/task/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0?redirect_spruce_users=true",
       );
     cy.dataCy("task-status-badge").should("contain.text", "Succeeded");
     cy.dataCy("test-breadcrumb").should("not.exist");
@@ -107,7 +107,7 @@ describe("Bookmarking and selecting lines", () => {
     // Need to fire a real click here because the copy to clipboard
     cy.dataCy("jira-button").realClick();
     cy.assertValueCopiedToClipboard(
-      `{noformat}\n${logLine0}\n...\n${logLine10}\n${logLine11}\n...\n${logLine297}\n{noformat}`
+      `{noformat}\n${logLine0}\n...\n${logLine10}\n${logLine11}\n...\n${logLine297}\n{noformat}`,
     );
   });
 
@@ -227,7 +227,7 @@ describe("Sharing lines", () => {
     cy.contains("Copy selected contents").realClick();
     cy.validateToast("success", "Copied 2 lines to clipboard", true);
     cy.assertValueCopiedToClipboard(
-      `{noformat}\n[2022/03/02 17:01:58.587] Starting task spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12, execution 0.\n[2022/03/02 17:01:58.701] Running pre-task commands.\n{noformat}`
+      `{noformat}\n[2022/03/02 17:01:58.587] Starting task spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12, execution 0.\n[2022/03/02 17:01:58.701] Running pre-task commands.\n{noformat}`,
     );
   });
   it("should be able to copy a link to the selected lines", () => {
@@ -239,7 +239,7 @@ describe("Sharing lines", () => {
     cy.contains("Copy share link to selected lines").realClick();
     cy.validateToast("success", "Copied link to clipboard", true);
     cy.assertValueCopiedToClipboard(
-      "http://localhost:4173/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task?bookmarks=0%2C297&selectedLineRange=L1-L2&shareLine=1"
+      "http://localhost:4173/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task?bookmarks=0%2C297&selectedLineRange=L1-L2&shareLine=1",
     );
   });
   it("should be able to limit the search range to the selected lines", () => {

@@ -38,7 +38,7 @@ describe("pretty print toggle", () => {
   it("should disable the toggle if the logType is not resmoke", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <PrettyPrintToggle />
+      <PrettyPrintToggle />,
     );
     render(<Component />, { wrapper });
     act(() => {
@@ -52,7 +52,7 @@ describe("pretty print toggle", () => {
   it("should not disable the toggle if the logType is resmoke", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <PrettyPrintToggle />
+      <PrettyPrintToggle />,
     );
     render(<Component />, { wrapper });
     act(() => {
@@ -67,7 +67,7 @@ describe("pretty print toggle", () => {
     const user = userEvent.setup();
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <PrettyPrintToggle />
+      <PrettyPrintToggle />,
     );
     const { router } = render(<Component />, { wrapper });
     act(() => {

@@ -11,7 +11,7 @@ type replaceFunction = (match: string, matchIndex: number) => string;
 export const highlighter = (
   regexp: RegExp,
   text: string,
-  replaceFunction: replaceFunction
+  replaceFunction: replaceFunction,
 ) =>
   text.replace(regexp, (match, ...groups) => {
     for (let i = 0; i < groups.length; i++) {

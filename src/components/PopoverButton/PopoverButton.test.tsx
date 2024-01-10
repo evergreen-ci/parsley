@@ -5,7 +5,7 @@ describe("popoverButton", () => {
   it("opens a popover when clicked", async () => {
     const user = userEvent.setup();
     render(
-      <PopoverButton buttonText="Open Popover">Some content</PopoverButton>
+      <PopoverButton buttonText="Open Popover">Some content</PopoverButton>,
     );
     const button = screen.getByRole("button", {
       name: "Open Popover",
@@ -21,7 +21,7 @@ describe("popoverButton", () => {
     render(
       <PopoverButton buttonText="Open Popover" onClick={onClick}>
         Some content
-      </PopoverButton>
+      </PopoverButton>,
     );
     const button = screen.getByRole("button", {
       name: "Open Popover",

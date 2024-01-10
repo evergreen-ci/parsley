@@ -140,10 +140,10 @@ export const useResolveLogURL = ({
         downloadURL = getEvergreenTaskFileURL(
           taskID,
           execution,
-          encodeURIComponent(fileName)
+          encodeURIComponent(fileName),
         );
         const allFiles = taskFileData?.task?.files.groupedFiles.flatMap(
-          (group) => group.files
+          (group) => group.files,
         );
         rawLogURL =
           allFiles?.find((file) => file?.name === fileName)?.link || "";

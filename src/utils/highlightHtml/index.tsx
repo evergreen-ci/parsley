@@ -15,7 +15,7 @@ import { highlighter } from "./highlighter";
 export const highlightHtml = (
   html: string = "",
   searchTerm: RegExp | undefined = undefined,
-  highlights: RegExp | undefined = undefined
+  highlights: RegExp | undefined = undefined,
 ) => {
   const escapedHtml = escapeTags(html);
 
@@ -28,7 +28,7 @@ export const highlightHtml = (
           highlightedText = highlighter(
             searchTerm,
             highlightedText,
-            (match) => `<mark>${match}</mark>`
+            (match) => `<mark>${match}</mark>`,
           );
         }
 
@@ -42,7 +42,7 @@ export const highlightHtml = (
             (match, index) =>
               `<mark color="${
                 highlightColorList[index % highlightColorList.length]
-              }">${match}</mark>`
+              }">${match}</mark>`,
           );
         }
 

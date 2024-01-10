@@ -70,7 +70,7 @@ const processResmokeLine = (line: string) => {
  */
 const getColorMapping = (
   logLine: string,
-  portColors: Record<string, string>
+  portColors: Record<string, string>,
 ) => {
   if (!logLine) {
     return;

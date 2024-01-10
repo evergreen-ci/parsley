@@ -7,15 +7,15 @@ describe("highlightHtml", () => {
       <>
         {highlightHtml(
           "<a href='https://donthighlightme.com'>highlight me</a> highlight me <span data-cy='dont-highlight-me'>highlight me</span>",
-          /highlight/gi
+          /highlight/gi,
         )}
-      </>
+      </>,
     );
     expect(screen.queryAllByDataCy("highlight")).toHaveLength(3);
     expect(screen.getByDataCy("dont-highlight-me")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "highlight me" })).toHaveAttribute(
       "href",
-      "https://donthighlightme.com"
+      "https://donthighlightme.com",
     );
   });
   it("can highlight < or > without corrupting valid HTML tags/attributes", () => {
@@ -23,9 +23,9 @@ describe("highlightHtml", () => {
       <>
         {highlightHtml(
           "<blah blah> <span data-cy='dont-highlight-me'>blah blah</span>",
-          /</gi
+          /</gi,
         )}
-      </>
+      </>,
     );
     expect(screen.queryAllByDataCy("highlight")).toHaveLength(1);
     expect(screen.queryByDataCy("highlight")).toHaveTextContent("<");
@@ -42,20 +42,20 @@ describe("highlightHtml", () => {
         {highlightHtml(
           "Downloading node package...",
           undefined,
-          /(Downloading)|(node)|(package)/gi
+          /(Downloading)|(node)|(package)/gi,
         )}
-      </>
+      </>,
     );
     expect(screen.queryAllByDataCy("highlight")).toHaveLength(3);
     const colors = new Set();
     colors.add(
-      getComputedStyle(screen.queryAllByDataCy("highlight")[0]).backgroundColor
+      getComputedStyle(screen.queryAllByDataCy("highlight")[0]).backgroundColor,
     );
     colors.add(
-      getComputedStyle(screen.queryAllByDataCy("highlight")[1]).backgroundColor
+      getComputedStyle(screen.queryAllByDataCy("highlight")[1]).backgroundColor,
     );
     colors.add(
-      getComputedStyle(screen.queryAllByDataCy("highlight")[2]).backgroundColor
+      getComputedStyle(screen.queryAllByDataCy("highlight")[2]).backgroundColor,
     );
     expect(colors.size).toBe(3);
   });
@@ -71,9 +71,9 @@ describe("highlightHtml", () => {
         {highlightHtml(
           "building for production...",
           /building/i,
-          /(production)/i
+          /(production)/i,
         )}
-      </>
+      </>,
     );
     expect(screen.queryAllByDataCy("highlight")).toHaveLength(2);
     screen.getAllByDataCy("highlight").forEach((highlight) => {

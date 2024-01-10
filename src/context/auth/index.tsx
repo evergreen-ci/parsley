@@ -60,7 +60,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
             leaveBreadcrumb(
               "Not Authenticated",
               { status_code: response.status },
-              SentryBreadcrumb.User
+              SentryBreadcrumb.User,
             );
             logoutAndRedirect();
           }
@@ -110,7 +110,7 @@ const AuthProvider: React.FC<{ children: React.ReactNode }> = ({
       isAuthenticated,
       logoutAndRedirect,
     }),
-    [isAuthenticated, devLogin, logoutAndRedirect]
+    [isAuthenticated, devLogin, logoutAndRedirect],
   );
 
   return (

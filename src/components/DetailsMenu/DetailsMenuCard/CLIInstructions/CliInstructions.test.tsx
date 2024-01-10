@@ -14,7 +14,7 @@ describe("cliInstructions", () => {
   it("should not exist if no task id or build id is provided", () => {
     const { Component } = renderComponentWithHook(
       useLogContext,
-      <CLIInstructions />
+      <CLIInstructions />,
     );
     render(<Component />, { wrapper });
     expect(screen.queryByDataCy("cli-instructions")).not.toBeInTheDocument();
@@ -22,7 +22,7 @@ describe("cliInstructions", () => {
   it("should render the task log download command with the appropriate tags if the log is a task log", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <CLIInstructions />
+      <CLIInstructions />,
     );
     render(<Component />, { wrapper });
     act(() => {
@@ -62,7 +62,7 @@ describe("cliInstructions", () => {
   it("should render the test log download command if the log is a test log", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <CLIInstructions />
+      <CLIInstructions />,
     );
     render(<Component />, { wrapper });
     act(() => {
@@ -80,7 +80,7 @@ describe("cliInstructions", () => {
   it("should render the logkeeper download command if the log is a resmoke log", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <CLIInstructions />
+      <CLIInstructions />,
     );
     render(<Component />, { wrapper });
     act(() => {

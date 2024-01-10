@@ -25,7 +25,7 @@ const UploadLink: React.FC<UploadLinkProps> = ({ clearLogs, hasLogs }) => {
       leaveBreadcrumb(
         "upload-link",
         { from: pathname, hasLogs: false, to: "/upload" },
-        SentryBreadcrumb.Navigation
+        SentryBreadcrumb.Navigation,
       );
       sendEvent({ hasLogs: false, name: "Clicked Upload Link" });
       navigate(routes.upload);

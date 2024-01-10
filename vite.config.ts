@@ -40,7 +40,7 @@ export default defineConfig({
     alias: {
       "@leafygreen-ui/emotion": path.resolve(
         __dirname,
-        "./config/leafygreen-ui/emotion.ts"
+        "./config/leafygreen-ui/emotion.ts",
       ),
     },
     extensions: [".mjs", ".js", ".ts", ".jsx", ".tsx", ".json"],

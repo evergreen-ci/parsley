@@ -28,7 +28,7 @@ interface FilterGroupProps {
   editFilter: (
     fieldName: keyof Filter,
     fieldValue: MatchType | CaseSensitivity | boolean | string,
-    filter: Filter
+    filter: Filter,
   ) => void;
 }
 
@@ -147,7 +147,7 @@ const FilterGroup: React.FC<FilterGroupProps> = ({
               onChange={(e) => {
                 setNewFilterExpression(e.target.value);
                 setIsValid(
-                  validateRegexp(e.target.value) && e.target.value !== ""
+                  validateRegexp(e.target.value) && e.target.value !== "",
                 );
               }}
               onKeyDown={(e) => e.key === "Enter" && isValid && handleSubmit()}

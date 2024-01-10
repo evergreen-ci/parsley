@@ -30,14 +30,14 @@ describe("Basic resmoke log view", () => {
   it("log header should show breadcrumbs, including one for the test name", () => {
     cy.dataCy("project-breadcrumb").should(
       "contain.text",
-      "mongodb-mongo-master"
+      "mongodb-mongo-master",
     );
 
     cy.dataCy("version-breadcrumb").should("contain.text", "Patch 973");
     cy.dataCy("version-breadcrumb").trigger("mouseover");
     cy.dataCy("breadcrumb-tooltip").should(
       "contain.text",
-      "SERVER-45720 Create tests for Atlas Workflows"
+      "SERVER-45720 Create tests for Atlas Workflows",
     );
     cy.dataCy("version-breadcrumb").trigger("mouseout");
 
@@ -46,13 +46,13 @@ describe("Basic resmoke log view", () => {
       .should(
         "have.attr",
         "href",
-        "http://localhost:9090/task/mongodb_mongo_master_rhel80_debug_v4ubsan_all_feature_flags_experimental_concurrency_sharded_with_stepdowns_and_balancer_4_linux_enterprise_361789ed8a613a2dc0335a821ead0ab6205fbdaa_22_09_21_02_53_24/0?redirect_spruce_users=true"
+        "http://localhost:9090/task/mongodb_mongo_master_rhel80_debug_v4ubsan_all_feature_flags_experimental_concurrency_sharded_with_stepdowns_and_balancer_4_linux_enterprise_361789ed8a613a2dc0335a821ead0ab6205fbdaa_22_09_21_02_53_24/0?redirect_spruce_users=true",
       );
     cy.dataCy("task-status-badge").should("contain.text", "Succeeded");
 
     cy.dataCy("test-breadcrumb").should(
       "contain.text",
-      "internal_transactions_kill_sessions.js"
+      "internal_transactions_kill_sessions.js",
     );
     cy.dataCy("test-status-badge").should("contain.text", "Pass");
   });
@@ -153,7 +153,7 @@ describe("Bookmarking and selecting lines", () => {
     // Need to fire a real click here because the copy to clipboard
     cy.dataCy("jira-button").realClick();
     cy.assertValueCopiedToClipboard(
-      `{noformat}\n${logLine0}\n...\n${logLine10}\n${logLine11}\n...\n${logLine11079}\n{noformat}`
+      `{noformat}\n${logLine0}\n...\n${logLine10}\n${logLine11}\n...\n${logLine11079}\n{noformat}`,
     );
   });
 
@@ -290,7 +290,7 @@ describe("Sharing lines", () => {
     cy.contains("Copy selected contents").realClick();
     cy.validateToast("success", "Copied 2 lines to clipboard", true);
     cy.assertValueCopiedToClipboard(
-      `{noformat}\n+------------------------------------------+--------+-----+-----+\n|full_name                                 |name    |port |pid  |\n{noformat}`
+      `{noformat}\n+------------------------------------------+--------+-----+-----+\n|full_name                                 |name    |port |pid  |\n{noformat}`,
     );
   });
   it("should be able to copy a link to the selected lines", () => {
@@ -302,7 +302,7 @@ describe("Sharing lines", () => {
     cy.contains("Copy share link to selected lines").realClick();
     cy.validateToast("success", "Copied link to clipboard", true);
     cy.assertValueCopiedToClipboard(
-      "http://localhost:4173/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab?bookmarks=0%2C11079&selectedLineRange=L1-L2&shareLine=1"
+      "http://localhost:4173/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab?bookmarks=0%2C11079&selectedLineRange=L1-L2&shareLine=1",
     );
   });
   it("should be able to limit the search range to the selected lines", () => {

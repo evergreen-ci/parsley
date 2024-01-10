@@ -38,7 +38,7 @@ const ButtonRow: React.FC = () => {
               leaveBreadcrumb(
                 "copy-jira",
                 { bookmarks },
-                SentryBreadcrumb.User
+                SentryBreadcrumb.User,
               );
               await copyToClipboard(getJiraFormat(bookmarks, getLine));
               setHasCopied(!hasCopied);

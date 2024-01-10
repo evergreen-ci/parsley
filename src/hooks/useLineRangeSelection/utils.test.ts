@@ -20,17 +20,17 @@ describe("parseSelectedLineRange", () => {
 describe("encodeSelectedLineRange", () => {
   it("should encode a selected line range", () => {
     expect(encodeSelectedLineRange({ endingLine: 10, startingLine: 1 })).toBe(
-      "L1-L10"
+      "L1-L10",
     );
   });
   it("should encode a selected line range with a single line", () => {
     expect(encodeSelectedLineRange({ endingLine: 1, startingLine: 1 })).toBe(
-      "L1"
+      "L1",
     );
   });
   it("should return an empty string if either line is undefined", () => {
     expect(
-      encodeSelectedLineRange({ endingLine: undefined, startingLine: 1 })
+      encodeSelectedLineRange({ endingLine: undefined, startingLine: 1 }),
     ).toBe("L1");
   });
 });

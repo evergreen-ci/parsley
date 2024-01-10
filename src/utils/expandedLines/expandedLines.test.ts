@@ -7,7 +7,7 @@ describe("mergeIntervals", () => {
         [89, 94],
         [95, 96],
         [97, 102],
-      ])
+      ]),
     ).toStrictEqual([[89, 102]]);
   });
 
@@ -17,7 +17,7 @@ describe("mergeIntervals", () => {
         [0, 5],
         [3, 15],
         [7, 28],
-      ])
+      ]),
     ).toStrictEqual([[0, 28]]);
   });
 
@@ -26,7 +26,7 @@ describe("mergeIntervals", () => {
       mergeIntervals([
         [89, 94],
         [97, 102],
-      ])
+      ]),
     ).toStrictEqual([
       [89, 94],
       [97, 102],
@@ -61,7 +61,7 @@ describe("isExpanded", () => {
         [0, 5],
         [23, 27],
         [30, 45],
-      ])
+      ]),
     ).toBe(true);
   });
 
@@ -71,7 +71,7 @@ describe("isExpanded", () => {
         [0, 5],
         [23, 27],
         [30, 45],
-      ])
+      ]),
     ).toBe(false);
   });
 });

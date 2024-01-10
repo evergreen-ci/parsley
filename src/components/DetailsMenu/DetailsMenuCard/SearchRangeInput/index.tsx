@@ -11,11 +11,11 @@ const { red } = palette;
 const SearchRangeInput: React.FC = () => {
   const [lowerBound, setLowerBound] = useQueryParam<number | undefined>(
     QueryParams.LowerRange,
-    undefined
+    undefined,
   );
   const [upperBound, setUpperBound] = useQueryParam<number | undefined>(
     QueryParams.UpperRange,
-    undefined
+    undefined,
   );
 
   const hasError =

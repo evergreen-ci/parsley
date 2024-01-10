@@ -11,7 +11,7 @@ export type StreamedFetchOptions = {
   onProgress?: (progress: number) => void;
   onIncompleteDownload?: (
     reason: IncompleteDownloadReason,
-    error?: Error
+    error?: Error,
   ) => void;
   downloadSizeLimit?: number;
 };
@@ -56,7 +56,7 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
             // If we've hit the file size limit, stop streaming and close the stream
             if (bytesFetched > options.downloadSizeLimit) {
               options?.onIncompleteDownload?.(
-                IncompleteDownloadReason.FileTooLarge
+                IncompleteDownloadReason.FileTooLarge,
               );
               controller.close();
               break;
@@ -80,7 +80,7 @@ const streamedFetch = async (url: string, options: StreamedFetchOptions) => {
         if (bytesFetched > 0) {
           options?.onIncompleteDownload?.(
             IncompleteDownloadReason.ServerError,
-            error as Error
+            error as Error,
           );
           controller.close();
         } else {

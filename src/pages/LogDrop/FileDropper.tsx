@@ -36,7 +36,7 @@ const FileDropper: React.FC = () => {
       sendEvent({ name: "Dropped file" });
       dispatch({ file: acceptedFiles[0], type: "DROPPED_FILE" });
     },
-    [dispatch, sendEvent]
+    [dispatch, sendEvent],
   );
 
   const onParse = useCallback(
@@ -54,12 +54,12 @@ const FileDropper: React.FC = () => {
                 });
                 const { result: logLines, trimmedLines } = await decodeStream(
                   stream,
-                  LOG_LINE_SIZE_LIMIT
+                  LOG_LINE_SIZE_LIMIT,
                 );
                 leaveBreadcrumb(
                   "Decoded file",
                   { fileSize: logLines.length },
-                  SentryBreadcrumb.UI
+                  SentryBreadcrumb.UI,
                 );
                 sendEvent({
                   fileSize: logLines?.length,
@@ -91,7 +91,7 @@ const FileDropper: React.FC = () => {
       setFileName,
       ingestLines,
       dispatchToast,
-    ]
+    ],
   );
 
   const { getInputProps, getRootProps, open } = useDropzone({

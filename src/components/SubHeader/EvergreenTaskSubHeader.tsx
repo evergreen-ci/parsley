@@ -58,8 +58,8 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   const { isPatch, message, projectIdentifier, revision } = versionMetadata;
 
   const currentTest =
-    task?.tests?.testResults?.find((test) =>
-      test?.logs?.urlRaw?.match(new RegExp(`${testID}`))
+    task?.tests?.testResults?.find(
+      (test) => test?.logs?.urlRaw?.match(new RegExp(`${testID}`)),
     ) ?? null;
 
   const breadcrumbs = [

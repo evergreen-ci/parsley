@@ -29,14 +29,14 @@ describe("getJiraFormat", () => {
   it("should add an ellipsis between lines if they are not adjacent to each other", () => {
     const bookmarks = [0, 5];
     expect(getJiraFormat(bookmarks, getLine)).toBe(
-      `{noformat}\n${logLines[0]}\n...\n${logLines[5]}\n{noformat}`
+      `{noformat}\n${logLines[0]}\n...\n${logLines[5]}\n{noformat}`,
     );
   });
 
   it("should not add an ellipsis if the lines are adjacent", () => {
     const bookmarks = [0, 1];
     expect(getJiraFormat(bookmarks, getLine)).toBe(
-      `{noformat}\n${logLines[0]}\n${logLines[1]}\n{noformat}`
+      `{noformat}\n${logLines[0]}\n${logLines[1]}\n{noformat}`,
     );
   });
 
@@ -53,7 +53,7 @@ describe("getJiraFormat", () => {
   it("should properly format the JIRA string", () => {
     const bookmarks = [0, 2, 4, 5];
     expect(getJiraFormat(bookmarks, getLine)).toBe(
-      `{noformat}\n${logLines[0]}\n...\n${logLines[2]}\n...\n${logLines[4]}\n${logLines[5]}\n{noformat}`
+      `{noformat}\n${logLines[0]}\n...\n${logLines[2]}\n...\n${logLines[4]}\n${logLines[5]}\n{noformat}`,
     );
   });
 });
@@ -136,27 +136,27 @@ describe("trimSeverity", () => {
   it("should trim the severity prefix from a line", () => {
     expect(
       trimSeverity(
-        "[P: 40] [2022/12/05 20:03:30.136] Running pre-task commands."
-      )
+        "[P: 40] [2022/12/05 20:03:30.136] Running pre-task commands.",
+      ),
     ).toBe("[2022/12/05 20:03:30.136] Running pre-task commands.");
     expect(
       trimSeverity(
-        "[P: 70] [2022/12/05 20:03:30.138] + '[' amazon2-cloud-small = amazon2-cloud-large ']'"
-      )
+        "[P: 70] [2022/12/05 20:03:30.138] + '[' amazon2-cloud-small = amazon2-cloud-large ']'",
+      ),
     ).toBe(
-      "[2022/12/05 20:03:30.138] + '[' amazon2-cloud-small = amazon2-cloud-large ']'"
+      "[2022/12/05 20:03:30.138] + '[' amazon2-cloud-small = amazon2-cloud-large ']'",
     );
   });
   it("should not trim the string if the severity prefix is not present", () => {
     expect(
-      trimSeverity("[2022/12/05 20:03:30.136] Running pre-task commands.")
+      trimSeverity("[2022/12/05 20:03:30.136] Running pre-task commands."),
     ).toBe("[2022/12/05 20:03:30.136] Running pre-task commands.");
     expect(
       trimSeverity(
-        "[2022/12/05 20:03:30.138] + '[' amazon2-cloud-small = amazon2-cloud-large ']'"
-      )
+        "[2022/12/05 20:03:30.138] + '[' amazon2-cloud-small = amazon2-cloud-large ']'",
+      ),
     ).toBe(
-      "[2022/12/05 20:03:30.138] + '[' amazon2-cloud-small = amazon2-cloud-large ']'"
+      "[2022/12/05 20:03:30.138] + '[' amazon2-cloud-small = amazon2-cloud-large ']'",
     );
   });
 });

@@ -14,7 +14,7 @@ describe("Searching", () => {
     cy.dataCy("highlight").should("have.length", 1);
     cy.dataCy("highlight").should(
       "contain.text",
-      "ShardedClusterFixture:job0:mongos0 "
+      "ShardedClusterFixture:job0:mongos0 ",
     );
   });
 

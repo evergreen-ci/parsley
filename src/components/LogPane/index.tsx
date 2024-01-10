@@ -20,7 +20,7 @@ const LogPane: React.FC<LogPaneProps> = ({ rowCount, rowRenderer }) => {
 
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
-    undefined
+    undefined,
   );
 
   useEffect(() => {
@@ -33,14 +33,14 @@ const LogPane: React.FC<LogPaneProps> = ({ rowCount, rowRenderer }) => {
           leaveBreadcrumb(
             "Triggered scroll to shareLine",
             { initialScrollIndex, shareLine },
-            SentryBreadcrumb.User
+            SentryBreadcrumb.User,
           );
           scrollToLine(initialScrollIndex);
         } else {
           leaveBreadcrumb(
             "shareLine not provided or found in processedLogLines",
             { shareLine },
-            SentryBreadcrumb.UI
+            SentryBreadcrumb.UI,
           );
         }
 

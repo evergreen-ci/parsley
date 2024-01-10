@@ -131,7 +131,7 @@ describe("useLogContext", () => {
         // Expect the line not to be a collapsed row
         expect(isCollapsedRow(line)).toBe(false);
         expect(result.current.getLine(line as number)).toStrictEqual(
-          resmokeLines[i]
+          resmokeLines[i],
         );
       }
     });

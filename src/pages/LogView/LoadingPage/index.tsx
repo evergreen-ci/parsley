@@ -57,7 +57,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       getResmokeLogURL(buildID || "", { metadata: true, testID }),
       {
         skip: buildID === undefined,
-      }
+      },
     );
 
   const {

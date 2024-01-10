@@ -27,11 +27,11 @@ describe("useTaskQuery", () => {
         }),
       {
         wrapper,
-      }
+      },
     );
     await waitFor(() => {
       expect(result.current.task).toMatchObject(
-        evergreenTaskMock?.result?.data?.task as Task
+        evergreenTaskMock?.result?.data?.task as Task,
       );
     });
   });
@@ -45,12 +45,12 @@ describe("useTaskQuery", () => {
         }),
       {
         wrapper,
-      }
+      },
     );
     await waitFor(() => {
       expect(result.current.task).toMatchObject(
         logkeeperMetadataMock?.result?.data?.logkeeperBuildMetadata
-          ?.task as Task
+          ?.task as Task,
       );
     });
   });

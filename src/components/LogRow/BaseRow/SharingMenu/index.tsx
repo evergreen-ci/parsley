@@ -41,7 +41,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
     // Create an array of line numbers that represent the range in selectedLines
     const lineNumbers = getLinesInProcessedLogLinesFromSelectedLines(
       processedLogLines,
-      selectedLines
+      selectedLines,
     );
 
     await copyToClipboard(getJiraFormat(lineNumbers, getLine));
@@ -50,7 +50,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
       name: "Copied Share Lines To Clipboard",
     });
     dispatchToast.success(
-      `Copied ${pluralize("line", lineNumbers.length, true)} to clipboard`
+      `Copied ${pluralize("line", lineNumbers.length, true)} to clipboard`,
     );
   };
 
@@ -108,7 +108,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
         onClick={handleCopySelectedLines}
         title={`Copy the selected ${pluralize(
           "line",
-          lineCount
+          lineCount,
         )} to your clipboard with JIRA formatting.`}
       >
         Copy selected contents
@@ -119,7 +119,7 @@ const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
           onClick={handleShareLinkToSelectedLines}
           title={`Copy a link to ${pluralize("this", lineCount)} ${pluralize(
             "line",
-            lineCount
+            lineCount,
           )}.`}
         >
           Copy share link to selected {pluralize("line", lineCount)}

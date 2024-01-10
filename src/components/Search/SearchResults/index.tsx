@@ -17,17 +17,17 @@ const SearchResults: React.FC<SearchResultsProps> = ({
 }) => {
   // Register keyboard shortcuts for paginating backwards.
   useKeyboardShortcut({ charKey: CharKey.P }, () =>
-    paginate(DIRECTION.PREVIOUS)
+    paginate(DIRECTION.PREVIOUS),
   );
   useKeyboardShortcut(
     { charKey: CharKey.Enter, modifierKeys: [ModifierKey.Shift] },
-    () => paginate(DIRECTION.PREVIOUS)
+    () => paginate(DIRECTION.PREVIOUS),
   );
 
   // Register keyboard shortcuts for paginating forwards.
   useKeyboardShortcut({ charKey: CharKey.N }, () => paginate(DIRECTION.NEXT));
   useKeyboardShortcut({ charKey: CharKey.Enter }, () =>
-    paginate(DIRECTION.NEXT)
+    paginate(DIRECTION.NEXT),
   );
 
   return (

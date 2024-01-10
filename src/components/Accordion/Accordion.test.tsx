@@ -7,19 +7,19 @@ describe("accordion", () => {
     render(
       <Accordion title="collapsed" toggledTitle="expanded">
         accordion content
-      </Accordion>
+      </Accordion>,
     );
     await user.click(screen.getByDataCy("accordion-toggle"));
     expect(screen.getByText("expanded")).toBeInTheDocument();
     expect(screen.getByDataCy("accordion-collapse-container")).toHaveAttribute(
       "aria-expanded",
-      "true"
+      "true",
     );
     await user.click(screen.getByDataCy("accordion-toggle"));
     expect(screen.getByText("collapsed")).toBeInTheDocument();
     expect(screen.getByDataCy("accordion-collapse-container")).toHaveAttribute(
       "aria-expanded",
-      "false"
+      "false",
     );
   });
 
@@ -27,11 +27,11 @@ describe("accordion", () => {
     render(
       <Accordion defaultOpen title="accordion title">
         accordion content
-      </Accordion>
+      </Accordion>,
     );
     expect(screen.getByDataCy("accordion-collapse-container")).toHaveAttribute(
       "aria-expanded",
-      "true"
+      "true",
     );
   });
 
@@ -41,18 +41,18 @@ describe("accordion", () => {
     render(
       <Accordion onToggle={onToggle} title="accordion title">
         accordion content
-      </Accordion>
+      </Accordion>,
     );
     await user.click(screen.getByDataCy("accordion-toggle"));
     expect(screen.getByDataCy("accordion-collapse-container")).toHaveAttribute(
       "aria-expanded",
-      "true"
+      "true",
     );
     expect(onToggle).toHaveBeenCalledTimes(1);
     await user.click(screen.getByDataCy("accordion-toggle"));
     expect(screen.getByDataCy("accordion-collapse-container")).toHaveAttribute(
       "aria-expanded",
-      "false"
+      "false",
     );
     expect(onToggle).toHaveBeenCalledTimes(2);
   });
@@ -62,7 +62,7 @@ describe("accordion", () => {
     render(
       <Accordion title="accordion title" titleTag={titleTag}>
         accordion content
-      </Accordion>
+      </Accordion>,
     );
     expect(screen.getByDataCy("my-custom-tag")).toBeInTheDocument();
   });

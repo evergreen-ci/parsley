@@ -34,7 +34,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
     leaveBreadcrumb(
       "delete-filter",
       { filterExpression },
-      SentryBreadcrumb.User
+      SentryBreadcrumb.User,
     );
     sendEvent({ filterExpression, name: "Deleted Filter" });
   };
@@ -42,7 +42,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
   const editFilter = (
     fieldName: keyof Filter,
     fieldValue: MatchType | CaseSensitivity | boolean | string,
-    filter: Filter
+    filter: Filter,
   ) => {
     // Duplicate filters are not allowed.
     if (
@@ -53,7 +53,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
     }
     const newFilters = [...filters];
     const idxToReplace = newFilters.findIndex(
-      (f) => f.expression === filter.expression
+      (f) => f.expression === filter.expression,
     );
     newFilters[idxToReplace] = {
       ...filter,
@@ -63,7 +63,7 @@ const FilterNavGroup: React.FC<FilterNavGroupProps> = ({
     leaveBreadcrumb(
       "edit-filter",
       { fieldName, fieldValue, filterExpression: filter.expression },
-      SentryBreadcrumb.User
+      SentryBreadcrumb.User,
     );
     sendEvent({
       after: newFilters[idxToReplace],

@@ -8,7 +8,7 @@ describe("bookmarks bar", () => {
         lineCount={0}
         processedLogLines={[]}
         scrollToLine={jest.fn()}
-      />
+      />,
     );
     await waitFor(() => {
       expect(router.state.location.search).toBe("");
@@ -21,7 +21,7 @@ describe("bookmarks bar", () => {
         lineCount={1}
         processedLogLines={[1]}
         scrollToLine={jest.fn()}
-      />
+      />,
     );
     await waitFor(() => {
       expect(router.state.location.search).toBe("?bookmarks=0");
@@ -34,7 +34,7 @@ describe("bookmarks bar", () => {
         lineCount={11}
         processedLogLines={[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10]}
         scrollToLine={jest.fn()}
-      />
+      />,
     );
     await waitFor(() => {
       expect(router.state.location.search).toBe("?bookmarks=0,10");
@@ -50,14 +50,14 @@ describe("bookmarks bar", () => {
       />,
       {
         route: "?bookmarks=1,7&shareLine=5",
-      }
+      },
     );
     const { children } = screen.getByDataCy("bookmark-list");
     expect(children).toHaveLength(3);
     expect((children.item(0) as Element).textContent).toContain("1");
     expect((children.item(1) as Element).textContent).toContain("5");
     expect((children.item(1) as Element).children.item(1)).toStrictEqual(
-      screen.getByLabelText("Link Icon")
+      screen.getByLabelText("Link Icon"),
     );
     expect((children.item(2) as Element).textContent).toContain("7");
   });
@@ -72,7 +72,7 @@ describe("bookmarks bar", () => {
       />,
       {
         route: "?bookmarks=1,3&shareLine=5",
-      }
+      },
     );
     await user.click(screen.getByDataCy("clear-bookmarks"));
     expect(router.state.location.search).toBe("?shareLine=5");
@@ -89,7 +89,7 @@ describe("bookmarks bar", () => {
       />,
       {
         route: "?bookmarks=1,3",
-      }
+      },
     );
     await user.click(screen.getByDataCy("bookmark-3"));
     expect(scrollToLine).toHaveBeenCalledTimes(1);
@@ -107,7 +107,7 @@ describe("bookmarks bar", () => {
       />,
       {
         route: "?bookmarks=1,3",
-      }
+      },
     );
     await user.click(screen.getByDataCy("bookmark-3"));
     expect(scrollToLine).toHaveBeenCalledTimes(1);

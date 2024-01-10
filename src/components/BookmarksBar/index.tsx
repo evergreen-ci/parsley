@@ -27,11 +27,11 @@ const BookmarksBar: React.FC<BookmarksBarProps> = ({
 
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
-    undefined
+    undefined,
   );
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
-    []
+    [],
   );
 
   // Set the initial bookmarks on load.

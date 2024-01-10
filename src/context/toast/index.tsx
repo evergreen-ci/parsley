@@ -62,7 +62,7 @@ const ToastProviderCore: React.FC<{ children: ReactNode }> = ({ children }) => {
         title: title || mapLeafyGreenVariantToTitle[variant],
         variant,
       }),
-    [pushToast]
+    [pushToast],
   );
 
   const toastContext = useMemo(() => {

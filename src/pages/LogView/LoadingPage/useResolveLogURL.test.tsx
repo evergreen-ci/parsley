@@ -36,7 +36,7 @@ describe("useResolveLogURL", () => {
         }),
       {
         wrapper,
-      }
+      },
     );
     expect(result.current).toMatchObject({
       downloadURL: "",
@@ -82,7 +82,7 @@ describe("useResolveLogURL", () => {
         }),
       {
         wrapper,
-      }
+      },
     );
     expect(result.current).toMatchObject({
       downloadURL: "",
@@ -124,7 +124,7 @@ describe("useResolveLogURL", () => {
         }),
       {
         wrapper,
-      }
+      },
     );
     await waitFor(() => {
       expect(result.current).toMatchObject({
@@ -161,7 +161,7 @@ describe("useResolveLogURL", () => {
         }),
       {
         wrapper,
-      }
+      },
     );
     await waitFor(() => {
       expect(result.current).toMatchObject({
@@ -194,7 +194,7 @@ describe("useResolveLogURL", () => {
         }),
       {
         wrapper,
-      }
+      },
     );
     await waitFor(() => {
       expect(result.current).toMatchObject({

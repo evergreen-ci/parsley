@@ -52,7 +52,7 @@ const ShortcutModal: React.FC<ShortcutModalProps> = ({ open, setOpen }) => {
     { charKey: CharKey.QuestionMark, modifierKeys: [ModifierKey.Shift] },
     () => {
       setOpen(!open);
-    }
+    },
   );
 
   useOnClickOutside([modalRef], () => {

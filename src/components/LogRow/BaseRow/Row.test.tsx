@@ -9,7 +9,7 @@ import Row from ".";
 
 const renderRow = (
   props: React.ComponentProps<typeof Row>,
-  routerOptions: RenderWithRouterMatchOptions
+  routerOptions: RenderWithRouterMatchOptions,
 ) =>
   renderWithRouterMatch(<Row {...props} />, {
     ...routerOptions,
@@ -44,7 +44,7 @@ describe("row", () => {
         lineNumber: 54,
         scrollToLine,
       },
-      {}
+      {},
     );
     await user.click(screen.getByDataCy("log-link-54"));
     expect(router.state.location.search).toBe("?shareLine=54");
@@ -55,7 +55,7 @@ describe("row", () => {
     const user = userEvent.setup();
     const { router } = renderRow(
       { ...rowProps, children: testLog },
-      { route: "?shareLine=0" }
+      { route: "?shareLine=0" },
     );
 
     await user.click(screen.getByDataCy("log-link-0"));
@@ -73,7 +73,7 @@ describe("row", () => {
     const user = userEvent.setup();
     const { router } = renderRow(
       { ...rowProps, children: testLog },
-      { route: "?bookmarks=0" }
+      { route: "?bookmarks=0" },
     );
 
     await user.dblClick(screen.getByText(testLog));
@@ -113,7 +113,7 @@ describe("row", () => {
           },
           searchTerm: regexp,
         },
-        {}
+        {},
       );
 
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");
@@ -130,7 +130,7 @@ describe("row", () => {
           },
           searchTerm: regexp,
         },
-        {}
+        {},
       );
 
       expect(screen.queryByDataCy("highlight")).not.toBeInTheDocument();
@@ -143,7 +143,7 @@ describe("row", () => {
           children: testLog,
           highlightRegex: regexp,
         },
-        {}
+        {},
       );
 
       expect(screen.getByDataCy("highlight")).toHaveTextContent("Test");

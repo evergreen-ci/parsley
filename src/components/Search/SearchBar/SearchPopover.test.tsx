@@ -6,7 +6,7 @@ describe("search popover", () => {
     render(<SearchPopover disabled searchSuggestions={[]} />);
     expect(screen.getByDataCy("search-suggestion-button")).toHaveAttribute(
       "aria-disabled",
-      "true"
+      "true",
     );
   });
 
@@ -17,7 +17,7 @@ describe("search popover", () => {
       <SearchPopover
         onClick={onClick}
         searchSuggestions={["apple", "banana"]}
-      />
+      />,
     );
     await user.click(screen.getByDataCy("search-suggestion-button"));
     await waitFor(() => {
@@ -36,7 +36,7 @@ describe("search popover", () => {
       <SearchPopover
         onClick={onClick}
         searchSuggestions={["apple", "banana"]}
-      />
+      />,
     );
     await user.click(screen.getByDataCy("search-suggestion-button"));
     await waitFor(() => {
@@ -58,7 +58,7 @@ describe("search popover", () => {
       <SearchPopover
         onClick={onClick}
         searchSuggestions={["apple", "banana"]}
-      />
+      />,
     );
     await user.click(screen.getByDataCy("search-suggestion-button"));
     await waitFor(() => {

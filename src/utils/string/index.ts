@@ -14,7 +14,7 @@ export const copyToClipboard = async (textToCopy: string) => {
  */
 export const getJiraFormat = (
   indices: number[],
-  getLine: (lineNumber: number) => string | undefined
+  getLine: (lineNumber: number) => string | undefined,
 ) => {
   if (indices.length === 0) {
     return "";

@@ -42,7 +42,7 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
     {
       skip: !projectIdentifier,
       variables: { projectIdentifier },
-    }
+    },
   );
   const { project } = data || {};
   const { parsleyFilters } = project || {};
@@ -56,7 +56,7 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
     leaveBreadcrumb(
       "applied-project-filters",
       { filters: state.selectedFilters },
-      SentryBreadcrumb.User
+      SentryBreadcrumb.User,
     );
     sendEvent({
       filters: state.selectedFilters,
@@ -100,7 +100,7 @@ const ProjectFiltersModal: React.FC<ProjectFiltersModalProps> = ({
               }}
               selected={
                 !!state.selectedFilters.find(
-                  (f) => f.expression === filter.expression
+                  (f) => f.expression === filter.expression,
                 )
               }
             />

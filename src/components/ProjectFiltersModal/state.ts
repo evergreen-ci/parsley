@@ -25,7 +25,7 @@ const reducer = (state: State, action: Action): State => {
       return {
         ...state,
         selectedFilters: state.selectedFilters.filter(
-          (f) => f.expression !== action.filterToRemove
+          (f) => f.expression !== action.filterToRemove,
         ),
       };
     case "RESET":

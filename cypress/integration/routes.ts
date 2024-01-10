@@ -1,7 +1,7 @@
 describe("Parsley Routes", () => {
   it("should render 'No Logs Found' when visiting a task log page of an empty log", () => {
     cy.visit(
-      "evergreen/mci_ubuntu1604_test_db_patch_a1d2c8f70bf5c543de8b9641ac1ec08def1ddb26_5f74d99ab2373627c047c5e5_20_09_30_19_16_47/0/task"
+      "evergreen/mci_ubuntu1604_test_db_patch_a1d2c8f70bf5c543de8b9641ac1ec08def1ddb26_5f74d99ab2373627c047c5e5_20_09_30_19_16_47/0/task",
     );
     cy.contains("No Logs Found");
   });

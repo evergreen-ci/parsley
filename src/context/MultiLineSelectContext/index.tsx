@@ -28,7 +28,7 @@ const useMultiLineSelectContext = () => {
   const context = useContext(MultiLineSelectContext);
   if (context === undefined) {
     throw new Error(
-      "useMultiLineSelectContext must be used within a MultiLineSelectContextProvider"
+      "useMultiLineSelectContext must be used within a MultiLineSelectContextProvider",
     );
   }
   return context as MultiLineSelectContextState;
@@ -41,7 +41,7 @@ const MultiLineSelectContextProvider: React.FC<{
   const [openMenu, setOpenMenu] = useState<boolean>(false);
   const [shareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
-    undefined
+    undefined,
   );
 
   const hasShareLine = shareLine !== undefined;
@@ -53,7 +53,7 @@ const MultiLineSelectContextProvider: React.FC<{
       : selectedLines.startingLine;
 
   const [menuPosition, setMenuPosition] = useState<number | undefined>(
-    initialMenuPosition ?? undefined
+    initialMenuPosition ?? undefined,
   );
 
   const clearSelection = useCallback(() => {
@@ -76,14 +76,14 @@ const MultiLineSelectContextProvider: React.FC<{
             endingLine: selectedLine,
             startingLine: selectedLines.startingLine,
           },
-          SentryBreadcrumb.UI
+          SentryBreadcrumb.UI,
         );
       } else {
         setSelectedLines({ endingLine: undefined, startingLine: selectedLine });
         leaveBreadcrumb(
           "Set initial line range",
           { endingLine: undefined, startingLine: selectedLine },
-          SentryBreadcrumb.UI
+          SentryBreadcrumb.UI,
         );
       }
 
@@ -93,14 +93,14 @@ const MultiLineSelectContextProvider: React.FC<{
         setMenuPosition(selectedLine);
       }
     },
-    [selectedLines, setSelectedLines, clearSelection]
+    [selectedLines, setSelectedLines, clearSelection],
   );
 
   const bothLinesSelected = useMemo(
     () =>
       selectedLines.startingLine !== undefined &&
       selectedLines.endingLine !== undefined,
-    [selectedLines]
+    [selectedLines],
   );
   const memoizedContext = useMemo(
     () => ({
@@ -117,7 +117,7 @@ const MultiLineSelectContextProvider: React.FC<{
       openMenu,
       bothLinesSelected,
       selectedLines,
-    ]
+    ],
   );
   return (
     <MultiLineSelectContext.Provider value={memoizedContext}>

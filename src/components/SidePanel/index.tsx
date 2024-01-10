@@ -25,7 +25,7 @@ const SidePanel: React.FC<SidePanelProps> = ({
   expandedLines,
 }) => {
   const [collapsed, setCollapsed] = useState(
-    Cookie.get(HAS_OPENED_DRAWER) === "true"
+    Cookie.get(HAS_OPENED_DRAWER) === "true",
   );
 
   return (

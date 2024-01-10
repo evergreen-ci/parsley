@@ -13,7 +13,7 @@ describe("uploadLink", () => {
     expect(screen.getByText("Upload")).toBeInTheDocument();
     expect(screen.queryByDataCy("upload-link")).toHaveAttribute(
       "href",
-      "/upload"
+      "/upload",
     );
   });
 

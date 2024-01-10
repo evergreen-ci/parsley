@@ -79,8 +79,8 @@ describe("matchesFilters", () => {
           matchesFilters(
             logLine,
             [{ isMatch: true, regex: /fix/i }],
-            FilterLogic.And
-          )
+            FilterLogic.And,
+          ),
         ).toBe(true);
       });
       it("works with case sensitivity on", () => {
@@ -88,8 +88,8 @@ describe("matchesFilters", () => {
           matchesFilters(
             logLine,
             [{ isMatch: true, regex: /fix/ }],
-            FilterLogic.And
-          )
+            FilterLogic.And,
+          ),
         ).toBe(false);
       });
     });
@@ -100,8 +100,8 @@ describe("matchesFilters", () => {
           matchesFilters(
             logLine,
             [{ isMatch: true, regex: /test/ }],
-            FilterLogic.And
-          )
+            FilterLogic.And,
+          ),
         ).toBe(true);
       });
       it("works with match type inverse", () => {
@@ -109,8 +109,8 @@ describe("matchesFilters", () => {
           matchesFilters(
             logLine,
             [{ isMatch: false, regex: /test/ }],
-            FilterLogic.And
-          )
+            FilterLogic.And,
+          ),
         ).toBe(false);
       });
     });
@@ -126,8 +126,8 @@ describe("matchesFilters", () => {
               { isMatch: true, regex: /rerender/ },
               { isMatch: true, regex: /test/ },
             ],
-            FilterLogic.And
-          )
+            FilterLogic.And,
+          ),
         ).toBe(true);
       });
       it("should work for condition !A and B / A and !B", () => {
@@ -138,8 +138,8 @@ describe("matchesFilters", () => {
               { isMatch: true, regex: /rerender/ },
               { isMatch: false, regex: /test/ },
             ],
-            FilterLogic.And
-          )
+            FilterLogic.And,
+          ),
         ).toBe(false);
       });
       it("should work for condition !A and !B", () => {
@@ -150,8 +150,8 @@ describe("matchesFilters", () => {
               { isMatch: false, regex: /rerender/ },
               { isMatch: false, regex: /test/ },
             ],
-            FilterLogic.And
-          )
+            FilterLogic.And,
+          ),
         ).toBe(false);
       });
     });
@@ -165,8 +165,8 @@ describe("matchesFilters", () => {
               { isMatch: true, regex: /rerender/ },
               { isMatch: true, regex: /test/ },
             ],
-            FilterLogic.Or
-          )
+            FilterLogic.Or,
+          ),
         ).toBe(true);
       });
       it("should work for condition !A or B / A or !B", () => {
@@ -177,8 +177,8 @@ describe("matchesFilters", () => {
               { isMatch: true, regex: /rerender/ },
               { isMatch: false, regex: /test/ },
             ],
-            FilterLogic.Or
-          )
+            FilterLogic.Or,
+          ),
         ).toBe(true);
       });
       it("should work for condition !A or !B", () => {
@@ -189,8 +189,8 @@ describe("matchesFilters", () => {
               { isMatch: false, regex: /rerender/ },
               { isMatch: false, regex: /test/ },
             ],
-            FilterLogic.Or
-          )
+            FilterLogic.Or,
+          ),
         ).toBe(false);
       });
     });
@@ -206,7 +206,7 @@ describe("getMatchingLines", () => {
     const filter1 = makeFilter({ expression: "starting", visible: false });
     const filter2 = makeFilter({ expression: "mongod", visible: false });
     expect(
-      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
+      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And),
     ).toBeUndefined();
   });
 
@@ -217,7 +217,7 @@ describe("getMatchingLines", () => {
     });
     const filter2 = makeFilter({ expression: "mongod" });
     expect(
-      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
+      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And),
     ).toStrictEqual(new Set([]));
   });
 
@@ -227,7 +227,7 @@ describe("getMatchingLines", () => {
     });
     const filter2 = makeFilter({ expression: "mongod" });
     expect(
-      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
+      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And),
     ).toStrictEqual(new Set([1, 4, 7]));
   });
 
@@ -237,7 +237,7 @@ describe("getMatchingLines", () => {
     });
     const filter2 = makeFilter({ expression: "mongod", visible: false });
     expect(
-      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And)
+      getMatchingLines(logLines, [filter1, filter2], FilterLogic.And),
     ).toStrictEqual(new Set([0, 1, 4, 7]));
   });
 });

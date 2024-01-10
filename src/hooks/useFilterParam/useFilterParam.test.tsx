@@ -76,7 +76,7 @@ describe("useFilterParam", () => {
         ...useFilterJointHook(),
         location: useLocation(),
       }),
-      { wrapper }
+      { wrapper },
     );
     act(() => {
       result.current.setFilters([
@@ -98,7 +98,7 @@ describe("useFilterParam", () => {
       filters: ["100something,else", "100failed"],
     });
     expect(result.current.location.search).toBe(
-      "?filters=100something%252Celse,100failed"
+      "?filters=100something%252Celse,100failed",
     );
   });
 

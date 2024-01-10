@@ -29,12 +29,12 @@ const renderDetailsMenu = () => {
     useLogContext: useLogContext(),
     useQueryParam: useQueryParam<number | undefined>(
       QueryParams.UpperRange,
-      undefined
+      undefined,
     ),
   });
   const { Component: MenuComponent, hook } = renderComponentWithHook(
     useCombinedHook,
-    <DetailsMenu disabled={false} />
+    <DetailsMenu disabled={false} />,
   );
   const { Component } = RenderFakeToastContext(<MenuComponent />);
   const utils = render(<Component />, { wrapper });

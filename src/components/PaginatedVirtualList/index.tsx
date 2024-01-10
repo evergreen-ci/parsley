@@ -33,7 +33,7 @@ const PaginatedVirtualList = forwardRef<
       rowCount,
       rowRenderer,
     },
-    ref
+    ref,
   ) => {
     if (paginationOffset >= paginationThreshold) {
       throw new Error("paginationOffset must be less than paginationThreshold");
@@ -69,7 +69,7 @@ const PaginatedVirtualList = forwardRef<
 
         return rowRenderer(lineIndex, undefined, undefined);
       },
-      [rowRenderer, startingIndex]
+      [rowRenderer, startingIndex],
     );
 
     // Expose scrollToIndex as a ref
@@ -102,7 +102,7 @@ const PaginatedVirtualList = forwardRef<
         totalCount={pageSize}
       />
     );
-  }
+  },
 );
 
 PaginatedVirtualList.displayName = "PaginatedVirtualList";

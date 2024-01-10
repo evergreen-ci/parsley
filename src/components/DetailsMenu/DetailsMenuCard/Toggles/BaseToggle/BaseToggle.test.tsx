@@ -12,7 +12,7 @@ describe("base toggle", () => {
         rightLabel="Right"
         tooltip="test tooltip"
         value
-      />
+      />,
     );
     expect(screen.getByText("Test Label")).toBeInTheDocument();
     expect(screen.getByText("Left")).toBeInTheDocument();
@@ -29,7 +29,7 @@ describe("base toggle", () => {
         onChange={toggleFunc}
         tooltip="test tooltip"
         value={false}
-      />
+      />,
     );
     const toggle = screen.getByDataCy("toggle");
     await user.click(toggle);
@@ -50,7 +50,7 @@ describe("base toggle", () => {
         rightLabel="Right"
         tooltip="test tooltip"
         value
-      />
+      />,
     );
     expect(screen.getByDataCy("toggle")).toBeDisabled();
   });
