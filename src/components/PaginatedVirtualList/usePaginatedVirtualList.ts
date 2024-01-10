@@ -78,7 +78,7 @@ const usePaginatedVirtualList = ({
           paginationThreshold,
           totalPageCount,
         },
-        SentryBreadcrumb.UI
+        SentryBreadcrumb.UI,
       );
     } else {
       // This setTimeout is necessary because the first scroll doesn't always work
@@ -99,7 +99,7 @@ const usePaginatedVirtualList = ({
           paginationThreshold,
           totalPageCount,
         },
-        SentryBreadcrumb.UI
+        SentryBreadcrumb.UI,
       );
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -135,7 +135,7 @@ const usePaginatedVirtualList = ({
           paginationThreshold,
           startingIndex,
         },
-        SentryBreadcrumb.UI
+        SentryBreadcrumb.UI,
       );
       // This setTimeout is necessary to avoid a race condition where the list hasn't finished rendering the next page
       setTimeout(() => {
@@ -146,7 +146,7 @@ const usePaginatedVirtualList = ({
       }, 0);
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [paginationOffset, currentPage, startingIndex]
+    [paginationOffset, currentPage, startingIndex],
   );
 
   return {

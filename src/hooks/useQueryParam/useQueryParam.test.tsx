@@ -226,7 +226,7 @@ describe("useQueryParam", () => {
         }),
         {
           wrapper,
-        }
+        },
       );
       expect(result.current.allQueryParams).toMatchObject({
         filters: "100drop%22%2C%22attr%22",
@@ -242,7 +242,7 @@ describe("useQueryParam", () => {
       });
       expect(result.current.queryParam).toBe("test2 test2");
       expect(result.current.location.search).toBe(
-        "?filters=100drop%2522%252C%2522attr%2522&search=test2%20test2"
+        "?filters=100drop%2522%252C%2522attr%2522&search=test2%20test2",
       );
     });
     it("should preserve encoded uri's with array values", () => {
@@ -265,7 +265,7 @@ describe("useQueryParam", () => {
         }),
         {
           wrapper,
-        }
+        },
       );
       expect(result.current.allQueryParams).toMatchObject({
         filters: ['100drop","attr"', '001drop","attr"'],
@@ -281,7 +281,7 @@ describe("useQueryParam", () => {
         search: "test2 test2",
       });
       expect(result.current.location.search).toBe(
-        "?filters=100drop%2522%252C%2522attr%2522,001drop%2522%252C%2522attr%2522&search=test2%20test2"
+        "?filters=100drop%2522%252C%2522attr%2522,001drop%2522%252C%2522attr%2522&search=test2%20test2",
       );
     });
     it("should preserve falsy values in the url", () => {
@@ -302,7 +302,7 @@ describe("useQueryParam", () => {
         }),
         {
           wrapper,
-        }
+        },
       );
       expect(result.current.allQueryParams).toMatchObject({
         bookmarks: 0,
@@ -320,7 +320,7 @@ describe("useQueryParam", () => {
         something: false,
       });
       expect(result.current.location.search).toBe(
-        "?bookmarks=0&search=test2%20test2&something=false"
+        "?bookmarks=0&search=test2%20test2&something=false",
       );
     });
   });

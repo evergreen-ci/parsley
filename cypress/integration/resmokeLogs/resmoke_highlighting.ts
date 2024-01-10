@@ -12,7 +12,7 @@ describe("Highlighting", () => {
     cy.dataCy("highlight").should("have.length", 1);
     cy.dataCy("highlight").should(
       "contain.text",
-      "ShardedClusterFixture:job0:mongos0 "
+      "ShardedClusterFixture:job0:mongos0 ",
     );
   });
 
@@ -23,7 +23,7 @@ describe("Highlighting", () => {
     cy.dataCy("highlight").should("have.length", 1);
     cy.dataCy("highlight").should(
       "contain.text",
-      "ShardedClusterFixture:job0:mongos0 "
+      "ShardedClusterFixture:job0:mongos0 ",
     );
   });
   it("should highlight other terms in the log if the search term does not match the highlight", () => {
@@ -36,7 +36,7 @@ describe("Highlighting", () => {
         .invoke("text")
         .should(
           "match",
-          /ShardedClusterFixture:job0:mongos0|ShardedClusterFixture:job0:shard0:node1/
+          /ShardedClusterFixture:job0:mongos0|ShardedClusterFixture:job0:shard0:node1/,
         );
     });
   });
@@ -58,7 +58,7 @@ describe("Highlighting", () => {
         .invoke("text")
         .should(
           "match",
-          /ShardedClusterFixture:job0:mongos0|ShardedClusterFixture:job0:shard0:node1/
+          /ShardedClusterFixture:job0:mongos0|ShardedClusterFixture:job0:shard0:node1/,
         );
     });
     const colors = new Set();

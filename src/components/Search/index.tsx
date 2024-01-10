@@ -39,7 +39,7 @@ const Search: React.FC = () => {
     {
       skip: !projectIdentifier,
       variables: { projectIdentifier },
-    }
+    },
   );
   const { project } = data || {};
   const { parsleyFilters } = project || {};
@@ -62,7 +62,7 @@ const Search: React.FC = () => {
           leaveBreadcrumb(
             "Added Filter",
             { filterExpression: value },
-            SentryBreadcrumb.User
+            SentryBreadcrumb.User,
           );
         }
         break;
@@ -74,7 +74,7 @@ const Search: React.FC = () => {
           leaveBreadcrumb(
             "Added Highlight",
             { highlightExpression: value },
-            SentryBreadcrumb.User
+            SentryBreadcrumb.User,
           );
         }
         break;
@@ -89,7 +89,7 @@ const Search: React.FC = () => {
     leaveBreadcrumb(
       "Applied Search",
       { searchExpression: value },
-      SentryBreadcrumb.User
+      SentryBreadcrumb.User,
     );
   };
 

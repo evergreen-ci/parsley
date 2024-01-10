@@ -29,7 +29,7 @@ declare global {
       clickToggle(
         toggleDataCy: string,
         enable: boolean,
-        tab?: "search-and-filter" | "log-viewing"
+        tab?: "search-and-filter" | "log-viewing",
       ): void;
       /**
        * Custom command to clear the search range bounds in the Details Menu panel.
@@ -96,7 +96,7 @@ declare global {
       validateToast(
         type: "success" | "warning" | "error" | "info",
         message?: string,
-        shouldClose?: boolean
+        shouldClose?: boolean,
       ): void;
       /**
        * Custom command to validate that a value was copied to the clipboard.

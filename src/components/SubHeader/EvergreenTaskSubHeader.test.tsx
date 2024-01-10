@@ -15,7 +15,7 @@ describe("evergreen task subheader", () => {
           taskID="spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35"
           testID="JustAFakeTestInALonelyWorld"
         />
-      </MockedProvider>
+      </MockedProvider>,
     );
     await waitFor(() => {
       expect(screen.getByText("spruce")).toBeInTheDocument();
@@ -23,7 +23,7 @@ describe("evergreen task subheader", () => {
     // check_codegen task should be failing
     expect(screen.getByText("check_codegen")).toBeInTheDocument();
     expect(screen.getByDataCy("task-status-badge").textContent).toContain(
-      "Failed"
+      "Failed",
     );
     // JustAFakeTestInALonelyWorld test should not be in the document
     expect(screen.queryByText("JustAFakeTestInALonelyWorld")).toBeNull();
@@ -40,7 +40,7 @@ describe("evergreen task subheader", () => {
           taskID="mongodb_mongo_master_rhel80_debug_v4ubsan_all_feature_flags_experimental_concurrency_sharded_with_stepdowns_and_balancer_4_linux_enterprise_361789ed8a613a2dc0335a821ead0ab6205fbdaa_22_09_21_02_53_24"
           testID="1716e11b4f8a4541c5e2faf70affbfab"
         />
-      </MockedProvider>
+      </MockedProvider>,
     );
     await waitFor(() => {
       expect(screen.getByText("mongodb-mongo-master")).toBeInTheDocument();
@@ -48,12 +48,12 @@ describe("evergreen task subheader", () => {
     // merge-patch task should be succeeding
     expect(screen.getByText("merge-patch")).toBeInTheDocument();
     expect(screen.getByDataCy("task-status-badge").textContent).toContain(
-      "Succeeded"
+      "Succeeded",
     );
     // ResmokeTest test should be passing
     expect(screen.getByText("ResmokeTest")).toBeInTheDocument();
     expect(screen.getByDataCy("test-status-badge").textContent).toContain(
-      "Pass"
+      "Pass",
     );
   });
 });

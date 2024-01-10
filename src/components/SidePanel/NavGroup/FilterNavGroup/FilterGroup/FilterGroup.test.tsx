@@ -16,7 +16,7 @@ describe("filters", () => {
         deleteFilter={jest.fn()}
         editFilter={jest.fn()}
         filter={defaultFilter}
-      />
+      />,
     );
     expect(screen.getByText(defaultFilter.expression)).toBeInTheDocument();
   });
@@ -28,13 +28,13 @@ describe("filters", () => {
         deleteFilter={jest.fn()}
         editFilter={jest.fn()}
         filter={defaultFilter}
-      />
+      />,
     );
     await user.click(screen.getByLabelText("Edit filter"));
     expect(screen.queryByText(defaultFilter.expression)).toBeNull();
     expect(screen.getByDataCy("edit-filter-name")).toBeInTheDocument();
     expect(screen.getByDataCy("edit-filter-name")).toHaveValue(
-      defaultFilter.expression
+      defaultFilter.expression,
     );
 
     expect(screen.getByDataCy("edit-filter-name")).toHaveFocus();
@@ -52,7 +52,7 @@ describe("filters", () => {
         deleteFilter={jest.fn()}
         editFilter={editFilter}
         filter={defaultFilter}
-      />
+      />,
     );
     // Clear the text input and submit a new filter.
     await user.click(screen.getByLabelText("Edit filter"));
@@ -68,7 +68,7 @@ describe("filters", () => {
     expect(editFilter).toHaveBeenCalledWith(
       "expression",
       "newFilter",
-      defaultFilter
+      defaultFilter,
     );
   });
 
@@ -80,14 +80,14 @@ describe("filters", () => {
         deleteFilter={jest.fn()}
         editFilter={editFilter}
         filter={defaultFilter}
-      />
+      />,
     );
     // Clear the text input and submit a new filter.
     await user.click(screen.getByLabelText("Edit filter"));
     await user.clear(screen.getByDataCy("edit-filter-name"));
     await user.type(
       screen.getByDataCy("edit-filter-name"),
-      "some [[invalid regex"
+      "some [[invalid regex",
     );
     const confirmButton = screen.getByRole("button", {
       name: "Apply",
@@ -105,7 +105,7 @@ describe("filters", () => {
         deleteFilter={jest.fn()}
         editFilter={editFilter}
         filter={defaultFilter}
-      />
+      />,
     );
     expect(screen.getByLabelText("Visibility Icon")).toBeInTheDocument();
     await user.click(screen.getByLabelText("Hide filter"));
@@ -121,7 +121,7 @@ describe("filters", () => {
         deleteFilter={deleteFilter}
         editFilter={jest.fn()}
         filter={defaultFilter}
-      />
+      />,
     );
     await user.click(screen.getByLabelText("Delete filter"));
     expect(deleteFilter).toHaveBeenCalledTimes(1);
@@ -136,7 +136,7 @@ describe("filters", () => {
         deleteFilter={jest.fn()}
         editFilter={editFilter}
         filter={defaultFilter}
-      />
+      />,
     );
 
     const insensitiveOption = screen.getByRole("tab", {
@@ -157,7 +157,7 @@ describe("filters", () => {
     expect(editFilter).toHaveBeenCalledWith(
       "caseSensitive",
       CaseSensitivity.Sensitive,
-      defaultFilter
+      defaultFilter,
     );
   });
 
@@ -169,7 +169,7 @@ describe("filters", () => {
         deleteFilter={jest.fn()}
         editFilter={editFilter}
         filter={defaultFilter}
-      />
+      />,
     );
 
     const exactOption = screen.getByRole("tab", {
@@ -190,7 +190,7 @@ describe("filters", () => {
     expect(editFilter).toHaveBeenCalledWith(
       "matchType",
       MatchType.Inverse,
-      defaultFilter
+      defaultFilter,
     );
   });
 
@@ -202,17 +202,17 @@ describe("filters", () => {
         deleteFilter={jest.fn()}
         editFilter={editFilter}
         filter={{ ...defaultFilter, expression: "invalid (regex" }}
-      />
+      />,
     );
     expect(
-      screen.getByLabelText("Important With Circle Icon")
+      screen.getByLabelText("Important With Circle Icon"),
     ).toBeInTheDocument();
     await user.hover(screen.getByLabelText("Important With Circle Icon"));
     await expect(
-      screen.findByText("Invalid filter expression, please update it!")
+      screen.findByText("Invalid filter expression, please update it!"),
     ).resolves.toBeInTheDocument();
     await expect(
-      screen.findByText("Invalid Regular Expression: Unterminated group")
+      screen.findByText("Invalid Regular Expression: Unterminated group"),
     ).resolves.toBeInTheDocument();
   });
   it("should disable all inputs except editing or deleting for an invalid filter regular expression", async () => {
@@ -222,11 +222,11 @@ describe("filters", () => {
         deleteFilter={jest.fn()}
         editFilter={editFilter}
         filter={{ ...defaultFilter, expression: "invalid (regex" }}
-      />
+      />,
     );
     expect(screen.getByLabelText("Hide filter")).toHaveAttribute(
       "aria-disabled",
-      "true"
+      "true",
     );
   });
 
@@ -238,11 +238,11 @@ describe("filters", () => {
         deleteFilter={jest.fn()}
         editFilter={editFilter}
         filter={{ ...defaultFilter, expression: "invalid (regex" }}
-      />
+      />,
     );
     await user.click(screen.getByLabelText("Edit filter"));
     expect(
-      screen.getByText("Invalid Regular Expression: Unterminated group")
+      screen.getByText("Invalid Regular Expression: Unterminated group"),
     ).toBeInTheDocument();
     const confirmButton = screen.getByRole("button", {
       name: "Apply",
@@ -251,7 +251,7 @@ describe("filters", () => {
     await user.clear(screen.getByDataCy("edit-filter-name"));
     await user.type(screen.getByDataCy("edit-filter-name"), "newFilter");
     expect(
-      screen.queryByText("Invalid Regular Expression: Unterminated group")
+      screen.queryByText("Invalid Regular Expression: Unterminated group"),
     ).not.toBeInTheDocument();
     expect(confirmButton).toHaveAttribute("aria-disabled", "false");
   });

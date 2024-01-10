@@ -25,14 +25,14 @@ const MockToastProvider: React.FC<{ children: React.ReactNode }> = ({
       progress: (
         message: string,
         progress: number = 0.5,
-        closable: boolean = true
+        closable: boolean = true,
       ) => action(`Toast Info`)({ closable, message, progress }),
       success: (message: string, closable: boolean = true) =>
         action(`Toast Success`)({ closable, message }),
       warning: (message: string, closable: boolean = true) =>
         action(`Toast Warning`)({ closable, message }),
     }),
-    []
+    [],
   );
 
   return (

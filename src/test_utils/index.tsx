@@ -54,7 +54,7 @@ const customWithin = (ui: HTMLElement) =>
  */
 const renderWithRouterMatch = (
   ui: React.ReactElement,
-  options: RenderWithRouterMatchOptions = {}
+  options: RenderWithRouterMatchOptions = {},
 ) => {
   const { path = "/", route = "/", wrapper: TestWrapper, ...rest } = options;
 
@@ -81,7 +81,7 @@ const renderWithRouterMatch = (
     <RouterProvider router={memoryRouter} />,
     {
       ...rest,
-    }
+    },
   );
 
   const customRerender = (element: React.ReactElement) => {

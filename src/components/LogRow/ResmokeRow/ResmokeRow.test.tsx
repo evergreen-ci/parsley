@@ -9,7 +9,7 @@ import ResmokeRow from ".";
 
 const renderRow = (
   props: React.ComponentProps<typeof ResmokeRow>,
-  options: RenderWithRouterMatchOptions
+  options: RenderWithRouterMatchOptions,
 ) =>
   renderWithRouterMatch(<ResmokeRow {...props} />, {
     ...options,
@@ -44,7 +44,7 @@ describe("resmokeRow", () => {
     const getResmokeLineColor = jest.fn().mockReturnValue("#ff0000");
     renderRow(
       { ...resmokeProps, getResmokeLineColor, lineIndex: 7, lineNumber: 7 },
-      {}
+      {},
     );
 
     expect(getResmokeLineColor).toHaveBeenCalledWith(7);
@@ -53,7 +53,7 @@ describe("resmokeRow", () => {
   it("should highlight text that match a search term", () => {
     renderRow(
       { ...resmokeProps, lineIndex: 7, lineNumber: 7, searchTerm: /mongod/ },
-      {}
+      {},
     );
 
     expect(screen.queryByDataCy("highlight")).toHaveTextContent("mongod");
@@ -66,7 +66,7 @@ describe("resmokeRow", () => {
         lineIndex: 7,
         lineNumber: 7,
       },
-      {}
+      {},
     );
 
     expect(screen.queryByDataCy("highlight")).toHaveTextContent("mongod");

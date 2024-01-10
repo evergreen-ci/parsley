@@ -19,7 +19,7 @@ const useFetch = <T extends object>(
   url: string,
   options?: {
     skip?: boolean;
-  }
+  },
 ) => {
   const { skip = false } = options || {};
 

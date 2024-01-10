@@ -31,7 +31,7 @@ const logs = [
 const renderSharingMenu = () => {
   const { Component: MenuComponent, hook } = renderComponentWithHook(
     useMultiLineSelectContext,
-    <SharingMenu defaultOpen />
+    <SharingMenu defaultOpen />,
   );
   const { Component } = RenderFakeToastContext(<MenuComponent />);
   const utils = renderWithRouterMatch(<Component />, { wrapper });
@@ -46,7 +46,7 @@ describe("sharingMenu", () => {
     renderSharingMenu();
     expect(screen.getByText("Copy selected contents")).toBeInTheDocument();
     expect(
-      screen.getByText("Copy share link to selected line")
+      screen.getByText("Copy share link to selected line"),
     ).toBeInTheDocument();
     expect(screen.getByText("Only search on range")).toBeInTheDocument();
   });
@@ -64,7 +64,7 @@ describe("sharingMenu", () => {
     await user.click(screen.getByText("Copy selected contents"));
     const clipboardText = await navigator.clipboard.readText();
     expect(clipboardText).toBe(
-      "{noformat}\nline 2\nline 3\nline 4\n{noformat}"
+      "{noformat}\nline 2\nline 3\nline 4\n{noformat}",
     );
   });
   it("clicking `copy selected contents` should copy a single selected line to the clipboard", async () => {
@@ -91,7 +91,7 @@ describe("sharingMenu", () => {
       hook.current.handleSelectLine(3, true);
     });
     expect(
-      screen.getByText("Copy share link to selected lines")
+      screen.getByText("Copy share link to selected lines"),
     ).toBeInTheDocument();
     await user.click(screen.getByText("Copy share link to selected lines"));
     const clipboardText = await navigator.clipboard.readText();
@@ -110,7 +110,7 @@ describe("sharingMenu", () => {
     expect(screen.getByText("Only search on range")).toBeInTheDocument();
     await user.click(screen.getByText("Only search on range"));
     expect(router.state.location.search).toBe(
-      "?lower=1&selectedLineRange=L1-L3&upper=3"
+      "?lower=1&selectedLineRange=L1-L3&upper=3",
     );
   });
   it("clicking `clear selection` should clear the selected line range", () => {
@@ -141,7 +141,7 @@ describe("sharingMenu", () => {
     };
     const { Component: MenuComponent, hook } = renderComponentWithHook(
       useSpecialHook,
-      <SharingMenu defaultOpen />
+      <SharingMenu defaultOpen />,
     );
     const { Component } = RenderFakeToastContext(<MenuComponent />);
     renderWithRouterMatch(<Component />, {

@@ -54,7 +54,7 @@ const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
         </Tabs>
       </Container>
     );
-  }
+  },
 );
 DetailsMenuCard.displayName = "DetailsMenuCard";
 

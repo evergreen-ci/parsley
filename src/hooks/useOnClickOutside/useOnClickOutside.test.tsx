@@ -36,7 +36,7 @@ describe("useOnClickOutside", () => {
         <>
           <div ref={ref1}> Test ref 1 </div>
           <div ref={ref2}> Test ref 2 </div>
-        </>
+        </>,
       );
 
       renderHook(() => useOnClickOutside([ref1, ref2], callback));
@@ -52,7 +52,7 @@ describe("useOnClickOutside", () => {
         <>
           <div ref={ref1}> Test ref 1 </div>
           <div ref={ref2}> Test ref 2 </div>
-        </>
+        </>,
       );
 
       renderHook(() => useOnClickOutside([ref1, ref2], callback));

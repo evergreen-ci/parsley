@@ -183,7 +183,7 @@ describe("searchbar", () => {
     const user = userEvent.setup({ advanceTimers: jest.advanceTimersByTime });
     const onChange = jest.fn();
     render(
-      <SearchBar onChange={onChange} searchSuggestions={["apple", "banana"]} />
+      <SearchBar onChange={onChange} searchSuggestions={["apple", "banana"]} />,
     );
 
     await user.click(screen.getByDataCy("search-suggestion-button"));

@@ -12,7 +12,7 @@ import { useRef, useState } from "react";
  * Reference: https://github.com/mongodb/leafygreen-ui/blob/main/packages/hooks/src/useStateRef.ts
  */
 const useStateRef = <T extends any>(
-  initial: T
+  initial: T,
 ): [T, (x: T) => void, () => T] => {
   const [state, _setState] = useState<T>(initial);
   const ref = useRef<T>(state);

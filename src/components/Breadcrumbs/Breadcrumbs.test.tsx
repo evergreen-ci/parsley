@@ -33,7 +33,7 @@ describe("breadcrumbs", () => {
     expect(screen.queryByText(longMessage)).not.toBeInTheDocument();
 
     expect(
-      screen.getByText(trimStringFromMiddle(longMessage, 30))
+      screen.getByText(trimStringFromMiddle(longMessage, 30)),
     ).toBeInTheDocument();
     await user.hover(screen.getByText(trimStringFromMiddle(longMessage, 30)));
     await waitFor(() => {
@@ -52,7 +52,7 @@ describe("breadcrumbs", () => {
     expect(screen.queryByText(longMessage)).not.toBeInTheDocument();
 
     expect(
-      screen.getByText(trimStringFromMiddle(longMessage, 25))
+      screen.getByText(trimStringFromMiddle(longMessage, 25)),
     ).toBeInTheDocument();
     await user.hover(screen.getByText(trimStringFromMiddle(longMessage, 25)));
     await waitFor(() => {
@@ -70,7 +70,7 @@ describe("breadcrumbs", () => {
     await user.hover(screen.getByText(shortMessage));
     await waitFor(() => {
       expect(
-        screen.queryByDataCy("breadcrumb-tooltip")
+        screen.queryByDataCy("breadcrumb-tooltip"),
       ).not.toBeInTheDocument();
     });
   });

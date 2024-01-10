@@ -10,7 +10,7 @@ const getEvergreenTaskURL = (taskID: string, execution: string | number) => {
     redirect_spruce_users: true,
   };
   return `${evergreenURL}/task/${taskID}/${execution}?${stringifyQuery(
-    params
+    params,
   )}`;
 };
 

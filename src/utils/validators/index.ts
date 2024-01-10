@@ -27,7 +27,7 @@ const getRegexpError = (regexp: string): string => {
     // Removes the "Invalid regular expression: /.*: " prefix from the error message
     const message = (e as unknown as Error).message.replace(
       /Invalid regular expression: (\/.*\/: )?/gm,
-      ""
+      "",
     );
     return message;
   }

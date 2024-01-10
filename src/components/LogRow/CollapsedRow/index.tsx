@@ -36,7 +36,7 @@ const CollapsedRow: React.FC<CollapsedRowProps> = ({
         expandLines([
           [start, start + (SKIP_NUMBER - 1)],
           [end - (SKIP_NUMBER - 1), end],
-        ])
+        ]),
       );
     } else {
       startTransition(() => expandLines([[start, end]]));

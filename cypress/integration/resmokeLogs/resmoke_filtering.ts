@@ -37,7 +37,7 @@ describe("Filtering", () => {
           cy.addFilter(filter2);
           cy.location("search").should(
             "contain",
-            `filters=100${filter1},100${filter2}`
+            `filters=100${filter1},100${filter2}`,
           );
           cy.get("[data-cy^='log-row-']")
             .not("[data-bookmarked=true]")
@@ -49,14 +49,14 @@ describe("Filtering", () => {
 
         it("should be able to toggle case sensitivity", () => {
           cy.visit(
-            `${logLink}?filterLogic=and&filters=100${filter1},100${filter2}`
+            `${logLink}?filterLogic=and&filters=100${filter1},100${filter2}`,
           );
           cy.dataCy(`filter-${filter1}`).within(() => {
             cy.contains("Sensitive").click();
           });
           cy.location("search").should(
             "contain",
-            `filters=110${filter1},100${filter2}`
+            `filters=110${filter1},100${filter2}`,
           );
           cy.get("[data-cy^='log-row-']")
             .not("[data-bookmarked=true]")
@@ -68,14 +68,14 @@ describe("Filtering", () => {
 
         it("should be able to toggle inverse matching", () => {
           cy.visit(
-            `${logLink}?filterLogic=and&filters=110${filter1},100${filter2}`
+            `${logLink}?filterLogic=and&filters=110${filter1},100${filter2}`,
           );
           cy.dataCy(`filter-${filter2}`).within(() => {
             cy.contains("Inverse").click();
           });
           cy.location("search").should(
             "contain",
-            `filters=110${filter1},101${filter2}`
+            `filters=110${filter1},101${filter2}`,
           );
           cy.get("[data-cy^='log-row-']")
             .not("[data-bookmarked='true']")
@@ -87,7 +87,7 @@ describe("Filtering", () => {
 
         it("should be able to toggle visibility", () => {
           cy.visit(
-            `${logLink}?filterLogic=and&filters=110${filter1},101${filter2}`
+            `${logLink}?filterLogic=and&filters=110${filter1},101${filter2}`,
           );
           cy.dataCy(`filter-${filter1}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
@@ -97,7 +97,7 @@ describe("Filtering", () => {
           });
           cy.location("search").should(
             "contain",
-            `filters=010${filter1},001${filter2}`
+            `filters=010${filter1},001${filter2}`,
           );
           cy.get("[data-cy^='collapsed-row-']").should("not.exist");
         });
@@ -114,7 +114,7 @@ describe("Filtering", () => {
           cy.addFilter(filter2);
           cy.location("search").should(
             "contain",
-            `filters=100${filter1},100${filter2}`
+            `filters=100${filter1},100${filter2}`,
           );
           cy.get("[data-cy^='log-row-']")
             .not("[data-bookmarked=true]")
@@ -127,14 +127,14 @@ describe("Filtering", () => {
 
         it("should be able to toggle case sensitivity", () => {
           cy.visit(
-            `${logLink}?filterLogic=or&filters=100${filter1},100${filter2}`
+            `${logLink}?filterLogic=or&filters=100${filter1},100${filter2}`,
           );
           cy.dataCy(`filter-${filter1}`).within(() => {
             cy.contains("Sensitive").click();
           });
           cy.location("search").should(
             "contain",
-            `filters=110${filter1},100${filter2}`
+            `filters=110${filter1},100${filter2}`,
           );
           cy.get("[data-cy^='log-row-']")
             .not("[data-bookmarked=true]")
@@ -144,21 +144,21 @@ describe("Filtering", () => {
                 .should(
                   "satisfy",
                   (text: string) =>
-                    text.match(/deleted/) || text.match(/session/i)
+                    text.match(/deleted/) || text.match(/session/i),
                 );
             });
         });
 
         it("should be able to toggle inverse matching", () => {
           cy.visit(
-            `${logLink}?filterLogic=or&filters=110${filter1},100${filter2}`
+            `${logLink}?filterLogic=or&filters=110${filter1},100${filter2}`,
           );
           cy.dataCy(`filter-${filter2}`).within(() => {
             cy.contains("Inverse").click();
           });
           cy.location("search").should(
             "contain",
-            `filters=110${filter1},101${filter2}`
+            `filters=110${filter1},101${filter2}`,
           );
           cy.get("[data-cy^='log-row-']")
             .not("[data-bookmarked=true]")
@@ -168,14 +168,14 @@ describe("Filtering", () => {
                 .should(
                   "satisfy",
                   (text: string) =>
-                    text.match(/deleted/) || !text.match(/session/i)
+                    text.match(/deleted/) || !text.match(/session/i),
                 );
             });
         });
 
         it("should be able to toggle visibility", () => {
           cy.visit(
-            `${logLink}?filterLogic=or&filters=110${filter1},101${filter2}`
+            `${logLink}?filterLogic=or&filters=110${filter1},101${filter2}`,
           );
           cy.dataCy(`filter-${filter1}`).within(() => {
             cy.get(`[aria-label="Hide filter"]`).click();
@@ -185,7 +185,7 @@ describe("Filtering", () => {
           });
           cy.location("search").should(
             "contain",
-            `filters=010${filter1},001${filter2}`
+            `filters=010${filter1},001${filter2}`,
           );
           cy.get("[data-cy^='collapsed-row-']").should("not.exist");
         });

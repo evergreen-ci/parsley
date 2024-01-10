@@ -57,12 +57,12 @@ const BaseRow: React.FC<BaseRowProps> = ({
   const { selectedLines } = useMultiLineSelectContext();
   const [shareLine, setShareLine] = useQueryParam<number | undefined>(
     QueryParams.ShareLine,
-    undefined
+    undefined,
   );
 
   const [bookmarks, setBookmarks] = useQueryParam<number[]>(
     QueryParams.Bookmarks,
-    []
+    [],
   );
   const inRange = isLineInRange(range, lineNumber);
 

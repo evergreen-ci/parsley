@@ -48,15 +48,15 @@ export const constructRegexToMatch = (visibleFilters: Filters) => {
 export const matchesFilters = (
   line: string,
   regexToMatch: { regex: RegExp; isMatch: boolean }[],
-  filterLogic: FilterLogic
+  filterLogic: FilterLogic,
 ) => {
   if (filterLogic === FilterLogic.And) {
     return regexToMatch.every(({ isMatch, regex }) =>
-      isMatch ? regex.test(line) : !regex.test(line)
+      isMatch ? regex.test(line) : !regex.test(line),
     );
   }
   return regexToMatch.some(({ isMatch, regex }) =>
-    isMatch ? regex.test(line) : !regex.test(line)
+    isMatch ? regex.test(line) : !regex.test(line),
   );
 };
 
@@ -71,7 +71,7 @@ export const matchesFilters = (
 export const getMatchingLines = (
   logLines: string[],
   filters: Filters,
-  filterLogic: FilterLogic
+  filterLogic: FilterLogic,
 ) => {
   const visibleFilters = filters.filter((f) => f.visible !== false);
   if (visibleFilters.length === 0) {

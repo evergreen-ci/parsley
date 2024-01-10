@@ -20,7 +20,7 @@ describe("filters", () => {
             matchType: MatchType.Exact,
             visible: true,
           },
-        ])
+        ]),
       ).toStrictEqual(["100hello-i-am-a-filter"]);
     });
     it("stringifies multiple filters correctly", () => {
@@ -44,7 +44,7 @@ describe("filters", () => {
             matchType: MatchType.Exact,
             visible: false,
           },
-        ])
+        ]),
       ).toStrictEqual(["011passed", "101failed", "010running"]);
     });
     it("successfully encodes special characters", () => {
@@ -56,7 +56,7 @@ describe("filters", () => {
             matchType: MatchType.Exact,
             visible: true,
           },
-        ])
+        ]),
       ).toStrictEqual(["100ran%20in%20d%7B3%2C%7D"]);
     });
   });
@@ -96,7 +96,7 @@ describe("filters", () => {
     });
     it("parses multiple filters correctly", () => {
       expect(
-        parseFilters(["011passed", "101failed", "010running"])
+        parseFilters(["011passed", "101failed", "010running"]),
       ).toStrictEqual([
         {
           caseSensitive: CaseSensitivity.Sensitive,
@@ -132,7 +132,7 @@ describe("query-string", () => {
     it("should preserve empty strings if skipEmptyString is passed in", () => {
       let result = stringifyQuery(
         { bar: null, foo: "" },
-        { skipEmptyString: false }
+        { skipEmptyString: false },
       );
       expect(result).toBe("foo=");
       result = stringifyQuery({ bar: 21, foo: "" }, { skipEmptyString: false });
@@ -149,7 +149,7 @@ describe("query-string", () => {
     });
     it("stringifies an array correctly", () => {
       expect(
-        stringifyQuery({ statuses: ["passed", "failed", "running"] })
+        stringifyQuery({ statuses: ["passed", "failed", "running"] }),
       ).toBe("statuses=passed,failed,running");
     });
     it("stringifies an object containing many fields correctly", () => {
@@ -159,9 +159,9 @@ describe("query-string", () => {
           files: 23,
           statuses: ["passed", "failed", "running"],
           variant: [1, 3, 5],
-        })
+        }),
       ).toBe(
-        "exists=true&files=23&statuses=passed,failed,running&variant=1,3,5"
+        "exists=true&files=23&statuses=passed,failed,running&variant=1,3,5",
       );
     });
   });
@@ -174,7 +174,7 @@ describe("query-string", () => {
     });
     it("parses multiple query params that are strings", () => {
       expect(
-        parseQueryString("status=passed&variant=ubuntu1604")
+        parseQueryString("status=passed&variant=ubuntu1604"),
       ).toMatchObject({
         status: "passed",
         variant: "ubuntu1604",
@@ -188,8 +188,8 @@ describe("query-string", () => {
     it("parses a query param with multiple arrays as value", () => {
       expect(
         parseQueryString(
-          "statuses=failed,passed,ehh&variants=ubuntu1604,GLADOS"
-        )
+          "statuses=failed,passed,ehh&variants=ubuntu1604,GLADOS",
+        ),
       ).toMatchObject({
         statuses: ["failed", "passed", "ehh"],
         variants: ["ubuntu1604", "GLADOS"],
@@ -197,7 +197,7 @@ describe("query-string", () => {
     });
     it("parses a query param with a mixed array and a single string as a value", () => {
       expect(
-        parseQueryString("status=failed&variants=ubuntu1604,GLADOS")
+        parseQueryString("status=failed&variants=ubuntu1604,GLADOS"),
       ).toMatchObject({
         status: "failed",
         variants: ["ubuntu1604", "GLADOS"],

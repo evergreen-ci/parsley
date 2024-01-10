@@ -65,7 +65,7 @@ describe("Highlighting", () => {
       cy.get("a").should(
         "have.attr",
         "href", // href value should not contain any <mark> tags
-        "https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecated-storyfn"
+        "https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#deprecated-storyfn",
       );
     });
   });

@@ -20,12 +20,12 @@ const useQueryParams = (parseOptions?: ParseOptions) => {
       });
       navigate(`?${stringifiedQuery}`, { replace: true });
     },
-    [navigate]
+    [navigate],
   );
 
   const searchParamsObject = useMemo(
     () => parseQueryString(searchParams.toString(), parseOptions),
-    [searchParams, parseOptions]
+    [searchParams, parseOptions],
   );
   return [searchParamsObject, setQueryString] as const;
 };
@@ -40,7 +40,7 @@ const useQueryParams = (parseOptions?: ParseOptions) => {
  */
 const useQueryParam = <T>(
   param: QueryParams,
-  defaultParam: T
+  defaultParam: T,
 ): readonly [T, (set: T) => void] => {
   const [searchParams, setSearchParams] = useQueryParams();
 
@@ -55,7 +55,7 @@ const useQueryParam = <T>(
         }
         if (Array.isArray(paramValue)) {
           newParams[paramKey] = paramValue.map((v) =>
-            v != null ? encodeURIComponent(v) : null
+            v != null ? encodeURIComponent(v) : null,
           );
         }
       });
@@ -64,14 +64,14 @@ const useQueryParam = <T>(
         [param]: value,
       });
     },
-    [setSearchParams, searchParams, param]
+    [setSearchParams, searchParams, param],
   );
 
   const queryParam =
     searchParams[param] !== undefined
       ? (conditionalCastToArray(
           searchParams[param],
-          Array.isArray(defaultParam)
+          Array.isArray(defaultParam),
         ) as unknown as T)
       : defaultParam;
 

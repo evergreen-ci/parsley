@@ -18,7 +18,7 @@ const useHighlightParam = () => {
       (
         conditionalCastToArray(searchParams.highlights ?? [], true) as string[]
       ).map((h) => decodeURIComponent(h)),
-    [searchParams.highlights]
+    [searchParams.highlights],
   );
 
   const setHighlightsParam = useCallback(
@@ -27,11 +27,11 @@ const useHighlightParam = () => {
         ...searchParams,
         [QueryParams.Highlights]: newHighlights.map((highlight) =>
           // We need to encode the highlights twice because the URL will decode them once
-          encodeURIComponent(highlight)
+          encodeURIComponent(highlight),
         ),
       });
     },
-    [setSearchParams, searchParams]
+    [setSearchParams, searchParams],
   );
 
   return [parsedHighlights, setHighlightsParam] as const;

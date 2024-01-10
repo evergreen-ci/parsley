@@ -14,7 +14,7 @@ export const findLineIndex = (
   processedLines: ProcessedLogLines,
   lineNumber: number | undefined,
   start: number = 0,
-  end: number = processedLines.length - 1
+  end: number = processedLines.length - 1,
 ): number => {
   // Line number was not found in the array.
   if (lineNumber === undefined || start > end) {

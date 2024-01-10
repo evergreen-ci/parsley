@@ -4,8 +4,8 @@ describe("findJsonObjects", () => {
   it("should return an empty array if there are no json objects", () => {
     expect(
       findJsonObjects(
-        "[js_test:backup_restore_rolling] 2020-03-02T08:52:04.781+0000 d20521| no json objects in here"
-      )
+        "[js_test:backup_restore_rolling] 2020-03-02T08:52:04.781+0000 d20521| no json objects in here",
+      ),
     ).toStrictEqual([]);
   });
 
@@ -57,7 +57,7 @@ describe("parseJson", () => {
         '    "bigNumberArray": [\n' +
         "        987654321987654321987654321\n" +
         "    ]\n" +
-        "}"
+        "}",
     );
   });
 
@@ -82,7 +82,7 @@ describe("parseJson", () => {
         '            "target_arch": "x86_64"\n' +
         "        }\n" +
         "    }\n" +
-        "}"
+        "}",
     );
   });
 });
@@ -98,7 +98,7 @@ describe("prettyPrintFormat", () => {
         "    id: 12345,\n" +
         '    c: "RECOVERY",\n' +
         '    ctx: "initAndListen"\n' +
-        "}\n"
+        "}\n",
     );
   });
 
@@ -133,7 +133,7 @@ describe("prettyPrintFormat", () => {
         '    std_get_0_envDataEntry: "distmod",\n' +
         '    std_get_1_envDataEntry: "rhel62"\n' +
         "}\n" +
-        "a little more text"
+        "a little more text",
     );
   });
 });

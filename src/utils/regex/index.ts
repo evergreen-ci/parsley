@@ -10,7 +10,7 @@ import { stringIntersection } from "utils/string";
 const hasOverlappingRegex = (
   regex1: RegExp | undefined,
   regex2: RegExp | undefined,
-  text: string
+  text: string,
 ) => {
   if (regex1 === undefined || regex2 === undefined) {
     return false;

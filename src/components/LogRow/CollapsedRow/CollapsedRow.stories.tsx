@@ -21,7 +21,7 @@ const CollapsedRowStory = (args: React.ComponentProps<typeof CollapsedRow>) => {
     const intervals = rows.filter(
       (line) =>
         !withinRange(line, expandedLines[0]) &&
-        !withinRange(line, expandedLines[1])
+        !withinRange(line, expandedLines[1]),
     );
     setRows(intervals);
   };
@@ -52,7 +52,7 @@ export const CollapsedRowSingle: CustomStoryObj<typeof CollapsedRow> = {
 const CollapsedAnsiRowStory = (
   args: React.ComponentProps<typeof CollapsedRow> & {
     wrap: boolean;
-  }
+  },
 ) => {
   const { ingestLines, preferences, processedLogLines } = useLogContext();
   const { setWrap } = preferences;
@@ -93,7 +93,7 @@ export const CollapsedAnsiRow: CustomStoryObj<
 const CollapsedResmokeRowStory = (
   args: React.ComponentProps<typeof CollapsedRow> & {
     wrap: boolean;
-  }
+  },
 ) => {
   const { ingestLines, preferences, processedLogLines } = useLogContext();
   const { setWrap } = preferences;

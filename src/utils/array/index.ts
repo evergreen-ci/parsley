@@ -12,7 +12,7 @@ const arraySymmetricDifference = <T>(a: T[], b: T[]) => {
   const setA = new Set(a);
   const setB = new Set(b);
   const difference = Array.from(
-    new Set(a.concat(b).filter((x) => !setA.has(x) || !setB.has(x)))
+    new Set(a.concat(b).filter((x) => !setA.has(x) || !setB.has(x))),
   );
 
   return difference;
@@ -27,7 +27,7 @@ const arraySymmetricDifference = <T>(a: T[], b: T[]) => {
  */
 const conditionalCastToArray = <T>(
   value: T | T[],
-  shouldBeArray: boolean
+  shouldBeArray: boolean,
 ): T[] => {
   if (shouldBeArray) {
     return Array.isArray(value) ? value : [value];

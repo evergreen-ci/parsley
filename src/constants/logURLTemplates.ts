@@ -16,7 +16,7 @@ import { stringifyQuery } from "utils/query-string";
 const getLobsterTaskURL = (
   taskID: string,
   execution: string | number,
-  origin: string
+  origin: string,
 ) => `${lobsterURL}/evergreen/task/${taskID}/${execution}/${origin}`;
 
 /**
@@ -30,7 +30,7 @@ const getLobsterTestURL = (
   taskID: string,
   execution: string | number,
   testID: string,
-  groupID?: string
+  groupID?: string,
 ) =>
   `${lobsterURL}/evergreen/test/${taskID}/${execution}/${testID}${
     groupID ? `/${groupID}` : ""
@@ -62,7 +62,7 @@ const getEvergreenTestLogURL = (
   taskID: string,
   execution: string | number,
   testID: string,
-  options: { text?: boolean; groupID?: string }
+  options: { text?: boolean; groupID?: string },
 ) => {
   const { groupID, text } = options;
   const params = {
@@ -71,7 +71,7 @@ const getEvergreenTestLogURL = (
     text,
   };
   return `${evergreenURL}/test_log/${taskID}/${execution}?${stringifyQuery(
-    params
+    params,
   )}`;
 };
 
@@ -87,7 +87,7 @@ const getEvergreenTestLogURL = (
  */
 const getResmokeLogURL = (
   buildID: string,
-  options: { testID?: string; raw?: boolean; html?: boolean; metadata?: true }
+  options: { testID?: string; raw?: boolean; html?: boolean; metadata?: true },
 ) => {
   const { html, metadata, raw, testID } = options;
   const params = {
@@ -97,7 +97,7 @@ const getResmokeLogURL = (
   };
   if (testID) {
     return `${logkeeperURL}/build/${buildID}/test/${testID}?${stringifyQuery(
-      params
+      params,
     )}`;
   }
   return `${logkeeperURL}/build/${buildID}/all?${stringifyQuery(params)}`;
@@ -113,7 +113,7 @@ export enum Origin {
 const getEvergreenTaskLogURL = (
   logLinks: TaskType["logs"],
   origin: string,
-  params: { priority?: boolean; text?: boolean } = {}
+  params: { priority?: boolean; text?: boolean } = {},
 ) => {
   const url =
     {
@@ -146,7 +146,7 @@ const constructEvergreenTaskLogURL = (
   taskID: string,
   execution: string | number,
   origin: string,
-  options: { priority?: boolean; text?: boolean }
+  options: { priority?: boolean; text?: boolean },
 ) => {
   const { priority, text } = options;
   const params = {
@@ -155,7 +155,7 @@ const constructEvergreenTaskLogURL = (
     type: mapOriginToType[origin as Origin] || undefined,
   };
   return `${evergreenURL}/task_log_raw/${taskID}/${execution}?${stringifyQuery(
-    params
+    params,
   )}`;
 };
 
@@ -169,7 +169,7 @@ const constructEvergreenTaskLogURL = (
 const getEvergreenTaskFileURL = (
   taskID: string,
   execution: string | number,
-  fileName: string
+  fileName: string,
 ) => `${evergreenURL}/task_file_raw/${taskID}/${execution}/${fileName}`;
 
 export {

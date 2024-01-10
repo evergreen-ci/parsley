@@ -16,7 +16,7 @@ const useFilterParam = () => {
   });
 
   const parsedFilters = parseFilters(
-    conditionalCastToArray(searchParams.filters ?? [], true) as string[]
+    conditionalCastToArray(searchParams.filters ?? [], true) as string[],
   );
 
   const setFiltersParam = useCallback(
@@ -26,7 +26,7 @@ const useFilterParam = () => {
         [QueryParams.Filters]: stringifyFilters(filters),
       });
     },
-    [setSearchParams, searchParams]
+    [setSearchParams, searchParams],
   );
 
   return [parsedFilters, setFiltersParam] as const;

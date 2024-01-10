@@ -8,7 +8,7 @@
  */
 const isLineInRange = (
   range: { lowerRange: number; upperRange?: number },
-  index: number
+  index: number,
 ) => {
   if (range.upperRange) {
     return index >= range.lowerRange && index <= range.upperRange;

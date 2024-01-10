@@ -41,7 +41,7 @@ describe("fetchLogFile", () => {
     mockFetch.mockResolvedValue(response);
 
     await expect(fetchLogFile(url, options)).rejects.toThrow(
-      "Network response was not ok (404)"
+      "Network response was not ok (404)",
     );
   });
 
@@ -51,7 +51,7 @@ describe("fetchLogFile", () => {
     mockFetch.mockResolvedValue(response);
 
     await expect(fetchLogFile(url, options)).rejects.toThrow(
-      "Network response has no body"
+      "Network response has no body",
     );
   });
 

@@ -1,9 +1,9 @@
 const renderComponentWithHook = <
   T extends () => any,
-  U extends JSX.Element | null
+  U extends JSX.Element | null,
 >(
   useHook: T,
-  Comp: U
+  Comp: U,
 ) => {
   const hook: { current: ReturnType<typeof useHook> } = {
     current: {} as ReturnType<typeof useHook>,

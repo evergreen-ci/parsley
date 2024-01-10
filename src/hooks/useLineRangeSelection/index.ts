@@ -5,7 +5,7 @@ import { encodeSelectedLineRange, parseSelectedLineRange } from "./utils";
 
 const useLineRangeSelection = (): readonly [
   SelectedLineRange,
-  (range: SelectedLineRange) => void
+  (range: SelectedLineRange) => void,
 ] => {
   const [selectedLineRange, setSelectedLineRange] = useQueryParam<
     string | undefined
@@ -24,7 +24,7 @@ const useLineRangeSelection = (): readonly [
       encodeSelectedLineRange({
         endingLine: tempEndingLine,
         startingLine: tempStartingLine,
-      })
+      }),
     );
   };
   const { endingLine, startingLine } = selectedLineRange

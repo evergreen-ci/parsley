@@ -10,7 +10,7 @@ describe("expanded lines", () => {
   it("shows a message when no lines have been expanded", () => {
     render(<ExpandedNavGroup {...props} />);
     expect(
-      screen.getByDataCy("expanded-lines-default-message")
+      screen.getByDataCy("expanded-lines-default-message"),
     ).toBeInTheDocument();
   });
 
@@ -22,7 +22,7 @@ describe("expanded lines", () => {
           [0, 2],
           [5, 6],
         ]}
-      />
+      />,
     );
     expect(screen.getByText("Row 0 to 2")).toBeInTheDocument();
     expect(screen.getByText("Row 5 to 6")).toBeInTheDocument();
@@ -38,10 +38,10 @@ describe("expanded lines", () => {
           [9, 10],
           [20, 22],
         ]}
-      />
+      />,
     );
     const navGroupHeader = screen.getByDataCy(
-      "expanded-lines-nav-group-header"
+      "expanded-lines-nav-group-header",
     );
     expect(within(navGroupHeader).getByText("4")).toBeInTheDocument();
   });
@@ -54,7 +54,7 @@ describe("expanded lines", () => {
         {...props}
         collapseLines={collapseLines}
         expandedLines={[[0, 2]]}
-      />
+      />,
     );
     await user.click(screen.getByLabelText("Delete range"));
     expect(collapseLines).toHaveBeenCalledTimes(1);

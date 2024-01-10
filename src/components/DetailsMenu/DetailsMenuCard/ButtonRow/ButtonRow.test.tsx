@@ -18,7 +18,7 @@ describe("buttonRow", () => {
       });
       expect(screen.getByDataCy("jira-button")).toHaveAttribute(
         "aria-disabled",
-        "true"
+        "true",
       );
       // Tooltip should appear even if button is disabled.
       await user.hover(screen.getByDataCy("jira-button"));
@@ -39,7 +39,7 @@ describe("buttonRow", () => {
       await user.hover(jiraButton);
       await waitFor(() => {
         expect(
-          screen.getByText("Copy bookmarked lines in JIRA format")
+          screen.getByText("Copy bookmarked lines in JIRA format"),
         ).toBeInTheDocument();
       });
       // Tooltip text should change after clicking on the button.
@@ -62,7 +62,7 @@ describe("buttonRow", () => {
       await user.click(jiraButton);
       const clipboardText = await navigator.clipboard.readText();
       expect(clipboardText).toBe(
-        `{noformat}\n${logLines[0]}\n...\n${logLines[2]}\n...\n${logLines[5]}\n{noformat}`
+        `{noformat}\n${logLines[0]}\n...\n${logLines[2]}\n...\n${logLines[5]}\n{noformat}`,
       );
     });
   });

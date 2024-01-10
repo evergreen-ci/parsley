@@ -15,7 +15,7 @@ describe("usePaginatedVirtualList", () => {
         paginationThreshold,
         ref,
         rowCount,
-      })
+      }),
     );
     expect(result.current.startingIndex).toBe(0);
     expect(result.current.pageSize).toBe(5000);
@@ -28,7 +28,7 @@ describe("usePaginatedVirtualList", () => {
         paginationThreshold,
         ref,
         rowCount,
-      })
+      }),
     );
     expect(result.current.pageSize).toBe(paginationThreshold);
   });
@@ -40,7 +40,7 @@ describe("usePaginatedVirtualList", () => {
         paginationThreshold: 5000,
         ref,
         rowCount: 1000,
-      })
+      }),
     );
     expect(result.current.pageSize).toBe(1000);
   });
@@ -58,7 +58,7 @@ describe("usePaginatedVirtualList", () => {
             },
           },
           rowCount,
-        })
+        }),
       );
 
       act(() => {
@@ -71,7 +71,7 @@ describe("usePaginatedVirtualList", () => {
         index: paginationOffset,
       });
       expect(result.current.pageSize).toBe(
-        paginationThreshold + paginationOffset
+        paginationThreshold + paginationOffset,
       );
     });
     it("should not scroll to next page if on last page", () => {
@@ -86,7 +86,7 @@ describe("usePaginatedVirtualList", () => {
             },
           },
           rowCount,
-        })
+        }),
       );
 
       // Go to last page
@@ -112,7 +112,7 @@ describe("usePaginatedVirtualList", () => {
           paginationThreshold,
           ref,
           rowCount,
-        })
+        }),
       );
       // Go to last page
       act(() => {
@@ -142,7 +142,7 @@ describe("usePaginatedVirtualList", () => {
             },
           },
           rowCount: 1000,
-        })
+        }),
       );
 
       act(() => {
@@ -162,7 +162,7 @@ describe("usePaginatedVirtualList", () => {
           ref,
           rowCount: overrideRowCount,
         }),
-      { initialProps: { overrideRowCount: rowCount } }
+      { initialProps: { overrideRowCount: rowCount } },
     );
     act(() => {
       result.current.scrollToNextPage();
@@ -185,7 +185,7 @@ describe("usePaginatedVirtualList", () => {
             },
           },
           rowCount,
-        })
+        }),
       );
 
       // Go to second page
@@ -198,7 +198,7 @@ describe("usePaginatedVirtualList", () => {
         index: paginationOffset,
       });
       expect(result.current.pageSize).toBe(
-        paginationThreshold + paginationOffset
+        paginationThreshold + paginationOffset,
       );
 
       // Go to first page
@@ -223,7 +223,7 @@ describe("usePaginatedVirtualList", () => {
             },
           },
           rowCount,
-        })
+        }),
       );
       expect(result.current.currentPage).toBe(0);
       act(() => {
@@ -243,7 +243,7 @@ describe("usePaginatedVirtualList", () => {
           paginationThreshold,
           ref,
           rowCount,
-        })
+        }),
       );
       act(() => {
         result.current.scrollToLine(1000);
@@ -259,14 +259,14 @@ describe("usePaginatedVirtualList", () => {
           paginationThreshold,
           ref,
           rowCount,
-        })
+        }),
       );
       act(() => {
         result.current.scrollToLine(5000);
       });
       expect(result.current.startingIndex).toBe(4900);
       expect(result.current.pageSize).toBe(
-        paginationThreshold + paginationOffset
+        paginationThreshold + paginationOffset,
       );
       expect(result.current.currentPage).toBe(1);
       act(() => {
@@ -291,7 +291,7 @@ describe("usePaginatedVirtualList", () => {
             },
           },
           rowCount,
-        })
+        }),
       );
       act(() => {
         result.current.scrollToLine(6000);

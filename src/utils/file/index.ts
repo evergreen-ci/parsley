@@ -13,7 +13,7 @@ type StreamedFileOptions = {
  */
 const fileToStream = async (
   file: File,
-  options: StreamedFileOptions = {}
+  options: StreamedFileOptions = {},
 ): Promise<ReadableStream<ArrayBuffer>> => {
   let bytesRead = 0;
   const stream = new ReadableStream<ArrayBuffer>({
@@ -28,7 +28,7 @@ const fileToStream = async (
           while (byteOffset < fileReader.result.byteLength) {
             const chunk = fileReader.result.slice(
               byteOffset,
-              byteOffset + CHUNK_SIZE
+              byteOffset + CHUNK_SIZE,
             );
             controller.enqueue(chunk);
             byteOffset += CHUNK_SIZE;
@@ -37,7 +37,7 @@ const fileToStream = async (
               leaveBreadcrumb(
                 "File size limit exceeded",
                 { bytesRead },
-                SentryBreadcrumb.UI
+                SentryBreadcrumb.UI,
               );
               break;
             }

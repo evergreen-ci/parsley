@@ -54,7 +54,7 @@ const reducer = (state: LogState, action: Action): LogState => {
               const processedLogLine = processResmokeLine(logLine);
               const colorMapping = getColorMapping(
                 processedLogLine,
-                acc.colorMap
+                acc.colorMap,
               );
               if (colorMapping) {
                 acc.colorMap[colorMapping.portOrState] = colorMapping.color;
@@ -65,7 +65,7 @@ const reducer = (state: LogState, action: Action): LogState => {
             {
               colorMap: {} as Record<string, string>,
               processedLogs: [] as string[],
-            }
+            },
           );
           processedLogs = transformedLogs.processedLogs;
           colorMap = transformedLogs.colorMap;
@@ -102,7 +102,7 @@ const reducer = (state: LogState, action: Action): LogState => {
     }
     case "COLLAPSE_LINES": {
       const newExpandedLines = state.expandedLines.filter(
-        (_f, idx) => idx !== action.idx
+        (_f, idx) => idx !== action.idx,
       );
       return {
         ...state,
@@ -126,7 +126,7 @@ const reducer = (state: LogState, action: Action): LogState => {
       const hasSearch = !!action.searchTerm;
       const searchTerm = new RegExp(
         action.searchTerm,
-        state.searchState.caseSensitive ? "" : "i"
+        state.searchState.caseSensitive ? "" : "i",
       );
       return {
         ...state,
@@ -152,7 +152,7 @@ const reducer = (state: LogState, action: Action): LogState => {
       }
       const newSearchTerm = new RegExp(
         searchTerm.source,
-        action.caseSensitive ? "" : "i"
+        action.caseSensitive ? "" : "i",
       );
       return {
         ...state,

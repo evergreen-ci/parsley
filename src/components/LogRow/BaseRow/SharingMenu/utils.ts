@@ -4,12 +4,12 @@ import { findLineIndex } from "utils/findLineIndex";
 
 const getLinesInProcessedLogLinesFromSelectedLines = (
   processedLogLines: ProcessedLogLines,
-  selectedLines: SelectedLineRange
+  selectedLines: SelectedLineRange,
 ) => {
   const endingLine = selectedLines.endingLine ?? selectedLines.startingLine;
   const startingIndex = findLineIndex(
     processedLogLines,
-    selectedLines.startingLine
+    selectedLines.startingLine,
   );
   const endingIndex = findLineIndex(processedLogLines, endingLine);
 

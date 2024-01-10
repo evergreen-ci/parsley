@@ -20,7 +20,7 @@ const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
   onParse,
 }) => {
   const [logType, setLogType] = useState<LogTypes | undefined>(
-    (Cookie.get(LAST_SELECTED_LOG_TYPE) as LogTypes) ?? undefined
+    (Cookie.get(LAST_SELECTED_LOG_TYPE) as LogTypes) ?? undefined,
   );
 
   return (

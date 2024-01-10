@@ -4,7 +4,7 @@ import { Filters } from "types/logs";
 
 export const parseQueryString = (
   search: string,
-  options: ParseOptions = {}
+  options: ParseOptions = {},
 ) => {
   const parseOptions: ParseOptions = {
     arrayFormat: "comma",
@@ -17,7 +17,7 @@ export const parseQueryString = (
 
 export const stringifyQuery = (
   object: { [key: string]: any },
-  options: StringifyOptions = {}
+  options: StringifyOptions = {},
 ) =>
   queryString.stringify(object, {
     arrayFormat: "comma",

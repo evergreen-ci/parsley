@@ -32,7 +32,7 @@ describe("projectFiltersModal", () => {
   it("shows message when no filters are defined in project", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <ProjectFiltersModal open setOpen={jest.fn()} />
+      <ProjectFiltersModal open setOpen={jest.fn()} />,
     );
     render(<Component />, {
       wrapper: wrapper([noFiltersMock, evergreenTaskMock]),
@@ -46,7 +46,7 @@ describe("projectFiltersModal", () => {
   it("lists all of a project's filters", async () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <ProjectFiltersModal open setOpen={jest.fn()} />
+      <ProjectFiltersModal open setOpen={jest.fn()} />,
     );
     render(<Component />, {
       wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
@@ -64,7 +64,7 @@ describe("projectFiltersModal", () => {
     const user = userEvent.setup();
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <ProjectFiltersModal open setOpen={jest.fn()} />
+      <ProjectFiltersModal open setOpen={jest.fn()} />,
     );
     render(<Component />, {
       route: "?filters=100my_filter_1",
@@ -86,7 +86,7 @@ describe("projectFiltersModal", () => {
   it("disables submit button when no filters have been selected", async () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <ProjectFiltersModal open setOpen={jest.fn()} />
+      <ProjectFiltersModal open setOpen={jest.fn()} />,
     );
     render(<Component />, {
       wrapper: wrapper([projectFiltersMock, evergreenTaskMock]),
@@ -96,7 +96,7 @@ describe("projectFiltersModal", () => {
     });
     await waitForModalLoad();
     expect(
-      screen.queryByRole("button", { name: "Apply filters" })
+      screen.queryByRole("button", { name: "Apply filters" }),
     ).toHaveAttribute("aria-disabled", "true");
   });
 
@@ -104,7 +104,7 @@ describe("projectFiltersModal", () => {
     const user = userEvent.setup();
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
-      <ProjectFiltersModal open setOpen={jest.fn()} />
+      <ProjectFiltersModal open setOpen={jest.fn()} />,
     );
     const { router } = render(<Component />, {
       route: "?filters=100original",
@@ -118,21 +118,21 @@ describe("projectFiltersModal", () => {
     await user.click(screen.getByText("my_filter_2"));
     await user.click(screen.getByText("my_filter_3"));
     expect(
-      screen.queryByRole("button", { name: "Apply filters" })
+      screen.queryByRole("button", { name: "Apply filters" }),
     ).toHaveAttribute("aria-disabled", "false");
     await user.click(screen.getByRole("button", { name: "Apply filters" }));
     expect(router.state.location.search).toBe(
-      "?filters=100original,111my_filter_2,101my_filter_3"
+      "?filters=100original,111my_filter_2,101my_filter_3",
     );
   });
 });
 
 const waitForModalLoad = async () => {
   await waitFor(() =>
-    expect(screen.queryByDataCy("project-filters-modal")).toBeVisible()
+    expect(screen.queryByDataCy("project-filters-modal")).toBeVisible(),
   );
   await waitFor(() =>
-    expect(screen.queryAllByDataCy("project-filter")).toHaveLength(3)
+    expect(screen.queryAllByDataCy("project-filter")).toHaveLength(3),
   );
 };
 

@@ -6,7 +6,7 @@ describe("getLinesInProcessedLogLinesFromSelectedLines", () => {
     const selectedLines = { endingLine: undefined, startingLine: undefined };
     const result = getLinesInProcessedLogLinesFromSelectedLines(
       processedLogLines,
-      selectedLines
+      selectedLines,
     );
     expect(result).toStrictEqual([]);
   });
@@ -15,7 +15,7 @@ describe("getLinesInProcessedLogLinesFromSelectedLines", () => {
     const selectedLines = { endingLine: 3, startingLine: 2 };
     const result = getLinesInProcessedLogLinesFromSelectedLines(
       processedLogLines,
-      selectedLines
+      selectedLines,
     );
     expect(result).toStrictEqual([2, 3]);
   });
@@ -24,7 +24,7 @@ describe("getLinesInProcessedLogLinesFromSelectedLines", () => {
     const selectedLines = { endingLine: 4, startingLine: 2 };
     const result = getLinesInProcessedLogLinesFromSelectedLines(
       processedLogLines,
-      selectedLines
+      selectedLines,
     );
     expect(result).toStrictEqual([2, 4]);
   });
@@ -33,7 +33,7 @@ describe("getLinesInProcessedLogLinesFromSelectedLines", () => {
     const selectedLines = { endingLine: undefined, startingLine: 2 };
     const result = getLinesInProcessedLogLinesFromSelectedLines(
       processedLogLines,
-      selectedLines
+      selectedLines,
     );
     expect(result).toStrictEqual([2]);
   });

@@ -56,7 +56,7 @@ describe("filters", () => {
     await user.click(confirmButton);
 
     expect(router.state.location.search).toBe(
-      "?filters=100newFilter,100filter2"
+      "?filters=100newFilter,100filter2",
     );
     expect(screen.queryByText("filter1")).not.toBeInTheDocument();
     expect(screen.getByText("newFilter")).toBeInTheDocument();
@@ -120,7 +120,7 @@ describe("filters", () => {
       {
         route: "?filters=100filter1",
         wrapper,
-      }
+      },
     );
     await user.click(screen.getAllByLabelText("Delete filter")[0]);
     expect(router.state.location.search).toBe("");

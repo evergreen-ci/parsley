@@ -7,7 +7,7 @@ describe("iconWithTooltip", () => {
     render(
       <IconWithTooltip data-cy="Icon" glyph="Warning">
         Some Text
-      </IconWithTooltip>
+      </IconWithTooltip>,
     );
     expect(screen.queryByText("Some Text")).toBeNull();
 

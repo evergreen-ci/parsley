@@ -42,7 +42,7 @@ Cypress.Commands.add(
   (
     toggleDataCy: string,
     enabled: boolean,
-    tab: "search-and-filter" | "log-viewing" = "search-and-filter"
+    tab: "search-and-filter" | "log-viewing" = "search-and-filter",
   ) => {
     cy.toggleDetailsPanel(true);
     if (tab === "log-viewing") {
@@ -51,7 +51,7 @@ Cypress.Commands.add(
     cy.dataCy(toggleDataCy).click();
     cy.dataCy(toggleDataCy).should("have.attr", "aria-checked", `${enabled}`);
     cy.toggleDetailsPanel(false);
-  }
+  },
 );
 
 Cypress.Commands.add("dataCy", (value: string) => {
@@ -74,7 +74,7 @@ Cypress.Commands.add(
     }
 
     cy.toggleDetailsPanel(false);
-  }
+  },
 );
 
 Cypress.Commands.add(
@@ -94,7 +94,7 @@ Cypress.Commands.add(
     expect(rect.right).not.to.be.greaterThan(right);
 
     return subject;
-  }
+  },
 );
 
 Cypress.Commands.add(
@@ -124,7 +124,7 @@ Cypress.Commands.add(
     if (!hasOutOfBoundsValue) {
       fail("Element is contained in the viewport");
     }
-  }
+  },
 );
 
 Cypress.Commands.add("getInputByLabel", (label: string) => {
@@ -144,7 +144,7 @@ Cypress.Commands.add("login", () => {
       cy.origin("http://localhost:9090", { args }, ({ password, username }) => {
         cy.request("POST", "/login", { username, password });
       });
-    }
+    },
   );
 });
 
@@ -189,7 +189,7 @@ Cypress.Commands.add(
       });
       cy.dataCy(toastDataCy).should("not.exist");
     }
-  }
+  },
 );
 
 Cypress.Commands.add("assertValueCopiedToClipboard", (value: string) => {

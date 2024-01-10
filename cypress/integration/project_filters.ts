@@ -26,7 +26,7 @@ describe("project filters", () => {
     cy.contains("button", "Apply filters").click();
     cy.location("search").should(
       "contain",
-      "111%28NETWORK%257CASIO%257CEXECUTOR%257CCONNPOOL%257CREPL_HB%29"
+      "111%28NETWORK%257CASIO%257CEXECUTOR%257CCONNPOOL%257CREPL_HB%29",
     );
     cy.get("[data-cy^='collapsed-row-']").should("exist");
   });

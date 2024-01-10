@@ -14,11 +14,11 @@ interface DetailsMenuProps {
 const DetailsMenu: React.FC<DetailsMenuProps> = ({ disabled, ...rest }) => {
   const [lowerRange] = useQueryParam<undefined | number>(
     QueryParams.LowerRange,
-    undefined
+    undefined,
   );
   const [upperRange] = useQueryParam<undefined | number>(
     QueryParams.UpperRange,
-    undefined
+    undefined,
   );
   const [changeVisible, setChangeVisible] = useState(false);
   const detailsMenuRef = useRef<HTMLDivElement>(null);

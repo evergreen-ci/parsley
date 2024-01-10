@@ -54,7 +54,7 @@ describe("useHighlightParam", () => {
         ...useHighlightJointHook(),
         location: useLocation(),
       }),
-      { wrapper }
+      { wrapper },
     );
     act(() => {
       result.current.setHighlights(["something,else", "failed"]);
@@ -63,7 +63,7 @@ describe("useHighlightParam", () => {
       highlights: ["something,else", "failed"],
     });
     expect(result.current.location.search).toBe(
-      "?highlights=something%252Celse,failed"
+      "?highlights=something%252Celse,failed",
     );
   });
   it("should properly decode highlights from URL", () => {

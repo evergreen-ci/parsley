@@ -25,7 +25,7 @@ export type DispatchToast = (
     onClose?: () => void;
     shouldTimeout?: boolean;
     title?: string;
-  }
+  },
 ) => void;
 
 // This is a function definition.
@@ -37,5 +37,5 @@ export type DispatchToastWithProgress = (
     onClose?: () => void;
     shouldTimeout?: boolean;
     title?: string;
-  }
+  },
 ) => void;

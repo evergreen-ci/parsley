@@ -14,12 +14,12 @@ describe("parse log select", () => {
         fileName="filename.txt"
         onCancel={jest.fn()}
         onParse={jest.fn()}
-      />
+      />,
     );
     expect(screen.getByText("Select...")).toBeInTheDocument();
     expect(screen.getByDataCy("process-log-button")).toHaveAttribute(
       "aria-disabled",
-      "true"
+      "true",
     );
   });
 
@@ -30,7 +30,7 @@ describe("parse log select", () => {
         fileName="filename.txt"
         onCancel={jest.fn()}
         onParse={jest.fn()}
-      />
+      />,
     );
     expect(screen.getByText("Raw")).toBeInTheDocument();
     expect(screen.getByDataCy("process-log-button")).toBeEnabled();
@@ -43,7 +43,7 @@ describe("parse log select", () => {
         fileName="filename.txt"
         onCancel={jest.fn()}
         onParse={jest.fn()}
-      />
+      />,
     );
     expect(screen.getByText("Resmoke")).toBeInTheDocument();
     expect(screen.getByDataCy("process-log-button")).toBeEnabled();
@@ -58,7 +58,7 @@ describe("parse log select", () => {
         fileName="filename.txt"
         onCancel={jest.fn()}
         onParse={onParse}
-      />
+      />,
     );
     await user.click(screen.getByDataCy("process-log-button"));
     expect(onParse).toHaveBeenCalledTimes(1);
@@ -72,7 +72,7 @@ describe("parse log select", () => {
         fileName="filename.txt"
         onCancel={onCancel}
         onParse={jest.fn()}
-      />
+      />,
     );
     await user.click(screen.getByRole("button", { name: "Cancel" }));
     expect(onCancel).toHaveBeenCalledTimes(1);

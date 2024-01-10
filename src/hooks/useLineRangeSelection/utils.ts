@@ -7,7 +7,7 @@ import { SelectedLineRange } from "types/logs";
  * @returns an object with the start and end line numbers
  */
 const parseSelectedLineRange = (
-  selectedLineRange: string
+  selectedLineRange: string,
 ): SelectedLineRange => {
   const [start, end] = selectedLineRange.split("-");
   // start and end start with L, so we need to remove it

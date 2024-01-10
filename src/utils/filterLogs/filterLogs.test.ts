@@ -21,7 +21,7 @@ describe("filterLogs", () => {
         logLines,
         matchingLines: undefined,
         shareLine: undefined,
-      })
+      }),
     ).toStrictEqual([0, 1, 2, 3, 4, 5, 6, 7]);
   });
 
@@ -34,7 +34,7 @@ describe("filterLogs", () => {
         logLines,
         matchingLines: new Set([1, 2, 3]),
         shareLine: undefined,
-      })
+      }),
     ).toStrictEqual([1, 2, 3]);
   });
 
@@ -47,7 +47,7 @@ describe("filterLogs", () => {
         logLines,
         matchingLines: new Set([]),
         shareLine: undefined,
-      })
+      }),
     ).toStrictEqual([[0, 1, 2, 3, 4, 5, 6, 7]]);
   });
 
@@ -61,7 +61,7 @@ describe("filterLogs", () => {
           logLines,
           matchingLines: new Set([1]),
           shareLine: undefined,
-        })
+        }),
       ).toStrictEqual([[0], 1, [2, 3, 4, 5, 6], 7]);
     });
 
@@ -74,7 +74,7 @@ describe("filterLogs", () => {
           logLines,
           matchingLines: new Set([1]),
           shareLine: 7,
-        })
+        }),
       ).toStrictEqual([[0], 1, [2, 3, 4, 5, 6], 7]);
     });
 
@@ -87,7 +87,7 @@ describe("filterLogs", () => {
           logLines,
           matchingLines: new Set([1]),
           shareLine: undefined,
-        })
+        }),
       ).toStrictEqual([[0], 1, [2, 3], 4, 5, 6, [7]]);
     });
   });

@@ -121,7 +121,7 @@ const useLogDownloader = ({
               fileSize: getFileSize(),
               url,
             },
-            SentryBreadcrumb.Error
+            SentryBreadcrumb.Error,
           );
           reportError(err).warning();
           setError(err.message);
@@ -140,7 +140,7 @@ const useLogDownloader = ({
               time: Date.now() - timeStart,
               url,
             },
-            SentryBreadcrumb.HTTP
+            SentryBreadcrumb.HTTP,
           );
           sendEvent({
             duration: Date.now() - timeStart,

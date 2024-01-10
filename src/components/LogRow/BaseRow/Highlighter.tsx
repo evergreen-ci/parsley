@@ -20,7 +20,7 @@ const Highlighter: React.FC<HighlighterProps> = memo((props) => {
 
   const htmlToRender = useMemo(
     () => highlightHtml(text, searchTerm, highlights),
-    [text, searchTerm, highlights]
+    [text, searchTerm, highlights],
   );
 
   return (
