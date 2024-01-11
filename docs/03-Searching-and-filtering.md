@@ -5,21 +5,21 @@ DEVPROD-3668 fake commit
 **Line Wrapping:** 
 Log lines can be wrapped/unwrapped by toggling the wrap button under show details. 
 
-![wrap](https://user-images.githubusercontent.com/624531/207634738-6cde452e-4c0c-46e1-a9d8-01aa3b3dae20.png)
+![wrap](https://github.com/evergreen-ci/parsley/assets/64446617/468e4b78-a7ee-44d5-bbae-d1e372afb0ba)
 
 ## Search
 
 To search for a term in a log, enter a regexp search term in the search bar with the "Search" mode active. Hit enter to navigate to the first appearance of the term. You can paginate through the search results by either manually clicking on the next and previous buttons, or using the n and p keys on your keyboard. 
 
-![search example](https://user-images.githubusercontent.com/624531/207634781-776f1cd4-a261-4d44-bb36-f29a62a13847.png)
+![search example](https://github.com/evergreen-ci/parsley/assets/64446617/c1c4e8c8-03ed-4864-83ba-6ee2c165fd31)
 
 As seen above, search is case insensitive by default. Open the details menu to toggle to turn case sensitivity on and off. Note that the case sensitivity toggle only affects searching, having no effect on filtering or highlighting. 
 
-![case sensetive](https://user-images.githubusercontent.com/624531/207634810-65b64124-1c52-4cd5-a45c-dd9a41906f4f.png)
+![case sensetive](https://github.com/evergreen-ci/parsley/assets/64446617/1f9674e9-31fe-4662-aa89-6d180ada6d4f)
 
 You can limit your search between the certain lines by specifying a range in the details menu. 
  
-![range](https://user-images.githubusercontent.com/624531/207634831-130847b4-ce1c-43b2-973f-989b5de3a2a1.png)
+![range](https://github.com/evergreen-ci/parsley/assets/64446617/0208c11c-bb77-4f40-88c5-ff84599aa52b)
 
 ## Filtering
 To apply a filter, enter a regexp search term in the search bar with the "Filter" mode active. 
@@ -44,7 +44,7 @@ When a filter is applied, unmatching lines are collapsed and are represented by 
 
 You can hide the skipped line indicators entirely by toggling the expandable row option off in the details menu. 
 
-![exp rows](https://user-images.githubusercontent.com/624531/207634972-19ac3628-280f-47b8-ab65-8f7ba4d6c545.png)
+![exp rows](https://github.com/evergreen-ci/parsley/assets/64446617/f80ed1b4-3012-4181-aa85-f05abb41971e)
 
 ![exp row off](https://user-images.githubusercontent.com/624531/207634975-d9a240ac-624e-4fbf-81f7-81094f6e5ab9.png)
 
@@ -56,4 +56,4 @@ Multiple filters can be applied at the same time. Each filter’s settings can b
 
 You can change the filtering logic from AND and OR using the toggle in the details menu. Filtering logic will affect how multiple filters are processed.
 
-![filter logic](https://user-images.githubusercontent.com/624531/207635120-79d1daa5-e637-46e2-bd76-720ea0047e4f.png)
+![filter logic](https://github.com/evergreen-ci/parsley/assets/64446617/5e5892a9-5d60-432a-a329-7f5ff62b637d)
