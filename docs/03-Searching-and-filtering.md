@@ -1,7 +1,5 @@
 # Search a Log
 
-DEVPROD-3668 fake commit
-
 **Line Wrapping:** 
 Log lines can be wrapped/unwrapped by toggling the wrap button under show details. 
 
