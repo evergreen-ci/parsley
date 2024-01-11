@@ -3,21 +3,21 @@
 **Line Wrapping:** 
 Log lines can be wrapped/unwrapped by toggling the wrap button under show details. 
 
-![wrap](https://user-images.githubusercontent.com/624531/207634738-6cde452e-4c0c-46e1-a9d8-01aa3b3dae20.png)
+![wrap](./images/wrap.png)
 
 ## Search
 
 To search for a term in a log, enter a regexp search term in the search bar with the "Search" mode active. Hit enter to navigate to the first appearance of the term. You can paginate through the search results by either manually clicking on the next and previous buttons, or using the n and p keys on your keyboard. 
 
-![search example](https://user-images.githubusercontent.com/624531/207634781-776f1cd4-a261-4d44-bb36-f29a62a13847.png)
+![search example](./images/search_example.png)
 
 As seen above, search is case insensitive by default. Open the details menu to toggle to turn case sensitivity on and off. Note that the case sensitivity toggle only affects searching, having no effect on filtering or highlighting. 
 
-![case sensetive](https://user-images.githubusercontent.com/624531/207634810-65b64124-1c52-4cd5-a45c-dd9a41906f4f.png)
+![case sensetive](./images/case_insensitive.png)
 
 You can limit your search between the certain lines by specifying a range in the details menu. 
  
-![range](https://user-images.githubusercontent.com/624531/207634831-130847b4-ce1c-43b2-973f-989b5de3a2a1.png)
+![range](./images/range.png)
 
 ## Filtering
 To apply a filter, enter a regexp search term in the search bar with the "Filter" mode active. 
@@ -42,7 +42,7 @@ When a filter is applied, unmatching lines are collapsed and are represented by 
 
 You can hide the skipped line indicators entirely by toggling the expandable row option off in the details menu. 
 
-![exp rows](https://user-images.githubusercontent.com/624531/207634972-19ac3628-280f-47b8-ab65-8f7ba4d6c545.png)
+![exp rows](./images/expandable_rows.png)
 
 ![exp row off](https://user-images.githubusercontent.com/624531/207634975-d9a240ac-624e-4fbf-81f7-81094f6e5ab9.png)
 
@@ -54,4 +54,4 @@ Multiple filters can be applied at the same time. Each filter’s settings can b
 
 You can change the filtering logic from AND and OR using the toggle in the details menu. Filtering logic will affect how multiple filters are processed.
 
-![filter logic](https://user-images.githubusercontent.com/624531/207635120-79d1daa5-e637-46e2-bd76-720ea0047e4f.png)
+![filter logic](./images/filter.png)
