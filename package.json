@@ -94,7 +94,7 @@
     "@sentry/vite-plugin": "2.9.0",
     "@storybook/addon-actions": "7.5.2",
     "@storybook/addon-essentials": "7.5.2",
-    "@storybook/addon-interactions": "7.5.2",
+    "@storybook/addon-interactions": "7.6.8",
     "@storybook/addon-links": "7.5.2",
     "@storybook/addon-storyshots": "7.5.2",
     "@storybook/react": "7.5.2",
