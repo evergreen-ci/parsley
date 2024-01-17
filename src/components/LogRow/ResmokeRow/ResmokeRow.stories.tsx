@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
 import { ParsleyRow } from "components/LogRow/RowRenderer";
-import { LogTypes } from "constants/enums";
+import { LogTypes, WordWrapFormat } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
 import WithToastContext from "test_utils/toast-decorator";
@@ -43,6 +43,7 @@ const SingleLineStory = (args: any) => {
       range={{ lowerRange: 0 }}
       scrollToLine={scrollToLine}
       searchTerm={undefined}
+      wordWrapFormat={args.wordWrapFormat}
       wrap={args.wrap}
     />
   );
@@ -51,6 +52,7 @@ const SingleLineStory = (args: any) => {
 export const SingleLine: CustomStoryObj<ResmokeRowProps> = {
   args: {
     prettyPrint: true,
+    wordWrapFormat: WordWrapFormat.Standard,
     wrap: false,
   },
   render: (args) => <SingleLineStory {...args} />,
@@ -89,6 +91,7 @@ const MultipleLinesStory = (args: any) => {
 export const MultipleLines: CustomStoryObj<ResmokeRowProps> = {
   args: {
     prettyPrint: true,
+    wordWrapFormat: WordWrapFormat.Standard,
     wrap: false,
   },
   render: (args) => <MultipleLinesStory {...args} />,

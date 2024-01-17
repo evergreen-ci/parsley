@@ -1,3 +1,4 @@
+import { WordWrapFormat } from "constants/enums";
 import { LogContextProvider } from "context/LogContext";
 import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
 import {
@@ -140,6 +141,7 @@ const ansiProps = {
 
   prettyPrint: false,
   range: { lowerRange: 0 },
+  wordWrapFormat: WordWrapFormat.Standard,
   wrap: false,
 };
 

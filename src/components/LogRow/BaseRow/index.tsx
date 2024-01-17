@@ -4,6 +4,7 @@ import IconButton from "@leafygreen-ui/icon-button";
 import { palette } from "@leafygreen-ui/palette";
 import { useLogWindowAnalytics } from "analytics";
 import Icon from "components/Icon";
+import { WordWrapFormat } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { fontSize, size } from "constants/tokens";
 import { useMultiLineSelectContext } from "context/MultiLineSelectContext";
@@ -34,6 +35,7 @@ interface BaseRowProps extends Omit<LogRowProps, "getLine"> {
  * @param BaseRowProps.searchLine - the line number of the line that was searched for
  * @param BaseRowProps.searchTerm - the term that was searched for
  * @param BaseRowProps.color - the color of the highlight
+ * @param BaseRowProps.wordWrapFormat - the word wrap format to be used aggressive or standard
  * @param BaseRowProps.wrap - whether or not the text should wrap
  * @param BaseRowProps.scrollToLine - function to scroll to a line
  * @param BaseRowProps.range - the range of lines to be displayed
@@ -50,6 +52,7 @@ const BaseRow: React.FC<BaseRowProps> = ({
   scrollToLine,
   searchLine,
   searchTerm,
+  wordWrapFormat,
   wrap,
   ...rest
 }) => {
@@ -129,7 +132,7 @@ const BaseRow: React.FC<BaseRowProps> = ({
         </MenuIcon>
       )}
       <LineNumber lineNumber={lineNumber} />
-      <StyledPre shouldWrap={wrap}>
+      <StyledPre shouldWrap={wrap} wordWrapFormat={wordWrapFormat}>
         <Highlighter
           color={color}
           data-cy={dataCyText}
@@ -176,6 +179,7 @@ const ShareIcon = styled(Icon)`
 
 const StyledPre = styled.pre<{
   shouldWrap: boolean;
+  wordWrapFormat: WordWrapFormat;
 }>`
   overflow-y: hidden;
   margin-top: 0;
@@ -186,6 +190,10 @@ const StyledPre = styled.pre<{
   font-family: inherit;
   line-height: inherit;
   font-size: inherit;
+  ${({ shouldWrap, wordWrapFormat }) =>
+    shouldWrap &&
+    wordWrapFormat === WordWrapFormat.Aggressive &&
+    ` /* wrap multiple lines */ overflow-wrap: anywhere;`}
   ${({ shouldWrap }) =>
     shouldWrap && ` /* wrap multiple lines */ white-space: break-spaces;`}
 `;
