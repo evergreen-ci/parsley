@@ -9,9 +9,6 @@ import {
   getEvergreenTaskFileURL,
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,
-  getLobsterResmokeURL,
-  getLobsterTaskURL,
-  getLobsterTestURL,
   getResmokeLogURL,
 } from "constants/logURLTemplates";
 import {
@@ -42,8 +39,6 @@ type LogURLs = {
   jobLogsURL: string;
   /** The URL of the RESMOKE logs job logs page in logkeeper */
   legacyJobLogsURL: string;
-  /** The URL to open the log in Lobster */
-  lobsterURL: string;
   /** The URL of the log file without any processing */
   rawLogURL: string;
   /** Whether the hook is actively making an network request or not  */
@@ -113,17 +108,14 @@ export const useResolveLogURL = ({
   let htmlLogURL = "";
   let jobLogsURL = "";
   let legacyJobLogsURL = "";
-  let lobsterURL = "";
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
         rawLogURL = getResmokeLogURL(buildID, { raw: true, testID });
         htmlLogURL = getResmokeLogURL(buildID, { html: true, testID });
-        lobsterURL = getLobsterResmokeURL(buildID, testID);
       } else if (buildID) {
         rawLogURL = getResmokeLogURL(buildID, { raw: true });
         htmlLogURL = getResmokeLogURL(buildID, { html: true });
-        lobsterURL = getLobsterResmokeURL(buildID);
       }
       if (buildID) {
         jobLogsURL = getJobLogsURL(buildID);
@@ -177,15 +169,13 @@ export const useResolveLogURL = ({
         : constructEvergreenTaskLogURL(taskID, execution, origin, {
             text: false,
           });
-      lobsterURL = getLobsterTaskURL(taskID, execution, origin);
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
       if (!taskID || !execution || !testID || isLoadingTest) {
         break;
       }
-      const { url, urlLobster, urlRaw } =
-        testData?.task?.tests.testResults[0]?.logs || {};
+      const { url, urlRaw } = testData?.task?.tests.testResults[0]?.logs || {};
       rawLogURL =
         urlRaw ??
         getEvergreenTestLogURL(taskID, execution, testID, {
@@ -198,8 +188,6 @@ export const useResolveLogURL = ({
           groupID,
           text: false,
         });
-      lobsterURL =
-        urlLobster ?? getLobsterTestURL(taskID, execution, testID, groupID);
       downloadURL = rawLogURL;
       break;
     }
@@ -212,7 +200,6 @@ export const useResolveLogURL = ({
     jobLogsURL,
     legacyJobLogsURL,
     loading: isLoadingTest || isLoadingTask || isLoadingTaskFileData,
-    lobsterURL,
     rawLogURL,
   };
 };
