@@ -1,6 +1,6 @@
 # Parsley 🌿
 
-Parsley is the UI for Evergreen's log viewer. It will eventually replace
+Parsley is the UI for Evergreen's log viewer. It is the replacement for
 [Lobster](https://github.com/evergreen-ci/lobster).
 
 ## Table of Contents
