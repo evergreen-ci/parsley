@@ -15,9 +15,10 @@ import {
   FILTER_LOGIC,
   PRETTY_PRINT_BOOKMARKS,
   WRAP,
+  WRAP_FORMAT,
   ZEBRA_STRIPING,
 } from "constants/cookies";
-import { FilterLogic, LogTypes } from "constants/enums";
+import { FilterLogic, LogTypes, WordWrapFormat } from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useQueryParam } from "hooks/useQueryParam";
@@ -106,6 +107,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
   );
   const [zebraStriping, setZebraStriping] = useState(
     Cookie.get(ZEBRA_STRIPING) === "true",
+  );
+  const [wordWrapFormat, setWordWrapFormat] = useState(
+    (Cookie.get(WRAP_FORMAT) as WordWrapFormat) ?? WordWrapFormat.Standard,
   );
 
   const { dispatch, state } = useLogState(initialLogLines);
@@ -255,6 +259,10 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           setPrettyPrint(v);
           Cookie.set(PRETTY_PRINT_BOOKMARKS, v.toString(), { expires: 365 });
         },
+        setWordWrapFormat: (v: WordWrapFormat) => {
+          setWordWrapFormat(v);
+          Cookie.set(WRAP_FORMAT, v.toString(), { expires: 365 });
+        },
         setWrap: (v: boolean) => {
           setWrap(v);
           Cookie.set(WRAP, v.toString(), { expires: 365 });
@@ -263,6 +271,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
           setZebraStriping(v);
           Cookie.set(ZEBRA_STRIPING, v.toString(), { expires: 365 });
         },
+        wordWrapFormat,
         wrap,
         zebraStriping,
       },
@@ -315,6 +324,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       state.logs.length,
       state.searchState,
       upperRange,
+      wordWrapFormat,
+      setWordWrapFormat,
       wrap,
       dispatch,
       getLine,
