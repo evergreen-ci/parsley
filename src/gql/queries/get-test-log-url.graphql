@@ -6,7 +6,6 @@ query TestLogURL($taskID: String!, $testName: String!, $execution: Int!) {
         id
         logs {
           url
-          urlLobster #eslint-disable-line @graphql-eslint/no-deprecated
           urlRaw
         }
       }

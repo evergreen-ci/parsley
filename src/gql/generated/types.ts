@@ -3268,7 +3268,6 @@ export type TestLogUrlQuery = {
         logs: {
           __typename?: "TestLog";
           url?: string | null;
-          urlLobster?: string | null;
           urlRaw?: string | null;
         };
       }>;
