@@ -73,7 +73,7 @@ exports[`storyshots Storyshots components/LogRow/ResmokeRow Single Line 1`] = `
       title="Use shift+click to select multiple lines"
     />
     <pre
-      class="css-5l1bqm"
+      class="css-14vbqx7"
     >
       <span
         data-cy="resmoke-row"
