@@ -13,6 +13,7 @@ import {
   PrettyPrintToggle,
   WrapToggle,
 } from "./Toggles";
+import WordWrapFormatToggle from "./Toggles/WordWrapFormatToggle";
 import ZebraStripingToggle from "./Toggles/ZebraStripingToggle";
 
 interface DetailsMenuProps {
@@ -45,6 +46,7 @@ const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
             <Row>
               <Column>
                 <WrapToggle />
+                <WordWrapFormatToggle />
                 <PrettyPrintToggle />
                 <ExpandableRowsToggle />
                 <ZebraStripingToggle />
