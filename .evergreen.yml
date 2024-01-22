@@ -298,7 +298,7 @@ functions:
       shell: bash
       script: |
         ${PREPARE_SHELL}
-        yarn test --ci --testPathPattern=storyshots.test.ts
+        yarn test --ci --testPathPattern=snapshot.test.ts
 
   yarn-storybook:
     command: shell.exec
@@ -316,7 +316,7 @@ functions:
       shell: bash
       script: |
         ${PREPARE_SHELL}
-        yarn test --ci --testPathIgnorePatterns=storyshots.test.ts
+        yarn test --ci --testPathIgnorePatterns=snapshot.test.ts
 
   yarn-tsc:
     command: shell.exec

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/LogPane Default 1`] = `
+exports[`Snapshot Tests LogPane.stories Default 1`] = `
 <div>
   <div
     class="css-oic1sx"
@@ -432,7 +432,7 @@ exports[`storyshots Storyshots components/LogPane Default 1`] = `
 </div>
 `;
 
-exports[`storyshots Storyshots components/LogPane Zebra Striping 1`] = `
+exports[`Snapshot Tests LogPane.stories ZebraStriping 1`] = `
 <div>
   <div
     class="css-oic1sx"

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/LogRow/ResmokeRow Multiple Lines 1`] = `
+exports[`Snapshot Tests ResmokeRow.stories MultipleLines 1`] = `
 <div>
   <div
     class="css-1mysoqc"
@@ -27,7 +27,7 @@ exports[`storyshots Storyshots components/LogRow/ResmokeRow Multiple Lines 1`] =
 </div>
 `;
 
-exports[`storyshots Storyshots components/LogRow/ResmokeRow Single Line 1`] = `
+exports[`Snapshot Tests ResmokeRow.stories SingleLine 1`] = `
 <div>
   <div
     class="css-1dojz0v"
