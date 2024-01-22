@@ -203,7 +203,6 @@ const Container = styled.div`
   align-items: center;
 `;
 
-// @ts-expect-error
 const StyledSelect = styled(Select)`
   width: 120px;
   /* overwrite lg borders https://jira.mongodb.org/browse/PD-1995 */
