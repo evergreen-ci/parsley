@@ -10,7 +10,6 @@ const WordWrapFormatToggle: React.FC = () => {
   const isChecked = wordWrapFormat === WordWrapFormat.Aggressive;
 
   const onChange = (checked: boolean) => {
-    console.log("checked", checked);
     if (checked) {
       setWordWrapFormat(WordWrapFormat.Aggressive);
       sendEvent({
@@ -32,7 +31,7 @@ const WordWrapFormatToggle: React.FC = () => {
       leftLabel="Standard"
       onChange={onChange}
       rightLabel="Aggressive"
-      tooltip="Toggle between aggressive and standard wrapping. Aggressive wrapping will wrap on any character, while standard wrapping will only wrap on whitespace."
+      tooltip="Aggressive wrapping will wrap on any character, while standard wrapping will only wrap on whitespace."
       value={isChecked}
     />
   );

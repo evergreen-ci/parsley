@@ -193,7 +193,7 @@ const StyledPre = styled.pre<{
   ${({ shouldWrap, wordWrapFormat }) =>
     shouldWrap &&
     wordWrapFormat === WordWrapFormat.Aggressive &&
-    ` /* wrap multiple lines */ overflow-wrap: anywhere;`}
+    ` /* wrap on any character */ overflow-wrap: anywhere;`}
   ${({ shouldWrap }) =>
     shouldWrap && ` /* wrap multiple lines */ white-space: break-spaces;`}
 `;
