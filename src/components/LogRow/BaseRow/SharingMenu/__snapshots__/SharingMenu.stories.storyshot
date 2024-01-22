@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/LogRow/BaseRow/SharingMenu Default 1`] = `
+exports[`Snapshot Tests SharingMenu.stories Default 1`] = `
 <div>
   <button
     aria-disabled="false"

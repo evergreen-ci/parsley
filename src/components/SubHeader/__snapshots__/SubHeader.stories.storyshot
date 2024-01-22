@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/SubHeader Task File Log 1`] = `
+exports[`Snapshot Tests SubHeader.stories TaskFileLog 1`] = `
 <div>
   <div
     class="css-rbu5o8"
@@ -34,23 +34,112 @@ exports[`storyshots Storyshots components/SubHeader Task File Log 1`] = `
           fill="#00A35C"
         />
       </svg>
-      <a
-        class="lg-ui-0001 leafygreen-ui-1320234"
-        href="test-evergreen.com/task/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?redirect_spruce_users=true"
-        target="_self"
+      <nav
+        class="css-44gx6g"
+        data-cy="breadcrumb-container"
       >
-        <span
-          class="leafygreen-ui-1ewnca3"
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="project-breadcrumb"
         >
-          Task Page
-        </span>
-      </a>
+          spruce
+        </div>
+        <svg
+          aria-label="Chevron Right Icon"
+          class="leafygreen-ui-1t8pczl"
+          data-cy="breadcrumb-chevron"
+          fill="none"
+          height="14"
+          role="img"
+          viewBox="0 0 16 16"
+          width="14"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="version-breadcrumb"
+        >
+          <code
+            class="leafygreen-ui-sf558z"
+          >
+            d54e2c6
+          </code>
+        </div>
+        <svg
+          aria-label="Chevron Right Icon"
+          class="leafygreen-ui-1t8pczl"
+          data-cy="breadcrumb-chevron"
+          fill="none"
+          height="14"
+          role="img"
+          viewBox="0 0 16 16"
+          width="14"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <a
+          class="lg-ui-0001 leafygreen-ui-qaub7z"
+          data-cy="task-breadcrumb"
+          href="test-evergreen.com/task/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?redirect_spruce_users=true"
+          target="_self"
+        >
+          <span
+            class="leafygreen-ui-1ewnca3"
+          >
+            check_codegen
+             
+            <div
+              class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ud6teo"
+              data-cy="task-status-badge"
+            >
+              Failed
+            </div>
+          </span>
+        </a>
+        <svg
+          aria-label="Chevron Right Icon"
+          class="leafygreen-ui-1t8pczl"
+          data-cy="breadcrumb-chevron"
+          fill="none"
+          height="14"
+          role="img"
+          viewBox="0 0 16 16"
+          width="14"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="file-breadcrumb"
+        >
+          some-file-name.log
+        </div>
+      </nav>
     </div>
   </div>
 </div>
 `;
 
-exports[`storyshots Storyshots components/SubHeader Task Log 1`] = `
+exports[`Snapshot Tests SubHeader.stories TaskLog 1`] = `
 <div>
   <div
     class="css-rbu5o8"
@@ -84,23 +173,88 @@ exports[`storyshots Storyshots components/SubHeader Task Log 1`] = `
           fill="#00A35C"
         />
       </svg>
-      <a
-        class="lg-ui-0001 leafygreen-ui-1320234"
-        href="test-evergreen.com/task/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?redirect_spruce_users=true"
-        target="_self"
+      <nav
+        class="css-44gx6g"
+        data-cy="breadcrumb-container"
       >
-        <span
-          class="leafygreen-ui-1ewnca3"
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="project-breadcrumb"
         >
-          Task Page
-        </span>
-      </a>
+          spruce
+        </div>
+        <svg
+          aria-label="Chevron Right Icon"
+          class="leafygreen-ui-1t8pczl"
+          data-cy="breadcrumb-chevron"
+          fill="none"
+          height="14"
+          role="img"
+          viewBox="0 0 16 16"
+          width="14"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="version-breadcrumb"
+        >
+          <code
+            class="leafygreen-ui-sf558z"
+          >
+            d54e2c6
+          </code>
+        </div>
+        <svg
+          aria-label="Chevron Right Icon"
+          class="leafygreen-ui-1t8pczl"
+          data-cy="breadcrumb-chevron"
+          fill="none"
+          height="14"
+          role="img"
+          viewBox="0 0 16 16"
+          width="14"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <a
+          class="lg-ui-0001 leafygreen-ui-qaub7z"
+          data-cy="task-breadcrumb"
+          href="test-evergreen.com/task/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?redirect_spruce_users=true"
+          target="_self"
+        >
+          <span
+            class="leafygreen-ui-1ewnca3"
+          >
+            check_codegen
+             
+            <div
+              class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ud6teo"
+              data-cy="task-status-badge"
+            >
+              Failed
+            </div>
+          </span>
+        </a>
+      </nav>
     </div>
   </div>
 </div>
 `;
 
-exports[`storyshots Storyshots components/SubHeader Test Log 1`] = `
+exports[`Snapshot Tests SubHeader.stories TestLog 1`] = `
 <div>
   <div
     class="css-rbu5o8"
@@ -134,23 +288,113 @@ exports[`storyshots Storyshots components/SubHeader Test Log 1`] = `
           fill="#00A35C"
         />
       </svg>
-      <a
-        class="lg-ui-0001 leafygreen-ui-1320234"
-        href="test-evergreen.com/task/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?redirect_spruce_users=true"
-        target="_self"
+      <nav
+        class="css-44gx6g"
+        data-cy="breadcrumb-container"
       >
-        <span
-          class="leafygreen-ui-1ewnca3"
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="project-breadcrumb"
         >
-          Task Page
-        </span>
-      </a>
+          spruce
+        </div>
+        <svg
+          aria-label="Chevron Right Icon"
+          class="leafygreen-ui-1t8pczl"
+          data-cy="breadcrumb-chevron"
+          fill="none"
+          height="14"
+          role="img"
+          viewBox="0 0 16 16"
+          width="14"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="version-breadcrumb"
+        >
+          <code
+            class="leafygreen-ui-sf558z"
+          >
+            d54e2c6
+          </code>
+        </div>
+        <svg
+          aria-label="Chevron Right Icon"
+          class="leafygreen-ui-1t8pczl"
+          data-cy="breadcrumb-chevron"
+          fill="none"
+          height="14"
+          role="img"
+          viewBox="0 0 16 16"
+          width="14"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <a
+          class="lg-ui-0001 leafygreen-ui-qaub7z"
+          data-cy="task-breadcrumb"
+          href="test-evergreen.com/task/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?redirect_spruce_users=true"
+          target="_self"
+        >
+          <span
+            class="leafygreen-ui-1ewnca3"
+          >
+            check_codegen
+             
+            <div
+              class="css-1grgn2x-TaskStatusBadge leafygreen-ui-ud6teo"
+              data-cy="task-status-badge"
+            >
+              Failed
+            </div>
+          </span>
+        </a>
+        <svg
+          aria-label="Chevron Right Icon"
+          class="leafygreen-ui-1t8pczl"
+          data-cy="breadcrumb-chevron"
+          fill="none"
+          height="14"
+          role="img"
+          viewBox="0 0 16 16"
+          width="14"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            clip-rule="evenodd"
+            d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+            fill="currentColor"
+            fill-rule="evenodd"
+          />
+        </svg>
+        <div
+          class="leafygreen-ui-cssveg"
+          data-cy="test-breadcrumb"
+        >
+          Test
+           
+        </div>
+      </nav>
     </div>
   </div>
 </div>
 `;
 
-exports[`storyshots Storyshots components/SubHeader Uploaded Log 1`] = `
+exports[`Snapshot Tests SubHeader.stories UploadedLog 1`] = `
 <div>
   <div
     class="css-rbu5o8"

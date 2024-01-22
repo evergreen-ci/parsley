@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/IconWithTooltip Default 1`] = `
+exports[`Snapshot Tests IconWithTooltip.stories Default 1`] = `
 <div>
   <div
     class="css-rtde4j"

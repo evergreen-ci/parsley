@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/Accordion Default 1`] = `
+exports[`Snapshot Tests Accordion.stories Default 1`] = `
 <div>
   <div>
     <div

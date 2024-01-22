@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/SidePanel Default 1`] = `
+exports[`Snapshot Tests SidePanel.stories Default 1`] = `
 <div>
   <div
     class="css-3ieiu4"

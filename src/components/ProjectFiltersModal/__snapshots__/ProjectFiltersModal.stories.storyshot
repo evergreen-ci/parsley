@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/ProjectFiltersModal Default 1`] = `
+exports[`Snapshot Tests ProjectFiltersModal.stories Default 1`] = `
 <div>
   <button
     type="button"
@@ -10,7 +10,7 @@ exports[`storyshots Storyshots components/ProjectFiltersModal Default 1`] = `
 </div>
 `;
 
-exports[`storyshots Storyshots components/ProjectFiltersModal Empty 1`] = `
+exports[`Snapshot Tests ProjectFiltersModal.stories Empty 1`] = `
 <div>
   <button
     type="button"

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/Badge/TestStatusBadge All Badges 1`] = `
+exports[`Snapshot Tests TestStatusBadge.stories AllBadges 1`] = `
 <div>
   <div
     class="css-134efv6"
@@ -33,7 +33,7 @@ exports[`storyshots Storyshots components/Badge/TestStatusBadge All Badges 1`] =
 </div>
 `;
 
-exports[`storyshots Storyshots components/Badge/TestStatusBadge Default 1`] = `
+exports[`Snapshot Tests TestStatusBadge.stories Default 1`] = `
 <div>
   <div
     class="leafygreen-ui-n4itms"

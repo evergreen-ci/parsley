@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
+exports[`Snapshot Tests SearchBar.stories Default 1`] = `
 <div>
   <div
     class="css-14zx4vh"
@@ -166,7 +166,7 @@ exports[`storyshots Storyshots components/Search/SearchBar Default 1`] = `
 </div>
 `;
 
-exports[`storyshots Storyshots components/Search/SearchBar With Search Suggestions 1`] = `
+exports[`Snapshot Tests SearchBar.stories WithSearchSuggestions 1`] = `
 <div>
   <div
     class="css-14zx4vh"
