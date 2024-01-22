@@ -27,7 +27,7 @@
     "prepare": "husky install",
     "prettier": "prettier --write",
     "preview": "serve -s dist -p 4173",
-    "snapshot": "jest storyshots.test.ts --watchAll=false",
+    "snapshot": "jest snapshot.test.ts --watchAll=false",
     "start": "vite",
     "verify-backend": "./scripts/verify-backend.sh",
     "storybook": "storybook dev -p 6006",
