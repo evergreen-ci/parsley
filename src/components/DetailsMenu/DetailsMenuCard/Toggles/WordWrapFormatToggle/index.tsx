@@ -27,10 +27,10 @@ const WordWrapFormatToggle: React.FC = () => {
   return (
     <BaseToggle
       data-cy="word-wrap-format-toggle"
-      label="Wrap Format"
-      leftLabel="Standard"
+      label="Aggressive Word Wrap"
+      leftLabel="OFF"
       onChange={onChange}
-      rightLabel="Aggressive"
+      rightLabel="ON"
       tooltip="Aggressive wrapping will wrap on any character, while standard wrapping will only wrap on whitespace."
       value={isChecked}
     />
