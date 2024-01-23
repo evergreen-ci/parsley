@@ -109,7 +109,9 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
     Cookie.get(ZEBRA_STRIPING) === "true",
   );
   const [wordWrapFormat, setWordWrapFormat] = useState(
-    (Cookie.get(WRAP_FORMAT) as WordWrapFormat) ?? WordWrapFormat.Standard,
+    (Cookie.get(WRAP_FORMAT) as WordWrapFormat)
+      ? (Cookie.get(WRAP_FORMAT) as WordWrapFormat)
+      : WordWrapFormat.Standard,
   );
 
   const { dispatch, state } = useLogState(initialLogLines);
