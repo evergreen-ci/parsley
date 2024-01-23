@@ -6,7 +6,7 @@ import BaseToggle from "../BaseToggle";
 const WordWrapFormatToggle: React.FC = () => {
   const { sendEvent } = usePreferencesAnalytics();
   const { preferences } = useLogContext();
-  const { setWordWrapFormat, wordWrapFormat } = preferences;
+  const { setWordWrapFormat, wordWrapFormat, wrap } = preferences;
   const isChecked = wordWrapFormat === WordWrapFormat.Aggressive;
 
   const onChange = (checked: boolean) => {
@@ -27,6 +27,7 @@ const WordWrapFormatToggle: React.FC = () => {
   return (
     <BaseToggle
       data-cy="word-wrap-format-toggle"
+      disabled={!wrap}
       label="Aggressive Word Wrap"
       leftLabel="OFF"
       onChange={onChange}

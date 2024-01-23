@@ -1,6 +1,12 @@
 import Cookie from "js-cookie";
-import { LogContextProvider } from "context/LogContext";
-import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
+import { LogContextProvider, useLogContext } from "context/LogContext";
+import {
+  act,
+  renderWithRouterMatch as render,
+  screen,
+  userEvent,
+} from "test_utils";
+import { renderComponentWithHook } from "test_utils/TestHooks";
 import WordWrapFormatToggle from ".";
 
 jest.mock("js-cookie");
@@ -15,22 +21,51 @@ describe("word wrap format toggle", () => {
     mockedGet.mockImplementation(() => "standard");
   });
 
+  it("should be disabled if word wrap is disabled", () => {
+    const { Component, hook } = renderComponentWithHook(
+      useLogContext,
+      <WordWrapFormatToggle />,
+    );
+    render(<Component />, { wrapper });
+    expect(hook.current.preferences.wrap).toBe(false);
+    const wordWrapFormatToggle = screen.getByDataCy("word-wrap-format-toggle");
+    act(() => {
+      hook.current.preferences.setWrap(true);
+    });
+    expect(wordWrapFormatToggle).not.toBeDisabled();
+  });
   it("defaults to 'standard' if cookie is unset", () => {
     mockedGet.mockImplementation(() => "");
-    render(<WordWrapFormatToggle />, { wrapper });
+    const { Component, hook } = renderComponentWithHook(
+      useLogContext,
+      <WordWrapFormatToggle />,
+    );
+    render(<Component />, { wrapper });
+    expect(hook.current.preferences.wordWrapFormat).toBe("standard");
     const wordWrapFormatToggle = screen.getByDataCy("word-wrap-format-toggle");
     expect(wordWrapFormatToggle).toHaveAttribute("aria-checked", "false");
   });
 
   it("should read from the cookie properly", () => {
-    render(<WordWrapFormatToggle />, { wrapper });
+    const { Component } = renderComponentWithHook(
+      useLogContext,
+      <WordWrapFormatToggle />,
+    );
+    render(<Component />, { wrapper });
     const wordWrapFormatToggle = screen.getByDataCy("word-wrap-format-toggle");
     expect(wordWrapFormatToggle).toHaveAttribute("aria-checked", "false");
   });
 
   it("should not update the URL", async () => {
     const user = userEvent.setup();
-    const { router } = render(<WordWrapFormatToggle />, { wrapper });
+    const { Component, hook } = renderComponentWithHook(
+      useLogContext,
+      <WordWrapFormatToggle />,
+    );
+    const { router } = render(<Component />, { wrapper });
+    act(() => {
+      hook.current.preferences.setWrap(true);
+    });
     const wordWrapFormatToggle = screen.getByDataCy("word-wrap-format-toggle");
 
     await user.click(wordWrapFormatToggle);
