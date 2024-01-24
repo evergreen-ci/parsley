@@ -73,7 +73,7 @@ exports[`Snapshot Tests AnsiRow.stories SingleLine 1`] = `
       title="Use shift+click to select multiple lines"
     />
     <pre
-      class="css-5l1bqm"
+      class="css-14vbqx7"
     >
       <span
         data-cy="ansi-row"

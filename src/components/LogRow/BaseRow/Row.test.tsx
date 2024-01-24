@@ -1,3 +1,4 @@
+import { WordWrapFormat } from "constants/enums";
 import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
 import {
   RenderWithRouterMatchOptions,
@@ -165,5 +166,6 @@ const rowProps = {
     upperRange: undefined,
   },
   scrollToLine: jest.fn(),
+  wordWrapFormat: WordWrapFormat.Standard,
   wrap: false,
 };

@@ -23,7 +23,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
     searchLine,
     searchState,
   } = useLogContext();
-  const { prettyPrint, wrap } = preferences;
+  const { prettyPrint, wordWrapFormat, wrap } = preferences;
 
   const { searchTerm } = searchState;
   const searchRegex = searchTerm
@@ -62,6 +62,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
         scrollToLine={scrollToLine}
         searchLine={searchLine}
         searchTerm={searchRegex}
+        wordWrapFormat={wordWrapFormat}
         wrap={wrap}
       />
     );

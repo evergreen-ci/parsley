@@ -1,5 +1,5 @@
 import { useAnalyticsRoot } from "analytics/useAnalyticsRoot";
-import { FilterLogic } from "constants/enums";
+import { FilterLogic, WordWrapFormat } from "constants/enums";
 
 type Action =
   | { name: "Opened Task Link" }
@@ -10,6 +10,7 @@ type Action =
   | { name: "Opened Lobster Logs" }
   | { name: "Clicked Copy To Jira" }
   | { name: "Toggled Wrap"; on: boolean }
+  | { name: "Toggled Word Wrap Format"; format: WordWrapFormat }
   | { name: "Toggled Case Sensitivity"; on: boolean }
   | { name: "Toggled Pretty Print"; on: boolean }
   | { name: "Toggled Filter Logic"; logic: FilterLogic }
