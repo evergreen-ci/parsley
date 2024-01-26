@@ -106,15 +106,15 @@ const ButtonRow: React.FC = () => {
       >
         Open log in standard HTML format in a new tab
       </Tooltip>
-      <Menu
-        trigger={
-          <Button
-            data-cy="secondary-links-button"
-            leftGlyph={<Icon glyph="Ellipsis" />}
-          />
-        }
-      >
-        {legacyJobLogsURL && (
+      {legacyJobLogsURL && (
+        <Menu
+          trigger={
+            <Button
+              data-cy="secondary-links-button"
+              leftGlyph={<Icon glyph="Ellipsis" />}
+            />
+          }
+        >
           <MenuItem
             as="a"
             data-cy="legacy-job-logs-button"
@@ -126,8 +126,8 @@ const ButtonRow: React.FC = () => {
           >
             Legacy job logs
           </MenuItem>
-        )}
-      </Menu>
+        </Menu>
+      )}
     </DetailRow>
   );
 };
