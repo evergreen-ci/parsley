@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
-import { LogTypes } from "constants/enums";
+import { LogTypes, WordWrapFormat } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
 import WithToastContext from "test_utils/toast-decorator";
@@ -41,6 +41,7 @@ const SingleLineStory = (args: any) => {
       range={{ lowerRange: 0 }}
       scrollToLine={scrollToLine}
       searchTerm={undefined}
+      wordWrapFormat={args.wordWrapFormat}
       wrap={args.wrap}
     />
   );
@@ -48,6 +49,7 @@ const SingleLineStory = (args: any) => {
 
 export const SingleLine: CustomStoryObj<AnsiRowProps> = {
   args: {
+    wordWrapFormat: WordWrapFormat.Standard,
     wrap: false,
   },
   render: (args) => <SingleLineStory {...args} />,
@@ -81,6 +83,7 @@ const MultiLineStory = (args: any) => {
 
 export const MultiLines: CustomStoryObj<AnsiRowProps> = {
   args: {
+    wordWrapFormat: WordWrapFormat.Standard,
     wrap: false,
   },
   render: (args) => <MultiLineStory {...args} />,

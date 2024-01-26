@@ -19,9 +19,12 @@ const globalStyles = css`
       sans-serif;
     font-size: 13px;
     margin: 0;
+    tab-size: 4;
+
     /* Prevent scroll bounce behavior */
     overscroll-behavior-y: none;
     overscroll-behavior-x: none;
+
     /* Hides scroll bar on webkit browsers preventing it from using up page width */
     ::-webkit-scrollbar {
       display: none;

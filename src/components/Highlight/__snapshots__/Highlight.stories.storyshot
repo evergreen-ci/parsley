@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/Highlight All Colors 1`] = `
+exports[`Snapshot Tests Highlight.stories AllColors 1`] = `
 <div>
   <div>
     <div>
@@ -106,7 +106,7 @@ exports[`storyshots Storyshots components/Highlight All Colors 1`] = `
 </div>
 `;
 
-exports[`storyshots Storyshots components/Highlight Default Highlight 1`] = `
+exports[`Snapshot Tests Highlight.stories DefaultHighlight 1`] = `
 <div>
   <span>
     Should be 

@@ -1,4 +1,4 @@
-import { FilterLogic, LogTypes } from "constants/enums";
+import { FilterLogic, LogTypes, WordWrapFormat } from "constants/enums";
 
 interface SearchState {
   searchTerm?: RegExp;
@@ -28,12 +28,14 @@ interface Preferences {
   expandableRows: boolean;
   filterLogic: FilterLogic;
   prettyPrint: boolean;
+  wordWrapFormat: WordWrapFormat;
   wrap: boolean;
   zebraStriping: boolean;
   setCaseSensitive: (caseSensitive: boolean) => void;
   setExpandableRows: (expandableRows: boolean) => void;
   setFilterLogic: (filterLogic: FilterLogic) => void;
   setWrap: (wrap: boolean) => void;
+  setWordWrapFormat: (wrapFormat: WordWrapFormat) => void;
   setPrettyPrint: (prettyPrint: boolean) => void;
   setZebraStriping: (zebraStriping: boolean) => void;
 }

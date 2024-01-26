@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`storyshots Storyshots components/LoadingBar Default 1`] = `
+exports[`Snapshot Tests LoadingBar.stories Default 1`] = `
 <div>
   <div
     class="css-k7jz0p"

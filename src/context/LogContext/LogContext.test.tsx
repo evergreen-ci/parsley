@@ -1,9 +1,13 @@
+import Cookie from "js-cookie";
 import { MemoryRouter, Route, Routes } from "react-router-dom";
 import { LogTypes } from "constants/enums";
-import { act, renderHook } from "test_utils";
+import { act, renderHook, waitFor } from "test_utils";
 import { isCollapsedRow } from "utils/collapsedRow";
 import { LogContextProvider, useLogContext } from ".";
 import { DIRECTION } from "./types";
+
+jest.mock("js-cookie");
+const mockedGet = Cookie.get as unknown as jest.Mock<string>;
 
 const Router = ({
   children,
@@ -473,6 +477,60 @@ describe("useLogContext", () => {
         result.current.paginate(DIRECTION.NEXT);
       });
       expect(result.current.searchState.searchIndex).toBe(0);
+    });
+  });
+  describe("preferences", () => {
+    it("word wrap should default to false", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), { wrapper });
+      expect(result.current.preferences.wrap).toBe(false);
+    });
+    it("word wrap format should default to `standard` if it has not been set", () => {
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), {
+        wrapper,
+      });
+      expect(result.current.preferences.wordWrapFormat).toBe("standard");
+    });
+    it("word wrap format should default to the cookie value if its been previously been set", async () => {
+      mockedGet.mockImplementation(() => "aggressive");
+      const wrapper: React.FC<{ children: React.ReactNode }> = ({
+        children,
+      }) => (
+        <Router>
+          <LogContextProvider
+            initialLogLines={["A line 1", "B line 2", "C line 3"]}
+          >
+            {children}
+          </LogContextProvider>
+        </Router>
+      );
+      const { result } = renderHook(() => useLogContext(), {
+        wrapper,
+      });
+      await waitFor(() => {
+        expect(result.current.preferences.wordWrapFormat).toBe("aggressive");
+      });
     });
   });
 });

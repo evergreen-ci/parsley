@@ -25,4 +25,16 @@ enum FilterLogic {
   Or = "or",
 }
 
-export { CaseSensitivity, FilterLogic, LogTypes, MatchType, SearchBarActions };
+enum WordWrapFormat {
+  Aggressive = "aggressive",
+  Standard = "standard",
+}
+
+export {
+  CaseSensitivity,
+  FilterLogic,
+  WordWrapFormat,
+  LogTypes,
+  MatchType,
+  SearchBarActions,
+};

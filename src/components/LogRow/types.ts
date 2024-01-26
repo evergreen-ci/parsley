@@ -1,3 +1,5 @@
+import { WordWrapFormat } from "constants/enums";
+
 /**
  * RootRowProps are the props that are passed to the root LogRow component.
  * These props are used to render any type of LogRow and should always be passed to the root LogRow component.
@@ -18,6 +20,7 @@ interface LogRowProps extends RootRowProps {
   };
   searchLine?: number;
   searchTerm?: RegExp;
+  wordWrapFormat: WordWrapFormat;
   wrap: boolean;
 }
 
