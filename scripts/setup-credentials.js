@@ -5,7 +5,6 @@ const file = path.join(__dirname, "../", ".env-cmdrc.json");
 const production = {
   REACT_APP_EVERGREEN_URL: "https://evergreen.mongodb.com",
   REACT_APP_GRAPHQL_URL: "https://evergreen.mongodb.com/graphql/query",
-  REACT_APP_LOBSTER_URL: "https://evergreen.mongodb.com/lobster",
   REACT_APP_LOGKEEPER_URL: "https://logkeeper2.build.10gen.cc",
   REACT_APP_SPRUCE_URL: "https://spruce.mongodb.com",
   REACT_APP_PARSLEY_URL: "https://parsley.mongodb.com",

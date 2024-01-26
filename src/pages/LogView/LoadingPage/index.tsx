@@ -40,7 +40,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     jobLogsURL,
     legacyJobLogsURL,
     loading: isLoadingEvergreen,
-    lobsterURL,
     rawLogURL,
   } = useResolveLogURL({
     buildID,
@@ -81,7 +80,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         isUploadedLog: false,
         jobLogsURL,
         legacyJobLogsURL,
-        lobsterURL,
         logType,
         origin,
         rawLogURL,
@@ -110,7 +108,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     htmlLogURL,
     jobLogsURL,
     legacyJobLogsURL,
-    lobsterURL,
     fileName,
     logkeeperMetadata?.task_id,
     logkeeperMetadata?.execution,

@@ -7,7 +7,6 @@ type Action =
   | { name: "Opened Legacy Job Logs" }
   | { name: "Opened Raw Logs" }
   | { name: "Opened HTML Logs" }
-  | { name: "Opened Lobster Logs" }
   | { name: "Clicked Copy To Jira" }
   | { name: "Toggled Wrap"; on: boolean }
   | { name: "Toggled Word Wrap Format"; format: WordWrapFormat }

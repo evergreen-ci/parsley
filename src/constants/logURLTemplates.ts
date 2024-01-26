@@ -1,52 +1,7 @@
 import queryString from "query-string";
 import { Task as TaskType } from "gql/generated/types";
-import {
-  evergreenURL,
-  lobsterURL,
-  logkeeperURL,
-} from "utils/environmentVariables";
+import { evergreenURL, logkeeperURL } from "utils/environmentVariables";
 import { stringifyQuery } from "utils/query-string";
-
-/**
- * @param taskID - the task ID
- * @param execution - the execution number of the task
- * @param origin - the origin of the log
- * @returns a Lobster URL of the format `/evergreen/task/${taskID}/${execution}/${origin}`
- */
-const getLobsterTaskURL = (
-  taskID: string,
-  execution: string | number,
-  origin: string,
-) => `${lobsterURL}/evergreen/task/${taskID}/${execution}/${origin}`;
-
-/**
- * @param taskID - the task ID
- * @param execution - the execution number of the task
- * @param testID - the test ID
- * @param groupID - the group ID (optional)
- * @returns a Lobster URL of the format `/evergreen/test/${taskID}/${execution}/${testID}/${groupID}`
- */
-const getLobsterTestURL = (
-  taskID: string,
-  execution: string | number,
-  testID: string,
-  groupID?: string,
-) =>
-  `${lobsterURL}/evergreen/test/${taskID}/${execution}/${testID}${
-    groupID ? `/${groupID}` : ""
-  }`;
-
-/**
- * @param buildID - the build ID of the resmoke job
- * @param testID - the test ID of the resmoke log (optional)
- * @returns a Lobster URL of the format `/build/${buildID}/test/${testID}` or `/build/${buildID}/all`
- */
-const getLobsterResmokeURL = (buildID: string, testID?: string) => {
-  if (testID) {
-    return `${lobsterURL}/build/${buildID}/test/${testID}`;
-  }
-  return `${lobsterURL}/build/${buildID}/all`;
-};
 
 /**
  *
@@ -174,9 +129,6 @@ const getEvergreenTaskFileURL = (
 
 export {
   constructEvergreenTaskLogURL,
-  getLobsterTaskURL,
-  getLobsterTestURL,
-  getLobsterResmokeURL,
   getEvergreenTaskFileURL,
   getEvergreenTaskLogURL,
   getEvergreenTestLogURL,

@@ -20,7 +20,6 @@ interface LogMetadata {
   rawLogURL?: string;
   jobLogsURL?: string;
   legacyJobLogsURL?: string;
-  lobsterURL?: string;
   isUploadedLog?: boolean;
 }
 

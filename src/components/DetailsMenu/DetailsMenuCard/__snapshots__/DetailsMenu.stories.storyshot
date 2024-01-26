@@ -484,40 +484,6 @@ exports[`Snapshot Tests DetailsMenu.stories Default 1`] = `
                   HTML
                 </div>
               </button>
-              <button
-                aria-disabled="false"
-                aria-expanded="false"
-                aria-haspopup="true"
-                class="lg-ui-button-0000 leafygreen-ui-xcwxw8"
-                data-cy="secondary-links-button"
-                type="button"
-              >
-                <div
-                  class="leafygreen-ui-v038xi"
-                />
-                <div
-                  class="leafygreen-ui-v95oty"
-                >
-                  <svg
-                    alt=""
-                    aria-hidden="true"
-                    class="leafygreen-ui-18si895"
-                    fill="none"
-                    height="16"
-                    role="presentation"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M2.75 6a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm5 0a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm6.75 1.75a1.75 1.75 0 10-3.5 0 1.75 1.75 0 003.5 0z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
-                </div>
-              </button>
             </div>
           </div>
           <div
@@ -1015,40 +981,6 @@ exports[`Snapshot Tests DetailsMenu.stories WithDownloadedLog 1`] = `
                     />
                   </svg>
                   HTML
-                </div>
-              </button>
-              <button
-                aria-disabled="false"
-                aria-expanded="false"
-                aria-haspopup="true"
-                class="lg-ui-button-0000 leafygreen-ui-xcwxw8"
-                data-cy="secondary-links-button"
-                type="button"
-              >
-                <div
-                  class="leafygreen-ui-v038xi"
-                />
-                <div
-                  class="leafygreen-ui-v95oty"
-                >
-                  <svg
-                    alt=""
-                    aria-hidden="true"
-                    class="leafygreen-ui-18si895"
-                    fill="none"
-                    height="16"
-                    role="presentation"
-                    viewBox="0 0 16 16"
-                    width="16"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path
-                      clip-rule="evenodd"
-                      d="M2.75 6a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm5 0a1.75 1.75 0 110 3.5 1.75 1.75 0 010-3.5zm6.75 1.75a1.75 1.75 0 10-3.5 0 1.75 1.75 0 003.5 0z"
-                      fill="currentColor"
-                      fill-rule="evenodd"
-                    />
-                  </svg>
                 </div>
               </button>
             </div>

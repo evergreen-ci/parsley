@@ -18,7 +18,7 @@ const ButtonRow: React.FC = () => {
   const [hasCopied, setHasCopied] = useState(false);
   const [bookmarks] = useQueryParam<number[]>(QueryParams.Bookmarks, []);
 
-  const { htmlLogURL, jobLogsURL, legacyJobLogsURL, lobsterURL, rawLogURL } =
+  const { htmlLogURL, jobLogsURL, legacyJobLogsURL, rawLogURL } =
     logMetadata || {};
   const tooltipText = bookmarks.length
     ? "Copy bookmarked lines in JIRA format"
@@ -106,26 +106,15 @@ const ButtonRow: React.FC = () => {
       >
         Open log in standard HTML format in a new tab
       </Tooltip>
-      <Menu
-        trigger={
-          <Button
-            data-cy="secondary-links-button"
-            leftGlyph={<Icon glyph="Ellipsis" />}
-          />
-        }
-      >
-        <MenuItem
-          as="a"
-          data-cy="lobster-button"
-          disabled={!lobsterURL}
-          glyph={<Icon glyph="Export" />}
-          href={lobsterURL || ""}
-          onClick={() => sendEvent({ name: "Opened Lobster Logs" })}
-          target="_blank"
+      {legacyJobLogsURL && (
+        <Menu
+          trigger={
+            <Button
+              data-cy="secondary-links-button"
+              leftGlyph={<Icon glyph="Ellipsis" />}
+            />
+          }
         >
-          Lobster
-        </MenuItem>
-        {legacyJobLogsURL && (
           <MenuItem
             as="a"
             data-cy="legacy-job-logs-button"
@@ -137,8 +126,8 @@ const ButtonRow: React.FC = () => {
           >
             Legacy job logs
           </MenuItem>
-        )}
-      </Menu>
+        </Menu>
+      )}
     </DetailRow>
   );
 };

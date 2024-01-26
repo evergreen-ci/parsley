@@ -44,7 +44,6 @@ describe("useResolveLogURL", () => {
       jobLogsURL: "",
       legacyJobLogsURL: "",
       loading: true,
-      lobsterURL: "",
       rawLogURL: "",
     });
     await waitFor(() => {
@@ -54,7 +53,6 @@ describe("useResolveLogURL", () => {
         jobLogsURL: "",
         legacyJobLogsURL: "",
         loading: false,
-        lobsterURL: "lobsterURL",
         rawLogURL: "rawURL",
       });
     });
@@ -90,7 +88,6 @@ describe("useResolveLogURL", () => {
       jobLogsURL: "",
       legacyJobLogsURL: "",
       loading: true,
-      lobsterURL: "",
       rawLogURL: "",
     });
     await waitFor(() => {
@@ -100,7 +97,6 @@ describe("useResolveLogURL", () => {
         jobLogsURL: "",
         legacyJobLogsURL: "",
         loading: false,
-        lobsterURL: "test-lobster.com/evergreen/task/a-task-id/0/agent",
         rawLogURL: "agent-link.com?text=true&type=E",
       });
     });
@@ -135,8 +131,6 @@ describe("useResolveLogURL", () => {
         jobLogsURL: "",
         legacyJobLogsURL: "",
         loading: false,
-        lobsterURL:
-          "test-lobster.com/evergreen/test/a-task-id/0/a-test-name-that-doesnt-exist",
         rawLogURL:
           "test-evergreen.com/test_log/a-task-id/0?test_name=a-test-name-that-doesnt-exist&text=true",
       });
@@ -170,7 +164,6 @@ describe("useResolveLogURL", () => {
         jobLogsURL: "",
         legacyJobLogsURL: "",
         loading: false,
-        lobsterURL: "",
         rawLogURL: "a-file-url",
       });
     });
@@ -204,7 +197,6 @@ describe("useResolveLogURL", () => {
         jobLogsURL: "",
         legacyJobLogsURL: "",
         loading: false,
-        lobsterURL: "",
         rawLogURL: "a-file-url-with-crazy-path",
       });
     });
@@ -233,7 +225,6 @@ const getExistingTestLogURLMock: ApolloMock<
               id: "testID",
               logs: {
                 url: "htmlURL",
-                urlLobster: "lobsterURL",
                 urlRaw: "rawURL",
               },
             },
