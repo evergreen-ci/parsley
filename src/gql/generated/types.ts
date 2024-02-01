@@ -430,13 +430,12 @@ export type DistroInfo = {
 };
 
 export type DistroInput = {
-  /** TODO: require adminOnly field upon completion of DEVPROD-3533 */
-  adminOnly?: InputMaybe<Scalars["Boolean"]["input"]>;
+  adminOnly: Scalars["Boolean"]["input"];
   aliases: Array<Scalars["String"]["input"]>;
   arch: Arch;
   authorizedKeysFile: Scalars["String"]["input"];
   bootstrapSettings: BootstrapSettingsInput;
-  cloneMethod: CloneMethod;
+  cloneMethod?: InputMaybe<CloneMethod>;
   containerPool: Scalars["String"]["input"];
   disableShallowClone: Scalars["Boolean"]["input"];
   disabled: Scalars["Boolean"]["input"];
