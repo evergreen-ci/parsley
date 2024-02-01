@@ -128,7 +128,8 @@ const Container = styled.div`
   flex-direction: column;
   align-items: center;
 
-  width: ${size.xl};
+  min-width: ${size.xl};
+  width: fit-content;
   background-color: ${gray.light3};
   box-shadow: 0 ${size.xxs} ${size.xxs} rgba(0, 0, 0, 0.25);
   padding-top: ${size.s};
