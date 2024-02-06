@@ -116,7 +116,7 @@
     "@typescript-eslint/parser": "5.62.0",
     "@vitejs/plugin-react": "3.0.1",
     "babel-plugin-import-graphql": "2.8.1",
-    "cypress": "12.7.0",
+    "cypress": "13.6.4",
     "cypress-real-events": "1.11.0",
     "env-cmd": "10.1.0",
     "eslint": "8.31.0",
