@@ -14,13 +14,18 @@ interface ParseLogSelectProps {
   onCancel: () => void;
 }
 
+type SelectState =
+  | LogTypes.RESMOKE_LOGS
+  | LogTypes.EVERGREEN_TASK_LOGS
+  | undefined;
+
 const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
   fileName,
   onCancel,
   onParse,
 }) => {
-  const [logType, setLogType] = useState<LogTypes | undefined>(
-    (Cookie.get(LAST_SELECTED_LOG_TYPE) as LogTypes) ?? undefined,
+  const [logType, setLogType] = useState<SelectState>(
+    (Cookie.get(LAST_SELECTED_LOG_TYPE) as SelectState) ?? undefined,
   );
 
   return (
@@ -34,7 +39,7 @@ const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
         data-cy="parse-log-select"
         onChange={(value) => {
           Cookie.set(LAST_SELECTED_LOG_TYPE, value, { expires: 365 });
-          setLogType(value as LogTypes);
+          setLogType(value as SelectState);
         }}
         placeholder="Select..."
         value={logType ?? ""}

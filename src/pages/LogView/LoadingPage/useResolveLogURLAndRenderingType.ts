@@ -30,7 +30,10 @@ interface UseResolveLogURLProps {
   taskID?: string;
   testID?: string;
 }
-type LogURLs = {
+
+type RenderingType = "resmoke" | "default";
+
+type HookResult = {
   /** The URL of the file parsley should download */
   downloadURL: string;
   /** The URL of the log file in the html log viewer */
@@ -43,6 +46,8 @@ type LogURLs = {
   rawLogURL: string;
   /** Whether the hook is actively making an network request or not  */
   loading: boolean;
+  /** The type of rendering logic to use for the log */
+  renderingType: RenderingType;
 };
 
 /**
@@ -67,7 +72,7 @@ export const useResolveLogURLAndRenderingType = ({
   origin,
   taskID,
   testID,
-}: UseResolveLogURLProps): LogURLs => {
+}: UseResolveLogURLProps): HookResult => {
   const { loading: isLoadingTask, task } = useTaskQuery({
     buildID,
     execution,
@@ -194,6 +199,12 @@ export const useResolveLogURLAndRenderingType = ({
     default:
       break;
   }
+
+  // renderingType is only propagated for evergreen test logs as of DEVPROD-1435.
+  const renderingType =
+    (testData?.task?.tests.testResults[0]?.logs
+      .renderingType as RenderingType) || "default";
+
   return {
     downloadURL,
     htmlLogURL,
@@ -201,5 +212,6 @@ export const useResolveLogURLAndRenderingType = ({
     legacyJobLogsURL,
     loading: isLoadingTest || isLoadingTask || isLoadingTaskFileData,
     rawLogURL,
+    renderingType,
   };
 };

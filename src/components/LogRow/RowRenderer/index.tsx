@@ -17,6 +17,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
     expandLines,
     getLine,
     getResmokeLineColor,
+    logMetadata,
     preferences,
     range,
     scrollToLine,
@@ -49,7 +50,15 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
         />
       );
     }
-    const Row = rowRendererMap[logType];
+
+    // At this point, logMetadata.renderingType is guaranteed to be defined from LogView/LoadingPage.tsx.
+    // logType can be removed from this calculation when the Parsley resmoke route is fully deprecated.
+    const Row =
+      logMetadata?.renderingType === "resmoke" ||
+      logType === LogTypes.RESMOKE_LOGS
+        ? ResmokeRow
+        : AnsiRow;
+
     return (
       <Row
         getLine={getLine}
@@ -70,13 +79,6 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
 
   result.displayName = `${logType}RowRenderer`;
   return result;
-};
-
-const rowRendererMap = {
-  [LogTypes.EVERGREEN_TASK_FILE]: AnsiRow,
-  [LogTypes.EVERGREEN_TASK_LOGS]: AnsiRow,
-  [LogTypes.EVERGREEN_TEST_LOGS]: AnsiRow,
-  [LogTypes.RESMOKE_LOGS]: ResmokeRow,
 };
 
 export { ParsleyRow };
