@@ -5,10 +5,14 @@ import {
   TaskFilesQueryVariables,
   TaskQuery,
   TaskQueryVariables,
-  TestLogUrlQuery,
-  TestLogUrlQueryVariables,
+  TestLogUrlAndRenderingTypeQuery,
+  TestLogUrlAndRenderingTypeQueryVariables,
 } from "gql/generated/types";
-import { GET_TASK, GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
+import {
+  GET_TASK,
+  GET_TEST_LOG_URL_AND_RENDERING_TYPE,
+  TASK_FILES,
+} from "gql/queries";
 import { renderHook, waitFor } from "test_utils";
 import { ApolloMock } from "types/gql";
 import { useResolveLogURLAndRenderingType } from "./useResolveLogURLAndRenderingType";
@@ -204,11 +208,11 @@ describe("useResolveLogURL", () => {
 });
 
 const getExistingTestLogURLMock: ApolloMock<
-  TestLogUrlQuery,
-  TestLogUrlQueryVariables
+  TestLogUrlAndRenderingTypeQuery,
+  TestLogUrlAndRenderingTypeQueryVariables
 > = {
   request: {
-    query: GET_TEST_LOG_URL,
+    query: GET_TEST_LOG_URL_AND_RENDERING_TYPE,
     variables: {
       execution: 0,
       taskID: "a-task-id",
@@ -224,6 +228,7 @@ const getExistingTestLogURLMock: ApolloMock<
             {
               id: "testID",
               logs: {
+                renderingType: "resmoke",
                 url: "htmlURL",
                 urlRaw: "rawURL",
               },
@@ -236,11 +241,11 @@ const getExistingTestLogURLMock: ApolloMock<
 };
 
 const getEmptyTestLogURLMock: ApolloMock<
-  TestLogUrlQuery,
-  TestLogUrlQueryVariables
+  TestLogUrlAndRenderingTypeQuery,
+  TestLogUrlAndRenderingTypeQueryVariables
 > = {
   request: {
-    query: GET_TEST_LOG_URL,
+    query: GET_TEST_LOG_URL_AND_RENDERING_TYPE,
     variables: {
       execution: 0,
       taskID: "a-task-id",

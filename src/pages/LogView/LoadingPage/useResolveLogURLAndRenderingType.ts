@@ -14,10 +14,10 @@ import {
 import {
   TaskFilesQuery,
   TaskFilesQueryVariables,
-  TestLogUrlQuery,
-  TestLogUrlQueryVariables,
+  TestLogUrlAndRenderingTypeQuery,
+  TestLogUrlAndRenderingTypeQueryVariables,
 } from "gql/generated/types";
-import { GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
+import { GET_TEST_LOG_URL_AND_RENDERING_TYPE, TASK_FILES } from "gql/queries";
 import { useTaskQuery } from "hooks/useTaskQuery";
 
 interface UseResolveLogURLProps {
@@ -76,9 +76,9 @@ export const useResolveLogURLAndRenderingType = ({
   });
 
   const { data: testData, loading: isLoadingTest } = useQuery<
-    TestLogUrlQuery,
-    TestLogUrlQueryVariables
-  >(GET_TEST_LOG_URL, {
+    TestLogUrlAndRenderingTypeQuery,
+    TestLogUrlAndRenderingTypeQueryVariables
+  >(GET_TEST_LOG_URL_AND_RENDERING_TYPE, {
     skip: !(
       logType === LogTypes.EVERGREEN_TEST_LOGS &&
       taskID &&

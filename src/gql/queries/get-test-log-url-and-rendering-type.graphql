@@ -1,10 +1,15 @@
-query TestLogURL($taskID: String!, $testName: String!, $execution: Int!) {
+query TestLogURLAndRenderingType(
+  $taskID: String!
+  $testName: String!
+  $execution: Int!
+) {
   task(taskId: $taskID, execution: $execution) {
     id
     tests(opts: { testName: $testName, excludeDisplayNames: true }) {
       testResults {
         id
         logs {
+          renderingType
           url
           urlRaw
         }
