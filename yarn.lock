@@ -11225,10 +11225,10 @@ loose-envify@^1.0.0, loose-envify@^1.1.0, loose-envify@^1.4.0:
   dependencies:
     js-tokens "^3.0.0 || ^4.0.0"
 
-lossless-json@3.0.1:
-  version "3.0.1"
-  resolved "https://registry.yarnpkg.com/lossless-json/-/lossless-json-3.0.1.tgz#962e4d190b66e67a3097d3cccecb6eb359e633b2"
-  integrity sha512-nPtsiG5mi/yY2EChSMq/JGv/9QWLMExoKW7fEv9c0Pv7civ9mIV8CkenE3Xs90q59odKSn6s4o+5mSpoRCxeCA==
+lossless-json@4.0.1:
+  version "4.0.1"
+  resolved "https://registry.yarnpkg.com/lossless-json/-/lossless-json-4.0.1.tgz#d45229e3abb213a0235812780ca894ea8c5b2c6b"
+  integrity sha512-l0L+ppmgPDnb+JGxNLndPtJZGNf6+ZmVaQzoxQm3u6TXmhdnsA+YtdVR8DjzZd/em58686CQhOFDPewfJ4l7MA==
 
 lower-case-first@^2.0.2:
   version "2.0.2"
