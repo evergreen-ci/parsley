@@ -160,8 +160,7 @@
   },
   "resolutions": {
     "@types/react": "18.0.0",
-    "@types/react-dom": "18.0.0",
-    "internal-slot": "1.0.7"
+    "@types/react-dom": "18.0.0"
   },
   "engines": {
     "node": ">=20.10.0"
