@@ -11,7 +11,7 @@ import {
 import { GET_TASK, GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
 import { renderHook, waitFor } from "test_utils";
 import { ApolloMock } from "types/gql";
-import { useResolveLogURLAndRenderingType } from "./useResolveLogURL";
+import { useResolveLogURLAndRenderingType } from "./useResolveLogURLAndRenderingType";
 
 describe("useResolveLogURL", () => {
   it("resolves test log URLs from GraphQL resolver when data is available", async () => {

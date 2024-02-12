@@ -16,7 +16,7 @@ import NotFound from "pages/404";
 import { LogkeeperMetadata } from "types/api";
 import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 import { getBytesAsString } from "utils/string";
-import { useResolveLogURLAndRenderingType } from "./useResolveLogURL";
+import { useResolveLogURLAndRenderingType } from "./useResolveLogURLAndRenderingType";
 
 interface LoadingPageProps {
   logType: LogTypes;
