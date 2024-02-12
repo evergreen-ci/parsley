@@ -16,7 +16,7 @@ import NotFound from "pages/404";
 import { LogkeeperMetadata } from "types/api";
 import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 import { getBytesAsString } from "utils/string";
-import { useResolveLogURL } from "./useResolveLogURL";
+import { useResolveLogURLAndRenderingType } from "./useResolveLogURL";
 
 interface LoadingPageProps {
   logType: LogTypes;
@@ -41,7 +41,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     legacyJobLogsURL,
     loading: isLoadingEvergreen,
     rawLogURL,
-  } = useResolveLogURL({
+  } = useResolveLogURLAndRenderingType({
     buildID,
     execution,
     fileName,

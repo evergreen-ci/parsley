@@ -11,7 +11,7 @@ import {
 import { GET_TASK, GET_TEST_LOG_URL, TASK_FILES } from "gql/queries";
 import { renderHook, waitFor } from "test_utils";
 import { ApolloMock } from "types/gql";
-import { useResolveLogURL } from "./useResolveLogURL";
+import { useResolveLogURLAndRenderingType } from "./useResolveLogURL";
 
 describe("useResolveLogURL", () => {
   it("resolves test log URLs from GraphQL resolver when data is available", async () => {
@@ -28,7 +28,7 @@ describe("useResolveLogURL", () => {
     );
     const { result } = renderHook(
       () =>
-        useResolveLogURL({
+        useResolveLogURLAndRenderingType({
           execution: "0",
           logType: "EVERGREEN_TEST_LOGS",
           taskID: "a-task-id",
@@ -72,7 +72,7 @@ describe("useResolveLogURL", () => {
     );
     const { result } = renderHook(
       () =>
-        useResolveLogURL({
+        useResolveLogURLAndRenderingType({
           execution: "0",
           logType: "EVERGREEN_TASK_LOGS",
           origin: "agent",
@@ -112,7 +112,7 @@ describe("useResolveLogURL", () => {
     );
     const { result } = renderHook(
       () =>
-        useResolveLogURL({
+        useResolveLogURLAndRenderingType({
           execution: "0",
           logType: "EVERGREEN_TEST_LOGS",
           taskID: "a-task-id",
@@ -147,7 +147,7 @@ describe("useResolveLogURL", () => {
     );
     const { result } = renderHook(
       () =>
-        useResolveLogURL({
+        useResolveLogURLAndRenderingType({
           execution: "0",
           fileName: "a-file-name",
           logType: LogTypes.EVERGREEN_TASK_FILE,
@@ -179,7 +179,7 @@ describe("useResolveLogURL", () => {
     );
     const { result } = renderHook(
       () =>
-        useResolveLogURL({
+        useResolveLogURLAndRenderingType({
           execution: "0",
           fileName: "a file name.some/crazy/path",
           logType: LogTypes.EVERGREEN_TASK_FILE,

@@ -58,7 +58,7 @@ type LogURLs = {
  * @param UseResolveLogURLProps.testID - The test ID of the log
  * @returns LogURLs
  */
-export const useResolveLogURL = ({
+export const useResolveLogURLAndRenderingType = ({
   buildID,
   execution,
   fileName,
