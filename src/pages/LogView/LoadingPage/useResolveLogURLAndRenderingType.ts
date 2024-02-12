@@ -20,7 +20,7 @@ import {
 import { GET_TEST_LOG_URL_AND_RENDERING_TYPE, TASK_FILES } from "gql/queries";
 import { useTaskQuery } from "hooks/useTaskQuery";
 
-interface UseResolveLogURLProps {
+interface UseResolveLogURLAndRenderingTypeProps {
   buildID?: string;
   execution?: string;
   fileName?: string;
@@ -52,15 +52,15 @@ type HookResult = {
 
 /**
  * `useResolveLogURL` is a custom hook that resolves the log URL based on the log type and other parameters.
- * @param UseResolveLogURLProps - The props for the hook
- * @param UseResolveLogURLProps.buildID - The build ID of the log
- * @param UseResolveLogURLProps.execution - The execution number of the log
- * @param UseResolveLogURLProps.fileName - The name of the file being viewed
- * @param UseResolveLogURLProps.groupID - The group ID of the test
- * @param UseResolveLogURLProps.logType - The type of log being viewed
- * @param UseResolveLogURLProps.origin - The origin of the log
- * @param UseResolveLogURLProps.taskID - The task ID of the log
- * @param UseResolveLogURLProps.testID - The test ID of the log
+ * @param UseResolveLogURLAndRenderingTypeProps - The props for the hook
+ * @param UseResolveLogURLAndRenderingTypeProps.buildID - The build ID of the log
+ * @param UseResolveLogURLAndRenderingTypeProps.execution - The execution number of the log
+ * @param UseResolveLogURLAndRenderingTypeProps.fileName - The name of the file being viewed
+ * @param UseResolveLogURLAndRenderingTypeProps.groupID - The group ID of the test
+ * @param UseResolveLogURLAndRenderingTypeProps.logType - The type of log being viewed
+ * @param UseResolveLogURLAndRenderingTypeProps.origin - The origin of the log
+ * @param UseResolveLogURLAndRenderingTypeProps.taskID - The task ID of the log
+ * @param UseResolveLogURLAndRenderingTypeProps.testID - The test ID of the log
  * @returns LogURLs
  */
 export const useResolveLogURLAndRenderingType = ({
@@ -72,7 +72,7 @@ export const useResolveLogURLAndRenderingType = ({
   origin,
   taskID,
   testID,
-}: UseResolveLogURLProps): HookResult => {
+}: UseResolveLogURLAndRenderingTypeProps): HookResult => {
   const { loading: isLoadingTask, task } = useTaskQuery({
     buildID,
     execution,
