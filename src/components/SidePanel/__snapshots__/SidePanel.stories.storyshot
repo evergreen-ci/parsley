@@ -6,7 +6,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
     class="css-3ieiu4"
   >
     <div
-      class="lg-ui-side-nav-0000 css-18wdk2z leafygreen-ui-83xhmz"
+      class="lg-ui-side-nav-0000 css-18wdk2z leafygreen-ui-f85pfm"
       data-testid="side-nav-container"
     >
       <div
@@ -14,14 +14,14 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
       >
         <nav
           aria-label="Side panel"
-          class="leafygreen-ui-1ejkhps"
+          class="leafygreen-ui-fw8ayd"
           id="side-nav-159"
         >
           <div
             class="leafygreen-ui-1nmawjt"
           >
             <ul
-              class="leafygreen-ui-19jz4bq"
+              class="leafygreen-ui-138pepl"
             >
               <div
                 class="css-6eonsj"
