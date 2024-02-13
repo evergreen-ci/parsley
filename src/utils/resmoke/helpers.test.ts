@@ -9,6 +9,7 @@ import {
   getResmokeFunction,
   getShellPrefix,
   getState,
+  getSvc,
   getTimeStamp,
 } from "./helpers";
 
@@ -210,6 +211,22 @@ describe("resmoke/helpers", () => {
     it("correctly returns state", () => {
       const line = `[j0:s0:n1] {"t":{"$date":"2022-09-13T16:57:46.852+00:00"},"s":"D2", "c":"REPL_HB",  "id":4615670, "ctx":"ReplCoord-1","msg":"Sending heartbeat","attr":{"requestId":3705,"target":"localhost:20003","heartbeatObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":3,"hbv":1,"from":"localhost:20004","fromId":1,"term":3,"primaryId":1}}}`;
       expect(getState(line)).toBe(":s0:n1]");
+    });
+  });
+  describe("getSvc", () => {
+    it("handles empty strings", () => {
+      expect(getSvc("")).toBeUndefined();
+    });
+    it("handles strings without svc", () => {
+      expect(getSvc("hello")).toBeUndefined();
+    });
+    it("correctly returns svc", () => {
+      let line = `{"t":{"$date":"2022-09-13T16:57:46.852+00:00"},"s":"D2", "c":"REPL_HB",  "id":4615670, "svc":"R", "ctx":"ReplCoord-1","msg":"Sending heartbeat","attr":{"requestId":3705,"target":"localhost:20003","heartbeatObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":3,"hbv":1,"from":"localhost:20004","fromId":1,"term":3,"primaryId":1}}}`;
+      expect(getSvc(line)).toBe("R");
+      line = `{"t":{"$date":"2022-09-13T16:57:46.852+00:00"},"s":"D2", "c":"REPL_HB",  "id":4615670, "svc":"S", "ctx":"ReplCoord-1","msg":"Sending heartbeat","attr":{"requestId":3705,"target":"localhost:20003","heartbeatObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":3,"hbv":1,"from":"localhost:20004","fromId":1,"term":3,"primaryId":1}}}`;
+      expect(getSvc(line)).toBe("S");
+      line = `{"t":{"$date":"2022-09-13T16:57:46.852+00:00"},"s":"D2", "c":"REPL_HB",  "id":4615670, "svc":"-", "ctx":"ReplCoord-1","msg":"Sending heartbeat","attr":{"requestId":3705,"target":"localhost:20003","heartbeatObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":3,"hbv":1,"from":"localhost:20004","fromId":1,"term":3,"primaryId":1}}}`;
+      expect(getSvc(line)).toBe("-");
     });
   });
 });

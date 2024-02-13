@@ -157,6 +157,22 @@ const getPid = (line: string) => {
 };
 
 /**
+ * Regex to extract the svc field.
+ * @example "svc":"R"
+ * @example "svc":"S"
+ * @example "svc":"-"
+ */
+const svcRegex = /"svc":"(R|S|-)"/;
+
+/**
+ * `getSvc` returns the svc associated with a mongod process. It can be router-role work (R),
+ * shardserver-role work (S), or neither (-). It is not always present in resmoke logs.
+ * @param line - the resmoke line
+ * @returns the svc associated with the resmoke line
+ */
+const getSvc = (line: string) => line.match(svcRegex)?.[1];
+
+/**
  * The context
  * @example "ctx":"conn1"
  * @example "ctx":"conn2"
@@ -233,4 +249,5 @@ export {
   getShellPrefix,
   getState,
   getTimeStamp,
+  getSvc,
 };
