@@ -170,10 +170,7 @@ const svcRegex = /"svc":"(R|S|-)"/;
  * @param line - the resmoke line
  * @returns the svc associated with the resmoke line
  */
-const getSvc = (line: string) => {
-  const svc = line.match(svcRegex)?.[1];
-  return svc;
-};
+const getSvc = (line: string) => line.match(svcRegex)?.[1];
 
 /**
  * The context
