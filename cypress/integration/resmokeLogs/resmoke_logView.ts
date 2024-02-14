@@ -147,7 +147,7 @@ describe("Bookmarking and selecting lines", () => {
       "|ShardedClusterFixture:job0:mongos0        |j0:s0   |20009|73157|";
     const logLine11 =
       "|ShardedClusterFixture:job0:mongos1        |j0:s1   |20010|73217|";
-    const logLine11079 = `[j0:s1] | 2022-09-21T12:50:28.489+00:00 I  NETWORK  22944   [conn60] "Connection ended","attr":{"remote":"127.0.0.1:47362","uuid":{"uuid":{"$uuid":"b28d7d9f-03b6-4f93-a7cd-5e1948135f69"}},"connectionId":60,"connectionCount":2}`;
+    const logLine11079 = `[j0:s1] | 2022-09-21T12:50:28.489+00:00 I  NETWORK  22944       [conn60] "Connection ended","attr":{"remote":"127.0.0.1:47362","uuid":{"uuid":{"$uuid":"b28d7d9f-03b6-4f93-a7cd-5e1948135f69"}},"connectionId":60,"connectionCount":2}`;
 
     cy.dataCy("details-button").click();
     // Need to fire a real click here because the copy to clipboard
