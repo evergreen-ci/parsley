@@ -3258,9 +3258,9 @@ export type TestLogUrlAndRenderingTypeQuery = {
         id: string;
         logs: {
           __typename?: "TestLog";
+          renderingType?: string | null;
           url?: string | null;
           urlRaw?: string | null;
-          renderingType?: string | null;
         };
       }>;
     };
