@@ -4,7 +4,7 @@ import { useQueryParam } from "hooks/useQueryParam";
 import { formatPrettyPrint } from "utils/prettyPrint";
 import { LogRowProps } from "../types";
 
-interface ResmokeRowProps extends LogRowProps {
+export interface ResmokeRowProps extends LogRowProps {
   prettyPrint: boolean;
   getResmokeLineColor: (lineNumber: number) => string | undefined;
 }

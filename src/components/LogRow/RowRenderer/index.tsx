@@ -1,11 +1,12 @@
-import { LogTypes } from "constants/enums";
+import { LogTypes, SupportedLogRenderingTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { useHighlightParam } from "hooks/useHighlightParam";
 import { ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
-import AnsiRow from "../AnsiRow";
+import { reportError } from "utils/errorReporting";
+import AnsiRow, { AnsiRowProps } from "../AnsiRow";
 import CollapsedRow from "../CollapsedRow";
-import ResmokeRow from "../ResmokeRow";
+import ResmokeRow, { ResmokeRowProps } from "../ResmokeRow";
 
 type RowRendererFunction = (props: {
   processedLogLines: ProcessedLogLines;
@@ -39,6 +40,24 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
       ? new RegExp(`${highlights.map((h) => `(${h})`).join("|")}`, "gi")
       : undefined;
 
+  let Row: React.FC<ResmokeRowProps> | React.FC<AnsiRowProps>;
+  // At this point, logMetadata is defined from <LoadingPage />
+  switch (logMetadata?.renderingType) {
+    case SupportedLogRenderingTypes.Resmoke:
+      Row = ResmokeRow;
+      break;
+    case SupportedLogRenderingTypes.Default:
+      Row = AnsiRow;
+      break;
+    default:
+      Row = AnsiRow;
+      reportError(new Error("Encountered unsupported renderType"), {
+        rawLogURL: logMetadata?.rawLogURL,
+        renderingType: logMetadata?.renderingType,
+      }).warning();
+      break;
+  }
+
   const result = (index: number) => {
     const processedLogLine = processedLogLines[index];
     if (isCollapsedRow(processedLogLine)) {
@@ -50,14 +69,6 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
         />
       );
     }
-
-    // At this point, logMetadata.renderingType is guaranteed to be defined from LogView/LoadingPage.tsx.
-    // logType can be removed from this calculation when the Parsley resmoke route is fully deprecated.
-    const Row =
-      logMetadata?.renderingType === "resmoke" ||
-      logType === LogTypes.RESMOKE_LOGS
-        ? ResmokeRow
-        : AnsiRow;
 
     return (
       <Row

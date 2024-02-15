@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { LogTypes } from "constants/enums";
+import { LogTypes, SupportedLogRenderingTypes } from "constants/enums";
 import {
   getJobLogsURL,
   getLegacyJobLogsURL,
@@ -31,8 +31,6 @@ interface UseResolveLogURLAndRenderingTypeProps {
   testID?: string;
 }
 
-type RenderingType = "resmoke" | "default";
-
 type HookResult = {
   /** The URL of the file parsley should download */
   downloadURL: string;
@@ -46,8 +44,8 @@ type HookResult = {
   rawLogURL: string;
   /** Whether the hook is actively making an network request or not  */
   loading: boolean;
-  /** The type of rendering logic to use for the log */
-  renderingType: RenderingType;
+  /** The rendering logic to use for the log when available */
+  renderingType: string;
 };
 
 /**
@@ -113,6 +111,7 @@ export const useResolveLogURLAndRenderingType = ({
   let htmlLogURL = "";
   let jobLogsURL = "";
   let legacyJobLogsURL = "";
+  let renderingType = "";
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
@@ -127,6 +126,7 @@ export const useResolveLogURLAndRenderingType = ({
         legacyJobLogsURL = getLegacyJobLogsURL(buildID);
       }
       downloadURL = rawLogURL;
+      renderingType = SupportedLogRenderingTypes.Resmoke;
       break;
     }
     case LogTypes.EVERGREEN_TASK_FILE: {
@@ -145,6 +145,7 @@ export const useResolveLogURLAndRenderingType = ({
         rawLogURL =
           allFiles?.find((file) => file?.name === fileName)?.link || "";
       }
+      renderingType = SupportedLogRenderingTypes.Default;
       break;
     }
     case LogTypes.EVERGREEN_TASK_LOGS: {
@@ -174,13 +175,18 @@ export const useResolveLogURLAndRenderingType = ({
         : constructEvergreenTaskLogURL(taskID, execution, origin, {
             text: false,
           });
+      renderingType = SupportedLogRenderingTypes.Default;
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
       if (!taskID || !execution || !testID || isLoadingTest) {
         break;
       }
-      const { url, urlRaw } = testData?.task?.tests.testResults[0]?.logs || {};
+      const {
+        renderingType: renderingTypeFromQuery,
+        url,
+        urlRaw,
+      } = testData?.task?.tests.testResults[0]?.logs || {};
       rawLogURL =
         urlRaw ??
         getEvergreenTestLogURL(taskID, execution, testID, {
@@ -194,16 +200,13 @@ export const useResolveLogURLAndRenderingType = ({
           text: false,
         });
       downloadURL = rawLogURL;
+      renderingType =
+        renderingTypeFromQuery || SupportedLogRenderingTypes.Default;
       break;
     }
     default:
       break;
   }
-
-  // renderingType is only propagated for evergreen test logs as of DEVPROD-1435.
-  const renderingType =
-    (testData?.task?.tests.testResults[0]?.logs
-      .renderingType as RenderingType) || "default";
 
   return {
     downloadURL,
