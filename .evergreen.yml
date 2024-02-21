@@ -19,12 +19,18 @@ modules:
 #            Parsley Functions        #
 #######################################
 functions:
+  assume-ec2-role:
+    command: ec2.assume_role
+    params:
+      role_arn: ${ASSUME_ROLE_ARN}
+
   attach-codegen-diff:
     command: s3.put
     type: system
     params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
+      aws_key: ${AWS_ACCESS_KEY_ID}
+      aws_secret: ${AWS_SECRET_ACCESS_KEY}
+      aws_session_token: ${AWS_SESSION_TOKEN}
       local_files_include_filter:
         - "parsley/bin/codegen.diff"
       remote_file: parsley/${task_id}/codegen/
@@ -40,8 +46,9 @@ functions:
     - command: s3.put
       type: system
       params:
-        aws_key: ${aws_key}
-        aws_secret: ${aws_secret}
+        aws_key: ${AWS_ACCESS_KEY_ID}
+        aws_secret: ${AWS_SECRET_ACCESS_KEY}
+        aws_session_token: ${AWS_SESSION_TOKEN}
         local_files_include_filter:
           ["parsley/cypress/screenshots/*"]
         remote_file: parsley/${task_id}/
@@ -52,8 +59,9 @@ functions:
     - command: s3.put
       type: system
       params:
-        aws_key: ${aws_key}
-        aws_secret: ${aws_secret}
+        aws_key: ${AWS_ACCESS_KEY_ID}
+        aws_secret: ${AWS_SECRET_ACCESS_KEY}
+        aws_session_token: ${AWS_SESSION_TOKEN}
         local_files_include_filter:
           ["parsley/cypress/videos/*"]
         remote_file: parsley/${task_id}/
@@ -72,8 +80,9 @@ functions:
     - command: s3.put
       type: system
       params:
-        aws_key: ${aws_key}
-        aws_secret: ${aws_secret}
+        aws_key: ${AWS_ACCESS_KEY_ID}
+        aws_secret: ${AWS_SECRET_ACCESS_KEY}
+        aws_session_token: ${AWS_SESSION_TOKEN}
         local_files_include_filter:
           ["parsley/storybook-static/*.html"]
         remote_file: parsley/${task_id}/storybook/
@@ -84,8 +93,9 @@ functions:
     - command: s3.put
       type: system
       params:
-        aws_key: ${aws_key}
-        aws_secret: ${aws_secret}
+        aws_key: ${AWS_ACCESS_KEY_ID}
+        aws_secret: ${AWS_SECRET_ACCESS_KEY}
+        aws_session_token: ${AWS_SESSION_TOKEN}
         local_files_include_filter:
           ["parsley/storybook-static/**/*.js", "parsley/storybook-static/**/*.mjs"]
         remote_file: parsley/${task_id}/storybook/
@@ -96,8 +106,9 @@ functions:
     - command: s3.put
       type: system
       params:
-        aws_key: ${aws_key}
-        aws_secret: ${aws_secret}
+        aws_key: ${AWS_ACCESS_KEY_ID}
+        aws_secret: ${AWS_SECRET_ACCESS_KEY}
+        aws_session_token: ${AWS_SESSION_TOKEN}
         local_files_include_filter:
           ["parsley/storybook-static/**/*.js.map"]
         remote_file: parsley/${task_id}/storybook/
@@ -108,8 +119,9 @@ functions:
     - command: s3.put
       type: system
       params:
-        aws_key: ${aws_key}
-        aws_secret: ${aws_secret}
+        aws_key: ${AWS_ACCESS_KEY_ID}
+        aws_secret: ${AWS_SECRET_ACCESS_KEY}
+        aws_session_token: ${AWS_SESSION_TOKEN}
         local_files_include_filter:
           ["parsley/storybook-static/**/*.svg"]
         remote_file: parsley/${task_id}/storybook/
@@ -120,8 +132,9 @@ functions:
     - command: s3.put
       type: system
       params:
-        aws_key: ${aws_key}
-        aws_secret: ${aws_secret}
+        aws_key: ${AWS_ACCESS_KEY_ID}
+        aws_secret: ${AWS_SECRET_ACCESS_KEY}
+        aws_session_token: ${AWS_SESSION_TOKEN}
         local_files_include_filter:
           ["parsley/storybook-static/**/*.json"]
         remote_file: parsley/${task_id}/storybook/
@@ -144,8 +157,9 @@ functions:
     command: s3.put
     type: system
     params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
+      aws_key: ${AWS_ACCESS_KEY_ID}
+      aws_secret: ${AWS_SECRET_ACCESS_KEY}
+      aws_session_token: ${AWS_SESSION_TOKEN}
       local_file: "parsley/build/source_map.html"
       remote_file: parsley/${task_id}/source_map.html
       bucket: mciuploads
@@ -164,10 +178,11 @@ functions:
     params:
       working_dir: parsley
       shell: bash
+      env:
+        AUTHOR_EMAIL: ${author_email}
+        DEPLOYS_EMAIL: ${DEPLOYS_EMAIL}
+        EXECUTION: ${execution}
       script: |
-        export AUTHOR_EMAIL=${author_email}
-        export DEPLOYS_EMAIL=${DEPLOYS_EMAIL}
-        export EXECUTION=${execution}
         bash scripts/email.sh
 
   setup-credentials:
@@ -175,28 +190,27 @@ functions:
     params:
       working_dir: parsley
       shell: bash
+      env:
+        REACT_APP_SENTRY_AUTH_TOKEN: ${REACT_APP_SENTRY_AUTH_TOKEN}
+        REACT_APP_SENTRY_DSN: ${REACT_APP_SENTRY_DSN}
+        NEW_RELIC_ACCOUNT_ID: ${NEW_RELIC_ACCOUNT_ID}
+        NEW_RELIC_AGENT_ID: ${NEW_RELIC_AGENT_ID}
+        NEW_RELIC_APPLICATION_ID: ${NEW_RELIC_APPLICATION_ID}
+        NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
+        NEW_RELIC_TRUST_KEY: ${NEW_RELIC_TRUST_KEY}
+        DEPLOYS_EMAIL: ${DEPLOYS_EMAIL}
+        BUCKET: ${bucket}
+        EVERGREEN_API_SERVER_HOST: ${evergreen_api_server_host}
+        EVERGREEN_UI_SERVER_HOST: ${evergreen_api_server_host}
+        EVERGREEN_API_KEY: ${evergreen_api_key}
+        EVERGREEN_USER: ${evergreen_user}
       script: |
         echo "Generating .env-cmdrc.json"
-        REACT_APP_SENTRY_AUTH_TOKEN=${REACT_APP_SENTRY_AUTH_TOKEN} \
-        REACT_APP_SENTRY_DSN=${REACT_APP_SENTRY_DSN} \
-        NEW_RELIC_ACCOUNT_ID=${NEW_RELIC_ACCOUNT_ID} \
-        NEW_RELIC_AGENT_ID=${NEW_RELIC_AGENT_ID} \
-        NEW_RELIC_APPLICATION_ID=${NEW_RELIC_APPLICATION_ID} \
-        NEW_RELIC_LICENSE_KEY=${NEW_RELIC_LICENSE_KEY} \
-        NEW_RELIC_TRUST_KEY=${NEW_RELIC_TRUST_KEY} \
-        DEPLOYS_EMAIL=${DEPLOYS_EMAIL} \
-        BUCKET=${bucket} \
         node scripts/setup-credentials.js
 
         echo "populating evergreen.yml"
-        cat <<EOF > .evergreen.yml
-        api_server_host: ${evergreen_api_server_host}
-        ui_server_host: ${evergreen_ui_server_host}
-        api_key: ${evergreen_api_key}
-        user: ${evergreen_user}
-        EOF
-
-        echo "Done populating"
+        ./scripts/create-evergreen-yml.sh
+        echo "Done populating evergreen.yml"
 
   setup-node:
     - command: subprocess.exec
@@ -341,14 +355,16 @@ functions:
     params:
       working_dir: parsley
       shell: bash
+      env: 
+        BUCKET: ${bucket}
+        AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
+        AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
+        AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
+        EXECUTION: ${execution}
+        DEPLOYS_EMAIL: ${DEPLOYS_EMAIL}
+        AUTHOR_EMAIL: ${author_email}
       script: |
         ${PREPARE_SHELL}
-        BUCKET=${bucket} \
-        AWS_ACCESS_KEY_ID=${aws_key} \
-        AWS_SECRET_ACCESS_KEY=${aws_secret} \
-        EXECUTION=${execution} \
-        DEPLOYS_EMAIL=${DEPLOYS_EMAIL} \
-        AUTHOR_EMAIL=${author_email} \
         yarn deploy:prod
 
 #######################################
@@ -425,8 +441,9 @@ functions:
     command: s3.put
     type: system
     params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
+      aws_key: ${AWS_ACCESS_KEY_ID}
+      aws_secret: ${AWS_SECRET_ACCESS_KEY}
+      aws_session_token: ${AWS_SESSION_TOKEN}
       local_file: parsley/logkeeper/logkeeperapp.log
       remote_file: parsley/${task_id}/${execution}/logkeeperapp.log
       bucket: mciuploads
@@ -437,8 +454,9 @@ functions:
     command: s3.get
     type: setup
     params:
-      aws_key: ${aws_key}
-      aws_secret: ${aws_secret}
+      aws_key: ${AWS_ACCESS_KEY_ID}
+      aws_secret: ${AWS_SECRET_ACCESS_KEY}
+      aws_session_token: ${AWS_SESSION_TOKEN}
       extract_to: parsley/logkeeper
       remote_file: _bucketdata.tar.gz
       bucket: parsley-test
@@ -450,6 +468,7 @@ functions:
 tasks:
   - name: compile
     commands:
+    - func: assume-ec2-role
     - func: yarn-build
     - func: attach-source-map
 
@@ -468,6 +487,7 @@ tasks:
 
   - name: e2e_test
     commands:
+    - func: assume-ec2-role
     - func: setup-mongodb
     - func: run-make-background
       vars:
@@ -483,6 +503,7 @@ tasks:
 
   - name: storybook
     commands:
+    - func: assume-ec2-role
     - func: yarn-storybook
     - func: attach-storybook
     - func: link-to-storybook
@@ -498,6 +519,7 @@ tasks:
 
   - name: deploy-prod
     commands:
+      - func: assume-ec2-role
       - func: setup-credentials
       - func: sym-link
       - func: prod-deploy
