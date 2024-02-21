@@ -126,8 +126,8 @@ describe("useLogContext", () => {
         result.current.ingestLines(lines, LogTypes.RESMOKE_LOGS);
       });
       const resmokeLines = [
-        `[j0:s0:n1] | 2022-09-13T16:57:46.852+00:00 D2 REPL_HB  4615670 [ReplCoord-1] "Sending heartbeat","attr":{"requestId":3705,"target":"localhost:20003","heartbeatObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":3,"hbv":1,"from":"localhost:20004","fromId":1,"term":3,"primaryId":1}}`,
-        `[j0:s0] | 2022-09-13T16:57:46.855+00:00 I  -        20883   [conn188] "Interrupted operation as its client disconnected","attr":{"opId":6047}`,
+        `[j0:s0:n1] | 2022-09-13T16:57:46.852+00:00 D2 REPL_HB  4615670     [ReplCoord-1] "Sending heartbeat","attr":{"requestId":3705,"target":"localhost:20003","heartbeatObj":{"replSetHeartbeat":"shard-rs0","configVersion":5,"configTerm":3,"hbv":1,"from":"localhost:20004","fromId":1,"term":3,"primaryId":1}}`,
+        `[j0:s0] | 2022-09-13T16:57:46.855+00:00 I  -        20883       [conn188] "Interrupted operation as its client disconnected","attr":{"opId":6047}`,
       ];
       expect(result.current.processedLogLines).toStrictEqual([0, 1]);
       for (let i = 0; i < lines.length; i++) {

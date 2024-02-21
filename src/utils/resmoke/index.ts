@@ -10,6 +10,7 @@ import {
   getResmokeFunction,
   getShellPrefix,
   getState,
+  getSvc,
   getTimeStamp,
 } from "./helpers";
 
@@ -56,7 +57,10 @@ const processResmokeLine = (line: string) => {
   const msg = getMessage(json) ?? "";
   const attr = getAttributes(json) ?? "";
 
-  const output = `${resmokeFunction} ${ports}| ${timeStamp} ${shellPrefix} ${configSrv} ${pid} [${ctx}] "${msg}"${
+  const svc = getSvc(json) ?? "";
+  const formattedSvc = (svc ? ` [${svc}]` : "").padEnd(4, " ");
+
+  const output = `${resmokeFunction} ${ports}| ${timeStamp} ${shellPrefix} ${configSrv} ${pid}${formattedSvc} [${ctx}] "${msg}"${
     attr ? `,${attr}` : ""
   }`;
   return output;
