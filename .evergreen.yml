@@ -209,6 +209,7 @@ functions:
         node scripts/setup-credentials.js
 
         echo "populating evergreen.yml"
+        chmod +x ./scripts/create-evergreen-yml.sh
         ./scripts/create-evergreen-yml.sh
         echo "Done populating evergreen.yml"
 
@@ -237,12 +238,10 @@ functions:
           npm install -g yarn
 
   sym-link:
-    command: shell.exec
+    command: subprocess.exec
     params:
       working_dir: parsley
-      shell: bash
-      script: |
-        ln -s evergreen/graphql/schema sdlschema
+      command: ln -s evergreen/graphql/schema sdlschema
 
   yarn-build:
     command: shell.exec
@@ -514,6 +513,7 @@ tasks:
 
   - name: check_codegen
     commands:
+      - func: assume-ec2-role
       - func: sym-link
       - func: yarn-codegen
 
