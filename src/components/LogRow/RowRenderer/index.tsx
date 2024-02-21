@@ -51,7 +51,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
       break;
     default:
       Row = AnsiRow;
-      reportError(new Error("Encountered unsupported renderType"), {
+      reportError(new Error("Encountered unsupported renderingType"), {
         rawLogURL: logMetadata?.rawLogURL,
         renderingType: logMetadata?.renderingType,
       }).warning();
