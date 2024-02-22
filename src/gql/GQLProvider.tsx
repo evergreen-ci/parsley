@@ -13,10 +13,17 @@ import { reportError } from "utils/errorReporting";
 const logErrorsLink = onError(({ graphQLErrors, operation }) => {
   if (Array.isArray(graphQLErrors)) {
     graphQLErrors.forEach((gqlErr) => {
+      const fingerprint = [operation.operationName];
+      if (gqlErr?.path?.length) {
+        fingerprint.push(...gqlErr.path);
+      }
       reportError(new Error(gqlErr.message), {
-        gqlErr,
-        operationName: operation.operationName,
-        variables: operation.variables,
+        context: {
+          gqlErr,
+          variables: operation.variables,
+        },
+        fingerprint,
+        tags: { operationName: operation.operationName },
       }).warning();
     });
   }
