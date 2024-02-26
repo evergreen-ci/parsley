@@ -15,7 +15,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
         <nav
           aria-label="Side panel"
           class="leafygreen-ui-fw8ayd"
-          id="side-nav-179"
+          id="side-nav-202"
         >
           <div
             class="leafygreen-ui-1nmawjt"
@@ -32,7 +32,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                   <div
                     class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-175"
+                    id="menu-group-label-id-198"
                   >
                     <div
                       class="leafygreen-ui-1rnl6t5"
@@ -54,7 +54,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                         >
                           <path
                             clip-rule="evenodd"
-                            d="M6 6.148l-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 01-.17.376l-3 2.625a.5.5 0 01-.83-.376v-8.25z"
+                            d="m6 6.148-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 0 1-.17.376l-3 2.625a.5.5 0 0 1-.83-.376v-8.25Z"
                             fill="currentColor"
                             fill-rule="evenodd"
                           />
@@ -89,7 +89,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-175"
+                    aria-labelledby="menu-group-label-id-198"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -115,7 +115,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                           >
                             <path
                               clip-rule="evenodd"
-                              d="M5.364 14.364a1 1 0 001.414 0l4.95-4.95.707-.707a1 1 0 000-1.414l-.707-.707-4.95-4.95a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L8.899 8l-4.242 4.243a1 1 0 000 1.414l.707.707z"
+                              d="M5.364 14.364a1 1 0 0 0 1.414 0l4.95-4.95.707-.707a1 1 0 0 0 0-1.414l-.707-.707-4.95-4.95a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L8.899 8l-4.242 4.243a1 1 0 0 0 0 1.414l.707.707Z"
                               fill="currentColor"
                               fill-rule="evenodd"
                             />
@@ -152,7 +152,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                                     xmlns="http://www.w3.org/2000/svg"
                                   >
                                     <path
-                                      d="M10.922.681a.963.963 0 011.362 0l1.363 1.363a.963.963 0 010 1.362L12.284 4.77 9.56 2.044 8.538 3.066l2.724 2.725-7.153 7.153-3.747 1.022 1.022-3.747L10.922.68z"
+                                      d="M10.922.681a.963.963 0 0 1 1.362 0l1.363 1.363a.963.963 0 0 1 0 1.362L12.284 4.77 9.56 2.044 8.538 3.066l2.724 2.725-7.153 7.153-3.747 1.022 1.022-3.747L10.922.68Z"
                                       fill="currentColor"
                                     />
                                   </svg>
@@ -180,7 +180,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                                   >
                                     <path
                                       clip-rule="evenodd"
-                                      d="M8 2.008c3.934 0 6.473 3.129 7.455 4.583l.043.064C15.713 6.97 16 7.391 16 8s-.287 1.03-.502 1.345l-.043.064c-.982 1.454-3.521 4.583-7.455 4.583S1.527 10.863.545 9.41l-.043-.064C.287 9.03 0 8.609 0 8s.287-1.03.502-1.345l.043-.064C1.527 5.137 4.066 2.008 8 2.008zM9.13 4.13A5.147 5.147 0 008 4.005C5.75 4.005 3.927 5.794 3.927 8c0 2.206 1.824 3.995 4.073 3.995 2.25 0 4.073-1.789 4.073-3.995 0-2.206-1.824-3.995-4.073-3.995.378 0 .756.045 1.13.126zM8 10.996c1.687 0 3.055-1.341 3.055-2.996S9.687 5.004 8 5.004 4.945 6.345 4.945 8 6.313 10.996 8 10.996z"
+                                      d="M8 2.008c3.934 0 6.473 3.129 7.455 4.583l.043.064C15.713 6.97 16 7.391 16 8s-.287 1.03-.502 1.345l-.043.064c-.982 1.454-3.521 4.583-7.455 4.583S1.527 10.863.545 9.41l-.043-.064C.287 9.03 0 8.609 0 8s.287-1.03.502-1.345l.043-.064C1.527 5.137 4.066 2.008 8 2.008ZM9.13 4.13A5.147 5.147 0 0 0 8 4.005C5.75 4.005 3.927 5.794 3.927 8c0 2.206 1.824 3.995 4.073 3.995 2.25 0 4.073-1.789 4.073-3.995 0-2.206-1.824-3.995-4.073-3.995.378 0 .756.045 1.13.126ZM8 10.996c1.687 0 3.055-1.341 3.055-2.996S9.687 5.004 8 5.004 4.945 6.345 4.945 8 6.313 10.996 8 10.996Z"
                                       fill="currentColor"
                                       fill-rule="evenodd"
                                     />
@@ -209,7 +209,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                                   >
                                     <path
                                       clip-rule="evenodd"
-                                      d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+                                      d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
                                       fill="currentColor"
                                       fill-rule="evenodd"
                                     />
@@ -245,8 +245,8 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                                   Case
                                 </div>
                                 <div
-                                  aria-label="segmented-control-180"
-                                  aria-owns="segmented-control-180-0 segmented-control-180-1"
+                                  aria-label="segmented-control-203"
+                                  aria-owns="segmented-control-203-0 segmented-control-203-1"
                                   class="leafygreen-ui-18en4yf"
                                   role="tablist"
                                 >
@@ -262,7 +262,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                                         aria-controls="Toggle case sensitivity"
                                         aria-selected="true"
                                         class="leafygreen-ui-ypz97o"
-                                        id="segmented-control-180-0"
+                                        id="segmented-control-203-0"
                                         role="tab"
                                         tabindex="0"
                                         type="button"
@@ -291,7 +291,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                                         aria-controls="Toggle case sensitivity"
                                         aria-selected="false"
                                         class="leafygreen-ui-ypz97o"
-                                        id="segmented-control-180-1"
+                                        id="segmented-control-203-1"
                                         role="tab"
                                         tabindex="-1"
                                         type="button"
@@ -325,8 +325,8 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                                   Match
                                 </div>
                                 <div
-                                  aria-label="segmented-control-181"
-                                  aria-owns="segmented-control-181-0 segmented-control-181-1"
+                                  aria-label="segmented-control-204"
+                                  aria-owns="segmented-control-204-0 segmented-control-204-1"
                                   class="leafygreen-ui-18en4yf"
                                   role="tablist"
                                 >
@@ -342,7 +342,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                                         aria-controls="Toggle match type"
                                         aria-selected="true"
                                         class="leafygreen-ui-ypz97o"
-                                        id="segmented-control-181-0"
+                                        id="segmented-control-204-0"
                                         role="tab"
                                         tabindex="0"
                                         type="button"
@@ -371,7 +371,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                                         aria-controls="Toggle match type"
                                         aria-selected="false"
                                         class="leafygreen-ui-ypz97o"
-                                        id="segmented-control-181-1"
+                                        id="segmented-control-204-1"
                                         role="tab"
                                         tabindex="-1"
                                         type="button"
@@ -409,7 +409,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                   <div
                     class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-176"
+                    id="menu-group-label-id-199"
                   >
                     <div
                       class="leafygreen-ui-1rnl6t5"
@@ -464,7 +464,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-176"
+                    aria-labelledby="menu-group-label-id-199"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -492,7 +492,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                           >
                             <path
                               clip-rule="evenodd"
-                              d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+                              d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
                               fill="currentColor"
                               fill-rule="evenodd"
                             />
@@ -516,7 +516,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                   <div
                     class="leafygreen-ui-g6ml2m"
                     data-testid="side-nav-group-header-label"
-                    id="menu-group-label-id-177"
+                    id="menu-group-label-id-200"
                   >
                     <div
                       class="leafygreen-ui-1rnl6t5"
@@ -537,7 +537,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M8.853 12.031A.1.1 0 018.926 12h5.824a.25.25 0 01.25.25v1.5a.25.25 0 01-.25.25H7.231a.1.1 0 01-.072-.168l1.694-1.8zM4.019 9.193l.375-.374L7.576 12l-.375.375a1 1 0 01-.779.29l-.574-.04a1 1 0 00-.778.29l-.141.14-1.591-1.59.141-.142a1 1 0 00.29-.778l-.04-.573a1 1 0 01.29-.779zM11.433 1.779a1 1 0 011.415 0l1.767 1.768a1 1 0 010 1.414L8.28 11.296 5.098 8.114l6.335-6.335zM2.632 12.167l1.593 1.593-.17.172a.25.25 0 01-.178.074H1.386a.25.25 0 01-.176-.428l1.422-1.41z"
+                            d="M8.853 12.031A.1.1 0 0 1 8.926 12h5.824a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25H7.231a.1.1 0 0 1-.072-.168l1.694-1.8ZM4.019 9.193l.375-.374L7.576 12l-.375.375a1 1 0 0 1-.779.29l-.574-.04a1 1 0 0 0-.778.29l-.141.14-1.591-1.59.141-.142a1 1 0 0 0 .29-.778l-.04-.573a1 1 0 0 1 .29-.779ZM11.433 1.779a1 1 0 0 1 1.415 0l1.767 1.768a1 1 0 0 1 0 1.414L8.28 11.296 5.098 8.114l6.335-6.335ZM2.632 12.167l1.593 1.593-.17.172a.25.25 0 0 1-.178.074H1.386a.25.25 0 0 1-.176-.428l1.422-1.41Z"
                             fill="currentColor"
                           />
                         </svg>
@@ -564,7 +564,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                     </div>
                   </div>
                   <ul
-                    aria-labelledby="menu-group-label-id-177"
+                    aria-labelledby="menu-group-label-id-200"
                     class="leafygreen-ui-bdnco"
                   >
                     <div
@@ -592,7 +592,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                           >
                             <path
                               clip-rule="evenodd"
-                              d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+                              d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
                               fill="currentColor"
                               fill-rule="evenodd"
                             />
@@ -632,7 +632,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                           >
                             <path
                               clip-rule="evenodd"
-                              d="M12.203 3.404a1 1 0 00-1.414 0L8.314 5.879 5.839 3.404a1 1 0 00-1.414 0l-.707.707a1 1 0 000 1.414L6.192 8l-2.474 2.475a1 1 0 000 1.414l.707.707a1 1 0 001.414 0l2.475-2.475 2.475 2.475a1 1 0 001.414 0l.707-.707a1 1 0 000-1.414L10.435 8l2.475-2.475a1 1 0 000-1.414l-.707-.707z"
+                              d="M12.203 3.404a1 1 0 0 0-1.414 0L8.314 5.879 5.839 3.404a1 1 0 0 0-1.414 0l-.707.707a1 1 0 0 0 0 1.414L6.192 8l-2.474 2.475a1 1 0 0 0 0 1.414l.707.707a1 1 0 0 0 1.414 0l2.475-2.475 2.475 2.475a1 1 0 0 0 1.414 0l.707-.707a1 1 0 0 0 0-1.414L10.435 8l2.475-2.475a1 1 0 0 0 0-1.414l-.707-.707Z"
                               fill="currentColor"
                               fill-rule="evenodd"
                             />
@@ -676,7 +676,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                 >
                   <path
                     clip-rule="evenodd"
-                    d="M6 6.148l-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 01-.17.376l-3 2.625a.5.5 0 01-.83-.376v-8.25z"
+                    d="m6 6.148-3.8-3.94C1.797 1.79 2.044 1 2.576 1h10.848c.532 0 .779.79.377 1.208L10 6.148v5.625a.5.5 0 0 1-.17.376l-3 2.625a.5.5 0 0 1-.83-.376v-8.25Z"
                     fill="currentColor"
                     fill-rule="evenodd"
                   />
@@ -726,7 +726,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M8.853 12.031A.1.1 0 018.926 12h5.824a.25.25 0 01.25.25v1.5a.25.25 0 01-.25.25H7.231a.1.1 0 01-.072-.168l1.694-1.8zM4.019 9.193l.375-.374L7.576 12l-.375.375a1 1 0 01-.779.29l-.574-.04a1 1 0 00-.778.29l-.141.14-1.591-1.59.141-.142a1 1 0 00.29-.778l-.04-.573a1 1 0 01.29-.779zM11.433 1.779a1 1 0 011.415 0l1.767 1.768a1 1 0 010 1.414L8.28 11.296 5.098 8.114l6.335-6.335zM2.632 12.167l1.593 1.593-.17.172a.25.25 0 01-.178.074H1.386a.25.25 0 01-.176-.428l1.422-1.41z"
+                    d="M8.853 12.031A.1.1 0 0 1 8.926 12h5.824a.25.25 0 0 1 .25.25v1.5a.25.25 0 0 1-.25.25H7.231a.1.1 0 0 1-.072-.168l1.694-1.8ZM4.019 9.193l.375-.374L7.576 12l-.375.375a1 1 0 0 1-.779.29l-.574-.04a1 1 0 0 0-.778.29l-.141.14-1.591-1.59.141-.142a1 1 0 0 0 .29-.778l-.04-.573a1 1 0 0 1 .29-.779ZM11.433 1.779a1 1 0 0 1 1.415 0l1.767 1.768a1 1 0 0 1 0 1.414L8.28 11.296 5.098 8.114l6.335-6.335ZM2.632 12.167l1.593 1.593-.17.172a.25.25 0 0 1-.178.074H1.386a.25.25 0 0 1-.176-.428l1.422-1.41Z"
                     fill="currentColor"
                   />
                 </svg>
@@ -735,7 +735,7 @@ exports[`Snapshot Tests SidePanel.stories Default 1`] = `
           </div>
         </nav>
         <button
-          aria-controls="side-nav-179"
+          aria-controls="side-nav-202"
           aria-expanded="true"
           aria-label="Collapse navigation"
           class="leafygreen-ui-v87gj9"
