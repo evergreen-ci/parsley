@@ -1,5 +1,5 @@
 import { useQuery } from "@apollo/client";
-import { LogTypes, SupportedLogRenderingTypes } from "constants/enums";
+import { LogRenderingTypes, LogTypes } from "constants/enums";
 import {
   getJobLogsURL,
   getLegacyJobLogsURL,
@@ -19,6 +19,7 @@ import {
 } from "gql/generated/types";
 import { GET_TEST_LOG_URL_AND_RENDERING_TYPE, TASK_FILES } from "gql/queries";
 import { useTaskQuery } from "hooks/useTaskQuery";
+import { reportError } from "utils/errorReporting";
 
 interface UseResolveLogURLAndRenderingTypeProps {
   buildID?: string;
@@ -126,7 +127,7 @@ export const useResolveLogURLAndRenderingType = ({
         legacyJobLogsURL = getLegacyJobLogsURL(buildID);
       }
       downloadURL = rawLogURL;
-      renderingType = SupportedLogRenderingTypes.Resmoke;
+      renderingType = LogRenderingTypes.Resmoke;
       break;
     }
     case LogTypes.EVERGREEN_TASK_FILE: {
@@ -145,7 +146,7 @@ export const useResolveLogURLAndRenderingType = ({
         rawLogURL =
           allFiles?.find((file) => file?.name === fileName)?.link || "";
       }
-      renderingType = SupportedLogRenderingTypes.Default;
+      renderingType = LogRenderingTypes.Default;
       break;
     }
     case LogTypes.EVERGREEN_TASK_LOGS: {
@@ -175,7 +176,7 @@ export const useResolveLogURLAndRenderingType = ({
         : constructEvergreenTaskLogURL(taskID, execution, origin, {
             text: false,
           });
-      renderingType = SupportedLogRenderingTypes.Default;
+      renderingType = LogRenderingTypes.Default;
       break;
     }
     case LogTypes.EVERGREEN_TEST_LOGS: {
@@ -200,8 +201,19 @@ export const useResolveLogURLAndRenderingType = ({
           text: false,
         });
       downloadURL = rawLogURL;
-      renderingType =
-        renderingTypeFromQuery || SupportedLogRenderingTypes.Default;
+      if ((renderingTypeFromQuery || "") in LogRenderingTypes) {
+        renderingType = renderingTypeFromQuery as LogRenderingTypes;
+      } else if (!renderingTypeFromQuery) {
+        renderingType = LogRenderingTypes.Default;
+      } else {
+        renderingType = LogRenderingTypes.Default;
+        reportError(new Error("Encountered unsupported renderingType"), {
+          context: {
+            rawLogURL,
+            unsupportedRenderingType: renderingTypeFromQuery,
+          },
+        }).warning();
+      }
       break;
     }
     default:

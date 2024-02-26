@@ -1,9 +1,8 @@
-import { LogTypes, SupportedLogRenderingTypes } from "constants/enums";
+import { LogRenderingTypes, LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { useHighlightParam } from "hooks/useHighlightParam";
 import { ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
-import { reportError } from "utils/errorReporting";
 import AnsiRow, { AnsiRowProps } from "../AnsiRow";
 import CollapsedRow from "../CollapsedRow";
 import ResmokeRow, { ResmokeRowProps } from "../ResmokeRow";
@@ -43,18 +42,14 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
   let Row: React.FC<ResmokeRowProps> | React.FC<AnsiRowProps>;
   // At this point, logMetadata is defined from <LoadingPage />
   switch (logMetadata?.renderingType) {
-    case SupportedLogRenderingTypes.Resmoke:
+    case LogRenderingTypes.Resmoke:
       Row = ResmokeRow;
       break;
-    case SupportedLogRenderingTypes.Default:
+    case LogRenderingTypes.Default:
       Row = AnsiRow;
       break;
     default:
       Row = AnsiRow;
-      reportError(new Error("Encountered unsupported renderingType"), {
-        rawLogURL: logMetadata?.rawLogURL,
-        renderingType: logMetadata?.renderingType,
-      }).warning();
       break;
   }
 

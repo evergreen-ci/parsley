@@ -5,7 +5,7 @@ enum LogTypes {
   RESMOKE_LOGS = "RESMOKE_LOGS",
 }
 
-enum SupportedLogRenderingTypes {
+enum LogRenderingTypes {
   Default = "default",
   Resmoke = "resmoke",
 }
@@ -38,7 +38,7 @@ enum WordWrapFormat {
 export {
   CaseSensitivity,
   FilterLogic,
-  SupportedLogRenderingTypes,
+  LogRenderingTypes,
   LogTypes,
   MatchType,
   SearchBarActions,
