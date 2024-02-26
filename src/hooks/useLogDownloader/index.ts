@@ -62,12 +62,11 @@ const useLogDownloader = ({
         downloadSizeLimit,
         onIncompleteDownload: (reason, incompleteDownloadError) => {
           reportError(new Error("Incomplete download"), {
-            message: reason,
-            metadata: {
+            context: {
               incompleteDownloadError,
+              message: reason,
               url,
             },
-            name: "Log download incomplete",
           }).warning();
 
           dispatchToast.warning(LOG_FILE_DOWNLOAD_TOO_LARGE_WARNING, true, {
@@ -99,12 +98,11 @@ const useLogDownloader = ({
               reason: "Log line size limit exceeded",
             });
             reportError(new Error("Incomplete download"), {
-              message: "Log line size limit exceeded",
-              metadata: {
+              context: {
+                message: "Log line size limit exceeded",
                 trimmedLines,
                 url,
               },
-              name: "Log download incomplete",
             }).warning();
             dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
               shouldTimeout: false,

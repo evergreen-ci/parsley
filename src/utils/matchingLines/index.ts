@@ -26,11 +26,11 @@ export const constructRegexToMatch = (visibleFilters: Filters) => {
         });
       } catch (e) {
         // If we get an error here, it means the regex is invalid and got past the validation step. We should report this error.
-        reportError(new Error("Invalid regex for filter"), {
-          message: `The regex "${f.expression}" is invalid`,
-          metadata: e,
-          name: "Invalid Regex",
-        }).severe();
+        if (e instanceof Error) {
+          reportError(new Error("Invalid regex for filter"), {
+            context: { error: e.toString(), expression: f.expression },
+          }).severe();
+        }
       }
     }
   });
