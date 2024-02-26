@@ -124,52 +124,74 @@ exports[`Snapshot Tests DetailsMenu.stories Default 1`] = `
                       class="css-1sg2lsz"
                     >
                       <div
-                        class="css-1b84j75 leafygreen-ui-90q1a7"
+                        class="leafygreen-ui-1br9h7w css-1b84j75"
                       >
                         <div
-                          class="leafygreen-ui-lzja97"
+                          class="leafygreen-ui-e3fvh5"
+                        />
+                        <div
+                          aria-disabled="false"
+                          class="leafygreen-ui-myfm8l"
                         >
-                          <input
-                            aria-invalid="false"
-                            aria-labelledby="Range Lower Bound"
-                            autocomplete="on"
-                            class="leafygreen-ui-lkup3q"
-                            data-cy="range-lower-bound"
-                            id="textinput-3"
-                            min="0"
-                            placeholder="0"
-                            required=""
-                            type="number"
-                            value=""
-                          />
                           <div
-                            class="lg-ui-icon-selector-0000 leafygreen-ui-dhxvhh"
+                            class="leafygreen-ui-1ago99h"
+                          >
+                            <input
+                              aria-describedby=""
+                              aria-invalid="false"
+                              autocomplete="on"
+                              class="lg-ui-form-field-input-0000 leafygreen-ui-vrj1me"
+                              data-cy="range-lower-bound"
+                              id="lg-form-field-input-25"
+                              min="0"
+                              placeholder="0"
+                              required=""
+                              type="number"
+                              value=""
+                            />
+                          </div>
+                          <div
+                            class="leafygreen-ui-44gx6g"
                           />
                         </div>
+                        <div
+                          class="leafygreen-ui-jsxxy6"
+                        />
                       </div>
                       <div
-                        class="css-1b84j75 leafygreen-ui-90q1a7"
+                        class="leafygreen-ui-1br9h7w css-1b84j75"
                       >
                         <div
-                          class="leafygreen-ui-lzja97"
+                          class="leafygreen-ui-e3fvh5"
+                        />
+                        <div
+                          aria-disabled="false"
+                          class="leafygreen-ui-myfm8l"
                         >
-                          <input
-                            aria-invalid="false"
-                            aria-labelledby="Range Upper Bound"
-                            autocomplete="on"
-                            class="leafygreen-ui-lkup3q"
-                            data-cy="range-upper-bound"
-                            id="textinput-4"
-                            min="0"
-                            placeholder="100"
-                            required=""
-                            type="number"
-                            value=""
-                          />
                           <div
-                            class="lg-ui-icon-selector-0000 leafygreen-ui-dhxvhh"
+                            class="leafygreen-ui-1ago99h"
+                          >
+                            <input
+                              aria-describedby=""
+                              aria-invalid="false"
+                              autocomplete="on"
+                              class="lg-ui-form-field-input-0000 leafygreen-ui-vrj1me"
+                              data-cy="range-upper-bound"
+                              id="lg-form-field-input-29"
+                              min="0"
+                              placeholder="100"
+                              required=""
+                              type="number"
+                              value=""
+                            />
+                          </div>
+                          <div
+                            class="leafygreen-ui-44gx6g"
                           />
                         </div>
+                        <div
+                          class="leafygreen-ui-jsxxy6"
+                        />
                       </div>
                     </div>
                   </div>
@@ -524,12 +546,12 @@ exports[`Snapshot Tests DetailsMenu.stories WithDownloadedLog 1`] = `
             role="tablist"
           >
             <button
-              aria-controls="tab-panel-20"
+              aria-controls="tab-panel-36"
               aria-selected="true"
               class="leafygreen-ui-oq6if2"
               data-cy="search-and-filter-tab"
               data-text="Search & Filter"
-              id="tab-21"
+              id="tab-37"
               name="Search & Filter"
               role="tab"
               tabindex="0"
@@ -541,12 +563,12 @@ exports[`Snapshot Tests DetailsMenu.stories WithDownloadedLog 1`] = `
               </div>
             </button>
             <button
-              aria-controls="tab-panel-22"
+              aria-controls="tab-panel-38"
               aria-selected="false"
               class="leafygreen-ui-1vvp6ij"
               data-cy="log-viewing-tab"
               data-text="Log Viewing"
-              id="tab-23"
+              id="tab-39"
               name="Log Viewing"
               role="tab"
               tabindex="-1"
@@ -568,9 +590,9 @@ exports[`Snapshot Tests DetailsMenu.stories WithDownloadedLog 1`] = `
         </div>
         <div>
           <div
-            aria-labelledby="tab-21"
+            aria-labelledby="tab-37"
             data-cy="search-and-filter-tab"
-            id="tab-panel-20"
+            id="tab-panel-36"
             role="tabpanel"
           >
             <div
@@ -623,52 +645,74 @@ exports[`Snapshot Tests DetailsMenu.stories WithDownloadedLog 1`] = `
                       class="css-1sg2lsz"
                     >
                       <div
-                        class="css-1b84j75 leafygreen-ui-90q1a7"
+                        class="leafygreen-ui-1br9h7w css-1b84j75"
                       >
                         <div
-                          class="leafygreen-ui-lzja97"
+                          class="leafygreen-ui-e3fvh5"
+                        />
+                        <div
+                          aria-disabled="false"
+                          class="leafygreen-ui-myfm8l"
                         >
-                          <input
-                            aria-invalid="false"
-                            aria-labelledby="Range Lower Bound"
-                            autocomplete="on"
-                            class="leafygreen-ui-lkup3q"
-                            data-cy="range-lower-bound"
-                            id="textinput-7"
-                            min="0"
-                            placeholder="0"
-                            required=""
-                            type="number"
-                            value=""
-                          />
                           <div
-                            class="lg-ui-icon-selector-0000 leafygreen-ui-dhxvhh"
+                            class="leafygreen-ui-1ago99h"
+                          >
+                            <input
+                              aria-describedby=""
+                              aria-invalid="false"
+                              autocomplete="on"
+                              class="lg-ui-form-field-input-0000 leafygreen-ui-vrj1me"
+                              data-cy="range-lower-bound"
+                              id="lg-form-field-input-59"
+                              min="0"
+                              placeholder="0"
+                              required=""
+                              type="number"
+                              value=""
+                            />
+                          </div>
+                          <div
+                            class="leafygreen-ui-44gx6g"
                           />
                         </div>
+                        <div
+                          class="leafygreen-ui-jsxxy6"
+                        />
                       </div>
                       <div
-                        class="css-1b84j75 leafygreen-ui-90q1a7"
+                        class="leafygreen-ui-1br9h7w css-1b84j75"
                       >
                         <div
-                          class="leafygreen-ui-lzja97"
+                          class="leafygreen-ui-e3fvh5"
+                        />
+                        <div
+                          aria-disabled="false"
+                          class="leafygreen-ui-myfm8l"
                         >
-                          <input
-                            aria-invalid="false"
-                            aria-labelledby="Range Upper Bound"
-                            autocomplete="on"
-                            class="leafygreen-ui-lkup3q"
-                            data-cy="range-upper-bound"
-                            id="textinput-8"
-                            min="0"
-                            placeholder="100"
-                            required=""
-                            type="number"
-                            value=""
-                          />
                           <div
-                            class="lg-ui-icon-selector-0000 leafygreen-ui-dhxvhh"
+                            class="leafygreen-ui-1ago99h"
+                          >
+                            <input
+                              aria-describedby=""
+                              aria-invalid="false"
+                              autocomplete="on"
+                              class="lg-ui-form-field-input-0000 leafygreen-ui-vrj1me"
+                              data-cy="range-upper-bound"
+                              id="lg-form-field-input-63"
+                              min="0"
+                              placeholder="100"
+                              required=""
+                              type="number"
+                              value=""
+                            />
+                          </div>
+                          <div
+                            class="leafygreen-ui-44gx6g"
                           />
                         </div>
+                        <div
+                          class="leafygreen-ui-jsxxy6"
+                        />
                       </div>
                     </div>
                   </div>
@@ -1005,9 +1049,9 @@ exports[`Snapshot Tests DetailsMenu.stories WithDownloadedLog 1`] = `
             </div>
           </div>
           <div
-            aria-labelledby="tab-23"
+            aria-labelledby="tab-39"
             data-cy="log-viewing-tab"
-            id="tab-panel-22"
+            id="tab-panel-38"
             role="tabpanel"
           />
         </div>

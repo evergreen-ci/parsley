@@ -112,44 +112,63 @@ exports[`Snapshot Tests SearchBar.stories Default 1`] = `
         class="css-1xm32e0"
       >
         <div
-          class="css-z4vplf leafygreen-ui-90q1a7"
+          class="leafygreen-ui-1br9h7w css-z4vplf"
         >
           <div
-            class="leafygreen-ui-lzja97"
+            class="leafygreen-ui-e3fvh5"
+          />
+          <div
+            aria-disabled="false"
+            class="leafygreen-ui-1vizp6e"
           >
-            <input
-              aria-invalid="true"
-              aria-labelledby="searchbar-input"
-              autocomplete="on"
-              class="leafygreen-ui-18wtnk9"
-              data-cy="searchbar-input"
-              id="textinput-9"
-              placeholder="optional, regexp to search"
-              required=""
-              spellcheck="false"
-              type="text"
-              value=""
-            />
             <div
-              class="lg-ui-icon-selector-0000 leafygreen-ui-11c7q5r"
+              class="leafygreen-ui-1ago99h"
+            >
+              <input
+                aria-describedby="lg-form-field-description-204"
+                aria-invalid="true"
+                autocomplete="on"
+                class="lg-ui-form-field-input-0000 leafygreen-ui-vrj1me"
+                data-cy="searchbar-input"
+                id="lg-form-field-input-205"
+                placeholder="optional, regexp to search"
+                required=""
+                spellcheck="false"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              class="leafygreen-ui-44gx6g"
             >
               <svg
                 alt=""
                 aria-hidden="true"
-                class="leafygreen-ui-1lzd8bx"
+                class="leafygreen-ui-160ryfb"
+                fill="none"
                 height="16"
                 role="presentation"
                 viewBox="0 0 16 16"
                 width="16"
+                xmlns="http://www.w3.org/2000/svg"
               >
                 <path
                   clip-rule="evenodd"
-                  d="M8.8639 1.51357C8.49039 0.828811 7.50961 0.828811 7.1361 1.51357L1.12218 12.5388C0.763263 13.1968 1.23814 14 1.98608 14H14.0139C14.7619 14 15.2367 13.1968 14.8778 12.5388L8.8639 1.51357ZM7 5C7 4.44772 7.44772 4 8 4C8.55228 4 9 4.44772 9 5V9C9 9.55228 8.55228 10 8 10C7.44772 10 7 9.55228 7 9V5ZM9 12C9 12.5523 8.55228 13 8 13C7.44772 13 7 12.5523 7 12C7 11.4477 7.44772 11 8 11C8.55228 11 9 11.4477 9 12Z"
+                  d="M8.864 1.514a.983.983 0 0 0-1.728 0L1.122 12.539A.987.987 0 0 0 1.986 14h12.028a.987.987 0 0 0 .864-1.461L8.864 1.514ZM7 5a1 1 0 0 1 2 0v4a1 1 0 0 1-2 0V5Zm2 7a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"
                   fill="currentColor"
                   fill-rule="evenodd"
                 />
               </svg>
             </div>
+          </div>
+          <div
+            class="leafygreen-ui-jsxxy6"
+          >
+            <p
+              class="leafygreen-ui-jvw8or"
+              data-testid="lg-form_field-error_message"
+              id="lg-form-field-description-204"
+            />
           </div>
         </div>
         <div
@@ -278,28 +297,39 @@ exports[`Snapshot Tests SearchBar.stories WithSearchSuggestions 1`] = `
         class="css-1xm32e0"
       >
         <div
-          class="css-z4vplf leafygreen-ui-90q1a7"
+          class="leafygreen-ui-1br9h7w css-z4vplf"
         >
           <div
-            class="leafygreen-ui-lzja97"
+            class="leafygreen-ui-e3fvh5"
+          />
+          <div
+            aria-disabled="false"
+            class="leafygreen-ui-mrtshz"
           >
-            <input
-              aria-invalid="false"
-              aria-labelledby="searchbar-input"
-              autocomplete="on"
-              class="leafygreen-ui-1kmfbzh"
-              data-cy="searchbar-input"
-              id="textinput-10"
-              placeholder="optional, regexp to search"
-              required=""
-              spellcheck="false"
-              type="text"
-              value=""
-            />
             <div
-              class="lg-ui-icon-selector-0000 leafygreen-ui-11c7q5r"
+              class="leafygreen-ui-1ago99h"
+            >
+              <input
+                aria-describedby=""
+                aria-invalid="false"
+                autocomplete="on"
+                class="lg-ui-form-field-input-0000 leafygreen-ui-vrj1me"
+                data-cy="searchbar-input"
+                id="lg-form-field-input-210"
+                placeholder="optional, regexp to search"
+                required=""
+                spellcheck="false"
+                type="text"
+                value=""
+              />
+            </div>
+            <div
+              class="leafygreen-ui-44gx6g"
             />
           </div>
+          <div
+            class="leafygreen-ui-jsxxy6"
+          />
         </div>
         <div
           class="css-1kijwh"
