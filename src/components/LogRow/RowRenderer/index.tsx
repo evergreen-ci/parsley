@@ -40,7 +40,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
       : undefined;
 
   let Row: typeof ResmokeRow | typeof AnsiRow;
-  // At this point, logMetadata is defined from <LoadingPage />
+  // At this point, logMetadata.renderingType is guaranteed to be defined from <LoadingPage />
   switch (logMetadata?.renderingType) {
     case LogRenderingTypes.Resmoke:
       Row = ResmokeRow;
