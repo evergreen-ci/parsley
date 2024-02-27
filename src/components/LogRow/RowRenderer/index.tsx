@@ -3,9 +3,9 @@ import { useLogContext } from "context/LogContext";
 import { useHighlightParam } from "hooks/useHighlightParam";
 import { ProcessedLogLines } from "types/logs";
 import { isCollapsedRow } from "utils/collapsedRow";
-import AnsiRow, { AnsiRowProps } from "../AnsiRow";
+import AnsiRow from "../AnsiRow";
 import CollapsedRow from "../CollapsedRow";
-import ResmokeRow, { ResmokeRowProps } from "../ResmokeRow";
+import ResmokeRow from "../ResmokeRow";
 
 type RowRendererFunction = (props: {
   processedLogLines: ProcessedLogLines;
@@ -39,7 +39,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
       ? new RegExp(`${highlights.map((h) => `(${h})`).join("|")}`, "gi")
       : undefined;
 
-  let Row: React.FC<ResmokeRowProps> | React.FC<AnsiRowProps>;
+  let Row: typeof ResmokeRow | typeof AnsiRow;
   // At this point, logMetadata is defined from <LoadingPage />
   switch (logMetadata?.renderingType) {
     case LogRenderingTypes.Resmoke:
