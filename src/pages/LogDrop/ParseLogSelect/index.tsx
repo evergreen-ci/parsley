@@ -5,18 +5,18 @@ import { Option, Select } from "@leafygreen-ui/select";
 import { InlineCode, InlineCodeProps, Label } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
 import { LAST_SELECTED_LOG_TYPE } from "constants/cookies";
-import { LogTypes } from "constants/enums";
+import { LogRenderingTypes, LogTypes } from "constants/enums";
 import { size } from "constants/tokens";
 
 interface ParseLogSelectProps {
   fileName: string | undefined;
-  onParse: (logType: LogTypes | undefined) => void;
+  onParse: (logType: LogRenderingTypes | undefined) => void;
   onCancel: () => void;
 }
 
 type SelectState =
-  | LogTypes.RESMOKE_LOGS
-  | LogTypes.EVERGREEN_TASK_LOGS
+  | LogRenderingTypes.Resmoke
+  | LogRenderingTypes.Default
   | undefined;
 
 const ParseLogSelect: React.FC<ParseLogSelectProps> = ({

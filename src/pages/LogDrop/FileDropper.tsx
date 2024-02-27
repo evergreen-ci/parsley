@@ -40,15 +40,16 @@ const FileDropper: React.FC = () => {
   );
 
   const onParse = useCallback(
-    (logType: LogTypes | undefined) => {
-      if (logType) {
+    (renderingType: LogRenderingTypes | undefined) => {
+      if (renderingType) {
+        const logType =
+          renderingType === LogRenderingTypes.Resmoke
+            ? LogTypes.RESMOKE_LOGS
+            : LogTypes.EVERGREEN_TASK_LOGS;
         setLogMetadata({
           isUploadedLog: true,
           logType,
-          renderingType:
-            logType === LogTypes.RESMOKE_LOGS
-              ? LogRenderingTypes.Resmoke
-              : LogRenderingTypes.Default,
+          renderingType,
         });
         leaveBreadcrumb("Parsing file", { logType }, SentryBreadcrumb.UI);
         dispatch({ type: "PARSE_FILE" });
