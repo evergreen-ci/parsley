@@ -5,7 +5,7 @@ import { Option, Select } from "@leafygreen-ui/select";
 import { InlineCode, InlineCodeProps, Label } from "@leafygreen-ui/typography";
 import Cookie from "js-cookie";
 import { LAST_SELECTED_LOG_TYPE } from "constants/cookies";
-import { LogRenderingTypes, LogTypes } from "constants/enums";
+import { LogRenderingTypes } from "constants/enums";
 import { size } from "constants/tokens";
 
 interface ParseLogSelectProps {
@@ -44,8 +44,8 @@ const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
         placeholder="Select..."
         value={logType ?? ""}
       >
-        <Option value={LogTypes.RESMOKE_LOGS}>Resmoke</Option>
-        <Option value={LogTypes.EVERGREEN_TASK_LOGS}>Raw</Option>
+        <Option value={LogRenderingTypes.Resmoke}>Resmoke</Option>
+        <Option value={LogRenderingTypes.Default}>Raw</Option>
       </Select>
       <ButtonContainer>
         <Button onClick={onCancel}>Cancel</Button>
