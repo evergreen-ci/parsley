@@ -201,7 +201,7 @@ functions:
         DEPLOYS_EMAIL: ${DEPLOYS_EMAIL}
         BUCKET: ${bucket}
         EVERGREEN_API_SERVER_HOST: ${evergreen_api_server_host}
-        EVERGREEN_UI_SERVER_HOST: ${evergreen_api_server_host}
+        EVERGREEN_UI_SERVER_HOST: ${evergreen_ui_server_host}
         EVERGREEN_API_KEY: ${evergreen_api_key}
         EVERGREEN_USER: ${evergreen_user}
       script: |
