@@ -79,6 +79,7 @@ export const useResolveLogURLAndRenderingType = ({
     taskID,
   });
 
+  // Testlog LogRenderingType is queried from EVG, the rest are inferred from logType.
   const { data: testData, loading: isLoadingTest } = useQuery<
     TestLogUrlAndRenderingTypeQuery,
     TestLogUrlAndRenderingTypeQueryVariables
