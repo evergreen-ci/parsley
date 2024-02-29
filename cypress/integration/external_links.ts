@@ -42,7 +42,7 @@ describe("External Links", () => {
       cy.dataCy("raw-log-button").should(
         "have.attr",
         "href",
-        "http://localhost:9090/test_log/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/0?test_name=JustAFakeTestInALonelyWorld&group_id=&text=true",
+        "http://localhost:9090/rest/v2/tasks/spruce_ubuntu1604_check_codegen_d54e2c6ede60e004c48d3c4d996c59579c7bbd1f_22_03_02_15_41_35/build/TestLogs/JustAFakeTestInALonelyWorld?execution=0&print_time=true",
       );
       cy.dataCy("html-log-button").should("be.visible");
       cy.dataCy("html-log-button").should("not.be.disabled");
