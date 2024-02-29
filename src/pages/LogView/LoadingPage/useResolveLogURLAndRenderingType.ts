@@ -46,7 +46,7 @@ type HookResult = {
   /** Whether the hook is actively making an network request or not  */
   loading: boolean;
   /** The rendering logic to use for the log when available */
-  renderingType: string;
+  renderingType: LogRenderingTypes;
 };
 
 /**
@@ -113,7 +113,7 @@ export const useResolveLogURLAndRenderingType = ({
   let htmlLogURL = "";
   let jobLogsURL = "";
   let legacyJobLogsURL = "";
-  let renderingType = "";
+  let renderingType: LogRenderingTypes = LogRenderingTypes.Default;
   switch (logType) {
     case LogTypes.RESMOKE_LOGS: {
       if (buildID && testID) {
@@ -213,7 +213,7 @@ export const useResolveLogURLAndRenderingType = ({
             rawLogURL,
             unsupportedRenderingType: renderingTypeFromQuery,
           },
-        }).warning();
+        }).severe();
       }
       break;
     }
