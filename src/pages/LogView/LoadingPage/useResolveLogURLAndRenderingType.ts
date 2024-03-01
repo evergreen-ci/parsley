@@ -202,10 +202,10 @@ export const useResolveLogURLAndRenderingType = ({
           text: false,
         });
       downloadURL = rawLogURL;
-      if ((renderingTypeFromQuery || "") in LogRenderingTypes) {
-        renderingType = renderingTypeFromQuery as LogRenderingTypes;
-      } else if (!renderingTypeFromQuery) {
+      if (!renderingTypeFromQuery) {
         renderingType = LogRenderingTypes.Default;
+      } else if (renderingTypeFromQuery in LogRenderingTypes) {
+        renderingType = renderingTypeFromQuery as LogRenderingTypes;
       } else {
         renderingType = LogRenderingTypes.Default;
         reportError(new Error("Encountered unsupported renderingType"), {
