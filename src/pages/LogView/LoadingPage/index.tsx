@@ -16,7 +16,7 @@ import NotFound from "pages/404";
 import { LogkeeperMetadata } from "types/api";
 import { SentryBreadcrumb, leaveBreadcrumb } from "utils/errorReporting";
 import { getBytesAsString } from "utils/string";
-import { useResolveLogURL } from "./useResolveLogURL";
+import { useResolveLogURLAndRenderingType } from "./useResolveLogURLAndRenderingType";
 
 interface LoadingPageProps {
   logType: LogTypes;
@@ -41,7 +41,8 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
     legacyJobLogsURL,
     loading: isLoadingEvergreen,
     rawLogURL,
-  } = useResolveLogURL({
+    renderingType,
+  } = useResolveLogURLAndRenderingType({
     buildID,
     execution,
     fileName,
@@ -83,6 +84,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         logType,
         origin,
         rawLogURL,
+        renderingType,
         taskID: taskID || logkeeperMetadata?.task_id,
         testID,
       });
@@ -92,25 +94,26 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
       dispatchToast.error(error);
     }
   }, [
-    data,
-    ingestLines,
-    error,
-    logType,
-    isLoadingLogkeeperMetadata,
-    dispatchToast,
-    setLogMetadata,
-    taskID,
-    execution,
-    testID,
-    origin,
     buildID,
-    rawLogURL,
+    data,
+    dispatchToast,
+    error,
+    execution,
+    fileName,
     htmlLogURL,
+    ingestLines,
+    isLoadingLogkeeperMetadata,
     jobLogsURL,
     legacyJobLogsURL,
-    fileName,
-    logkeeperMetadata?.task_id,
     logkeeperMetadata?.execution,
+    logkeeperMetadata?.task_id,
+    logType,
+    origin,
+    rawLogURL,
+    renderingType,
+    setLogMetadata,
+    taskID,
+    testID,
   ]);
 
   if (isLoadingLog || isLoadingEvergreen) {

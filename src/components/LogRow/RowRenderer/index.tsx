@@ -1,4 +1,4 @@
-import { LogTypes } from "constants/enums";
+import { LogRenderingTypes, LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { useHighlightParam } from "hooks/useHighlightParam";
 import { ProcessedLogLines } from "types/logs";
@@ -17,6 +17,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
     expandLines,
     getLine,
     getResmokeLineColor,
+    logMetadata,
     preferences,
     range,
     scrollToLine,
@@ -38,6 +39,20 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
       ? new RegExp(`${highlights.map((h) => `(${h})`).join("|")}`, "gi")
       : undefined;
 
+  let Row: typeof ResmokeRow | typeof AnsiRow;
+  // At this point, logMetadata.renderingType is guaranteed to be defined from <LoadingPage />
+  switch (logMetadata?.renderingType) {
+    case LogRenderingTypes.Resmoke:
+      Row = ResmokeRow;
+      break;
+    case LogRenderingTypes.Default:
+      Row = AnsiRow;
+      break;
+    default:
+      Row = AnsiRow;
+      break;
+  }
+
   const result = (index: number) => {
     const processedLogLine = processedLogLines[index];
     if (isCollapsedRow(processedLogLine)) {
@@ -49,7 +64,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
         />
       );
     }
-    const Row = rowRendererMap[logType];
+
     return (
       <Row
         getLine={getLine}
@@ -70,13 +85,6 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
 
   result.displayName = `${logType}RowRenderer`;
   return result;
-};
-
-const rowRendererMap = {
-  [LogTypes.EVERGREEN_TASK_FILE]: AnsiRow,
-  [LogTypes.EVERGREEN_TASK_LOGS]: AnsiRow,
-  [LogTypes.EVERGREEN_TEST_LOGS]: AnsiRow,
-  [LogTypes.RESMOKE_LOGS]: ResmokeRow,
 };
 
 export { ParsleyRow };
