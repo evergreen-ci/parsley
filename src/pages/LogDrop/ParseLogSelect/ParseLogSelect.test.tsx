@@ -1,5 +1,5 @@
 import Cookie from "js-cookie";
-import { LogTypes } from "constants/enums";
+import { LogRenderingTypes, LogTypes } from "constants/enums";
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import ParseLogSelect from ".";
 
@@ -24,7 +24,7 @@ describe("parse log select", () => {
   });
 
   it("defaults to 'Raw' option if cookie is set to evergreen logs", () => {
-    mockedGet.mockImplementation(() => LogTypes.EVERGREEN_TASK_LOGS);
+    mockedGet.mockImplementation(() => LogRenderingTypes.Default);
     render(
       <ParseLogSelect
         fileName="filename.txt"
@@ -37,7 +37,7 @@ describe("parse log select", () => {
   });
 
   it("defaults to 'Resmoke' option if cookie is set to resmoke logs", () => {
-    mockedGet.mockImplementation(() => LogTypes.RESMOKE_LOGS);
+    mockedGet.mockImplementation(() => LogRenderingTypes.Resmoke);
     render(
       <ParseLogSelect
         fileName="filename.txt"

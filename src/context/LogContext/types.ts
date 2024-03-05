@@ -9,18 +9,19 @@ interface SearchState {
 }
 
 interface LogMetadata {
-  logType?: LogTypes;
-  fileName?: string;
-  taskID?: string;
-  execution?: string;
-  testID?: string;
   buildID?: string;
-  origin?: string;
+  execution?: string;
+  fileName?: string;
   htmlLogURL?: string;
-  rawLogURL?: string;
+  isUploadedLog?: boolean;
   jobLogsURL?: string;
   legacyJobLogsURL?: string;
-  isUploadedLog?: boolean;
+  logType?: LogTypes;
+  origin?: string;
+  rawLogURL?: string;
+  renderingType?: string;
+  taskID?: string;
+  testID?: string;
 }
 
 interface Preferences {

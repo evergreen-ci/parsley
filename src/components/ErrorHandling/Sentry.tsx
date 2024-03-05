@@ -3,9 +3,11 @@ import {
   captureException,
   getClient,
   init,
+  setTags,
   withScope,
 } from "@sentry/react";
 import type { Scope, SeverityLevel } from "@sentry/react";
+import type { Context, Primitive } from "@sentry/types";
 import {
   getReleaseStage,
   getSentryDSN,
@@ -28,20 +30,41 @@ const initializeSentry = () => {
 
 const isInitialized = () => !!getClient();
 
-const sendError = (
-  err: Error,
-  severity: SeverityLevel,
-  metadata?: { [key: string]: any },
-) => {
+export type ErrorInput = {
+  err: Error;
+  fingerprint?: string[];
+  context?: Context;
+  severity: SeverityLevel;
+  tags?: { [key: string]: Primitive };
+};
+
+const sendError = ({
+  context,
+  err,
+  fingerprint,
+  severity,
+  tags,
+}: ErrorInput) => {
   withScope((scope) => {
-    setScope(scope, { context: metadata, level: severity });
+    setScope(scope, { context, level: severity });
+
+    if (fingerprint) {
+      // A custom fingerprint allows for more intelligent grouping
+      scope.setFingerprint(fingerprint);
+    }
+
+    if (tags) {
+      // Apply tags, which are a searchable/filterable property
+      setTags(tags);
+    }
+
     captureException(err);
   });
 };
 
 type ScopeOptions = {
   level?: SeverityLevel;
-  context?: { [key: string]: any };
+  context?: Context;
 };
 
 const setScope = (scope: Scope, { context, level }: ScopeOptions = {}) => {

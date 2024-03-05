@@ -3,7 +3,7 @@ import styled from "@emotion/styled";
 import { palette } from "@leafygreen-ui/palette";
 import { useDropzone } from "react-dropzone";
 import { useLogDropAnalytics } from "analytics";
-import { LogTypes } from "constants/enums";
+import { LogRenderingTypes, LogTypes } from "constants/enums";
 import { LOG_LINE_TOO_LARGE_WARNING } from "constants/errors";
 import { LOG_FILE_SIZE_LIMIT, LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { size } from "constants/tokens";
@@ -40,9 +40,17 @@ const FileDropper: React.FC = () => {
   );
 
   const onParse = useCallback(
-    (logType: LogTypes | undefined) => {
-      if (logType) {
-        setLogMetadata({ isUploadedLog: true, logType });
+    (renderingType: LogRenderingTypes | undefined) => {
+      if (renderingType) {
+        const logType =
+          renderingType === LogRenderingTypes.Resmoke
+            ? LogTypes.RESMOKE_LOGS
+            : LogTypes.EVERGREEN_TASK_LOGS;
+        setLogMetadata({
+          isUploadedLog: true,
+          logType,
+          renderingType,
+        });
         leaveBreadcrumb("Parsing file", { logType }, SentryBreadcrumb.UI);
         dispatch({ type: "PARSE_FILE" });
         startTransition(() => {

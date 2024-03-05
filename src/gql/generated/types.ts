@@ -3244,13 +3244,13 @@ export type TaskQuery = {
   } | null;
 };
 
-export type TestLogUrlQueryVariables = Exact<{
+export type TestLogUrlAndRenderingTypeQueryVariables = Exact<{
   taskID: Scalars["String"]["input"];
   testName: Scalars["String"]["input"];
   execution: Scalars["Int"]["input"];
 }>;
 
-export type TestLogUrlQuery = {
+export type TestLogUrlAndRenderingTypeQuery = {
   __typename?: "Query";
   task?: {
     __typename?: "Task";
@@ -3262,6 +3262,7 @@ export type TestLogUrlQuery = {
         id: string;
         logs: {
           __typename?: "TestLog";
+          renderingType?: string | null;
           url?: string | null;
           urlRaw?: string | null;
         };
