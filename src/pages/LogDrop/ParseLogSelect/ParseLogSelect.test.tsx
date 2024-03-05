@@ -12,6 +12,7 @@ describe("parse log select", () => {
     render(
       <ParseLogSelect
         fileName="filename.txt"
+        isPastedFile={false}
         onCancel={jest.fn()}
         onParse={jest.fn()}
       />,
@@ -28,6 +29,7 @@ describe("parse log select", () => {
     render(
       <ParseLogSelect
         fileName="filename.txt"
+        isPastedFile={false}
         onCancel={jest.fn()}
         onParse={jest.fn()}
       />,
@@ -41,6 +43,7 @@ describe("parse log select", () => {
     render(
       <ParseLogSelect
         fileName="filename.txt"
+        isPastedFile={false}
         onCancel={jest.fn()}
         onParse={jest.fn()}
       />,
@@ -56,6 +59,7 @@ describe("parse log select", () => {
     render(
       <ParseLogSelect
         fileName="filename.txt"
+        isPastedFile={false}
         onCancel={jest.fn()}
         onParse={onParse}
       />,
@@ -70,6 +74,7 @@ describe("parse log select", () => {
     render(
       <ParseLogSelect
         fileName="filename.txt"
+        isPastedFile={false}
         onCancel={onCancel}
         onParse={jest.fn()}
       />,

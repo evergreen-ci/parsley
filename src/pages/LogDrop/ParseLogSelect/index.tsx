@@ -12,6 +12,7 @@ interface ParseLogSelectProps {
   fileName: string | undefined;
   onParse: (logType: LogRenderingTypes | undefined) => void;
   onCancel: () => void;
+  isPastedFile: boolean;
 }
 
 type SelectState =
@@ -21,6 +22,7 @@ type SelectState =
 
 const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
   fileName,
+  isPastedFile,
   onCancel,
   onParse,
 }) => {
@@ -32,7 +34,12 @@ const ParseLogSelect: React.FC<ParseLogSelectProps> = ({
     <ProcessLogsContainer>
       <Label htmlFor="parse-log-select">
         How would you like to parse{" "}
-        <StyledInlineCode>{fileName}</StyledInlineCode>?
+        {isPastedFile ? (
+          "the pasted file"
+        ) : (
+          <StyledInlineCode>{fileName}</StyledInlineCode>
+        )}
+        ?
       </Label>
       <Select
         aria-labelledby="parse-log-select"
