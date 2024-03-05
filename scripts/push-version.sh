@@ -1,9 +1,16 @@
 #!/bin/bash
 
 WAIT_TIME=9
-GITHUB_REMOTE=https://github.com/evergreen-ci/parsley
+GIT_DESTINATION=$(git rev-parse --abbrev-ref @{upstream})
 
-git push $GITHUB_REMOTE
+
+if git push upstream
+then
+  echo "Successfully pushed to ${GIT_DESTINATION}"
+else
+  echo "Failed to push to ${GIT_DESTINATION}"
+  exit 1
+fi
 
 i=$WAIT_TIME
 while [ $i -gt 0 ]
@@ -11,4 +18,10 @@ while [ $i -gt 0 ]
 done
 echo ""
 
-git push --tags $GITHUB_REMOTE
+if git push --tags upstream
+then
+  echo "Successfully pushed tags to ${GIT_DESTINATION}"
+else
+  echo "Failed to push tags to ${GIT_DESTINATION}"
+  exit 1
+fi
