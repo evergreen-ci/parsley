@@ -1,5 +1,4 @@
 import { execSync } from "child_process";
-import { githubRemote } from "./constants";
 
 /**
  * `createNewTag` is a helper function that creates a new tag.
@@ -29,7 +28,7 @@ const getLatestTag = () => {
  * @param tag - the tag to delete
  */
 const deleteTag = (tag: string) => {
-  const deleteCommand = `git push --delete ${githubRemote} ${tag}`;
+  const deleteCommand = `git push --delete upstream ${tag}`;
   execSync(deleteCommand, { stdio: "inherit", encoding: "utf-8" });
 };
 
@@ -37,7 +36,7 @@ const deleteTag = (tag: string) => {
  * `pushTags` is a helper function that pushes tags to the remote.
  */
 const pushTags = () => {
-  execSync(`git push --tags ${githubRemote}`, {
+  execSync(`git push --tags upstream`, {
     stdio: "inherit",
     encoding: "utf-8",
   });
