@@ -1,6 +1,6 @@
 import styled from "@emotion/styled";
 import Button from "@leafygreen-ui/button";
-import { Body } from "@leafygreen-ui/typography";
+import { Body, InlineKeyCode } from "@leafygreen-ui/typography";
 import { DropzoneInputProps } from "react-dropzone";
 import Icon from "components/Icon";
 import { size } from "constants/tokens";
@@ -13,7 +13,12 @@ interface FileSelectorProps {
 const FileSelector: React.FC<FileSelectorProps> = ({ getInputProps, open }) => (
   <FileSelectorContainer>
     <input {...getInputProps()} />
-    <Body weight="medium">Drag and Drop a log file to view in Parsley</Body>
+    <Body weight="medium">Drag and Drop a log file</Body>
+    <Body weight="medium">or</Body>
+    <Body weight="medium">
+      <InlineKeyCode>⌘</InlineKeyCode> + <InlineKeyCode>V</InlineKeyCode> to
+      paste text from your clipboard
+    </Body>
     <Body weight="medium">or</Body>
     <Button
       leftGlyph={<Icon glyph="Upload" />}
@@ -32,7 +37,7 @@ const FileSelectorContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: ${size.xs};
+  gap: ${size.xxs};
 `;
 
 export default FileSelector;

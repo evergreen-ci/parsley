@@ -9,6 +9,7 @@ import { LOG_FILE_SIZE_LIMIT, LOG_LINE_SIZE_LIMIT } from "constants/logs";
 import { size } from "constants/tokens";
 import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
+import useClipboardPaste from "hooks/useClipboardPaste";
 import {
   SentryBreadcrumb,
   leaveBreadcrumb,
@@ -29,6 +30,12 @@ const FileDropper: React.FC = () => {
   const { ingestLines, setFileName, setLogMetadata } = useLogContext();
   const [, startTransition] = useTransition();
   const { dispatch, state } = useLogDropState();
+  const onClipboardPaste = useCallback((text: string) => {
+    leaveBreadcrumb("Pasted text", {}, SentryBreadcrumb.User);
+    sendEvent({ name: "Pasted text" });
+    dispatch({ text, type: "PASTED_TEXT" });
+  }, []);
+  useClipboardPaste(onClipboardPaste);
 
   const onDrop = useCallback(
     (acceptedFiles: File[]) => {
@@ -55,37 +62,53 @@ const FileDropper: React.FC = () => {
         dispatch({ type: "PARSE_FILE" });
         startTransition(() => {
           (async () => {
-            if (state.file) {
-              try {
-                const stream = await fileToStream(state.file, {
-                  fileSizeLimit: LOG_FILE_SIZE_LIMIT,
-                });
-                const { result: logLines, trimmedLines } = await decodeStream(
-                  stream,
-                  LOG_LINE_SIZE_LIMIT,
-                );
-                leaveBreadcrumb(
-                  "Decoded file",
-                  { fileSize: logLines.length },
-                  SentryBreadcrumb.UI,
-                );
-                sendEvent({
-                  fileSize: logLines?.length,
-                  logType,
-                  name: "Processed Log",
-                });
-                setFileName(state.file.name);
-                ingestLines(logLines, logType);
-                if (trimmedLines) {
-                  dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
-                    shouldTimeout: false,
-                    title: "Log not fully loaded",
-                  });
+            switch (state.type) {
+              case "file":
+                if (state.file) {
+                  try {
+                    const stream = await fileToStream(state.file, {
+                      fileSizeLimit: LOG_FILE_SIZE_LIMIT,
+                    });
+                    const { result: logLines, trimmedLines } =
+                      await decodeStream(stream, LOG_LINE_SIZE_LIMIT);
+                    leaveBreadcrumb(
+                      "Decoded file",
+                      { fileSize: logLines.length },
+                      SentryBreadcrumb.Info,
+                    );
+                    sendEvent({
+                      fileSize: logLines?.length,
+                      logType,
+                      name: "Processed Log",
+                    });
+                    setFileName(state.file.name);
+                    ingestLines(logLines, logType);
+                    if (trimmedLines) {
+                      dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
+                        shouldTimeout: false,
+                        title: "Log not fully loaded",
+                      });
+                    }
+                  } catch (e: any) {
+                    dispatchToast.error(
+                      "An error occurred while parsing the log.",
+                    );
+                    reportError(e).severe();
+                  }
                 }
-              } catch (e: any) {
-                dispatchToast.error("An error occurred while parsing the log.");
-                reportError(e).severe();
-              }
+                break;
+              case "text":
+                if (state.text) {
+                  const logLines = state.text.split("\n");
+                  setFileName("Pasted Log");
+                  ingestLines(logLines, logType);
+                }
+                break;
+              default:
+                reportError(
+                  new Error(`Invalid state type: ${state.type}`),
+                ).severe();
+                break;
             }
           })();
         });
@@ -95,6 +118,7 @@ const FileDropper: React.FC = () => {
       setLogMetadata,
       dispatch,
       state.file,
+      state.type,
       sendEvent,
       setFileName,
       ingestLines,
@@ -120,6 +144,7 @@ const FileDropper: React.FC = () => {
       visibleUI = (
         <ParseLogSelect
           fileName={state.file?.name || ""}
+          isPastedFile={state.type === "text"}
           onCancel={() => dispatch({ type: "CANCEL" })}
           onParse={onParse}
         />
