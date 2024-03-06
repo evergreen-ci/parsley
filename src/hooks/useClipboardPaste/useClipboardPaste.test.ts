@@ -1,5 +1,5 @@
 import { renderHook } from "test_utils";
-import useClipboardPaste from "."; // Adjust the import path as necessary
+import useClipboardPaste from ".";
 
 // Mock navigator.clipboard.readText
 const mockReadText = jest.fn();
@@ -22,18 +22,15 @@ describe("useClipboardPaste", () => {
     const callback = jest.fn();
     renderHook(() => useClipboardPaste(callback));
 
-    // Setup the mocked readText function to return a specific string
     const expectedText = "Pasted content";
     mockReadText.mockResolvedValue(expectedText);
 
-    // Simulate a paste event
     const event = new Event("paste");
     window.dispatchEvent(event);
 
     // Wait for the promise to resolve
     await new Promise(process.nextTick);
 
-    // Check if the callback was called with the expected text
     expect(callback).toHaveBeenCalledWith(expectedText);
   });
 
