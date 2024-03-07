@@ -25,7 +25,7 @@ describe("should initialize error handlers according to release stage", () => {
   it("production", () => {
     mockEnv("NODE_ENV", "production");
     mockEnv("REACT_APP_RELEASE_STAGE", "production");
-    mockEnv("REACT_APP_SENTRY_DSN", "fake-sentry-key");
+    mockEnv("REACT_APP_PARSLEY_SENTRY_DSN", "fake-sentry-key");
     initializeErrorHandling();
 
     expect(Sentry.init).toHaveBeenCalledWith({
@@ -39,7 +39,7 @@ describe("should initialize error handlers according to release stage", () => {
   it("beta", () => {
     mockEnv("REACT_APP_RELEASE_STAGE", "beta");
     mockEnv("NODE_ENV", "production");
-    mockEnv("REACT_APP_SENTRY_DSN", "fake-sentry-key");
+    mockEnv("REACT_APP_PARSLEY_SENTRY_DSN", "fake-sentry-key");
     initializeErrorHandling();
 
     expect(Sentry.init).toHaveBeenCalledWith({
@@ -53,7 +53,7 @@ describe("should initialize error handlers according to release stage", () => {
   it("staging", () => {
     mockEnv("NODE_ENV", "production");
     mockEnv("REACT_APP_RELEASE_STAGE", "staging");
-    mockEnv("REACT_APP_SENTRY_DSN", "fake-sentry-key");
+    mockEnv("REACT_APP_PARSLEY_SENTRY_DSN", "fake-sentry-key");
     initializeErrorHandling();
 
     expect(Sentry.init).toHaveBeenCalledWith({

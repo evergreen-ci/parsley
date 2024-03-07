@@ -22,7 +22,7 @@ functions:
   assume-ec2-role:
     command: ec2.assume_role
     params:
-      role_arn: ${ASSUME_ROLE_ARN}
+      role_arn: ${PARSLEY_ASSUME_ROLE_ARN}
 
   attach-codegen-diff:
     command: s3.put
@@ -185,21 +185,21 @@ functions:
       script: |
         bash scripts/email.sh
 
-  setup-credentials:
+  parsley-setup-credentials:
     command: shell.exec
     params:
       working_dir: parsley
       shell: bash
       env:
-        REACT_APP_SENTRY_AUTH_TOKEN: ${REACT_APP_SENTRY_AUTH_TOKEN}
-        REACT_APP_SENTRY_DSN: ${REACT_APP_SENTRY_DSN}
+        PARSLEY_SENTRY_AUTH_TOKEN: ${PARSLEY_SENTRY_AUTH_TOKEN}
+        REACT_APP_PARSLEY_SENTRY_DSN: ${REACT_APP_PARSLEY_SENTRY_DSN}
         NEW_RELIC_ACCOUNT_ID: ${NEW_RELIC_ACCOUNT_ID}
-        NEW_RELIC_AGENT_ID: ${NEW_RELIC_AGENT_ID}
-        NEW_RELIC_APPLICATION_ID: ${NEW_RELIC_APPLICATION_ID}
         NEW_RELIC_LICENSE_KEY: ${NEW_RELIC_LICENSE_KEY}
         NEW_RELIC_TRUST_KEY: ${NEW_RELIC_TRUST_KEY}
+        PARSLEY_NEW_RELIC_AGENT_ID: ${PARSLEY_NEW_RELIC_AGENT_ID}
+        PARSLEY_NEW_RELIC_APPLICATION_ID: ${PARSLEY_NEW_RELIC_APPLICATION_ID}
         DEPLOYS_EMAIL: ${DEPLOYS_EMAIL}
-        BUCKET: ${bucket}
+        BUCKET: ${parsley_bucket}
         EVERGREEN_API_SERVER_HOST: ${evergreen_api_server_host}
         EVERGREEN_UI_SERVER_HOST: ${evergreen_ui_server_host}
         EVERGREEN_API_KEY: ${evergreen_api_key}
@@ -279,7 +279,7 @@ functions:
         ${PREPARE_SHELL}
         # Only record to cypress cloud if this is a pr or a mainline commit.
         if [[ "${requester}" == "github_pr" || "${requester}" == "commit" || "$requester" == "patch" ]]; then
-          yarn cy:run --record --key "${cypress_record_key}" --reporter junit
+          yarn cy:run --record --key "${parsley_cypress_record_key}" --reporter junit
         else
           yarn cy:run --reporter junit
         fi
@@ -363,7 +363,7 @@ functions:
       working_dir: parsley
       shell: bash
       env: 
-        BUCKET: ${bucket}
+        BUCKET: ${parsley_bucket}
         AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID}
         AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY}
         AWS_SESSION_TOKEN: ${AWS_SESSION_TOKEN}
@@ -528,7 +528,7 @@ tasks:
   - name: deploy-prod
     commands:
       - func: assume-ec2-role
-      - func: setup-credentials
+      - func: parsley-setup-credentials
       - func: sym-link
       - func: prod-deploy
 

@@ -26,9 +26,9 @@ export default defineConfig({
             "%REACT_APP_RELEASE_STAGE%",
             "%NEW_RELIC_ACCOUNT_ID%",
             "%NEW_RELIC_TRUST_KEY%",
-            "%NEW_RELIC_AGENT_ID%",
             "%NEW_RELIC_LICENSE_KEY%",
-            "%NEW_RELIC_APPLICATION_ID%",
+            "%PARSLEY_NEW_RELIC_AGENT_ID%",
+            "%PARSLEY_NEW_RELIC_APPLICATION_ID%",
           ],
         }),
       ],
@@ -72,7 +72,7 @@ export default defineConfig({
     sentryVitePlugin({
       org: "mongodb-org",
       project: "parsley",
-      authToken: process.env.REACT_APP_SENTRY_AUTH_TOKEN,
+      authToken: process.env.PARSLEY_SENTRY_AUTH_TOKEN,
       release: {
         name: process.env.npm_package_version,
       },
