@@ -11,7 +11,7 @@ enum Environment {
 }
 
 const getReleaseStage = () => process.env.REACT_APP_RELEASE_STAGE || "";
-const getSentryDSN = () => process.env.REACT_APP_SENTRY_DSN || "";
+const getSentryDSN = () => process.env.REACT_APP_PARSLEY_SENTRY_DSN || "";
 
 const isLocal = () => getReleaseStage() === ReleaseStage.Local;
 const isStaging = () => getReleaseStage() === ReleaseStage.Staging;
