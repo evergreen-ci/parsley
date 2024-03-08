@@ -1,0 +1,8 @@
+query ParsleySettings {
+  user {
+    parsleySettings {
+      sectionsEnabled
+    }
+    userId
+  }
+}

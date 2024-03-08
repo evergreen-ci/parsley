@@ -1,0 +1,7 @@
+mutation UpdateParsleySettings($opts: UpdateParsleySettingsInput!) {
+  updateParsleySettings(opts: $opts) {
+    parsleySettings {
+      sectionsEnabled
+    }
+  }
+}
