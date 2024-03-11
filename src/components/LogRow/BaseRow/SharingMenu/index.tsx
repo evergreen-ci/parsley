@@ -20,12 +20,11 @@ interface SharingMenuProps {
 
 const SharingMenu: React.FC<SharingMenuProps> = ({ defaultOpen }) => {
   const { clearSelection, selectedLines } = useMultiLineSelectContext();
-  const { getLine, logMetadata, processedLogLines } = useLogContext();
+  const { getLine, isUploadedLog, processedLogLines } = useLogContext();
   const [params, setParams] = useQueryParams();
   const dispatchToast = useToastContext();
   const [open, setOpen] = useState(defaultOpen);
   const { sendEvent } = useLogWindowAnalytics();
-  const { isUploadedLog } = logMetadata || {};
   const setMenuOpen = () => {
     if (open) {
       sendEvent({ name: "Closed Share Menu" });

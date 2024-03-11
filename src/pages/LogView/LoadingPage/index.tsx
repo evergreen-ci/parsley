@@ -78,7 +78,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         execution: execution || String(logkeeperMetadata?.execution || 0),
         fileName,
         htmlLogURL,
-        isUploadedLog: false,
         jobLogsURL,
         legacyJobLogsURL,
         logType,

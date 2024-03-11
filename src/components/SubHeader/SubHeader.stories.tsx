@@ -77,7 +77,7 @@ const SubheaderWrapper: React.FC<SubheaderWrapperProps> = ({
   const { setLogMetadata } = useLogContext();
 
   useEffect(() => {
-    setLogMetadata({ ...metaData, isUploadedLog });
+    setLogMetadata({ ...metaData, logType: LogTypes.LOCAL_UPLOAD });
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   return <Subheader />;

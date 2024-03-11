@@ -38,6 +38,7 @@ import { getNextPage } from "./utils";
 
 interface LogContextState {
   expandedLines: ExpandedLines;
+  isUploadedLog: boolean;
   hasLogs: boolean | null;
   lineCount: number;
   listRef: React.RefObject<PaginatedVirtualListRef>;
@@ -298,7 +299,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       getLine,
       getResmokeLineColor,
       ingestLines,
-      isUploadedLog: () => state.logMetadata?.logType === LogTypes.LOCAL_UPLOAD,
+      isUploadedLog: state.logMetadata?.logType === LogTypes.LOCAL_UPLOAD,
       paginate: (direction: DIRECTION) => {
         const { searchIndex, searchRange } = state.searchState;
         if (searchIndex !== undefined && searchRange !== undefined) {

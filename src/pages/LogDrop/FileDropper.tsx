@@ -44,7 +44,6 @@ const FileDropper: React.FC = () => {
       if (renderingType) {
         const logType = LogTypes.LOCAL_UPLOAD;
         setLogMetadata({
-          isUploadedLog: true,
           logType,
           renderingType,
         });
