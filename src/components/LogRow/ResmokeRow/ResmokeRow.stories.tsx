@@ -60,10 +60,12 @@ export const SingleLine: CustomStoryObj<ResmokeRowProps> = {
 
 // Multiple ResmokeRows.
 const MultipleLinesStory = (args: any) => {
-  const { ingestLines, preferences, processedLogLines } = useLogContext();
+  const { ingestLines, preferences, processedLogLines, setLogMetadata } =
+    useLogContext();
   const { setPrettyPrint, setWrap } = preferences;
 
   useEffect(() => {
+    setLogMetadata({ logType: LogTypes.EVERGREEN_TASK_LOGS });
     ingestLines(logLines, LogRenderingTypes.Resmoke);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -80,7 +82,6 @@ const MultipleLinesStory = (args: any) => {
       <LogPane
         rowCount={processedLogLines.length}
         rowRenderer={ParsleyRow({
-          logType: LogTypes.RESMOKE_LOGS,
           processedLogLines,
         })}
       />

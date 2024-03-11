@@ -57,10 +57,12 @@ export const SingleLine: CustomStoryObj<AnsiRowProps> = {
 
 // Multiple AnsiRows.
 const MultiLineStory = (args: any) => {
-  const { ingestLines, preferences, processedLogLines } = useLogContext();
+  const { ingestLines, preferences, processedLogLines, setLogMetadata } =
+    useLogContext();
   const { setWrap } = preferences;
 
   useEffect(() => {
+    setLogMetadata({ logType: LogTypes.EVERGREEN_TASK_LOGS });
     ingestLines(logLines, LogRenderingTypes.Default);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -73,7 +75,6 @@ const MultiLineStory = (args: any) => {
       <LogPane
         rowCount={processedLogLines.length}
         rowRenderer={ParsleyRow({
-          logType: LogTypes.EVERGREEN_TASK_LOGS,
           processedLogLines,
         })}
       />

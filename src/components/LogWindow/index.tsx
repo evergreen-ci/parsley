@@ -5,13 +5,9 @@ import LogPane from "components/LogPane";
 import { ParsleyRow } from "components/LogRow/RowRenderer";
 import SidePanel from "components/SidePanel";
 import SubHeader from "components/SubHeader";
-import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 
-interface LogWindowProps {
-  logType: LogTypes;
-}
-const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
+const LogWindow: React.FC = () => {
   const {
     clearExpandedLines,
     collapseLines,
@@ -41,7 +37,6 @@ const LogWindow: React.FC<LogWindowProps> = ({ logType }) => {
             <LogPane
               rowCount={processedLogLines.length}
               rowRenderer={ParsleyRow({
-                logType,
                 processedLogLines,
               })}
             />

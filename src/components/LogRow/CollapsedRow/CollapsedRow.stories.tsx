@@ -54,10 +54,12 @@ const CollapsedAnsiRowStory = (
     wrap: boolean;
   },
 ) => {
-  const { ingestLines, preferences, processedLogLines } = useLogContext();
+  const { ingestLines, preferences, processedLogLines, setLogMetadata } =
+    useLogContext();
   const { setWrap } = preferences;
 
   useEffect(() => {
+    setLogMetadata({ logType: LogTypes.EVERGREEN_TASK_LOGS });
     ingestLines(ansiLogLines, LogRenderingTypes.Default);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -70,7 +72,6 @@ const CollapsedAnsiRowStory = (
       <LogPane
         rowCount={processedLogLines.length}
         rowRenderer={ParsleyRow({
-          logType: LogTypes.EVERGREEN_TASK_LOGS,
           processedLogLines: collapsedLogLines,
         })}
       />
@@ -95,10 +96,12 @@ const CollapsedResmokeRowStory = (
     wrap: boolean;
   },
 ) => {
-  const { ingestLines, preferences, processedLogLines } = useLogContext();
+  const { ingestLines, preferences, processedLogLines, setLogMetadata } =
+    useLogContext();
   const { setWrap } = preferences;
 
   useEffect(() => {
+    setLogMetadata({ logType: LogTypes.RESMOKE_LOGS });
     ingestLines(resmokeLogLines, LogRenderingTypes.Resmoke);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
@@ -111,7 +114,6 @@ const CollapsedResmokeRowStory = (
       <LogPane
         rowCount={processedLogLines.length}
         rowRenderer={ParsleyRow({
-          logType: LogTypes.RESMOKE_LOGS,
           processedLogLines: collapsedLogLines,
         })}
       />
