@@ -204,7 +204,11 @@ export const useResolveLogURLAndRenderingType = ({
       downloadURL = rawLogURL;
       if (!renderingTypeFromQuery) {
         renderingType = LogRenderingTypes.Default;
-      } else if (renderingTypeFromQuery in LogRenderingTypes) {
+      } else if (
+        Object.values<string>(LogRenderingTypes).includes(
+          renderingTypeFromQuery,
+        )
+      ) {
         renderingType = renderingTypeFromQuery as LogRenderingTypes;
       } else {
         renderingType = LogRenderingTypes.Default;
