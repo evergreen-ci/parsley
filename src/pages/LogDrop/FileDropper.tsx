@@ -42,10 +42,7 @@ const FileDropper: React.FC = () => {
   const onParse = useCallback(
     (renderingType: LogRenderingTypes | undefined) => {
       if (renderingType) {
-        const logType =
-          renderingType === LogRenderingTypes.Resmoke
-            ? LogTypes.RESMOKE_LOGS
-            : LogTypes.EVERGREEN_TASK_LOGS;
+        const logType = LogTypes.LOCAL_UPLOAD;
         setLogMetadata({
           isUploadedLog: true,
           logType,
@@ -75,7 +72,7 @@ const FileDropper: React.FC = () => {
                   name: "Processed Log",
                 });
                 setFileName(state.file.name);
-                ingestLines(logLines, logType);
+                ingestLines(logLines, renderingType);
                 if (trimmedLines) {
                   dispatchToast.warning(LOG_LINE_TOO_LARGE_WARNING, true, {
                     shouldTimeout: false,

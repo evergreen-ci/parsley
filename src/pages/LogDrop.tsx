@@ -4,10 +4,10 @@ import { useLogContext } from "context/LogContext";
 import FileDropper from "./LogDrop/FileDropper";
 
 const LogDrop = () => {
-  const { hasLogs, logMetadata } = useLogContext();
+  const { hasLogs } = useLogContext();
 
   return hasLogs ? (
-    <LogWindow logType={logMetadata?.logType || LogTypes.RESMOKE_LOGS} />
+    <LogWindow logType={LogTypes.LOCAL_UPLOAD} />
   ) : (
     <FileDropper />
   );
