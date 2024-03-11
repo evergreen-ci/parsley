@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
 import { ParsleyRow } from "components/LogRow/RowRenderer";
-import { LogTypes } from "constants/enums";
+import { LogRenderingTypes, LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import { ExpandedLine, ExpandedLines } from "types/logs";
@@ -58,7 +58,7 @@ const CollapsedAnsiRowStory = (
   const { setWrap } = preferences;
 
   useEffect(() => {
-    ingestLines(ansiLogLines, LogTypes.EVERGREEN_TASK_LOGS);
+    ingestLines(ansiLogLines, LogRenderingTypes.Default);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -99,7 +99,7 @@ const CollapsedResmokeRowStory = (
   const { setWrap } = preferences;
 
   useEffect(() => {
-    ingestLines(resmokeLogLines, LogTypes.RESMOKE_LOGS);
+    ingestLines(resmokeLogLines, LogRenderingTypes.Resmoke);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {

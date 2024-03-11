@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
-import { LogTypes, WordWrapFormat } from "constants/enums";
+import { LogRenderingTypes, LogTypes, WordWrapFormat } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
 import WithToastContext from "test_utils/toast-decorator";
@@ -28,7 +28,7 @@ const SingleLineStory = (args: any) => {
   const { ingestLines, scrollToLine } = useLogContext();
 
   useEffect(() => {
-    ingestLines(logLines, LogTypes.EVERGREEN_TASK_LOGS);
+    ingestLines(logLines, LogRenderingTypes.Default);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -61,7 +61,7 @@ const MultiLineStory = (args: any) => {
   const { setWrap } = preferences;
 
   useEffect(() => {
-    ingestLines(logLines, LogTypes.EVERGREEN_TASK_LOGS);
+    ingestLines(logLines, LogRenderingTypes.Default);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {

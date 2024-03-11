@@ -88,7 +88,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         taskID: taskID || logkeeperMetadata?.task_id,
         testID,
       });
-      ingestLines(data, logType);
+      ingestLines(data, renderingType);
     }
     if (error) {
       dispatchToast.error(error);

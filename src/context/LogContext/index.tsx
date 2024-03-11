@@ -18,7 +18,12 @@ import {
   WRAP_FORMAT,
   ZEBRA_STRIPING,
 } from "constants/cookies";
-import { FilterLogic, LogTypes, WordWrapFormat } from "constants/enums";
+import {
+  FilterLogic,
+  LogRenderingTypes,
+  LogTypes,
+  WordWrapFormat,
+} from "constants/enums";
 import { QueryParams } from "constants/queryParams";
 import { useFilterParam } from "hooks/useFilterParam";
 import { useQueryParam } from "hooks/useQueryParam";
@@ -53,7 +58,7 @@ interface LogContextState {
   expandLines: (expandedLines: ExpandedLines) => void;
   getLine: (lineNumber: number) => string | undefined;
   getResmokeLineColor: (lineNumber: number) => string | undefined;
-  ingestLines: (logs: string[], logType: LogTypes) => void;
+  ingestLines: (logs: string[], renderingType: LogRenderingTypes) => void;
   paginate: (dir: DIRECTION) => void;
   scrollToLine: (lineNumber: number) => void;
   setFileName: (fileName: string) => void;
@@ -220,8 +225,8 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       : undefined;
 
   const ingestLines = useCallback(
-    (lines: string[], logType: LogTypes) => {
-      dispatch({ logType, logs: lines, type: "INGEST_LOGS" });
+    (lines: string[], renderingType: LogRenderingTypes) => {
+      dispatch({ logs: lines, renderingType, type: "INGEST_LOGS" });
     },
     [dispatch],
   );
@@ -293,6 +298,7 @@ const LogContextProvider: React.FC<LogContextProviderProps> = ({
       getLine,
       getResmokeLineColor,
       ingestLines,
+      isUploadedLog: () => state.logMetadata?.logType === LogTypes.LOCAL_UPLOAD,
       paginate: (direction: DIRECTION) => {
         const { searchIndex, searchRange } = state.searchState;
         if (searchIndex !== undefined && searchRange !== undefined) {
