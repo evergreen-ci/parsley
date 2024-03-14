@@ -3555,7 +3555,14 @@
   dependencies:
     lodash "^4.17.21"
 
-"@leafygreen-ui/hooks@^8.0.0", "@leafygreen-ui/hooks@^8.0.1", "@leafygreen-ui/hooks@^8.1.0", "@leafygreen-ui/hooks@^8.1.1":
+"@leafygreen-ui/hooks@^8.0.0", "@leafygreen-ui/hooks@^8.0.1":
+  version "8.0.1"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/hooks/-/hooks-8.0.1.tgz#3f864f5be93e872c0884206643ee6b957972e17f"
+  integrity sha512-n++2Qdtv0UsJoSSCtrDU0Qlcq0JvSy+fzvvexDphqbchoC47DtgFqVfftq8UcmkvkkJOkTASrIZesV45rVJAiQ==
+  dependencies:
+    lodash "^4.17.21"
+
+"@leafygreen-ui/hooks@^8.1.1":
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/hooks/-/hooks-8.1.1.tgz#39ff22a762ea61146e9b0d136d73836e72103acc"
   integrity sha512-Ovh4/huQbM3UVSnHDQE0rWWG8bxZG7qdI2RZYtmUW/YbAL66GQx3jkfpuLlL3Npu5SxuS6b/Ai42sB2U6+Df0A==
@@ -3609,13 +3616,13 @@
     "@leafygreen-ui/tokens" "^2.2.0"
     "@leafygreen-ui/tooltip" "^11.0.0"
 
-"@leafygreen-ui/leafygreen-provider@3.1.11":
-  version "3.1.11"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/leafygreen-provider/-/leafygreen-provider-3.1.11.tgz#b5d438ec0b859a388c54f487668c0106097d062d"
-  integrity sha512-xRwZjchRcvtpbkrLAxuHDl5MPgdi6J7ErVyeeP8k6+y7yTdaaAu8j8bbiacASwpOJdX5Q2XNl2pJ8gzC2PgyRA==
+"@leafygreen-ui/leafygreen-provider@3.1.0":
+  version "3.1.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/leafygreen-provider/-/leafygreen-provider-3.1.0.tgz#5f36e5e6e6203e9cf64ba7bad342ed1fa433a32c"
+  integrity sha512-ZfmBV8O8RvUgOOYeV6aMOyYnqKdT/ovEwo4AZVChBvvB7IzNbGkEFgQPLcvqk4dhOJ0Kwg8bWeijD0gSZ9FB3g==
   dependencies:
-    "@leafygreen-ui/hooks" "^8.1.0"
-    "@leafygreen-ui/lib" "^13.2.0"
+    "@leafygreen-ui/hooks" "^7.3.3"
+    "@leafygreen-ui/lib" "^10.0.0"
 
 "@leafygreen-ui/lib@^10.0.0", "@leafygreen-ui/lib@^10.2.2", "@leafygreen-ui/lib@^10.3.3", "@leafygreen-ui/lib@^10.3.4", "@leafygreen-ui/lib@^10.4.3":
   version "10.4.3"
@@ -3644,7 +3651,16 @@
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
-"@leafygreen-ui/lib@^13.0.0", "@leafygreen-ui/lib@^13.1.0", "@leafygreen-ui/lib@^13.2.0", "@leafygreen-ui/lib@^13.2.1":
+"@leafygreen-ui/lib@^13.0.0", "@leafygreen-ui/lib@^13.1.0":
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/lib/-/lib-13.1.0.tgz#c594da94916a5dce6a3bf93adf2bcead4ff62e44"
+  integrity sha512-YDq/IYwhcIWYg8A81Uo2J/a+0VP9Pfbn2heUGfytLY9gYcrpMYL7kClAHwZzg8iS4iOaIexGcaUFu0I3OYFxyA==
+  dependencies:
+    "@storybook/csf" "^0.1.0"
+    lodash "^4.17.21"
+    prop-types "^15.7.2"
+
+"@leafygreen-ui/lib@^13.2.0", "@leafygreen-ui/lib@^13.2.1":
   version "13.2.1"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/lib/-/lib-13.2.1.tgz#4d4c62ff5ee6182532055f6825b8c9d68e522bfe"
   integrity sha512-b9EwTr65RU05rAh/dF8SHZ6yV6jPvPx6tu0IlXB/upk7Mdswjad83CI1ceF2pDlo8GPhCKlwFvPZlQCR1jqBXA==
