@@ -4,7 +4,6 @@ import styled from "@emotion/styled";
 import { Tab, Tabs } from "@leafygreen-ui/tabs";
 import { H3 } from "@leafygreen-ui/typography";
 import { size } from "constants/tokens";
-import { useLogContext } from "context/LogContext";
 import { useToastContext } from "context/toast";
 import {
   ParsleySettingsInput,
@@ -36,9 +35,6 @@ interface DetailsMenuProps {
 const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
   ({ "data-cy": dataCy }, ref) => {
     const dispatchToast = useToastContext();
-    const { logMetadata } = useLogContext();
-    const { logType } = logMetadata || {};
-
     const [selectedTab, setSelectedTab] = useState(0);
 
     const { data } = useQuery<
@@ -95,12 +91,11 @@ const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
               <Column>
                 <SectionsToggle
                   checked={sectionsEnabled}
-                  logType={logType}
                   updateSettings={updateSettings}
                 />
                 <WrapToggle />
                 <WordWrapFormatToggle />
-                <PrettyPrintToggle logType={logType} />
+                <PrettyPrintToggle />
                 <ExpandableRowsToggle />
                 <ZebraStripingToggle />
               </Column>

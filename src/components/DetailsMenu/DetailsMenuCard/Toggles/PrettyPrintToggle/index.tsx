@@ -3,13 +3,10 @@ import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import BaseToggle from "../BaseToggle";
 
-interface PrettyPrintToggleProps {
-  logType: LogTypes | undefined;
-}
-
-const PrettyPrintToggle: React.FC<PrettyPrintToggleProps> = ({ logType }) => {
+const PrettyPrintToggle: React.FC = () => {
   const { sendEvent } = usePreferencesAnalytics();
-  const { preferences } = useLogContext();
+  const { logMetadata, preferences } = useLogContext();
+  const { logType } = logMetadata || {};
   const { prettyPrint, setPrettyPrint } = preferences;
 
   const disablePrettyPrint = logType !== LogTypes.RESMOKE_LOGS;

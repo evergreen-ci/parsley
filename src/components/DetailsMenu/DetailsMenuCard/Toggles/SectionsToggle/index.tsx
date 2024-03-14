@@ -1,20 +1,22 @@
 import { usePreferencesAnalytics } from "analytics";
 import { LogTypes } from "constants/enums";
+import { useLogContext } from "context/LogContext";
 import { ParsleySettingsInput } from "gql/generated/types";
 import BaseToggle from "../BaseToggle";
 
 interface SectionsToggleProps {
   checked: boolean;
-  logType: LogTypes | undefined;
   updateSettings: (parsleySettings: ParsleySettingsInput) => void;
 }
 
 const SectionsToggle: React.FC<SectionsToggleProps> = ({
   checked,
-  logType,
   updateSettings,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
+
+  const { logMetadata } = useLogContext();
+  const { logType } = logMetadata || {};
   const isTaskLog = logType === LogTypes.EVERGREEN_TASK_LOGS;
 
   return (

@@ -2935,7 +2935,7 @@ export type User = {
   displayName: Scalars["String"]["output"];
   emailAddress: Scalars["String"]["output"];
   parsleyFilters: Array<ParsleyFilter>;
-  parsleySettings?: Maybe<ParsleySettings>;
+  parsleySettings: ParsleySettings;
   patches: Patches;
   permissions: Permissions;
   subscriptions?: Maybe<Array<GeneralSubscription>>;
@@ -3325,10 +3325,10 @@ export type ParsleySettingsQuery = {
   user: {
     __typename?: "User";
     userId: string;
-    parsleySettings?: {
+    parsleySettings: {
       __typename?: "ParsleySettings";
       sectionsEnabled: boolean;
-    } | null;
+    };
   };
 };
 
