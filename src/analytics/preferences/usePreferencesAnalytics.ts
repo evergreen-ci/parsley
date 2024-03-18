@@ -12,6 +12,7 @@ type Action =
   | { name: "Toggled Word Wrap Format"; format: WordWrapFormat }
   | { name: "Toggled Case Sensitivity"; on: boolean }
   | { name: "Toggled Pretty Print"; on: boolean }
+  | { name: "Toggled Sections"; on: boolean }
   | { name: "Toggled Filter Logic"; logic: FilterLogic }
   | { name: "Toggled Expandable Rows"; on: boolean }
   | { name: "Toggled Zebra Stripes"; on: boolean };

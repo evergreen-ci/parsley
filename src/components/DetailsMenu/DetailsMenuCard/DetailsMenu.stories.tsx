@@ -1,12 +1,23 @@
 import { useEffect } from "react";
+import { MockedProvider } from "@apollo/client/testing";
 import Card from "@leafygreen-ui/card";
 import { LogTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
+import { parsleySettingsMock } from "test_data/parsleySettings";
+import WithToastContext from "test_utils/toast-decorator";
 import { CustomMeta, CustomStoryObj } from "test_utils/types";
 import DetailsMenu from ".";
 
 export default {
   component: DetailsMenu,
+  decorators: [
+    (Story: () => JSX.Element) => (
+      <MockedProvider mocks={[parsleySettingsMock]}>
+        <Story />
+      </MockedProvider>
+    ),
+    WithToastContext,
+  ],
 } satisfies CustomMeta<typeof DetailsMenu>;
 
 export const Default: CustomStoryObj<typeof DetailsMenu> = {

@@ -253,3 +253,25 @@ describe("Sharing lines", () => {
     cy.dataCy("range-upper-bound").should("have.value", "2");
   });
 });
+
+describe("sections", () => {
+  beforeEach(() => {
+    const logLink =
+      "/evergreen/spruce_ubuntu1604_test_2c9056df66d42fb1908d52eed096750a91f1f089_22_03_02_16_45_12/0/task";
+    cy.visit(logLink);
+  });
+
+  it("Can enable/disable sections", () => {
+    cy.toggleDetailsPanel(true);
+    cy.contains("Log Viewing").click();
+    cy.dataCy("sections-toggle")
+      .should("have.attr", "aria-disabled", "false")
+      .should("have.attr", "aria-checked", "true");
+    cy.dataCy("sections-toggle").click();
+    cy.dataCy("sections-toggle").should("have.attr", "aria-checked", "false");
+    cy.dataCy("sections-toggle").click();
+    cy.dataCy("sections-toggle").should("have.attr", "aria-checked", "true");
+  });
+
+  // TODO: Check for section headers when the sectioning logic is implemented.
+});

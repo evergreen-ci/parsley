@@ -1,14 +1,18 @@
+import { MockedProvider } from "@apollo/client/testing";
 import { act, waitFor } from "@testing-library/react";
 import { QueryParams } from "constants/queryParams";
 import { LogContextProvider, useLogContext } from "context/LogContext";
 import { RenderFakeToastContext } from "context/toast/__mocks__";
 import { useQueryParam } from "hooks/useQueryParam";
+import { parsleySettingsMock } from "test_data/parsleySettings";
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import { renderComponentWithHook } from "test_utils/TestHooks";
 import DetailsMenu from ".";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
-  <LogContextProvider initialLogLines={logs}>{children}</LogContextProvider>
+  <MockedProvider mocks={[parsleySettingsMock]}>
+    <LogContextProvider initialLogLines={logs}>{children}</LogContextProvider>
+  </MockedProvider>
 );
 
 const logs = [

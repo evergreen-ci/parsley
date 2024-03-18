@@ -6,15 +6,15 @@ import BaseToggle from "../BaseToggle";
 const PrettyPrintToggle: React.FC = () => {
   const { sendEvent } = usePreferencesAnalytics();
   const { logMetadata, preferences } = useLogContext();
-
-  const { prettyPrint, setPrettyPrint } = preferences;
   const { logType } = logMetadata || {};
-  const disablePrettyPrint = logType !== LogTypes.RESMOKE_LOGS;
+  const { prettyPrint, setPrettyPrint } = preferences;
+
+  const isResmokeLog = logType === LogTypes.RESMOKE_LOGS;
 
   return (
     <BaseToggle
       data-cy="pretty-print-toggle"
-      disabled={disablePrettyPrint}
+      disabled={!isResmokeLog}
       label="Pretty Print Bookmarks"
       onChange={(value) => {
         setPrettyPrint(value);

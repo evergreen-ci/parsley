@@ -1,8 +1,19 @@
 import { forwardRef, useState } from "react";
+import { useMutation, useQuery } from "@apollo/client";
 import styled from "@emotion/styled";
 import { Tab, Tabs } from "@leafygreen-ui/tabs";
 import { H3 } from "@leafygreen-ui/typography";
 import { size } from "constants/tokens";
+import { useToastContext } from "context/toast";
+import {
+  ParsleySettingsInput,
+  ParsleySettingsQuery,
+  ParsleySettingsQueryVariables,
+  UpdateParsleySettingsMutation,
+  UpdateParsleySettingsMutationVariables,
+} from "gql/generated/types";
+import { UPDATE_PARSLEY_SETTINGS } from "gql/mutations";
+import { PARSLEY_SETTINGS } from "gql/queries";
 import ButtonRow from "./ButtonRow";
 import CLIInstructions from "./CLIInstructions";
 import SearchRangeInput from "./SearchRangeInput";
@@ -11,6 +22,7 @@ import {
   ExpandableRowsToggle,
   FilterLogicToggle,
   PrettyPrintToggle,
+  SectionsToggle,
   WrapToggle,
 } from "./Toggles";
 import WordWrapFormatToggle from "./Toggles/WordWrapFormatToggle";
@@ -22,7 +34,39 @@ interface DetailsMenuProps {
 
 const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
   ({ "data-cy": dataCy }, ref) => {
+    const dispatchToast = useToastContext();
     const [selectedTab, setSelectedTab] = useState(0);
+
+    const { data } = useQuery<
+      ParsleySettingsQuery,
+      ParsleySettingsQueryVariables
+    >(PARSLEY_SETTINGS);
+    const { user } = data || {};
+    const { parsleySettings } = user || {};
+    const { sectionsEnabled = true } = parsleySettings || {};
+
+    const [updateParsleySettings] = useMutation<
+      UpdateParsleySettingsMutation,
+      UpdateParsleySettingsMutationVariables
+    >(UPDATE_PARSLEY_SETTINGS, {
+      onError: (err) => {
+        dispatchToast.error(
+          `Error updating Parsley settings: '${err.message}'`,
+        );
+      },
+      refetchQueries: ["ParsleySettings"],
+    });
+
+    const updateSettings = (newSettings: ParsleySettingsInput) => {
+      updateParsleySettings({
+        variables: {
+          opts: {
+            parsleySettings: newSettings,
+          },
+        },
+      });
+    };
+
     return (
       <Container ref={ref} data-cy={dataCy}>
         <H3>Parsley Settings</H3>
@@ -45,6 +89,10 @@ const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
           <Tab data-cy="log-viewing-tab" name="Log Viewing">
             <Row>
               <Column>
+                <SectionsToggle
+                  checked={sectionsEnabled}
+                  updateSettings={updateSettings}
+                />
                 <WrapToggle />
                 <WordWrapFormatToggle />
                 <PrettyPrintToggle />
