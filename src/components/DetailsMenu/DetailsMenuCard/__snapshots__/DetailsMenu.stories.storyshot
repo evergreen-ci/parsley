@@ -25,12 +25,12 @@ exports[`Snapshot Tests DetailsMenu.stories Default 1`] = `
             role="tablist"
           >
             <button
-              aria-controls="tab-panel-2"
+              aria-controls="tab-panel-1"
               aria-selected="true"
               class="leafygreen-ui-oq6if2"
               data-cy="search-and-filter-tab"
               data-text="Search & Filter"
-              id="tab-3"
+              id="tab-2"
               name="Search & Filter"
               role="tab"
               tabindex="0"
@@ -42,12 +42,12 @@ exports[`Snapshot Tests DetailsMenu.stories Default 1`] = `
               </div>
             </button>
             <button
-              aria-controls="tab-panel-4"
+              aria-controls="tab-panel-3"
               aria-selected="false"
               class="leafygreen-ui-1vvp6ij"
               data-cy="log-viewing-tab"
               data-text="Log Viewing"
-              id="tab-5"
+              id="tab-4"
               name="Log Viewing"
               role="tab"
               tabindex="-1"
@@ -69,9 +69,9 @@ exports[`Snapshot Tests DetailsMenu.stories Default 1`] = `
         </div>
         <div>
           <div
-            aria-labelledby="tab-3"
+            aria-labelledby="tab-2"
             data-cy="search-and-filter-tab"
-            id="tab-panel-2"
+            id="tab-panel-1"
             role="tabpanel"
           >
             <div
@@ -487,9 +487,9 @@ exports[`Snapshot Tests DetailsMenu.stories Default 1`] = `
             </div>
           </div>
           <div
-            aria-labelledby="tab-5"
+            aria-labelledby="tab-4"
             data-cy="log-viewing-tab"
-            id="tab-panel-4"
+            id="tab-panel-3"
             role="tabpanel"
           />
         </div>
@@ -524,12 +524,12 @@ exports[`Snapshot Tests DetailsMenu.stories WithDownloadedLog 1`] = `
             role="tablist"
           >
             <button
-              aria-controls="tab-panel-20"
+              aria-controls="tab-panel-5"
               aria-selected="true"
               class="leafygreen-ui-oq6if2"
               data-cy="search-and-filter-tab"
               data-text="Search & Filter"
-              id="tab-21"
+              id="tab-6"
               name="Search & Filter"
               role="tab"
               tabindex="0"
@@ -541,12 +541,12 @@ exports[`Snapshot Tests DetailsMenu.stories WithDownloadedLog 1`] = `
               </div>
             </button>
             <button
-              aria-controls="tab-panel-22"
+              aria-controls="tab-panel-7"
               aria-selected="false"
               class="leafygreen-ui-1vvp6ij"
               data-cy="log-viewing-tab"
               data-text="Log Viewing"
-              id="tab-23"
+              id="tab-8"
               name="Log Viewing"
               role="tab"
               tabindex="-1"
@@ -568,9 +568,9 @@ exports[`Snapshot Tests DetailsMenu.stories WithDownloadedLog 1`] = `
         </div>
         <div>
           <div
-            aria-labelledby="tab-21"
+            aria-labelledby="tab-6"
             data-cy="search-and-filter-tab"
-            id="tab-panel-20"
+            id="tab-panel-5"
             role="tabpanel"
           >
             <div
@@ -1005,9 +1005,9 @@ exports[`Snapshot Tests DetailsMenu.stories WithDownloadedLog 1`] = `
             </div>
           </div>
           <div
-            aria-labelledby="tab-23"
+            aria-labelledby="tab-8"
             data-cy="log-viewing-tab"
-            id="tab-panel-22"
+            id="tab-panel-7"
             role="tabpanel"
           />
         </div>

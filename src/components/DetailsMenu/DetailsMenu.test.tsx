@@ -3,15 +3,10 @@ import { act, waitFor } from "@testing-library/react";
 import { QueryParams } from "constants/queryParams";
 import { LogContextProvider, useLogContext } from "context/LogContext";
 import { RenderFakeToastContext } from "context/toast/__mocks__";
-import {
-  ParsleySettingsQuery,
-  ParsleySettingsQueryVariables,
-} from "gql/generated/types";
-import { PARSLEY_SETTINGS } from "gql/queries";
 import { useQueryParam } from "hooks/useQueryParam";
+import { parsleySettingsMock } from "test_data/parsleySettings";
 import { renderWithRouterMatch as render, screen, userEvent } from "test_utils";
 import { renderComponentWithHook } from "test_utils/TestHooks";
-import { ApolloMock } from "types/gql";
 import DetailsMenu from ".";
 
 const wrapper = ({ children }: { children: React.ReactNode }) => (
@@ -90,24 +85,3 @@ describe("detailsMenu", () => {
     });
   });
 });
-
-const parsleySettingsMock: ApolloMock<
-  ParsleySettingsQuery,
-  ParsleySettingsQueryVariables
-> = {
-  request: {
-    query: PARSLEY_SETTINGS,
-  },
-  result: {
-    data: {
-      user: {
-        __typename: "User",
-        parsleySettings: {
-          __typename: "ParsleySettings",
-          sectionsEnabled: true,
-        },
-        userId: "me",
-      },
-    },
-  },
-};
