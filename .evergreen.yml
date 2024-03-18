@@ -277,12 +277,8 @@ functions:
       shell: bash
       script: |
         ${PREPARE_SHELL}
-        # Only record to cypress cloud if this is a pr or a mainline commit.
-        if [[ "${requester}" == "github_pr" || "${requester}" == "commit" || "$requester" == "patch" ]]; then
-          yarn cy:run --record --key "${parsley_cypress_record_key}" --reporter junit
-        else
-          yarn cy:run --reporter junit
-        fi
+        yarn cy:run --reporter junit
+
 
   yarn-eslint:
     command: shell.exec
