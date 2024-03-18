@@ -49,4 +49,4 @@ fi
 
 
 echo "Use the following command to start logkeeper:"
-echo "${YELLOW}LK_CORS_ORIGINS=http:\/\/localhost:\\\d+ go run main/logkeeper.go --localPath $PWD/bin/_bucketdata${NC}"
+echo "${YELLOW}LK_CORS_ORIGINS=http:\/\/localhost:\\\d+ LK_EVERGREEN_ORIGIN=http://localhost:8080 LK_PARSLEY_ORIGIN=http://localhost:5173 go run main/logkeeper.go --localPath $PWD/bin/_bucketdata${NC}"
