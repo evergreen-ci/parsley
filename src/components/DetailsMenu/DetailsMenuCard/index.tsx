@@ -51,7 +51,7 @@ const DetailsMenuCard = forwardRef<HTMLDivElement, DetailsMenuProps>(
     >(UPDATE_PARSLEY_SETTINGS, {
       onError: (err) => {
         dispatchToast.error(
-          `Error while updating Parsley settings: '${err.message}'`,
+          `Error updating Parsley settings: '${err.message}'`,
         );
       },
       refetchQueries: ["ParsleySettings"],

@@ -14,9 +14,9 @@ const SectionsToggle: React.FC<SectionsToggleProps> = ({
   updateSettings,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
-
   const { logMetadata } = useLogContext();
   const { logType } = logMetadata || {};
+
   const isTaskLog = logType === LogTypes.EVERGREEN_TASK_LOGS;
 
   return (

@@ -28,7 +28,7 @@ describe("sections toggle", () => {
     expect(sectionsToggle).toHaveAttribute("aria-checked", "false");
   });
 
-  it("should disable the toggle if the logType is not task", () => {
+  it("should disable toggle if logType is not task", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
       <SectionsToggle checked updateSettings={jest.fn()} />,
@@ -41,7 +41,7 @@ describe("sections toggle", () => {
     expect(sectionsToggle).toHaveAttribute("aria-disabled", "true");
   });
 
-  it("should not disable the toggle if the logType is task", () => {
+  it("should not disable toggle if logType is task", () => {
     const { Component, hook } = renderComponentWithHook(
       useLogContext,
       <SectionsToggle checked updateSettings={jest.fn()} />,
@@ -54,7 +54,7 @@ describe("sections toggle", () => {
     expect(sectionsToggle).toHaveAttribute("aria-disabled", "false");
   });
 
-  it("should call the update functions with correct parameters & should not update the URL", async () => {
+  it("should call update function with correct parameters, without updating the URL", async () => {
     const user = userEvent.setup();
     const updateSettings = jest.fn();
 
