@@ -3555,10 +3555,10 @@
   dependencies:
     lodash "^4.17.21"
 
-"@leafygreen-ui/hooks@^8.0.0", "@leafygreen-ui/hooks@^8.0.1", "@leafygreen-ui/hooks@^8.1.0", "@leafygreen-ui/hooks@^8.1.1":
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/hooks/-/hooks-8.1.1.tgz#39ff22a762ea61146e9b0d136d73836e72103acc"
-  integrity sha512-Ovh4/huQbM3UVSnHDQE0rWWG8bxZG7qdI2RZYtmUW/YbAL66GQx3jkfpuLlL3Npu5SxuS6b/Ai42sB2U6+Df0A==
+"@leafygreen-ui/hooks@^8.0.0", "@leafygreen-ui/hooks@^8.0.1", "@leafygreen-ui/hooks@^8.1.0", "@leafygreen-ui/hooks@^8.1.1", "@leafygreen-ui/hooks@^8.1.2":
+  version "8.1.2"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/hooks/-/hooks-8.1.2.tgz#2166c621d8c1c56b45d56c01fae09e4957ba0dff"
+  integrity sha512-XJlTqPx1RqjGRk1v5MWtISWfHBudAqYDsc7NzRCgK+bfwGa4LvsrJ89ZcJJdxUHH2Coz/z+Vxp+zNJThxtaf5A==
   dependencies:
     "@leafygreen-ui/lib" "^13.2.1"
     lodash "^4.17.21"
@@ -3589,10 +3589,18 @@
     "@leafygreen-ui/palette" "^4.0.7"
     "@leafygreen-ui/tokens" "^2.1.4"
 
-"@leafygreen-ui/icon@11.28.0", "@leafygreen-ui/icon@^11.12.4", "@leafygreen-ui/icon@^11.12.5", "@leafygreen-ui/icon@^11.15.0", "@leafygreen-ui/icon@^11.16.1", "@leafygreen-ui/icon@^11.22.1", "@leafygreen-ui/icon@^11.22.2", "@leafygreen-ui/icon@^11.23.0", "@leafygreen-ui/icon@^11.24.0", "@leafygreen-ui/icon@^11.25.0", "@leafygreen-ui/icon@^11.27.1":
+"@leafygreen-ui/icon@11.28.0":
   version "11.28.0"
   resolved "https://registry.yarnpkg.com/@leafygreen-ui/icon/-/icon-11.28.0.tgz#728b0a0875a7179e492201208ecad88b8f6262bc"
   integrity sha512-4MEUSowuU8WjWwIwn7+nufAEXo8T2623TuNHXRC3RdWgW7rWknn6eZXva6IUSvM4I1H+a1rmIPtWc7qRafjYCQ==
+  dependencies:
+    "@leafygreen-ui/emotion" "^4.0.7"
+    lodash "^4.17.21"
+
+"@leafygreen-ui/icon@^11.12.4", "@leafygreen-ui/icon@^11.12.5", "@leafygreen-ui/icon@^11.15.0", "@leafygreen-ui/icon@^11.16.1", "@leafygreen-ui/icon@^11.22.1", "@leafygreen-ui/icon@^11.22.2", "@leafygreen-ui/icon@^11.23.0", "@leafygreen-ui/icon@^11.24.0", "@leafygreen-ui/icon@^11.25.0", "@leafygreen-ui/icon@^11.27.1", "@leafygreen-ui/icon@^11.29.1":
+  version "11.29.1"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/icon/-/icon-11.29.1.tgz#f61115a5b0b36310a5ffb008bf51dd9ae8982917"
+  integrity sha512-bCfeJ3mndU5wHayMWfkVWo0NXhPpBpHIG53aox/eRterqLvWg6jWyiuF930MHbyWDNEXC9Qw1WD637kZ93mmog==
   dependencies:
     "@leafygreen-ui/emotion" "^4.0.7"
     lodash "^4.17.21"
@@ -3670,19 +3678,19 @@
     lodash "^4.17.21"
     react-transition-group "^4.4.5"
 
-"@leafygreen-ui/modal@16.0.3", "@leafygreen-ui/modal@^16.0.3":
-  version "16.0.3"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/modal/-/modal-16.0.3.tgz#36483aa1642fab9e2955001c4b1adb54e15135fc"
-  integrity sha512-JvHV4Yy5KCaH3snnG19aYS1d0suslPTWXcPZqySCil+pruCMwCDVdf/21KqQSM/JmyJVwoHlVxHegQlFAMAWEg==
+"@leafygreen-ui/modal@16.0.5", "@leafygreen-ui/modal@^16.0.3":
+  version "16.0.5"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/modal/-/modal-16.0.5.tgz#c1d45672130b5d65b7f412a9132cf2faa0996440"
+  integrity sha512-LbHfJYg/RPo2+yLu980k7Ux0nTYTlvtmxuXfutgESnEYbN5FYB+GfC+lp4mQuHPD/ODC8QBaq+HJC2smKGvkHg==
   dependencies:
     "@leafygreen-ui/emotion" "^4.0.7"
-    "@leafygreen-ui/hooks" "^8.0.0"
-    "@leafygreen-ui/icon" "^11.23.0"
+    "@leafygreen-ui/hooks" "^8.1.2"
+    "@leafygreen-ui/icon" "^11.29.1"
     "@leafygreen-ui/icon-button" "^15.0.19"
     "@leafygreen-ui/lib" "^13.0.0"
     "@leafygreen-ui/palette" "^4.0.7"
-    "@leafygreen-ui/portal" "^5.0.3"
-    "@leafygreen-ui/tokens" "^2.2.0"
+    "@leafygreen-ui/portal" "^5.1.0"
+    "@leafygreen-ui/tokens" "^2.5.1"
     focus-trap "6.9.4"
     focus-trap-react "^9.0.2"
     polished "^4.2.2"
@@ -3728,12 +3736,12 @@
     "@leafygreen-ui/tokens" "^2.2.0"
     react-transition-group "^4.4.5"
 
-"@leafygreen-ui/portal@^5.0.2", "@leafygreen-ui/portal@^5.0.3":
-  version "5.0.3"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/portal/-/portal-5.0.3.tgz#062ec8710afcee4c2f4cf3aa78b1f9a3bc25c86e"
-  integrity sha512-vwoZHtdrMzR5uBsfxAvl1kdB/xtQwtfpRTuCqC5Q3X+DsLg9JReDl+5dsGMegwDwkqwzsndYVGpq0BcFuDITXQ==
+"@leafygreen-ui/portal@^5.0.2", "@leafygreen-ui/portal@^5.0.3", "@leafygreen-ui/portal@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/portal/-/portal-5.1.0.tgz#d9dfd61e4ee403ebb0086b5e91b1c5d41a553d75"
+  integrity sha512-zvbxF0YN4YLA3KECm1wVM/Ag96CjjhFYORoWwQM6KRbHP/Brg9/g7mPd2aJj/xpPZlJYSTeAwhKM9JJkrnm6Dg==
   dependencies:
-    "@leafygreen-ui/hooks" "^8.0.0"
+    "@leafygreen-ui/hooks" "^8.1.2"
     "@leafygreen-ui/lib" "^13.0.0"
 
 "@leafygreen-ui/ripple@^1.1.12":
@@ -3876,17 +3884,10 @@
     "@leafygreen-ui/palette" "^3.4.7"
     "@leafygreen-ui/tokens" "^2.0.0"
 
-"@leafygreen-ui/tokens@^2.0.0", "@leafygreen-ui/tokens@^2.0.1", "@leafygreen-ui/tokens@^2.0.2", "@leafygreen-ui/tokens@^2.0.3", "@leafygreen-ui/tokens@^2.1.0", "@leafygreen-ui/tokens@^2.1.4", "@leafygreen-ui/tokens@^2.2.0":
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/tokens/-/tokens-2.2.0.tgz#8cae3fc84bd54e9d579ab6bd2a43fad3f9050fd9"
-  integrity sha512-hmRT1Sz6J9tv84ty1YPs1zmFewOCt/TghfbR0So5UtA5S2q4sVqjPZEpSvLmlxmtXIyl77fjU+uZYHpW2EID6w==
-  dependencies:
-    "@leafygreen-ui/palette" "^4.0.7"
-
-"@leafygreen-ui/tokens@^2.3.0":
-  version "2.3.0"
-  resolved "https://registry.yarnpkg.com/@leafygreen-ui/tokens/-/tokens-2.3.0.tgz#33ec8416f423849c64174b387c2844cb41c24752"
-  integrity sha512-8oDrQWRvUISitKLufO+9rpvQnJxU56sVUhTjR3O3sY7CkRo1vhHUV7F82oY3Gt6nBXVn82RrBTHzZ6F6LHlBvw==
+"@leafygreen-ui/tokens@^2.0.0", "@leafygreen-ui/tokens@^2.0.1", "@leafygreen-ui/tokens@^2.0.2", "@leafygreen-ui/tokens@^2.0.3", "@leafygreen-ui/tokens@^2.1.0", "@leafygreen-ui/tokens@^2.1.4", "@leafygreen-ui/tokens@^2.2.0", "@leafygreen-ui/tokens@^2.3.0", "@leafygreen-ui/tokens@^2.5.1":
+  version "2.5.1"
+  resolved "https://registry.yarnpkg.com/@leafygreen-ui/tokens/-/tokens-2.5.1.tgz#295e02ba47c0fb4f2ab6891973c64be4a0d92c95"
+  integrity sha512-sC0fQ578tsQan54kQ9SCidUgSY2R31o787N7Umzji44CcnqZCPj2Lrbyp3tideUw+FcdapTAxkA+mpppPfGgRA==
   dependencies:
     "@leafygreen-ui/palette" "^4.0.7"
 
