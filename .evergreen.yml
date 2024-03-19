@@ -583,3 +583,8 @@ post:
   - func: attach-logkeeper-logs
   - func: attach-test-results
   - func: attach-codegen-diff
+
+parameters:
+  - key: cypress_spec
+    value: cypress/integration/**/*
+    description: Specify the Cypress spec files to run for user submitted patches running the e2e_test task.
