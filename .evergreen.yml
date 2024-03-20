@@ -437,7 +437,7 @@ functions:
     params:
       working_dir: parsley/logkeeper
       background: true
-      script: go run main/logkeeper.go --localPath _bucketdata
+      script: go run main/logkeeper.go --localPath ../evergreen/_bucketdata
       shell: bash
       env:
         GOROOT: ${goroot}
@@ -457,17 +457,16 @@ functions:
       content_type: text/plain
       permissions: public-read
 
-  seed-logkeeper:
+  seed-bucket-data:
     command: s3.get
     type: setup
     params:
       aws_key: ${AWS_ACCESS_KEY_ID}
       aws_secret: ${AWS_SECRET_ACCESS_KEY}
       aws_session_token: ${AWS_SESSION_TOKEN}
-      extract_to: parsley/logkeeper
+      extract_to: parsley/evergreen
       remote_file: _bucketdata.tar.gz
       bucket: parsley-test
-      working_dir: parsley/logkeeper
 
 #######################################
 #                Tasks                #
@@ -499,7 +498,7 @@ tasks:
     - func: run-make-background
       vars:
         target: local-evergreen
-    - func: seed-logkeeper
+    - func: seed-bucket-data
     - func: run-logkeeper
     - func: yarn-install
     - func: yarn-build
