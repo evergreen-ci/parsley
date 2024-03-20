@@ -1,4 +1,4 @@
-describe("Basic resmoke log view", () => {
+describe("Basic resmoke log view for log originating from Logkeeper", () => {
   const logLink =
     "/resmoke/7e208050e166b1a9025c817b67eee48d/test/1716e11b4f8a4541c5e2faf70affbfab";
   beforeEach(() => {
@@ -55,6 +55,16 @@ describe("Basic resmoke log view", () => {
       "internal_transactions_kill_sessions.js",
     );
     cy.dataCy("test-status-badge").should("contain.text", "Pass");
+  });
+});
+
+describe("Basic resmoke log view for log originating from Evergreen", () => {
+  it("should render resmoke lines", () => {
+    const logLink =
+      "test/mongodb_mongo_master_enterprise_amazon_linux2_arm64_all_feature_flags_jsCore_patch_9801cf147ed208ce4c0ff8dff4a97cdb216f4c22_65f06bd09ccd4eaaccca1391_24_03_12_14_51_29/0/6c6087a1e80e7c15424ee80e6f276e95";
+    cy.visit(logLink);
+    cy.dataCy("resmoke-row").should("be.visible");
+    cy.dataCy("ansii-row").should("not.exist");
   });
 });
 
