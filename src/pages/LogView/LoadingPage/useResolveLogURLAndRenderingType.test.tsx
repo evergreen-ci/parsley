@@ -20,12 +20,6 @@ import { useResolveLogURLAndRenderingType } from "./useResolveLogURLAndRendering
 
 describe("useResolveLogURLAndRenderingType", () => {
   describe("test log renderingType", () => {
-    const hookParams = {
-      execution: "0",
-      logType: "EVERGREEN_TEST_LOGS",
-      taskID: "a-task-id",
-      testID: "a-test-name",
-    };
     beforeEach(() => {
       jest.spyOn(ErrorReporting, "reportError");
     });
@@ -187,6 +181,12 @@ describe("useResolveLogURLAndRenderingType", () => {
         );
       });
     });
+    const hookParams = {
+      execution: "0",
+      logType: "EVERGREEN_TEST_LOGS",
+      taskID: "a-task-id",
+      testID: "a-test-name",
+    };
   });
 
   it("resolves test log URLs from GraphQL resolver when data is available", async () => {
