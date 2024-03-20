@@ -1,4 +1,4 @@
-# This file downloads a resmoke log for use with the local logkeeper db
+# This file downloads bucket data for task output.
 
 
 RED='\033[0;31m'
@@ -16,7 +16,7 @@ if [ ! -d "bin/_bucketdata" ]; then
     # Use aws cli to download the bucket data
     echo "Downloading bucket data..."
     # Try to download the bucket data
-    aws s3 sync --content-encoding gzip  s3://parsley-test/ ./bin
+    aws s3 cp s3://parsley-test/_bucketdata.tar.gz bin/_bucketdata.tar.gz
     # Check to see if the download was successful
     if [ $? -ne 0 ]; then
         echo "${RED}Failed to download bucket data!${NC}"
@@ -28,12 +28,12 @@ if [ ! -d "bin/_bucketdata" ]; then
     fi
     # Uncompress the files in the _bucketdata directory
     echo "Uncompressing bucket data..."
-    tar -xzf ./bin/_bucketdata.tar.gz -C ./bin/
+    tar -xzf bin/_bucketdata.tar.gz -C bin/
     # Check to see if the uncompress was successful
     if [ $? -ne 0 ]; then
         echo "${RED}Failed to uncompress bucket data!${NC}"
         echo "Cleaning up _bucketdata directory..."
-        rm -rf _bucketdata
+        rm -rf bin/_bucketdata
         exit 1
     fi
     echo "Finished uncompressing files."
@@ -50,3 +50,6 @@ fi
 
 echo "Use the following command to start logkeeper:"
 echo "${YELLOW}LK_CORS_ORIGINS=http:\/\/localhost:\\\d+ go run main/logkeeper.go --localPath $PWD/bin/_bucketdata${NC}"
+
+echo "Create symlink in your local evergreen directory:"
+echo "ln -s $PWD/bin/_bucketdata _bucketdata"
