@@ -6,8 +6,6 @@ NC='\033[0m' # No Color
 YELLOW='\033[1;33m'
 GREEN='\033[0;32m'
 
-SPRUCE_DIR=pwd
-
 # Check to see if we have a _bucketdata directory
 if [ ! -d "bin/_bucketdata" ]; then
     echo "${RED}No _bucketdata directory found!${NC}"
@@ -47,9 +45,8 @@ else
     echo "If you want to download the bucket data again, delete the _bucketdata directory and rerun this script."
 fi
 
-
 echo "Use the following command to start logkeeper:"
-echo "${YELLOW}LK_CORS_ORIGINS=http:\/\/localhost:\\\d+ go run main/logkeeper.go --localPath $PWD/bin/_bucketdata${NC}"
+echo "${YELLOW}LK_CORS_ORIGINS=http:\/\/localhost:\\\d+ LK_EVERGREEN_ORIGIN=http://localhost:8080 LK_PARSLEY_ORIGIN=http://localhost:5173 go run main/logkeeper.go --localPath $PWD/bin/_bucketdata${NC}"
 
 echo "Create symlink in your local evergreen directory:"
 echo "ln -s $PWD/bin/_bucketdata _bucketdata"
