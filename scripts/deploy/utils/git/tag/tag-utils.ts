@@ -2,9 +2,10 @@ import { execSync } from "child_process";
 
 /**
  * `createNewTag` is a helper function that creates a new tag.
+ * @param version - version indicates the type of upgrade of the new tag.
  */
-const createNewTag = () => {
-  execSync("yarn version --new-version patch", {
+const createNewTag = (version: "patch" | "minor" | "major") => {
+  execSync(`yarn version --new-version ${version}`, {
     encoding: "utf-8",
     stdio: "inherit",
   });

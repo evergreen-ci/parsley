@@ -2,9 +2,10 @@ import { yellow } from "../../../../utils/colors";
 
 /**
  * `createNewTag` is a helper function that creates a new tag.
+ * @param version - version indicates the type of upgrade of the new tag.
  */
-const createNewTag = () => {
-  console.log(yellow("Dry run mode enabled. Created new tag."));
+const createNewTag = (version: "patch" | "minor" | "major") => {
+  console.log(yellow(`Dry run mode enabled. Created new ${version} tag.`));
 };
 
 /**

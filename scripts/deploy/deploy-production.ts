@@ -34,7 +34,7 @@ const evergreenDeploy = async () => {
     }
 
     console.log(
-      "Deploy canceled. If systems are experiencing an outage and you'd like to push the deploy directly to S3, run yarn deploy:prod --local."
+      "Deploy canceled. If systems are experiencing an outage and you'd like to push the deploy directly to S3, run yarn deploy:prod --local.",
     );
     return;
   }
@@ -42,25 +42,31 @@ const evergreenDeploy = async () => {
   // Print all commits between the last tag and the current commit
   console.log(`Commit messages:\n${commitMessages}`);
 
-  const response = await prompts({
-    type: "confirm",
+  const { value: version } = await prompts({
+    type: "select",
     name: "value",
-    message: "Are you sure you want to deploy to production?",
+    message: "How should this deploy be versioned?",
+    choices: [
+      { title: "Patch", value: "patch" },
+      { title: "Minor", value: "minor" },
+      { title: "Major", value: "major" },
+    ],
+    initial: 0,
   });
 
-  if (response.value) {
+  if (version) {
     try {
       console.log("Creating new tag...");
-      createNewTag();
+      createNewTag(version);
       console.log("Pushing tags...");
       pushTags();
       console.log("Pushed to remote. Should be deploying soon...");
       console.log(
         green(
           `Track deploy progress at ${underline(
-            "https://spruce.mongodb.com/commits/parsley?requester=git_tag_request"
-          )}`
-        )
+            "https://spruce.mongodb.com/commits/parsley?requester=git_tag_request",
+          )}`,
+        ),
       );
     } catch (err) {
       console.error(err);
