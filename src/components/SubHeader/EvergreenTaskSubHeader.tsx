@@ -1,3 +1,4 @@
+import { useQuery } from "@apollo/client";
 import { InlineCode } from "@leafygreen-ui/typography";
 import { usePreferencesAnalytics } from "analytics";
 import { TaskStatusBadge, TestStatusBadge } from "components/Badge";
@@ -6,6 +7,11 @@ import Icon from "components/Icon";
 import { StyledLink } from "components/styles";
 import { LogTypes } from "constants/enums";
 import { getEvergreenTaskURL } from "constants/externalURLTemplates";
+import {
+  TestLogUrlAndRenderingTypeQuery,
+  TestLogUrlAndRenderingTypeQueryVariables,
+} from "gql/generated/types";
+import { GET_TEST_LOG_URL_AND_RENDERING_TYPE } from "gql/queries";
 import { useTaskQuery } from "hooks/useTaskQuery";
 import { shortenGithash, trimStringFromMiddle } from "utils/string";
 
@@ -27,14 +33,30 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
   testID,
 }) => {
   const { sendEvent } = usePreferencesAnalytics();
-  const { loading, task } = useTaskQuery({
+  const { loading: isLoadingTask, task: taskData } = useTaskQuery({
     buildID,
     execution,
     logType,
     taskID,
   });
 
-  if (loading || !task) {
+  const { data: testData, loading: isLoadingTest } = useQuery<
+    TestLogUrlAndRenderingTypeQuery,
+    TestLogUrlAndRenderingTypeQueryVariables
+  >(GET_TEST_LOG_URL_AND_RENDERING_TYPE, {
+    skip: !(
+      logType === LogTypes.EVERGREEN_TEST_LOGS &&
+      taskID &&
+      Number.isInteger(execution) &&
+      testID
+    ),
+    variables: {
+      execution,
+      taskID: taskID as string,
+      testName: `^${testID}$`,
+    },
+  });
+  if (isLoadingTask || isLoadingTest || !taskData) {
     return (
       <>
         <Icon glyph="EvergreenLogo" size={24} />
@@ -47,20 +69,30 @@ export const EvergreenTaskSubHeader: React.FC<Props> = ({
       </>
     );
   }
-
   const {
     displayName,
     execution: taskExecution,
     patchNumber,
     status,
     versionMetadata,
-  } = task;
+  } = taskData;
+
   const { isPatch, message, projectIdentifier, revision } = versionMetadata;
 
-  const currentTest =
-    task?.tests?.testResults?.find((test) =>
-      test?.logs?.urlRaw?.match(new RegExp(`${testID}`)),
-    ) ?? null;
+  let currentTest: { testFile: string; status: string } | null = null;
+  switch (logType) {
+    case LogTypes.RESMOKE_LOGS:
+      currentTest =
+        taskData?.tests?.testResults?.find((test) =>
+          test?.logs?.urlRaw?.match(new RegExp(`${testID}`)),
+        ) ?? null;
+      break;
+    case LogTypes.EVERGREEN_TEST_LOGS:
+      currentTest = testData?.task?.tests?.testResults?.[0] ?? null;
+      break;
+    default:
+      currentTest = null;
+  }
 
   const breadcrumbs = [
     {
