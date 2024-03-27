@@ -1,7 +1,7 @@
 {
   "name": "parsley",
   "private": true,
-  "version": "1.0.163",
+  "version": "1.0.166",
   "scripts": {
     "bootstrap-logkeeper": "./scripts/bootstrap-logkeeper.sh",
     "build": "tsc && GIT_SHA=`git rev-parse HEAD` APP_VERSION=$npm_package_version vite build",
@@ -67,7 +67,7 @@
     "@leafygreen-ui/typography": "16.5.0",
     "@sentry/react": "7.84.0",
     "ansi_up": "6.0.2",
-    "graphql": "16.6.0",
+    "graphql": "16.8.1",
     "html-react-parser": "3.0.6",
     "js-cookie": "3.0.5",
     "linkify-html": "4.1.3",
