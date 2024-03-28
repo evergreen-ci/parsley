@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import styled from "@emotion/styled";
 import LogPane from "components/LogPane";
 import { ParsleyRow } from "components/LogRow/RowRenderer";
-import { LogTypes, WordWrapFormat } from "constants/enums";
+import { LogRenderingTypes, LogTypes, WordWrapFormat } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { MultiLineSelectContextProvider } from "context/MultiLineSelectContext";
 import WithToastContext from "test_utils/toast-decorator";
@@ -28,7 +28,7 @@ const SingleLineStory = (args: any) => {
   const { getResmokeLineColor, ingestLines, scrollToLine } = useLogContext();
 
   useEffect(() => {
-    ingestLines(logLines, LogTypes.RESMOKE_LOGS);
+    ingestLines(logLines, LogRenderingTypes.Resmoke);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
@@ -60,11 +60,13 @@ export const SingleLine: CustomStoryObj<ResmokeRowProps> = {
 
 // Multiple ResmokeRows.
 const MultipleLinesStory = (args: any) => {
-  const { ingestLines, preferences, processedLogLines } = useLogContext();
+  const { ingestLines, preferences, processedLogLines, setLogMetadata } =
+    useLogContext();
   const { setPrettyPrint, setWrap } = preferences;
 
   useEffect(() => {
-    ingestLines(logLines, LogTypes.RESMOKE_LOGS);
+    setLogMetadata({ logType: LogTypes.EVERGREEN_TASK_LOGS });
+    ingestLines(logLines, LogRenderingTypes.Resmoke);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   useEffect(() => {
@@ -80,7 +82,6 @@ const MultipleLinesStory = (args: any) => {
       <LogPane
         rowCount={processedLogLines.length}
         rowRenderer={ParsleyRow({
-          logType: LogTypes.RESMOKE_LOGS,
           processedLogLines,
         })}
       />

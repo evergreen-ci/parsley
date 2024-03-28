@@ -1,3 +1,4 @@
+import { LogTypes } from "constants/enums";
 import { LogContextProvider, useLogContext } from "context/LogContext";
 import {
   MultiLineSelectContextProvider,
@@ -150,7 +151,7 @@ describe("sharingMenu", () => {
     });
     act(() => {
       hook.current.useLogContextHook.setLogMetadata({
-        isUploadedLog: true,
+        logType: LogTypes.LOCAL_UPLOAD,
       });
     });
     expect(screen.queryByText("Share link to selected lines")).toBeNull();

@@ -13,6 +13,8 @@ query TestLogURLAndRenderingType(
           url
           urlRaw
         }
+        status
+        testFile
       }
     }
   }

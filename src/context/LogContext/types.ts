@@ -13,7 +13,6 @@ interface LogMetadata {
   execution?: string;
   fileName?: string;
   htmlLogURL?: string;
-  isUploadedLog?: boolean;
   jobLogsURL?: string;
   legacyJobLogsURL?: string;
   logType?: LogTypes;

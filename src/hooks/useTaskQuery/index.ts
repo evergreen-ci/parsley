@@ -37,13 +37,11 @@ export const useTaskQuery = ({
   logType,
   taskID,
 }: UseTaskQueryProps): UseTaskQueryReturnType => {
-  const isResmoke = logType === LogTypes.RESMOKE_LOGS;
-
   const { data: taskData, loading: taskLoading } = useQuery<
     TaskQuery,
     TaskQueryVariables
   >(GET_TASK, {
-    skip: isResmoke || !taskID,
+    skip: logType === LogTypes.RESMOKE_LOGS || !taskID,
     variables: { execution: Number(execution), taskId: String(taskID) },
   });
 
@@ -51,7 +49,7 @@ export const useTaskQuery = ({
     LogkeeperTaskQuery,
     LogkeeperTaskQueryVariables
   >(GET_LOGKEEPER_TASK, {
-    skip: !isResmoke || !buildID,
+    skip: logType !== LogTypes.RESMOKE_LOGS || !buildID,
     variables: { buildId: String(buildID) },
   });
 

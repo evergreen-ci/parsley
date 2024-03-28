@@ -78,7 +78,6 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         execution: execution || String(logkeeperMetadata?.execution || 0),
         fileName,
         htmlLogURL,
-        isUploadedLog: false,
         jobLogsURL,
         legacyJobLogsURL,
         logType,
@@ -88,7 +87,7 @@ const LoadingPage: React.FC<LoadingPageProps> = ({ logType }) => {
         taskID: taskID || logkeeperMetadata?.task_id,
         testID,
       });
-      ingestLines(data, logType);
+      ingestLines(data, renderingType);
     }
     if (error) {
       dispatchToast.error(error);

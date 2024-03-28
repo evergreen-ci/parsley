@@ -5,7 +5,7 @@ export const useAnalyticAttributes = () => {
   const { newrelic } = window;
 
   const { logMetadata } = useLogContext();
-  const { logType } = logMetadata || {};
+  const { logType, renderingType } = logMetadata || {};
 
   const userId = localStorage.getItem("userId");
 
@@ -21,5 +21,8 @@ export const useAnalyticAttributes = () => {
     if (userId !== null) {
       newrelic.setCustomAttribute("userId", userId);
     }
-  }, [userId, logType, newrelic]);
+    if (renderingType !== undefined) {
+      newrelic.setCustomAttribute("renderingType", renderingType);
+    }
+  }, [userId, logType, newrelic, renderingType]);
 };

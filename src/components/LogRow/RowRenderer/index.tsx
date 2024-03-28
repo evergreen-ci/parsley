@@ -1,4 +1,4 @@
-import { LogRenderingTypes, LogTypes } from "constants/enums";
+import { LogRenderingTypes } from "constants/enums";
 import { useLogContext } from "context/LogContext";
 import { useHighlightParam } from "hooks/useHighlightParam";
 import { ProcessedLogLines } from "types/logs";
@@ -9,10 +9,9 @@ import ResmokeRow from "../ResmokeRow";
 
 type RowRendererFunction = (props: {
   processedLogLines: ProcessedLogLines;
-  logType: LogTypes;
 }) => (index: number) => JSX.Element;
 
-const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
+const ParsleyRow: RowRendererFunction = ({ processedLogLines }) => {
   const {
     expandLines,
     getLine,
@@ -83,7 +82,7 @@ const ParsleyRow: RowRendererFunction = ({ logType, processedLogLines }) => {
     );
   };
 
-  result.displayName = `${logType}RowRenderer`;
+  result.displayName = `${logMetadata?.logType}RowRenderer`;
   return result;
 };
 
